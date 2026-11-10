@@ -142,7 +142,7 @@ own with `lualatex`.
   versions listed above. The deciphering of the manuscript, its edition and the editors' notes are theirs.
 - **Transcription:** AI-transcribed (Claude Opus 5.5, Anthropic).
 - **Companion:** commentary AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude
-  (Anthropic). The register of claims and the corrections are produced the same way.
+  Opus 5.5 (Anthropic). The register of claims and the corrections are produced the same way.
 
 ## Rights
 
