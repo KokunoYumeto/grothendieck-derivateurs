@@ -1,0 +1,1855 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\card}{\mathrm{card}\,}
+% macro conflict, first definition kept: \newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\uFl}{\underline{\mathrm{Fl}}}
+\newcommand{\uNerf}{\underline{\mathrm{Nerf}}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\Flu}{\underline{\mathrm{Fl}}}
+\newcommand{\fU}{\mathfrak{U}}
+\newcommand{\fV}{\mathfrak{V}}
+\newcommand{\Filt}{\mathrm{Filt}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=0.5pt](c){#1};}
+\newcommand{\pfn}[2]{\textsuperscript{(}\footnote[#1]{#2}\textsuperscript{)}}
+\newcommand{\uFilt}{\underline{\mathrm{Filt}}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\wavy}[1]{\widetilde{#1}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\qpre}{\mathrel{\leftarrow\!\!\!\!\mapsto}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\deq}{\overset{\text{déf}}{=}}
+\newcommand{\univ}{\mathrm{univ}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\Ss}{\mathrm{Ss}}
+\newcommand{\Img}{\mathrm{Im}\,}
+\newcommand{\isoto}{\xrightarrow{\ \sim\ }}
+\newcommand{\hookto}{\lhook\joinrel\longrightarrow}
+\newcommand{\Ci}{\mathcal{C}}
+\begin{document}
+% ---- from Der-ChXV-05-11-10_p001-005.tex
+% ===================== PDF page 1 =====================
+\printedpage{---}
+% no page number printed on this page
+% head: (none)
+
+\begin{center}
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\vspace{2cm}
+
+\textbf{Chapitre XV}
+
+\medskip
+
+\textbf{Théorèmes de factorisation}
+
+\textbf{(Modèles (2))}
+\end{center}
+
+\clearpage
+
+% ===================== PDF page 2 =====================
+\printedpage{---}
+% no page number printed on this page
+% head: (none)
+
+Ce texte a été déchiffré et transcrit en \LaTeXe{} par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Seules quelques corrections mineures évidentes ont été effectuées. Pour les rares ajouts ou commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{maltsin@math.jussieu.fr}
+
+\hfill G. Maltsiniotis\hspace*{2cm}
+
+\clearpage
+
+% ===================== PDF page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 1}
+
+\section*{1\quad Construction fondamentale : la suite transfinie de factorisation d'une flèche $\boldsymbol{f}$.}
+
+Soit $\M$ une $\mathfrak{U}$-catégorie, stable par “petites” (\textit{i.e.} $\mathfrak{U}$-petites) $\varinjlim$ filtrantes. Soit
+\[
+C_0 \;\subset\; \Fl(\M)
+\tag*{(1.1)}
+\]
+un \textit{petit} ensemble de flèches, on se propose de construire pour toute flèche $f$ de $\M$, une factorisation
+\[
+f \;=\; p\,i \,, \qquad i \;\in\; \widetilde{C_0} = ((C_0)_*)^* \;, \;\; p \;\in\; (C_0)_* \;.
+\tag*{(1.2)}
+\]
+Pour ceci, on va construire une suite ordinale de foncteurs
+\[
+\left\{
+\begin{array}{rcl}
+f & \longmapsto & X_\alpha(f) \;=\; X_\alpha(C_0,f) \\
+X_\alpha : \uFl(\M) & \longrightarrow & \M
+\end{array}
+\right.
+\tag*{(1.3)}
+\]
+et des homomorphismes fonctoriels
+\[
+i_\alpha(f) : \mathrm{source}\, f \;\longrightarrow\; X_\alpha(f) \;,
+\tag*{(1.4)}
+\]
+\[
+p_\alpha(f) : X_\alpha(f) \;\longrightarrow\; \mathrm{but}\, f \;,
+\tag*{(1.5)}
+\]
+de sorte qu'on aura le diagramme (où $X = \mathrm{source}\, f$, $Y = \mathrm{but}\, f$)
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "f"] \arrow[dr, "i_\alpha(f)"'] & & Y \\
+& X_\alpha(f) \arrow[ur, "p_\alpha(f)"'] &
+\end{tikzcd}
+\qquad ,
+\tag*{(1.6)}
+\]
+ce diagramme étant commutatif
+\[
+f \;=\; p_\alpha(f) i_\alpha(f) \;.
+\tag*{(1.7)}
+\]
+On peut dire aussi qu'on a une section du foncteur canonique de “composition”, transposé de $\boldsymbol{\Delta}_1 \longrightarrow \boldsymbol{\Delta}_2$, donné par $0 \longmapsto 0$, $1 \longmapsto 2$ :
+\[
+\left\{
+\begin{array}{l}
+\begin{tikzcd}[ampersand replacement=\&]
+\uNerf_2(\M) \arrow[r, shift left, "\gamma"] \& \uNerf_1(\M) \arrow[l, dotted, shift left, "\Phi_\alpha"]
+\end{tikzcd}
+\;=\; \uFl(\M) \;, \\[1ex]
+\\[1ex]
+\\
+\end{array}
+\right.
+\tag*{(1.8)}
+\]
+$\Phi$ comme “factorisation”,
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 2}
+où
+\[
+\Phi_\alpha(f) \;=\; \{\; X \xrightarrow{i_\alpha(f)} X_\alpha(f) \xrightarrow{p_\alpha(f)} Y \;\}
+\tag*{(1.9)}
+\]
+avec $p_\alpha(f)i_\alpha(f) = f$. La fonctorialité de 1.4 et 1.5, ou celle de $\Phi_\alpha$, \textit{i.e.} de 1.9, s'exprime par le fait que tout carré commutatif
+\[
+\begin{tikzcd}[row sep=large]
+X \arrow[r, "f"] \arrow[d, "u_X"'] & Y \arrow[d, "u_Y"] \\
+X' \arrow[r, "{f'}"] & Y'
+\end{tikzcd}
+\tag*{(1.10)}
+\]
+dans $\M$, interprété comme flèche $u = (u_X, u_Y)$ de $f$ dans $f'$ dans $\uFl(\M)$, donne naissance au double carré commutatif
+\[
+\begin{tikzcd}[row sep=large]
+X \arrow[r, "i_\alpha(f)"] \arrow[d, "u_X"] & X_\alpha(f) \arrow[r, "p_\alpha(f)"] \arrow[d, "X_\alpha(u)"] & Y \arrow[d, "u_Y"] \\
+X' \arrow[r, "{i_\alpha(f')}"] & X_\alpha(f') \arrow[r, "{p_\alpha(f')}"] & Y' \;.
+\end{tikzcd}
+\tag*{(1.11)}
+\]
+\textbf{N.B.} Quand on voudra expliciter la dépendance de ces constructions par rapport à $C_0$, on écrira
+\[
+X_\alpha(C_0,f) \;, \qquad i_\alpha(C_0,f) \;, \qquad p_\alpha(C_0,f) \;, \qquad \Phi_\alpha(C_0,f) \;,
+\]
+ou
+\[
+X_\alpha(C_0,-) \;\;\text{ou}\;\; X_\alpha^{C_0} \;, \qquad i_\alpha(C_0,-) \;\;\text{ou}\;\; i_\alpha^{C_0} \qquad \textit{etc.} \;,
+\]
+au lieu de $X_\alpha(f)$, $i_\alpha(f)$, \dots
+
+Voici les propriétés essentielles du système inductif ordinal des $X_\alpha(f)$ ou $\Phi_\alpha(f)$.
+
+\msp{page 3}
+
+\textbf{1.} $X_0(f) = X$, $i_0(f) = \mathrm{id}_X$, $p_0(f) = f$ (\textit{i.e.} la factorisation $\Phi_0(f)$ de $f$ est la factorisation triviale $X \xrightarrow{\mathrm{id}_X} X \xrightarrow{f} Y$).
+
+\textbf{2.}
+\[
+\begin{aligned}
+X_{\alpha+1}(f) &\;=\; X_1(p_\alpha(f)) \\
+i_{\alpha+1}(f) &\;=\; i_1(p_\alpha(f)) \circ i_\alpha(f) \\
+p_{\alpha+1}(f) &\;=\; p_1(p_\alpha(f))
+\end{aligned}
+\]
+\[
+\begin{tikzcd}
+\underbrace{X}_{= \,\mathrm{source}\, f} \arrow[r, "i_\alpha(f)"] \arrow[rrr, bend left=20, "f"] & X_\alpha(f) \arrow[rr, "p_\alpha(f)"] \arrow[dr, bend right=40, "i_1(p_\alpha(f))"'] & & Y \\
+& & \underbrace{X_1(p_\alpha(f))}_{= X_{\alpha+1}(f)} \arrow[ur, bend right=40] &
+\end{tikzcd}
+\]
+
+\clearpage
+
+% ===================== PDF page 5 =====================
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+ou mieux
+\[
+\begin{tikzcd}[row sep=large]
+X \arrow[rrr, "f"] \arrow[d, "\mathrm{id}"] & & & Y \arrow[d, "\mathrm{id}"] \\
+X \arrow[r, "i_\alpha(f)"] \arrow[d, "\mathrm{id}"] & X_\alpha(f) \arrow[rr, "p_\alpha(f)"] \arrow[d, "\mathrm{id}"] & & Y \arrow[d, "\mathrm{id}"] \\
+X \arrow[r] & X_\alpha(f) \arrow[r, "i_1(p_\alpha(f))"] & \underbrace{X_1(p_\alpha(f))}_{= X_{\alpha+1}(f)} \arrow[r, "p_1(p_\alpha(f))"] & Y \;.
+\end{tikzcd}
+\tag*{(1.12)}
+\]
+Le morphisme de transition $X_\alpha(f) \longrightarrow X_{\alpha+1}(f)$ est
+\[
+X_\alpha(f) \;\; \xrightarrow{\;\;i_1(p_\alpha(f))\;\;} \;\; X_1(p_\alpha(f)) \;=\; X_{\alpha+1}(f) \;.
+\]
+
+\textbf{3.} Si $\alpha$ est un ordinal limite, on a
+\[
+\left\{
+\begin{array}{rcl}
+X_\alpha(f) & = & \varinjlim\limits_{\alpha'<\alpha} X_{\alpha'}(f). \\[3ex]
+i_\alpha(f) & = & \parbox[t]{8cm}{morphisme canonique de $X = X_0(f)$ dans la limite inductive.} \\[5ex]
+p_\alpha(f) & = & \text{limite projective des } p_{\alpha'}(f) : X_{\alpha'}(f) \longrightarrow Y.
+\end{array}
+\right.
+\]
+(On peut considérer la limite inductive définissant $X_\alpha(f)$ comme une limite dans $X\backslash\M/Y\dots$)
+
+Les morphismes de transition
+\[
+X_{\alpha'}(f) \;\longrightarrow\; X_\alpha(f) \qquad (\; \alpha' \;<\; \alpha \;)
+\]
+sont les morphismes canoniques relatifs au système inductif des $X_{\alpha'}(f)$.
+
+\msp{page 4}
+
+On peut donc dire que la suite ordinale des factorisations fonctorielles $\Phi_\alpha(f)$ de $f$ variable, se déduit de la factorisation fonctorielle $\Phi_1(f)$ de $f$ en
+\[
+\begin{tikzcd}
+X \arrow[r, "i_1(f)"] \arrow[rr, bend left=20, "f"] & X_1(f) \arrow[r, "p_1(f)"] & Y
+\end{tikzcd}
+\]
+par “itération transfinie à droite”, \textit{i.e.} en regardant les opérations $\Phi_\alpha$ comme des foncteurs
+% footnote mark (1) printed beside the following display; \footnotemark/\footnotetext used because \footnote does not work inside math
+\[
+\left\{
+\begin{array}{rcl}
+p_\alpha :\; \uFl(\M) & \longrightarrow & \uFl(\M) \\
+f & \longmapsto & p_\alpha(f) \;,
+\end{array}
+\right.
+\qquad\qquad \text{\footnotemark}
+\]
+\footnotetext{\textbf{N.B.} $p_\alpha$ respecte les structures de catégories \textit{sur} $\M$, via les foncteurs but : $\uFl(\M) \longrightarrow \M$, \textit{i.e.} $\uFl(\M)$ est considérée comme objet de $\mathrm{CAT}/\M$.}
+munis d'homomorphismes fonctoriels (au-dessus de $\M$)
+\[
+\mathrm{id}_{\uFl(\M)} \;\longrightarrow\; p_\alpha \;.
+\]
+
+% ---- from Der-ChXV-05-11-10_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Ainsi, si on considère
+\[
+\left\{
+\begin{array}{rl}
+\Flu(\cM) & \text{comme objet de CAT}/\cM \text{ par le foncteur } f \longmapsto \text{but}\, f\\[1ex]
+\text{où} & \text{CAT est la catégorie des catégories \textit{éléments de} } \fV\text{\textit{,} univers}\\
+ & \text{tel que } \fU \in \fV\text{, d'où Cat } \overset{\text{(déf)}}{=} \mathrm{Cat}^{\fU},\ \cM,\ \Flu(\cM) \in \text{CAT} ,
+\end{array}
+\right.
+\]
+on a un endofoncteur $p_1$ de $\Flu(\cM)$ sur $\cM$, et un homomorphisme fonctoriel
+\[
+i_1 \ : \ \mathrm{id}_{\Flu(\cM)/\cM} \longrightarrow p_1 \ , \qquad \textit{i.e.} \quad
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "f"] \arrow[dr, "i_1(f)"'] & & Y \\
+ & \underbrace{X_1(f)}_{=\,\text{source}\, p_1(f)} \arrow[ur, "p_1(f)"'] &
+\end{tikzcd} \ ,
+\tag*{(1.13)}
+\]
+et la description de la suite ordinale des endofoncteurs $p_\alpha$ de $\Flu\,\cM/\cM$ résulte de cette seule donnée, compte tenu que les petites limites filtrantes existent dans les fibres de $\Flu\,\cM \xrightarrow{\text{but}} \cM$.
+
+\msp{page 5}
+
+\[
+\begin{tikzcd}[column sep=normal]
+X \arrow[r, "i_1(f)"] \arrow[dr, "f"'] & X_1(f) \arrow[r, "i_1(p_1(f))"] \arrow[d, "p_1(f)"] & X_2(f) \arrow[r] \arrow[dl, "p_2(f)"] & \cdots \arrow[r] & X_\alpha(f) \arrow[r, "i_1(p_\alpha(f))"] \arrow[dlll, "p_\alpha(f)"] & X_{\alpha+1}(f) \arrow[r] \arrow[dllll, "p_{\alpha+1}(f) = p_1(p_\alpha(f))"] & \cdots \\
+ & Y & & & & &
+\end{tikzcd}
+\tag*{(1.14)}
+\]
+
+Donc, pour achever de définir la suite ordinale des $X_\alpha(f)$ (munie des $i_\alpha(f)$, $p_\alpha(f)$), ou des $p_\alpha(f)$ (munie des $i_\alpha(f)$), il reste à décrire $X_1(f)$, $i_1(f)$, $p_1(f)$.
+
+La propriété essentielle de ce triple dont nous aurons besoin est la suivante :
+
+\begin{itemize}[leftmargin=5em, labelwidth=4em, labelsep=1em, align=left]
+\item[(1.15)] \textbf{Fact}$(C_0)$ (propriété de factorisation par rapport à $C_0$).
+
+Pour tout diagramme commutatif
+\[
+D : \qquad
+\begin{tikzcd}
+A \arrow[r] \arrow[d, "i"'] & X \arrow[d, "f"] \\
+B \arrow[r] & Y
+\end{tikzcd}
+\qquad \text{avec } i \in C_0 \ ,
+\]
+d'où un diagramme traits pleins
+\[
+\begin{tikzcd}
+A \arrow[r] \arrow[d, "i"'] & X \arrow[d, "i_D"] \arrow[dr, dotted, "i_1(f)"] \arrow[dd, dotted, bend right=60, "f"'] & \\
+B \arrow[r] & X_D \overset{\text{déf}}{=} X \amalg_A B \arrow[r, dotted, "u_D"] \arrow[d, "p_D"] & X_1(f) \arrow[dl, dotted, "p_1(f)"] \\
+ & Y \ , &
+\end{tikzcd}
+\]
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+il existe un homomorphisme de la factorisation $f = p_D i_D$ de $f$ dans la factorisation $f = p_1(f)i_1(f)$.
+\end{itemize}
+
+Pour formuler cette condition, j'ai utilisé l'existence des sommes amalgamées $X_D$, \textit{i.e.} la condition sur $C_0$ :
+
+\msp{page 6}
+
+\begin{itemize}[leftmargin=5em, labelwidth=4em, labelsep=1em, align=left]
+\item[(1.16)] Les flèches $i \in C_0$ sont coquarrables, \textit{i.e.} pour un diagramme
+\[
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "i"'] & X \\
+B &
+\end{tikzcd}
+\]
+avec $i \in C_0$, la somme amalgamée existe.
+\end{itemize}
+
+Mais on peut formuler 1.15 aussi ainsi, indépendamment de l'hypothèse (1.16) :
+
+\begin{itemize}[leftmargin=5em, labelwidth=4em, labelsep=1em, align=left]
+\item[(1.17)] Pour tout carré commutatif
+\[
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "i"'] & X \arrow[d, "f"] \\
+B \arrow[r, "v"] & Y
+\end{tikzcd}
+\qquad ,
+\]
+avec $i \in C_0$, il existe un carré commutatif traits pleins
+\[
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "i"'] & X \arrow[d, "i_1(f)"] \\
+B \arrow[r, "v_1"] \arrow[dr, dotted, "v"] & X_1(f) \arrow[d, dotted, "p_1(f)"] \\
+ & Y
+\end{tikzcd}
+\]
+tel que $v = p_1(f)v_1$.
+\end{itemize}
+
+Ceci a pour conséquence le
+
+\textbf{Corollaire 1} (de 1.17). \textit{Soit} $f \in \Fl(\cM)$\textit{, et} $\alpha$ \textit{un ordinal} $(\in \fU)$. \textit{Pour tout carré commutatif}
+\[
+\begin{tikzcd}
+A \arrow[r, "u_\alpha"] \arrow[d, "i"'] & X_\alpha(f) \arrow[d, "p_\alpha(f)"] \\
+B \arrow[r, "v"] & Y
+\end{tikzcd}
+\]
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{il existe un carré commutatif}
+\[
+\begin{tikzcd}
+A \arrow[r, "u_\alpha"] \arrow[d, "i"'] & X_\alpha(f) \arrow[d, "\text{trans.}"] \arrow[dd, dotted, bend left=60, "p_\alpha(f)"] \\
+B \arrow[r, "v_1"] \arrow[dr, dotted, "v"] & X_{\alpha+1}(f) \arrow[d, dotted, "p_{\alpha+1}(f)"] \\
+ & Y
+\end{tikzcd}
+\]
+\textit{tel que}
+\[
+v \ = \ p_{\alpha+1}(f)\ v_1 \ .
+\]
+
+\msp{page 7}
+
+\textbf{Corollaire 2.} \textit{Soit $\pi$ un cardinal} $(\in \fU)$ \textit{tel que pour toute flèche $i : A \longrightarrow B$ dans $C_0$, la source $A$ soit $\pi$-accessible. Soit $\alpha$ un ordinal grand devant $\pi$} (i.e. \textit{tel que l'ensemble ordonné $I_\alpha$ des ordinaux $\alpha' < \alpha$ soit grand devant $\pi$}) -- \textit{p. ex. $\alpha$ le premier ordinal dont le cardinal soit $> \pi$. Alors pour toute flèche $f \in \Fl(\cM)$, on a $p_\alpha(f) \in (C_0)_*$.}
+
+\textsc{Démonstration}. Cela signifie que pour tout carré commutatif
+\[
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "i"'] & X_\alpha(f) \arrow[d, "p_\alpha(f)"] \\
+B \arrow[r, "v"] \arrow[ur, dotted, "w"] & Y \ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+avec $i \in C_0$, la flèche pointillée $w$ (avec $wi = u$, $p_\alpha(f)w = v$) existe. Or
+\[
+X_\alpha(f) = \varinjlim_{\alpha' \in I_\alpha} X_{\alpha'}(f) \ ,
+\]
+donc $A$ étant $\pi$-accessible et $I_\alpha$ grand devant $\pi$, $u$ provient d'une flèche $u_{\alpha'} : A \longrightarrow X_{\alpha'}(f)$, et (quitte à remplacer $\alpha'$ par $\alpha'' > \alpha'$ et $u_{\alpha'}$ par le composé $u_{\alpha''} : A \longrightarrow X_{\alpha'}(f) \longrightarrow X_{\alpha''}(f)$) on peut supposer $p_{\alpha'}(f)u_{\alpha'} = vi$, \textit{i.e.} que $(*)$ provient d'un carré commutatif
+\[
+\begin{tikzcd}
+A \arrow[r, "u_{\alpha'}"] \arrow[d, "i"'] \arrow[rr, dotted, bend left=30, "u"] & X_{\alpha'}(f) \arrow[r, dotted, "\text{trans.}"'] \arrow[d, "p_{\alpha'}(f)"'] & X_\alpha(f) \arrow[dl, dotted, "p_\alpha(f)"] \\
+B \arrow[r, "v"] & Y \ , &
+\end{tikzcd}
+\]
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+et appliquant le corollaire 1, on trouve
+\[
+\begin{tikzcd}
+A \arrow[r, "u_{\alpha'}"] \arrow[d, "i"'] & X_{\alpha'}(f) \arrow[d, "\text{trans.}"] & \\
+B \arrow[r, "v_1"] \arrow[dr, dotted, "v"] & X_{\alpha'+1}(f) \arrow[r, dotted, "\text{trans.}"] \arrow[d, "p_{\alpha+1}(f)"] & X_\alpha(f) \arrow[dl, dotted, "p_\alpha(f)"] \\ % [sic] p_{\alpha+1}(f) -> p_{\alpha'+1}(f), the arrow starts at X_{\alpha'+1}(f); ?? uncertain: subscript of the label, tightly set -- \alpha+1 or \alpha'+1
+ & Y &
+\end{tikzcd}
+\]
+avec $v = p_{\alpha+1}(f)v_1$, et on prendra % [sic] p_{\alpha+1}(f)v_1 -> p_{\alpha'+1}(f)v_1, corollaire 1 is applied to \alpha' (arrow from X_{\alpha'+1}(f))
+\[
+w \ = \ \mathrm{trans}_{\alpha,\alpha'+1} \circ v_1 \ .
+\]
+
+\msp{page 8}
+
+Mais on veut une factorisation de $f$, flèche quelconque dans $\cM$, en
+\[
+f \ = \ p\ i \ , \qquad \text{avec} \ \ p \in (C_0)_* \ \ \textit{et} \ \ i \in \widetilde{C_0} \ ,
+\]
+donc il faut encore énoncer une propriété, assurant que les $i_\alpha(f)$ sont dans $\widetilde{C_0}$. On aura même quelque chose de plus précis. Introduisons
+
+\begin{itemize}[leftmargin=10em, labelwidth=9em, labelsep=1em, align=left]
+\item[(1.18)\hfill $C'_0 \ = $] plus petit sous-ensemble de $\Fl(\cM)$ contenant $C_0$, stable par cochangement de base (chaque fois qu'il existe).
+\item[\hfill $C''_0 \ = $] ensemble des flèches qui sont soit dans $C'_0$, soit des sommes amalgamées d'une famille \textit{non vide} de telles flèches $A \xrightarrow{i_\alpha} B_\alpha$ de même source $A$, $i_\alpha \in C'_0$ ; la flèche $A \longrightarrow B = \displaystyle\coprod_{\alpha}{}_{(A)} B_\alpha$ est dans $C''_0$.
+\end{itemize}
+
+(La condition 1.16 implique que les éléments de $C'_0$ sont coquarrables, et cela suffit, avec la condition de stabilité de $\cM$ par $\varinjlim$ filtrantes, à assurer que les sommes amalgamées infinies envisagées existent dans $\cM$.)
+
+\textbf{N.B.} $C''_0$ est \textit{égal} au plus petit ensemble de flèches contenant $C_0$ et stable par cochangement de base et par petites sommes amalgamées. \texttt{[Si les petites sommes existent dans $\cM$, alors $C''_0$ est aussi l'ensemble des flèches obtenues par cochangement de base à partir de sommes de flèches de $C_0$.]}
+
+\setcounter{footnote}{1}% the edition numbers these footnotes 2 and 3
+\begin{itemize}[leftmargin=10em, labelwidth=9em, labelsep=1em, align=left]
+\item[(1.19)\hfill $C'''_0 \ = $] plus petit sous-ensemble de $\Fl(\cM)$ contenant $C''_0$, et stable de plus par limites inductives ordinales strictes, \textit{i.e.} pour un système inductif ordinal $(A_\alpha)_{\alpha<\alpha_0}$, tel que pour $\alpha$ ordinal limite on ait $A_\alpha \xleftarrow{\ \sim\ } \varinjlim\limits_{\alpha' \in I_\alpha} A_{\alpha'}$, si les morphismes de transition $i_{\beta,\alpha} : A_\alpha \longrightarrow A_\beta$ sont dans $C'''_0$, de même les morphismes canoniques
+\[
+A_\alpha \xrightarrow{\ i_\alpha\ } \varinjlim_{\beta \in I_{\alpha_0}} A_\beta \ . \quad \footnotemark
+\]
+\end{itemize}
+\footnotetext{$C_0 \subset C'_0 \subset C''_0 \subset C'''_0$}% footnote 2: mark printed in the display, text printed at the foot of p. 8
+
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 9}
+
+La proposition 2, p. 4 de XIII assure que l'on a
+\[
+C'''_0 \ \subset \ \widetilde{C_0} \ .
+\]
+Ceci posé, voici la deuxième propriété essentielle de la factorisation $f = p_1(f)i_1(f)$ (la première étant 1.17) :
+
+\begin{itemize}[leftmargin=5em, labelwidth=4em, labelsep=1em, align=left]
+\item[(1.20)] \qquad\qquad Pour toute flèche $f \in \Fl(\cM)$, on a $i_1(f) \in C''_0$.
+\end{itemize}
+
+Il en résulte aussitôt, par récurrence ordinale :
+
+\begin{itemize}[leftmargin=5em, labelwidth=4em, labelsep=1em, align=left]
+\item[(1.21)] \qquad Pour toute flèche $f \in \Fl(\cM)$ et tout ordinal $\alpha \in \fU$, on a $i_\alpha(f) \in C'''_0$, a fortiori $i_\alpha(f) \in \widetilde{C_0}$.
+\end{itemize}
+
+Donc si $\alpha$ est grand devant $\pi$ (\textit{cf.} cor. 2, page 7), la factorisation $f = p_\alpha(f)i_\alpha(f)$ satisfait
+\[
+\left\{
+\begin{array}{l}
+f = p_\alpha(f)i_\alpha(f)\text{, avec } i_\alpha(f) \in C'''_0 \subset \widetilde{C_0} = \Phi \text{ \texttt{[à ne pas}}\\
+\text{\texttt{confondre avec }}\Phi_\alpha\text{\texttt{]}, } p_\alpha(f) \in C_{0*} = \Psi \text{, lorsque } \alpha \text{ est}\\
+\text{grand devant } \pi\text{, les sources des } i \in C_0 \ \pi\text{-accessibles.}
+\end{array}
+\right.
+\tag*{(1.22)}
+\]
+
+Il reste à construire le foncteur $f \longmapsto X_1(f)$, avec $i_1(f)$, $p_1(f)$, satisfaisant les conditions (1.17) et (1.20), sous l'hypothèse (1.16) que les $i \in C_0$ sont coquarrables. On considère alors, pour $f \in \Fl(\cM)$ fixé, l'ensemble $\Delta(f)$ (ou $\Delta(C_0, f)$) de \textit{tous} les diagrammes $D$ de la forme (1.15), avec $i \in C_0$, et on pose
+\[
+X_1(f) \ = \ \coprod_{D \in \Delta(f)}{}_{(X)} X_D
+\tag*{(1.23)}
+\]
+(somme amalgamée sous $X$, \textit{i.e.} somme indexée
+\msp{page 10}
+par $\Delta(f)$ dans $X\backslash\cM$), le morphisme $X \xrightarrow{i_1(f)} X_1(f)$ étant le morphisme costructural, et le morphisme $X_1(f) \xrightarrow{p_1(f)} Y$ étant celui ayant pour composantes les $p_D$. En somme, on fait “au plus économique” (et au plus naturel) pour assurer la validité de (1.17), sous la forme équivalente (1.15). D'autre part, par définition de $C'_0$, $C''_0$, les $i_D$ sont dans $C'_0$, et $i_1(f)$ est dans $C''_0$, ce qui est (1.20)\footnote{Il faudrait quand même expliciter la dépendance fonctorielle de $X_1(f)$ par rapport à $f$\,!!!}.
+
+Pour résumer :
+
+\textbf{Théorème 1.} \textit{Soient $\cM$ une $\fU$-catégorie stable par $\fU$-limites inductives filtrantes, $C_0 \subset \Fl(\cM)$ un petit ensemble de flèches de $\cM$. On suppose les flèches $i \in C_0$ coquarrables. Cela assure la définition d'un endofoncteur $f \longmapsto p_1(f)$ de $\Flu(\cM)$, et d'un homomorphisme fonctoriel $i_1 : \mathrm{id}_{\Flu(\cM)} \longrightarrow p_1$,} i.e. \textit{$i_1(f) : f \longrightarrow p_1(f)$, induisant l'identité sur les objets buts de $f$ et de $p_1(f)$,}
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "i_1(f)"] \arrow[dr, "f"'] & & X_1(f) \arrow[dl, "p_1(f)"] \\
+ & Y \ , &
+\end{tikzcd}
+\]
+
+% ---- from Der-ChXV-05-11-10_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+{\itshape d'où par itération un système inductif ordinal d'endofoncteurs $f\longmapsto p_\alpha(f)$ de $\uFl(\cM)$, et d'homomorphismes $i_\alpha : \mathrm{id}_{\uFl(\cM)} \longrightarrow p_\alpha$, \textup{i.e.}}
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "i_\alpha(f)"] \arrow[dr, "f"'] & & X_\alpha(f) \arrow[dl, "p_\alpha(f)"] \\
+& Y\,, &
+\end{tikzcd}
+\]
+{\itshape formant un système inductif ordinal de factorisations de $f$ fonctorielles en $f$.}
+
+\msp{page 11}
+
+{\itshape Ceci posé, on a :}
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] {\itshape Pour tout ordinal $\alpha$, on a $i_\alpha(f)\in\Phi$.}
+\item[b)] {\itshape Supposons que les sources des $i\in C_0$ soient accessibles et soit alors $\pi$ un cardinal dans $\mathfrak{U}$ tel qu'elles soient $\pi$-accessibles. Alors pour tout nombre ordinal $\alpha$ grand devant $\pi$, on a $p_\alpha(f)\in C_{0*}$, donc}
+\[
+f \;=\; p_\alpha(f)\, i_\alpha(f) \qquad\quad \textit{avec} \qquad\quad i_\alpha(f)\in\Phi\,, \qquad\quad p_\alpha(f)\in\Psi\,.
+\]
+\end{enumerate}
+
+On a un résultat légèrement plus précis, que voici :
+
+\textbf{Corollaire 1.} \textit{Soit $\Phi_0$ une partie de} $\Fl(\cM)$ \textit{telle que}
+\[
+C_0''' \;\subset\; \Phi_0 \;\subset\; \Phi \qquad\quad (\textit{d'où}\ \ C_0\subset\Phi_0\subset\Phi)\,,
+\tag*{(1.24)}
+\]
+\textit{où $C_0'''\subset\Phi$ est définie dans} 1.19, \textit{p.} 8. \textit{Par exemple, si $\Phi_0$ est une partie de} $\Fl(\cM)$ \textit{satisfaisant}
+\[
+C_0 \;\subset\; \Phi_0 \;\subset\; \Phi\,,
+\]
+\textit{et stable par cochangement de base, par petites sommes amalgamées} (\textit{cf.} (1.18), p.~8), \textit{par $\varinjlim$ ordinales strictes} (\textit{cf.} (1.19), p.~8), \textit{elle satisfait} (1.24). (\textbf{N.B.} \textit{Si $\cM$ admet des sommes amalgamées simples, de tels $\Phi_0$ existent trivialement, il suffit de prendre $\Phi_0=\Phi$.})
+
+\msp{page 12}
+
+\textit{Ceci posé, pour toute flèche $f$ dans $\cM$, et tout ordinal $\alpha$, on a}
+\[
+i_\alpha(f) \;\in\; \Phi_0\,.
+\]
+
+\textbf{Corollaire 2.} \textit{Supposons que les sources des flèches $i\in C_0$ soient accessibles, et soit $\Phi_0$ comme dans le corollaire} 1 (p.~ex. $\Phi_0=C_0'''$). \textit{Alors le couple $(\Phi_0,\Psi)$ est un précouple de Quillen,} i.e.
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] $\Phi_0\longleftrightarrow\Psi$, i.e. $\Psi\subset\Phi_{0*}$ (\textit{ou ce qui revient au même, $\Phi_0\subset\Psi^*$}), \textit{et}
+\item[b)] \textit{on a la propriété de factorisation de Quillen.}
+\end{enumerate}
+\textit{Cela implique donc que $\Phi$ $(=\widetilde{C_0}=\widetilde{\Phi_0})$ est formé des flèches qui sont facteurs directs de flèches de $\Phi_0$. Donc si $\Phi_0$ est stable par facteurs directs, on a $\Phi_0=\Phi$,} i.e. \textit{$\Phi_0$ est clos à gauche.}
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\section*{2\quad Variation des factorisations $f=p_\alpha i_\alpha$ avec la partie $C_0$ génératrice}
+
+Je dis que le système inductif ordinal de foncteurs $p_\alpha=p_\alpha^{C_0} : \uFl(\cM)\longrightarrow\uFl(\cM)$,
+\msp{page 13}
+muni des flèches
+\[
+i_\alpha^{C_0} \;:\; \mathrm{id}_{\uFl(\cM)} \longrightarrow p_\alpha^{C_0}\,,
+\]
+dépend fonctoriellement de $C_0$, quand on considère $C_0$ comme un élément de l'ensemble ordonné des \textit{petites} parties de $\Fl(\cM)$, formées de flèches coquarrables (donc de l'ensemble ordonné
+\[
+\mathfrak{P}_{\mathfrak{U}\text{-petites}}(\Fl_{\text{coquar.}}(\cM)) \quad ).
+\]
+Si on a une inclusion
+\[
+C_0 \;\hookrightarrow\; C_1\,,
+\tag*{(2.1)}
+\]
+on en déduit pour tout ordinal $\alpha$ un homomorphisme fonctoriel
+\[
+u_\alpha \;=\; u_\alpha^{C_1,C_0} \;:\; X_\alpha^{C_0} \;\longrightarrow\; X_\alpha^{C_1}\,,
+\tag*{(2.2)}
+\]
+rendant commutatifs les carrés déduits de $f : X\longrightarrow Y$ dans $\cM$,
+\[
+\begin{tikzcd}
+X \arrow[r, "i_\alpha^{C_0}(f)"] \arrow[d, "\mathrm{id}"'] & X_\alpha^{C_0}(f) \arrow[r, "p_\alpha^{C_0}(f)"] \arrow[d, "u_\alpha(f)"] & Y \arrow[d, "\mathrm{id}"] \\
+X \arrow[r, "i_\alpha^{C_1}(f)"] & X_\alpha^{C_1}(f) \arrow[r, "p_\alpha^{C_1}(f)"] & Y\,,
+\end{tikzcd}
+\tag*{(2.3)}
+\]
+et compatible avec les morphismes de transition pour $\alpha$ variable,
+\[
+\begin{tikzcd}
+X_\alpha^{C_0} \arrow[r, "{\mathrm{trans}_{\beta,\alpha}^{C_0}}"] \arrow[d, "u_\alpha"'] & X_\beta^{C_0} \arrow[d, "u_\beta"] \\
+X_\alpha^{C_1} \arrow[r, "{\mathrm{trans}_{\beta,\alpha}^{C_1}}"] & X_\beta^{C_1}\,.
+\end{tikzcd}
+\tag*{(2.4)}
+\]
+
+\msp{page 14}
+
+Pour définir les $u_\alpha$, satisfaisant aux conditions précédentes, il suffit de les définir pour $\alpha=1$ ``et d'itérer'' :
+\[
+\begin{tikzcd}[column sep=small]
+& X_1^{C_0}(f) \arrow[dd, "u_1(f)"] \arrow[dr, "p_1^{C_0}(f)"] & \\
+X \arrow[ur, "i_1^{C_0}(f)"] \arrow[dr, "i_1^{C_1}(f)"'] & & Y \\
+& X_1^{C_1}(f) \arrow[ur, "p_1^{C_1}(f)"'] & {}.
+\end{tikzcd}
+\tag*{(2.5)}
+\]
+Or $X_1^{C_0}(f)$ est défini comme une somme directe dans $X\backslash\cM/Y$, relative à un ensemble d'indices $\Delta(C_0,f)$ \textit{contenu} dans $\Delta(C_1,f)$ -- et la famille d'objets dont on prend la somme directe étant induite d'une famille (non petite) dont l'ensemble d'indices serait $\Delta(\Fl_{\text{coquar.}}(\cM),f)$, savoir formé de \textit{tous} les diagrammes carrés
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\[
+D : \qquad
+\begin{tikzcd}
+A \arrow[r, "u"] \arrow[d, "i"'] & X \arrow[d, "f"] \\
+B \arrow[r, "v"] & Y
+\end{tikzcd}
+\qquad\qquad \text{avec $i$ coquarrable sans plus ,}
+\]
+la définition des $X_D$, $i_D$, $p_D$ associés à $D$ ne dépendant que de $D$, et non de l'ensemble $C_0$ ou $C_1$ de flèches coquarrables qui contient $i$. Ceci dit, la flèche $u_1(f)$
+\msp{page 15}
+dans (2.5) n'est autre que l'inclusion canonique d'une somme amalgamée partielle, indexée par $\Delta(C_0,f)$, dans la somme amalgamée correspondante à l'ensemble d'indices plus grand. La fonctorialité de cette flèche $u_1(f)$, pour $f$ variable, ``est immédiate'', elle résulte de la commutativité du carré, associé à un morphisme $v=(v_X,v_Y)$ de flèches
+\[
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "v_X"'] & Y \arrow[d, "v_Y"] \\
+X' \arrow[r, "f'"] & Y'\,,
+\end{tikzcd}
+\tag*{(2.6)}
+\]
+savoir le diagramme d'applications entre ensembles d'indices
+\[
+\begin{tikzcd}
+\Delta(C_0,f) \arrow[r, hook, "u_1(f)"] \arrow[d, "{\begin{array}{r}\text{dépendance fonctorielle}\\ \text{en $f$ de $\Delta(C_0,f)$}\end{array}}"'] & \Delta(C_1,f) \arrow[d, "{\begin{array}{l}\text{dépendance fonctorielle}\\ \text{en $f$ de $\Delta(C_1,f)$}\end{array}}"] \\
+\Delta(C_0,f') \arrow[r, hook, "u_1(f')"] & \Delta(C_1,f')
+\end{tikzcd}
+\tag*{(2.7)}
+\]
+(commutativité qui revient à dire que $\Delta(C_0,f)$ peut être considéré comme un foncteur en le couple $(C_0,f)$ comme objet de la catégorie produit $\underline{\mathfrak{P}_{\text{pet.}}(\Fl_{\text{coquar.}}(\cM))}\times\uFl(\cM)$ \ldots). Le carré commutatif (2.7) est la partie ``indices'' d'un carré commutatif entre familles d'objets $\mathscr{X}(C_0,f)$, $\mathscr{X}(C_0,f')$, $\mathscr{X}(C_1,f)$, $\mathscr{X}(C_1,f')$,
+\msp{page 16}
+indexés par ces ensembles, savoir les $X_D^{C_0}$ et les $X_D^{C_1}$ relatifs aux diagrammes $D$ impliquant, soit la flèche $f$, soit la flèche $f'$ \ldots
+
+Or la construction canonique du système inductif ordinal $p_\alpha$, avec les $i_\alpha : \mathrm{id}_{\uFl(\cM)}\longrightarrow p_\alpha$, est fonctorielle par rapport à la donnée initiale $p_1$, $i_1$ -- je n'explicite pas le détail de la fonctorialité, bien que je devrais \ldots
+
+\section*{3\quad Majoration des cardinaux}
+
+Je suppose à présent que $\cM$ est muni d'une \textit{filtration cardinale}
+\[
+(\Filt^\pi)_{\pi\geq\pi_0} \qquad\quad (\pi_0,\ \pi \text{ cardinaux dans } \mathfrak{U})
+\tag*{(3.1)}
+\]
+(SGA 4 I 9.12, p.~149), les $\Filt^\pi$ stables par sommes amalgamées simples (chaque fois qu'elles existent), donc aussi par sommes amalgamées infinies indexées par des ensembles
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+d'indices de cardinal $\leq\pi$. On suppose de plus que tout objet de $\Filt^{\pi_0}$ soit accessible, et on désigne par \circled{$\pi_1$} le plus petit cardinal tel que $\pi_1\geq\pi_0$ et que les objets de $\Filt^{\pi_0}$ soient $\pi_1$-accessibles. Désignant, pour tout cardinal, par $\cM_\pi$ le sous-ensemble de $\mathrm{Ob}\,\cM$ formé des objets $\pi$-accessibles, on aura alors pour tout $\pi\geq\pi_1$ (\textit{loc. cit.} 9.16)
+\[
+\cM_\pi \;\subset\; \Filt^\pi \;\subset\; \cM_{(\pi^{\pi_0})} \qquad\quad (\text{si } \pi\geq\pi_1)\,,
+\tag*{(3.2)}
+\]
+
+\msp{page 17}
+
+donc si $\pi^{\pi_0}=\pi$, p.~ex. si $\pi=2^c$ avec $c\geq\pi_0$, on aura
+\[
+\Filt^\pi \;=\; \cM_\pi\,.
+\tag*{(3.2 bis)}
+\]
+(Si on admet l'hypothèse du continu généralisée, on a $\pi^{\pi_0}=\pi$ pour tout $\pi>\pi_0$, donc $\Filt^\pi=\cM_\pi$ si $\pi\geq\pi_1$ et $\pi>\pi_0$.)
+
+Je pose, pour tout cardinal $\pi\geq\pi_0$,
+\[
+\Fl^\pi(\cM) \;=\; \{\ f\in\Fl(\cM) \mid \text{source et but de $f$ sont dans } \Filt^\pi\ \}
+\tag*{(3.3)}
+\]
+-- ce qui sans doute donne une filtration cardinale sur $\uFl(\cM)$ (mais ce n'est pas là notre souci \ldots). Mon but à présent, c'est de dégager des conditions sur $C_0\subset\Fl_{\text{coquar.}}(\cM)$ (petite partie de $\Fl(\cM)$) et sur le cardinal $\pi$, et l'ordinal $\alpha$, pour que l'on ait
+\[
+\begin{aligned}
+f\in\Fl^\pi(\cM) \;\;\overset{?}{\Longrightarrow}\;\; & X_\alpha(f)\in\Filt^\pi \\
+& (\textit{i.e.}\ p_\alpha(f)\in\Fl^\pi(\cM),\ \text{ou encore } i_\alpha(f)\in\Fl^\pi(\cM))\,.
+\end{aligned}
+\tag*{(3.4)}
+\]
+Plus généralement, je me propose de donner une estimation de la ``cardinalité'' de $X_\alpha(f)$, pour $C_0$ fixé, en fonction de $C_0$, de $f$, de $\alpha$, plus exactement, en fonction des trois cardinaux $\pi(C_0)$, $\pi(f)$, $\pi(\alpha)$ définis comme
+\[
+\left\{
+\begin{array}{rcl}
+\pi(C_0) & = & \text{plus petit cardinal tel que } C_0\subset\Fl^\pi(\cM) \\[1ex]
+\pi(f) & = & \pi(\{f\}) \;=\; \text{plus petit cardinal tel que } f\in\Fl^\pi(\cM) \\[1ex]
+\pi(\alpha) & = & \card\alpha\,.
+\end{array}
+\right.
+\tag*{(3.5)}
+\]
+Donc je cherche une fonction
+\msp{page 18}
+cardinale de variables cardinales $\varphi$, telle que l'on ait
+\[
+X_\alpha(f) \;\in\; \Filt^\pi \qquad\quad \text{si} \qquad\quad \pi \;=\; \varphi(\underbrace{\pi(C_0)}_{r},\underbrace{\pi(f)}_{s},\underbrace{\pi(\alpha)}_{t})\,.
+\tag*{(3.6)}
+\]
+L'estimation cruciale concernera sûrement le cas $\alpha=1$. Notons que $X_1^{C_0}(f)=X_1(f)$ est défini comme une somme amalgamée (en général infinie) d'objets $X_D$, pour un ensemble $\Delta(C_0,f)=\Delta(f)$ de diagrammes, savoir les diagrammes commutatifs
+\[
+\begin{tikzcd}
+A \arrow[r] \arrow[d, "i"'] & X \arrow[d, "f"] \\
+B \arrow[r] & Y
+\end{tikzcd}
+\]
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+avec $i\in C_0$. Pour un $i$ fixé, et un $f$ fixé, le cardinal de l'ensemble des diagrammes de ce type est majoré par celui de $\mathrm{Hom}(A,X)\times\mathrm{Hom}(B,Y)$. On a $A,B\in\Filt^r$, $X,Y\in\Filt^s$, donc il nous faut une majoration de
+\[
+\card\mathrm{Hom}_{\cM}(A,X)\,, \qquad\quad A\;\in\;\Filt^r\,, \qquad\quad X\;\in\;\Filt^s\,.
+\]
+
+\msp{page 19}
+
+Voici les majorations essentielles dans ce sens :
+
+\textbf{Proposition 3.1.} \textit{Soit $\pi_0$ le cardinal initial de la filtration cardinale} $(\Filt^\pi)_{\pi\geq\pi_0}$ \textit{envisagé, $\pi_1$ le plus petit cardinal $\geq\pi_0$ tel que les objets de} $\Filt^{\pi_0}$ \textit{soient $\pi_1$-accessibles, $C_1=$} card $\underbrace{\widetilde{\uFl^{\pi_1}(\cM)}}_{=\uFl(\cM^{\pi_1})}$\pfn{4}{\textit{cf.} plus bas la notation $\widetilde{\mathcal{C}}$.}. \textit{Pour tout cardinal $\pi\geq\pi_0$, je désigne par $\cM^\pi$ la sous-catégorie strictement pleine de $\cM$ dont l'ensemble des objets est} $\Filt^\pi$. \textit{Enfin, si $\mathcal{C}$ est une catégorie, je désigne par $\widetilde{\mathcal{C}}$ l'ensemble des classes d'isomorphie d'objets de $\mathcal{C}$.}\pfn{5}{Signalons qu'on a toujours $\card\widetilde{\uFl(\mathcal{C})}\geq\card\widetilde{\mathcal{C}}$ car $\widetilde{\mathcal{C}}\hookrightarrow\widetilde{\uFl(\mathcal{C})}$ via $\mathrm{cl}(X)\longmapsto\mathrm{cl}(\mathrm{id}_X)$.}
+% ?? uncertain: straight underlines under "le plus petit" and under "pleine" -- underlined / not underlined (a wavy tilde and an underbrace stand close by)
+
+$1^\circ$) \textit{Si $r\geq\sup(\pi_1,C_1)$, on a}
+\[
+\card\,(\underbrace{\widetilde{\uFl^r(\cM)}}_{=\uFl(\cM^r)}) \;\leq\; 2^{(r^{\pi_0})} \quad\ (=2^r,\ \textit{si } r=2^c,\ \textit{avec } c\geq\pi_0)\,.
+\tag*{(3.7)}
+\]
+
+$2^\circ$) \textit{Si $r,s\geq\sup(\pi_1,C_1)$, et si $A\in\Filt^r$, $X\in\Filt^s$, on a}
+% (3.8) and (3.9) share one brace on the right
+\[
+\begin{array}{l}
+\text{(3.8)}\\[3ex]
+\text{(3.9)}
+\end{array}
+\qquad\qquad
+\begin{array}{r@{\;\;\leq\;\;}l}
+\card\mathrm{Hom}_{\cM}(A,X) & s^{(r^{\pi_0})}\\[3ex]
+\card\widetilde{\uFl(\cM^r/X)} & s^{(r^{\pi_0})}
+\end{array}
+\qquad\quad
+\left\{
+\begin{array}{lll}
+= & s^r & \textit{si } r=2^c,\ \textit{avec } c\geq\pi_0\,,\\[3ex]
+= & s & \textit{si } s=2^{c'},\ \textit{avec } c'\geq r^{\pi_0}\,.
+\end{array}
+\right.
+\]
+
+\textbf{N.B.} Si on admet l'hypothèse du continu généralisée, qui implique que $\pi^{\pi'}=\pi$ si $\pi>\pi'$ ($\pi$ cardinal infini, $\pi'\geq1$), alors prenant $r$ tel que $r>\pi_0$, les formules précédentes donnent (avec de plus $r\geq\sup(\pi_1,C_1)$) :
+\[
+\card\widetilde{\uFl^r(\cM)} \;\;\leq\;\; 2^r\,,
+\tag*{(3.7 bis)}
+\]
+\[
+\card\mathrm{Hom}_{\cM}(A,X) \;\leq\; s^r \qquad\quad (\text{si } A\in\Filt^r,\ X\in\Filt^s)\,,
+\tag*{(3.8 bis)}
+\]
+\[
+\card\widetilde{\uFl(\cM^r/X)} \;\leq\; s^r \qquad\quad (\text{si } X\in\Filt^s)\,.
+\tag*{(3.9 bis)}
+\]
+Sans hypothèse du continu, ces formules sont aussi valables pour $r$ de la forme $2^c$, avec $c\geq\pi_0$. Ce sont ces dernières formules qui on l'air les plus naturelles. Pour (3.8 bis) et % [sic] qui on l'air -> qui ont l'air, verb form
+(3.9 bis), je signale que le deuxième membre $s^r$ est le cardinal de l'ensemble $\mathrm{Hom}_{\mathrm{Ens}}(A,X)$, où $A$, $X$ sont deux ensembles tels que $\card A=r$, $\card X=s$. On ne peut donc espérer améliorer (3.8 bis)\,! Pour la
+
+% ---- from Der-ChXV-05-11-10_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 20}
+première formule (3.7 bis), notons que l'on a égalité lorsque $\M$ est la catégorie des couples $(A,B)$, $A$ un ensemble et $B$ une partie de $A$, avec les flèches évidentes, et qu'on définit $\M^\pi$ (pour $\pi\geq\pi_0$) comme la sous-catégorie strictement pleine formée des $(A,B)$ tels que $\card A\geq\pi$.
+
+\textsc{Démonstration de} 3.1. Prouvons d'abord la formule (3.8),
+\[
+\card\Hom(A,X)\ \leq\ s^{(r^{\pi_0})}\qquad\quad
+\left\{\begin{array}{l}
+\text{si } A\in\Filt^r,\ X\in\Filt^s,\\[1.5ex]
+r\geq\pi_1,\ s\geq\sup(\pi_1,C_1).
+\end{array}\right.
+\]
+
+(\textbf{N.B.} Je n'utiliserai pas $r\geq C_1$, postulé dans 3.1 $1^\circ$.) J'écris \texttt{[<<J'écris>> rayé]}
+\[
+\begin{aligned}
+A\ &=\ \varinjlim_I A_i\ ,\quad \card I\ \leq\ r^{\pi_0}\ ,\quad A_i\ \in\ \Filt^{\pi_0}\ ,\\
+X\ &=\ \varinjlim_J X_j\ ,\quad \card J\ \leq\ s^{\pi_1}\ ,\quad X_j\ \in\ \Filt^{\pi_1}\ ,\qquad\qquad J\text{ grand devant }\pi_1\ .
+\end{aligned}
+\]
+On aura
+\[
+\Hom(A,X)\ \simeq\ \varprojlim_{i\in I}\ \underbrace{\Hom(A_i,\,\varinjlim_J X_j)}_{\overset{(\text{\footnotemark[6]})}{\simeq}\ \varinjlim\limits_{j\in J}\ \underbrace{\Hom(A_i,X_j)}_{\text{de cardinal }\leq C_1}}\ ,
+\]
+\footnotetext[6]{car les $A\in\Filt^{\pi_0}$ sont $\pi_1$-accessibles.}
+donc pour tout $i\in I$
+\[
+\Hom(A_i,X)\ \leq\ \card(J)\times C_1\ \leq\ s^{\pi_1}\times C_1\ =\ s^{\pi_1}\ ,
+\]
+car $s\geq C_1$, donc $s^{\pi_1}\geq C_1$, d'où
+\[
+\card(\,\varprojlim_{j\in I}\Hom(A_i,X))\ \leq\ (s^{\pi_1})^{\card I}\ \leq\ \underbrace{(s^{\pi_1})^{(r^{\pi_0})}}_{s^{\pi_1 r^{\pi_0}}}\ . % [sic] j\in I -> i\in I, the limit is over the index i of A_i
+\]
+Comme $r\geq\pi_1$, on a $r^{\pi_0}\geq\pi_1$, donc $r^{\pi_0}\pi_1=r^{\pi_0}$, d'où
+\[
+\card\Hom(A,X)\ \leq\ s^{(r^{\pi_0})}\ ,
+\]
+c'est bien la formule (3.8). Pour en tirer une estimation pour $\M^r/X$ (avec $X\in\Filt^s$), \msp{page 21} je vais d'abord majorer le cardinal des classes d'isomorphie d'objets de $\M^r/X$, \textit{i.e.} des flèches à isomorphisme près (dans $\M^r$)
+\[
+A\ \longrightarrow\ X\ ,\qquad\quad X\text{ fixé dans }\Filt^s,\ A\text{ variable dans }\M^r\ .
+\]
+On aura
+\[
+A\ =\ \varinjlim_{i\in I} A_i\qquad\quad\text{avec } A_i\in\Filt^{\pi_0},\ I\text{ ensemble ordonné de cardinal}\leq r^{\pi_0}\ .
+\]
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+Pour $I$ fixé, le cardinal de l'ensemble des systèmes inductifs indexés par $I$, dans $\M^{\pi_0}/X$, à isomorphisme près, peut se majorer ainsi : pour tout $i\in I$, il faut choisir $A_i$ dans $\M^{\pi_0}$ (mais seule sa classe dans $\wavy{\M^{\pi_0}}$ importe), donc c'est majoré par card $\wavy{\M^{\pi_0}}\ \leq C_0$~\textsuperscript{(}\footnote[7]{On a posé ici $C_0=\card\wavy{\uFl^{\pi_0}}$ , donc $C_0\leq C_1$.}\textsuperscript{)}, et pour tous les $i$, par $\card I\times C_0\leq r^{\pi_0}\times C_0$, et si $r\geq C_0$, donc $r^{\pi_0}\geq C_0$, on trouve une majoration des choix possibles du système des \textit{objets} $A_i$ dans $\M^\pi$, à isomorphisme près, par $r^{\pi_0}$. Si on se donne de plus les morphismes de transition $A_i\longrightarrow A_j$ pour $i<j$, cela fait pour chaque paire comparable, élément de $I\times I$, un choix majoré par $C_0$, donc encore une majoration par $\ \underbrace{\card(I\times I)}_{=(\card I)^2=\card I}\cdot C_0\leq r^{\pi_0}\cdot C_0=r^{\pi_0}$. Donc l'ensemble des systèmes inductifs en question, à isomorphisme près, pour $I$ fixé, est de cardinal $\leq r^{\pi_0}\cdot r^{\pi_0}=r^{\pi_0}$. Enfin, les \textit{homomorphismes} d'un système inductif donné dans $X$ sont majorés par $\card I\times s^{(r^{\pi_0})}$ (par (3.8) déjà prouvé), donc par
+\[
+r^{\pi_0}\cdot s^{(r^{\pi_0})}\ =\ s^{(r^{\pi_0})}\qquad\quad(\text{puisque } r^{\pi_0}\leq s^{(r^{\pi_0})})\ .
+\]
+
+Au total, pour $I$ fixé, l'ensemble des systèmes inductifs à isomorphisme près, indexés par $I$, à valeurs dans $\M^r/X$, est \msp{page 22} de cardinal majoré par $\quad\underbrace{r^{\pi_0}}_{\text{\scriptsize\begin{tabular}{@{}c@{}}nombre des\\ systèmes inductifs\\ dans $\M^\pi$, à\\ isomorphisme près\end{tabular}}}\quad\cdot\quad\underbrace{s^{(r^{\pi_0})}}_{\text{\scriptsize\begin{tabular}{@{}c@{}}nombre des\\ flèches d'un\\ tel système inductif\\ dans $X$\end{tabular}}}\quad=s^{(r^{\pi_0})}$.
+
+Mais il faut maintenant faire varier $I$, à isomorphisme près, dans la catégorie des ensembles ordonnés (filtrants \textit{etc.}) de cardinal $\leq\lambda=r^{\pi_0}$. On voit de suite que cet ensemble de classes d'isomorphie (qui peut s'interpréter comme un ensemble quotient d'un certain ensemble de parties d'un ensemble fixe $I_0$ de cardinal $\lambda$) est de cardinal $\leq 2^\lambda$. On trouve donc finalement
+\[
+\card\wavy{\M^r/X}\ \ \leq\ s^{(r^{\pi_0})}\cdot 2^{(r^{\pi_0})}\ =\ s^{(r^{\pi_0})}\ ,
+\]
+sous condition que
+\[
+r\ \geq\ \sup(\pi_1,C_0)\ ,\qquad\quad s\ \geq\ \sup(\pi_1,C_1)\ .
+\]
+Il faut prouver l'inégalité similaire pour card $\wavy{\uFl^r\,\M}$ \ (3.9). Or, comme pour $A$, $B$ dans $\M^r$, on a, si $r\geq\sup(\pi_1,C_1)$,
+\[
+\card\Hom_{\M}(A,B)\ \leq\ r^{(r^{\pi_0})}
+\]
+en vertu de (3.8) où on fait $s=r$, on trouve que
+\[
+\begin{aligned}
+\card\wavy{\uFl(\M^r/X)}\ &\leq\ \Bigl(\card\wavy{\M^r/X}\,\Bigr)^2\cdot r^{(r^{\pi_0})}\\
+&\leq\ s^{(r^{\pi_0})}\cdot r^{(r^{\pi_0})}\\
+&=\ s^{(r^{\pi_0})}\qquad\text{si } s\geq r\ .
+\end{aligned}
+\]
+(On va regarder plus bas les cas $s\leq r$~\textsuperscript{(}\footnote[8]{\textit{cf.} cor. 2, page 23.}\textsuperscript{)}). C'est bien la formule (3.9).
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 23}
+Venons-en à la catégorie $\M^r$ elle-même. L'argument de la page 21 montre que l'ensemble des classes d'isomorphie d'objets de $\M^r$ indexés par un $I$ fixé, de cardinal $\leq r^{\pi_0}$, comme $A=\varinjlim\limits_i A_i$ avec $A_i\in\Filt^{\pi_0}$, est de cardinal majoré par $r^{\pi_0}$ (si $r\geq C_0$). Si on fait varier $I$, on trouve une majoration par $r^{\pi_0}\cdot 2^{(r^{\pi_0})}=2^{(r^{\pi_0})}$. On en conclut comme tantôt que l'ensemble $\ \wavy{\Fl\,\M^r}$ est de cardinal majoré par
+\[
+(2^{(r^{\pi_0})})^2\times r^{(r^{\pi_0})}\qquad\quad(\text{si } r\geq\sup(\pi_1,C_1))\ ,
+\]
+donc par $r^{(r^{\pi_0})}$. Je dis qu'on a
+\[
+r^{(r^{\pi_0})}\ =\ 2^{(r^{\pi_0})}\ ,
+\]
+en effet, on a $\geq$, et pour prouver $\leq$, on note que $r<2^r$, donc $r^{(r^{\pi_0})}\leq(2^r)^{(r^{\pi_0})}=2^{r\cdot r^{\pi_0}}=2^{(r^{\pi_0})}$, O.K.! Cela établit donc 3.7. Cet argument prouve en fait le
+
+\textbf{Lemme 3.2.} \textit{Soient $r$ un cardinal, $r'$ un cardinal $\geq r$. Alors on a}
+\[
+r^{r'}\ =\ 2^{r'}\qquad\quad(=s^{r'}\ \textit{pour tout}\ 2\leq s\leq r)\ .
+\]
+
+\textbf{Corollaire 1.} \textit{Soient $r\geq\sup(\pi_1,C_1)$, et $A,X\in\Filt^\pi$. Alors}
+\[
+\card\Hom_{\M}(A,X)\ \leq\ 2^{(r^{\pi_0})}\qquad\quad(=2^r\ \textit{si}\ r=2^c,\ \textit{avec}\ c\geq\pi_0)\ . \tag*{(3.10)}
+\]
+
+On applique (3.8), qui donne la majoration $r^{(r^{\pi_0})}$, et le lemme 3.2.
+
+On notera qu'on trouve la même majoration pour le cardinal de $\wavy{\uFl(\M^r)}$ tout entier (3.7)! De même, (3.9) donne :
+
+\textbf{Corollaire 2.} \textit{Soit $r\geq\sup(\pi_1,C_1)$, et $X\in\Ob\M^r$. Alors}
+\[
+\card\wavy{\uFl(\M^r/X)}\ \leq\ 2^{(r^{\pi_0})}\qquad\quad(=2^r\ \textit{si}\ r=2^c,\ \textit{avec}\ c\geq\pi_0)\ . \tag*{(3.11)}
+\]
+c'est donc la formule (3.9) pour $s\leq r$, laissée en suspens.
+
+\msp{page 24}
+Revenons à la majoration cardinale des $X_\alpha(f)$, où $f : X\longrightarrow Y$ est dans $\Fl^s(\M)$, \textit{i.e.} $X,Y\in\Filt^s$. On suppose de plus $C_0\subset\Fl^r(\M)$,
+\[
+\begin{aligned}
+&C_0\ \subset\ \Fl^r(\M)\ =\ \Fl(\M^r)\ ,\qquad\quad(f:X\longrightarrow Y)\in\Fl^s(\M)\ ,\ \ \textit{i.e.}\ X,Y\in\Filt^s\ ,\\
+&\text{avec } s\geq r\ .
+\end{aligned} \tag*{(3.10)}
+\]
+
+\texttt{[Deux fois (3.10).]} Il y a une difficulté idiote, c'est que $\M^r$ est équivalente à une petite catégorie, mais n'est pas elle-même petite. Même si $C_0$ ne contenait qu'une seule classe d'isomorphie de flèches de $\M^r$, son cardinal pourrait être (pour $r$ fixé) arbitrairement élevé. Aussi, dans ce qui suit, je dois supposer la condition de “non pléthoricité cardinale” pour $C_0$ :
+\[
+\parbox{0.72\linewidth}{$\forall\,i\in C_0$, désignant par $C_0(i)$ l'ensemble des $i'\in C_0$ telles que $i\simeq i'$ dans $\Fl(\M)$, j'impose que $\card C_0(i)\leq 2^{(r^{\pi_0})}$ (ce qui est aussi la valeur de la majoration pour le cardinal de $\wavy{\uFl^r(\M)}=\wavy{\uFl(\M^r)}$\,).} \tag*{(3.11)}
+\]
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\texttt{[Deux fois (3.11).]} Cela implique donc que l'on a $\card C_0\leq(2^{(r^{\pi_0})})^2=2^{(r^{\pi_0})}$,
+\[
+\card C_0\ \leq\ 2^{(r^{\pi_0})}\ , \tag*{(3.12)}
+\]
+qui est équivalente à (3.11) (moyennant $C_0\subset\Fl^r(\M)$, postulé dans (3.10)).
+
+Il s'ensuit par (3.8) que l'on a
+\[
+\card\Delta(C_0,f)\ \leq\ \underbrace{\card(C_0)}_{\leq 2^{(r^{\pi_0})}}\cdot s^{(r^{\pi_0})}\cdot s^{(r^{\pi_0})}\ \leq\ s^{(r^{\pi_0})}\ .
+\]
+
+D'autre part, les $X_D$ dont on prend la somme amalgamée sous $X$, pour obtenir $X_1(f)$, sont dans $\M^s$, si on fait l'hypothèse suivante. \msp{page 25}
+\[
+\left|\ \parbox{0.72\linewidth}{Les $\M^\pi=\uFilt^\pi$ sont stables par sommes amalgamées simples, et par $\varinjlim$ filtrantes de cardinal $\leq\pi$ (pas nécessairement grandes devant $\pi_0$) ,}\right. \tag*{(3.13)}
+\]
+compte tenu que $r\leq s$, donc $\M^r\subset\M^s$, donc $A$, $B$, $X$ dans $X_D=B\amalg_A X$ sont dans $\M^s$. Les sommes amalgamées partielles \textit{finies} des $X_D$ sont donc aussi dans $\M^s$, par récurrence sur le cardinal de l'ensemble d'indices. La somme amalgamée infinie apparaît ainsi comme $\varinjlim$ filtrante d'objets de $\M^s$, l'ensemble d'indices étant l'ensemble $\mathfrak{P}^*_{\mathfrak{f}}\Delta(C_0,f)$ des parties finies non vides de $\Delta(C_0,f)$. Cet ensemble est de cardinal majoré par $s'$, si $s'$ est un cardinal \textit{infini} tel que $\card\Delta(C_0,f)\leq s'$. On peut donc prendre $s'=s^{(r^{\pi_0})}$. On a donc prouvé, compte tenu de (3.13) appliqué à $\M^{s'}$, le % ?? uncertain: symbol in X_D = B \amalg_A X -- \amalg or a doubled \sqcup; subscript of \mathfrak{P}^* -- fraktur f or roman f
+
+\textbf{Lemme 3.3.} \textit{On suppose} \textup{(3.10), i.e.} $C_0\subset\Fl^r(\M)$, $f\in\Fl^s(\M)$, \textit{avec} $s\geq r\geq\sup(\pi_1,C_1)$, \textit{et de plus que $C_0$ satisfait la condition de non-pléthoricité} \textup{(3.11)} \textup{(}\textit{ce qu'on peut toujours supposer, quitte à réduire $C_0$ sans changer $\widetilde{C_0}=\Phi$ et $C_{0*}=\Psi$}\textup{)}\textit{, et que la filtration cardinale satisfait la condition de stabilité (anodine!)} \textup{(3.13)}\textit{. Posons}
+\[
+s'\ =\ s^{(r^{\pi_0})}\ . \tag*{(3.14)}
+\]
+\textit{Alors $X_1(C_0,f)$ est dans $\M^{s'}$. Plus généralement et plus joliment, pour $C_0$ et $r$ fixés} \textup{(}\textit{avec $C_0\subset\Fl^r(\M)$ et satisfaisant la condition de non-pléthoricité} \textup{(3.11)} \textit{relativement à $r$}\textup{)}\textit{, pour tout cardinal} \msp{page 26} \textit{de la forme}
+\[
+s'\ =\ s^t\ ,\qquad\quad\textit{avec}\ t\geq r^{\pi_0},\ s\geq 2 \tag*{(3.15)}
+\]
+\textit{(d'où $s'\geq 2^{(r^{\pi_0})}>r^{\pi_0}\geq r$), $\uFl^{s'}(\M)$ est stable sous le foncteur $p_1^{C_0}:\uFl(\M)\longrightarrow\uFl(\M)$.}
+
+En effet, si on applique la première partie du lemme au couple $(r,s')$, on trouve que $X_1(f)$ est dans $\M^{s''}$, avec $s''=s'^{(r^{\pi_0})}$. Mais
+\[
+s''\ =\ s'^{(r^{\pi_0})}\ =\ (s^t)^{(r^{\pi_0})}\ =\ s^{tr^{\pi_0}}\ \underset{\substack{\vert\\ \text{\scriptsize car $t\geq r^{\pi_0}$,}\\ \text{\scriptsize donc $tr^{\pi_0}=t$}}}{=}\ s^t\ =\ s'\ ,
+\]
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+donc on voit que $f\in\Fl^{s'}$ implique $X_1(f)\in\M^{s'}$, ou ce qui revient au même, $p_1(f)\in\Fl^{s'}$.
+
+\textbf{Corollaire.} \textit{Soient $C_0$, $r$, $s'=s^t$ $(t\geq r^{\pi_0},\ s\geq 2)$ comme dessus, et soit $\alpha$ un nombre ordinal tel que}
+\[
+\card\alpha\ \leq\ s'\ =\ s^t\ .
+\]
+\textit{Alors $\uFl^{s'}(\M)$ est stable par le foncteur $p_\alpha=p_\alpha^{C_0}$.}
+
+On le voit aussitôt par récurrence transfinie, compte tenu du lemme 3.3, et de l'hypothèse de stabilité (3.13).
+
+Pour résumer :
+
+\textbf{Théorème 2.} \textit{Soit $\M$ une catégorie stable par petites $\varinjlim$ filtrantes, et munie d'une filtration cardinale} $(\Filt^\pi)_{\pi\geq\pi_0}$\textit{, telle que les} $\Filt^\pi$ \textit{soient stables par $\varinjlim$ filtrantes de cardinal $\leq\pi$ (pas forcément grandes devant $\pi_0$), et par les sommes amalgamées simples qui existent dans $\M$. On suppose que les éléments de} $\Filt^{\pi_0}$ \textit{soient accessibles, et on désigne par $\pi_1$ le plus petit cardinal $\geq\pi_0$, tel que les objets de} $\Filt^{\pi_0}$ \textit{soient $\pi_1$-accessibles. On pose} \msp{page 27}
+\[
+c_1\ =\ \card\Fl(\M^{\pi_1})\ =\ \card\Fl^{\pi_1}(\M)
+\]
+\textit{(où pour tout $\pi\geq\pi_0$, $\M^\pi$ désigne la sous-catégorie strictement pleine de $\M$ définie par} $\Filt^\pi$\textit{, et} $\Fl^\pi(\M)=\Fl(\M^\pi)$\textit{).}
+
+\textit{Soit $C_0$ une petite partie de} $\Fl(\M)$\textit{, formée de flèches coquarrables, et posons}
+\[
+\Phi\ =\ \widetilde{C_0}\ =\ \Psi^*\ ,\qquad\quad\textit{où}\ \ \Psi=C_{0*}=\Phi_*\ .
+\]
+\textit{Soit $r$ un cardinal} $\geq\sup(\pi_1,c_1)$\textit{, et tel que l'on ait $C_0\subset\Fl^r(\M)$. On suppose que $C_0$ est irrédondant (}i.e.\textit{ deux objets de $C_0$ isomorphes sont égaux), ou plus généralement, que $C_0$ satisfait la très anodine condition de non-pléthoricité} \textup{(3.11)} \textit{relativement à $r$. On considère la suite transfinie des foncteurs $p_\alpha=p_\alpha^{C_0}$ sur $\uFl(\M)$} \textup{(}\textit{cf.} \textup{th. 1)}\textit{, donnant lieu aux factorisations fonctorielles d'une $f\in\uFl(\M)$, $f:X\longrightarrow Y$, en}
+\[
+X\ \xrightarrow{i_\alpha(f)}\ X_\alpha(f)\ \xrightarrow{p_\alpha(f)}\ Y\ . \tag*{(3.16)}
+\]
+
+\textit{On a alors ce qui suit :}
+
+$1^\circ$) \textit{On a (pour mémoire) $i_\alpha(f)\in\Phi$ pour tout $\alpha$, et de plus,} si $\alpha$ est grand devant $r^{\pi_0}$, \textit{on a aussi $p_\alpha(f)\in\Psi$. Si $r'$ est un cardinal $>r^{\pi_0}$ (p. ex. le cardinal successeur de $r^{\pi_0}$), on peut prendre pour $\alpha$ le premier ordinal dont le cardinal soit égal à $r'$.}
+
+$2^\circ$) \textit{Pour tout cardinal $s$ de la forme}
+\[
+s\ =\ c^t\qquad\quad\textit{avec}\ \ t\geq r^{\pi_0},\ c\geq 2
+\]
+\textit{(donc $s=2^t$ si on prend $c\leq t$,} cf. \textit{lemme 3.2), $\uFl^s(\M)$ est stable sous les $p_\alpha$ tels que} $\card\alpha\leq s$\textit{. Si on prend p. ex. pour $\alpha$ le premier ordinal dont le cardinal soit $>r^{\pi_0}$, alors $\uFl^s(\M)$ est stable par $p_\alpha$, qui par $1^\circ$) réalise donc une factorisation fonctorielle} \textup{(3.16)} \textit{avec $i_\alpha(f)\in\Phi$, $p_\alpha(f)\in\Psi$.}
+
+% ---- from Der-ChXV-05-11-10_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 28}
+\textsc{Démonstration}. Tout a été prouvé, si on se rappelle que les objets de $\mathcal{M}^r$ sont $r^{\pi_0}$-accessibles (\textit{cf.} (3.2)).
+
+\section*{4\quad Compléments sur les structures de Quillen}
+
+\textbf{Définition 4.1.} Soit $\mathcal{M}$ une catégorie. On appelle \textit{précouple de Quillen} dans $\mathcal{M}$ un couple $(\Phi,\Psi)$ de parties de $\Fl(\mathcal{M})$, satisfaisant les deux conditions suivantes.
+\begin{itemize}[leftmargin=2.5em]
+\item[\textit{a})] On a $\Phi\longleftrightarrow\Psi$, \textit{i.e.} $\Psi\subset\Phi_*$, ou ce qui revient au même, $\Phi\subset\Psi^*$ -- soit encore : pour tout carré commutatif dans $\mathcal{M}$
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "u"] \arrow[d, "i"'] & X \arrow[d, "p"] \\
+B \arrow[ur, dotted, "w" description] \arrow[r, "v"] & Y \;,
+\end{tikzcd}
+\tag*{(4.1.1)}
+\]
+avec $i\in\Phi$, $p\in\Psi$, il existe $w$ telle que $wi=u$, $pw=v$.
+\item[\textit{b})] Toute $f\in\Fl(\mathcal{M})$ se factorise en
+\[
+f \;=\; p\,i\;, \qquad \text{avec } i\in\Phi,\, p\in\Psi\ .
+\]
+\end{itemize}
+On écrit
+\[
+\Phi \;\qpre\; \Psi
+\tag*{(4.1.2)}
+\] % ?? uncertain: the printed relation sign -- a double arrow with a small vertical bar in the middle (rendered by \qpre)
+pour indiquer que $(\Phi,\Psi)$ est un précouple de Quillen.
+
+On dit que le précouple de Quillen est \textit{clos}, si $\Phi$ est clos à gauche, $\Psi$ clos à droit. On va voir plus bas (cor. 2, page 31) que cela implique (donc équivaut à) % [sic] clos à droit -> clos à droite, gender agreement with « à droite »
+\[
+\Phi \;=\; \Psi^*\;, \qquad \Psi \;=\; \Phi_*\ .
+\tag*{(4.1.3)}
+\]
+
+\msp{page 29}
+Un précouple de Quillen clos est aussi appelé un couple de Quillen.
+
+\textbf{Proposition 4.2.} \textit{Soit} $(\Phi,\Psi)$ \textit{un précouple de Quillen dans} $\mathcal{M}$\textit{, et soit} $j\in\Fl(\mathcal{M})$\footnote[9]{\textbf{N.B.} On utilise seulement que $\Phi\longleftrightarrow\Psi$, et que $j$ peut se mettre sous la forme $pi$, avec $i\in\Phi$, $p\in\Psi$.}. % footnote mark printed as "(9)"
+\textit{On a alors les conditions équivalentes sur} $j$ \textit{:}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $j\in\widetilde{\Phi}$.
+\item[b)] $j\in\Psi^*$.
+\item[c)] $j$ \textit{est facteur direct d'un} $i\in\Phi$.
+\item[c$'$)] $j$ \textit{est facteur direct d'un} $i\in\Phi$ \textit{ayant même source que} $j$\textit{, plus précisément, il existe un diagramme}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "j"] \arrow[d, shift right=1ex, "\id_A"'] & B \arrow[d, shift right=1ex, "q"'] \\
+A \arrow[u, dotted, shift right=1ex, "\id_A"'] \arrow[r, "i"] & B' \;, \arrow[u, dotted, shift right=1ex, "p"']
+\end{tikzcd}
+\tag*{(4.2.1)}
+\]
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{avec} $i\in\Phi$\textit{, et}
+\[
+qj \;=\; i\;, \qquad pi \;=\; j\;, \qquad pq \;=\; \id_B\;,
+\tag*{(4.2.2)}
+\]
+\textit{de sorte que} $j$ \textit{est un facteur direct de} $i\in\Phi$\textit{, par} $(\id_A,q)$\textit{, admettant la rétraction} $(\id_A,p)$.
+\item[d)] \textit{Pour tout diagramme commutatif traits pleins}
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j"] \arrow[dr, "i"'] & & B \arrow[dl, dotted, bend left=40, "q"] \\
+& B' \arrow[ur, "p"'] &
+\end{tikzcd}
+\;,
+\tag*{(4.2.3)}
+\]
+i.e. \textit{toute factorisation de} $j$ \textit{en} $pi$\textit{, si on a} $p\in\Psi$\textit{, il existe une section} $q$ \textit{de} $B'$ \textit{sur} $B$ \textit{dans} $A\backslash\mathcal{M}$\textit{,} i.e. \textit{une flèche} $q:B\longrightarrow B'$ \textit{telle que}
+\[
+pq \;=\; \id_B \qquad \textit{et} \qquad qj \;=\; i\ .
+\]
+\end{itemize}
+
+\textsc{Démonstration} de la proposition. Elle se fait par la suite d'implications suivante, toutes $(\pm)$ tautologiques :
+\[
+(c') \;\Longrightarrow\; (c) \;\Longrightarrow\; (a) \;\Longrightarrow\; (b) \;\Longrightarrow\; (d) \;\Longrightarrow\; (c')\;,
+\]
+\msp{page 30}
+dont les quatre premières utilisent seulement l'hypothèse $\Phi\longleftrightarrow\Psi$ (de $(a)$ de la définition 4.1), et la dernière seulement, $(d)\Longrightarrow(c')$, fait appel à l'hypothèse de factorisation de Quillen ($(b)$ dans 4.1) ; et encore il suffit de la supposer pour $j$ seulement !
+
+$(c')\Longrightarrow(c)$ tautologie pure, $(c)\Longrightarrow(a)$ car on sait que $\widetilde{\Phi}$ est stable par facteurs directs (et contient $\Phi$), $(a)\Longrightarrow(b)$ car $\widetilde{\Phi}\subset\Psi^*$ ($\widetilde{\Phi}$ étant par définition la plus petite partie close à gauche de $\Fl(\mathcal{M})$ contenant $\Phi$, et $\Psi^*$ étant close à gauche), $(b)\Longrightarrow(d)$ car on écrit le diagramme donné (4.2.2) (traits pleins) comme % [sic] (4.2.2) -> (4.2.3), the diagram given in condition d) is (4.2.3)
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "u"] \arrow[d, "j\in\Psi^*"'] & X \arrow[d, "p\in\Psi"] \\
+B \arrow[ur, dotted, "q" description] \arrow[r, "v"] & Y \;,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+en y faisant $Y=B$, $v=\id_B$, et en rebaptisant $X$ par $B'$, et $u$ par $i$ : l'hypothèse $(b)$, $j\in\Psi^*$, signifie que dans un diagramme traits pleins $(*)$, il existe toujours $q$ telle que $qj=u$, $pq=v$, et en l'exprimant dans le cas particulier où $v=\id_B$, on trouve $(d)$.
+
+Reste à prouver $(d)\Longrightarrow(c')$, en utilisant cette fois l'hypothèse de factorisation sur $j$, \textit{i.e.} qu'on peut écrire $j$ sous la forme $pi$ :
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j"] \arrow[dr, "i"'] & & B \arrow[dl, dotted, bend left=40, "q"] \\
+& B' \arrow[ur, "p"'] &
+\end{tikzcd}
+\;,
+\]
+avec $i\in\Phi$, $p\in\Psi$. En vertu de $(d)$, comme $p\in\Psi$, il existe donc $q:B\longrightarrow B'$ satisfaisant
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 31}
+\[
+pq \;=\; \id_B\;, \qquad qj \;=\; i\;,
+\]
+ce qui prouve $(c')$, puisque $i\in\Phi$.
+
+\textbf{Corollaire 1.} \textit{Soit} $(\Phi,\Psi)$ \textit{un précouple de Quillen. Alors on a}
+\[
+\begin{aligned}
+\widetilde{\Phi} \;\;=\;\; \Psi^* \;\;=\;\; &\textit{ensemble des objets de } \underline{\Fl}(\mathcal{M}) \textit{ qui sont fac-}\\
+&\textit{teurs directs d'éléments de } \Phi\ ,
+\end{aligned}
+\tag*{(4.3)}
+\] % printed line break of the display falls inside "fac-teurs"; kept as printed
+\textit{et dualement}
+\[
+\begin{aligned}
+\overline{\Psi} \;\;=\;\; \Phi_* \;\;=\;\; &\textit{ensemble des objets de } \underline{\Fl}(\mathcal{M}) \textit{ qui sont fac-}\\
+&\textit{teurs directs d'éléments de } \Psi\ .
+\end{aligned}
+\tag*{(4.4)}
+\] % printed line break of the display falls inside "fac-teurs"; kept as printed
+
+\textbf{Corollaire 2.} \textit{Les conditions suivantes sur le précouple de Quillen} $(\Phi,\Psi)$ \textit{sont équivalentes.}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{Le précouple est} clos, i.e. $\Phi=\widetilde{\Phi}$\textit{,} $\Psi=\overline{\Psi}$\textit{.}
+\item[b)] $\Phi=\Psi^*$\textit{,} $\Psi=\Phi_*$\textit{.}
+\item[c)] $\Phi$ \textit{et} $\Psi$ \textit{sont stables par facteurs directs.}
+\end{itemize}
+Soit maintenant
+\[
+W \;\subset\; \Fl(\mathcal{M})
+\tag*{(4.5)}
+\]
+un localiseur, satisfaisant les conditions habituelles
+\[
+\left\{
+\begin{aligned}
+&\textit{a})\quad W \text{ contient les isomorphismes.}\\[1ex]
+&\textit{b})\quad \text{Si } X\xrightarrow{\;f\;}Y\xrightarrow{\;g\;}Z \text{ dans } \mathcal{M}\text{, si deux parmi } f,\ g,\ gf \text{ sont}\\
+&\phantom{\textit{b})}\quad \text{dans } W\text{, alors le troisième aussi.}
+\end{aligned}
+\right.
+\tag*{(4.6)}
+\]
+($W$ modérément saturé). Supposons de plus données quatre autres parties
+\[
+C\ ,\ TC\ , \qquad F\ ,\ TF
+\tag*{(4.7)}
+\]
+de $\Fl(\mathcal{M})$, satisfaisant les conditions suivantes.
+\[
+\left\{
+\begin{aligned}
+&\textit{a})\quad (C,TF) \text{ et } (TC,F) \text{ sont des précouples de Quillen.}\\[1ex]
+&\textit{b})\quad TC\subset C\cap W,\ TF\subset F\cap W.
+\end{aligned}
+\right.
+\tag*{(4.8)}
+\]
+
+\msp{page 32}
+Ces propriétés s'explicitent ainsi :
+\begin{itemize}[leftmargin=2.5em]
+\item[\textbf{M\,1}] Propriétés de relèvement-prolongement, $C\longleftrightarrow TF$ et $TC\longleftrightarrow F$.
+\item[\textbf{M\,2}] Propriété de factorisation de toute flèche $f$ de $\mathcal{M}$ en $f=pi$, avec, au choix, $i\in C$, $p\in TF$, ou $i\in TC$, $p\in F$.
+\item[\textbf{M$'$}] $TC\subset C\cap W$, $TF\subset F\cap W$.
+\end{itemize}
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+C'est donc une partie des axiomes d'une structure de Quillen faible pour $W$ (XIII, p. 27, déf. 1) -- il manque les axiomes de stabilité M\,3, M\,4, et les axiomes de “propreté” (propriety) M$''$, savoir $F\subset\mathrm{Fib}_W$, $C\subset\mathrm{Cof}_W$.
+
+\textbf{Proposition 4.3.} \textit{Soient} $\mathcal{M}$ \textit{une catégorie,} $(C,TF)$ \textit{et} $(TC,F)$ \textit{deux précouples de Quillen dans} $\mathcal{M}$\textit{, satisfaisant}
+\[
+TC \;\subset\; C\;, \qquad TF \;\subset\; F\;,
+\tag*{(4.3.1)}
+\]
+\textit{et soit} $W$ \textit{une partie de} $\Fl(\mathcal{M})$ \textit{dont on ne suppose pour l'instant que} 4.6, (b)\footnote[10]{On utilise seulement que si $X\xrightarrow{\;f\;}Y\xrightarrow{\;g\;}Z$, et si $gf\in W$, alors $f\in W\Longleftrightarrow g\in W$. On n'a pas besoin que $W$ contienne les isomorphismes, ni qu'il soit stable par composition.}\textit{, et} % footnote mark printed as "(10)"
+\[
+W \;\supset\; TC\ ,\ TF\ ,
+\tag*{(4.3.2)}
+\]
+\textit{donc on a}
+\[
+TC \;\subset\; C\cap W\ , \qquad TF \;\subset\; F\cap W\ .
+\tag*{(4.3.3)}
+\]
+\textit{Considérons les conditions de prolongement-relèvement suivantes} (a), (a$'$)\textit{, et les conditions de factorisation} (b), (b$'$), (c), (d) (\textit{en se rappelant que} $\widetilde{TC}=F^*$\textit{,} $\overline{TF}=C_*$\textit{, en vertu de la proposition} 4.2 (\textit{cor.} 1) \textit{appliquée aux précouples de Quillen} $(TC,F)$\textit{,} $(C,TF)$) :
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $C\cap W\subset\widetilde{TC}$\quad (\textit{donc} $TC\subset C\cap W\subset\widetilde{TC}$).
+\item[a$'$)] $F\cap W\subset\overline{TF}$\quad (\textit{donc} $TF\subset F\cap W\subset\overline{TF}$).
+\item[b)] $W\subset TF\circ\widetilde{TC}$.
+\item[b$'$)] $W\subset\overline{TF}\circ TC$.
+\item[c)] $W\subset\overline{TF}\circ\widetilde{TC}$.
+\item[d)] $W\subset TF{\circ}TC$ (\textit{donc, par} (4.3.2)\textit{,} $W=TF{\circ}TC$ \textit{si} $W$ \textit{est stable par composition}).\footnote[11]{\textbf{N.B.} La condition $(a)$ signifie aussi que $(C\cap W,F)$ est encore un précouple de Quillen, resp. $(b)$ signifie que $(C,F\cap W)$ en est un -- et alors cette paire de précouples de Quillen satisfait cette fois à $(d)$, \textit{i.e.} $W=TF'\circ TC'$.} % footnote mark printed as "(11)"
+\end{itemize}
+
+\msp{page 33}
+\textit{Alors toutes les conditions sauf la dernière sont équivalentes} (\textit{et elles sont donc impliquées par cette dernière}). \textit{Donc lorsque} $TC$ \textit{ou} $TF$ \textit{sont stables par facteurs directs} (\textit{p. ex. si} $TC$ \textit{est clos à gauche, ou} $TF$ \textit{clos à droite}), \textit{toutes les conditions envisagées sont équivalentes} (\textit{puisque par le corollaire} 2 \textit{à la proposition} 4.2\textit{, on a alors} $TC=\widetilde{TC}$ \textit{resp.} $TF=\overline{TF}$\textit{, donc} (b$'$) \textit{resp.} (b) \textit{équivaut alors à} (d)).
+
+\textsc{Démonstration}. Elle se fait par le diagramme d'implications
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+& (d) \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+(b) \arrow[dr, Rightarrow] & \mathrm{Q} & (b') \arrow[dl, Rightarrow] \\
+& (c) \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+(a) \arrow[uu, Rightarrow] & & (a') \arrow[uu, Rightarrow]
+\end{tikzcd}
+\;,
+\]
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+où les quatre implications du carré supérieur Q sont tautologiques. Il suffit donc d'établir les implications
+\[
+(c) \;\Longrightarrow\; (a) \;\Longrightarrow\; (b)\;,
+\]
+les implications $(c)\Longrightarrow(a')\Longrightarrow(b')$ en résultent par dualité.
+
+Supposons donc $(c)$, \textit{i.e.}
+\[
+W \;\subset\; \overline{TF}\circ\widetilde{TC}\;,
+\tag*{$(*)$}
+\]
+et prouvons $(a)$, \textit{i.e.} que
+\[
+C\cap W \;\subset\; \widetilde{TC}\ .
+\]
+Mais si $j\in C\cap W$, pour prouver que $j\in\widetilde{TC}$, écrivons $j=pi$, $i\in\widetilde{TC}$, $p\in\overline{TF}$, ce qui est possible par l'hypothèse $(*)$ et $j\in W$.
+
+\msp{page 34}
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j\in C"] \arrow[dr, "i\in\widetilde{TC}"'] & & B \arrow[dl, dotted, bend left=60, "q"] \\
+& B' \arrow[ur, "p\in\overline{TF}"'] &
+\end{tikzcd}
+\;.
+\]
+Utilisons maintenant l'hypothèse $j\in C$ et $C\longleftrightarrow\overline{TF}$, on trouve donc (prop. 3.2, $(a)\Longrightarrow(d)$) une flèche $q:B\longrightarrow B'$ telle que $pq=\id_B$, $qj=i$, donc $j$ apparaît comme facteur direct de $i$. Comme $i\in\widetilde{TC}$ et que $\widetilde{TC}$ est stable par facteurs directs, on en conclut $j\in\widetilde{TC}$, \quad \textit{q.e.d.}
+
+$(a)\Longrightarrow(b)$. On suppose donc
+\[
+C\cap W \;\subset\; \widetilde{TC}\;,
+\tag*{$(*)$}
+\]
+et on veut prouver $(b)$, \textit{i.e.}
+\[
+W \;\subset\; TF\circ\widetilde{TC}\ .
+\]
+Soit donc $f\in W$, et factorisons $f$ en $pi$, avec $i\in C$, $p\in TF$. (O.K. à cause du précouple de Quillen $(C,TF)$). Comme $TF\subset W$, on a $p\in W$, et comme $pi\in W$, on en conclut $i\in W$ (saturation modérée de $W$ -- on doit quand même l'utiliser !). On a donc $i\in C{\cap}W$, donc $i\in\widetilde{TC}$ par $(*)$, d'où $f\in TF\circ\widetilde{TC}$, \quad \textit{q.e.d.}
+
+\textbf{Corollaire 1.} \textit{Supposons} $TC$ \textit{stable par facteurs directs. Alors toutes les conditions de la proposition} 4.3 \textit{sont équivalentes, et équivalent à la relation}
+\[
+C\cap W \;=\; TC\ .
+\tag*{(4.3.4)}
+\]
+\textit{Dualement, si} $TF$ \textit{est stable par facteurs directs, les conditions de la proposition} 4.3 \textit{sont toutes équivalentes et équivalent à}
+\[
+F\cap W \;=\; TF\ .
+\tag*{(4.3.4$'$)}
+\]
+
+% ---- from Der-ChXV-05-11-10_p026-030.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 35}
+En effet, par le corollaire 2 de la proposition 4.2, l'hypothèse sur $TC$ implique que $TC = \widetilde{TC}$, donc comme $TC \subset C{\cap}W$, l'hypothèse $C{\cap}W \subset \widetilde{TC}$ $(= TC)$ équivaut à $C{\cap}W = TC$.
+
+\textbf{Corollaire 2.} \textit{Supposons $C$ et $W$ stables par facteurs directs. Alors les conditions équivalentes de la proposition} 4.3 \textit{équivalent à}
+\[
+C\cap W \;=\; \widetilde{TC}\ . \tag*{(4.3.5)}
+\]
+\textit{Dualement, si $F$, $W$ sont stables par facteurs directs, les conditions équivalentes de la proposition} 4.3 \textit{équivalent à}
+\[
+F\cap W \;=\; \overline{TF}\ . \tag*{(4.3.5$'$)}
+\]
+
+En effet, si $C$ et $W$ sont stables par facteurs directs, il en est de même de $C\cap W$, et dès lors si $C\cap W\subset\widetilde{TC}$, comme $C\cap W$ contient $TC$, on en conclut $\widetilde{C\cap W}=\widetilde{TC}$. Mais comme $C\cap W\longleftrightarrow TC$ et $C\cap W$ est stable par facteurs directs, $C\cap W$ est clos à gauche par corollaire 2 de la proposition 4.2, \textit{i.e.} $C\cap W=\widetilde{C\cap W}$, d'où $C\cap W=\widetilde{TC}$, \quad \textit{q.e.d.}
+
+\textbf{Corollaire 3.} \textit{Supposons les conditions équivalentes} (a) \textit{à} (c) \textit{de} 4.3 \textit{satisfaites, et de plus} $W$ stable par facteurs directs\footnote[12]{En fait, il suffit de supposer que l'on a $W\supset\widetilde{TC}$, $\overline{TF}$, \textit{i.e.} que tout facteur direct d'un élément de $W$ qui est soit dans $C$, soit dans $F$, est encore dans $W$. Alors $(\widetilde{C},\widetilde{TC},\bar{F},\overline{TF})$ définissent une structure de Quillen close, et on sait que cela implique qu'en fait, $W$ lui aussi est stable par facteurs directs.}. \textit{Alors les conditions préliminaires} (4.3.1) \textit{et} (4.3.2) \textit{restent satisfaites quand on remplace $(C,TF)$ et $(TC,F)$ par leurs clôtures $(C',TF')=(\widetilde{C},\overline{TF})$ et $(TC',F')=(\widetilde{TC},\bar{F})$, et les conditions équivalentes de la proposition} 4.3 \textit{sont encore satisfaites pour ces couples, sous les formes fortes}
+\[
+\left\{
+\begin{aligned}
+C'\cap W &\;=\; TC' && (=\widetilde{TC'}\,)\\
+F'\cap W &\;=\; TF' && (=\overline{TF'}\,)\\
+W &\;=\; TF'\circ TC'\ .
+\end{aligned}
+\right.
+\tag*{(4.3.6)}
+\]
+
+\msp{page 36}
+\textit{Le triple $(W,C',F')$ est un triple de Quillen clos $($correspondant à une “closed model category” de Quillen, du moins si on suppose $\mathcal{M}$ stable par $\varinjlim$ finies et $\varprojlim$ finies, et que $W$ est modérément saturé$)$.}\footnote[13]{Il en résulte le\par
+\textbf{Corollaire 4.} \textit{Soient $W$ un localiseur modérément saturé, et $(C,TF)$, $(TC,F)$ deux précouples de Quillen tels que $TC\subset C\cap W$, $TF\subset F\cap W$. Alors les conditions suivantes sont équivalentes.}
+\begin{enumerate}[leftmargin=*]
+\item[a)] $TC=C\cap W$.
+\item[b)] $TF=F\cap W$.
+\item[c)] $W=TF\circ TC$.
+\item[d)] $(W,C,F)$ \textit{est un triple de Quillen clos.}
+\end{enumerate}}
+
+\textsc{Démonstration.} Les relations (4.3.1) impliquent
+\[
+\widetilde{TC}\;\subset\;\widetilde{C}\qquad\text{et}\qquad\overline{TF}\;\subset\;\bar{F}\ ,
+\]
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{i.e.}
+\[
+TC'\;\subset\;C'\ ,\qquad TF'\;\subset\;F'\ ,
+\]
+\textit{i.e.} (4.3.1) pour les nouveaux couples de Quillen. La relation 4.3.2, $W\supset TC,TF$, implique
+\[
+W\;\supset\;\widetilde{TC}\ ,\ \overline{TF}\ ,\qquad \textit{i.e.}\qquad W\;\supset\;TC'\ ,\ TF'\ ,
+\]
+en vertu du corollaire 2 à la proposition 4.2 et du fait que $W$ est stable par facteurs directs ; donc on a (4.3.2) pour les nouveaux couples. Comme par hypothèse on a
+\[
+W\;=\;\overline{TF}\circ\widetilde{TC}\ ,
+\]
+ceci s'écrit
+\[
+W\;=\;TF'\circ TC'\ ,
+\]
+donc les nouveaux couples satisfont aux mêmes conditions, qui cette fois, les couples étant clos, prennent la forme forte (4.3.6).
+
+Prouvons que le triple $(W,C',F')$ satisfait aux axiomes de Quillen d'un triple de Quillen clos. On a bien, par (4.3.6),
+\[
+\left\{
+\begin{aligned}
+C' &\;=\;(TF')^*\;=\;(F'\cap W)^*\ , &\qquad F' &\;=\;(TC')_*\;=\;(C'\cap W)_*\ ,\\
+W &\;=\;TF'\circ TC'\;=\;C'_*\circ F'^*\ ,
+\end{aligned}
+\right.
+\]
+qui correspond à la définition des catégories de modèles de Quillen \textit{clos} : les axiomes M\,1, M\,2, M\,3, M\,4 de Quillen sont réalisés de façon triviale (M\,3 et M\,4 parce que
+\msp{page 37}
+$C$ et $F$, $TC$ et $TF$ sont clos à gauche resp. à droite). L'axiome M\,5 est la saturation modérée de $W$.
+
+\textbf{4.4.} Voici l'idée pour construire plus ou moins “toutes” les structures de Quillen closes $(C,TC,F,TF)$ associées à un localiseur donné $W\subset\mathcal{M}$. On suppose que $\mathcal{M}$ satisfait aux conditions du paragraphe précédent, concernant l'existence de $\varinjlim$ filtrantes, d'une filtration cardinale, l'accessibilité dans $\mathcal{M}$ (celle des éléments de $\mathrm{Filt}^{\pi_0}$). On part d'une partie petite
+\[
+C_0\;\subset\;\Fl(\mathcal{M})
+\]
+telle que
+\[
+C_{0*}\;\subset\;W\ , \tag*{(4.4.1)}
+\]
+et on pose
+\[
+\left\{
+\begin{aligned}
+C &\;=\;\widetilde{C_0}\ , &\qquad TC &\;=\;C\cap W\ ,\\
+TF &\;=\;C_*\;=\;C_{0*}\ , &\qquad F &\;=\;(TC)_*\ .
+\end{aligned}
+\right.
+\tag*{(4.4.2)}
+\]
+Il y a un problème seulement, vu que l'on sait déjà que $(C,TF)$ est un couple de Quillen par le théorème de factorisation dans §1 (p. 10) : il faut la factorisation pour le couple $(TC,F\;=\;(TC)_*)$. À ce moment là, les conditions préliminaires (4.3.1), (4.3.2) de la proposition 4.3 sont satisfaites :
+\[
+TC\;\subset C\ ,\qquad TF\;\subset F\ ,\qquad W\;\supset\;TC\ ,\ TF\ ,
+\]
+ainsi que la condition $(a)$, $C\cap W\subset\widetilde{TC}$, puisque $C\cap W=TC$. Donc on trouve, par l'équivalence des conditions $(a)$, $(a')$, $(c)$, et vu que $TC$ et $TF$ sont clos,
+\[
+TF\;=\;F\cap W\ ,\qquad W\;=\;TF\circ TC\ ,
+\]
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 38}
+d'autre part l'hypothèse sur $W$ implique que $W$ est stable par facteurs directs, $C$ l'est aussi, étant close à gauche, donc $TC=C{\cap}W$ aussi, donc par proposition 4.1, corollaire 2, on a $TC\;=\;\widetilde{TC}$, $TC$ est close à gauche. On gagne donc, par la dernière assertion du corollaire 3, proposition 4.3 (p. 35).
+
+En fait, indépendamment des conditions particulières sur $\mathcal{M}$, $W$, on vient de prouver ceci :
+
+\textbf{Lemme 4.4.1} (corollaire de la proposition 4.3.). \textit{Soient $\mathcal{M}$ une catégorie, $W$ un localiseur dans $\mathcal{M}$ modérément saturé et stable par facteurs directs. Alors les structures de Quillen closes $(C,F)$ associées à $W$ s'obtiennent ainsi : on prend une partie $C_0$ de} $\Fl(\mathcal{M})$ \textit{telle que}
+\[
+TF\;\deq\;C_{0*}\;\subset\;W\ ,
+\]
+\textit{on pose}
+\[
+C\;=\;\widetilde{C_0}\;=\;TF^*\ ,\qquad TC\;=\;C\cap W\ ,\qquad F\;=\;(TC)_*\ ,
+\]
+\textit{et on doit se débrouiller pour que $(C,TF)$ et $(TC,F)$ satisfassent à la condition de factorisation de Quillen,} i.e. \textit{soient des précouples de Quillen.} (En fait, $C$, $TF$ et $F$ étant clos par construction, et $TC=C\cap W$ étant stable par facteurs directs ($C$ et $W$ l'étant), ce seront même des \textit{couples} de Quillen.)
+
+\msp{page 39}
+Les hypothèses supplémentaires faites tantôt sur $\mathcal{M}$ servaient à assurer que si je prends $C_0$ petite, alors la factorisation marche pour $(C,TF)$ automatiquement. Il reste le problème pour $TC$, $F$.
+
+Notons que si elle marche, alors $TC=\widetilde{TC}=F^*$, donc $TC$ est clos à gauche, et \textit{a fortiori} satisfait les conditions de stabilité correspondantes :
+\[
+\left\{
+\begin{tabular}{rp{0.6\textwidth}}
+\textit{a}) & Stable par cochangement de base, par composition, par facteurs directs (ces deux dernières sont assurées automatiquement, car $C$, $W$ sont stables).\\[1ex]
+\textit{b}) & Stable par $\varinjlim$ ordinales strictes.
+\end{tabular}
+\right.
+\tag*{(4.4.3)}
+\]
+
+L'hypothèse de stabilité sur $W$ sert (entre autres) à garantir la stabilité $(b)$ pour $TC$ (en fait, il suffirait pour cela seulement que $W$ soit stable par $\varinjlim$ ordinales strictes). Il reste la stabilité de $TC=C{\cap}W$ par cochangement de base, qui est problématique car $W$ n'est en général \textit{pas} stable par cochangement de base. C'est pour assurer cette stabilité que je me vois pratiquement contraint ici à imposer
+\[
+C_0\;\subset\;\Cof_W\ , \tag*{(4.4.4)}
+\]
+je dis qu'avec l'hypothèse de stabilité faite sur $W$, cela implique
+\[
+C\;\deq\;\widetilde{C_0}\subset\Cof_W\ . \tag*{(4.4.5)}
+\]
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 40}
+En effet, on a :
+
+\textbf{Proposition 4.4.2.} \textit{Soit $\mathcal{M}$ stable par petites $\varinjlim$ inductives filtrantes, et $W\subset$} $\Fl(\mathcal{M})$ \textit{un localiseur $($modérément saturé$)$} stable par lesdites limites. \textit{Alors} $\Cof_W$ \textit{satisfait les conditions de stabilité} (4.4.3) (“\textit{stabilité de Quillen gauche}”), \textit{et est stable aussi par $\varinjlim$ filtrantes quelconques.}
+
+En effet, la condition $(a)$ est satisfaite sans condition supplémentaire sur $W$. D'autre part, il est immédiat que cette condition par rapport aux $\varinjlim$ filtrantes implique que $\Cof_W$ \textit{est stable par limites inductives filtrantes} dans $\underline{\Fl}(\mathcal{M})$.
+
+\textbf{Corollaire 4.4.3.} \textit{Sous les conditions de la proposition} 4.4.2, $\Cof_W\cap W=W^{\univ}$ $($\textit{ensemble des $W$-équivalences co-universelles dans $\mathcal{M}$}$)$ \textit{est stable par limites inductives filtrantes, et donc “stable à gauche” en sens de} (4.4.3).
+
+\textbf{Corollaire 4.4.4.} \textit{Sous les conditions de la proposition} 4.4.2, \textit{supposons de plus que les sommes amalgamées simples existent dans $\mathcal{M}$, et soit $C_0$ une petite partie de} $\Cof_W$ \textit{dont les éléments soient accessibles, et considérons}
+\[
+C\;=\;\widetilde{C_0}\ ,\qquad TC\;\deq\;C\cap W\ .
+\]
+\textit{Alors on a}
+\[
+C\;=\;\Cof_W\ ,\qquad TC\;=\;C\cap W^{\univ}\;\subset\;W^{\univ}\ ,
+\]
+\msp{page 41}
+\textit{et $C$ et $TC$ sont $Q$-stables à gauche.}
+
+En effet, par le théorème 1 du paragraphe 1 (p. 10) et son corollaire, $\widetilde{C_0}$ est la plus petite partie de $\Fl(\mathcal{M})$ contenant $C_0$ et Q-stable à gauche. Comme $\Cof_W$ est Q-stable à gauche et contient $C_0$, on a donc $C=\widetilde{C_0}\subset\Cof_W$. Donc $TC\deq C{\cap}W\subset\Cof_W{\cap}W\deq W^{\univ}$, donc $TC=C\cap W^{\univ}$. Comme $W^{\univ}$ est lui aussi $Q$-stable à gauche (corollaire précédent), il en est de même de $C\cap W$, \quad \textit{q.e.d.}
+
+\textbf{Corollaire 4.4.5.} \textit{Supposons que tout objet de $\mathcal{M}$ soit accessible. Sous les conditions du corollaire précédent, posant}
+\[
+TF\;=\;C_{0*}\;=\;C_*\ ,\qquad F\;=\;(TC)_*\ ,
+\]
+\textit{le couple $(C,TF)$ est un couple de Quillen. Pour qu'il en soit de même du couple $(TC,F)$, il suffit qu'il existe une} petite \textit{partie $TC_0$ de $C\cap W$, telle que $\widetilde{TC_0}=TC$ $(\deq C\cap W)$.}
+
+La première assertion est, on l'a vu tantôt, le théorème 1 du paragraphe 1. La deuxième résulte de ce même théorème. On peut préciser dans ce sens :
+
+\textbf{Proposition 4.4.6.} \textit{Soit $\mathcal{M}$ une catégorie stable par petites $\varinjlim$ filtrantes, par sommes amalgamées, et dont tous les objets sont accessibles, $W$ un localiseur}
+\msp{page 42}
+\textit{modérément saturé dans $\mathcal{M}$, stable par $\varinjlim$ filtrantes, $C_0$ une} petite \textit{partie de} $\Fl(\mathcal{M})$, \textit{telle que}
+\[
+C_0\;\subset\;\Cof_W\ ,\qquad \underbrace{C_{0*}}_{(=TF)}\;\subset\;W\ ,
+\]
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{posons}
+\[
+C\;=\;\widetilde{C_0}\qquad TC\;=\;C\cap W\ ,\qquad TF\;=\;C_*\ ,\qquad F\;=\;(TC)_*\ ,
+\]
+\textit{et soit $TC_0$ une petite partie de $TC=C\cap W$. On a alors}
+\[
+\left\{
+\begin{aligned}
+C &\;\subset\;\Cof_W\ , &\qquad TC &\;=\;C\cap W^{\univ}\quad(\textit{pour mémoire})\\
+\widetilde{TC_0} &\;\subset\;TC\ , & F_0 &\supset F\quad(\textit{ce dernier trivial})\ ,
+\end{aligned}
+\right.
+\tag*{(4.4.6)}
+\]
+\textit{et les conditions suivantes sont équivalentes :}
+\begin{enumerate}[leftmargin=*]
+\item[a)] $\widetilde{TC_0}=TC\quad(\textit{on a}\subset)$\,;
+\item[a$'$)] $F_0=F\quad(\textit{on a}\supset)$\,;
+\item[b)] $TF=F_0\cap W\quad(\textit{on a}\subset)$\footnote[14]{\textbf{N.B.} On voit facilement que $\boxed{TF=F\cap W,}$ mais ça ne suffit pas pour avoir $TF=F_0\cap W$ pour $TC_0$ convenable.}\,;
+\item[c)] $W=TF\circ\widetilde{TC_0}\quad(\textit{on a}\supset)$\footnote[15]{\textbf{N.B.} On sait que $\boxed{W=TF\circ TC,}$ ce qui n'est nullement suffisant pour impliquer $(c)$\,!}\,;
+\end{enumerate}
+\textit{et impliquent que $(W,C,F)$ est un triple de Quillen clos.}
+
+\textsc{Démonstration.} L'inclusion $\widetilde{TC_0}\;\subset\;TC$ résulte de la Q-stabilité à gauche de $TC$ (cor. 4.4.4) et du fait que $TC_0\subset TC$ est petite (on applique alors le théorème 1 tout comme pour $C\subset\Cof_W\ldots$). L'équivalence de $(a)$, $(b)$, $(c)$ n'est autre que la proposition 4.3 appliquée à $W$ et aux deux couples de Quillen $(C,TF)$, $(\widetilde{TC_0},F_0)$ (compte tenu du théorème 1 du paragraphe 1). Qu'on a alors un triple de Quillen clos a été vu dans le corollaire 3 de la proposition 4.3 (p. 35). Il reste à prouver l'équivalence de $(a)$ et de $(a')$. On a $(a)\Longrightarrow(a')$, puisque $(TC_0)_*=(\widetilde{TC_0})_*=F_0$. Inversement, $(a')$ implique $\widetilde{TC_0}=\widetilde{TC}$, donc le théorème de factorisation pour $(TC,F)$ en vertu du théorème de factorisation, corollaire 1 (p. 11) appliqué à $TC_0\subset TC\subset\widetilde{TC_0}$ et à $F_0=F=(TC_0)_*$.
+
+\msp{page 43}
+Ainsi, le seul problème, une fois trouvé $C_0$ (petite) satisfaisant $C_0\subset\Cof_W$, $C_{0*}\subset W$, c'est de trouver une \textit{petite} partie $TC_0\subset TC$ qui “engendre $TC\;=\;C\cap W$ ”, \textit{i.e.} qui satisfasse aux conditions équivalentes $(a)$, $(a')$, $(b)$, $(c)$ de la proposition précédente. J'ai passé des jours à essayer de prouver l'existence de $TC_0$, en supposant $\mathcal{M}$ munie d'une filtration cardinale, et $W$ une partie accessible de $\mathcal{M}$, sans y être arrivé. Bien sûr, tout ce qui nous importe vraiment, c'est que $(TC,F)$ satisfasse à la condition de factorisation. Mais je ne vois aucun moyen de le prouver, si ce n'est en “engendrant” à gauche $TC$ par un \textit{petit} sous-ensemble $TC_0$.
+
+\section*{5\quad Résultats techniques préliminaires sur les parties accessibles de $\mathrm{Ob}\,\mathcal{M}$, stables par limites inductives filtrantes}
+
+Je crois pourtant que je peux arriver à quelque chose d'utilisable, en travaillant systématiquement avec des $C$ ($\subset\Cof_W$, Q-closes à gauche, Q-engendrées à gauche par une \textit{petite} partie $C_0$ de $C$) qui sont stables par toutes limites inductives filtrantes.
+
+% ---- from Der-ChXV-05-11-10_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Je suppose à nouveau sur $\cM$ les conditions suivantes :
+\msp{page 44}
+
+\begin{enumerate}[nosep]
+\item[\textit{a})] $\cM$ stable par petites limites inductives (et pas seulement filtrantes).
+\item[\textit{b})] $\cM$ muni d'une filtration cardinale $(\Filt^{\pi})_{\pi\geq\pi_0}$.
+\item[\textit{c})] Les objets de $\cM$ sont accessibles (\textbf{N.B.} Il suffit de le supposer pour les objets de $\Filt^{\pi_0}$).
+\end{enumerate}
+
+La condition ($b$) implique que $\cM$ contient une petite famille génératrice par épimorphismes stricts (p. ex. une sous-catégorie $\cC$ petite de $\uFilt^{\pi_0} = \cM^{\pi_0}$ telle que l'inclusion $\cC \longrightarrow \uFilt^{\pi_0}$ soit une équivalence de catégories). Par SGA 4 I 8.12.7, il en résulte que $\cM$ est stable par petites limites projectives. Il s'ensuit le
+
+\textbf{Lemme 5.1} (sous les conditions ($a$), ($b$)). \textit{Pour tout objet $X$ de $\cM$, l'ensemble} $\Ss(X)$ \textit{des sous-objets de $X$, muni de la relation d'ordre naturelle ``d'inclusion'', admet des} inf \textit{et des} sup \textit{quelconques.}
+
+Des inf, car ceux-ci s'expriment comme des limites projectives dans $\cM$. Or l'existence des inf implique celle des sup, puisque $\sup_J = \inf_{J'}$, où $J'$ est l'ensemble des majorants de $J$ dans $\Ss(X)$.
+
+\textbf{Corollaire 5.2.} \textit{Pour toute flèche $f : Z \longrightarrow X$ dans $\cM$, il existe, parmi les sous-objets $X'$ de $X$ par lesquelles $f$ se factorise, un plus petit} % [sic] lesquelles -> lesquels, "sous-objets" is masculine
+\msp{page 45}
+\textit{(qu'on notera} $\Img f$\textit{). Le morphisme $Z \longrightarrow \Img f$ est un épimorphisme.}
+
+Cette dernière assertion provient de celle-ci :
+
+\textbf{Lemme 5.3.} \textit{Soient $\cM$ une catégorie où les noyaux des doubles flèches existent. Soit $f : Z \longrightarrow Y$ une flèche de $\cM$. Alors $g$ est un épimorphisme si et seulement si $g$ ne se factorise pas par un sous-objet} strict $Y_0$ \textit{de $Y$ différent de $Y$.} % [sic] g -> f, the arrow has been named f
+
+On va faire une hypothèse supplémentaire (pratiquement anodine) sur les $\Filt^{\pi}$ :
+
+\begin{enumerate}[nosep]
+\item[\textit{d})] $\Filt^{\pi}$ est stable par limites inductives indexées par des catégories d'indices $I$ telles que $\card \Fl(I) \leq \pi$\footnote[16]{Cette condition sera nommée ($d_0$) par la suite.}. (Il suffit de supposer la stabilité par objet initial, sommes amalgamées simples, et $\varinjlim$ filtrantes indexées par un ensemble ordonné $I$ de cardinal $\leq \pi$.) De plus, si $f : Z \longrightarrow X$ est une flèche de $\cM$ telle que $Z$ ou $X$ est dans $\Filt^{\pi}$, alors $\Img f \in \Filt^{\pi}$.
+\end{enumerate}
+
+Cette dernière condition sur $\Img f$ se décompose en deux :
+\msp{page 46}
+
+\begin{enumerate}[nosep]
+\item[$d_1$)] Tout sous-objet d'un objet de $\Filt^{\pi}$ est dans $\Filt^{\pi}$.
+\item[$d_2$)] Si $Z$ est dans $\Filt^{\pi}$, alors tout quotient $Z'$ de $Z$ tel que $\Img p = Z'$ (où $p : Z \longrightarrow Z'$ est le morphisme canonique) est dans $\Filt^{\pi}$.\footnote[17]{Il semblerait qu'on n'aura pas besoin de ($d_1$), seulement de ($d_2$). Mais en fait, ($d_1$) doit être conséquence de ($d_2$), et ($d_2$) est conséquence de la première partie de ($d$) (stabilité par $\varinjlim$ finies) si tout épimorphisme dans $\cM$ est strict, donc effectif (si les $\Filt^{\pi}$ sont stables par $\varprojlim$ finies aussi \ldots).}
+\end{enumerate}
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Bien sûr, pratiquement il sera toujours vrai que $\Filt^{\pi}$ est stable par passage aux sous-objets et aux quotients d'un objet (pas seulement les quotients particuliers dont il est question dans ($d_2$). % [sic] closing parenthesis of "(pas seulement" missing, parentheses unbalanced as printed
+D'ailleurs, lorsque tout bimorphisme (\textit{i.e.} monomorphisme \textit{et} épimorphisme) de $\cM$ est un isomorphisme, alors ($d_2$) équivaut bien à la stabilité de $\Filt^{\pi}$ par quotients d'objets.
+
+\textbf{Proposition 5.3.} \texttt{[Deux fois 5.3.]} \textit{Supposons les conditions} (a), (b), (d) \textit{vérifiées pour $\cM$. Soient $\pi$ un cardinal $\geq \pi_0$, et $X$ un objet de $\cM$. Soit} $\Ss_{\pi}(X)$ \textit{l'ensemble des sous-objets de $X$ qui sont dans} $\Filt^{\pi}$\textit{. Cet ensemble, ordonné par la relation d'ordre induite par} $\Ss(X)$\textit{, est grand devant $\pi$ (et en particulier filtrant). Si de plus, les limites inductives filtrantes de monomorphismes dans $\cM$ sont des monomorphismes}\footnote[18]{C'est une \textit{condition d'exactitude} de $\cM$, que je vais noter comme :\par
+\noindent\circled{e}\quad Les monomorphismes dans $\cM$ sont stables par $\varinjlim$ filtrantes dans $\uFl(\cM)$.} \textit{(p. ex. si les limites inductives filtrantes sont exactes à gauche), ou si les objets de} $\Filt^{\pi}$ \textit{sont $\pi$-accessibles, on a $\varinjlim\limits_{\alpha\in\Ss_{\pi}(X)} Z_{\alpha} \isoto X$}\footnote[19]{Dire aussi que $\Ss_{\pi}(X)$ est $\pi$-adapté, et le système inductif $(Z_{\alpha})_{\alpha}$ aussi.}.
+
+\msp{page 47}
+\textsc{Démonstration}. Soit $(Z_{\alpha})_{\alpha\in A}$ une famille de sous-objets de $X$ tels que $Z_{\alpha} \in \Filt^{\pi}$, et $\card A \leq \pi$. Soit $Z = \coprod_{\alpha\in A} Z_{\alpha}$, on a $Z \in \Filt^{\pi}$ par ($c$). Le plus petit sous-objet de $X$ majorant les $Z_{\alpha}$ n'est autre que $\Img (Z \longrightarrow X)$, qui est dans $\Filt^{\pi}$ par ($d_1$). Prouvons que $\varinjlim\limits_{\alpha\in\Ss_{\pi}(X)} Z_{\alpha} \isoto X$ est un isomorphisme, quand on sait que c'est un monomorphisme. Or
+\[
+X \;=\; \varinjlim_{I} X_i \ ,
+\]
+où $(X_i)_{i\in I}$ est un système inductif filtrant, $I$ ensemble ordonné grand devant $\pi$, les $X_i$ dans $\Filt^{\pi}$. Soit, pour tout $i \in I$, $X'_i$ l'image de $X_i$ dans $X$. On a donc $X'_i \in \Filt^{\pi}$ par ($d_2$). Utilisant le fait que les $X_i \longrightarrow X'_i$ sont des épimorphismes, on voit de suite que $X = \varinjlim\limits_{I} X'_i$. Considérons l'application
+\[
+\begin{aligned}
+I \quad &\longrightarrow \quad \Ss_{\pi}(X)\\
+i \quad &\longmapsto \quad X'_i \ .
+\end{aligned}
+\]
+C'est une application croissante, soit $J$ son image, partie filtrante grande devant $\pi$ de $\Ss_{\pi}(X)$, telle que
+\[
+\varinjlim_{\alpha\in J} Z_{\alpha} \ \isoto \ X \ .
+\]
+\msp{page 48}
+On a donc
+\[
+\underbrace{\varinjlim_{\alpha\in J} Z_{\alpha}}_{\simeq X} \ \longrightarrow \ \varinjlim_{\alpha\in\Ss_{\pi}X} Z_{\alpha} \ \xrightarrow{\ \varphi\ } \ X \ ,
+\]
+le composé étant l'identité. Si on sait que $\varphi$ est un monomorphisme, il en résulte que c'est un isomorphisme (monomorphisme ayant une section). Or $\varphi$ sera un monomorphisme si toute $\varinjlim$ filtrante de monomorphismes est un monomorphisme, et alors on gagne.
+
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Si on suppose que les éléments de $\Filt^{\pi}$ sont $\pi$-accessibles, on gagne aussi, car on trouve :
+
+\textbf{Corollaire 5.4.} \textit{Si les objets de} $\Filt^{\pi}$ \textit{sont $\pi$-accessibles (p. ex. si $\pi \geq \pi_1$ et $\pi = \pi^{\pi_0}$, p. ex. $\pi \geq \pi_1$ et $\pi = 2^{c}$, avec $c \geq \pi_0$,} cf. (3.2) \textit{p. 16), alors pour toute partie filtrante $J$ de} $\Ss(X)$ \textit{grande devant $\pi$, telle que $\varinjlim\limits_{\alpha\in J} Z_{\alpha} \isoto X$, $J$ est cofinale dans} $\Ss_{\pi}(X)$ \textit{(donc $\varinjlim\limits_{\alpha\in J} Z_{\alpha} \isoto \varinjlim\limits_{\alpha\in\Ss(X)} Z_{\alpha}$).}
+
+C'est immédiat.
+
+\msp{page 49}
+\textbf{Scholie 5.5.} Quand on fait sur $\cM$ l'hypothèse d'exactitude assez anodine que les $\varinjlim$ filtrantes de monomorphismes sont des monomorphismes, \textit{ou} qu'on se borne aux cardinaux $\pi$ tels que les objets de $\Filt^{\pi}$ soient $\pi$-accessibles, on peut \textit{canoniser} la représentation d'un objet $X$ comme $\varinjlim\limits_{i\in I} X_i$, avec $X_i \in \Filt^{\pi}$ et $I$ grand devant $\pi$, en prenant $I = \Ss_{\pi}(X)$, et le système inductif correspondant. On a de plus l'agréable propriété supplémentaire que voici : toute partie filtrante $J$ de $I$, de cardinal $\leq \pi$, admet une borne supérieure $i_J$, et (si on suppose que $\cM$ satisfait la condition ($e$), page 46, note 18), on aura
+\[
+X_{i_J} \;=\; \varinjlim_{i\in J} X_i \ ;
+\]
+en d'autres termes, on a une représentation de $X$ par un système inductif (parfaitement) \textit{$\pi$-adapté} (\textit{cf.} XIII, p. 85, 86).
+
+\msp{page 50}
+Soit maintenant
+\[
+M \;\subset\; \Ob\cM
+\]
+une partie de $\Ob\cM$, stable par la relation d'isomorphie. Si $M$ est $\pi$-accessible (suivant la condition $\mathrm{b}_{\pi}$ de XIII, p. 88), alors en posant
+\[
+M^{\pi} \;=\; M \cap \Filt^{\pi} \ ,
+\]
+$M^{\pi}$ détermine $M$ par la condition suivante sur $X \in \Ob\cM$.
+\[
+\begin{aligned}
+&X \in M \iff \text{le sous-ensemble } \Ss^{M}_{\pi}(X) \text{ de } \Ss_{\pi}(X) \text{ formé des } X_{\alpha} \in \Ss_{\pi}(X)\\
+&\text{tels que } X_{\alpha} \in M \ (\iff X_{\alpha} \in M^{\pi}) \text{ est cofinal dans } \Ss_{\pi}(X).
+\end{aligned}
+\tag*{(5.1)}
+\]
+Notons que lorsque $X \in \Filt^{\pi}$, ce critère est trivialement valable, puisque alors $\Ss_{\pi}(X)$ admet $X$ comme plus grand élément, et les sous-ensembles cofinaux sont ceux qui contiennent cet objet final. Donc (5.1) est intéressant seulement pour les $X \in \Ob\cM \backslash \Filt^{\pi}$. Notons que pour \textit{toute} partie $M^{\pi}$ de $\Filt^{\pi}$, on peut définir une partie $M$ de $\Ob\cM$ par la condition (5.1), et on aura trivialement
+\[
+M^{\pi} \;=\; M \cap \Filt^{\pi} \ . \tag*{(5.2)}
+\]
+Mais sans doute, bien que $M$ satisfasse (5.1), il n'est pas pour autant nécessairement $\pi$-accessible. En effet, pour qu'il le soit, il faut qu'il soit stable par $\varinjlim$
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 51}
+grandes devant $\pi$ d'éléments de $M^{\pi}$, ce qui implique que tout facteur direct d'un élément de $M^{\pi}$ est dans $M$, donc aussi dans $M^{\pi}$, d'après la condition de stabilité ($d$) sur $\Filt^{\pi}$. C'est là une condition particulière sur la partie $M^{\pi}$ de $\Filt^{\pi}$. Aussi, on devra avoir une condition sur $\cM$ plus forte que la validité de (5.1), savoir :
+\[
+\parbox{0.72\textwidth}{Pour tout $X \in \Ob\cM$ et pour toute partie $J$ de $\Ss_{\pi}(X)$, telle que
+\begin{enumerate}[nosep]
+\item[\textit{a})] $J$ est cofinale dans $\Ss_{\pi}(X)$ et
+\item[\textit{b})] Si $J' \subset J$ est une partie filtrante de $J$, de cardinal $\leq \pi$, alors sa borne supérieure $\alpha_{J'}$ dans $\Ss_{\pi}(X)$ appartient à $J$,
+\end{enumerate}
+on a $X \in M$ si et seulement si $J^{M} \overset{\text{déf}}{=} J \cap \Ss^{M}_{\pi}(X)$ est cofinal dans $J$ (ou ce qui revient au même, dans $\Ss_{\pi}(X)$)\,\footnotemark[20].}
+\tag*{(5.3)}
+\]
+\footnotetext[20]{Au lieu de $J$ cofinale dans $\Ss_{\pi}(X)$, il suffit même que l'on ait $\varinjlim\limits_{\alpha\in J} X_{\alpha} \isoto X$ -- la condition correspondante sur $M$ devient donc plus exigeante. Mais si les objets de $\Filt^{\pi}$ sont $\pi$-accessibles, cette condition est en fait équivalente à la condition plus faible.}
+
+Si on admet déjà le ``il suffit'' de (5.1), alors il suffit dans (5.3) de supposer $X \in M$ et exiger qu'alors $J^{M}$ soit cofinal dans $J$.
+
+Mais notons la
+\msp{page 52}
+
+\textbf{Proposition 5.6.}\footnote[21]{Faux tel quel, vrai si on suppose que $M^{\pi}$ est stable par $\varinjlim$ filtrantes.} \textit{Supposons $\pi$ choisi de telle façon que les objets de} $\Filt^{\pi}$ \textit{soient $\pi$-accessibles (p. ex. $\pi = 2^{c}$, avec $c \geq \pi_1$,} cf. (3.2), \textit{p. 16). Alors, pour une partie $M$ de} $\Ob\cM$\textit{, $M$ est $\pi$-accessible si et seulement si elle satisfait au critère} (5.3).
+
+On a vu que c'est nécessaire (tautologiquement, compte tenu de la proposition 5.3 et du scholie 5.5, bas de la page 49). Prouvons que c'est suffisant, en établissant d'abord le
+
+\textbf{Lemme 5.7.} \textit{Sous les conditions de} 5.6 \textit{sur $\pi$, et la condition} (e) \textit{sur $\cM$} (p. 46), \textit{pour toute représentation $\pi$-adaptée $X = \varinjlim\limits_{i\in I} X_i$ d'un objet $X$ de $\cM$, le sous-ensemble $I'$ des $i \in I$ tels que $X_i \longrightarrow X$ soit un monomorphisme, est cofinal dans $I$. De plus, $I'$ est stable par bornes supérieures dans $I$ de parties filtrantes $J$ de $I'$ de cardinal $\leq \pi$.}
+
+Montrons comment ce lemme 5.7 implique le ``il suffit'' de la proposition 5.6. Soit donc $X = \varinjlim\limits_{i\in I} X_i$ une représentation $\pi$-adaptée de $X$ ($X_i \in \Filt^{\pi}$, $I$ grand devant $\pi$, \textit{etc.}). Il faut prouver que, si 5.3 est valable, alors $X \in M$ si et seulement si l'ensemble $I_M$ est cofinal dans $I$.
+
+\msp{page 53}
+Supposons $X \in M$. Considérons le sous-ensemble $I' \subset I$ décrit dans le lemme. On a une application $I' \longrightarrow \Ss_{\pi}(X)$, soit $i \longmapsto X'_i = \Img (X_i \hookto X)$, et on a
+\[
+X \simeq \varinjlim_{i\in I} X_i \ \simeq \ \varinjlim_{i\in I'} X_i \ \simeq \ \varinjlim_{i\in I'} X'_i \ \simeq \ \varinjlim_{\alpha\in J} Z_{\alpha} \ ,
+\]
+où $J$ est l'image de $I'$ dans $\Ss_{\pi}(X)$. Comme les objets de $\Filt^{\pi}$ sont $\pi$-accessibles, on en conclut que $J$ est cofinal dans $\Ss_{\pi}(X)$. Par 5.3, il s'ensuit que l'ensemble $J_M$ des $\alpha \in J$
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+tels que $Z_{\alpha} \in M$ est cofinal dans $J$, donc $\neq \emptyset$. Donc $I'_M$, qui est l'image inverse de $J_M$ dans $I'$, est en tous cas non vide. Appliquant le même résultat en remplaçant $I'$ par le sous-ensemble $I'_{\geq i'_0}$, on voit que $I'_M$ est cofinal dans $I'$, donc aussi dans $I$, puisque $I'$ est cofinal dans $I$ ; donc $I_M \supset I'_M$ est cofinal dans $I$, \quad \textit{q.e.d.}
+
+Inversement, supposons que $I_M$ soit cofinal dans $I$, et prouvons $X \in M$. La difficulté ici provient du fait que la représentation $X = \varinjlim\limits_{i\in I_M} X_i$ n'est plus adaptée à $\pi$ -- $I_M$ n'est pas nécessairement stable dans $I$ par bornes supérieures (dans $I$) de parties filtrantes dans $I_M$, $I'$ de cardinal $\leq \pi$. En somme, il faut
+\msp{page 54}
+prouver que $M$ est stable par $\varinjlim$ grandes devant $\pi$ sans plus, et je doute maintenant que ça résulte des seules hypothèses faites ici, qui ne concernent que les systèmes inductifs où les morphismes de transition sont des monomorphismes.
+
+Voici, je crois, un contre-exemple. Prenons
+\[
+M \quad = \quad \parbox[t]{0.6\textwidth}{ensemble des objets de $\cM$ isomorphes à un objet fixe $X_0 \in \Filt^{\pi}$, tel que $X_0$ n'ait pas d'endomorphisme qui soit un monomorphisme autre que l'identité.}
+\tag*{(5.4)}
+\]
+Alors la condition 5.3 est satisfaite. Car :
+\begin{enumerate}[nosep]
+\item[\textit{a})] Si $X \in M$, \textit{i.e.} $X \simeq X_0$, alors $X \in \Filt^{\pi}$, donc $\Ss_{\pi}(X)$ admet $X$ comme objet final, et $J$, étant cofinal, contient cet élément, donc $J_M$ (qui le contient aussi) est cofinal.
+\end{enumerate}
+Et :
+\begin{enumerate}[nosep]
+\item[\textit{b})] Si $J_M$ est cofinal, l'hypothèse (5.4) implique que l'ensemble des morphismes de transition entre les $Z_{\alpha}$ ($\alpha \in J_M$) est formé d'isomorphismes, donc la limite inductive $X$ des $Z_{\alpha}$ en question est isomorphe à chacun d'eux, donc $X \simeq X_0$, \textit{i.e.} $X \in M$.
+\end{enumerate}
+Pourtant, $M$ n'est $\pi$-accessible que s'il est stable par $\varinjlim$ grandes devant $\pi$, ce qui implique qu'il est stable par \textit{facteurs directs.} Mais l'hypothèse
+\msp{page 55}
+(5.4) n'exclut nullement que $X_0$ admette un projecteur $p$ ($p^{2} = p$) non trivial. Celui-ci aura une image $X'$ dans $\cM$, qui sera facteur direct de $X_0$ non isomorphe à $X_0$, \textit{i.e.} non dans $M$.
+
+Ces difficultés disparaissent si on suppose que $M^{\pi}$ est stable par $\varinjlim$ filtrantes indexées par des ensembles ordonnés $I$ de cardinal $\leq \pi$. En effet, dans ce cas, dans la démonstration précédente, le sous-ensemble $I_M$ est stable par bornes supérieures (dans $I$) de parties $J$ de $I_M$ filtrantes et de cardinal $\leq \pi$. Donc le système inductif $(X_i)_{i\in I_M}$ est encore $\pi$-adapté, et on peut lui appliquer le lemme 5.7, pour trouver un sous-ensemble cofinal $I'_M \subset I_M$, tel que les $X_i \longrightarrow X$ pour $i \in I'_M$ soient des monomorphismes. L'image $J$ de $I'_M$ dans $\Ss_{\pi}(X)$ est alors une partie de $\Ss_{\pi}(X)$ telle que $\varinjlim\limits_{\alpha\in J} Z_{\alpha} = X$, donc (par l'hypothèse faite sur $\pi$) cofinale dans $\Ss_{\pi}(X)$ (5.4), avec $Z_{\alpha} \in M^{\pi}$ pour tout $\alpha \in J$. Donc par 5.3 on a $X \in M$, \textit{q.e.d.}
+
+\msp{page 56}
+Il reste à prouver le lemme 5.7. Avec les hypothèses et notations du lemme, soit donc $i_0 \in I$, il faut trouver $i' \in I'$ tel que $i' \geq i_0$. Considérons l'image $X'_i$ de $X_i$ dans $X$, et
+
+% ---- from Der-ChXV-05-11-10_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+l'inclusion
+\[
+\underbrace{X'_{i_0}}_{\in\, \Filt^\pi} \;\longrightarrow\; X \;\simeq\; \varinjlim X_i \;.
+\]
+Comme $X'_{i_0} \in \Filt^\pi$, donc est $\pi$-accessible, il existe un $i_1 > i_0$ tel que $X'_{i_0} \longrightarrow X$ se factorise par
+\[
+X'_{i_0} \;\longrightarrow\; X_{i_1} \;.
+\]
+Appliquant ce même résultat à $X_{i_1}$, $X'_{i_1}$ \textit{etc.}, on trouve une suite infinie de morphismes
+\[
+\begin{tikzcd}[column sep=small]
+X_{i_0} \arrow[dr] & & X_{i_1} \arrow[dr] & & X_{i_2} \arrow[dr] & \\
+& X'_{i_0} \arrow[ur] & & X'_{i_1} \arrow[ur] & & X'_{i_2} \quad \cdots
+\end{tikzcd}
+\]
+telle que les morphismes composés de deux en deux soient, sur la ligne supérieure, les transitions
+\[
+X_{i_m} \longrightarrow X_{i_n} \qquad (\; i_m \;<\; i_n \;) \;,
+\]
+et sur la ligne inférieure, les inclusions
+\[
+X'_{i_m} \hookrightarrow X'_{i_n} \qquad (\; \hookrightarrow X \;) \;.
+\]
+Soit $i_\omega = \sup_n i_n$ dans $I$, donc
+\[
+X_{i_\omega} \;=\; \varinjlim_{n} X_{i_n} \;\simeq\; \varinjlim_{n} X'_{i_n} \;\simeq\; X'_{i_\omega} \;,
+\]
+donc $X_{i_\omega} \longrightarrow X$ est un monomorphisme.
+
+\msp{page 57}
+
+La dernière assertion de 5.7 résulte aussitôt du fait qu'une limite inductive filtrante de monomorphismes dans $\M$ est un monomorphisme (condition $(e)$, p.~46).
+
+On peut préciser la proposition 5.6 obtenue ainsi :
+
+\textbf{Proposition 5.7}. \texttt{[Deux fois 5.7.]} \textit{Soient $\M$ une catégorie satisfaisant les conditions} (a), (b), (c), (d) (p.~44, 45) et (e) (p.~46). \textit{Soit $\M$ une partie de} $\Ob\M$\textit{, stable par isomorphie, $\pi$ un cardinal tel que les objets de} $\Filt^\pi$ \textit{soient $\pi$-accessibles. Les conditions suivantes sont équivalentes :} % [sic] Soit $\M$ (calligraphique) -> Soit $M$, la partie de Ob M est notée M partout ailleurs
+
+\begin{enumerate}[label={}]
+\item[a)] \textit{$M$ est $\pi$-accessible, et stable par $\varinjlim$ filtrantes.}
+\item[b)] \textit{$M$ est $\pi$-accessible, et $M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrante de cardinal $\leq \pi$.}
+\item[c)] \textit{Il existe une partie $M^\pi$ de} $\Filt^\pi$\textit{, stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$ et telle que pour tout $X \in \Ob\M$, on ait $X \in M$ si et seulement si l'ensemble $J_M$ des $Z_\alpha \in J$ tels que $Z_\alpha \in M^\pi$ est cofinal dans $J$.}
+\end{enumerate}
+
+(\textit{De plus, sous la condition} (c), \textit{on a}
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 58}
+$M^\pi = M \cap \Filt^\pi$.)
+\begin{enumerate}[label={}]
+\item[c$'$)] \textit{Il existe une partie $M_0$ de} $\Filt^\pi$ \textit{telle que $M$ soit la plus petite partie de $\M$ stable par limites inductives filtrantes.} (\textit{De plus, on peut alors prendre $M_0$} petite.)\footnote[22]{\textbf{N.B.} On a
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+(a) \arrow[r, Leftrightarrow] \arrow[d, Rightarrow] \& (b) \arrow[d, Rightarrow] \\
+(c') \arrow[r, Rightarrow, "?"] \& (c)
+\end{tikzcd}
+\quad ,
+\]
+sans conditions sur $\pi$ (sauf $\pi \geq \pi_0$).}.
+\end{enumerate}
+
+\textbf{Corollaire 5.8.} \textit{Les applications}
+\[
+M \;\longmapsto\; M^\pi = M \cap \Filt^\pi \;,
+\]
+\[
+M^\pi \quad\longmapsto\quad \parbox[t]{0.5\textwidth}{\textit{l'ensemble des $X \in \Ob\M$ tels que l'ensemble $\Ss_\pi^{M^\pi}(X)$ des $Z_\alpha \in \Ss_\pi(X)$ qui sont dans $M^\pi$ soit cofinal} (= \textit{plus petit sous-ensemble de $\Ob\M$ stable par $\varinjlim$ filtrantes})}
+\]
+\textit{établissent des bijections, inverses l'une de l'autre, entre l'ensemble des $M \subset \Ob\M$ satisfaisant les conditions équivalentes de la proposition} 5.7\textit{, et l'ensemble des parties $M^\pi$ de} $\Filt^\pi$ \textit{stables par $\varinjlim$ filtrantes de cardinal $\leq \pi$.}
+
+\textsc{Démonstration de} 5.7. L'implication $(b) \Longrightarrow (c)$ est tautologique, compte tenu de la définition de la $\pi$-accessibilité de $M$, et de la proposition 5.3. Et $(a) \Longrightarrow (b)$ provient de la stabilité de $\Filt^\pi$ par $\varinjlim$ filtrantes de cardinal $\leq \pi$ (condition $(d)$).
+
+Il reste donc à prouver $(c) \Longrightarrow (a)$. (C'est ici qu'on doit utiliser l'hypothèse particulière sur $\pi$.) Une fois ceci vu, on saura l'équivalence de $(a)$, $(b)$, $(c)$, et d'autre part, il est immédiat que $(a) \Longrightarrow (c')$, en
+\msp{page 59}
+prenant $M_0 = M \cap \Filt^\pi$. D'autre part, $(c') \Longrightarrow (c)$ (sans hypothèses sur $\pi\,$?), car on peut supposer que la partie $M_0$ de $\Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$. Mais alors, connaissant l'équivalence de $(a)$, $(b)$ $(c)$, d'où aussitôt le corollaire, il s'ensuit que l'enveloppe stable par $\varinjlim$ filtrantes de $M_0$ dans $\M$ n'est autre que la partie accessible déduite de $M_0$ dont il est question dans $(c)$, et on gagne. % [sic] $(b)$ $(c)$ -> $(b)$, $(c)$, virgule manquante
+
+Donc tout revient à prouver que, si tous les objets de $\Filt^\pi$ sont accessibles, alors $(c)$ implique $(a)$. Montrons d'abord que $(c)$ implique le critère d'appartenance (5.3) (p.~51), donc par la proposition 5.6 “revue et corrigée” dans la note 21, il s'ensuit déjà que $(c) \Longrightarrow (b)$, et il restera à établir $(b) \Longrightarrow (a)$, \textit{i.e.} que $(b)$ implique la stabilité de $M$ par $\varinjlim$ filtrantes quelconques (pas seulement grandes devant $\pi$).
+
+Que $(c)$ implique (5.3) va résulter du lemme suivant, appliqué à $I = \Ss_\pi(X)$ :
+
+\textbf{Lemme 5.8.} \texttt{[Deux fois 5.8.]} \textit{Soit $I$ un ensemble ordonné} $\pi$-adapté, i.e. \textit{filtrant et tel que toute partie filtrante $K$ de $I$, de cardinal $\leq \pi$, ait une borne supérieure $i_K$ dans $I$. Je dis qu'une partie $J$ de $I$ est} $\pi$-cofinale, \textit{si elle est cofinale, et si pour toute partie filtrante $K$ de $J$ de cardinal $\leq \pi$, sa borne supérieure $i_K$ dans $I$ est}
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 60}
+\textit{dans $J$.} (\textit{Il s'ensuit donc que $J$ est lui aussi $\pi$-adapté, pour la structure d'ordre induite.}) \textit{Ceci dit, l'intersection de deux parties $\pi$-cofinales de $I$ est encore $\pi$-cofinale.}
+
+Il suffit de voir qu'elle est cofinale, car sa stabilité par bornes supérieures dans $I$ de parties filtrantes de cardinal $\leq \pi$ est tautologique (si elle est vraie pour des $J_\alpha$, elle est vraie pour $\bigcap_\alpha J_\alpha$). Soit $i_0 \in I$, et construisons un élément de $J \cap J'$ qui majore $i_0$. On construit de proche en proche une double suite
+\[
+\begin{tikzcd}
+i_1 \arrow[dr] & & i_2 \arrow[dr] & & \cdots \\
+& i'_1 \arrow[ur] & & i'_2 \arrow[ur] &
+\end{tikzcd}
+\]
+avec les $i_\alpha$ dans $J$, les $i'_\alpha$ dans $J'$, et $i_1 \geq i_0$. On a donc
+\[
+\sup i_\alpha \;=\; \sup i'_\alpha \;,
+\]
+et si $i$ est la valeur commune des deux membres, on a $i \in J \cap J'$.
+
+Ceci vu, pour prouver la validité de (5.3), on note que la partie $J' = \Ss_\pi^{(M^\pi)}(X)$ de $I = \Ss_\pi(X)$, formée des $Z_\alpha \subset X$ tels que $Z_\alpha \in M^\pi$, est stable par bornes supérieures de parties filtrantes de cardinal $\leq \pi$, vu que $M^\pi$ est stable
+\msp{page 61}
+par $\varinjlim$ de cardinal $\leq \pi$. Donc si $J$ est une partie $\pi$-cofinale de $\Ss_\pi(X)$, $J \cap J'$ est cofinale dans $J$, \textit{i.e.} dans $I$, si et seulement si $J'$ est cofinale dans $I$ (\textit{i.e.} si et seulement si $X \in M$, par la condition $(c)$). Car $J \cap J'$ cofinale $\Longrightarrow$ $J'$ cofinale tautologiquement, et $J'$ cofinale implique $J'$ $\pi$-cofinale, donc $J \cap J'$ $\pi$-cofinale par le lemme 5.8, donc cofinale.
+
+Reste à prouver seulement que $(b) \Longrightarrow (a)$, \textit{i.e.} la stabilité de $M$ par limites inductives filtrantes quelconques, moyennant $(b)$. Ici à nouveau, cela ne doit pas utiliser l'hypothèse particulière sur $\pi$, ni même l'hypothèse d'exactitude $(e)$ sur $\M$, mais être une histoire générale d'accessibilité :
+
+\textbf{Proposition 5.9.} \textit{Soit $\M$ une catégorie satisfaisant} (a), (b), (c), (d$_0$) (pages 44, 45), \textit{$\pi \geq \pi_0$ un cardinal, $M$ une partie $\pi$-accessible de} $\Ob\M$, i.e. \textit{satisfaisant la condition $b_\pi$ de} XIII, p.~88. \textit{Alors $M$ est stable par $\varinjlim$ filtrantes si et seulement si $M^\pi \overset{\text{déf}}{=} M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$.}
+
+Je n'ai pas envie d'expliciter ici la démonstration, ayant l'impression pénible de refaire à perpette la même démonstration (ici et dans XIII). Je devrai revenir là-dessus dans une situation plus décantée.
+
+\msp{page 62}
+
+Je vais quand même esquisser la démonstration. Soit $X = \varinjlim\limits_{I} X_i$, $I$ filtrant, les $X_i$ dans $M$, il faut prouver que $X \in M$ (moyennant l'hypothèse de stabilité sur $M^\pi = M \cap \Filt^\pi$).
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\[
+\begin{tikzcd}
+& \Ci \arrow[r] \arrow[d] \arrow[dl, dotted, "\mathfrak{z}"'] \arrow[dr, phantom, "\text{\footnotesize cart.}"] & I \arrow[d, "\varphi"] \\
+\underline{M}^\pi & \underline{M}^\pi/\underline{M} \arrow[l, dotted, "\text{\footnotesize “source”}"] \arrow[r, "\text{\footnotesize “but”}"'] & \underline{M}
+\end{tikzcd}
+\] % ?? uncertain: label of the dotted arrow -- printed glyph resembles a Fraktur z (\mathfrak{z}); possibly meant \exists
+
+$\Ci$ est une catégorie cofibrée sur $I$, dont les fibres sont
+\[
+\Ci_i \;\simeq M^\pi/X_i \;,
+\]
+or comme $X_i \in M$, on voit, à cause de la condition de $\pi$-accessibilité, que $M^\pi/X_i$ est \textit{filtrante.} On va le dégager en
+
+\textbf{Lemme 5.10.} \textit{Soit $M$ une partie $\pi$-accessible de $\M$. Alors pour tout $Y \in M$, $M^\pi/Y$ est une catégorie} filtrante, \textit{et $\Ss_\pi(Y)$ y est cofinale.}
+
+\msp{page 63}
+
+Considérons le foncteur canonique
+\[
+I \;=\; \Ss_\pi(Y) \xrightarrow{\;\varphi\;} \underline{M}^\pi/Y \;=\; I' \;,
+\]
+où la catégorie source $I$ est filtrante. Par SGA 4 I 8.1.3, ce foncteur est cofinal si et seulement s'il satisfait deux conditions F\,1, F\,2, et alors $I'$ est également filtrante. La condition F\,1 est la condition habituelle que tout $i' \in \Ob I'$ est “majoré” par un $\varphi(i)$, \textit{i.e.} tout $Z \longrightarrow Y$, avec $Z \in M^\pi$, est “majoré” par un \textit{monomorphisme} $Z_\alpha \hookrightarrow Y$, avec $Z_\alpha \in M^\pi$, ce qui résulte du fait que c'est majoré par $Z_\alpha \hookrightarrow Y$ avec $Z_\alpha \in \Filt^\pi$, \textit{i.e.} $Z_\alpha \in \Ss_\pi(Y)$, et que parmi ces $Z_\alpha$ ceux qui sont dans $M^\pi$ sont cofinaux (vu que $Y \in M$). L'autre condition\footnote[23]{Comme $I$ est filtrante.} est qu'une double flèche $i' \overset{f'}{\underset{g'}{\rightrightarrows}} \varphi(i)$ peut
+\msp{page 64}
+s'égaliser par une flèche $\varphi(h)$, avec $h : i \longrightarrow j$. Mais en fait, pour un $i' \in \Ob I'$, \textit{i.e.} un $Z \longrightarrow Y$ donné ($Z \in M^\pi$), et un $i \in \Ob I$, \textit{i.e.} un $Z_\alpha \hookrightarrow Y$ donné ($Z_\alpha \in M^\pi$), il existe au plus \textit{une} flèche dans $I' = \underline{M}^\pi/Y$ de $Z \longrightarrow Y$ dans $Z_\alpha \hookrightarrow Y$. Donc la condition F\,2 est trivialement satisfaite (on prend $h = \mathrm{id}_i$).
+
+\textbf{Corollaire 5.11.} \textit{Si $(X_i)_{i \in I}$ est un système inductif filtrant, avec les $X_i$ dans $M^\pi$, alors la catégorie $\Ci = \underline{M}^\pi/\underline{M} \times_{\underline{M}} (I,\varphi)$, construite page} 62, \textit{est filtrante, et le foncteur canonique} (\textit{fibrant}) \textit{$\Ci \longrightarrow I$ est cofinal.}
+
+Que $\Ci$ soit filtrante et $\Ci \longrightarrow I$ cofinal résulte formellement du fait que $I$ l'est, que les fibres de $\Ci$ le sont, et que $\Ci$ est cofibrée sur $I$. (Mérite un lemme, à toutes fins utiles.)
+
+\textbf{N.B.} On peut remplacer $\Ci$ par $\Ci_0$ dont les fibres sont les
+\[
+\Ss_\pi^{M^\pi}(X_i) \;\subset\; \underline{M}^\pi \;; \qquad \text{cofinale dans } \Ci_i = \underline{M}^\pi/X_i \;,
+\]
+\msp{page 65}
+on trouve une sous-catégorie de $\Ci$ cofinale dans $\Ci$, et qui est cette fois ordonnée tout comme $I$.
+
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+On a
+\[
+X_i \;=\; \varinjlim_{Z_\alpha \in \Ci_i} Z_\alpha \;,
+\]
+donc
+\[
+X \;=\; \varinjlim_{\alpha \in \Ci} Z_\alpha \;,
+\]
+au total on est arrivé à représenter $X$ comme $\varinjlim$ filtrante d'éléments $Z_\alpha$ qui sont (non seulement dans $M$, mais même) dans $M^\pi$.
+
+Changeons la notation, en prenant
+\[
+X \;=\; \varinjlim_{i \in I} X_i \;, \qquad I \text{ ensemble ordonné filtrant, } X_i \in M^\pi \;\; \forall\, i \in I \;,
+\]
+soit $I'$ l'ensemble des parties \textit{filtrantes} $J \subset I$ telles que $\mathrm{card}\, J \leq \pi$, $I'$ ordonné par inclusion. Alors $I'$ est grand devant $\pi$, et on a un système inductif
+\[
+(X_J)_{J \in I'} \;, \qquad X_J \;=\; \varinjlim_{i \in J} X_i \;.
+\]
+Par l'hypothèse de stabilité de $M^\pi$ (qui n'a pas encore servi), les $X_J$ sont dans $M^\pi$. On a donc
+\[
+X \;=\; \varinjlim_{J \in I'} X_J \;, \qquad \text{les } X_J \text{ dans } M^\pi\text{, } I' \text{ grande devant } \pi \;,
+\]
+donc $X \in M$ puisque $M$ est $\pi$-admissible, \quad \textit{q.e.d.}
+
+\msp{page 66}
+
+\textbf{Définition 5.12.}
+\begin{enumerate}[label={}]
+\item[1)] Soit $\M$ une catégorie satisfaisant les conditions $(a)$, $(b)$, $(c)$, $(d)$ (p.~44-46). Soit $\pi \geq \pi_0$ un cardinal. Une partie $M$ de $\Ob\M$ est dite \textit{L-$\pi$-accessible,} si elle est $\pi$-accessible et stable par petites $\varinjlim$ filtrantes\footnote[24]{On dit alors que $M$ est \textit{L-stable.}}, ou ce qui revient au même (5.9), si elle est $\pi$-accessible et si $M^\pi = M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$. (\textbf{N.B.} Si les objets de $\Filt^\pi$ sont $\pi$-accessibles, 5.8 nous dit que cela signifie aussi qu'il suffit pour cela qu'il existe une partie $M_0$ de $\Filt^\pi$ telle que $M$ soit la L-enveloppe (enveloppe stable par $\varinjlim$ filtrantes) de $M_0$ -- condition qui est de toutes façons toujours nécessaire, en prenant $M_0 = M^\pi$.)
+\item[2)] Soit $M$ une partie de $\Ob\M$. On dit qu'elle est \textit{L-accessible,} si elle satisfait à l'une des quatre conditions équivalentes suivantes :
+\begin{enumerate}[label={}]
+\item[\textit{a})] Il existe un cardinal $\pi$ tel que $M$ soit L-$\pi$-accessible.
+\item[\textit{a}$'$)] $M$ est accessible et L-stable.
+\item[\textit{b})] Il existe une petite partie $M_0$ de $\Ob\M$, telle que $M$ soit la L-enveloppe de $M_0$\footnote[25]{Cette condition ne dépend pas de la filtration cardinale choisie de $\M$.}.
+\item[\textit{b}$'$)] Il existe une partie $M_0$ de $\M$ contenue dans une partie $\Filt^\pi$ (ou ce qui revient au même, telle que la sous-catégorie pleine $\underline{M}_0$ de $\M$ soit essentiellement petite, \textit{i.e.} équivalente à une petite catégorie, telle que $M$ soit la \textit{L}-enveloppe de $M_0$).
+\end{enumerate}
+\end{enumerate}
+\end{document}

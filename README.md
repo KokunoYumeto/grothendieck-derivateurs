@@ -86,9 +86,9 @@ The companion sets the corrected text of the pages it covers. These corrections 
 `corrections.csv`; the files in `transcription/` are the transcription before them.
 
 - PDF: **[LesDerivateurs_companion.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/latest/download/LesDerivateurs_companion.pdf)**
-  (857 pages: the text and commentary, the register of claims, the corrections, the bibliography)
+  (1,226 pages: the text and commentary, the register of claims, the corrections, the bibliography)
 
-The companion now covers:
+The companion covers:
 
 | Chapter | Covered |
 |---|---|
@@ -98,12 +98,18 @@ The companion now covers:
 | VI | whole chapter (parts VI-a, VI-b, VI-c) |
 | VII | whole chapter (parts VII-a, VII-b, VII-c) |
 | VIII, IX, X | whole chapters (part VIII-X) |
+| XI | whole chapter (part XI-XIIa) |
+| XII, sections 1–4 | whole sections (part XI-XIIa) |
 | XII, section 5 | whole section (parts XIIb-a, XIIb-b) |
-| XII, section 6 | pages 1–35 of the 64 of the edition file (part XIIc-a) |
+| XII, section 6 | whole section (parts XIIc-a, XIIc-b) |
 | XII, appendix | whole appendix (part XIIapp) |
+| XIII | whole chapter (parts XIII-a, XIII-b) |
+| XIV | whole chapter (part XIV) |
+| XV | pages 1–40 of the 77 of the edition file (part XV-a) |
+| XIX | whole chapter (part XIX) |
 
-In progress: the rest of Chapter II; Chapter XI; Chapter XII, sections 1–4 and the rest of section 6; Chapters XIII to
-XIX. The table of contents of the companion lists these parts as not yet included.
+In progress: the rest of Chapters II and XV; Chapters XVI, XVII and XVIII. The table of contents of the companion lists
+these parts as not yet included.
 
 Source: `companion/`
 

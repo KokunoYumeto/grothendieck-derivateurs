@@ -1,0 +1,414 @@
+\documentclass[11pt]{article}
+\usepackage[no-math]{fontspec}
+\usepackage[a4paper,left=27mm,right=32mm,top=24mm,bottom=25mm,marginparwidth=23mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{marginnote}
+\setlength{\emergencystretch}{1.2em}
+
+\usepackage[english,main=french]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\if\relax\detokenize{#1}\relax\else\begingroup\reversemarginpar\marginnote{\footnotesize p.~#1}\endgroup\fi}
+\newcommand{\msp}[1]{\marginnote{\footnotesize [#1]}}
+
+% footnote marks as printed: "(1)" in the text, "1" before the footnote text
+\makeatletter
+\renewcommand\@makefnmark{\hbox{\textsuperscript{\normalfont(\@thefnmark)}}}
+\renewcommand\@makefntext[1]{\parindent 1em\noindent\hb@xt@1.8em{\hss\textsuperscript{\normalfont\@thefnmark}}#1}
+\makeatother
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\bDelta}{\mathbf{\Delta}}
+\newcommand{\ho}{\mathrm{ho}}
+\newcommand{\cM}{\mathcal{M}}
+\begin{document}
+% ---- from Der-ChXIV-07-10-10_p001-005.tex
+% ===================== PDF page 1 =====================
+\printedpage{}% no page number printed on this page
+% head: (none)
+
+\begin{center}
+\vspace*{6cm}
+
+{\LARGE \textsf{LES DÉRIVATEURS}}
+
+\vspace{1cm}
+
+{\large \textbf{ALEXANDRE GROTHENDIECK}}
+
+\vspace{2cm}
+
+{\large \textbf{Chapitre XIV}}
+
+\vspace{0.3cm}
+
+{\large \textbf{Carrés h-cartésiens et h-cocartésiens}}
+\end{center}
+
+\clearpage
+
+% ===================== PDF page 2 =====================
+\printedpage{}% no page number printed on this page
+% head: (none)
+
+\vspace*{6cm}
+
+\noindent Ce texte a été déchiffré et transcrit en \LaTeXe{} par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Pour les quelques corrections évidentes, ou rares commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés. Un point d'interrogation entre crochets signifie que l'on n'est pas sûr du mot qui précède.
+
+\noindent Ce chapitre est inachevé. Dans la première section, Grothendieck introduit une notion de “catégorie quadrangulée” à gauche (resp. à droite). Le texte s'interrompt brutalement au début de la deuxième section, consacrée aux exemples, quand Grothendieck réalise, sans doute, que l'exemple principal qu'il a en vue (la catégorie homotopique d'une catégorie de modèles munie des carrés homotopiquement cartésiens (resp. cocartésiens)) ne satisfait \textit{pas} à l'axiomatique des catégories quadrangulées. Cela est brièvement expliqué dans une postface des éditeurs.
+
+\noindent Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\noindent \textbf{maltsin@math.jussieu.fr}
+
+\hfill G. Maltsiniotis\hspace*{2cm}
+
+\clearpage
+
+% ===================== PDF page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 octobre 2010
+
+\msp{page 1}
+
+\section*{1\quad Axiomes de structures quadrangulées (une tentative avortée)}
+
+Soit $(\mathcal{M},W)$ une catégorie de modèles admettant une théorie de la fibre homotopique. Alors on a dans $\mathrm{Ho}_W=\mathcal{M}W^{-1}$ une notion de \textit{carré $W$-cartésien} (ou $W$-homotopiquement cartésien), par quoi on entend un diagramme carré
+\[
+\begin{tikzcd}
+X_1 \arrow[d] & X_3 \arrow[l] \arrow[d] \\
+X_0 & X_2 \arrow[l]
+\end{tikzcd}
+\]
+dans $\mathrm{Ho}_W$ provenant, à isomorphisme près, d'un carré $W$-cartésien dans $\mathcal{M}$ – donc isomorphe, dans $\underline{\mathrm{Hom}}(\boldsymbol{\Delta}_1\times\boldsymbol{\Delta}_1,\mathrm{Ho}_W)$, a un carré \textit{cartésien} \texttt{[dans $\mathcal{M}$]} % [sic] a un carré -> à un carré, preposition printed without its grave accent
+\[
+\begin{tikzcd}
+Y_1 \arrow[d, "p_1"'] & Y_3\ (\simeq Y_1\times_{Y_0}Y_2) \arrow[l] \arrow[d] & \\
+Y_0 & Y_2 \arrow[l, "p_2"] & ,
+\end{tikzcd}
+\]
+avec $p_1,\ p_2\in\mathrm{Fib}_W$. (En fait, il suffit de $p_1$ ou $p_2$ dans $\mathrm{Fib}_W$ pour assurer le caractère $W$-cartésien du carré cartésien envisagé.) Je voudrais axiomatiser cette situation, histoire surtout de faire la liste des propriétés serviables essentielles de cette notion, et de la notion duale de carré $W$-cocartésien (ou $W$-homotopiquement cocartésien), dans le cas où $(\mathcal{M},W)$ admet une théorie de la cofibre homotopique. L'espèce de structure, savoir celle des “catégories quadrangulées” (à gauche, à droite, bilatères) est une variante, dans un cas \msp{page 2} non additif, de la notion de catégorie triangulée dégagée par \textsc{Verdier}. Comme celle-ci, cette notion est en fait trop faible – ce n'est \textit{pas} “la bonne” – mais elle a un intérêt pratique provisoire. La “bonne” notion (s'il en est une à part celle de dérivateur) devrait travailler avec une notion plus fine de carré et de carré $W$-cartésien, en travaillant systématiquement dans $\mathrm{HO}_W(\boldsymbol{\Delta}_1\times\boldsymbol{\Delta}_1)=\mathcal{M}(\boldsymbol{\Delta}_1\times\boldsymbol{\Delta}_1)W(\boldsymbol{\Delta}_1\times\boldsymbol{\Delta}_1)^{-1}$ (où vivent les “vrais” carrés $W$-cartésiens !), et catégories similaires, telles que $\mathrm{HO}_W(\Psi)$, $\mathrm{HO}_W(\Phi)$. Mais les inclure dans une axiomatique ne faisant pas mention d'une catégorie de modèles $(\mathcal{M},W)$, revient manifestement à mettre le doigt dans l'engrenage de la notion de dérivateur, et ce n'est pas mon propos pour l'instant.
+
+\noindent\textbf{Définition 1.} J'appelle \textit{“catégorie à carrés h-cartésiens”,} ou \textit{“catégorie quadrangulée à gauche”,} une catégorie $\mathcal{H}$, munie d'un sous-ensemble Cart de l'ensemble $\mathrm{Hom}(\boldsymbol{\Delta}_1\times\boldsymbol{\Delta}_1,\mathcal{H})$
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 octobre 2010
+des diagrammes carrés \texttt{[par carré on entend carré commutatif]}
+\[
+\begin{tikzcd}
+X_1 \arrow[d] & X_3 \arrow[l] \arrow[d] \\
+X_0 & X_2 \arrow[l]
+\end{tikzcd}
+\]
+dans $\mathcal{H}$, carrés appelés \textit{“h-cartésiens”} (h comme “homotopiquement”), cette \msp{page 3} donnée étant soumise aux axiomes qui suivent, Cart (1) à Cart (\ldots).
+
+\noindent Comme je ne suis pas sûr de connaître d'avance toutes les propriétés essentielles, le nombre de ces axiomes reste pour le moment ouvert.
+
+\noindent\textbf{Cart (1) (Symétrie).} Si un carré
+\[
+\begin{tikzcd}
+X_1 \arrow[d] & X_3 \arrow[l] \arrow[d] \\
+X_0 & X_2 \arrow[l]
+\end{tikzcd}
+\]
+est h-cartésien, de même le carré symétrique (obtenu en échangeant le rôle de $X_1$ et de $X_2$).
+
+\noindent\textbf{Cart (2) (Carrés triviaux).} Soit
+\[
+\begin{tikzcd}
+X_1 \arrow[d, "p_1"'] & X_3 \arrow[l, "q_2"'] \arrow[d, "q_1"] \\
+X_0 & X_2 \arrow[l, "p_2"]
+\end{tikzcd}
+\]
+un carré dans $\mathcal{H}$, avec $p_1$ un isomorphisme. Alors le carré est h-cartésien si et seulement si $q_1$ est un isomorphisme.
+
+\noindent\textbf{Cart (3) (Carrés composés).} Soit un diagramme commutatif
+\[
+\begin{tikzcd}
+X'_0 \arrow[d] \arrow[dr, phantom, "\mathrm{I}"] & X'_1 \arrow[l] \arrow[d] \arrow[dr, phantom, "\mathrm{II}"] & X'_2 \arrow[l] \arrow[d] & \\
+X_0 & X_1 \arrow[l] & X_2 \arrow[l] & ,
+\end{tikzcd}
+\]
+d'où les carrés I, II et III :
+\[
+\begin{tikzcd}
+X'_0 \arrow[d] & X'_2 \arrow[l] \arrow[d] \\
+X_0 & X_2 \arrow[l]
+\end{tikzcd}
+\]
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 octobre 2010
+(qu'on appelle \textit{carré composé} (“horizontal”) des carrés I et II). Supposons I h-cartésien. Alors II est h-cartésien si et seulement si III l'est \texttt{[voir postface des éditeurs]}.
+
+\noindent\textbf{Corollaire.} \textit{Soit un diagramme commutatif cubique, qu'on peut considérer comme homomorphisme d'un carré} (\textit{face supérieure du cube}) \textit{dans un autre} (\textit{face inférieure}) :
+\[
+\begin{tikzcd}
+ & {} \arrow[dl] \arrow[dd] & & {} \arrow[ll] \arrow[dl] \arrow[dd] \\
+{} \arrow[dd] & & {} \arrow[ll, crossing over] & \\
+ & {} \arrow[dl] & & {} \arrow[ll] \arrow[dl] \\
+{} & & {} \arrow[ll] \arrow[from=uu, crossing over] & .
+\end{tikzcd}
+\]
+\textit{Si toutes les faces du cube}\footnote{En fait, il suffit de la face inférieure, et des deux faces parallèles latérales (p. ex. celle de devant et celle de derrière).} \textit{sauf la face supérieure sont} \msp{page 4} \textit{des carrés h-cartésiens (savoir la face inférieure et les quatre faces latérales), il en est de même de la face supérieure.}\footnote{\textbf{Corollaire} (de Cart (3) et Cart (2)) : \textit{tout carré isomorphe à un carré h-cartésien est h-cartésien.}}
+
+\noindent Ces axiomes sont dans la nature d'axiomes de stabilité, nous donnant des critères affirmant que certains carrés sont h-cartésiens, si telles conditions sont remplies (p. ex. que certains autres carrés sont déjà h-cartésiens). J'ai l'impression d'avoir épuisé ici les propriétés pertinentes de ce type (\textit{i.e.} que les autres devraient pouvoir s'en déduire). À présent, je m'occupe de propriétés d'existence et d'unicité de carrés h-cartésien. % [sic] carrés h-cartésien -> carrés h-cartésiens, missing plural agreement
+
+\noindent\textbf{Cart (4) (Axiome du produit fibré).} Tout diagramme
+\[
+\begin{tikzcd}
+X_1 \arrow[d] & \\
+X_0 & X_2 \arrow[l]
+\end{tikzcd}
+\]
+dans $\mathcal{H}$ peut se compléter en un carré h-cartésien
+\[
+\begin{tikzcd}
+X_1 \arrow[d] & X_3 \arrow[l] \arrow[d] & \\
+X_0 & X_2 \arrow[l] & .
+\end{tikzcd}
+\]
+L'axiome suivant (\textit{cf.} son corollaire) assurera entre autres que le carré h-cartésien en question est \textit{unique à isomorphisme près} – mais on fera attention qu'il n'est en général pas unique “à isomorphisme unique près”.
+
+% ---- from Der-ChXIV-07-10-10_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+
+\textbf{Cart (5) (Axiome d'exactitude)} Considérons deux carrés h-cartésiens
+\[
+X = \left(\begin{tikzcd}
+X_1 \ar[d] & X_3 \ar[l] \ar[d] \\
+X_0 & X_2 \ar[l]
+\end{tikzcd}\right)
+\qquad \text{et} \qquad
+Y = \left(\begin{tikzcd}
+Y_1 \ar[d] & Y_3 \ar[l] \ar[d] \\
+Y_0 & Y_2 \ar[l]
+\end{tikzcd}\right)
+\]
+et un homomorphisme $p = (p_0, p_1, p_2)$ entre les diagrammes de type
+\[
+\Phi \ = \
+\begin{tikzcd}
+1 \ar[d] & \\
+0 & 2 \ar[l]
+\end{tikzcd}
+\]
+associés (\textit{cf.} diagramme en traits pleins ci-dessous) :
+
+\msp{page 5}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \ar[dl] \ar[dd, "p_1" near start] & & X_3 \ar[ll] \ar[dl] \ar[dd, dotted, "p_3"] \\
+X_0 \ar[dd, "p_0"'] & & X_2 \ar[ll, crossing over] & \\
+& Y_1 \ar[dl] & & Y_3 \ar[ll] \ar[dl] \\
+Y_0 & & Y_2 \ar[ll] \ar[from=uu, crossing over, "p_2"' near end] & .
+\end{tikzcd}
+\]
+
+Alors :
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] Il existe un homomorphisme $\bar{p} : X \longrightarrow Y$ induisant $p$, \textit{i.e.} il existe une flèche $p_3$ de façon à compléter le diagramme cubique commutatif (en respectant donc la contrainte de commutativité pour les deux carrés adjacents à l'arête $p_3$).
+\item[b)] Si de plus $p_0$, $p_1$, $p_2$ sont des isomorphismes, il en est de même de $p_3$ \texttt{[voir postface des éditeurs]}.
+\end{itemize}
+
+Prenant le cas où $p_0$, $p_1$, $p_2$ sont des identités, on trouve :
+
+\textbf{Corollaire 1.} \textit{Sous les conditions de} Cart (4)\textit{, si on a} deux \textit{carrés h-cartésiens $X$, $X'$ qui complètent}
+\[
+\begin{tikzcd}[row sep=small]
+& X_1 \ar[dl] & \\
+X_0 & & , \\
+& X_2 \ar[ul] &
+\end{tikzcd}
+\]
+\textit{il existe un homomorphisme de $X$ dans $X'$ qui induise l'identité sur les sommets d'indices} 0, 1, 2\textit{, et un tel homomorphisme est toujours un isomorphisme.}
+
+Mais cet isomorphisme n'est pas forcément unique, en d'autres termes, un automorphisme d'un carré h-cartésien peut induire l'identité sur les sommets $X_0$, $X_1$, $X_2$, sans être l'identité.
+% foot: Version 7 octobre 2010
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 6}
+\textbf{Corollaire 2.} \textit{Considérons un carré commutatif}
+\[
+Y = \left(\begin{tikzcd}
+Y_1 \ar[d] & Y_3 \ar[l] \ar[d] \\
+Y_0 & Y_2 \ar[l]
+\end{tikzcd}\right) \quad ,
+\]
+\textit{et un objet $T$ de $\mathcal{H}$, d'où (posant} $\mathrm{Hom}(T,X) = X(T)$\textit{) un carré commutatif dans} (Ens)
+\[
+\begin{tikzcd}
+Y_1(T) \ar[d] & Y_3(T) \ar[l] \ar[d] \\
+Y_0(T) & Y_2(T) \ar[l]
+\end{tikzcd} \quad ,
+\]
+\textit{et par suite}
+\[
+Y_3(T) \longrightarrow Y_1(T) \times_{Y_0(T)} Y_2(T) \quad . \tag*{$(*)$}
+\]
+\textit{Si $Y$ est h-cartésien, cette application} $(*)$ \textit{est} surjective \textit{quel que soit $T$.}
+
+On applique Cart (5) à $Y$ et au carré constant $X$ de valeur $T$
+\[
+X = \quad
+\begin{tikzcd}
+T \ar[d, "\mathrm{id}"'] & T \ar[l, "\mathrm{id}"'] \ar[d, "\mathrm{id}"] \\
+T & T \ar[l, "\mathrm{id}"']
+\end{tikzcd} \quad ,
+\]
+en notant que la donnée de $p = (p_0, p_1, p_2)$ de
+\[
+\begin{tikzcd}
+T \ar[d] & \\
+T & T \ar[l]
+\end{tikzcd}
+\qquad\qquad \text{dans} \qquad\qquad
+\begin{tikzcd}
+Y_1 \ar[d] & \\
+Y_0 & Y_2 \ar[l]
+\end{tikzcd}
+\]
+revient à la donnée d'un élément du deuxième membre de $(*)$,
+\[
+\begin{tikzcd}
+Y_1 \ar[d] & T \ar[l, "p_1"'] \ar[dl, "p_0"] \ar[d, "p_2"] \\
+Y_0 & Y_2 \ar[l]
+\end{tikzcd} \quad ,
+\]
+et que les éléments de $Y_3(T)$ qui s'envoient (par $(*)$) dans cet élément ne sont autres que les $p_3$ dont l'axiome Cart (5) affirme l'existence.
+
+\textbf{N.B.} On notera que l'application surjective $(*)$ n'est en général \textit{pas} bijective, \textit{i.e.} le carré h-cartésien n'est en général pas cartésien.
+% foot: Version 7 octobre 2010
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 7}
+\textbf{N.B.} Il y a une notion duale de \textit{catégorie à carrés h-cocartésiens,} ou \textit{catégorie quadrangulée à droite.} Le plus souvent, les deux structures sont présentes simultanément. Il y a lieu de dégager des propriétés qui relient les deux structures duales sur une même catégorie. Ainsi, sauf erreur, dans le cas $\mathcal{H}$ additive, les deux espèces de carrés, les h-cartésiens et les h-cocartésiens, devraient \textit{coïncider.} (Il me faudra revenir là-dessus par la suite.) Dans le cas $\mathcal{H}$ ``ponctuée'', il y a l'adjonction des foncteurs $\Sigma$, $\Omega$ liés l'un à la structure quadrangulée droite, l'autre à la structure quadrangulée gauche. Et il y a, quand il y a des \underline{Hom} internes ou externes, des propriétés éventuelles de $\uHom(X,Y)$ par rapport aux quadrangles h-cocartésiens en $X$, h-cartésiens en $Y$ -- mais c'est à peine un lien entre les deux structures \ldots
+
+\section*{2\quad Exemples}
+
+Un premier exemple trivial, est celui où $\mathcal{H}$ est stable par produits fibrés, et où les carrés h-cartésiens sont définis comme les carrés cartésiens. Les axiomes Cart (1) à Cart (5) sont alors des propriétés bien connues, $\pm$ tautologiques de la notion de carré cartésien. Et
+\msp{page 8}
+en un sens, le cas général doit se ramener à ce cas particulier banal.
+
+Le seul type d'autre cas que je connaisse, est celui où $\mathcal{H} = \mathcal{M}W^{-1}$, où $W$ est un localiseur admettant une théorie de la fibre $W$-homotopique (\textit{cf.} chapitre XII). Dans ce cas, on l'a dit, on prend comme carrés h-cartésiens dans $\mathcal{H}$ ceux qui sont isomorphes, dans $\uHom(\bDelta_1 \times \bDelta_1, \mathcal{H})$, à un carré $W$-cartésien dans $\mathcal{M}$. Encore faut-il vérifier les axiomes Cart (1) à Cart (5). Je pense que je n'ai guère de chance d'y arriver que moyennant une
+
+\textbf{Proposition 1.} \textit{Moyennant des hypothèses sur $(\mathcal{M}, W)$ qui vont être dégagées ci-dessous, vérifiées en tous cas si $(\mathcal{M}, W)$ est quillénisable, sur la catégorie des ensembles ordonnés finis} (\textit{cf.} XIII, p. 51)\textit{, on a ceci : soit}
+\[
+X = \left(\begin{tikzcd}
+X_1 \ar[d] & X_3 \ar[l] \ar[d] \\
+X_0 & X_2 \ar[l]
+\end{tikzcd}\right)
+\]
+\textit{un carré dans $\mathcal{M}$, et soit} $\ho_W(X)$ \textit{son image dans} $\uHom(\bDelta_1 \times \bDelta_1, \mathcal{H})$\textit{. Pour que} $\ho_W(X)$ \textit{soit h-cartésien, il} faut (\textit{et il suffit, bien sûr}) \textit{que $X$ soit $W$-cartésien} \texttt{[voir postface des éditeurs]}\textit{.}
+% foot: Version 7 octobre 2010
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+
+\section*{Postface des éditeurs}
+
+La proposition ci-dessus est fausse. On rappelle que si $\mathcal{M}$ est une catégorie de modèles fermée de Quillen de classe d'équivalences faibles $W$, un carré commutatif
+\[
+X = \left(\begin{tikzcd}
+X_1 \ar[d] & X_3 \ar[l] \ar[d] \\
+X_0 & X_2 \ar[l]
+\end{tikzcd}\right)
+\]
+de $\mathcal{M}$ est $W$-cartésien si et seulement si il existe un carré \textit{cartésien}
+\[
+Y = \left(\begin{tikzcd}
+Y_1 \ar[d] & Y_3 \ar[l] \ar[d] \\
+Y_0 & Y_2 \ar[l]
+\end{tikzcd}\right)
+\]
+avec $Y_1 \longrightarrow Y_0$ une fibration, et $Y_0$ et $Y_2$ fibrants (cette dernière condition étant superflue si la catégorie de modèles $\mathcal{M}$ est propre à droite), et un morphisme de carrés $s : X \longrightarrow Y$, $s = (s_0, s_1, s_2, s_3)$, \textit{i.e.} un cube commutatif
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \ar[dl] \ar[dd, "s_1" near start] & & X_3 \ar[ll] \ar[dl] \ar[dd, "s_3"] \\
+X_0 \ar[dd, "s_0"'] & & X_2 \ar[ll, crossing over] & \\
+& Y_1 \ar[dl] & & Y_3 \ar[ll] \ar[dl] \\
+Y_0 & & Y_2 \ar[ll] \ar[from=uu, crossing over, "s_2"' near end] & ,
+\end{tikzcd}
+\]
+tel que $s$ soit une équivalence faible argument par argument, \textit{i.e.} $s_0, s_1, s_2, s_3 \in W$. Il est équivalent de demander que pour \textit{tout} diagramme commutatif à flèches verticales des équivalences faibles
+\[
+\begin{tikzcd}
+X_1 \ar[r] \ar[d] & X_0 \ar[d] & X_2 \ar[l] \ar[d] \\
+Y_1 \ar[r] & Y_0 & Y_2 \ar[l]
+\end{tikzcd}
+\]
+tel que $Y_1 \longrightarrow Y_0$ soit une fibration, et $Y_0$, $Y_2$ des objets fibrants, la flèche canonique $X_3 \longrightarrow Y_1 \times_{Y_0} Y_2$ soit une équivalence faible.
+
+Supposons maintenant que la catégorie de modèles $\mathcal{M}$ soit ponctuée, autrement dit qu'elle admette un objet $*$ à la fois initial et final, et soit $X$ un objet fibrant de $\mathcal{M}$. Choisissons une décomposition de la flèche $* \longrightarrow X$, en une équivalence faible suivie d'une fibration
+\[
+* \longrightarrow C \longrightarrow X \quad ,
+\]
+et formons le carré cartésien
+% foot: Version 7 octobre 2010
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+C \ar[d] & \Omega X \ar[l] \ar[d] \\
+X & * \ar[l]
+\end{tikzcd} \quad ,
+\]
+où par définition $\Omega X = C \times_X *$ est l'\textit{espace des lacets} de $X$. Ce carré est $W$-cartésien. Par ailleurs, il est isomorphe dans $\uHom(\bDelta_1 \times \bDelta_1,\ \mathcal{M}W^{-1})$ au carré trivial
+\[
+\begin{tikzcd}
+* \ar[d] & \Omega X \ar[l] \ar[d] \\
+X & * \ar[l]
+\end{tikzcd} \quad .
+\]
+
+Néanmoins, ce dernier n'est \textit{pas} en général $W$-cartésien. En effet, s'il l'était, l'unique flèche $s_3 : \Omega X \longrightarrow \Omega X$ de $\mathcal{M}$ rendant commutatif le cube
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& * \ar[dl] \ar[dd] & & \Omega X \ar[ll] \ar[dl] \ar[dd, dotted, "s_3"] \\
+X \ar[dd, "\parallel"'] & & * \ar[ll, crossing over] & \\ % Audit resolved: vertical identity mark on X; see corrections.csv, PDF leaf 10.
+& C \ar[dl] & & \Omega X \ar[ll] \ar[dl] \\
+X & & * \ar[ll] \ar[from=uu, crossing over] &
+\end{tikzcd}
+\]
+serait une équivalence faible. Or, comme la flèche $s_3$ se factorise par $* \times_X * \simeq *$, cela impliquerait que $\Omega X \to *$ est une équivalence faible. Cette condition est très restrictive. Si, par exemple, $\mathcal{M}$ est la catégorie de modèles des espaces topologiques pointés, et $X$ un CW-complexe pointé, elle équivaut à la contractibilité de la composante connexe de $X$ contenant le point base. De même, si $\mathcal{M}$ est la catégorie de modèles des complexes d'une catégorie abélienne de Grothendieck et $X$ un complexe, elle signifie que $X$ est acyclique.
+
+Des considérations analogues montrent que les carrés $h$-cartésiens de $\mathcal{M}W^{-1}$, définis dans la section 2 comme étant les carrés commutatifs de $\mathcal{M}W^{-1}$ qui sont isomorphes dans $\uHom(\bDelta_1 \times \bDelta_1,\ \mathcal{M}W^{-1})$ à un carré $W$-cartésien, ne satisfont pas à toutes les conditions de Cart (3) et Cart (5) de la section 1. En effet, supposons toujours que $\mathcal{M}$ soit ponctuée, et gardons les notations ci-dessus. Considérons le diagramme commutatif dans $\mathcal{M}W^{-1}$
+\[
+\begin{tikzcd}
+* \ar[d] & \Omega X \ar[l] \ar[d] & \Omega X \ar[l, "*_{\Omega X}"'] \ar[d] \\
+X & * \ar[l] & * \ar[l]
+\end{tikzcd} \quad ,
+\]
+où $*_{\Omega X}$ désigne l'unique endomorphisme de $\Omega X$ se factorisant par $*$. Il résulte de ce qui précède que le carré de gauche et le carré composé sont $h$-cartésiens. En revanche, le carré de droite ne l'est pas en général. En effet, si ce carré était isomorphe dans $\uHom(\bDelta_1 \times \bDelta_1,\ \mathcal{M}W^{-1})$ à un carré $W$-cartésien, la flèche $*_{\Omega X}$ serait un isomorphisme
+% foot: Version 7 octobre 2010
+
+% ---- from Der-ChXIV-07-10-10_p011-011.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XIV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 octobre 2010
+de $\cM W^{-1}$, donc une équivalence faible de $\cM$, ce qui impliquerait les mêmes conditions très restrictives que ci-dessus. Ainsi l'une des implications de l'axiome Cart 3 n'est pas satisfaite.
+
+De même le cube commutatif dans $\cM W^{-1}$
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & * \arrow[dl] \arrow[dd] & & \Omega X \arrow[ll] \arrow[dl] \arrow[dd, "*_{\Omega X}"] \\
+X \arrow[dd, "\shortparallel"'] & & * \arrow[ll, crossing over] & \\
+ & * \arrow[dl] & & \Omega X \arrow[ll] \arrow[dl] \\
+X & & * \arrow[ll] \arrow[from=uu, crossing over] & \mathllap{,}
+\end{tikzcd}
+\]
+dont les faces horizontales sont $h$-cartésiennes, montre que la condition $(b)$ de l'axiome Cart (5) n'est pas satisfaite en général.
+\end{document}

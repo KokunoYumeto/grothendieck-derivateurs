@@ -1,0 +1,1240 @@
+% macro conflict, first definition kept: \newcommand{\harp}{\mathrel{\leftharpoonup\mkern-6mu\relbar\mkern-6mu\rightharpoondown}}
+% macro conflict, first definition kept: \newcommand{\qpair}{\mathrel{\leftarrow\mkern-4mu\mapstochar\mkern-2mu\rightarrow}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+% Q-orthogonality arrows (half arrowheads = Q-orthogonal, full arrowheads = equality)
+\newcommand{\Qo}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}   % lower half-head left, upper half-head right
+\newcommand{\Qorev}{\mathrel{\leftharpoonup\joinrel\relbar\joinrel\rightharpoondown}} % mirrored form of (1.2)
+\newcommand{\Qog}{\mathrel{\leftarrow\joinrel\relbar\joinrel\rightharpoonup}}         % full head left
+\newcommand{\Qod}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightarrow}}       % full head right
+\newcommand{\Qogd}{\mathrel{\leftarrow\joinrel\relbar\joinrel\rightarrow}}            % full heads both sides
+% the same arrows crossed by a vertical bar (Quillen factorisation)
+\newcommand{\Qx}[2]{\mathrel{#1\joinrel\mapstochar#2}}
+% crossed by two vertical bars (functorial factorisation)
+\newcommand{\Qxx}[2]{\mathrel{#1\joinrel\mapstochar\mkern2mu\mapstochar#2}}
+% Q-closure marks
+\newcommand{\tld}{\tilde{}}   % left Q-closure mark (small tilde in exponent)
+\newcommand{\rcl}{\bar{}}       % right Q-closure mark (horizontal bar in exponent)
+\newcommand{\Qorth}{\mathrel{\leftharpoondown\mkern-6mu\relbar\mkern-6mu\rightharpoonup}}
+\newcommand{\Qorthx}{\mathrel{\leftharpoondown\mkern-9mu{+}\mkern-9mu\rightharpoonup}}
+\newcommand{\Qorthxfull}{\mathrel{\leftharpoondown\mkern-9mu{+}\mkern-9mu\rightarrow}}
+\newcommand{\Qcouple}{\mathrel{\leftarrow\mkern-9mu{+}\mkern-9mu\rightarrow}}
+\newcommand{\clos}{\longleftrightarrow}
+\newcommand{\fl}{\longrightarrow}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\cc}{\mathrm{c}}
+\newcommand{\ddarr}{\mathrel{\twoheadleftarrow\joinrel\twoheadrightarrow}}
+\newcommand{\harp}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}
+\newcommand{\deq}{\overset{\text{déf}}{=}}
+\newcommand{\Mono}{\mathrm{Mono}}
+\newcommand{\Filt}{\mathrm{Filt}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\qpair}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Diag}{\mathrm{Diag}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Qs}{\tilde{\ }}
+\newcommand{\fact}{\mathrel{\leftarrow\mkern-11mu\twoheadrightarrow}}
+\newcommand{\limind}{\varinjlim}
+\newcommand{\limproj}{\varprojlim}
+\newcommand{\Is}{\mathrm{Is}}
+\begin{document}
+% ---- from der-ch19_p001-005.tex
+\printedpage{(non numérotée)}
+% head: (none; title page)
+
+\begin{center}
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\bigskip\bigskip
+
+\textbf{Chapitre XIX}
+
+\medskip
+
+\textbf{Modèles (4)}
+\end{center}
+
+\newpage
+
+\printedpage{(non numérotée)}
+% head: (none; editorial note)
+
+Ce texte a été déchiffré et transcrit en \LaTeXe\ par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Seules quelques corrections mineures évidentes ont été effectuées. Pour les rares ajouts ou commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{georges.maltsiniotis@imj-prg.fr}
+
+\hfill G. Maltsiniotis\hspace*{2cm}
+
+\newpage
+
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 1}
+
+\section*{1\quad Rappels sur les couples de Quillen (couples de Quillen spéciaux)}
+
+Je vais reprendre les notations et la terminologie pour les relations de LLP \texttt{[left lifting property]} et RLP \texttt{[right lifting property]} de Quillen. J'écris (pour une catégorie $\mathcal{M}$, et $\Phi, \Psi \subset \mathrm{Fl}(\mathcal{M})$)
+\[
+\Phi \Qo \Psi \qquad \iff \qquad (\Phi \subset \Psi^{*}) \qquad \iff \qquad (\Psi \subset \Phi_{*})\ ,
+\tag*{(1.1)}
+\]
+i.e. $\Phi$ a la LLP par rapport à $\Psi$, ou encore $\Psi$ la RLP par rapport à $\Phi$. Je dis aussi que $(\Phi, \Psi)$ est un \textit{couple} Q-\textit{orthogonal.} Cette notion n'est pas symétrique, mais je me permets parfois (exceptionnellement) d'écrire
+\[
+\Psi \Qorev \Phi \qquad \text{comme synonyme de} \qquad \Phi \Qo \Psi\ .
+\tag*{(1.2)}
+\]
+$\Phi$ est Q-\textit{orthogonal à gauche} de $\Psi$, $\Psi$ est Q-\textit{orthogonal à droite} à $\Phi$, et la Q-orthogonalité à gauche (resp. à droite) est notée par le demi-sommet de flèche pointant vers le bas (resp. vers le haut). J'écris
+\[
+\left\{
+\begin{aligned}
+&\Phi \quad \Qog \quad \Psi \quad \iff \quad (\Phi = \Psi^{*})\\
+&\Phi \quad \Qod \quad \Psi \quad \iff \quad (\Psi = \Phi_{*})\\
+&\Phi \quad \Qogd \quad \Psi \quad \iff \quad (\Phi = \Psi^{*} \ \text{ et } \ \Psi = \Phi_{*})\ .
+\end{aligned}
+\right.
+\tag*{(1.3)}
+\]
+Ces trois cas de Q-orthogonalité renforcée sont donc ceux où on a de plus $\Phi = \Phi^{\tld}$
+resp. $\Psi = \Psi^{\rcl}$ resp. $\Phi = \Phi^{\tld}$ et $\Psi = \Psi^{\rcl}$. On dit que $\Phi$ est Q-\textit{clos à gauche} si $\Phi = \Phi^{\tld}$, que % reading resolved: DER_XIX_corrections.csv
+$\Psi$ est Q-\textit{clos à droite} si $\Psi = \Psi^{\rcl}$, que le couple Q-orthogonal $(\Phi, \Psi)$ est Q-\textit{clos à gauche} (resp. \textit{à droite}) si $\Phi$ (resp. $\Psi$) est Q-clos à gauche (resp. à droite). On dit qu'il est Q-\textit{clos} si les deux conditions % reading resolved: DER_XIX_corrections.csv
+
+\msp{page 2}
+
+sont satisfaites simultanément. Quand aucune confusion n'est à craindre, il m'arrivera de dire simplement que $\Phi$ est Q-clos, ou que $\Psi$ est Q-clos, sans spécifier si c'est à gauche où % [sic] où -> ou, conjunction "or" intended
+à droite. Mais pour un couple Q-orthogonal $(\Phi, \Psi)$ (ou je préfère l'écrire $\Phi \Qo \Psi$), Q-clos % [sic] ou -> où, relative adverb intended
+signifie toujours Q-clos à gauche et à droite.
+
+Quand un couple Q-orthogonal $\Phi \Qo \Psi$ a la propriété de factorisation de Quillen, je l'indique par la barre verticale croisant l'horizontale, ainsi
+\[
+\Phi \ \Qx{\leftharpoondown}{\rightharpoonup} \ \Psi\ ,
+\tag*{(1.4)}
+\]
+et on définit de même le sens des graphismes
+\[
+\left\{
+\begin{aligned}
+&\Phi \quad \Qx{\leftharpoondown}{\rightharpoonup} \quad \Psi\\
+&\Phi \quad \Qx{\leftarrow}{\rightharpoonup} \quad \Psi\\
+&\Phi \quad \Qx{\leftharpoondown}{\rightarrow} \quad \Psi\\
+&\Phi \quad \Qx{\leftarrow}{\rightarrow} \quad \Psi\ .
+\end{aligned}
+\right.
+\tag*{(1.3)} % [sic] (1.3) -> (1.5), number already used above and (1.5) is missing
+\]
+
+\newpage
+
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+Un couple Q-\textit{orthogonal} Q-\textit{factorisant} $\Phi \Qx{\leftharpoondown}{\rightharpoonup} \Psi$ est appelé un \textit{précouple de Quillen.} S'il est de plus Q-clos, i.e. si on a $\Phi \Qx{\leftarrow}{\rightarrow} \Psi$, on dit que c'est un \textit{couple de Quillen.}
+
+$\Phi$ est dit Q-\textit{saturé à gauche} s'il contient les isomorphismes et est stable par cochangement de base, par (petite) composition transfinie, et par facteurs directs. Dualement $\Psi$ est dit Q-\textit{saturé à droite} s'il
+
+\msp{page 3}
+
+contient les isomorphismes, est stable par changement de base, par composition transfinie, et par facteurs directs. Si $\Phi$ est Q-saturé à gauche, il est stable par (petites) sommes directes, i.e. si les $f_i : A_i \longrightarrow B_i$ ($i \in I$, $I$ petit) sont dans $\Phi$, $f = \coprod f_i : \coprod A_i \longrightarrow \coprod B_i$ aussi, et de même pour (petites) sommes amalgamées finies ou infinies (quand on se place dans un $A\backslash\mathcal{M}$ au lieu de $\mathcal{M}$). On a l'énoncé dual pour $\Psi$, quand $\Psi$ est Q-saturé à droite.
+
+En fait, il y a des notions plus faibles de Q-saturation que celle que je viens de dire : Q-\textit{saturation simple} (à gauche : $\Phi$ contient les isomorphismes, stable par composition binaire, par cochangement de base), Q-\textit{saturation transfinie} (on exige de plus stabilité par composition transfinie), enfin Q-\textit{saturation totale,} ou Q-saturation tout court (quand on exige de plus la stabilité par facteurs directs). On a les implications
+\[
+\left\{
+\begin{aligned}
+&\text{Q-clos à gauche}\\
+&\Downarrow\\
+&\text{Q-saturé (total)}\\
+&\Downarrow\\
+&\text{Q-saturé transfini}\\
+&\Downarrow\\
+&\text{Q-saturé simple.}
+\end{aligned}
+\right.
+\tag*{(1.6)}
+\]
+Pour $\Phi \subset \mathrm{Fl}(\mathcal{M})$, on a sa Q-clôture (à gauche) $\Phi^{\tld}$ (qui est la plus petite partie Q-close à gauche de $\mathrm{Fl}(\mathcal{M})$ contenant $\Phi$) et de même son Q-saturé (total) à gauche, son Q-saturé transfini, son Q-saturé simple
+
+\msp{page 4}
+
+avec les inclusions tautologiques
+\[
+\Phi \ \subset \
+\underbrace{\Phi'}_{\substack{\text{Q-saturé}\\ \text{à gauche simple}}}
+\ \subset \
+\underbrace{\Phi''}_{\substack{\text{Q-saturé}\\ \text{à gauche transfini}}}
+\ \subset \
+\underbrace{\Phi'''}_{\substack{\text{Q-saturé}\\ \text{à gauche total}}}
+\ \subset \
+\underbrace{\Phi^{\tld}}_{\substack{\text{Q-clôture}\\ \text{à gauche}}}
+\ ,
+\tag*{(1.7)}
+\]
+et dualement pour $\Psi$. Entre $\Phi$ et $\Phi'$ il y a encore un $\Phi'_0$,
+\[
+\Phi \ \subset \ \Phi'_0 \ \subset \ \Phi'\ ,
+\tag*{(1.8)}
+\]
+qui est le Q-\textit{saturé pour cochangement de base} (contenant aussi, par définition, tous les isomorphismes). Pour construire tous ces saturés, on procède ainsi :
+
+\newpage
+
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\begin{enumerate}[leftmargin=*]
+\item[1)] $\Phi'_0 \quad = \quad$ ensemble des flèches $i : A \longrightarrow B$ s'insérant dans un carré cocartésien
+\[
+\begin{tikzcd}
+A_0 \arrow[r, "i_0"] \arrow[d] & B_0 \arrow[d]\\
+A \arrow[r, "i"] & B\ ,
+\end{tikzcd}
+\]
+avec $i_0 \in \Phi$ ou $i_0$ une identité (auquel cas on trouve pour $i$ les isomorphismes).
+
+\item[2)] $\Phi' \quad = \quad$ ensemble des flèches composées multiples
+\[
+i_n \, i_{n-1} \ \cdots \ i_1\ ,
+\]
+avec $i_\alpha \in \Phi'_0$.
+
+\item[3)] $\Phi'' \quad = \quad$ ensemble des composés transfinis de flèches $\in \Phi'_0$.
+\end{enumerate}
+
+On a envie de poser
+\[
+\Phi''' \ = \ \Phi^{\prime\prime\natural} \ \overset{\text{déf}}{=} \ \text{ensemble des facteurs directs d'éléments de } \Phi'',
+\]
+et c'est un fait que $\Phi^{\prime\prime\natural} \subset \Phi'''$ trivialement, mais il n'est par clair en général qu'on ait % [sic] par -> pas, typo
+\msp{page 5}
+égalité, faute de pouvoir montrer que $\Phi^{\prime\prime\natural}$ est stable, non seulement par facteurs directs, mais aussi par cochangement de base et par composition transfinie. Cependant, rappelons :
+
+\textbf{Théorème 1.1.} \textit{Supposons $\mathcal{M}$ stable par petites $\varinjlim$ , et que ses éléments soient accessibles. Supposons de plus que $\Phi$ soit petit, plus généralement, qu'il existe une partie $\Phi_0 \subset \Phi$ petite telle que $\Phi \subset \Phi_0{}^{\tld}$, donc}
+\[
+\Psi \ \overset{\text{déf}}{=} \ \Phi_{*} \ = \ (\Phi_0)_{*} \qquad \text{\footnotemark}.
+\tag*{(1.1.1)} % footnote mark printed as superscript (1)
+\]
+\footnotetext{\textbf{N.B.} On a donc $\Phi \Qod \Psi$, a fortiori $\Phi_0 \Qod \Psi$.}
+\textit{Sous ces conditions, si $\Phi''_0$ désigne le \textup{Q}-saturé à gauche transfini de $\Phi_0$, alors on a $\Phi''_0 \Qx{\leftharpoondown}{\rightarrow} \Psi$, i.e. toute flèche $f$ de $\mathcal{M}$ se factorise en $f = pi$, avec $i \in \Phi''_0$, $p \in \Psi$\,\footnote{Il y a même factorisation \textit{fonctorielle} en $f$, propriété qui mérite une notation, p.ex. $\Phi''_0 \Qxx{\leftharpoondown}{\rightarrow} \Psi$.}. A fortiori, si $\Phi''$ désigne le \textup{Q}-saturé à gauche transfini de $\Phi$, on a} % footnote mark printed as superscript (2)
+\[
+\Phi'' \ \Qx{\leftharpoondown}{\rightarrow} \ \Psi\ .
+\]
+
+\bigskip
+
+\textbf{Corollaire 1.2.} \textit{Sous les conditions du théorème, on a}
+\[
+\Phi''' \ \text{(Q-saturé total à gauche de $\Phi$)} \ = \
+\underbrace{\Phi^{\prime\prime\natural}}_{\substack{\text{ensemble des}\\ \text{facteurs directs d'éléments}\\ \text{de $\Phi''$}}}
+\ = \ \Phi^{\tld}\ .
+\tag*{(1.2.1)}
+\]
+\textit{Plus généralement (en apparence seulement!), si $\Phi_1$ est une partie de \textup{$\mathrm{Fl}(\mathcal{M})$} qui est \textup{Q}-saturée à gauche transfinie, et telle que}
+\[
+\Phi_0 \ \subset \ \Phi_1 \ \subset \ \Phi^{\tld} \ = \ \Phi_0{}^{\tld}\ ,
+\]
+
+% ---- from der-ch19_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 6}
+\textit{alors}
+\begin{enumerate}[label={}]
+\item[a)] \textit{on a $\Phi_1 \Qorthxfull \Psi$ et} % reading resolved: DER_XIX_corrections.csv
+\item[b)] $\Phi_1^{\sim} = \Phi^{\sim} = \Phi_1^{\natural}$.
+\end{enumerate}
+Ce corollaire résulte du théorème en vertu de XV prop. 4.2, dont je rappelle ici l'essentiel :
+
+\textbf{Proposition 1.3.} \textit{Soit $\Phi \Qorthx \Psi$. Alors $\Phi^{\sim} = \Phi^{\natural} = \Psi^{*}$, et dualement on a $\Psi^{-} = \Psi^{\natural} = \Phi_{*}$.}
+
+Notons aussi, dans cet ordre d'idées :
+
+\textbf{Corollaire 1.4.} \textit{Soit $\Phi \Qorth \Psi$, et soit $W$ une partie quelconque de $\mathrm{Fl}(\mathcal{M})$. Pour qu'on ait $\Phi \subset W^{\natural}$, il suffit que toute flèche de $\mathcal{M}$ se factorise en $f = pi$, avec $i \in W$, $p \in \Psi$. (Et cette condition est évidemment aussi nécessaire si $\Phi \Qorthx \Psi$, et $W$ stable par facteurs directs.)}
+
+On dit qu'une partie $\Phi_0$ de $\Phi$ est Q-\textit{génératrice à gauche} de $\Phi$ si elle satisfait la condition
+\[
+\Phi \ \subset \Phi_0^{\sim}\ , \tag*{(1.9)}
+\]
+et on dit que $\Phi$ est une partie \textit{spéciale} si $\Phi$ admet une \textit{petite} partie Q-génératrice à gauche. Si $\Phi_0 \subset \Phi$ est petit, et si $\mathcal{M}$ satisfait les conditions du théorème 1.1, alors $\Phi_0$ est une partie Q-génératrice (à gauche) si et seulement si son Q-saturé total (à gauche) $\Phi_0'''$ contient $\Phi$ (condition en apparence plus forte que $\Phi \subset \Phi_0^{\sim}$, puisque en général on a $\Phi_0''' \subset \Phi_0^{\sim}$). Cela signifie donc aussi, via 1.2, que tout \msp{page 7} élément de $\Phi$ est facteur direct d'un composé transfini de flèches déduites de
+\[
+\Phi_0 \cup (\text{Identités de } \mathcal{M})
+\]
+par cochangement de base.
+
+Je rappelle encore le sorite $\pm$ tautologique des foncteurs adjoints :
+
+\textbf{Proposition 1.5.} \textit{Soit}
+\[
+\begin{tikzcd}
+\mathcal{M}' \arrow[r, shift right=1, "v^{*}"'] & \mathcal{M} \arrow[l, shift right=1, "v_{!}"']
+\end{tikzcd}
+\tag*{(1.5.1)}
+\]
+\textit{un couple de foncteurs adjoints, soient}
+\[
+\Phi \ \subset\ \mathrm{Fl}(\mathcal{M})\ , \qquad \Psi' \ \subset\ \mathrm{Fl}(\mathcal{M}')\ ,
+\]
+\textit{alors on a}
+\[
+(v_{!}(\Phi) \Qorth \Psi') \qquad \Longleftrightarrow \qquad (\Phi \Qorth v^{*}(\Psi'))\ . \tag*{(1.5.2)}
+\]
+
+\textbf{Corollaire 1.6.} \textit{Pour toute partie $\Phi$ de} $\mathrm{Fl}(\mathcal{M})$,
+\[
+(v_{!}(\Phi))_{*} \ =\ (v^{*})^{-1}(\Phi_{*})\ . \tag*{(1.6.1)}
+\]
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+En effet, appliquant 1.5 à $\Phi$ et à $\{f'\}$, où $f' \in \mathrm{Fl}(\mathcal{M}')$, on trouve
+\[
+f' \in (v_{!}(\Phi))_{*} \qquad \Longleftrightarrow \qquad v^{*}(f') \in \Phi_{*}\ ,
+\]
+ce qui équivaut à (1.6.1). Dualement :
+
+\textbf{Corollaire 1.7.} \textit{Pour toute partie $\Psi'$ de $\mathcal{M}'$, on a}
+\[
+(v^{*}(\Psi'))^{*} \ =\ (v_{!})^{-1}(\Psi'^{*}). \tag*{(1.7.1)}
+\]
+
+En effet, si $f \in \mathrm{Fl}(\mathcal{M})$, on a par (1.5.2)
+\[
+f \in (v^{*}(\Psi'))^{*} \qquad \Longleftrightarrow \qquad v_{!}(f) \in \Psi^{*}\ . % [sic] \Psi^{*} -> \Psi'^{*}, cf. (1.7.1)
+\]
+\textsuperscript{(}\footnote[3]{donner ici 1.9 page 9.}\textsuperscript{)}.
+
+\msp{page 8}
+Un couple Q-orthogonal $\Phi \Qorth \Psi$ est dit \textit{spécial} s'il satisfait les conditions suivantes.
+\[
+\left\{
+\begin{array}{ll}
+\text{a)} & \parbox[t]{0.7\textwidth}{$\mathcal{M}$ est stable par petites $\varinjlim$ , les objets de $\mathcal{M}$ sont accessibles. (On dit alors que $\mathcal{M}$ est “spéciale”.)} \\[3ex]
+\text{b)} & \text{Le couple est clos : } \Phi \clos \Psi. \\[1ex]
+\text{c)} & \Phi \text{ est \textit{spéciale.}}
+\end{array}
+\right.
+\tag*{(1.10)}
+\]
+Cela implique donc, par 1.1, que $\Phi \Qcouple \Psi$ est un couple de Quillen. Si $\mathcal{M}$ satisfait a), les couples Q-orthogonaux spéciaux dans $\mathcal{M}$, ou encore les couples de Quillen spéciaux, correspondent donc biunivoquement aux parties $\Phi$ de $\mathrm{Fl}(\mathcal{M})$ qui sont \textit{spéciales} et closes à gauche (ou ce qui revient au même, Q-saturées à gauche), en associant à une telle $\Phi$ le couple $\Phi \Qcouple \Phi_{*}$.
+
+Ceci posé :
+
+\marginpar{$\Vert$}% double vertical bar printed in the left margin beside Corollaire 1.8
+\textbf{Corollaire 1.8.} \textit{Supposons que $\mathcal{M}$, $\mathcal{M}'$ satisfassent la condition} a) \textit{de} (1.10), \textit{et soit $(\Phi, \Psi)$ un couple de Quillen spécial dans $\mathcal{M}$. Alors $\Bigl(\Phi' = v_{!}(\Phi)^{\sim}, \Psi' = (v^{*})^{-1}(\Psi)\Bigr)$ est un couple de Quillen spécial dans $\mathcal{M}'$.}
+
+En effet, par le corollaire 1.6 on a
+\[
+\Phi'_{*} \ =\ (v_{!}(\Phi))_{*} \ =\ (v^{*})^{-1}(\Psi) \ =\ \Psi'\ ,
+\]
+donc $\Phi' \clos \Psi'$. Il reste à prouver que $\Phi'$ est spécial. Soit $\Phi_0$ une partie petite de $\Phi$ telle que $\Phi \subset \Phi_0^{\sim}$, posons $\Phi'_0 \ =\ v_{!}(\Phi_0) \subset \Phi'$, \msp{page 9} il suffit de voir qu'on a
+\[
+v_{!}(\Phi) \ \subset\ v_{!}(\Phi_0)^{\sim}\ , \tag*{($*$)}
+\]
+d'où résultera qu'on a $\Phi' \overset{\text{déf}}{=} (v_{!}(\Phi))^{\sim} \subset v_{!}(\Phi_0)^{\sim}$. Mais on a
+\[
+v_{!}(\Phi_0)^{\sim} \ =\ (v_{!}(\Phi_0)_{*})^{*}\ ,
+\]
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+et
+\[
+v_{!}(\Phi_0)_{*} \ =\ (v^{*})^{-1}(\underbrace{\Phi_{0\,*}}_{\Psi}) \ =\ (v^{*})^{-1}(\Psi) \ \overset{\text{déf}}{=}\ \Psi'\ ,
+\]
+donc
+\[
+v_{!}(\Phi_0)^{\sim} \ =\ \Psi'^{*} \ =\ \Phi' \ =\ v_{!}(\Phi)^{\sim}\ ,
+\]
+d'où ($*$). Cet argument ne fait pas appel à l'hypothèse “spéciale” sur $\mathcal{M}$, et peut s'expliciter en le
+
+\textbf{Corollaire 1.9.} \textsuperscript{(}\footnote[4]{devrait passer avant 1.8.}\textsuperscript{)} \textit{Sous les conditions générales de} 1.5 \textit{($v_{!} : \mathcal{M} \fl \mathcal{M}'$ étant un foncteur admettant un adjoint à droite), soient $\Phi_0$, $\Phi$ deux parties de} $\mathrm{Fl}(\mathcal{M})$ \textit{telles que $\Phi \subset \Phi_0^{\sim}$ (ou ce qui revient au même, $\Phi^{\sim} \subset \Phi_0^{\sim}$). Alors $v_{!}(\Phi) \subset v_{!}(\Phi_0)^{\sim}$, i.e. $v_{!}(\Phi)^{\sim} \subset v_{!}(\Phi_0)^{\sim}$.}
+
+En effet, cette relation équivaut aussi à $v_{!}(\Phi_0)_{*} \ \subset\ v_{!}(\Phi)_{*}$, c'est-à-dire (par 1.6) $(v^{*})^{-1}(\Phi_{0\,*}) \ \subset\ (v^{*})^{-1}(\Phi_{*})$, et est impliqué par $\Phi_{0\,*} \ \subset\ \Phi_{*}$. Cette dernière d'autre part équivaut à l'hypothèse $\Phi^{\sim} \subset \Phi_0^{\sim}$, q.e.d.
+
+\msp{page 10}
+Si $\Psi$ est une partie de $\mathrm{Fl}(\mathcal{M})$, on en déduit pour toute $I$ dans Cat une partie
+\[
+\left\{
+\begin{array}{l}
+\Psi(I) \subset \mathrm{Fl}(\mathcal{M}(I)), \quad \text{avec}\ \ \mathcal{M}(I) = \underline{\mathrm{Hom}}(I^{\circ}, \mathcal{M})\ , \\[1ex]
+f \in \Psi(I) \iff f(i) \in \Psi \ \ \forall\, i \in \mathrm{Ob}\, I\ .
+\end{array}
+\right.
+\tag*{(1.11)}
+\]
+Si on introduit la catégorie discrète $I_0$ sous-jacente à $\mathrm{Ob}\, I$, et le foncteur canonique
+\[
+v_I = v \ :\ I_0 \fl I\ , \tag*{(1.12)}
+\]
+on trouve un couple de foncteurs adjoints
+\[
+\begin{tikzcd}[row sep=small]
+\mathcal{M}(I) \arrow[r, shift right=1, "v^{*}"'] & \mathcal{M}(I_0) \arrow[l, shift right=1, "v_{!}"'] \\
+( & ) \arrow[l, dotted, "v_{*}"]
+\end{tikzcd}
+\ \simeq\ \mathcal{M}^{I_0}\ ,
+\tag*{(1.13)}
+\]
+et on a
+\[
+\Psi(I) \ =\ (v^{*})^{-1}(\Psi(I_0))\ .
+\]
+Supposons maintenant qu'on ait
+\[
+\left\{
+\begin{array}{rcl}
+\Psi & = & \Phi_{*} \\[1ex]
+\text{d'où}\ \ \Psi(I_0) & = & \Phi(I_0)_{*}
+\end{array}
+\right.
+\tag*{(1.14)}
+\]
+(vérification immédiate), on conclut alors par 1.6
+\[
+\Psi(I) \ =\ (v_{!}(\Phi(I_0)))_{*} \ =\ (\Phi\langle I\rangle)_{*}\ , \tag*{(1.15)}
+\]
+avec
+\[
+\Phi\langle I\rangle \ \overset{\text{déf}}{=}\ v_{!}(\Phi(I_0))^{\sim} \ =\ \Psi(I)^{*}\ . \tag*{(1.16)}
+\]
+Si on a un foncteur
+\[
+u \ :\ I \fl I'\ , \tag*{(1.17)}
+\]
+d'où un triple de foncteurs adjoints
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 11}
+\[
+\left\{
+\begin{tikzcd}[column sep=large]
+\mathcal{M}(I) \arrow[r, shift left=3, "u_{!}"] \arrow[r, shift right=3, "u_{*}"] & \mathcal{M}(I') \arrow[l, "u^{*}"']
+\end{tikzcd}
+\right.
+,
+\tag*{(1.18)}
+\]
+on aura de façon $\pm$ tautologique
+\[
+\left\{
+\begin{array}{rcl}
+u_{!}(\Phi\langle I\rangle) & \subset & \Phi\langle I'\rangle \\
+u^{*}(\Psi(I')) & \subset & \Psi(I)\ .
+\end{array}
+\right.
+\tag*{(1.19)}
+\]
+Le corollaire 1.8 donne :
+
+\textbf{Proposition 1.10.} \textit{Supposons que $\Phi \Qcouple \Psi$ soit un couple de Quillen} spécial \textit{dans $\mathcal{M}$, i.e. de la forme $(\Phi, \Phi_{*})$, avec $\Phi$ partie Q-close à gauche spéciale dans $\mathcal{M}$ ($\mathcal{M}$ satisfaisant la condition} (1.10. a))\textit{. Alors pour toute $I$ dans} Cat, \textit{$(\Phi\langle I\rangle, \Psi(I))$ est un couple spécial dans $\mathcal{M}(I)$, en particulier il satisfait au théorème de factorisation.}
+
+Considérons la construction duale, qui nous fait introduire, à partir d'un couple $\Phi \clos \Psi$ dans $\mathcal{M}$, le couple
+\[
+\Phi(I) \ \clos\ \Psi[I]\ , \tag*{(1.20)}
+\]
+où $\Phi(I)$ est défini par la formule générale (1.11) (où $\Psi$ est remplacé par $\Phi$), et où $\Psi[I]$ est défini soit comme $\Phi(I)_{*}$, soit comme
+\[
+\Psi[I] \ =\ v_{*}(\Psi(I_0))^{-} \ =\ \Phi(I)_{*}\ . \tag*{(1.21)}
+\]
+
+\msp{page 12}
+On a alors, pour $u : I \fl I'$
+\[
+\left\{
+\begin{array}{rcl}
+u^{*}(\Phi(I')) & \subset & \Phi(I) \\
+u_{*}(\Psi[I]) & \subset & \Psi[I']\ .
+\end{array}
+\right.
+\tag*{(1.22)}
+\]
+Il se pose encore la question si le couple $(\Phi(I), \Psi[I])$ satisfait au théorème de factorisation, sous des hypothèses convenables sur $(\Phi, \Psi)$. Je peux seulement hasarder la
+
+\textbf{Question-conjecture 1.11.} \textit{Supposons que $(\Phi, \Psi)$ soit un couple de Quillen} spécial, \textit{en est-il de même de $(\Phi(I), \Psi[I])$ pour toute $I$ dans} (Cat) \textit{? En d'autres termes, si $\mathcal{M}$ est spéciale, condition} (1.10. a))\textit{, et si $\Phi$ est une partie Q-close à gauche} spéciale \textit{de $\mathcal{M}$, i.e. admettant une petite partie Q-génératrice, est-il vrai que pour toute $I$ dans} Cat, \textit{$\Phi(I)$ est également spéciale ? Je conjecture que oui, en faisant au besoin des hypothèses supplémentaires sur $\mathcal{M}$ (existence d'une filtration cardinale ?). P.ex. si $\Phi_0$ est Q-génératrice dans $\Phi$, et petite, alors $\Phi_0(I)$ est-elle Q-génératrice dans $\Phi(I)$ ?}
+
+\textbf{Proposition 1.12} \textsuperscript{(}\footnote[5]{cf. XVII 6.4 (p. 117), mais où les notations pour $\Phi\langle I\rangle$, $\Psi(I)$ sont inverses.}\textsuperscript{)}. \textit{Soit $\Phi \clos \Psi$ dans $\mathcal{M}$, soit $u : I \fl I'$ une flèche dans} Cat, \textit{d'où}
+\[
+\left\{
+\begin{tikzcd}[column sep=large]
+\mathcal{M}(I) \arrow[r, shift left=3, "u_{!}"] \arrow[r, shift right=3, "u_{*}"] & \mathcal{M}(I') \arrow[l, "u^{*}"']
+\end{tikzcd}
+\right.
+.
+\tag*{(1.12.1)}
+\]
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\textit{On a alors} (1.19), \textit{i.e.}
+\[
+\left\{
+\begin{array}{rcl}
+u_{!}(\Phi\langle I\rangle) & \subset & \Phi\langle I'\rangle \\
+u^{*}(\Psi(I')) & \subset & \Psi(I)\ ,
+\end{array}
+\right.
+\tag*{(1.13.1)}
+\]
+\textit{et de plus l'équivalence}
+\[
+u^{*}(\Phi(I')) \subset \Phi\langle I'\rangle \qquad \Longleftrightarrow \qquad u_{*}(\Psi(I)) \subset \Psi(I')\ . \tag*{(1.13.2)}
+\]
+\textit{Ces relations équivalentes sont satisfaites dans chacun des trois cas}~\textsuperscript{(}\footnote[6]{\textbf{N.B.} On a $1^{\circ} \Longrightarrow 3^{\circ}$, $2^{\circ} \Longrightarrow 3^{\circ}$.}\textsuperscript{)} \textit{:}
+\begin{enumerate}[label={}]
+\item[1°)] \textit{$u$ est coétale.}
+\item[2°)] \textit{$I$ est discrète.}
+\item[3°)] $\forall\, i' \in \mathrm{Ob}\, I'$\textit{, toute composante connexe de $I/i'$ admet un objet final.}
+\end{enumerate}
+\msp{page 13}
+
+\section*{2\quad Rappels sur les triples de Quillen clos et les triples de Quillen spéciaux}
+
+Soit $(\mathcal{M}, W)$ une \textit{catégorie de modèles,} i.e. $\mathcal{M}$ munie d'un localiseur $W \subset \mathrm{Fl}(\mathcal{M})$, i.e. une partie satisfaisant
+\[
+\parbox{0.75\textwidth}{$W$ contient les isomorphismes, et si $f$, $g$ sont des flèches composables, si deux parmi $f$, $g$, $gf$ sont dans $W$, la troisième aussi \textit{(saturation faible).}}
+\tag*{(2.1)}
+\]
+Je rappelle que la donnée d'un \textit{triple de Quillen clos} $(W, C, F)$\textit{,} ou d'une structure de Quillen close, sur $\mathcal{M}$, ayant $W$ comme ensemble de quasi-isomorphismes, revient à la donnée de deux couples de Quillen
+\[
+C \Qcouple TF\ , \qquad TC \ \Qcouple\ F\ , \tag*{(2.2)}
+\]
+satisfaisant
+\[
+TC \ \subset\ C \cap W\ , \qquad TF \ \subset\ F \cap W\ , \tag*{(2.3)}
+\]
+plus une des trois conditions équivalentes :
+\[
+\left\{
+\begin{array}{lrcll}
+\text{a)} & TC & = & C \cap W & \qquad (\text{i.e. } C \cap W \subset TC) \\[1ex]
+\text{b)} & TF & = & F \cap W & \qquad (\text{i.e. } F \cap W \subset TF) \\[1ex]
+\text{c)} & W & = & TF \circ TC\ . &
+\end{array}
+\right.
+\tag*{(2.4)}
+\]
+Rappelons aussi que ceci implique que $W$ \textit{est fortement saturée,} et a fortiori que $W = W^{\natural}$, i.e. $W$ stable par facteurs directs.
+
+Rappelons aussi qu'en vertu de (1.4), on a :
+
+% ---- from der-ch19_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 14}
+
+\begin{itemize}[leftmargin=4em]
+\item[(2.5)] Étant donnés les deux couples (2.2), avec $TC \subset C$ (équivalent à $TF \subset F$), pour qu'on ait la première relation (2.3), i.e. $TC \subset W$, il faut, et il suffit si $W = W^{\natural}$, que toute flèche $f$ de $\M$ (ou seulement toute flèche de $TC$) se factorise en $f = pi$, avec $i \in W$, $p \in F$. Dualement, pour qu'on ait $TF \subset W$, il faut et il suffit si $W = W^{\natural}$, que toute flèche $f$ de $\M$ (ou seulement toute flèche de $TF$) se factorise en $f = pi$, avec $i \in W$, $f \in C$. % [sic] i \in W, f \in C -> i \in C, p \in W (?), dual of the preceding factorisation with p \in F
+\end{itemize}
+
+On dit que la structure de Quillen $(W,C,F)$ est \textit{spéciale} si les deux couples de Quillen (2.3) sont spéciaux, i.e. si les conditions suivantes sont satisfaites.
+
+\begin{itemize}[leftmargin=4em]
+\item[(2.6)]
+\begin{itemize}
+\item[a)] $\M$ est stable par petites $\varinjlim$, et ses éléments sont accessibles ($\M$ “spéciale”).
+\item[b)] Il existe des \textit{petites} parties $C_0 \subset C$, $TC_0 \subset TC$ qui soient Q-génératrices à gauche, i.e. telles que l'on ait
+\[
+\left\{
+\begin{array}{rclcrclcrcl}
+C & \subset & C_0^{\sim}\ , & \text{i.e.} & C & = & C_0^{\sim}\ , & \text{i.e.} & TF & = & C_{0*}\ ;\\
+TC & \subset & (TC_0)^{\sim}\ , & \text{i.e.} & TC & = & (TC_0)^{\sim}\ , & \text{i.e.} & F & = & (TC_0)_*\ .
+\end{array}\right. % reading resolved: DER_XIX_corrections.csv
+\]
+\end{itemize}
+\end{itemize}
+
+Ainsi, la donnée d'un tel triple de Quillen \textit{spécial} dans $\M$, quand $\M$ satisfait (2.6. a), revient à la donnée des deux parties
+\msp{page 15}
+\[
+TC \ \subset\ C
+\tag*{(2.7)}
+\]
+de $\Fl(\M)$, satisfaisant les conditions :
+\[
+\left\{
+\begin{array}{ll}
+C,\ TC\ \text{“spéciales”} &
+\left\{\begin{array}{ll}
+\text{a)} & \text{$C$, $TC$ sont Q-closes à gauche.}\\[1ex]
+\text{b)} & \parbox[t]{0.45\textwidth}{$C$, $TC$ sont Q-engendrées à gauche par des \textit{petites} parties $C_0$, $TC_0$ de $C$, $TC$ respectivement.}
+\end{array}\right.\\[5ex]
+ & \quad\ \begin{array}{ll}
+\text{c)} & TC \subset W,\ TF \overset{\text{déf}}{=} C_* \subset W.\\[1ex]
+\text{d)} & \parbox[t]{0.45\textwidth}{On a l'une des trois conditions équivalentes supplémentaires de (2.4), i.e. :}\\[5ex]
+ & \begin{array}{lrcllrcl}
+\alpha) & TC & = & C \cap W\ , & \text{i.e.} & C \cap W & \subset & TC\ .\\
+\beta) & TF & = & F \cap W\ , & \text{i.e.} & F \cap W & \subset & TF\ .\\
+\gamma) & W & = & TF \circ TC\ . & & & &
+\end{array}
+\end{array}
+\end{array}\right.
+\tag*{(2.8)}
+\]
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\textbf{Proposition 2.1.} \textit{Soit}
+\[
+\begin{tikzcd}
+\M' \arrow[r, shift right, "v^*"'] & \M \arrow[l, shift right, "v_!"']
+\end{tikzcd}
+\tag*{(2.11)} % [sic] (2.11) -> (2.1.1), numbering sequence (2.1.2), (2.1.3), ...
+\]
+\textit{un couple de foncteurs adjoints, $\M$ étant muni d'une structure de Quillen close} $(W,C,F)$. \textit{Posons}
+\[
+\left\{
+\begin{array}{rcl}
+W' & = & (v^*)^{-1}(W)\\
+F' & = & (v^*)^{-1}(F)\\
+TF' & = & F' \cap W' \ = \ (v^*)^{-1}(TF)\\
+C' & = & v_!(C)^{\sim}\\
+TC' & = & v_!(TC)^{\sim}\ .
+\end{array}\right.
+\tag*{(2.1.2)}
+\]
+
+\begin{itemize}
+\item[1°)] \textit{On a alors}
+\[
+\left\{
+\begin{array}{rclcrcl}
+C' & \longleftrightarrow & TF'\ , & & TC' & \longleftrightarrow & F'\ ,\\
+TC' & \subset & C'\ , & & TF' & \subset & F'\ .
+\end{array}\right.
+\tag*{(2.1.3)}
+\]
+
+\textit{Pour que les données} (2.1.2) \textit{dans $\M'$ y correspondent à un triple de Quillen $(W',C',F')$, il faut et il suffit que les conditions suivantes soient satisfaites :}
+\msp{page 16}
+\[
+\left\{
+\begin{array}{ll}
+\text{a)} & \parbox[t]{0.7\textwidth}{\textit{Factorisation pour $C' \longleftrightarrow TF'$ et $TC' \longleftrightarrow F'$, i.e. les relations $C' \Qcouple TF'$ et $TC' \Qcouple F'$,}}\\[4ex]
+\text{b)} & TC' \subset W',
+\end{array}\right. % reading resolved: DER_XIX_corrections.csv
+\tag*{(2.1.4)}
+\]
+\textit{ou encore, au lieu de} b)\textit{, la condition équivalente} (en présence de a)) :
+\[
+\left\{
+\begin{array}{ll}
+\text{b$'$)} & \parbox[t]{0.7\textwidth}{\textit{Toute flèche $f'$ dans $\M'$ (non seulement $f' \in TC'$) se factorise en $f' = p'i'$, avec $i' \in W'$, $p' \in F'$.}}
+\end{array}\right.
+\tag*{(2.1.5)}
+\]
+\item[2°)] \textit{Supposons} (2.1.4. a) \textit{satisfaite (factorisation). Alors, pour que $(W',C',F')$ soit un triple de Quillen clos, il} suffit \textit{que l'on ait}
+\[
+\text{b$''$)}\qquad \boxed{\ v^*v_!(TC)\ \subset\ TC\ }\ ,
+\tag*{(2.1.6)}
+\]
+\textit{et que de plus on soit dans l'un des trois cas suivants :}
+\begin{itemize}
+\item[A)] \textit{$v^*$ admet un adjoint à droite $v_*$.}
+\item[B)] \textit{$v^*$ commute aux petites} $\varinjlim$\textit{, $(W,C,F)$ est spécial, et $\M'$ est spéciale, i.e. satisfait à la condition} (2.6. a).
+\item[C)] \textit{$v^*$ est pleinement fidèle, et $v^*v_!(F) \subset F$.}
+\end{itemize}
+\end{itemize}
+Notons tout de suite le
+
+\textbf{Corollaire 2.2.} \textit{Supposons que $(W,C,F)$ soit un triple de Quillen spécial, que $\M'$ soit spéciale, que $v^*$ commute aux petites} $\varinjlim$\textit{, enfin que l'on ait} (2.1.6)\textit{, i.e. $v^*v_!(TC) \subset TC$. Alors $(W',C',F')$ est un triple de Quillen spécial.}
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 17}
+En effet, en vertu du 2.1. 2°, cas B, pour voir que $(W',C',F')$ soit un triple de Quillen clos, il est à vérifier (2.1.6. b$''$). Mais cela résulte de 1.8, appliqué aux deux couples de Quillen spéciaux $(C,TF)$, $(TC,F)$ dans $\M$ : les couples $(C',TC')$ et $(TC',F')$ sont des couples de Quillen spéciaux, ce qui prouve en même temps que le triple $(W',C',F')$ est spécial, q.e.d. % [sic] (C',TC') -> (C',TF'), image of the couple (C,TF)
+
+Démontrons 2.1. Les premières deux relations (2.1.3) sont contenues dans 1.6, les relations $TC' \subset C'$, $TF' \subset F'$ sont tautologiques. Le critère (2.1.4) pour que $(W',C',F')$ soit un triple de Quillen clos, est contenu dans le rappel de la page 13, compte tenu que l'on sait déjà que $TF' = F' \cap W'$ (relation (2.4. b)). Que la condition (2.1.4. b), en présence de (2.1.4. a), soit équivalente à la condition (2.1.5. b$'$), est contenu dans la première assertion (2.5), en notant que l'on a $W' = W'^{\natural}$ (ce qui résulte de la définition de $W'$ et de $W = W^{\natural}$).
+
+Il reste à prouver 2°), i.e. que la condition b) est satisfaite moyennant a) et b$''$) (2.1.6) dans chacun des trois cas A), B), C).
+
+\textit{Cas A.} Par définition de $W' = (v^*)^{-1}(W)$, pour prouver que $TC' \subset W'$, il suffit de prouver
+\[
+v^*(TC')\ \subset\ W'\ ,  % [sic] W' -> W, v^*(TC') lies in M and W' = (v^*)^{-1}(W)
+\]
+et a fortiori, il suffit de prouver
+\[
+v^*(TC')\ \subset\ TC\ ,\qquad\quad \text{i.e. } v^*(TC') \harp F\ .
+\tag*{(2.1.7)} % reading resolved: DER_XIX_corrections.csv
+\]
+Or par 1.5, appliqué au couple de foncteurs
+\msp{page 18}
+adjoints $(v^*,v_*)$, cette relation équivaut à
+\[
+TC' \harp v_*(F)\ .
+\]
+Comme $TC' \overset{\text{déf}}{=} v_!(TC)^{\sim}$, ceci équivaut à
+\[
+v_!(TC) \harp v_*(F)\ ,
+\]
+ou encore (en réappliquant 1.5 à $(v_!(TC),F)$ au lieu de $(TC',F)$), à
+\[
+v^*v_!(TC) \harp F\ ,\qquad\quad \text{i.e. } v^*v_!(TC) \subset \underbrace{TC}_{=\,F^*}\ ,
+\]
+or c'est là l'hypothèse b$''$).
+
+\textit{Cas B.} Il suffit encore de prouver 2.1.7. Or, du fait que $v_!(TC)$ admet un petit ensemble Q-générateur à gauche, $v_!(TC)^{\sim}$ est la clôture de $v_!(TC)$ pour les opérations de cochangement de base, de composition transfinie, de facteurs directs. Comme $v^*$ commute à toutes ces opérations (comme il commute aux petites $\varinjlim$), et comme $TC$ dans $\Fl(\M)$ est stable par ces opérations, on voit donc que pour montrer que $v^*$ applique $v_!(TC)^{\sim}$ dans $TC$, il suffit de voir qu'il applique $v_!(TC)$ dans $TC$, ce qui est encore l'hypothèse b$''$).
+
+\textit{Cas C.} On va vérifier b) sous la forme équivalente b$'$). Soit donc $f' \in \Fl(\M')$, $f' : X' \longrightarrow Y'$,
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 19}
+posons
+\[
+f\ =\ v^*(f'),
+\]
+et factorisons $f$ en $pi$, avec $i \in TC$, $p \in F$, d'où
+\[
+v_!v^*(f') = v_!(f) = v_!(p)v_!(i)\ .
+\]
+Mais $v^*$ étant pleinement fidèle, $v_!v^* \xrightarrow{\ \sim\ } \mathrm{id}$, donc on trouve une factorisation de $f'$ en $v_!(p)v_!(i)$. Il suffit donc de voir que
+\[
+v_!(p)\ \in\ F'\ ,\qquad\quad v_!(i)\ \in\ W'\ ,
+\]
+ce qui équivaut à
+\[
+v^*v_!(p) \in F\ ,\qquad\quad v^*v_!(i) \in W\ ,
+\]
+et résulte des hypothèses que $v^*v_!(F) \subset F$ et $v^*v_!(TC) \subset TC \subset W$, q.e.d.
+
+\textbf{N.B.} J'ai noté les cas A) et C) par acquis de conscience, sans application précise en vue. Le cas le plus utile sera justiciable du cas B), et mérite d'être réexplicité en un
+
+\textbf{Théorème 2.3}\footnote[7]{cf. scholie 2.10, qui devrait précéder le théorème 2.3.}. \textit{Soit $(W,C,F)$ un triple de Quillen spécial dans $\M$. Pour toute $I$ dans} Cat\textit{, considérons le triple $(W(I),C\langle I\rangle,F(I))$ dans $\M(I) = \underline{\mathrm{Hom}}(I^{\circ},\M)$, où les notations sont celles de page 10, donc $W(I)$, $F(I)$ et $TF(I)$ se définissent fibre par fibre, et $C\langle I\rangle = (F(I))^* = (v_{I\,!}(C(I_0)))^{\sim}$}\footnote[8]{où $v_I : I_0 \longrightarrow I$ ($I_0$ catégorie discrète ayant mêmes objets que I).}\textit{.}
+\begin{itemize}
+\item[1°)] \textit{Pour toute $I$ dans} Cat\textit{, $(W(I),C\langle I\rangle,F(I))$ est}
+\msp{page 20}
+\textit{un triple de Quillen spécial dans $\M(I)$.}
+\item[2°)] \textit{Si $u : I \longrightarrow I'$ est une flèche dans} Cat\textit{, d'où}
+\[
+\begin{tikzcd}
+\M(I) \arrow[r, shift left, "u_!"] & \M(I'), \arrow[l, shift left, "u^*"]
+\end{tikzcd}
+\tag*{(2.3.1)}
+\]
+\textit{alors}
+\[
+\left\{
+\begin{array}{l}
+\left.\begin{array}{rcl}
+u^*(W(I')) & \subset & W(I)\\
+u^*(F(I')) & \subset & F(I)\\
+u^*(TF(I')) & \subset & TF(I)
+\end{array}\right\}\textit{tautologie}\\
+\begin{array}{rcl}
+u_!(C\langle I\rangle) & \subset & C\langle I'\rangle\\
+u_!(TC\langle I\rangle) & \subset & TC\langle I'\rangle\ ,
+\end{array}
+\end{array}\right.
+\tag*{(2.3.2)}
+\]
+\textit{enfin, $u_!$ induit un foncteur}
+\[
+\M(I)_{\cc} \longrightarrow \M(I')_{\cc} \qquad\quad \text{\footnotemark[9]}
+\tag*{(2.3.3)}
+\]
+\footnotetext[9]{Sous-catégories des objets cofibrants.}
+compatible aux localiseurs $W(I)_{\cc} = W(I)|\M(I)_{\cc}$ \textit{et} $W(I')_{\cc} = W(I')|\M(I')_{\cc}$\textit{, donc induit un foncteur}
+\[
+u_!^W\ :\ \Ho_W(I) \longrightarrow \Ho_W(I')\ .
+\tag*{(2.3.4)}
+\]
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\textit{Ce foncteur est un adjoint à gauche du foncteur $u^*_W$,}
+\[
+u^*_W\ :\ \Ho_W(I') \longrightarrow \Ho_W(I)\ ,
+\tag*{(2.3.5)}
+\]
+\textit{induit par $u^*$} (3.3.1). % [sic] (3.3.1) -> (2.3.1), the adjunction displayed in (2.3.1)
+\end{itemize}
+\textsc{Démonstration de 2.3.}
+
+\textit{Prouvons} 1°). On considère comme dans 1.10 le foncteur
+\[
+v = v_I\ :\ I_0 \longrightarrow I
+\]
+et le couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\M(I) \arrow[r, shift right, "v^*"'] & \M(I_0)\ , \arrow[l, shift right, "v_!"']
+\end{tikzcd}
+\tag*{(2.3.6)}
+\]
+auquel on peut appliquer 2.2. Il reste
+\msp{page 21}
+à vérifier seulement
+\[
+v^*v_!(TC)\ \subset\ TC\ ,
+\tag*{(2.3.7)}
+\]
+or on a, pour $X = (X_i)_{i \in I_0} \in \M(I_0)$,
+\[
+\begin{aligned}
+v_!(X)(i) &\ \simeq\ \textstyle\coprod_{j \in I_0} v_{j\,!}(X_j)(i)\\
+&\ \simeq\ \textstyle\coprod_{j \in I_0}\ \ \underbrace{X_j^{\mathrm{Hom}(i,j)}}_{\substack{\text{somme directe}\\ \text{de }\mathrm{Hom}(i,j)\text{ copies}}}\qquad ,
+\end{aligned}
+\]
+et la relation (2.3.7) résulte du fait que $TC$, étant Q-clos à gauche, est stable par petites sommes directes.
+
+\textit{Prouvons} 2°). Les formules (2.3.2) sont essentiellement tautologiques, les deux dernières résultent de la troisième et de la deuxième, en vertu de 1.5 appliqué au couple de foncteurs adjoints $(u_!,u^*)$. La relation $u_!(C\langle I\rangle) \subset C\langle I'\rangle$, et le fait que $u_!$ transforme objet initial en objet initial, impliquent (2.3.3). Que $u_!$ restreint à $\M(I)_{\cc}$ soit compatible aux localiseurs provient de $u_!(TC\langle I\rangle) \subset TC\langle I'\rangle$, et du fait que toute flèche $f$ dans $\M(I)_{\cc}$ qui est dans $W(I)$, se décompose en $f = pi$, avec $i \in TC$ et $p$ inverse à gauche d'une $j \in TC\langle I\rangle$. Ceci vu, joint aux deux premières formules (2.3.2) montre qu'on est sous les conditions
+\msp{page 22}
+du théorème d'adjonction de Quillen, d'où l'adjonction de $u_!^W$ et de $u^*_W$, q.e.d.
+
+\textbf{Corollaire 2.4.} \textit{Soit $W$ un localiseur dans $\M$, tel qu'il existe un triple de Quillen spécial $(W,C,F)$ incluant $W$. Alors le prédérivateur} $\Ho_W$ \textit{sur} Cat \textit{satisfait aux axiomes Dér 1 (décomposition), Dér 2 (localisation), Dér 3 (objet final), Der 4 bis (existence des $u_!^W$), Dér 5 bis (calcul des fibres des $u_!^W$), Dér 6 bis (exactitude à gauche, i.e. exactitude à gauche des carrés $W$-cocartésiens dans les} $\Ho_W(I)$\textit{), Dér 6 (exactitude à droite des carrés $W$-cartésiens).} % [sic] Der 4 bis -> Dér 4 bis, accent missing as printed
+
+On vient de prouver Dér 4 bis, et Dér 5 bis est pratiquement contenu dans le mode d'obtenir de $u_!$, compte tenu de proposition 1.12, qui implique que pour $X$ dans $\M(I)_{\cc}$, et $i'$ dans $I'$, l'image inverse de $X$ dans $\M(i'\backslash I)$ est dans $\M(i'\backslash I)_{\cc}$ \dots
+
+% ---- from der-ch19_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 23}
+L'axiome de décomposition est satisfait pour tout prédérivateur de la forme $\mathbf{D}_{\mathcal{M},W}$. L'axiome d'exactitude à gauche Dér 5 bis est valable, pourvu que les $(\mathcal{M}(I),W(I))$ s'insèrent dans une structure à cofibrations, ce qui est le cas. De même pour l'axiome Dér 2 de localisation, pourvu que de plus $W$ soit fortement saturé, ce qui est également le cas. Enfin, l'axiome de l'objet final dit que si $I$ admet un objet final, alors
+\[ \Ho_W(e) \longrightarrow \Ho_W(I) \]
+est pleinement fidèle, ou encore que le morphisme d'adjonction
+\[ u_!u^*(\xi) \longrightarrow \xi \]
+est un isomorphisme. Mais en vertu de 1.12, cas 3°, dans ce cas $u^*$ applique $\mathcal{M}(e)_{\mathrm{c}} = \mathcal{M}_{\mathrm{c}}$ dans $\mathcal{M}(I)_{\mathrm{c}}$, donc le calcul du couple de foncteurs adjoints $u_!^W$, $u_W^*$ peut se faire en utilisant les restrictions de $u_!$, $u^*$ à $\mathcal{M}(I)_{\mathrm{c}}$ et $\mathcal{M}_{\mathrm{c}}$ respectivement. Comme le morphisme d'adjonction $u_!^{\mathrm{c}}u_{\mathrm{c}}^* \longrightarrow \mathrm{id}$ est un isomorphisme, il en est donc de même de $u_!^W u_W^* \longrightarrow \mathrm{id}$, qui s'en déduit en localisant, q.e.d.
+
+\textbf{2.5.} Pour achever de construire $\Ho_W$ comme un dérivateur sur Cat tout entier, il faut \msp{page 24} donc établir Dér 4, Dér 5 : existence des $u_*^W$, et calcul des fibres de $u_*^W$. Quant à Dér 6, il est acquis automatiquement, du fait que chaque $(\mathcal{M}(I),W(I))$ s'insère dans une structure de fibration $(W(I),F(I))$. (Oubli dans la démonstration de 2.4.) L'idée naturelle est d'utiliser à présent la structure de triple
+\[ (W(I),C(I),\ \underbrace{F[I]}_{\deq TC(I)_*}\ )\ , \tag*{(2.5.1)} \]
+mais la difficulté est de prouver la factorisation pour un couple
+\[ C(I) \longleftrightarrow TF[I]\ , \qquad \underbrace{TC(I)}_{\deq C(I)\cap W(I)} \quad \longleftrightarrow F[I]\ , \tag*{(2.5.2)} \]
+faute de pouvoir montrer, dans les conditions générales de 2.3 seulement (triple de Quillen spécial) que $C(I)$ et $TC(I)$ sont également spéciaux. (Cf. question 1.11.) Mais moyennant des conditions convenables sur $\mathcal{M}$, on arrivera à s'en tirer si $C = \mathit{mono}$. L'énoncé pertinent, un peu technique, se trouve dans XV cor. 7.4 (p. 98-99), que je vais rappeler ici.
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 25}
+\textbf{Théorème 2.6.} \textit{Soit $\mathcal{M}$ une catégorie satisfaisant les conditions suivantes.}
+\[ \left\{ \begin{minipage}{0.72\textwidth}\itshape
+\begin{itemize}[leftmargin=2.5em]
+\item[\upshape a)] $\mathcal{M}$ est “spéciale”, i.e. stable par petites $\varinjlim$ , et ses éléments sont accessibles.
+\item[\upshape b)] Les limites inductives filtrantes dans $\mathcal{M}$ sont exactes à gauche (et dans $\mathcal{M}$ les $\varprojlim$ finies sont représentables – résulte de \textup{a} et \textup{c}).
+\item[\upshape c)] $\mathcal{M}$ admet une filtration cardinale $(\Filt^\pi)_{\pi\geq\pi_0}$.
+\item[\upshape d)] Les $\Filt^\pi$ sont stables par $\varprojlim$ indexées par des catégories $I$ telles que $\operatorname{card}\Fl(I) \leq \pi$, et par quotients ($Z \in \Filt^\pi$ et $Z \longrightarrow Z'$ épimorphisme implique $Z' \in \Filt^\pi$).
+\item[\upshape e)] Si $A_1$, $A_2$ sont deux sous-objets d'un objet $B$ de $\mathcal{M}$, et $A_0 = A_1 \cap A_2$, alors $A_1 \amalg_{A_0} A_2 \longrightarrow B$ est un monomorphisme.
+\item[\upshape f)] Si on a un carré cocartésien
+\begin{center}
+\begin{tikzcd}
+A_0 \arrow[r, "i"] \arrow[d] & A_1 \arrow[d] \\
+A_2 \arrow[r, "i'"] & A_3
+\end{tikzcd}
+\end{center}
+avec $i$ monomorphisme, alors $i'$ est un monomorphisme.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.6.1)} \]
+$^{(10,11,12,13)}$\footnotetext[10]{\textbf{N.B.} a + c signifie aussi que $\mathcal{M}$ est une “catégorie $\mathfrak{U}$-paratopos”, et implique l'existence d'une filtration cardinale satisfaisant d) (sauf l'assertion concernant les quotients $Z'$ de $Z$). Donc il s'agit d'un $\mathfrak{U}$-paratopos satisfaisant de plus b) e) f). (Est-ce alors un topos\,? \textit{Non,} car e), f) sont O.K. dans les \textit{catégories abéliennes\,!})}\footnotetext[11]{\textbf{N.B.} La condition d) est sans doute inutile, du moins si les épimorphismes sont effectifs, car d) sera satisfaite en tous cas pour $\pi = 2^c$, avec $c \geq \pi_0$.}\footnotetext[12]{\textbf{N.B.} La condition e) n'est \textit{pas} satisfaite pour la catégorie (Gr), et le théorème est en défaut pour cette catégorie, laquelle n'admet \textit{pas} “assez d'injectifs”, cf. SGA 4 I 8.12.9. Par contre, e) et f) sont satisfaites par les catégories \textit{abéliennes.}}\footnotetext[13]{Cf. XVIII 4.6.7 (p. 157) pour une formulation plus sympathique de l'ensemble des conditions a) à f) pour $\mathcal{M}$.}. \textit{(On dira alors que $\mathcal{M}$ est} “très spéciale”\textit{). Soit de plus}
+\[ W \ \subset \Fl(\mathcal{M}) \tag*{(2.6.2)} \]
+\textit{un localiseur dans $\mathcal{M}$, qui satisfait les conditions}
+\[ \left\{ \begin{minipage}{0.72\textwidth}\itshape
+\begin{itemize}[leftmargin=2.5em]
+\item[\upshape a)] $W$ est stable par $\varinjlim$ filtrantes $^{\textup{(14)}}$.
+\item[\upshape b)] $W$ est de plus $\mathrm{L}_1$-accessible, i.e. il existe une \textup{petite} partie $W_0 \subset W$ telle que $W$ soit la $\mathrm{L}_1$-enveloppe de $W$, i.e. que $W$ soit la plus petite partie de $\Fl(\mathcal{M})$ contenant $W_0$, et stable par $\varinjlim$ filtrantes. % [sic] la L_1-enveloppe de W -> la L_1-enveloppe de W_0, W_0 being the small generating part just introduced
+\end{itemize}
+\end{minipage}\right. \tag*{(2.6.3)} \]
+\footnotetext[14]{\textbf{N.B.} a) implique déjà que $W = W^\natural$.}
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 26}
+\textit{Posons alors}
+\[ C \ = \ \Mono(\mathcal{M}), \qquad TC \ = \ C\cap W\ , \qquad TF \ = \ C_*\ , \qquad F = (TC)_*\ . \tag*{(2.6.4)} \]
+\textit{Sous ces conditions :}
+\begin{itemize}[leftmargin=2.5em]
+\item[1°)] \textit{$C \Qcouple TF$, plus précisément $C \qpair TF$ est un couple de Quillen spécial.} % reading resolved: DER_XIX_corrections.csv
+\item[2°)] \textit{Pour que $TC \qpair F$ soit un couple de Quillen, il faut et il suffit que $TC$ soit stable par cochangement de base, et alors c'est un couple de Quillen spécial.} % reading resolved: DER_XIX_corrections.csv
+\item[3°)] \textit{Pour que $(W,C,F)$ soit un triple de Quillen (lequel sera nécessairement spécial par \textup{1°, 2°}, et en particulier clos), il faut et il suffit que les conditions suivantes soient satisfaites.}
+\[ \left\{ \begin{array}{ll}
+\text{a)} & TC\ (\deq W\cap\Mono)\ \text{\itshape est stable par cochangement de base.}\\[1ex]
+\text{b)} & TF\ (\deq (\Mono)_*) \ = \ \text{\itshape “applications de type injectif”}\ \subset W.
+\end{array}\right. \tag*{(2.6.5)~$^{(15)}$} \]
+\footnotetext[15]{\textbf{N.B.} Ces conditions (2.6.5) équivalent à dire que $(W,C)$ est une structure de catégorie à cofibrations sur $\mathcal{M}$.}
+\textit{Et la condition} b) \textit{équivaut encore à :}
+\[ \begin{minipage}{0.7\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[b$'$)] \textit{Toute flèche $f$ de $\mathcal{M}$ (ou seulement de $TF$) se factorise en $f = pi$, avec $i$ monomorphisme, $p \in W$.}
+\end{itemize}
+\end{minipage} \tag*{(2.6.6)} \]
+\end{itemize}
+
+\textbf{Corollaire 2.7.} \textit{$\mathcal{M}$ et $W$ étant comme dans} (2.6.1), (2.6.3), \textit{pour que $(W,C,F)$ soit un triple de Quillen} propre à gauche \textit{(i.e. $C \subset \Cof_W$), il faut et il suffit que $W$ satisfasse la condition} (2.6.5. b) \textit{(i.e. $W$ contient les flèches de type injectif), et de plus}
+\msp{page 27}
+
+\begin{itemize}[leftmargin=7em]
+\item[] $C \subset \Cof_W$, \textit{i.e. la condition :}
+\item[a$'$)] \textit{Pour tout diagramme cocartésien}
+\[ \begin{tikzcd}
+A_0 \arrow[r, "i"] \arrow[d, "f"'] & A_1 \arrow[d, "f'"'] \\
+A_2 \arrow[r, "i'"] & A_3
+\end{tikzcd} \tag*{(2.7.7)} \]
+\textit{avec $i$ monomorphisme, si $f \in W$, alors $f' \in W$. (Stabilité de $W$ par cochangement de base par monomorphismes.)}
+\end{itemize}
+
+\textit{Sous ces conditions, ce triple de Quillen est spécial, et a fortiori clos.}
+
+Ce corollaire résulte de 2.6. 3°), puisque $C \subset \Cof_W$ implique $TC \deq C\cap W = C\cap W^{\mathrm{univ}}$ (car $\Cof_W \cap W \ = \ W^{\mathrm{univ}}$), donc que $TC$ est stable par cochangement de base, d'où la condition (2.6.5. a).
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\textbf{2.8.} On dit qu'une \textit{structure de Quillen} $(W,C,F)$ sur $\mathcal{M}$ est \textit{très spéciale,} si elle est obtenue comme au théorème 2.1., i.e. si on a les conditions :
+\[ \left\{ \begin{minipage}{0.72\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $\mathcal{M}$ est très spéciale, i.e. satisfait aux conditions (2.6.1).
+\item[b)] $W$ est stable par petites $\varinjlim$ filtrantes, et est accessible (conditions (2.6.3)).
+\item[c)] $C = \Mono$.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.8.1)} \]
+Donc pour qu'un localiseur $W$ dans $\mathcal{M}$ corresponde à une structure de Quillen très spéciale \msp{page 28} dans $\mathcal{M}$ (laquelle sera forcément unique), il faut et il suffit que $\mathcal{M}$ et $W$ satisfassent les conditions (2.8.1. a)\,b)), et que de plus on ait :
+\[ \left\{ \begin{minipage}{0.65\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $TC \deq \Mono\cap W$ est stable par cochangement de base.
+\item[b)] $TF \deq (\Mono)_* \subset W$, i.e. $W$ contient les flèches de type injectif dans $\mathcal{M}$.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.8.2)} \]
+\footnote[16]{On dit aussi que le localiseur $W$ est très spécial, s'il définit une structure de Quillen très spéciale.}.
+
+On trouve maintenant le
+
+\textbf{Théorème 2.9.} \textit{Soit} $(W, C = \Mono, F = (TC)_* = (W\cap\Mono)_*)$ \textit{un triple de Quillen très spécial dans une catégorie $\mathcal{M}$} (2.8). \textit{Alors :}
+\begin{itemize}[leftmargin=2.5em]
+\item[1°)] \textit{Pour toute $I$ dans} Cat, $(W(I),C(I),F[I])$ \textit{est un triple de Quillen très spécial dans $\mathcal{M}(I)$, et on a en particulier}
+\[ C(I) \ = \ \Mono(\mathcal{M}(I))\ , \tag*{(2.9.1)} \]
+\textit{et de plus}
+\[ F[I]\cap W(I) \ = \ (TF)[I]\ . \tag*{(2.9.2)} \]
+\item[2°)] \textit{Pour toute flèche $u : I \longrightarrow I'$ dans} Cat, \textit{d'où le couple de foncteurs adjoints}
+\[ \begin{tikzcd}
+\mathcal{M}(I) \arrow[r, shift right, "u_*"'] & \mathcal{M}(I') \arrow[l, shift right, "u^*"']
+\end{tikzcd}\ , \tag*{(2.9.3)} \]
+\textit{on a}
+\[ \left\{ \begin{array}{rcl}
+u^*(W(I')) & \subset & W(I)\\
+u^*(C(I')) & \subset & C(I)\\
+u^*(TC(I')) & \subset & TC(I)\\
+u_*(F[I]) & \subset & F[I']\\
+u_*(TF[I]) & \subset & TF[I']\ ,
+\end{array}\right. \tag*{(2.9.4)} \]
+\textit{enfin $u_*$ induit un foncteur}
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 29}
+\[ u_*^{\mathrm{f}} \ :\ \mathcal{M}(I)_{\mathrm{f}} \longrightarrow \mathcal{M}(I')_{\mathrm{f}} \qquad\quad ^{(17)} \tag*{(2.9.5)} \]
+\footnotetext[17]{sous-catégories pleines des objets fibrants.}
+compatible aux localiseurs $W(I)_{\mathrm{f}}$ \textit{et} $W(I')_{\mathrm{f}}$ \textit{induits par $W(I)$, $W(I')$ respectivement, donc induit un foncteur}
+\[ u_*^W \ :\ \Ho_W(I) \longrightarrow \mathit{Ho}_W(I')\ . \tag*{(2.9.6)} \] % [sic] italic Ho_W(I') -> upright Ho_W(I'), inconsistent with the upright Ho_W elsewhere
+\textit{Ce foncteur est un} adjoint à droite \textit{du foncteur}
+\[ u_W^* \ :\ \mathit{Ho}_W(I') \longrightarrow \Ho_W(I) \tag*{(2.9.7)} \] % [sic] italic Ho_W(I') -> upright Ho_W(I'), inconsistent with the upright Ho_W elsewhere
+\textit{induit par $u^*$} (2.9.3).
+\end{itemize}
+\textsc{Démonstration de 2.9.} Pour prouver 1°), il faut vérifier d'abord que les conditions préliminaires (2.8.1. a)\,b)) sur $\mathcal{M}$, $W$ sont stables par passage de $\mathcal{M}$, $W$ à $\mathcal{M}(I)$, $W(I)$, ce qui se fait par AQT \texttt{[âne qui trotte]}. D'ailleurs on vérifie tout de suite que
+\[ C(I) \ = \ \Mono(\mathcal{M}(I))\ , \]
+et le théorème 2.6 (1°, 2°) implique alors que
+\[ \begin{array}{ccccc}
+C(I) & \qpair & C(I)_* & \deq & TF[I]\\
+\underbrace{TC(I)}_{\deq C(I)\cap W(I)} & \qpair & (TC(I))_* & \deq & F[I]
+\end{array} \] % reading resolved: DER_XIX_corrections.csv
+sont des couples de Quillen spéciaux. (En notant pour le deuxième, que $TC(I)$ est bien \msp{page 30} stable par cochangement de base, $TC$ l'étant.) Pour vérifier que l'on a un triple de Quillen très spécial, il reste en vertu de 2.8 à vérifier que
+\[ TF[I] \ \subset\ W(I)\ , \]
+ce qui s'écrit
+\[ v^*(TF[I]) \ \subset\ W(I_0)\ , \]
+où
+\[ v \ :\ I_0 \longrightarrow I \]
+est défini comme dans (1.12) (p. 10). En fait, on aura même
+\[ v^*(TF[I]) \ = \ v^*v_*(TF(I_0)) \ \subset\ \underbrace{TF(I_0)}_{= F(I_0)\cap W(I_0)}\quad , \]
+et la démonstration est duale de celle de
+\[ v^*v_!(TC(I_0)) \ \subset\ TC(I_0) \]
+(cf. (2.3.7), p. 21), elle ne dépend pas des questions de factorisation dans $\mathcal{M}(I)$, et provient ici de la stabilité de $TF$ par petits produits. Cela prouve 1°.
+
+La démonstration de 2° est maintenant la duale de celle de (2.3. 2°). Comme cela nous fait répéter deux fois la même démonstration, cela montre qu'on n'a pas “monté le sorite” tout à fait avec assez de soin. Donc à titre de rattrapage, j'ajoute un
+
+% ---- from der-ch19_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 31}
+\textbf{Scholie 2.10.} \textit{Soit $(W,C,F)$ un triple de Quillen clos dans $\M$. Pour $I$ dans \textup{Cat}, pour que $(W(I),C\langle I\rangle,F(I))$ soit un triple de Quillen clos pour $\M(I)$, il faut et il suffit que les couples $C\langle I\rangle\longleftrightarrow TF(I)$ et $TC\langle I\rangle\longleftrightarrow F(I)$ soient factorisants. Supposons que cette condition soit satisfaite pour $I$ et pour $I'$, et soit $u : I\longrightarrow I'$ une flèche de $I$ dans $I'$. Alors les assertions de \textup{2.3. 2°} sont valables, en particulier on trouve un foncteur $u^{W}_{!} : \Ho_W(I)\longrightarrow\Ho_W(I')$, adjoint à gauche de $u^{*}_{W}$\footnote[18]{Dire aussi que le calcul des fibres de $u^{W}_{!}(X)$, prévu dans Dér 5 bis, est OK.}. Ces résultats se dualisent aussitôt (par $\M\longmapsto\M^{\circ}$, $I\longmapsto I^{\circ}$) pour les triples $(W(I),C(I),F[I])$, et pour la construction de $u^{W}_{*}$, adjoint à droite de $u^{*}_{W}$. En particulier, pour que le triple précédent soit un triple de Quillen (forcément clos), il faut et il suffit que les deux couples $C(I)\longleftrightarrow TF[I]$ et $TC(I)\longleftrightarrow F[I]$ soient factorisants ; et quand cette condition est satisfaite pour $I$ et pour $I'$ (pour une flèche $u : I\longrightarrow I'$ dans \textup{Cat} donnée), alors $u^{W}_{*}$ existe et se construit dualement de la construction de $u^{W}_{!}$ explicitée dans \textup{2.3. 2°}.}
+
+\msp{page 32}
+% a vertical bar is printed in the left margin alongside Corollaire 2.11
+\textbf{Corollaire 2.11.} \textit{Le prédérivateur $\mathbf{D}_{\M,W}$ défini pour un localiseur \textup{très spécial} $W$ dans $\M$ est un dérivateur en plein sens du terme, i.e. il satisfait à tous les axiomes Dér 1 à Dér 6 (y inclus Dér 4 bis et Dér 5 bis et Dér 6 bis) des dérivateurs.}
+
+\textbf{N.B.} À ma propre surprise, je n'ai pas été capable de trouver un cas d'un localiseur $W$ qui définisse un dérivateur sur Cat tout entier (avec existence de $u^{W}_{!}$, $u^{W}_{*}$), \textit{que} pour $W$ un localiseur très spécial, donc s'insérant dans un triple de Quillen très spécial -- ou quand on peut s'y ramener de la façon standard. (Par exemple dans le cas où $\M=\Cat$, $W$ un localiseur fondamental satisfaisant Loc 6 a) et Loc 8, 8 bis)\footnote[19]{axiome des carrés cocartésiens (version directe), axiome des limites inductives, accessibilité.} -- les monomorphismes dans $W$ se refusent formellement à être stable par cochangement de base !) J'ignore totalement si le résultat mirobolant ``prouvé'' par \textsc{Anderson} est vrai ou faux. Ça a l'air presque trop beau pour être vrai \ldots{}D'ailleurs, je ne connais pas de structure de Quillen spéciale qui ne soit très spéciale -- désolé ! % [sic] stable -> stables, agreement with « les monomorphismes »
+
+\msp{page 33}
+
+\section*{3\quad Cas des catégories à cofibrations, des catégories à fibrations}
+
+Je rappelle les axiomes d'une \textit{structure à cofibrations} $(W,C)$ sur une catégorie $\M$.
+
+\begin{itemize}[leftmargin=4em,labelwidth=3.5em,align=left]
+\item[Cof$_0$ :] $W$ est un localiseur.
+\item[Cof$_1$ :] $C$ contient les isomorphismes, est stable par cochangement de base, par composition.
+\item[Cof$_2$ :] $C\cap W$ est stable par cochangement de base (et aussi par composition, et contient les isomorphismes, en vertu de Cof$_0$, Cof$_1$).
+\item[Cof$_3$ :] Toute flèche $f$ dans $\M$ se factorise en $f=pi$, avec $i\in C$, $p\in W$.
+\end{itemize}
+
+(Axiomes de K. S. \textsc{Brown}, légèrement généralisés par \textsc{Anderson}). Il y a un ``axiome
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+de continuité'' ou \textit{``axiome transfini''} facultatif, qui est le suivant :
+
+\begin{itemize}[leftmargin=4em,labelwidth=3.5em,align=left]
+\item[Cof$_4$ :] $\M$ stable par petites $\varinjlim$ filtrantes, et $C$ et $TC = C\cap W$ sont stables par composition transfinie.
+\end{itemize}
+
+Ainsi, Cof$_1$, Cof$_2$, Cof$_4$ peuvent se résumer en disant que $C$ et $TC$ sont Q-saturés transfiniment à gauche.
+
+La structure de cofibration est dite \textit{spéciale} si elle satisfait Cof$_4$, si $\M$ est spéciale, et si $C$ admet une \textit{petite} partie $C_0$ qui soit Q-génératrice à gauche, i.e. telle que
+\[
+C \ \subset\ C_0\Qs\,, \qquad \text{i.e.}\quad \tilde{C}=C_0\Qs. \tag*{(3.1)}
+\]
+
+\msp{page 34}
+Alors, par le théorème de factorisation 1.1, on a
+\[
+C \ \fact\ TF \ \deq\ C_* \ ,
+\]
+et l'axiome de factorisation Cof$_3$ implique (cf. 1.4) $TF\subset W^{\natural}$. Plus généralement, on a :
+
+\textbf{Proposition 3.1.} \textit{Supposons que $\M$ soit spéciale (stable par petites $\varinjlim$ , et éléments accessibles), que $(W,C)$ satisfasse à Cof$_0$, Cof$_1$, et que $C$ soit stable par composition transfinie (ce qui, joint à Cof$_1$, s'énonce en disant que $C$ est Q-saturé transfini à gauche), enfin que $C$ admette une petite partie $C_0$ Q-génératrice à gauche, de sorte que $C\fact TF\deq C_*$. Alors pour que l'axiome de factorisation Cof$_3$ soit satisfait, il suffit qu'on ait}
+\[
+TF \ \subset\ W \ , \tag*{(3.1.1)}
+\]
+\textit{et il faut qu'on ait $TF\subset W^{\natural}$, donc si $W=W^{\natural}$, l'axiome Cof$_3$ équivaut à} (3.1.1).
+
+La structure de cofibration est dite \textit{semi-close} si $C$ est Q-clos à gauche, i.e. si on a $C=C\Qs$ (ce qui implique que $C$ est stable par composition transfinie), \textit{close} si de plus $TC=(TC)\Qs$ (ce qui implique l'axiome transfini Cof$_4$).
+
+\msp{page 35}
+Je ne reviens pas ici sur la théorie de K. S. \textsc{Brown} des catégories à cofibrations. C'est à ma connaissance l'ensemble d'axiomes le plus économique connu, pour assurer d'une part une bonne prise sur $\Ho_W$ (par une notion correspondante d'homotopie d'applications, et un calcul de fractions dans $\Pi\M_{\mathrm{c}}$), et d'autre part l'existence de la suite \textit{exacte} de cofibrations, donc une théorie de cofibres $W$-homotopiques. (\textbf{N.B.} Quand la structure est \textit{propre,} i.e. $C\subset\Cof_W$, alors l'existence de cette structure revient à dire simplement que ``$W$ admet assez de $W$-cofibrations'', i.e. que toute $f\in\Fl(\M)$ se factorise en $pi$, avec $i\in\Cof_W$, $p\in W$ ; et on peut donc prendre $C=\Cof_W$. Dans le cas où $W$ est stable par petites $\varinjlim$ filtrantes, $C=\Cof_W$ et $TC=W^{\mathrm{univ}}$ satisfont de plus l'axiome transfini Cof$_4$.) Enfin, K. S. \textsc{Brown} montre que toute flèche $i : X\longrightarrow Y$ dans $C$, \textit{avec $X$, $Y$ cofibrants} (i.e. $\emptyset_{\M}\longrightarrow X$, $\emptyset_{\M}\longrightarrow Y$ dans $C$) est dans $\Cof_W$ (``Lemme de Brown'').
+
+Je m'intéresse ici à la question d'étendre la structure à cofibrations à une catégorie de la forme $\M(I)$, et d'utiliser cette extension pour construire
+\msp{page 36}
+les foncteurs $u^{W}_{!}$. Notons déjà que la théorie de K. S. \textsc{Brown}, avec les compléments d'\textsc{Anderson}\footnote[20]{revus et arrangés par mes soins.}, donne essentiellement ceci :
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\textbf{Proposition 3.2.} \textit{Soit $W\subset\Fl(\M)$ un localiseur associé à une structure à cofibrations $(C,W)$ dans $\M$.}
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[1°)] \textit{Sur la catégorie \textup{$\Diag_0$} des ensembles ordonnés \textup{finis}, ce prédérivateur satisfait aux axiomes Dér 1 (décomposition), Dér 2 (localisation), Dér 3 (objet final), Dér 4 bis (existence de $u^{W}_{!}$), Dér 5 bis (calcul des fibres de $u^{W}_{!}$), Dér 6 bis (exactitude à gauche).}
+\item[2°)] \textit{C'est encore vrai sur la sous-catégorie \textup{$\Diag_1$} dans \textup{Cat} plus grande, formée des ensembles ordonnés $I$ \textup{noethériens} tels que l'espace topologique associé à $I^{\circ}$ soit noethérien (toute suite croissante d'objets de $I$, ou d'ouverts de $I^{\circ}$, est stationnaire).}
+\item[3°)] \textit{Enfin, si l'axiome transfini Cof$_4$ est satisfait, i.e. si $C$ et $TC$ sont stables par composition transfinie, alors la conclusion de \textup{1°} reste valable sur la sous-catégorie pleine \textup{$\Diag_2$} de \textup{Cat} formée des ensembles ordonnés qui sont noethériens sans plus.}
+\end{itemize}
+
+\textbf{Corollaire 3.3.} \textit{Supposons que l'on ait Cof$_3$ sous la forme plus forte d'une factorisation
+\msp{page 37}
+$f=pi$ \textup{fonctorielle} en $f$, ce qui est le cas en particulier si la structure à cofibrations est spéciale. Alors pour toute $I$ dans \textup{Cat}, $\M(I)$ muni de $(W(I),C(I))$ est une catégorie à cofibrations, laquelle satisfait l'axiome transfini Cof$_4$ si $(W,C)$ y satisfait. Donc on peut lui appliquer les résultats de \textup{3.2}, qui impliquent notamment que les axiomes Dér 1, 2, 3 ( ?) sont valables sur \textup{Cat} tout entier, et que $u^{W}_{!}$ existe quand $u$ est de la forme $\id_I\times v$, avec $v : J\longrightarrow K$ une flèche dans \textup{$\Diag_1$} (resp. dans \textup{$\Diag_2$}, si l'axiome transfini est satisfait).}
+
+\textbf{3.4.} La clef de la théorie est dans l'extension de la structure à cofibrations $(W,C)$ de $\M$ à une catégorie $\M(I)$, où $I$ est un ensemble ordonné, en $(W(I),C_I)$. Les faits principaux sont énoncés dans XVII, dans les théorèmes p. 26-27, p. 50, p. 60. C'est quand $I$ est \textit{noethérien,} et qu'on suppose soit que $\mathrm{Esp}(I^{\circ})$ est également noethérien (p.ex. $I$ fini), soit que $(W,C)$ satisfait l'axiome transfini Cof$_4$, qu'on prouve que $(W(I),C_I)$ est également une structure à cofibrations sur $\M(I)$.
+
+\msp{page 38}
+Un fait important pour la construction des foncteurs $u^{W}_{!}$, pour $u : I\longrightarrow I'$ une flèche entre catégories ordonnées noethériennes, est la relation
+\[
+C_I\cap W(I) \ = \ (TC)_I \ , \tag*{(3.4.1)}
+\]
+d'où résulte que l'on a, pour $u$ comme dessus,
+\[
+u_!(C_I\cap W(I)) \ \subset\ C_{I'}\cap W(I') \ , \tag*{(3.4.2)}
+\]
+ingrédient essentiel de la construction du foncteur $u^{W}_{!}$. Pour étendre cette construction au cas d'une flèche $\pm$ quelconque dans Cat, il se pose donc le problème d'étendre la définition de $C_I$, et les formules (3.4.1) et (3.4.2), au cas de catégories $\pm$ quelconques dans Cat. Or on a prouvé :
+
+\textbf{Proposition 3.5.} \textit{Si $\Phi=\Psi^*$ est une partie \textup{Q-close} à gauche de \textup{$\Fl(\M)$}, et $I$ un ensemble ordonné noethérien, $\Phi_I$ l'extension de $\Phi$ en une partie de \textup{$\Fl(\M(I))$} définie par \textup{\textsc{Anderson}}, alors on a}
+\[
+\Phi_I \ = \ \Psi(I)^* \ = \ v_!(\Phi(I_0))\Qs \ , \tag*{(3.5.1)}
+\]
+\textit{où $v : I_0\longrightarrow I$ est le foncteur canonique de la catégorie discrète définie par \textup{$\mathrm{Ob}\,I$}.}
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+C'est (avec des notations différentes) le lemme 6.2.5 (p. 107) de XVII, dont je ne reprends pas ici la démonstration.
+
+Ceci donne la clef d'une définition de $\Phi_I$ comme $\Phi\langle I\rangle$ (avec les notations des paragraphes 1, 2),
+\msp{page 39}
+pour $I$ quelconque dans Cat,
+\[
+\Phi_I \ \deq\ \Phi\langle I\rangle \ \deq\ \Psi(I)^* \ = \ v_!(\Phi(I_0))\Qs \ , \tag*{(3.5.2)}
+\]
+où $\Psi=\Phi_*$, et où on suppose $\Phi$ Q-clos à gauche, i.e. $\Phi=\Psi^*$. Dans le cas où on suppose seulement $\Phi$ Q-saturé transfini sans plus, on aurait envie de poser
+\[
+\Phi_I \ \deq\ \text{Q-saturé transfini de } v_!(\Phi(I_0)) \ , \tag*{(3.5.3)}
+\]
+et je présume que pour $I$ ordonné noethérien, cela coïncide avec la définition d'\textsc{Anderson}. Mais je vais me borner pour la suite au cas où $C=\Phi$ est Q-clos à gauche.
+
+Revenons alors au cas d'une structure à cofibrations $(W,C)$ dans $\M$, en supposant $C$ et $TC=C\cap W$ Q-clos à gauche. Définissons pour toute $I$ dans Cat $C_I=C\langle I\rangle$ comme dans (3.5.2). On a alors, pour $u : I\longrightarrow I'$ une flèche dans Cat,
+\[
+u_!(C\langle I\rangle) \ \subset\ C\langle I'\rangle \ , \tag*{(3.5.4)}
+\]
+mais on n'y a guère de raison d'espérer avoir aussi (3.4.2), sans disposer de la formule
+\[
+C\langle I\rangle\cap W(I) \ \overset{?}{=}\ (TC)\langle I\rangle \qquad\qquad \text{\footnote[21]{\textbf{N.B.} On a l'inclusion $\supset$, car $v^*v_!TC(I_0)\subset TC(I_0)$.}}. \tag*{(3.5.5)}
+\]
+On a prouvé que cette formule est valable si $I$ est ordonné noethérien (XVII th. 2.1, p. 26-27). Cela
+\msp{page 40}
+nous amène à la
+
+\textbf{Question 3.6.} \textit{Soit $\M$ une catégorie stable par petites limites, et soit $(W,C)$ une structure à cofibrations dans $\M$ telle que $C$ et $TC=C\cap W$ soient Q-clos à gauche. Soit $I$ un objet de \textup{Cat}, a-t-on alors}
+\[
+C\langle I\rangle\cap W(I) \ = \ (TC)\langle I\rangle \text{ ?} \tag*{(3.6.1)}
+\]
+
+On a vu au paragraphe précédent qu'il en est ainsi si $(W,C)$ s'insère dans un triple de Quillen clos $(W,C,F=(TC)_*)$, et quand on suppose de plus que les couples
+\[
+C\langle I\rangle \ \longleftrightarrow\ TF(I) \ , \qquad TC\langle I\rangle \ \longleftrightarrow\ F(I)
+\]
+sont factorisant, auquel cas $(W(I),C\langle I\rangle,F(I))$ est une structure de Quillen close dans $\M(I)$. D'ailleurs, $(W,C,F)$ est une structure de Quillen (nécessairement close) si et seulement si les couples $C\longleftrightarrow \underbrace{TF}_{\deq C_*}$, $TC\longleftrightarrow \underbrace{\ F\ }_{\deq (TC)_*}$ eux-mêmes sont factorisants, et si % [sic] factorisant -> factorisants, agreement with « les couples »
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+de plus $TF\subset W$ (ce qui est automatique si $W=W^{\natural}$, car on aura en tous cas, par Cof$_4$, $TF\subset W^{\natural}$).
+
+Mais peut-on s'en tirer avec moins, pour pouvoir conclure à (3.6.1) ? Ne suffirait-il pas de savoir que $TC\langle I\rangle\longleftrightarrow F(I)$ est factorisant (ce qui n'a guère de chances d'être vrai pour une $I$ $\pm$ générale, si on n'a déjà $TC\fact F$, factorisation dans $\M$ lui-même). C'est bien le cas :
+
+\msp{page 41}
+\textbf{Proposition 3.7.} \textit{Sous les conditions générales de \textup{(3.6)} sur $\M$, $W$, $C$, $I$, supposons que le couple $TC\langle I\rangle\longleftrightarrow F(I)$ (où $F\deq (TC)_*$) soit factorisant, i.e. $TC\langle I\rangle\fact F(I)$. Alors la formule \textup{(3.6.1)} est vraie.}
+
+En effet, si $f\in C\langle I\rangle\cap W(I)$, on factorise $f$ en $pi$, avec $i\in TC\langle I\rangle$, $p\in F(I)$. Comme $f,i\in W(I)$, on aura $p\in W(I)$, i.e. $p\in TF(I)$, et à cause de $\underbrace{C\langle I\rangle}_{\ni\, f}\harp\underbrace{TF(I)}_{\ni\, p}$, il existe $p : Y\longrightarrow X'$ telle que $pq=\id_Y$, $qf=i$, % reading resolved: DER_XIX_corrections.csv; % [sic] p : Y -> q : Y, the arrow Y -> X' is q (see the diagram and pq = id_Y)
+\[
+\begin{tikzcd}[column sep=small, row sep=large]
+X \arrow[rr, "f\in C\langle I\rangle\cap W(I)"] \arrow[dr, "i\in TC\langle I\rangle"'] & & Y \arrow[dl, dotted, shift right=1ex, "q"'] \\
+& X' \arrow[ur, "p\in F(I)"'] \ , &
+\end{tikzcd}
+\]
+donc $f$ est facteur direct de $i\in TC\langle I\rangle$. Comme $TC\langle I\rangle$ est stable par facteurs directs, on gagne.
+
+\textbf{Corollaire 3.8.} \textit{Soit $(W,C,F)$ une structure de Quillen close dans $\M$, et supposons que $TC=C\cap W$ soit une partie Q-spéciale de $\M$, i.e. le couple $TC\fact F$ un couple spécial (i.e. $\M$ est \textup{spéciale}, et il existe une petite partie $TC_0$ Q-génératrice à gauche pour $TC$). Alors pour toute $I$ dans \textup{Cat}, on a}
+\[
+C\langle I\rangle\cap W(I) \ = \ TC\langle I\rangle \ . \tag*{(3.8.1)}
+\]
+
+\msp{page 42}
+En apparence, on n'a pas eu à supposer que $C$ soit elle aussi une partie Q-spéciale de $\Fl(\M)$. Mais comme on a besoin de la factorisation pour $C\longleftrightarrow TF$ (pour avoir au moins une structure de cofibrations sur $\M$), on n'a guère le moyen de l'établir sans supposer $C$ spéciale. Sans compter que pour pouvoir expliciter (3.8.1) pour la construction de $u^{W}_{!}$, on a besoin de savoir que $(W(I),C\langle I\rangle)$ définit bien une structure à cofibrations sur $\M(I)$, ce qui ne peut guère se faire (il me semble) sans avoir la factorisation pour $C\langle I\rangle\longleftrightarrow TF(I)$ également ; chose que je n'arrive à établir pour un $I$ général dans Cat, que moyennant l'hypothèse de spécialité sur $C$ également.
+
+\textbf{3.9.} Pour en avoir le cœur net, il faudrait quelques exemples concrets et illuminants, du type suivant :
+
+a) \texttt{[Il n'y a pas de b).]} Structure de Quillen close $(W,C,F)$ sur $\M$, telle que pour le prédérivateur associé, $u^{W}_{!}$ n'existe pas toujours, ou $u^{W}_{*}$ n'existe par toujours. Je pense notamment au cas d'une flèche $u : I\longrightarrow I'$ avec $I'=e$ (présumant que si dans ce cas, $u^{W}_{!}$ resp. $u^{W}_{*}$ existe, alors il existe dans tous les cas). Un tel exemple serait encore plus % [sic] n'existe par toujours -> n'existe pas toujours, typing error
+
+% ---- from der-ch19_p026-028.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 43}
+instructif, bien sûr, si $\mathcal{M}$ est stable par petites $\limind$ , que ses objets soient accessibles etc. et que $W$ soit L-accessible (i.e. stable par petites $\limind$ filtrantes, et de plus accessible \dots). Le premier candidat pour $I$ auquel je pense serait un $B_G$ ($G$ un groupe, p.ex. $G=\pm1$), c'est en effet l'exemple aux antipodes des ensembles ordonnés, lesquels, eux, ne semblent pas faire trop de problème (moyennant l'hypothèse noethérienne tout au moins).
+
+Les exemples suivants ne sont pas aussi convaincants que ça, hélas!
+
+\textbf{Exemple 3.10.} Soit $\mathcal{M}$ une catégorie quelconque, alors les couples $(\Fl(\mathcal{M}),\Is(\mathcal{M}))$ et $(\Is(\mathcal{M}),\Fl(\mathcal{M}))$ sont tous deux des couples de Quillen,
+\[
+\Fl(\mathcal{M}) \Qcouple \Is(\mathcal{M}) \ , \qquad \Is(\mathcal{M}) \Qcouple \Fl(\mathcal{M}) \ . \tag*{(3.10.1)} % reading resolved: DER_XIX_corrections.csv
+\]
+Il s'ensuit que si on pose
+\[
+W \ = \ \Is(\mathcal{M}) \ , \qquad C \ = \ F \ = \ \Fl(\mathcal{M}) \ , \tag*{(3.10.2)}
+\]
+$(W,C,F)$ est un triple de Quillen clos \textsuperscript{(}\footnote[22]{au moins si on admet que $\mathcal{M}$ est stable par $\limind$ et $\limproj$ \textit{finies.}}\textsuperscript{)}. D'ailleurs pour toute $I$ dans Cat, on a $W(I)=\Is(\mathcal{M}(I))$, donc
+\[
+\Ho_W(I) \ = \ \mathcal{M}(I) \ . \tag*{(3.10.3)}
+\]
+Donc la question de l'existence des foncteurs $u_!^W$, $u_*^W$ se réduit à celle des foncteurs $u_!$, $u_*$ habituels, adjoints à gauche et à droite de $u^* : \mathcal{M}(I') \longrightarrow \mathcal{M}(I)$.
+
+\msp{page 44}
+On sait bien que l'existence de ces foncteurs pour $u$ donné, fait appel à l'existence de certaines $\limind$ resp. $\limproj$ dans $\mathcal{M}$; p.ex. si $I'=e$, il est nécessaire et suffisant que les $\limind$ (resp. $\limproj$ ) de type $I^\circ$ soient représentables dans $\mathcal{M}$. Mais avec les hypothèses faites sur $\mathcal{M}$, il n'y a pas de problème si $u : I \longrightarrow I'$ est un foncteur entre catégories \textit{finies.} On va donner un exemple où il n'en est plus ainsi.
+
+\textbf{Exemple 3.11.} Soit $k$ un anneau commutatif, et $\mathcal{M}=K^{\mathrm{b}}(k\text{-Ab})$ la catégorie des complexes de cochaînes bornés de $k$-modules, $W$ l'ensemble des quasi-isomorphismes, donc
+\[
+\Ho_W \ = \ D^{\mathrm{b}}(k\text{-Ab}) \ ,
+\]
+catégorie dérivée bornée de la catégorie abélienne des $k$-modules. On sait, en utilisant l'existence d'assez de projectifs dans $k$-Ab, que cette structure est associée à une structure de Quillen close $(W,C,F)$, décrite par \textsc{Quillen}
+\msp{page 45}
+dans Homotopical Algebra -- à cela près qu'il prend $D^-(k)$ au lieu de $D^{\mathrm{b}}(k)$. Peut-être, pour vérifier les axiomes, doit-on supposer que $k$ est de dimension cohomologique finie.
+
+Prenons $I=B_G$, où $G$ est un groupe (p.ex. $G=\{\pm1\}$), et $u : I \longrightarrow e$. Alors $\mathcal{M}(I)$ est la catégorie des complexes bornés de $k[G]$-modules. On voit que $u_!^W$ resp. $u_*^W$ existe si et seulement si pour tout tel complexe borné, ou simplement pour un $k[G]$-module sans plus $M$, le complexe $L\Gamma^G(M)$ resp. $R\Gamma_G(M)$ appartient à $D^{\mathrm{b}}(k)$, ou ce qui revient au même,
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+si et seulement si on a
+\[
+\begin{aligned}
+H_i(G,M) \ &= \ 0 \quad \text{pour } i \gg 0 \ ,\\
+\text{resp.}\quad H^i(G,M) \ &= \ 0 \quad \text{pour } i \gg 0 \ ,
+\end{aligned}
+\]
+pour tout $k[G]$-module $M$. Ce n'est pratiquement jamais le cas; quand on prend p.ex. $k=\mathbf{Z}$ et $G$ groupe fini, cela n'est le cas que si $G=e$. L'exemple le plus économique me paraît $G=\pm1$, $k=\mathbf{F}_2$.
+
+\msp{page 46}
+Donc ici $u_!^W$ et $u_*^W$ n'existent pas, pour $I \longrightarrow e$ avec $I$ catégorie finie. Mais aussi $\mathcal{M}$ n'est pas stable par petites $\limind$ .
+
+\textbf{Exemple 3.12.} Soit $\mathcal{M}$ une catégorie muni d'un localiseur $W$ fortement saturé, tel que $\mathcal{M} \longrightarrow \underbrace{\mathcal{M}W^{-1}}_{=\mathcal{H}}$ admette un adjoint -- à gauche disons. On a donc une situation de deux foncteurs adjoints % [sic] muni -> munie, agreement with « une catégorie »
+\[
+\begin{tikzcd}[column sep=huge]
+\mathcal{H} \arrow[r, shift left, "v_!\ \text{pleinement fidèle}"] & \mathcal{M} \arrow[l, shift left, "v^*\ \text{localisation}"]
+\end{tikzcd}
+\ , \tag*{(3.12.1)}
+\]
+et $W=(v^*)^{-1}(\mathrm{Iso}(\mathcal{H}))$. On trouve que pour toute $I$ dans Cat, on a
+\[
+\mathrm{HO}_W(I) \ \simeq \ \mathcal{H}(I) \ \overset{\text{déf}}{=} \ \mathrm{Hom}(I^\circ,\mathcal{H}). \tag*{(3.12.2)} % [sic] HO_W -> Ho_W, notation Ho_W used in (3.10.3) and Exemple 3.11
+\]
+On peut donc songer à faire un exemple où dans $\mathcal{M}$ les petites $\limind$ et $\limproj$ existent, mais non dans $\mathcal{H}$, de sorte que les $u_!^W$ ou $u_*^W$ n'existent pas toujours. Mais ce semble difficile à construire, vu que dans la situation envisagé, on voit facilement que les petites $\limproj$ existent dans $\mathcal{H}$. Donc si dans $\mathcal{H}$ % [sic] envisagé -> envisagée, agreement with « la situation »
+\msp{page 47}
+il existe une petite famille cogénératrice (et pour ceci, il suffit qu'une telle famille existe dans $\mathcal{M}$), il y aura également des petites $\limind$ , en vertu de SGA 4 I 8.12.7. De même, elles existent si $\mathcal{H}$ est une sous-catégorie pleine de $\mathcal{M}$ \textit{stable par petites} $\limind$ , et il paraît pratiquement impossible de faire un exemple (3.12.1) sans que $\mathcal{H}$ ait cette propriété de stabilité. Sans compter qu'il y a même la perplexité suivante :
+
+\marginpar{! \textbar}\textbf{Question 3.13.} \textit{Existe-t-il une $\mathfrak{U}$-catégorie (\,$\mathfrak{U}$ un univers donné) où les petites $\limind$ soient représentables, sans qu'il en soit de même des petites $\limproj$ ?} \textbf{N.B.} Une telle catégorie n'admet pas de petite famille génératrice, a fortiori elle n'est pas équivalente à une petite catégorie.
+
+\msp{page 48}
+\textbf{Question 3.14.} \textsc{Anderson} prétend que pour le prédérivateur défini par une catégorie à cofibrations satisfaisant l'axiome Cof$_4$ transfini, les foncteurs $u_!^W$ existent. Sa démonstration est totalement canulée, néanmoins je n'arrive pas à faire de contre-exemple. Le résultat qu'il annonce serait-il vrai? Je ne connais pas même d'exemple d'un localiseur $W$, dans une catégorie $\mathcal{M}$ \textit{avec petites $\limind$ et petites $\limproj$ ,} tel que $u_!^W$ ou $u_*^W$ n'existent pas toujours -- mais je suis persuadé qu'il y a des exemples (même avec $\mathcal{M}$ une petite catégorie?). J'en suis moins convaincu si on suppose $W$ stable par $\limind$ filtrantes, et au besoin, de plus, que les éléments de $\mathcal{M}$ sont accessibles (plus éventuellement d'autres propriétés catégoriques anodines sur $\mathcal{M}$, telles l'existence d'une filtration
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 49}
+cardinale etc.)
+
+\textbf{Question 3.15.} Cela me ramène à la question particulièrement élusive et irritante, de l'existence des petits ensembles Q-générateurs, dans une partie $\Phi$ de $\Fl(\mathcal{M})$, quand on suppose (disons) que $\mathcal{M}$ est stable par petites $\limproj$ , que ses éléments sont accessibles et qu'il admet une filtration cardinale. Ainsi on a la question : une partie L-accessible de $\Fl(\mathcal{M})$, qu'on suppose au besoin Q-saturé à gauche (ou ce qui revient au même, contenant les isomorphismes, et stable par cochangement de base, par composition et par facteurs directs) admet-elle une \textit{petite partie} $\Phi_0$ Q-génératrice à gauche? % [sic] Q-saturé -> Q-saturée, agreement with « une partie »
+
+\marginpar{! \textbar}D'autre part, je n'ai pas à présent construit un seul exemple d'un couple $\Phi \longleftrightarrow \Psi$, dans une catégorie $\mathcal{M}$, qui ne soit factorisant! Le cas où $\mathcal{M}$ est spéciale, était bien sûr le plus intéressant. Visiblement, dans tout
+\msp{page 50}
+ça ce sont les exemples qui manquent. Le clef d'une compréhension semble bien être dans les questions de factorisation entre ensembles $\Phi \longleftrightarrow \Psi$. Il faudrait en faire une étude systématique, mais je recule devant la perspective d'une digression qui me prendrait peut-être encore des semaines! % [sic] Le clef -> La clef, « clef » is feminine
+\end{document}

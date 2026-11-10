@@ -1,6 +1,6 @@
 # Pages commented in two parts of the companion
 
-The companion comments the text in parts (I-a, I-b, II-a, ...). Six pairs of consecutive parts both contain the same
+The companion comments the text in parts (I-a, I-b, II-a, ...). Eight pairs of consecutive parts both contain the same
 five printed pages of the Künzer–Malgoire–Maltsiniotis edition: these pages end the earlier part and open the later
 one. The overlaps start and end inside manuscript pages, so they are given here by printed page and by manuscript page.
 
@@ -12,8 +12,11 @@ one. The overlaps start and end inside manuscript pages, so they are given here 
 | VII-a / VII-b | 34–38 | 49′ (end)–57 (beginning) | VII-a | VII-b, pp. 34–38 |
 | VII-b / VII-c | 69–73 | 108–117 (beginning) | VII-b | VII-c, pp. 69–73 |
 | XIIb-a / XIIb-b | 78–82 | 114 (end)–122 (beginning) | XIIb-a | XIIb-b, pp. 78–82 |
+| XIIc-a / XIIc-b | 145–149 | 228–234 (beginning) | XIIc-a | XIIc-b, pp. 145–149 |
+| XIII-a / XIII-b | 29–33 | 50 (end)–60 (beginning) | XIII-a | XIII-b, pp. 29–33 |
 
-Each overlap also contains the end of the preceding manuscript page (VII-a/VII-b: ms. 50′, written `50$'$` in VII-a).
+Each overlap also contains the end of the preceding manuscript page (VII-a/VII-b: ms. 50′, written `50$'$` in VII-a;
+XIIc-a/XIIc-b: only the end of footnote 124 of ms. 227).
 
 **In the integrated book.** `kit/build_global_reader.py` has a setting `SKIP_PAGES` (printed pages per part). For the
 later part of each pair it does not set the text from the line that opens the first overlapping page to the line that
@@ -21,10 +24,11 @@ opens the next five-page file (so the `\setcounter{footnote}` lines of that file
 meets no commentary block and leaves environments and braces balanced, and reports each cut. The files of each part
 (`companion/checks/DER_<id>/`) still contain the whole part.
 
-**Which text is kept.** The two texts of an overlap differ only where one of them corrects a reading. In each pair the
+**Which text is kept.** The two texts of an overlap differ only where one of them corrects a reading (XIIc-a/XIIc-b also in
+the layout of the diagrams; see below). In each pair the
 earlier part's text is kept: it carries most of the commentary on these pages (blocks set in the overlap: I-a 6 / I-b 0;
-VI-a 5 / VI-b 1; VI-b 4 / VI-c 2; VII-a 4 / VII-b 0; VII-b 11 / VII-c 4; XIIb-a 5 / XIIb-b 6) and it ends on these
-pages, so one cut per pair suffices. Where the later part had the right reading, the kept text was corrected (below).
+VI-a 5 / VI-b 1; VI-b 4 / VI-c 2; VII-a 4 / VII-b 0; VII-b 11 / VII-c 4; XIIb-a 5 / XIIb-b 6; XIIc-a 6 / XIIc-b 5;
+XIII-a 10 / XIII-b 7) and it ends on these pages, so one cut per pair suffices. Where the later part had the right reading, the kept text was corrected (below).
 
 **What is carried over.** For each pair: the commentary blocks of the later part set inside the omitted pages are
 copied into the kept part's `_blocks.tex` (the later part keeps its own copy), with any bibliography entry they cite
@@ -34,10 +38,12 @@ part's row for the same reading (its evidence appended in brackets) or moved the
 the edge page whose assertion lies after the overlap stay where they were (VI-b/VI-c: VI-c row on ms. 145, printed
 p. 89; VII-a/VII-b: VIIb-A023, VIIb-A024 and the correction on ms. 57 zero-length propagation, printed p. 39;
 VII-b/VII-c: VIIc-A028, VIIc-A029, printed p. 74; XIIb: XIIbb-A023, printed p. 83, and the preamble-wide correction of
-`\intdiag`). The block of VII-b anchored on the last overlapping page but set after the cut ("Degreewise free is a
+`\intdiag`; XIIc: XIIcb-A024 and XIIcb-A025, Proposition 17, printed p. 150, and the two corrections of the TikZ code
+of the whole XIIc-b text; XIII: XIIIb-Q047, item c) of the theorem-scholie, printed p. 34, and the correction of the
+footnote numbering in the XIII-b preamble). The block of VII-b anchored on the last overlapping page but set after the cut ("Degreewise free is a
 precise assertion") remains in the book where it is.
 
-## The six overlaps
+## The eight overlaps
 
 ### I-a / I-b — printed pp. 34–38, ms. 59 (end)–66 (beginning). Kept: I-a.
 
@@ -83,6 +89,26 @@ placed before VII-b's own ms. 117 blocks); 27 claim rows (VIIc-A001–A027); 4 c
 The texts differ only in a TeX comment. Carried: six blocks (ms. 115 ×2, 119, 120 ×2, 121; "Integration as a calculus
 of gluing" placed before XIIb-a's ms. 122 block), with `\Hot` written `\mathrm{Hot}` (XIIb-a does not define `\Hot`)
 and four bibliography entries; 23 claim rows (XIIbb-A001–A022 and XIIbb-A044); 4 corrections merged.
+
+### XIIc-a / XIIc-b — printed pp. 145–149, ms. 228–234 (beginning). Kept: XIIc-a.
+
+The XIIc-b text sets every diagram of these pages with `ampersand replacement=\&` and other column and row separations
+(layout only) and draws two dotted arrows differently. On ms. 229 the arrow p_f bends by 60 degrees instead of 45
+(layout). On ms. 230 (printed p. 146) the edition draws the dotted arrow pr_1 from X × I down to X to the right of the
+vertical arrows i_X and i_0^X, with its label on its right, as XIIc-b has it; XIIc-a had it as a loop on the left of
+the diagram. Corrected in XIIc-a, with a correction row. Carried: blocks "An interval with room at both ends"
+(ms. 228), "A cylinder and a circle in finite categories" and "What the appeal to Thomason supplies" (ms. 230), "Weak
+equivalences between objects under a fixed base" (ms. 232) and "Comparing the two meanings of homotopy pushout"
+(ms. 233), each placed in the file before the XIIc-a block that follows it in the text, with one bibliography entry;
+23 claim rows (XIIcb-A001–A023); 5 corrections merged.
+
+### XIII-a / XIII-b — printed pp. 29–33, ms. 50 (end)–60 (beginning). Kept: XIII-a.
+
+The texts are identical. Carried: seven blocks (ms. 51, 53, 54 ×2, 55, 57, 59), placed in reading order (where a
+carried block is set at the same place as an XIII-a block, the one with the earlier anchor page comes first); in the
+copy of "Why uniform left structures produce right images" the block with the Brown argument is named instead of being
+called "the next block", since an XIII-a block stands between them. Three bibliography entries; 46 claim rows
+(XIIIb-Q001–Q046); 8 corrections merged.
 
 ## Carried material, item by item
 
@@ -165,6 +191,46 @@ and four bibliography entries; 23 claim rows (XIIbb-A001–A022 and XIIbb-A044);
 - Reference copied into `DER_XIIb-a_references.bib`: `Grothendieck1983`.
 - Reference copied into `DER_XIIb-a_references.bib`: `Grothendieck1991Letter`.
 - Commentary block copied into `DER_XIIb-a_blocks.tex`: "Integration as a calculus of gluing" (anchor `p121`).
+
+### XIIc-b -> XIIc-a
+
+- Text of `DER_XIIc-a_text.tex` corrected on ms. 230 (printed p. 146): `\arrow[dd, dotted, out=180, in=180, looseness=4, "\mathrm{pr}_1"']` -> `\arrow[dd, dotted, bend left=45, "\mathrm{pr}_1"{pos=.60}]`.
+- Correction row added to `DER_XIIc-a_corrections.csv` (pdf_page 32; ms230; dotted arrow pr_1 in the expanded mapping-cylinder diagram (printed p. 146); transcription).
+- Claim rows moved from `DER_XIIc-b_claims.csv` to `DER_XIIc-a_claims.csv` (23, ids kept): XIIcb-A001 (ms. 228, open), XIIcb-A002 (ms. 228, stated), XIIcb-A003 (ms. 228, stated), XIIcb-A004 (ms. 228, stated), XIIcb-A005 (ms. 228, stated), XIIcb-A006 (ms. 228 (continued footnote), stated), XIIcb-A007 (ms. 228 (continued footnote), stated), XIIcb-A008 (ms. 228 (continued footnote), stated), XIIcb-A009 (ms. 229, stated), XIIcb-A010 (ms. 229, stated), XIIcb-A011 (ms. 229–230, proved), XIIcb-A012 (ms. 230, stated), XIIcb-A013 (ms. 230, proved), XIIcb-A014 (ms. 230, stated), XIIcb-A015 (ms. 231–232, proved), XIIcb-A016 (ms. 231–232, proved), XIIcb-A017 (ms. 231 footnote 125; 232 NB, proved), XIIcb-A018 (ms. 232, proved), XIIcb-A019 (ms. 232–233, open), XIIcb-A020 (ms. 233, proved), XIIcb-A021 (ms. 233–234, proved), XIIcb-A022 (ms. 234, stated), XIIcb-A023 (ms. 234, proved).
+- Correction row 2 of `DER_XIIc-b_corrections.csv` (ms.229, first paragraph: factoriastion -> Intended: factorisation., edition_slip_kept) merged into row 43 of `DER_XIIc-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 3 of `DER_XIIc-b_corrections.csv` (ms.230, sentence following the formula for i_f: comme composé de $Y \longrightarrow Y \amalg X$ -> Intended: comme composé de $X \longrightarrow Y \amalg X$., edition_slip_kept) merged into row 44 of `DER_XIIc-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 4 of `DER_XIIc-b_corrections.csv` (ms.232, end of Proposition 16 proof: $Y'_0 \longrightarrow Y$ -> Intended: $Y'_0 \longrightarrow Y'$., edition_slip_kept) merged into row 45 of `DER_XIIc-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 5 of `DER_XIIc-b_corrections.csv` (ms.232, question about a pushout: $S' \longrightarrow S$ -> Intended: $S \longrightarrow S'$., edition_slip_kept) merged into row 46 of `DER_XIIc-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 6 of `DER_XIIc-b_corrections.csv` (ms.234, first paragraph after the two-square diagram: immersions ouverts -> Intended: immersions ouvertes., edition_slip_kept) merged into row 47 of `DER_XIIc-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Reference copied into `DER_XIIc-a_references.bib`: `Grothendieck1990XIIa`.
+- Commentary block copied into `DER_XIIc-a_blocks.tex`: "An interval with room at both ends" (anchor `p228:assurent que ça existe, avec`), placed before "Conservative gluing is an additional hypothesis".
+- Commentary block copied into `DER_XIIc-a_blocks.tex`: "A cylinder and a circle in finite categories" (anchor `p230:donc aussi la rétraction`), placed before "The mapping cylinder, with the two endpoints distinguished".
+- Commentary block copied into `DER_XIIc-a_blocks.tex`: "What the appeal to Thomason supplies" (anchor `p230:donc aussi la rétraction`), placed before "The mapping cylinder, with the two endpoints distinguished".
+- Commentary block copied into `DER_XIIc-a_blocks.tex`: "Weak equivalences between objects under a fixed base" (anchor `p232:Ici, c'est un argument formel, valable`), placed before "Why Proposition 16 is a formal gluing lemma".
+- Commentary block copied into `DER_XIIc-a_blocks.tex`: "Comparing the two meanings of homotopy pushout" (anchor `p233:Il faut donc vérifier :`), placed before "Completing the pasting step".
+
+### XIII-b -> XIII-a
+
+- Claim rows moved from `DER_XIII-b_claims.csv` to `DER_XIII-a_claims.csv` (46, ids kept): XIIIb-Q001 (ms. 50, stated), XIIIb-Q002 (ms. 50, stated), XIIIb-Q003 (ms. 50–51, stated), XIIIb-Q004 (ms. 50–51, stated), XIIIb-Q005 (ms. 51, stated), XIIIb-Q006 (ms. 51, assumed), XIIIb-Q007 (ms. 51, stated), XIIIb-Q008 (ms. 51, stated), XIIIb-Q009 (ms. 51–52, stated), XIIIb-Q010 (ms. 52, stated), XIIIb-Q011 (ms. 52, stated), XIIIb-Q012 (ms. 52, stated), XIIIb-Q013 (ms. 52, open), XIIIb-Q014 (ms. 53, stated), XIIIb-Q015 (ms. 53, false), XIIIb-Q016 (ms. 53, stated), XIIIb-Q017 (ms. 53, stated), XIIIb-Q018 (ms. 53, stated), XIIIb-Q019 (ms. 53–54, open), XIIIb-Q020 (ms. 53–54, conjectured), XIIIb-Q021 (ms. 54, open), XIIIb-Q022 (ms. 54, stated), XIIIb-Q023 (ms. 54–55, stated), XIIIb-Q024 (ms. 54 footnote32, open), XIIIb-Q025 (ms. 55, stated), XIIIb-Q026 (ms. 55, open), XIIIb-Q027 (ms. 55, stated), XIIIb-Q028 (ms. 55, sketched), XIIIb-Q029 (ms. 55, stated), XIIIb-Q030 (ms. 55–56, conjectured), XIIIb-Q031 (ms. 56, stated), XIIIb-Q032 (ms. 56, open), XIIIb-Q033 (ms. 56, stated), XIIIb-Q034 (ms. 57, stated), XIIIb-Q035 (ms. 57, stated), XIIIb-Q036 (ms. 57–58, stated), XIIIb-Q037 (ms. 58, stated), XIIIb-Q038 (ms. 58, stated), XIIIb-Q039 (ms. 59, assumed), XIIIb-Q040 (ms. 59, stated), XIIIb-Q041 (ms. 59, stated), XIIIb-Q042 (ms. 59, sketched), XIIIb-Q043 (ms. 59, stated), XIIIb-Q044 (ms. 60–65, proved), XIIIb-Q045 (ms. 60,65–66, proved), XIIIb-Q046 (ms. 60, stated).
+- Correction row 3 of `DER_XIII-b_corrections.csv` (ms. 51, after Definition 2 [sic line 61]: eventuellement -> éventuellement, edition_slip_kept) merged into row 29 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 4 of `DER_XIII-b_corrections.csv` (ms. 51, Example 2 [sic line 65]: K^{\bullet}(A) -> K^{\bullet}(\mathcal A), edition_slip_kept) merged into row 28 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 5 of `DER_XIII-b_corrections.csv` (ms. 52, definition of nonnegative/nonpositive complexes: K^i=0 si i\geq0, resp. si i\leq0 -> K^i=0 si i<0, resp. si i>0, edition_slip_kept) merged into row 30 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 6 of `DER_XIII-b_corrections.csv` (ms. 53, first paragraph [sic line 80]: elle même -> elle-même, edition_slip_kept) merged into row 31 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 7 of `DER_XIII-b_corrections.csv` (ms. 55, first sentence [sic line 97]: des ces structures -> de ces structures, edition_slip_kept) merged into row 32 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 8 of `DER_XIII-b_corrections.csv` (ms. 56, paragraph before Section 6 [sic line 113]: u_{\star} -> u_* (same right direct-image functor; notation normalized only in commentary), edition_slip_kept) merged into row 33 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 9 of `DER_XIII-b_corrections.csv` (ms. 59, Theorem-scholie 1), parenthetical on finite shapes: \mathcal M étant supposée stable par \varinjlim finies -> \mathcal M étant supposée stable par \varprojlim finies, edition_slip_kept) merged into row 35 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Correction row 10 of `DER_XIII-b_corrections.csv` (ms. 60, Theorem-scholie 1)b) [sic line 155]: suite croissante de fermées -> suite croissante de fermés, edition_slip_kept) merged into row 36 of `DER_XIII-a_corrections.csv`, the same reading; its evidence is appended there in brackets.
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "Quillenisability and the strength of its qualifiers" (anchor `p51:En pratique, j'utiliserai cette définition`), placed before "Two meanings of a bounded diagram of complexes".
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "A bound on each component is not a bound on the diagram" (anchor `p53`), placed before "Unbounded resolutions remove the dimensional restriction".
+- Reference copied into `DER_XIII-a_references.bib`: `Joyal1984Letter`.
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "An answer already present in Joyal's letter" (anchor `p54`), placed before "The two elementary derivator axioms".
+- Reference copied into `DER_XIII-a_references.bib`: `Serpe2003`.
+- Reference copied into `DER_XIII-a_references.bib`: `StacksKInjective079P`.
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "Unbounded resolutions answer the derived-image question" (anchor `p54`), placed before "The two elementary derivator axioms".
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "Localization axioms, stability, and locally constant coefficients" (anchor `p55`), placed before "Locally constant diagrams depend on the homotopy type".
+- In the copy of "Why uniform left structures produce right images": "the general Brown argument given in the next block." -> "the general Brown argument given below, in the block ``The Brown argument makes admissibility automatic''.".
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "Why uniform left structures produce right images" (anchor `p57`), placed before "Closure and exactness already imply both trivial-class equalities".
+- Commentary block copied into `DER_XIII-a_blocks.tex`: "The Brown argument makes admissibility automatic" (anchor `p59`), placed before "Every available right Kan extension is admissible".
 
 ### I-b: rejected
 

@@ -85,7 +85,7 @@ CHUNKS = [
     ("DER_XVIII-e", [("XVIII", "part 5 of 5")]),
     ("DER_XIX", [("XIX", "")]),
 ]
-# Overlaps: six pairs of chunks transcribe the same five edition pages (one part file of the transcription). The book
+# Overlaps: eight pairs of chunks transcribe the same five edition pages (one part file of the transcription). The book
 # sets those pages once, from the earlier chunk of the pair, which also holds the commentary blocks, claims and
 # corrections of the other chunk on them (reader/OVERLAPS.md). For the chunk named here, the edition pages (printed
 # page numbers, \printedpage) from..to are not set: the cut runs from the part-file line that opens page `from` to the
@@ -97,6 +97,8 @@ SKIP_PAGES = {
     "DER_VII-b": (34, 38),    # ms. 49' (end)-57 (beginning), set from DER_VII-a
     "DER_VII-c": (69, 73),    # ms. 108-117 (beginning), set from DER_VII-b
     "DER_XIIb-b": (78, 82),   # ms. 114 (end)-122 (beginning), set from DER_XIIb-a
+    "DER_XIIc-b": (145, 149), # ms. 228-234 (beginning), set from DER_XIIc-a
+    "DER_XIII-b": (29, 33),   # ms. 50 (end)-60 (beginning), set from DER_XIII-a
 }
 STATUSES = ["proved", "sketched", "stated", "assumed", "conjectured", "false", "open"]
 LISTED = ("false", "open", "conjectured")
@@ -1113,12 +1115,15 @@ def drop_nocite_all(cid, text, notes):
 
 
 def drop_contents_lines(cid, text, notes):
-    """The book writes its own contents: a chunk's \\addcontentsline or \\addtocontents is not used."""
+    """The book writes its own contents and bookmarks: a chunk's \\addcontentsline, \\addtocontents or \\pdfbookmark
+    is not used."""
     arg = r"\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}"
     new, n = re.subn(r"(?:\\phantomsection\s*)?\\addcontentsline\s*" + arg + r"\s*" + arg + r"\s*" + arg +
-                     r"|\\addtocontents\s*" + arg + r"\s*" + arg, "", text)
+                     r"|\\addtocontents\s*" + arg + r"\s*" + arg +
+                     r"|\\pdfbookmark\s*(?:\[[^\]]*\])?\s*" + arg + r"\s*" + arg, "", text)
     if n:
-        notes.append(f"{cid}: {n} contents line(s) of the chunk's own reader not used (the book writes its contents)")
+        notes.append(f"{cid}: {n} contents line(s) or bookmark(s) of the chunk's own reader not used (the book writes "
+                     f"its contents and bookmarks)")
     return new
 
 
