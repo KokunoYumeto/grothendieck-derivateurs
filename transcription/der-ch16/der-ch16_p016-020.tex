@@ -1,0 +1,236 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Mono}{\mathrm{Mono}}
+\newcommand{\univ}{\mathrm{univ}}
+\newcommand{\id}{\mathrm{id}}
+
+% footnote marks in the text printed as superscript (n), in the footnote as superscript n
+\makeatletter
+\renewcommand\@makefnmark{\hbox{\textsuperscript{\normalfont(\@thefnmark)}}}
+\renewcommand\@makefntext[1]{\parindent 1em\noindent\hbox{\textsuperscript{\normalfont\@thefnmark}}\,#1}
+\makeatother
+
+\begin{document}
+
+\noindent\printedpage{14}% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+X_0 \arrow[rr, "i_2"] \arrow[dr, "i_1"] \arrow[dd, "i_1"'] \& \& X_2 \arrow[dr, "j_1"] \arrow[dd, "j_1" near start] \& \\
+\& X_1 \arrow[rr, "j_2" near start, crossing over] \& \& X_3 \arrow[dd, "\id"] \\
+X_1 \arrow[rr, "j_2" near end] \arrow[dr, "\id"'] \& \& X_3 \arrow[dr, "\id"'] \& \\
+\& X_1 \arrow[rr, "j_2"] \arrow[from=2-2, "\id"' near start, crossing over] \& \& X_3,
+\end{tikzcd}
+\tag*{(Q$'$)} % ?? uncertain: placement of the label "id" printed above the left part of the back lower edge X_1 -> X_3 -- label of the front vertical X_1 -> X_1, or of the edge X_1 -> X_3
+\]
+où $f_0 = i_1$, $f_1 = \id_{X_1}$, $f_1 = j_1$, $f_3 = \id_{X_3}$, donc % [sic] $f_1 = j_1$ -> $f_2 = j_1$, $f_1$ is already given as $\id_{X_1}$ and $f_2$ is missing
+\[
+j_1 \in W \Longrightarrow i_1 \in W, \ \ \textit{i.e.}\ \text{Loc (6 b)} \Longrightarrow \text{Loc (6$'$ b)},
+\]
+et si on a Loc (6 c), on voit que $i_1 \in W \Longrightarrow j_1 \in W$, \textit{i.e.} Loc (6$'$ a).
+
+\textbf{Commentaire 3.2.} Loc (6 a) m'apparaît comme le “minimum vital” pour établir l'existence d'une théorie des cofibres $W$-homotopique dans Cat. Pour cela, il faut en effet disposer d'un critère serviable assurant qu'une flèche $i : A \longrightarrow B$ dans Cat est dans $\Cof_W$.
+
+\msp{page 19}On trouve, quand on dispose de Loc (6 a) (sous forme duale, \textit{i.e.} pour les \textit{fermés,} c'est kif-kif), que les \textit{immersions ouvertes de Dwyer} sont dans $\Cof_W$, ce qui suffit pour avoir \textit{une bonne théorie des cofibres $W$-homotopiques, dans laquelle les carrés MV sont $W$-cocartésiens} (chose a laquelle on tient absolument). % [sic] a laquelle -> à laquelle, missing accent
+
+Quant à Loc (6 b), si je dispose à la place de Loc (6$'$ b) + Loc (6 a), je dois m'en tirer pour prouver Loc (6). Dans XII Appendice (pages 265 ff.) je prouve, paraît-il, que (avec les notations actuelles) Loc (6$'$) implique Loc (6), et même Loc (6 c) si $W$ est stable par facteurs directs (condition Loc (1 bis)). Mais la démonstration est incomplète, puisque j'admets tacitement que les immersions de Dwyer sont dans $\Cof_W$, chose que je n'avais établie que moyennant l'axiome W (7), en fait moyennant Loc (6 a) (ce qui est une partie de W (7)).
+
+\msp{page 20}Mais ici me vient l'idée du lemme de K. S. \textsc{Brown}, cité par \textsc{Baues}, que je vais redonner ici :
+
+\textbf{Lemme 3.2.1.} (K. S. \textsc{Brown}) \textit{Soit $(\mathcal{M}, W)$ un localiseur} ($W$ \textit{modérément saturé}), \textit{muni d'un ensemble $C \subset \Fl\,\mathcal{M}$ satisfaisant les conditions :}
+\begin{enumerate}
+\item[1)] \textit{$C$ stable par composition et par cochangement de base} (N.B. \textit{on n'a à supposer l'existence des sommes amalgamées}
+$\begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname-1-1.base), row sep=small, column sep=small]
+X_0 \arrow[rr, "i_1"] \arrow[dr, "i_2"'] \& \& X_1 \arrow[dr] \& \\
+\& X_2 \arrow[rr] \& \& X_3
+\end{tikzcd}$
+\textit{que si $i_1 \in C$}), \textit{contient les isomorphismes.}
+\item[2)] \textit{$\mathcal{M}$ contient un objet initial, $\emptyset_{\mathcal{M}}$, et pour tout objet $X$ de $\mathcal{M}$, $\emptyset_{\mathcal{M}} \longrightarrow X$ est dans $C$.} (N.B. (1) \textit{et} (2) \textit{impliquent que $\mathcal{M}$ est stable par sommes finies.})
+\item[3)] \textit{Toute flèche $f$ de $\mathcal{M}$ se factorise en $pi$, avec $i \in C$, $p \in W$.}
+\item[4)] \textit{$C \cap W$ est stable par cochangement de base,} i.e. \textit{si}
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+X_0 \arrow[rr, "i_1"] \arrow[dr, "i_2"'] \& \& X_1 \arrow[dr] \& \\
+\& X_2 \arrow[rr, "j_1"'] \& \& X_3
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\printedpage{15}% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\textit{est cocartésien et $i_1 \in C \cap W$, alors $j_1 \in C \cap W$.} (N.B. \textit{$j_1 \in C$ est déjà contenu dans} (1), \textit{il reste à exiger $j_1 \in W$.})
+\end{enumerate}
+\textit{Sous ces conditions, on a $C \subset \Cof_W$.}
+
+On peut aussi énoncer le lemme ainsi
+
+\textbf{Corollaire 3.2.2.} \textit{Supposons que $C$ satisfait} (1), (2), (3). \textit{Alors}
+\msp{page 21}\textit{les conditions suivantes sur $C$ sont équivalentes.}
+\begin{enumerate}
+\item[a)] \textit{Condition} (4) \textit{ci-dessus,} i.e. \textit{stabilité de $C \cap W$ par cochangement de base.}
+\item[a$'$)] \textit{$C \cap W \subset W^{\univ}$.}
+\item[b)] \textit{$C \subset \Cof_W$.}
+\item[b$'$)] \textit{Pour tout carré cocartésien}
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+X_0 \arrow[rr, "i"] \arrow[dr, "p"'] \arrow[to=2-4, phantom, "\textit{coc.}" description] \& \& X_1 \arrow[dr, "q"] \& \\
+\& X'_0 \arrow[rr, "j"] \& \& X'_1
+\end{tikzcd}
+\]
+\textit{avec $i \in C$, $p \in W$, on a $q \in W$.}
+\end{enumerate}
+\textsc{Démonstration}. On a
+\[
+\begin{aligned}
+&\text{b} \iff \text{b}'\\
+&\text{a} \iff \text{a}'
+\end{aligned}
+\]
+car $C$ est stable par cochangement de base. On a b $\Longrightarrow$ a$'$ car $\Cof_W \cap W = W^{\univ}$ grâce à l'hypothèse 3°). On a a $\Longrightarrow$ b$'$ par le lemme de Brown.
+
+On va appliquer ceci au cas $\mathcal{M} = \mathrm{Cat}$, $C =$ immersions ouvertes de Dwyer. Les conditions 1), 2) ne dépendent pas de $W$, elles sont vérifiées, et 3) aussi dès que $W$ est un localiseur fondamental. Quant à 4), c'est une conséquence de l'ancien W (7 bis), \textit{i.e.} Loc (6$'$) (on a
+\msp{page 22}besoin apparemment de Loc (6$'$ a \textit{et} b).) On en conclut $C \subset \Cof_W$ - c'est merveilleux! (Mais je ne sais pas prouver le lemme \dots)
+
+Cela légitime la démonstration faite dans XII \textit{loc. cit.}, et on trouve la
+
+\textbf{Proposition 3.3.} \textit{La condition} Loc (6$'$) (\textit{axiome du carré cocartésien, forme forte} (a) \textit{et} (b)) équivaut \textit{à} Loc (6 a, b) (\textit{axiome des homomorphismes des carrés cocartésiens}) \textit{et est} impliqué \textit{par} Loc (6 c). \textit{Si $W$ satisfait à} Loc (1 bis), i.e. \textit{est stable par facteurs directs, alors} Loc (6$'$) équivaut \textit{à} Loc (6 c) \textit{et à} Loc (6 a b c).
+
+\textbf{Commentaire 3.4.} Ainsi, on trouve une théorie des cofibres $W$-homotopiques \textit{soit} sous l'hypothèse Loc (6$'$) (équivalente à Loc (6) plus compliquée), soit sous l'hypothèse plus faible (et plus compliquée) Loc (6 a).
+
+% left margin: a vertical line is printed alongside the following paragraph
+Dans le premier cas, c'est une théorie de nature très particulière, puisque les carrés $W$-cocartésiens sont “réversibles” (\textit{i.e.} on a non seulement $i_1 \in W \Longrightarrow j_1 \in W$, mais aussi l'implication inverse).
+
+Il reste donc la question si Loc (6$'$ a) suffit pour une théorie des cofibres $W$-homotopiques, ou ce qui revient sûrement au même, si ça implique déjà Loc (6 a) (donc lui est équivalent). C'est entièrement suspendu à la \textit{question} :
+
+\printedpage{16}% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\msp{page 23}% left margin: a question mark followed by a double vertical line alongside the first three lines of the following paragraph
+\marginpar{\footnotesize ?\,$\Vert$}l'axiome Loc (6$'$ a) (axiome du carré cocartésien, forme directe) implique-t-il que l'ensemble des immersions ouvertes de Dwyer qui sont dans $W$ (immersions de Dwyer $W$-triviales) est stable par cochangement de base ? En fait, on voit qu'il suffirait pour cela de vérifier l'axiome du cube (ou des homomorphismes de carrés cocartésiens), forme directe Loc (6 a), dans le cas où $f_0$ et $f_2$ sont des identités, donc à prouver qu'alors $f_1 \in W \Longrightarrow f_3 \in W$ (ce qui donnerait directement $\mathrm{Dw} \subset \Cof_W$). Mais je ne vois aucun moyen de le prouver \dots
+
+Supposons maintenant que la condition Loc (6 a) est vérifiée, donc qu'on dispose d'une “bonne théorie des cofibres $W$-homotopiques”, donc aussi d'une théorie des carrés $W$-cocartésiens (\textit{cf.} XII, p. 258-262). Il y a deux questions qui se posent, concernant la validité, avec ces hypothèses plus faibles, des développements de XII :
+\begin{enumerate}
+\item[1°)] Soit un carré commutatif
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+X_0 \arrow[rr] \arrow[dr] \& \& X_2 \arrow[dr] \& \\
+\& X_1 \arrow[rr] \& \& X_3
+\end{tikzcd}
+\]
+dans Cat, est-il vrai que ce carré est $W$-cocartésien si et seulement si la flèche
+\[
+\text{canonique}\ \displaystyle\int
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+\& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+\& X_2
+\end{tikzcd}
+\quad \longrightarrow \ X_3 \text{ est dans } W \text{ ? }\text{\footnotemark[15]}
+\]
+\footnotetext[15]{Mieux, dans tous les cas, quand on a un diagramme
+$\begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base), row sep=tiny, column sep=small]
+\& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+\& X_2
+\end{tikzcd}$, son intégrale $\displaystyle\int$ est une somme amalgamée $W$-homotopique dudit diagramme (moyennant Loc (6 a) sans plus, et même seulement Loc (6$'$ a)).}
+\end{enumerate}
+\msp{page 24}
+\begin{enumerate}
+\item[2°)] Est-il encore vrai que si $A$ est dans Cat, et $u : F \lhook\joinrel\longrightarrow G$ un homomorphisme dans $A^{\wedge}$, alors $u \in \Cof_{W_A}$, et si $u \in W$, $u \in W_A^{\univ}$, donc a-t-on
+\[
+\Mono_{A^{\wedge}} \subset \Cof_{W_A}, \qquad \Mono_{A^{\wedge}} \cap W_A \subset W_A^{\univ} \text{ ? }\text{\footnotemark[16]}
+\]
+\footnotetext[16]{N.B. Loc (6$'$ a) suffit au lieu de ( Loc (6 a)).}
+\end{enumerate}
+Mais 1°) est prouvé dans XII, prop. 20, p. 262 - je viens de vérifier que la démonstration est valable dans les hypothèses actuelles \footnote[17]{Mais elle utilise de plus Loc (3 bis). Mais avec une autre démonstration plus simple que je viens de rajouter (p 264), on peut s'en passer (et on obtient une vison plus complète de la situation).}, pourvu que je vérifie que le corollaire 3, p. 149 dans XII est valable, \textit{i.e.} % [sic] (footnote 17) vison -> vision, missing letter
+\begin{enumerate}
+\item[1° bis)] Si
+$\begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname-1-1.base)]
+X_0 \arrow[r] \arrow[d] \& X_1 \arrow[d] \\
+X_2 \arrow[r] \& X
+\end{tikzcd}$
+est un carré MV dans Cat, alors
+$\displaystyle\int
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+\& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+\& X_2
+\end{tikzcd}
+\quad \longrightarrow \quad X$ est dans $W$ (donc, moyennant 1°), le carré est $W$-cocartésien).
+\end{enumerate}
+
+\printedpage{17}% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+Pour le vérifier, je suis amené à vérifier que le théorème 4 dans loc. cit. (p. 146) est encore valable.
+
+Je viens de le faire, et ai annoté en conséquence le théorème 4 et ses corollaires (certains résultats (cor. 4 et cor. 5) utilisant W (7 bis) dans toute sa force, \textit{i.e.} Loc (6$'$), \textit{i.e.} Loc (6 a \textit{et} b). Mais le corollaire 3 du théorème 4 est O.K.
+
+Je viens aussi de vérifier la validité de 2°), en vérifiant la démonstration du corollaire du théorème 5 (XII, p. 168) et en l'annotant en conséquence.
+
+\msp{page 25}3.5. Résumons : on a
+\[
+\text{Loc (6 c)} \ \Longrightarrow \ \text{Loc (6)} \ \iff \ \text{Loc (6$'$)}
+\tag*{(3.5.1)}
+\]
+et
+\[
+\text{Si } \ W = W^{\natural}\,, \ \text{ on a } \ \text{Loc (6 c)} \ \iff \ \text{Loc (6)} \ \iff \ \text{Loc (6$'$)}.
+\tag*{(3.5.2)}
+\]
+D'autre part
+\[
+\text{Loc (6 a)} \ \Longrightarrow \ \text{Loc (6$'$ a)}\,,
+\tag*{(3.5.3)}
+\]
+et j'ignore si l'implication inverse
+\[
+\text{Loc (6$'$ a)} \ \overset{?}{\Longrightarrow} \ \text{Loc (6 a)}
+\]
+est valable \footnote[18]{C'est le cas en présence de Loc (8, 9).}. Pour établir Loc (6 a), il suffit de le faire en tous cas quand $f_0$ et $f_2$ sont des isomorphismes.
+
+L'axiome Loc (6 a) semble le “minimum vital” pour que $W$ donne lieu à une “bonne théorie des cofibres $W$-homotopiques”, donc aussi des carrés $W$-cocartésiens. De façon plus précise, j'ai envie de prouver ceci :
+
+\textbf{Proposition 3.6.} \textit{L'axiome} Loc (6 a) \textit{équivaut à la conjonction des deux propriétés suivantes.}
+
+\printedpage{18}% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\begin{itemize}[leftmargin=7em, labelwidth=6em]
+\item[\textbf{Loc (6 A)}] Cat a “assez de $W$-cofibrations”,
+\msp{page 26}\textit{i.e.} toute flèche $f$ de Cat se factorise en $f = pi$, avec $i \in \Cof_W$ et $p \in W$. (Cela signifie aussi que Cat muni de $(W, \Cof_W)$ est une catégorie à cofibrations de K. S. \textsc{Brown} - \textsc{Anderson}, et tous les résultats de la théorie de \textsc{Brown-Quillen} sont applicables. En particulier, on a une bonne théorie des carrés $W$-cocartésiens.)
+\item[\textbf{Loc (6 B)}] Si $X$ dans Cat est réunion de deux ouverts $U$, $V$, d'intersection $S$, alors le carré
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=large, column sep=large]
+S \arrow[r] \arrow[d] \& U \arrow[d] \\
+V \arrow[r] \& X
+\end{tikzcd}
+\]
+est $W$-cocartésien \footnote[19]{En fait, Loc (6 B) est conséquence de Loc (6 A), laquelle donc est \textit{équivalente} à Loc (6 a). (\textit{Cf.} esquisse de démonstration dans 4.4.15, pages 66-68.)}.
+\end{itemize}
+D'autre part, la condition Loc (6 A) peut être remplacée par la condition (en apparence plus faible)
+\begin{itemize}[leftmargin=7em, labelwidth=6em]
+\item[\textbf{Loc (6 A$'$)}] Tout morphisme de Dwyer est dans $\Cof_W$.
+\end{itemize}
+\textbf{Corollaire 3.7.} \textit{La condition} Loc (6), i.e. Loc (6 a, b) (\textit{ou encore la condition équivalente} Loc (6$'$)) \textit{équivaut à la conjonction des conditions} Loc (6 A) (\textit{ou} Loc (6 A$'$)) \textit{et} Loc (6 B) \textit{ci-dessus}), \textit{et de la condition}
+\begin{itemize}[leftmargin=7em, labelwidth=6em]
+\item[\textbf{Loc (6 C)}] Pour tout carré $W$-cocartésien
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=large]
+X_0 \arrow[r, "i"] \arrow[d] \& X_1 \arrow[d] \\
+X_2 \arrow[r, "j"] \& X
+\end{tikzcd}
+\]
+dans Cat, $j \in W \Longrightarrow i \in W$.
+\end{itemize}
+\msp{page 27}D'autre part, je soupçonne que Loc (6 c) n'est guère vérifiée que si $W = W^{\natural}$ (cas qui est le plus commun bien sûr), auquel cas Loc (6 c) \textit{équivaut} à Loc (6). Il n'y a sans doute pas lieu de l'inclure dans Loc (6), pas plus que $W = W^{\natural}$ dans Loc (1).
+
+\end{document}

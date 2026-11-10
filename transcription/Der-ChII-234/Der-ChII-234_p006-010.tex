@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Homint}{\operatorname{Hom\,int}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+\begin{document}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+0-connexes (\footnote[4]{Cela signifie aussi que $\alpha$ est $W_0$-coasphérique. Pour un traitement ab ovo, cf. prop. 3.2, page 43.}). Le fait que les $x\backslash C'$ non vide implique que $\varprojlim\limits_{C} \longrightarrow \varprojlim\limits_{C'}$ soit \textit{injectif.} Pour la sujectivité, si $\xi' \in \varprojlim\limits_{C'}$ (cas ensembliste), on définit $\xi \in \varprojlim\limits_{C}$ par les $\xi(x) \in F(x)$ à l'aide de % [sic] sujectivité -> surjectivité, lettre r omise
+\msp{page 6}
+\[ x \xrightarrow{u} \alpha(x') \]
+en prenant $u^*(\xi(x'))$ (où $\xi(x') \in (\alpha^*(F))(x') = F(\alpha(x')))$, le point essentiel est de montrer que les $u^*(\xi(x'))$ ne dépendent que de $x$, pas du choix de $(x',u) \in x\backslash C'$. Or pour $(x',u)$ variable dans $x\backslash C'$, l'application
+\[
+\begin{aligned}
+\varphi : \operatorname{Ob}(x\backslash C') &\quad\longrightarrow\quad F(x)\\
+(x',u) &\quad\longmapsto\quad u^*(\xi(x'))
+\end{aligned}
+\]
+est telle que s'il existe une flèche
+\[ (x',u) \xrightarrow{u'} (\bar{x}',\bar{u}) \qquad \text{où} \qquad u' : x' \longrightarrow \bar{x}' \]
+(donc le diagramme
+\[
+\begin{tikzcd}
+ & \alpha(x') \arrow[dd, "\alpha(u')"] \\
+x \arrow[ur, "u"] \arrow[dr, "\bar{u}"'] & \\
+ & \alpha(\bar{x}')
+\end{tikzcd}
+\]
+est commutatif), alors $\varphi(x',u) = \varphi(\bar{x}',\bar{u})$. Donc $\varphi$ est constant sur les composantes connexes de $x\backslash C'$, donc constant si $x\backslash C'$ est 0-connexe, d'où $\xi(x)$. On prouve alors aussitôt que pour $x$ variable,
+\[ \xi \overset{\text{déf}}{=} (\xi(x))_{x\in\operatorname{Ob} C} \simeq \varprojlim F, \qquad \text{\texttt{[plutôt}}\ \ \in \varprojlim F, \text{\texttt{]}} \]
+et que $\alpha^*(\xi) = \xi'$, cqfd.
+
+On peut dire que pour $x_0 \in \operatorname{Ob} C_0$ fixé, si on regarde le préfaisceau \textit{constant} sur $x_0\backslash C'$ de valeur $F(x_0)$, soit $\Phi_{x_0}$, l'application
+\[ (x',u) \longmapsto \xi^*(u') : x_0\backslash C' \longrightarrow F(x_0) \]
+peut être regardée comme une section de ce préfaisceau sur $x\backslash C'$, défini par $\xi' \in \varprojlim\limits_{C'} \alpha^*F$, donc on a
+\[ \varprojlim_{C'} \alpha^*F \xrightarrow{c_{x_0}} \Gamma(x_0\backslash C', \Phi_{x_0}) \qquad (\xleftarrow{\ \sim\ } F(x_0) \text{ si } x_0\backslash C \text{ 0-connexe}). \]
+Si on a \fbox{$x_0 \xrightarrow{v} x_1$} dans $C'$, on en déduit
+\[ x_1\backslash C' \xrightarrow{V} x_0\backslash C' \]
+(les $x\backslash C'$ sont les fibres d'une \textit{catégorie fibrée} $C\backslash C'$ sur $C$ \dots) et on a $F(x_1) \longrightarrow F(x_0)$, d'où \fbox{$\Phi_{x_1} \longrightarrow V^*\Phi_{x_0}$} pour les faisceaux constants correspondants sur $x_0\backslash C'$ resp. $x_1\backslash C'$
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 7}
+et on a commutativité dans
+\[
+\begin{tikzcd}[column sep=large]
+\varprojlim\limits_{C'} \alpha^*F \arrow[r, "c_{x_1}"] \arrow[d, "c_{x_0}"'] & \Gamma(x_0\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_0\backslash C'), F(x_0)) \arrow[d, "V^*"] & \\
+\operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_1)) \simeq \Gamma(x_1\backslash C', F(x_1)) \arrow[r, "\substack{v^*\\ (F(x_1) \longrightarrow F(x_0))}"'] & \Gamma(x_1\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_0)) & \\
+\pi_0(x_1\backslash C') \arrow[r, "\pi_0(V)"] \arrow[d, dotted] & \pi_0(x_0\backslash C') \arrow[d, dotted] & \text{commutatif.} \\
+F(x_1) \arrow[r, "F(v)"] & F(x_0) &
+\end{tikzcd}
+\]
+On considère le préfaisceau d'ensembles
+\[ x \longmapsto \pi_0(x\backslash C') \qquad \text{sur } C, \]
+appelons-le $\pi_0(C'/C)$, on aura un morphisme canonique
+\[ \boxed{\varprojlim_{C'} \alpha^*(F) \xrightarrow{\ \sim\ } \operatorname{Hom}_{\substack{\text{préfaisceaux}\\ \text{d'ensembles sur $C$}}} (\pi_0(C'/C), F),} \]
+sans doute toujours \texttt{[un]} isomorphisme.
+
+Si on travaille dans la catégorie dérivée des préfaisceaux des $k$-modules ($k$ un anneau), la formule précédente suggère conjecturalement
+\[ \boxed{\mathbf{R}\Gamma(C', \alpha^*F) \simeq \mathbf{R}\underbrace{\operatorname{Hom}}_{\text{Hom internes}}\ (\underbrace{\mathbf{L}\alpha_!(k_{C'})}_{\substack{\text{homologie}\\ \text{relative de}\\ \text{$C'$ sur $C$}}}, F).} \]
+
+\msp{page 8}
+L'augmentation canonique
+\[ \mathbf{L}\alpha_!(k_{C'}) \longrightarrow k_C \]
+redonne, en prenant les $\mathbf{R}\mathrm{Hom}$ dans $F$,
+\[ \mathbf{R}\Gamma(C,F) \longrightarrow \mathbf{R}\operatorname{Hom}(\mathbf{L}\alpha_!(k_{C'}), F) \xleftarrow{\ \sim\ } \mathbf{R}\Gamma(C', \alpha^*F) \]
+l'homomorphisme canonique de `contravariance' de la cohomologie.
+
+Si par contre on travaille avec le dérivateur non additif HOT, donc $F$ un `type d'homotopie relatif' sur $C$, on doit avoir
+\[ \boxed{\mathbf{R}\Gamma_{\mathrm{HOT}}(C', \alpha^*F) \xrightarrow{\ \sim\ } \mathbf{R}\Gamma(C\,,\ \underbrace{\operatorname{Hom}}_{\substack{\text{Hom interne}\\ \text{de la catégorie des}\\ \text{types d'homotopie}\\ \text{relatifs sur $C$}}}\ (\ \alpha_!\ (\ \underbrace{e_{C'}}_{\substack{\text{objet final}\\ \text{de HOT($C'$),}\\ \text{type d'homotopie}\\ \text{relatif final}\\ \text{sur $C'$}}}\ ),\ F)).} \]
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+En fait, ces formules sont quasi-tautologiques, si on admet l'existence des foncteurs $\alpha_!$ comme adjoints \textit{à gauche} des $\alpha^*$. Dans le cas abélien, disons,
+\msp{page 9}
+l'isomorphie des $H^0$ des deux membres est la formule d'adjonction
+\[ \operatorname{Hom}_{C'}(k_{C'}, \alpha^*F) \simeq \operatorname{Hom}_C(\alpha_!(k_{C'}), F), \]
+d'où l'isomorphie pour les $H^i$ des deux membres, par décalage. De même dans le cas de HOT, l'isomorphie canonique des $\pi_0$ des deux membres est la formule d'adjonction. Pour avoir l'isomorphisme plus fin dans $\mathbf{D}(e)$, la catégorie fondamentale du dérivateur envisagé, en termes de Hom internes, on doit admettre l'existence d'objets unité (les $k_X$ dans un cas, les $e_X$ \texttt{[plutôt} $\varepsilon_X$\texttt{]} dans l'autre), compatibles avec images inverses, de telle façon \texttt{[que]} $\Homint(\varepsilon_X, \underbrace{F}_{\in\mathbf{D}_X}) \simeq F$. On aura
+\[ \Gamma(C', \alpha^*F) \overset{\text{déf}}{=} f'_*(\alpha^*(F)) \simeq f_*(\alpha_*\alpha^*(F)), \]
+et la question est donc de donner une interprétation de $\alpha_*\alpha^*F$ comme
+\[ \alpha_*\alpha^*F \simeq \Homint(\alpha_!(\varepsilon_{C'}), F) \qquad \text{dans } \mathbf{D}(C). \]
+Pour ceci, on va écrire
+\[ \alpha^*(F) \simeq \Homint(\varepsilon_{C'}, F), \]
+et la formule doit résulter d'une `formule d'adjonction interne'
+\msp{page 10}
+\[ ? \qquad\qquad \boxed{\alpha_*(\Homint_{C'}(G', \alpha^*F)) \simeq \Homint_C(\alpha_!G', F).} \]
+(\textit{Formule d'adjonction `interne',} pour $\alpha_!$ et $\alpha^*$, valable en principe pour \textit{tout} $\alpha : C' \longrightarrow C$ dans Diag, tout $G'$ dans $\mathbf{D}(C')$ et tout $F$ dans $\mathbf{D}(C)$.)
+
+Comment prouver cette formule ? En prenant l'opération produit $\otimes$ associé à l'opération Hom\,int, on est ramené (en prenant les foncteurs contravariants associés) à une formule
+\[ G \otimes \alpha_!G' \xrightarrow{\ \sim\ } \alpha_!(\alpha^*G \otimes G'). \]
+On trouve par adjonction un homomorphisme canonique, il faut voir s'il est toujours \texttt{[un]} isomorphisme.
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 11}
+
+\section*{2\quad Les catégories localement filtrantes sont les catégories localement totalement $0$-connexes}
+
+Soit $\mathcal{T}$ un topos. On dit que $\mathcal{T}$ est \textit{irréductible} si l'ensemble ordonné $\operatorname{Ouv}(\mathcal{T})$ des sous-objets de $e_{\mathcal{T}}$ a la propriété suivante : a) $\operatorname{Ouv}(\mathcal{T})$ n'est pas réduit à un élément, i.e. $\emptyset_{\mathcal{T}} \longrightarrow e_{\mathcal{T}}$ n'est pas un isomorphisme ($\mathcal{T}$ n'est pas identique à son sous-topos vide). b) Si $U'$, $U''$ sont deux objets `non vides', i.e. non initiaux, de $\operatorname{Ouv}(\mathcal{T})$, leur intersection est `non vide'. Il revient au même pour b) de dire que si $\mathcal{T}'$, $\mathcal{T}''$ sont deux sous-topos fermés distinct de $\mathcal{T}$, alors leur supremum $\mathcal{T}' \cup \mathcal{T}''$ est distinct de $\mathcal{T}$, ou encore que tout ouvert de $\mathcal{T}$ est connexe. On dit que $\mathcal{T}$ est \textit{localement irréductible} si a) $\mathcal{T}$ est localement connexe (i.e. chaque faisceau sur $\mathcal{T}$ est somme de faisceaux 0-connexes), et si b) pour tout faisceau 0-connexe $U$ sur $\mathcal{T}$, le topos induit $\mathcal{T}/U$ est irréductible (i.e. l'ensemble ordonné $\operatorname{Ouv}(U)$ des sous-objets de $U$ a la propriété b) ci-dessus ( a) signifie simplement que $U \not\simeq \emptyset_{\mathcal{T}}$, i.e. que $U$ n'est pas objet initial dans $\mathcal{T}^\wedge$ ; ou plus simplement) : tout sous-faisceau d'un faisceau connexe est connexe (\footnote[5]{\textbf{NB} Irréductible n'implique pas localement irréductible, pas plus que connexe n'implique pas localement connexe etc.}) (\footnote[6]{$\mathcal{T}$ est localement irréductible si et seulement s'il a un ensemble des générateurs $(U_\alpha)$, avec les $U_\alpha$ irréductibles (donc 0-connexes, donc $\mathcal{T}$ est localement connexe).}).
+
+Quand $\mathcal{T}$ est de la forme $\operatorname{Top}(T)$, où $T$ est un espace topologique, alors $\mathcal{T}$ irréductible signifie que $T$ est irréductible (car alors $\operatorname{Ouv}(\mathcal{T}) \simeq \operatorname{Ouv}(T)$). Cela implique déjà trivialement que $T$ est localement connexe (tout ouvert est somme disjoint d'ouverts connexes), donc $\operatorname{Top}(\mathcal{T})$ est localement connexe. De plus, cela implique aussi que $\operatorname{Top}(T)$ est localement irréductible (\footnote[7]{expliciter la démonstration.}). (\textbf{NB} Les objets 0-connexes % [sic] \operatorname{Top}(\mathcal{T}) -> \operatorname{Top}(T), Top s'applique à l'espace T et non au topos \mathcal{T}
+\msp{page 12}
+de $\operatorname{Top}(T)^\wedge$, i.e. les faisceaux d'ensembles 0-connexes sur $T$, sont ceux dont la `fibre générique' a exactement un point \dots) Aussi $\mathcal{T} = \operatorname{Top}(T)$ est localement irréductible si et seulement si $T$ \texttt{[est]} localement connexe, et les composantes connexes de $T$ sont irréductibles, i.e. si et seulement si $T = \coprod_i T_i$, les $T_i$ irréductibles.
+
+Si $\mathcal{T}$ est de la forme $\operatorname{Top}(X)$, $X$ une catégorie, on sait que $\mathcal{T}$ est localement connexe (et même localement $\infty$-connexe). On voit d'autre part que $\mathcal{T}$ est irréductible si et seulement si $\operatorname{Esp}(X)$ (l'espace topologique associé, dont l'ensemble sous-jacent est $\operatorname{Ob} X$) est irréductible (\footnote[8]{car les ouverts de $\operatorname{Top}(X)$, ceux de $\operatorname{Esp}(X)$ et ceux de $X$ se correspondent.}) ; et on dit alors que $X$ est irréductible (\footnote[9]{Cela signifie aussi que pour $x$, $y$ dans $X$, $\exists\, z$ avec \begin{tikzcd}[ampersand replacement=\&, row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)] \& x \\ z \arrow[ur] \arrow[dr] \& \\ \& y \end{tikzcd}, i.e. $\operatorname{Ord}(X)$ est filtrant à gauche.}). Comme les composantes connexes de $X$ et celles de $\operatorname{Esp}(X)$ ou $\operatorname{Top}(X) = \mathcal{T}$ se correspondent, on voit donc que les conditions suivantes sont équivalentes : a) le topos $\operatorname{Top}(X)$ est localement irréductible, b)
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+$\operatorname{Esp}(X)$ est localement irréductible, c) les composantes connexes de $X$ sont irréductibles, d) les $X/x$ \texttt{[sont]} irréductibles. On dit alors que $X$ est localement irréductible (\footnote[10]{Faux, on a (a $\Longleftrightarrow$ d) $\Longrightarrow$ (b $\Longleftrightarrow$ c) $X$ irréductible n'implique \textit{pas} que les $X/x$ le soient, exemple $X = (0 \overset{\alpha}{\underset{\beta}{\rightrightarrows}} 1)$ $(\alpha \neq \beta)$, on a $X/1 =$ \begin{tikzcd}[ampersand replacement=\&, row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-2.base)] 0' \arrow[dr] \& \\ \& 1 \\ 0'' \arrow[ur] \& \end{tikzcd}, qui n'est \textit{pas} irréductible, ni localement irréductible puisqu'il est connexe. Pourtant il est étale sur $X$.}).
+
+Cela implique donc que pour tout $X'$ étale sur $X$, avec $X'$ 0-connexe, $X'$ est irréductible.
+
+\textit{Dire conditions équivalentes.}
+\begin{enumerate}
+\item[a)] $\operatorname{Top}(X)$ est localement irréductible.
+\item[b)] Les $X/x$ \texttt{[sont]} irréductibles.
+\item[c)] Tout objet 0-connexe de $X^\wedge$ est irréductible.
+\item[d)] Les composantes connexes de $X$ sont faiblement cofiltrantes (i.e. faiblement filtrantes à gauche).
+\item[e)] Condition PS $1_{\mathrm{g}}$ de SGA 4, I 2.
+\end{enumerate}
+Si $X$ est \texttt{[une]} catégorie, $X$ irréductible signifie aussi que $X \neq \emptyset$ et $\forall\, x, y \in \operatorname{Ob} X$, \texttt{[il]} existe \texttt{[un]} $s$ avec \begin{tikzcd}[row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)] & x \\ s \arrow[ur] \arrow[dr] & \\ & y \end{tikzcd}. (Cela signifie aussi que $X$ est \textit{faiblement filtrante} (\footnote[11]{Il est mieux l'appeler \textit{pseudo-filtrante,} et réservons faiblement filtrante à : localement faiblement filtrante + connexe.}) à gauche, ou faiblement cofiltrante.) $X$ localement irreductible signifie que pour $x$, $y$ \textit{appartenant à une même composante connexe,} \texttt{[il]} existe \texttt{[un]} $s$ avec \begin{tikzcd}[row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)] & x \\ s \arrow[ur] \arrow[dr] & \\ & y \end{tikzcd}, % [sic] irreductible -> irréductible, accent omis
+\msp{page 13}
+i.e. $X/[x] \cap X/[y] \neq \emptyset$ (où $[x]$ est considéré comme élément de l'ensemble ordonné $\operatorname{Ob} X$). Il revient encore au même de dire que les catégories induites $X/x$ sont irréductibles (\footnote[12]{faux, cf. annotation marginale plus haut.}).
+
+\textbf{Exemple.} Une catégorie \textit{ayant un objet initiale,} ou seulement un `plus petit objet', est irréductible. Inversement, si l'ensemble \textit{ordonné} $\operatorname{Ord}(X)$ associé à $X$ (quotient de $\operatorname{Ob}(X)$ par la relation d'équivalence associé à son préordre) est fini, p.ex. $X$ fini, ou seulement localement fini, p.ex. $X$ localement fini (i.e. les catégories $X/x$ finies), alors si $X$ est irréductible, $\operatorname{Ob} X$ a un plus petit élément, i.e. $X$ a un plus petit objet. C'est vrai plus généralement encore, si $\operatorname{Ord}(X)$ est artinien, i.e. toute suite décroissante dans $\operatorname{Ord}(X)$ est stationnaire. % [sic] initiale -> initial, accord avec « objet »
+
+Mais la condition intéressante est la condition topossique de \textit{locale} irréductibilité, qui équivaut : $I$ pseudo-filtrante à gauche, i.e. les composantes connexes de $I$ filtrantes, i.e. les conditions PS 1, PS 2
+
+PS 1\enspace Tout diagramme \begin{tikzcd}[row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-2.base)] x \arrow[dr] & \\ & s \\ y \arrow[ur] & \end{tikzcd} se complète en \begin{tikzcd}[row sep=0.2em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)] & x \arrow[dr] & \\ z \arrow[ur] \arrow[dr] & & s \\ & y \arrow[ur] & \end{tikzcd} \textit{commutatif.}
+
+PS 2\enspace Pour toute double flèche $x \rightrightarrows y$, \texttt{[il]} existe un égalisateur $z \longrightarrow x \rightrightarrows y$.
+
+\end{document}

@@ -1,0 +1,209 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\upi}{\underline{\pi}}
+\newcommand{\uCh}{\underline{\mathrm{Ch}}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+
+\begin{document}
+\setcounter{footnote}{65}
+
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Proposition 9.}
+
+\begin{enumerate}[label=\textit{\alph*)}]
+\item \textit{Tout objet $V$ de} Cat \textit{ayant un objet final est totalement $W$-asphérique - donc tout préfaisceau d'ensembles $H$} représentable \textit{sur une catégorie $U$ (la représentabilité signifiant justement que $U/H$ a un objet final) est totalement $W$-asphérique.}
+
+\item (\footnote{!! Sans doute \textit{faux} tel quel, cf. rectification page suivante.}) \textit{(Supposons} W(7 bis) \textit{satisfait.) Soient $V$ dans} Cat, \textit{$V'$, $V''$ deux ouverts de réunion $V$. Si $V'$, $V''$, $V'\cap V''$ sont totalement $W$-asphériques, il en est de même de $V$.}
+\end{enumerate}
+
+\noindent\textsc{Démonstration} de a). Soit $V$ avec objet final et $f : V \longrightarrow V'$, d'où la factorisation
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \tilde{V} = \upi_0(V/V') \arrow[dr, "\pi"'] & \\
+V \arrow[ur, "\tilde{f}"] \arrow[rr, "f"'] & & V'
+\end{tikzcd}
+\]
+de $f$. On démontre sans mal (\footnote{Voici une démonstration simple : On a pour toute $V$ dans Cat $e_V = \varinjlim_{v \text{ dans } V} v$ (limite inductive du foncteur d'inclusion de $V$ dans $V^\wedge$), car $\forall\, x$ dans $V$
+\[
+\varinjlim_{v \text{ dans } V} \Hom(x,v) \simeq \pi_0(x\backslash V) = e.
+\]
+Comme $f_!$ commute aux $\varinjlim$ , on a donc $f_!(e_V) = \varinjlim_{v \text{ dans } V} f(v)$. Si $v_0$ est un objet final de $V$, cela montre que $f_!(e_V) = f(v_0)$, q.e.d.}) (histoire de cofinalité) ceci :
+
+\noindent\textbf{Corollaire.} \textit{L'image par $\tilde{f}$ d'un objet final de $V$ est un objet final de $\tilde{V} = \upi_0(V/V')$.}
+
+Comme un objet de Cat avec objet final est $W$-asphérique par W(3), cela établit a).
+
+Prouvons b). J'ai envie de dire que si on a $f : V \longrightarrow W$ dans Cat, alors $\upi_0(V/W)$ est réunion de deux ouverts isomorphes à $\upi_0(V'/W)$, $\upi_0(V''/W)$, dont l'intersection est isomorphe à $\upi_0(V'\cap V''/W)$. Cela signifierait ni plus ni
+\msp{page 98}
+moins que ceci : $f_!$ transforme les monomorphismes $V' \longrightarrow V$, $V'' \longrightarrow V$ (interprétés comme flèches dans $V^\wedge$, de but $e_V$) en monomorphismes, et le produit fibré $V'\cap V'' = V' \times_V V''$ en le produit fibré correspondant dans $W^\wedge$. Mais le foncteur $f_!$ commute aux $\varinjlim$ quelconques (étant un adjoint à gauche), et je ne vois aucune raison a priori pour qu'il commute (disons) aux produits fibrés (ce qui impliquerait aussi qu'il transforme monomorphismes en itou). Si je me rappelle bien, c'est ultrafaux en général. Donc je doute fort à présent que l'énoncé b) soit vrai, sans hypothèse supplémentaire. Pour assurer la monomorphie, on songe à imposer l'existence de \textit{rétractions} de $V$ sur $V'$, $V''$ et de $V'$ ou $V''$ sur $V'\cap V''$.
+
+Je viens de vérifier la chose, et donne le
+% foot: Version 7 décembre 2002
+\printedpage{69}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textbf{Corollaire 1} (rectification de \texttt{[la]} prop. 9, partie b) (\footnote{NB Il y a un énoncé légèrement plus général, en partant d'une catégorie $U$ et d'un diagramme
+$\begin{tikzcd}[ampersand replacement=\&, row sep=small]
+V'\cap V'' \arrow[r] \arrow[d] \& V' \arrow[d] \\
+V'' \arrow[r] \& V
+\end{tikzcd}$
+\textit{dans} $U^\wedge$ : si $V'$, $V''$, $V'\cap V''$ sont totalement $W$-asphériques, il en est de même de $V$.}) : \textit{L'énoncé est valable si on suppose qu'il existe une} rétraction \textit{$r'_0$ de $V''$ sur $V'\cap V''$, et de même une rétraction $r''_0$ de $V'$ sur $V'\cap V''$.} (\footnote{Corollaire rectifié faux également - les rétractions ne sont pas des flèches de $V^\wedge$, et ne passent dans $p_!$.}) % ?? uncertain: editorial bracket "[la]" -- "[la]" or "[1a]"
+\[
+\begin{tikzcd}
+V'\cap V'' \arrow[r, "i''_0"'] \arrow[d, "i'_0"] & V' \arrow[d, "i'"] \arrow[l, dotted, bend right=50, "r''_0"'] \\
+V'' \arrow[r, "i''"] \arrow[u, dotted, bend left=50, "r'_0"] & V \arrow[u, dotted, bend right=50, "r'"'] \arrow[l, dotted, bend left=50, "r''"]
+\end{tikzcd}
+\]
+
+(\textbf{NB} Nous verrons plus tard qu'il suffit de l'existence d'\textit{une} de ces rétractions pour assurer la conclusion.)
+
+\textsc{Démonstration}. Comme $V$ est somme amalgamée de $V'$ et $V''$, il existe une rétraction $r'$ de $V$ sur $V'$ (donnée par $\mathrm{id}_{V'}$ sur $V'$, par $i''_0r'_0$ sur $V''$) qui induit $r'_0$ sur $V''$, et de même il existe
+\msp{page 99}
+une rétraction $r''$ de $V$ sur $V''$, induisant $r''_0$ sur $V'$. L'existence de ces rétractions assure déjà que pour tout foncteur $f : V \longrightarrow W$, le diagramme transformé de
+\[
+\begin{tikzcd}[row sep=large]
+V'\cap V'' \arrow[r] \arrow[d] & V' \arrow[d] \\
+V'' \arrow[r] & V
+\end{tikzcd}
+\]
+(intérprété comme diagramme dans $V^\wedge$) est formé de monomorphismes (\footnote{\textbf{faux,} déjà dans le cas où $V = \Phi$, $V'$, $V''$ ses deux ouverts canoniques isomorphes à $\bDelta^1$, et $V'{\cap}V'' = e$.}) % [sic] intérprété -> interprété, misspelt accent
+\[
+\begin{tikzcd}[row sep=large]
+f_!(V'\cap V'') \arrow[r, hook] \arrow[d, hook] & f_!(V') \arrow[d, hook] \\
+f_!(V'') \arrow[r, hook] & f_!(V),
+\end{tikzcd}
+\]
+et de plus que $f_!(V') \cap f_!(V'')$ (qui contient $f_!(V'\cap V'')$) lui est en fait \textit{égal.} Il en résulte que l'on a un diagramme à la fois cartésien et cocartésien d'immersions ouvertes dans Cat
+% foot: Version 7 décembre 2002
+\printedpage{70}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=large]
+W/f_!(V'\cap V'') \arrow[r, hook] \arrow[d, hook] & W/f_!(V') \arrow[d, hook] \\
+W/f_!(V'') \arrow[r, hook] & W/\Bigl(f_!(V) \overset{\text{déf}}{=} f_!(e_V)\Bigr),
+\end{tikzcd}
+\]
+lequel s'identifie aussi à
+\[
+\begin{tikzcd}[row sep=large]
+\upi_0(V'\cap V''/W) \arrow[r, hook] \arrow[d, hook] & \upi_0(V'/W) \arrow[d, hook] \\
+\upi_0(V''/W) \arrow[r, hook] & \underline{\pi_0}(V/W).
+\end{tikzcd}
+\]
+
+\msp{page 100}
+L'hypothèse sur $V'$, $V''$, $V'\cap V''$ implique que les trois sommets du carré autres que $\upi_0(V/W)$ sont $W$-asphériques, donc par W(7 bis) il en est de même de ce dernier, q.e.d.
+
+\textbf{Corollaire 2} (\footnote{Plus généralement, si $I$ est une catégorie \textit{ordonnée finie,} ayant un objet initial, alors}). \textit{Moyennant} W(7 bis)\textit{, la catégorie} $\Psi = \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(B.base)]
+ \& a \\
+|[alias=B]| 0 \arrow[ur] \arrow[dr] \& \\
+ \& b
+\end{tikzcd}$ \textit{(ou $0 \longleftarrow 1 \longrightarrow 2$) est totalement $W$-asphérique} (\footnote{\textbf{Faux,} $\Psi$ n'est \textit{pas} totalement $W$-asphérique.}).
+
+On applique le corollaire 1 à $\Psi$ et à ses deux sous-catégories ouvertes, $\Psi/a$, $\Psi/b$ (isomorphes à $\bDelta^1$), et à leur intersection $\{0\} \simeq \bDelta^0 = e$. Comme ces trois catégories ont un objet final (contrairement à $\Psi$ elle-même, qui n'a qu'un objet initial \dots), elles sont totalement $W$-asphériques. Le corollaire s'applique, l'existence des rétractions $r'_0$, $r''_0$ étant ici évidente.
+
+C'est surtout la partie b) (rectifiée) de la page 9 qui assure l'existence de catégories totalement $W$-asphériques autres que celles ayant un objet final (\footnote{Je conjecture à présent que ce sont les seules! (\footnotemark)}\footnotetext{Faux, il y a les catégories filtrantes (si $W$ satisfait l'axiome des limites).}). Il est vrai qu'en sens inverse il faudrait quand même s'assurer qu'un objet $X$ $W$-asphérique de Cat n'est pas \textit{toujours} totalement $W$-asphérique! Le contre-exemple n'est pas tellement évident finalement -
+\msp{page 101}
+j'ai passé des heures avant d'en trouver un et d'y voir un peu clair! Il suffit en somme d'exhiber un exemple d'une flèche dans Cat
+\[
+f : X \longrightarrow Y
+\]
+telle que
+% foot: Version 7 décembre 2002
+\printedpage{71}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\begin{enumerate}[label=\alph*)]
+\item $\underline{\pi_0}(f) \overset{\text{déf}}{=} \upi_0(X/Y) \xrightarrow{\ \sim\ } Y$, i.e. les $\pi_0(y\backslash X)$ \texttt{[plutôt les} $y\backslash X$\texttt{]} sont 0-connexes (pour $y \in \Ob Y$),
+\end{enumerate}
+
+et telle que de plus
+
+\begin{enumerate}[label=\alph*), start=2]
+\item $X$ est $W$-asphérique, et $Y$ non.
+\end{enumerate}
+
+% a vertical bar is printed in the left margin beside the next paragraph (lines "La difficulté ..." to "... le foncteur")
+La difficulté est la suivante, quand on cherche des contre-exemples `idiots' : c'est que l'hypothèse a) implique déjà, quand $X$ est $W_\infty$-asphérique (ou seulement 1-connexe) que $Y$ est 1-connexe : le foncteur
+\[
+Y' \longmapsto X' = X \times_Y Y'
+\]
+de la catégorie des revêtements étales $Y'$ de $Y$ vers celle des revêtements étales $X'$ de $X$ est pleinement fidèle (vérification immédiate), d'où le résultat annoncé. Donc un contre-exemple doit faire appel à l'existence d'un $\pi_i(Y,y)$ non nul, avec $i \geq 2$. Cela implique
+\msp{page 102}
+qu'il n'y a pas de contre-exemple avec des catégories de la forme $Y = Z/F$ (déduites d'un foncteur $q : X \longrightarrow Z$ en prenant $F = q_!(e_X) = \pi_0(X/Z)$), où $Z$ est une catégorie telle que $\bDelta^1$ (?), $\Phi$, $\Psi$, ou $\begin{tikzcd}[ampersand replacement=\&, sep=small, baseline=(M.base)]
+ \& {} \& \\
+{} \arrow[ur] \arrow[dr] \& |[alias=M]| \phantom{x} \& {} \arrow[ul] \arrow[dl] \\
+ \& {} \&
+\end{tikzcd}$ (ayant le type d'homotopie du cercle) etc., car les composantes connexes de telles catégories $Y$ sont des $K(\pi,1)$ - les $\pi_i$ supérieures ($i \geq 2$) sont nuls.
+
+Cette difficulté vue, le contre-exemple devient évident. Je pars d'un objet 1-connexe \textit{quelconque} $Y$ de $X$ \texttt{[plutôt de} Cat\texttt{]}, et je prends $y_0 \in \Ob Y$,
+\[
+X = \uCh(Y; y_0, -) \xrightarrow{\ f\ } Y.
+\]
+On sait que $X$ est $W_\infty$-asphérique, et que $f$ est $W_\infty$-parfait, donc les inclusions
+\[
+X_y \longrightarrow y\backslash X
+\]
+sont des $W_\infty$-équivalences. L'hypothèse a) que les $y\backslash X$ soient 0-connexes équivaut donc à la même hypothèse sur les fibres $X_y$, ou
+\msp{page 103}
+encore sur une seule fibre ($f$ étant parfait, donc une $W_\infty$-fibration, et $Y$ 0-connexe), soit
+\[
+X_{y_0} \simeq \Omega(Y, y_0).
+\]
+Sa 0-connexité équivaut à l'hypothèse de 1-connexité de $Y$ (on n'a utilisé encore que celle de 0-connexité). Donc pour un contre-exemple, il suffit de prendre $Y$ 1-connexe et non $\infty$-connexe. Le cas le plus simple est celui où $Y$ a le type d'homotopie de la sphère $S^2$, réalisé p. ex. par la catégorie ordonnée ci-contre \texttt{[ci-dessous]} à 6 sommets.
+% foot: Version 7 décembre 2002
+
+\printedpage{72}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=small]
+e_2^+ \bullet & \bullet\, e_2^- \\
+e_1^+ \bullet \arrow[ur] & \bullet\, e_1^- \arrow[ul] \\
+e_0^+ \bullet \arrow[ur] & \bullet\, e_0^- \arrow[ul]
+\end{tikzcd}
+\]
+\texttt{[de plus,} $e_0^+ \leq e_1^+ \leq e_2^+$\texttt{,} $e_0^- \leq e_1^- \leq e_2^-$\texttt{]} (\footnote{C'est en somme cet exemple (à homotopie topologique près) que je réalise (sans d'abord m'en apercevoir dans l'Appendice p. 10-12, mais avec des catégories finies).}). Je résume le résultat obtenu.
+
+\textbf{Proposition 10.} \textit{Soit $Y$ une petite catégorie} 1\textit{-connexe ($y_0 \in \Ob Y$). Alors} $\uCh(Y; y_0, -)$ \textit{est $W_\infty$-asphérique, mais n'est pas totalement $W_\infty$-asphérique si $Y$ elle-même n'est $\infty$-connexe, i.e. $W_\infty$-asphérique.} (\footnote{Mais un exemple plus percutant est $\Psi = \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(A.base)]
+ \& b \\
+|[alias=A]| a \arrow[ur] \arrow[dr] \& \\
+ \& c
+\end{tikzcd}$ , qui est $W_\infty$-asphérique, mais pas totalement!}).
+
+On peut se demander si $Y$ $W_\infty$-asphérique implique que $\uCh(Y; y_0, -)$ est totalement $W_\infty$-asphérique. J'en doute fort!
+
+\msp{page 104}
+Revenons maintenant à la situation du début de la section, diagramme $(*)$, p.~87,
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T = \{t\} \arrow[l, hook', dotted, "j"'] \arrow[d, dotted, "\mathrm{iso}"] \\
+U' \arrow[r, hook, "i'"] & X' & T' = \{t'\}. \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+Nous pouvons donner maintenant un exemple où $i$ est dans $W$ (et même $W$-asphérique) sans que $i'$ le soit :
+\[
+i \in W, \qquad i' \notin W. \tag*{$(**)$}
+\]
+On peut même supposer que $t$ soit objet final de $X$ (ce qui signifie que l'objet $H$ de $U^\wedge$ est isomorphe à $e_U$, l'objet final), et $t'$ objet final de $X'$ (i.e. $p_!(e_U) = e_{U'}$, i.e. les $u'\backslash U$ sont 0-asphériques). Dans ce cas, comme $X$, $X'$ sont $W$-asphériques, les relations $(**)$ équivalent à
+\[
+U \text{ est } W\text{-asphérique, et } U' \text{ non,} \tag*{$(***)$}
+\]
+ce qui est justement la situation que nous venons de construire (p. 101-103).
+
+On aimerait aussi trouver un exemple où dans $(*)$ on ait $p \in W$, $q \notin W$.
+% foot: Version 7 décembre 2002
+
+\end{document}

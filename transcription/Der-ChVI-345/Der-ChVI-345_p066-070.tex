@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Ch}{\mathrm{Ch}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=large]
+ & \Ch(S) \arrow[d, "p_S"] \arrow[dl, dotted, "\beta_S"'] \arrow[dd, dotted, bend right=40, "\sigma_S"'] \arrow[dr, phantom, "\text{cart.}"]
+ & C_S(X)=C(X) \arrow[l, "\pi"'] \arrow[d, "p'"] \arrow[dll, bend right=40, "\bar f_X=f_{C(X)}"'] \\
+S & S\times S \arrow[l, "\pr_2^S"'] \arrow[d, "\pr_1^S"] \arrow[dr, phantom, "\text{cart.}"]
+ & X\times S \arrow[l, "\pi_1=f_X\times\mathrm{id}_S"] \arrow[d, "\pr_1"] \\
+ & S & X(=S'). \arrow[l, "f_X"'] \arrow[uu, dotted, bend right=40, "i_X"']
+\end{tikzcd}
+\]
+
+Il est l'image inverse de $(\Ch(S),\pr_1^Sp_S=\sigma_S)$ par $X\xrightarrow{f_X}S$, mais on a explicité la factorisation de $\sigma_S$ sur le diagramme pour réinterpréter la flèche structurale $\bar f_X=f_{C(X)}$, définie comme
+\[
+f_{C(X)}=\beta_S\pi(=\pr_2^S\underbrace{p_S\pi}_{=\pi_1p'})
+\]
+par la formule
+\[
+f_{C(X)}=\underbrace{(\pr_2^S\pi_1)}_{\text{projection } \pr_2 \text{ de } X\times S \text{ dans } S}p'.
+\]
+
+\msp{page 102}
+Or
+\[
+\begin{aligned}
+&p'\in\mathrm{Fib}, && \text{car déduit de } p_S\in\mathrm{Fib} \text{ par changement de base } \pi_1,\\
+&(\pr_2 : X\times S\longrightarrow S)\in\mathrm{Fib} && \text{pourvu que } X\longrightarrow\underbrace{e}_{\text{objet final de } \mathcal{M}}\quad \text{soit dans Fib (même raison),}
+\end{aligned}
+\]
+donc si $X\in\Fib\,e$, on a $f_{C(X)}\in\mathrm{Fib}$. Comme c'est une propriété essentielle qu'on veut avoir pour \textit{tout} $X$ dans $\mathcal{M}/S$, on va faire l'hypothèse supplémentaire
+
+\textbf{Hypothèse 3.} \textit{$\forall\,X\in\mathit{Ob}\,\mathcal{M}$, $X\longrightarrow e$ est dans Fib.}
+
+Quant à
+\[
+i_X : X\longrightarrow C(X),
+\]
+il est déduit de la section $\alpha_S$ de $(\Ch(S),\sigma_S)$ sur $S$ par changement de base $X\longrightarrow S$. Notons maintenant que
+\[
+\begin{tikzcd}
+\Ch(S) \arrow[r, shift left, "\sigma_S"] \arrow[r, shift right, "\beta_S"'] & S
+\end{tikzcd}
+\qquad\qquad\qquad \text{sont dans } W,
+\]
+car leurs composés avec $S\xrightarrow{\alpha_S}\Ch(S)$ sont l'identité, et $\alpha_S\in W$. D'autre part, $\sigma_S=\pr_1^S\circ p$ est dans Fib, comme composé de deux éléments dans Fib (NB $S\longrightarrow e$ dans Fib par Hypothèse 3). Ainsi $\sigma_S$, $\beta_S$ sont dans $\mathrm{Fib}\cap W$. On aura besoin de % [sic] \pr_1^S\circ p -> \pr_1^S\circ p_S, la flèche est notée p_S dans le diagramme et plus haut (\pr_1^Sp_S=\sigma_S)
+
+\textbf{Hypothèse 4.} \textit{L'ensemble de flèches $\mathit{Fib}\cap W$ est stable par tout changement de base.}
+
+% foot: Version 9 novembre 2001
+
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 103}
+Cela implique donc que
+\[
+C(X)\xrightarrow{\pr_1\pi'}X
+\]
+\texttt{[plutôt} $\pr_1p'$\texttt{]} est $\in W$ (étant déduit de $\sigma_S : \Ch(S)\longrightarrow S$ par changement de base), donc toute section $i_X : X\longrightarrow C(X)$ de $C(X)$ sur $X$ est dans $i_X$ \texttt{[plutôt dans} $W$\texttt{]}. On a donc bien une factorisation, fonctorielle en $X$
+\[
+\begin{tikzcd}
+ & C(X) \arrow[dr, "\bar f_X=f_{C(X)}"] & \\
+X \arrow[ur, "i_X"] \arrow[rr, "f_X"] & & S
+\end{tikzcd}
+\]
+avec
+\[
+i_X\in W,\qquad\qquad f_{C(X)}\in\mathrm{Fib}.
+\]
+C'est tout ce qu'on avait utilisé pour établir
+\[
+(\Fib\,S)W_S^{-1}\xrightarrow{\sim}(\mathcal{M}/S)W_S^{-1}.
+\]
+Mais il s'agit maintenant, sous l'hypothèse où on introduit un $\mathcal{L}$, de prouver que pour tout $X$ dans $\mathcal{M}/S$, les deux flèches
+\[
+\begin{tikzcd}
+C(X) \arrow[r, shift left, "C(i_X)"] \arrow[r, shift right, "i_{C(X)}"'] & C(C(X))
+\end{tikzcd}
+\]
+sont égales dans $(\mathcal{M}/S)(W_S^{\mathcal{L}})^{-1}$. Comme par hypothèse on a $W_S^{\mathcal{L}}=W_S$ dans $\Fib\,S$ (Hypothèse 1), et que $C(X),\ C(C(X))\in\mathrm{Ob}\,\Fib\,S$,
+\msp{page 104}
+il suffit de prouver que les deux flèches sont égales \textit{dans} $(\Fib\,S)W_S^{-1}$. Cet énoncé est indépendant de la donnée de $\mathcal{L}$, et on a envie de le prouver.
+
+Peut-être y a-t-il moyen d'expliciter un langage géométrique, pour s'y reconnaître. Identifions les objets $X$ de $\mathcal{M}$ aux foncteurs $\mathcal{M}^o\longrightarrow(\mathrm{Ens})$ qu'ils définissent,
+\[
+X\longmapsto(T\longmapsto X(T)=\mathrm{Hom}_{\mathcal{M}}(T,X))\,.
+\]
+Ainsi, pout tout $T$ % [sic] pout -> pour, faute de frappe
+\[
+\Ch(X)(T)
+\]
+est un ensemble, appelé \textit{l'ensemble des chemins dans $X(T)$.} Il s'envoie (par $p_X$) fonctoriellement (en $T$) dans $(X\times X)(T)=X(T)\times X(T)$, i.e. chaque chemin $c$ dans $X(T)$ a une origine $\sigma(c)$, et un but $\beta(c)$. De plus, par $\alpha_X$, $X(T)$ s'envoie (fonctoriellement en $T$) dans l'ensemble des chemins de $X(T)$ : pour chaque élément $x$ dans $X(T)$, il y a donc un chemin (noté $1_x$ ou $\alpha_x$) bien défini de source et but $x$, qu'on appelle le chemin trivial, ou vide. Ceci dit,
+
+% foot: Version 9 novembre 2001
+
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 105}
+pour $X$ dans $\mathcal{M}/S$, $C(X)$ représente le contra-foncteur suivant dans $\mathcal{M}$ : pour tout $T$ dans $\mathcal{M}$,
+\[
+C(X)(T)=\Bigl\{(x,c)\Bigm| x\in X(T),\ c : f_X(x)\xrightarrow{c}s\ \text{ un chemin dans } S(T), \text{ de source } f_X(x)\Bigr\}\,,
+\]
+où $f_X : X\longrightarrow S$ est le morphisme structural.
+
+Les ‘calculs’ faits, il y a deux (?) jours montrent qu'on a de même une interprétation
+\[
+\begin{aligned}
+C(C(X))(T)=\Bigl\{(x,c,c')\Bigm| x\in X(T),\ f_X(x)\xrightarrow{c}s\xrightarrow{c'}t,\\
+c\text{ un chemin de source } f_X(x),\\
+c'\text{ un chemin de source égale à } \beta(c)\Bigr\}
+\end{aligned}
+\]
+et les applications $i_{C(X)}$ et $C(i_X)$ s'identifient respectivement à
+\[
+\begin{aligned}
+(x,c)\quad&\longmapsto\quad(x,1_{f(x)},c)\quad f(x)\xrightarrow{1_x}f(x)\xrightarrow{c}s\\
+(x,c)\quad&\longmapsto\quad(x,c,1_{\beta(c)})\quad f(x)\longrightarrow s\xrightarrow{1_s}s
+\end{aligned}
+\]
+\texttt{[plutôt} $f(x)\xrightarrow{1_{f(x)}}f(x)\xrightarrow{c}s$\texttt{]}. Pour les comparer, on a une envie irrésistible d'écrire
+\[
+c\circ 1_x=1_s\circ c=c,
+\]
+mais a-t-on le droit? Il faudrait pouvoir composer les chemins, et c'est très, très difficile!
+
+Mais on peut toujours axiomatiser. On suppose donc que pour $X$ dans $\mathcal{M}$, $\Ch(X)$
+\msp{page 106}
+n'est pas seulement une structure de (soi-disants) ‘chemins’ dans $X$ amorphe, seulement la donnée de la source et du but des chemins et des chemins triviaux (ces structures sur $\Ch(X)$ dépendant fonctoriellement de $X$), mais qu'on a une composition des chemins quand ceux-ci sont ‘composables’, i.e. une flèche d'un produit fibré
+\[
+(c,c')\longmapsto c'\circ c : (\Ch(X),\beta_X)\times_X(\Ch(X),\sigma_X)\xrightarrow{\pi_X}\Ch(X),
+\]
+i.e. on peut composer des chemins dans $X(T)$
+\[
+x\xrightarrow{c}y\xrightarrow{c'}z
+\]
+si et seulement si $\text{but}\,c=\text{source}\,c'$, et de plus on exige bien sûr que $\text{source}(c'\circ c)=\text{source}\,c$, $\text{but}(c'\circ c)=\text{but}\,c'$, ce qui s'exprime par un diagramme commutatif
+\[
+\begin{tikzcd}
+(\Ch(X),\beta_X)\times_X(\Ch(X),\sigma_X) \arrow[rr] \arrow[dr] & & \Ch(X) \arrow[dl, "p_X"] \\
+ & X\times X. &
+\end{tikzcd}
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+La pensée naturelle, c'est qu'avec cette composition et ces identités, les $X(T)$, $\Ch(T)$ deviennent les objets et les flèches d'une \textit{catégorie} - i.e. que $(X,\Ch(X),\alpha_X,p_X,\pi_X)$ définissent une structure de ‘catégorie dans $\mathcal{M}$’. Mais pour ce qu'on veut faire maintenant, on n'a sans doute pas besoin de tout, i.e.
+\msp{page 107}
+de l'axiome pertinent d'associativité de la composition et celui sur les unités, mais seulement que les $1_x$ soient des unités bilatères pour la composition.
+
+En supossant donné ce supplément de structure sur le foncteur Ch, et revenant à la considération du foncteurs associé % [sic] supossant -> supposant, faute de frappe ; foncteurs -> foncteur, accord avec « du » et « associé »
+\[
+C : \mathcal{M}/S\longrightarrow\Fib\,S,
+\]
+on trouve un morphisme canonique
+\[
+C(C(X))\xrightarrow{\gamma_X}C(X)
+\]
+par
+\[
+(x,c,c')\longmapsto(x,c'\circ c),
+\]
+et l'axiome des unités bilatères nous assure aussitôt que
+\[
+(\ast)\qquad\qquad\gamma_X\circ i_{C(X)}=\gamma_X\circ C(i_X)=\mathrm{id}_{C(X)}.
+\]
+Comme $i_{C(X)}\in W$, cela prouve déjà que $\gamma_X\in W$, donc $\gamma_X\in W_S$. Donc $\gamma_X$ devient un isomorphisme dans $(\Fib\,S)W_S^{-1}$, et la relation $(\ast)$ implique bien $i_{C(X)}=C(i_X)$ dans le localisé, q.e.d.
+
+Je vais à nouveau résumer ce que j'ai dégagé.
+
+\msp{page 108}
+\textbf{Théorème-Scholie 2.} Soit $\mathcal{M}$ une catégorie, munie de deux ensembles de flèches
+\[
+W,\ \mathrm{Fib}\subseteq\mathrm{Fl}(\mathcal{M}).
+\]
+On fait les hypothèses suivantes.
+
+\begin{enumerate}[label={}]
+\item[$1^o$] $W$ contient les isomorphismes, si $f$, $g$ sont composables, si deux parmi $f$, $g$, $gf$ sont dans $W$, le troisième aussi.
+\item[$2^o$] $\mathcal{M}$ est stable par $\varprojlim$ finies, Fib contient les isomorphismes, est stable par composition et par changement de base (\footnote[59]{Ces hypothèses de stabilité sur Fib ne serviront que dans II, et encore seulement dans le cas A), repris in toto sous la forme A$'$ plus bas (p.~112).}).
+\end{enumerate}
+
+Pour $S$ dans $\mathcal{M}$, \fbox{$\Fib\,S$} désigne la sous-catégorie pleine de $\mathcal{M}/S$ formée des $X\longrightarrow S$ qui sont dans Fib. On distingue deux versions différentes d'un axiome de factorisation d'une $f : X\longrightarrow S$ quelconque dans $\mathcal{M}$ en $X\xrightarrow{i}\bar X\xrightarrow{\bar f}S$, avec $i\in W$, $\bar f\in\mathrm{Fib}$.
+
+% foot: Version 9 novembre 2001
+
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\begin{enumerate}[label={}]
+\item[A)] On se donne, pour tout $S$ dans $\mathcal{M}$, un foncteur
+\[
+\mathcal{M}/S\longrightarrow\mathcal{M}/S\qquad\qquad X\longmapsto C(X)\ \ (=\bar X)
+\]
+et un morphisme de foncteurs en $\mathrm{X}$
+\[
+X\xrightarrow{i_X}C(X)
+\]
+avec
+\[
+i_X\in W,\qquad\qquad C(X)\in\mathrm{Ob}\,\Fib\,S.
+\]
+\item[B)] Désignant par
+\[
+\mathrm{Cof}_0\subseteq\mathrm{Fl}\,\mathcal{M}
+\]
+l'ensemble des flèches de $\mathcal{M}$ qui possèdent la propriété de relèvement à droite \texttt{[plutôt à gauche]} par rapport à Fib, on suppose ‘à la \textsc{Quillen}’, que toute flèche $f : X\longrightarrow S$ se factorise en
+\[
+X\xrightarrow{i_X}C(X)\xrightarrow{\bar f}S,
+\]
+avec
+\[
+i\in\mathrm{Cofib}_0\cap W,\qquad\qquad\bar f\in\mathrm{Fib}.
+\]
+\texttt{[où} $\mathrm{Cof}_0=\mathrm{Cofib}_0$\texttt{]}.
+\end{enumerate}
+
+\msp{page 109}
+Donnons nous $S$ dans $\mathcal{M}$, considérons
+\[
+W_S\subseteq\mathrm{Fl}(\mathcal{M}/S)
+\]
+l'ensemble de flèches induit par $W$ (
+\begin{tikzcd}[column sep=small, row sep=small, baseline={([yshift=.5ex]current bounding box.south)}]
+f : X \arrow[rr] \arrow[dr] & & Y \arrow[dl] \\
+ & S &
+\end{tikzcd}
+est dans $W_S$ si et seulement si il l'est en oubliant $S$), et désignons par $W_S$ (par abus de notation) l'ensemble de flèches induit par $W_S$ sur $\Fib\,S$, ou plus généralement sur toute sous-catégorie pleine $\mathcal{F}$ de $\mathcal{M}/S$, avec
+\[
+\Fib\,S\subseteq\mathcal{F}\subseteq\mathcal{M}/S.
+\]
+
+\circled{I} Le foncteur
+\[
+(\ast)\qquad\qquad(\Fib\,S)W_S^{-1}\xrightarrow{\sim}(\mathcal{M}/S)W_S^{-1}
+\]
+induit par l'inclusion est une équivalence de catégories, plus généralement pour toute $\mathcal{F}$ comme dessus
+\[
+(\Fib\,S)W_S^{-1}\longrightarrow\mathcal{F}W_S^{-1}\longrightarrow(\mathcal{M}/S)W_S^{-1}
+\]
+sont des équivalences de catégories. Un foncteur quasi-inverse est obtenu (dans les deux cas A) et B)) à l'aide du foncteur
+\[
+\gamma : \mathcal{M}/S\longrightarrow(\Fib\,S)W_S^{-1}
+\]
+
+% foot: Version 9 novembre 2001
+
+\end{document}

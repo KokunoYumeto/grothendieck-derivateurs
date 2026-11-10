@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+\frenchsetup{AutoSpacePunctuation=false}
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\dashedbox}[1]{\tikz[baseline=(n.base)]\node[draw,dashed,inner sep=2pt](n){#1};}
+\newcommand{\Fib}{\mathrm{Fib}}
+\newcommand{\Parf}{\mathrm{Parf}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\begin{document}
+
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 53}
+
+\section*{IV\quad Sur l'axiome W(4) et ses variantes.}
+
+(\footnote[60]{Cf. aussi partie VI (HOT$_W$), p. 186-196}). J'ai passé des jours à essayer de prouver que toutes ces variantes sont équivalentes. Je vais donner une liste de celles, parmi ces variantes, qui avec le recul me paraissent encore avoir une utilité. (Avec des notations différentes de celles des pages 13-14.)
+
+\begin{itemize}[leftmargin=5em,labelsep=0.5em]
+\item[\fbox{W(4a)}] Toute $W$-fibration (cf. th. 3, p. 51, déf. 3, p. 52) est ultraforte, ce qui revient à ceci: pour
+\[
+\begin{tikzcd}
+X & X' \arrow[l,"q"'] \arrow[d,"f'"] \\
+Y \arrow[from=u,"f"'] & Y' \arrow[l,"p"']
+\end{tikzcd}
+\]
+cartésien dans Cat, si $f \in \underline{\Fib}_W$, $p \in W$, alors $q \in W$.
+
+\item[W(4a$'$)] Comme a), en supposant $f \in \Parf_\omega$, i.e. $f$ $W_\omega$-parfait (donc une $W_\omega$-fibration), où $W_\omega \subseteq W$ est la plus petits partie $\Sigma$ de Fl(Cat) satisfaisant W(1, 2 bis, 3). % [sic] petits -> petite, accord avec « partie »
+
+\item[\fbox{W(4b)}] Soit un diagramme commutatif
+$\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small, baseline=(X.base)]
+|[alias=X]| X \arrow[rr,"f"] \arrow[dr,"p"'] \& \& Y \arrow[dl,"q"] \\
+\& S \&
+\end{tikzcd}$
+dans Cat, avec $p, q \in \Fib_W$, $f \in W$.
+Alors $\forall s \in S$, $f_s : X_s \longrightarrow Y_s$ \texttt{[est dans} $W$\texttt{]}.
+
+\item[W(4b$'$)] Comme b), en supposant \texttt{[de plus]} $X$ et $Y$ fibrés scindés sur $S$, $f$ compatible avec \texttt{[les]} scindages (donc foncteur cartésien).
+
+\item[W(4b$''$)] Comme b), en supposant $p$, $q$ $W$\textit{-parfaits.}
+
+\item[\fbox{W(4c)}] Soit $f : X \longrightarrow Y$, avec $f \in \Fib_W \cap W$, alors les fibres de $f$ sont $W$-asphériques.
+
+\item[\dashedbox{W(4c$'$)}] Comme c), en supposant $f \in \Parf_\omega \cap W$. (C'est l'ancien W(4b$''$), dépouillé du $W_\infty$-parasite.)
+\end{itemize}
+
+\msp{page 54}
+
+J'ai cerclé les notions \texttt{[encadrées ici]} qui ont été vraiment utiles. Pratiquement, on peut parier que c'est la notion la plus forte, W(4a), qui est la seule importante. Voici les implications tautologiques (à l'exception de W(4a$'$) $\Longrightarrow$ W(4b), qui est démontré dans la démonstration de la proposition 4 (pages 6-10) (\footnote[61]{Cette démonstration utilise une notion plus forte de $W$-fibration que celle du théorème 3, p. 51.})).
+
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small]
+& \mathrm{a} \arrow[d,Rightarrow] & \\
+& \mathrm{a}' \arrow[dd,Rightarrow,"{\text{\rule[0.6ex]{2cm}{0.4pt}\ \begin{tabular}[t]{@{}l@{}}implication douteuse,\\ il faut affaiblir\\ un peu b), en\\ renforçant la\\ notion de\\ $W$-fibration\\ utilisée\\ pour énoncer b)\end{tabular}}}"] & \\
+& & \\
+& \mathrm{b} \arrow[dl,Rightarrow] \arrow[dr,Rightarrow] \arrow[dd,Rightarrow] & \\
+\mathrm{b}' & & \mathrm{b}'' \\
+& \mathrm{c} \arrow[d,Rightarrow] & \\
+& \mathrm{c}' &
+\end{tikzcd}
+\]
+
+J'ai surtout sué pour montrer que c$'$) $\Longrightarrow$ c), ou c) $\Longrightarrow$ b), sans y arriver. L'effort m'a permis de me débarrasser de diverses idées fausses, et de les remplacer par des justes, cf. plus bas. Il y a quand même un résultat positif qui surnage :
+
+\textbf{Proposition 1.} \textit{La condition b) (et sans doute même b$'$) et b$''$)} (\footnote[62]{et en supposant dans le cas de b$''$, que $W$ satisfait la condition des limites inductives W(6 bis), cf. prop. 5 du `corollaire' de la, page 14.})\textit{, mais je ne vais pas le prouver ici \dots) implique sans doute a) pour $\bar{W}$, le saturé fort de $W$. En tous cas, si $W$ est fortement saturé, les conditions a), a$'$), b) (et sûrement aussi b$'$) et b$''$)) sont équivalentes.}
+
+\textsc{Démonstration} de b) $\Longrightarrow$ a), quand $W$ est fortement saturé. En fait, moyennant b) (et sans même supposer $W$ fortement saturé), nous allons prouver que si on a
+\[
+\begin{tikzcd}
+X & X' \arrow[l,"q"'] \arrow[d,"f'"] \\
+Y \arrow[from=u,"f"'] & Y' \arrow[l,"p"']
+\end{tikzcd}
+\]
+cartésien dans Cat, avec
+\msp{page 55}
+$f$ une $W$-fibration, et $p \in W$, alors $\underline{q \in \bar{W}}$, i.e. $\hot_W(q)$ \texttt{[est un]} isomorphisme. Pour ceci, nous interprétons la flèche $q$ dans $\Hot_W$ de la façon suivante. Soit
+\[
+\xi = \hot_{Y,W}(X/Y), \qquad \xi' = p^*(\xi),
+\]
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+qui dit que $q$ s'identifie à la flèche canonique
+\[
+H_\bullet^{\HOT_W}(Y',\xi') \longrightarrow H_\bullet^{\HOT_W}(Y,\xi) \qquad \text{dans } \Hot_W = \HOT_W(e), \tag*{$(*)$}
+\]
+où on note de plus que $\xi \in \HOT_W(Y)$ est un coefficient \textit{localement constant} sur $Y$.
+
+Établissons d'abord cette interprétation de $q$. Notons que comme $X \in \underline{\Fib}_W Y$, l'image inverse $\xi' = p^*(\xi)$ n'est autre que $\hot_{Y',W}(X' = X \times_Y Y')$. D'autre part, si $g : Y \longrightarrow e$, $g' : Y' \longrightarrow e$ sont les flèches structurales, les deux membres de $(*)$ s'interprètent resp. comme $g'_!(\xi')$ et $g_!(\xi)$ (les $g'_!$ et $g_!$ au sens du prédérivateur $\HOT_W$). Or le calcul de $g'_!$, $g_!$ nous donne que les deux membres s'identifient resp. à
+\[
+\hot_W(X'), \qquad \hot_W(X),
+\]
+et nous admettons que la flèche
+\[
+\hot_W(X') \longrightarrow \hot_W(X)
+\]
+n'est autre que $\hot_W(q)$. D'ailleurs, comme $X$ est $W$-fibrée sur $S$, par définition pratiquement, $\xi$ est dans $\HOT^{\mathrm{lc}}_W(S)$. Donc il nous suffira de prouver le
+
+\msp{page 56}
+
+\textbf{Corollaire.} \textit{Supposons que $W$ satisfait à W(4b), et soit $p : S' \longrightarrow S$ dans $W$, $\xi \in \HOT^{\mathrm{lc}}_W(S)$, $\xi' = p^*(\xi)$. Alors}
+\[
+H_\bullet(S',\xi') \xrightarrow{\ \sim\ } H_\bullet(S,\xi)
+\]
+\textit{est un isomorphisme dans} $\Hot_W$.
+
+\textsc{Démonstration}. Il suffit de prouver que pour tout $\eta \in \mathrm{Ob}\,\Hot_W$ on a une bijection pour les $\Hom(-,\eta)$. Par la formule d'adjonction sur $S$, $S'$, cette application entre les Hom dans $\Hot_W$ s'identifie \texttt{[à]}
+\[
+\Hom_{\HOT_W(S)}(\xi,\eta_S) \longrightarrow \Hom_{\HOT_W(S')}(\xi',\eta_{S'}),
+\]
+où $\eta_S = p^*(\eta)$, $\eta_{S'} = p'^*(\eta)$ \texttt{[plutôt} $\eta_S = g^*(\eta)$\texttt{,} $\eta_{S'} = g'^*(\eta)$\texttt{, où} $g : S \longrightarrow e$\texttt{,} $g' : S' \longrightarrow e$ \texttt{sont les flèches structurales]}, donc $\eta_{S'} = p^*(\eta_S)$, et la flèche $(*)$ est la flèche sur les Hom induite par le foncteur
+\[
+p^*_{\mathrm{lc}} : \HOT^{\mathrm{lc}}_W(S) \longrightarrow \HOT^{\mathrm{lc}}_W(S').
+\]
+Or moyennant l'axiome W(4b) (que nous n'avons pas utilisé jusqu'à présent), ledit foncteur est une \textit{équivalence de catégories} si $p \in W$ (cf. VI, p. 204).
+
+\hfill q.e.d.
+
+De peur de les oublier, je vais maintenant faire une liste des petites questions que j'ai élucidées chemin faisant en gribouillant.
+
+\begin{itemize}[leftmargin=5em,labelsep=0.5em]
+\item[1°)] Si $X$, $Y$ sont $W$-lisses sur $S$, et $f : X \longrightarrow Y$ un $S$-morphisme tel que $f_s : X_s \longrightarrow Y_s$ soit $W$-lisse pour tout $s \in \mathrm{Ob}\,S$, il ne s'ensuit \textit{pas} que $f$ soit $W$-lisse. Mais c'est pourtant vrai quand $X$ et $Y$ sont fibrées scindées sur $S$ (ce
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 57}
+qui implique déjà leur $W$-lissité sur $S$), et $f$ compatible avec les scindages et a fortiori cartésien. Énoncé dual pour les catégories cofibrées scindées et les foncteurs strictement cartésiens entre elles qui sont $W$-propres fibre par fibre : ils sont $W$-propres.
+
+\item[2°)] J'étais intéressé, dans un cas de catégories fibrées scindées $X$, $Y$ sur $S$ et d'un foncteur strictement cartésien $f : X \longrightarrow Y$, supposé $W$-parfait fibre par fibre, de conclure que $f$ soit aussi $W$-parfait. (C'était un cas où de plus on sait que $X$, $Y$ sont aussi des $W$-fibrés sur $S$, i.e. les fonteurs changement de base $X_{s'} \longrightarrow X_s$, $Y_{s'} \longrightarrow Y_s$ sont dans $W$. Mais ça n'a pas beaucoup servi \dots) La question qui restait, en 1°), était celle de la $W$\textit{-propreté} de $f$. Mais c'est sans espoir (même pour $Y = S$), en vertu de la brillante % [sic] fonteurs -> foncteurs, lettre omise
+
+\textbf{Proposition 2.} \textit{Supposons que} $S = 0$
+$\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(Z.base)]
+\& a \\
+|[alias=Z]| \phantom{0} \arrow[ur] \arrow[dr] \& \\
+\& b
+\end{tikzcd}$
+\textit{, et soit $Z$ une catégorie sur $S$. Alors $\Phi(Z)$ est propre sur $S$ si et seulement si $Z = \emptyset$.}
+
+Prenons alors dans 2°) ci-dessus $X = \Phi(Z)$, $Y = S$, $f : \Phi(Y) \longrightarrow S$ \texttt{[plutôt} $f : \Phi(Z) \longrightarrow S$\texttt{]} le morphisme structural (donc les $f_s$ sont $W$-parfaits), alors $f$ n'est propre que si $X = \emptyset$. Pourtant, si on prend $Z$ $W$-fibrée sur $S$, $\Phi(Z)$ l'est aussi, et on a un contre-exemple à 2°).
+\end{itemize}
+
+Mais on s'est quand même convaincu du résultat suivant :
+
+\textbf{Proposition 3.} \textit{Soient $X$, $Y$ catégories fibrées scindées sur $S$, $f : X \longrightarrow Y$ $S$-foncteur strictement cartésien, tel que}
+\msp{page 58}
+\textit{pour tout $s \in S$, $f_s : X_s \longrightarrow Y_s$ soit} $W$-fibrant. \textit{Alors,} si $W$ satisfait W(4a), $f$ \textit{est $W$-fibrant.}
+
+(J'espérais avoir que $f$ est $W$-fibrant `à l'\oe{}il', pour prouver que W(4c) implique W(4b). Mais j'étais obligé de supposer W(4a) \dots)
+
+\end{document}

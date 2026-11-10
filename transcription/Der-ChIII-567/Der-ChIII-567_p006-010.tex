@@ -1,0 +1,280 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+% short macros for the printed notation
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\hm}{\mathrm{hom}}
+\newcommand{\homext}{\mathrm{hom}\,\mathrm{ext}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\Ltens}{\overset{\mathbf{L}}{\otimes}}
+\newcommand{\RHom}{\mathbf{R}\mathrm{Hom}}
+\newcommand{\ab}{\mathrm{ab}}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+
+\begin{document}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+
+\texttt{[deux fois} (8)\texttt{]}. Ceci posé, on a les isomorphismes canoniques, pour $\xi,\eta\in\Ob\Hot_0$,
+\[
+\left\{
+\begin{aligned}
+\xi\times_{\D}(\eta\times_{\D}M) &\;\simeq\; (\xi\times\eta)\times_{\D}M\\
+\hm_{\D}(\xi,\hm_{\D}(\eta,M)) &\;\simeq\; \hm_{\D}(\xi\times\eta,M).
+\end{aligned}
+\right.
+\tag*{(9)}
+\]
+
+Si $\xi$, $\eta$ sont représentés par $X$, $Y$, la première formule p.ex.
+\msp{page 6}
+s’établit en calculant le deuxième membre comme
+\[
+\varphi_!(M_{X\times Y})\simeq p_!(\;\underbrace{q'_!(M_{X\times Y})}_{\substack{\simeq\ q_!(M_Y)_X\\ \text{car $q$ est $\mathbf{D}$-lisse}}}\;)\simeq\xi\times_{\D}(\eta\times_{\D}M),
+\]
+O.K.
+\[
+\begin{tikzcd}
+X \ar[d,"p"'] & X\times_e Y \ar[l,"q'"'] \ar[d,"p'"] \ar[dl,dotted,"\varphi"'] \\
+e & Y \ar[l,"q"]
+\end{tikzcd}
+\]
+
+J’ai aussi envie de prouver :
+
+\textbf{Proposition 1.} \textit{Soit $\xi\in\Ob\Hot_0$. Alors $F\longmapsto\xi\times_{\D}F$, en tant que morphisme de dérivateurs $\D\longrightarrow\D$, est} exact à droite, \textit{et $F\longmapsto\hm_{\D}(\xi,F)$ est exact à gauche.}
+
+On peut supposer que $\xi$ est défini par $X$ dans Diag. Soit $f:I\longrightarrow J$, soit $F$ dans $\D(I)$, il faut prouver
+\[
+f_*(\hm_{\D}(\xi,F))\;\simeq\;\hm_{\D}(\xi,f_*(F)).
+\]
+Considérons donc
+\[
+\begin{tikzcd}
+X\times I \ar[r,"f'"] \ar[d,"{p=(x,i)\longmapsto i}"'] & X\times J \ar[d,"{q=(x,j)\longmapsto j}"] \\
+I \ar[r,"f"] & J.
+\end{tikzcd}
+\]
+
+On a
+\[
+\hm_{\D}(\xi,F)=p_*(p^*F),
+\]
+donc
+\[
+f_*(\hm_{\D}(\xi,F))=\underbrace{f_*p_*}_{(fp)_*}(p^*(F))=(qf')_*p^*(F)\simeq q_*(f'_*p^*(F)).
+\]
+Mais
+\[
+f'_*p^*(F)\;\simeq\;q^*f_*(F),
+\]
+formule de changement de base des $f_*$, pour le changement de base $q$, qui est lisse, car déduit de $X\longrightarrow e$, qui est lisse, par changement de base $J\longrightarrow e$. On trouve
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 7}
+donc
+\[
+f_*(\hm_{\D}(\xi,F))\simeq q_*q^*(f_*(F))\defeq\hm_{\D}(\xi,f_*(F)),
+\]
+q.e.d. L’énoncé pour $F\longmapsto\xi\times_{\D}F$ est dual de celui qu’on vient de prouver.
+
+Reprenons, pour $\xi\in(\mathrm{hot})_0$ \texttt{[}$=\Hot_0$\texttt{]}, la formule d’adjonction
+\[
+\Hom(\xi\times_{\D}M,N)\simeq\Hom(M,\hm_{\D}(\xi,N))\defeq\Hom_{\xi}(M,N).
+\tag*{$(*)$}
+\]
+
+Si $\xi$ est défini par $X$ dans Diag, les deux membres de $(*)$ s’identifient à
+\[
+\Hom_{\D(X)}(p^*M,p^*N),
+\]
+où $p:X\longrightarrow e$ est le foncteur structural.
+
+Fixons $M$, $N$, et considérons l’expression $(*)$ comme contrafoncteur
+\[
+(\Hot_0)^o\;\longrightarrow\;\mathrm{Ens}.
+\]
+
+Il semblerait que dans tous les cas connus, ce foncteur soit ‘représentable’ par un objet, sinon de $\Hot_0$ lui-même, du moins un objet dans Hot. Si on ne peut le définir comme objet $H$ de $\Hot_0$, le fait qu’on ait un isomorphisme canonique
+\[
+\Hom_{\xi}(M,N)\;\simeq\Hom_{\Hot}(\xi,H),
+\tag*{(10)}
+\]
+fonctoriel en $\xi\in\Ob\Hot_0$, ne \texttt{[le]} définit pas forcément
+\msp{page 8}
+à isomorphisme unique près. En fait, quand
+\[
+\D=\D_{\mathcal{M},\Sigma}
+\]
+est défini par une catégorie de modèles $(\mathcal{M},\Sigma)$, alors il y a une définition naturelle d’une opération $\homext$ (Hom ‘externe’) à valeurs dans Hot, savoir un foncteur
+\[
+\left\{
+\begin{aligned}
+&\mathcal{A}^o\times\mathcal{A} &&\longrightarrow &&\mathrm{Hot}\\
+&(M,N) &&\longmapsto &&\homext(M,N),
+\end{aligned}
+\right.
+\tag*{(11)}
+\]
+où $\mathcal{A}=\mathcal{M}\Sigma^{-1}$ est la catégorie fondamentale de $\D=\D_{\mathcal{M},\Sigma}$. Il est vrai que je n’ai pas vérifié, si p. ex. $(\mathcal{M},\Sigma)$ est sous-jacente à une catégorie de modèles quillénienne, de sorte que (par \textsc{Thomason}) $\D$ est bien un dérivateur, que cette notion de $\homext$ satisfait bien à une formule de la forme (10). Ici je vais le poser [?], au besoin, ces données supplémentaires : donnée de (11), et d’un isomorphisme fonctoriel
+\[
+\underbrace{\Hom_{\xi}(M,N)}_{\begin{subarray}{l}=\ \Hom(\xi\times_{\D}M,N)\\ =\ \Hom(M,\hm_{\D}(\xi,N))\end{subarray}}
+\quad\simeq\;\Hom_{\Hot}(\xi,\homext(M,N)).
+\tag*{(12)}
+\]
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 9}
+Si maintenant $\eta$ est un deuxième élément de $\Hot_0$, on a envie d’écrire
+\[
+\left\{
+\begin{aligned}
+\homext(\eta\times_{\D}M,N) &\;\simeq\;\homext(M,\hm_{\D}(\eta,N))\\
+&\;\simeq\;\hm_{\HOT}(\eta,\homext(M,N)),
+\end{aligned}
+\right.
+\tag*{(13)}
+\]
+où dans le deuxième membre, $\hm_{\HOT}$ est l’opération (1) dans le cas où $\D=\mathrm{HOT}$, et qui est défini aussi en termes du produit cartésien $\xi\times\eta$ dans Hot, par
+\[
+\Hom_{\Hot}(\xi,\hm_{\HOT}(\eta,\zeta))\;\simeq\;\Hom_{\Hot}(\xi\times\eta,\zeta),
+\]
+en d’autres termes, pour $\eta$ fixé, le foncteur
+\[
+\zeta\;\longmapsto\;\hm_{\HOT}(\eta,\zeta)
+\]
+est défini comme le foncteur adjoint à droite du foncteur
+\[
+\xi\;\longmapsto\;\xi\times\eta.
+\]
+
+Pour vérifier heuristiquement la formule (13) (vérification valable ‘en forme’ si les trois objets envisagés sont en fait définis comme objets de $\Hot_0\ \ldots$), on prend $\Hom_{\Hot}(\xi,-)$ à valeurs dans les trois membres, pour $\xi$ donné dans $\Hot_0$. Pour le premier, on trouve
+\[
+\begin{aligned}
+\Hom_{\xi}(\eta\times_{\D}M,N) &\;=\;\Hom(\xi\times_{\D}(\eta\times_{\D}M),N)\\
+&\;=\;\Hom((\xi\times\eta)\times_{\D}M,N).
+\end{aligned}
+\]
+Pour le deuxième
+\[
+\begin{aligned}
+\Hom_{\xi}(M,\hm_{\D}(\eta,N)) &\;=\;\Hom_{\mathcal{A}}(\xi\times_{\D}M,\hm_{\D}(\eta,N))\\
+&\;\simeq\;\Hom_{\mathcal{A}}(\eta\times_{\D}(\xi\times_{\D}M),N)\\
+&\;\simeq\;\Hom_{\mathcal{A}}((\eta\times\xi)\times_{\D}M,N),
+\end{aligned}
+\]
+\msp{page 10}
+et enfin pour le troisième
+\[
+\begin{aligned}
+\Hom_{\Hot}(\xi\times\eta,\homext(M,N)) &\;\simeq\;\Hom_{\xi\times\eta}(M,N)\\
+&\;\simeq\;\Hom((\xi\times\eta)\times_{\D}M,N),
+\end{aligned}
+\]
+donc toujours la même chose ! Pas de doute, ça doit marcher.
+
+S’il faut se donner le $\homext$ (11) comme donnée supplémentaire, avec de plus un isomorphisme trifonctoriel (12), il faut aussi se donner les isomorphismes trifonctoriels (13), \textit{‘compatibles’} avec l’isomorphisme (12) au sens du calcul précédent.
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+
+Par exemple, prenant $\eta=$ type d’homotopie du cercle $S^1$, les formules (13) se spécialisent en
+\[
+\begin{aligned}
+\homext(\Sigma M,N) &\;\simeq\;\homext(M,\Omega N)\\
+&\;\simeq\;\Omega\homext(M,N)\\
+&\;\defeq\;\hm_{\HOT}(S^1,\homext(M,N)).
+\end{aligned}
+\tag*{(14)}
+\]
+
+Mais cette formule dans Hot n’est sans doute pas tout à fait la bonne, car le bon formalisme de $\Omega$, $\Sigma$ se fait dans les catégories \textit{ponctuées,} et en particulier dans la catégorie homotopique ponctué $\Hot_{\bullet}$. % [sic] ponctué -> ponctuée, agreement with « catégorie »
+
+Je vais expliciter un exemple, en prenant le dérivateur
+\[
+\mathrm{Dér}(A)
+\]
+‘dérivé’ d’une catégorie abélienne $A$. Donc $\D(e)=$ catégorie dérivée de $A$. Pour éviter des
+\msp{page 11}
+difficultés accessoires ici, je vais supposer que $A$ est la catégorie des $k$-modules, $k$ un anneau quelconque.
+
+À tout $\xi\in\Ob\Hot$ est associé un ‘abélianisé’
+\[
+\xi_{\ab}\defeq H_{\bullet}(\xi)\in\underbrace{D(\mathrm{Ab})}_{\text{ou }\mathbf{D}(\mathbf{Z}\text{-Mod})}\;,\qquad\quad\text{catégorie dérivée des groupes abéliens,}
+\]
+objet qui n’a de cohomologie qu’en degré $\le 0$. Ceci dit, si $M$ est dans $D(k\text{-Mod})$, on aura
+\[
+\left\{
+\begin{aligned}
+\xi\times_{\D}M &\;\simeq\;\xi_{\ab}\Ltens_{\mathbf{Z}}M\\
+\hm_{\D}(\xi,M) &\;\simeq\;\RHom_{\mathbf{Z}}(\xi_{\ab},M),
+\end{aligned}
+\right.
+\tag*{(15)}
+\]
+formule qui est en cheville avec la formule de Künneth pour l’homologie
+\[
+(\xi\times\eta)_{\ab}\simeq\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab},
+\tag*{(16)}
+\]
+ce qui redonne un aspect familier aux formules (9), qui se réduisent à
+\[
+\left\{
+\begin{aligned}
+\xi_{\ab}\Ltens_{\mathbf{Z}}(\eta_{\ab}\Ltens_{\mathbf{Z}}M) &\;\simeq\;(\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab})\Ltens_{\mathbf{Z}}M\\
+\RHom_{\mathbf{Z}}(\xi_{\ab},\RHom_{\mathbf{Z}}(\eta_{\ab},M)) &\;\simeq\;\RHom_{\mathbf{Z}}(\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab},M).\qquad\text{(\footnotemark[2])}
+\end{aligned}
+\right.
+\]
+\footnotetext[2]{Explicitier aussi la formule d’adjonction (7) (p. 4).} % [sic] Explicitier -> Expliciter, spelling (cf. « expliciter » in the text)
+
+D’autre part, existe-t-il bien un $\homext(M,N)$, si $M$, $N$ dans $D(k\text{-Mod})$ ? On pense à $\RHom_k(M,N)$, mais pour en faire un type d’homotopie, on doit ‘tronquer en degrés $>0$’. On pourrait donc prendre
+\[
+\homext(M,N)\;\simeq\;\tau_{\le 0}(\RHom_k(M,N)).
+\]
+
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 12}
+La formule fondamentale (10) est-elle alors valable ? Le deuxième membre est en effet
+\[
+\Hom_{\Hot}(\xi,H)\;\simeq\;\Hom_{\mathrm{Hotab}}(\xi_{\ab},H)\qquad\quad\text{(\footnotemark[3])}
+\]
+\footnotetext[3]{? ? est-ce vrai ? ? ?}
+car $H$ est un objet abélien de Hot (cf. le tapis sur l’abélianisation \ldots), à partir de là c’est gagné :
+\[
+\begin{aligned}
+\Hom_{\underbrace{\scriptstyle\mathrm{Hotab}}_{\begin{subarray}{l}\approx\ D(\mathbf{Z}\text{-Mod})^{\le 0},\\ \text{sous-catégorie \textit{pleine}}\\ \text{de }D(\mathbf{Z}\text{-Mod})\end{subarray}}}(\xi_{\ab},\tau_{\le 0}\RHom_k(M,N)) &\;\simeq\;\Hom_{D(\mathbf{Z}\text{-Mod})}(\xi_{\ab},\RHom_k(M,N))\\
+&\;\simeq\;\Hom_{D(k\text{-Mod})}(\xi_{\ab}\times M,N),
+\end{aligned}
+\]
+O.K.
+
+D’autre part, le bifoncteur
+\[
+(M,N)\;\longmapsto\;\homext(M,N)\;=\;\tau_{\le 0}\RHom_k(M,N)
+\]
+se factorise canoniquement par Hotab et a fortiori par $\Hot_{\bullet}$. Le ‘bon’ $\homext(M,N)$ serait ici plutôt celui dans Hotab, voire même dans la catégorie $D^{-}(\mathbf{Z}\text{-Mod})$, déduite de celle là ‘en rendant le foncteur translation inversible’. Il est évident d’ailleurs qu’ici le $\xi_{\ab}\times_{\D}M$, où $\xi=S^1$, n’est pas ‘la bonne’ suspension, qui doit être le décalage des degrés – $\xi_{\ab}$ ne devrait avoir de la cohomologie qu’en degré $-1$, et non aussi en degré $0$.
+
+\end{document}

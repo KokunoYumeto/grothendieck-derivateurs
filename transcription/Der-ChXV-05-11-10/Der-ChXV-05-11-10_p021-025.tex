@@ -1,0 +1,293 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\id}{\mathrm{id}}
+% printed sign for "précouple de Quillen" in (4.1.2): double arrow with a small bar in the middle
+\newcommand{\qpre}{\mathrel{\leftarrow\!\!\!\!\mapsto}}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 28}
+\textsc{Démonstration}. Tout a été prouvé, si on se rappelle que les objets de $\mathcal{M}^r$ sont $r^{\pi_0}$-accessibles (\textit{cf.} (3.2)).
+
+\section*{4\quad Compléments sur les structures de Quillen}
+
+\textbf{Définition 4.1.} Soit $\mathcal{M}$ une catégorie. On appelle \textit{précouple de Quillen} dans $\mathcal{M}$ un couple $(\Phi,\Psi)$ de parties de $\Fl(\mathcal{M})$, satisfaisant les deux conditions suivantes.
+\begin{itemize}[leftmargin=2.5em]
+\item[\textit{a})] On a $\Phi\longleftrightarrow\Psi$, \textit{i.e.} $\Psi\subset\Phi_*$, ou ce qui revient au même, $\Phi\subset\Psi^*$ -- soit encore : pour tout carré commutatif dans $\mathcal{M}$
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "u"] \arrow[d, "i"'] & X \arrow[d, "p"] \\
+B \arrow[ur, dotted, "w" description] \arrow[r, "v"] & Y \;,
+\end{tikzcd}
+\tag*{(4.1.1)}
+\]
+avec $i\in\Phi$, $p\in\Psi$, il existe $w$ telle que $wi=u$, $pw=v$.
+\item[\textit{b})] Toute $f\in\Fl(\mathcal{M})$ se factorise en
+\[
+f \;=\; p\,i\;, \qquad \text{avec } i\in\Phi,\, p\in\Psi\ .
+\]
+\end{itemize}
+On écrit
+\[
+\Phi \;\qpre\; \Psi
+\tag*{(4.1.2)}
+\] % ?? uncertain: the printed relation sign -- a double arrow with a small vertical bar in the middle (rendered by \qpre)
+pour indiquer que $(\Phi,\Psi)$ est un précouple de Quillen.
+
+On dit que le précouple de Quillen est \textit{clos}, si $\Phi$ est clos à gauche, $\Psi$ clos à droit. On va voir plus bas (cor. 2, page 31) que cela implique (donc équivaut à) % [sic] clos à droit -> clos à droite, gender agreement with « à droite »
+\[
+\Phi \;=\; \Psi^*\;, \qquad \Psi \;=\; \Phi_*\ .
+\tag*{(4.1.3)}
+\]
+
+\msp{page 29}
+Un précouple de Quillen clos est aussi appelé un couple de Quillen.
+
+\textbf{Proposition 4.2.} \textit{Soit} $(\Phi,\Psi)$ \textit{un précouple de Quillen dans} $\mathcal{M}$\textit{, et soit} $j\in\Fl(\mathcal{M})$\footnote[9]{\textbf{N.B.} On utilise seulement que $\Phi\longleftrightarrow\Psi$, et que $j$ peut se mettre sous la forme $pi$, avec $i\in\Phi$, $p\in\Psi$.}. % footnote mark printed as "(9)"
+\textit{On a alors les conditions équivalentes sur} $j$ \textit{:}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $j\in\widetilde{\Phi}$.
+\item[b)] $j\in\Psi^*$.
+\item[c)] $j$ \textit{est facteur direct d'un} $i\in\Phi$.
+\item[c$'$)] $j$ \textit{est facteur direct d'un} $i\in\Phi$ \textit{ayant même source que} $j$\textit{, plus précisément, il existe un diagramme}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "j"] \arrow[d, shift right=1ex, "\id_A"'] & B \arrow[d, shift right=1ex, "q"'] \\
+A \arrow[u, dotted, shift right=1ex, "\id_A"'] \arrow[r, "i"] & B' \;, \arrow[u, dotted, shift right=1ex, "p"']
+\end{tikzcd}
+\tag*{(4.2.1)}
+\]
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{avec} $i\in\Phi$\textit{, et}
+\[
+qj \;=\; i\;, \qquad pi \;=\; j\;, \qquad pq \;=\; \id_B\;,
+\tag*{(4.2.2)}
+\]
+\textit{de sorte que} $j$ \textit{est un facteur direct de} $i\in\Phi$\textit{, par} $(\id_A,q)$\textit{, admettant la rétraction} $(\id_A,p)$.
+\item[d)] \textit{Pour tout diagramme commutatif traits pleins}
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j"] \arrow[dr, "i"'] & & B \arrow[dl, dotted, bend left=40, "q"] \\
+& B' \arrow[ur, "p"'] &
+\end{tikzcd}
+\;,
+\tag*{(4.2.3)}
+\]
+i.e. \textit{toute factorisation de} $j$ \textit{en} $pi$\textit{, si on a} $p\in\Psi$\textit{, il existe une section} $q$ \textit{de} $B'$ \textit{sur} $B$ \textit{dans} $A\backslash\mathcal{M}$\textit{,} i.e. \textit{une flèche} $q:B\longrightarrow B'$ \textit{telle que}
+\[
+pq \;=\; \id_B \qquad \textit{et} \qquad qj \;=\; i\ .
+\]
+\end{itemize}
+
+\textsc{Démonstration} de la proposition. Elle se fait par la suite d'implications suivante, toutes $(\pm)$ tautologiques :
+\[
+(c') \;\Longrightarrow\; (c) \;\Longrightarrow\; (a) \;\Longrightarrow\; (b) \;\Longrightarrow\; (d) \;\Longrightarrow\; (c')\;,
+\]
+\msp{page 30}
+dont les quatre premières utilisent seulement l'hypothèse $\Phi\longleftrightarrow\Psi$ (de $(a)$ de la définition 4.1), et la dernière seulement, $(d)\Longrightarrow(c')$, fait appel à l'hypothèse de factorisation de Quillen ($(b)$ dans 4.1) ; et encore il suffit de la supposer pour $j$ seulement !
+
+$(c')\Longrightarrow(c)$ tautologie pure, $(c)\Longrightarrow(a)$ car on sait que $\widetilde{\Phi}$ est stable par facteurs directs (et contient $\Phi$), $(a)\Longrightarrow(b)$ car $\widetilde{\Phi}\subset\Psi^*$ ($\widetilde{\Phi}$ étant par définition la plus petite partie close à gauche de $\Fl(\mathcal{M})$ contenant $\Phi$, et $\Psi^*$ étant close à gauche), $(b)\Longrightarrow(d)$ car on écrit le diagramme donné (4.2.2) (traits pleins) comme % [sic] (4.2.2) -> (4.2.3), the diagram given in condition d) is (4.2.3)
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, "u"] \arrow[d, "j\in\Psi^*"'] & X \arrow[d, "p\in\Psi"] \\
+B \arrow[ur, dotted, "q" description] \arrow[r, "v"] & Y \;,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+en y faisant $Y=B$, $v=\id_B$, et en rebaptisant $X$ par $B'$, et $u$ par $i$ : l'hypothèse $(b)$, $j\in\Psi^*$, signifie que dans un diagramme traits pleins $(*)$, il existe toujours $q$ telle que $qj=u$, $pq=v$, et en l'exprimant dans le cas particulier où $v=\id_B$, on trouve $(d)$.
+
+Reste à prouver $(d)\Longrightarrow(c')$, en utilisant cette fois l'hypothèse de factorisation sur $j$, \textit{i.e.} qu'on peut écrire $j$ sous la forme $pi$ :
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j"] \arrow[dr, "i"'] & & B \arrow[dl, dotted, bend left=40, "q"] \\
+& B' \arrow[ur, "p"'] &
+\end{tikzcd}
+\;,
+\]
+avec $i\in\Phi$, $p\in\Psi$. En vertu de $(d)$, comme $p\in\Psi$, il existe donc $q:B\longrightarrow B'$ satisfaisant
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 31}
+\[
+pq \;=\; \id_B\;, \qquad qj \;=\; i\;,
+\]
+ce qui prouve $(c')$, puisque $i\in\Phi$.
+
+\textbf{Corollaire 1.} \textit{Soit} $(\Phi,\Psi)$ \textit{un précouple de Quillen. Alors on a}
+\[
+\begin{aligned}
+\widetilde{\Phi} \;\;=\;\; \Psi^* \;\;=\;\; &\textit{ensemble des objets de } \underline{\Fl}(\mathcal{M}) \textit{ qui sont fac-}\\
+&\textit{teurs directs d'éléments de } \Phi\ ,
+\end{aligned}
+\tag*{(4.3)}
+\] % printed line break of the display falls inside "fac-teurs"; kept as printed
+\textit{et dualement}
+\[
+\begin{aligned}
+\overline{\Psi} \;\;=\;\; \Phi_* \;\;=\;\; &\textit{ensemble des objets de } \underline{\Fl}(\mathcal{M}) \textit{ qui sont fac-}\\
+&\textit{teurs directs d'éléments de } \Psi\ .
+\end{aligned}
+\tag*{(4.4)}
+\] % printed line break of the display falls inside "fac-teurs"; kept as printed
+
+\textbf{Corollaire 2.} \textit{Les conditions suivantes sur le précouple de Quillen} $(\Phi,\Psi)$ \textit{sont équivalentes.}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{Le précouple est} clos, i.e. $\Phi=\widetilde{\Phi}$\textit{,} $\Psi=\overline{\Psi}$\textit{.}
+\item[b)] $\Phi=\Psi^*$\textit{,} $\Psi=\Phi_*$\textit{.}
+\item[c)] $\Phi$ \textit{et} $\Psi$ \textit{sont stables par facteurs directs.}
+\end{itemize}
+Soit maintenant
+\[
+W \;\subset\; \Fl(\mathcal{M})
+\tag*{(4.5)}
+\]
+un localiseur, satisfaisant les conditions habituelles
+\[
+\left\{
+\begin{aligned}
+&\textit{a})\quad W \text{ contient les isomorphismes.}\\[1ex]
+&\textit{b})\quad \text{Si } X\xrightarrow{\;f\;}Y\xrightarrow{\;g\;}Z \text{ dans } \mathcal{M}\text{, si deux parmi } f,\ g,\ gf \text{ sont}\\
+&\phantom{\textit{b})}\quad \text{dans } W\text{, alors le troisième aussi.}
+\end{aligned}
+\right.
+\tag*{(4.6)}
+\]
+($W$ modérément saturé). Supposons de plus données quatre autres parties
+\[
+C\ ,\ TC\ , \qquad F\ ,\ TF
+\tag*{(4.7)}
+\]
+de $\Fl(\mathcal{M})$, satisfaisant les conditions suivantes.
+\[
+\left\{
+\begin{aligned}
+&\textit{a})\quad (C,TF) \text{ et } (TC,F) \text{ sont des précouples de Quillen.}\\[1ex]
+&\textit{b})\quad TC\subset C\cap W,\ TF\subset F\cap W.
+\end{aligned}
+\right.
+\tag*{(4.8)}
+\]
+
+\msp{page 32}
+Ces propriétés s'explicitent ainsi :
+\begin{itemize}[leftmargin=2.5em]
+\item[\textbf{M\,1}] Propriétés de relèvement-prolongement, $C\longleftrightarrow TF$ et $TC\longleftrightarrow F$.
+\item[\textbf{M\,2}] Propriété de factorisation de toute flèche $f$ de $\mathcal{M}$ en $f=pi$, avec, au choix, $i\in C$, $p\in TF$, ou $i\in TC$, $p\in F$.
+\item[\textbf{M$'$}] $TC\subset C\cap W$, $TF\subset F\cap W$.
+\end{itemize}
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+C'est donc une partie des axiomes d'une structure de Quillen faible pour $W$ (XIII, p. 27, déf. 1) -- il manque les axiomes de stabilité M\,3, M\,4, et les axiomes de “propreté” (propriety) M$''$, savoir $F\subset\mathrm{Fib}_W$, $C\subset\mathrm{Cof}_W$.
+
+\textbf{Proposition 4.3.} \textit{Soient} $\mathcal{M}$ \textit{une catégorie,} $(C,TF)$ \textit{et} $(TC,F)$ \textit{deux précouples de Quillen dans} $\mathcal{M}$\textit{, satisfaisant}
+\[
+TC \;\subset\; C\;, \qquad TF \;\subset\; F\;,
+\tag*{(4.3.1)}
+\]
+\textit{et soit} $W$ \textit{une partie de} $\Fl(\mathcal{M})$ \textit{dont on ne suppose pour l'instant que} 4.6, (b)\footnote[10]{On utilise seulement que si $X\xrightarrow{\;f\;}Y\xrightarrow{\;g\;}Z$, et si $gf\in W$, alors $f\in W\Longleftrightarrow g\in W$. On n'a pas besoin que $W$ contienne les isomorphismes, ni qu'il soit stable par composition.}\textit{, et} % footnote mark printed as "(10)"
+\[
+W \;\supset\; TC\ ,\ TF\ ,
+\tag*{(4.3.2)}
+\]
+\textit{donc on a}
+\[
+TC \;\subset\; C\cap W\ , \qquad TF \;\subset\; F\cap W\ .
+\tag*{(4.3.3)}
+\]
+\textit{Considérons les conditions de prolongement-relèvement suivantes} (a), (a$'$)\textit{, et les conditions de factorisation} (b), (b$'$), (c), (d) (\textit{en se rappelant que} $\widetilde{TC}=F^*$\textit{,} $\overline{TF}=C_*$\textit{, en vertu de la proposition} 4.2 (\textit{cor.} 1) \textit{appliquée aux précouples de Quillen} $(TC,F)$\textit{,} $(C,TF)$) :
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $C\cap W\subset\widetilde{TC}$\quad (\textit{donc} $TC\subset C\cap W\subset\widetilde{TC}$).
+\item[a$'$)] $F\cap W\subset\overline{TF}$\quad (\textit{donc} $TF\subset F\cap W\subset\overline{TF}$).
+\item[b)] $W\subset TF\circ\widetilde{TC}$.
+\item[b$'$)] $W\subset\overline{TF}\circ TC$.
+\item[c)] $W\subset\overline{TF}\circ\widetilde{TC}$.
+\item[d)] $W\subset TF{\circ}TC$ (\textit{donc, par} (4.3.2)\textit{,} $W=TF{\circ}TC$ \textit{si} $W$ \textit{est stable par composition}).\footnote[11]{\textbf{N.B.} La condition $(a)$ signifie aussi que $(C\cap W,F)$ est encore un précouple de Quillen, resp. $(b)$ signifie que $(C,F\cap W)$ en est un -- et alors cette paire de précouples de Quillen satisfait cette fois à $(d)$, \textit{i.e.} $W=TF'\circ TC'$.} % footnote mark printed as "(11)"
+\end{itemize}
+
+\msp{page 33}
+\textit{Alors toutes les conditions sauf la dernière sont équivalentes} (\textit{et elles sont donc impliquées par cette dernière}). \textit{Donc lorsque} $TC$ \textit{ou} $TF$ \textit{sont stables par facteurs directs} (\textit{p. ex. si} $TC$ \textit{est clos à gauche, ou} $TF$ \textit{clos à droite}), \textit{toutes les conditions envisagées sont équivalentes} (\textit{puisque par le corollaire} 2 \textit{à la proposition} 4.2\textit{, on a alors} $TC=\widetilde{TC}$ \textit{resp.} $TF=\overline{TF}$\textit{, donc} (b$'$) \textit{resp.} (b) \textit{équivaut alors à} (d)).
+
+\textsc{Démonstration}. Elle se fait par le diagramme d'implications
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+& (d) \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+(b) \arrow[dr, Rightarrow] & \mathrm{Q} & (b') \arrow[dl, Rightarrow] \\
+& (c) \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+(a) \arrow[uu, Rightarrow] & & (a') \arrow[uu, Rightarrow]
+\end{tikzcd}
+\;,
+\]
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+où les quatre implications du carré supérieur Q sont tautologiques. Il suffit donc d'établir les implications
+\[
+(c) \;\Longrightarrow\; (a) \;\Longrightarrow\; (b)\;,
+\]
+les implications $(c)\Longrightarrow(a')\Longrightarrow(b')$ en résultent par dualité.
+
+Supposons donc $(c)$, \textit{i.e.}
+\[
+W \;\subset\; \overline{TF}\circ\widetilde{TC}\;,
+\tag*{$(*)$}
+\]
+et prouvons $(a)$, \textit{i.e.} que
+\[
+C\cap W \;\subset\; \widetilde{TC}\ .
+\]
+Mais si $j\in C\cap W$, pour prouver que $j\in\widetilde{TC}$, écrivons $j=pi$, $i\in\widetilde{TC}$, $p\in\overline{TF}$, ce qui est possible par l'hypothèse $(*)$ et $j\in W$.
+
+\msp{page 34}
+\[
+\begin{tikzcd}[column sep=small]
+A \arrow[rr, "j\in C"] \arrow[dr, "i\in\widetilde{TC}"'] & & B \arrow[dl, dotted, bend left=60, "q"] \\
+& B' \arrow[ur, "p\in\overline{TF}"'] &
+\end{tikzcd}
+\;.
+\]
+Utilisons maintenant l'hypothèse $j\in C$ et $C\longleftrightarrow\overline{TF}$, on trouve donc (prop. 3.2, $(a)\Longrightarrow(d)$) une flèche $q:B\longrightarrow B'$ telle que $pq=\id_B$, $qj=i$, donc $j$ apparaît comme facteur direct de $i$. Comme $i\in\widetilde{TC}$ et que $\widetilde{TC}$ est stable par facteurs directs, on en conclut $j\in\widetilde{TC}$, \quad \textit{q.e.d.}
+
+$(a)\Longrightarrow(b)$. On suppose donc
+\[
+C\cap W \;\subset\; \widetilde{TC}\;,
+\tag*{$(*)$}
+\]
+et on veut prouver $(b)$, \textit{i.e.}
+\[
+W \;\subset\; TF\circ\widetilde{TC}\ .
+\]
+Soit donc $f\in W$, et factorisons $f$ en $pi$, avec $i\in C$, $p\in TF$. (O.K. à cause du précouple de Quillen $(C,TF)$). Comme $TF\subset W$, on a $p\in W$, et comme $pi\in W$, on en conclut $i\in W$ (saturation modérée de $W$ -- on doit quand même l'utiliser !). On a donc $i\in C{\cap}W$, donc $i\in\widetilde{TC}$ par $(*)$, d'où $f\in TF\circ\widetilde{TC}$, \quad \textit{q.e.d.}
+
+\textbf{Corollaire 1.} \textit{Supposons} $TC$ \textit{stable par facteurs directs. Alors toutes les conditions de la proposition} 4.3 \textit{sont équivalentes, et équivalent à la relation}
+\[
+C\cap W \;=\; TC\ .
+\tag*{(4.3.4)}
+\]
+\textit{Dualement, si} $TF$ \textit{est stable par facteurs directs, les conditions de la proposition} 4.3 \textit{sont toutes équivalentes et équivalent à}
+\[
+F\cap W \;=\; TF\ .
+\tag*{(4.3.4$'$)}
+\]
+
+\end{document}

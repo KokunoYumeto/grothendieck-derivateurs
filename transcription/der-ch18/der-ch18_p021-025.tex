@@ -1,0 +1,227 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\card}{\operatorname{card}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\msp{page 84}
+\[
+\begin{tikzcd}
+\uHom(J,C) \arrow[r, "\alpha^J"] \arrow[d, "\varepsilon_j^*"] & \uHom(J,\Ind'_\pi C) \arrow[d, "{\varepsilon_j^{*\prime}}"] & \ni \varphi \arrow[d, mapsto] \\
+C \arrow[r, "\alpha"] & \Ind'_\pi(C) & \ni \varphi(j)\ ,
+\end{tikzcd}
+\qquad (\text{\footnotemark[21]})
+\tag*{(4.4.6.2)}
+\]
+\footnotetext[21]{Les foncteurs $\varepsilon_j^*$, $\varepsilon_j^{*\prime}$ sont les foncteurs évaluation en $j$.}
+lequel induit un foncteur
+\[
+\underbrace{\uHom(J/C)/\varphi}_{\overset{\text{déf}}{=}\, I} \xrightarrow{\varepsilon_j^\varphi} C/\varphi(j)\ . \tag*{(4.4.6.3)} % [sic] \uHom(J/C) -> \uHom(J,C), everywhere else written Hom(J,C)
+\]
+Si $C$ est stable par $\varinjlim$ relatives à un ensemble $K$ du type de conditions $\leqslant \pi$ (p.ex. $\varinjlim$ finies), il en est de même de $\uHom(J,C)$, et aussi de $\uHom(J,C)/\varphi$, et de $C/\varphi(j)$, en vertu du fait que $\alpha^J$ et $\alpha$ commutent aux $\varinjlim$ du type envisagé, de plus (4.4.6.3) commute aux limites en question. Supposons donc $C$ stable tout au moins par $\varinjlim$ finies, donc les catégories source et but dans (4.4.6.3) sont filtrantes. (Le fait que le foncteur commute aux $\varinjlim$ finies ne semble pas utile dans le contexte présent.) Cela nous servira pour avoir le critère commode de cofinalité SGA 4 I 8.1.3 b) par F\,1, F\,2.
+
+\msp{page 85}
+Rappelons que la cofinalité des foncteurs (4.4.6.3), quand elle a lieu ( ?), implique le fait que $\varphi$ est une limite inductive du foncteur composé
+\[
+\begin{tikzcd}[row sep=small]
+I \arrow[r, "\psi_J"] \arrow[d, equal] & \uHom(J,C) \arrow[r, "\alpha^J"] \arrow[dd, dotted, "\varepsilon_j^*"] & \uHom(J,\Ind'_\pi(C)) \arrow[dd, dotted, "{\varepsilon_j^{*\prime}}"] \\
+\uHom(J,C)/\varphi \arrow[d, "\varepsilon_j^\varphi"'] & & \\
+C/\varphi(j) \arrow[r, dotted, "\psi_j"] & C \arrow[r, dotted, "\alpha"] & \Ind'_\pi(C)\ ,
+\end{tikzcd}
+\tag*{(4.4.6.4)}
+\]
+suivant l'ensemble ordonné filtrant $I$, plus précisément que $\varphi$ est la $\varinjlim$ “argument par argument en $j$”, ce qui signifie que pour tout $j \in \Ob J$, $\varphi(j) = \varepsilon_j^*(\varphi)$ est limite inductive de $\varepsilon_j^*(\alpha^J\psi) = (\alpha\psi_j)\varepsilon_j^\varphi$. (Or on sait en effet que $\varphi(j)$ est la limite de $\alpha\psi$, puisque $\varphi(j) \in \Ob C^\wedge$ est ind-représentable, donc aussi celle de $(\alpha\psi_j)\varepsilon_j^\varphi$ si $\varepsilon_j^\varphi$ est cofinal.)
+
+Ainsi, admettant la cofinalité de (4.4.6.3) et interprétant $\psi_J$ dans (4.4.6.4)
+
+\msp{page 86}
+\[
+\psi_J \ :\ I \longrightarrow \uHom(J,C)
+\]
+comme un foncteur
+\[
+I \times J \xrightarrow{\Psi} C\ , % [sic] \Psi -> \psi, the functor I x J -> C is called \psi in the next formula and in (4.4.7.1)
+\]
+on trouve la “représentation indicielle” de $\varphi$
+\[
+\varphi(j) \ =\ \underbrace{\varinjlim_{i\in I} \psi(i,j)}_{\substack{\text{limite inductive}\\ \text{prise dans } \Ind'_\pi(C)\\ \text{d'objets de } C \hookrightarrow \Ind'_\pi(C)}} \qquad ,
+\]
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+d'où
+\[
+\begin{aligned}
+\underbrace{\varinjlim_{j\in J}{}_{\,\Ind'_\pi C}\varphi(j)}_{\text{sous réserve d'existence}} \quad &= \quad \varinjlim_{j\in J}\, \varinjlim_{i\in I} \psi(i,j)\\
+&= \quad \varinjlim_{i\in I}\, \varinjlim_{j\in J} \psi(i,j)\ ,
+\end{aligned}
+\]
+toutes les limites inductives étant prises dans $\Ind'_\pi(C)$. Mais si les $\varinjlim$ de type $J$ sont représentables dans $C$, et $\card J \leqslant \pi$, on sait que la $\varinjlim\limits_{j\in J} \psi(i,j)$ \textit{dans} $C$ est aussi leur $\varinjlim$ dans $\Ind'_\pi C$, et on trouve donc que $\varinjlim\limits_{j\in J} \varphi(j)$ existe dans $\Ind'_\pi(C)$ si et seulement si $\varinjlim\limits_{i\in I} \Psi(i)$ existe dans $\Ind'_\pi(C)$, où pour $i \in I$, on pose
+\[
+\Psi(i) \ =\ \varinjlim_{j\in J} \psi(i,j) \qquad \textit{dans } C.
+\]
+
+\msp{page 87}
+Résumons ce que nous avons obtenu :
+
+\textbf{Lemme 4.4.7.} \textit{Soit $C$ une petite catégorie, $\pi$ un cardinal infini, $J$ une catégorie telle que $\card \Fl J \leqslant \pi$, $\varphi : J \longrightarrow \Ind'_\pi(C)$ un foncteur. Supposons les $\varinjlim$ de type $J$ existant dans $C$, et que les foncteurs $\varepsilon_j^\varphi$ ($j \in \Ob J$) de (4.4.6.3) soient \textup{cofinaux} (ce qui s'explicite de façon simple surtout si source et but sont filtrants, chose acquise si $C$ est stable par $\varinjlim$ finies). Alors $\varphi$ a une “représentation indicielle canonique”}
+\[
+\psi \ :\ I \times J \longrightarrow C \tag*{(4.4.7.1)}
+\]
+\textit{avec}
+\[
+I \ =\ \uHom(J,C)/\varphi\ , \tag*{(4.4.7.2)}
+\]
+\textit{i.e. on a l'isomorphisme fonctoriel en $j \in \Ob J$}
+\[
+\varphi(j) \ \simeq\ \varinjlim_{I} \psi(i,j) \qquad (\text{\footnotemark[22]})\ . \tag*{(4.4.7.3)}
+\]
+\footnotetext[22]{limite inductive dans $\Ind'_\pi$ d'objets de $C$.}
+\textit{Posons pour tout $i \in \Ob I$}
+\[
+\Psi(i) \ =\ \varinjlim_{J} \psi(i,j) \qquad (\text{\footnotemark[23]})\ . \tag*{(4.4.7.4)}
+\]
+\footnotetext[23]{limite inductive prise dans $C$, mais valable aussi dans $\Ind'_\pi C$.}
+\textit{Alors $\varinjlim\limits_{j\in J} \varphi(j)$ (dans $\Ind'_\pi C$) existe si et seulement si}
+\msp{page 88}
+\textit{la $\varinjlim\limits_{i\in I} \Psi(i)$ existe (dans $\Ind'_\pi C$ également), et les deux sont égales.}
+
+\textbf{Corollaire 4.4.8.} \textit{Supposons que $C$ soit stable par $\varinjlim$ de cardinal $\leqslant \pi$ (pas seulement par celles de type $J$). Alors $\uHom(J,C)$ et $I = \uHom(J,C)/\varphi$ ont la même propriété, $I$ est grande devant $\pi$, et $\varinjlim\limits_{j\in J} \varphi(j) \ =\ \varinjlim\limits_{i\in I} \Psi(i)$ existe dans $\Ind'_\pi(C)$, sous réserve de cofinalité des foncteurs (4.4.6.3).}
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+Il suffit en effet de vérifier ce
+
+\textbf{Lemme 4.4.8.1.} \textit{Soit $I$ une catégorie grande devant $\pi$, et $\Psi : I \longrightarrow C$ un foncteur. Alors $\varinjlim\limits_{i} \Psi(i)$ existe dans $\Ind'_\pi(C)$, et c'est la limite inductive dans $C^\wedge$, ou encore “c'est” l'ind-objet grand devant $\pi$ représenté par $\Psi$.} (En d'autres termes (\footnote[24]{C'est abusif, cette stabilité est un énoncé nettement plus fort! Je le prouve page 99.}), $\Ind'_\pi(C) \subset C^\wedge$ est une sous-catégorie strictement pleine \textit{stable} par $\varinjlim$ grandes devant $\pi$.)
+
+\msp{page 89}
+Ce lemme est une tautologie : si $F$ désigne la limite inductive dans $C^\wedge$, il est clair par définition (en prenant un foncteur $I_0 \longrightarrow I$ cofinal, avec $I_0$ \textit{ordonnée} grande devant $\pi$, de sorte que la $\varinjlim$ peut être prise suivant $I_0$) que $F$ est dans $\Ind'_\pi(C)$, et alors c'est a fortiori une $\varinjlim$ dans $\Ind'_\pi C$.
+
+Pour vérifier l'existence des $\varinjlim$ de cardinal $\leqslant \pi$ dans $\Ind'_\pi C$, dans le cas où $C$ lui-même est stable par lesdites limites, il suffit donc, grâce au corollaire 4.4.8, de prouver la cofinalité des foncteurs (4.4.6.3). Cela va résulter du
+
+\textbf{Lemme 4.4.9.} \textit{Soient $C$ une petite catégorie, $\pi$ un cardinal infini, $J$ une petite catégorie telle que pour tous $j, j' \in \Ob J$, on ait $\card \Hom(j,j') \leqslant \pi$. Sous ces conditions, pour tout $j \in \Ob J$, le foncteur (4.4.6.3) \textup{admet un adjoint à gauche,} donc a fortiori il est cofinal (car les catégories colocalisées au dessus de $C/\varphi(j)$ ont un objet initial, a fortiori elles sont $0$-connexes).}
+
+\msp{page 90}
+\textsc{Démonstration de} 4.4.8. Revenons au diagramme (4.4.6.2), dont on déduit (4.4.6.3), nous allons le réécrire de façon simplifiée :
+\[
+\begin{tikzcd}
+B \arrow[r, "\beta"] \arrow[d, shift left, "\varepsilon"] & B' \arrow[d, shift left, "\varepsilon'"] & \ni y'_0 \arrow[d, mapsto] \\
+C \arrow[r, "\gamma"] \arrow[u, dotted, shift left, "\lambda"] & C' \arrow[u, dotted, shift left, "\lambda'"] & \ni z'_0\ .
+\end{tikzcd}
+\tag*{(4.4.9.1)}
+\]
+Je dis que $\varepsilon$, $\varepsilon'$ ont \textit{des adjoints à gauche} $\lambda$ resp. $\lambda'$, et que l'homomorphisme canonique de “changement de base”
+\[
+\lambda'\gamma \longrightarrow \beta\lambda \tag*{(4.4.9.2)}
+\]
+est un \textit{isomorphisme.} En effet, l'existence des adjoints de $\varepsilon$, $\varepsilon'$, à savoir des foncteurs $\varepsilon_{j\,!}$ et $\varepsilon'_{j\,!}$ relatifs à l'inclusion
+\[
+\varepsilon_j \ :\ e \longrightarrow J
+\]
+et aux catégories de foncteurs $\uHom(J,C)$ resp. $\uHom(J,\Ind'_\pi C)$, résultant de l'existence des sommes de type $\Hom(j,j')$ ($j' \in \Ob J$) dans $C$ (déjà acquise), \textit{et dans} $\Ind'_\pi C$\textit{ ;} et le fait que le foncteur $C \longrightarrow \Ind'_\pi C$ commute
+\msp{page 91}
+auxdites sommes (chose également déjà acquise, puisque $\card\, (\Hom(j,j')) \leqslant \pi$) implique alors que (4.4.4.2) est un isomorphisme. Moyennant la vérification en suspens (l'existence % [sic] (4.4.4.2) -> (4.4.9.2), the isomorphism in question is the change-of-base arrow (4.4.9.2)
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+des sommes de cardinal $\leqslant \pi$ dans $\Ind'_\pi(C)$), le lemme 4.4.9 résultera du résultat plus général :
+
+\textbf{Lemme 4.4.10.} \textit{Considérons un carré commutatif (4.4.9.1) (traits pleins) de catégories, où $\varepsilon$ admet un adjoint à gauche $\lambda$, $\varepsilon'$ un adjoint à gauche $\lambda'$, et la flèche de changement de base (4.4.9.2) est un isomorphisme. Alors pour tout $y'_0$ dans $B'$, posant $\varepsilon'(y'_0) = z'_0$, le foncteur induit par $(\varepsilon, \varepsilon')$,}
+\[
+\overline{B} \ =\ B/y'_0 \xrightarrow{\bar{\varepsilon}} \overline{C} = C/z'_0\ ,
+\]
+\textit{admet un adjoint à gauche $\overline{\lambda}$, donné par}
+\[
+\begin{tikzcd}[column sep=small]
+\overline{\lambda}(\gamma(z) \xrightarrow{v} z'_0) \ \ = & \Bigl(\lambda'\gamma(z) \simeq \beta(\lambda(z)) \arrow[r, "{\lambda'(v)}"] \arrow[ddr, "{\substack{\overline{\lambda}(v) \,=\, \text{composé}\\ \text{adj} \circ \lambda'(v)}}"'] & \lambda'(z'_0) \arrow[d, equal] \\
+ & & \lambda'\varepsilon'(y'_0) \arrow[d, "\text{adj.}"] \\
+ & & y'_0\Bigr)\ \ .
+\end{tikzcd}
+\]
+
+\msp{page 92}
+La démonstration se fait par un AQT \texttt{[âne qui trotte]} fastidieux (j'avoue ne pas avoir poussé jusqu'au dernier détail \ldots).
+
+Pour terminer la démonstration de 4.4.9, il reste à prouver un dernier ( ?)
+
+\textbf{Lemme 4.4.11.} \textit{Soit $C$ une petite catégorie, stable par sommes de cardinal $\leqslant \pi$. Alors $\Ind'_\pi C$ est stable par sommes de cardinal $\leqslant \pi$ (et, pour mémoire, le foncteur $\alpha : C \longrightarrow \Ind'_\pi C$ y commute).}
+
+Appliquant le corollaire 4.4.8 au lemme 4.4.7, on est ramené à prouver la cofinalité de (4.4.6.3) quand $J$ est discrète, plus le fait que $\uHom(J,C)/\varphi$ est grande devant $\pi$, dans ce cas. Mais la donnée de $\varphi$ revient à celle d'une famille $(\varphi_j)_{j\in J}$ d'objets de $\Ind'_\pi(C)$, et le foncteur (4.4.6.3) s'explicite comme la projection
+\[
+\prod_{j\in J} (C/\varphi_j) \longrightarrow C/\varphi_j
+\]
+du produit total sur un des facteurs. Donc on est ramené à ceci :
+
+\msp{page 93}
+\textbf{Lemme 4.4.12.} \textit{Soit $(C_j)_{j\in J}$ une famille de petites catégories grandes devant $\pi$, indexée par un petit ensemble $J$. Alors $\prod C_j$ est grande devant $\pi$, et les projections (pour $j_0 \in J$) $\prod C_j \longrightarrow C_{j_0}$ sont cofinales.}
+
+Prouvons d'abord la cofinalité, qui est le plus important pour nous. C'est évident si $J = \{j_0\}$, sinon on a $J = J' \cup \{j_0\}$, et $\prod_{j\in J} C_j \simeq C' \times C_{j_0}$, où $C' = \prod_{j\in J'} C_j$, donc il faut voir que $C' \times C_{j_0} \longrightarrow C_{j_0}$ est cofinal, i.e. que toute catégorie $\xi\backslash(C' \times C_{j_0})$ (pour $\xi \in \Ob C_{j_0}$) est 0-connexe, or elle est isomorphe à $C' \times (\xi\backslash C_{j_0})$, et $\xi\backslash C_{j_0}$ étant 0-connexe, il reste à voir que $C'$ est 0-connexe. On fera attention à cet égard qu'un produit \textit{infini} de catégories 0-connexes n'est pas forcément 0-connexe, donc la cofinalité n'est pas totalement tautologique! Mais si on prouve que la catégorie $\prod_{j\in J} C_j$ est
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 94}
+grande devant $\pi$, donc filtrante, cela implique qu'elle est 0-connexe, et on peut appliquer ce même résultat à $C' = \prod_{j\in J'} C_j$, et on gagne.
+
+Donc on est ramené à prouver que $\prod C_j$ est grande devant $\pi$. Ceci se voit soit sur le critère $\mathrm{PF}_\pi\,1$, $\mathrm{PF}_\pi\,2$ de 4.4.4 b, soit en se ramenant au cas où les $C_j$ sont ordonnées, mais cela a l'air plus long. Notons que l'on prouve de même qu'un (petit) produit de catégories filtrantes est encore une catégorie filtrante.
+
+\textbf{Remarques.}
+\begin{enumerate}[label={}, leftmargin=*]
+\item[1.] Cet argument ne montre nullement (même si $C$ est stable par $\varinjlim$ de cardinal $\leqslant \pi$) que pour tout $\varphi \in \uHom(J,\Ind(C))$, le foncteur similaire à (4.4.6.3)
+\[
+\uHom(J,C)/\varphi \longrightarrow C/\varphi(j)
+\]
+soit cofinal, et je doute qu'il le soit toujours. La difficulté provient du fait que $C \longrightarrow \Ind\, C$ ne commute pas aux sommes de cardinal $\leqslant \pi$, seulement aux sommes finies,
+\msp{page 95}
+donc le lemme 4.4.10 ne peut être invoqué.
+\item[2.] Nous venons de prouver, via 4.4.8 et 4.4.9 (dont la démonstration est achevée avec 4.4.12), que si $C$ est une petite catégorie stable par $\varinjlim$ de cardinal $\leqslant \pi$, alors $\Ind_\pi C$ est également stable par ces limites. De plus, les systèmes inductifs de ce type $J$ dans $\Ind_\pi C$ admettent une représentation indicielle
+\[
+\psi \ :\ I \times J \longrightarrow C\ ,
+\]
+avec $I$ grande devant $\pi$. Et on peut toujours supposer, quitte à prendre $I' \longrightarrow I$ cofinal avec $I'$ ensemble ordonné grand devant $\pi$, que $I$ est de plus un ensemble ordonné.
+\end{enumerate}
+
+C'est là le moyen donc, pour la démonstration du
+
+\textbf{Théorème 4.4.13.} \textit{Soit $C$ une catégorie équivalente à une petite catégorie, et stable par $\varinjlim$ de cardinal $\leqslant \pi$, où $\pi$ est un cardinal infini donné. Alors :}
+\msp{page 96}
+
+\begin{enumerate}[label={}, leftmargin=*]
+\item[\textit{a)}] \textit{(Pour mémoire.) Le foncteur canonique}
+\[
+C \longrightarrow \Ind_\pi(C) \xrightarrow{\ \sim\ } \Ind'_\pi(C)
+\]
+\textit{commute aux $\varinjlim$ de cardinal $\leqslant \pi$.}
+\item[\textit{b)}] \textit{(Pour mémoire.) Les systèmes inductifs de cardinal $\leqslant \pi$ dans $\Ind_\pi(C)$ (i.e. les foncteurs $\varphi : J \longrightarrow \Ind_\pi(C)$, avec $\card \Fl(J) \leqslant \pi$) admettent une représentation indicielle}
+\[
+\psi \ :\ I \times J \longrightarrow C\ ,
+\]
+\textit{avec $I$ ensemble ordonné grand devant $\pi$, et admettent une limite inductive dans $\Ind_\pi C$ qui se calculent par}
+\[
+\underbrace{\varinjlim_{j\in J} \varphi(j)}_{\text{dans } \Ind_\pi(C)} \ \simeq\ \text{“}\,\varinjlim_{i\in I}\,\text{”}\Psi(i)
+\]
+\end{enumerate}
+
+\end{document}

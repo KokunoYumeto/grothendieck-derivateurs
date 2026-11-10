@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Ch}{\underline{\mathrm{Ch}}}
+\newcommand{\Hotp}[1]{\mathrm{Hot}_{\bullet\,#1}}
+\newcommand{\hotp}[1]{\mathrm{hot}_{\bullet\,#1}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\HomEns}{\mathrm{Hom}_{\mathrm{Ens}}}
+\newcommand{\utpi}{\underset{\sim}{\pi}}
+
+\begin{document}
+
+\printedpage{115}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+\msp{page 171}
+
+\section*{VI\quad Critère de $W_\infty$-asphéricité pour les $\Omega^n(X,x)$.}
+
+\subsection*{1\quad Cogitations sur $W_n$.}
+
+On va définir, pour $n \in \mathbf{N}$,
+\[
+W_n \subseteq \mathrm{Fl}(\mathrm{Cat})
+\]
+par les conditions suivantes (où $f : X \longrightarrow Y$ est une flèche dans Cat).
+
+\noindent\begin{tabular}{@{}l c l p{0.64\textwidth}@{}}
+$f \in W_0$ & $\Longleftrightarrow$ & a) & $\pi_0(f)$ bijectif.\\
+ & $\Longleftrightarrow$ & b) & Pour tout préfaisceau d'ensembles $F$ \textit{constant} sur $Y$, $H^0(Y,F) \longrightarrow H^0(X,f^*F)$ est bijectif.\\
+ & $\Longleftrightarrow$ & c) & Le foncteur $F \longmapsto f^*F$ des préfaisceaux d'ensembles \textit{constants} sur $Y$ vers les faisceaux d'ensembles constants sur $X$ est pleinement fidèle.
+\end{tabular}
+
+\texttt{[Les termes de faisceau ou de préfaisceau sont utilisés ici indifféremment.]}
+
+\textbf{NB} Si $F_0$ est un ensemble, $F_{0\,Y}$ le faisceau d'ensembles constant défini par $F$ sur $Y$, on a
+\[
+\begin{aligned}
+H^0(Y,F_{0\,Y}) &\simeq \HomEns(\pi_0(Y),F_0) && \text{(fonctoriel en $Y$)}\\
+\mathrm{Hom}_{Y^\wedge}(F_{0\,Y},G_{0\,Y}) &\simeq \HomEns(\pi_0(Y),\HomEns(F_0,G_0)) && \text{(fonctoriel en $Y$),}
+\end{aligned}
+\]
+ce qui implique que a) $\Longrightarrow$ c) $\underset{\substack{\text{en prenant}\\ \mathrm{Hom}_{Y^\wedge}(e_Y,F)}}{\overset{\text{tautologiquement}}{\Longrightarrow}}$ b) $\Longrightarrow$ a).
+
+\noindent\begin{tabular}{@{}l c l p{0.64\textwidth}@{}}
+$f \in W_1$ & $\Longleftrightarrow$ & a) & $\pi_0(f)$ bijectif, et pour tout $x \in \Ob X$, $\pi_1(f,x) : \pi_1(X,x) \longrightarrow \pi_1(Y,f(x))$ est bijectif. (NB Il suffit de le vérifier pour \textit{un} $x$ dans chaque composante connexe de $X$.)\\
+ & $\Longleftrightarrow$ & a$'$) & $\Pi(X) \xrightarrow{\Pi f} \Pi(Y)$ est une équivalence de catégories.\\
+ & $\Longleftrightarrow$ & b) & $H^0(Y,F) \longrightarrow H^0(X,f^*F)$ bijectif pour tout faisceau d'ensembles \textit{localement constant} sur $Y$, et $H^1(Y,F) \longrightarrow H^1(X,f^*F)$ bijectif si de plus $F$ est un faisceau en groupes.\\
+ & $\Longleftrightarrow$ & b$'$) & Comme b), mais pour le $H^1$ on se borne à $F$ \textit{constant}, et on exige $H^1(f)$ \textit{surjectif} seulement.\\
+ & $\Longleftrightarrow$ & c) & Le foncteur $F \longmapsto f^*F$ de la catégorie des faisceaux d'ensembles localement constants sur $Y$ vers celle des faisceaux localement constants sur $X$ est une équivalence de catégories.
+\end{tabular}
+
+\clearpage
+
+\printedpage{116}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+\msp{page 172}
+
+\textbf{NB} Le groupe $\pi_1(X,x)$ est défini via la théorie du groupoïde fondamental. On sait qu'il est en bijection canonique avec $\pi_0(\Omega(X,x))$, où $\Omega(X,x) = \Ch(X;x,x)$ (ce qui permet d'avoir une loi de composition monoïdale sur $\Omega(X,x)$, donnant la loi de groupe sur le $\pi_0$), ou au choix $\Omega(X,x) = \Ch_\infty(X;x,x)$ (plus commode dans certaines situations, mais ne donnant pas directement la loi de composition dans $\pi_0(\Omega(X,x))$).
+
+Je vais poser, pour $n \in \mathbf{N}$,
+\[
+\pi_n(X,x) = \pi_0(\Omega^n(X,x)),
+\]
+$\Omega^n$ désignant l'itéré $n$-ième du foncteur $(X,x) \longmapsto \Omega(X,x)$ de la catégorie $\mathrm{Cat}_\bullet$ des objets ponctués de Cat dans elle-même. Je préfère ici travailler avec la théorie \underline{Ch} au lieu de $\Ch_\infty$. Tôt ou tard il faudra donner un énoncé de comparaison \dots
+
+\textbf{Théorème 1} (\footnote[112]{Sans doute \textit{faux}. On doit avoir a) $\Longrightarrow$ b), mais b) $\Longrightarrow$ a) \texttt{[est]} sans doute faux déjà pour $n = 2$ (sauf le cas $X$, $Y$ 1-connexes). Cf. énoncé rectifié \texttt{[p. 178]}.}). \textit{Soit $f : X \longrightarrow Y$ dans} Cat\textit{, et soit $n \in \mathbf{N}$, $n \geq 2$, $S$ une partie de} $\Ob X$ \textit{telle que le composé $S \longrightarrow \Ob X \longrightarrow \pi_0(X)$ soit} \texttt{[un]} \textit{épimorphisme. Les conditions suivantes sont équivalentes.}
+
+\begin{itemize}
+\item[\textit{a)}] \textit{$\pi_i(f,x)$ isomorphe pour tout $x \in \Ob X$ et tout $i \in [0,n]$.}
+
+\item[\textit{a$'$)}] \textit{Comme a), mais avec $x \in S$.}
+
+\item[\textit{b)}] \textit{On a}
+\[
+\begin{array}{rcll}
+H^0(Y,F) & \xrightarrow{\ \sim\ } & H^0(X,f^*F) & \textit{pour $F$ faisceau d'ensembles}\\
+ & & & \textit{localement constant sur $Y$.}\\
+H^1(Y,F) & \xrightarrow{\ \sim\ } & H^1(X,f^*F) & \textit{si de plus $F$ faisceau en groupes.}\\
+H^i(Y,F) & \xrightarrow{\ \sim\ } & H^i(X,f^*F) & \textit{si de plus $F$ faisceau abélien, $i \in [2,n]$.}
+\end{array}
+\]
+\end{itemize}
+
+\msp{page 173}
+
+\textbf{NB} L'équivalence de a) et a$'$) devrait être triviale, mais pour cela il faut avoir défini les $\pi_n(X,x)$, pour $x$ variable dans $\Ob X$, comme système local sur $X$, chose que je n'ai pas faite encore. Je vais essayer de le faire dans un courant d'air. Tout d'abord, les $\Omega(X,x)$ sont les fibres d'une $W_\omega$-fibration parfaite (\footnote[113]{\textbf{NB} $W_\omega$ est le plus petit localiseur de Cat (satisfaisant W(1, 2 bis, 3)).}), s'insérant dans le carré cartésien
+\[
+\begin{tikzcd}
+\Ch(X) \arrow[d, "{p_X=(\sigma_X,\beta_X)}"'] & \Omega(X,-) \arrow[l] \arrow[d] \\
+X \times X & X. \arrow[l, "\mathrm{diag}_X"'] \arrow[ul, dotted, "i_X"']
+\end{tikzcd}
+\]
+
+\clearpage
+
+\printedpage{117}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+On sait alors que l'on a un foncteur
+\[
+\begin{aligned}
+\Pi X &\longrightarrow \mathrm{Hot}_{W_\omega}\\
+x &\longmapsto \mathrm{hot}_{W_\omega}(\Omega(X,x)).
+\end{aligned}
+\tag*{$(*)$}
+\]
+Or on a, pour $i \geq 1$,
+\[
+\pi_i(X,x) = \pi_{i-1}(\ \underbrace{\Omega(X,x)}_{\text{objet ponctué}}\ ).
+\]
+Cela donne le système local cherché des $\pi_i$, si seulement on avait un foncteur un peu plus précis que $(*)$, savoir
+\[
+\Pi X \longrightarrow \Hotp{W_\omega} \qquad \text{(catégorie $W_\omega$-homotopique \textit{ponctuée})}
+\]
+(\footnote[114]{Mais il faut aussi vérifier que les $\pi_n(X,x)$ ($n \geq 1$) sont des foncteurs sur $\Hotp{W_\infty}$, i.e. transforment $W_\infty$-équivalences en itou. Cela résulte de W(4a) pour $W_\infty$, qui implique que $(X,x) \longrightarrow \Omega(X,x)$ se factorise par $\Hotp{W_\infty}$ (en tant que foncteur à valeurs dans $\Hotp{W_\infty}$).}). Or la flèche $i_X : X \longrightarrow \Ch X$ relevant $p_X$ donne une section canonique de $\Omega(X,-)$ sur $X$ -
+\msp{page 174}
+celle justement qui associe à tout $x \in X$ le point marqué $1_x$ de $\Omega(X;x,x)$ (`lacet vide en $x$'). La question est donc celle-ci :
+
+\begin{quote}
+On a une $W$-fibration $\Omega \longrightarrow X$, avec une section donné $\sigma$. Cela définit-il un foncteur canonique % [sic] donné -> donnée, accord avec « section »
+\[
+X \longrightarrow \Hotp{W},
+\]
+transformant toute flèche en \texttt{[un]} isomorphisme?
+\end{quote}
+
+L'idée naturelle est de prendre
+\[
+x \longmapsto \hotp{W}(\Omega/x)
+\]
+en ponctuant $\Omega/x$ par le point marqué $\sigma(x)$ de $\Omega_x \hookrightarrow \Omega/x$. L'ennui, c'est que les morphismes de transition $\Omega/x \longrightarrow \Omega/x'$ (pour $x \xrightarrow{u} x'$ dans $X$) ne sont pas compatibles avec les points marqués. Mais on a une flèche (savoir $\sigma(u)$) allant
+\msp{page 175}
+de l'image $\sigma(x)/x'$ du point marqué de $\Omega/x$ vers le point marqué $\sigma(x')/x'$ de $\Omega/x'$. Ceci doit suffire pour définir la flèche
+\[
+(\Omega/x,\sigma(x)/x) \longrightarrow (\Omega/x',\sigma(x')/x')
+\]
+comme flèche dans $\Hotp{W}$, avec transitivité pour une composée $x \xrightarrow{u} x' \xrightarrow{v} x''$ dans $X$. Je vais pour l'instant me borner
+\printedpage{118}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+\msp{page 176}
+à une indication, quitte à faire des vérifications circonstanciées par la suite. Au besoin, j'utiliserai dès maintenant que pour $i \in \mathbf{N}$, $i \geq 1$,
+\[
+\pi_i(f,x) : \pi_i(X,x) \longrightarrow \pi_i(Y,f(x))
+\]
+peuvent s'interpréter comme provenant d'un homomorphisme de systèmes locaux
+\[
+\utpi_i(X,-) \longrightarrow f^*(\utpi_i(Y,-))
+\]
+sur $X$. La condition a) du théorème 1 s'interprète en disant que cet homomorphisme est un \textit{isomorphisme} pour $i \in [1,n]$, et la condition a$'$) se borne alors à rappeler qu'il suffit de tester qu'il en est ainsi pour \textit{un} point de chaque composante connexe de $X$.
+
+L'énoncé du théorème 1 garde un sens pour $n = 1$, et dans ce cas a été `rappelé' précédemment (et est $\pm$ tautologique). Cela va nous permettre de procéder par récurrence sur $n$, en supposant que le théorème est prouvé pour $n-1$. Cela signifie que l'on peut supposer que les conditions a) \textit{et} b) sont satisfaites par $f$ pour $i \in [1,n-1]$, et se borner à prouver que, sous ces conditions, la condition a) (ou a$'$), pour $i = n$, équivaut à la condition b) pour $i = n$.
+
+\msp{page 177}
+
+Donc il faut prouver simplement ceci :
+
+\textbf{Lemme} (\footnote[115]{Sans doute faux.}). \textit{Supposons que $\pi_i(f,x)$} \texttt{[est un]} \textit{isomorphisme pour $i \in [0,n-1]$ et b) satisfait pour $i \in [0,n-1]$, où $n \in \mathbf{N}$, $n \geq 2$, est fixé. Alors les conditions suivantes sont équivalentes :}
+
+\begin{itemize}
+\item[\textit{a)}] $\pi_n(f,x) : \pi_n(X,x) \longrightarrow \pi_n(Y,f(x))$ \texttt{[est un]} \textit{isomorphisme pour tout $x \in \Ob X$.}
+
+\item[\textit{b)}] $H^n(Y,F) \xrightarrow{\sim} H^n(X,f^*F)$ \texttt{[est un]} \textit{isomorphisme pour tout faisceau abélien localement constant sur $Y$.}
+\end{itemize}
+
+Notons que $f$ induit une flèche dans $\mathrm{Cat}_\bullet$,
+\[
+\Omega(f,x) : \Omega(X,x) \longrightarrow \Omega(Y,f(x)),
+\]
+d'où
+\[
+\begin{tikzcd}[row sep=small]
+\pi_i(\Omega(X,x)) \arrow[r] \arrow[d, dash, "\wr"'] & \pi_i(\Omega(Y,f(x))) \arrow[d, dash, "\wr"'] \\
+\pi_{i+1}(X,x) \arrow[r] & \pi_{i+1}(Y,f(x)),
+\end{tikzcd}
+\]
+s'identifiant à $\pi_{i+1}(f,x)$ :
+\[
+\pi_i(\Omega(f,x)) \simeq \pi_{i+1}(f,x).
+\]
+
+\clearpage
+
+\printedpage{119}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+L'hypothèse a) du lemme implique que $\pi_i(\Omega(X,x)) \xrightarrow{\sim} \pi_i(\Omega(Y,y))$ pour $i \in [0,n-1]$. Il s'agit ici des $\pi_i$ basés en les points unités. On devra sans doute prouver que, du fait qu'il s'agit d'un morphisme de monoïdes dans Cat (satisfaisant certaines conditions?) ça reste vrai pour les $\pi_i$ en \textit{tout} point $\xi$ de $\Omega(X,n)$. Par l'hypothèse de récurrence, on saura donc que $\Omega(X,x) \longrightarrow \Omega(Y,y)$ % [sic] \Omega(X,n) -> \Omega(X,x), le point de base est x
+\msp{page 178}
+induit un isomorphisme pour la cohomologie à coefficients localement constants, jusqu'en dimension $n-1$ inclus.
+
+Finalement, je me suis $\pm$ convaincu que l'énoncé du théorème 1 est faux tel quel. Voici un énoncé que j'éspère vrai, et que je vais essayer de prouver dans un esprit `utilitaire', en utilisant tout ce que je sais en homotopie et cohomologie (et pas seulement ce que j'ai développé `from scratch' dans le modélisateur Cat). % [sic] j'éspère -> j'espère, orthographe
+
+\textbf{Théorème 1 rectifié.} \textit{Considérons, pour un entier $n \geq 2$ donné, les conditions suivantes sur une flèche $f : X \longrightarrow Y$ dans} Cat \textit{(ou une application continue d'espaces topologiques, ou un morphisme dans $\mathbf{\Delta}^\wedge$ etc. etc.) :}
+
+\begin{itemize}
+\item[$a_n$)] \textit{Si $Z$ est une `fibre homotopique' de $f$ (NB il y en a essentiellement une par composante connexe de $Y$), alors $Z$ est $n$-connexe, i.e.}
+\msp{page 179}
+\textit{(p. ex) $\pi_i(Z) = 0$ pour $i \in [0,n]$.}
+
+\item[$b_n$)] \textit{$\pi_0(f)$ est bijectif, et $\forall\ x \in X$, $\pi_i(f,x) : \pi_i(X,x) \longrightarrow \pi_i(Y,f(x))$ est} \texttt{[un]} \textit{isomorphisme pour $i \in [1,n]$. (}\textbf{NB} \textit{Il suffit de le dire pour} \textup{un} \textit{point $x$ de chaque composante connexe de $X$.)}
+
+\item[$c_n$)] $H^i(Y,F) \longrightarrow H^i(X,f^*F)$ \texttt{[est un]} \textit{isomorphisme pour $F$ faisceau localement constant sur $Y$ (avec $F$ abélien si $i \geq 2$, $F$ faisceau en groupes si $i = 1$).}
+\end{itemize}
+
+\textit{On a alors}
+\[
+a_n \ \Longrightarrow\ b_n \ \Longrightarrow \text{(\footnotemark[116])}\ c_n \ \Longrightarrow \text{(\footnotemark[117])}\ a_{n-1}
+\]
+\footnotetext[116]{si $X$, $Y$ 1-connexes, c'est vraiment prouvé, sinon, il y a des vérifications à faire (qui ont l'air soritales \dots).}%
+\footnotetext[117]{\textbf{NB} Même si $X$, $Y$ 1-connexes, il n'est pas clair que $\mathrm{c}_n \Longrightarrow \mathrm{b}_n$, car il faut montrer que $\pi_n(Z) \longrightarrow \pi_n(X)$ est nul, et on trouve seulement que le composé avec $\pi_n(X) \longrightarrow H_n(X)$ est nul. Je présume qu'il y a des contre-exemples.}%
+\textit{(et je présume que chacune de ces implications est stricte).}
+
+\textsc{Démonstration}. $\mathrm{a}_n \Longrightarrow \mathrm{b}_n$ est conséquence immédiate de la suite exacte d'homotopie pour une Hot-fibration $\bar{X} \xrightarrow{\bar{f}} Y$ qui factorise $X \xrightarrow{f} Y$ en $f = \bar{f} \circ i$, $i \in W_\infty$. En fait, $\mathrm{a}_n$ \textit{équivaut} à $\mathrm{b}_n$ + la surjectivité des $\pi_{n+1}(X,x) \longrightarrow \pi_{n+1}(Y,f(x))$, laquelle bien sûr ne résulte \textit{pas} de $\mathrm{b}_n$, i.e. de la bijectivité des $\pi_i(f,x)$ pour $i \leq n$ (prendre des $K(\pi,n+1)$). Donc l'implication est bien stricte.
+
+\end{document}

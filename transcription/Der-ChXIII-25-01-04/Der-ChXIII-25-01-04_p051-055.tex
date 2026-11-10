@@ -1,0 +1,159 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\barlongleftrightarrow}{\mathrel{\text{\ooalign{$\longleftrightarrow$\cr\hidewidth$\mid$\hidewidth\cr}}}}
+\newcommand{\idx}[2]{\noindent #1\dotfill #2\par}
+
+\begin{document}
+
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 91}Soit
+\[ \mathcal{C} \;=\; \underline{M}^\pi/\mathcal{X} \]
+la catégorie suivante. Ses objets sont les triples
+\[ (Z,i,\alpha) \quad \text{tels que} \quad Z\in M^\pi,\ i\in I,\ \alpha : Z\longrightarrow X_i \ , \]
+les flèches
+\[ (Z,i,\alpha) \;\longrightarrow\; (Z',i',\alpha') \]
+sont les couples $(u,\lambda)$ avec
+\[ u : Z\longrightarrow Z', \qquad \lambda : i\longrightarrow i', \qquad (\textit{i.e.}\ \text{on a } i\le i' \text{ et } \lambda \text{ est l'unique flèche de } i \text{ dans } i'), \]
+tels que le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+Z \arrow[r,"\alpha"] \arrow[d,"u"'] & X_i \arrow[d,"\text{transition } \lambda_{i',i}"] \\
+Z' \arrow[r,"\alpha'"] & X_{i'}
+\end{tikzcd}
+\]
+commute. On peut donc définir $\mathcal{C}$ comme le produit fibré dans le carré cartésien
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & \mathcal{C} \arrow[r,"\text{cofibré}"] \arrow[d] \arrow[dl,dotted,"\mathcal{Z}"'] & I \arrow[d,"\mathcal{X} : X \longmapsto X_i"] \\ % [sic] X \longmapsto X_i -> i \longmapsto X_i, the functor \mathcal{X} goes from I, so the variable should be i
+\underline{M}^\pi & \underline{M}^\pi/E \arrow[l,dotted,"\text{source}"'] \arrow[r,"\text{but}","\text{cofibré}"'] & E.
+\end{tikzcd}
+\]
+La fibre $\mathcal{C}_i$ de $\mathcal{C}$ en $i\in I$ est $\mathrm{Filt}^\pi/X_i$ \texttt{[plutôt} $M^\pi/X_i$\texttt{]}. On a, comme \textit{b}) $\Longrightarrow$ première moitié de \textit{a}), que $\underline{M}^\pi$ est un
+\msp{page 92}système de générateurs stricts de $\underline{M}$ \texttt{[cela n'est pas clair sans autres hypothèses sur} $\underline{M}$\texttt{]}, et $X_i\in\operatorname{Ob}\underline{M}$ par hypothèse,
+\[ X_i \;=\; \varinjlim_{Z\in\operatorname{Ob}\underline{M}^\pi/X_i} Z \;=\; \varinjlim_{\mathcal{C}_i}\mathcal{Z}|\mathcal{C}_i, \]
+donc le système inductif donné $(X_i)_{i\in I}$ sur $I$ à valeurs dans $X$, se déduit du système inductif (non ordonné en général) sur $\mathcal{C}$, à valeurs dans $\underline{M}^\pi$, en ``intégrant sur les fibres'' de $\mathcal{C}\longrightarrow I$. D'ailleurs, comme $\underline{M}^\pi/E\longrightarrow E$ est cofibrée, donc propre, il en est de même de $\mathcal{C}\longrightarrow I$, donc les $\varinjlim$ de $\mathcal{Z}$ sur les fibres $\mathcal{C}_i$ ($=$ $\underline{M}^\pi/X_i$) forment bien un foncteur covariant $I\longrightarrow E$, dont la limite inductive est celle de $\mathcal{Z}$ (\footnote{\textbf{NB} Si on admet la validité de $a$), alors il en résulte déjà que $\varinjlim\limits_{i\in I} X_i \simeq \varinjlim\limits_{\alpha\in C} Z_\alpha$ est dans $M$. (Stabilité de $M$ par $\varinjlim$ grandes devant $\pi$).}).
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 93}Soit, pour tout $i\in I$, $\tilde{\mathcal{C}}_i$ l'ensemble ordonné
+\[ \tilde{\mathcal{C}}_i = \{\text{sous-catégories } \mathcal{C}'_i \text{ de } \mathcal{C}_i = \underline{M}^\pi/X_i \mid \operatorname{card}\mathcal{Z}(\mathcal{C}'_i)\le\pi,\ \ \mathcal{C}'_i \text{ filtrante}\}. \]
+J'admets pour l'instant le
+
+\textbf{Lemme} (\footnote{Utilise l'hypothèse tacite que les éléments de $\mathrm{Filt}^\pi$ sont $\pi$-accessibles.}). \textit{Pour tout $X\in M$, la catégorie $\underline{M}^\pi/X$ est filtrante. (Sous l'hypothèse} b), \textit{ou que tout objet de $M$ est de la forme dite dans} a).\textit{)}
+
+Il en résulte, comme $X_i\in M$, que $\mathcal{C}_i$ est filtrante, donc la réunion des $\mathcal{C}'_i\in\tilde{\mathcal{C}}_i$ est $\mathcal{C}_i$ ; l'ensemble ordonné $\tilde{\mathcal{C}}_i$ est filtrant, et toute partie $(\mathcal{C}'_{i_\alpha})_{\alpha\in A}$ filtrante et de cardinal $\le\pi$ de $\tilde{\mathcal{C}}_i$ y admet une borne supérieure $\mathcal{C}'_{i_A}$, savoir la réunion des $\mathcal{C}'_{i_\alpha}$. $\tilde{\mathcal{C}}_i$ est donc un ensemble ordonné $\pi$-adapté.
+
+On peut considérer les ensembles ordonnés $\tilde{\mathcal{C}}_i$, pour $i\in I$ variable, comme les fibres d'une application croissante d'ensembles ordonnés
+\[ p \;:\; \tilde{\mathcal{C}} \;\longrightarrow\; \mathcal{C}, \]
+en écrivant
+\[ \left\{ \begin{array}{l}
+(\mathcal{C}'_i\subset\mathcal{C}_i) \;\le\; (\mathcal{C}'_j\subset\mathcal{C}_j) \\
+\text{si et seulement si } i\le j, \\
+\text{et le foncteur canonique de transition } \mathcal{C}_i\longrightarrow\mathcal{C}_j \text{ applique } \mathcal{C}'_i \text{ dans } \mathcal{C}'_j.
+\end{array}\right. \]
+On voit donc que $\tilde{\mathcal{C}}$ est lui aussi filtrant et grand devant $\pi$.
+
+\msp{page 94}On définit un système inductif sur $\tilde{\mathcal{C}}$, à valeurs dans $\underline{\mathrm{Filt}}^\pi$, en posant
+\[ Z_{\mathcal{C}'_i} \;=\; \varinjlim_{\alpha\,\in\,\mathcal{C}'_i\ (\subset\,\mathcal{C}_i\,=\,\underline{M}^\pi/X_i)} Z_\alpha \]
+(où un $\alpha\in\mathcal{C}_i$ est formé, je le rappelle, de $Z_\alpha\xrightarrow{u_\alpha}X_i$, avec $Z_\alpha\in M^\pi\subset\underline{\mathrm{Filt}}^\pi$). Ces $Z_{\mathcal{C}'_i}$ ne sont plus forcément dans $M^\pi$, mais seulement dans $\mathrm{Filt}^\pi$. (Alors à quoi ça a servi de définir les $\mathcal{C}_i$ eux-mêmes comme $\underline{M}^\pi/X_i$, au lieu de $\underline{\mathrm{Filt}}^\pi/X_i$ ?)
+
+Le système inductif
+\[ (Z_{\mathcal{C}'_i})_{\mathcal{C}'_i\in\tilde{\mathcal{C}}_i} \]
+est parfaitement bien adapté à la filtration cardinale pour le cardinal $\pi$, et il est immédiat que sa $\varinjlim$ est isomorphe à $\varinjlim\limits_{\alpha\in\operatorname{Ob}\mathcal{C}_i=\underline{M}^\pi/X_i} Z_\alpha = X_i\in M$ . Donc par \textit{b}), l'ensemble $\tilde{\mathcal{C}}_M$ des $\mathcal{C}'_i\in\tilde{\mathcal{C}}_i$ tels que $Z_{\mathcal{C}'_i}\in M$ (donc $Z_{\mathcal{C}'_i}\in M^\pi$) est cofinal dans $\tilde{\mathcal{C}}_i$. Il s'ensuit donc que l'ensemble $\tilde{\mathcal{C}}_M$ est lui aussi cofinal dans $\tilde{\mathcal{C}}$.
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 95}On vérifie aussi immédiatement que
+\[ \varinjlim_{\alpha\in\tilde{\mathcal{C}}} Z_\alpha \;=\; \varinjlim X_i \;=\; X, \]
+donc, $\tilde{\mathcal{C}}_M$ étant cofinal,
+\[ \varinjlim_{\alpha\in\tilde{\mathcal{C}}_M} Z_\alpha \;=\; X. \]
+Au total, on est arrivé à représenter $X$ sous la forme
+\[ X \;=\; \varinjlim_{\alpha\in A} X_\alpha, \]
+où cette fois les $X_\alpha$ sont \textit{dans} $M^\pi$ (pas seulement dans $M$), et $A$ est grand devant $\pi$. Mais on ne sait pas que toute partie filtrante $B$ de cardinal $\le\pi$ de $A$ admet une borne supérieure $\alpha_B$ dans $A$, et encore moins que $X_{\alpha_B} = \varinjlim\limits_{\alpha\in B} X_\alpha$ (\footnote{Si on suppose $(a_\pi)$, cet argument prouve du moins que $M$ est stable par $\varinjlim$ grandes devant $\pi$.}). Donc on ne peut encore appliquer directement \textit{b}). S'il ne s'agissait que de prouver la deuxième moitié de \textit{a}), où on suppose déjà les $X_i\in M^\pi$ et $I$ grand devant $\pi$, on n'a rien gagné du tout par nos labeurs !
+
+\msp{page 96}Mais revenons à ce cas
+\[ X \;=\; \varinjlim X_i \;\left|\; \begin{array}{l} X_i\in M^\pi \\[1.5ex] I \text{ grand devant } \pi, \end{array}\right. \]
+et introduisons à nouveau
+\[ \tilde{I} \;=\; \{I'\subset I \mid I' \text{ filtrant, de cardinal } \le\pi\}, \]
+donc cette fois $\tilde{I}$ est bien adapté à $\pi$ (filtrant, et toute partie filtrante de cardinal $\le\pi$ a une borne supérieure), et si on pose
+\[ X_{\tilde{\imath}} \;=\; \varinjlim_{i\in I'_{\tilde{\imath}}} X_i, \]
+on voit que le système inductif
+\[ (X_{\tilde{\imath}})_{\tilde{\imath}\in\tilde{I}} \]
+est parfaitement adapté à $\pi$ et la filtration cardinale. De plus, je dis que l'ensemble $\tilde{I}_M$ est \textit{cofinal} dans $\tilde{I}$. En effet, $\tilde{I}_M$ contient le sous-ensemble $\tilde{I}_0$ formé des $I'\in\tilde{I}$ qui ont un plus grand élément -- et $\tilde{I}_0$ est bien cofinal ! Maintenant, on peut appliquer
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 97}le ``il suffit'' dans \textit{b}), qui conclue que $X = \varinjlim X_i\in M$, q.e.d. % [sic] conclue -> conclut, verb form (indicative of conclure)
+
+On a prouvé $b\Longrightarrow a$, sans utiliser l'hypothèse que tout objet de $\mathrm{Filt}^\pi$ est $\pi$-accessible. Mais on a utilisé cette hypothèse pour prouver que $b$ (ou $a$) implique que $M$ est stable par $\varinjlim$ grandes devant $\pi$ (lemme 2, p. 90).
+
+$a\overset{?}{\Longrightarrow} b$. Le ``il suffit'' dans \textit{b}) est conséquence immédiate de \textit{a}). Il reste à prouver que si, dans le système inductif $\pi$-adapté $(X_i)_{i\in I}$ de limite $X$, on a $X\in M$, alors $I_M$ est cofinal dans $I$. Mais par hypothèse \textit{a}), on aura $X = \varinjlim\limits_J Y_j$, avec $J$ grand devant $\pi$, les $Y_j$ dans $M^\pi$. Admettons que $\mathrm{Filt}^\pi\subset E_\pi$, \textit{i.e.} tout élément de $\mathrm{Filt}^\pi$, en particulier les $X_i$, sont $\pi$-accessibles.
+
+Je pense que je n'arriverai pas à prouver $a_\pi\Longrightarrow b_\pi$, mais seulement ceci : Si $\pi'$ est un cardinal $>\pi$ (disons le successeur de $\pi$ dans la suite ordinale des cardinaux), alors $a_\pi\Longrightarrow b_\pi$.
+
+\msp{page 98}Ceci va résulter du
+
+\textbf{Lemme 3.} \textit{Soient $X\simeq\varinjlim\limits_I X_i$, $X\simeq\varinjlim\limits_J Y_j$ deux représentations de $X$ sous forme des $\varinjlim$ filtrantes, avec $I$ grand devant $\pi'$, $J$ grand devant $\pi$, avec $\pi$, $\pi'$ deux cardinaux tels que $\pi'>\pi$. On suppose $(X_i)_{i\in I}$ $\pi'$-adapté,} i.e. \textit{pour toute partie filtrante $I'$ de $I$ de cardinal $\le\pi'$, $I'$ a une borne supérieure $i_{I'}$, et $X_{i_{I'}} = \varinjlim\limits_{i\in I'} X_i$. Alors pour tout $i\in I$, on peut trouver une partie $I'$ de $I$, contenant $i$,} grande devant $\pi$, \textit{de cardinal $\le\pi'$, et une partie $J'$ de $J$, enfin un isomorphisme $I'\xrightarrow[\sim]{\lambda}J'$ et une application strictement croissante $\mu : J'\longrightarrow I'$ et des homomorphismes} \texttt{[fin du chapitre]}
+
+\newpage
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Index des notations}
+
+\idx{LLP, RLP}{1}
+\idx{$\Phi_*$, $\Psi^*$}{1}
+\idx{$\widetilde{\Phi}$, $\overline{\Psi}$}{1}
+\idx{$\Phi \longleftrightarrow \Psi$}{3}
+\idx{$\mathrm{Cof}_W$, $\mathrm{Fib}_W$}{8}
+\idx{$W^{\mathrm{univ}}$}{9}
+\idx{$W_{\mathrm{univ}}$}{10}
+\idx{$\underline{\mathrm{Fib}}_W S\subset\mathcal{M}/S$}{10}
+\idx{$W_S$}{10}
+\idx{$W_S^{\mathrm{u}}$}{10}
+\idx{$S\backslash\underline{\mathrm{Cof}}_W$}{10}
+\idx{$\Phi \barlongleftrightarrow \Psi$}{28}
+\idx{$\mathcal{M}_{\mathrm{cf}}$, $W_{\mathrm{cf}}$}{29}
+\idx{$\mathrm{Ho}_W$}{29}
+\idx{$\mathrm{Hom}_W$}{30}
+\idx{$\pi_{\mathrm{d}}$, $\pi$}{30}
+\idx{$\mathcal{M}_{\mathrm{c}}$}{30}
+\idx{$W_{\mathrm{c}}$}{31}
+\idx{$\pi_{\mathrm{g}}$}{31}
+\idx{$\mathcal{M}_{\mathrm{f}}$}{31}
+\idx{$f\sim g$}{32}
+\idx{$\Psi,\ \Phi,\ \mathcal{M}(\Psi),\ W(\Psi),\ \mathcal{M}(\Phi),\ W(\Phi)$}{33}
+\idx{$\mathcal{M}(I)$, $W(I)$}{34}
+\idx{$F(I),\ TF(I),\ C(I),\ TC(I)$}{35}
+\idx{$\alpha_s$}{35}
+\idx{$u^*$, $u_*$, $u_!$}{45}
+\idx{$u^*_W$, $u^W_*$, $u^W_!$}{49}
+\idx{$\mathrm{HO}_W(I)$}{49}
+\idx{Diag}{50}
+\idx{$\mathrm{HO}_{\mathcal{M},W}(I)$, $\mathbf{D}_{\mathcal{M},W}(I)$}{54}
+\idx{$\mathrm{HO}^{\mathrm{lc}}_W(I)$, $u^*_{\mathrm{lc}}$}{56}
+\idx{$u^{\mathrm{f}}_*$}{59}
+\idx{$u^*_{\mathrm{c}}$}{67}
+\idx{$\mathfrak{U}$}{77}
+\idx{$\mathrm{Filt}^\pi(E)$}{77}
+
+\end{document}

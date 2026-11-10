@@ -1,0 +1,202 @@
+\documentclass[11pt,leqno]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\section*{III\quad Classes remarquables de foncteurs liés à $W$.}
+
+Finalement, j'appelerai \textit{‘localiseur fondamental’} une partie $W$ de Fl(Cat) satisfaisant les trois conditions suivantes : % [sic] appelerai -> appellerai, spelling
+
+\begin{enumerate}
+\item[(i)] Saturation W(1) (cf. rappel p. 1).
+\item[(ii)] Axiome de l'élément final W(3) (page 3).
+\item[(iii)] La variante affaiblie W(2 bis) de l'axiome de localisation W(2) donnée dans le corollaire page 1 (anciennement c'était L4$'$ dans Pursuing Stacks).
+\end{enumerate}
+
+Quand j'aurai besoin de plus sur $W$, je le dirai explicitement. Ces trois axiomes ont suffi pour pratiquement tout ce que j'ai fait avec $W$ dans Pursuing Stacks, la seule exception étant un usage (si je me rappelle) unique, quelque part, d'une variante affaiblie de W(2) (pour les $S$-foncteurs \textit{cartésiens} entre $S$-catégories \textit{fibrées} - si sur toute fibre il est dans $W$, il est lui-même dans $W$).
+
+On suppose donc par la suite donné un localiseur fondamental
+\[
+W \subseteq \mathrm{Fl}(\mathrm{Cat}).
+\]
+
+\textbf{Proposition 1.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat}. \textit{Conditions équivalentes :}
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour tout isomorphisme local $Y' \longrightarrow Y$, $f' : X' \longrightarrow Y'$ est $\in W$.}
+\item[\textit{b)}] \textit{Même condition, dans le cas particulier $Y' = Y/y \longrightarrow Y$, donc $\forall\ y \in Y$, $X/y \simeq X \times_Y (Y/y)$ est $W$-asphérique.}
+\end{enumerate}
+
+\msp{page 23}\textbf{Définition 1.} Sous ces conditions équivalentes a), b) de la proposition 1, on dit que $f$ est \textit{$W$-asphérique.} On dit \texttt{[que]} $f$ est \textit{$W$-coasphérique} si $f^{\circ}$ est $W$-asphérique, i.e. si les $y\backslash X$ sont $W$-asphériques (pour $y \in \Ob Y$).
+
+\textsc{Démonstration.} Il suffit de prouver b) $\Longrightarrow$ a). Par définition d'un isomorphisme local, on voit que la condition b) est stable par changement de base $Y' \longrightarrow Y$, avec $Y'$ un isomorphisme local (puisque les $Y'/y' \xrightarrow{\sim} Y/y$, donc $X'/y' \xrightarrow{\sim} X/y$). Il suffit donc de voir que si $f$ satisfait à b), alors $f \in W$. Mais c'est l'axiome W(2 bis).
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X \arrow[d] & & & \\
+Y & & Y' \arrow[ll] & \\
+& Y/y \arrow[ul] & & Y'/y' \arrow[ll] \arrow[ul]
+\end{tikzcd}
+\end{center}
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\textbf{Remarque.} Si $f$ a un adjoint à droite $g$, alors pour tout $y \in Y$, $X/y \simeq X/g(y)$, donc $X/y$ a un objet final et est donc $W$-asphérique. Donc si $f$ a un adjoint à droite (à gauche), alors $f$ est $W$-asphérique ($W$-coasphérique).
+
+Mais même si $f$ n'a pas d'adjoint à droite, il y a quand même un adjoint généralisé
+\[
+g : Y \longrightarrow X^{\wedge}
+\]
+et on a
+\[
+X/y \simeq X/g(y) \qquad \text{(pour l'inclusion pleinement fidèle $X \hookrightarrow X^{\wedge}$),}
+\]
+donc $\mathrm{Top}(X/y)$ s'identifie au topos induit $\mathrm{Top}(X)/g(y)$. La condition $f$ $W$-asphérique signifie donc que les faisceaux $g(y)$ dans $\mathrm{Top}(X)$ sont
+\msp{page 24}
+$W$-asphériques. Pour de nombreuses autres formulations équivalentes, je renvoie à Pursuing Stacks.
+
+\textbf{Proposition 2.} \textit{Soit $X \xrightarrow{f} Y \xrightarrow{g} Z$ dans} \textup{Cat}. \textit{Si $f$ et $g$ sont $W$-asphériques ($W$-coasphériques), de même $gf$. Si $gf$ et $f$ sont $W$-asphériques ($W$-coasphériques), $g$ aussi.}
+
+\textbf{Rappel.} Un morphisme $p : S' \longrightarrow S$ dans Cat est un \textit{isomorphisme local} si $\forall\ s' \in \Ob S'$, le morphisme induit
+\[
+p_{s'} : S'/s' \xrightarrow{\sim} S/s \qquad (s = p(s'))
+\]
+est un isomorphisme : $p$ induit un isomorphisme sur les ‘localisées’ de $S'$ et $S$ en $s'$ et $s = p(s')$ respectivement. Il est immédiat que cette notion est stable par composition, que si $gf$ et $g$ sont des isomorphismes locaux, alors $f$ l'est aussi, que tout isomorphisme est un isomorphisme local. De plus, les isomorphismes locaux sont \textit{stables par changement de base,} ce qui résulte du fait (trivial et important) que si on a un carré cartésien dans Cat
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S \arrow[from=u, "f"'] & S', \arrow[l, "p"']
+\end{tikzcd}
+\end{center}
+
+et si $x' \in \Ob X'$ a pour image $x$, $s'$, $s$ dans $X$, $S'$, $S$, alors le diagramme
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X/x \arrow[d, "f/x"'] & X'/x' \arrow[l, "q/x'"'] \arrow[d, "f'/x'"] \\
+S/s & S'/s' \arrow[l, "p/s'"']
+\end{tikzcd}
+\end{center}
+
+est également cartésien. (Donc si $p/s'$ est \texttt{[un]} isomorphisme, $q/x'$ aussi.)
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 25}Revenons à la proposition 2. La stabilité de la notion de morphisme asphérique par composition résulte aussitôt de la forme a) de la condition. De même pour la condition que si $gf$ et $f$ sont $W$-asphériques, $g$ aussi - il faut montrer que si $Z' \longrightarrow Z$ est \texttt{[un]} isomorphisme local, alors $g'$ est dans $W$, or l'hypothèse implique que $g'f'$ et $f'$ le sont.
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X \arrow[d, "f"'] & X' \arrow[l, "r"'] \arrow[d, "f'"] \\
+Y \arrow[d, "g"'] & Y' \arrow[l, "q"'] \arrow[d, "g'"] \\
+Z & Z' \arrow[l, "p"']
+\end{tikzcd}
+\end{center}
+
+\textbf{Corollaire 1.} \textit{L'image inverse d'un $f : X \longrightarrow Y$ qui est $W$-asphérique (resp. $W$-coasphérique) par un isomorphisme local (resp. par un coïsomorphisme local) est $W$-asphérique ($W$-coasphérique).}
+
+\begin{center}
+\begin{tikzcd}[row sep=huge]
+X \arrow[d] & X' \arrow[l] \arrow[d] & X'' \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l, "\text{iso local}"] & Y'' \arrow[l, "\text{iso local}"]
+\end{tikzcd}
+\end{center}
+
+Résulte formellement de la définition par a) et du fait qu'un composé de deux isomorphismes locaux (resp. coïsomorphismes locaux) est itou.
+
+\textbf{NB} Bien sûr, la notion de foncteur $W$-asphérique n'est pas stable par changement de base quelconque. Par exemple, l'inclusion $X = \{y_0\} \longrightarrow Y$ est $W$-asphérique si et seulement si les catégories discrètes $\mathrm{Hom}(y_0, y)$ sont $W$-asphériques, i.e. (sous réserve que l'on ait W(5), axiome de connexité) si et seulement si les $\mathrm{Hom}(y_0, y)$ sont de cardinal 1, i.e. $y_0$ \textit{objet initial} de $Y$. Mais si $Y \neq \{y_0\}$, prenant $y$ dans $Y$, $y \neq y_0$, et posant $Y' = \{y\} \longrightarrow Y$, on a $X' = X \times_Y Y' = \emptyset$ et $\emptyset \longrightarrow e$ n'est pas asphérique!
+
+\msp{page 26}Par contre, on s'attend que les morphismes $W$-asphériques soient stables par changements de base \textit{$W$-lisses} (qui généralisent les isomorphismes locaux), et les morphismes $W$-coasphériques par changements de base $W$-propres. Cf. plus bas.
+
+\textbf{Corollaire 2.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat} \textit{une} \textup{équivalence} \textit{de catégories. Alors $f$ est $W$-asphérique et $W$-coasphérique.}
+
+En effet, $f$ a un adjoint à gauche et un adjoint à droite, et on utilise la remarque page 23.
+
+\textbf{Proposition 3.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat}. \textit{Conditions équivalentes :}
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour tout $y \in \Ob Y$, le foncteur d'inclusion}
+\[
+X_y \longrightarrow X/y \tag*{$(*)$}
+\]
+\textit{est $W$-}co\textit{asphérique.}
+\item[\textit{b)}] \textit{Pour tout $x_0 \in X$, le morphisme induit pour les colocalisées}
+\[
+x_0\backslash X \longrightarrow y_0\backslash Y \qquad \textit{(où $y_0 = f(x_0)$)}
+\]
+\textit{est à fibres $W$-asphériques.}
+\item[\textit{c)}] \textit{Pour tout morphisme $\mathbf{\Delta}^1 = Y' \longrightarrow Y$, considérons $X' = X \times_Y Y'$ sur $\mathbf{\Delta}^1$, l'inclusion $X'_1 \longrightarrow X'$ de la fibre fermée de $X'$ (fibre sur le point fermé de $Y'$) est $W$-coasphérique.}
+\item[\textit{d)}] \textit{Pour toute flèche $u_0 : y_0 \longrightarrow y_1$ dans $Y$, et tout $x_0$ dans $X_{y_0}$, la catégorie $X(x_0;u_0)$ formée des flèches $u' : x_0 \longrightarrow x$ dans $X$ de source $x_0$, et qui relèvent $u$} \texttt{[plutôt} $u_0$\texttt{]}\textit{, est $W$-asphérique.}
+\end{enumerate}
+
+\msp{page 27}\textsc{Démonstration.} Pour expliciter la condition a), il faut expliciter la catégorie $\xi_0\backslash(X_y)$, pour un objet quelconque $\xi_0 = (x_0, u_0)$ de $X/y$, $x_0 \in \Ob X$,
+\[
+u_0 : y_0 \longrightarrow y_1 = y \quad \text{dans $Y$, avec $y_0 = f(x_0)$.}
+\]
+
+Cette catégorie $\xi_0\backslash X_{y_1}$ s'explicite alors comme la catégorie des $x_1$ dans $X_{y_1}$, \textit{munis} d'une flèche de $\xi_0$ dans l'image $\xi_1 = (x_1, \mathrm{id}_{f(x_1)} = \mathrm{id}_{y_1})$ de $x_1$ dans $X/y_1$ dans $\xi_0$ \texttt{[‘dans} $\xi_0$\texttt{’ à effacer]}, i.e. d'une flèche $u$ de $x_0$ dans $x_1$, telle que $f(u)$ donne lieu au triangle commutatif dans $Y$, i.e. $f(u) = u_0$. % ?? uncertain: weight of the typewriter bracket [‘dans ξ0’ à effacer] -- medium or bold typewriter
+
+\begin{center}
+\begin{tikzcd}
+x_1 \arrow[dd, dash] & & \\
+& & x_0 \arrow[ull, "u"'] \arrow[dd, dash] \\
+y_1 \arrow[r, dash, "\mathrm{id}"] & y_1 & \\
+& & y_0 \arrow[ul, "u_0"'] \arrow[ull, "f(u)"]
+\end{tikzcd}
+\end{center}
+
+Donc c'est la catégorie notée $X(x_0;u_0)$ dans d). On voit tout de suite qu'elle est aussi isomorphe à la fibre de $x_0\backslash X \longrightarrow y_0\backslash Y$ en l'élément $u_0$ de $y_0\backslash Y$, dont il est question dans b). D'où l'équivalence de a) b) c). D'autre part, la donnée de $u_0$ dans $Y$ équivaut à celle d'un foncteur $\mathbf{\Delta}^1 \longrightarrow Y$, comme dans c), et pour exprimer alors que $\underbrace{X'_1}_{\simeq X_{y_1}} \longrightarrow X'$ est coasphérique, il suffit d'exprimer que les $x'\backslash X'_1$ ($x' \in \Ob X'$) sont $W$-asphériques. Or c'est trivial si $x' \in \Ob X'_1$ (objet initial), donc il suffit de le vérifier pour $x'$ dans $X'\backslash X'_1 = X'_0 \simeq X_{y_0}$. Alors $x'$ s'identifie à un élément $x_0$ de $X_{y_0}$, et on vérifie tout de suite que $x_0\backslash X'_1$ est isomorphe à la catégorie $X(x_0;u_0)$ de d). Cela achève la démonstration.
+
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 28}\textbf{Définition 2.} Sous les conditions de la proposition 3, on dit que $f$ est \textit{$W$-propre.} On dit que $f$ est \textit{$W$-lisse} si $f^{\circ}$ est $W$-propre, i.e. si les morphismes d'inclusion $(*)$ \texttt{[plutôt} $X_y \longrightarrow y\backslash X$\texttt{]} sont $W$-asphériques etc. (conditions duales de celles de la proposition 3).
+
+\textbf{Remarque.} La condition a) de la proposition 3 est satisfaite en particulier si l'inclusion $(*)$ a un adjoint à gauche (cf. remarque page 23). Cela signifie que les catégories $X(x_0;u)$ ont un objet initial. Cela signifie aussi que la catégorie $X$ sur $Y$ est Cat-cofibrée sur $Y$ au sens faible, i.e. qu'il existe, pour $u_0 : y_0 \longrightarrow y_1$ flèche dans $Y$, et $x_0$ dans $X_{y_0}$, un objet $u_{0*}(x_0)$ dans $X_{y_1}$ qui représente le foncteur covariant $X_{y_1} \longrightarrow (\mathrm{Ens})$, $x_1 \longmapsto \mathrm{Hom}_u(x_0, x_1)$. Ainsi, si $X$ est Cat-cofibrée au sens faible sur $Y$, et a fortiori si elle est Cat-cofibrée, alors $f : X \longrightarrow Y$ est $W$-propre. Dualement, si $f$ est faiblement Cat-fibrée, $f$ est \texttt{[}$W$\texttt{-]}lisse.
+
+\textbf{Proposition 4.} (\footnote[43]{Dire aussi : Si $X \xrightarrow{f} Y \xrightarrow{g} Z$, si $gf$ et $f$ $W$-lisses, alors $g$ est lisse en les points de $\mathrm{Im}\, f$, idem pour propre.}) \textit{La notion de morphisme $W$-propre est stable par composition, par changement de base. Les coisomorphismes locaux sont propres (trivial sur b)), a fortiori les isomorphismes sont propres, les immersions fermées sont propres.}
+
+\textit{Énoncé dual pour les morphismes lisses : stabilité par changement de base, par composition, les isomorphismes locaux sont lisses, notamment les immersions ouvertes.}
+
+\msp{page 29}La stabilité par changement de base est immédiate sur la forme c). La stabilité par composition \texttt{[est]} moins triviale :
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+{\scriptstyle x} &[-1.5em] X \arrow[d, "f"] & x\backslash X \arrow[l] \arrow[d] & \bar{X} \arrow[l] \arrow[d] \\
+{\scriptstyle y} & Y \arrow[d, "g"] & y\backslash Y \arrow[l] \arrow[d] & \bar{Y} \arrow[l] \arrow[d] \\
+{\scriptstyle z} & Z & z\backslash Z \arrow[l] & \{u\} \arrow[l]
+\end{tikzcd}
+\end{center}
+
+Dans le diagramme à carrés cartésiens ci-contre \texttt{[plutôt dont les deux carrés de droite sont cartésiens]} (déduit de $x \in \Ob X$, d'où $y = f(x)$, $z = g(y) = gf(x)$, et de $u \in \Ob z\backslash Z$), il faut prouver que $\bar{X}$ est $W$-asphérique. On sait que $\bar{Y}$ l'est ($g$ propre) et que $\bar{X} \longrightarrow \bar{Y}$ est à fibres $W$-asphériques. Il suffit donc d'utiliser la proposition 5 ci-dessous, et la remarque immédiate % ?? uncertain: weight of the typewriter bracket [plutôt dont les deux carrés de droite sont cartésiens] -- medium or bold typewriter
+
+\textbf{Lemme.} \textit{Si $f$ est propre, il en est de même de $x\backslash f : x\backslash X \longrightarrow y\backslash Y$, pour tout $x$ dans $X$, $y = f(x)$.}
+
+\end{document}

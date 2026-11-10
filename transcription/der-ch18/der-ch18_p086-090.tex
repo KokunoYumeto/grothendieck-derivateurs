@@ -1,0 +1,237 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\bs}{\backslash}
+\newcommand{\encadre}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners,inner sep=2pt](X){#1};}
+
+\begin{document}
+
+\printedpage{84}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}
+{} & i \arrow[drr, "u_1"] \arrow[dd, dash] & {} & {} \\
+{} & {} & j \arrow[r, "v_1"] & k \arrow[dd, dash] \\
+i' \arrow[r, "u'"] \arrow[drr, "v'"'] & f(i) \arrow[drr] & {} & {} \\
+{} & {} & f(j) \arrow[r] \arrow[uu, dash, crossing over] & f(k)
+\end{tikzcd}
+\]
+
+\begin{itemize}[label={}]
+\item \msp{page 229}Mais on applique F 2 sur $f$ à la double-flèche en question $i' \rightrightarrows f(k)$, on trouve $w : k \longrightarrow \bar{k}$,
+\[
+\begin{tikzcd}
+{} & k \arrow[r, "w"] \arrow[dd, dash] & \bar{k} \arrow[dd, dash] \\
+{} & {} & {} \\
+i' \arrow[r, shift left] \arrow[r, shift right] & f(k) \arrow[r] & f(\bar{k})
+\end{tikzcd}
+\]
+telle que
+\[
+\underbrace{f(w)(f(u_1)u')}_{= f(wu_1)u'} = \underbrace{f(w)(f(v_1)v')}_{f(wv_1)v'} \ ,
+\]
+et remplaçant $k$ par $\bar{k}$, et $u_1$, $v_1$ par $wu_1$, $wv_1$, on trouve ce qu'on veut.
+\end{itemize}
+
+\begin{enumerate}[label=\arabic*), start=2]
+\item PF (2) pour $i'\bs I$, i.e. on se donne un diagramme ci-contre \texttt{[ci-dessous]},
+\[
+\begin{tikzcd}
+{} & i \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] \arrow[dd, dash] & j \arrow[r, dotted, "w"] \arrow[dd, dash] & j' \\
+{} & {} & {} & {} \\
+i' \arrow[r, "u'"] & f(i) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(j) \arrow[r, dotted, "f(w)"] & f(j') \ ,
+\end{tikzcd}
+\]
+avec $f(u_1)u' = f(u_2)u'$, soit $v'$ (double-flèche dans $i'\bs I$ de $(i,u')$ dans $(j,v')$), on veut l'égaliser à droite. Or $I$ étant filtrant, il existe $w : j \longrightarrow j'$ telle que $wu_1 = wu_2$, or cette flèche définit une flèche $(j,v') \longrightarrow (j', f(w')v')$, qui égalise la double-flèche donnée. % [sic] f(w')v' -> f(w)v', the arrow just defined is w : j --> j'
+\end{enumerate}
+
+b $\Longrightarrow$ b$'$ est clair.
+
+b) $\Longrightarrow$ a). Comme les $i'\bs I$ sont filtrantes, donc 0-connexes, $f$ est cofinal, il reste à prouver que $I$ est filtrant, donc à vérifier PF 0 ($I$ 0-connexe), PF 1, PF 2 pour $I$. $I$ est 0-connexe, car $I'$ l'est, et $f$ cofinal, i.e. $\mathbf{W}_0$-coasphérique, d'où PF 0.
+
+\msp{page 230}Prouvons PF 1, i.e. que si
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+{} & i_1 \\
+i_0 \arrow[ur] \arrow[dr] & {} \\
+{} & i_2
+\end{tikzcd}
+est donné, on peut compléter en un carré commutatif.
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & i_1 \arrow[dr, dotted, "v_1"] & {} \\
+i_0 \arrow[ur, "u_1"] \arrow[dr, "u_2"'] & {} & i_3 \\
+{} & i_2 \arrow[ur, dotted, "v_2"'] & {}
+\end{tikzcd}
+\]
+% foot: Version 17 décembre 2025
+
+\printedpage{85}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & f(i_1) \arrow[dr, "f(v_1)"] & {} \\
+f(i_0) \arrow[ur, "f(u_1)"] \arrow[dr, "f(u_2)"'] & {} & f(i_3) \\
+{} & f(i_2) \arrow[ur, "f(v_2)"'] & {}
+\end{tikzcd}
+\]
+
+Mais considérons les objets $\xi_1 = (i_1, f(u_1))$, $\xi_2 = (i_2, f(u_2))$ de $f(i_0)\bs I$, et utilisant PF 1$'$ pour cette catégorie, on trouve $\xi_3 = (i_3, w')$ dans ladite catégorie, et des flèches de $\xi_1$, $\xi_2$ dans $\xi_3$, i.e. $v_1 : i_1 \longrightarrow i_3$, \texttt{[}$v_2 : i_2 \longrightarrow i_3$\texttt{,]} telles que $\underbrace{f(v_1)f(u_1)}_{f(v_1u_1)} = w'$, $\underbrace{f(v_2)f(u_2)}_{f(v_2u_2)} = w'$, donc
+\[
+f(v_1u_1) \ = \ f(v_2u_2) \ .
+\]
+Ainsi, on a une double-flèche $i_0 \overset{v_1u_1}{\underset{v_2u_2}{\rightrightarrows}} i_3$, égalisée par $f$. Si on prouve PF 2 sur $I$, on trouve $i_3 \xrightarrow{\alpha} \bar{i}_3$ telle que $\alpha(v_1u_1) = \alpha(v_2u_2)$, i.e. $(\alpha v_1)u_1 = (\alpha v_2)u_2$, et quitte à remplacer $i_3$ par $\bar{i}_3$, $v_1$, $v_2$ par $\alpha v_1$, $\alpha v_2$, on a gagné.
+
+Reste à prouver PF 2 sur $I$, i.e. égaliser une double-flèche
+\[
+i_0 \ \overset{v_1}{\underset{v_2}{\rightrightarrows}} \ i_1 \ .
+\]
+
+\msp{page 231}Or $I'$ satisfaisant à PF 2, on peut égaliser la double-flèche $f(u_1)$, $f(u_2)$ par une flèche $f(i_1) \xrightarrow{v'} i'$ dans $I'$, et comme $i'\bs I$ non vide, on peut supposer que $i'$ est de la forme $f(i_2)$.
+\[
+\begin{tikzcd}
+i_0 \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] \arrow[dd, dash] & i_1 \arrow[r, densely dotted] & i_2 \\
+{} & {} & {} \\
+f(i_0) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(i_1) \arrow[r, densely dotted, "v'"] & f(i_2) % ?? uncertain: style of the arrow v' -- densely dotted or solid
+\end{tikzcd}
+\]
+Admettons pour un instant la condition F 3 de c), que nous allons appliquer à $(i_1, i_2, v')$. Il existe donc $i_2 \xrightarrow{v} \bar{i}_2$, $w : i_1 \longrightarrow \bar{i}_2$ tels que l'on ait $f(w)v' = f(v)$. Il s'ensuit que $f(w)$ égalise $f(u_1)$ et $f(u_2)$, i.e. qu'on a $f(wu_1) = f(wu_2)$, i.e. la double-flèche initiale est remplacée par $(\bar{u}_1 = wu_1, \bar{u}_2 = wu_2)$, telle que $f(\bar{u}_1) = f(\bar{u}_2)$. En somme, on est ramené au cas d'une double-flèche $(u_1, u_2)$ telle que $f(u_1) = f(u_2)$, soit $v'$. Mais alors soit $\xi_1 = (i_0, v')$, $\xi_0 = (i_0, \mathrm{id}_{f(i_0)})$, on a donc une double-flèche $(u_1, u_2) : \xi_0 \rightrightarrows \xi_1$ dans $f(i_0)\bs I$. Cette catégorie % [sic] \xi_1 = (i_0, v') -> \xi_1 = (i_1, v'), u_1, u_2 go from i_0 to i_1
+\msp{page 232}est filtrante, donc cette double-flèche est égalisable à droite, ce qui implique aussitôt que la double-flèche $(v_1, v_2)$ \textit{dans $I$} est aussi égalisable à droite.
+
+Donc il reste à prouver que b$'$) implique la condition F 3. Mais considérons les deux objets $\xi_0 = (i_0, \mathrm{id}_{f(i_0)})$, $\xi_1 = (i_1, u')$ de $f(i_0)\bs I$, et utilisons la condition de filtration PF 1 sur cette catégorie, donc on trouve un objet $\xi_2 = (i_2, v')$, et deux flèches
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+\xi_0 \arrow[dr, "w"] & {} \\
+{} & \xi_2 \\
+\xi_1 \arrow[ur, "v"'] & {}
+\end{tikzcd}
+, i.e. $i_0 \xrightarrow{w} i_2$
+% foot: Version 17 décembre 2025
+\printedpage{86}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+et $i_1 \xrightarrow{v} i_2$ telles qu'on ait $f(w)\mathrm{id}_{i_0} = f(v)u' = v'$, d'où $f(w) = f(v)u'$, ce qui est la condition F 3.
+\[
+\begin{tikzcd}
+i_0 \arrow[rr, dotted, bend left, "w"] \arrow[dd, dash] & i_1 \arrow[r, dotted, "v"] \arrow[dd, dash] & i_2 \arrow[dd, dash] \\
+{} & {} & {} \\
+f(i_0) \arrow[r, "u'"] \arrow[rr, dotted, bend right, "v'"'] & f(i_1) & f(i_2)
+\end{tikzcd}
+\]
+
+Ainsi on a établi
+\[
+\text{a} \ \Longleftrightarrow \ \text{b} \ \Longleftrightarrow \ \text{b}' \ ,
+\]
+prouvons maintenant
+
+a $\Longrightarrow$ c. On sait déjà que a) implique $I'$ filtrante, et il reste à établir F 3. Or $I$ étant filtrante, il existe des flèches
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+i_0 \arrow[dr, "w"] & {} \\
+{} & i_2 \\
+i_1 \arrow[ur, "v"'] & {}
+\end{tikzcd}
+. On
+\msp{page 233}n'a pas forcément $f(w) = f(v)u'$, on a là une double-flèche $f(i_0) = f(i_1)$ dans $I'$. Mais par la condition F 2 sur $f$, il existe $i_2 \xrightarrow{\alpha} \bar{i}_2$ dans $I$ telle que $f(\alpha)$ égalise ladite double-flèche, donc $f(\underbrace{\alpha w}_{\bar{w}}) = f(\underbrace{\alpha v}_{\bar{v}})u'$, et quitte à remplacer $i_2$ par $\bar{i}_2$, et $w$, $v$ par $\bar{w} = \alpha w$, $\bar{v} = \alpha v$, on gagne. % [sic] f(i_0) = f(i_1) -> f(i_0) \rightrightarrows f(i_2), the double arrow f(w), f(v)u' goes from f(i_0) to f(i_2)
+
+Reste à prouver (pour la partie $1^\circ$) que si $f$ est \textit{fidèle}, alors c) $\Longrightarrow$ b). Il reste donc à prouver que c) implique que pour $i'$ dans $I'$, $i'\bs I$ est filtrante. On sait déjà par F 1 que $i'\bs I$ est non vide, il reste à prouver les conditions PF 1$'$, PF 2 pour $i'\bs I$. Comme $I'$ filtrante, l'on peut compléter
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & f(i_1) \arrow[dr, dotted] & {} \\
+i' \arrow[ur] \arrow[dr] & {} & j' \ , \\
+{} & f(i_2) \arrow[ur, dotted] & {}
+\end{tikzcd}
+\]
+et par F 1 on peut supposer $j'$ de la forme $f(i_3)$.
+% foot: Version 17 décembre 2025
+
+\printedpage{87}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small]
+{} & i_1 \arrow[drr, dotted, "v_1\,?"] \arrow[dd, dash] & {} & {} & {} \\
+{} & {} & {} & i_3 \arrow[r] \arrow[dd, dash] & \bar{i}_3 \arrow[dd, dash] \\
+{} & f(i_1) \arrow[drr, "v_1'"] & i_2 \arrow[ur, dotted, "v_2\,?"'] \arrow[dd, dash, crossing over] & {} & {} \\
+i' \arrow[ur, "u_1'"] \arrow[dr, "u_2'"'] & {} & {} & f(i_3) \arrow[r] & f(\bar{i}_3) \\
+{} & {} & f(i_2) \arrow[ur, "v_2'"'] & {} & {}
+\end{tikzcd}
+\]
+Appliquant F 3 à $i_1$, $i_3$, $v_1'$, on peut supposer (quitte à remplacer $i_3$ par $\bar{i}_3$)
+\msp{page 234}que $v_1'$ provient d'un $v_1 : i_1 \longrightarrow i_3$. Appliquant à nouveau F 3 à $i_2$, $i_3$, $v_2'$, on peut supposer que $v_2'$ également provient d'un $v_2 : i_2 \longrightarrow i_3$. Alors $\xi_3 = (i_3, v_1'u_1' = v_2'u_2')$ est un majorant commun de $\xi_1 = (i_1, u_1')$, $\xi_2 = (i_2, u_2')$.
+
+Prouvons enfin PF 2 pour $i'\bs I$, donc on a un diagramme ci-contre \texttt{[ci-dessous]} avec $f(u_1)u' = f(u_2)u'$ (double-flèche dans $i'\bs I$), on veut égaliser dans $i'\bs I$.
+\[
+\begin{tikzcd}
+{} & i_0 \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] & i_1 \arrow[rr, densely dotted, bend left, "w"] & i_2 \arrow[r, densely dotted] & \bar{i}_2 \\
+{} & {} & {} & {} & {} \\
+i' \arrow[r, "u'"] & f(i_0) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(i_1) \arrow[r, dotted, "v'"] & f(i_2) \arrow[r] & f(\bar{i}_2)
+\end{tikzcd}
+\]
+Mais $I'$ étant filtrante, on peut égaliser $(f(u_1), f(u_2))$ par $f(i_1) \longrightarrow j'$, et à cause de F 1 on peut supposer $j' = f(i_2)$. Appliquant encore F 3 à $(i_1, i_2, v')$, on trouve $i_1 \longrightarrow \bar{i}_2$ tel que $f(w)$ égalise $f(u_1)$, $f(u_2)$ :
+\[
+f(wu_1) \ = \ f(wu_2) \ .
+\]
+Mais $f$ étant \textit{fidèle}, cela implique $wu_1 = wu_2$, et on a donc égalisé la double-flèche de $i'\bs I$ par $w : (i_1, -) \longrightarrow (\bar{i}_2, -)$.
+
+\subsection*{4.9.6.8. N.B.}
+
+\begin{enumerate}[label=\arabic*$^\circ$)]
+\item Si on ne suppose pas que $f$ soit fidèle, on voit que c) implique pourtant que les $i'\bs I$ satisfont PF 1$'$ (elles sont donc pseudo-filtrantes et 0-connexes). Donc $f$ est cofinal.
+
+\msp{page 235}On voit, par le même argument, que $I$ satisfait PF 1$'$, i.e. est pseudo-filtrante. Ainsi, si on introduit la condition :
+\begin{itemize}[label=\encadre{b$''$}]
+\item $I'$ est filtrante, les $i'\bs I$ ($i \in \mathrm{Ob}\, I'$) sont pseudo-filtrantes (i.e. satisfont PF 1$'$) (donc $f$ cofinal).
+\end{itemize}
+On trouve les implications
+\[
+(\text{a} \ \Longleftrightarrow \ \text{b} \ \Longleftrightarrow \ \text{b}') \ \ \Longrightarrow \ \ (\text{b}'' \ \Longleftrightarrow \ \text{c}) \ ,
+\]
+et les conditions équivalentes c), b$''$) impliquent que $I$ est également pseudo-filtrante, et que pour toute double-flèche $\xi_0 \overset{u_1}{\underset{u_2}{\rightrightarrows}} \xi_1$ dans un $i'\bs I$ ou dans $I$, il existe une flèche $\xi_1 \xrightarrow{v} \xi_2$ dans la même catégorie, telle que $vu_1$ et $vu_2 \ : \ \xi_0 \rightrightarrows \xi_2$ aient \textit{même image}
+% foot: Version 17 décembre 2025
+\printedpage{88}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\textit{dans $I'$}. Donc si $f$ est fidèle, alors ces conditions c, c$'$ \texttt{[plutôt b$''$]} impliquent que $I$ et les $i'\bs I$ satisfont aussi la condition PF 2 de la double-flèche, donc sont filtrantes, donc dans ce cas les cinq conditions a) b) b$'$) c) c$'$) \texttt{[plutôt b$''$)]} sont équivalentes. Mais aussi lorsque $I$ est ordonnée, on sait [\,?] que la condition de la double-flèche dans $I$ est satisfaite automatiquement.
+
+\item \msp{page 236}Notons aussi que dans la condition b$'$), on ne peut supprimer l'hypothèse que $I'$ satisfait PF 2 (en plus de $I'$ 0-connexe et les $i'\bs I$ filtrantes). Pour le voir, prenons $I' = I$, $f = \mathrm{id}$, donc l'hypothèse a ($\Longleftrightarrow$ b $\Longleftrightarrow$ b$'$) signifie que $I$ est filtrante, $f$ étant bien sûr cofinal. Mais b$'$ affaiblie signifie que $I$ est 0-connexe et les $i\bs I$ sont filtrantes, et on sait que ceci n'implique \textit{pas} que $I$ soit filtrante, même si on suppose $I$ pseudo-filtrante. Un exemple simple est donné par $I$ définie par
+\[
+\mathrm{Ob}\, I \ = \ \mathbf{N} \ , \qquad \mathrm{Hom}_I(i,j) \ = \ \left\{
+\begin{array}{rcccc}
+\emptyset & \text{si} & i & > & j \\[1ex]
+\{\mathrm{id}_i\} & \text{si} & i & = & j \\[1ex]
+\{\pm 1\} & \text{si} & i & < & j \ ,
+\end{array}
+\right.
+\]
+la composition des flèches se faisant par la multiplication des signes $\varepsilon_{k,j}\varepsilon'_{j,i} = (\varepsilon\varepsilon')_{k,i}$ (en posant $\mathrm{id}_i = (+1)_{i,i}$). Les catégories $i\bs I$ sont isomorphes entre elles et sont \textit{ordonnées} et pseudo-filtrantes, donc filtrantes, d'autre part, $I$ est pseudo-filtrante, pourtant elle n'est pas filtrante, car ne satisfait pas PF 2.
+
+\item D'autre part, si $f$ n'est pas fidèle, alors c) (équivalente à $b''$) n'implique pas a), comme on voit en prenant $I' = e$ ; alors b$''$) équivaut à $I$ pseudo-filtrante, qui n'implique pas que $I$ soit filtrante.
+\end{enumerate}
+
+\subsection*{\msp{page 237}\textbf{4.9.6.9.} \textsc{Démonstration de 4.9.6.3, partie} $2^\circ$.}
+
+C'est essentiellement “la même” démonstration que pour la partie $1^\circ$).
+
+a$_\pi$) $\Longrightarrow$ b$_\pi$). On peut court-circuiter la démonstration directe, en regardant, pour un ensemble $A$ de cardinal $\leqslant \pi$, le diagramme
+\[
+\begin{tikzcd}
+I \arrow[r, "\delta_A"] \arrow[d, "f"'] & I^A \arrow[d, "f^A"] \\
+I' \arrow[r, "\delta_{A'}"] & I'^A
+\end{tikzcd}
+\]
+\texttt{[plutôt $\delta'_A$]}. Comme $f$ est cofinal, $I$ filtrante, $f^A$ est aussi cofinal (4.9.8.5), d'autre part, $I$ grande devant $\pi$ signifie que $\delta_A$ est cofinal ($\forall$ $A$ avec $\mathrm{card}\, A \leqslant \pi$). Donc $f^A\delta_A = \delta_{A'}f$ est cofinal, donc $\delta_{A'}f$ et $f$ le sont, donc $\delta_{A'}$ aussi, ce qui signifie que $I'$ est grande devant $\pi$.
+
+Reste à prouver que pour $i'$ dans $I'$, $i'\bs I$ est grande devant $\pi$. Cela résulte du fait que $i'\bs I \xrightarrow{p} I$ est coétale, que $i\bs I$ est 0-connexe, et du
+
+\textbf{Lemme 4.9.6.9.1.} \textit{Soit $I$ une catégorie filtrante (resp. grande devant $\pi$). Alors pour toute $J$ sur $I$ coétale sur $I$ et $0$-connexe, $J$ est filtrante (resp. grande devant $\pi$).}
+% foot: Version 17 décembre 2025
+
+\end{document}

@@ -1,0 +1,268 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Ch}{\underline{\mathrm{Ch}}}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Fl}{\underline{\mathrm{Fl}}}
+\newcommand{\Hom}{\underline{\mathrm{Hom}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+
+\begin{document}
+
+\printedpage{125}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+\msp{page 188}
+veux être strict, et donner (si je peux) des démonstrations complètes dans le cadre où je me place à présent, celui du modéliseur Cat, et en n'utilisant que ce que je sais y démontrer directement à présent, sans me référer à la théorie semi-simpliciale ou topologique.
+
+\textbf{Théorème 2} (?). \textit{Soit $X$ dans} Cat, \textit{$n \in \mathbf{N}$ un entier $\geq 1$. Alors les conditions suivantes sont équivalentes :}
+
+\begin{itemize}
+\item[\textit{$a_n$)}] \textit{$X$ est $0$-connexe, et si $x$ est dans $X$, $\pi_i(X,x) = 0$ pour $i \in [1,n]$ (condition qui ne dépend pas du choix de $x$), i.e. les $\Omega^i(X,x)$ pour $i \in [1,n]$ sont $0$-connexes.}
+\item[\textit{$b_n$)}] \textit{Pour tout groupe $G$, $G \longrightarrow H^0(X,G_X)$ est un isomorphisme, et $H^1(X,G_X) = 0$. De plus, si $G$ est abélien, on a aussi $H^i(X,G_X) = 0$, pour $i \in [1,n]$.}
+\end{itemize}
+
+\textsc{Démonstration}. Pour $n = 1$ cette équivalence est $\pm$ tautologique et a été rappelée (sous une forme légèrement différente) au début (p.~71). On procède par récurrence. On peut donc supposer que $n \geq 2$, que $X$ satisfait $\mathrm{a}_{n-1}$, $\mathrm{b}_{n-1}$, et prouver qu'alors $\mathrm{a}_n$, $\mathrm{b}_n$ sont équivalentes, i.e. $\pi_n(X,x) = 0$ équivaut à $H^n(X,M) = 0$ pour tout groupe abélien $M$.
+
+\msp{page 189}
+On utilise la $W_\infty$-fibration (parfaite)
+\[
+\begin{tikzcd}[row sep=large]
+E = \Ch(X;x,-) \arrow[d] & E\ W_\infty\text{-asphérique} \\
+X &
+\end{tikzcd}
+\]
+de fibre $Z$ en $x$ égale à $\Omega(X,x)$.
+
+Supposons $\mathrm{a}_n$) pour $X$, donc $a_{n-1}$) pour $\Omega(X,x)$. Par hypothèse de récurrence, on a donc
+\[
+H^i(Z,M) = 0 \qquad \text{pour } i \in [1,n-1],
+\]
+$M$ groupe abélien. Donc dans la suite spectrale de Leray,
+\[
+H^*(E,M) \Longleftarrow E_2^{pq} = H^p(X,H^q(Z,M))
+\]
+on a
+\[
+E_2^{pq} = 0 \qquad \text{si } q \in [1,n-1], \qquad
+\begin{tikzpicture}[baseline=0]
+\draw[->] (0,0) -- (2.2,0);
+\draw[->] (0,0) -- (0,2.1);
+\foreach \x in {0,0.35,0.7,1.05,1.4} {
+  \fill (\x,0) circle (1.5pt);
+  \fill (\x,1.4) circle (1.5pt);
+}
+\node[left] at (-0.05,1.4) {$n$};
+\node at (0.35,0.7) {$0$};
+\node at (1.05,0.7) {$0$};
+\end{tikzpicture}
+\quad .
+\]
+
+\printedpage{126}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+
+On a donc la suite exacte
+\[
+0 \longrightarrow H^n(X,M) \longrightarrow H^n(E,M)
+\]
+et comme $E$ est $W_\infty$-asphérique, on a $H^n(E,M) = 0$, donc $H^n(X,M) = 0$.
+
+Inversement, supposons $\mathrm{b}_n$), prouvons $\mathrm{a}_n$). On sait déjà qu'on a $\mathrm{a}_{n-1}$), donc $\mathrm{a}_{n-2}$ pour $\Omega(X,x)$, ce qui implique
+\[
+H^i(Z,M) = 0 \qquad \text{pour } i \in [1,n-2],
+\]
+donc
+\[
+E_2^{pq} = 0 \qquad \text{si } q \in [1,n-2].
+\]
+On a donc la suite exacte
+
+\msp{page 190}
+\[
+0 \longrightarrow \underbrace{H^{n-1}(X,M)}_{=\,0} \longrightarrow \underbrace{H^{n-1}(E,M)}_{=\,0} \longrightarrow H^0(X,H^{n-1}(Z,M)) \longrightarrow \underbrace{H^n(X,M)}_{=\,0} \longrightarrow H^n(E,M),
+\]
+donc
+\[
+H^0(X,\ \underbrace{H^{n-1}(Z,M)}_{\begin{array}{l}\text{système local}\\ \textit{constant}\text{ sur } X,\\ \text{car } X \text{ est 1-connexe}\end{array}}\ ) = 0,
+\]
+donc
+\[
+H^{n-1}(Z,M) = 0,
+\]
+ce qui, par hypothèse de récurrence, implique $\pi_{n-1}(Z,z) = 0$, donc $\pi_n(X,x) = 0$, q.e.d.
+
+\textbf{Corollaire.} \textit{Pour que $X$ soit $W_\infty$-asphérique, i.e. pour qu'on ait $G \xrightarrow{\ \sim\ } H^0(X,G)$, $H^1(X,G) = 0$} \texttt{[pour]} \textit{tout groupe} \texttt{[}$G$\texttt{]}\textit{, et $H^i(X,G) = 0$ si $i \geq 2$ pour $G$ abélien, il faut et il suffit que} $1^\circ$) \textit{$X$ soit} $0$\textit{-connexe, et ($x$ étant un point de $X$)} $2^\circ$) \textit{les $\Omega^i(X,x)$} \texttt{[soient]} $0$\textit{-connexes pour $i \geq 1$.}
+
+\msp{page 191}
+
+\section*{3\quad Sur la philosophie des fibres homotopiques.}
+
+Le critère d'asphéricité (pour $W_\infty$) que je viens d'obtenir, grâce aux foncteur $\Ch(X)$ (ou au choix, $\Ch_\infty(X)$) et ses dérivés $\Omega(X,x)$ et les itérés, enlève tout doute (s'il pouvait en rester encore) que les `espaces de chemins' que j'ai construit (assez péniblement!) sont bel et bien `les bons'. Je voudrais maintenant me rendre compte de façon la plus précise possible de leur `canonicité', dans quelle mesure ces constructions sont indépendant d'un choix (p.ex. celui entre la théorie $\Ch$, et $\Ch_\infty$). % [sic] aux foncteur -> au foncteur, number agreement
+
+Tout revient, finalement, à des questions de factorisation d'une flèche quelconque
+\[
+f : X \longrightarrow Y
+\]
+\printedpage{127}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+de Cat en
+\[
+X \xrightarrow{\ i_f\ } \bar{X} \xrightarrow{\ \bar{f}\ } Y,
+\]
+avec
+\[
+i_f \in W, \qquad \bar{f} \in W\text{-fib}
+\]
+(le fait que $\bar{f}$ puisse même être choisie $W_\omega$-parfait, ne me paraissant pas essentiel ici).
+
+C'est bien de cela qu'il s'agit pour construire
+
+\msp{page 192}
+un objet `chemins dans $X$'
+\[
+\Ch(X),
+\]
+en factorisant l'application diagonale
+\[
+X \xrightarrow{\ \mathrm{diag}_X\ } X \times X,
+\]
+et aussi quand on construit $\Omega(X,x)$ comme fibre en $x$ d'une $W$-fibration
+\[
+E(X,x) \longrightarrow (X,x)
+\]
+qui factorise l'inclusion
+\[
+\{x\} \longrightarrow X
+\]
+(donc $E(X,x)$ étant $W$-asphérique).
+
+On peut être plus ou moins exigeant, et regarder, soit pour un `but' $Y$ (ou plutôt un $S$) fixé dans Cat, une factorisation fonctorielle
+\[
+C : \Cat/S \longrightarrow \Fib_W S \hookrightarrow \Cat/S
+\]
+du morphisme structural $X \longrightarrow S$ d'un objet, en
+\[
+X \xrightarrow{\ i_X\ } C(X) \longrightarrow S,
+\]
+i.e. on se donne le foncteur $C$, \textit{plus}
+
+\msp{page 193}
+le morphisme fonctoriel
+\[
+i_C : \mathrm{id}_{\Cat/S} \longrightarrow C
+\]
+avec
+\[
+(i_X : X \longrightarrow C(X)) \in W \qquad \forall\ X \text{ dans } \Cat/S,
+\]
+soit être encore plus exigeant et faire varier en même temps la source et le but de $f : X \longrightarrow Y (= S)$, et demander un foncteur
+\[
+\begin{aligned}
+C : \Fl(\Cat) \quad &\longrightarrow \quad \Cat \\
+f \quad &\longmapsto \quad C(f),
+\end{aligned}
+\]
+\printedpage{128}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+avec des morphismes fonctoriels en $f$
+\[
+\underbrace{s(f)}_{=\,X} \xrightarrow{\ i_f\ } \underbrace{C(f)}_{=\,\bar{X}} \xrightarrow{\ p_f\ } \underbrace{b(f)}_{=\,Y}
+\]
+($i$, $p$ des flèches dans $\Hom(\Fl(\Cat),\Cat)$), avec
+\[
+i_f \in W, \qquad p_f \in W\text{-fib}
+\]
+pour toute flèche $f$ dans Cat.
+
+\msp{page 194}
+Dans les deux points de vue, dans quel sens a-t-on \textit{unicité} d'une telle construction?
+
+Prenons d'abord le premier point de vue, factorisation des flèches à but fixé $S$, donc \texttt{[c'est une]} question dans $\Cat/S$. J'ai oublié une propriété importante, mais elle résulte de ce qui a été dit : le foncteur
+\[
+\begin{tikzcd}[column sep=small]
+X \longmapsto C(X) : & \Cat/S \arrow[rr] \arrow[dr, dotted] & & \Cat/S \\
+& & \Fib_W S \arrow[ur, dotted, hook] &
+\end{tikzcd}
+\]
+\textit{transforme} \texttt{[les]} \textit{flèches} \texttt{[de]} \textit{$W$ en itou}, comme on voit sur le diagramme commutatif
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X \arrow[r, "i_X"] \arrow[d, "f"'] & C(X) \arrow[d, "C(f)"] \\
+Y \arrow[r, "i_Y"] & C(Y),
+\end{tikzcd}
+\]
+où $i_X$, $i_Y$ sont dans $W$, donc
+\[
+f \in W \qquad \Longleftrightarrow \qquad C(f) \in W.
+\]
+Soit
+\[
+(C',i')
+\]
+un deuxième foncteur, $\Cat/S \longrightarrow \Cat/S$,
+
+\msp{page 195}
+muni d'un morphisme
+\[
+i' : \mathrm{id}_{\Cat/S} \longrightarrow C'
+\]
+qui est dans $W$ argument par argument, et tel que $C'$ se factorise par $\Fib_W S$. On peut comparer $C$ et $C'$ moyennant $C \circ C'$, car
+\[
+\begin{tikzcd}[column sep=small]
+& C \circ C' & \\
+C = C \circ \mathrm{id} \arrow[ur, "C\ast i'"] & & C' = \mathrm{id} \circ C', \arrow[ul, "i\ast C'"']
+\end{tikzcd}
+\]
+\printedpage{129}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 30 mars 2003
+i.e. on a, pour tout $X$ dans $\Cat/S$,
+\[
+\begin{tikzcd}[column sep=small]
+& C(C'(X)) & \\
+C(X) \arrow[ur, "C(i'_X)"] & & C'(X), \arrow[ul, "i_{C'(X)}"']
+\end{tikzcd}
+\]
+le deux flèches étant dans $W$ (celle de gauche parce que $C(W) \subseteq W$). Ce sont des flèches dans $\Fib_W S$, et si on suppose que $W$ satisfait W(4b), elles induisent des $W$-équivalences en chaque fibre. Cela montre donc déjà % [sic] le deux flèches -> les deux flèches, typo
+
+\msp{page 196}
+qu'à isomorphisme (peut-être non-canonique) près, le foncteur composé défini par $C$,
+\[
+\begin{tikzcd}
+X \arrow[r, mapsto] & C(X) \arrow[r, mapsto] & (s \longmapsto \mathrm{hot}_W(C(X)_s)) \\
+\Cat/S \arrow[r] \arrow[rr, bend right, "\varphi_C"'] & \Fib_W S \arrow[r] & \Hom(S^\circ,\mathrm{Hot}_W),
+\end{tikzcd}
+\]
+ne dépend pas du choix particulier de $C$, i.e. deux tels foncteurs `fibres homotopiques' (correspondant à deux choix $C$, $C'$) sont toujours isomorphes. Mais au lieu d'utiliser $C \circ C'$ pour définir un tel isomorphisme, on aurai pu utiliser $C' \circ C$, ou quelque autre procédé. On aimerait comprendre s'il y a unicité véritable, une caractérisation intrinsèque de ces isomorphismes $\varphi_C \xrightarrow{\ \sim\ } \varphi_{C'}$, indépendamment de telle construction ou de telle autre. % [sic] aurai pu -> aurait pu, typo
+
+Je présume que $C \circ C'$ est lui aussi muni de
+\[
+\mathrm{id}_{\Cat/S} \longrightarrow C \circ C',
+\]
+
+\msp{page 197}
+et même a priori de deux façons possible
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+& C(C'(X)) & \\
+C(X) \arrow[ur, "C(i'_X)"] & & C'(X) \arrow[ul, "i_{C'(X)}"'] \\
+& X, \arrow[ul, "i_X"] \arrow[ur, "i'_X"'] \arrow[uu, dotted] &
+\end{tikzcd}
+\]
+soit par $C(i'_X) \circ i_X$, soit par $i_{C(X)} \circ i'_X$, heureusement elles sont égales, car pour toute flèche $X \xrightarrow{\ i'\ } X'$ dans $\Cat/S$, le carré % [sic] i_{C(X)} -> i_{C'(X)}, the diagram above has i_{C'(X)}
+
+\end{document}

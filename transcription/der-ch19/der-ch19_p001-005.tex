@@ -1,0 +1,232 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+% Q-orthogonality arrows (half arrowheads = Q-orthogonal, full arrowheads = equality)
+\newcommand{\Qo}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}   % lower half-head left, upper half-head right
+\newcommand{\Qorev}{\mathrel{\leftharpoonup\joinrel\relbar\joinrel\rightharpoondown}} % mirrored form of (1.2)
+\newcommand{\Qog}{\mathrel{\leftarrow\joinrel\relbar\joinrel\rightharpoonup}}         % full head left
+\newcommand{\Qod}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightarrow}}       % full head right
+\newcommand{\Qogd}{\mathrel{\leftarrow\joinrel\relbar\joinrel\rightarrow}}            % full heads both sides
+% the same arrows crossed by a vertical bar (Quillen factorisation)
+\newcommand{\Qx}[2]{\mathrel{#1\joinrel\mapstochar#2}}
+% crossed by two vertical bars (functorial factorisation)
+\newcommand{\Qxx}[2]{\mathrel{#1\joinrel\mapstochar\mkern2mu\mapstochar#2}}
+% Q-closure marks
+\newcommand{\tld}{\tilde{}}   % left Q-closure mark (small tilde in exponent)
+\newcommand{\rcl}{\neg}       % right Q-closure mark (small hooked bar in exponent)
+
+\begin{document}
+
+\printedpage{(non numérotée)}
+% head: (none; title page)
+
+\begin{center}
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\bigskip\bigskip
+
+\textbf{Chapitre XIX}
+
+\medskip
+
+\textbf{Modèles (4)}
+\end{center}
+
+\newpage
+
+\printedpage{(non numérotée)}
+% head: (none; editorial note)
+
+Ce texte a été déchiffré et transcrit en \LaTeXe\ par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Seules quelques corrections mineures évidentes ont été effectuées. Pour les rares ajouts ou commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{georges.maltsiniotis@imj-prg.fr}
+
+\hfill G. Maltsiniotis\hspace*{2cm}
+
+\newpage
+
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 1}
+
+\section*{1\quad Rappels sur les couples de Quillen (couples de Quillen spéciaux)}
+
+Je vais reprendre les notations et la terminologie pour les relations de LLP \texttt{[left lifting property]} et RLP \texttt{[right lifting property]} de Quillen. J'écris (pour une catégorie $\mathcal{M}$, et $\Phi, \Psi \subset \mathrm{Fl}(\mathcal{M})$)
+\[
+\Phi \Qo \Psi \qquad \iff \qquad (\Phi \subset \Psi^{*}) \qquad \iff \qquad (\Psi \subset \Phi_{*})\ ,
+\tag*{(1.1)}
+\]
+i.e. $\Phi$ a la LLP par rapport à $\Psi$, ou encore $\Psi$ la RLP par rapport à $\Phi$. Je dis aussi que $(\Phi, \Psi)$ est un \textit{couple} Q-\textit{orthogonal.} Cette notion n'est pas symétrique, mais je me permets parfois (exceptionnellement) d'écrire
+\[
+\Psi \Qorev \Phi \qquad \text{comme synonyme de} \qquad \Phi \Qo \Psi\ .
+\tag*{(1.2)}
+\]
+$\Phi$ est Q-\textit{orthogonal à gauche} de $\Psi$, $\Psi$ est Q-\textit{orthogonal à droite} à $\Phi$, et la Q-orthogonalité à gauche (resp. à droite) est notée par le demi-sommet de flèche pointant vers le bas (resp. vers le haut). J'écris
+\[
+\left\{
+\begin{aligned}
+&\Phi \quad \Qog \quad \Psi \quad \iff \quad (\Phi = \Psi^{*})\\
+&\Phi \quad \Qod \quad \Psi \quad \iff \quad (\Psi = \Phi_{*})\\
+&\Phi \quad \Qogd \quad \Psi \quad \iff \quad (\Phi = \Psi^{*} \ \text{ et } \ \Psi = \Phi_{*})\ .
+\end{aligned}
+\right.
+\tag*{(1.3)}
+\]
+Ces trois cas de Q-orthogonalité renforcée sont donc ceux où on a de plus $\Phi = \Phi^{\tld}$
+resp. $\Psi = \Psi^{\rcl}$ resp. $\Phi = \Phi^{\tld}$ et $\Psi = \Psi^{\rcl}$. On dit que $\Phi$ est Q-\textit{clos à gauche} si $\Phi = \Phi^{\tld}$, que % ?? uncertain: exponent mark of Psi -- small hooked bar (reversed negation sign) or negation sign
+$\Psi$ est Q-\textit{clos à droite} si $\Psi = \Psi^{\rcl}$, que le couple Q-orthogonal $(\Phi, \Psi)$ est Q-\textit{clos à gauche} (resp. \textit{à droite}) si $\Phi$ (resp. $\Psi$) est Q-clos à gauche (resp. à droite). On dit qu'il est Q-\textit{clos} si les deux conditions % ?? uncertain: exponent mark of Psi -- small hooked bar (reversed negation sign) or negation sign
+
+\msp{page 2}
+
+sont satisfaites simultanément. Quand aucune confusion n'est à craindre, il m'arrivera de dire simplement que $\Phi$ est Q-clos, ou que $\Psi$ est Q-clos, sans spécifier si c'est à gauche où % [sic] où -> ou, conjunction "or" intended
+à droite. Mais pour un couple Q-orthogonal $(\Phi, \Psi)$ (ou je préfère l'écrire $\Phi \Qo \Psi$), Q-clos % [sic] ou -> où, relative adverb intended
+signifie toujours Q-clos à gauche et à droite.
+
+Quand un couple Q-orthogonal $\Phi \Qo \Psi$ a la propriété de factorisation de Quillen, je l'indique par la barre verticale croisant l'horizontale, ainsi
+\[
+\Phi \ \Qx{\leftharpoondown}{\rightharpoonup} \ \Psi\ ,
+\tag*{(1.4)}
+\]
+et on définit de même le sens des graphismes
+\[
+\left\{
+\begin{aligned}
+&\Phi \quad \Qx{\leftharpoondown}{\rightharpoonup} \quad \Psi\\
+&\Phi \quad \Qx{\leftarrow}{\rightharpoonup} \quad \Psi\\
+&\Phi \quad \Qx{\leftharpoondown}{\rightarrow} \quad \Psi\\
+&\Phi \quad \Qx{\leftarrow}{\rightarrow} \quad \Psi\ .
+\end{aligned}
+\right.
+\tag*{(1.3)} % [sic] (1.3) -> (1.5), number already used above and (1.5) is missing
+\]
+
+\newpage
+
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+Un couple Q-\textit{orthogonal} Q-\textit{factorisant} $\Phi \Qx{\leftharpoondown}{\rightharpoonup} \Psi$ est appelé un \textit{précouple de Quillen.} S'il est de plus Q-clos, i.e. si on a $\Phi \Qx{\leftarrow}{\rightarrow} \Psi$, on dit que c'est un \textit{couple de Quillen.}
+
+$\Phi$ est dit Q-\textit{saturé à gauche} s'il contient les isomorphismes et est stable par cochangement de base, par (petite) composition transfinie, et par facteurs directs. Dualement $\Psi$ est dit Q-\textit{saturé à droite} s'il
+
+\msp{page 3}
+
+contient les isomorphismes, est stable par changement de base, par composition transfinie, et par facteurs directs. Si $\Phi$ est Q-saturé à gauche, il est stable par (petites) sommes directes, i.e. si les $f_i : A_i \longrightarrow B_i$ ($i \in I$, $I$ petit) sont dans $\Phi$, $f = \coprod f_i : \coprod A_i \longrightarrow \coprod B_i$ aussi, et de même pour (petites) sommes amalgamées finies ou infinies (quand on se place dans un $A\backslash\mathcal{M}$ au lieu de $\mathcal{M}$). On a l'énoncé dual pour $\Psi$, quand $\Psi$ est Q-saturé à droite.
+
+En fait, il y a des notions plus faibles de Q-saturation que celle que je viens de dire : Q-\textit{saturation simple} (à gauche : $\Phi$ contient les isomorphismes, stable par composition binaire, par cochangement de base), Q-\textit{saturation transfinie} (on exige de plus stabilité par composition transfinie), enfin Q-\textit{saturation totale,} ou Q-saturation tout court (quand on exige de plus la stabilité par facteurs directs). On a les implications
+\[
+\left\{
+\begin{aligned}
+&\text{Q-clos à gauche}\\
+&\Downarrow\\
+&\text{Q-saturé (total)}\\
+&\Downarrow\\
+&\text{Q-saturé transfini}\\
+&\Downarrow\\
+&\text{Q-saturé simple.}
+\end{aligned}
+\right.
+\tag*{(1.6)}
+\]
+Pour $\Phi \subset \mathrm{Fl}(\mathcal{M})$, on a sa Q-clôture (à gauche) $\Phi^{\tld}$ (qui est la plus petite partie Q-close à gauche de $\mathrm{Fl}(\mathcal{M})$ contenant $\Phi$) et de même son Q-saturé (total) à gauche, son Q-saturé transfini, son Q-saturé simple
+
+\msp{page 4}
+
+avec les inclusions tautologiques
+\[
+\Phi \ \subset \
+\underbrace{\Phi'}_{\substack{\text{Q-saturé}\\ \text{à gauche simple}}}
+\ \subset \
+\underbrace{\Phi''}_{\substack{\text{Q-saturé}\\ \text{à gauche transfini}}}
+\ \subset \
+\underbrace{\Phi'''}_{\substack{\text{Q-saturé}\\ \text{à gauche total}}}
+\ \subset \
+\underbrace{\Phi^{\tld}}_{\substack{\text{Q-clôture}\\ \text{à gauche}}}
+\ ,
+\tag*{(1.7)}
+\]
+et dualement pour $\Psi$. Entre $\Phi$ et $\Phi'$ il y a encore un $\Phi'_0$,
+\[
+\Phi \ \subset \ \Phi'_0 \ \subset \ \Phi'\ ,
+\tag*{(1.8)}
+\]
+qui est le Q-\textit{saturé pour cochangement de base} (contenant aussi, par définition, tous les isomorphismes). Pour construire tous ces saturés, on procède ainsi :
+
+\newpage
+
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\begin{enumerate}[leftmargin=*]
+\item[1)] $\Phi'_0 \quad = \quad$ ensemble des flèches $i : A \longrightarrow B$ s'insérant dans un carré cocartésien
+\[
+\begin{tikzcd}
+A_0 \arrow[r, "i_0"] \arrow[d] & B_0 \arrow[d]\\
+A \arrow[r, "i"] & B\ ,
+\end{tikzcd}
+\]
+avec $i_0 \in \Phi$ ou $i_0$ une identité (auquel cas on trouve pour $i$ les isomorphismes).
+
+\item[2)] $\Phi' \quad = \quad$ ensemble des flèches composées multiples
+\[
+i_n \, i_{n-1} \ \cdots \ i_1\ ,
+\]
+avec $i_\alpha \in \Phi'_0$.
+
+\item[3)] $\Phi'' \quad = \quad$ ensemble des composés transfinis de flèches $\in \Phi'_0$.
+\end{enumerate}
+
+On a envie de poser
+\[
+\Phi''' \ = \ \Phi^{\prime\prime\natural} \ \overset{\text{déf}}{=} \ \text{ensemble des facteurs directs d'éléments de } \Phi'',
+\]
+et c'est un fait que $\Phi^{\prime\prime\natural} \subset \Phi'''$ trivialement, mais il n'est par clair en général qu'on ait % [sic] par -> pas, typo
+\msp{page 5}
+égalité, faute de pouvoir montrer que $\Phi^{\prime\prime\natural}$ est stable, non seulement par facteurs directs, mais aussi par cochangement de base et par composition transfinie. Cependant, rappelons :
+
+\textbf{Théorème 1.1.} \textit{Supposons $\mathcal{M}$ stable par petites $\varinjlim$ , et que ses éléments soient accessibles. Supposons de plus que $\Phi$ soit petit, plus généralement, qu'il existe une partie $\Phi_0 \subset \Phi$ petite telle que $\Phi \subset \Phi_0{}^{\tld}$, donc}
+\[
+\Psi \ \overset{\text{déf}}{=} \ \Phi_{*} \ = \ (\Phi_0)_{*} \qquad \text{\footnotemark}.
+\tag*{(1.1.1)} % footnote mark printed as superscript (1)
+\]
+\footnotetext{\textbf{N.B.} On a donc $\Phi \Qod \Psi$, a fortiori $\Phi_0 \Qod \Psi$.}
+\textit{Sous ces conditions, si $\Phi''_0$ désigne le \textup{Q}-saturé à gauche transfini de $\Phi_0$, alors on a $\Phi''_0 \Qx{\leftharpoondown}{\rightarrow} \Psi$, i.e. toute flèche $f$ de $\mathcal{M}$ se factorise en $f = pi$, avec $i \in \Phi''_0$, $p \in \Psi$\,\footnote{Il y a même factorisation \textit{fonctorielle} en $f$, propriété qui mérite une notation, p.ex. $\Phi''_0 \Qxx{\leftharpoondown}{\rightarrow} \Psi$.}. A fortiori, si $\Phi''$ désigne le \textup{Q}-saturé à gauche transfini de $\Phi$, on a} % footnote mark printed as superscript (2)
+\[
+\Phi'' \ \Qx{\leftharpoondown}{\rightarrow} \ \Psi\ .
+\]
+
+\bigskip
+
+\textbf{Corollaire 1.2.} \textit{Sous les conditions du théorème, on a}
+\[
+\Phi''' \ \text{(Q-saturé total à gauche de $\Phi$)} \ = \
+\underbrace{\Phi^{\prime\prime\natural}}_{\substack{\text{ensemble des}\\ \text{facteurs directs d'éléments}\\ \text{de $\Phi''$}}}
+\ = \ \Phi^{\tld}\ .
+\tag*{(1.2.1)}
+\]
+\textit{Plus généralement (en apparence seulement!), si $\Phi_1$ est une partie de \textup{$\mathrm{Fl}(\mathcal{M})$} qui est \textup{Q}-saturée à gauche transfinie, et telle que}
+\[
+\Phi_0 \ \subset \ \Phi_1 \ \subset \ \Phi^{\tld} \ = \ \Phi_0{}^{\tld}\ ,
+\]
+
+\end{document}

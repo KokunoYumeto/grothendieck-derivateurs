@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\ul}[1]{\underline{\mathrm{#1}}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+ & \HOT_W(S)\approx(\Cat/S)(W_S^{\mathrm{d}})^{-1} \\
+\HOT^{\mathrm{lc}}_W(S)\approx(\Cat/S)W_S^{-1} \arrow[ur, "i"] \arrow[r, "C"] \arrow[dr, "j"'] & (\ul{Parf}\,S)W_S^{-1} \arrow[u, "\text{\footnotesize car $W_S=W_S^{\mathrm{d}}$ sur $\ul{Parf}$}"'] \arrow[d, "\text{\footnotesize car $W_S=W_S^{\mathrm{g}}$ sur $\ul{Parf}$}"] \\
+ & \HOT^{o}_W(S)\approx(\Cat/S)(W_S^{\mathrm{g}})^{-1}.
+\end{tikzcd}
+\]
+
+\msp{page 64}
+On voit par là qu'on a des isomorphismes canoniques
+\[
+\rho i\simeq\id,\qquad\sigma j\simeq\id
+\]
+dans la catégorie des endofoncteurs de $(\Cat/S)W_S^{-1}$ ($\approx\HOT^{\mathrm{lc}}_W(S)$), isomorphisme qui s'explicite ici par le fait que $\rho i$, $\sigma j$ sont déduits du même foncteur $C$ par passage aux localisés $W_S^{-1}$ (donc en fait $\rho i=\sigma j$ !), et qu'on a une flèche fonctorielle en $X$
+\[
+X\xrightarrow{i_X}C(X),
+\]
+qui est dans $W$ pour tout $X$. Ainsi, $\rho$ et $\sigma$ sont à isomorphisme près des \textit{rétractions} des catégories $\HOT_W(S)$, $\HOT^{o}_W(S)$ sur la catégorie $\HOT^{\mathrm{lc}}_W(S)$. De plus, ces rétractions sont ce qu'on appelle des foncteurs de localisation (comme on voit sur le diagramme de la page 62). (On dit que $C\xrightarrow{F}C'$ est un \textit{foncteur de localisation} si, désignant par $\Sigma\subseteq\Fl\,C$ l'ensemble des flèches de $C$ transformées en des isomorphismes par $F$, le foncteur
+\[
+C\Sigma^{-1}\xrightarrow{\bar{F}}C'
+\]
+qui factorise $F$ est une équivalence de catégories.)
+
+\msp{page 65}
+On sait d'ailleurs que si un foncteur $f$ a un adjoint $g$ (à gauche ou à droite), alors $f$ est un foncteur \texttt{[de]} localisation si et seulement si l'adjoint $g$ est pleinement fidèle. Pour prouver que $i$, $j$ sont pleinement fidèles, il serait donc tentant de prouver qu'ils sont adjoints des foncteurs $\rho$, $\sigma$.
+
+Pour nous y reconnaître, je vais poser
+\[
+\left\{
+\begin{aligned}
+&\cA=\Cat/S,\ \ \Sigma_0=W_S^{\mathrm{d}},\ \ \Sigma=W_S\qquad\quad(\subseteq\Fl(\cA))\\
+&C:\cA\longrightarrow\cA\ \text{ le foncteur familier, qui a la vertu}\\
+&\qquad\qquad\qquad\quad C(\Sigma)\subseteq\Sigma_0\quad.
+\end{aligned}
+\right.
+\]
+
+On a donc la situation
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+(*)\qquad\qquad(\cA,\Sigma_0)\ \underset{C}{\overset{\rho_0\,=\,\id_{\cA}}{\rightleftarrows}}\ (\cA,\Sigma),
+\]
+induisant par passage aux localisés
+\[
+\cA\Sigma_0^{-1}\quad\underset{\bar{C}}{\overset{\rho\,=\,\bar{\rho}_0}{\rightleftarrows}}\ \cA\Sigma^{-1},
+\]
+on veut vérifier que $\rho$ et $C$ \texttt{[plutôt $\bar{C}$]} sont adjoints l'un de l'autre, $C$ \texttt{[plutôt $\bar{C}$]} \textit{sûrement à droite,} ce qui signifie que l'on doit avoir des homomorphismes fonctoriels
+\[
+\left\{
+\begin{aligned}
+&\id_{\cA\Sigma^{-1}}&&\rightleftarrows&&\rho\,\bar{C}\quad(=\overline{\rho_0C})\\
+&\id_{\cA\Sigma_0^{-1}}&&\rightleftarrows&&\bar{C}\rho\quad(=\overline{C\rho_0})
+\end{aligned}
+\right.
+\]
+(\footnote[41]{mais si $C$ est à \textit{droite,} les flèches ici doivent aller en sens inverse et c'est bien à quoi je dois me résoudre p.~67.}) \texttt{[les flèches en bas vont en direction corrigée, mais les flèches en haut ne sont pas effacées]} satisfaisant deux relations de compatibilité sur lesquelles on reviendra. On peut espérer trouver ces homomorphismes fonctoriels à partir de
+\[
+\left\{
+\begin{aligned}
+&\id_{\cA}&&\xrightarrow{\ i\ }&&\rho_0C&&=&&C\\
+&\id_{\cA}&&\xleftarrow{\ p\ }&&C\rho_0&&=&&C
+\end{aligned}
+\right.
+\]
+
+\msp{page 66}
+et dans notre cas on dispose bel et bien de
+\[
+i:\id_{\cA}\longrightarrow C\qquad\text{i.e. de }\ i_X:X\longrightarrow C(X)
+\]
+fonctoriel en $X\in\Ob\,\cA$ (et de plus $i_X$ est dans $\Sigma$). Il n'y a pas cependant de flèche naturelle en sens inverse $p_X$
+\[
+C(X)\xrightarrow{\ ?\ }X.
+\]
+J'avais songé à la projection $\pi_X:C(X)\longrightarrow X$, déduite de la construction $C(X)\simeq X\times_S(\ul{Ch}_\infty(S),\sigma)$, mais ce n'est malheureusement pas un $S$-morphisme. Comme on cherche une flèche dans $\cA\Sigma_0^{-1}$, on pourrait se contenter d'avoir une flèche fonctorielle en sens inverse, du moment qu'elle soit dans $\Sigma_0$, donc puisse s'inverser quand on travaille dans $\cA\Sigma_0^{-1}$. Le candidat evident est $i_X:X\longrightarrow C(X)$ dont on vient de parler. L'ennui, c'est que $i_X$ est seulement dans $\Sigma$, pas dans $\Sigma_0$ (\footnote[42]{S'il n'en était pas ainsi, le type d'homotopie relatif sur $S$ défini par $X/S$ serait localement constant (puisqu'il en est ainsi pour celui défini par $C(X)$), ce qui n'est pas toujours le cas.}). Pourtant, quand $X$ est lui-même de la forme $C(Y)$ (plus généralement, s'il est un Hot-fibré sur $S$), alors le fait que $X\longrightarrow C(X)$ soit dans $\Sigma$ implique déjà qu'il soit dans $\Sigma_0$. Notons donc ceci % [sic] evident -> évident, accent missing
+\[
+\left\{
+\begin{array}{lrl}
+i:\id_{\cA}\longrightarrow C\ \text{tel que} & 1^o) & i_X:X\longrightarrow C(X)\ \textit{dans}\ \Sigma\\[1ex]
+ & & \text{pour tout }X\in\Ob\,\cA\\[1ex]
+ & 2^o) & i_X\ \text{dans }\Sigma_0\text{ si }X\text{ de la}\\[1ex]
+ & & \text{forme }C(Y)
+\end{array}
+\right.
+\]
+
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 67}
+L'idée me vient, après des essais merdouillants \texttt{[sic]}, que $\bar{C}$ pourrait être l'adjoint à droite, et non à gauche \texttt{[c'est la version corrigée (droite et gauche échangées) cf.~p.~65]}, i.e. que les flèches cherchées pourraient aller en sens inverse
+\[
+\left\{
+\begin{aligned}
+&\id_{\cA\Sigma^{-1}}&&\xleftarrow{\ p\ }&&\rho\,\bar{C}\quad(=\overline{\rho_0C})\\
+&\id_{\cA\Sigma_0^{-1}}&&\xrightarrow{\ i\ }&&\bar{C}\rho\quad(=\overline{C\rho_0})
+\end{aligned}
+\right.
+\]
+(j'inverse du coup les notations pour $p$ et $i$), donc on est amené si possible à chercher des flèches
+\[
+\begin{aligned}
+&\id_{\cA}&&\xleftarrow{\ p\ }&&\rho_0C&&=&&C\\
+&\id_{\cA}&&\xrightarrow{\ i\ }&&C\rho_0&&=&&C,
+\end{aligned}
+\]
+donc des flèches fonctorielles en $X$
+\[
+X\xrightarrow{i_X}C(X)\xrightarrow{p_X}X.
+\]
+On tient bel et bien une $i_X$ fonctorielle - toujours la même! Pour $p_X$, on n'en a pas plus qu'avant, mais se rappelant qu'il suffit de le trouver dans $\cA\Sigma^{-1}$ (et non plus $\cA\Sigma_0^{-1}$!), il suffit d'inverser la flèche $i_X$, qui est en effet un \textit{isomorphisme} dans $\cA\Sigma^{-1}$ (mais non dans $\cA\Sigma_0^{-1}$). On posera donc
+\[
+p_X=i_X^{-1}:C(X)\longrightarrow X\qquad\quad\text{dans }\cA\Sigma^{-1}.
+\]
+Il faut prouver deux compatibilités seulement, pour les foncteurs $\bar{C}$ et $\rho$ entre $\cA\Sigma_0^{-1}$ et $\cA\Sigma^{-1}$ (et j'écrirai $C$ au lieu de $\bar{C}$) : les deux composés
+\[
+\left\{
+\begin{array}{l}
+\begin{tikzcd}[ampersand replacement=\&]
+\rho \arrow[r, "\rho*i"] \arrow[rr, bend left=20, dotted, "\id"] \& \rho\,C\rho \arrow[r, "p*\rho"] \& \rho
+\end{tikzcd}
+\qquad\quad\text{\footnotesize (relation pour foncteurs à valeurs dans $\cA\Sigma^{-1}$)}\\[2ex]
+\begin{tikzcd}[ampersand replacement=\&]
+C \arrow[r, "i*C"] \arrow[rr, bend right=20, dotted, "\id"'] \& C\rho\,C \arrow[r, "C*p"] \& C
+\end{tikzcd}
+\qquad\quad\text{\footnotesize (relation pour foncteurs à valeurs dans $\cA\Sigma_0^{-1}$)}
+\end{array}
+\right.
+\]
+doivent être l'identité $\id_\rho$ resp. $\id_C$.
+
+\msp{page 68}
+La première relation se vérifie tautologiquement, elle revient à dire que dans $\cA\Sigma^{-1}$, on a un composé identité des
+\[
+X\xrightarrow{i_X}C(X)\xrightarrow{i_X^{-1}}X\qquad\quad!
+\]
+La seconde signifie que pour tout $X$, on a un composé identité dans $\cA\Sigma_0^{-1}$
+\[
+C(X)\xrightarrow{i_{C(X)}}C(C(X))\xrightarrow{C(p_X)}C(X).
+\]
+Or $p_X:C(X)\longrightarrow X$ avait été défini dans $A\Sigma^{-1}$ comme inverse $i_X^{-1}$ de $i_X$, d'autre part le foncteur $C$ sur $\cA$ définit par hypothèse $\cA\Sigma^{-1}\longrightarrow\cA\Sigma_0^{-1}$, plus précisément $C(\Sigma)\subseteq\Sigma_0$ % [sic] $A\Sigma^{-1}$ (italic A) -> $\mathcal{A}\Sigma^{-1}$, elsewhere script A
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+ainsi $C(i_X)$ est inversible dans $\cA\Sigma_0^{-1}$, et $C(p_X)=C(i_X)^{-1}$. Donc la compatibilité revient à la relation
+\[
+C(i_X)^{-1}i_{C(X)}=\id\qquad\quad\textit{dans}\ \ \cA\Sigma_0^{-1},
+\]
+i.e.
+\[
+\boxed{\,i_{C(X)}=C(i_X)\,}:C(X)\longrightarrow C^2(X).
+\]
+En d'autre termes, il faut prouver le : % [sic] d'autre termes -> d'autres termes, plural
+
+\textbf{Lemme.} \textit{Soit $X$ dans $\Cat/S$, considérons les deux flèches}
+\[
+i_{C(X)},\ C(i_X):C(X)\rightrightarrows C(C(X)).
+\]
+\textit{Ces flèches sont égales, sinon au sens absolu, du moins dans $(\Cat/S)(W_S^{\mathrm{d}})^{-1}$.}
+
+Ici $f_X:X\longrightarrow S$ est la projection standard et
+\[
+\begin{aligned}
+C(X)\ &=\ \quad\{(x,c)\ \mid\ x\in\Ob\,X,\ c:f_X(x)\ \underbrace{\longrightarrow}_{\text{chemin dans }S}\ t\}\\
+C^2(X)\ &=\ \{(x,c,c')\ \mid\ x\in\Ob\,X,\ \underbrace{f_X(x)\xrightarrow{c}t\xrightarrow{c'}t'}_{c,\ c'\text{ chemins dans }S}\},
+\end{aligned}
+\]
+les projections dans $S$ sont données par
+\[
+\begin{aligned}
+(x,c)&&\longmapsto&&t&&=&&\text{but }c\\
+(x,c,c')&&\longmapsto&&t'&&=&&\text{but }c'
+\end{aligned}
+\]
+
+\msp{page 69}
+On trouve
+\[
+i_{C(X)}(x,c)=(x,c,1_t):
+\begin{tikzcd}
+x \arrow[d] & & \\
+f_X(x) \arrow[r, "c"] & t \arrow[r, "1_t", "\text{chemin vide}"'] & t
+\end{tikzcd}
+\]
+\[
+C(i_X)(x,c)=(x,1_{f_X(x)},c):
+\begin{tikzcd}
+x \arrow[d] & & \\
+f_X(x) \arrow[r, "1_{f_X(x)}", "\text{chemin vide}"'] & f_X(x) \arrow[r, "c"] & t
+\end{tikzcd}
+\]
+Mais on a le choix entre deux théories de chemins, pour construire $C(X)$ : soit avec les $\ul{Ch}_\infty(S)$, soit avec les $\ul{Ch}(S)$. ‘Ça donne les mêmes résultats’, mais suivant les situations l'un est plus commode que l'autre. Je vais travailler avec les $\ul{Ch}(S)$, auquel cas les $1_S$ sont des unités à gauche et à droite, et on a une loi de composition pour les chemins. Cette loi nous permet de définir
+\[
+\begin{aligned}
+C^2(X)&&\xrightarrow{\ \gamma\ }&&C(X)\\
+(x,c,c')&&\longmapsto&&(x,c'\circ c),
+\end{aligned}
+\]
+et les composés de $i_{C(X)}$ et de $C_{i(X)}$ avec cette flèche sont $\id_{C(X)}$ dans les deux cas % [sic] $C_{i(X)}$ -> $C(i_X)$, the arrow considered is C(i_X)
+\printedpage{43}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+C(X) \arrow[r, shift left] \arrow[r, shift right] \arrow[rr, bend right=15, dashed, "\id"'] & C^2(X) \arrow[r, "\gamma"] & C(X).
+\end{tikzcd}
+\]
+
+Donc pour montrer que $i_{C(X)}=C(i_X)$ dans $(\Cat/S)(W_S^{\mathrm{d}})^{-1}$, il suffit de prouver que $\gamma$ est dans $W_S^{\mathrm{d}}$. Mais on sait que le foncteur C transforme $W_S$ en $W_S^{\mathrm{d}}$, donc $C(i_X)$ est dans $W_S^{\mathrm{d}}$, et comme $\gamma\circ C(i_X)=\id$, $\gamma$ est dans $W_S^{\mathrm{d}}$, OK! % [sic] foncteur C (upright roman C) -> foncteur $C$, math italic elsewhere
+
+\msp{page 70}
+J'ai envie de grouper ce qui a été prouvé dans un énoncé récapitulatif.
+
+\textbf{Théorème-Scholie.} On considère le diagramme de catégories de la page 8 (\footnote[43]{On suppose sur $W$ les conditions a) b) c) de p.~45, de plus L5 (p.~43). Cf. commentaires p.~81.}).
+
+\circled{I} Quand on munit toutes les 13 catégories du diagramme du localiseur $W_S$ ($W$-équivalence grossière, i.e. $W$-équivalence dans Cat, sans plus), \textit{tous} les foncteurs du diagramme induisent des équivalences sur les catégories localisées (\footnote[44]{De plus, si $\mathcal{F}$ est une sous-catégorie pleine de $\Cat/S$ qui contient une des deux sous-catégories $\ul{Fib}_0S$, $\ul{Cofib}_0S$ (ce qui inclut le cas des 8 catégories des diagrammes, autres que $\Cat/S$ elle-même), l'inclusion $(\mathcal{F},W_S|\mathcal{F})$ dans $(\Cat/S,W_S)$ induit une équivalence pour les localisés.}). Désignons par
+\[
+\HOT^{\mathrm{lc}}_W(S)
+\]
+‘la’ catégorie localisée commune.
+
+\circled{II} Munissons les quatre catégories bordantes gauches
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+\Cat/S & \ul{Liss}\,S \arrow[l, hook'] & \ul{Fib}\,S \arrow[l, hook'] & \ul{Fibsc}\,S \arrow[l, hook']
+\end{tikzcd}
+\]
+du localiseur $W_S^{\mathrm{d}}$ de la $W$-équivalence fine \textit{droite} sur $S$ ( $\begin{tikzcd}[row sep=small, column sep=small]
+X \arrow[rr, "f"] \arrow[dr] & & Y \arrow[dl]\\
+ & S &
+\end{tikzcd}$ est dans $W_S^{\mathrm{d}}$ si et seulement si les $s\backslash X\longrightarrow s\backslash Y$ le sont \texttt{[plutôt, sss ils sont dans $W$]}, pour tout $s\in\Ob\,S$). Les foncteurs du diagramme, i.e. ceux de $(*)$, entre ces catégories, donc aussi leurs composés, induisent des équivalences entre les localisées (\footnote[45]{Plus généralement, ça marche pour toute sous-catégorie pleine de $\Cat/S$ qui contient $\ul{Fib}\,S$ (et dualement, avec $W_S^{\mathrm{g}}$ au lieu de $W_S^{\mathrm{d}}$, si $\mathcal{F}$ contient $\ul{Cofib}\,S$).}). Désignons par
+\[
+\HOT_W(S)
+\]
+‘la’ catégorie localisée commune.
+
+Enoncé dual pour
+\[
+(*')\qquad\qquad
+\begin{tikzcd}
+\Cat/S & \ul{Prop}\,S \arrow[l, hook'] & \ul{Cofib}\,S \arrow[l, hook'] & \ul{Cofibsc}\,S, \arrow[l, hook']
+\end{tikzcd}
+\]
+
+% foot (each page): Version 9 novembre 2001
+
+\end{document}

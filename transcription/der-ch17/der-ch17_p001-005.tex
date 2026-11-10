@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fl}{\mathrm{Fl}}
+
+\begin{document}
+
+% ===================== PDF page 1 =====================
+\printedpage{--}
+% head: (none)
+% no page number printed on this page
+
+\begin{center}
+\vspace*{5cm}
+
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\vspace{2cm}
+
+\textbf{Chapitre XVII}
+
+\medskip
+
+\textbf{Catégories à fibrations et à cofibrations}\\
+\textbf{(Modèles (3))}
+\end{center}
+
+\clearpage
+
+% ===================== PDF page 2 =====================
+\printedpage{--}
+% head: (none)
+% no page number printed on this page
+
+\vspace*{5cm}
+
+Ce texte a été déchiffré et transcrit en \LaTeXe{} par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Seules quelques corrections mineures évidentes ont été effectuées. Pour les rares ajouts ou commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{georges.maltsiniotis@imj-prg.fr}
+
+\hspace*{\fill}G. Maltsiniotis\hspace*{2cm}
+
+\clearpage
+
+% ===================== PDF page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 1}
+
+\section*{1\quad Préliminaires\footnote{\textbf{N.B.} Ces préliminaires seront complètement repris et dépassés dans le paragraphe 2. À ne pas lire !}}
+
+\textbf{Proposition 1.} \textit{Soit $\mathcal{M}$ une catégorie stable par $\varinjlim$ quelconques, $C \subset \Fl(\mathcal{M})$ contenant les isomorphismes, stable par cochangement de base et par composition} transfinie. \textit{Soit, pour tout petit ensemble ordonné $I$, $C_I \subset \Fl(\mathcal{M}(I^{\circ}))$ l'ensemble des flèches $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ telles que $\forall\ i_0 \in I$, dans le diagramme} % ?? uncertain: superscript of I -- \circ or degree sign
+
+\[
+\begin{tikzcd}[column sep=large]
+X'_{i_0} = \varinjlim\limits_{i<i_0} X_i \arrow[r] \arrow[d, "\alpha_{i_0} = \varinjlim\limits_{i<i_0} u_i"'] \arrow[dr, phantom, "\text{cocart.}"] & X_{i_0} \arrow[d, "\beta_{i_0}"'] \arrow[dd, dotted, shift left=3ex, "u_{i_0}"] & \\
+Y'_{i_0} = \varinjlim\limits_{i<i_0} Y_i \arrow[r] & \tilde{Y}_{i_0} \arrow[d, "\tilde{u}_{i_0}"'] & \text{\footnotesize (défini comme somme amalgamée)} \\
+& Y_{i_0}\ , &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+\textit{la flèche $\tilde{u}_{i_0}$ soit dans $C$\footnote{Condition stable par passage de $I$ à un sous-ensemble ordonné \textit{ouvert} $I'$ de $I$.}. Je dis que si $I$ est} bien ordonné, \textit{alors $u_\bullet \in C_I$ implique}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{que $\varinjlim u_i : \varinjlim X_i \longrightarrow \varinjlim Y_i$ est dans $C$, et}
+\item[b)] $\forall\ i \in I$, $(u_i : X_i \longrightarrow Y_i) \in C$\footnote{Dire aussi que l'on a
+\begin{itemize}[leftmargin=2em]
+\item[b$'$)] \textit{Si $i' \leq i$, alors dans le diagramme similaire à $(*)$,}
+\end{itemize}
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X'_{i'} \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] \& X'_i \arrow[d] \\
+Y'_{i'} \arrow[r] \& \tilde{Y}'_i \arrow[d, "u_{i',i}"] \\
+\& Y'_i\ ,
+\end{tikzcd}
+\]
+\textit{on a} $u_{i',i} \in C$ (on retrouve $(*)$ en faisant $i' = i_0$, $i = i_0 + 1$). Le cas b) s'obtient en faisant $i' = 0$, $i$ quelconque, d'où $(X'_i \longrightarrow Y'_i) \in C$. L'appliquant à $i+1$ au lieu de $i$, on trouve $(u_i : X_i \longrightarrow Y_i) \in C$.}.
+\end{itemize}
+
+. % a lone full stop printed on its own line
+
+\textbf{Corollaire.} \textit{Soit $W \subset \mathcal{M}$ localiseur modérément saturé, tel que $TC \overset{\text{déf}}{=} C \cap W$ soit stable par cochangement de base, et par composition} transfinie. \textit{Soit $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $C_I$. Alors $u_\bullet \in W_{I^{\circ}}$ (i.e. $\forall\ i \in I$, on a $u_i \in W$) si et seulement si $u_\bullet \in (TC)_I$, i.e. si et seulement si pour tout $i \in I$, la flèche $\tilde{u}_i$ dans $(*)$ est dans $TC$, ou ce qui}
+\msp{page 2 n'existe pas}
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 3}
+\textit{revient au même, dans $W$ (puisque par hypothèse elle est déjà dans $C$). Si cette condition est satisfaite, alors $\varinjlim u_i : \varinjlim X_i \longrightarrow \varinjlim Y_i$ est dans $W$.}
+
+% ===================== PDF page 4 (continued) =====================
+
+\textsc{Démonstration} du corollaire. Supposons $u_\bullet \in (TC)_I$, alors par la proposition, $\varinjlim\limits_{i\in I} u_i$ est dans $TC$, ou ce qui revient au même, dans $W$. D'autre part, appliquant ce même résultat aux systèmes inductifs induits sur $I_{<i_0}$, on trouve que dans $(*)$, la flèche $\alpha_{i_0}$ est dans $TC$, donc aussi $\beta_{i_0}$ par cochangement de base, donc aussi $u_{i_0} = \tilde{u}_{i_0}\beta_{i_0}$. Donc il reste à prouver qu'inversement, si on suppose les $u_{i_0} \in W$, alors les $\tilde{u}_{i_0}$ sont eux aussi dans $W$ (i.e. dans $TC = C \cap W$), ou ce qui revient au même, que les $\beta_{i_0}$ sont dans $W$, ou encore dans $TC$. Mais comme $TC$ est stable par cochangement de base, il suffit pour cela de prouver que $\alpha_{i_0} \in TC$, ou encore $\alpha_{i_0} \in C$. Donc on est ramené à prouver que
+\begin{itemize}[leftmargin=2.5em]
+\item[c)] $u \in W_{I^{\circ}} \cap C_I \Longrightarrow (\,\varinjlim\limits_{i<i_0} u_i) \in W$ pour tout $i_0 \in I$,
+\end{itemize}
+donc, changeant de notation, à prouver \texttt{[phrase incomplète]}. Nous prouverons ensemble a) b) c) par induction transfinie sur le nombre ordinal $\alpha$ tel que $I \simeq I_\alpha = \{\text{ensemble des ordinaux } i < \alpha\}$.
+
+\msp{page 4}
+
+1$^\circ$) Cas $\alpha = 0$, i.e. $I = \emptyset$ : il est trivial.
+
+2$^\circ$) Si c'est ok pour $I_\alpha$, aussi pour $I_{\alpha+1} = \{\beta \mid \beta \leq \alpha\}$. Ici, $I_{\alpha+1}$ ayant un plus grand élément $\alpha$, a) est contenu dans b) (pour $i = \alpha$, plus grand élément de $I_{\alpha+1}$.) Pour prouver b), il reste à prouver que $u_\alpha \in C$. On regarde le diagramme $(*)$ pour $i_0 = \alpha$. Par l'hypothèse de récurrence (forme a), appliquée à $I_\alpha$, on a $\alpha_{i_0} \in C$, donc par cochangement de base $\beta_{i_0} \in C$, donc par composition $u_{i_0} = \tilde{u}_{i_0}\beta_{i_0} \in C$. Pour prouver c), il reste à prouver que $\varinjlim\limits_{i<\alpha} u_i \in W$. Mais par l'hypothèse de récurrence appliquée à $I_\alpha = \{i \mid i < \alpha\}$, on sait déjà que $(u_i)_{i<\alpha} \in (TC)_{I_\alpha}$, donc par la partie prouvée du corollaire ou de la proposition, $\varinjlim\limits_{i<\alpha} u_i \in TC$.
+
+3$^\circ$) Si $\alpha$ est un ordinal limite, et si a) b) c) sont vrais pour $I_\beta$ avec $\beta < \alpha$, ils le sont aussi pour $I_\alpha$. Cette fois, b) est contenu dans l'hypothèse de
+\msp{page 5}
+récurrence, il faut prouver a), i.e. que
+\[
+u_\alpha \overset{\text{déf}}{=} \varinjlim_{i<\alpha} u_i \ :\ \underbrace{X_\alpha}_{\overset{\text{déf}}{=} \varinjlim\limits_{i<\alpha} X_i} \longrightarrow \underbrace{Y_\alpha}_{\overset{\text{déf}}{=} \varinjlim\limits_{i<\alpha} Y_i}
+\]
+est dans $C$. Quant à c), il est déjà contenu dans la hypothèse de récurrence. Donc il reste finalement à prouver
+\[
+u_\alpha \ \in \ C
+\]
+quand on suppose que la proposition est prouvée pour les ordinaux $\beta < \alpha$.
+
+On va construire un troisième système ordinal sur $I_\alpha$, en introduisant pour tout $0 \leq i < \alpha$, i.e. $i \in I_\alpha$, $Z_i$ par le carré cocartésien
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}
+X_i \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha \arrow[d] \\
+Y_i \arrow[r] & Z_i\ .
+\end{tikzcd}
+\]
+
+Les flèches de transition entre les $Z_i$ sont évidentes, et on aura $\varinjlim\limits_{i} Z_i \xrightarrow{\ \sim\ } Y_\alpha$. Ainsi, $u_\alpha : X_\alpha (= Z_{-1}) \longrightarrow Y_\alpha$ est décomposé en composé transfini de morphismes
+\msp{page 6}
+\[
+Z_i \xrightarrow{v_{i+1}} Z_{i+1} \qquad (-1 \leq i < \alpha)
+\tag*{$(*)$}
+\]
+et
+\[
+\varinjlim_{i<i_0} Z_i \xrightarrow{v_{i_0}} Z_{i_0} \qquad i_0 \text{ ordinal limite } < \alpha.
+\tag*{$(**)$}
+\]
+
+(\textbf{N.B.} Le cas où $i_0$ n'est \textit{pas} ordinal limite n'est autre que $(*)$ pour $i = \beta_0 - 1$.) Tout revient à prouver que ces flèches sont dans $C$ (donc leur composé transfini aussi). % [sic] $\beta_0 - 1$ -> $i_0 - 1$, the case discussed is that of $i_0$
+
+Cas $(*)$.
+\[
+\begin{tikzcd}
+X_i \arrow[r] \arrow[d, "u_i"'] \arrow[dr, phantom, "\text{cocart.}"] & X_{i+1} \arrow[r] \arrow[d, "\beta_{i+1}"'] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha \arrow[d] \\
+Y_i \arrow[r] & \tilde{Y}_{i+1} \arrow[r] \arrow[d, "\tilde{u}_{i+1}"'] \arrow[dr, phantom, "\text{cocart.}"] & Z_i \arrow[d, "v_{i+1}"] \\
+& Y_{i+1} \arrow[r] & Z_{i+1}\ .
+\end{tikzcd}
+\tag*{\footnotemark}
+\]
+\footnotetext{Pour se donner confiance -- on pourrait traiter toute de suite le cas général.} % [sic] toute de suite -> tout de suite, French idiom
+
+Comme $\tilde{u}_{i+1} \in C$, $v_{i+1} \in C$ par cochangement de base, OK. Il faut cependant traiter à part le cas $i = 0$, i.e. la flèche $X_\alpha \longrightarrow Z_0$, qui est incluse dans
+\[
+\begin{tikzcd}
+X_0 \arrow[r] \arrow[d, "u_0"'] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha = Z_{-1} \arrow[d, "v_0"] \\
+Y_0 \arrow[r] & Z_0\ ,
+\end{tikzcd}
+\]
+où $u_0 \in C$, donc $v_0 \in C$, OK.
+
+Cas $(**)$. Si $i_0 < \alpha$ est ordinal limite, inspectons $(**)$. On a par passage à la limite
+\[
+Z'_{i_0} \overset{\text{déf}}{=} \varinjlim_{i<i_0} Z_i \ \simeq\ Y'_{i_0} \amalg_{X'_{i_0}} X_\alpha
+\]
+(cf. diagramme $(*)$ pour la définition de $X'_{i_0}$, $Y'_{i_0}$), s'insérant dans le diagramme suivant greffé sur $(*)$
+
+\end{document}

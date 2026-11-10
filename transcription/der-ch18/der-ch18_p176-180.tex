@@ -1,0 +1,227 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\card}{\operatorname{card}}
+
+\begin{document}
+
+\printedpage{174}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 451}
+Dire que c'est l'identité, est exprimé par la condition 2°) sur $(x_j,p_j)_{j\in J}$. La condition 3° est clair par construction, $p_j$ admettant une image isomorphe à $z$ par $\alpha_j$. D'autre part, on voit \texttt{[tout]} de suite que pour une flèche $\lambda : j \longrightarrow j'$ de $J$, on a commutativité dans % [sic] est clair -> est claire, agreement with "condition"
+\[
+\begin{tikzcd}
+x_j \arrow[r, "x_\lambda"] & x_{j'} \\
+x_j^\natural \arrow[u, hook] \arrow[r, "x_\lambda"] & x_{j'}^\natural \arrow[u, hook] \\
+z \arrow[u, "\wr", "\overline{\alpha_j}"'] \arrow[r, "\mathrm{id}_z", "\sim"'] & z \ , \arrow[u, "\wr", "\overline{\alpha_{j'}}"']
+\end{tikzcd}
+\]
+où $\overline{\alpha_j}$, $\overline{\alpha_{j'}}$ sont les isomorphismes définis par $\alpha_j$, $\alpha_{j'}$ respectivement. Cela prouve que $x_\lambda^\natural$ est un isomorphisme.
+
+Cela prouve que si $(x_i)_{i\in I}$ est essentiellement constant, il existe $J\longrightarrow I$ comme indiqué. L'inverse est également vrai, car on peut supposer $J = I$, puisque $(x_i)_{i\in I}$ et $(x_j)_{j\in J}$ définissent des ind-objets isomorphes. Alors le système inductif des $x_j^\natural$ a des morphismes de transition des isomorphismes, et comme $J$ est filtrante donc 1-connexe, on en déduit facilement qu'il est isomorphe
+\msp{page 452}
+à un système inductif constant, de valeur $z$. En choisissant un tel isomorphisme
+\[
+z \xrightarrow[\sim]{\overline{\alpha_i}} x_i^\natural \ ,
+\]
+on trouve $z \xrightarrow{\alpha} \underline{x}$, et le système des $p_i$ définit des
+\[
+\begin{tikzcd}
+x_i \arrow[r, "\overline{p_i}"] \arrow[rr, bend right=12, "\beta_i \overset{\text{déf}}{=} \overline{\alpha_j}^{-1}\overline{p_i}"'] & x_i^\natural \arrow[r, "\overline{\alpha_j}^{-1}"] & z \ ,
+\end{tikzcd}
+\] % [sic] \overline{\alpha_j} (index j) -> \overline{\alpha_i}, the arrow goes from x_i^\natural, cf. z -> x_i^\natural above
+et on voit facilement que l'on aura
+\[
+\beta\alpha \ = \ id_z \ , \qquad \alpha\beta \ = \ \mathrm{id}_{\underline{x}} \ ,
+\]
+
+\hfill q.e.d.
+
+\textsc{Je peux maintenant prouver} 4.15.3. C'est en effet essentiellement la conjonction des 4.15.7.5 (p. 448), et de 4.8.13, qui nous dit essentiellement que si $\mathcal{C}$ est \textit{karoubienne} (condition vérifiée si $\mathcal{C}$ est sans projecteurs), alors tout système inductif dans $\mathcal{C}$, grand devant $\pi_0$, où $\pi_0 \geqslant \card\,\text{réd}\,\mathcal{C}$, est essentiellement constant,
+
+\hfill q.e.d.
+
+\printedpage{175}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 453}
+\textbf{4.15.8.} Je veux revenir ici sur la démonstration inachevée de 4.8.13 (p. 212-216). Je reprends la démonstration où je l'avais laissée (p. 215). Il faut prouver que
+\[
+F(\xi) \ = \ \varinjlim_{i\in I} M_i
+\]
+est de cardinal $\leqslant \pi_0$. J'ai annoncé qu'on peut se ramener au cas où $M$ est un monoïde de monomorphismes, i.e. que $uv = uv' \Longrightarrow v = v'$ (pour $u,v,v' \in M$). Je vais expliciter cet argument.
+
+Pour tout $i\in I$, soit
+\[
+N_i \ = \ \left\{ u \in M \ \middle| \ \begin{array}{l}
+\text{l'ensemble } I_{i,u} \text{ des } j\in I \text{ tels}\\
+j \geqslant i,\ \alpha_{ji} = u \text{ est cofinal}\\
+\text{dans } I\text{, i.e. pour tout } j_0\in I,\\
+\text{existe } j \in I_{i,u}\text{, avec } j \geqslant j_0
+\end{array} \right\} .
+\tag*{(4.15.8.1)}
+\]
+Comme $I$, donc $i\backslash I$ est grande devant $\pi_0$, et $\card M \leqslant \pi_0$, on voit aussitôt que
+\[
+N_i \ \neq \ \emptyset \ .
+\tag*{(4.15.8.2)}
+\]
+$\Big($ Si d'autre part $i' \geqslant i$, on trouve
+\[
+N_i \ = \ N_{i'}\alpha_{i'i} \ .
+\tag*{(4.15.8.3)}
+\]
+L'inclusion $N_{i'}\alpha_{i'i} \subset N_i$ est $\pm$ tautologique, prouvons $N_i \subset N_{i'}\alpha_{i'i}$. Soit $u \in N_i$, l'ensemble $J = I_{i,u} \cap (i'\backslash I)$ des $j \geqslant i'$ tels que $\alpha_{ji} = u$ est cofinal dans $I$, donc grand devant $\pi_0$.
+\[
+\begin{tikzcd}
+i \arrow[r] \arrow[rr, bend right=12, "u = \alpha_{ji}"'] & i' \arrow[r, "\alpha_{ji'}"] & j
+\end{tikzcd}
+\]
+Donc il existe un $v \in M$ tel que l'ensemble $J'$ de $j\in J$ tels que $\alpha_{ji'} = v$
+\msp{page 454}
+soit cofinal dans $J$, donc dans $I$. Comme cet ensemble $J'$ est contenu dans $I_{i',v}$, cela implique que $I_{i',v}$ est cofinal dans $I$, i.e. $v \in N_{i'}$. On a d'autre part, pour $j \in J'$,
+\[
+\underbrace{\alpha_{ji'}}_{v}\alpha_{i'i} \ = \ \underbrace{\alpha_{ji}}_{u} \ ,
+\]
+d'où $u = v\alpha_{i'i}$ avec $v\in N_{i'}$, d'où $u \in N_i\alpha_{i'i}$, q.e.d. $\Big)$ % [sic] N_i\alpha_{i'i} -> N_{i'}\alpha_{i'i}, the inclusion to be proved is N_i \subset N_{i'}\alpha_{i'i}
+
+Pour $i \in I$, soit
+\[
+\alpha_i \ : \ \underbrace{\mathrm{Hom}(\xi, \underbrace{x_i}_{=\,\xi})}_{=\,M} \ \longrightarrow \ \underbrace{\mathrm{Hom}(\xi,F) \ = \ F(\xi)}_{\simeq\ \varinjlim\limits_{i} \mathrm{Hom}(\xi,x_i)}
+\]
+\printedpage{176}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+le morphisme canonique. On trouve ceci :
+\[
+\begin{minipage}{0.62\textwidth}
+Si $u \in N_i$, alors la relation d'équivalence $R_i$ dans $M$ définie par $\alpha_i$ ($v \overset{R_i}{\sim} v' \Longleftrightarrow \alpha_i(v) = \alpha_i(v')$) est égale à celle définie par l'application $v \longmapsto uv$ de $M$ dans $M$, i.e.
+\[
+\alpha_i(v) \ = \ \alpha_i(v') \qquad \Longleftrightarrow \qquad uv \ = \ uv' \ .
+\]
+\end{minipage}
+\tag*{(4.15.8.4)}
+\]
+
+C'est immédiate, puisque $I_{i,u}$ étant cofinal dans $I$, on a $\alpha_i(v) = \alpha_i(v')$ si et seulement si $\exists\ j \in I_{i,u}$ avec $\alpha_{ji}v = \alpha_{ji}v'$, or $\alpha_{ji} = u$. % [sic] C'est immédiate -> C'est immédiat, agreement
+
+Pour $u \in M$, notons $R_u$ la relation d'équivalence dans $M$ définie par $v \longmapsto uv$. L'ensemble des relations d'équivalence dans \texttt{[}$M$\texttt{]}
+\msp{page 455}
+obtenu ainsi est de cardinal $\leqslant \card M \leqslant \pi_0$, donc l'ensemble des relations d'équivalences $R_i$ ($i \in I$) est lui aussi de cardinal $\leqslant \pi_0$. Cela montre, $\pi_0$ étant grand devant $\pi_0$, qu'il existe une relation d'équivalence de la forme $R_u$ ($u \in M$), et un ensemble cofinal $I'$ dans $I$, tel que $\forall\ i \in I'$ on ait $R_i = R_u$. Cela montre que, quitte à remplacer $I$ par l'ensemble ordonné cofinal $I'$, qu'on peut supposer que l'on a
+\[
+R_i \ = \ R_u \qquad \forall\, i \in I \ .
+\tag*{(4.15.8.5)}
+\]
+Soit alors
+\[
+E \ = \ M/R_u \ = \ M/R_i \qquad (\forall\ i \in I) \ ,
+\]
+on voit donc que les $\alpha_{ji} \in M$ (pour $i \leqslant j$) sont tels que l'application
+\[
+\tau_{\alpha_{ji}} \ : \ v \ \longmapsto \ \alpha_{ji}v \ : \ M \ \longrightarrow \ M
+\]
+est compatible avec la relation d'équivalence $R_u$, donc passe au quotient en une application
+\[
+\overline{\alpha_{ji}} \ : \ E \ \longmapsto \ E \ ,
+\]
+laquelle est d'ailleurs \textit{injective.}
+
+Soit $M'$ le sous-monoïde de $M$ formé des $u \in M$ qui ont la propriété de stabilité précédente, ainsi que la propriété d'injectivité qu'on vient de dire, et $\overline{M'}$ le monoïde image de $M'$ dans le monoïde
+\[
+\mathrm{Mon}(E) \ \subset \ \mathrm{End}_{\mathrm{Ens}}(E)
+\]
+\msp{page 456}
+des applications injectives de $E$ dans lui-même. On voit donc que le système inductif donné, défini par les $\alpha_{ji}$, prend ses valeurs dans le sous-monoïde $M'$ de $M$ (i.e. de la sous-catégorie correspondante de la catégorie $B_M$), et que la limite inductive $F(\xi)$ qui nous intéresse (pour prouver $\card F(\xi) \leqslant \pi_0$) est isomorphe à la limite inductive du système inductif d'un système d'ensembles tous égaux à $E$, les morphismes de transition étant les $\overline{\alpha_{ji}} \in \overline{M'} \subset \mathrm{Mon}(E)$. De plus, on aura $\card \overline{M'} \leqslant \card M \leqslant \pi_0$. Le résultat $\card F(\xi) \leqslant \pi_0$ voulu résultera alors du
+
+\textbf{Lemme-clef 4.15.8.1.} \textit{Soit $M$ un monoïde de monomorphismes (i.e. tel que $uv = uv'$ $\Longrightarrow v = v'$, pour $u,v,v' \in M$), et soit $(\alpha_{ji})_{i\leqslant j}$ un système inductif dans $B_M$, indexé par un ensemble ordonné $I$ grand devant $\pi_0$, où $\pi_0$ est un cardinal}
+\printedpage{177}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 457}
+\textit{infini tel que} $\card M \leqslant \pi_0$. \textit{Alors il existe un $i_0 \in I$ tel que pour tout $i \geqslant i_0$, $\alpha_{i_0,i}$ soit un isomorphisme.}
+
+Si on applique ce lemme au cas de $\overline{M'}$ et du $\overline{\alpha_{ji}}$, on trouve donc qu'il existe un $i_0 \in I$ tel que les $\overline{\alpha_{ji_0}}$ soient des isomorphismes. Cela implique que $F(\xi) \simeq \varinjlim\limits_{i} \underbrace{E_i}_{E}$ est isomorphe à $E_{i_0}$, donc est de cardinal égal à $\card E_{i_0} = \card E \leqslant \pi_0$, ce qui achèvera la démonstration.
+
+D'ailleurs, l'énoncé 4.8.13 implique 4.15.8.1, car dans le système inductif des $(M_i = M, \alpha_{ji})$, de $\varinjlim$ égale à $F(\xi)$, s'il n'existait \textit{pas} de $i_0$ comme stipulé dans 4.15.8.1, alors on en conclurait aisément que l'on aurait $\card F(\xi) > \pi_0$, contrairement à 4.8.13. Nous allons dégager ceci dans un lemme :
+
+\msp{page 458}
+\textbf{Lemme 4.15.8.2.} \textit{Soit $(E_i)_{i\in I}$ un système inductif d'ensembles, indexé par un ensemble ordonné $I$ grand devant $\pi_0$. On suppose qu'il existe $i_0 \in I$ tel que}
+\begin{enumerate}[nosep]
+\item[\textit{a)}] \textit{$i \geqslant i_0$ implique} $\card E_i = \pi_0$, \textit{et}
+\item[\textit{b)}] \textit{$j \geqslant i \geqslant i_0$ implique que $u_{ji} : E_i \longrightarrow E_j$ est un monomorphisme. Supposons de plus}
+\item[\textit{c)}] \textit{$\forall\ i \geqslant i_0$ $\exists\ j > i$ tel que $u_{ji}$ ne soit} pas \textit{un isomorphisme (i.e. ne soit pas surjectif). Soit $E_\infty = \varinjlim\limits_{i\in I} E_i$. Alors} $\card E_\infty > \pi_0$.
+\end{enumerate}
+Ce lemme implique donc l'\textit{équivalence} de 4.8.13 et du “lemme-clef” 4.15.8.1. Pour prouver 4.15.8.2, nous allons prouver quelque chose d'un peu plus précis :
+
+\textbf{Corollaire 4.15.8.3.} \textit{Sous les conditions de 4.15.8.2, soit $\alpha_0$ le premier ordinal tel que} $\card \alpha_0 > \pi_0$, \textit{et soit $I_{\alpha_0}$ l'ensemble des ordinaux $\beta < \alpha$ (ensemble ordonné qui est grand devant $\pi_0$). Il existe alors une application strictement croissante}
+\[
+I_{\alpha_0} \ \longrightarrow \ I \ , \qquad \alpha \ \longmapsto \ i_\alpha \ , \qquad \textit{appliquant } 0 \textit{ dans } i_0 \ ,
+\]
+\msp{page 459}
+\textit{tel que pour tout $\alpha \in I_{\alpha_0}$, on ait}
+\[
+\underbrace{u_{i_{\alpha+1},i_\alpha}}_{\substack{\textit{c'est un } \text{monomorphisme,}\\ \textit{d'après b, vu que } i_{\alpha+1} > i_\alpha \geqslant i_0}} \qquad\qquad \text{\textit{n'est pas un isomorphisme} (\footnotemark[187]).}
+\]
+\footnotetext[187]{\textit{mieux} : $\forall\ \alpha \in I_{\alpha_0}$ $\varinjlim\limits_{\beta\in I_\alpha} E_{i_\beta} \longrightarrow E_{i_\alpha}$ n'est pas surjectif.}
+\textit{On a alors}
+\[
+E'_\infty \ \overset{\text{déf}}{=} \ \underbrace{\varinjlim_{\alpha\in I_{\alpha_0}} E_{i_\alpha}}_{} \ \hookrightarrow \ \varinjlim_{i\in I} E_i \ \overset{\text{déf}}{=} E_\infty
+\]
+\textit{et}
+\[
+\card E'_\alpha \ \geqslant \ \underbrace{\card I_{\alpha_0}}_{=\ \textit{successeur de } \pi_0} \ > \ \pi_0 \ ,
+\] % [sic] E'_\alpha -> E'_\infty, the following line has \card E'_\infty
+\textit{d'où} $\card E_\infty \geqslant \card E'_\infty > \pi_0$.
+
+\textsc{Démonstration}. La construction des $i_\alpha$ par récurrence transfinie est immédiate, en utilisant c) et le fait que $I$ est grande devant $\pi_0$, et que pour tout $\alpha \in I_{\alpha_0}$, l'ensemble $I_\alpha$
+\printedpage{178}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+des $\beta < \alpha$ est de cardinal $\leqslant \pi_0$. Le fait que $E'_\infty \longrightarrow E_\infty$ soit injectif résulte de b). Le fait que
+\[
+\card E'_\infty \ \geqslant \ \card I_{\alpha_0}
+\]
+résulte du fait que $E'_\infty$ est réunion croissante de sous-ensembles identifiés à $E_{i_\alpha}$, et pour tout
+\msp{page 460}
+$\alpha$ on peut trouver un
+\[
+\xi_\alpha \ \in \ E_{i_\alpha}\backslash \bigcup_{\beta<\alpha} E_{i_\beta} \ .
+\]
+L'application
+\[
+\begin{aligned}
+\alpha \ &\longmapsto \ \xi_\alpha\\
+I_{\alpha_0} \ &\longrightarrow \ E'_\infty
+\end{aligned}
+\]
+est injective, donc $\card E'_\infty \geqslant \card I_{\alpha_0}$.
+
+% vertical bar printed in the left margin beside the whole of Corollaire 4.15.8.4
+\textbf{Corollaire 4.15.8.4.} \textit{Pour un $M$ et un $\pi_0$ donnés, pour que le lemme-clef 4.15.8.1 soit valable, il faut et il suffit qu'il le soit dans le cas où $I = I_{\alpha_0}$, $\alpha_0$ étant le premier ordinal tel que} $\card \alpha_0 > \alpha_0$. \textit{Il revient au même qu'on ne puisse trouver de système inductif $(\alpha_{ji})_{j\geqslant i}$ indexé par $I_{\alpha_0}$, à valeurs dans $M$, tel que pour $i < j$, on ait $\alpha_{ji}$ non inversible dans $M$.} % [sic] \card \alpha_0 > \alpha_0 -> \card \alpha_0 > \pi_0, cf. Corollaire 4.15.8.3
+
+\msp{page 461}
+Je vais résumer ce qui a été obtenu dans un énoncé récapitulatif :
+
+\textbf{Théorème 4.15.9.} \textit{Soient $\mathcal{C}$ une petite catégorie, $\pi$ un cardinal tel que $\pi \geqslant$} $\card\mathcal{C}$. \textit{Les conditions suivantes sont équivalentes (et je conjecture qu'elles sont toujours satisfaites) :}
+\begin{enumerate}[nosep]
+\item[\textit{a)}] \textit{$\mathcal{M} \overset{\text{déf}}{=} \mathrm{Ind}_\pi\mathcal{C}$ est réduit à $\mathcal{M}_\pi$.}
+\item[\textit{a$'$)}] \textit{(Si $\mathcal{C}$ est karoubienne.) Tout système inductif $\underline{x} = (x_i)_{i\in I}$ dans $\mathcal{C}$, grand devant $\pi$, est essentiellement constant.}
+\item[\textit{a$''$)}] \textit{Pour tout système inductif $(x_i)_{i\in I}$ dans $\mathcal{C}$, grand devant $\pi$, il existe un foncteur cofinal $J \longrightarrow I$, avec $J$ ensemble ordonné grand devant $\pi$, et tel que le système réindexé $(x_j)_{j\in J}$ satisfasse les conditions suivantes :}
+\begin{enumerate}[nosep]
+\item[\textit{1)}] \textit{Tous les $x_j$ sont égaux à un même élément $x$ de $\mathcal{C}$.}
+\item[\textit{2)}] \textit{Il existe un projecteur $p$ dans $x$, tel que l'on ait $\alpha_{j'j} = p$ pour $j < j'$ ($j,j' \in J$), où $\alpha_{j'j} : x_j \longrightarrow x_{j'}$ est la flèche de transition.}
+\end{enumerate}
+\item[\textit{b)}] \textit{Pour tout $x \in \mathrm{Ob}\,\mathcal{C}$, et pour tout monoïde quotient $M'$ de $M = \mathrm{End}_{\mathcal{C}}(x)$, tel que $M'$ soit un monoïde de monomorphismes (i.e. $uv = uv' \Longrightarrow v = v'$ si $u,v,v' \in M'$), et pour tout système inductif grand devant $\pi$ à valeurs dans $B_{M'}$ (définie par un système d'éléments $(\alpha_{ji})_{i\leqslant j,\ i,j\in I}$ d'un ensemble ordonné $I$ grand devant $\pi$, avec $\alpha_{kj}\alpha_{ji} = \alpha_{ki}$ pour $i \leqslant j \leqslant k$), il existe $i_0 \in I$ tel}
+\msp{page 462}
+\textit{que $\alpha_{ii_0} = 1$ pour $i \geqslant i_0$, i.e. $\alpha_{ji} = 1$ pour $j \geqslant i \geqslant i_0$.}
+\item[\textit{b$'$)}] \textit{$M'$ étant un monoïde de monomorphismes comme dans b) (donc} $\card M' \leqslant \card\mathcal{C} \leqslant$ \textit{$\pi$), soit de plus $\alpha_0$ le plus petit ordinal tel que} $\card\alpha_0 > \pi$, \textit{et soit $I = I_{\alpha_0}$ l'ensemble ordonné des ordinaux $\alpha < \alpha_0$ (lequel ensemble est grand devant $\pi$). Il n'existe} pas \textit{de système inductif dans $B_{M'}$, tel que pour $i < j$ dans $I$, $\alpha_{ji}$ soit un élément non inversible dans $M'$ (donc $u \longmapsto \alpha_{ji}u : M' \longrightarrow M'$ est injectif mais non surjectif).}
+\end{enumerate}
+
+\end{document}

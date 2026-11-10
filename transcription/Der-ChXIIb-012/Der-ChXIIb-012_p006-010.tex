@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+
+\begin{document}
+
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\[
+\left\{
+\begin{aligned}
+&\left.\begin{aligned} f_U &: U \longrightarrow X' \\ f_T &: T \longrightarrow X' \end{aligned}\right\}\text{flèches dans Cat}\\
+&u : H \longrightarrow H_{X'}(f_U^{\circ}\times f_T),\ \text{flèche dans } \uHom(U^{\circ}\times T,\Ens),
+\end{aligned}
+\right.
+\tag*{\texttt{[}$(*)$\texttt{]}}
+\]
+\textit{où pour tout $X'$ dans} Cat\textit{, on a posé}
+\[
+H_{X'} = ((x,y)\longmapsto \Hom_{X'}(x,y)) : X'^{\circ}\times X' \longrightarrow \Ens.
+\]
+
+Sûrement on aura même un isomorphisme de catégories
+\[
+\uHom(X,X') \simeq \text{catégorie des triples } (f_U,f_T,u) \text{ comme dans } (*).
+\]
+
+\subsection*{1.4\quad Construction de sommes amalgamées à partir d'une immersion ouverte où fermée.} % [sic] où fermée -> ou fermée, conjonction « ou » et non adverbe « où »
+
+Pour une construction d'une sorte de somme amalgamée, en termes d'un triple $(X,U,T)$ $+\ \ldots$, \msp{page 67} qui soit symétrique en $U$, $T$, j'ai envie de regarder d'abord la situation ‘mixte’, d'un diagramme en traits pleins
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[d, dotted, "f"] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[r, hook, dotted, "i'"] & X' & T', \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+qu'on aimerait compléter ‘canoniquement’, si faire se peut, en un morphisme de triples (i.e. en une flèche dans $\mathcal{T}$). L'idée naturelle, c'est que le $X'$ qui s'y insère serait la limite inductive, dans Cat, du diagramme initial. Si $T'=T$, $f_T=\id_T$, cela signifie donc que $X'$ s'identifie à la somme amalgamée $X\amalg_U U'$, et inversement si $U'=U$, $f_U=\id_U$.
+
+Désignons par $X'$ la somme amalgamée \texttt{[plutôt la limite inductive]}, et explicitons, pour $X''$ quelconque dans Cat, l'ensemble des flèches $g$ de $X'$ dans $X''$, comme foncteur en $X''$. C'est l'ensemble des triples
+\[
+(g_X, g_{U'}, g_{T'}) \qquad
+\left\{\begin{aligned} g_X &: X \longrightarrow X'' \\ g_{U'} &: U' \longrightarrow X'' \\ g_{T'} &: T' \longrightarrow X''\end{aligned}\right.
+\qquad \text{avec} \quad
+\begin{aligned} g_X\circ i &= g_{U'} f_U \\ g_X \circ j &= g_{T'} f_T. \end{aligned}
+\tag*{$(*)$}
+\]
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[dd, "g_X"'] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[dr, "g_{U'}"'] & & T' \arrow[dl, "g_{T'}"] \\
+& X'' &
+\end{tikzcd}
+\]
+
+Notons que pour un tel triple, $g_X$ est partiellement connu déjà en termes de $g_{U'}$, $g_{T'}$, par ses restrictions $g_X\circ i$ et $g_X\circ j$ à $U$ et $T$ respectivement, par les formules
+\[
+g_U = g_{U'}f_U, \qquad g_T = g_{T'}f_T.
+\]
+
+\msp{page 68} Donc la donnée d'un triple $(*)$ équivaut à celle d'un triple
+\[
+(g_{U'}, g_{T'}, g_X) \qquad
+\left\{\begin{aligned}
+&g_X \text{ une flèche } X\longrightarrow X'' \text{ correspondant à}\\
+&g_U = g_{U'}\circ f_U \text{ et } g_T = g_{T'}\circ f_T \text{ déjà donnés (via } g_{U'}\text{, } g_{T'}\text{),}
+\end{aligned}\right.
+\]
+donc en vertu de 1.3. cela correspond à
+\[
+(g_{U'}, g_{T'}, u) \qquad
+\left\{\begin{aligned}
+g_{U'} &: U' \longrightarrow X''\\
+g_{T'} &: T' \longrightarrow X''\\
+u &: H \longrightarrow \underbrace{H_{X''}\left((g_{U'}\circ f_U)^{\circ}\times(g_{T'}\circ f_T)\right)}_{(u,t)\longmapsto \Hom_{X''}(g_{U'}f_U(u),g_{T'}f_T(t))}.
+\end{aligned}\right.
+\tag*{$(*)$}
+\]
+On va interpréter la donnée de $u$, en termes d'un foncteur
+\[
+F^{*} = (H'\longmapsto H'\circ F) : \uHom(U'^{\circ}\times T',\Ens) \longrightarrow \uHom(U^{\circ}\times T,\Ens)
+\tag*{$(**)$}
+\]
+où
+\[
+F : U^{\circ}\times T \longrightarrow U'^{\circ}\times T' \qquad \text{est donné par } F = f_U^{\circ}\times f_T.
+\]
+On a un objet $H''=H''_{g_{U'},g_{T'}}$ de la catégorie source de $(**)$ déterminé en termes du couple $(g_{U'},g_{T'})$, par
+\[
+H''(u',t') = \Hom_{X''}(g_{U'}(u'),g_{T'}(t')),
+\]
+et le bifoncteur but de la flèche $u$ dans $(*)$ s'interprète comme
+\[
+F^{*}(H'') = H''\circ F : (u,t)\longmapsto \underbrace{H''(f_U(u),f_T(t))}_{=\Hom(g_{U'}f_U(u),g_{T'}f_T(t))} \quad .
+\]
+Ainsi, $u$ s'interprète comme une flèche
+\[
+u : H \longrightarrow F^{*}(H'').
+\]
+Or le foncteur $F^{*}$ a un adjoint à gauche $F_{!}$, i.e. on a
+\[
+\Hom(H,F^{*}(H'')) \simeq \Hom(F_{!}(H),H'').
+\tag*{$(*{*}*)$}
+\]
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\msp{page 69} avec
+\[
+F_{!} : \uHom(U^{\circ}\times T,\Ens) \longrightarrow \uHom(U'^{\circ}\times T',\Ens).
+\]
+Posons
+\[
+H' = F_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+c'est un bifoncteur bien déterminée par la seule donnée du diagramme initial $(*)$ p. 67, ou ce qui revient au même, en termes de % [sic] déterminée -> déterminé, accord avec « bifoncteur » (masculin)
+\[
+(U,T,H,f_U : U\longrightarrow U', f_T : T\longrightarrow T').
+\]
+
+Et on voit que la donnée d'une flèche $X'\longrightarrow X''$, $X''$ objet variable de Cat, équivaut à celle de
+\[
+g_{U'} : U'\longrightarrow X'',\ g_{T'} : T'\longrightarrow X'',\ u : H'\longrightarrow H'' = H_{X''}(g_{U'}^{\circ}\times g_{T'}),
+\]
+c'est à dire, en vertu de 1.3., à celle d'une flèche
+\[
+X'_0 \longrightarrow X'',
+\]
+où $X'_0$ désigne l'objet de Cat déduit de $U'$, $T'$ par recollement au moyen de $H'$. Cela montre donc que la limite inductive cherchée n'est autre que $X'_0$. On a ainsi trouvé le
+
+\textbf{Théorème 1.} \textit{La limite inductive $X'$ dans} Cat \textit{du diagramme} $(*)$ \textit{page 67, défini en termes d'un triple $(X,U,T)$ dans $\mathcal{T}$ et de flèches $f_U : U\longrightarrow U'$, $f_T : T\longrightarrow T'$ dans} Cat\textit{, existe (sans mérite)} \msp{page 70} \textit{et les flèches canoniques}
+\[
+U' \overset{i'}{\hookrightarrow} X' \overset{j'}{\hookleftarrow} T'
+\]
+\textit{sont des immersions ouvertes et fermées complémentaires l'une de l'autre. La donnée de recollement qui définit $X'$ via $U'$, $T'$ est donnée par}
+\[
+H' = (\underbrace{f_U^{\circ}\times f_T}_{F})_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+\textit{où $H$ est la donnée de recollement qui définit $X$, i.e. $H : U^{\circ}\times T\longrightarrow$} Ens \textit{est le bifoncteur $(u,t)\longmapsto \Hom_X(u,t)$.}
+
+Ainsi on a, pour $u'$ dans $U'$ et $t'$ dans $T'$
+\[
+\Hom_{X'}(u',t') = F_{!}(H)(u',t'),
+\]
+et il reste à expliciter $F_{!}(H)$. Ici $F=f_U^{\circ}\times f_T$ est un foncteur covariant sur $U^{\circ}\times T$, on peut l'interpréter comme un préfaisceau sur $U\times T^{\circ}$, et écrire dès lors
+\[
+\underbrace{F_{!}(H)(u',t')}_{\Hom_{X'}(u',t')} = \varinjlim_{(u',t')\backslash U\times T^{\circ}} \underbrace{\Hom_X(u,t)}_{H(u,t)} \ .
+\tag*{$(*)$}
+\]
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+La catégorie $(u',t')\backslash U\times T^{\circ}$ sur laquelle on prend la $\varinjlim$ s'explicite comme un produit
+\[
+(u',t')\backslash U\times T^{\circ} \simeq (u'\backslash U)\times(T/t')^{\circ}.
+\]
+Les applications
+\[
+\Hom_X(u,t)\longrightarrow \Hom_{X'}(u',t') \qquad (=F_{!}(H)(u',t'))
+\]
+\msp{page 71} déduites de cette formule ne sont autres que les suivantes : $u$, $t$ sont données comme objets de $u'\backslash U$, $T/t'$, i.e. avec des flèches
+\[
+u'\xrightarrow{\alpha} f_U(u), \qquad f_T(t)\xrightarrow{\beta} t',
+\]
+d'où
+\[
+\Hom_X(u,t) \xrightarrow{\text{via } f=f_X:X\to X'} \Hom_{X'}(\underbrace{f(u)}_{f_U(u)},\underbrace{f(t)}_{f_T(t)}) \xrightarrow{\text{via } \alpha,\ \beta} \Hom_{X'}(u',t').
+\]
+
+Notons pour mémoire que pour tout objet $Z$ de Cat, et tout préfaisceau $G$ sur $Z$, on a la formule
+\[
+\varinjlim_{Z} G \simeq \pi_0(Z/G),
+\]
+où $Z/G$ s'interprète en termes de l'immersion canonique $Z\longrightarrow Z^{\wedge}$ $(G\in \Ob Z^{\wedge})$. C'est donc une catégorie fibrée sur $Z$ à fibres discrètes, et on a en fait un isomorphisme entre la sous-catégorie pleine de $\Cat/Z$ formée de telles catégories fibrées à fibres discrètes, avec $Z^{\wedge}$. Dans ce dictionnaire parfait entre préfaisceaux d'ensembles et catégories fibrées à fibres discrètes, le foncteur $\varinjlim$ sur $Z^{\wedge}$ correspond simplement au foncteur $\pi_0$ sur la catégorie des objets au dessus de $Z$ dans Cat, lui-même induit par le foncteur (indépendant de $Z$)
+\[
+\Cat \xrightarrow{\pi_0} \Ens.
+\]
+
+\msp{page 72} On peut donc réécrire la formule fondamentale $(*)$ p. 70, en termes du foncteur $H$ définissant le recollement $X$ de $U$ et de $T$, par
+\[
+\boxed{\underbrace{\Hom_{X'}(u',t')}_{H'(u',t')} \simeq \pi_0(\underbrace{(u',t')\backslash U\times T^{\circ}/H}_{((u'\backslash U)\times(T/t')^{\circ})/H}).}
+\tag*{$(*)$}
+\]
+
+Par la suite, nous n'aurons sans doute qu'à utiliser le cas où on a soit $T'=T$, $f_T=\id_T$, soit l'inverse. Nous travaillerons surtout dans le premier cas, en déduisant ce dont nous aurons besoin pour le cas dual, par principe de dualité (automorphisme $X\longmapsto X^{\circ}$ de la
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+catégorie Cat). Dans ce cas, dans la formule fondamentale $(*)$ l'élément $t'$ de $T'$ s'écrit comme un élément $t$ de $T$, et la formule se retranscrit comme
+\[
+\boxed{\Hom_{X'}(u',t) \simeq \pi_0(\underbrace{u'\backslash U/t}_{\text{catégorie des triples } (u,\alpha,\beta'),\ \left\{\begin{aligned} &u\in \Ob U\\ &\alpha : u\longrightarrow t\\ &\beta' : u'\longrightarrow f_U(u)\end{aligned}\right.}).}
+\tag*{$(**)$}
+\]
+
+C'est la formule que j'avais trouvée directement dans ce cas, sans me soucier encore de faire varier $T$ en même temps que $U$. Je voudrais faire le lien entre les deux formules $(*)$ et $(**)$, par voie topologique, donc établir une bijection canonique, fonctorielle etc.
+\[
+\pi_0(u'\backslash U/t) \xrightarrow{\sim} \pi_0(((u'\backslash U)\times(T/t)^{\circ})/H).
+\]
+
+\msp{page 73} On a sûrement un foncteur
+\[
+u'\backslash U/t \longrightarrow ((u'\backslash U)\times(T/t)^{\circ})/H
+\]
+qui associe à un triple
+\[
+(u,\alpha,\beta') : u\in \Ob U,\ \alpha : u\longrightarrow t,\ \beta' : u'\longrightarrow f_U(u)
+\]
+le triple $(\bar u,\bar t,\xi)$ $(\xi\in H(\bar u,\bar t))$ dans le second membre, avec $\bar u$ dans $u'\backslash U$, $\bar t$ dans $T/t$, défini ainsi :
+\[
+\bar u = (u,\beta'),\ \bar t = (t,\id_t), \underbrace{\xi}_{=\alpha} \in H(\bar u,\bar t) = \Hom(u,t).
+\]
+En somme
+\[
+u'\backslash U/t = \text{fibre de } ((u'\backslash U)\times(T/t)^{\circ})/H \text{ en l'objet initial } \bar t \text{ de } (T/t)^{\circ}
+\]
+par la projection naturelle, flèche composée
+\[
+\begin{tikzcd}
+((u'\backslash U)\times(T/t)^{\circ})/H \arrow[d] \\
+(u'\backslash U)\times(T/t)^{\circ} \arrow[d, "\pi"] \\
+(T/t)^{\circ}.
+\end{tikzcd}
+\]
+
+Il faut voir que l'inclusion de la fibre donne une bijection sur les $\pi_0$, ou ce qui revient au même, que l'inclusion de la fibre $u'\backslash U$ \textit{de} $\pi$ en l'objet initial $(t,\id_t)$ de $(T/t)^{\circ}$ donne une bijection sur les $\varinjlim$ du foncteur $H$. Donc l'inclusion a intérêt à être asphérique, ou du moins co-cofinalle. % [sic] co-cofinalle -> co-cofinale, orthographe
+
+\end{document}

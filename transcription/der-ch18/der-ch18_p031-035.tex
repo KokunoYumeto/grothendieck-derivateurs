@@ -1,0 +1,251 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Filt}{\operatorname{Filt}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\uFilt}{\underline{\mathrm{Filt}}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+\setcounter{footnote}{29}
+
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\section*{4.5\quad Filtration cardinale canonique d'une catégorie $\mathfrak{U}$-paratopos}
+
+\textbf{Définition 4.5.1.} On appelle \textit{catégorie $\mathfrak{U}$-paratopos} une catégorie $\mathcal{M}$ $\mathfrak{U}$-pseudo-topos et accessible, i.e. qui satisfait aux conditions équivalentes du théorème 4.3.6 (p. 70). On dit que c'est une \textit{catégorie $\pi$-$\mathfrak{U}$-paratopos}, si elle est $\pi$-accessible, i.e. si elle admet une petite sous-catégorie génératrice dont les objets soient $\pi$-accessible, ou ce qui revient au même, si % [sic] soient π-accessible -> soient π-accessibles, accord du pluriel
+$\mathcal{M}$ est équivalente à une catégorie de la forme $\Ind'_{\pi}(\mathcal{M}_{\pi})$, où $\mathcal{M}_{\pi}$ est une petite catégorie (ou : une catégorie équivalente à une petite catégorie), et stable par $\varinjlim$ de cardinal $\leqslant \pi$. (Et on peut prendre pour $\mathcal{M}_{\pi}$ la sous-catégorie pleine de $\mathcal{M}$ formée des objets
+\msp{page 107}
+$\pi$-accessibles).
+
+Dans la suite, nous allons, plus généralement, considérer une catégorie $C$ équivalente à une petite catégorie, stable par $\varinjlim$ de cardinal $\leqslant \pi_0$ (\footnote{Il n'y a pas lieu de le supposer tout de suite.}), et la catégorie
+\[
+\mathcal{M} \ \overset{\text{déf}}{=}\ \Ind'_{\pi_0}C \ \subset\ C^{\wedge}\ ,
+\tag*{(4.5.1)}
+\]
+où $\pi_0$ est un cardinal infini donné. Je me propose d'introduire sur $\mathcal{M}$ une filtration cardinale canonique :
+
+\textbf{Proposition 4.5.2} (\footnote{N'est prouvé (et n'est vrai) que si $\pi^{\pi_0} = \pi$, voir rectification 4.5.6, page 116.}). \textit{Soit $F \in \Ob\mathcal{M} \subset \Ob C^{\wedge}$, et soit $\pi$ un cardinal $\geqslant \pi_1 =$} $\sup(\pi_0, \card\Fl C_0)$\textit{, où $C_0$ est une petite sous-catégorie pleine de $C$ telle que $C_0 \overset{\sim}{\hookrightarrow} C$. Les conditions suivantes sont équivalentes :}
+\begin{enumerate}[leftmargin=3em]
+\item[\textit{a)}] $\card\Fl(C_0/F) \leqslant \pi$.
+\item[\textit{a$'$)}] $\card\Ob\,(C_0/F) \leqslant \pi$.
+\item[\textit{a$''$)}] \textit{Pour tout $x$ dans $C_0$,} $\card F(x) \leqslant \pi$.
+\item[\textit{b)}] \textit{Il existe une petite catégorie filtrante $I$ (pas nécessairement ordonnée),} grande devant $\pi_0$\textit{, avec} $\card I \leqslant \pi$\textit{, et un système inductif $(x_i)_{i\in I}$ dans $C$, tel que l'on ait}
+\[
+F \ \simeq\ \varinjlim_{i\in I} x_i\ ,
+\tag*{(4.5.2.1)}
+\]
+\textit{où la $\varinjlim$ est prise dans $\mathcal{M}$, ou ce qui revient au même (en vertu de 4.4.15, $I$ étant grande devant $\pi_0$) dans $C^{\wedge}$, i.e. $F$ est isomorphe au foncteur ind-représentable défini par l'ind-objet $\underline{x} = (x_i)_{i\in I}$ de $C$.}
+\item[\textit{c)}] \textit{$F$ est $\pi$-accessible dans $\mathcal{M}$.}
+\item[\textit{c$'$)}] \textit{$F$ est $\pi$-accessible dans $C^{\wedge}$.}
+\end{enumerate}
+\msp{page 108}
+
+\textsc{Démonstration}. On a les implications $\pm$ tautologiques
+\[
+\begin{tikzcd}[row sep=small]
+ & \mathrm{a}' \arrow[r, Rightarrow] & \mathrm{a}'' & \\
+\mathrm{a} \arrow[ur, Rightarrow] \arrow[dr, Rightarrow] & & & \\
+ & \mathrm{b} \arrow[r, Rightarrow] & \mathrm{c}' \arrow[r, Rightarrow] & \mathrm{c}\ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+où a$'$ $\Longrightarrow$ a$''$ provient de l'inclusion canonique $F(x) = \Hom_{\mathcal{M}}(x,F) \hookrightarrow \Ob C/F$, a $\Longrightarrow$ b s'obtient en prenant $I = C_0/F$ et notant que $I$ est stable par limites inductives de cardinal $\leqslant \pi_0$ ($C$ l'étant), donc est grande devant $\pi_0$ (\footnote{On n'a pas besoin de cette stabilité, de toutes façons $C_0/F$ est grande devant $\pi_0$, en vertu de 4.4.3, p. 80.}). On a b $\Longrightarrow$ c$'$ en vertu du fait que la sous-catégorie strictement pleine $C^{\wedge}_{\pi}$ de $C^{\wedge}$ définie par
+\[
+\left\{
+\begin{array}{lcl}
+C^{\wedge}_{\pi} & = & \text{sous-catégorie strictement pleine de } C^{\wedge} \text{ formée des}\\
+ & & F \in \mathcal{M} \text{ qui sont } \pi\text{-accessibles.}
+\end{array}
+\right.
+\tag*{(4.5.2.2)}
+\]
+est stable par $\varinjlim$ de cardinal $\leqslant \pi$ (SGA 4 I 9.9). Enfin c$'$ $\Longrightarrow$ c provient du fait que le foncteur d'inclusion $\mathcal{M} \hookrightarrow C^{\wedge}$ est pleinement fidèle et $\pi_0$-accessible, i.e. commute aux limites inductives grandes devant $\pi_0$, et a fortiori à celles grandes devant $\pi$. Par les implications du diagramme ci-dessus, il suffit donc de prouver qu'on a
+% marginal mark (handwritten squiggle) in the left margin of the edition beside the following display
+\[
+\mathrm{c} \overset{(\mbox{\footnotemark[33]})}{\Longrightarrow} a \qquad\quad \text{et} \qquad\quad \mathrm{a}'' \ \Longrightarrow\ \mathrm{a}\ .
+\]
+\footnotetext[33]{n'est prouvé (et n'est vrai) que si $\pi^{\pi_0} = \pi$.}
+\setcounter{footnote}{33}
+
+\msp{page 109}
+
+\textit{Prouvons} a$''$ $\Longrightarrow$ a. Considérons l'application
+\[
+\Fl C/F \ \longrightarrow\ \Fl C
+\tag*{$(*)$}
+\]
+induit par le foncteur étale $C' = C/F \longrightarrow C$, alors l'ensemble des flèches au-dessus d'une % [sic] induit -> induite, accord avec « l'application »
+flèche $\alpha : x \longrightarrow y$ de $C$ est en correspondance biunivoque avec $\Ob C'_y = F(y)$, puisqu'une telle flèche $\alpha'$ est connue quand on connaît son but, qui est un objet quelconque de $F(y)$ ($C' \longrightarrow C$ étant étale, i.e. fibrant à fibres discrètes). Donc le fibre de $(*)$ en $\alpha$ est de % [sic] le fibre -> la fibre, genre
+cardinal $= \card F(y) \leqslant \pi$, donc on a
+\[
+\card\Fl C/F \ \leqslant\ \pi \underbrace{\card\Fl C}_{\leqslant \pi_1} \ \leqslant\ \pi \underbrace{\ \pi_1\ }_{\leqslant \pi} \ \leqslant\ \pi^2 = \pi\ ,
+\]
+ce qui prouve a.
+
+Prouvons enfin c $\Longrightarrow$ a. Pour ceci, nous allons utiliser la première inclusion $\mathcal{M}_{\pi} \subset \Filt^{\pi}\mathcal{M}$ de SGA 4 I 9.16, qui s'applique dès lors que nous prouvons le
+
+% marginal mark (handwritten squiggle) in the left margin of the edition beside Corollaire 4.5.3
+\textbf{Corollaire 4.5.3} (\footnote{Pas prouvé, la condition c) des filtrations cardinales peut-être pas satisfaite. Sans doute \textit{faux} en général.}). \textit{Sous les conditions de 4.5.2, soit, pour tout cardinal $\pi \geqslant \pi_1$,} $\Filt^{\pi}(\mathcal{M})$ \textit{la sous-catégorie strictement pleine de $\mathcal{M}$ formée des $F \in \Ob\mathcal{M}$ qui satisfont la condition a) de 4.5.2. Alors la famille des} $(\Filt^{\pi})_{\pi\geqslant\pi_1}$ \textit{est une}
+\msp{page 110}
+\textit{filtration cardinale de $\mathcal{M}$.}
+
+La condition a) de loc. cit. 9.12 (les $\uFilt^{\pi}$ sont équivalentes à des petites catégories) est évidente. Prouvons b), i.e. la stabilité de $\uFilt^{\pi}$ par $\varinjlim$ filtrantes $F = \varinjlim F_i$ \textit{grandes devant} $\pi_0$, de cardinal $\leqslant \pi$. Comme $\mathcal{M} \hookrightarrow C^{\wedge}$ commute à ces limites, pour $x$ dans $C$
+\[
+F(x) \ =\ \varinjlim_{i} F_i(x)\ ,
+\]
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+d'où $\card F(x) \leqslant \card\Ob I \cdot \pi \leqslant \pi \cdot \pi = \pi$, ce qui (par l'équivalence a $\Longleftrightarrow$ a$''$) implique $F \in \Ob\Filt^{\pi}$. Prouvons la condition c) de loc. cit. Pour ceci, nous aurons besoin du fait, plus précis que le b), qu'on vient d'établir :
+
+\textbf{Corollaire 4.5.4} (\footnote{Prouvé seulement si $\pi^{\pi_0} = \pi$\,! Sans doute \textit{faux} en général.}). \textit{Pour tout $\pi \geqslant \pi_1$,} $\Filt^{\pi}$ \textit{est stable par $\varinjlim$ (dans $\mathcal{M}$) de cardinal $\leqslant \pi$ (pas nécessairement filtrantes, a fortiori pas nécessairement grandes devant $\pi_0$).}
+
+Il suffit, en vertu de ce qui est déjà prouvé de du lemme 4.4.14 (\footnote{Il faut une variante du lemme 4.4.14, pour les $\varinjlim$ de cardinal $\leqslant \pi'$, qui se prouve de la même façon.}), de montrer que $\Filt^{\pi}$ % [sic] de du lemme -> du lemme, mot répété
+est stable par $\varinjlim$ \textit{de cardinal} $\leqslant \pi_0$. Si $\varphi : J \longrightarrow \Filt^{\pi}$ est un foncteur avec $\card J \leqslant \pi_0$, on le met sous forme indicielle
+\[
+\psi\ :\ I \times J \ \longrightarrow\ C\ ,
+\]
+grâce à 4.14.3.b, avec $I$ grande devant $\pi_0$.
+
+\msp{page 111}
+
+Je rappelle qu'on pouvait prendre
+\[
+I \ =\ \uHom(J,C)/\varphi\ ,
+\]
+où $\uHom(J,C) \hookrightarrow \uHom(J, \mathcal{M} = \Ind'_{\pi}C)$, quitte à ne pas exiger que $I$ soit ordonnée. On a envie de prouver que $\card\Fl I \leqslant \pi$. L'ennui, c'est qu'on arrive seulement à la majoration
+\[
+\card\Fl I \ \leqslant\ \pi^{\pi_0}\ .
+\]
+(Même si $J$ est discrète, on n'a pas mieux, puisqu'alors
+\[
+I \ \simeq\ \prod_{j\in J} C/\varphi(j)\ , \qquad \text{d'où} \quad \Fl I = \prod_{j\in J} \Fl C/\varphi(j)\ ,
+\]
+et si $\card\Fl C/\varphi(j) = \pi$ pour tout $j$, on trouve $\card\Fl I = \pi^{\pi_0}$ -- il n'y a pas moyen de faire mieux\,!)
+
+Donc je n'arrive pas à prouver directement 4.5.4, ce qui m'aurait arrangé pour prouver la condition c) de loc. cit. Mais à vrai dire, on a fait ici le travail de la démonstration du théorème 4.3.6, partie b $\Longrightarrow$ c -- on y a déjà prouvé que la filtration qu'on vient de construire (par la condition a) de 4.5.2) est une filtration cardinale. La condition c) de SGA 4 I 9.12 est prouvée à la page 76. Mais je vais refaire
+\msp{page 112}
+la démonstration plus sérieusement.
+
+Soit donc $F \in \Ob\mathcal{M}$, considérons
+\[
+J \ =\ C/F\ ,
+\]
+c'est une catégorie stable par $\varinjlim$ de cardinal $\leqslant \pi_0$, donc grande devant $\pi_0$, et on a
+\[
+F \ \simeq\ \varinjlim_{j\in J} x_j \qquad\quad (\,\varinjlim \ \text{dans } \mathcal{M})
+\]
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+en désignant par $j \longmapsto x_j$ le foncteur canonique $C/F \longrightarrow C$. Soit alors $I$ l'ensemble des sous-catégories $J'$ de $J$ qui sont \textit{de cardinal $\leqslant \pi$ et grandes devant $\pi_0$, $I$} ordonné par inclusion, et pour tout $J' \in I$, posons
+\[
+X_{J'} \ =\ \varinjlim_{j\in J'} x_j\ .
+\]
+Comme $J'$ est grande devant $\pi_0$, la limite inductive dans $\mathcal{M}$ est aussi une limite dans $C^{\wedge}$, d'où résulte aussitôt, comme $\card\Ob J' \leqslant \card\Fl J' \leqslant \pi$, que $X_{J'}$ est dans $\Filt^{\pi}$. Alors
+\[
+J' \ \longmapsto\ X_{J'} \ \in\ \Ob\Filt^{\pi}
+\]
+est un foncteur
+\[
+I \ \longrightarrow\ \Filt^{\pi}\ ,
+\]
+dont la limite inductive est celle des $x_j$, donc isomorphe à $F$. D'autre part, il est immédiat que $I$ est grand devant $\pi$, i.e. que si $(J'_{\alpha})_{\alpha\in A}$ est
+\msp{page 113}
+une famille d'éléments de $I$, celle-ci est majorée par un $J' \in I$. Ceci résulte du
+
+% marginal mark (handwritten squiggle) in the left margin of the edition beside Lemme 4.5.5
+\textbf{Lemme 4.5.5} (\footnote{N'est prouvé \textit{que} si $\pi^{\pi_0} = \pi$\,! Sans doute faux en général.}). \textit{Soient $\pi$, $\pi_0$, avec $\pi > \pi_0$, des cardinaux infinis, et soit $J$ une catégorie grande devant $\pi_0$. Alors pour toute partie $\Phi$ de} $\Fl J$\textit{, telle que} $\card\Phi \leqslant \pi$\textit{, il existe une sous-catégorie $J'$ de $J$} grande devant $\pi_0$\textit{, telle que} $\card J' \leqslant \pi$ (\footnote{C'est OK si on exige seulement $\card J' \leqslant \pi^{\pi_0}$.})\textit{, et} $\Fl J' \supset \Phi$.
+
+Ce lemme étant admis, on a donc représenté un objet quelconque $F$ de $\mathcal{M}$ comme une $\varinjlim\limits_{i\in I} X_i$, avec $I$ ensemble ordonné grand devant $\pi$, les $X_i$ dans $\Filt^{\pi}$. Il reste à prouver que si $\pi' > \pi$ et $F \in \Filt^{\pi'}$, alors on peut prendre $I$ tel que $\card I \leqslant \pi'^{\pi}$. Mais $F \in \Filt^{\pi'}$ signifie que $J = C/F$ satisfait $\card\Fl J \leqslant \pi'$. Alors l'ensemble des parties de cardinal $\leqslant \pi$ de $\Fl J$ a un cardinal majoré par $\pi'^{\pi}$, a fortiori $\card I \leqslant \pi'^{\pi}$, ce qui achève de prouver que $(\Filt^{\pi})_{\pi\geqslant\pi_1}$ est une filtration cardinale sur $\mathcal{M}$.
+
+\msp{page 114}
+
+Pour prouver le lemme, on commence par saturer $\Phi$ par composition finie, on trouve une sous-catégorie $J'_0$ de $J$ telle que $\card\Fl J'_0 \leqslant \pi_0$ \ldots{} Mais je m'aperçois que pour prouver le lemme, j'ai encore besoin de $\pi^{\pi_0} = \pi$ -- une enveloppe de $J'$ grande devant $\pi_0$ va avoir un cardinal majoré (au mieux) par $\pi^{\pi_0}$.
+
+Prenons p.ex.
+\[
+J \ =\ \mathfrak{P}(S) \qquad\quad \text{(ensemble ordonné)}
+\]
+avec $\card S = \pi > \pi_0$, donc $J$ est grand devant $\pi_0$. Considérons l'application
+\[
+S \ \longrightarrow\ J = \mathfrak{P}(S)\ , \qquad\quad s \longmapsto \{s\}\ ,
+\]
+et prenons pour $\Phi \subset \Fl J$ l'ensemble des $\mathrm{id}_{\{s\}}$. Donc on cherche une partie $J'$ de $J$, contenant $S$, et grande devant $\pi_0$ pour l'ordre induit par $J$. On voit tout de suite que la plus petite partie $J'$ faisant l'affaire est l'ensemble $\mathfrak{P}_{\pi_0}(S)$ des parties de $S$ de cardinal $\leqslant \pi_0$. Mais on trouve
+\[
+\card J' \cdot \pi_0! \ =\ \pi^{\pi_0}\ ,
+\]
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 115}
+où
+\[
+\begin{aligned}
+\pi_0! \ &=\ \card\Aut\,(E_0) \qquad\quad (E_0 \text{ ensemble de cardinal } \pi_0)\\
+&=\ \pi_0^{\pi_0}\\
+&=\ 2^{\pi_0}\ ,
+\end{aligned}
+\]
+donc
+\[
+\card J' \cdot 2^{\pi_0} \ =\ \pi^{\pi_0}\ .
+\tag*{$(*)$}
+\]
+D'autre part, il est immédiat que $\card J' \geqslant \card\mathfrak{P}(E_0) = 2^{\pi_0}$ (où $E_0$ est une partie de $S$ de cardinal $\pi_0$), donc le premier membre de $(*)$ est égal à $\card J'$, donc on trouve
+\[
+\card J' \ =\ \pi^{\pi_0}\ ,
+\]
+sorry\,!
+
+Finalement, je me suis convaincu que la proposition 4.5.2, et les corollaires et lemmes précédents par lesquels j'ai essayé de l'établir, n'est vrai que pour ces cardinaux $\pi > \pi_0$ tels que
+\[
+\pi^{\pi_0} \ =\ \pi\ ,
+\]
+ce qui, moyennant l'hypothèse du continu généralisée, équivaut à
+\[
+\pi^{\pi_0} \ <\ 2^{\pi}\ (\ =\ \pi^{\pi}\ )
+\]
+(ou encore à $\pi^{\pi_0} \neq 2^{\pi}$ $(= \pi^{\pi})$). Je vais donner
+\msp{page 116}
+ici un énoncé rectifié.
+
+\textbf{Proposition 4.5.6.}
+\begin{enumerate}[leftmargin=3em]
+\item[\circled{1\textsuperscript{o}}] \textit{Sous les hypothèses générales de 4.5.2 sur $C$, $\pi_0$, $\pi_1$, $\pi$, les conditions a, a$'$, a$''$, b, c$'$ de cette proposition sont équivalentes (moyennant $\pi \geqslant \pi_1$)} (\footnote{\textbf{N.B.} Pour cette équivalence, l'hypothèse que $C$ soit stable par $\varinjlim$ de cardinal $\leqslant \pi$ est inutile, et aussi pour que c$'$) implique c), et lui soit équivalente si $\pi = \pi^{\pi_0} \geqslant \pi_1$, cf. 4.7.1, p. 161.})\textit{, et impliquent la condition c ($F$ est $\pi$-accessible). Quand $\pi^{\pi_0} = \pi$ (notamment quand $\pi = 2^{c}$, avec $c \geqslant \pi_0$), alors toutes les conditions a à c$'$ de 4.5.2 sont équivalentes.}
+\item[\circled{2\textsuperscript{o}}] \textit{Plus généralement et plus précisément, pour $\pi \geqslant \pi_1$ donné, considérons les conditions sur $\pi$ :}
+\begin{enumerate}[leftmargin=2em]
+\item[\textit{1)}] $\pi^{\pi_0} = \pi$.
+\item[\textit{2)}] $\Filt^{\pi}(\mathcal{M})$ \textit{(définie dans 4.5.3) est stable par $\varinjlim$ de cardinal $\leqslant \pi$.}
+\item[\textit{3)}] \textit{$\forall$ $F$ dans $\mathcal{M}$, on a $F \simeq \varinjlim\limits_{I} X_i$, avec $I$ ensemble ordonné grand devant $\pi$, les $X_i$ dans} $\Filt^{\pi}(\mathcal{M})$\textit{. De plus, si $\pi' > \pi$ et $F \in$} $\Filt^{\pi'}(\mathcal{M})$\textit{, on peut prendre $I$ de cardinal $\leqslant \pi'^{\pi}$.}
+\item[\textit{4)}] \textit{Comme 3), sans la majoration de cardinaux, et en supposant seulement $I$ catégorie grande devant $\pi$ (pas nécessairement catégorie ordonné).} % [sic] catégorie ordonné -> catégorie ordonnée, accord
+\item[\textit{5)}] \textit{La condition c) de 4.5.2 implique les autres conditions (elles sont équivalentes, par 1°), en d'autres termes}
+\[
+\mathcal{M}_{\pi} \ \subset\ \Filt^{\pi} \qquad\quad \textit{(donc } \mathcal{M}_{\pi} = \Filt^{\pi}\textit{, puisqu'on sait que } \Filt^{\pi} \subset \mathcal{M}_{\pi}\textit{)}\ ,
+\]
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

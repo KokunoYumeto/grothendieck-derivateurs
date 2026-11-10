@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\uHom}{\underline{\operatorname{Hom}}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. IV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 78}
+une façon ‘canonique’, ‘naturelle’, ‘voulue par Dieu’, de le ‘remplumer’ en un diagramme substantiel. Les flèches les plus évidentes qui se présentent sont relatives à un foncteur
+\[ f : I \longrightarrow J \]
+dans Diag, et aux deux morphismes d'adjonction pour le couple $(f^*, f_*)$, savoir
+\[
+\begin{aligned}
+G &\longrightarrow f_*f^*G && \text{dans } D(J)\\
+f^*f_*F &\longrightarrow F && \text{dans } D(I). \quad (\text{\footnotemark})
+\end{aligned}
+\]
+\footnotetext{Bien sûr, problème dual pour $(f_!, f^*)$.}
+
+Je vais essayer de remplumer ces deux flèches, et vais généraliser en envisageant la situation ci-contre \texttt{[ci-dessous]}
+\[
+\begin{tikzcd}
+I \arrow[d, "f"'] & F \\
+J & G, \arrow[u, "u"']
+\end{tikzcd}
+\]
+où
+\[ \Hom^f(G,F) \overset{\text{déf}}{=} \Hom(f^*G,F) \overset{\text{adj.}}{\simeq} \Hom(G,f_*F). \]
+Donc le même $u$ s'interprète par \textit{deux} flèches squelettiques
+\[
+\left\{
+\begin{aligned}
+f^*(G) &\longrightarrow F && \text{dans } \mathbf{D}(I)\\
+G &\longrightarrow f_*(F) && \text{dans } \mathbf{D}(J).
+\end{aligned}
+\right.
+\tag*{(1)}
+\]
+Les remplumer, c'est les interpréter (si faire se peut) en termes de deux objets (si possible canoniques) dans $\mathbf{D}(I \times \bDelta_1)$ et $\mathbf{D}(J \times \bDelta_1)$ respectivement.
+
+Je vais me guider sur le cas particulier d'un dérivateur trivial
+\[ \mathbf{D} = \mathbf{D}_{\mathcal{M}}, \]
+où $\mathcal{M}$ est une catégorie de modèles ‘nue’ $(\Sigma = \emptyset)$.
+
+\msp{page 79}
+Pour $f$ fixé, on va construire une catégorie auxiliaire $K(f)$, de telle façon que pour toute catégorie $\mathcal{M}$, les systèmes $(G,F,u)$ d'un $\mathcal{M}$-préfaisceau $G$ sur $J$, d'un autre $F$ sur $I$, et d'un $f$-homomorphisme $G \longrightarrow F$, s'identifient (fonctoriellement) aux $\mathcal{M}$-préfaisceaux sur
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. IV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+$K(f)$. Ceci dit, on va essayer d'interpréter les flèches (1) squelettiques, mais peu importe ici -- tous les $\mathbf{D}$-squelettes sont maintenant remplumés) en termes de la géométrie de $K(f)$. % [sic] remplumés) -> remplumés, closing parenthesis printed without any opening parenthesis
+
+\[
+\left\{
+\begin{aligned}
+&\Ob K(f) = \Ob K(I) \amalg \Ob K(J) \qquad \text{\texttt{[plutôt} $\Ob I \amalg \Ob J$\texttt{ ]}}\\
+&\text{$I$, $J$ s'identifiant à des sous-catégories pleines de $K(f)$,}\\
+&\text{il n'y a pas des flèches d'un $j \in J$ dans un $i \in I$.}\\
+&\text{(Donc $I$ est ouverte dans $K(f)$, $J$ son complémentaire fermé.)}\\
+&\text{Pour $i \in \Ob I$, $j \in \Ob J$, on pose $\Hom_{K(f)}(i,j) = \Hom_J(f(i),j)$.}
+\end{aligned}
+\right.
+\]
+
+La composition des flèches dans $K(f)$ est évidente. On va définir une rétraction canonique
+\[ \bar{f} : K(f) \longrightarrow J \]
+de $K(f)$ sur sa sous-catégorie fermée $J$. Donc $\bar{f}$ est connu sur $\Ob J$, et sur $\Ob I$ ce sera $f$ :
+\[
+\left\{
+\begin{aligned}
+\bar{f}(j) &= j && \text{si } j \in \Ob J\\
+\bar{f}(i) &= f(i) && \text{si } i \in \Ob I.
+\end{aligned}
+\right.
+\]
+Il reste à définir, pour $x, y \in \Ob K(f)$,
+\msp{page 80}
+\[ \Hom_{K(f)}(x,y) \longrightarrow \Hom_J(\bar{f}(x), \bar{f}(y)). \]
+Si $x, y \in \Ob J$, c'est l'identité, si $x, y \in I$, c'est $f$. Si $x \in I$, $y \in J$, on doit définir une flèche
+\[ \Hom(f(x),y) \longrightarrow \Hom(f(x),y), \]
+et on prend encore l'identité. On a
+\[
+\begin{tikzcd}
+J \arrow[r, hook, "j"] \arrow[dr, equal] & K(f) \arrow[d, "\bar{f}"] & I \arrow[l, hook', "i"'] \\
+& J &
+\end{tikzcd}
+\]
+\[
+\left\{
+\begin{aligned}
+\bar{f} \circ j &= \id_J\\
+j \circ \bar{f} &= \left\{
+\begin{aligned}
+&j && \text{sur } J\\
+&jf && \text{sur } I,
+\end{aligned}
+\right.
+\end{aligned}
+\right.
+\qquad \text{i.e.} \quad
+\boxed{
+\begin{aligned}
+j\bar{f}j &= j && \text{sur } J\\
+j\bar{f}i &= jf && \text{sur } I
+\end{aligned}
+}\ ,
+\]
+et on a \texttt{[}$K = K(f)$\texttt{]}
+\[
+\begin{aligned}
+\alpha :\ \id_K &\longrightarrow j\bar{f} && \text{i.e. homomorphisme fonctoriel}\\
+x &\xrightarrow{\alpha(x)} j(\bar{f}(x)), && x \in \Ob K,
+\end{aligned}
+\]
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. IV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+défini ainsi :
+\[
+\left\{
+\begin{aligned}
+&\text{Si } x \in J,\ \alpha(x) = \id_x\ :\ x \xrightarrow{\sim} j(\bar{f}(x)) = j(x) = x\\
+&\text{Si } x \in I,\ \alpha(x) : \underbrace{x \longrightarrow f(x)}_{\text{dans } K(f)},\ \text{ou } \underbrace{f(x) \longrightarrow f(x)}_{\text{dans } J},\ \alpha(x) = \id_{f(x)}.
+\end{aligned}
+\right.
+\]
+On doit vérifier la fonctorialité pour $x$ variable dans $K$ \dots
+
+Soit $\Phi$ un $\mathcal{M}$-préfaisceau sur $K$. Il définit
+\[
+\begin{aligned}
+F &= i^*(\Phi) && \in \Ob \mathbf{D}_{\mathcal{M}}(I)\\
+G &= j^*(\Phi) && \in \Ob \mathbf{D}_{\mathcal{M}}(J).
+\end{aligned}
+\]
+D'autre part $f^*(G)$ s'interprète comme $(j\bar{f})^*(\Phi)|I$, car
+\[
+\begin{aligned}
+f^*(G)(i) &= G(\ \underbrace{f(i)}_{= \bar{f}(i) \,\in\, J}\ )\\
+&= j^*(\Phi)(\bar{f}(i))\\
+&= \Phi(j\bar{f}(i))\\
+&= (j\bar{f})^*(\Phi)(i).
+\end{aligned}
+\]
+
+\msp{page 81}
+Donc
+\[ f^*(G) \simeq (j\bar{f})^*(\Phi)|I. \]
+Or la flèche
+\[ \alpha : \id_K \longrightarrow j\bar{f} \]
+donne
+\[ \underbrace{\id_K(\Phi)}_{= \Phi} \xleftarrow{\Phi(\alpha)} (j\bar{f})^*(\Phi), \qquad \text{fonctoriel en } \Phi, \]
+d'où, en prenant les restrictions à $I$,
+\[ i^*(\Phi) \overset{\text{déf}}{=} F \xleftarrow{\ u\ } f^*G. \]
+
+En fait, sans tellement se tortiller, on devrait pouvoir montrer que pour toute catégorie $\mathcal{M}$, la catégorie $\uHom(K^o, \mathcal{M})$ des $\mathcal{M}$-préfaisceaux sur $K$ est isomorphe à celle des triples $(F,G,u)$, avec $F \in \Ob \uHom(I^o, \mathcal{M})$, $G \in \uHom(J^o, \mathcal{M})$, et $u : f^*(G) \longrightarrow F$. Ainsi, $K$ apparaît comme solution d'un problème universel
+\[ \uHom(K^o, \mathcal{M}) \longrightarrow \{F,\ G,\ u \text{ comme dessus}\}(\mathcal{M}). \]
+
+Mais pour y préciser la flèche $\longrightarrow$ de façon conceptuelle simple, il est bon de se donner $K$ avec les structures supplémentaires \begin{tikzcd}[cramped, column sep=normal] I \arrow[r, hook, shift left, "j"] & K \arrow[l, shift left, "\bar{f}"] & I \arrow[l, hook', "i"'] \end{tikzcd}, $\bar{f}j = \id_J$, $\id_K \xrightarrow{\alpha} j\bar{f}$. Et ce système % [sic] I (first object, source of j and target of f-bar) -> J, since j : J -> K(f) and f-bar : K(f) -> J
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. IV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 82}
+$\{K,\ i,\ j,\ \bar{f},\ \alpha\}$ est (sauf erreur) défini à isomorphisme canonique près par la condition de représenter le foncteur $\mathcal{M} \longmapsto \{F,\ G,\ u\}^o(\mathcal{M})$ \dots
+
+En particulier, le système défini par $G \in \Ob \mathbf{D}_{\mathcal{M}}(J)$
+\[ (f^*(G),\ G,\ \id : f^*(G) \longrightarrow f^*(G)) \]
+est défini sauf erreur par $\bar{f}^*(G)$ sur $K(f)$. On se propose [?] de trouver une interprétation similaire pour
+\[ (F,\ f_*(F),\ f^*f_*F \longrightarrow F) \]
+$(F \in \Ob \mathbf{D}(I))$. Le candidat naturel serait ici $\Phi = i_*(F)$. Admettons ce point (i.e. surtout la vérification du fait que $j^*(i_*(F)) \simeq f_*(F)$). Tout ceci montre que si $\mathbf{D}$ est à nouveau un dérivateur quelconque, on peut, par les formules précédentes, trouver un objet canonique $\Phi$ de $\mathbf{D}(K)$, en termes soit d'un $\mathbf{D}$-coefficient $F$ sur $I$ (en prenant $\Phi = i_*(F)$), soit d'un $\mathbf{D}$-coefficient $G$ sur $J$ (en prenant $\Phi = \bar{f}^*(G)$). D'autre part, on peut espérer définir canoniquement
+\[
+\begin{aligned}
+\mathbf{D}(K) &\longrightarrow \mathbf{D}(I \times \bDelta_1)\\
+\mathbf{D}(K) &\longrightarrow \mathbf{D}(J \times \bDelta_1)
+\end{aligned}
+\]
+dont les composés avec les foncteurs ‘squelettes’
+\[
+\begin{aligned}
+\mathbf{D}(I \times \bDelta_1) &\longrightarrow \uHom(\bDelta_1^o, \mathbf{D}(I))\\
+\mathbf{D}(J \times \bDelta_1) &\longrightarrow \uHom(\bDelta_1^o, \mathbf{D}(J))
+\end{aligned}
+\]
+\msp{page 83}
+redonnent (pour $\Phi \in \Ob \mathbf{D}(K)$) les flèches squelettiques
+\[
+\left\{
+\begin{aligned}
+f^*(G) &\xrightarrow{\ u\ } F\\
+G &\xrightarrow{\ v\ } f_*F
+\end{aligned}
+\right.
+\]
+associées à $(F,G,u)$. De façon précise, $f^*(G) \longrightarrow F$ se définit en termes de $\mathbf{D}$, et $\Phi \in \Ob \mathbf{D}(K)$, comme ci-dessus, et $v$ s'en déduit par adjonction.
+
+L'idée naturelle ici, serait de ramener le problème de l'étoffement des flèches d'adjonction sqelettiques, au cas des immersions ouvertes ou fermées. Notons que les sous-catégories ouvertes de $K$ correspondent justement aux foncteurs $K \longrightarrow \bDelta_1$, en prenant les images inverses de l'ouvert générique. Il y a donc un unique % [sic] sqelettiques -> squelettiques, missing u (spelled squelettiques elsewhere in the text)
+\[ \varphi :\ K(f) \longrightarrow \bDelta_1 \]
+avec $I = \varphi^{-1}(\{0\})$. Donc \texttt{[fin du chapitre]}
+
+\end{document}

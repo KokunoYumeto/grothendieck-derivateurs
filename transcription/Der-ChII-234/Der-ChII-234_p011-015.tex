@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\sX}{\mathscr{X}} % ?? uncertain: alphabet of the curly X -- \mathscr{X} or \mathcal{X}
+\begin{document}
+
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 14}
+
+En résumé, on a la
+
+\noindent\textbf{Proposition 2.1.} \textit{Soit $X$ un objet de} Cat. \textit{Conditions équivalentes :}
+\begin{enumerate}[label={},leftmargin=3em]
+\item[\textit{a)}] \textit{Le topos associé} $\operatorname{Top}(X)$ \textit{est localement irréductible, i.e. (étant localement connexe) pour tout objet $F$ de $X^{\wedge}$ et tout sous-objet $F'$ de $F$, si $F$ est connexe, $F'$ l'est.}
+\item[\textit{a$'$)}] \textit{Pour tout $X'$ étale sur $X$, si $X'$ est connexe, tout ouvert de $X'$ est connexe.}
+\item[\textit{a$''$)}] \textit{Tout ouvert d'une catégorie localisée $X/a$ ($a \in \operatorname{Ob} X$) est connexe (i.e. $X/a$ est une catégorie irréductible, i.e. le topos} $\operatorname{Top}(X/a)$ \textit{l'est).}
+\item[\textit{b)}] \textit{Pour tout objet $a$ de $X$,} $\operatorname{Esp}(X/a)$ \textit{est un espace topologique irréductible.}
+\item[\textit{c)}] \textit{Les catégories $X/a$ sont faiblement filtrantes à gauche (ou faiblement cofiltrantes), i.e. pour deux objets $\xi$, $\eta$ d'une telle catégorie,} \texttt{[il]} \textit{existe un objet $\zeta$ et deux flèches}
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+ \& \xi \\
+\zeta \arrow[ur] \arrow[dr] \& \\
+ \& \eta
+\end{tikzcd}
+\textit{(i.e. l'ensemble ordonné Ord($X/a$) associé à $X/a$ est filtrant à gauche)}
+\item[\textit{c$'$)}] \textit{Pour tout diagramme en traits pleins dans $X$,}
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+ \& x \arrow[dr] \& \\
+z \arrow[ur, dotted] \arrow[dr, dotted] \& \& s \\
+ \& y \arrow[ur] \&
+\end{tikzcd}
+\textit{, on peut le compléter en un carré} commutatif \textit{comme indiqué. (Condition} PS 1 \textit{des catégories localement filtrantes.)}
+\end{enumerate}
+
+\noindent Ces conditions impliquent que toute composante connexe $X_{\alpha}$ de $X$ est irréductible, ou ce qui revient au même, que $\operatorname{Esp}(X_{\alpha})$ est irréductible,
+
+\msp{page 15}
+
+\noindent mais ne sont pas impliquées par celle-ci.
+
+Contrexemple, la catégorie 0-connexe $0 \underset{\beta}{\overset{\alpha}{\rightrightarrows}} 1$, avec $\alpha \neq \beta$. On a $X/1 \simeq$
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+0 \arrow[dr] \& \\
+ \& 1 \\
+0' \arrow[ur] \&
+\end{tikzcd}, qui n'est \textit{pas} irréductible, puisque $\Phi \backslash \{1\} \simeq \varepsilon$ est un ouvert disconnexe \texttt{[}$\Phi = X/1$\texttt{,} $\varepsilon = \bullet\ \bullet$\texttt{]}.
+
+J'aimerais une condition `topossique' sur $X$, équivalente à $X$ `pseudo-filtrante à gauche', i.e. les composantes connexes filtrantes, i.e. PS 1\textsuperscript{opp} (condition c$'$) ci-dessus) + PS 2\textsuperscript{opp} (condition de la double flèche), et qui de plus implique que tout objet 0-connexe de $X^{\wedge}$ (i.e. tout objet $X'$ de Cat étale sur $X$ et 0-connexe) soit $W_{\infty}$-asphérique. Et je songe à la notion de `totale asphéricité' de Pursuing Stacks.
+
+\noindent\textbf{Définition 2.2.} (\footnote[13]{Cf. tableau récapitulatif pages 97, 98 et surtout 99.})\ \ Soit $X$ une catégorie.
+\begin{enumerate}[label={},leftmargin=3em]
+\item[a)] On dit que $X$ est \textit{faiblement filtrante} (\footnote[14]{dire plutôt \textit{pseudo-filtrante}, réserver `faiblement filtrante' à `localement faiblement filtrante' (ou \textit{irréductible}) + connexe, condition PS $1'_{\mathrm{g}}$.}) si $X \neq \emptyset$, et si pour $a, b \in \operatorname{Ob} X$, $\exists\, c$ et des flèches $c$
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+ \& a \\
+{} \arrow[ur, phantom] \& \\
+ \& b
+\end{tikzcd}
+\hspace{-2.6em}% layout aid only
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+ \& {} \\
+{} \arrow[ur] \arrow[dr] \& \\
+ \& {}
+\end{tikzcd}
+, i.e. $X/[a] \cap X/[b] \neq \emptyset$. (\textbf{NB} $X$ est faiblement filtrante (\footnote[15]{pseudo-filtrante.}) à gauche si et seulement si $\operatorname{Ord}(X)$ l'est, i.e. est filtrante à gauche. \textbf{ReNB} $X$ faiblement filtrante $\Longrightarrow$ $X$ 0-connexe.)
+
+\item[b)] \printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+On dit que $X$ est \textit{localement faiblement filtrante à gauche} ou plus simplement préfiltrante à gauche si les catégories $X/x$ ($x \in \operatorname{Ob} X$) sont faiblement filtrantes à gauche, i.e. si $X$ satisfait la condition : $\forall$ diagrammes
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+a \arrow[dr] \& \\
+ \& x \\
+b \arrow[ur] \&
+\end{tikzcd}, $\exists\, c$ dans $X$ et des flèches de $c$ dans $a$, $b$ rendant \textit{commutatif} le carré
+\[
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small]
+ \& a \arrow[dr] \& \\
+c \arrow[ur, dotted] \arrow[dr, dotted] \& \& x \\
+ \& b \arrow[ur] \&
+\end{tikzcd}
+\]
+(\footnote[16]{Condition PS $1_{\mathrm{g}}$.}). (\textbf{NB} Cette condition implique que $\operatorname{Ord}(X)$ est localement faiblement filtrant, mais n'équivaut pas à cette dernière. Exemple, $X = 0 \underset{\beta}{\overset{\alpha}{\rightrightarrows}} 1$, $X/1 =$
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+0' \arrow[dr] \& \\
+ \& 1 \\
+0'' \arrow[ur] \&
+\end{tikzcd}
+n'est pas faiblement filtrante à gauche.)
+
+\msp{page 16}
+
+\textbf{NB} Si $X$ localement faiblement filtrante à gauche, tout $X'$ étale sur $X$ itou.
+
+\textbf{NB} (\footnote[17]{\textbf{Faux.}}) $X$ localement faiblement filtrante à gauche $\Longleftrightarrow$ les composantes connexes sont faiblement filtrantes à gauche, ou encore si $X$ est 0-connexe, $X$ localement faiblement filtrante à gauche $\Longleftrightarrow$ $X$ est faiblement filtrante (\footnote[18]{pseudo-filtrante.}) à gauche. On a en effet $\Longleftarrow$ tautologiquement (\footnote[19]{\textbf{faux,} ainsi $0 \underset{\beta}{\overset{\alpha}{\rightrightarrows}} 1$ est 0-connexe et faiblement filtrante à gauche, mais non pas localement faiblement filtrante à gauche car
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+0 \arrow[dr, "\alpha"] \& \\
+ \& 1 \\
+0 \arrow[ur, "\beta"'] \&
+\end{tikzcd}
+1 ne se complète pas en un carré \textit{commutatif.}}), et $\Longrightarrow$ en montrant que si PS 1 \texttt{[est]} satisfait, alors $PS(a,b)$ défini par $X/[a] \cap X/[b] \neq \emptyset$ est une relation d'équivalence, impliquée par la relation $C(a,b)$ : $\{\operatorname{Hom}(a,b) \neq \emptyset$ \textit{ou} $\operatorname{Hom}(b,a) \neq \emptyset\}$, donc la relation d'équivalence (homotopie) engendrée par $C(a,b)$ est plus fine que $PS(a,b)$.
+
+\item[c)] On dit que $X$ est \textit{filtrante à gauche}, ou \textit{cofiltrante,} si elle est faiblement filtrante (\footnote[20]{pseudo-filtrante.}) à gauche (donc \textit{non vide}), et satisfait (en plus de la condition PS $1'_{\mathrm{g}}$ de a)) la condition PS $2_{\mathrm{g}}$ suivante :
+
+Pour toute double flèche $a \underset{v}{\overset{u}{\rightrightarrows}} b$, \texttt{[il]} existe \texttt{[une]} flèche $c \xrightarrow{w} a$ telle que $uw = vw$ (\footnote[21]{i.e. trois conditions a) $X \neq \emptyset$ b) PS $1'$ habituelle c) PS 2 (double flèche).}).
+
+Il revient au même de dire que $X$ satisfait les trois conditions a$'$) $X$ est 0-connexe (plus forte que $X \neq \emptyset$), b$'$) PS 1, i.e. $X$ localement faiblement filtrante à gauche et c$'$) PS 2 comme avant.
+
+\item[d)] On dit que $X$ est \textit{localement filtrante à gauche} si les composantes connexes sont filtrantes à gauche, i.e. si $X$ satisfait les conditions PS 1 et PS 2 (`pseudo-cofiltrante' dans la terminologie de SGA 4). \textbf{NB} Si $X$ est localement filtrante à gauche, il en est de même de tout $X'$ étale sur $X$, car c'est évident pour PS 1 qui concerne les $X/x$, et pour PS 2 cela résulte du fait que $X' \longrightarrow X$ est fidèle. Donc si $X$ est localement cofiltrante, les $X/a$ sont filtrantes, mais la réciproque est fausse.
+\end{enumerate}
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent On a les notions duales : \textit{faiblement filtrante à droite} (ou simplement faiblement filtrante), et \textit{filtrante à droite} ou simplement filtrante. (Notions duales de a), c) ci-dessus.) Pour la notion duale de b), savoir que les $x\backslash X$ soient faiblement filtrantes, on ne peut plus l'appeler `localement faiblement filtrante', mais ce serait \textit{co}localement faiblement filtrante.
+
+\noindent\textbf{Exemple.} $X = \Bigl(0 \xrightarrow{\gamma} 1 \underset{\beta'}{\overset{\alpha'}{\rightrightarrows}} 2 \underset{\beta}{\overset{\alpha}{\rightrightarrows}} 3\Bigr)$ avec $(\alpha\alpha' = \beta\beta') \neq (\alpha\beta' = \beta\alpha')$.
+
+\msp{page 17}
+
+\noindent Seule la notion a) (faiblement filtrante (\footnote[22]{pseudo-filtrant.}) à gauche) ne dépend que de $\operatorname{Ord} X$ - mais bien sûr si $X$ est \textit{pré}ordonnée, toutes trois ne dépendent que de $\operatorname{Ord} X$. Notons que dire que ça ne dépend que de $\operatorname{Ord} X$, ou que de $\mathrm{Esp}\,\mathrm{sep}X$, revient au même, puisque les deux se déterminent mutuellement. La condition a) signifie que $\operatorname{Esp} X$, ou aussi $\operatorname{Top}(X)$, est \textit{irréductible.} On dira que $X$ est \textit{irréductible} (au lieu de pseudo-filtrante). Les trois autres notions ne peuvent s'exprimer en termes de $\operatorname{Esp} X$ ou de $\operatorname{Ord} X$ seul, mais elles s'expriment en termes du $\mathrm{Topos}\, X$. La condition b) ($X$ localement faiblement filtrante) signifie que $\operatorname{Top}(X)$ est \textit{localement irréductible,} et on dira aussi que $X$ est \textit{localement irréductible} (au lieu de localement faiblement filtrante). Ça signifie que pour tout $X'$ étale sur $X$ et 0-connexe, $X'$ est faiblement filtrante à gauche, i.e. est irréductible.
+
+Reste à exprimer la condition filtrante elle-même en termes de $\operatorname{Top} X$. Je rappelle à ce propos :
+
+\noindent\textbf{Proposition 2.3.} \textit{Les conditions suivantes sur un topos $\sX$ sont équivalentes (quand $S$ (comme `site') désigne une partie génératrice de} $\mathrm{Fais}(\sX) = S^{\wedge}$, formée d'objets 0-connexes (\footnote[23]{donc $\sX$ est localement 0-connexe.}).\textit{)}
+\begin{enumerate}[label={},leftmargin=3em]
+\item[\textit{a)}] \textit{Si $U$, $V$ sont deux objets $0$-connexes de $\operatorname{Ob} \sX$, $U \times V$ est $0$-connexe.}
+\item[\textit{b)}] \textit{Si $U$ est un objet $0$-connexe de $\sX^{\wedge}$, alors $U \longrightarrow e$ est `$W_0$-asphérique', i.e. pour tout $V$, la projection $V \times U \longrightarrow V$ induit $\pi_0(U \times V) \xrightarrow{\sim} \pi_0(U)$.}
+\item[\textit{c)}] \textit{Si $U$, $V$} \texttt{[sont]} \textit{dans $\sX^{\wedge}$, alors}
+\[
+\pi_0(U \times V) \xrightarrow{\sim} \pi_0(U) \times \pi_0(V).
+\]
+\item[\textit{d)}] \textit{Comme a), avec $U$, $V$ dans $S$. (Mais on suppose les objets de $S$ $0$-connexes.)}
+\end{enumerate}
+\noindent(\footnote[24]{Il faudrait expliciter la démonstation avec celle de 2.9 ci-dessous (p.~25).}). % [sic] démonstation -> démonstration, letter r missing
+
+\msp{page 18}
+
+\noindent De plus, ces conditions impliquent que $\sX$ est connexe, donc 0-connexe si $\sX \neq \emptyset$. Cela implique de plus que $\sX$ est $W_{\infty}$-asphérique, cf. Pursuing Stacks §35 (Corollary p.~52) (\footnote[25]{\textbf{Faux,} loc. cit. ne dit rien de tel.}).
+
+C'est essentiellement Proposition 1 de Pursuing Stacks §65, cf. loc. cit. p.~170-171 (\footnote[26]{Mais je m'y borne aux topos de la forme $\operatorname{Top}(A)$, avec $A$ dans Cat.}). Cf. aussi Pursuing Stacks, §35, pages 50-55.
+
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent\textbf{Définition 2.4.} On dit que $\sX$ est \textit{totalement $0$-connexe} s'il est localement connexe, non vide et satisfait les conditions équivalentes de 2.3. (NB c'est un cas particulier de la notion `totalement $W$-asphérique' de loc. cit. On a ainsi la notion de totalement $n$-connexe.)
+
+Notons que pour un objet $X$ de Cat, dire que $\operatorname{Top}(X)$ est totalement 0-connexe revient à dire que $X \neq \emptyset$, et que pour $x, y \in \operatorname{Ob} X$, $x \times y$ dans $X^{\wedge}$ est 0-connexe, i.e. $X/x \times y$ est 0-connexe (\footnote[27]{Cela signifie aussi que $\mathrm{diag}_X : X \longrightarrow X \times X$ est co-cofinale, i.e. $X^o \longrightarrow X^o \times X^o$ est cofinale, et implique qu'il en est de même de $X \longrightarrow X^E$ pour tout ensemble \textit{fini} $E$.}). C'est une condition très forte. On dira aussi que $X$ est \textit{totalement $0$-connexe.} Notons ici
+
+\noindent\textbf{Proposition 2.5.} \textit{Soit $\sX$ un topos. Si $\sX$ est totalement $0$-connexe, alors $\sX$ est irréductible. (En fait la conclusion vaut, tautologiquement, en supposant seulement que le produit de deux objets $0$-connexes de $\sX^{\wedge}$ est non vide, et il suffit même de le supposer pour des sous-objets de l'objet final $e_{\sX}$.) En particulier, si $\sX = \mathit{Top}(X)$, où $X$ est dans} Cat\textit{, alors $X$ est faiblement filtrante à gauche.}
+
+Mais bien sûr, cela n'implique \textit{pas} que $\sX$ soit localement irréductible.
+
+\msp{page 19}
+
+\noindent Par exemple la catégorie $\mathbf{\Delta}$, ou toute petite catégorie stable par produits binaires, est totalement 0-connexe, mais $\mathbf{\Delta}$ n'est pas localement irréductible (les catégories induites $\mathbf{\Delta}/\mathbf{\Delta}^n$, pour $n > 0$, ne sont visiblement \textit{pas} irréductibles). (Mais rappelons que si $\sX = \operatorname{Top}(T)$, $T$ un espace topologique, alors $T$ irréductible implique que $\sX$ est aussi \textit{localement} irréductible. Donc $T$ totalement 0-connexe implique $\operatorname{Top}(T)$ globalement \textit{et} localement irréductible, i.e. pour tout $T'$ étale sur $T$, et 0-connexe, $T'$ est irréductible.)
+
+\noindent\textbf{Théorème 2.6.} \textit{Soit $\sX$ un topos localement connexe, $S \subseteq \sX^{\wedge}$ une petite partie génératrice formée d'objets $0$-connexes. Conditions équivalentes (}sauf \textit{c, c$'$, qui semblent} (\footnote[28]{\textbf{sont.}}) \textit{plus faibles, cf. démonstration).)}
+\begin{enumerate}[label={},leftmargin=3em]
+\item[\textit{a)}] \textit{Tout topos induit $\sX/U$ sur $U$ $0$-connexe dans $\sX^{\wedge}$ est totalement $0$-connexe.}
+\item[\textit{a$'$)}] \textit{Tout produit fibré $U \times_W V$ d'objets $0$-connexes dans $\sX^{\wedge}$ est $0$-connexe.}
+\item[\textit{b)}] \textit{$\sX$ est localement irréductible, et ses composantes connexes sont totalement $0$-connexes.}
+\item[\textit{c)}] \textit{Comme a), avec $U$ dans $S$, i.e. les $\sX/U$ ($U \in \operatorname{Ob} S$) sont totalement $0$-connexes.}
+\item[\textit{c$'$)}] \textit{Comme a$'$), avec $U$, $V$, $W$ dans $S$.}
+\item[\textit{d)}] \textit{$S$ est localement filtrante à gauche, i.e. $S$ satisfait les deux conditions}
+
+PS$^*$ 1\ \ \textit{Tout diagramme}
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+a \arrow[dr] \& \\
+ \& x \\
+b \arrow[ur] \&
+\end{tikzcd}
+\textit{dans $S$ s'insère dans}
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+ \& a \arrow[dr] \& \\
+c \arrow[ur, dotted] \arrow[dr, dotted] \& \& x \\
+ \& b \arrow[ur] \&
+\end{tikzcd}
+\textit{commutatif.}
+
+PS$^*$ 2\ \ \textit{Tout diagramme $a \rightrightarrows b$ s'insère dans un diagramme commutatif $c \longrightarrow a \rightrightarrows b$.}
+\end{enumerate}
+\noindent(\footnote[29]{NB On a équivalence de \tikz[baseline=(n.base)]\node[draw, rounded corners, inner sep=1.5pt](n){a), a$'$), b), d),}; qui impliquent c), c$'$), lesquels sont équivalents. Mais il semble (\footnotemark[30]) que c), c$'$) soient strictement plus faible. Cf. cependant les variantes e), e$'$) dans 2.12 (p.~28, 29).}). % [sic] plus faible -> plus faibles, adjective does not agree with the plural subject c), c')
+\footnotetext[30]{Il s'avère. C'est bien vrai, c) et c$'$) n'impliquent \textit{pas} les autres conditions, cf. annotation marginale
+% footnote 30 continues at the foot of printed page 13:
+p.~28 (cas de $X = B_G$).}
+
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 20}
+
+\noindent Ces conditions impliquent que les objets 0-connexes de $\sX^{\wedge}$ (en particulier les éléments de $S$) sont $\infty$-connexes.
+
+\noindent\textbf{Corollaire 2.7} (de l'équivalence b $\Longleftrightarrow$ d). \textit{Soit $X$ un objet de} Cat. \textit{Pour que $X$ soit filtrant à gauche il faut et il suffit que $\mathit{Top}(X)$ soit totalement $0$-connexe et localement (et donc aussi globalement) irréductible (ou encore que $X$ soit totalement $0$-connexe et que pour tout $x \in \operatorname{Ob} X$, la catégorie localisée $X/x$ soit irréductible (elle est même totalement $0$-connexe), ou encore que pour deux objets $a$, $b$ dans $X$, $a \times b \in X^{\wedge}$ soit $0$-connexe, et pour}
+\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname.center)]
+a \arrow[dr] \& \\
+ \& x \\
+b \arrow[ur] \&
+\end{tikzcd}
+\textit{dans $X$, $a \times_x b$ (dans $X^{\wedge}$) soit $0$-connexe)} (\footnote[31]{Exemple de $X$ totalement 0-connexe, mais non cofiltrant, i.e. non localement irréductible ? La catégorie $\mathbf{\Delta}$ des simplexes type est totalement 0-connexe, mais n'est pas cofiltrante car $\mathbf{\Delta}^0 = e \underset{\partial_1}{\overset{\partial_0}{\rightrightarrows}} \mathbf{\Delta}^1$ ne peut être égalisé ! Donc \texttt{[la catégorie opposée]} $\mathbf{\Delta}^o = I$ est telle que $I \longrightarrow I^E$ soit cofinal pour tout ensemble fini $E$, mais $I$ non filtrante.}).
+
+\noindent\textsc{Démonstration} de 2.6. On a le diagramme d'implications $\pm$ tautologiques
+\[
+\begin{tikzcd}[ampersand replacement=\&, column sep=large, row sep=large]
+ \& \mathrm{a} \arrow[r, Leftrightarrow] \arrow[dl, Rightarrow, "{\substack{\text{par}\\ \text{2.5}}}"'] \arrow[d, Rightarrow] \& \mathrm{a}' \arrow[d, Rightarrow] \\
+\mathrm{b} \arrow[d, Rightarrow] \& \mathrm{c} \arrow[r, Leftrightarrow, "{(\Leftarrow \text{ par 2.3.})}"] \& \mathrm{c}' \arrow[dll, Rightarrow] \\
+\text{PS 1.} \& \&
+\end{tikzcd}
+\]
+Montrons quand même les deux implications c$'$) $\Longrightarrow$ PS 1 et b $\Longrightarrow$ PS 1.
+
+\msp{page 21}
+
+\noindent C'est contenu dans le
+
+\noindent\textbf{Corollaire 2.8.} \textit{Soient $\sX$, $S$ comme dans 2.6. Conditions équivalentes :}
+\begin{enumerate}[label={},leftmargin=3em]
+\item[\textit{a)}] \textit{$\sX$ est localement irréductible, i.e. les topos induits $\sX/U$, où $U$ est $0$-connexe, sont irréductibles.}
+\item[\textit{b)}] \textit{Tout produit fibré $U \times_W V$ d'objets $0$-connexes $U$, $V$ est `non vide'.}
+\item[\textit{b$'$)}] \textit{Tout produit fibré $U \times_W V$, avec $U$, $V$ `non vide', $W$ $0$-connexe, est non vide.}
+\item[\textit{c)}] \textit{Les $\sX/x$ avec $x \in S$ sont irréductibles.}
+\item[\textit{d)}] \textit{Comme b), avec $U$, $V$, $W$ dans $S$.}
+\item[\textit{e)}] \textit{$S$ est localement faiblement filtrante à gauche, i.e. satisfait PS$^*$ 1.}
+\end{enumerate}
+\noindent Ici les implications $\pm$ évidentes sont
+
+\end{document}

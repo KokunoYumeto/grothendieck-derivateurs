@@ -1,0 +1,149 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Ch}{\underline{\mathrm{Ch}}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\comp}{\operatorname{comp}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\printedpage{79}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+Cette fois, les foncteurs de composition
+\[ C_n(\underline{t};a,b)\times C_n(\underline{t'};b,c) \longrightarrow C_n(\underline{t''};a,c), \]
+sont compatibles avec les foncteurs transition pour $n$ variable, et on trouve
+\msp{page 126}
+\[ C_\infty(\underline{t};a,b)\times C_\infty(\underline{t'};b,c) \longrightarrow C_\infty(\underline{t''};a,c), \]
+donc une flèche dans Hot
+\[ \comp_{\tau_0} : C_\infty\times C_\infty \longrightarrow C_\infty. \]
+Il faut voir qu'elle ne dépend pas du choix de $\tau_0$, mais si on a $\tau_0$ et $\tau'_0$, on les compare par $\tau_0\times\tau'_0 \begin{array}{l}\longrightarrow \tau_0\\ \longrightarrow \tau'_0\end{array}$, il suffit donc de voir que s'il existe une flèche $\tau_0\longrightarrow\tau'_0$, alors $\comp_{\tau_0} = \comp_{\tau'_0}$. Mais une telle flèche induit des flèches $\underline{t}_{\tau_0}\longrightarrow\underline{t}_{\tau'_0}$, $\underline{t'}_{\tau_0}\longrightarrow\underline{t'}_{\tau'_0}$, $\underline{t''}_{\tau_0}\longrightarrow\underline{t''}_{\tau'_0}$, d'où un diagramme dans Cat
+\[
+\begin{tikzcd}
+C_\infty(\underline{t}_{\tau'_0};a,b)\times C_\infty(\underline{t'}_{\tau'_0};b,c) \arrow[r, "{\comp_{\tau'_0}}"] \arrow[d] & C_\infty(\underline{t''}_{\tau'_0};a,c) \arrow[d] \\
+C_\infty(\underline{t}_{\tau_0};a,b)\times C_\infty(\underline{t'}_{\tau_0};b,c) \arrow[r, "{\comp_{\tau_0}}"] & C_\infty(\underline{t''}_{\tau_0};a,c),
+\end{tikzcd}
+\]
+dont on vérifie tout de suite qu'il est commutatif. Or ce diagramme peut se réécrire dans Hot comme
+\[
+\begin{tikzcd}
+C_\infty(a,b)\times C_\infty(b,c) \arrow[r, "{\comp_{\tau'_0}}"] \arrow[d, "{\mathrm{id}}"] & C_\infty(a,c) \arrow[d, "{\mathrm{id}}"] \\
+C_\infty(a,b)\times C_\infty(b,c) \arrow[r, "{\comp_{\tau_0}}"] & C_\infty(a,c),
+\end{tikzcd}
+\]
+\msp{page 127}
+d'où $\comp_{\tau_0} = \comp_{\tau'_0}$.
+
+Je recule devant la vraie difficulté - celle de prouver l'associativité de cette loi de composition. Elle devient associative dans $\Hot^{\wedge}_{0}$ - mais pour que deux flèches dans Hot soient égales (ici donc
+\[ C_\infty(a,b)\times C_\infty(b,c)\times C_\infty(c,d) \rightrightarrows C_\infty(a,d)\quad ), \]
+suffit-il qu'il en soit ainsi de leurs images dans $\Hot^{\wedge}_{0}$ - en d'autres termes, le foncteur
+\[ \Hot\longrightarrow\Hot^{\wedge}_{0}, \]
+est-il (en plus d'être conservatif) au moins fidèle (sinon pleinement fidèle)?
+
+\clearpage
+\printedpage{80}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+Il y a aussi que cette loi de composition est compatible avec celle des $H(a,b)$ dans Ind\,Hot, pour les flèches canoniques
+\[ H(a,b)\longrightarrow C_\infty(a,b) \qquad \text{dans Ind\,Hot}, \]
+si on saurait que ce sont des épimorphismes, et le restent par produits cartésiens, on aurait gagné.
+
+Bien sûr, on saura que c'est associatif, une fois qu'on saura que la compostititon définie ici est compatible avec la composition des chemins dans le cadre semi-simplicial. Mais comment fait-on dans ce cadre, pour composer les chemins de longueur non bornée? N'y a-t-il pas là exactement la même difficulté? À moins de s'en % [sic] compostititon -> composition, misspelling % ?? uncertain: exact letters of the misspelled word -- compostititon / compositition
+\msp{page 128}
+tirer en se ramenant tout de suite, pour la théorie des opérations $\Omega$, aux complexes de Kan, et aux chemins de type $\Delta_+$. Mais pour les composer \textit{fonctoriellement,} il me semble y avoir toujours le même problème - on trouvera des chemins de type $\Delta_+\Delta_+ = \boldsymbol{\Delta}_2^+$, et non pas $\Delta_+$, mais on peut alors composer les homotopies directes (revient à s'induire sur $\Delta_+\simeq\{0,2\}\subseteq\boldsymbol{\Delta}_2^+$). Or j'ai fait le formalisme des catégories de chemins sans me soucier de conditions du type Kan. Je présume que dans le cadre semi-simplicial, les $\uHom(\boldsymbol{\Delta}_1,X)$ ne donnent \textit{pas} le bon objet des chemins, pour $X$ pas de Kan. (Car sinon, il semblerait que pour $X=X_0$ à composantes \textit{finies,} le calcul des $\pi_i$ devrait être fini, ce qui n'est pourtant pas le cas, m'a-t-on toujours assuré \dots)
+
+Je présume pourtant, quand on prend $\Sigma=\mathrm{Fl}(X)$, que les objets $\Ch_\infty(X;a,b)$ et $\Ch_\infty(\bar{X};a,b)$ sont isomorphes dans Hot, quand on immerge $X$ dans une enveloppe de Thomason-Kan $\bar{X}$.
+
+\clearpage
+\printedpage{81}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 129}
+
+\section*{11\quad Rapide retour sur les $(\mathcal{M},\Sigma)$, dans l'optique des dérivateurs}
+
+Quand on s'intéresse au formalisme des $\Ch_\Sigma(X;a,b)$ en vue d'un \textit{dérivateur} $\mathbf{D}_{X,\Sigma}$ qu'on voudrait définir en termes de $X$, $\Sigma$, il semblerait que le prédérivateur qu'on obtient bel et bien ne mérite le nom de dérivateur que lorsqu'on suppose que pour toute flèche
+\[ Y\longrightarrow Y' \]
+dans Cat qui est une Hot-équivalence, les flèches correspondantes
+\[ \mathrm{Hom}_{\mathrm{Ind\,Cat\,hot}}(Y',H(a,b)) \longrightarrow \mathrm{Hom}_{\mathrm{Ind\,Cat\,hot}}(Y,H(a,b)), \]
+ou encore
+\[ \varinjlim_n \mathrm{Hom}_{\mathrm{Cat\,hot}}(Y',\Ch_{n,\Sigma}(a,b)) \longrightarrow \varinjlim_n \mathrm{Hom}_{\mathrm{Cat\,hot}}(Y,\Ch_{n,\Sigma}(a,b)) \]
+sont des bijections. J'ai regardé dans V ce que ça signifie pour l'objet $H(a,b) = (\Ch_{n,\Sigma}(a,b))_n$ de Ind\,Cat\,hot. C'est cette condition seulement qui assure, du point de vue des dérivateurs, une interprétation convaincante de $\Ch_{\infty,\Sigma}(a,b)$,
+\[ \Ch_{\infty,\Sigma}(a,b) \;=\; \varinjlim_n \Ch_{n,\Sigma}(a,b) \]
+en tant qu'objet de Hot, ou plus exactement de $\Hot^{\wedge}_{0}$, car on a alors pour $Y$ une catégorie \textit{finie}
+\[ \underbrace{\mathrm{Hom}_{\mathrm{Cat\,hot}}(Y,H(a,b))}_{\simeq\,\mathrm{Hom}_{X(Y)\Sigma_Y^{-1}}(a_X,b_X)} \;\simeq\; \mathrm{Hom}_{\Hot}(Y,\Ch_{\infty,\Sigma}(a,b)), \]
+\msp{page 130}
+car je veux quand-même que le type dans Hot soit le bon, qu'il correspond bien à l'homotopie des espaces de chemins. Donc on voudrait qu'un morphisme
+\[ X\xrightarrow{\;f\;}X' \]
+dans (Cat), qui est une Hot-équivalence, définisse
+\[ \Ch_\infty(X;a,b) \longrightarrow \Ch_\infty(X';f(a),f(b)), \]
+qui soient eux aussi des Hot-équivalences. D'autre part, c'est évidemment compatible avec la brillante composition des chemins, que j'ai réussi à définir entre ces objets de Hot. Donc (sous réserve d'avoir vérifié ce que je viens de dire) la vérification de l'associativité se ramenerait au cas où $X$ est de Thomason-Kan. Mais dans ce cas, il y a des chances que, tout comme dans le cas semi-simplicial, les $\Ch_\infty(X;a,b)$ peuvent se définir (comme objets de (Hot)) comme étant simplement les chemins de type $\Delta_+$ de $a$ à $b$, qu'on compose alors de la façon triviale. Mais non, ces catégories sont discrètes! % [sic] ramenerait -> ramènerait, missing accent
+
+Je renonce pour l'instant à poursuivre plus la question d'associativité. Demander à \textsc{Thomason} pour les propriétés du foncteur $\Hot\longrightarrow\Hot^{\wedge}_{0}$.
+
+\clearpage
+\printedpage{82}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 131}
+Cela signifie, à très peu de choses près, qu'on a une interprétation de $\Ch_{\infty,\Sigma}(a,b)$, en tant qu'objet de Hot, comme un `Hom externe' $\mathrm{Hom\,ext}(a,b)$ à valeurs dans Hot, défini sur la catégorie $\mathcal{M}=X$ à l'aide du seul ensemble admissible de flèches $\Sigma\subseteq\mathrm{Fl}(\mathcal{M})$, opération satisfaisant la condition
+\[ \boxed{\mathrm{Hom}_{\Hot}(Y,\mathrm{Hom\,ext}(a,b)) \;\simeq\; \mathrm{Hom}_{\mathcal{M}(Y)\Sigma_Y^{-1}}(a_X,b_X)} \tag*{$(*)$} \]
+(qui peut s'interpréter aussi, soit comme
+\[ \mathrm{Hom}_{\mathcal{M}}(p_!(a_Y),b) \]
+si $p_! : \underbrace{\mathcal{M}(Y)\Sigma_Y^{-1}}_{\mathbf{D}(Y)} \longrightarrow \mathcal{M}$ existe, soit comme
+\[ \mathrm{Hom}_{\mathcal{M}}(a,p_*(b_Y)) \]
+si $p_* : \underbrace{\mathcal{M}(Y)\Sigma_Y^{-1}}_{\mathbf{D}(Y)} \longrightarrow \underbrace{\mathcal{M}}_{=\,\mathbf{D}(*)}$ existe); avec le seul petit ennui que cette formule n'est valable que pour $Y$ \textit{finie.} Si on veut exprimer le second membre pour $Y$ variable quelconque dans Cat, il ne suffit pas d'un objet de Hot ($\mathrm{Hom\,ext}(a,b)$) dans le premier membre, mais il faut l'ind-objet $H(a,b) = (\Ch_n(a,b))_{n\in\mathbf{N}}$ dans Hot. Si donc on tient à travailler dans un `domaine' Diag du dérivateur $\mathbf{D}=\mathbf{D}_{\mathcal{M},\Sigma}$ aussi grand que possible, en se bornant à des catégories finies,
+\msp{page 132}
+et qu'on veut qu'une formule $(*)$ reste valable pour toute $Y$ dans le domaine, il faut `en toute rigueur' définir le $\mathrm{Hom\,ext}(a,b)$ non comme objet de Hot, mais de Ind\,Hot. Il se décrirait donc alors comme
+\[ \mathrm{Hom\,ext}(a,b) = (\Ch_{n,\Sigma}(a,b))_n \qquad \text{(ind-objet dans Hot)}\ , \]
+et l'objet $\Ch_{\infty,\Sigma}$ dans Hot en est une sorte de limite inductive.
+
+Je me suis demandé si la condition préalable, savoir que les foncteurs $H(a,b)$ sur Cat transforment Hot-équivalences $Y'\longrightarrow Y$ en bijections, était bel et bien une (forte) restriction. Je me suis convaincu que c'est bien le cas, déjà dans le cas particulier où $\Sigma=\mathrm{Fl}(X)$. Il me semble que lorsque les composantes connexes de $\Omega(X,a)$ ne sont pas contractiles, ladite condition n'est pratiquement jamais satisfaite. J'ai pensé p.~ex. au cas où $X$ a le type d'homotopie (dans Hot) d'une 2-sphère, de sorte que son $\Omega(X,a)=\Ch_\infty(X,a,a)$ doit avoir un $\pi_1\simeq\mathbf{Z}$. Prenons $Y$ ayant le type dans Hot d'un cercle, disons
+\[
+\begin{tikzcd}
+ & & a & & \\
+Y\colon & 0 \arrow[ur] \arrow[dr] & & 0' \arrow[ul] \arrow[dl] & , \\
+ & & b & &
+\end{tikzcd}
+\]
+
+\clearpage
+\printedpage{83}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 133}
+donc les foncteurs
+\[ f : Y\longrightarrow \Ch_\infty(X;\bullet,\bullet) \overset{\text{déf}}{=} \Omega(X,\bullet) \]
+correspondent à \textit{certains} `lacets' de $\Omega(X,\bullet)$ (mais lacets à origine non précisée), ils ont un type d'homotopie au sens topologique (`nombre de tours' autour de la sphère $X$) donné par un entier $n\in\mathbf{Z}$ (le `degré' du lacet $\lambda$). L'intuition évidente, c'est que l'ensemble des degrés $\delta$ qu'on peut obtenir ainsi, avec une catégorie \textit{finie} donnée $Y$ qui représente le cercle $S^1\in(\Hot)$, est fini - $|\delta|$ majoré sûrement par le nombre de ces flèches (donc au moins par 4 dans le cas envisagé, chaque flèche de $Y$ faisant faire \textit{au plus} un tour autour du pseudo-cercle $\Omega(S^2,\bullet)$) (\footnote[28]{probablement on ne trouve tout au plus que les degrés $\delta$ entre $-2$ et $+2$.}). D'autre part, quand on représente $S^1$ par des catégories $Y_n$ arbitrairement grandes (disons déduites des intervalles $\Phi_n=(\Delta_+\Delta_-)^n$ en identifiant la source et le but), on doit trouver des degrés arbitrairement élevés. Or toute $Y_n$ s'envoie dans $Y(=Y_2)$ par une flèche
+\[ Y_n = Y' \longrightarrow Y = Y_2 \]
+\msp{page 134}
+qui est de degré 1, donc qui est une Hot-équivalence. Mais l'application correspondante
+\[ \pi_0\uHom(Y,\Omega(X,\bullet)) \longrightarrow \pi_0\uHom(Y',\Omega(X,\bullet)) \]
+n'est pas bijective. Ce genre d'argument me semble devoir marcher chaque fois que l'ensemble des groupes d'homotopie $\pi_j(X,x)$, pour $j\geq 2$ (donc l'ensemble des groupes d'homotopie $\pi_i$ de $\Omega(X,x)$, pour $i\geq 1$) est \textit{infini,} en prenant pour $Y$, $Y'$ différents représentants $Y_n$ de la sphère $S^i$, disons les $Y_n$ déduites de $\Phi_n$ $(n\geq 2)$ en prenant $\Phi_n^i = \Phi_n\times\Phi_n\times\cdots\times\Phi_n$ (qui est une sorte de $i$-cube combinatoire), et en identifiant son `bord' à un seul point. Je présume que le nombre d'élements dans $\pi_i(\Omega(X,x))$ qu'on peut obtenir à partir de flèches $Y_n\longrightarrow\Omega(X,x)$ est limité par la taille de $Y_n$, mais on peut sûrement les obtenir chacun, en prenant $n$ assez grand. Si donc $\xi\in\pi_i(\Omega)$ échappe à $Y_{n_0}$ ($n_0=0$, disons), on prend un $n'$ assez grand pour que $\xi$ n'échappe pas à $Y_{n'}$, et on choisit % [sic] d'élements -> d'éléments, missing accent
+\[ Y_{n'} \longrightarrow Y_n\ , \]
+\texttt{[}$n=n_0$\texttt{?]}
+
+\msp{page 135}
+qui soit une Hot-équivalence (p.~ex. à l'aide d'une rétraction de $\Phi_{n'}$ sur $\Phi_n$, compatible avec sources et buts).
+
+Ceci attire fortement l'attention sur le fait que si $Y$, $C$ sont deux catégories, la catégorie $\uHom(Y,C)$ \textit{n'est pas} un représentant de $\uHom_{\Hot}(\mathrm{hot}(Y),\mathrm{hot}(C))$, on a seulement une flèche canonique
+\[ \mathrm{hot}(\uHom(Y,C)) \longrightarrow \uHom_{\Hot}(\mathrm{hot}(Y),\mathrm{hot}(C)), \tag*{$(*)$} \]
+
+\end{document}

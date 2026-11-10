@@ -1,0 +1,1777 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\Liss}{\underline{\mathrm{Liss}}}
+% macro conflict, first definition kept: \newcommand{\Liss}{\underline{\mathrm{Liss}}}
+% macro conflict, first definition kept: \newcommand{\Liss}{\underline{\mathrm{Liss}}}
+\documentclass[11pt]{article}
+\usepackage[no-math]{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Wd}{W^{\mathrm{d}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Liss}{\underline{\mathrm{Liss}}\,}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\lc}{\mathrm{lc}}
+\newcommand{\adj}[2]{\mathrel{\underset{#2}{\overset{#1}{\rightleftarrows}}}}
+\newcommand{\multhot}{\mathrm{multhot}}
+\newcommand{\mult}{\mathrm{mult}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\bs}{\backslash}
+\newcommand{\ul}[1]{\underline{\mathrm{#1}}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,rounded corners,inner sep=2pt](c){#1};}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Parf}{\underline{\mathrm{Parf}}}
+\newcommand{\Prop}{\underline{\mathrm{Prop}}}
+\newcommand{\Fibsc}{\underline{\mathrm{Fibsc}}}
+\newcommand{\Cofibsc}{\underline{\mathrm{Cofibsc}}}
+\newcommand{\lcs}{\mathrm{lc}\,!}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\troisbarres}{\leavevmode\llap{$|||$\quad}}
+\newcommand{\Bifib}{\underline{\mathrm{Bifib}}}
+\newcommand{\margbar}{\marginpar{\(\|\)}}
+\newcommand{\und}[1]{\underline{\mathrm{#1}}}
+\newcommand{\circnum}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\begin{document}
+% ---- from Der-ChVI-345_p086-090.tex
+\printedpage{84}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+même encore meilleure pour le foncteur $f_!$ entre les HOT, puisque la description de ce foncteur peut se faire directement sur $\Cat/S'$ tout entier, sans avoir à se borner à des sous-catégories plus ou moins \msp{page 138}astucieuses, où le foncteur induit serait compatible avec les localiseurs ($\underline{\mathrm{Liss}}\,S$ et $\underline{\mathrm{Fibhot}}\,S$ dans le cas de $f^*$).
+
+On a de façon immédiate la transitivité de $f_!$, $f_!^{\mathrm{lc}}$, $f_!^{o}$, i.e.
+\[
+(gf)_! = g_!f_!, \qquad (gf)_!^{\mathrm{lc}} = g_!^{\mathrm{lc}}f_!^{\mathrm{lc}}, \qquad (gf)_!^{o} = g_!^{o}f_!^{o}.
+\]
+
+Mais on ne va pas faire bouger $S$, $S'$, $f$ pour le moment, car il faut maintenant, avant toute autre chose, essayer d'établir l'adjonction de $f_!$ et de $f^*$ (dans cet ordre).
+
+Pour le moment, occupons-nous de $\HOT_W$ seulement - le cas de $\HOT_W^{o}$ s'en déduira en appliquant ce qu'on saura à $f^{o}$. Et on s'occupera de $\HOT_W^{\mathrm{lc}}$ plus tard.
+
+1) \textit{L'homomorphisme}
+\[
+\alpha : \id_{\HOT_W(S')} \longrightarrow f^*f_!.
+\]
+
+Si $X'$ est dans $\Cat/S'$, $f_!(\hot_{S',W}(X'))$ est $\hot_{S,W}(X')$, mais on ne peut trouver son image inverse $f^*$ sur $S'$ en prenant l'image inverse catégorique. Car même si on fait des hypothèses draconiennes sur $X'$ en tant qu'objet de $\Cat/S'$ (p.ex. $X'$ fibrée sur $S'$), celles-ci seront réduites à néant quand on aura composé avec $f$, sur lequel nous ne voulons ici faire aucune hypothèse. Il \msp{page 139}faut donc d'abord appliquer le foncteur $\Phi_S$ à $X'$ sur $S$, puis prendre son image inverse sur $S'$ :
+\[
+f^*f_!(\hot_{S',W}(X')) = \hot_{S',W}(\Phi_S(X'/S)\times_S S').
+\]
+Il faut donc trouver une flèche
+\[
+\alpha_{X'} : X' \longrightarrow \Phi_S(X'/S)\times_S S'
+\]
+dans le localisé $(\Cat/S')(\Wd_{S'})^{-1}$, voire même une flèche dans $\Cat/S'$ lui-même. Mais par les propriétés d'adjonction des foncteurs $f_!$ et $f^*$ au \textit{niveau catégorique,} une telle flèche revient à une flèche
+\[
+f_!(X') \longrightarrow \Phi_S(X'/S)
+\]
+dans $\Cat/S$, i.e. à une flèche qui rend commutatif le carré
+\[
+\begin{tikzcd}
+X' \arrow[r] \arrow[d] & \Phi_S(X'/S') \arrow[d] \\ % [sic] \Phi_S(X'/S') -> \Phi_S(X'/S), the arrow f_!(X') -> \Phi_S(X'/S) just above has X'/S
+S' \arrow[r] & S.
+\end{tikzcd}
+\]
+% foot: Version 9 novembre 2001
+
+\printedpage{85}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Or on a une telle flèche canonique, savoir $i_{X'/S}$. Elle est fonctorielle en $X'$ sur $S$ (sans avoir même à se soucier si $X'$ sur $S$ provient d'un $X'$ sur $S'$, i.e. si la flèche structurale $X'\longrightarrow S$ se factorise par $S'\longrightarrow S$).
+
+\leavevmode\msp{page 140}2) \textit{L'homomorphisme}
+\[
+\beta : \id_{\HOT_W(S)} \longleftarrow f_!f^*.
+\]
+
+On peut décrire $\HOT_W(S)$ par $(\underline{\mathrm{Fib}}\,S)(\Wd_S)^{-1}$ ou $(\underline{\mathrm{Liss}}\,S)(\Wd_S)^{-1}$ par exemple, de sorte que $f^*$ a une description simple par
+\[
+f^*(\hot_{S,W}(X)) = \hot_{S',W}(X\times_S S')
+\]
+(pour $X$ lisse sur $S$). On a ensuite
+\[
+f_!f^*(\hot_{S,W}(X)) = \hot_{S,W}(X\times_S S'),
+\]
+mais attention, $X\times_S S'$ n'est pas a priori dans $\underline{\mathrm{Liss}}\,S$, seulement dans $\Cat/S$ sans plus. Mais cela n'empêche qu'il donne ce qu'il faut, par localisation $(\Wd_S)^{-1}$ dans $\Cat/S$. Pour définir $\beta_X$, il suffit donc de trouver une flèche
+\[
+\beta_X : X \longleftarrow X\times_S S'
+\]
+dans $\Cat/S$, et on voit bien $\pr_1^X$ (\footnote[68]{quand $\xi\in\HOT_W(S)$ est défini par $X$ dans $\Cat/S$ non nécessairement lisse, on doit trouver $\Phi_S(X)\times_S S'\longrightarrow X$ dans $(\Cat/S)(\Wd_S)^{-1}$, on prend $(i_X)^{-1}\pr_1^{\Phi_S(X)}$ (cf. page 143).}). On a donc
+\[
+\left\{
+\begin{array}{lcl}
+\alpha : \id & \longrightarrow & f^*f_! \\
+\beta : \id & \longleftarrow & f_!f^*
+\end{array}
+\right.
+\]
+
+3) \textit{La compatibilité}
+\[
+\begin{tikzcd}
+f_! \arrow[r, "f_!*\alpha"] \arrow[rr, bend right, "\id"'] & f_!f^*f_! \arrow[r, "\beta*f_!"] & f_!.
+\end{tikzcd}
+\]
+
+On doit donc prendre $X'$ sur $S'$, et expliciter les flèches à partir de l'objet
+\[
+\xi' = \hot_{S',W}(X').
+\]
+% foot: Version 9 novembre 2001
+
+\printedpage{86}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\leavevmode\msp{page 141}On a
+\[
+f_!(\xi') = \hot_{S,W}(X'/S),
+\]
+et pour calculer $f^*f_!(\xi')$, il faut comme tantôt prendre $\Phi_S(X')$ et on trouve
+\[
+f^*f_!(\xi') = \hot_{S',W}(\Phi_S(X')\times_S S').
+\]
+Enfin,
+\[
+f_!f^*f_!(\xi') = \hot_{S,W}(\Phi_S(X')\times_S S').
+\]
+Il faut expliciter les flèches
+\[
+\begin{tikzcd}[row sep=small]
+\underbrace{f_!(\xi')} \arrow[r, "{f_!(\alpha_{\xi'})}"] & \underbrace{f_!f^*f_!(\xi')} \arrow[r, "{\beta_{f_!(\xi')}}"] & \underbrace{f_!(\xi')}. \\
+X'/S \arrow[r, "{\alpha_{X'}}", "{\text{déduit de } i_{X'}}"'] & \Phi_S(X')\times_S S' \arrow[r, dotted, "{\beta_{X'}}"] & X'/S \\
+ & \text{sur } S &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+$\alpha_{X'}$ est déduit de $i_{X'} : X'\longrightarrow\Phi_S(X')$ comme l'unique $S'$-morphisme rendant commutatif le diagramme
+\[
+\begin{tikzcd}
+X' \arrow[r, "{\alpha_{X'}}"] \arrow[d] \arrow[rr, bend left, "{i_{X'}}"] & \Phi_S(X')\times_S S' \arrow[r, "\pr_1"] \arrow[dl, dotted] & \Phi_S(X') \arrow[d] \\ % doubt resolved in DER_VI-c_corrections.csv; input note: style of the curved arrow i_{X'} -- dashed or finely dotted or solid
+S' \arrow[rr] & & S.
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+
+Pour décrire $\beta_{f_!(\xi')}$, où $f_!(\xi') = \hot_{S,W}(X')$, il faut donner une description générale de $\beta_\xi$ qui soit valable pour \textit{tout} représentant $X$ de $\xi$, pas seulement dans le cas $X$ lisse sur $S$. Pour calculer $f^*(\xi)$, il faut donc prendre le $\hot_{S',W}$ de $\Phi(X)\times_S S'$, puis pour $f_!f^*(\xi)$, il \msp{page 142}faut prendre le $\hot_{S,W}$ du même $\Phi_S(X)\times_S S'$. Il faut définir, si on peut, une flèche
+\[
+\Phi_S(X)\times_S S' \longrightarrow X \qquad\qquad \text{dans } \Cat/S,
+\]
+ou du moins dans $(\Cat/S)(\Wd_S)^{-1}$. Mais on a
+\[
+i_X : X \longrightarrow \Phi_S(X)
+\]
+qui est dans $\Wd_S$, et qui par produit cartésien définit
+\[
+i_X\times_S\id_{S'} : X\times_S S' \longrightarrow \Phi_S(X)\times_S S'
+\]
+(en d'autres termes on a pris l'image inverse de $i_X$ par $S'\longrightarrow S$). Cette flèche est-elle encore dans $\Wd_S$? (\footnote[69]{Non, elle ne l'est pas, car si $S'=\{s\}$, cela signifierait que $X'_s\longrightarrow s\backslash X$ est dans $W$, ce qui est faux en général.}). Si oui, on a le diagramme
+% foot: Version 9 novembre 2001
+\printedpage{87}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+\Phi_S(X)\times_S S' \arrow[r, dotted, "\beta_X ?"] & X \\
+X\times_S S' \arrow[u, "{i_X\times_S\id_{S'}}", "{=\pi_X}"'] \arrow[ur, "\pr_1^X"] &
+\end{tikzcd}
+\]
+et on définit la flèche cherchée $\beta_X$ \textit{dans} $(\Cat/S)(\Wd_S)^{-1}$ par la commutativité de ce triangle, donc comme
+\[
+\beta_X = \pr_1^X\circ\underbrace{\pi_X^{-1}}_{\text{inverse dans }(\Cat/S)(\Wd_S)^{-1}} \qquad\qquad .
+\]
+
+\leavevmode\msp{page 143}Mais ça ne marche pas - cf. annotation! On va faire alors l'inverse
+\[
+\begin{tikzcd}
+\Phi_S(X)\times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] \arrow[dr, dotted, "\beta_X ?"'] & \Phi_S(X) \\
+ & X \arrow[u, "{i_X \qquad \text{dans } \Wd_S}"']
+\end{tikzcd}
+\]
+
+(\footnote[70]{Description de $\beta_\xi$ pour $\xi=\hot_{S,W}(X)$, avec $X$ quelconque dans $\Cat/S$, à expliciter dans définition en forme.}), on définit $\beta_X$ comme $(i_X)^{-1}\pr_1^{\Phi_S(X)}$, où $(i_X)^{-1}$ est défini dans $(\Cat/S)(\Wd_S)^{-1}$.
+
+Pour prouver la commutativité de $(*)$ (p. 141), comme $i_{X'} : X'\longrightarrow\Phi_S(X')$ est dans $\Wd_S$, il suffit de prouver, au lieu de $\beta_{X'}\alpha_{X'} = \id_{X'}$, la relation déduite en composant avec $i_{X'} : X'\longrightarrow\Phi_S(X')$
+\[
+\underbrace{i_{X'}\beta_{X'}}_{\pr_1^{\Phi_S(X')}}\alpha_{X'} = i_{X'},
+\]
+i.e.
+\[
+\pr_1^{\Phi_S(X')}\circ\alpha_{X'} = i_{X'},
+\]
+ce qui n'est autre que la relation de définition de $\alpha_{X'}$ (cf. $(**)$ p. 141), on gagne!
+
+4) \textit{Compatibilité}
+\[
+\begin{tikzcd}
+f^* \arrow[r, "\alpha*f^*"] \arrow[rr, bend right, "\id"'] & f^*f_!f^* \arrow[r, "f^**\beta"] & f^*.
+\end{tikzcd}
+\]
+% foot: Version 9 novembre 2001
+
+\printedpage{88}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\leavevmode\msp{page 144}Partons donc d'un $\xi\in\Ob\HOT_W(S)$, qu'on peut supposer défini par $X\in\Ob\underline{\mathrm{Fib}}\,S$. Alors
+\[
+\begin{aligned}
+f^*(\xi) &\;=\; \hot_{S',W}(X\times_S S'),\\
+f_!f^*(\xi) &\;=\; \hot_{S,W}(X\times_S S'),\\
+f^*f_!f^*(\xi) &\;=\; \hot_{S',W}(\Phi_S(X\times_S S')\times_S S').
+\end{aligned}
+\]
+Il faut expliciter maintenant
+\[
+\underbrace{f^*(\xi)}_{\hot_{S',W}(X')} \xrightarrow{\alpha_{f^*(\xi)}} \underbrace{f^*f_!f^*(\xi)}_{\hot_{S',W}(\Phi_S(X')\times_S S')} \xrightarrow{f^*(\beta_\xi)} \underbrace{f^*(\xi)}_{\hot_{S',W}(X')} \quad ,
+\]
+et vérifier que le composé est l'identité. On a posé
+\[
+X' = X\times_S S',
+\]
+et le diagramme est donc aussi
+\[
+\begin{tikzcd}
+X' \arrow[r, "{\alpha_{X'}}"] \arrow[rr, bend left, "{\id_{X'}}"] & \Phi_S(X')\times_S S' \arrow[r, "f^*(\beta_\xi)"] & X' % doubt resolved in DER_VI-c_corrections.csv; input note: style of the curved arrow id_{X'} -- dashed or finely dotted or solid
+\end{tikzcd}
+\]
+dans $(\Cat/S')(\Wd_{S'})^{-1}$. Pour vérifier la commutativité, on peut composer avec
+\[
+X\times_S S' = X' \xrightarrow{i_X\times_S\id_{S'}} \Phi_S(X')\times_S S' \qquad\qquad \text{(où } i_X : X\longrightarrow\Phi_S(X)\text{)}
+\]
+qui est dans $\Wd_{S'}$ (\footnote[71]{\textbf{NB} Comme $X$ est lisse$/S$, et $\Phi_S(X)$ aussi, $X\longrightarrow\Phi_S(X)$ reste une $W$-équivalence colocale par tout changement de base.}), or on vérifie, sur la construction générale de $\beta_\xi=\beta_X$ (page précédente), que l'on a commutativité dans
+\[
+\begin{tikzcd}
+\Phi_S(X')\times_S S' \arrow[r, "f^*(\beta_\xi)"] \arrow[dr, "\Phi_S(\pr_1^X)\times_S S'"'] & X' \arrow[d, "i_X\times_S S'"] \\
+ & \Phi_S(X)\times_S S'.
+\end{tikzcd}
+\]
+
+\leavevmode\msp{page 145}On est ramené à la commutativité de
+\[
+\begin{tikzcd}
+X\times_S S' = X' \arrow[r, "{\alpha_{X'}}"] \arrow[dr, "i_X\times_S S'"', "?"] & \Phi_S(X')\times_S S' \arrow[d, "\Phi_S(\pr_1^X)\times_S S'"] \\
+ & \Phi_S(X)\times_S S'
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+% foot: Version 9 novembre 2001
+
+% ---- from Der-ChVI-345_p091-095.tex
+\printedpage{89}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+dans $(\Cat/S')(W^{\dd}_{S'})^{-1}$. Essayons de prouver que c'est commutatif dans $\Cat/S'$, pas seulement dans le localisé par $W^{\dd}_{S'}$. On peut le regarder comme diagramme dans $\Cat/S$ et prouver la commutativité à ce titre. Cette relation de commutativité $vu = w$ se décompose alors en deux, suivant les deux facteurs $\Phi_S(X)$ et $S'$ de l'objet but $\Phi_S(X) \times_S S'$. Suivant le facteur $S'$, la relation signifie simplement que $\alpha_{X'}$ est un $S'$-morphisme, c'est OK. Pour le facteur $\Phi_S(X)$, on prolonge le diagramme $(*)$ à droite par le carré
+\[
+\begin{tikzcd}
+X' \arrow[r, dotted, "\alpha_{X'}"] \arrow[dr, dotted] & \Phi_S(X') \times_S S' \arrow[r, "\pr_1^{\Phi_S(X')}"] \arrow[d, "\Phi_S(\pr_1 X)\times_S S'"] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+ & \Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X),
+\end{tikzcd}
+\] % [sic] \Phi_S(\pr_1 X)\times_S S' -> \Phi_S(\pr_1^X)\times_S S', the X is printed on the line instead of as superscript of \pr_1
+\msp{page 146}
+et compte tenu que le composé de la première ligne horizontale est $i_{X'}$, par construction de $\alpha_{X'}$, on est ramené à la commutativité de
+\[
+\begin{tikzcd}
+X \times_S S' = X' \arrow[r, "i_{X'}"] \arrow[d, "i_X\times_S S'"'] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+\Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X).
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+Or le morphisme $i_X : X \longrightarrow \Phi_S(X)$ dans $\Cat/S$ donne lieu au carré commutatif (comme toute flèche $i : X \longrightarrow Y$)
+\[
+\begin{tikzcd}
+X \times_S S' \arrow[r, "\pr_1^X"] \arrow[d, "i_X\times_S S'"'] & X \arrow[d, "i_X"] \\
+\Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X),
+\end{tikzcd}
+\]
+de sorte que le composé inférieur de $(*)$ n'est autre que celui de $(**)$, donc égal au composé supérieur de ce dernier, et la commutativité de $(*)$ revient à celle de
+\[
+\begin{tikzcd}
+X \times_S S' = X' \arrow[r, "i_{X'}"] \arrow[d, "\pr_1^X"'] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+X \arrow[r, "i_X"] & \Phi_S(X),
+\end{tikzcd}
+\]
+qui est évidente par fonctorialité de $Z \xrightarrow{i_Z} \Phi_S(Z)$, appliquée à la flèche $\pr_1^X : X' \longrightarrow X$ de $\Cat/S$.
+
+% foot: Version 9 novembre 2001
+
+\printedpage{90}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 147}
+On a ainsi prouvé que les foncteurs
+\[
+\HOT_W(S') \adj{f_!}{f^*} \HOT_W(S)
+\tag*{$(*)$}
+\]
+sont adjoints l'un de l'autre, avec des morphismes d'adjonction
+\[
+\left\{
+\begin{array}{lcl}
+\id & \xrightarrow{\ \alpha\ } & f^*f_! \\[1ex]
+\id & \xleftarrow{\ \beta\ } & f_!f^*
+\end{array}
+\right.
+\]
+précisés plus haut. Je présume que la même démonstration, en travaillant avec les localiseurs grossiers $W_S$, $W_{S'}$, au lieu de $W^{\dd}_S$, $W^{\dd}_{S'}$, donnerait que les foncteurs correspondants
+\[
+\HOT^{\lc}_W(S') \adj{f_!^{\lc}}{f^*_{\lc}} \HOT^{\lc}_W(S)
+\tag*{$(**)$}
+\]
+sont adjoints l'un de l'autre, avec essentiellement ‘les mêmes’ morphismes d'adjonction $\alpha$, $\beta$. Je n'ai pas envie de reprendre les raisonnements précédents et préfère le \textit{déduire} de l'adjonction dans la situation $(*)$. Cela me donnera l'occasion de mieux comprendre les traits formels essentiels de la situation. Je poserai pour simplifier
+\msp{page 148}
+\[
+\begin{array}{rcl@{\qquad\qquad}rcl}
+\HOT_W(S) & = & \cA, & \HOT_W(S') & = & \cA', \\
+\HOT^{\lc}_W(S) & = & \cA_0, & \HOT^{\lc}_W(S') & = & \cA'_0,
+\end{array}
+\]
+et j'utilise les couples de foncteurs adjoints
+\[
+\cA \adj{\rho}{i} \cA_0, \qquad\qquad \cA' \adj{\rho'}{i'} \cA'_0,
+\]
+où $\rho$, $\rho'$ sont des foncteurs de localisation, i.e. $i$, $i'$ des foncteurs pleinement fidèles. Je dispose d'un couple de foncteurs adjoints
+\[
+\cA' \adj{f_!}{f^*} \cA,
+\]
+et je suppose de plus
+
+\begin{enumerate}
+\item[a)] $f_!$ est compatible avec les localiseurs de $\cA'$, $\cA$ définis par $\rho'$, $\rho$ respectivement, donc définit un foncteur (bien déterminé à isomorphisme unique près)
+\[
+f_!^0 : \cA'_0 \longrightarrow \cA_0,
+\]
+donnant donc lieu à un diagramme commutatif (à isomorphisme fonctoriel près)
+
+% foot: Version 9 novembre 2001
+
+\printedpage{91}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+\cA' \arrow[r, "\rho'"] \arrow[d, "f_!"'] & \cA'_0 \arrow[d, "f_!^0"] \\
+\cA \arrow[r] & \cA_0.
+\end{tikzcd}
+\tag*{(I)}
+\]
+\texttt{[plutôt} $\cA \xrightarrow{\rho} \cA_0$\texttt{]}
+
+\item[b)] ‘Dualement’, $f^* : \cA \longrightarrow \cA'$ est compatible avec les sous-catégories pleines images essentielles des foncteurs pleinement fidèles $i$, $i'$, et induit
+\msp{page 149}
+alors un foncteur, défini à isomorphisme unique près :
+\[
+f_0^* : \cA_0 \longrightarrow \cA'_0,
+\]
+donnant lieu à un carré de foncteurs, commutatif à isomorphisme fonctoriel canonique près
+\[
+\begin{tikzcd}
+\cA_0 \arrow[r, "i"] \arrow[d, "f_0^*"'] & \cA \arrow[d, "f^*"] \\
+\cA'_0 \arrow[r, "i'"] & \cA'.
+\end{tikzcd}
+\tag*{(II)}
+\]
+\end{enumerate}
+
+\textit{Sous ces conditions, le couple de foncteurs}
+\[
+\cA_0 \adj{f_!^0}{f_0^*} \cA'_0, \qquad \text{\texttt{[plutôt} } \cA'_0 \adj{f_!^0}{f_0^*} \cA_0, \text{\texttt{]}}
+\]
+\textit{est un couple de foncteurs adjoints.} (NB quand je parle de couples de foncteurs adjoints, celui écrit au-dessus de l'autre est l'adjoint à gauche.)
+
+\textsc{Démonstration}. Soient
+\[
+\eta_0 \in \Ob \cA_0, \qquad\qquad \xi'_0 \in \Ob \cA'_0,
+\]
+il faut définir une bijection bifonctorielle
+\[
+\Hom_{\cA_0}(f_!^0(\xi'_0), \eta_0) \simeq \Hom_{\cA'_0}(\xi'_0, f_0^*(\eta_0))
+\]
+Pour cela, on va écrire $\xi'_0$ sous la forme
+\[
+\xi'_0 = \rho'(\xi')\,, \qquad\qquad \xi' \in \Ob \cA',
+\]
+il suffira d'établir la bijection bifonctorielle en remplaçant $\xi'_0$ par $\rho'(\xi')$, i.e.
+\[
+\Hom_{\cA_0}(f_!^0(\rho'(\xi')), \eta_0) \simeq \Hom_{\cA'_0}(\rho'(\xi'), f_0^*(\eta_0))
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{92}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 150}
+(En effet, la formule d'adjonction s'interprète comme un isomorphisme de bifoncteurs, ou, ce qui revient au même, de foncteurs $\cA'_0 \mathrel{\underset{\psi}{\overset{\varphi}{\rightrightarrows}}} \cA_0^{\wedge}$, or
+\[
+\begin{array}{ccc}
+\uHom(\cA'_0, \cA_0^{\wedge}) & \longrightarrow & \uHom(\cA', \cA_0^{\wedge}) \\[1ex]
+\varphi & \longmapsto & \varphi \circ \rho'
+\end{array}
+\]
+est pleinement fidèle, puisque $\rho'$ est un foncteur de localisation, donc il revient au même de se donner un isomorphisme $\varphi \simeq \psi$, ou $\varphi \circ \rho' \simeq \psi \circ \rho'$.) On doit donc transformer l'expression
+\[
+\begin{array}{cccc}
+ & \Hom_{\cA_0}(\underbrace{f_!^0(\rho'(\xi'))}_{\rho f_!(\xi')}, \eta_0) & \underbrace{\simeq}_{\text{\footnotesize commutativité de (I)}} & \Hom_{\cA_0}(\rho f_!(\xi'), \eta_0) \\[3ex]
+\underbrace{\simeq}_{\text{\footnotesize adjonction $\rho$, $i$}} & \Hom_{\cA}(f_!(\xi'), i(\eta_0)) & \underbrace{\simeq}_{\text{\footnotesize adjonction $f_!$, $f^*$}} & \Hom_{\cA'}(\xi', \underbrace{f^*i(\eta_0)}_{i'(f_0^*(\eta_0))}) \\[3ex]
+\underbrace{\simeq}_{\text{\footnotesize commutativité de (II)}} & \Hom_{\cA'}(\xi', i'(f_0^*(\eta_0))) & \underbrace{\simeq}_{\text{\footnotesize adjonction $\rho'$, $i'$}} & \Hom_{\cA'_0}(\underbrace{\rho'(\xi')}_{\xi'_0}, f_0^*(\eta_0)),
+\end{array}
+\]
+ce qui est la bijection annoncée.
+
+Je résume l'essentiel des résultats obtenus sur $f_!$, $f_!^{\lc}$ :
+
+\textbf{Théorème 2.} \textit{Soit $f : S' \longrightarrow S$ une flèche dans} $\Cat$\textit{, considérons les foncteurs}
+\[
+\begin{aligned}
+\HOT_W(S') &\adj{f_!}{f^*} \HOT_W(S) \\
+\HOT^{\lc}_W(S') &\adj{f_!^{\lc}}{f^*_{\lc}} \HOT^{\lc}_W(S),
+\end{aligned}
+\]
+\msp{page 151}
+\textit{où les foncteurs $f_!$, $f_!^{\lc}$ sont décrits dans le théorème} 1 \textit{(p. 136). Les morphismes d'adjonction}
+\[
+\left\{
+\begin{array}{lcl}
+\id & \longrightarrow & f^*f_! \\[1ex]
+\id & \longleftarrow & f_!f^*
+\end{array}
+\right.
+\]
+\textit{sont décrits p. 138 à 140.}
+
+On voudrait expliciter la formule sympathique, obtenue en passant
+\[
+\boxed{\;f_!f^*(\xi) = \hot_{S,W}(S'/S) \times_S \xi\;}\ ,
+\]
+pour ceci il faut expliciter le deuxième membre. Notons la
+
+\textbf{Proposition 4.} \textit{Il existe un unique foncteur}
+\[
+(\xi, \eta) \longmapsto \xi \times_S \eta : \HOT_W(S) \times \HOT_W(S) \longrightarrow \HOT_W(S)
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{93}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\textit{avec la propriété que pour $X$, $Y$ variables dans} $\Liss S$\textit{, on ait un isomorphisme bifonctoriel en $X$, $Y$}
+\[
+\hot_{S,W}(X) \times_S \hot_{S,W}(Y) \simeq \hot_{S,W}(X \times_S Y)
+\tag*{$(*)$}
+\]
+(\footnote[72]{\textbf{NB} La multiplication $\times_S$ dans $\HOT_W(S)$ est associative, commutative, unitaire \textit{etc., etc.}, puisque c'est le cas dans $\Liss S$.}).
+
+C'est formel, en utilisant seulement que sur $\Liss S$, le bifoncteur
+\[
+(X, Y) \longrightarrow X \times_S Y
+\]
+est compatible avec les localiseurs $W^{\dd}_S \times W^{\dd}_S$ et $W^{\dd}_S$. Pour le voir, on est ramené à voir que si $X \xrightarrow{u} X'$ dans $\Liss S$ est dans $W^{\dd}_S$, alors il en est de même de $X \times_S Y \xrightarrow{\ u\times_S \id_Y\ } X' \times_S Y$, pour tout
+\msp{page 152}
+$Y$ dans $\Liss S$. En fait, on n'utilise que la lissité de $X$, $X'$, pas celle de $Y$, et c'est immédiat, car si $X \longrightarrow X'$ est dans $W^{\dd}_S$, $X \times_S Y \longrightarrow X' \times_S Y$ est dans $W^{\dd}_Y$, donc aussi dans $W^{\dd}_S$ (cf. théorème 1 appliqué à $Y \longrightarrow S$). Cette remarque suggère en même temps :
+
+\textbf{Corollaire 1. (Faux)} \textit{La formule bifonctorielle} $(*)$ \textit{reste valable pour $X$ dans} $\Liss S$\textit{, $Y$ quelconque dans} $\Cat/S$\textit{, et aussi dans le cas inverse.} (\footnote[73]{Cet énoncé est sûrement \textit{faux!} Contrexemple p. 153, cf. corollaire 1 rectifié page 154-156.})
+
+Dans le premier cas, considérons
+\[
+Y \xrightarrow{i_Y} \Phi(Y)
+\]
+dans $W^{\dd}_S$, donc un isomorphisme dans $(\Cat/S)(W^{\dd}_S)^{-1}$, on aura donc
+\[
+\begin{array}{lcl}
+\hot_{S,W}(X) \times_S\ \hot_{S,W}(Y) & \xrightarrow{\ \sim\ } & \hot_{S,W}(X) \times_S\ \hot_{S,W}(\Phi(Y)) \\[1ex]
+ & \underbrace{\xrightarrow{\ \sim\ }}_{\text{\footnotesize car $X$ \textit{et} $\Phi(Y)$ lisses sur $S$}} & \hot_{S,W}(X \times_S \Phi(Y)),
+\end{array}
+\]
+or je dis que
+\[
+X \times_S Y \xrightarrow{\ X\times_S i_Y\ } X \times_S \Phi(Y)
+\]
+est encore dans $W^{\dd}_S$. Il suffit de voir que c'est dans $W^{\dd}_X$ (cf. théorème 1), et pour ceci, que le changement de base lisse $X \longrightarrow S$ induit $\Cat/S \longrightarrow \Cat/X$ compatible avec les localiseurs $W^{\dd}_S$, $W^{\dd}_X$. Mais c'est \textit{faux} (prendre $X = \{s\}$).
+
+\msp{page 153}
+Montrons que les corollaire est faux. Je vais prendre $Y = \{s\}$, catégorie ponctuelle en $s$, alors $\Phi(Y)$ est la catégorie fibrée à fibres discrètes définie par le foncteur représentable $F$ défini par $s$, donc c'est $S/F$ et, en l'occurence $S/s$: % [sic] les corollaire -> le corollaire, agreement; occurence -> occurrence, spelling
+\[
+\Phi(\{s\}) \simeq S/s \qquad\quad \text{comme catégorie sur } S.
+\]
+
+% foot: Version 9 novembre 2001
+
+% ---- from Der-ChVI-345_p096-100.tex
+\printedpage{94}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Si p.ex. $s$ est élément final $e$ de $S$, on trouve
+\[\Phi(\underset{S}{e}) \simeq S,\]
+donc
+\[\hot_{S,W}(X)\times_S \hot_{S,W}(e)=\hot_{S,W}(X),\]
+d'autre part
+\[\hot_{S,W}(X\times_S e)=\hot_{S,W}(X_e).\]
+
+\msp{154}
+Si les deux étaient isomorphes dans $\HOT_W(S)$ par la flèche canonique
+\[X_e\longrightarrow X,\]
+en appliquant le foncteur $p_!$ (où $p : S\longrightarrow e$), il s'ensuiverait que $X_e\longrightarrow X$ est dans $W$. Si par exemple $S=\mathbf{\Delta}^1$, cela impliquerait que pour tout $X$ lisse sur $S$, $X_1\longrightarrow X$ est dans $W$, alors que normalement la lissité implique que $X_0\longrightarrow X$ est dans $W$. Donc ça reviendrait à dire que $\Liss\,\mathbf{\Delta}^1=\Liss_0\mathbf{\Delta}^1$, d'où aussitôt $\Liss\,S=\Liss_0S$, pour tout $S$ dans Cat, ça se saurait! Le contrexemple le plus trivial est de prendre $X=\{0\}\hookrightarrow S=\mathbf{\Delta}^1$, l'inclusion de l'ouvert ‘générique’, immersion ouverte, donc lisse, la fibre $X_1$ est vide! % [sic] s'ensuiverait -> s'ensuivrait, nonstandard verb form
+
+% marginal mark: handwritten sign in the left margin beside the following statement
+\textbf{Corollaire 1 rectifié.} \textit{Si $X$ est dans} $\Cat/S$\textit{, pas nécessairement lisse sur $S$, alors le foncteur}
+\[\mult_{X/S} : Y\longmapsto Y\times_S X : \Cat/S\longrightarrow \Cat/S\]
+\textit{induit un foncteur}
+\[\Liss\,S\longrightarrow \Cat/S\]
+\textit{compatible avec les localiseurs $W_S^{\mathrm{d}}$, $W_S^{\mathrm{d}}$, donc induit un foncteur}
+\[(\Liss\,S)(W_S^{\mathrm{d}})^{-1}\longrightarrow(\Cat/S)(W_S^{\mathrm{d}})^{-1},\]
+
+\msp{155}
+\textit{ou encore (compte tenu de l'équivalence induite par l'inclusion}
+\[(\underline{\mathrm{Liss}}\,S)(W_S^{\mathrm{d}})^{-1}\xrightarrow{\ \sim\ }(\Cat/S)(W_S^{\mathrm{d}})^{-1}\quad\textit{),}\] % doubt resolved in DER_VI-c_corrections.csv; input note: underline of Liss -- double underline or single underline
+\textit{un foncteur, encore noté} $\multhot_{X/S}$,
+\[\multhot_{X/S} : \HOT_W(S)\longrightarrow\HOT_W(S).\]
+
+Ce foncteur satisfait donc à la relation
+\[\multhot_{X/S}(\hot_{S,W}(Y))\qquad\underbrace{\ \simeq\ }_{\text{isomorphisme canonique}}\qquad\hot_{S,W}(X\times_S Y)\]
+% foot: Version 9 novembre 2001
+\printedpage{95}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% marginal mark: handwritten sign in the left margin beside the following two lines
+pour $Y$ \textit{lisse sur $S$,} et pour $Y$ quelconque dans $\Cat/S$,
+\[\multhot_{X/S}(\hot_{S,W}(Y))\qquad\underbrace{\ \simeq\ }_{\text{isomorphisme canonique}}\qquad\hot_{S,W}(X\times_S \Phi_S(Y)).\]
+
+Quand $X$ est lui-même lisse sur $S$, ce foncteur n'est autre que la multiplication par $\hot_{S,W}(X)$ :
+\[\multhot_{X/S}=\mult_{\hot_{S,W}(X)}\qquad\text{si $X$ \textit{lisse sur $S$.}}\]
+
+% marginal mark: handwritten sign in the left margin beside the following paragraph
+Mais sa valeur pour $\hot_{S,W}(Y)$, quand $Y$ n'est \textit{pas} lisse sur $S$, ne doit pas être confondue avec $\hot_{S,W}(X\times_S Y)$.
+
+Ainsi, si $X$ et $Y$ sont dans $\Cat/S$, considérons
+\[X\times_S Y\qquad\text{et}\qquad\boxed{\hot_{S,W}(X\times_S Y).}\] % the frame is printed with rounded corners
+
+\begin{enumerate}
+\item[a)] Si ni $X$ ni $Y$ ne sont supposés lisses sur $S$, cet élément ‘n'a aucune interprétation naturelle en termes d'opérations sur les catégories $\HOT_W(S)$’ (\footnote[74]{Sauf dans le cas où l'un des deux soit dans $\underline{\mathrm{Fibhot}}\,S$, cf. annotation page suivante.}).
+
+\msp{156}
+
+\item[b)] Si $X$ et $Y$ sont lisses sur $S$, cet élément s'interprète comme
+\[\hot_{S,W}(X)\times_S\hot_{S,W}(Y)\]
+(\footnote[75]{Mais aussi si l'\textit{un} des deux éléments est dans $\underline{\mathrm{Fibhot}}\,S$ (et moyennant l'axiome L6 bis sur $W$).}).
+
+\item[c)] Si l'un des deux $X$, $Y$ est lisse sur $S$, sans rien supposer sur l'autre, on a une interprétation en termes de $\mult_X$ (si $Y$ lisse), ou $\mult_Y$ (si $X$ lisse), notamment
+\[\begin{aligned}
+\hot_{S,W}(X\times_S Y)\ &\simeq\ \multhot_X(\hot_{S,W}(Y))\quad\text{si $Y$ lisse sur $S$}\\
+&\simeq\ \multhot_Y(\hot_{S,W}(X))\quad\text{si $X$ lisse sur $S$.}
+\end{aligned}\]
+\end{enumerate}
+
+\textbf{Corollaire 2.} \textit{Soit $f : S'\longrightarrow S$ une flèche dans} Cat\textit{, d'où $f_!$, $f^*$ entre} $\HOT_W(S')$ \textit{et} $\HOT_W(S)$\textit{. On a la relation}
+\[f_!f^*(\xi)\simeq\multhot_{S'}(\xi),\]
+\textit{donc si $S'$ est lisse sur $S$,}
+\[f_!f^*(\xi)\simeq\hot_{S,W}(S')\times_S\xi.\]
+
+Nous sommes maintenant en mesure de vérifier les axiomes Der 4$'$b, Der 5$'$ relatifs aux images directes (I, p.~67, 68), et de plus Der 3b (I, p.~111). L'axiome Der 4$'$ n'est autre que l'existence des adjoints à gauche $f_!$ des $f^*$. L'axiome Der 5$'$ permet le ‘calcul’ des fibres d'un objet $f_!(\xi)$. Il dit qu'une certaine
+% foot: Version 9 novembre 2001
+\printedpage{96}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\msp{157}
+flèche du changement de base, relatif au diagramme commutatif dans Cat
+\[\begin{tikzcd}[row sep=large]
+S' \arrow[d,"f"'] & s\backslash S' \arrow[l,"q"'] \arrow[d,"f'"] \\
+S & e\simeq\{s\} \arrow[l,"p"']
+\end{tikzcd}\qquad(s\in\mathrm{Ob}\,S),\]
+savoir
+\[p^*(f_!(\xi'))\longrightarrow f'_!(q^*(\xi'))\]
+est un isomorphisme (pour $\xi'\in\mathbf{D}(S')$). Soit donc
+\[\xi'\in\mathrm{Ob}\,\HOT_W(S'),\qquad\xi'=\hot_{S',W}(X')\]
+avec $X'$ dans $\Cat/S'$. Comme
+\[f_!(\xi')=\hot_{S,W}(X'),\]
+et que $X'$ n'a aucune raison d'être lisse sur $S$ (si on ne suppose pas $S'$ lui-même lisse sur $S$, auquel cas il pourrait être utile de prendre $X'$ lisse sur $S'$, donc aussi sur $S$), pour calculer $p^*(f_!(\xi'))$ il n'est pas question de prendre la fibre $X'_s$, mais il faut prendre $s\backslash X'=\Phi_S(X')_s$ :
+\[p^*(f_!(\xi'))\simeq\hot_W(s\backslash X').\]
+\[\begin{tikzcd}[row sep=large]
+X' \arrow[d] & s\backslash X' \arrow[l] \arrow[d] \\
+S' \arrow[d] & s\backslash S' \arrow[l,"q"'] \arrow[d] \\
+S & s\backslash S \arrow[l]
+\end{tikzcd}\]
+
+Considérons le diagramme de changement de base par $s\backslash S\longrightarrow S$ ci-contre \texttt{[i.e. ci-dessus]}, à carrés cartésiens. On voit d'abord que $q^*(\xi')$ n'est autre que la classe dans $\HOT_W(s\backslash S')$ de l'image inverse de $X'$ par le changement de base $s\backslash S'\longrightarrow S'$. Pour l'assurer, il suffirait de prendre $X'$ lisse sur $S'$ (ce qui
+\msp{158}
+est licite) - alors la description de l'image inverse est OK pour tout changement de base. Mais on a vu que dans le cas d'un co-isomorphisme local comme $s\backslash S'\longrightarrow S'$, il n'y a pas même besoin de cet artifice - la formule est OK sans restriction de lissité. Ainsi
+\[q^*(\xi')=\hot_{s\backslash S',W}(s\backslash X'),\]
+% foot: Version 9 novembre 2001
+\printedpage{97}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+d'où
+\[f'_!(q^*(\xi'))\simeq\hot_{S,W}(s\backslash X')=\hot_W(s\backslash X').\]
+Donc on a bien trouvé
+\[p^*f_!\simeq f'_!q^*.\]
+
+On peut maintenant prouver aussi Der 3b. On a vu qu'une fois qu'on dispose des adjoints à gauche $f_!$ des $f^*$, cet axiome s'énonce sous \textit{forme homologique} ainsi : Si
+\[f : S'\longrightarrow S\]
+est dans $W$, il faut prouver que pour tout
+\[\xi\in\HOT_W(e)\overset{\text{déf}}{=}\mathrm{Hot}_W,\]
+la flèche correspondante
+\[(*)\qquad p'_!p'^*(\xi)\longrightarrow p_!p^*(\xi)\]
+est \texttt{[un]} isomorphisme dans $\mathrm{Hot}_W$, où $p : S\longrightarrow e$, $p' : S'\longrightarrow e$ sont les flèches structurales. Or comme tout objet de Cat est lisse sur $e$, le corollaire 2 précédent permet d'identifier cette flèche $(*)$ à
+\[\eta'\times_S\xi\longrightarrow\eta\times_S\xi\]
+\msp{159}
+déduite de
+\[\hot_W(f) :\quad\underbrace{\ \eta'\ }_{\overset{\text{déf}}{=}\,\hot_W(S')}\quad\longrightarrow\quad\underbrace{\ \eta\ }_{\overset{\text{déf}}{=}\,\hot_W(S)}\quad.\]
+Comme celle-ci est \texttt{[un]} isomorphisme par hypothèse, on gagne.
+
+Donc on a prouvé
+
+\textbf{Théorème 3.} \textit{Le prédérivateur} HOT \textit{satisfait aux axiomes} Der 1, Der 2 (\footnote[76]{\textit{pas prouvé}, le ‘résultat’ auquel je pensais est canulé, cf. complément proposition 5, page 164.}) \textit{(pour mémoire), et} Der 3b (\footnote[77]{Et même la variante la plus forte Der 3b$'_2$ de Der 3, cf. démonstration page suivante. \textbf{NB} Pour Der 3b$'_2$, on a utilisé l'axiome L6 sur $W$ - et c'est essentiel. On voit que la validité de Der 3b$'_2$ implique L6, et même la forme plus forte L6 bis, et même si on suppose seulement Der 3b$'_1$, i.e. $f_0^*$ pleinement fidèle.}), Der 4$'$, Der 5$'$\textit{.} % [sic] canulé (footnote 76) -> annulé (?), not a French word
+
+On a envie de prouver aussi les variantes renforcées de Der 3, la forme la plus forte étant celle-ci (Der 3b$'_2$) : si $f\in W$, alors $f^*$ induit une \textit{équivalence} de catégories
+\[f_0^* : \HOT^{\mathrm{lc}}_W(S)\longrightarrow\HOT^{\mathrm{lc}}_W(S').\]
+
+La pleine fidélité du foncteur $f_0^*$ doit résulter de la variante naturelle Der 3b$''_{\mathrm{coh}}$ de Der 3b, une fois qu'on aura développé le formalisme des Hom internes dans les $\HOT_W(S)$. Mais pour donner un sens à Der 3b$''_{\mathrm{coh}}$, on a besoin des foncteurs \textit{cohomologie,} i.e. de $p_*$ et $p'_*$ (au lieu de $p_!$, $p'_!$) pour HOT, donc c'est encore prématuré pour l'instant. La construction des $f_*$ et celle des Hom internes se fera d'ailleurs sûrement $\pm$ conjointement.
+% foot: Version 9 novembre 2001
+
+\printedpage{98}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\msp{160}
+Mais je m'aperçois à l'instant qu'on trouve quasiment ‘à l'œil’ le fait que $f_0^*$ soit bien une \textit{équivalence} de catégories, et que $f_!^0$ soit l'équivalence quasi-inverse, en utilisant l'adjonction des foncteurs $f_!^0$, $f_0^*$, et se rappelant que pour prouver que ce sont des équivalences quasi-inverses l'une de l'autre, il revient au même de montrer que les morphismes d'adjonction
+\[\begin{aligned}
+\mathrm{id}&\quad\xrightarrow{\ \alpha_0\ }\quad f_0^*f_!^0\\
+\mathrm{id}&\quad\xleftarrow{\ \beta_0\ }\quad f_!^0f_0^*
+\end{aligned}\]
+sont \texttt{[des]} isomorphismes. Je vais essayer de décrire ces flèches d'adjonction dans le cas général (sans supposer $f\in W$), puis de montrer qu'elles sont dans $W$ si $f$ l'est.
+
+\begin{enumerate}
+\item[\texttt{[1)}] \texttt{Soit]} $\xi=\hot^{\mathrm{lc}}_{S,W}(X)$ dans $\HOT_W(S)$. On peut supposer $X\in\mathrm{Ob}\,\underline{\mathrm{Parf}}\,S$. Comme \texttt{[‘Comme’ barré]} $X$ lisse sur $S$, on a
+\[f_0^*(\xi)=\hot^{\mathrm{lc}}_{S',W}(X\times_S S'),\qquad f_!^0f_0^*(\xi)=\hot^{\mathrm{lc}}_{S,W}(X\times_S S').\]
+Donc
+\[\beta_{0,\xi} : f_!^0f_0^*(\xi)\longrightarrow\xi\]
+est une flèche
+\[X\times_S S'\longrightarrow X\qquad\text{dans }(\Cat/S)(W_S)^{-1}\]
+et je présume que c'est $\mathrm{pr}_1$ (\footnote[78]{\textbf{NB} On voit que l'axiome L6 est $\pm$ \textit{nécessaire} pour que le résultat sur $f_0^*$, $f_!^0$ soit valable.}). Est-ce dans $W$ si $f : S'\longrightarrow S$ l'est? Oui (car $X$ est parfait
+
+\msp{161}
+
+sur $S$), sous réserve que $W$ satisfait l'axiome L6 (cf. page 43).
+
+\item[2)] Soit
+\[\xi'=\hot^{\mathrm{lc}}_{S',W}(X')\qquad\text{dans }\HOT_W(S'),\]
+on a
+\[f_!^0(\xi')=\hot^{\mathrm{lc}}_{S,W}(X'),\]
+mais pour expliciter $f_0^*$ de cet élément, comme $X'$ n'a aucune raison d'être un Hot-fibré sur $S$ (auquel cas il suffirait de prendre $f^*(X')\overset{\text{déf}}{=}X\times_S S'$), il faut d'abord prendre $C_S(X')$, puis appliquer $f^*$ :
+\[f_0^*f_!^0(X')=\hot^{\mathrm{lc}}_{S',W}(C_S(X')\times_S S').\]
+
+Il faut donc définir
+\[X'\xrightarrow{\beta_{0,X'}}C_S(X')\times_S S'\qquad\text{dans }(\Cat/S')W_{S'}^{-1}.\]
+
+Or on trouve une flèche canonique dans $\Cat/S'$, déduite du $S$-morphisme $i_{X'}$ : $X'\longrightarrow C_S(X')$, i.e. du carré commutatif en traits pleins
+\end{enumerate}
+% foot: Version 9 novembre 2001
+
+% ---- from Der-ChVI-345_p101-105.tex
+\noindent\printedpage{99}%
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+X' \arrow[rr, "i_{X'}"] \arrow[ddd, "p_{X'}"'] \arrow[dr, dotted, "\beta_{0,X'}"'] & & C_S(X') \arrow[ddd] \\
+& C_S(X') \times_S S' \arrow[ur, dotted, "\pr_1"'] \arrow[ddl, dotted] & \\
+& \text{\footnotesize commutatif} & \\
+S' \arrow[rr, "f"] & & S,
+\end{tikzcd}
+\]
+
+\begin{quote}
+comme l'unique flèche pointillée $\beta_{0,X'}$ qui soit un $S'$-morphisme (triangle gauche commutatif) et qui rende commutatif le triangle supérieur.
+\end{quote}
+
+Si $f \in W$, alors $\pr_1$, déduit de $f$ par changement de base $C_S(X') \longrightarrow S$, qui est parfait, est dans $W$ par L6, on sait qu'il en est de même de $i_{X'}$, donc aussi de $\beta_{0,X'}$, on gagne.
+
+\msp{page 162}Pour terminer les propriétés générales des foncteurs $f_!$ pour $\HOT_W$, je voudrais donner les énoncés raisonnables de changement de base. Ce serait un
+
+\noindent\textbf{Théorème 4.} \textit{Soit}
+\[
+\begin{tikzcd}
+X \arrow[d, "f"'] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S & S' \arrow[l, "p"']
+\end{tikzcd}
+\]
+\textit{un diagramme cartésien dans} $\Cat$\textit{, considérons la flèche de changement de base (dans} $\underline{\Hom}(\HOT_W(X), \HOT_W(S'))$\textit{) :}
+\[
+p^* f_! \longleftarrow f'_! q^*.
+\]
+\textit{C'est un isomorphisme dans chacun des deux cas suivants.}
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{$f$ est lisse.}
+\item[\textit{b)}] \textit{$p$ est propre.}
+\end{enumerate}
+
+\textsc{Démonstration.} \textit{Cas a).} On teste avec $\xi$ dans $\HOT_W(X)$, on peut supposer $\xi$ de la forme
+\[
+\xi = \hot_{X,W}(Z) \qquad \text{avec } Z \in \mathrm{Ob}\, \underline{\mathrm{Liss}}\, X.
+\]
+Notons que $Z$ est alors aussi lisse sur $S$, puisque $f$ est lisse.
+\[
+\begin{aligned}
+f_!(\xi) &= \hot_{S,W}(Z), &\qquad p^* f_!(\xi) &= \hot_{S',W}(\quad \underbrace{Z \times_S S'}_{\text{$Z'$, cf. diagramme}} \quad) \\
+q^*(\xi) &= \hot_{X',W}(Z'), & f'_! q^*(\xi) &= \hot_{S',W}(Z'),
+\end{aligned}
+\]
+OK!
+
+\noindent\printedpage{100}%
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+Z \arrow[d] & Z' \arrow[l] \arrow[d] \\
+X \arrow[d, "f"'] & X' \arrow[l, "q"] \arrow[d, "f'"] \\
+S & S' \arrow[l, "p"]
+\end{tikzcd}
+\]
+\textit{Cas b).} Il faut admettre que \msp{page 163}le foncteur changement de base par $p$ :
+\[
+Z \longmapsto Z \times_S S' : \Cat/S \longrightarrow \Cat/S'
+\]
+est compatible avec les localiseurs $W^{\mathrm{d}}_{S}$, $W^{\mathrm{d}}_{S'}$ (cf. plus bas) - c'est ça, formellemet, la propriété pertinente pour $p$ (\footnote[79]{Ça doit être \textit{équivalent} à $p$ propre. Comparer avec le corollaire 1, page 166.}). Il en résultera que % [sic] formellemet -> formellement, letter omitted
+\[
+p^* : \HOT_W(S) \longrightarrow \HOT_W(S')
+\]
+se calcule, pour un élément dans $\HOT_W(S)$ donné par un $Z$ \textit{quelconque} dans $\Cat/S$ (pas nécessairement lisse sur $S$), par
+\[
+p^*(\hot_{S,W}(Z)) = \hot_{S',W}(Z \times_S S').
+\]
+Partons alors, comme dans a), d'un élément $\xi$ de $\HOT_W(X)$ donné par un $Z$ de $\Cat/X$ (inutile cette fois de supposer $Z$ lisse), le calcul immédiat précédent établit encore la formule de commutation.
+
+Mais il ne semble pas que la propriété de compatibilité de $X \longmapsto X \times_S S'$, avec l'équivalence colocale sur $S$ et sur $S'$, résulte de façon $\pm$ évidente de la condition que $p : S' \longrightarrow S$ soit propre (\footnote[80]{Mais si, cf. démonstration page 168. Les développements des quatre pages qui suivent sont inutiles par cette démonstration.}). J'ai envie de le déduire de fourbis généraux sur le formalisme des dérivateurs, à savoir du théorème de changement de base des $f_!^{\D}$ pour un morphisme $\D$-propre.
+
+\msp{page 164}Sous forme duale d'un théorème de changement de base pour $f_*^{\D}$, par changement de base $\D$-lisse, c'est fait dans I, p. 56 à 58, et on doit pouvoir l'appliquer ici. Notons que dans la démonstration du théorème loc. cit., on n'utilise que L4 \texttt{[plutôt} Der 4\texttt{]}, i.e. l'existence des $f_*^{\D}$, à l'exclusion des $f_!^{\D}$ (L4$'$ \texttt{[plutôt} Der 4$'$\texttt{]}), plus L5 \texttt{[plutôt} Der 5\texttt{]} bien sûr, donc la forme duale ne fait appel à l'existence des $f_*^{\D}$, seulement des $f_!^{\D}$. On a donc une bonne chance de pouvoir l'appliquer à $\HOT_W$ (où je n'ai pas encore établi l'existence des $f_*^{\mathrm{HOT}}$). % [sic] ne fait appel -> ne fait pas appel, "pas" apparently omitted (sense and "seulement des")
+
+\noindent\printedpage{101}%
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Notons d'abord
+
+\noindent\textbf{Proposition 5.} \textit{Soit} $f : S' \longrightarrow S$ \textit{une flèche dans} $\Cat$. \textit{Alors $f$ est une} $\HOT_W$\textit{-équivalence} si et seulement si $\hot_W(f)$ \textit{est} \texttt{[un]} \textit{isomorphisme. Si $W$ est fortement saturé, cela signifie donc que $f \in W$ (et en tous cas $f \in W \Longrightarrow f$} \texttt{[est]} \textit{une} $\HOT_W$\textit{-équivalence)} (\footnote[81]{devrait remonter vers le théorème 3, p. 159.}).
+
+C'est contenu dans la démonstration de Der 3b tantôt. Je rappelle que $f$ est une HOT-équivalence, par définition, si et seulement si pour $a, b \in \Hot_W (= \HOT_W(e))$,
+\[
+\Hom_{\HOT_W(S)}(a_S, b_S) \longrightarrow \Hom_{\HOT_W(S')}(a_{S'}, b_{S'}) \tag*{$(*)$}
+\]
+est \texttt{[un]} isomorphisme, où $a_S$ etc. désigne $p_S^*(a)$ etc. ($p_S : S \longrightarrow e$). Les formules d'adjonction de $p_{S!}$, $p_S^*$ et de $p_{S'!}$, $p_{S'}^*$ permettent d'interpréter la flèche $(*)$ comme
+\[
+\Hom_{\HOT_W(S)}(p_{S!}(a_S), b) \longrightarrow \Hom_{\HOT_W(S')}(p_{S'!}(a_{S'}), b),
+\]
+\msp{page 165}déduit par ‘transposition’ $\Hom(-, b)$ de la flèche
+\[
+p_{S'!}(a_{S'}) \longrightarrow p_{S!}(a_S)
+\]
+induite par $f$ - donc il faut prouver que celle-ci est un isomorphisme (c'est la forme que nous avions utilisé tantôt). Or cette flèche s'identifie à
+\[
+\eta' \times a \longrightarrow \eta \times a
+\]
+induite par
+\[
+\hot_W(f) : \underbrace{\eta'}_{= \hot_W(S')} \quad \longrightarrow \quad \underbrace{\eta}_{= \hot_W(S)} \quad ,
+\]
+et dire que c'est \texttt{[un]} isomorphisme quel que soit $a$ dans $\Hot_W$ revient à dire que $\eta' \longrightarrow \eta$ l'est (puisque la multiplication dans $\Hot_W$ a une élément unité \dots). % [sic] une élément -> un élément, gender agreement
+
+Maintenant je me rappelle que pour avoir l'axiome Der 2 des dérivateurs, je devrais également supposer $W$ \textit{fortement} saturé (i.e. égal au localiseur défini par le foncteur canonique $\Cat \longrightarrow (\Cat)W^{-1} \overset{\text{déf}}{=} \Hot_W$). (C'est ce que je supposais d'emblée, en partant d'un $(\mathcal{M}, W)$ général pour définir un prédérivateur, pour avoir l'axiome Der 2.)
+
+En appliquant le dual du théorème de I, p. 56, on trouve donc le théorème de changement de base pour $f_!$, pour changement de base $f : S' \longrightarrow S$ \textit{$W$-propre.}
+
+% the following paragraph is marked in the left margin by a double vertical rule
+\msp{page 166}\marginpar{$\Vert$}Mais la démonstration utilise sûrement Der 2 (critère d'isomorphisme par fibres, dans $\HOT_W(S)$), que je n'ai pas prouvé encore. Elle est incomplète pour le moment. Mais je peux noter dès maintenant le
+
+\noindent\printedpage{102}%
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\textbf{Corollaire 1} (du théorème 4, p. 162). \textit{Si la flèche} $S' \xrightarrow{p} S$ \textit{dans} $\Cat$ \textit{donne lieu (pour tout} $f : X \longrightarrow S$ \textit{dans} $\Cat/S$\textit{) à la formule de changement de base pour}
+\[
+f_! : \HOT_W(X) \longrightarrow \HOT_W(S),
+\]
+\textit{alors le foncteur} $p^* : X \longmapsto X \times_S S'$ \textit{de} $\Cat/S$ \textit{dans} $\Cat/S'$ \textit{est compatible avec les localiseurs} $W^{\mathrm{d}}_{S}$\textit{,} $W^{\mathrm{d}}_{S'}$\textit{.} (L'implication inverse a été vue déjà, cf. pages 161-163.)
+
+Cela résultera du
+
+\noindent\textbf{Lemme.} \textit{Soit} $u : X' \longrightarrow X$ \textit{une flèche dans} $\Cat/S$\textit{. Pour que} $u \in W^{\mathrm{d}}_{S}$\textit{, il faut et il suffit (si $W$} \texttt{[est]} \textit{fortement saturé) que pour tout} $\xi \in \Hot_W$\textit{, la flèche correspondante}
+\[
+u_* : p'_!(\xi_{X'}) \longrightarrow p_!(\xi_X)
+\]
+\textit{soit} \texttt{[un]} \textit{isomorphisme dans} $\HOT_W(S)$\textit{.}
+
+C'est suffisant, sous réserve de saturation forte de $W$, car si $u_*$ est \texttt{[un]} isomorphisme, passant aux fibres, on trouve par Der 5$'$
+\[
+H_\bullet^{\HOT_W}(s\bs X', \xi) \longrightarrow H_\bullet^{\HOT_W}(s\bs X, \xi),
+\]
+si c'est \texttt{[un]} isomorphisme, alors $s\bs X' \longrightarrow s\bs X$ est par définition une HOT-équivalence, ce qui implique que c'est dans $W$ (proposition 5).
+
+\msp{page 167}C'est nécessaire, car si $\xi = \hot_W(T)$, donc $\xi_S = \hot_{S,W}(T_S)$ (où $T_S = T \times S/S$), et on a donc
+\[
+p'_!(\xi_{X'}) = \hot_{S,W}(X' \times T), \qquad p_!(\xi_X) = \hot_{S,W}(X \times T),
+\]
+et il faut prouver que si $u : X' \longrightarrow X$ est dans $W^{\mathrm{d}}_{S}$, alors $\underbrace{X' \times T}_{X' \times_S T_S} \longrightarrow \underbrace{X \times T}_{X \times_S T_S}$ aussi, ce qui signifie simplement que
+\[
+s\bs(X' \times T) \longrightarrow s\bs(X \times T) \tag*{$(*)$}
+\]
+est dans $W$ pour tout $s \in S$. Mais le changement de base $s\bs S \longrightarrow S$ commute aux produits fibrés, donc transforme $X \times T = X \times_S T_S$ en $(s\bs X) \times_{s\bs S} T_{(s\bs S)} = s\bs X \times T$, et de même pour $X'$. Donc la flèche s'identifie à
+\[
+(s\bs X') \times T \longrightarrow (s\bs X) \times T,
+\]
+déduite de
+\[
+s\bs X' \longrightarrow s\bs X
+\]
+par le foncteur $? \times T$. Comme ce foncteur transforme $W$ en $W$, on gagne.
+
+\noindent\printedpage{103}%
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\msp{page 168}Finalement, je m'aperçois que j'ai eu un blocage stupide, pour la question que le changement de base propre soit compatible à la $W$-équivalence colocale. Soit
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "f"] \arrow[dr] & & Y \arrow[dl] & \\
+& S & & S', \arrow[ll, "g"']
+\end{tikzcd}
+\]
+avec $f \in W^{\mathrm{d}}_{S}$ et $g$ propre, il faut voir que $f' : X' \longrightarrow Y'$ déduit de $f$ par changement de base $S' \longrightarrow S$ est encore dans $W^{\mathrm{d}}_{S'}$. Cela signifie que tout changement de base de la forme $s'\bs S' \longrightarrow S'$ le transforme en $\in W$. Mais soit $s = g(s')$, on a le carré commutatif
+\[
+\begin{tikzcd}
+S & S' \arrow[l] \\
+\underbrace{s\bs S}_{= Z} \arrow[u] & \underbrace{s'\bs S'}_{= Z'} \arrow[l] \arrow[u] \ ,
+\end{tikzcd}
+\]
+et il suffit de voir que pour toute flèche $\varphi : \mathcal{X} \longrightarrow \mathcal{Y}$ dans $\Cat/Z$ qui est dans $W$, son image inverse par changement de base $Z' \longrightarrow Z$ est itou. (En appliquant ceci au cas $\mathcal{X} = X \times_S (s\bs S)$, $\mathcal{Y} = Y \times_S (s\bs S)$, $\varphi = s\bs f$.) Or ceci résulte du fait que, par \msp{page 169}hypothèse de propreté, $Z' \longrightarrow Z$ est propre et à fibres Hot-asphériques, donc c'est une Hot-équivalence universelle. Il suffirait même que $g$ soit $W$-propre, pour impliquer que $Z' \longrightarrow Z$ est une $W$-équivalence universelle, i.e. qui reste telle après tout changement de base. Or on a le
+
+\noindent\textbf{Lemme.} Si $g : Z' \longrightarrow Z$ est une $W$-équivalence universelle, alors le foncteur
+\[
+g^* : X \longmapsto X \times_Z Z' : \Cat/Z \longrightarrow \Cat/Z'
+\]
+est compatible avec les localiseurs $W_Z$, $W_{Z'}$, i.e. si $f : X \longrightarrow Y$ dans $\Cat/Z$ est dans $W$, de même $f' : X' \longrightarrow Y'$ dans $\Cat/Z'$.
+\[
+\begin{tikzcd}
+X \arrow[dr, "f"'] \arrow[ddr] & & X' \arrow[ll, "g_X"'] \arrow[dr, "f'"] \arrow[ddr] & \\
+& Y \arrow[d] & & Y' \arrow[ll, "g_Y"', crossing over] \arrow[d] \\
+& Z & & Z' \arrow[ll, "g"']
+\end{tikzcd}
+\]
+Cela est évident sur le carré supérieur du diagramme ci-dessus, où $g_X$, $g_Y$ sont dans $W$ par l'hypthèse sur $g$, donc $f$ est dans $W$ si et seulement si $f'$ l'est, cqfd. % [sic] hypthèse -> hypothèse, letter omitted
+
+\msp{page 170 manque}\texttt{[page 170 manque]}
+
+% ---- from Der-ChVI-345_p106-110.tex
+\setcounter{footnote}{81}
+
+\printedpage{104}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+\msp{page 171}
+
+\subsection*{Nouvelle version de la théorie de $\mathrm{HOT}_W$.}
+
+Je me suis aperçu que l'hypothèse $W \supseteq W_\infty$ (L3 quater, p. 1), que j'avais fini par mettre sur $W$, est artificielle, et que l'hypothèse L5 (p. 43), voire L6, L6 bis (p. 43-44), est inutile pour une grande partie de la théorie de $\mathrm{HOT}_W$. J'ai été ainsi amené à revoir la théorie (i.e. ce que j'en ai fait jusqu'à présent) sous les hypothèses suivantes sur $W$ (cf. XII) :
+
+\begin{itemize}[leftmargin=4em]
+\item[W(1)] (\textit{Saturation} de $W$) : comme avant (L1 page 1)
+\item[W(2)] (localisation) : c'est l'ancien L4 bis (\footnote{i.e. le L5 de la page 2. L'axiome est repris (sous une forme voisine et équivalente) au bas de la page 43.}).
+\item[W(3)] (objet final) : Si $X$ a un objet final, $X$ est $W$-asphérique (ancien L3).
+\end{itemize}
+
+Ces trois axiomes sont suffisants pout tout ce que j'avais fait dans Pursuing Stacks, et dans une grande partie de ce qui a été fait ici sur HOT. Parfois cependant il faut l'ancien L 5, que je réénonce ici (comparer XII, théorème \texttt{[numéro du théorème manque]}) : % [sic] pout -> pour, misprint
+
+\begin{itemize}[leftmargin=4em]
+\item[W(4b)] Soient $X$, $Y$ $W$-fibrés sur $S$, $f : X \longrightarrow Y$ un $S$-morphisme. Si $f \in W$, alors $\forall s \in \mathrm{Ob}\, S$, $f_s : X_s \longrightarrow Y_s$ est dans $W$.
+\end{itemize}
+
+Pour la notion de $W$-fibré (\textit{faible}), j'ai été long à trouver enfin \textit{la} bonne notion, bonne pour un $W$ ne satisfaisant que $\mathrm{W}(1,2,3)$ (et même seulement $\mathrm{W}(1, 2 \text{ bis}, 3)$, où W(2 bis) est l'ancien L4). Je renvoie pour cela à (XII, théorème 3, p. 51), où la notion est bien cernée à coups de conditions équivalentes. En fait, pour les applications principales à $\mathrm{HOT}_W$, vues jusqu'à présent, il suffit (\footnote{C'est finalement une erreur, semble-t-il à présent. Je crois que l'axiome W(4b$'$) ne sert finalement à strictement rien (si ce n'est en fait à entretenir des idées fausses.)}) d'une variante affaiblie de W(4b) :
+
+\begin{itemize}[leftmargin=4em]
+\item[W(4b$'$)] Comme W(4b), mais en exigeant de plus que $X$, $Y$ soient dans $\ul{Parf}_\omega\, S$.
+\end{itemize}
+
+\msp{page 172}
+
+Pour la notion de morphismes $W$-propres, $W$-lisses, $W$-parfaits dans Cat, je renvoie à XII, partie III (p. 22-52), et les notations $\ul{Liss}_W S$, $\ul{Prop}_W S$, $\ul{Parf}_W S$ (sous-catégories de $\mathrm{Cat}/S$), et $\mathrm{Parf}_W \subseteq \mathrm{Fl}(\mathrm{Cat})$. Dans l'énoncé de W(4b$'$) on a posé
+\[
+\ul{Parf}_\omega S = \ul{Parf}_{W_\omega} S, \quad
+\begin{array}[t]{l}
+\text{où } W_\omega \subseteq \mathrm{Fl}(\mathrm{Cat}) \text{ est la plus petite partie de } \mathrm{Fl}(\mathrm{Cat})\\
+\text{satisfaisant } \mathrm{W}(1, 2\mathrm{bis}, 3).
+\end{array}
+\]
+
+Je note de même
+\[
+W'_\omega \subseteq \mathrm{Fl}(\mathrm{Cat}), \qquad \text{plus petite partie de } \mathrm{Fl}(\mathrm{Cat}) \text{ satifaisant } \mathrm{W}(1, 2, 3, 4\mathrm{b}). % [sic] satifaisant -> satisfaisant, misprint
+\]
+
+\printedpage{105}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+L'hypothèse $W \supseteq W_\infty$ que nous avions fini par imposer sur $W$, et qui est apparu artificielle au cours de la réflexion du XII, a avantage à être remplacée par % [sic] apparu -> apparue, agreement with « l'hypothèse »
+\[
+W \supseteq W'_\omega \qquad (\text{ou par } W \supseteq \overline{W'_\omega}, \text{ où } \overline{W'_\omega} \text{ est le saturé fort de } W'_\omega)
+\]
+(\footnote{$\overline{W'_\omega}$ est le plus petit sous-ensemble \textit{fortement saturé} de $\mathrm{Fl}(\mathrm{Cat})$, satisfaisant W(4b), et il satisfait même la condition W$'$(4a), variante la plus forte des axiomes du type W(4).}). Mais nous ne l'imposons pas comme condition impérative, au même titre que $\mathrm{W}(1,2,3)$, pas plus que W(4b). Le rôle que j'ai fait jouer à $W_\infty$ dans les semaines passées, semble revenir plus naturellement à $W'_\omega$ ou $\overline{W'_\omega}$. Il en est ainsi notamment aussi, il me semble, dans l'énoncé des conditions du type Der 3 sur un dérivateur (I, p. 111-112), qu'il faudrait revoir dans cette lumière. Mais tout dépend, si (comme j'en ai l'impression) on peut faire vraiment de l'algèbre homotopique substantielle, avec notamment les suites exactes longues de fibration et de suspension, pour $\mathrm{HOT}_W$, avec des $W$ qui sont \textit{strictement} contenus dans $W_\infty$. Avant de même être assuré, il est trop tôt encore pour me prononcer sur la `bonne' formulation de Der 3,
+
+\msp{page 173}
+
+qui est l'axiome mettant en relation le dérivateur $\mathbf{D}$ avec $W_\infty$, ou avec quelque autre localiseur fondamental.
+
+Je vais faire à présent un résumé de la théorie de $\mathrm{HOT}_W$, revue dans l'optique que je viens de dire : on suppose pour $W$ \textit{les conditions} $\mathrm{W}(1,2,3)$ \textit{sans plus,} sauf mention explicite.
+
+\circled{1} \textbf{Localiseurs principaux} sur $\mathrm{Cat}/S$ et sur les principales catégories de $S$-catégories (cf. diagramme p. 76).
+
+Ils seront tous induits par les trois localiseurs familiers
+\[
+\begin{tikzcd}[column sep=small]
+W_S^{\mathrm{d}} \arrow[dr, hook] & & W_S^{\mathrm{g}} \arrow[dl, hook'] \\
+& W_S &
+\end{tikzcd}
+\]
+sur $\mathrm{Cat}/S$. Il y a lieu aussi de regarder $W_S^{\mathrm{f}}$, mais jamais sur $\mathrm{Cat}/S$ tout entier, mais sur d'autres catégories du diagramme, et toujours dans des cas où $W_S^{\mathrm{f}}$ coïncide soit avec $W_S^{\mathrm{d}}$, soit avec $W_S^{\mathrm{g}}$. Mais le point de vue $W_S^{\mathrm{f}}$ est souvent plus directement commode, et a l'avantage de plus d'être symétrique.
+
+\circled{a} Dans $\ul{Liss}_W S$, on a
+
+\printedpage{106}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+\[
+\begin{tikzcd}[row sep=large, column sep=0pt]
+W_S^{\mathrm{f}} \arrow[d, Rightarrow] & {} = W_S^{\mathrm{d}} = W_S^{\mathrm{univ}} \\
+W_S^{\mathrm{g}} \arrow[d, Rightarrow] & \\
+W_S &
+\end{tikzcd}
+\]
+
+Dualement,
+
+\circled{b} dans $\ul{Prop}_W S$, on a
+\[
+\begin{tikzcd}[row sep=large, column sep=0pt]
+W_S^{\mathrm{f}} \arrow[d, Rightarrow] & {} = W_S^{\mathrm{g}} = W_S^{\mathrm{univ}} \\
+W_S^{\mathrm{d}} \arrow[d, Rightarrow] & \\
+W_S, &
+\end{tikzcd}
+\]
+
+\msp{page 174}
+
+enfin,
+
+\circled{c} dans $\ul{Fib}_W S$, on a
+\[
+\begin{tikzcd}[row sep=large]
+W_S^{\mathrm{f}} \arrow[r, Leftrightarrow] \arrow[d, Rightarrow] & W_S^{\mathrm{d}} \arrow[r, Leftrightarrow] & W_S^{\mathrm{g}} \arrow[r, Leftrightarrow] & W_S^{\mathrm{univ}} \\
+W_S. & & &
+\end{tikzcd}
+\]
+
+Cette implication $W_S^{\mathrm{f}} \Longrightarrow W_S$ est stricte si on ne fait pas sur $W$ l'axiome W(4b), dont l'utilité ici est exactement d'assurer
+\[
+\left|\;
+\begin{array}{l}
+W_S^{\mathrm{f}} \Longleftrightarrow W_S \ \text{ dans } \ul{Fib}_W S \ \textit{si}\ \mathrm{W}(4\mathrm{b})\ \texttt{[est]}\ \text{satisfait}\\[1.5ex]
+\text{et alors les cinq localiseurs envisagés ci-dessus}\\[1.5ex]
+\text{dans } \ul{Fib}_W S \text{ sont tous égaux.}
+\end{array}
+\right.
+\]
+
+Les relations entre [?] localiseurs dans $\ul{Liss}_W S$, $\ul{Prop}_W S$, $\ul{Fib}_W S$ se transportent automatiquement aux sous-catégories de celles-ci, plus généralement à toutes celles qui s'envoient
+\printedpage{107}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+par un foncteur d'inclusion dans une de celles-ci. Dans le diagramme p. 76, toutes les catégories, à la seule exception de $\mathrm{Cat}/S$ tout entier, sont dans ce cas.
+
+Pour les résultats principaux développés jusqu'à présent sur $\mathrm{HOT}_W$, quand l'axiome W(4b) est utilisé, la forme faible W(4b$'$) suffit. On a
+\[
+\left|\;
+\begin{array}{l}
+W_S^{\mathrm{f}} \Longleftrightarrow W_S \ \text{ dans } \ul{Parf}_\omega S \ \textit{si}\ \mathrm{W}(4\mathrm{b}')\ \texttt{[est]}\ \text{satisfait}\\[1.5ex]
+\text{et alors les cinq localiseurs } W_S^{\mathrm{f}},\, W_S^{\mathrm{d}},\, W_S^{\mathrm{g}},\, W_S^{\mathrm{univ}},\, W_S\\[1.5ex]
+\text{sont égaux dans } \ul{Parf}_\omega S.
+\end{array}
+\right.
+\]
+
+\circled{2} \textbf{Principales catégories de catégories sur $S$.}
+
+Ce sont, à des modifications d'éclairage près, celles du diagramme p. 76. Les catégories $\ul{Fibsc}\,S$, $\ul{Fib}\,S$, $\ul{Cofibsc}\,S$, $\ul{Cofib}\,S$ et leurs variantes à indice 0, sont inchangées - leur rôle est d'être aussi petites
+
+\msp{page 175}
+
+que possible pour remplir leur fonction (de description de $\mathrm{HOT}_W(S)$, $\mathrm{HOT}^{o}_W(S)$, $\mathrm{HOT}^{\mathrm{lc}}_W(S)$, ou $\mathrm{HOT}^{\mathrm{lc}!}_W(S)$ ci-dessous). La catégorie $\ul{Parf}\,S$ du diagramme remplissait une fonction du même type, c'est pourquoi nous la remplaçons à présent (en surenchérissant) par $\ul{Parf}_\omega S$. Les autres catégories du diagramme sont, en plus de $\mathrm{Cat}/S$, $\ul{Liss}\,S$ et $\ul{Prop}\,S$ et leurs variantes à indice 0, ainsi que $\ul{Fibhot}\,S$. (Toutes ces catégories, ainsi que $\ul{Parf}\,S$, étaient donc construites par référence à $W_\infty$, non pas à $W$.) Leur rôle est d'être aussi grandes que possible pour donner lieu à certaines propiétés et relations. Or il se trouve qu'ici la référence à $W_\infty$ était artificielle, et il y a lieu de mettre plutôt les catégories $\ul{Liss}_W S$, $\ul{Prop}_W S$, $\ul{Fib}_W S$, et en plus les variantes $\ul{Liss}_{0,W} S$, $\ul{Prop}_{0,W} S$. Ainsi le diagramme devient % [sic] propiétés -> propriétés, misprint
+\[
+\begin{tikzcd}[column sep=tiny, row sep=small]
+ & & & & \ul{Fib}_W S \arrow[dd, hook, "\delta"] \arrow[dddllll, dotted, bend right=35, "\Phi_0"'] \arrow[dddrrrr, dotted, bend left=35, "\Psi_0"] & & & & \\
+ & & \ul{Liss}_{0,W} S \arrow[urr, hook] \arrow[dd, hook] & & & & \ul{Prop}_{0,W} S \arrow[ull, hook'] \arrow[dd, hook] & & \\
+ & \ul{Fib}_{0,W} S \arrow[ur, hook] \arrow[dd, hook] & & & \mathrm{Cat}/S \arrow[dd, "C"] \arrow[dddllll, dotted, bend right=30, "\Phi"] \arrow[dddrrrr, dotted, bend left=30, "\Psi"'] & & & \ul{Cofib}_{0,W} S \arrow[ul, hook'] \arrow[dd, hook] & \\
+\ul{Fibsc}_{0,W} S \arrow[ur] \arrow[dd, hook] & & \ul{Liss}_W S \arrow[urr, hook] & & & & \ul{Prop}_W S \arrow[ull, hook'] & & \ul{Cofibsc}_{0,W} S \arrow[ul] \arrow[dd, hook] \\
+ & \ul{Fib}\,S \arrow[ur, hook] & & & \ul{Parf}_\omega S \arrow[uuull, hook] \arrow[uuurr, hook'] & & & \ul{Cofib}\,S \arrow[ul, hook'] & \\
+\ul{Fibsc}\,S \arrow[ur] & & & & & & & & \ul{Cofibsc}\,S \arrow[ul]
+\end{tikzcd}
+\]
+(\footnote{NB la nouvelle notation serait plutôt $\ul{Fibf}_W S$, car il s'agit de $W$-fibrations qu'à présent j'appelle `faibles' (et définies seulement dans Cat, à l'opposé des $W$-fibrations, définissables dans toute catégorie de modèles).}) (tous les carrés \texttt{[sont]} cartésiens, les foncteurs notés $\hookrightarrow$ sont pleinement fidèles),
+
+\printedpage{108}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+\msp{page 176}
+
+où j'ai encore marqué en vert \texttt{[dans l'original seulement]} les cinq \textit{`foncteurs d'inversion'}
+\[
+\Phi,\ \Psi,\ \Phi_0,\ \Psi_0,\ C,
+\]
+qui fournissent des quasi-inverses des foncteurs sur les catégories localisées déduits par les \textit{foncteurs d'inclusion.}
+
+\circled{3} \textbf{Les quatre types de catégories} $\mathrm{HOT}_W$\textbf{.}
+
+Sur chacune des catégories de l'etage, il y a \textit{deux} localiseurs à regarder, % [sic] l'etage -> l'étage, missing accent (printed « l'étage » below)
+\[
+\begin{tikzcd}[row sep=huge, column sep=0pt]
+W_S^{\mathrm{f}} \arrow[d, Rightarrow] & {} = W_S^{\mathrm{g}} = W_S^{\mathrm{d}} = W_S^{\mathrm{univ}} \\
+W_S, &
+\end{tikzcd}
+\]
+donnant lieu à deux localisés distincts, notés
+\[
+\mathrm{HOT}^{\mathrm{lc}}_W(S) \qquad \text{et} \qquad \mathrm{HOT}^{\mathrm{lc}!}_W(S),
+\]
+il se trouve que (grâce à $\Phi_0$ et $\Psi_0$) ces localisés `sont les mêmes' pour les 8 catégories de l'étage, à l'exception de $\ul{Parf}_\omega S$; plus exactement, les foncteurs d'inclusion (à l'exception peut-être de ceux ayant pour source $\ul{Parf}_\omega S$) induisent des équivalences sur les deux types de localisés, les équivalences quasi-inverses étant obtenues par $\Phi_0$ (aile gauche) ou $\Psi_0$ (aile droite). Quand on localise \textit{pour} $W_S$ (à l'exclusion de $W_S^{\mathrm{f}}$), on trouve aussi des quasi-inverses par $C|\ul{Liss}_{0,W} S$ resp. $C|\ul{Prop}_{0,W} S$, pour les deux inclusions
+\[
+\begin{tikzcd}
+\ul{Liss}_{0,W} S & \ul{Parf}_\omega S \arrow[l, hook'] \arrow[r, hook] & \ul{Prop}_{0,W} S
+\end{tikzcd}
+\]
+(\footnote{cf. plus bas, ce qu'on peut dire pour les localisés pour $W_S^{\mathrm{f}}$.}). Par raison de symétrie, le plus joli semble de définir
+\[
+\left\{
+\begin{array}{lcl}
+\mathrm{HOT}^{\mathrm{lc}}_W(S) & = & (\ul{Fib}_W S)(W_S^{\mathrm{f}})^{-1}\\
+\mathrm{HOT}^{\mathrm{lc}!}_W(S) & = & (\ul{Fib}_W S)(W_S)^{-1},
+\end{array}
+\right.
+\]
+et on a un foncteur de localisation
+\[
+\mathrm{HOT}^{\mathrm{lc}}_W(S) \xrightarrow{\ \lambda\ } \mathrm{HOT}^{\mathrm{lc}!}_W(S)
+\]
+induit par l'inclusion
+\[
+W_S^{\mathrm{f}} \subseteq W_S.
+\]
+
+% ---- from Der-ChVI-345_p111-115.tex
+\printedpage{109}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\msp{page 177}
+Pour toute sous-catégorie pleine
+\[
+\mathcal{F} \subseteq \Fib_W S
+\]
+qui contient l’une des trois sous-catégories
+\[
+\Fib_{0,W}S,\ \Parf_\omega S,\ \Prop_{0,W}S,
+\]
+l’inclusion de $\mathcal{F}$ dans $\Fib_W S$ définit des équivalences
+\[
+\mathcal{F}(W_S)^{-1} \approx \HOT^{\lcs}_W(S),
+\]
+et si $\mathcal{F}$ contient l’une des deux sous-catégories $\Fib_{0,W}S$, $\Prop_{0,W}S$ (à l’exclusion de $\Parf_\omega S$), on trouve aussi
+\[
+\mathcal{F}(W^{\mathrm{f}}_S)^{-1} \approx \HOT^{\mathrm{lc}}_W(S).
+\]
+Le rez-de-chaussée contribue deux autres variantes de HOT, en localisant soit par $W^{\mathrm{d}}_S$ (aile gauche), soit par $W^{\mathrm{g}}_S$ (aile droite). Les foncteurs d’inclusion définissent des équivalences pour les localisées soit pour $W^{\mathrm{d}}_S$ (aile gauche), soit pour $W^{\mathrm{g}}_S$ (aile droite). Le plus joli (symétrie) semble de définir ces deux localisés par $\Cat/S$
+\[
+\HOT_W(S) = (\Cat/S)(W^{\mathrm{d}}_S)^{-1}, \qquad \HOT^{o}_W(S) = (\Cat/S)(W^{\mathrm{g}}_S)^{-1}.
+\]
+Les quasi-inverses pour les équivalences de catégories localisées, induites par les foncteurs d’inclusion, sont donnés soit par $\Phi$ (aile gauche), soit par $\Psi$ (aile droite).
+
+Mais $\Phi$ et $\Psi$ fournissent des quasi-inverses également quand on localise pour $W_S$, la $W$-équivalence grossière au lieu de la fine - pareil qu’à l’étage. On trouve donc au rez-de-chaussée un (unique) troisième localisé, qu’on peut décrire plus joliment par
+\[
+(\Cat/S)(W_S)^{-1},
+\]
+mais il est équivalent à $(\Fib_W S)W_S^{-1}$ par le
+\msp{page 178}
+foncteur induit par l’inclusion. (Un quasi-inverse étant fourni par $C$.) C’est donc $\HOT^{\lcs}_W(S)$. On trouve ainsi, par le diagramme commutatif de catégories avec localiseurs
+\[
+\begin{tikzcd}[column sep=small]
+ & (\Fib_W S, W^{\mathrm{f}}_S) \arrow[dl] \arrow[dd] \arrow[dr] & \\
+(\Cat/S, W^{\mathrm{d}}_S) \arrow[ddr] & & (\Cat/S, W^{\mathrm{g}}_S) \arrow[ddl] \\
+ & (\Fib_W S, W_S) \arrow[d] & \\
+ & (\Cat/S, W_S) &
+\end{tikzcd}
+\]
+% foot: Version 9 novembre 2001
+\printedpage{110}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+(où la flèche verticale courte induit une équivalence sur les localisés), le diagramme commutatif entre les catégories $\HOT_W$ liées à $S$ :
+\[
+\begin{tikzcd}[column sep=small]
+ & \HOT^{\mathrm{lc}}_W(S) \arrow[dl, "i"'] \arrow[dd, "\lambda"'] \arrow[dr, "j"] & \\
+\HOT_W(S) \arrow[dr, "\rho"'] & & \HOT^{o}_W(S)(\simeq \HOT_W(S^{o})) \arrow[dl, "\sigma"] \\
+ & \HOT^{\lcs}_W(S), &
+\end{tikzcd}
+\tag*{$(\ast)$}
+\]
+où $\rho$, $\sigma$, $\lambda$ sont des foncteurs de localisation, et où $i$, $j$ sont ressentis comme des foncteurs d’inclusion. Ce diagramme $(\ast)$ semble épuiser les foncteurs naturels qui relient entre elles les quatre catégories envisagées.
+
+\noindent\msp{page 179}
+Les propriétés des foncteurs $\Phi$, $\Psi$, $C$ qui ont été utilisées, pour fournir tous les quasi-inverses voulus de foncteurs (entre catégories localisées) induits par les foncteurs d’inclusion du diagramme, sont les suivantes.
+
+\cercle{a} On a un homomorphisme fonctoriel dans $\Cat/S$
+\[
+X \xrightarrow{i_X} \Phi(X), \qquad \underline{i_X \in W^{\mathrm{d}}_S}.
+\]
+Quand $X$ est dans $\Fib_W S$, $\Phi(X)$ est dans $\Fibsc_0 S$ \texttt{[plutôt }$\Fibsc_{0,W}S$\texttt{, cf. diag. p. 175]}, donc $i_X \in W^{\mathrm{f}}_S$ ($= W^{\mathrm{d}}_S$ sur $\Fib_W S$). Ainsi $\Phi$ induit le foncteur $\Phi_0$ du diagramme.
+
+Dualement, on a
+\[
+X \xrightarrow{i_X} \Psi(X), \qquad \underline{i_X \in W^{\mathrm{g}}_S},
+\]
+et quand $X$ est dans $\Fib_W S$, $\Psi(X)$ est dans $\Cofibsc_0 S$ \texttt{[plutôt }$\Cofibsc_{0,W}S$\texttt{]}, d’où le foncteur $\Psi_0$.
+
+\cercle{b} On a un homomorphisme fonctoriel
+\[
+\left|
+\begin{aligned}
+& X \xrightarrow{i_X} C(X), \qquad \underline{i_X \in W_S} \\
+& \text{et } C(X) \in \Ob\,\Parf_\omega S.
+\end{aligned}
+\right.
+\]
+
+\troisbarres Mais on fera attention qu’en l’absence de l’axiome W(4b) sur $W$, on ne peut \textit{pas} affirmer $i_X \in W^{\mathrm{f}}_S$, même si $X$ est dans $\Fib_W S$ (voire, dans $\Parf_\omega S$), seul cas (de toutes façons) où on est en droit de s’y attendre. Je note à ce propos le diagramme \textit{cartésien,} pour $f : X \longrightarrow Y$ dans $\Cat/S$
+% foot: Version 9 novembre 2001
+\printedpage{111}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+C(Y)_s \arrow[d, "\pi^{s}_{Y}"'] & C(X)_s \arrow[l, "C(f)_s"'] \arrow[d, "\pi^{s}_{X}"] \\
+Y & X, \arrow[l, "f"']
+\end{tikzcd}
+\qquad \text{\footnotesize flèches verticales dans $\Parf_\omega \subseteq \Fib_W$}
+\]
+qui montre par exemple que
+\msp{page 180}
+l’on ne peut pas s’attendre que $f \in W_S \implies C(f) \in W^{\mathrm{f}}_S$ sans disposer de l’axiome W(4a$'$) \texttt{[qu’est-ce que c’est?]} (ou d’un axiome de force comparable, tel W(4b)).
+
+Ce sont ces faits négatifs (en l’absence de W(4b)) qui sont cause que je ne peux rien dire de particulier sur les foncteurs induits par \textit{localisation fine} $(W^{\mathrm{f}}_S)^{-1}$ des deux foncteurs d’inclusion
+\[
+\Liss_0 S \longleftarrow \Parf_\omega S \longrightarrow \Prop_0 S,
+\]
+ou, ce qui revient au même, de celui induit par le composé commun de ceux-là avec les inclusions dans $\Fib_W S$
+\[
+\begin{tikzcd}[column sep=tiny, row sep=small]
+ & \Parf_\omega S \arrow[dl] \arrow[dd] \arrow[dr] & \\
+\Liss_0 S \arrow[dr] & & \Prop_0 S \arrow[dl] \\
+ & \Fib_W S, &
+\end{tikzcd}
+\]
+en d’autres termes, je ne peux rien dire sur les propriétés de fidélité du foncteur
+\[
+(\Parf_\omega S)(W^{\mathrm{f}}_S)^{-1} \longrightarrow (\Fib_W S)(W^{\mathrm{f}}_S)^{-1},
+\]
+et encore moins que ce soit une équivalence de catégories. Donc, en l’absence de W(4b), pour les sous-catégories pleines $\mathcal{F}$ de $\Fib_W S$ qui contiennent $\Parf_\omega S$, sans contenir ni $\Liss_0 S$ ni $\Prop_0 S$, il se pourrait a priori que les localisées
+\[
+\mathcal{F}(W^{\mathrm{f}}_S)^{-1}
+\]
+soient toutes différentes. Je pense notamment à $\Parf_W S$, aussi intéressante en elle-même, après tout, que $\Parf_\omega S$. Donc en plus des quatre localisées du diagramme $(\ast)$, p. 178, il y a toute une série infinie ‘tératologique’ de localisées
+\msp{page 181}
+qui refusent de se laisser ‘boucler’ \texttt{[?]} par $\Phi_0$ ou $\Psi_0$, et pour lesquelles même $C$ n’est d’aucun secours, faute de l’axime W(4b). % [sic] axime -> axiome, missing letter
+
+\subsection*{\cercle{4} Cas où l’axiome \textmd{W(4b)} est satisfait.}
+% foot: Version 9 novembre 2001
+
+\printedpage{112}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Alors les perplexités que je viens de dire disparaissent. On a aussitôt, en vertu de W(4b) :
+\[
+|||\qquad
+\begin{array}{@{}r@{}}
+\text{Si } X \in \Ob\,\Fib_W S, \text{ alors } i_X : X \longrightarrow C(X) \text{ est dans } W^{\mathrm{f}}_S \\
+(\textit{en supposant l’axiome } \text{W(4b)})
+\end{array}
+\]
+et $C$ fournit des quasi-inverses pour les foncteurs ‘d’inclusion’ entre localisés fins (pour $W^{\mathrm{f}}_S$) envisagés à la page précédente. Il en fournit \texttt{[‘Il en fournit’ barré]} un également pour le foncteur $\lambda$ envisagé plus haut ($(\ast)$ page 178)
+\[
+\underbrace{(\Fib_W S)(W^{\mathrm{f}}_S)^{-1}}_{\overset{\text{déf}}{=}\HOT^{\mathrm{lc}}_W(S)} \longrightarrow \underbrace{(\Cat/S)(W_S)^{-1}}_{\simeq \HOT^{\lcs}_W(S)},
+\]
+lequel est donc une équivalence. Une autre façon, plus évidente, de dire la même chose, c’est que sur chacune des catégories de l’étage les deux localiseurs $W^{\mathrm{f}}_S$ et $W_S$ sont désormais identiques (puisqu’elles sont toutes contenues dans $\Fib_W S$, où elles \texttt{[plutôt ils]} le sont justement par l’axiome W(4b)), donc le foncteur $\lambda$ entre ces deux localisés (définition originale de $\lambda$, dans le cas $\mathcal{F} = \Fib_W S$, cf. page 176) est même le \textit{foncteur identique,} les deux catégories localisées étant \textit{égales :}
+\[
+\HOT^{\mathrm{lc}}_W(S) = \HOT^{\lcs}_W(S) \qquad\qquad !
+\]
+Ainsi le diagramme $(\ast)$ p. 178 prend la forme
+\[
+\begin{tikzcd}[column sep=small]
+ & \HOT^{\mathrm{lc}}_W(S) \arrow[dl, shift left=1.2, "i"] \arrow[dr, shift right=1.2, "j"'] & \\
+\HOT_W(S) \arrow[ur, shift left=1.2, "\rho"] & & \HOT^{o}_W(S). \arrow[ul, shift right=1.2, "\sigma"']
+\end{tikzcd}
+\tag*{$(\ast)$}
+\]
+
+\noindent\msp{page 182}
+Quand on interprète non seulement les deux catégories latérales $\HOT_W(S)$, $\HOT^{o}_W(S)$, mais aussi celle du milieu, comme des localisées de $\Cat/S$, pour les localiseurs $W^{\mathrm{d}}_S$, $W^{\mathrm{g}}_S$ et $W_S$ respectivement, les foncteurs $\rho$, $\sigma$ sont ceux déduits des deux inclusions
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+W^{\mathrm{d}}_S \arrow[dr, hook] & & W^{\mathrm{g}}_S \arrow[dl, hook'] \\
+ & W_S &
+\end{tikzcd}
+\qquad \text{\footnotesize comme parties de Fl(Cat/$S$),}
+\]
+tandis que les foncteurs $i$, $j$ sont déduits, par passage aux localisés, d’un seul et même foncteur
+\[
+\Cat/S \xrightarrow{C} \Cat/S,
+\]
+ce foncteur ayant la vertu d’appliquer $W_S$ dans $W^{\mathrm{d}}_S \cap W^{\mathrm{g}}_S$,
+\[
+f \in W_S \overset{\text{moyennant W(4b)}}{\Longrightarrow} C(f) \in W^{\mathrm{d}}_S \cap W^{\mathrm{g}}_S \qquad (\text{et même } \in W^{\mathrm{univ}}_S).
+\]
+% foot: Version 9 novembre 2001
+
+\printedpage{113}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+(Et pour cause, puisque $C$ se factorise par $\Fib_W S$ (et même par $\Parf_\omega S$), où $W_S$ est identique à $W^{\mathrm{d}}_S$, $W^{\mathrm{g}}_S$, $W^{\mathrm{univ}}_S$. Que $f \in W_S$ implique $C(f) \in W$ est indépendant de l’axiome W(4b), et se voit sur le diagramme
+\[
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d, "i_X"'] & Y \arrow[d, "i_Y"'] \\
+C(X) \arrow[r, "C(f)"] & C(Y),
+\end{tikzcd}
+\]
+où les flèches $i_X$, $i_Y$ sont dans $W_S$.)
+
+Ceci dit, il est vrai que les couples
+\[
+(\rho, i),\ (\sigma, j)
+\]
+sont des couples de foncteurs adjoints, donc ($\rho$ et $\sigma$ étant des foncteurs de localisation) que $i$ et $j$ sont \textit{pleinement fidèles.} La formule d’adjonction peut se lire comme
+\[
+\boxed{\Hom_{W^{\mathrm{g}}_S}(X, CY) \simeq \Hom_{W^{\mathrm{d}}_S}(X, CY) \simeq \Hom_{W_S}(X, Y)}
+\tag*{$(\ast)$}
+\]
+\msp{page 183}
+pour $X$, $Y$ dans $\Cat/S$ sans plus. Un $\Hom_\Sigma$ indique le Hom dans $(\Cat/S)\Sigma^{-1}$.
+
+\noindent\textbf{Corollaire.} \textit{Si $X$ dans} $\Cat/S$\textit{, $Y$ dans} $\Fib_W S$\textit{, alors}
+\[
+\begin{tikzcd}[column sep=small]
+\Hom_{W^{\mathrm{g}}_S}(X, Y) \arrow[dr, "\sim"] & & \Hom_{W^{\mathrm{d}}_S}(X, Y) \arrow[dl, "\sim"'] \\
+ & \Hom_{W_S}(X, Y) &
+\end{tikzcd}
+\]
+\textit{sont bijectifs.}
+
+En effet, $Y$ dans $\Fib_W(S)$ implique que $Y \xrightarrow{i_Y} C(Y)$ est dans $W^{\mathrm{univ}}_S \subseteq W^{\mathrm{d}}_S \cap W^{\mathrm{g}}_S$, donc
+\[
+\Hom_{W^{\mathrm{g}}_S}(X, Y) \xrightarrow{\sim} \Hom_{W^{\mathrm{g}}_S}(X, CY) \underbrace{\xrightarrow{\sim}}_{\text{adjonction}} \Hom_{W_S}(X, Y),
+\]
+et itou pour $\Hom_{W^{\mathrm{d}}_S}(X, Y)$.
+
+\subsection*{\cercle{5} Perplexités sur les variantes affaiblies de l’axiome \textmd{W(4b)}.}
+
+Que reste-t-il de toutes ces belles choses (plus que trois catégories HOT, au lieu de $4+\infty$!) quand on ne suppose plus que W(4b$'$) au lieu de W(4b), i.e. l’égalité de $W_S$ et $W^{\mathrm{f}}_S$ dans
+% foot: Version 9 novembre 2001
+
+% ---- from Der-ChVI-345_p116-120.tex
+\printedpage{114}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+$\Parf_\omega S$? Finalement, il me semble (contrairement à ce que j'avais cru voir) qu'il ne reste presque rien (\footnote{\textbf{NB} Si $W$ satisfait l'axiome des limites, alors W(4b$'$) implique W(4b), cf. théorème récapitulatif dans XVI 4.4.13 (p. 58-62), notamment $2^{o}$). La condition W(4b) est la condition B de cet énoncé, et W(4b$'$) la condition D. (Elle est impliquée par W(4a) $=$ C, ce que je soupçonnais nullement en écrivant XII \dots)}). On ne sait alors toujours pas, pour $X$ dans $\Fib_W S$, si
+\[ i_X : X \longrightarrow C(X) \]
+n'est dans $W^{\mathrm{f}}_S$, et non seulement dans $W_S$; on ne le sait que pour $X \in \Parf_\omega S$, mais dans ce cas on n'en a pas besoin, car l'utilité du foncteur $C(X)$ et de l'inclusion $i_X : X \longrightarrow C(X)$, c'est ‘d'améliorer’ $X$ et de le rendre parfait, voire même $W$-parfait. Mais s'il l'est déjà, c'est plus la peine. Il y aura, comme
+\msp{page 184}
+avant, 4 localisées essentiellement distinctes $\HOT_W$, $\HOT^{o}_W$, $\HOT^{\mathrm{lc}}_W$, $\HOT^{\mathrm{lc}\,!}_W$, plus une infinité d'autres $\mathcal{F}(W^{\mathrm{f}}_S)^{-1}$ pour $\mathcal{F}$ entre $\Parf_\omega S$ et $\Fib_W S$ (cf. page 180), avec le seul bénéfice qu'on peut maintenant exclure le cas $\mathcal{F} = \Parf_\omega S$, car dans ce cas $\mathcal{F}(W^{\mathrm{f}}_S)^{-1} = \mathcal{F}(W_S)^{-1} = \HOT^{\mathrm{lc}\,!}_W(S)$ fait partie des quatre canoniques. La chose décisive, c'est qu'on n'a toujours aucun moyen de prouver que
+\[ \lambda : \HOT^{\mathrm{lc}}_W(S) \longrightarrow \HOT^{\mathrm{lc}\,!}_W(S) \]
+est une équivalence, et je doute que ce soit le cas. Il faudrait regarder avec $W = W_{\mathbf{D}}$ la $\mathbf{D}$-équivalence, où $\mathbf{D}$ est un dérivateur Der($k$-Mod), $k$ un anneau donné (p.ex. $k = \mathbf{Z}$, ou $k$ un corps $\mathbf{Z}/p\mathbf{Z}$ ou $\mathbf{Q}$ \dots). Je ne vais pas le faire maintenant cependant. (Il est vrai que l'axiome W(4b$'$) n'est pas non plus satisfait dans ce cas \dots)
+
+Si dans l'énoncé de l'axiome, on remplaçait $\Parf_\omega S$ par $\Parf_W S$, rien d'essentiel ne serait changé - tout au plus je remplacerais $\Parf_\omega S$ par $\Parf_W S$ dans le brillant diagramme p. 175. Finalement, je suis à présent convaincu qu'il faut tout ou rien : ou bien \textit{quatre} catégories $\HOT(S)$ pour $W$, en se contentant de W$(1,2,3)$, ou bien rien que trois, i.e. pas de $\HOT^{\mathrm{lc}\,!}_W(S)$ - et pour ça, il ne semble pas qu'on puisse se contenter de moins de W(4b).
+
+\msp{page 185}
+Il suffirait, il est vrai, de supposer que $W_S = W^{\mathrm{f}}_S$ sur l'une quelconque des sept catégories de l'étage autres que $\Parf_\omega S$. Cela impliquerait alors que dans les six autres, on aura $\overline{W_S} = \overline{W^{\mathrm{f}}_S}$ (mêmes saturés forts dans $\mathrm{Fl}(\mathcal{F})$). Un des deux les plus faibles des axiomes en question serait : % doubt resolved in DER_VI-c_corrections.csv; input note: line under "étage" -- read as the overline of $\overline{W^{\mathrm{f}}_S}$ on the next line, not an underline of "étage"
+
+\begin{quote}
+Si $f : X \longrightarrow Y$ est un foncteur \textit{cartésien} de catégories Cat-fibrées et $W$-fibrées (\footnote{‘$W$-fibrées’ signifiant ici que pour $u \in \mathrm{Fl}\,S$, les foncteurs $u^*$ de changement de base $X_{s'} \longrightarrow X_s$, $Y_{s'} \longrightarrow Y_s$ sont dans $W$.}) sur une autre $S$, si $f \in W$, alors $f_s \in W$ pour tout $s \in S$,
+\end{quote}
+
+(et l'autre est la version duale, pour les foncteurs cocartésiens de catégories cofibrées). Sauf erreur, cet axiome doit déjà impliquer que $\overline{W}$ satisfait la version W(4a) la plus forte
+\printedpage{115}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+de toutes (a fortiori W(4b)) des axiomes W(4). Cet axiome me paraît donc à présent beaucoup plus raisonnable que W(4b$'$), et ceci d'autant plus qu'il se réfère directemment à la description de $\HOT^{\mathrm{lc}}_W(S)$ en termes de foncteurs (ou de ‘pseudofoncteurs’, si on ne veut supposer les catégories scindées et les foncteurs compatibles aux scindages) $S^{o} \longrightarrow \mathrm{Cat}$. % [sic] directemment -> directement, spelling
+D'ailleurs, bien qu'il n'en ait pas l'air, cet axiome \textit{est} autodual, puisque la version duale, pour $S$ fixée, est la version directe pour $S^{o}$! Cela rend cet axiome encore plus appétissant. Donc pour formuler W(4a$'$), j'ai envie à présent de laisser tomber $\Parf_\omega$, et de faire pareil. Si on garde deux versions W(4a$'$) (l'ancienne) et W(4a$''$) (la nouvelle), l'une et l'autre ont la vertu d'impliquer W(4b). Et W(4b$'$) (nouvelle version) doit impliquer W(4a) (version ultraforte), sinon pour $W$, du moins pour $\overline{W}$.
+
+Mes idées étaient tenacement [?] embrouillées
+\msp{page 186}
+jusqu'à aujourd'hui même, car j'avais l'idée que, grâce au mirifique foncteur $C$, la catégorie $\Parf_\omega S$, comme les sept autres catégories de l'étage, pourrait servir à définir $\HOT^{\mathrm{lc}}_W(S)$. Or il n'en est rien, semble-t-il, à moins de supposeer l'axiome W(4b), ou la variante W(4b$'$) (nouvelle version). L'ancienne version de W(4b$'$) s'avère parfaitement inutilisable. % [sic] supposeer -> supposer, spelling
+
+À ce propos, je n'ai toujours pas répondu clairement pourtant, pas un ‘oui’ ou un ‘non’, à la question :
+
+\begin{quote}
+\textbf{Question :} \textit{les inclusions}
+\[
+\begin{tikzcd}
+ & \Liss_{0,W}S \\
+\Parf_W S \arrow[ur] \arrow[dr] & \\
+ & \Prop_{0,W}S
+\end{tikzcd}
+\]
+\textit{induisent-elles, même en l'absence de W(4b) (ou de ses variantes affaiblies) des équivalences pour les localisées fines (par $W^{\mathrm{f}}_S$)? Même question pour} $\Parf_\omega S$ \textit{au lieu de} $\Parf_W S$ (\footnote{OK en présence de l'axiome W(6bis) sur les $\varinjlim$ , cf. p. 192 ff.}). \textit{Même question pour}
+\[ \Bifib\, S \subseteq \Parf_\omega S, \]
+\textit{la catégorie des catégories sur $S$ qui sont à la fois} Cat-\textit{fibrées et} Cat-\textit{cofibrées.}
+\end{quote}
+
+Je ne me rends pas compte, même en admettant (cette fois) l'axiome W(4a), si $\Bifib\, S$ est assez grosse pour pouvoir décrire tous le types d'homotopie relatifs localement constants sur $S$, i.e. si % [sic] tous le types -> tous les types, missing letter
+\[ (\Bifib\, S)(W^{\mathrm{f}}_S)^{-1} \longrightarrow (\Fib_W S)(W^{\mathrm{f}}_S)^{-1} \]
+est au moins essentiellement surjectif, sinon une équivalence de catégories. Il manque un foncteur
+\[ \mathrm{Cat}/S \longrightarrow \Bifib\, S \qquad \text{ou du moins} \qquad \underbrace{\Fib_W S}_{\text{ou $\Fib_\omega S$\,?}} \longrightarrow \Bifib\, S, \]
+\printedpage{116}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+qui puisse jouer le rôle de $\Phi$ et de $\Psi$ \textit{simultané\msp{page 187}ment.} Je n'ai pas même vérifié que $\Phi$ ne transforme \textit{pas} objets de $\Prop_W S$ ou de $\Prop_{0,W}(S)$ en objets $W$-propres (donc $W$-parfaits, étant de toutes façons $W$-lisse et même $W_\omega$-lisse) sur $S$ (\footnote{Voir réponse à cette intéressante question page 192.}). Si c'était pourtant vrai sur $\Prop_W S$, ça montrerait que l'image essentielle de $\Prop_W S$ dans $\HOT_W(S)$ ($= (\mathrm{Cat}/S)(W^{\mathrm{d}}_S)^{-1}$) est contenu dans $\HOT^{\mathrm{lc}}_W(S)$. % [sic] contenu -> contenue, agreement with "l'image"
+Prenant $S = \mathbf{\Delta}^1$, cela signifierait que si dans $X$ on a une sous-catégorie fermée $X_1$ telle que $X_1 \overset{i}{\hookrightarrow} X$ soit $W_\omega$-asphérique, alors $1\backslash X \longrightarrow 0\backslash X$ est dans $W$ - or $0\backslash X \simeq X$, $1\backslash X \simeq X_1$, la flèche est $X_1 \longrightarrow X$, qui est bien dans $W$ étant $W$-asphérique! C'est étrange et quasiment immoral (\footnote{On observe plus bas que c'est ainsi chaque fois que $S$ a un objet final.}). Mais à force de gribouillis je viens de me convaincre que même si $X$ est cofibrée sur $S$ (donc aussi $W$-propre), $\Phi(X)$ n'est pas $W$-propre (ce qui impliquerait $W$-parfait), ni
+\msp{page 188}
+même un $W$-fibré, ce qui signifierait que
+\[ s'\backslash X \longrightarrow s\backslash X \qquad \text{associé à } s \longrightarrow s' \text{ dans } S \]
+serait toujours dans $W$. Posant $Z' = s'\backslash S$, $Z = s\backslash S$, cela signifierait que si on a un \textit{co-isomorphisme local}
+\[ i : \underbrace{Z'}_{\simeq z_0\backslash Z} \longrightarrow Z, \]
+où $Z'$, $Z$ ont des éléments initiaux, et si $X$ est cofibrée sur $Z$, $X'$ son image inverse sur $Z'$, alors $X' \longrightarrow X$ est dans $W$. En fait, si $Z$ a aussi un élément \textit{final} $e$ (comme c'était le cas tantôt pour $\mathbf{\Delta}^1$), alors $Z' \simeq z_0\backslash Z$ en a aussi en $e'$, qui s'envoie sur $e$, et on aura le diagramme commutatif
+\[
+\begin{tikzcd}
+X' \arrow[r, "j"] & X \\
+X'_{e'} \arrow[u, "W"] \arrow[r, "\sim"] & X_e, \arrow[u, "W"']
+\end{tikzcd}
+\]
+d'où $j \in W$. Donc pour faire un contrexemple,
+\msp{page 189}
+il faut prendre $Z$ sans élément final.
+
+Mais prenons $Z$ \texttt{[un]} ensemble ordonné, avec un objet initial $0$, mais sans objet final, et prenons pour $z_0$ un élément \textit{maximal} de $Z$, de sorte que $Z' = z_0\backslash Z$ soit isomorphe à $\{z_0\}$. Il faut donner dans Cat un exemple où l'inclusion de $X_{z_0}$ dans $X$ n'est pas dans $W$. On va prendre
+\printedpage{117}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\[
+\begin{tikzcd}
+ & & a \\
+Z = & 0 \arrow[ur] \arrow[dr] & \\
+ & & b = z_0,
+\end{tikzcd}
+\]
+donc la donnée de $X$ cofibrée coscindée sur $Z$ équivaut à un diagramme dans Cat
+\[
+\begin{tikzcd}
+ & X_a \\
+X_0 \arrow[ur, "\alpha"] \arrow[dr, "\beta"] & \\
+ & X_b.
+\end{tikzcd}
+\]
+Je pense que sous des conditions assez fortes (p.ex. si $\alpha$, $\beta$ sont des immersions ouvertes, ou des immersions fermées - à vérifier!), la catégorie $X$ est isomorphe dans Hot à la somme amalgamée dans Cat
+\[ X_a{\textstyle\coprod_{X_0}}X_b, \]
+et il n'y \texttt{[a]} aucune raison (sauf si on suppose $\alpha \in W$, et encore \dots) que $X_b \longrightarrow X_a \coprod_{X_0} X_b$ soit dans $W$. Prenons $X_0 = X_b = e$, $\beta = \mathrm{id}_e$, donc $\alpha$ est donné par la donnée d'un élément $t$ de $\mathrm{Ob}(X_a = T)$. La somme amalgamée est $T$, qui n'est pas isomorphe à $e$ dans $\mathrm{Hot}_W$,
+\msp{page 190}
+si $T$ n'a pas été prise $W$-asphérique. Mais je vais essayer de montrer directement que l'inclusion
+\[ T = X_a \longrightarrow X \]
+est $\in W$. Pour ceci je regarde la sous-catégorie ouverte $Z''$ de $Z$, complémentaire de la sous-catégorie pleine fermée $Z'$, et je note que $X'' = X|Z''$ étant propre sur $Z''$ et $a$ étant objet final de $Z''$, on a
+\[ X_a \longrightarrow X'' \qquad \text{dans } W, \]
+il reste à voir qu'il en est de même de $X'' \longrightarrow X$. Or $X''$ est déduite de $X$ en ajoutant un unique élément $\xi$ (celui de $X_b$), lequel ne s'envoie dans aucun élément de $X''$, et qui ne reçoit aucun élément de $X_a$ - par contre pour l'unique élément $\xi_0$ de $X_0$ il y a une unique flèche de celui-ci dans $\xi$. On a donc une rétraction de $X$ sur $X''$, envoyant $\xi$ sur $\xi_0$ et la flèche précédente sur $\mathrm{id}_{\xi_0}$. Est-ce un homotopisme? Il suffit de \texttt{[montrer]} qu'en tant qu'endomorphisme $\varphi$ de $X$, c'est $\sim \mathrm{id}_X$. Or on a bien $\mathrm{id}_X \longleftarrow \varphi$, dont la valeur sur $X''$ est l'identité, et la valeur sur $\xi$ est l'unique $\varphi(\xi) = \xi_0 \longrightarrow \xi$. C'est un peu bref, mais ça doit être vrai. (De toutes façons, $X$ est la réunion de deux ouverts $X''$, et de l'ouvert $X|\{0,b\} = X'''$, avec $X''' \simeq \mathbf{\Delta}^1$, et $X'' \cap X''' \simeq e$, donc au moins pour la cohomologie à coefficients localement constants de $X$ je suis à l'aise par Mayer-Vietoris, et sais bien que c'est celle du morceau $X''$, donc celle de $X_0$ \texttt{[ou $X_a$, indice illisible]} nullement celle de $e$!)
+
+\printedpage{118}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\msp{page 191}
+\margbar On a donc vu au moins ceci : Si $X$ est cofibrée donc $W$-propre sur $S$, il ne s'ensuit nullement que $\Phi(X)$ soit encore $W$-propre sur $S$ (\footnote{voir résultat plus précis page suivante!}), ni que ce soit un $W$-fibré. Mais que se passe-t-il si $X \in \Prop_{0,W}S$, par exemple s'il provient de $\Cofibsc_0 S$? Alors $X$ est dans $\Fib_W S$, donc on sait déjà que $\Phi(X)$ est dans $\Fibsc_{0,W}S$, donc ce n'est pas par là qu'on fera un contrexemple. Mais considérons encore $X$ cofibrée sur
+\[
+\begin{tikzcd}
+ & & a \\
+S = & 0 \arrow[ur] \arrow[dr] & \\
+ & & b,
+\end{tikzcd}
+\]
+donnée par le diagramme
+\[
+\begin{tikzcd}
+ & X_a \\
+X_0 \arrow[ur, "u"] \arrow[dr, "v"] & \\
+ & X_b
+\end{tikzcd}
+\]
+dans Cat, en supposant cette fois $u, v \in W$ ($X \in \Cofibsc_{0,W}S$). Alors $\Phi(X)$ est la catégorie fibrée scindée sur $S$ définie par le diagramme contravariant sur $S$
+\[
+\begin{tikzcd}
+ & X_a \arrow[dl, hook, "i"'] \\
+X_0 & \\
+ & X_b, \arrow[ul, hook, "j"']
+\end{tikzcd}
+\]
+où $i$, $j$ sont les inclusions (qui sont des immersions fermées). Dire que $\mathcal{X} = \Phi(X)$ est propre sur $S$ signifie aussi que ses restrictions au dessus des sous-catégories ouvertes $\{0,a\}$ et $\{0,b\}$ de $S$ le sont (car toute flèche $\mathbf{\Delta}^1 \longrightarrow S$ se factorise par l'une ou l'autre). Cela
+\msp{page 192}
+signifie donc aussi que l'inclusion des fibres fermées
+\[ X_a \longrightarrow X, \qquad X_b \longrightarrow X \]
+sont coasphériques. Mais $X_a \longrightarrow X$ ne peut être coasphérique que si $X_b = \emptyset$, car pour $x \in X_b \subseteq X$, $x\backslash X_a$ (ainsi que $X_a/x$) est vide, donc \textit{pas} $W$-asphérique (si on ne suppose $W = \mathrm{Fl}(\mathrm{Cat})$, cas que nous excluons). Donc $\Phi(X)$ n'est propre sur $S$ \textit{que} si $X_a$ et $X_b = \emptyset$ (résultat valable pour \textit{toute} $X$ sur $S$, qu'elle soit cofibrée sur $S$ ou $W$-propre, ou non). Si on veut $u, v \in W$, cela implique donc que $X_0 = \emptyset$, donc on a prouvé :
+
+% ---- from Der-ChVI-345_p121-125.tex
+\printedpage{119}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+% the following paragraph is marked by a triple vertical rule in the left margin
+\noindent\llap{$|||$\quad}Soit $X \in \mathrm{Cat}/S$, $S = \begin{tikzcd}[row sep=tiny, column sep=small] & a \\ 0 \arrow[ur] \arrow[dr] & \\ & b \end{tikzcd}$. Si $\Phi(X)$ est propre sur $S$, alors $X = \emptyset$ (si on suppose $W \neq \mathrm{Fl}(\mathrm{Cat})$).
+
+Mais chemin faisant est apparue une idée bizarre. Considérons le diagramme infini, pour $X$ dans $\mathrm{Cat}/S$ :
+\[
+X \longrightarrow \Phi(X) \longrightarrow \Psi\Phi(X) \longrightarrow \Phi\Psi\Phi(X) \longrightarrow \cdots
+\]
+Si $X$ est quelconque, ces flèches sont alternativement dans $W_S^{\mathrm{d}}$ et $W_S^{\mathrm{g}}$, donc leurs composées sont dans $W_S$ sans plus. Mais si $X$ est dans $\und{Fib}_W S$, comme cette catégorie est \textit{stable} par $\Phi$, $\Psi$, et que sur $\und{Fib}_W S$ $W_S^{\mathrm{d}} = W_S^{\mathrm{g}} = W_S^{\mathrm{f}} = W_S^{\mathrm{univ}}$, on voit que dans ce cas les flèches sont toutes dans $W_S^{\mathrm{f}}$. On a envie maintenant de poser
+\[
+\Phi_\infty(X) = \varinjlim \text{ de tout ça}
+\]
+\msp{page 193}
+et on définirait symétriquement
+\[
+\Psi_\infty(X) = \varinjlim (X \longrightarrow \Psi(X) \longrightarrow \Phi\Psi(X) \longrightarrow \cdots).
+\]
+
+Pour que ce soit utilisable, il faut poser l'axiome \underline{W(6 bis)} (comparer XII, pages 14, 15). La limite inductive d'une suite de morphismes $f_i : X_i \longrightarrow Y_i$, pour un morphisme de systèmes inductifs dans Cat indexés par $\mathbf{N}$, est dans $W$ si les $f_i$ le sont.
+
+Cet axiome est voisin de W(6) de loc. cit., mais n'est impliqué par lui que moyennant W(4b). Il est plus fort dans le cas de systèmes inductifs indexés par $\mathbf{N}$ (donc aussi, plus généralement, de systèmes inductifs sur des ensembles ordonnés filtrants ayant un ensemble cofinal dénombrable), mais ne dit rien sur les systèmes inductifs sur des ensembles ordonnés d'indices plus généraux.
+
+Cet axiome implique aussi qu'une limite inductive filtrante de morphismes $f_i$ est $W$-lisse, resp. $W$-propre, si les $f_i$ le sont. On trouve alors que $\Phi_\infty(X)$ est à la fois $W$-lisse (comme limite inductive des $\Phi(X)$, $\Phi\Psi\Phi(X)$, \ldots, $\Phi(\Psi\Phi)^n(X)$, lesquelles sont $W$-lisses sur $S$) et $W$-propre (comme limite inductive des $\Psi\Phi(X)$, \ldots, $(\Psi\Phi)^n(X)$ \ldots). D'autre part, que $X \longrightarrow \Phi_\infty(X)$ est dans $W_S^{\mathrm{f}}$ - car $W_S^{\mathrm{f}}$ est stable par limites inductives filtrantes dénombrables dans $\mathrm{Cat}/S$. On a donc trouvé un foncteur
+\msp{page 194}
+\[
+\Phi_\infty : \und{Fib}_W S \longrightarrow \und{Parf}_W S \subseteq \und{Fib}_W S
+\]
+et un morphisme fonctoriel
+\[
+i_X : X \longrightarrow \Phi_\infty(X), \qquad \boxed{i_X \in W_S^{\mathrm{f}}} \qquad \text{si } X \in \und{Fib}_W S.
+\]
+% the box around i_X \in W_S^f is printed with rounded corners
+
+Ce foncteur permet alors, en l'absence de W(4b), de faire ce que le foncteur $C$ refusait absolument. Il est vrai que $C$ a l'avantage d'être défini sur $\mathrm{Cat}/S$ tout entier, et d'y être
+\printedpage{120}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+raisonnable et même fort utile, quand on a W(4b). Mais $\Phi_\infty$ est, lui aussi, défini sur $\mathrm{Cat}/S$ tout entier, ainsi que $i_X$
+\[
+\begin{aligned}
+&\Phi_\infty : \mathrm{Cat}/S \longrightarrow \und{Parf}_W S\\
+&i : \mathrm{id} \longrightarrow \Phi_\infty \qquad \text{i.e.}\ \begin{cases} i_X : X \longrightarrow \Phi_\infty(X)\\ i_X \in W_S, \end{cases}
+\end{aligned}
+\]
+avec le seul handicap (inévitable) que si $X$ n'est pas dans $\und{Fib}_W S$, on ne peut dire mieux que $i_X \in W_S$, à l'exclusion de $i_X \in W_S^{\mathrm{f}}$. Mais pour $C(X)$ c'était forcément pareil. Donc on a l'impression que $\Phi_\infty$, au choix, $\Psi_\infty$, bonnet blanc, blanc bonnet, joue en présence de W(6 bis) le même rôle que C en présence de W(4b). Tout au plus (en présence des deux axiomes à la fois) le foncteur $C$ a-t-il l'avantage esthétique de prendre ses valeurs dans $\und{Parf}_\omega S$, au lieu de $\und{Parf}_W S$ seulement (\footnote[93]{\textit{En fait} $\Phi_\infty = C$, si $C$ est défini via des chemins infinis d'un seul côté simplement. Si on définit $C$ via les chemins \textit{finis} de tous types $c$, alors il prend en effet ses valeurs dans $\und{Parf}_\omega S$.}). Mais il s'impose de % [sic] "que C en présence" (C in roman type) -> $C$, italic everywhere else
+\msp{page 195}
+se rendre compte à présent que $\Phi_\infty$ a un avantage exactement du même ordre sur $C$, en introduisant
+\[
+W''_\omega = \text{plus petite partie } \Sigma \text{ de } \mathrm{Fl}(\mathrm{Cat}) \text{ satisfaisant } \mathrm{W}(1, 2\text{ bis}, 3, 6\text{ bis})
+\]
+et noter que
+\[
+\Phi_\infty(X) \in \mathrm{Ob}\,\und{Parf}_{W''_\omega} S, \qquad i_x \in W''_\omega % [sic] i_x -> i_X, the morphism is i_X everywhere else
+\]
+- mais là je m'aperçois qu'on a
+\[
+W_\omega \subseteq W''_\omega,
+\]
+donc $C$ est quand même un peu meilleur à cet égard \ldots
+
+Quand on dispose de $\Phi_\infty$ avec les propriétés qu'on vient d'expliciter, on trouve que l'inclusion
+\[
+\und{Parf}_W S \longrightarrow \und{Fib}_W(S)
+\]
+induit une équivalence non seulement pour les localisés pour $W_S$, mais aussi pour les localisés fins
+\[
+(\und{Parf}_W S)(W_S^{\mathrm{f}})^{-1} \longrightarrow (\und{Fib}_W(S))(W_S^{\mathrm{f}})^{-1} \overset{\text{déf}}{=} \mathrm{HOT}^{\mathrm{lc}}_W(S)
+\]
+(\footnote[94]{On peut y remplacer même $\und{Parf}_W S$ par $\und{Parf}_{W''_\omega} S$, \textit{ou} par toute autre sous-catégorie pleine de $\und{Fib}_W S$ contenant $\und{Parf}_{W''_\omega} S$.}). Mais on ne peut pour autant réduire le nombre des localisés utiles à trois, en l'absence de W(4b). Tout au plus, ayant un foncteur $\Phi_\infty$ qui est plus simple que $C$, en l'absence de W(4b), du fait qu'on sait de toutes façons que
+\[
+i_X : X \longrightarrow \Phi_\infty(X)
+\]
+est dans $W_S^{\mathrm{f}}$ si $X$ est dans $\und{Fib}_W S$, peut on
+\printedpage{121}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\msp{page 196}
+espérer s'en tirer avec la variante affaiblie de W(4b) obtenue en se bornant dans l'énoncé de W(4b) (p. 171) au cas où $X$, $Y$ sont dans $\und{Parf}_{W''_\omega} S$. Cette fois, ça suffit en effet à impliquer que le foncteur
+\[
+\lambda : (\und{Fib}_W S)(W_S^{\mathrm{f}})^{-1} \longrightarrow (\und{Fib}_W S)(W_S)^{-1}
+\]
+est une équivalence de catégories, puisque on peut le ‘calculer’ aussi bien en utilisant $\und{Parf}_{W''_\omega} S$ au lieu de $\und{Fib}_W S$, or l'hypothèse W(4b($\mathrm{W}''_\omega$)) implique que sur $\und{Parf}_{W''_\omega} S$ les deux localiseurs $W_S^{\mathrm{f}}$, $W_S$ sont \textit{égaux.}
+
+Il faut une conclusion pratique utilisable de toutes ces perplexités et observations. Essayons
+
+\textbf{Proposition.} \textit{Supposons que l'on soit sous l'une des conditions suivantes.}
+
+\begin{enumerate}[label={}]
+\item[$1^o$)] \textit{L'axiome} W(4b) \textit{est satisfait dans le cas de catégories $X$, $Y$ qui sont dans} $\und{Fibsc}_{0,W} S$ (\footnote[95]{mais c'est \textit{équivalent} à W(4b)! Cf. XVI 4.9. loc. cit.}) \textit{(cette condition sur $W$ est en fait autoduale).}
+
+\item[$2^o$)] \textit{L'axiome} W(4b) \textit{est satisfait dans le cas de catégories $X$, $Y$ qui sont dans} $\und{Parf}_{W''_\omega} S$\textit{, où $W''_\omega$ est le plus petit ensemble $\Sigma \subseteq$ Fl}(Cat) \textit{satisfaisant les conditions} $\mathrm{W}(1, 2\text{ bis}, 3, 6\text{ bis})$. \textit{(On peut aussi se contenter de la condition, plus forte mais plus compréhensible, que} W(4b) \textit{est OK si $X$, $Y$ sont dans} $\und{Parf}_W S$ (\footnote[96]{Mais cela implique aussi W(4b), cf. loc. cit.}).\textit{) De plus, on suppose que $W$ satisfait} W(6 bis).
+\end{enumerate}
+
+\textit{Sous ces conditions, le foncteur correspondant [?] $\lambda$}
+\[
+\mathrm{HOT}^{\mathrm{lc}}_W(S) \longrightarrow \mathrm{HOT}^{\mathrm{lc!}}_W(S)
+\]
+\textit{est une équivalence de catégories (cf. diagramme p. 178), donc $(\rho, i)$, $(\sigma, j)$ peuvent être regardés comme des couples de foncteurs entre deux catégories (cf. $(*)$ p. 181).} Ce sont des couples de foncteurs adjoints, \textit{donc $i$, $j$ sont pleinement fidèles, et on a la formule d'adjonction $(*)$, page 182.}
+
+\msp{page 197}
+Pour prouver l'adjonction de $(\rho, i)$ (ou dualement de $(\sigma, j)$), on exprime encore les deux catégories en présence $\mathrm{HOT}_W(S)$, $\mathrm{HOT}^{\mathrm{lc}}_W(S)$ comme $(\mathrm{Cat}/S)(W_S^{\mathrm{d}})^{-1}$, $(\mathrm{Cat}/S)(W_S)^{-1}$, le foncteur $\rho$ étant la localisation canonique allant du premier vers le second, et le foncteur $i$ étant donné par un foncteur d'inversion
+\[
+\gamma : (\mathrm{Cat}/S, W_S) \longrightarrow (\mathrm{Cat}/S, \overline{W_S^{\mathrm{d}}})
+\]
+qui est $C$ dans le cas $1^o$, $\Phi_\infty$ dans le cas $2^o$. Les morphismes d'adjonction
+\[
+\rho i \longrightarrow \mathrm{id}, \qquad i\rho \longleftarrow \mathrm{id}
+\]
+doivent se décrire alors comme dans le cas où on suppose tout bonnement W(4b), et les compatibilités se voient de même : on est ramené à prouver que deux flèches
+\printedpage{122}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\[
+\begin{tikzcd}
+\gamma(X) \arrow[r, shift left, "i_{\gamma(X)}"] \arrow[r, shift right, "\gamma(i_X)"'] & \gamma(\gamma(X))
+\end{tikzcd}
+\]
+sont égales dans $(\mathrm{Cat}/S)(W_S^{\mathrm{d}})^{-1}$. La vérification dans le cas $1^o$), où $\gamma = C$, ne doit pas être changée. Dans le cas $2^o$) où $\gamma = \Phi_\infty$, je ne l'ai pas fait. Je ne le ferai que sous la pression des besoins.
+
+\subsection*{\circnum{6} Loi contravariante de $\mathrm{HOT}_W(S)$, $\mathrm{HOT}^{\mathrm{lc}}_W(S)$.}
+
+Il y a pour
+\[
+f : S' \longrightarrow S
+\]
+un homomorphisme du diagramme
+\[
+\adjustbox{max width=\linewidth}{$\begin{tikzcd}[column sep=small]
+& \mathrm{HOT}^{\mathrm{lc}}_W(S') \arrow[dl] \arrow[dr] & & \text{\texttt{[Plutôt}} & & \mathrm{HOT}^{\mathrm{lc}}_W(S) \arrow[dl] \arrow[dr] & \\
+\mathrm{HOT}_W(S') & & \mathrm{HOT}^{o}_W(S') & & \mathrm{HOT}_W(S) & & \mathrm{HOT}^{o}_W(S)\ \text{\texttt{]}}
+\end{tikzcd}$}
+\]
+\msp{page 198}
+dans le diagramme similaire pour $S$ \texttt{[plutôt} $S'$\texttt{]}, par des foncteurs $f^*$ qui sont définis respectivement sur
+\[
+\begin{aligned}
+\und{Liss}_W S &\quad \text{pour}\quad \mathrm{HOT}_W(S) & \quad\longrightarrow\quad & \mathrm{HOT}_W(S')\\
+\und{Prop}_W S &\quad \text{pour}\quad \mathrm{HOT}^{o}_W(S) & \quad\longrightarrow\quad & \mathrm{HOT}^{o}_W(S')\\
+\und{Fib}_W S &\quad \text{pour}\quad \mathrm{HOT}^{\mathrm{lc}}_W(S) & \quad\longrightarrow\quad & \mathrm{HOT}^{\mathrm{lc}}_W(S'),
+\end{aligned}
+\]
+par l'intermédiare des foncteurs % [sic] intermédiare -> intermédiaire, missing i
+\[
+f^* : X \longmapsto X \times_S S' : \left\{
+\begin{aligned}
+\und{Liss}_W S &\quad\longrightarrow\quad \und{Liss}_W S'\\
+\und{Prop}_W S &\quad\longrightarrow\quad \und{Prop}_W S'\\
+\und{Fib}_W S &\quad\longrightarrow\quad \und{Fib}_W S',
+\end{aligned}
+\right.
+\]
+lequel foncteur est compatible avec les localiseurs pretinents, qui sont $W_S^{\mathrm{f}}$ dans tous les cas. Par contre, en l'absence d'hypothèses draconiennes sur $W$ ou sur $S$, on ne peut dire que $f^*$ soit compatible avec $W_S$, $W_{S'}$ sur une quelconque des catégories du diagramme p. 175, permettant de définir $\mathrm{HOT}^{\mathrm{lc!}}_W(S)$, de façon à nous donner un foncteur % [sic] pretinents -> pertinents, transposed letters
+\[
+\mathrm{HOT}^{\mathrm{lc!}}_W(S) \longrightarrow \mathrm{HOT}^{\mathrm{lc!}}_W(S').
+\]
+En l'absence d'axiomes sur $W$, le seul cas qui me soit connu est celui où $f$ est \textit{une $W$-équivalence universelle,} i.e. une $W$-fibration à fibres $W$-asphériques, auquel cas il est évident que pour \textit{toute} flèche $u : X \longrightarrow Y$ dans $\mathrm{Cat}/S$, $u \in W_S$ si et seulement si $(u' : X' \longrightarrow Y') \in W_{S'}$. On trouve alors un homomorphisme du diagramme complet $(*)$ p. 176 \texttt{[plutôt p. 178]} pour $S$, dans le diagramme correspondant pour $S'$.
+
+Si on suppose W(4b), alors $W_S = W_S^{\mathrm{f}}$ sur $\und{Fib}_W S$, donc sur cette catégorie-là le foncteur $f^*$ est compatible (sans mérite!) avec les localiseurs $W_S$, $W_{S'}$, mais ce n'est pas nouveau vraiment
+\printedpage{123}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\msp{page 199}
+par rapport à ce qui a été dit plus haut, pour $\und{Fib}_W S$, $\und{Fib}_W S'$, et pour les $\mathrm{HOT}^{\mathrm{lc}}_W$.
+
+Mais si on suppose W(4a), et $f \in \und{Fib}_W$, alors $f^*$ sur $\mathrm{Cat}/S$ tout entier est compatible avec les localiseurs $W_S$, $W_{S'}$, et on trouve un calcul de $f^*$ sur $\mathrm{HOT}^{\mathrm{lc!}}_W(S) \approx \mathrm{HOT}^{\mathrm{lc}}_W(S)$ par
+\[
+f^*(\mathrm{hot}^{\mathrm{lc}}_{S,W}(X)) = \mathrm{hot}^{\mathrm{lc}}_{S',W}(X \times_S S').
+\]
+
+Donc c'est là un cas, exceptionellement, où les foncteurs $f^*$ pour les $\mathrm{HOT}_W$ sont compatibles non seulement aux foncteurs d'inclusion $i$, $j$ (de la page 176 \texttt{[plutôt p. 178]}), mais aussi aux foncteurs de localisation $\rho$, $\sigma$. % [sic] exceptionellement -> exceptionnellement, French spelling has double n
+
+\textbf{Oubli :} Si $p : S' \longrightarrow S$ est $W$-propre, alors $p^* : \mathrm{Cat}/S \longrightarrow \mathrm{Cat}/S'$ est compatible avec $W_S^{\mathrm{d}}$, $W_{S'}^{\mathrm{d}}$, et $p^* : \mathrm{HOT}_W(S) \longrightarrow \mathrm{HOT}_W(S')$ peut se ‘calculer’ par la formule
+\[
+p^*(\mathrm{hot}_{S,W}(X)) = \mathrm{hot}_{S',W}(X \times_S S')
+\]
+pour \textit{tout} $X$ dans $\mathrm{Cat}/S$.
+
+\subsection*{\circnum{7} Produit dans $\mathrm{HOT}_W(S)$.}
+
+Le foncteur
+\[
+(X, Y) \longmapsto X \times_S Y : \und{Liss}_W S \times \und{Liss}_W S \longrightarrow \und{Liss}_W S
+\]
+est compatible avec les localiseurs $W_S^{\mathrm{f}} \times W_S^{\mathrm{f}}$ et $W_S^{\mathrm{f}}$, donc passe aux localisés en
+\[
+\left\{
+\begin{aligned}
+\mathrm{HOT}_W(S) \times \mathrm{HOT}_W(S) &\quad\longrightarrow\quad \mathrm{HOT}_W(S)\\
+(\xi, \eta) &\quad\longmapsto\quad \xi \times_S \eta
+\end{aligned}
+\right.
+\]
+(\footnote[97]{\textbf{NB} Si $X$, $Y$ sont \textit{quelconques} dans $\mathrm{Cat}/S$, on a $\mathrm{hot}_{S,W}(X) \times_S \mathrm{hot}_{S,W}(Y) = \mathrm{hot}_{S,W}(\Phi_S(X) \times_S \Phi_S(Y))$. Si $X$ ou $Y$ est lisse sur $S$, on peut y remplacer $\Phi(X)$ resp. $\Phi(Y)$ par $X$ resp. $Y$.}). Ce produit est associatif, unitaire, commute avec toutes les compatibilités habituelles, comme il résulte du fait que c'est comme ça dans $\und{Liss}_S$. L'élément unité est la classe de $S \xrightarrow{\mathrm{id}} S$. La sous-catégorie $\mathrm{HOT}^{\mathrm{lc}}_W(S)$ est stable par le produit, qui induit
+\msp{page 200}
+\[
+\mathrm{HOT}^{\mathrm{lc}}_W(S) \times \mathrm{HOT}^{\mathrm{lc}}_W(S) \longrightarrow \mathrm{HOT}^{\mathrm{lc}}_W(S),
+\]
+lui-même induit par le foncteur produit $(X, Y) \longrightarrow X \times_S Y$ dans $\und{Fib}_W S$.
+
+Si $X$ est quelconque dans $\mathrm{Cat}/S$, le foncteur
+\[
+\mathrm{mult}_{X/S} : Y \longmapsto X \times_S Y : \und{Liss}_W S \longrightarrow \mathrm{Cat}/S
+\]
+est compatible avec les localiseurs $W_S^{\mathrm{d}}$, car ce foncteur peut s'écrire comme le composé du foncteur correspondent \textit{à valeurs dans $\und{Liss}_W X$,} lequel est compatible avec les localiseurs % [sic] correspondent -> correspondant, adjective intended
+
+% ---- from Der-ChVI-345_p126-129.tex
+\setcounter{footnote}{97}
+
+\printedpage{124}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+$W_S^{\mathrm{d}}$, $W_S^{\mathrm{d}}$, et le foncteur ‘oubli de $X$’ de $\underline{\mathrm{Liss}}_W X$ (même de $\mathrm{Cat}/X$) dans $\mathrm{Cat}/S$, lequel est compatible avec $W_X^{\mathrm{d}}$ et $W_S^{\mathrm{d}}$. On trouve ainsi un foncteur % [sic] W_S^d, W_S^d -> apparently W_S^d, W_X^d (or W_X^d, W_S^d), the same symbol is printed twice
+\[
+\left\{\begin{aligned}
+&\mathrm{mult}_{X/S} : \mathrm{HOT}_W(S) \longrightarrow \mathrm{HOT}_W(S)\\
+&\mathrm{mult}_{X/S}(\mathrm{hot}_{S,W}(Y)) \overset{\text{déf}}{=} \mathrm{hot}_{S,W}(X\times_S Y) \qquad \text{si $Y$ \textit{lisse} sur $S$}
+\end{aligned}\right.
+\]
+(\footnote{Cette formule est également valable si $Y$ est dans $\underline{\mathrm{Fib}}_W\, S$, cf. $(*)$, p. 202.}), puisque $\mathrm{HOT}_W(S)$ peut s'obtenir comme localisé tant de $\underline{\mathrm{Liss}}_W S$ que de $\mathrm{Cat}/S$, pour $W_S^{\mathrm{d}}$. Quand $X$ est lui-même $W$-lisse sur $S$, ce foncteur n'est autre que
+\[
+\left\{\begin{aligned}
+&\mathrm{mult}_\xi : \eta \longmapsto \xi\times_S \eta,\\
+&\text{où }\ \xi = \mathrm{hot}_{S,W}(X).
+\end{aligned}\right.
+\]
+
+Mais il n'en est pas de même si $X$ n'est pas lisse, i.e. il faut distinguer dans ce cas, même pour $Y$ $W$-lisse sur $S$,
+\[
+\mathrm{hot}_{S,W}(X\times_S Y) \qquad\text{et}\qquad \mathrm{hot}_{S,W}(X)\times_S \mathrm{hot}_{S,W}(Y).
+\]
+
+Le deuxième terme peut s'expliciter comme $\mathrm{hot}_{S,W}(\Phi(X)\times_S Y)$ qui reçoit $\mathrm{hot}_{S,W}(X\times_S Y)$, i.e.
+\msp{page 201}
+on a un homomorphisme canonique
+\[
+\underbrace{\mathrm{hot}_{S,W}(X\times_S Y)}_{=\,\mathrm{mult}_{X/S}(Y)} \longrightarrow \underbrace{\mathrm{hot}_{S,W}(X)\times_S \mathrm{hot}_{S,W}(Y)}_{=\,\mathrm{hot}_{S,W}(\Phi(X)\times_S Y)},
+\]
+induit par
+\[
+X\times_S Y \longrightarrow \Phi(X)\times_S Y,
+\]
+mais cette dernière flèche n'a aucune raison d'être dans $W_S^{\mathrm{d}}$, et n'induit donc pas nécessairement un isomorphisme dans $\mathrm{HOT}_W(S)$. (Contrexemple page 154.)
+
+Il faut regarder à part le cas \textit{où $X$ est dans} $\underline{\mathrm{Fib}}_W S$, j'ai envie de dire que dans ce cas on a
+\[
+\mathrm{hot}_{S,W}(X\times_S Y) \xrightarrow{\ \sim\ } \underbrace{\mathrm{hot}_{S,W}(X)\times_S \mathrm{hot}_{S,W}(Y)}_{=\,\mathrm{hot}_{S,W}(\Phi(X)\times_S\, \Phi(Y))} \tag*{$(*)$} % doubt resolved in DER_VI-c_corrections.csv; input note: under the brace "hot" is printed larger than "(Phi(X)x_S Phi(Y))", which stands at subscript level -- argument of hot_{S,W} or part of its subscript
+\]
+(\footnote{Cette formule n'est établie qu'en supposant ou bien $Y$ $W$-lisse (en plus de $X$ $W$-fibré sur $S$), ou bien $X$ $W$-propre, p.ex. $X$ $W$-parfait.}) pour \textit{tout} $Y$ dans $\mathrm{Cat}/S$ (pas nécessairement $W$-lisse), a fortiori que dans ce cas
+\[
+\left\{\begin{aligned}
+&\mathrm{mult}_{X/S} = \mathrm{mult}_\xi \qquad \text{dans } \mathrm{HOT}_W(S)\\
+&\text{où } \xi = \mathrm{hot}_{S/W}(X/S) \text{ (si $X$ dans $\underline{\mathrm{Fib}}_W S$).} % [sic] hot_{S/W} -> hot_{S,W}, the notation used everywhere else
+\end{aligned}\right. \tag*{$(**)$}
+\]
+
+\printedpage{125}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+Dans le cas où $Y$ est lisse sur $S$ (ce qui suffit pour établir $(**)$), il suffit de se rappeler que $X\longrightarrow \Phi(X)$ est dans $W_S^{\mathrm{f}}$ (résulte du fait que $X$ est $W$-fibré sur $S$ (\footnote{il suffit même $W$-prélisse sur $S$}), donc $X_s \longrightarrow s\backslash X$ est dans $W$, $\forall\ s\in S$), donc $\underbrace{X\times_S Y}_{X_Y} \longrightarrow \underbrace{\Phi(X)\times_S Y}_{\Phi(X)_Y}$ est aussi dans $W_Y^{\mathrm{f}}$, donc (comme $X_Y$, $\Phi(X)_Y$ sont $W$-fibrés sur $Y$) dans $W_Y^{\mathrm{d}}$, donc aussi dans $W_S^{\mathrm{d}}$. En fait, même sans supposer $Y$ lisse, ceci montre que l'on a
+\msp{page 202}
+\[
+\mathrm{hot}_{S,W}(X\times_S Y) \xrightarrow{\ \sim\ } \mathrm{mult}_{Y/S}(\mathrm{hot}_{S,W}(X)) \qquad \text{si $X$ est dans $\underline{\mathrm{Fib}}_W S$.} \tag*{$(*)$}
+\]
+
+Pour avoir $(*)$ pour $Y$ quelconque, on peut par ce qui précède supposer $X$ lisse (quitte à le remplacer par $\Phi(X)$), donc $X$ dans $\underline{\mathrm{Liss}}_{0,W}S$. Il faut voir que
+\[
+X\times_S Y \longrightarrow X\times_S \Phi(Y)
+\]
+est encore dans $W_S^{\mathrm{d}}$. Or si $X$ est \textit{$W$-propre} sur $S$, le changement de base $X\longrightarrow S$ est compatible avec $W_S^{\mathrm{d}}$, $W_X^{\mathrm{d}}$ (sur $\mathrm{Cat}/S$ tout entier), et on gagne. (Ça doit être faux sans hypothèse de $W$-propreté sur $X$, \textit{ou} de $W$-lissité sur $Y$ \dots)
+
+Quand on a
+\[
+f : S' \longrightarrow S,
+\]
+alors
+\[
+f^* : \mathrm{HOT}_W(S) \longrightarrow \mathrm{HOT}_W(S')
+\]
+est compatible avec les structures de produit.
+
+\subsection*{\protect\cercle{8} Les foncteurs $f_!$ : théorème d'adjonction, propriétés du dérivateur $\mathrm{HOT}_W$.}
+
+Soit
+\[
+f : S' \longrightarrow S
+\]
+dans Cat, alors le foncteur induit
+\[
+f_! : \mathrm{Cat}/S' \longrightarrow \mathrm{Cat}/S
+\]
+est compatible avec les localiseurs $(W_{S'}^{\mathrm{d}}, W_S^{\mathrm{d}})$, ou $(W_{S'}^{\mathrm{g}}, W_S^{\mathrm{g}})$, ou $(W_{S'}, W_S)$. On trouve donc un foncteur induit pour les localisées, et \texttt{[un]} diagramme commutatif
+\msp{page 203}
+\[
+\begin{tikzcd}[column sep=small]
+\mathrm{HOT}_W(S') \arrow[rrd, "\rho'"] \arrow[dd, "f_!"'] & & & & \mathrm{HOT}^{o}_W(S') \arrow[lld, "\sigma'"'] \arrow[dd, "f^{o}_!"] \\
+& & \mathrm{HOT}^{\mathrm{lc}\,!}_W(S') \arrow[dd, "f^{\mathrm{lc}\,!}_!"] & & \\
+\mathrm{HOT}_W(S) \arrow[rrd, "\rho"] & & & & \mathrm{HOT}^{o}_W(S). \arrow[lld, "\sigma"'] \\
+& & \mathrm{HOT}^{\mathrm{lc}\,!}_W(S) & &
+\end{tikzcd}
+\]
+
+\printedpage{126}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+On n'a pas de foncteur $f_!^{\mathrm{lc}}$ au niveau des $\mathrm{HOT}_W^{\mathrm{lc}}$, sauf si on fait une hypothèse, telle \underline{W(4b)}, qui assure que $\mathrm{HOT}_W^{\mathrm{lc}\,!} \approx \mathrm{HOT}_W^{\mathrm{lc}}$.
+
+Le théorème principal, que le foncteur $f_!$ est adjoint à gauche de $f^*$, est valable \textit{sous la seule hypothèse} W$(1,2,3)$ (\footnote{i.e. avec ces nouvelles notations Loc$(1,2,3\ \text{bis})$ (cf. XVI).}). Donc dualement pour $f_!^{o}$, $f_{o}^*$. Mais comme on n'a pas de foncteur $f_{\mathrm{lc}\,!}^*$, la question d'adjonction ne se pose pas pour $f$ général, et sans hypothèse W(4b) sur $W$. Elle ne se pose, apparemment, que pour $f$ un $W$-fibré trivial (cf. fin de \cercle{6}, p. 198), et dans ce cas l'adjonction ne doit pas faire de difficultés. Mais tant que je n'ai pas de sentiment bien net au sujet de la signification des $\mathrm{HOT}_W^{\mathrm{lc}\,!}$, ce n'est pas là un résultat bien bandant \texttt{[sic]}.
+
+L'adjonction de $f_!$, $f^*$ pour $\mathrm{HOT}_W$ permet déjà de montrer que le prédérivateur $\mathrm{HOT}_W$
+\msp{page 204}
+satisfait les conditions Der 1, Der $4'$, Der $5'$ des dérivateurs. De plus, on a ce qu'on peut appeler la propriété Der 3b pour $\mathrm{HOT}_W$ en tant que $W$-dérivateur, i.e.
+
+\begin{quote}
+\textit{Si $f\in W$, alors $f$ est une} $\mathrm{HOT}_W$\textit{-équivalence} (\footnote{On le prouve en interprétant la notion de $\mathrm{HOT}_W$-équivalence par la $\mathrm{HOT}_W$\textit{-homologie.} Cela revient finalement à ceci : Si $f : S' \longrightarrow S$ est dans $W$, alors $\forall\, T$, $S'\times T \longrightarrow S\times T$ aussi!}) (moyennant les seuls axiomes W$(1,2,3)$ sur $W$). Plus précisément, $f$ est une $\mathrm{HOT}_W$-équivalence si et seulement si $\mathrm{hot}_W(f)$ est \texttt{[un]} isomorphisme, i.e. $f\in \overline{W}$, le saturé fort de $W$.
+\end{quote}
+
+Si $W$ \textit{satisfait} W(4b)\textit{,} alors on a également un couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathrm{HOT}_W^{\mathrm{lc}}(S') \arrow[r, shift left, "f_!^{\mathrm{lc}}"] & \mathrm{HOT}_W^{\mathrm{lc}}(S) \arrow[l, shift left, "f^*_{\mathrm{lc}}"]
+\end{tikzcd}
+\]
+pout toute flèche $S'\longrightarrow S$ dans Cat. On voit aussi dans ce cas que % [sic] pout -> pour, misprint
+
+\begin{quote}
+% printed with a vertical rule at the left of the block
+\begin{tabular}{|p{0.9\linewidth}}
+si $f : S' \longrightarrow S$ est dans $W$, alors $f^*_{\mathrm{lc}}$ et $f_!^{\mathrm{lc}}$ entre $\mathrm{HOT}_W^{\mathrm{lc}}(S)$ et $\mathrm{HOT}_W^{\mathrm{lc}}(S')$ sont des équivalences quasi-inverses l'une de l'autre (moyennant W(4b)),
+\end{tabular}
+\end{quote}
+
+ce qui est l'axiome Der 3b$_2$ ‘version $W$-dérivateurs’. On ne peut s'attendre à mieux, du côté Der 3!
+
+\textbf{Oubli :} Soit $f : S' \longrightarrow S$, on a alors $\boxed{f_!f^*} : \mathrm{HOT}_W(S) \longrightarrow \mathrm{HOT}_W(S)$ est égal à $\mathrm{mult}_{S'/S}$ (cf. p. 200). Il est donc égal à $\mathrm{mult}_\xi$, où $\xi = \mathrm{hot}_{S,W}(S')$, si on suppose ou bien $S'$ $W$-lisse sur $S$, ou bien $S'$ $W$-fibré sur $S$ (cf. $(**)$, p. 201).
+
+\subsection*{\protect\cercle{9} Théorème de changement de base pour $f_!$ dans $\mathrm{HOT}_W$.}
+
+Si on a
+\printedpage{127}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\[
+\begin{tikzcd}
+X \arrow[d, "f"'] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S & S', \arrow[l, "g"']
+\end{tikzcd}
+\]
+avec $f$ $W$-lisse \textit{ou} $g$ $W$-propre \texttt{[la suite manque]}
+\end{document}

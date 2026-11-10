@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Cr}{\mathrm{Cr}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ty}{\underline{\mathrm{Ty}}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\lng}{\operatorname{long}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\bD}{\boldsymbol{\Delta}}
+
+\begin{document}
+
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+\textbf{Corollaire 3.} \textit{Si $f$ est un morphisme} croissant \textit{d'intervalles orientés, alors pour tout $J' \in \Cr(\tau')$, on a}
+\[
+(0 \leq)\ \card \Cr(f)^{-1}(\{J\}) \longrightarrow \lng(J'),
+\] % [sic] \longrightarrow -> \leq, the next sentence speaks of equality; and {J} -> {J'}, as in Cr(f)^{-1}({J'}) below
+\msp{page 37}
+\textit{l'égalité n'étant obtenue que si les parties de $f$ sur les intervalles critiques de $I_\tau$ qui sont au dessus de $J'$ sont toutes égales à $0$ ou $1$ (donc si et seulement si sur les $J \in \Cr(f)^{-1}(\{J'\})$, elles sont égales à $1$).}
+
+\textbf{Corollaire 4.} \textit{Supposons de plus $I'$} \texttt{[}$= I_{\tau'}$\texttt{]} \textit{réduit. Alors}
+\[
+\mathit{Cr}(f) : \mathit{Cr}(\tau, f) \longrightarrow \mathit{Cr}(\tau')\ (\simeq \mathrm{Fl}\,\mathrm{tr}(\tau'))
+\]
+\textit{est} bijective.
+
+Donc dans ce cas, $\tau'$ réduit, on obtient une application en sens inverse
+\[
+\begin{tikzcd}[column sep=small]
+\Tr(\tau') \simeq \Cr(\tau') \arrow[rr, "\Cr^*(f)"] \arrow[dr, "\Cr(f)^{-1}"'] & & \Cr(\tau) \\
+ & \Cr(\tau, f), \arrow[ur, hook, "\text{inclusion}"'] &
+\end{tikzcd}
+\]
+application qui transforme l'intervalle critique $J'$ $(= \{i - 1, i\})$ en l'\textit{unique} intervalle critique $J$ de $I_\tau$ tel que
+\[
+f(J) = J'.
+\]
+
+\msp{page 38}
+Mais $J \simeq \bD_i^{\varepsilon}$, et on a donc un morphisme \textit{surjectif}
+\[
+f_0 : \bD_i^{\varepsilon} \longrightarrow J' \simeq \bD_1^{\varepsilon}.
+\]
+On voit tout de suite qu'il existe alors une \textit{unique} flèche de transition $u$ de $\bD_i^{\varepsilon}$, telle que $f(u) \neq \mathrm{id}$. Donc on trouve le corollaire suivant, plus précis que le corollaire 4 :
+
+\textbf{Corollaire 5.} \textit{Soit $f : I_\tau \longrightarrow I_{\tau'}$ un morphisme croissant d'intervalles orientés, avec $I_{\tau'}$ réduit, et soit $\Tr(\tau, f)$ l'ensemble des flèches de transition $\underline{u}_i$ de $I_\tau$ telle que $f(\underline{u}_i) \neq \mathrm{id}$, i.e. telles que $\pi(u_i, f) = 1$. Alors $f$ induit une application} % [sic] telle -> telles, agreement with "flèches" (cf. "telles que" just after)
+\[
+\Tr(\tau, f) \longrightarrow \Tr(\tau')
+\]
+\textit{qui est bijective, et (bien sûr) croissante, donc un isomorphisme d'ensembles ordonnés.}
+
+Ainsi l'application $\Tr(\tau') \longrightarrow \Cr(\tau, f)$ de tantôt se précise par une application bijective
+\[
+\Tr(f)^* : \Tr(\tau') \longrightarrow \Tr(\tau, f),
+\]
+reliée à $\Cr(f)^*$ plus haut par le triangle commutatif
+\[
+\begin{tikzcd}
+ & \Tr(\tau, f) \arrow[dd, "\wr\ \alpha"] \\
+\Tr(\tau') \arrow[ur, "\Tr(f)^*"] \arrow[dr, "\Cr(f)^*"'] & \\
+ & \Cr(\tau, f),
+\end{tikzcd}
+\]
+% foot: Version 22 décembre 2001
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 39}
+l'application $\alpha$ associant à toute $u_i \in \Tr(\tau, f)$ l'unique intervalle critique qui ‘contienne’ $u_i$ (i.e. tel que $u_i$ soit une flèche dudit intervalle, ou encore, fasse partie de la ‘chaîne critique’ associée \dots).
+
+On a mieux encore :
+
+\textbf{Proposition 8.} \textit{Soient $\tau, \tau' \in \mathrm{Ty}$, $\tau'$} réduit. \textit{Pour tout morphisme croissant d'intervalles orientés}
+\[
+f : I_\tau \longrightarrow I_{\tau'}
+\]
+\textit{(on va dire simplement que $f$ est une flèche dans $\Ty$, et écrire $f \in \Hom_{\Ty}(I_\tau, I'_\tau)$), associons lui la partie $\Tr(\tau, f)$ des flèches de transition de $I_\tau$ non dégénérées pour $f$. Ces flèches forment un ensemble totalement ordonné affecté de signes $+$ ou $-$ (caractère direct ou rétrograde des flèches), et $f$ induit une bijection d'ensembles totalement ordonnés} % [sic] I'_\tau -> I_{\tau'}, the target of f is I_{\tau'}
+\[
+\underbrace{E_f}_{\subseteq \Tr(\tau)} = \Tr(\tau, f) \simeq \Tr(\tau'),
+\]
+\textit{et même un isomorphisme d'ensembles totalement ordonnés ‘affectés de signes’. Ainsi, à toute $f$ on associe une partie $E_f$ de $\Tr(\tau)$, et telle que son ‘type’ soit égal à $\tau'$. Désignons par}
+\[
+\mathfrak{P}_{\tau'}(\Tr(\tau)) \subseteq \mathfrak{P}(\Tr(\tau))
+\]
+\textit{l'ensemble des parties $E$ de $\Tr(\tau)$ dont le type soit $\tau'$.}
+
+\msp{page 40}
+\textit{Alors l'application}
+\[
+f \longmapsto \Tr(\tau, f) : \Hom_{\Ty}(\tau, \tau') \longrightarrow \mathfrak{P}_{\tau'}(\Tr(\tau))
+\]
+\textit{est} bijective \textit{: se donner un morphisme $f : \tau \longrightarrow \tau'$ dans $\Ty$,} revient au même \textit{que de se donner une suite strictement croissante de flèches de transition}
+\[
+\underline{u}_{i_1},\ \underline{u}_{i_2},\ \dots\ ,\underline{u}_{i_{n'}} \qquad (n' = \lng \tau')
+\]
+\textit{dans $I_\tau$ $(i_1 < i_2 < \cdots < i_{n'})$, telle que la suite des signatures correspondante}
+\[
+(\varepsilon_{i_1}, \varepsilon_{i_2}, \dots, \varepsilon_{i_{n'}}) = \tau'
+\]
+\textit{soit égale à $\tau'$.}
+
+\textbf{Corollaire 1.} \textit{Pour tout $\tau$, on a des bijections canoniques}
+\[
+\left\{
+\begin{array}{lcl}
+\Tr^+(\tau) & \simeq & \Hom_{\Ty}(\tau, \Delta^+) \\
+\Tr^-(\tau) & \simeq & \Hom_{\Ty}(\tau, \Delta^-),
+\end{array}
+\right.
+\]
+fonctorielles en $\tau$ \textit{(variant dans} $\Ty$\textit{).}
+% foot: Version 22 décembre 2001
+
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+Pour donner un sens au corollaire, il faut définir
+\[
+\tau \longmapsto \Tr^+(\tau), \qquad \tau \longmapsto \Tr^-(\tau)
+\]
+comme \textit{foncteurs} contravariant en $\tau$, donc pour un morphisme
+\[
+f : I_{\tau_2} \longrightarrow I_{\tau_1}
+\]
+dans $\Ty$, définir des applications
+\msp{page 41}
+\[
+\begin{array}{rcl}
+\Tr^+(f)^* : \Tr^+(\tau_1) & \longrightarrow & \Tr^+(\tau_2) \\
+\Tr^-(f)^* : \Tr^-(\tau_1) & \longrightarrow & \Tr^-(\tau_2),
+\end{array}
+\]
+en d'autres termes, une application
+\[
+\Tr(f)^* : \Tr(\tau_1) \quad \longrightarrow \quad \Tr(\tau_2)
+\]
+‘compatible avec les signatures’. Dans le corollaire 5 plus haut, on a défini une telle application seulement pour $\tau'$ réduit \texttt{[}$\tau_1 = \tau'$\texttt{,} $\tau_2 = \tau$\texttt{]} (\footnote[12]{Ce qui suit ne fait pas intervenir les signatures - c'est un sorite sur les applications croissantes entre ensembles finis totalement ordonnés.}). Pour une flèche $u$ de $I_\tau$, appelons \textit{partie ensembliste} de $f$ sur $u$, où de $u$ pour $f$, la partie ensembliste de la flèche $f(u)$ dans $I_{\tau'}$, i.e. le segment $[f(i-1), f(i)] \subseteq I_{\tau'}$ (ici $u = \underline{u}_i$). Soit % [sic] où -> ou, alternative "de f sur u, ou de u pour f"
+\[
+\underline{u}_{i_1},\ \dots\ ,\underline{u}_{i_N} \qquad \text{ou } (v_1, v_2, \dots, v_n)
+\] % [sic] v_n -> v_N, the sequence has N elements (cf. v_N below)
+la suite croissante des éléments de $\Tr(\tau, f)$, on voit alors par récurrence sur $i$ que pour $i \in [1, N-1]$, on a
+\[
+\begin{array}{rcl}
+f(\mathrm{but}(v_i)) & = & f(\mathrm{source}(v_{i+1}))\ \ (= t_i), \\
+f(\mathrm{source}(v_1)) & = & 0_{\tau'}, \\
+f(\mathrm{but}(v_N)) & = & 1_{\tau'}.
+\end{array}
+\]
+Considérons la suite
+\[
+\{\overbrace{0_{\tau'}}^{= t_0}, t_1, t_2, \dots, t_{N-1}, \overbrace{1_{\tau'}}^{= t_N}\},
+\]
+elle est définie par le sous-ensemble correspondant de $I_{\tau'}$, qu'on appelera l'ensemble des \textit{sommets critiques de $I_{\tau'}$ pour $f$.} C'est une suite contenant $0_{\tau'}$, $1_{\tau'}$, et telle que deux éléments consécutifs sont reliés dans $I_{\tau'}$ par une flèche, ce qui équivaut à dire qu'elle contient les sommets critiques (intrinsèques) de $I_{\tau'}$. D'autre part, pour tout intervalle de transition $[i-1, i]$ de $I_{\tau'}$ $(i \in [1, n'])$, % [sic] appelera -> appellera, French spelling
+% foot: Version 22 décembre 2001
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 42}
+il existe un et un seul intervalle de transition $[t_{j-1}, t_j]$ pour cette suite $(j \in [1, N])$, telle qu'on ait $[i-1, i] = [t_{j-1}, t_j]$. C'est dire qu'il existe une et une seule $v_j \in \Tr(\tau, f)$ telle que la partie de $f$ sur $v_j$ (savoir justement $[j-1, j]$) contienne (celle de) $\underline{u}_i$. Pour résumer :
+
+\textbf{Corollaire 2.} \textit{Soit $f : \tau \longrightarrow \tau'$ dans $\Ty$. Alors pour toute $u \in \Tr(\tau') = \Tr(I_{\tau'})$, il existe une et une seule $v \in \Tr(\tau)$ telle que la partie de $f$ sur $v$ contienne $u$. De plus, les signatures de $u$ et de $v$ sont égales.}
+
+C'est ainsi qu'on obtient donc une application
+\[
+\Tr(f)^* : \Tr(\tau') \quad \longrightarrow \quad \Tr(\tau) \qquad (\text{se factorisant par } \Tr(\tau, f))
+\]
+induisant
+\[
+\begin{array}{rcl}
+\Tr^+(f)^* : \Tr^+(\tau') & \longrightarrow & \Tr^+(\tau) \\
+\Tr^-(f)^* : \Tr^-(\tau') & \longrightarrow & \Tr^-(\tau).
+\end{array}
+\]
+La transitivité pour un composé
+\[
+\tau \xrightarrow{f} \tau' \xrightarrow{g} \tau''
+\]
+ou
+\[
+I_\tau \xrightarrow{f} I_{\tau'} \xrightarrow{g} I_{\tau''}
+\]
+est immédiate. Si $u$, $u'$, $u''$ sont des flèches de transition dans $I_\tau$, $I_{\tau'}$, $I_{\tau''}$ respectivement, telles que
+\[
+\begin{array}{rcll}
+\pi(g, u') & \supseteq & \pi(u''), & \qquad \text{i.e. } u' = \Tr(g)^*(u'') \\
+\pi(f, u) & \supseteq & \pi(u'), & \qquad \text{i.e. } u = \Tr(f)^*(u'),
+\end{array}
+\]
+alors on a
+\[
+\pi(gf, u) \ \supseteq\ \pi(u''), \qquad \text{i.e. } u = \Tr(gf)^*(u'').
+\]
+
+\msp{page 43}
+Si les flèches en question ont comme partie intrinsèque $[i-1, i]$, $[i'-1, i']$, $[i''-1, i'']$ respectivement, l'hypothèse est
+\[
+\begin{array}{rclrcl}
+g(i'-1) & \leq & i''-1, & g(i') & \geq & i'' \\
+f(i-1) & \leq & i'-1, & f(i) & \geq & i'
+\end{array}
+\]
+et comme $g$ est croissant, on a déduit
+\[
+\begin{array}{rcll}
+gf(i-1) & \leq & g(i'-1) & (\leq i''-1) \\
+gf(i) & \geq & g(i') & (\geq i''),
+\end{array}
+\]
+\begin{flushright}
+c.q.f.d.
+\end{flushright}
+% foot: Version 22 décembre 2001
+
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+Ainsi, le corollaire 1 plus haut obtient un sens précis et il est démontré du même coup, vu que les correspondances du corollaire 1 sont données par
+\[
+\underbrace{f}_{\in \Hom_{\Ty}(\tau, \Delta^{\varepsilon})} \qquad \longmapsto \Tr(f)^*(\underline{u}),
+\]
+où $\underline{u}$ est l'unique flèche de transition de $\Delta^{\varepsilon}$.
+
+On va utiliser ces sorites pour donner, pour tout $\tau \in \Ty$, une description combinatoire simple des catégories $\Ty/\tau$ et $\tau\backslash\Ty$, ou du moins de leurs ensembles d'objets.
+
+\textbf{1$^o$ Description de} $\Ob\,(\tau\backslash\Ty)$\textbf{.}
+
+À $f \in \Ob(\tau\backslash\Ty)$, i.e.
+\[
+f : \tau \longrightarrow \tau' \qquad \text{i.e. } f : I_\tau \longrightarrow I_{\tau'}
+\]
+dans $\Ty$, est associé $E = E_f = \Tr(\tau, f) \subseteq \Tr(\tau)$, l'ensemble des flèches de transition critiques (i.e. non dégénérées) pour $f$. À chaque $u \in E$, associons l'entier $\lng(\pi(f, u))$,
+\msp{page 44}
+la \textit{partie} de $f$ sur $u$. Alors $(\tau', f)$ est déterminé de façon unique par le couple
+\[
+(E, \pi), \qquad E \in \mathfrak{P}(\Tr(\tau)), \qquad \underbrace{\pi}_{\text{pondération}} : E \ \longrightarrow\ \underbrace{\mathbf{N}^*}_{\substack{= \text{ensemble des} \\ \text{entiers} \geq 1}} \quad .
+\]
+Ou si on préfère, par l'application $\pi = \pi_f$
+\[
+\Tr(\tau) \xrightarrow{\pi} \mathbf{N}, \qquad u \longmapsto \pi(u) = \pi(u, f) = \lng(\pi_{\tau'}(f(u)))
+\]
+(qui redonne $E$ comme
+\[
+E = \pi^{-1}(\mathbf{N}^*) \qquad ).
+\]
+Cette application n'est soumise à aucune restriction,
+\[
+\Ob\,(\tau\backslash\Ty) \ \xrightarrow[\sim]{\text{bij.}}\ \Hom_{\mathrm{Ens}}(\Tr(\tau), \mathbf{N}).
+\]
+On récupère $\tau'$ à partir de $\pi$ ainsi. On prend $E = \pi^{-1}(\mathbf{N}^*)$ (flèches de transition non dégénérées pour $\pi$), $E$ est totalement ordonné par l'ordre induit par celui de $\Tr(\tau)$, il est de plus signaturé \texttt{[sic]} par la signaturation \texttt{[sic]} de $\Tr(\tau)$, soit
+\[
+(\varepsilon_1, n_1),\ \dots\ ,\ (\varepsilon_r, n_r)
+\]
+la suite des signatures et pondérations, de la suite des éléments de $E$ $(\varepsilon_i \in \{\pm 1\}$, $n_i \in \mathbf{N}^*$ pour $i \in [1, r])$. Alors,
+\[
+\tau' = \Delta_{\varepsilon_1}^{n_1} \Delta_{\varepsilon_2}^{n_2} \cdots \Delta_{\varepsilon_r}^{n_r}, \qquad r = \card E,
+\]
+dans le monoïde libre $\mathrm{Ty}$, où on a désigné par $\Delta_+$, $\Delta_-$ (au lieu de $\Delta^+$, $\Delta^-$) les deux générateurs. L'application
+\[
+I_\tau \ \longrightarrow\ I_{\tau'}
+\]
+% foot: Version 22 décembre 2001
+
+\end{document}

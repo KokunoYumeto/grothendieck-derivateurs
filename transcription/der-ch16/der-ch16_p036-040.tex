@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{decorations.pathreplacing,babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\fourche}{\begin{tikzcd}[ampersand replacement=\&, row sep=0.5em, column sep=1em, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \\
+ X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}}
+\newcommand{\carre}{\begin{tikzcd}[ampersand replacement=\&, row sep=0.5em, column sep=1em, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \arrow[dr] \& \\
+ X_0 \arrow[ur] \arrow[dr] \& \& X \\
+ \& X_2 \arrow[ur] \&
+\end{tikzcd}}
+
+\makeatletter
+\AtBeginDocument{%
+\renewcommand{\@makefnmark}{\hbox{\textsuperscript{\normalfont(\@thefnmark)}}}%
+\renewcommand{\@makefntext}[1]{\parindent 1em\noindent\hbox to 1.8em{\hss\textsuperscript{\normalfont\@thefnmark}}\,#1}%
+}
+\makeatother
+
+\begin{document}
+
+\begin{enumerate}[leftmargin=2.5em]
+\item[] \printedpage{34}%
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+\textit{le rectangle d'implications}
+\[
+\begin{tikzcd}[row sep=large, column sep=large, execute at end picture={
+\draw[decorate,decoration={brace,amplitude=6pt}] ([xshift=-14pt]A.west |- C.south) -- ([xshift=-14pt]A.north west) node[midway,left=8pt]{$\mathcal{F}_W,\mathrm{Fibf}_W$};
+\draw[decorate,decoration={brace,amplitude=6pt}] ([xshift=14pt]AW.north east) -- ([xshift=14pt]AW.east |- CW.south) node[midway,right=8pt]{$\mathcal{F}_{W_0},\mathrm{Fibf}_{W_0}$};
+}]
+|[alias=A]| \mathrm{A} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & |[alias=AW]| \mathrm{A}_{W_0} \arrow[d,Rightarrow] \\
+\mathrm{B} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{B}_{W_0} \arrow[d,Rightarrow] \\
+|[alias=C]| \mathrm{C} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & |[alias=CW]| \mathrm{C}_{W_0} \arrow[d,Rightarrow] \\
+\underbrace{\mathrm{D}}_{\mathrm{Parf}_W} \arrow[r,Rightarrow] & \underbrace{\mathrm{D}_{W_0}}_{\mathrm{Parf}_{W_0}}\,,
+\end{tikzcd}
+\tag*{(4.4.13.5)}
+\]
+\textit{où on a rappelé, à côté des accolades, quels sont l'ensemble, ou les ensembles $\mathcal{F}\subset\mathrm{Fl}(\mathrm{Cat})$ qui définissent les conditions envisagées (comme l'une des conditions $\mathrm{A}(\mathcal{F})$, $\mathrm{B}(\mathcal{F})$, $\mathrm{C}(\mathcal{F})$ ou $\mathrm{D}(\mathcal{F})=\mathrm{A}(\mathcal{F})$ dans le cas où les trois conditions sont équivalentes). La plus faible des huit conditions envisagées est $\mathrm{D}_{W_0}$, la plus forte} A. (\textit{Et pour $W_0$ variable, on trouve la condition la plus faible de toutes en prenant $D_{W_\omega}$, où $W_\omega$ est le plus petit des localiseurs fondamentaux dans} Cat.)
+
+\item[c)] \textit{On a de plus, pour la condition la plus faible $\mathrm{D}_{W_0}$, l'implication}
+\[
+\mathrm{D}_{W_0} \implies \mathrm{F},
+\]
+\msp{page 60}%
+\textit{où} $\mathrm{F}=\text{Loc (7 F)}$ \textit{est la condition que} Cat \textit{possède suffisamment de $W$-fibrations,} i.e. \textit{que c'est une catégorie de fibrations pour} $(W,\mathrm{Fib}_W)$.
+\end{enumerate}
+
+\noindent\cercle{2}\enspace{\itshape Si $W$ et $W_0$ satisfont à \textup{Loc (8 bis)} (axiome des limites dénombrables), alors \textup{$\mathrm{D}_{W_0}\Longrightarrow\mathrm{A}$, i.e.} les 8 conditions envisagées sont équivalentes. Donc si $W$ satisfait \textup{Loc (8 bis)}, considérant le plus petit localiseur fondamental $W_L$ satisfaisant à \textup{Loc (8 bis)} (de sorte que $W\supset W_L$), on voit que les huit conditions
+\[
+\mathrm{A},\ \mathrm{B},\ \mathrm{C},\ \mathrm{D},\ \mathrm{A}_{W_L},\ \mathrm{B}_{W_L},\ \mathrm{C}_{W_L},\ \mathrm{D}_{W_L}
+\]
+sont équivalentes~\footnote[33]{N.B. La forme la plus faible, $\mathrm{D}_{W_{\mathrm{L}}}$, de ces conditions, est la relation \fbox{$\mathrm{Parf}_{W_{\mathrm{L}}}\cap W\subset W^{\mathrm{u}}$.}}. En particulier, sous la même hypothèse (fort anodine) sur $W$, les conditions \textup{Loc (7) $=$ Loc (7 a), Loc (7 b)} et \textup{Loc (7 c)} sont équivalentes, et elles équivalent aussi à la condition \textup{$\mathrm{D}=\mathrm{A}(\mathrm{Parf}_W)$, i.e.} à
+\[
+\mathrm{Parf}_W\subset\mathrm{Fib}_W \qquad (\textit{cas particulier de } \text{Loc (7 a)}),
+\]
+et à ses deux variantes d'apparence plus faible \textup{$\mathrm{B}(\mathrm{Parf}_W)$, $\mathrm{C}(\mathrm{Parf}_W)$} (cas particulier de \textup{Loc (7 b) et de Loc (7 c)} respectivement).}
+
+% foot: Version 18 mars 2019
+
+\noindent\cercle{3}\enspace{\itshape Supposons que $W_0$ satisfasse à \textup{Loc (8 bis)} (sans hypothèse particulière sur $W$). Alors
+\printedpage{35}%
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+\msp{page 61}%
+les quatre conditions $\mathrm{A}_{W_0}$, $\mathrm{B}_{W_0}$, $\mathrm{C}_{W_0}$, $\mathrm{D}_{W_0}$ sont équivalentes, et le diagramme d'implications de \textup{1°)} (p. \textup{59}) se réduit donc au diagramme linéaire
+\[
+\mathrm{A} \implies \mathrm{B} \implies \mathrm{C} \implies \mathrm{D} \implies \mathrm{D}_{W_0}\ (\Longleftrightarrow \mathrm{A}_{W_0}\ldots),
+\]
+dont le premier terme est \textup{Loc (7 a) $=$ Loc (7)}, et le dernier équivaut à l'inclusion
+\[
+\mathcal{F}_{W_0}\subset\mathrm{Fib}_W,
+\]
+cas particulier de \textup{$\mathrm{A}=$ Loc (7 a)}, ou encore à l'inclusion (en apparence plus forte)
+\[
+\mathrm{Fibf}_{W_0}\subset\mathrm{Fib}_W,
+\]
+(cas particulier de la forme équivalente
+\[
+\mathrm{Fibf}_W\subset\mathrm{Fib}_W,
+\]
+de l'axiome} Loc (6 a)).
+
+\noindent\cercle{4}\enspace\textit{Enfin, on a les implications plus techniques conditionnelles suivantes.}
+\begin{enumerate}[leftmargin=2.5em]
+\item[a)] \textit{Si $W_0$ satisfait à Loc (7 F), alors les conditions $\mathrm{A}_{W_0}$, $\mathrm{B}_{W_0}$, $\mathrm{C}_{W_0}$ sont équivalentes, donc le diagramme (4.4.13.5) se réduit au diagramme}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathrm{A} \arrow[d,Rightarrow] & \\
+\mathrm{B} \arrow[d,Rightarrow] & \\
+\mathrm{C} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{C}_{W_0} \arrow[d,Rightarrow] \\
+\mathrm{D} \arrow[r,Rightarrow] & \mathrm{D}_{W_0}\ .
+\end{tikzcd}
+\]
+
+\item[b)] \textit{Si $W$ est fortement saturé} (\textit{axiome} Loc (1 ter), \textit{qui}
+\msp{page 62}%
+\textit{est satisfait dans la grande majorité des cas, et est même impératif pour construire un prédérivateur satisfaisant à l'axiome de localisation} Der 2) \textit{et satisfait à} Loc (3 bis) (\textit{axiome de localisation fort,} cf. §1), \textit{alors on a} $\mathrm{B}\Longrightarrow\mathrm{A}$, \textit{donc}
+\[
+\mathrm{A} \iff \mathrm{B},
+\]
+i.e. Loc (7 a) $=$ Loc (7) \textit{équivaut à} Loc (7 b).
+\end{enumerate}
+
+\noindent\textsc{Démonstration}. Tout ce qui est énoncé a été vu dans les pages précédentes, à la seule exception de 4°, b. Mais cette implication $\mathrm{B}\Longrightarrow\mathrm{A}$ pour $W$ fortement saturé est prouvé dans XII (prop. 1, p. 54). Je rappelle que la démonstration utilise de façon essentielle le % [sic] prouvé -> prouvée, accord avec « implication »
+% foot: Version 18 mars 2019
+\printedpage{36}%
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+formalisme du prédérivateur $\mathrm{HOT}_W$ (construit et étudié surtout dans VI), et la théorie des foncteurs $f_!$, et notamment le résultat (valable si $W$ satisfait à Loc (3 bis, 7 b)) que pour une flèche $f:S'\longrightarrow S$ dans $W$, la flèche correspondante
+\[
+f^*_{\mathrm{lc}}:\mathrm{HOT}^{\mathrm{lc}}_W(S)\longrightarrow\mathrm{HOT}^{\mathrm{lc}}_W(S')
+\]
+est une équivalence de catégories. Donc l'implication $\mathrm{B}\Longrightarrow\mathrm{A}$, elle aussi, est un résultat qui n'a rien d'évident.
+
+\noindent\msp{page 63}%
+4.4.14. Je résume les implications obtenues jusqu'à présent, y compris les implications conditionnelles, dans le diagramme récapitulatif suivant :
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+|[draw,circle,inner sep=1pt]| \mathrm{A} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{A}_{W_0} \arrow[d,Rightarrow] & \\
+\mathrm{B} \arrow[r,Rightarrow] \arrow[d,Rightarrow] \arrow[u, dotted, bend left=40, "\text{$W$ (1 ter, 3 bis)}"] & \mathrm{B}_{W_0} \arrow[d,Rightarrow] & \\
+\mathrm{C} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{C}_{W_0} \arrow[d,Rightarrow] \arrow[uu, dotted, bend right=25, "\text{$W_0$ (7)}"'] & \\
+\mathrm{D} \arrow[r,Rightarrow] \arrow[dr, dotted, "\text{$W$ (8 bis)}"'] & \mathrm{D}_{W_0} \arrow[r, Rightarrow, "{\text{\begin{tabular}{@{}l@{}}N.B. on verra sur l'exemple de $\mathbf{W}_0$\\ que cette implication est \textit{stricte,}\\ même sous l'hypothèse\\ Loc (1 ter, 2 bis, 4, 5, 6 a, 8, 9).\end{tabular}}}"] \arrow[d, dotted, "\text{$W$ (8 bis) $+$ $W_0$ (8 bis)}"] \arrow[uuu, dotted, bend right=50, "\text{$W_0$ (8 bis)}"'] &[12em] \mathrm{F} \\
+& |[draw,circle,inner sep=1pt, label={right:{$\;,$}}]| \mathrm{A} &
+\end{tikzcd}
+\]
+où j'ai cerclé la condition la plus forte et la plus importante de toutes, $\mathrm{A}=$ Loc (7), qui apparaît en deux extrémités opposées du diagramme.
+
+Je voudrais encore faire un commentaire sur les ingrédients des résultats prouvés ici, et notamment de l'équivalence des huit conditions A à $\mathrm{D}_{W_0}$, quand $W$ et $W_0$ satisfont Loc (8 bis) :
+
+\msp{page 64}%
+\begin{enumerate}[leftmargin=2.5em]
+\item[1)] La théorie des \textit{catégories de chemins} \underline{Ch}$(X)$ (VII), s'appuyant sur celle des \textit{morphismes lisses, propres, parfaits.}
+\item[2)] Le lemme de K. S. \textsc{Brown} (3.2.1, page 20).
+\item[3)] Pour l'implication $\mathrm{B}\implies\mathrm{A}$, \textit{i.e.} Loc (7 b) $\implies$ Loc (7) (sous l'hypothèse $W$ (1 ter, 3 bis)), j'utilise la théorie du prédérivateur $\mathrm{Hot}_W$ (VI), et plus particulièrement celle des foncteurs $f_!$ (définis sous la seule hypothèse $W$ (3 bis), renforçant la condition automatique $W$ (3) (faisant partie de la définition d'un localiseur fondamental)).
+\end{enumerate}
+% foot: Version 18 mars 2019
+
+\leavevmode\printedpage{37}%
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+Il est clair que je ne serais pas arrivé à y voir clair, sans le travail fondamental de K. S. \textsc{Brown}. Il reste pourtant encore des questions ouvertes. Ainsi, si on ne suppose pas que $W$ satisfasse à Loc (8 bis), mais au besoin à Loc (3 ter) (et je n'ai pas eu l'occasion encore de travailler avec un localiseur qui n'y satisfasse \ldots), est-il vrai néanmoins que l'on a encore l'implication
+\[
+\mathrm{D} \qquad \Longrightarrow \qquad \mathrm{A},
+\]
+de façon que les conditions A, B, C, D soient équivalentes (et en particulier Loc (7 c) implique déjà Loc (7) dans toute sa force) ? Il est clair dans tout cela que
+\msp{page 65}%
+je ne me suis pas suffisamment attaché à développer des exemples et des contre-exemples. Sans compter qu'il me semble que tous les localiseurs fondamentaux sur Cat qu'on rencontre “en pratique” satisfont déjà à Loc (8) et a fortiori à Loc (8 bis), donc pour eux on a bien l'implication escomptée. La même remarque s'applique à l'implication hypothétique
+\[
+\mathrm{D}_{W_0} \overset{?}{\implies} \mathrm{A},
+\]
+sous hypothèse Loc (8 bis) sur $W_0$ et sur $W$. Un candidat évident pour un contre-exemple déjà à la première question serait $W_\omega=$ plus petit localiseur fondamental sur Cat, un qu'il est presque évident qu'il ne satisfait \textit{pas} à Loc (8) ni même Loc (8 bis). Mais il n'y a aucune raison qu'il satisfasse non plus à F, de telle façon que (s'il n'y satisfait pas, donc non plus à D) l'implication $\mathrm{D}\Longrightarrow\mathrm{A}$ est bel et bien valable. Cela nous amène à la question, plus substantielle, si on n'aurait pas l'implication % [sic] un qu'il est -> dont il est (?), construction défectueuse
+\msp{page 66}%
+\[
+\mathrm{F} \overset{?}{\implies} \mathrm{A}\ \text{\footnotemark[34]},
+\]
+\footnotetext[34]{C'est faux, \textit{cf.} plus bas, l'implication Loc (7 $\mathrm{D}_{W_\omega}$) $\Longrightarrow$ Loc (7 F) est \textit{stricte.}}%
+du moins sous des conditions convenables assez anodines sur $W$, genre Loc (1 ter, 3 bis, 8 bis).
+
+C'est sans doute là la question la plus substantielle et la plus intéressante qui est soulevée par le diagramme de la page 63, et qui ne fait plus appel à l'introduction d'un localiseur fondamental $W_0$ auxiliaire. Vu le lemme de Brown, il ne me semble pas absolument exclu qu'un tel miracle ait bel et bien lieu !
+
+4.4.15 (Digression sur l'axiome Loc (6) des cofibrations.) Cela attire mon attention sur la question en quelque sorte duale : Si Cat a assez de $W$-\textit{co}fibrations, \textit{i.e.} si muni de $(W,\mathrm{Cof}_W)$ c'est une catégorie à cofibrations, cela implique-t-il déjà l'axiome Loc (6 a) (qui avait été dégagé, essentiellement, pour assurer qu'il en soit bien ainsi). La proposition 3.6. (p. 25) nous dit qu'il revient au même de prouver que, si $W$ satisfait Cof, alors les carrés de M. V. ouverts sont
+\msp{page 67}%
+$W$-cocartésien. Mais il me semble à présent que nous pouvons le prouver, sous la seule condition supplémentaire Loc (3 bis)~\footnote[35]{et peut-être, de plus, Loc (1 ter), \textit{i.e.} $W$ fortement saturée.}, laquelle assure l'existence des foncteurs $f_!$, et % [sic] cocartésien -> cocartésiens, accord avec « les carrés » ; [sic] (note 35) saturée -> saturé, accord avec « W » (localiseur)
+% foot: Version 18 mars 2019
+\printedpage{38}%
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+en particulier la construction de Holim d'un diagramme $\fourche$ \quad comme $\int\fourche$ \quad .
+Donc dire qu'un diagramme de $\mathcal{M}$ ouvert $\carre$ est $W$-cocartésien, doit revenir à dire que la flèche canonique
+\[
+\int\fourche \qquad \longrightarrow \qquad X
+\]
+est dans $W$ ; du moins si $W$ est supposé fortement saturé. Or cela a été bel et bien vu dans XII 3.4 (théorème 4 et son \textit{corollaire} 3, p. 149). Dans loc. cit. j'énonce les conclusions sous l'hypothèse que j'appelais W (7 bis) (l'actuel Loc (6)), mais je viens de vérifier que pour sa partie \textit{directe,} donc aussi pour ses corollaires 1 à 3, on n'a pas besoin
+\msp{page 68}%
+de cette hypothèse (comme je l'indique en annotations marginales).
+
+4.16. Le résultat que je viens de prouver (sans vérifier avec soin la démonstration) me paraît aussi délicat, qu'il est satisfaisant. Cela rend la “conjecture” hésitante de 4.4.14, savoir que
+\[
+\mathrm{F} \overset{?}{\Longrightarrow} \mathrm{A} \qquad \text{donc} \qquad \mathrm{F}\Longleftrightarrow\mathrm{A}
+\]
+en supposant que $W$ satisfait Loc (1 ter, 3 bis, 8 bis), nettement plus engageante. Car on commence à s'habituer aux miracles les plus époustouflants \ldots
+
+Pourtant, je viens de vérifier que cette conjecture est fausse, sur l'exemple de
+\[
+\mathbf{W}_0=\{f\in\mathrm{Fl}(\mathrm{Cat})\mid\pi_0(f)\ \mathrm{iso}\}\,,
+\]
+qui satisfait à F, mais pas à A, ni même à $\mathrm{D}_{W_\omega}$. Ainsi l'implication
+\[
+\mathrm{D}_{W_\omega} \implies \mathrm{F}
+\]
+et a fortiori les implications
+\[
+\left\{
+\begin{aligned}
+&\text{Loc (7 a)} \implies \mathrm{F},\ \text{Loc (7 b)} \implies \mathrm{F},\ \text{Loc (7 c)} \implies \mathrm{F}\\
+&\mathrm{D}_{W_0} \implies \mathrm{F}
+\end{aligned}
+\right.
+\]
+sont \textit{strictes,} même en se limitant à des localiseurs fondamentaux $W$ satisfaisant (comme $\mathbf{W}_0$) à
+\[
+\text{Loc (1 ter, 2, 3 bis, 4, 5, 6 a, 8, 9)}\ \text{\footnotemark[36]}.
+\]
+\footnotetext[36]{\textbf{N.B. $\mathbf{W}_0$} ne satisfait \textit{pas} Loc (6 b), ni Loc (7 $\mathrm{D}_{W_\omega}$) (\textit{cf.} plus bas), par contre Loc (7 F).}
+% foot: Version 18 mars 2019
+
+\end{document}

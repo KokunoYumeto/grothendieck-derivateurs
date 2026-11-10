@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\redop}{\mathop{\textnormal{réd}}\nolimits}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+\newcommand{\into}{\lhook\joinrel\longrightarrow}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\printedpage{179}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+Signalons tout de suite le
+
+\textbf{Corollaire 4.15.10.} \textit{Les conditions équivalentes précédentes sont satisfaites, si $\pi > \card\mathcal{C}$.}
+
+En effet, soit $\alpha_1$ le plus petit ordinal tel que $\card\alpha_1 > \card\mathcal{C}$. Donc $\pi_1 \defeq \card\alpha_1$ est le successeur de $\pi_0 \defeq \card\mathcal{C}$, et on a $\pi \geqslant \pi_1$, donc (si $\alpha_0$ est comme explicité dans b$'$ ci-dessus) $\card\alpha_0 > \pi_1$, donc $\alpha_1 < \alpha_0$. Soit (avec les notations de b$'$), pour $\alpha \in I$ \texttt{[plutôt} $\alpha \in I_{\alpha_0}$\texttt{]}, i.e.\ $\alpha < \alpha_0$,
+\[
+M_\alpha \;=\; \varinjlim_{i<\alpha} \underbrace{M_i}_{=\,M}\ ,
+\]
+on voit donc, comme les $\alpha_{ji}$ sont injectifs et non surjectifs, que
+\[
+\card M_\alpha \;\geqslant\; \card\alpha\ ,
+\]
+\msp{463}
+et que pour $\alpha < \beta$, on a
+\[
+M_\alpha \;\into\; M_\beta \qquad \text{injectif}\ .
+\]
+Appliquons ceci au cas où $\alpha = \alpha_1$, donc on trouve
+\[
+\card M_{\alpha_1} \;\geqslant\; \card\alpha_1 \;=\; \pi_1\ ,
+\]
+d'autre part, en prenant $\beta = \alpha_1 + 1$, d'où $M_\beta \simeq M$, on trouve une injection
+\[
+M_{\alpha_1} \;\into\; M\ ,
+\]
+d'où
+\[
+\pi_1 \;=\; \card M_{\alpha_1} \;\leqslant\; \card M \;=\; \pi_0\ ,
+\]
+une contradiction, ce qui établit b$'$.
+
+\textbf{Corollaire 4.15.11.} \textit{Soit $\mathcal{C}$ une catégorie essentiellement petite, $\pi$ un cardinal tel que $\pi > \card\redop\mathcal{C}$. Soit $\mathcal{M} \defeq \Ind_\pi\mathcal{C}$, alors $\mathcal{M} = \mathcal{M}_\pi$, et c'est une enveloppe de Karoubi de $\mathcal{C}$.}
+
+On peut supposer $\mathcal{C}$ réduite, donc $\card\mathcal{C} < \pi$, et on applique le corollaire précédent.
+
+Ainsi, le résultat litigieux 4.8.13 (p.~212) est finalement prouvé sous une forme légèrement plus faible, avec $\pi > \card\redop\mathcal{C}$ au lieu de $\pi \geqslant \card\redop\mathcal{C}$. Du même coup, les applications de 4.8.13 qu'on a fait jusqu'à présent (notamment le lemme 4.15.3).
+
+\msp{464}
+
+\subsection*{4.16\quad Exemples et questions}
+
+\textbf{4.16.0.} J'avais cru que tout foncteur “raisonnable” (ou plus précisément, tout foncteur “logiquement accessible”) entre catégories accessibles devrait être accessible. Ce n'est malheureusement pas vrai, puisqu'un composé de deux foncteurs Hom
+\[
+\Ens \longrightarrow \Ens\ , \qquad\quad E \longmapsto \underbrace{\Hom(\Hom(E,I),J)}_{J^{(I^E)}}
+\]
+\printedpage{180}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+est non accessible, si $I$, $J$ sont tous deux de cardinal $\geqslant 2$. Prenant p.ex.\ $I = J = \{0,1\}$, on trouve le foncteur
+\[
+E \longmapsto \mathfrak{P}(\mathfrak{P}(E))\ ,
+\]
+qui n'est pas accessible.
+
+\textbf{4.16.1.} Deuxième désillusion : j'avais cru que pour toute catégories accessible $\mathcal{M}$, toute % [sic] toute catégories -> toute catégorie, singular required after "toute"
+sous-catégorie $\mathcal{N}$ strictement pleine et stable par facteurs directs “raisonnable” (p.ex. “logiquement accessible”) devrait être accessible dans $\mathcal{M}$. Il n'en est rien, même dans le cas particulier de l'image inverse de la sous-catégorie accessible dans Ens
+\msp{465}
+\[
+\underbrace{\Ens^*}_{=\,\{E\,\in\Ens\,\mid\, E\neq\emptyset\}} \quad\subset\ \Ens
+\]
+par un contrafoncteur accessible \textit{représentable}
+\[
+\begin{aligned}
+\mathcal{M} \quad &\longrightarrow \quad (\Ens)^\circ \\
+x \quad &\longmapsto \quad \Hom_{\mathcal{M}}(x,z)\ ,
+\end{aligned}
+\]
+i.e.\ la sous-catégorie ouverte (donc strictement pleine) $\mathcal{M}_z$ de $\mathcal{M}$ formée des objets $x$ tels que $\Hom_{\mathcal{M}}(x,z) \neq \emptyset$, n'est par toujours accessible dans $\mathcal{M}$. Ici, je ne suis pas parvenu à % [sic] n'est par toujours -> n'est pas toujours, misprint "par" for "pas"
+un exemple aussi élémentaire (cf.\ appendice) -- j'ai pris $\mathcal{M} = (k\text{-alg.\ comm.})$, $k$ un corps infini et $z$ l'objet initial $k$ de $\mathcal{M}$ -- j'ai trouvé que $\mathcal{M}_z$ n'est pas $\mathrm{L}_\pi$-stable dans $\mathcal{M}$, quelque soit le cardinal $\pi$ % [sic] quelque soit -> quel que soit, standard spelling of the locution
+-- mais cet exemple utilisait que $\mathfrak{U} = \mathfrak{U}_1$, plus petit univers contenant $\mathbf{N}$. J'ignore si pour tout autre univers, on peut trouver un corps $k$ de cardinal $\pi \in \mathfrak{U}$ assez grand, de façon que tout $\pi$-ultrafiltre sur un ensemble $E \in \mathfrak{U}$ soit trivial. Peut-être
+\msp{466}
+un tel exemple, où non la construction du couple $(\mathcal{M},\mathcal{N})$, mais la démonstration du fait que $\mathcal{N}$ n'est pas accessible dans $\mathcal{M}$, fait appel à des hypothèses particulières sur l'univers ambiant, ne doit pas être considéré comme (tout à fait !) “logiquement accessible”. Pour être vraiment probant, il faudrait un exemple de nature plus élémentaire.
+
+% margin: a vertical bar is printed in the left margin beside the three lines from "L_pi-stable dans M pour pi assez grand" to "logiquement accessible) serait accessible dans M"
+Il reste la possibilité qu'il y ait un théorème métamathématique qui assure que tout couple $(\mathcal{M},\mathcal{N})$ logiquement accessible, avec $\mathcal{M}$ accessible, et $\mathcal{N}$ sous-catégorie strictement pleine $\mathrm{L}_\pi$-stable dans $\mathcal{M}$ pour $\pi$ assez grand, soit accessible dans $\mathcal{M}$ (\footnote[188]{C'est faux, même pour une sous-catégorie fermée, cf.\ 4.16.7.10 ci-dessous.}). Ceci s'appliquerait en particulier au cas d'une sous-catégorie \textit{fermée} : toute sous-catégorie fermée (qui soit logiquement accessible) serait accessible dans $\mathcal{M}$. L'exemple-test le plus simple serait celui du complémentaire fermé $\mathcal{M}'_z$ de la sous-catégorie ouverte $\mathcal{M}_z$ ci-dessus (\footnote[189]{\textbf{N.B.} elles est accessible dans $\mathcal{M}$ si et seulement si $\mathcal{M}_z$ l'est ! % [sic] elles est -> elle est, agreement with singular verb
+}), i.e.\ la catégorie des $x \in \Ob\mathcal{M}$ tels que $\Hom_{\mathcal{M}}(x,z) = \emptyset$, ou encore
+\msp{467}
+l'image inverse de la sous-catégorie fermée accessible
+\[
+e \;=\; \{\emptyset\} \;\subset\; (\Ens)
+\]
+réduite à $\{\emptyset\}$, par le foncteur représentable $x \longmapsto \Hom(x,z) : \mathcal{M} \longrightarrow \Ens$. Il se pourrait donc qu'une telle catégorie soit toujours accessible dans $\mathcal{M}$. Mais j'ai été incapable de le
+\printedpage{181}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+prouver, même dans le cas particulier ci-dessus, où $\mathcal{M} = (k\text{-alg.\ comm.})$, $k$ étant un corps commutatif infini. La difficulté est (dans tous les cas) la suivante : trouver, pour $z$ fixé, un cardinal $\pi > \pi_0$ tel que pour tout $x \in \Ob\mathcal{M}$, et tout système (ou \textit{un} système) $\pi_0$-$\pi$-adapté $(x_i)_{i\in I}$ de limite inductive $x_0$ ($\pi_0$ un cardinal donné, utile pour $\mathcal{M}$), \textit{si} $\Hom_{\mathcal{M}}(x,z)$ ($\simeq \varprojlim \Hom_{\mathcal{M}}(x_i,z)$) est vide, alors $\exists\ i_0 \in I$ tel que $\Hom_{\mathcal{M}}(x_{i_0},z)$ soit déjà vide. Dans l'exemple $\mathcal{M} = (k\text{-alg.\ comm.})$, il faut donc prouver que l'on peut trouver un cardinal $\pi$
+tel que pour tout $k$-algèbre $A$ avec $\Hom_{\mathcal{M}}(A,k) = \emptyset$, il existe une sous-$k$-algèbre $A_i$ de % [sic] pour tout k-algèbre -> pour toute k-algèbre, "algèbre" is feminine
+cardinal $\leqslant \pi$, telle que $\Hom_k(A_i,k) = \emptyset$ (\footnote[190]{C'est faux, cf.\ annotation marginale p.~466.}). J'ai tendance à croire que ça doit être vrai (et même sans
+\msp{468}
+supposer que $k$ soit un corps, et aussi en prenant la condition $\Hom_{\mathcal{M}}(A,Z) = \emptyset$, où $Z$ est un objet quelconque de $\mathcal{M}$). Ce genre de questions semble étonnement délicat \dots % [sic] étonnement -> étonnamment, adverb required
+
+\textbf{4.16.2.} Il est possible, plus généralement, que la question suivante ait une réponse affirmative : Soit
+\[
+f \;:\; \mathcal{M} \longrightarrow \mathcal{N}^\circ
+\]
+un foncteur accessible, avec $\mathcal{M}$, $\mathcal{N}$ catégories accessibles, et soit $\underline{T}$ une sous-catégorie de $\mathcal{N}$ accessible dans $\mathcal{N}$, et telle qu'il existe un cardinal $\pi$ ayant les propriétés suivantes : $\mathcal{N}^\circ$ satisfait $\mathrm{L}_\pi$ (i.e.\ $\mathcal{N}$ stable par $\varprojlim$ grandes devant $\pi_1$). Alors $\underline{S} \defeq f^{-1}(\underline{T})$ est-elle accessible dans $\mathcal{M}$ (\footnote[191]{Faux, avec $\mathcal{N} = \Ens$ et un foncteur représentable $\mathcal{M} \longrightarrow \Ens^\circ$, prenant $I = \{\emptyset\}$, cf.\ annotations marginales p.~466, 467.}) ? Ceci généralise le cas $\mathcal{N} = (\Ens)$, $\underline{T} = \{\emptyset\}$, $f$ foncteur représenté par $z \in \Ob\mathcal{M}$, envisagé tout à l'heure. Avec le même type d'exemple, mais en prenant $\mathcal{N} = (\Ens)^*$
+\msp{469}
+au lieu de $\mathcal{N} = \{\emptyset\}$, on voit que la condition supplémentaire de stabilité sur $\underline{T}$ n'est pas
+superflue. (\textbf{N.B.} Elle sont à assurer que $\underline{S}$ est $\mathrm{L}_\pi$-stable dans $\mathcal{M}$ pour $\pi$ grand.) % [sic] Elle sont -> Elles sont, agreement with plural verb
+
+\textbf{4.16.3.} Questions apparentée : j'avais espéré que pour un foncteur accessible entre catégories accessibles % [sic] Questions apparentée -> Question apparentée, agreement
+\[
+f \;:\; \mathcal{N} \longrightarrow \mathcal{M}\ ,
+\]
+la $\natural$-image essentielle, formée des $y \in \Ob\mathcal{M}$ qui sont isomorphes à un facteur direct d'un objet de la forme $f(x)$, avec $x \in \Ob\mathcal{N}$, serait accessible dans $\mathcal{N}$. L'exemple ci-dessus (nullement élémentaire !) de la sous-catégorie $\mathcal{M}_z$ de $\mathcal{M}$ (formée des $x \in \Ob\mathcal{M}$ tels que $\Hom_{\mathcal{M}}(x,z) \neq \emptyset$) montre qu'il n'en est rien. En effet, $\mathcal{M}_z$ est l'image essentielle, et aussi l'image $\natural$-essentielle, du foncteur
+\[
+\mathcal{M}/z \longrightarrow \mathcal{M}\ ,
+\]
+or $\mathcal{M}/z$ est accessible, et le foncteur précédent accessible, si $\mathcal{M}$ est accessible (vérification par AQT \texttt{[âne qui trotte]}, cf.\ plus bas, énoncé plus général).
+
+\msp{470}
+
+On a l'impression que la raison pour laquelle on a de tels contre-exemples, c'est que l'on a des $\natural$-images essentielles qui ne sont $\mathrm{L}_\pi$-stables dans $\mathcal{M}$ pour aucun cardinal $\pi \in \mathfrak{U}$. Cela amène à modifier la conjecture ainsi : soit $\pi$ un cardinal tel que $\mathcal{M}$ satisfasse à $\mathrm{L}_\pi$,
+\printedpage{182}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+et soit $\underline{S}(\pi)$ la plus petite sous-catégorie strictement pleine de $\mathcal{M}$, $\mathrm{L}_\pi$-stable dans $\mathcal{M}$, et qui contienne l'image essentielle de $f$. (On pourrait appeler $\underline{S}(\pi)$ la $\mathrm{L}_\pi$-image essentielle.) Alors $\underline{S}(\pi)$ est accessible dans $\mathcal{M}$. De plus, la famille (décroissante) des $\underline{S}(\pi)$, pour $\pi$ variable, est stationnaire, i.e.\ il existe un cardinal $\pi$ tel que $\pi' \geqslant \pi$ implique $\underline{S}(\pi') = \underline{S}(\pi)$. Il est clair alors que $\underline{S}(\pi)$ est la plus petite sous-catégorie de $\mathcal{M}$ qui soit accessible dans $\mathcal{M}$ et qui contienne l'image essentielle de $f$. La même question se pose pour un foncteur $g^\circ : \mathcal{N}^\circ \longrightarrow \mathcal{M}$, où $g : \mathcal{N} \longrightarrow \mathcal{M}^\circ$ est un foncteur accessible, $\mathcal{N}$ et $\mathcal{M}$ accessibles. Je conjecture que la réponse est encore affirmative.
+
+\msp{471}
+
+% margin: a hand-drawn curved stroke is printed in the left margin beside the last three lines of the following paragraph ("pleine M de C^ qui soit ..." to "sans pourtant être accessible.")
+Soit $\mathcal{M}$ une catégorie satisfaisant la condition L, et admettant une petite sous-catégorie pleine strictement génératrice $\mathcal{C}$, formée d'objets accessibles. On a donc un foncteur pleinement fidèle et accessible
+\[
+\mathcal{M} \;\into\; \mathcal{C}^\wedge\ ,
+\]
+$\mathcal{M}$ $\mathrm{L}_\pi$-stable dans $\mathcal{C}^\wedge$ pour $\pi$ convenable. Si $\overline{\mathcal{M}}$ est l'image essentielle, de sorte que $\mathcal{M} \simeq \overline{\mathcal{M}}$, c'est donc une sous-catégorie strictement pleine $\mathrm{L}_\pi$-stable dans $\mathcal{C}^\wedge$. Donc on s'attend à ce qu'elle soit accessible dans $\mathcal{C}^\wedge$ (si la situation décrite est “logiquement accessible”), ou ce qui revient au même, que $\mathcal{M}$ soit accessible. (Comparer 4.8.1, p.~187.) Mais il ne doit pas être difficile (\footnote[192]{OK en prenant un \textit{fermé} $\underline{S}$ non accessible dans $\mathcal{M}$ d'une catégorie accessible $\mathcal{M}$, qu'on plonge dans un $\mathcal{C}^\wedge$. Mais ces $\underline{S}$ n'a \textit{pas} une petite famille strictement génératrice ! % [sic] ces S n'a -> ce S n'a, plural determiner with singular verb
+}), en procédant à un nombre $\pi_{\mathfrak{U}}$ de choix (où $\pi_{\mathfrak{U}} = \card\mathfrak{U}$), de faire quand même des exemples (“logiquement inaccessibles”) d'une sous-catégorie strictement pleine $\mathcal{M}$ de $\mathcal{C}^\wedge$ qui soit $\mathrm{L}_\pi$-stable, mais non accessible dans $\mathcal{C}^\wedge$. Cette $\mathcal{M}$ admet donc une petite sous-catégorie strictement génératrice formée d'objets accessibles (\footnote[193]{Ce n'est pas clair, il faudrait pour cela que le foncteur d'inclusion soit un adjoint à gauche !}) et satisfait à $\mathrm{L}_\pi$, sans pourtant être accessible.
+
+\msp{472}
+
+\textbf{4.16.4} (\footnote[194]{descendre après 4.16.5.}). Soit $\mathcal{M}$ une catégorie telle que $\mathcal{M}$ et $\mathcal{M}^\circ$ soient accessibles. Je conjecture qu'alors $\mathcal{M}$ est essentiellement petite. Plus généralement, supposons $\mathcal{M}$ accessible, et que $\mathcal{M}$ admette une petite sous-catégorie qui soit \textit{strictement co}génératrice. Alors $\mathcal{M}$ est-elle essentiellement petite ? Plus généralement, si $\mathcal{M}$ admet une petite sous-catégorie strictement génératrice, et aussi une petite sous-catégorie strictement cogénératrice, i.e.\ si $\mathcal{M}$ et $\mathcal{M}^\circ$ sont toutes deux équivalentes à des sous-catégories pleines d'une $\mathcal{C}^\wedge$, avec $\mathcal{C}$ petite, alors $\mathcal{M}$ est-elle essentiellement petite ?
+
+\textbf{4.16.5.} Soit $I$ une petite catégorie, $I_\bullet$ le cône droit sur $I$ (obtenu en rajoutant un objet final $e$), $\mathcal{M}$ une catégorie accessible,
+\[
+\underline{\Hom}_{\square}(I_\bullet,\mathcal{M}) \;\into\; \underline{\Hom}(I_\bullet,\mathcal{M})
+\]
+la sous-catégorie strictement pleine de la catégorie (accessible) $\underline{\Hom}(I_\bullet,\mathcal{M})$, formée des foncteurs $f$ qui font de $f(e)$ la limite inductive dans $\mathcal{M}$ des $f(i)$ ($i \in \Ob I$). Cette sous-catégorie est $\mathrm{L}_\pi$-stable pour $\pi$ grand, donc il y a lieu
+\msp{473}
+de conjecturer qu'elle est accessible dans $\underline{\Hom}(I_\bullet,\mathcal{M})$. $\Big($ Je rappelle qu'on a vu dans 4.14 que c'est OK si les $\varinjlim$ de type $I$ sont représentables dans $\mathcal{M}$. Et qu'une réponse affirmative, dans le cas où
+\printedpage{183}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 1 \\
+I = 0 \arrow[ur] \arrow[dr] & \\
+ & 2
+\end{tikzcd}
+\quad ,\qquad\quad \text{donc} \qquad\quad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 1 \arrow[dr] & \\
+I = 0 \arrow[ur] \arrow[dr] & & 3 \\
+ & 2 \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\]
+implique que la sous-catégorie $\underline{\text{Ép}}(\mathcal{M})$ dans $\underline{\mathrm{Fl}}(\mathcal{M})$ est accessible dans $\underline{\mathrm{Fl}}(\mathcal{M})$.$\Big)$
+
+\textbf{N.B.} Si $\mathcal{M}$ admet une petite sous-catégorie \textit{co}génératrice, alors la question est justiciable de la conjecture 4.16.2 relative à un foncteur accessible $\mathcal{M} \longrightarrow \mathcal{N}^\circ$, ici $\underline{\Hom}(I_\bullet,\mathcal{M}) \longrightarrow \underline{\Hom}(I^\circ \times \mathcal{C},\Ens)^\circ \dots$
+
+\textbf{4.16.6.} Il reste la question de l'accessibilité relative d'une catégorie $\mathcal{E}$ sur une petite catégorie $\mathcal{C}$. Je pense à présent, grâce à 4.15.9, et son corollaire 4.15.10, que l'énoncé suivant doit “tomber” par AQT \texttt{[âne qui trotte]} :
+
+\textbf{Proposition 4.16.6.1.} \textit{Soit $f : \mathcal{E} \longrightarrow \mathcal{C}$ un foncteur, avec $\mathcal{C}$ petite catégorie karoubienne. On suppose que $f$ satisfait la condition $H' = H$ (1+2+3) de 4.15.1 (page 415), où il suffit H 2, H 3, pour toute flèche $\lambda$} non identique \textit{de $\mathcal{C}$. On suppose de plus que pour une catégorie $\mathcal{C}'$ d'un des deux types qu'on va décrire, et un foncteur $\mathcal{C}' \longrightarrow \mathcal{C}$, $\mathcal{E}' = \mathcal{E} \times_{\mathcal{C}} \mathcal{C}'$ soit accessible, et $\mathcal{E}' \longrightarrow \mathcal{C}'$ accessible.}
+
+\msp{474}
+
+$\Big($ \textit{On prend pour $\mathcal{C}'$ la catégorie}
+\[
+\mathcal{Q} = \left\{ \quad
+\begin{tikzcd}
+\xi_0 = \xi^\natural \arrow[r, shift left, "\sigma"] \arrow[dr, "u_0"'] & \xi \arrow[l, shift left, "\rho"] \arrow[d, "u = u_0\rho"] \arrow[loop right, "p"] \\
+ & \eta
+\end{tikzcd}
+\qquad
+\begin{array}{rclll}
+\rho\sigma & = & \mathrm{id}_{\xi_0} & & \\[2ex]
+\sigma\rho & = & p\ , & \text{\textit{d'où}} & \left\{\begin{array}{rcl} p^2 & = & p \\ p\sigma & = & \sigma \\ \rho p & = & \rho \end{array}\right. \\[4ex]
+u & = & u_0\rho\ , & \text{\textit{d'où}} & \left\{\begin{array}{rcl} up & = & u \\ u\sigma & = & u_0 \end{array}\right.
+\end{array}
+\right.
+\]
+\textit{(trois objets $\xi$, $\xi_0$, $\eta$ et cinq flèches non identiques $\sigma$, $\rho$, $p$, $u_0$, $u$, liés par les relations ci-dessus), ou la catégorie (isomorphe à $Q^\circ$)} % ?? uncertain: Q -- plain italic Q or calligraphic \mathcal{Q}
+\[
+\mathcal{Q}' = \left\{ \quad
+\begin{tikzcd}
+\xi_0 \arrow[r, shift left, "\sigma"] & \xi \arrow[l, shift left, "\rho"] \arrow[loop right, "p"] \\
+ & \eta \arrow[ul, "u_0"] \arrow[u, "u"]
+\end{tikzcd}
+\qquad
+\begin{array}{lcl}
+\left.\begin{array}{rcl} \rho\sigma & = & \mathrm{id}_{\xi_0} \\ \sigma\rho & = & p \end{array}\right\} & \Longrightarrow & \left\{\begin{array}{rcl} p^2 & = & p \\ p\sigma & = & \sigma \\ \rho p & = & \rho \end{array}\right. \\[4ex]
+\begin{array}{rcl} u & = & \sigma u_0 \end{array} & \Longrightarrow & \left\{\begin{array}{rcl} pu & = & u \\ \rho u & = & u_0 \end{array}\right.
+\end{array}
+\right.
+\]
+\textit{On se limite aux foncteurs $\mathcal{Q} \longrightarrow \mathcal{C}$, $\mathcal{Q}' \longrightarrow \mathcal{C}$ tels que $p$ soit transformé en une flèche} non identique \textit{de $\mathcal{C}$ (\footnote[195]{Je ne suis pas sûr si c'est raisonnable -- à vérifier avec soin !}) (donc la condition relative à $\mathcal{Q}$, $\mathcal{Q}'$ devient vide, si $\mathcal{C}$ est sans projecteurs).} $\Big)$
+
+\textit{Sous ces conditions, $\mathcal{E}$ est accessible, et $f : \mathcal{E} \longrightarrow \mathcal{C}$ est accessible.}
+
+\end{document}

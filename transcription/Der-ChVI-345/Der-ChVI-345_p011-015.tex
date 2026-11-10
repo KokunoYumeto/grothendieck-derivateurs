@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\cat}[1]{\underline{\mathrm{#1}}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+est pleinement fidèle ($i$ l'étant). Or il suffit de prendre
+\[
+\bar{v}_0 = v * i : (p\varphi)\circ i \mathrel{\relbar\joinrel\relbar} \mathrm{id}_{C'}\circ i.
+\] % ?? uncertain: the arrow between (p\varphi)\circ i and id_{C'}\circ i is printed as a plain line with no visible head -- plain line / arrow
+
+Pour résumer, il faut montrer que le composé des couples de foncteurs quasi-inverses marche dans les cinq cas suivants
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+\cat{Fibsc} \arrow[rrd, shift left] & \cat{Fibsc}_0 \arrow[l, hook'] \arrow[rd, shift left] & \cat{Parf} \arrow[d, shift left] & \cat{Cofibsc}_0 \arrow[r, hook] \arrow[ld, shift left] & \cat{Cofibsc} \arrow[lld, shift left] \\
+& & \mathrm{Cat}/S \arrow[llu, shift left, "\Phi"] \arrow[lu, shift left, "\Phi_0"] \arrow[u, shift left, "C"] \arrow[ru, shift left, "\Psi_0"] \arrow[rru, shift left, "\Psi"] & &
+\end{tikzcd}
+\]
+
+D'ailleurs par dualité, on est ramené aux trois cas de $\cat{Fibsc}$, $\cat{Fibsc}_0$, $\cat{Parf}$. (Peut-être le cas $\cat{Fibsc}_0$, avec $\Phi_0$ défini en termes de $\Phi$ et de $C$, se ramènera-t-il aux deux cas qui l'entourent, de $\cat{Fibsc}$ et $\cat{Parf}$.)
+
+Je vois que je dois rectifier le tir, tout d'abord parce que j'ai oublié que les foncteurs
+\msp{page 14}
+$\Phi$, $\Psi$ que j'avais en vue ne sont \textit{pas} compatibles avec les localiseurs \texttt{[= localisateurs]} - une flèche $f : X \longrightarrow Y$ de $\mathrm{Cat}/S$ telle que la flèche correspondante dans Cat soit dans $W$, ne va pas induire une flèche dans $\cat{Fibsc}\,S$ ou $\cat{Cofibsc}\,S$ qui soit dans $W$ sur chaque fibre. Ce n'est pas grave, car on peut remplacer les foncteurs par $\Phi' = \alpha'\Phi_0$, $\Psi' = \beta'\Psi_0$, qui sauf erreur doivent marcher. Mais en vue du Lemme précédent, il y a une perplexité, car j'ai l'air d'avoir prouvé que si $\mathcal{F}$ est une sous-catégorie pleine de $\mathrm{Cat}/S$ dont je suppose seulement qu'elle contient l'image essentielle d'une des trois catégories $\cat{Fib}_0S$, $\cat{Cofib}_0S$, ou $\cat{Parf}\,S$, alors l'inclusion dans $\mathrm{Cat}/S$ induit une équivalence des catégories localisées, en prenant dans $\mathcal{F}$ comme localisateur celui induit par $\mathrm{Cat}/S$, i.e.
+\begin{tikzcd}[column sep=small, row sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+f : X \arrow[rr] \arrow[dr] & & Y \arrow[dl] \\
+& S &
+\end{tikzcd}
+est dans $W_{\mathcal{F}}$ si et seulement si en tant que flèche de Cat, $f$ est dans $W$. Or ceci coïncide bien (via un théorème non trivial sur lequel je devrai revenir dans le cadre d'un localisateur fondamental général $W$) avec l'ensemble de flèches de localisation `fibre par fibre', dans le cas de $\mathcal{F} = \cat{Parf}\,S$, $\cat{Fibhot}\,S$, $\cat{Fib}_0S$, $\cat{Cofib}_0S$.
+
+\msp{page 15}
+Par contre, ce n'est nullement le cas en prenant $\mathcal{F} = \cat{Fib}\,S, \cat{Liss}\,S$ ou $\cat{Cofib}\,S$. Ayant choisi dans ces catégories comme localisateurs la notion de $W$-équivalences `fibre par fibre', j'ai donc l'air de dire que je trouve pour ces quatre catégories les \textit{mêmes} localisées (à équivalence près) que si je prenais le localisateur beaucoup plus grossier hérité par $\mathrm{Cat}/S$. Cela semble difficile à croire, et il faudra que je fasse très attention en démontrant les énoncés-clef.
+
+Pour voir que les flèches en traits pleins du grand diagramme p.~6 sont toutes compatibles avec les localis(at)eurs \texttt{[sic]}, donc aussi les flèches composées au moyen de celles-ci, j'ai à utiliser déjà ceci (pour le cas des flèches $\cat{Liss} \longrightarrow \mathrm{Cat}/S$, $\cat{Prop} \longrightarrow \mathrm{Cat}/S$):
+% foot: Version 9 novembre 2001
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\circled{1}\ \ Si $X, Y$ lisses ou propres sur $S$, et $f : X \longrightarrow Y$ un $S$-foncteur, si $f_s : X_s \longrightarrow Y_s$ est dans $W$ pour tout $s \in S$, alors $f \in W$. (\footnote{OK si on suppose L3 quater et L4.}).
+
+Cela renforce considérablement la condition L5 sur $W$, où on supposait que $f$ est un foncteur \textit{cartésien} entre catégories \textit{fibrées} sur $S$. (À dégager, pour les différentes propriétés dont on a besoin pour $W$, à quelles propriétés standard on peut les ramener. Tout sera OK si $W = W_\infty$.)
+
+\msp{page 16}
+I) \textbf{Définition de} $\Phi$, $\Psi$.
+
+On va calquer la construction canonique de $\cat{Ch}(X) \longrightarrow X \times X$ (ou $\cat{Ch}_\infty(X) \longrightarrow X \times X$) factorisant $X \xrightarrow{\mathrm{diag}} X \times X$, et la factorisation canonique correspondante d'un $f : X' \longrightarrow X$ en $X' \xrightarrow{i} \bar{X}' \xrightarrow{\bar{f}} Y$ \texttt{[plutôt} $\bar{X}' \xrightarrow{\bar{f}} X$\texttt{]}. On remplacera simplement $\cat{Ch}(X)$ par la sous-catégorie $\cat{Ch}_+(X)$, laquelle n'est autre que la catégorie des flèches de $X$
+\[
+\cat{Fl}(X) = \cat{Hom}(\boldsymbol{\Delta}_1, X),
+\]
+muni des foncteurs
+\[
+X \xrightarrow{i_X} \cat{Fl}(X) \xrightarrow{p_X=(\sigma_X,\beta_X)} X \times X,
+\]
+où $i_X$ est la flèche $x \longmapsto \mathrm{id}_x$, et $\sigma_X$, $\beta_X$ sont les foncteurs source et but. La fibre de $p_X$ en $(a,b) \in \mathrm{Ob}(X \times X)$ est la catégorie discrète définie par l'ensemble $\mathrm{Hom}(a,b)$, ça dépend grandement de $(a,b)$ et pas seulement de sa composante connexe dans $X \times X$ - donc $p_X$ n'a rien d'une Hot-fibration. Il n'est en géneral ni propre ni lisse ni rien, par contre les deux flèches composées avec $\mathrm{pr}_1$ et $\mathrm{pr}_2$ % [sic] géneral -> général, missing accent
+\[
+\begin{tikzcd}[column sep=small]
+& \cat{Fl}(X) \arrow[ld, "\sigma_X"'] \arrow[rd, "\beta_X"] & \\
+X & & X
+\end{tikzcd}
+\]
+sont sympathiques, on a en effet
+
+\msp{page 17}
+\textbf{Lemme.} \textit{On a}
+\[
+\sigma_X^{-1}(\{x\}) \simeq x\backslash X, \qquad\qquad \beta_X^{-1}(\{x\}) \simeq X/x.
+\]
+\textit{Le foncteur} $\sigma_X$ \textit{est} Cat-\textit{fibrant à fibres contractiles (donc asphériques, donc} $W$\textit{-asphériques), le foncteur} $\beta_X$ \textit{cofibrant à fibres contractiles (donc asphériques, donc} $W$\textit{-asphériques). Ce sont donc aussi des} Hot-\textit{équivalences, a fortiori des} $W$\textit{-équivalences} (\footnote{En fait, ce sont même des homotopismes, cf. remarque marginale plus bas (plus générale - on retrouve le cas de $\sigma_X$ en faisant $X' = X$.)}).
+
+\textbf{Corollaire 1.} \textit{Le foncteur} $i_X : X \longrightarrow \cat{Fl}(X)$ \textit{est une} Hot-\textit{équivalence} (puisque son composé avec la Hot-équivalence $\sigma_X$ est l'identité).
+% foot: Version 9 novembre 2001
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Voici la construction générale de la factorisation de $f : X' \longrightarrow X$, correspondant au choix précédent d'une `catégorie de chemins' $\mathcal{C}(X) = \cat{Fl}(X)$
+\[
+\begin{tikzcd}
+\bar{X}' \arrow[d, "\pi_f"] \arrow[rd] \arrow[rrd, "\bar{f}"] & & \\
+X' \arrow[u, dotted, bend left=60, "i_f"] \arrow[rd, "f"'] \arrow[r, phantom, "\text{\footnotesize Cart.}"] & \cat{Fl}(X) \arrow[r, "\beta_X"'] \arrow[d, "\sigma_X"'] & X \\
+& X &
+\end{tikzcd}
+\]
+où $i_f$ est déduit de la section $i$ \texttt{[plutôt} $i_X$\texttt{]} de $\cat{Fl}(X)$ sur $X$ (\footnote{\textbf{NB} $\pi_f i_f = \mathrm{id}$, et $i_f\pi_f \longrightarrow \mathrm{id}$, donc $i_f$, $\pi_f$ sont des homotopismes inverses l'un de l'autre dans Cat\,hot. Cela précise \texttt{[le]} cor.~3, page 18.}). Ainsi, $\bar{X}'$ est la catégorie des couples
+\[
+\{(x',u) \mid x' \in \mathrm{Ob}\,X',\ \underbrace{u}_{\in\mathrm{Fl}\,(X)} : f(x') \longrightarrow y\},
+\]
+le foncteur $\bar{f}$ est défini par
+\[
+\bar{f}(x',u) = \mathrm{but}(u) = y
+\]
+et $i_f$ par
+\[
+i_f(x') = (x', \mathrm{id}_{f(x')} : f(x') \xrightarrow{\mathrm{id}} f(x')),
+\]
+donc on a bien
+\[
+f(x') = \bar{f} i_f(x').
+\]
+
+\msp{page 18}
+\textbf{Corollaire 2.} \textit{Le foncteur}
+\[
+\bar{f} : \bar{X}' \longrightarrow X
+\]
+\textit{a comme fibres les catégories $X'/x$, il est cofibrant, les foncteurs de changement de base sont les foncteurs $X'/x \longrightarrow X'/y$ associés aux flèches $x \longrightarrow y$ dans $X$.}
+
+En fait, on voit que cette catégorie est non seulement cofibrée, mais canoniquement \textit{scindée.}
+
+(\footnote{\textbf{Corollaire 3.} \textit{La flèche $i_f : X' \longrightarrow \bar{X}'$ est un $X$-morphisme (si $X'$ sur $X$ par $f$, $\bar{X}'$ par $\bar{f}$), i.e. $f = \bar{f}\circ i_f$, et c'est une} Hot-\textit{équivalence} (car $\pi_f : \bar{X}' \longrightarrow X'$ est Cat-fibrant, à fibres contractiles, donc une Hot-équivalence).}).
+
+Appliquant ceci à des $f : X \longrightarrow S$, on trouve une construction
+\[
+\mathrm{Cat}/S \xrightarrow{\Psi} \cat{Cofibsc}\,S,
+\]
+c'est bel et bien fonctoriel en $X$ variant dans $\mathrm{Cat}/S$. Si
+\[
+\psi : X \longrightarrow Y
+\]
+% foot: Version 9 novembre 2001
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+dans $\mathrm{Cat}/S$, alors $\psi$ induit des
+\[
+\psi/s : X/s \longrightarrow Y/s\ ,
+\]
+pour $s \in S$, et ceci de façon compatible avec les
+\msp{page 19}
+foncteurs `cochangement de base' associés aux $u : s \longrightarrow t$ dans $S$
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X/s \arrow[r, "u_*^X"] \arrow[d, "\psi/s"'] & X/t \arrow[d, "\psi/t"] \\
+Y/s \arrow[r, "u_*^Y"] & Y/t \quad .
+\end{tikzcd}
+\]
+Cela définit donc un morphisme de catégories scindées sur $S$
+\[
+\Psi(X) \longrightarrow \Psi(Y),
+\]
+c'est lui!
+
+On a un morphisme fonctoriel en $X$
+\[
+X \xrightarrow{i_X} \Psi(X)
+\]
+dans $\mathrm{Cat}/X$, et c'est une Hot-équivalence, donc $\in W$. Sur les fibres, le morphisme $i_X$ induit
+\[
+X_s \xrightarrow{i_{X,s}} X/s,
+\]
+l'inclusion canonique.
+
+\msp{page 20}
+\textbf{Corollaire 1.} \textit{Si $X \xrightarrow{f} Y$ dans} $\mathrm{Cat}/S$ \textit{est dans $W$, alors $\Psi(X) \xrightarrow{\Psi(f)} \Psi(Y)$ aussi.} Mais on se gardera de croire que c'est dans $W_S$ au sens de $\cat{Cofib}\,S$ ou $\cat{Cofibsc}\,S$.
+
+Car sur les fibres de $\Psi(X)$, $\Psi(Y)$ on trouve les flèches
+\[
+f/s : X/s \longrightarrow Y/s
+\]
+induits par $f$, qui n'ont aucune raison d'être dans $W$. Qu'elles le soient signifie que $f : X \longrightarrow Y$ est dans $W$ `localement au dessus de S' (\footnote{cf. \circled{1} page 15.}), ce qui (pour les $W$ qui nous intéressent) est beaucoup plus fort que d'être dans $W$. (Si $Y = S$, cela signifie en fait que $p : X \longrightarrow S$ est $W$-asphérique, beaucoup plus fort que $p \in W$.)
+
+Donc pour prouver que
+\[
+\cat{Cofib}\,S \longrightarrow \mathrm{Cat}/S \qquad\quad \text{ou} \qquad\quad \cat{Cofibsc}\,S \longrightarrow \mathrm{Cat}/S
+\]
+% foot: Version 9 novembre 2001
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+induisent des équivalences pour les catégories localisées, le foncteur $\Psi$ directement ne sera pas utilisable. Cependant :
+
+\textbf{Corollaire 2.} \textit{Supposons $X$, $Y$ dans} $\cat{Prop}\,S$ \textit{ou dans} $\cat{Fibhot}\,S$\textit{, et considérons}
+\[
+\Psi(f) : \Psi(X) \longrightarrow \Psi(Y),
+\]
+\textit{pour que ce soit une $W$-équivalence dans} $\cat{Cofibsc}\,S$\textit{,}
+\msp{page 21}
+\textit{i.e. une $W$-équivalence fibre par fibre, il faut et il suffit que $f$ soit une $W$-équivalence fibre par fibre} (et cela doit impliquer (\footnote{cf. \circled{1} page 15.}) que $f$ est une $W$-équivalence).
+
+En effet, dans le diagramme commutatif
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+X_s \arrow[r, "f_s"] \arrow[d] & Y_s \arrow[d] \\
+X/s \arrow[r, "f/s"] & Y/s
+\end{tikzcd}
+\]
+les flèches verticales sont dans $W$, car $X$, $Y$ \texttt{[sont]} propres sur $S$ (ou $X$, $Y$ dans $\cat{Fibhot}\,S$), donc $f_s$ est dans $W$ si et seulement si $f/s$ l'est.
+
+\texttt{[Le foncteur]} $\Phi$ se définit de façon duale à $\Psi$, ce qui revient à échanger les rôles de $\sigma_X$, $\beta_X$ dans le diagramme page 17.
+
+(\footnote{\textbf{Corollaire 3.} \textit{Si $X \in \mathit{Ob}\,$}$\cat{Fibhot}\,S$\textit{, alors $\Psi(X)$ est dans} $\cat{Fibsc}_0S$.\par Cela signifie en effet que les $X/s \longrightarrow X/t$ sont dans $W$, or l'hypothèse sur $X$ implique que c'est dans $W_\infty$. OK.})
+
+\textbf{II) Définition de} $C : \mathrm{Cat}/S \longrightarrow \cat{Parf}\,S$
+
+Cette fois, c'est la factorisation des flèches $p : X \longrightarrow S$ dans Cat, en
+\[
+X \xrightarrow{j_{X/S}} \bar{X} \xrightarrow{\bar{p}} S,
+\]
+où $i_X$ \texttt{[plutôt} $j_{X/S}$\texttt{]} est une Hot-équivalence (donc dans $W$), et $\bar{p}$ parfait. Cela se construit formellement comme tantôt, en utilisant $\cat{Ch}_\infty(S)$ au lieu de $\cat{Fl}(S)$, et la factorisation
+\[
+S \xrightarrow{j_S} \cat{Ch}_\infty(S) \xrightarrow{p_S=(\sigma_S,\beta_S)} S \times S
+\]
+de $\mathrm{diag}_S : S \longrightarrow S \times S$. La situation est plus jolie, car $p_S$ est déjà `parfait', ce qui implique formellement que le $\bar{p}$ qui s'en déduit, pour factoriser $p : X \longrightarrow S$, est lui-même parfait.
+% foot: Version 9 novembre 2001
+
+\end{document}

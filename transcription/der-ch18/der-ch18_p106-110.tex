@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\Hom}{\underline{\mathrm{Hom}}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\red}{\mathop{\textup{réd}}\nolimits}
+\newcommand{\uS}{\underline{S}}
+
+\begin{document}
+
+\printedpage{104}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 278}
+\textbf{Corollaire 4.12.4.} \textit{Soient $\M$ et $\N$ deux catégories accessibles, et soit $\pi_0$ un cardinal infini tel que $\M$ soit $\pi_0$-accessible, i.e. que $\pi_0$ soit un cardinal utile pour $\M$. Soit $\pi_1 = \sup(\pi_0, \card\red\M_{\pi_0})$. Alors pour tout cardinal $\pi \geqslant \pi_1$ utile pour $\M$ (et en particulier, pour tout $\pi \geqslant \pi_1$ tel que $\pi^{\pi_0} = \pi$), la catégorie des foncteurs $\M \longrightarrow \N$ qui sont $\pi$-accessibles est elle-même accessible.}
+
+En effet, on aura $\M \simeq \Ind_\pi\M_\pi$, d'où par 4.12.3
+\[
+\Hom_{!\,\pi}(\M,\N) \xrightarrow{\sim} \Hom(\M_\pi,\N) ,
+\]
+or $\Hom(\M_\pi,\N)$ est accessible par 4.9.5 (p. 220). On peut préciser d'ailleurs ce point. Supposons $\pi_0$ choisi tel que $\pi_0$ soit utile non seulement pour $\M$, mais pour $\N$ également. Rappelons que l'on a $\card\Fl\M_\pi \leqslant 2^\pi$ (cf. 4.7.7, page 173).
+
+\msp{page 279}
+Posons donc
+\[
+\pi' = 2^\pi ,
+\]
+on a donc $\pi'^{\pi_0} = 2^{\pi\pi_0} = 2^\pi = \pi'$, et $\card\red\M_\pi \leqslant \pi'$. Donc 4.9.5 nous donne que
+\[
+\Hom(\M_\pi,\N) \simeq \Ind_{\pi'}(\Hom(\M_\pi,\M_{\pi'})) , % [sic] \M_{\pi'} -> \N_{\pi'}, the second argument should lie in N, as in Corollaire 4.12.5
+\]
+d'où :
+
+\textbf{Corollaire 4.12.5.} \textit{Sous les conditions de 4.12.4, si $\pi_0$ est utile pour $\M$} et \textit{pour $\N$, alors pour $\pi \geqslant \pi_1$, $\Hom_{!\,\pi}(\M,\N)$ est $\pi'$-accessible, où $\pi' = 2^\pi$, de façon plus précise, on a une équivalence de catégories}
+\[
+\Hom_{!\,\pi}(\M,\N) \simeq \Ind_{\pi'}(\Hom(\M_\pi,\N_{\pi'})) .
+\]
+
+\textbf{Remarque 4.12.6.} Si $\M$, $\N$ sont accessibles, la catégorie $\Hom_{\mathrm{acc}}(\M,\N)$ des foncteurs accessibles n'est par toujours accessible. Si $\N$ satisfait $\mathrm{L}_{\pi_0}$, cette catégorie satisfait $\mathrm{L}_{\pi_0}$, % [sic] par toujours -> pas toujours, negation "n'est pas" intended
+et les $\varinjlim$ grandes devant $\pi_0$ se calculent argument par argument.
+
+\msp{page 280}
+Si on pouvait trouver une sous-catégorie (équivalente à une petite catégorie) $\cH_\pi$ de $\cH = \Hom_{\mathrm{acc}}(\M,\N)$, pour un cardinal $\pi \geqslant \pi_0$ telle que tout objet $F$ de $\cH$ s'écrive $\varinjlim\limits_{I} F_i$, les $F_i$ dans $\cH_\pi$, $I$ grande devant $\pi$, alors si les objets de $\cH_\pi$ sont des foncteurs $\pi'$-accessibles de $\M$ dans $\N$, il en serait de même de tout $F$ dans $\cH$. Donc il existerait un cardinal infini $\pi'$ tel que tout foncteur accessible de $\M$ dans $\N$ soit $\pi'$-accessible. Mais sauf erreur, si p.ex. $\M = \N = \mathrm{Ens}$, il n'existe pas de tel cardinal. Je ne veux pas m'arrêter ici sur cette question, et faire un contre-exemple.
+
+\msp{page 281}
+
+\section*{4.13\quad Ensembles accessibles d'objets d'une catégorie accessible}
+
+\textbf{Définition 4.13.1.} Soient $\M$ une catégorie accessible, $S$ une partie de $\Ob\M$, $\uS$ la sous-catégorie pleine de $\M$ définie par $S$. On dit que $S$ est une \textit{partie accessible} de $\Ob\M$, ou encore que $\uS$ est une \textit{sous-catégorie “accessible dans $\M$”}, si
+\printedpage{105}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\begin{enumerate}
+\item[a)] $\uS$ est strictement pleine, i.e. pour $x$, $y$ deux objets isomorphes de $\M$, $x \in S$ implique $y \in S$,
+\item[b)] $\uS$ est accessible,
+\item[c)] le foncteur d'inclusion $\uS \longrightarrow \M$ est accessible.
+\end{enumerate}
+Soient $\pi_0$ un cardinal utile pour $\M$, i.e. tel que $\M \simeq \Ind_{\pi_0}(\M_{\pi_0})$, soit $\pi_1 = \sup(\pi_0, \card\red\M_{\pi_0})$. Soit d'autre part $\pi'_0$ un cardinal tel que
+
+\msp{page 282}
+$\uS$ (supposé accessible dans $\M$) soit $\pi_0$-\textit{accessible}, i.e. $\pi'_0$-utile pour $\uS$, et de plus tel % [sic] \pi_0-accessible -> \pi'_0-accessible, the following "i.e. \pi'_0-utile" refers to \pi'_0
+que $f : \uS \hookrightarrow \M$ soit $\pi'_0$-accessible. Soit $\pi'_1 \geqslant \pi'_0$ un cardinal tel que $\uS_{\pi'_0} \subset \M_{\pi'_1}$, $\pi'_1 \geqslant \card\red\uS_{\pi'_0}$. Il résulte de 4.12.1 que pour tout cardinal
+\[
+\pi \geqslant \pi'_1 , \qquad \text{tel que } \pi^{\pi'_0} = \pi, \tag*{$(*)$}
+\]
+on doit avoir
+\[
+\uS_\pi \subset \M_\pi , \qquad \text{donc } \uS_\pi \subset \M_\pi \cap \uS,
+\]
+d'ailleurs, comme $\uS \hookrightarrow \M$ est $\pi'_0$-accessible et a fortiori $\pi$-accessible, et pleinement fidèle, il s'ensuit aussitôt que $\M_\pi \cap S \subset S_\pi$, d'où
+\[
+S_\pi = \M \cap S . % [sic] \M \cap S -> \M_\pi \cap S, the preceding lines concern \M_\pi \cap S
+\]
+
+\msp{page 283}
+D'ailleurs, la condition $(*)$ implique que $\pi$ est utile pour $\uS$, donc
+\[
+\uS \xleftarrow{\sim} \Ind_\pi(\uS_\pi) .
+\]
+$\Big($ D'ailleurs, \textit{si} $\pi'_0 \geqslant \pi_0$, la relation $\pi^{\pi'_0} = \pi$ implique a fortiori $\pi^{\pi_0} = \pi$, et si $\pi'_1 \geqslant \pi_1$, on voit que $(*)$ implique que $\pi$ est utile aussi pour $\M$, i.e.
+\[
+\M \xleftarrow{\sim} \Ind_\pi(\M_\pi) .
+\]
+D'autre part, le foncteur d'inclusion $\uS \hookrightarrow \M$ se déduit essentiellement de $\uS_\pi \hookrightarrow \M_\pi$ en passant aux catégories $\Ind_\pi$. (\footnote[116]{\texttt{[Le contenu de cette parenthèse est]} “facultatif”.}). $\Big)$
+
+Ceci prouve entre autres le “il faut” dans la proposition qui suit :
+
+\textbf{Proposition 4.13.2.} \textit{Soient $\M$ une catégorie accessible, $\pi_0$ un cardinal infini utile pour $\M$, $S$ une partie de} $\Ob\M$, \textit{$\uS$ la sous-catégorie pleine de $\M$ correspondante.}
+
+\msp{page 284}
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour que $S$ soit accessible, il faut et il suffit qu'il existe un cardinal infini $\pi$ et une partie $S(\pi)$ de $\M_\pi$, tels que $S$ soit formé des objets de $\M$ qui sont isomorphes à un objet de la forme $\varinjlim\limits_{i\in I} x_i$, avec les $x_i$ dans $S(\pi)$ et $I$ grande devant $\pi$. En d'autres termes, il faut et il suffit qu'il existe un cardinal infini $\pi_1$ et une sous-catégorie pleine % [sic] \pi_1 -> \pi, the rest of the statement uses \pi
+$\uS(\pi)$ de $\M_\pi$, tels que $\uS$ soit l'image essentielle du foncteur canonique pleinement fidèle}
+\[
+\Ind_\pi(\uS(\pi)) \longrightarrow \M \qquad \bigl(\xleftarrow{\sim} \Ind_\pi(\M)\ \text{(\footnotemark[117])}\bigr) , \tag*{(4.13.2.1)} % [sic] \Ind_\pi(\M) -> \Ind_\pi(\M_\pi), footnote 117 refers to \pi utile pour \M, i.e. \M \simeq \Ind_\pi(\M_\pi)
+\]
+\footnotetext[117]{si $\pi$ utile pour $\M$.}
+\textit{prolongeant l'inclusion canonique $\uS(\pi) \hookrightarrow \M$ (cf. 4.12.3).}
+\item[\textit{b)}] \printedpage{106}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\textit{Si $S$ est accessible, on peut trouver des cardinaux $\pi'_0$, $\pi'_1$ tels que $\pi'_1 \geqslant \pi'_0 \geqslant \pi_0$ (où $\pi_0$ est un cardinal donné utile pour $\M$)}
+\msp{page 285}
+\textit{et tels que tout cardinal $\pi \geqslant \pi'_1$ avec $\pi^{\pi'_0} = \pi$ satisfasse aux conditions de c), en prenant $S(\pi) = S \cap \Ob\M_\pi$, i.e. $\uS(\pi) = \uS \cap \M_\pi$. Sous ces conditions, $\pi$ est utile pour $\uS$} et \textit{pour $\M$, $S(\pi)$ est une sous-catégorie} strictement \textit{pleine de $\M_\pi$, stable dans $\M_\pi$ par facteurs directs (ou ce qui revient au même, $\M_\pi$ étant karoubienne, une sous-catégorie karoubienne de $\M_\pi$).}
+\item[\textit{c)}] \textit{On peut prendre $\pi'_0$ le plus petit cardinal $\geqslant \pi_0$ utile pour $\uS$ et tel que $\uS \hookrightarrow \M$ soit $\pi'_0$-accessible, et $\pi'_1 = \sup(\pi'_0, \card\red\uS_{\pi'_0})$.}
+\end{enumerate}
+
+La partie b) ainsi que c) a déjà été prouvée, ce qui implique le “il faut” dans la partie a). Il reste à prouver le “il suffit” dans a). Mais l'hypothèse implique que
+\[
+\uS \xleftarrow{\sim} \Ind_\pi(S_\pi) ,
+\]
+ce qui implique que $\uS$ est accessible et même $\pi$-accessible, et elle implique aussi que $\uS$ est une sous-catégorie \textit{strictement} pleine de $\M$. Il reste à voir
+
+\msp{page 286}
+\texttt{[que]} le foncteur d'inclusion est accessible, en fait il est $\pi$-accessible, puisque (4.13.2.1) l'est (cf. 4.12.3).
+
+\textbf{Définition 4.13.3.} Soient $\M$, $S \subset \Ob\M$, $\uS \subset \M$ comme dans 4.12.1, $\pi$ un cardinal infini. On dit que $S$ est une partie $\pi$-\textit{accessible} de $\Ob\M$, ou que $\uS$ est une sous-catégorie $\pi$-accessible dans $\M$, si $S$, $\pi$ satisfont les conditions de 4.13.3 a), i.e. $\uS$ est l'image essentielle % [sic] 4.13.3 a) -> 4.13.2 a), a self-reference of the definition, the conditions a) are those of Proposition 4.13.2
+de $\Ind_\pi(S(\pi))$, où $S(\pi)$ est une sous-catégorie pleine de $\M_\pi$.
+
+Notons que, quitte à renforcer $S(\pi)$ par $S'(\pi) = {\natural}$-clôture de $S(\pi)$ dans $\M_\pi$, on peut supposer que $S(\pi)$ est une sous-catégorie \textit{strictement pleine et karoubienne}
+
+\msp{page 287}
+de $\M_\pi$. On sait alors que, $S(\pi)$ étant karoubienne, $S(\pi) \longrightarrow (\underbrace{\Ind_\pi(S(\pi))}_{})_\pi$ est une équivalence de catégories. Comme $\Ind_\pi(S(\pi)) \simeq \uS$ et que $S(\pi)$ est strictement pleine dans $\M_\pi$, donc aussi dans $\M$ et a fortiori dans $\uS$, que l'on a
+\[
+\uS(\pi) = \uS_\pi , \qquad \text{sous-catégorie de } \uS \text{ des objets } \pi\text{-accessibles de } S. \tag*{(4.13.1)}
+\]
+Je dis qu'on aura aussi
+\[
+\uS(\pi) = \uS \cap \M_\pi . \tag*{(4.13.2)}
+\]
+Comme c est clair, il reste à voir que $\uS{\cap}\M_\pi \subset \uS(\pi)$, or il est immédiat que $\uS{\cap}\M_\pi \subset S_\pi$, % [sic] c -> an inclusion sign (\supset), a letter c printed where the reverse inclusion seems meant
+et on conclut par (4.13.1). On trouve ainsi :
+
+\textbf{Proposition 4.13.4.} \textit{Soit $\M$ une catégorie accessible, $\pi$ un cardinal infini. Soit $\Sigma_\pi$ l'ensemble des}
+
+\msp{page 288}
+\textit{sous-catégories strictement pleines $\uS(\pi)$ de $\M_\pi$ qui sont karoubiennes, ou ce qui revient au même, stables dans $\M_\pi$ par facteurs directs. Soit $\Sigma'_\pi$ l'ensemble des sous-catégories de}
+\printedpage{107}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\textit{$\M$ qui sont $\pi$-accessibles dans $\M$. Considérons les applications}
+\[
+\begin{tikzcd}
+\Sigma_\pi \arrow[r, shift left, "\alpha_\pi"] & \Sigma'_\pi \arrow[l, shift left, "\beta_\pi"]
+\end{tikzcd}
+\tag*{(4.13.4.1)}
+\]
+\textit{définies ainsi : Si $\uS(\pi) \in \Sigma_\pi$, $\alpha_\pi(\uS(\pi))$ est l'image essentielle du foncteur non pleinement fidèle} $\Ind_\pi(\uS(\pi)) \longrightarrow \M$. \textit{Si $\uS \in \Sigma'_\pi$, $\beta_\pi(\uS) = \uS \cap \M_\pi$. Les applications $\alpha_\pi$, $\beta_\pi$ sont des bijections, inverses l'une de l'autre.}
+
+On n'a pas eu à supposer que $\pi$ soit utile pour $\M$, ni que $\pi$ soit minoré par un cardinal utile pour $\M$, i.e. qu'on ait $\pi \geqslant \pi_0$, où $\pi_0$ est le plus petit cardinal utile pour $\M$.
+
+\msp{page 289}
+\textbf{4.13.5.} Soit $\uS$ une sous-catégorie \textit{strictement pleine} de $\M$ (catégorie accessible), $\pi'_0$ un cardinal infini. Dire que $\uS$ est $\pi'_0$-accessible dans $\M$ signifie que les conditions suivantes sont satisfaites.
+\begin{enumerate}
+\item[1)] $\pi'_0$ est utile pour $\uS$, i.e. $\uS \xleftarrow{\sim} \Ind_{\pi'_0}(\uS_{\pi'_0})$.
+\item[2)] $\uS \hookrightarrow \M$ est $\pi'_0$-accessible.
+\item[3)] $\uS_{\pi'_0} \hookrightarrow \M_{\pi'_0}$ (qui implique que $S_{\pi'_0}$ est équivalente à une petite catégorie).
+\end{enumerate}
+Supposons ces conditions satisfaites, et soit $\pi$ un cardinal $> \pi'_0$. Est-ce que $\uS$ est $\pi$-accessible dans $\M$, i.e. les conditions similaires sont-elles satisfaites pour $\pi$ ? C'est évident pour 2°), mais risque d'être faux pour 1°, 2° \texttt{[plutôt 3°\,?]}. Mais faisons appel à 4.13.2 c). Posons
+\[
+\pi'_1 = \sup(\pi'_0, \card\red S_{\pi'_0}, \underbrace{\pi_0}_{\substack{\text{plus petit cardinal}\\ \text{infini utile}\\ \text{pour } \M}} ) .
+\]
+
+\msp{page 290}
+Alors pour $\pi \geqslant \pi'_1$ tel que $\pi^{\pi'_0} = \pi$, $\uS$ est $\pi$-accessible dans $\M$ (4.13.2 b et c). Supposons p.ex.
+\[
+\pi'_0 \geqslant \pi_0
+\]
+(pratiquement ce sera toujours vérifié) et de plus
+\[
+\pi'_0 \geqslant \card\red\M_{\pi_0} ,
+\]
+i.e. supposons
+\[
+\pi'_0 \geqslant \sup(\pi_0, \card\red\M_{\pi_0}) = \pi_1 .
+\]
+Alors
+\[
+\pi'_1 = \sup(\pi'_0, \card\red S_{\pi'_0}) \leqslant \sup(\pi'_0, \card\red\M_{\pi'_0}) \leqslant 2^{({\pi'_0}^{\pi_0})}
+\]
+(4.7.7.1, p. 177). Donc on trouve ceci :
+
+\textbf{Corollaire 4.13.6.} \textit{Soit $\pi'_0$ un cardinal $\geqslant \pi_1 = \sup(\pi_0, \card\red\M_{\pi_0})$ (\footnote[118]{\textbf{N.B.} $\pi_0$ est le plus petit cardinal utile pour $\M$.}), et soit $\uS$ une sous-catégorie $\pi'_0$-accessible dans $\M$. Alors pour tout cardinal $\pi$ tel que $\pi \geqslant 2^{({\pi'_0}^{\pi_0})}$, et tel que l'on ait $\pi^{\pi'_0} = \pi$ (i.e. $\pi$ de la forme $c^{\pi'_0}$, avec $c$ un cardinal $\geqslant 2^{({\pi'_0}^{\pi_0})}$), $\uS$ est $\pi$-accessible dans $\M$. (De plus, ces cardinaux sont réguliers pour $\uS$} et \textit{pour $\M$, donc $\uS \simeq \Ind_\pi(\uS_\pi)$, $\M \simeq \Ind_\pi(\M_\pi)$).}
+
+(\footnote[119]{Enchaîner ici avec 4.13.23 etc.}, \footnote[120]{Mettre ici le lemme 4.16.7.11 signalé en marge p. 292.}).
+
+\printedpage{108}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 291}
+\textbf{Proposition 4.13.7} (\footnote[121]{Le rejeter après 4.13.23.}). \textit{Soient $\M$ une catégorie accessible, $(S_\alpha)_{\alpha\in A}$ une famille de parties de} $\Ob\M$, \textit{indexée par un petit ensemble $A$, $(\uS_\alpha)_{\alpha\in A}$ la famille des sous-catégories accessibles dans $\M$ correspondante. Soit $S = \bigcap_{\alpha\in A} S_\alpha$, $\uS = \bigcap_{\alpha\in A} \uS_\alpha$, de sorte que $\uS$ est la sous-catégorie pleine de $\M$ définie par $S \subset$} $\Ob\M$. \textit{Ceci posé, si les $S_\alpha$ sont accessibles, il en est de même de $S$ – ou encore, si les $\uS_\alpha$ sont accessibles dans $\M$, il en est de même de $\uS$.}
+
+Cela résulte du résultat plus précis :
+
+\textbf{Corollaire 4.13.8} (\footnote[122]{Cf. reformulation plus raisonnable et plus correcte page 302, 302 bis.}). \textit{Avec les notations de 4.13.7 et 4.13.6, soit, pour tout $\alpha \in A$, $\pi'_\alpha$ un cardinal $\geqslant \pi_1$ tel que $S_\alpha$ soit $\pi'_\alpha$-accessible. Soit}
+\[
+\begin{aligned}
+\pi'_0 &= \sup\nolimits_{\alpha\in A} \pi'_\alpha \\
+\pi''_0 &= \sup(\card A, \sup\nolimits_\alpha 2^{({\pi'_\alpha}^{\pi_0})})
+\end{aligned}
+\]
+\textit{et soit $\pi \geqslant \pi''_0$ un cardinal tel que $\pi^{\pi'_0} = \pi$, i.e. de la forme $c^{\pi'_0}$, avec $c \geqslant \pi'_0$. Alors $S$ est $\pi$-accessible (i.e. $\uS$ est $\pi$-accessible dans $\M$). En particulier, $S$ est $2^{\pi''_0}$-accessible.} (\footnote[123]{Ça a l'air un peu abracadabrant ! Il faut de plus supposer que $\pi$ n'est pas cardinal limite !}).
+
+\msp{page 292}
+\textsc{Démonstration}. Soit $\alpha \in A$. Comme $\pi'_\alpha \leqslant \pi'_0$ et $\pi^{\pi'_0} = \pi$, on a a fortiori
+\[
+\pi^{\pi'_\alpha} = \pi , \qquad \text{de plus } \pi \geqslant \pi''_0 \geqslant 2^{(\pi_\alpha^{\pi_0})} , % ?? uncertain: prime on \pi_\alpha in the exponent -- absent (\pi_\alpha^{\pi_0}) or present ({\pi'_\alpha}^{\pi_0})
+\]
+donc en vertu de 4.13.6, $\uS_\alpha$ est $\pi$-accessible dans $\M$. D'autre part, comme $\uS_\alpha$ est $\pi'_\alpha$-accessible, il est stable dans $\M$ par $\varinjlim$ grandes devant $\pi'_\alpha$, a fortiori par $\varinjlim$ grandes devant $\pi'_0$ ($\geqslant \pi'_\alpha$). D'ailleurs, $\pi^{\pi'_0} = \pi$ implique $\pi \geqslant 2^{\pi_0} > \pi'_0$. Donc 4.13.8 résulte du
+
+\textbf{Corollaire 4.13.9.} \textit{Soit $\pi > \pi_0$ un cardinal tel que $\uS_\alpha$ soit $\pi$-accessible dans $\M$ pour tout $\alpha \in A$, et tel que} $\card A \leqslant \pi$. \textit{Supposons de plus qu'il existe un cardinal $\pi'_0$ tel que $\pi_0 \leqslant \pi'_0 < \pi$, tel que les $\uS_\alpha$ soient stables dans $\M$ par $\varinjlim$ grandes devant $\pi'_0$. Alors $\uS = \bigcap_{\alpha\in A} \uS_\alpha$ est $\pi$-accessible dans $\M$.}
+
+(\footnote[124]{Ce serait le moment de formuler ici le Lemme 4.16.7.11 (p. 488), qui devrait même remonter avec les premières généralités sur les parties $\pi$-accessibles dès avant 4.13.7 (immédiat après 4.13.6).}).
+
+Posons, pour tout $\alpha \in A$,
+\[
+\begin{aligned}
+\uS_\alpha(\pi) &\overset{\text{déf}}{=} \uS_\alpha \cap \M_\pi \\
+\uS(\pi) &\overset{\text{déf}}{=} \uS \cap \M_\pi = \bigcap \uS_\alpha(\pi) .
+\end{aligned}
+\]
+Chaque $\uS_\alpha(\pi)$ est stable dans $\M$ par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$ (puisqu'il en est ainsi de $\uS_\alpha$ et de $\M_\pi$) (donc il en est de même de leur intersection
+
+\msp{page 293}
+$\uS(\pi)$. A fortiori, $\uS(\pi)$ est une sous-catégorie strictement pleine et karoubienne de $\M_\pi$.)
+
+\end{document}

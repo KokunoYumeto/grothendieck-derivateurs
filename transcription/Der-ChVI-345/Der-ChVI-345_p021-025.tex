@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+% underlined category names (printed underlined, upright)
+\newcommand{\uu}[1]{\underline{\mathrm{#1}}}
+% circled labels (printed 1^o, 2^o in a circle)
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+% undirected link (printed as a plain horizontal line)
+\newcommand{\lline}{\mathrel{\relbar\joinrel\relbar\joinrel\relbar}}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X_s \arrow[r, "u_*^X"] \arrow[d, "i_s"] & X_t \arrow[d, "i_t"] \\
+X/s \arrow[r, "(\mathrm{id}_X)/u", "= u_*^{\Phi(X)}"'] \arrow[ur, bend left=30, shorten <=28pt, shorten >=12pt, "\alpha"] & X/t
+\end{tikzcd}
+\]
+
+\msp{page 31}
+Donc il me faut remballer! On peut considérer $i_X$ au mieux comme une flèche de $\uu{Fib}_0\, S$, et en prenant les composés on trouve une flèche dans $\uu{Fib}_0\, S$ :
+\[
+\begin{tikzcd}
+X \arrow[r, "i_X"] \arrow[rr, bend right=25, "\beta_X(=\alpha_X)"'] & \Phi(X) \arrow[r, "\Phi(j_X)"] & \Phi C(X),
+\end{tikzcd}
+\]
+i.e. (regardant maintenant $\Phi_0$ comme foncteur à valeurs dans $\uu{Fib}_0\, S$) un homomorphisme de foncteurs
+\[
+\beta : \mathrm{id}_{\uu{Fib}_0} S \longrightarrow \Phi_0 p_0, % [sic] \mathrm{id}_{\uu{Fib}_0} S -> \mathrm{id}_{\uu{Fib}_0 S}, the S is printed on the baseline, not in the subscript
+\]
+où $p_0 : \uu{Fib}_0 S \hookrightarrow \mathrm{Cat}/S$ est l'inclusion canonique. Ce $\beta$ est dans $W$ argument par argument, et de même pour $\alpha$ page 29, interprété cette fois comme
+\[
+\mathrm{id}_{\mathrm{Cat}/S} \longrightarrow p_0\Phi_0.
+\]
+Ce qu'on a prouvé finalement est ceci:
+
+\textbf{Théorème-remballage.} \textit{Soit $\mathcal{F}$ une sous-catégorie pleine de $\mathrm{Cat}/S$ qui contient une des trois sous-catégories pleines $\uu{Fib}_0 S$, $\uu{Parf}\, S$, $\uu{Cofib}_0 S$, et munissant $\mathcal{F}$ du localiseur $W$ `grossier' (induit par celui de $\mathrm{Cat}/S$). Alors l'inclusion}
+\[
+\mathcal{F} \longrightarrow \mathrm{Cat}/S
+\]
+\textit{induit une équivalence sur les localiseurs.}
+
+\msp{page 32}
+Par contre, les catégories localisées des quatre catégories de fibrés scindés
+\[
+\uu{Fibsc}\, S, \quad \uu{Cofibsc}\, S, \quad \uu{Fibsc}_0 S, \quad \uu{Cofibsc}_0 S
+\]
+échappent à nos arguments. \textit{Et pour cause!} Il est totalement ouvert, sur $S$ connexe disons (p. ex. $S = \mathbf{\Delta}^1$), que pour un type d'homotopie relatif $\xi$ sur $S$, les types induits $\xi_s$ ($s \in S$) forment un système local sur $S$, à valeurs dans $\mathrm{Hot}_W$, comme ce serait le cas si le théorème annoncé au début était vrai. Au contraire, \textit{toute} flèche de $\mathrm{Hot}_W$ doit provenir d'un objet de $\mathrm{Hot}_W(\mathbf{\Delta}^1)$. Les localisés des 9 autres catégories du diagramme p. 8, et de toutes celles dont il est question dans le théorème qu'on vient de prouver, doivent correspondre `visiblement' aux sous-catégories pleines de $\mathrm{HOT}_W(S)$ formées des HOT-coefficients localement constants sur $S$.
+
+Aussi, je me rends compte que c'était absurde de m'attendre à ce que $\uu{Fibsc}\, S$ et $\uu{Cofibsc}\, S$ donnent des catégories localisées canoniquement équivalentes. Car les éléments $\xi$ de la première
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\msp{page 33}
+des deux catégories donnent naissance chacun à un foncteur contravariant sur $S$
+\[
+\bar{\xi} : S^o \longrightarrow \mathrm{Hot}_W,
+\]
+ceux $\eta$ de la seconde (qui n'est autre que $(\uu{Fibsc}(S^o))^o$) donnent naissance chacun à un foncteur \textit{covariant}
+\[
+\bar{\eta} : S \longrightarrow \mathrm{Hot}_W,
+\]
+ce qui n'est pas pareil! Ce n'est `pareil' que si ce sont des coefficients locaux, ce qui signifie exactement que $\xi$ est dans $\uu{Fibsc}_0 S$ resp. $\eta$ dans $\uu{Cofibsc}_0 S$. On s'attend donc bien \circled{$1^o$} que les flèches
+\[
+\uu{Fibsc}_0 S \longrightarrow \uu{Fib}_0 S, \quad \uu{Cofibsc}_0 S \longrightarrow \uu{Cofib}_0 S
+\]
+induisent des équivalences sur les localisés (chose que j'ai été incapable de prouver tantôt) (\setcounter{footnote}{15}\footnote{Les quasi-inverses étant bel et bien donnés par $\Phi_0$, $\Psi_0$ - car [?] par quoi d'autre donc ???}). Par contre, il est pire que déraisonnable de s'attendre à ce qu'il en soit de même pour les foncteurs
+\[
+\uu{Fibsc}_0 S \longrightarrow \uu{Fibsc}\, S, \quad \uu{Cofibsc}_0 S \longrightarrow \uu{Cofibsc}\, S,
+\]
+ça devrait donner par localisation les foncteurs pleinement fidèles d'inclusion, des catégories d'objets localement constants dans $\mathrm{HOT}_W(S)$ resp. dans $(\mathrm{HOT}_W(S^o))^o$. Et de même pour
+\msp{page 34}
+les foncteurs induits sur les localisés par
+\[
+(*) \qquad \uu{Fibsc}\, S \longrightarrow \uu{Fib}\, S, \quad \uu{Cofibsc}\, S \longrightarrow \uu{Cofib}\, S.
+\]
+Comme les localisés des catégories but de ces deux foncteurs ont tout l'air de s'identifier aux sous-catégories précédentes d'objets localement constants, il semblerait donc que : \circled{$2^o$} Les foncteurs précédents définissent des rétractions de la catégorie $\mathrm{HOT}_W(S)$ resp. $\mathrm{HOT}_W(S^o)^o$ sur la sous-catégorie des objets localement constants sur $S$, les foncteurs localisés des foncteurs d'inclusion
+\[
+\uu{Fibsc}_0 S \longrightarrow \uu{Fibsc}\, S, \quad \uu{Cofibsc}_0 S \longrightarrow \uu{Cofibsc}\, S
+\]
+étant pleinement fidèles et ayant comme images essentielles les sous-catégories en question.
+
+Cette rétraction m'apparait comme une chose tout à fait mystérieuse. C'est lié au fait que pour le dérivateur très spécial $\mathbf{D} = \mathrm{HOT}$, quand on a un $\xi \in \mathbf{D}(S)$, on en déduit (à $\mathrm{HOT}/S$-équivalence près) un type de diagramme $X$ au dessus de $S$,
+\msp{page 35}
+qu'on peut regarder alors (via la construction $C$) comme définissant un type d'homotopie relatif \textit{localement constant} sur $S$.
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+Donc pour élucider la situation, i.e. les relations entre les 13 catégories localisées provenant du diagramme de la page 8, il reste à regarder si les assertions hypothétiques que je viens de faire sont bien valables, savoir
+
+\begin{enumerate}[leftmargin=*]
+\item[\circled{$1^o$}] Le foncteur déduit de
+\[
+\uu{Fibsc}_0 S \longrightarrow \uu{Fib}_0 S
+\]
+par passage aux localisés est une équivalence de catégories (et on peut dans cette question remplacer $\uu{Fib}_0 S$ par n'importe quelle autre sous-catégorie pleine de $\mathrm{Cat}/S$ la contenant - cela revient au même), et
+
+\item[\circled{$2^o$}] Le foncteur déduit de
+\[
+\uu{Fibsc}_0 S \longrightarrow \uu{Fibsc}\, S
+\]
+par localisation est pleinement fidèle. (Que son image soit exactement formée des objets localement constants du premier localisé, interprété comme $\mathrm{HOT}_W(S)$, est tautologique.)
+\end{enumerate}
+
+Il n'y a plus lieu de se soucier du côté
+\msp{page 36}
+cofibrés, puisque tout ce qu'on pourra en dire revient à ce que je viens d'expliciter, pour $X^o$ au lieu de $X$.
+
+Dans la direction de \circled{$1^o$}, nos arguments précédents à coups de $\Phi_0$, $p$ nous donnent déjà un renseignement utile. Mais il sera plus commode à présent de laisser tomber $\uu{Fib}_0 S$ ou plutôt, de le remplacer par $\uu{Fib}\, S$ (ce qui est licite, on l'a dit dans \circled{$1^o$}), de sorte qu'on a maintenant un diagramme commutatif (traits pleins)
+\[
+\begin{tikzcd}
+\uu{Fibsc}\, S \arrow[dr, "j"'] & & \uu{Fibsc}_0 S \arrow[ll, hook', "i"'] \arrow[dl, "k"'] \\
+& \uu{Fib}\, S, \arrow[ur, dotted, bend right=40, "\Phi_0=\psi"'] &
+\end{tikzcd}
+\]
+où $i$ est une inclusion (strictement) pleinement fidèle, $j$ (donc aussi $k$) fidèle. Enfin, on a un foncteur canonique $\psi$ ($= \Phi_0$) (en pointillés). Les localiseurs sur la ligne du haut sont les localiseur fins (pour $\uu{Fibsc}_0 S$ c'est pareil que la $W$-équivalence grossière), sur $\uu{Fib}\, S$ % [sic] les localiseur fins -> les localiseurs fins, missing plural s
+par contre on prend la $W$-équivalence grossière. (On sait que le localisé est le même, à équivalence près, que si on se restreint à la sous-catégorie pleine $\uu{Fib}_0 S$, ce qui est assez remarquable. % [sic] "(On sait ... remarquable." -> "(On sait ... remarquable.)", the opening parenthesis is never closed
+
+\msp{page 37}
+Tous les quatre foncteurs $i, j, k, \Phi_0$ sont compatibles aux localiseurs, donc passent aux localisés
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+\[
+\begin{tikzcd}
+\mathrm{HOT}_W(S) \arrow[dr, "\bar{j}"'] & & \mathrm{HOT}^{?}_W(S) \arrow[ll, "\bar{\imath}"'] \arrow[dl, "\bar{k}"'] \\
+& \mathrm{HOT}^{\mathrm{lc}}_W(S), \arrow[ur, bend right=40, "\bar{\psi}"'] &
+\end{tikzcd}
+\]
+où l'exposant ? dans la notation signifie que je ne sais interpréter cette catégorie, sauf si je prouve que $\bar{k}$ est une équivalence, et l'exposant lc dans la catégorie du bas dois suggerer l'intuition qu'il s'agit en tous cas d'une sorte de `types d'homotopie relatifs' (dans un sens modifié) \textit{localement constants} sur $S$. Le problème est de comprendre ce diagramme. La conjecture naturelle est % [sic] dois suggerer -> doit suggérer, verb agreement and missing accent
+
+\begin{enumerate}[leftmargin=*]
+\item[$1^o$)] $\bar{k}$ est une équivalence. (Ce qui implique que $\bar{\psi}$ est l'équivalence quasi-inverse, que $\bar{k}$, $\bar{\psi}$ permettent essentiellement d'identifier $\mathrm{HOT}^{?}_W$ et $\mathrm{HOT}^{\mathrm{lc}}_W$, de sorte que $\bar{\imath}$ et $\bar{\jmath}$ deviennent des foncteurs entre $\mathrm{HOT}_W$ et $\mathrm{HOT}^{\mathrm{lc}}_W$.)
+
+\item[$2^o$)] $\bar{\imath}$ est pleinement fidèle (NB l'image essentielle est bien comprise de toutes façons.)
+\end{enumerate}
+
+\msp{page 38}
+En direction de $1^o$), je sais pour l'instant que l'on a
+\[
+\bar{k}\bar{\psi} \simeq \mathrm{id}_{\mathrm{HOT}^{\mathrm{lc}}_W(S)},
+\]
+donc $\bar{k}$ est essentiellement surjectif (sur les objets), et induit des \textit{surjections} sur les $\mathrm{Hom}(-,-)$, tandis que $\bar{\psi}$ est injectif sur les classes d'isomorphismes d'objets, et sur les $\mathrm{Hom}(-,-)$ (i.e. \textit{fidèle}).
+
+Si les relations entre $\mathrm{HOT}^{?}_W$ et $\mathrm{HOT}^{\mathrm{lc}}_W$ s'avèrent imbitables (p. ex. $\bar{\psi}$ pas même pleinement fidèle, i.e. $\bar{k}$ pas même fidèle), alors la catégorie $\mathrm{HOT}^{?}_W$ mérite d'être larguée dans la corbeille, et on ne gardera que
+\[
+\begin{tikzcd}[row sep=large]
+\mathrm{HOT}_W(S) \arrow[d, shift right=1.5, "\bar{j}"'] \\
+\mathrm{HOT}^{\mathrm{lc}}_W(S), \arrow[u, shift right=1.5, "\bar{\psi}'"']
+\end{tikzcd}
+\]
+où on définit $\bar{\psi}'$ comme
+\[
+\bar{\psi}' = \bar{\imath}\bar{\psi} = \overline{i\psi}.
+\]
+Et la question (plus modeste) devient à présent :
+
+\begin{enumerate}[leftmargin=*]
+\item[$3^o$)] $\bar{\psi}'$ est-il pleinement fidèle? (L'image \textit{essentielle} est la même que celle de $\uu{Fib}_0$ ($\approx$ $\uu{Fib}$), elle est formée sauf erreur des objets localement constants - à vérifier au besoin \dots)
+\end{enumerate}
+
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 novembre 2001
+
+\msp{page 39}
+Il est difficile d'imaginer que $\bar{k}$, ou ce qui revient au même $\bar{\psi}$, puisse être une équivalence, sans qu'il existe au moins une `$W_S$-homotopie'
+\[
+\mathrm{id}_{\uu{Fibsc}_0 S} \ \leftrightarrow\ \leftrightarrow^{h}\!\leftrightarrow\ \leftrightarrow\ \psi k
+\]
+dans la catégorie des endofoncteurs de $\uu{Fibsc}_0 S$. À vrai dire, je me rends compte maintenant que la description de $\bar{\psi}$ à partir de $\psi : X \longmapsto \Phi_0 X = \Phi C X$ est inutilement compliquée, car on avait fait le détour par $C(X)$ uniquement pour être sûr de tomber dans $\uu{Fibsc}_0 S$, pas seulement dans $\uu{Fibsc}\, S$. Mais si on laisse tomber $\uu{Fibsc}_0 S$, on s'en fout, et le foncteur $\Phi : X \longmapsto \Phi(X)$ est beaucoup plus naturel. Et si on ne laisse pas tomber, il n'y a pas d'inconvénient de remplacer la source $\uu{Fib}\, S$ par $\uu{Fib}_0 S$ (qui a même localisé, à équivalence près), et sur $\uu{Fib}_0 S$ à nouveau il n'y a pas lieu de s'encombrer de $CX$, pour le plaisir de lui appliquer $\Phi$, car $\Phi(X)$ lui-même est déjà dans $\uu{Fibsc}_0 S$.
+
+Donc, la question est celle-ci : Si $X$ varie
+\msp{page 40}
+% layout: the arrows nearrow, uparrow, nwarrow are printed under each "Fibsc_0 S", pointing up to it; the arrow labelled c from X to Phi(X) is a long line with its arrowhead printed in the middle
+\[
+\begin{array}{l}
+\text{dans } \underset{\nearrow\uparrow\nwarrow}{\uu{Fibsc}_0 S}, \quad \text{y-a-t'il une homotopie dans } \underset{\nearrow\uparrow\nwarrow}{\uu{Fibsc}_0 S}, \quad \text{`naturelle', i.e. fonctorielle en } X, \\[2ex]
+\qquad\qquad X \xrightarrow{\qquad c \qquad} \Phi(X) = \ \text{Catégorie fibrée scindée de fibres les } s\backslash X
+\end{array}
+\]
+Mais un chemin qui soit formé de flèches
+\[
+X = X_0 \lline X_1 \lline X_2 \cdots \lline X_n = \Phi(X)
+\]
+qui soient toutes cartésiennes (et de plus, bien sûr, dans $W$!). Cela signifie donc qu'on aurait des catégories fibrées scindées sur $S$, $X_1$, \dots, $X_{n-1}$, dépendant \textit{fonctoriellement} de $X$, qui relient
+\[
+X = X_0 \qquad \text{à} \qquad \Phi(X) = X_n
+\]
+i.e.
+\[
+X_s \qquad \text{à} \qquad s\backslash X \qquad \text{???}
+\]
+Je ne vois rien à l'horizon.
+
+\end{document}

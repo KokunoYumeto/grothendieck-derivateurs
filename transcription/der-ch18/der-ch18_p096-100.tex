@@ -1,0 +1,246 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uGamma}{\underline{\Gamma}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\card}{\mathrm{card}\,}
+
+\begin{document}
+
+\printedpage{94}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+donc
+\[
+\begin{aligned}
+\Hom_{\mathcal{M}}(x,X) &\simeq \varinjlim_{I'} \Hom(x,\xi_{i'})\\
+&\simeq \varinjlim_{I'} \varprojlim_{I} \Hom(x_i,\xi_{i'})\\
+&\overset{\text{SGA 4 I 9.8}}{\simeq} \varprojlim_{I} \underbrace{\varinjlim_{I'} \Hom(x_i,\xi_{i'})}_{\simeq \Hom(x_i,X)}\\
+&\simeq \varprojlim_{I} \Hom(x_i,X)\ ,
+\end{aligned}
+\]
+ce qui prouve que $x$ est aussi une $\varinjlim$ des $x_i$ dans $\mathcal{M}$ tout entier.
+
+\msp{250}
+Ainsi, on est réduit à prouver 4.10.3. Appliquant 4.9.6 2°, on est ramené à prouver, pour le foncteur envisagé, les conditions F 1 et F $3_\pi$ (page 225).
+
+Dans les arguments qui suivent, on va utiliser les conditions a), b) de 4.10.3, mais non, pour l'instant, la condition c.
+
+\textbf{Lemme 4.10.5.} \textit{Sous les conditions de 4.10.3 a) b) (à l'exclusion de c), pour que (4.10.3.1) soit cofinal et $\Gamma(\mathcal{E}/J)$ grande devant $\pi$, il faut et il suffit que le foncteur envisagé satisfasse à la condition F 1, rappelée ci-dessous, et à la variante F$'$ 1 de celle-ci énoncée ci-dessous :}
+\begin{itemize}[leftmargin=3em]
+\item[F\,1)] {\itshape Pour tout système $(X(j))_{j\in\Ob J}$ d'éléments $X(j)\in\Ob\mathcal{E}_j$, existe une \textup{section} $G$ de $\mathcal{E}$ sur $J$, et un système de flèches
+\[
+X(j) \longrightarrow G(j) \qquad (j\in ObJ)\ . \tag*{\textup{(4.10.5.1)}}
+\]}
+\item[F$'$1)] {\itshape Sous les conditions de \textup{F\,1} précédent, supposons de plus une section $F$ de $\mathcal{E}$ sur $J$ \msp{251} et un système de flèches
+\[
+F(j) \longrightarrow X(j) \qquad (j\in\Ob J)\ ,
+\]
+alors $G$ et le système de flèches (4.10.5.1) peut être choisi de telle façon que les flèches composées
+\[
+F(j) \longrightarrow X(j) \longrightarrow G(j)
+\]
+définissent un homomorphisme de sections
+\[
+F \longrightarrow G
+\]
+(dans la catégorie $\uGamma(\mathcal{E}/J)$).}
+\end{itemize}
+(\footnote[106]{\textbf{N.B.} Les conditions F 1 et F$\,'$\,1 équivalent à dire que le foncteur envisagé satisfait aux conditions F1 et F3, vu encore (en vertu de 4.9.6.3, 1°) que $\uGamma(\mathcal{E}/J)$ est \textit{filtrante} sans plus, et le foncteur fidèle (4.10.3.1) cofinal. Cela implique déjà que $\uGamma(\mathcal{E}/J)$ est grande devant $\pi$.}).
+
+\textsc{Démonstration}. Il faut voir que F 1 \& F$'$ 1 équivaut à F 1 \& F $3_\pi$. L'implication $\Longleftarrow$ est $\pm$ immédiate, c'est de $\Longrightarrow$ que nous aurons besoin, donc
+\[
+\text{F 1 \& F}'\text{ 1} \quad\Longrightarrow\quad \text{F } 3_\pi\ .
+\]
+% foot: Version 17 décembre 2025
+
+\printedpage{95}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+Pour ceci, réénonçons F $3_\pi$ dans le contexte présent. On se donne une famille $(F_\alpha)_{\alpha\in A}$, $\card A\leqslant\pi$, d'objets de $\uGamma(\mathcal{E}/J)$, un objet $F$ de la même catégorie, et pour tout $j$ dans $\Ob J$, un système de flèches
+\[
+F_\alpha(j) \xrightarrow{u_\alpha(j)} F(j)\ ,
+\]
+mais sans supposer que pour $\alpha$ fixé, $j$ variable
+
+\msp{252}
+cela définisse un homomorphisme de sections $F_\alpha\longrightarrow F$. On cherche une section $G$ de $\mathcal{E}$ sur $J$, et un homomorphisme de sections $F\longrightarrow G$, tels que pour tout $\alpha$, le système des composés
+\[
+F_\alpha(j) \longrightarrow F(j) \longrightarrow G(j)
+\]
+définisse un homomorphisme de sections $F_\alpha\longrightarrow G_\alpha$. Soit donc $\lambda : j\longrightarrow j'$ une flèche de $J$, considérons les carrés (\textit{non commutatifs}) % [sic] F_\alpha -> G_\alpha -> F_\alpha -> G, the section sought is G (cf. p. 95 below: F_\alpha -> G)
+\[
+\begin{tikzcd}
+F_\alpha(j) \arrow[r,"u_\alpha(j)"] \arrow[d,"F_\alpha(\lambda)"'] \arrow[dr,phantom,"!"] & F(j) \arrow[d,"F(\lambda)"] \\
+F_\alpha(j') \arrow[r,"u_\alpha(j')"] & F(j')
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+(indexés par $\alpha\in A$). Pour $j'$ fixé dans $J$, le nombre de ces carrés est majoré par $\card\Ob(J/j')\times\card A\leqslant\pi\cdot\pi=\pi$. Il s'ensuit, comme $\mathcal{E}_{j'}$ est grande devant $\pi$, qu'il existe un objet $X(j')$ de $\mathcal{E}_{j'}$, et une flèche $v(j') : F(j')\longrightarrow X(j')$ de telle façon que pour tout $\alpha\in A$, et tout $\lambda\in\Ob J/j'$, le carré déduit de $(*)$
+
+\msp{253}
+en composant avec $F(j')\longrightarrow X(j')$ soit commutatif. On fait ce choix pour tout objet $j'$ de $J$. Appliquons alors F$'$ 1 à $F$ et au système de flèches $F(j)\xrightarrow{v(j)}X(j)$, on trouve $G$ et un système de flèches
+\[
+w(j)\ :\ X(j) \longrightarrow G(j)
+\]
+de telle façon que les flèches composées
+\[
+\begin{tikzcd}[column sep=small]
+w(j)v(j) : & F(j) \arrow[rr] \arrow[dr,dotted] & & G(j) \\
+& & X(j) \arrow[ur,dotted] &
+\end{tikzcd}
+\]
+définissent un homomorphisme de sections. Je dis que cet homomorphisme a la propriété voulue pour F $3_\pi$, i.e. que pour tout $\alpha\in A$, le système des composés
+\[
+F_\alpha(j) \longrightarrow F(j) \longrightarrow G(j)
+\]
+(pour $j\in\Ob J$ variable) définit un homomorphisme de sections $F_\alpha\longrightarrow G$. En effet, il suffit pour cela de considérer, pour une flèche $\lambda$ de $J$, le
+% foot: Version 17 décembre 2025
+\printedpage{96}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{254}
+diagramme
+\[
+\begin{tikzcd}
+F_\alpha(j) \arrow[r,"u_\alpha(j)"] \arrow[d,"F_\alpha(\lambda)"'] \arrow[dr,phantom,"!"] & F(j) \arrow[r,"v(j)"] \arrow[d,"F(\lambda)"'] & X(j) \arrow[r,"w(j)"] \arrow[d,phantom,"\text{comm.}"] & G(j) \arrow[d,"G(\lambda)"] \\
+F_\alpha(j') \arrow[r,"u_\alpha(j')"] & F(j') \arrow[r,"v(j')"] & X(j') \arrow[r,"w(j')"] & G(j')\ .
+\end{tikzcd}
+\]
+Le lemme 4.10.5 étant prouvé, tout revient donc à prouver la condition F 1, et son complément F$'$ 1, qui se prouvera dans la même haleine.
+
+\textbf{4.10.6.} On se donne donc le système d'objets
+\[
+X(j)\ \in\ \Ob\mathcal{E}_j \qquad (j\in\Ob J)\ , \tag*{(4.10.6.1)}
+\]
+et le cas échéant, un objet $F$ de $\uGamma(\mathcal{E}/J)$, et un système de flèches
+\[
+F(j) \xrightarrow{u_j} X(j)\ , \tag*{(4.6.10.2)} % [sic] (4.6.10.2) -> (4.10.6.2), numbering of 4.10.6; cited as (4.10.6.2) below
+\]
+et on se propose de construire $G$ de $\uGamma(\mathcal{E}/J)$, et un système de flèches
+\[
+X(j) \xrightarrow{w(j)} G(j)\ , \tag*{(4.10.6.3)}
+\]
+de telle façon que (si on a la donnée supplémentaire des $u(j)$) les flèches composées
+\[
+F(j) \xrightarrow{u(j)} X(j) \xrightarrow{v(j)} G(j) % [sic] v(j) -> w(j), the arrow X(j) -> G(j) is w(j) in (4.10.6.3)
+\]
+
+\msp{255}
+soient fonctorielles en $j$.
+
+On va faire une construction transfinie sur les ordinaux $\alpha$ tels que
+\[
+\card\alpha\ \leqslant\ \pi
+\]
+d'un système inductif
+\[
+(X_\alpha(j))_\alpha
+\]
+d'objets de $\prod_{j\in\Ob J}\mathcal{E}_j$. On va d'abord ignorer la donnée éventuelle (4.10.6.2). On posera
+\[
+X_0(j)\ =\ X(j)\ , \tag*{(4.10.6.4)}
+\]
+et on va donner la prescription pour passer de $X_\alpha$ à $X_{\alpha+1}$. La construction inclura aussi, pour toute flèche $\lambda : j'\longrightarrow j$ de $J$ et tout $\alpha$, la donnée de
+\[
+X_\alpha(j) \xrightarrow{t_\alpha(\lambda)} X_{\alpha+1}(j)\ , \qquad \text{flèche (dans $\mathcal{E}$) au dessus de $\lambda$,} \tag*{(4.10.6.5)} % [sic] X_\alpha(j) -> X_\alpha(j'), the source of an arrow over \lambda : j' -> j (cf. p. 97: X_\alpha(j') -> X_{\alpha+1}(j))
+\]
+et ces flèches, et les flèches de transition $X_\alpha(j)\xrightarrow{\tau_\alpha(j)}X_{\alpha+1}(j)$, doivent
+% foot: Version 17 décembre 2025
+\printedpage{97}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{256}
+satisfaire aux trois conditions suivantes :
+\begin{itemize}[leftmargin=3em]
+\item[(i)] Si $\lambda$ est une flèche identique $\mathrm{id}_J : J\longrightarrow J$, alors \fbox{$t_\alpha(\lambda)=\tau_\alpha(j)$.} % [sic] id_J : J -> J -> id_j : j -> j, the identity arrow of an object j of J
+\item[(ii)] Dans le diagramme
+\[
+\begin{tikzcd}
+X_\alpha(j') \arrow[r,"\tau_\alpha(j')"] \arrow[dr,"t_\alpha(\lambda)"] & X_{\alpha+1}(j') \arrow[r] \arrow[dr,"t_{\alpha+1}(\lambda)"] \arrow[d,phantom,"\bullet"] & X_{\alpha+2}(j') \arrow[r] \arrow[dr] & X_{\alpha+3}(j') \arrow[r] \arrow[dr,dotted] & {} \\
+X_\alpha(j') \arrow[r] & X_{\alpha+1}(j') \arrow[r,"\tau_{\alpha+1}(j')"] & X_{\alpha+2}(j') \arrow[r,"\tau_{\alpha+2}(j')"] & X_{\alpha+3}(j') \arrow[r] & {,}
+\end{tikzcd}
+\] % [sic] bottom row printed with j' (X_\alpha(j'), X_{\alpha+1}(j'), \tau_{\alpha+1}(j'), X_{\alpha+2}(j'), \tau_{\alpha+2}(j'), X_{\alpha+3}(j')) -> j, the arrows t(\lambda) go to the objects at j (cf. the text below: \tau_{\alpha+1}(j), \tau_{\alpha+2}(j))
+$\tau_{\alpha+2}(j)$ “rend le carré $\bullet$ commutatif”, i.e. égalise $t_{\alpha+1}(\lambda)\tau_\alpha(j')$ et $\tau_{\alpha+1}(j)t_\alpha(\lambda)$ :
+\[
+\boxed{\tau_{\alpha+2}(j)t_{\alpha+1}(\lambda)\tau_\alpha(j')\ =\ \tau_{\alpha+2}(j)\tau_{\alpha+1}(j)t_\alpha(\lambda)\ .}
+\]
+\item[(iii)] Si on a deux flèches consécutives $\lambda : j''\longrightarrow j'$, $\mu : j'\longrightarrow j$, on a donc le diagramme
+\[
+\begin{tikzcd}
+X_\alpha(j'') \arrow[r] \arrow[dr,"t_\alpha(\lambda)"] \arrow[ddr,"t_\alpha(\mu\lambda)"] & X_{\alpha+1}(j'') \arrow[r] \arrow[dr] & X_{\alpha+2}(j'') \arrow[r] \arrow[dr] & X_{\alpha+3}(j'') \\
+X_\alpha(j') \arrow[r] & X_{\alpha+1}(j') \arrow[r] \arrow[dr,"t_{\alpha+1}(\mu)"] & X_{\alpha+2}(j') \arrow[r] \arrow[dr] & X_{\alpha+3}(j') \\
+X_\alpha(j) \arrow[r] & X_{\alpha+1}(j) \arrow[r,"\tau_{\alpha+1}(j)"] & X_{\alpha+2}(j) \arrow[r,"\tau_{\alpha+2}(j)"] & X_{\alpha+3}(j)\ ,
+\end{tikzcd}
+\]
+\[
+\boxed{\tau_{\alpha+2}(j)t_{\alpha+1}(\mu)t_\alpha(\lambda)\ =\ \tau_{\alpha+2}(j)\tau_{\alpha+1}(j)t_\alpha(\mu\lambda)}
+\]
+\end{itemize}
+
+\msp{257}
+Ainsi, pour définir les $X_{\alpha+1}(j)$, il faut tenir compte de toutes ces contraintes. Donc :
+\begin{itemize}[leftmargin=3em]
+\item[1°)] Pour $j$ fixé, $X_{\alpha+1}(j)$ doit être but des flèches
+\[
+X_\alpha(j') \xrightarrow{t_\alpha(\lambda)} X_{\alpha+1}(j)\ ,
+\]
+pour les $\lambda\ :\ j'\longrightarrow j$ dans $\Ob J/j$ -- y compris pour $\lambda=\mathrm{id}_j$, auquel cas $t_\alpha(\lambda)\ :\ X_\alpha(j)\longrightarrow X_{\alpha+1}(j)$ jouera le rôle du morphisme de transition $\tau_\alpha(j)$.
+\item[2°)] Si $\alpha$ est de la forme $\alpha'+2$, i.e. s'il n'est ni ordinal limite, ni successeur d'un ordinal limite, alors on exige de plus, pour les morphismes de transition $\tau_\alpha(j)$, d'égaliser les couples de flèches prévus dans (ii) et (iii) ci-dessus.
+\end{itemize}
+Comme l'ensemble de ces données dans 1°), ou de ces contraintes dans 2°),
+\msp{258}
+est de cardinal $\leqslant\pi$, et que la catégorie $\mathcal{E}_j$ est grande devant $\pi$, on voit qu'on peut bel et bien trouver $X_{\alpha+1}(j)$ et des $t_\alpha(\lambda)\ :\ X_\alpha(j')\longrightarrow X_{\alpha+1}(j)$, de façon à satisfaire (si $\alpha=\alpha'{+}2$) aux contraintes rappelées dans 2°. Cela achève la description de la construction de $X_{\alpha+1}(\bullet)$, en termes de $X_\beta(\bullet)$ $(\beta\leqslant\alpha)$ et des $t_\beta(\lambda)$ $(\beta<\alpha)$.
+
+Il faut enfin définir $X_\alpha(\bullet)$ pour $\alpha$ un ordinal limite. Cette fois, on lui demande seulement de recevoir les $X_\beta(\bullet)$ pour $\beta<\alpha$. Comme l'ensemble $I_\alpha$ de ces $\beta$ est de cardinal $\leqslant\pi$, et que les $\mathcal{E}_j$ sont grandes devant $\pi$, on peut bel et bien trouver les $X_\alpha(j)$.
+% foot: Version 17 décembre 2025
+
+\printedpage{98}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{259}
+On a donc prouvé l'essentiel du
+
+\textbf{Lemme 4.10.7.} \textit{Sous les conditions de 4.10.3 a) b), et pour un système $X(\bullet)\in\Ob\prod_{j\in\Ob J}\mathcal{E}_j$ donné, on peut trouver un système inductif $(X_\alpha(i))_\alpha$ dans $\prod\mathcal{E}_j$, indexé par les ordinaux $\alpha$ telle que} $\card\alpha\leqslant\pi$, \textit{et pour toute flèche $\lambda : j'\longrightarrow j$ dans $J$ des flèches $t_\alpha(\lambda) : X_\alpha(j')\longrightarrow X_\alpha(j)$, de telle façon que l'on ait les conditions suivantes.} % [sic] (X_\alpha(i))_\alpha -> (X_\alpha(j))_\alpha, the index is j \in Ob J; [sic] X_\alpha(j') -> X_\alpha(j) -> X_\alpha(j') -> X_{\alpha+1}(j), cf. (4.10.6.5) and p. 97
+\begin{itemize}[leftmargin=3em]
+\item[\textit{1°)}] \textit{$X_0(\bullet)=X(\bullet)$.}
+\item[\textit{2°)}] \textit{Les conditions (i) (ii) (iii) (p. 256).}
+\item[\textit{3°)}] \textit{Si on se donne $F$ dans \textup{Ob}$\,\uGamma(\mathcal{E}/J)$, et des flèches $u(j) : F(j)\longrightarrow X(j)=X_0(j)$, on peut supposer que pour toute flèche $\lambda : j'\longrightarrow j$ dans $J$, on a}
+\[
+\begin{tikzcd}
+F(j') \arrow[r,"u(j')"] \arrow[d,"F(\lambda)"'] & X_0(j') \arrow[dr,"t_0(\lambda)"] & \\
+F(j) \arrow[r,"u(j)"] & X_0(j) \arrow[r,"\tau_0(j)"] & X_1(j)
+\end{tikzcd}
+\qquad\qquad \text{commutatif.}
+\tag*{$(*)$}
+\]
+\end{itemize}
+
+\msp{260}
+Il reste seulement à prouver ce dernier complément 3°. C'est une contrainte uniquement sur la construction de $X_1(\bullet)$ et des $t_0(\lambda)$. Supposons donc que l'on ait construit $X_1(\bullet)$ sans tenir compte de cette contrainte. Pour $j$ fixé, il faut donc “rendre commutatif” tous ces carrés, i.e. toutes ces double-flèches $(t_0(\lambda)u(j'),\tau_0(j)u(j)F(\lambda))$ de but $X_1(j)$. Comme l'ensemble de ces double-flèches est de cardinal $\card\Ob\mathcal{E}/j\leqslant\pi$, on peut trouver $X_1(j)\longrightarrow X'_1(j)$ dans $\mathcal{E}_j$, égalisant toutes ces double-flèches, donc quitte à remplacer $X_1(j)$ par $X'_1(j)$, on gagne.
+
+\msp{261}
+Il est temps enfin de faire appel à l'hypothèse c) de 4.10.3. Soit donc $\alpha$ un ordinal limite, comme stipulé dans cette condition. Comme $\card\alpha\leqslant\pi$, a fortiori $\card\beta\leqslant\pi$ si $\beta<\alpha$, on a donc un système inductif
+\[
+(X_\beta(\bullet))_{\beta\in I_\alpha}
+\]
+dans $\prod_{j\in J}\mathcal{E}_j$. Comme les $\varinjlim$ de type $I_\alpha$ existent dans $\mathcal{E}_j$, on peut donc considérer
+\[
+G(j)\ =\ \varinjlim_{\beta\in I_\alpha} X_\beta(j)\ \in\ \Ob\mathcal{E}_j\ .
+\]
+Si $\lambda : j'\longrightarrow j$ est une flèche de $J$, on en déduit une $\lambda$-flèche
+\[
+G(\lambda)\ :\ G(j)=\varinjlim X_\beta(j) \longrightarrow G(j')\simeq\varinjlim X_{\beta+1}(j')
+\]
+par $G(\lambda)=\varinjlim t_\beta(\lambda)$. Il faut
+\msp{262}
+faire attention que les $t_\beta(\lambda)$ ne définissent pas un homomorphisme de systèmes projectifs, mais par la condition (ii), p. 256, ils définissent un homomorphisme d'ind-objets, donc
+% foot: Version 17 décembre 2025
+
+\end{document}

@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Dia}{\mathsf{Dia}}
+\newcommand{\Cat}{\mathcal{C}\mathit{at}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\Hom}{\underline{\mathsf{Hom}}}
+\newcommand{\id}{\mathsf{id}}
+\newcommand{\Ob}{\mathsf{Ob}}
+\newcommand{\Del}{\mathbf{\Delta}}
+
+\begin{document}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 4}
+
+\section*{2. Préliminaires heuristiques sur les dérivateurs.}
+
+On se donne une sous-catégorie pleine $\Dia$ (comme “diagrammes”) de $\Cat$. Ça peut être tout $\Cat$, ou plus petit. Mais on supposera le plus souvent que $\Dia$ contient au moins les “catégories ordonnées” (correspondant aux ensembles ordonnés, \textit{i.e.} telles que $a$) tout morphisme est un mono et $b$) tout iso est une identité \texttt{[ce n'est pas vrai : la catégorie réduite à une double flèche satisfait à ces conditions, mais n'est pas un ensemble ordonné]}). Par abus de langage, on identifie un ensemble ordonné avec la catégorie correspondante (et une catégorie au topos qu'elle définit?). On considère $\Dia$ comme une 2-\textit{catégorie}.\footnote{N.B. Il faut des conditions de stabilité pour $\Dia$, au moins la stabilité par $I \times J$ et $I \amalg J$, en fait, nettement plus \dots}
+
+Un \textit{dérivateur} $\DD$ (sur $\Dia$, comme “\textit{domaine}” du dérivateur) est un 2-foncteur contravariant de $\Dia$ dans $\Cat$, satisfaisant certaines conditions. Donc
+\[ \DD : \Dia^{\circ} \longrightarrow \Cat \quad . \]
+Si $I \in \Ob_0 \Dia$ est une catégorie (ou un “type de diagramme”) du domaine de $\DD$, on doit donc avoir une catégorie $\DD(I)$. Les objets de $\DD(I)$ s'appelleront les \textit{objets-coefficients} (ou \textit{coefficients}) de type $\DD$, au dessus de $I$. Pour
+\[ f : I \longrightarrow J \]
+une 1-flèche de $\Dia$, on doit avoir un foncteur
+\[ f^*_{\DD} \text{ ou } f^* : \DD(J) \longrightarrow \DD(I) \quad , \]
+dit \textit{“foncteur image inverse”}. Si $F$ est un coefficient de type $\DD$ sur $J$ son “\textit{image inverse}” est donc un coefficient de type $\DD$ sur $I$. On suppose (pour simplifier!) que le 2-foncteur $\DD$ est \textit{strict}, donc qu'on a transitivité stricte
+\[ (gf)^* = f^*g^* \ , \qquad \text{si} \qquad I \xrightarrow{f} J \xrightarrow{g} K \qquad \text{dans} \ \ \Dia \ . \]
+
+\msp{page 5}
+
+De plus, si on a deux foncteurs $f, g : I \rightrightarrows J$, et un morphisme entre eux
+\[
+\begin{tikzcd}[column sep=large]
+I \arrow[r, shift left=2, "f"] \arrow[r, shift right=2, "g"'] \arrow[r, phantom, "{\downarrow}u"] & J
+\end{tikzcd}
+\quad ,
+\]
+on se donne un morphisme $u^*_{\DD}$ ou $u^*$ entre les foncteurs $g^*$ et $f^*$, d'où
+\[
+\begin{tikzcd}[column sep=large]
+\DD(I) & \DD(J) \arrow[l, shift right=2, "f^*"'] \arrow[l, shift left=2, "g^*"] \arrow[l, phantom, "{\uparrow}u^*"]
+\end{tikzcd}
+\quad .
+\]
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+On doit encore avoir transitivité pour une composition de morphismes de foncteurs :
+\[
+\begin{tikzcd}[column sep=large]
+I \arrow[r, shift left=4, "f"] \arrow[r, "g"' near start] \arrow[r, shift right=4, "h"'] \arrow[r, phantom, shift left=2, "{\downarrow}u"] \arrow[r, phantom, shift right=2, "{\downarrow}v"] & J
+\end{tikzcd}
+\]
+doit donner
+\[ (vu)^* = u^*v^* \]
+donc
+\[
+\begin{tikzcd}[column sep=large]
+\DD(I) & \DD(J) \arrow[l, shift right=4, "f^*"'] \arrow[l, "g^*" near end] \arrow[l, shift left=4, "h^*"] \arrow[l, phantom, shift right=2, "{\uparrow}u^*"] \arrow[l, phantom, shift left=2, "{\uparrow}v^*"]
+\end{tikzcd}
+\quad .
+\]
+De plus, si $f$ est une identité, $f^*$ aussi
+\[ (\id_I)^* = \id_{\DD(I)} \quad , \]
+et de même si $u$ est une identité
+\[ (\id_f)^* = \id_{f^*} \quad . \]
+
+\msp{page 6}
+
+J'indique tout de suite l'axiome le plus important sur un dérivateur (au-delà de la donnée d'un 2-contra foncteur strict) :
+
+\textbf{Der}$_1$ : Si $f : I \to J$ dans $\Dia$, alors $f^*_{\DD} = f^* : \DD(J) \to \DD(I)$ a un adjoint à droite et un adjoint à gauche.
+
+Ces foncteurs seront notés (du moins provisoirement) $f^{\DD}_*$ ou $f_*$ , et $f^{\DD}_!$ ou $f_!$ , soit
+\[ f_! \, , \ f_* : \DD(I) \rightrightarrows \DD(J) \quad , \]
+de sorte qu'on trouve une suite de \textit{trois} foncteurs adjoints entre $\DD(I)$ et $\DD(J)$
+\[ f_! \, , \ f^*, \ f_* \quad . \]
+
+N.B. Pour la plupart des développements on n'aura pas besoin de l'existence à la fois des $f_!$ et des $f_*$ . Un \textit{dérivateur à gauche} ne suppose que les $f_*$ (adjoints à droite des $f^*$), et l'existence de $f_!$ seulement quand $f$ est une \textit{immersion ouverte}. Dualement, un \textit{dérivateur à droite} ne suppose que les $f_!$ (adjoints à gauche des $f^*$), et $f_*$ seulement si $f$ est une \textit{immersion fermée}. Ce sont sans doute les dérivateurs à gauche qui sont les plus importants.
+
+\msp{page 7}
+
+\textbf{Der}$_2$ : Si $f : I \to J$ est dans $\Dia$, si c'est une immersion \textit{fermée}, le biadjoint à droite $f^!_{\DD}$ ou $f^!$ de $f^*$ existe. Si c'est une immersion ouverte, le biadjoint à gauche $f^?$ existe.\footnote{Il n'y a lieu d'exiger les biadjoints que pour un dérivateur ponctué. \textsf{HOT} n'y satisfait pas.} Dans
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+les deux cas, on veut que $f^*$ soit un foncteur de localisation, ce qui équivaut à dire que $f_*$ est pleinement fidèle, ou que $f_!$ est pleinement fidèle.\footnote{Il faut de plus caractériser l'image de $f_*$ si $f$ est une immersion fermée (les $F$ tels que $g^*F \overset{\sim}{\to} e_{\DD(U)}$) et celle de $f_!$ si c'est une immersion ouverte (les $F$ tels que $g^*F \simeq \emptyset_{\DD(Y)}$), où $g$ est l'immersion complémentaire.}
+
+N.B. Dans le cas d'un dérivateur à gauche, on suppose seulement l'existence de $f^!$ si $f$ est une immersion fermée. Donc pour résumer, pour un tel dérivateur, on suppose l'existence de
+\[
+\left\{
+\begin{aligned}
+& f_* \text{ quel que soit } f : I \to J \text{ dans } \Dia \\
+& f_! \text{ si } f \text{ est une immersion ouverte} \\
+& f^! \text{ si } f \text{ est une immersion fermée (cas ponctué seulement).}
+\end{aligned}
+\right.
+\]
+Dualement, pour un dérivateur à droite, on suppose l'existence de
+\[
+\left\{
+\begin{aligned}
+& f_! \text{ quel que soit } f : I \to J \text{ dans } \Dia \\
+& f_* \text{ si } f \text{ est une immersion fermée} \\
+& f^? \text{ si } f \text{ est une immersion ouverte (cas ponctué seulement).}
+\end{aligned}
+\right.
+\]
+Je voudrais formuler des axiomes astucieux, pour le cas d'un couple
+\[ Y \overset{i}{\hookrightarrow} I \overset{j}{\hookleftarrow} U \]
+d'une immersion ouverte $j$ et d'une immersion fermée $i$ dans $\Dia$, complémentaires l'une de l'autre. D'abord une formulation si on suppose $\DD$ “\textit{ponctué}”, \textit{i.e.} les catégories $\DD(I)$ ponctuées, et les foncteurs $f^*$ compatibles avec les ponctuations. On veut “interpréter” le carré (1) page 2 :
+
+\msp{page 8}
+
+\[
+\begin{tikzcd}
+& F \arrow[dr, "\mathrm{adj}"] & \\
+j_!j^*F \arrow[ur, "\mathrm{adj}"] \arrow[dr] & & i_*i^*F \\
+& e \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\tag*{(1)}
+\]
+
+\textbf{Der}$'_2$ : Pour tous $I, J \in \Dia$, on a
+\[ \DD(I \amalg J) \xrightarrow[(\alpha^*, \beta^*)]{\sim} \DD(I) \times \DD(J) \quad , \]
+où $\alpha, \beta$ sont les injections canoniques de $I$ et $J$ dans $I \amalg J$.
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+carré à la fois cartésien et cocartésien. On cherche donc un carré dans $\DD(I)$, mais mieux que ça. Soit $J = \Del_1 \times \Del_1$ le carré standard
+\[
+\begin{tikzcd}
+& (1,0) \arrow[dl] & \\
+(1,1) & & (0,0) \arrow[ul] \arrow[dl] \\
+& (0,1) \arrow[ul] &
+\end{tikzcd}
+\]
+et considérons la catégorie $I \times J$. On a
+\[
+\begin{aligned}
+& J \longrightarrow \Hom(I, I \times J) \\
+& j \longmapsto \bigl(i \longmapsto (i,j)\bigr)
+\end{aligned}
+\]
+D'autre part, par $\DD$
+\[ \Hom(I, I \times J)^{\circ} \longrightarrow \Hom(\DD(I \times J), \DD(I)) \]
+d'où un composé
+\[ J^{\circ} \longrightarrow \Hom(\DD(I \times J), \DD(I)) \]
+ou encore
+\[ \DD(I \times J) \longrightarrow \Hom(J^{\circ}, \DD(I)) \quad . \]
+Ceci vaut pour tout $J \in \Ob \, \Dia$. On peut donc dire que la donnée d'un “coefficient” $\Phi$ sur une catégorie produit $I \times J$ donne naissance à un diagramme de type $J^{\circ}$ dans la catégorie $\DD(I)$ des coefficients sur $I$. La philosophie
+\msp{page 9}
+des dérivateurs consiste en grande partie, inversement, chaque fois qu'on a un diagramme dans une catégorie de coefficients $\DD(I)$ (sur un diagramme $I$), disons diagramme de type $K$ : $K \to \DD(I)$, de se demander s'il ne provient pas “canoniquement” d'un objet de $\DD(I \times K^{\circ})$ \textit{i.e.} d'un coefficient sur $I \times K^{\circ}$.
+
+Ainsi pour le carré p. 8. On voudrait qu'il provienne de $\DD(I \times J)$, où $J = \Del_1 \times \Del_1$, et ceci fonctoriellement, donc on désire un foncteur “canonique”
+\[ \DD(I) \longrightarrow \DD(I \times \Del_1 \times \Del_1) \]
+qui en composant avec
+\[ \DD(I \times \Del_1 \times \Del_1) \longrightarrow \Hom((\Del_1 \times \Del_1)^{\circ}, \DD(I)) \]
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+donne le foncteur décrit par le carré (1). De plus, il faut exprimer dans le contexte présent la condition “bicartésienne” du carré (1), dans le contexte de la page 7. Question analogue pour le carré (2) de la page 2 :
+\[
+\begin{tikzcd}
+& F \arrow[dr] & \\
+i_*i^!F \arrow[ur] \arrow[dr] & & j_*j^*F \\
+& e \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\tag*{(2)}
+\]
+où il faut de plus interpréter la condition cartésienne. On va définir en fait un coefficient sur la sous-catégorie ouverte $W$ suivante de $\Del_1 \times \Del_1$
+\[
+\begin{tikzcd}
+(1,0) & \\
+& (0,0) \arrow[ul] \arrow[dl] \\
+(0,1) &
+\end{tikzcd}
+\quad ,
+\]
+
+\msp{page 10}
+
+plus exactement sur $W \times I$, et si $\alpha$
+\[ \alpha : W \times I \longrightarrow \Del_1 \times \Del_1 \times I \]
+est l'inclusion canonique, on définira le carré “cartésien” comme l'image par $\alpha_*$ de ce coefficient. Ceci nous ramène donc au problème de “globaliser” d'abord le diagramme partiel
+\[
+\begin{tikzcd}
+F \arrow[dr] & \\
+& j_*j^*F \\
+e \arrow[ur] &
+\end{tikzcd}
+\quad .
+\]
+Et de même pour le carré (1) sauf qu'on est embarassé si on choisit de le regarder surtout comme cartésien (ce qui suggère à procéder comme tantôt) ou comme \underline{co}cartésien (ce qui % [sic] embarassé -> embarrassé, spelling of the word
+
+\end{document}

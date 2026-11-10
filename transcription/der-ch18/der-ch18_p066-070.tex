@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Filt}{\operatorname{Filt}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=0.8pt](c){#1};}
+
+\begin{document}
+
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 186}
+
+\[ \card F(x) \longrightarrow \pi'^{\pi_0} \qquad \forall\, x \in \Ob C , \] % [sic] \longrightarrow -> \leqslant, a cardinal inequality is expected (cf. the next display)
+
+donc si $G \in \Ob \mathcal{M}_\pi \subset \Ob \Filt^{\pi^{\pi_0}}$, d'où
+\[ \card G(x) \leqslant \pi^{\pi_0} \qquad \forall\, x \in \Ob C , \]
+on trouve
+\[ \card \Hom(G,F) \leqslant \underbrace{\underbrace{\card(\Ob C)}_{\leqslant \pi_1}\cdot(\pi'^{\pi_0})^{(\pi^{\pi_0})}}_{\pi'^{\pi_0\cdot\pi^{\pi_0}} = \pi'^{(\pi^{\pi_0})}} , \]
+d'où
+\[ \card \Ob \mathcal{M}_\pi/F \leqslant \underbrace{\underbrace{\card(\Ob \mathcal{M}_\pi)}_{\leqslant 2^{(\pi^{\pi_0})}}\cdot\pi'^{(\pi^{\pi_0})}}_{\gamma = \pi'^{\pi^{\pi_0}}} , \]
+et enfin
+\[ \card \Fl \mathcal{M}_\pi/F \leqslant \underbrace{\underbrace{\gamma\cdot\gamma}_{\gamma = \pi'^{(\pi^{\pi_0})}}\cdot\underbrace{\card(\Fl \mathcal{M}_\pi)}_{\leqslant 2^{(\pi^{\pi_0})}}}_{\pi'^{(\pi^{\pi_0})}} , \]
+ce qui est la majoration annoncée (la même que celle prouvée dans 4.5.12, la démonstration étant essentiellement la même).
+
+\msp{page 187}
+
+\textbf{4.7.20.} Une fcg canonique est dite \textit{maximale} (où \textit{strictement canonique}) si elle n'est par déduite d'une fcg canonique strictement plus étendue $(\mathcal{F}^\pi)_{\pi\geqslant\pi_{00}}$ (donc avec $\pi_{00} < \pi_0$). Donc si $\mathcal{M}$ admet une fcga, alors elle admet même une fcg strictement canonique, et cette dernière est de plus unique. On va revenir là-dessus dans la section suivante. % [sic] où strictement -> ou strictement, alternative is meant; [sic] n'est par -> n'est pas, negation
+
+\section*{4.8\quad Catégories $\mathfrak{U}$-accessibles}
+
+\textbf{Proposition 4.8.1.} \textit{Soit $\mathcal{M}$ une $\mathfrak{U}$-catégorie, $\pi_0$ un cardinal infini. Considérons les conditions suivantes :}
+\begin{itemize}[label={}]
+\item[\textit{a)}] \textit{$\mathcal{M}$ satisfait à $L_{\pi_0}$ (i.e. est stable par petites $\varinjlim$ grandes devant $\pi_0$), et contient une petite sous-catégorie pleine $S$} strictement génératrice, \textit{formée d'objets $\pi_0$-accessibles.}
+\item[\textit{b)}] \textit{Il existe une petite catégorie $C$, et une équivalence de catégories}
+\[ \mathcal{M} \simeq \Ind_{\pi_0}(C) . \]
+\item[\textit{c)}] \textit{$\mathcal{M}$ admet une filtration cardinale généralisée accessible $(\mathcal{F}^\pi)_{\pi\geqslant\pi_0}$, ayant $\pi_0$ comme cardinal initial, et telle que $\pi_0$ soit un cardinal utile pour ladite filtration.}
+\end{itemize}
+% foot: Version 17 décembre 2025
+
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 188}
+\begin{itemize}[label={}]
+\item[\textit{c$'$)}] \textit{Comme c), avec $\pi_0$ cardinal régulier (et non seulement utile) pour la filtration cardinale généralisée accessible en question, et cette filtration étant supposée de plus} canonique.
+\end{itemize}
+\textit{On a alors le diagramme d'implications}
+\[ c' \Longleftrightarrow c \Longleftrightarrow b \Longrightarrow a . \]
+
+\textbf{4.8.1.1.} Il me faut ici préciser la terminologie, sur ce que j'entends par sous-catégorie (pleine) $C$ \textit{strictement génératrice} dans $\mathcal{M}$. Pour ceci, je me réfère à SGA 4 I 7.2, (i), aux conditions équivalentes b) et c) de loc. cit. :
+\begin{itemize}[label={}]
+\item[\circled{b}] $\forall\, F \in \Ob \mathcal{M}$, la flèche canonique
+\[ \varinjlim_{i\in C/F} x_i \longrightarrow F \]
+est un isomorphisme.
+\item[\circled{c}] Le foncteur canonique
+\[ \begin{array}{ccc}
+\mathcal{M} & \longrightarrow & C^{\wedge} \\[1ex]
+F & \longmapsto & (\underbrace{x}_{\in \Ob C} \longmapsto \underbrace{\Hom_{\mathcal{M}}(x,F)}_{\in \Ob (\mathrm{Ens})})
+\end{array} \]
+est pleinement fidèle.
+\end{itemize}
+Ces conditions impliquent :
+\begin{itemize}[label={}]
+\item[a)] $C$ est génératrice dans $\mathcal{M}$ par épimorphismes stricts, i.e. pour tout $F$ dans $\mathcal{M}$, la famille des flèches $x \longrightarrow F$ de source dans $C$, de but $F$, est épimorphique stricte.
+\end{itemize}
+Et lorsque $\mathcal{M}$ est stable par produits fibrés, cette condition a) est équivalente aux précédentes. Dans loc. cit. j'affirme
+
+\msp{page 189}
+
+cette équivalence sans hypothèse restrictive sur $\mathcal{M}$ – mais en annotation marginale j'affirme que cette assertion est \textit{fausse}, en dehors de l'hypothèse d'existence des produits fibrés dans $\mathcal{M}$. Pourtant, je viens de vérifier la démonstration donnée dans loc. cit. de l'implication a $\Longrightarrow$ b, et elle est correcte. Mais peut-être l'annotation résulte-t-elle d'une confusion entre la condition a), et la condition suivante, plus faible a priori, et qui lui ressemble comme un frère :
+\begin{itemize}[label={}]
+\item[a$'$)] Il existe une famille de flèches $u_i : x_i \longrightarrow F$, de source dans $C$, et de but $F$, qui est épimorphique stricte (cf. SGA 4 I 10.3).
+\end{itemize}
+On a envie de dire que quand on \textit{agrandisse} une famille de flèches épimorphique stricte, en rajoutant d'autres flèches de même but, elle doit rester épimorphique stricte (“a fortiori”) – ce qui donne l'impression que a$'$) doit impliquer a), donc lui être équivalent. Mais si on essaye de prouver cette propriété hypothétique % [sic] agrandisse -> agrandit, verb form
+% foot: Version 17 décembre 2025
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 190}
+de stabilité pour les familles épimorphiques strictes, on voit qu'on n'y arrive que si on suppose que la famille initiale est de plus \textit{épimorphique universelle} (si les produits fibrés existent dans $\mathcal{M}$), ou (sous la réserve précédente) si pour tout $x' \longrightarrow F$, le crible de $\mathcal{M}/F'$ image inverse du crible de $\mathcal{M}/F$ engendré par les $x_i \longrightarrow F$ est un “crible épimorphique”. Cela fait entrevoir en effet qu'il doit y avoir des cas où la condition a$'$) est satisfaite, mais non la condition a) (équivalente à b et à c).
+
+Mais nous sommes alors confrontés à la situation très déplaisante : si $C$ est une sous-catégorie strictement génératrice de $\mathcal{M}$, il ne s'ensuit pas pour autant qu'une sous-catégorie pleine $C'$ de $\mathcal{M}$ telle que $C' \supset C$ soit également strictement génératrice\,! Or j'ai toujours utilisé précédemment, sans y réfléchir à deux fois, qui si $C$ est strictement génératrice, il en est de même de $C' \supset C$. Donc il faudra que je sois à présent très attentif, % [sic] qui si -> que si, conjunction
+\msp{page 191}
+et que je vérifie si cette erreur $\pm$ tacite rend inopérantes certaines démonstrations, voire même, rend faux certains énoncés. Aussi, il me faudrait donner un exemple où $C$ est strictement génératrice, mais $C' \supset C$ ne l'est pas.
+
+Finalement, réflexion faite, ces ennuis craints disparaissent. Je vais énoncer un résultat en forme :
+
+\textbf{Proposition 4.8.2.} \textit{Soient $C$, $\mathcal{M}$ deux $\mathfrak{U}$-catégories, $i : C \longrightarrow \mathcal{M}$ un foncteur, d'où un foncteur}
+\[ \left\{\begin{aligned}
+&\varphi : \mathcal{M} \longrightarrow C^{\wedge}\\
+&\varphi(X) = (x \longmapsto \Hom_{\mathcal{M}}(i(x),X))
+\end{aligned}\right. \tag*{(4.8.2.1)} \]
+\textit{(foncteur composé $\mathcal{M} \xrightarrow{\textit{can.}} \mathcal{M}^{\wedge} \underbrace{\xrightarrow{i^*}}_{\substack{\textit{i.e. composition}\\ \textit{avec } i}} C^{\wedge}$). Pour tout $X$ dans $\mathcal{M}$, on considère la catégorie $C/X \simeq C/\varphi(X)$, et l'injection} [\,?] \textit{canonique (dans $\mathcal{M}^{\vee}$)}
+\[ \varinjlim_{x\in C/X} i(x) \longrightarrow X . \tag*{(4.8.2.2)} \]
+\begin{itemize}[label={}]
+\item[\textit{1°)}] \textit{Considérons les conditions suivantes.}
+\begin{itemize}[label={}]
+\item[\circled{a}] \textit{Pour tout $X \in \Ob \mathcal{M}$, la famille des flèches $i(x) \longrightarrow X$, indexée par $\Ob C/X$, est épimorphique stricte.}
+
+\msp{page 192}
+\item[\circled{b}] \textit{Pour tout $X \in \Ob \mathcal{M}$, la flèche canonique 4.8.2.2. est un isomorphisme, i.e. fait de $X$ une $\varinjlim$ des foncteurs canoniques $C/X \longrightarrow \mathcal{M}$.}
+\item[\circled{c}] \textit{Le foncteur $\varphi$ (4.8.2.1) est pleinement fidèle.}
+\end{itemize}
+\textit{On a alors les implications}
+\[ \mathrm{b} \Longleftrightarrow \mathrm{c} \Longrightarrow \mathrm{a} , \]
+\textit{et si on suppose $i$ pleinement fidèle, alors les trois conditions} a, b, c \textit{sont équivalentes.} (\textbf{N.B.} On dit que le foncteur $i : C \longrightarrow \mathcal{M}$ est \textit{strictement générateur}, si les conditions équivalentes b, c sont satisfaites. Si $C$ est une sous-catégorie de $\mathcal{M}$ (pas
+% foot: Version 17 décembre 2025
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+nécessairement pleine), on dit que $C$ est \textit{strictement génératrice} si le foncteur d'inclusion est strictement générateur, i.e. satisfait aux conditions équivalentes b), c). Pour ceci, il faut donc que la condition a) soit satisfaite, i.e. que pour tout $X$ dans $\mathcal{M}$, la famille des flèches $x \longrightarrow X$ de source dans $C$, de but $X$, soit épimorphique stricte, et cette condition est aussi suffisante quand $C$ est sous-catégorie pleine de $\mathcal{M}$.)
+\item[\textit{2°)}] (\footnote[80]{\texttt{[2° se trouve sur la page 193.]}}). \textit{Supposons que $i$ soit strictement générateur} (\footnote[81]{Il suffit même qu'il satisfasse la condition plus faible a) de 1°).}). \textit{Alors pour tout objet $X$ de $\mathcal{M}$, la famille des flèches $i(x) \longrightarrow X$, indexée par $\Ob C/X$, est non seulement épimorphique stricte (condition a) dans 1°), mais de plus, toute famille de flèches de but $X$, incluant la famille précédente, est également épimorphique stricte.}
+\item[\textit{3°)}] \textit{Considérons un diagramme commutatif de foncteurs de $\mathfrak{U}$-catégories :}
+
+\msp{page 193}
+\[ \begin{tikzcd}[column sep=small]
+C \arrow[rr, "\alpha"] \arrow[dr, "i"'] & & C' \arrow[dl, "i'"] \\
+& E &
+\end{tikzcd} \]
+\textit{Si le foncteur $i$ est strictement générateur} (\footnote[82]{En fait, il suffit qu'il satisfasse la condition plus faible c) de 1°).}), \textit{et si de plus $i'$ est pleinement fidèle, alors $i'$ est strictement générateur.}
+\end{itemize}
+
+\textbf{Corollaire 4.8.3.} \textit{Soit $\mathcal{M}$ une $\mathfrak{U}$-catégorie, $C$ une sous-catégorie strictement génératrice, $C'$ une sous-catégorie} pleine \textit{de $\mathcal{M}$ qui contient $C$, alors $C'$ est strictement génératrice.}
+
+C'est en effet un cas particulier de 4.8.2 3°.
+
+\msp{page 194}
+
+\textsc{Démonstration de 4.8.2}. La démonstration de 1°) est celle de SGA 4 I 7.2 (i). (Où on suppose que $C$ est une sous-catégorie pleine de $\mathcal{M}$, mais la démonstration donnée prouve en fait l'énoncé donné ici.) Prouvons 2°). Rajoutons donc à la famille des
+\[ i(x) \longrightarrow X \qquad (x \in \Ob C/X) \]
+une famille
+\[ X_\alpha \xrightarrow{p_\alpha} X \qquad (\alpha \in A) \]
+de nouvelles flèches, et prouvons que la famille totale ainsi obtenue est encore épimorphique stricte. On doit donc prouver que si $Y$ est un objet de $\mathcal{M}$, et si on a une famille de flèches $u_x : i(x) \longrightarrow Y$, $u_\alpha : X_\alpha \longrightarrow Y$, satisfaisant la condition de compatibilité habituelle pour des couples de flèches :
+\[ (v_x,v_y) \qquad\qquad \begin{tikzcd}
+& i(x) \arrow[dr, dotted, "p_x"] & \\
+Z \arrow[ur, "v_x"] \arrow[dr, "v_y"'] & & X\ , \\
+& i(y) \arrow[ur, dotted, "p_y"'] &
+\end{tikzcd} \]
+ou
+% foot: Version 17 décembre 2025
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\[ (v_x,v_\alpha) \qquad\qquad \begin{tikzcd}
+& i(x) \arrow[dr, dotted, "p_x"] & \\
+Z \arrow[ur, "v_x"] \arrow[dr, "v_\alpha"'] & & X\ , \\
+& X_\alpha \arrow[ur, dotted, "p_\alpha"'] &
+\end{tikzcd} \]
+\msp{page 195}
+ou
+\[ (v_\alpha,v_\beta) \qquad\qquad \begin{tikzcd}
+& X_\alpha \arrow[dr, dotted] & \\
+Z \arrow[ur, "v_\alpha"] \arrow[dr, "v_\beta"'] & & X\ , \\
+& X_\beta \arrow[ur, dotted] &
+\end{tikzcd} \]
+savoir les relations
+\[ \left\{\begin{aligned}
+u_xv_x &= u_yv_y\\
+u_xv_x &= u_\alpha v_\alpha\\
+u_\alpha v_\alpha &= u_\beta v_\beta ,
+\end{aligned}\right. \tag*{($*$)} \]
+alors il existe une flèche
+\[ u : X \longrightarrow Y \]
+(nécessairement unique, d'après la propriété c) d'épimorphicité stricte de la famille initiale indexée par $C/X$) telle qu'on ait
+\[ \left\{\begin{aligned}
+up_x &= v_x \quad \text{pour tout } x \in \Ob C/X\\ % [sic] v_x -> u_x, the arrow u p_x goes to Y (cf. up_\alpha = u_\alpha below)
+up_\alpha &= v_\alpha \quad \text{pour tout } \alpha \in A. % [sic] v_\alpha -> u_\alpha, cf. the relation up_\alpha = u_\alpha below
+\end{aligned}\right. \tag*{($*$)} \]
+Or d'après la propriété a), il existe un unique $u : X \longrightarrow Y$, de telle façon que la première des relations ($*$) soit satisfaite, pour tout $x \in \Ob C/X$. Donc il s'agit seulement de prouver que pour cet $u$, on a pour tout $\alpha$ la relation
+
+\msp{page 196}
+\[ up_\alpha = u_\alpha . \]
+Or, en appliquant la propriété a) à $X_\alpha$ au lieu de $X$, on veut que la famille des flèches % [sic] veut -> voit, sense of the sentence
+\[ i(y) \xrightarrow{q_y} X_\alpha \]
+(indexée par $C/X_\alpha$) est épimorphique stricte, a fortiori épimorphique. Donc pour prouver $up_\alpha = u_\alpha$, il suffit de prouver qu'on a
+\[ (up_\alpha)q_y = u_\alpha q_y \tag*{($**$)} \]
+pour toute $y$ dans $C/X_\alpha$. Mais c'est là une conséquence de la compatibilité ($*$) (deuxième formule), appliquée au cas suivant,
+% foot: Version 17 décembre 2025
+
+\end{document}

@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\M}{\mathcal{M}}
+
+\begin{document}
+
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 24}
+
+\textbf{Lemme.} \textit{Soit $P \subset I$ l'ensemble des $i_0 \in I$ tels que pour tout ouvert $K$ de $J = I/i_0$, la flèche $u_{K,J}$ est dans $C$. Ceci dit, soit $i_0 \in I$ tel que tout $i < i_0$ soit dans $P$. Alors $i_0 \in P$.} (On suppose $u_\bullet \in C_I$, mais $I$ quelconque.)
+
+En effet, soit $K \subset J = I/i_0$ un ouvert. Si $K = J$, il est trivial que $u_{K,J} \in C$ (c'est un isomorphisme). Si $K = J$, on a % [sic] Si K = J (second occurrence) -> Si K \neq J, the first case already treats K = J
+\[
+K \ \subset\ J' \overset{\text{déf}}{=} J\backslash\{i_0\} \ \subset\ J,
+\]
+et pour prouver que $u_{K,J} \in C$, il suffit de prouver que $u_{K,J'}, u_{J',J} \in C$. Or $u_{J',J} \in C$ par hypothèse $u_\bullet \in C_I$. Et $u_{K,J'} \in C$ par ce que a été prouvé pour le cas de $J'$, compte tenu que par hypothèse sur $i_0$, tout $i \in J'$ (i.e. tout $i < i_0$) est dans $P$. % [sic] par ce que a été prouvé -> par ce qui a été prouvé, grammar
+
+\textbf{Corollaire.} \textit{Si $I$ est artinien, $P = I$.}
+
+Car toute partie $P$ de $I$ ayant la propriété qu'on vient de dire ($I/i_0 \subset P \Longrightarrow i_0 \in P$) est égale à $I$. Si en effet il y avait $x_0 \notin P$, il existerait $x_1 < x_0$ avec $x_0 \notin P$, et par récurrence on construirait une suite strictement décroissante dans $I$, absurde. % [sic] avec x_0 \notin P -> avec x_1 \notin P, the new element must lie outside P
+
+\msp{page 25}
+
+\section*{2\quad Description de $C_I \subset \Fl(\M(I^\circ))$, pour $I$ ensemble ordonné}
+
+Soit $\M$ une catégorie, stable par (petites) $\varinjlim$ , $C \subset \Fl(\M)$ (“cofibrations”). On suppose
+\[
+\left\{
+\begin{array}{lll}
+\text{a)} & C & \text{contient les isomorphismes et est stable}\\
+ & & \text{par cochangement de base.}\\[1ex]
+\text{b)} & C & \text{stable par composition transfinie.}
+\end{array}
+\right.
+\tag*{(2.1)}
+\]
+
+Soit $I$ un (petit) ensemble ordonné, et considérons
+\[
+\M(I^\circ) \ =\ \underline{\mathrm{Hom}}(I,\M),
+\]
+on va définir une partie
+\[
+C_I \ \subset\ \Fl(\M(I^\circ))
+\]
+ainsi, pour $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ flèche dans $\M(I^\circ)$ :
+\[
+u_\bullet \in C_I \quad\Longleftrightarrow\quad
+\begin{array}{l}
+\forall\ i_0 \in I \text{ et pour tout ouvert } J \subset I/i_0 = K,\\
+\text{la flèche } u_{J,K} \text{ est dans } C.
+\end{array}
+\tag*{(2.2)}
+\]
+
+Voici la définition de $u_{J,K}$. Pour tout ouvert $J$ de $I$, on pose
+\[
+\left\{
+\begin{array}{rclrcl}
+X_J & = & \varinjlim\limits_{i\in J} X_i, & Y_J & = & \varinjlim\limits_{i\in J} Y_i,\\[2ex]
+u_J : X_J & \longrightarrow & Y_J, & u_J & = & \varinjlim\limits_{i\in J} u_i,
+\end{array}
+\right.
+\tag*{(2.3)}
+\]
+et on considère, pour $K \subset J$, le diagramme
+% foot: Version 9 février 2019
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 26}
+
+\[
+\begin{tikzcd}
+X_K \arrow[r, "\tau^X_{K,J}"] \arrow[d, "u_K"'] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X_J \arrow[d, "\tilde{u}_{K,J}"'] \arrow[dd, bend left=40, "u_J"] \\
+Y_K \arrow[r, "\tau^Y_{K,J}"] & Y_{K,J} \rlap{$\ = Y_K \amalg_{X_K} X_J$} \arrow[d, "u_{K,J}"'] \\
+ & Y_J \ .
+\end{tikzcd}
+\]
+
+\textbf{Théorème 2.1.} \textit{Soit $\M$ $\mathfrak{U}$-catégorie stable par petites $\varinjlim$ , $C \subset \Fl(\M)$, satisfaisant les conditions de stabilité} \textup{(2.1)} \textit{(par cochangement de base et par composition transfinie), $I$ un petit ensemble ordonné, $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ une flèche dans $\M(I^\circ)$.}
+\begin{itemize}[leftmargin=3em]
+\item[$1^\circ$)] \textit{On suppose $u_\bullet \in C_I$ (cf.} \textup{(2.2)}\textit{). Soient $K \subset J$ deux ouverts de $I$. Alors $u_{K,J}$ (défini dans} \textup{(2.4)}\textit{) est dans $C$.}
+\item[$2^\circ$)] \textit{Supposons $I$ artinien. Pour qu'on ait $u_\bullet \in C_I$, i.e. pour que $u_{K,J}$ soit dans $C$ pour tout couple $(K \subset J)$ d'ouverts tel que $J$ ait un plus grand élément, i.e. soit de la forme $I/i_0$ (i.e. aussi, par} $1^\circ$\textit{), pour} \textup{tout} \textit{couple d'ouverts $J \subset K$), (il faut et) il suffit qu'il en soit ainsi dans le cas particulier où $J = I/i_0$, $J' = I'/i_0 \overset{\text{déf}}{=} I/i_0 - \{i_0\} = \{i \in I \mid i < i_0\}$.}
+
+\msp{page 27}
+\item[$3^\circ$)] \textit{Supposons encore $I$ artinien}\footnote[11]{J'ignore si cette hypothèse est nécessaire, cf. commentaire p. 39.}\textit{. Soit $W \subset \Fl(\M)$ un localiseur modérément saturé, tel que $TC \overset{\text{déf}}{=} C \cap W$ satisfasse également aux conditions de stabilité} \textup{(2.1)} \textit{(par cochangement de base, par composition transfinie). Les conditions suivantes sur une flèche $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $\M(I^\circ)$ sont équivalentes.}
+\begin{itemize}[leftmargin=2em]
+\item[a)] \textit{$u_\bullet \in (TC)_I$, i.e. pour tout $i_0 \in I$ et $K$ ouvert de $J = I/i_0$, la flèche $u_{K,J}$ est dans $TC$.}
+\item[b)] \textit{$u_\bullet \in C_I \cap W_{I^\circ}$, i.e. pour tout $i_0 \in I$, on a $u_{i_0} \in W$, et pour tout ouvert $K$ de $I/i_0 = J$, on a $u_{K,J} \in C$.}
+\end{itemize}
+\end{itemize}
+
+Donnons tout de suite les corollaires principaux.
+
+\textbf{Corollaire 2.2.} \textit{Supposons $(u_\bullet : X_\bullet \longrightarrow Y_\bullet) \in C_I$. Alors}
+\begin{itemize}[leftmargin=3em]
+\item[a)] \textit{$\forall\ i \in I$, $u_i : X_i \longrightarrow Y_i$ est dans $C$.}
+\item[b)] \textit{La flèche}
+\[
+u_I \ :\ X_I \longrightarrow Y_I
+\tag*{(2.2.1)}
+\]
+\textit{est dans $C$. Plus généralement, pour toute partie ouverte $J$ de $I$, la flèche}
+\[
+u_J \ :\ X_J \longrightarrow Y_J
+\tag*{(2.2.2)}
+\]
+\textit{est dans $C$.}
+\end{itemize}
+% foot: Version 9 février 2019
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 28}
+
+Pour a), on applique $1^\circ$) (ou simplement la \textit{définition} de $C_I$) dans le cas de l'inclusion d'ouverts $\emptyset \hookrightarrow I/i$, vu qu'on a
+\[
+u_{\emptyset,I/i} \ \simeq\ u_i \ .
+\]
+Pour b), on applique $1^\circ$) à l'inclusion $\emptyset \longrightarrow I$, vu que
+\[
+u_{\emptyset,I} \ \simeq\ u_I \ ,
+\]
+et plus généralement
+\[
+u_{\emptyset,J} \ \simeq\ u_J \ .
+\]
+
+\textbf{Corollaire 2.3.} \textit{Supposons $u_\bullet \in C_I \cap W_{I^\circ}$. Alors pour toute inclusion d'ouverts $K \subset J$ de $I$, on a $u_{K,J} \in TC$, et en particulier (prenant $K = \emptyset$), on a $u_J \in TC$. Enfin, pour tout $i \in I$, on a $u_i \in TC$.}
+
+\textbf{Corollaire 2.4.} \textit{Soit $X_\bullet$ dans $\M(I^\circ)_{\mathrm{c}}$ un système inductif $C$-cofibrant, i.e. tel que $\emptyset_I \longrightarrow X_\bullet$ soit dans $C_I$, i.e. tel que pour tout $i_0 \in I$ et tout ouvert $K$ de $J = I/i_0$, la flèche de transition $\tau_{K,J} : X_K = \varinjlim\limits_{i\in K} X_i \longrightarrow X_J \simeq X_{i_0}$ soit dans $C$. Alors pour} \textup{tout} \textit{couple d'ouverts $K \subset J$, la flèche}
+\[
+\tau_{K,J} \ :\ \varinjlim_{i\in K} X_i \longrightarrow \varinjlim_{i\in J} X_i
+\]
+\textit{est dans $C$}\footnote[12]{et réciproquement, caractérise les objets $C$-cofibrants.}\textit{. En particulier (faisant $K = I/k$, $J = I/j$ pour $k \leq j$), si $k \leq j$ sont dans $I$, le morphisme de transition}
+\[
+\tau_{k,j} \ :\ X_k \longrightarrow X_j
+\]
+\msp{page 29}
+\textit{est dans $C$. Enfin, si $W \subset \Fl(\M)$ est comme dans} \textup{(2.1.\ $3^\circ$)}\textit{, et si $\emptyset_I \longrightarrow X$ est dans $W_{I^\circ}$, i.e. les $X_i$ sont $W$-coasphériques, alors $X_\bullet$ est dans $\M(I^\circ)_{TC}$ (où $TC = C \cap W$), et pour tout ouvert $J$ de $I$, $X_J = \varinjlim\limits_{i\in J} X_i$ est dans $\M_{TC}$, donc $X_J$ est $W$-coasphérique, et pour tout couple d'ouverts $K \subset J$, la flèche de transition $\tau_{K,J}$ est dans $TC$.}
+
+Signalons enfin le complément suivant au théorème 2.1, qui résultera de sa démonstration :
+
+\textbf{Corollaire 2.5.} \textit{Supposons que l'espace topologique associé à $I$ (dont les ouverts sont les ouverts de $I$, et les $I/i$ forment une base d'ouverts) soit} \textup{noethérien}\textit{, i.e. toute suite croissante d'ouverts est stationnaire. Alors toutes les conclusions dans le théorème} \textup{2.1} \textit{et ses corollaires restent valables, en supposant seulement la stabilité de $C$ ou de $TC = C \cap W$ par composition simple (au lieu de composition transfinie), en plus des deux autres stabilités.}
+% foot: Version 9 février 2019
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 30}
+
+\textsc{Démonstration} du théorème 2.1 et du corollaire 2.5.
+
+2.1. $1^\circ$) On peut supposer $J = I$, $K \subset I$. On construit une suite transfinie strictement croissante d'ouverts $I_\alpha$, avec
+\[
+\left\{
+\begin{array}{rcll}
+I_0 & = & K, & \\[1ex]
+I_{\alpha+1} & = & I_\alpha \cup I/s_\alpha & \text{où } s_\alpha \in I\backslash I_\alpha \text{ (si } I_\alpha \neq I\text{, sinon, la construction transfinie s'arrête),}\\[1ex]
+I_\alpha & = & \bigcup_{\beta<\alpha} I_\beta & \text{si } \alpha \text{ ordinal limite.}
+\end{array}
+\right.
+\]
+
+Il existe un $\alpha_0$ tel qu'on ait $I_{\alpha_0} = I$. On voit alors comme au paragraphe 1
+\msp{page 31}
+que pour tout $\alpha$, on a
+\[
+u_{I_\alpha,I_{\alpha+1}} \ \in\ C,
+\tag*{$(*)$}
+\]
+car il est déduit de $u_{(I/s_\alpha)\cap I_\alpha,I/s_\alpha}$ par cochangement de base. Cf. diagramme (6), p. 17, qu'il faudrait dégager en lemme, débarrassé des particularités techniques de la situation, i.e. un lemme sur les homomorphismes de carrés cartésiens :
+
+\textbf{Lemme 2.6.} \textit{Soit un homomorphisme de carrés cocartésiens $X_\bullet$, $Y_\bullet$, dans une catégorie $\M$ avec sommes amalgamées (\textbf{N.B.} il suffit que les sommes amalgamées intervenant ci-dessus existent) :}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+X_0 \arrow[rr] \arrow[dr] \arrow[dd, "f_0"'] & & X_1 \arrow[dr] \arrow[dd, "f_1" near end] & \\
+ & X'_0 \arrow[rr, crossing over] & & X'_1 \arrow[dd, "f'_1"] \\
+Y_0 \arrow[rr] \arrow[dr] & & Y_1 \arrow[dr] & \\
+ & Y'_0 \arrow[rr] \arrow[from=uu, crossing over, "f'_0" near start] & & Y'_1 \ .
+\end{tikzcd}
+\tag*{(2.6.1)}
+\]
+
+\textit{Soient $Z_0$, $Z_1$ les deux carrés latéraux et considérons, pour tout carré commutatif}
+$Z = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X \arrow[r] \arrow[d] \& X' \arrow[d] \\
+Y \arrow[r] \& Y'
+\end{tikzcd}$ \textit{, la flèche $u_Z$ du diagramme}
+\[
+\begin{tikzcd}
+X \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X' \arrow[d] & \\
+Y \arrow[r] & \tilde{Z} \arrow[r, "u_Z"'] & Y' \ .
+\end{tikzcd}
+\]
+% foot: Version 9 février 2019
+
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 32}
+
+\textit{Alors la flèche $u_{Z_1}$ se déduit de $u_{Z_0}$ par cochangement de base, de façon plus précise, on a un carré cocartésien, où} $T = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X_0 \arrow[r] \arrow[d] \& X_1 \arrow[d] \\
+Y_0 \arrow[r] \& Y_1
+\end{tikzcd}$ \textit{et} $T' = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X'_0 \arrow[r] \arrow[d] \& X'_1 \arrow[d] \\
+Y'_0 \arrow[r] \& Y'_1
+\end{tikzcd}$ \textit{désignent la face postérieure et antérieure du cube} \textup{(2.6.1) :}
+\[
+\begin{tikzcd}
+\tilde{Z}_0 \arrow[r, "u_{Z_0}"] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & Y'_0 \arrow[d] \\
+\tilde{Z}_1 \arrow[r, "u_{Z_1}"] & Y'_1 \ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\textit{qu'on voit sur la base du diagramme}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+X_0 \arrow[rr] \arrow[dr] \arrow[dd, "f_0"'] & & X_1 \arrow[dr] \arrow[dd, "f_1" near end] & & \\
+ & X'_0 \arrow[rr, crossing over] & & X'_1 \arrow[dd] \arrow[dddr, "f'_1"] & \\
+Y_0 \arrow[rr] \arrow[dr] \arrow[dr, phantom, shift left=2ex, "\text{\tiny cocart.}"] & & Y_1 \arrow[dr] & & \\
+ & \tilde{Z}'_0 \arrow[rr] \arrow[dr, "u_{Z_0}"'] \arrow[from=uu, crossing over] & & \tilde{Z}'_1 \arrow[dr, "u_{Z_1}"'] & \\
+ & & Y'_0 \arrow[rr] \arrow[from=uuul, crossing over, "f'_0" near end] \arrow[ur, phantom, "\text{\tiny cocart.}"] & & Y'_1 \ ,
+\end{tikzcd} % ?? uncertain: arrow to which the label f'_0 belongs and exact positions of the two "cocart." labels -- f'_0 printed beside the long diagonal X'_0 -> Y'_0 near Z̃'_0 -> Z̃'_1
+\tag*{$(**)$}
+\]
+\textit{dans lequel le cube est un cube totalement cocartésien, déduit du carré cocartésien $X$ en l'“exponentiant” par la flèche $f_0 : X_0 \longrightarrow Y_0$} \texttt{[plutôt, par la flèche} $(f_0,f_1)$ \texttt{de} $\underline{\Fl}(\M)$\texttt{]}\textit{.}
+
+La base du cube, et le carré
+\msp{page 33}
+composé de celui-ci et de $(*)$ (base du diagramme polyédral $(**)$) étant cocartésien, il en est de même de $(*)$.
+
+\textbf{Lemme 2.7.} \textit{Soit $(I_\alpha)_{\alpha\leq\alpha_0}$ une suite ordinale croissante d'ouverts de $I$. Alors $u_{I_0,I_{\alpha_0}} : Y_{I_0,I_{\alpha_0}} \longrightarrow Y_{I_{\alpha_0}}$ est composé transfini, indexé par l'ensemble des ordinaux $-1 \leq \alpha < \alpha_0$, d'une suite de flèches $v_\alpha$, où chaque $v_\alpha$ est déduit de $u_{I_\alpha,I_{\alpha+1}}$ par cochangement de base (et de $u_{I_0} : X_{I_0} \longrightarrow Y_{I_0}$ pour $\alpha = 0$).}
+
+Pour le voir, on introduit la suite transfinie d'objets $Z_\alpha = Y_{I_\alpha,I_{\alpha_0}}$, définis par le diagramme
+% foot: Version 9 février 2019
+
+\end{document}
