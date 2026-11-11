@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Liss}{\underline{\mathrm{Liss}}\,}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\lc}{\mathrm{lc}}
+\newcommand{\adj}[2]{\mathrel{\underset{#2}{\overset{#1}{\rightleftarrows}}}}
+
+\begin{document}
+
+\printedpage{89}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+in $(\Cat/S')(W^{\dd}_{S'})^{-1}$. Let us try to prove that this is commutative in $\Cat/S'$, not just in the category localized by $W^{\dd}_{S'}$. We can look at it as a diagram in $\Cat/S$ and prove its commutativity as such. This commutativity relation $vu = w$ then splits into two, according to the two factors $\Phi_S(X)$ and $S'$ of the target object $\Phi_S(X) \times_S S'$. For the factor $S'$, the relation simply means that $\alpha_{X'}$ is an $S'$-morphism, that's OK. For the factor $\Phi_S(X)$, we extend the diagram $(*)$ to the right by the square
+\[
+\begin{tikzcd}
+X' \arrow[r, dotted, "\alpha_{X'}"] \arrow[dr, dotted] & \Phi_S(X') \times_S S' \arrow[r, "\pr_1^{\Phi_S(X')}"] \arrow[d, "\Phi_S(\pr_1 X)\times_S S'"] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+ & \Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X),
+\end{tikzcd}
+\] % [sic] \Phi_S(\pr_1 X)\times_S S' -> \Phi_S(\pr_1^X)\times_S S', the X is printed on the line instead of as superscript of \pr_1
+\msp{page 146}
+and taking into account that the composite of the first horizontal row is $i_{X'}$, by construction of $\alpha_{X'}$, we are reduced to the commutativity of
+\[
+\begin{tikzcd}
+X \times_S S' = X' \arrow[r, "i_{X'}"] \arrow[d, "i_X\times_S S'"'] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+\Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X).
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+Now the morphism $i_X : X \longrightarrow \Phi_S(X)$ in $\Cat/S$ gives rise to the commutative square (as does any arrow $i : X \longrightarrow Y$)
+\[
+\begin{tikzcd}
+X \times_S S' \arrow[r, "\pr_1^X"] \arrow[d, "i_X\times_S S'"'] & X \arrow[d, "i_X"] \\
+\Phi_S(X) \times_S S' \arrow[r, "\pr_1^{\Phi_S(X)}"] & \Phi_S(X),
+\end{tikzcd}
+\]
+so that the lower composite of $(*)$ is none other than that of $(**)$, hence equal to the upper composite of the latter, and the commutativity of $(*)$ comes down to that of
+\[
+\begin{tikzcd}
+X \times_S S' = X' \arrow[r, "i_{X'}"] \arrow[d, "\pr_1^X"'] & \Phi_S(X') \arrow[d, "\Phi_S(\pr_1^X)"] \\
+X \arrow[r, "i_X"] & \Phi_S(X),
+\end{tikzcd}
+\]
+which is obvious by functoriality of $Z \xrightarrow{i_Z} \Phi_S(Z)$, applied to the arrow $\pr_1^X : X' \longrightarrow X$ of $\Cat/S$.
+
+% foot: Version 9 novembre 2001
+
+\printedpage{90}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 147}
+We have thus proved that the functors
+\[
+\HOT_W(S') \adj{f_!}{f^*} \HOT_W(S)
+\tag*{$(*)$}
+\]
+are adjoint to each other, with adjunction morphisms
+\[
+\left\{
+\begin{array}{lcl}
+\id & \xrightarrow{\ \alpha\ } & f^*f_! \\[1ex]
+\id & \xleftarrow{\ \beta\ } & f_!f^*
+\end{array}
+\right.
+\]
+specified above. I presume that the same proof, working with the coarse localizers $W_S$, $W_{S'}$, instead of $W^{\dd}_S$, $W^{\dd}_{S'}$, would give that the corresponding functors
+\[
+\HOT^{\lc}_W(S') \adj{f_!^{\lc}}{f^*_{\lc}} \HOT^{\lc}_W(S)
+\tag*{$(**)$}
+\]
+are adjoint to each other, with essentially ``the same'' adjunction morphisms $\alpha$, $\beta$. I do not feel like going over the preceding arguments again and prefer to \textit{deduce} it from the adjunction in the situation $(*)$. This will give me the opportunity to better understand the essential formal features of the situation. I shall put for simplicity
+\msp{page 148}
+\[
+\begin{array}{rcl@{\qquad\qquad}rcl}
+\HOT_W(S) & = & \cA, & \HOT_W(S') & = & \cA', \\
+\HOT^{\lc}_W(S) & = & \cA_0, & \HOT^{\lc}_W(S') & = & \cA'_0,
+\end{array}
+\]
+and I use the pairs of adjoint functors
+\[
+\cA \adj{\rho}{i} \cA_0, \qquad\qquad \cA' \adj{\rho'}{i'} \cA'_0,
+\]
+where $\rho$, $\rho'$ are localization functors, i.e. $i$, $i'$ fully faithful functors. I have a pair of adjoint functors
+\[
+\cA' \adj{f_!}{f^*} \cA,
+\]
+and I assume moreover
+
+\begin{enumerate}
+\item[a)] $f_!$ is compatible with the localizers of $\cA'$, $\cA$ defined by $\rho'$, $\rho$ respectively, hence defines a functor (well determined up to unique isomorphism)
+\[
+f_!^0 : \cA'_0 \longrightarrow \cA_0,
+\]
+thus giving rise to a commutative diagram (up to functorial isomorphism)
+
+% foot: Version 9 novembre 2001
+
+\printedpage{91}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+\cA' \arrow[r, "\rho'"] \arrow[d, "f_!"'] & \cA'_0 \arrow[d, "f_!^0"] \\
+\cA \arrow[r] & \cA_0.
+\end{tikzcd}
+\tag*{(I)}
+\]
+\texttt{[rather} $\cA \xrightarrow{\rho} \cA_0$\texttt{]}
+
+\item[b)] ``Dually'', $f^* : \cA \longrightarrow \cA'$ is compatible with the full subcategories, essential images of the fully faithful functors $i$, $i'$, and then induces
+\msp{page 149}
+a functor, defined up to unique isomorphism:
+\[
+f_0^* : \cA_0 \longrightarrow \cA'_0,
+\]
+giving rise to a square of functors, commutative up to canonical functorial isomorphism
+\[
+\begin{tikzcd}
+\cA_0 \arrow[r, "i"] \arrow[d, "f_0^*"'] & \cA \arrow[d, "f^*"] \\
+\cA'_0 \arrow[r, "i'"] & \cA'.
+\end{tikzcd}
+\tag*{(II)}
+\]
+\end{enumerate}
+
+\textit{Under these conditions, the pair of functors}
+\[
+\cA_0 \adj{f_!^0}{f_0^*} \cA'_0, \qquad \text{\texttt{[rather} } \cA'_0 \adj{f_!^0}{f_0^*} \cA_0, \text{\texttt{]}}
+\]
+\textit{is a pair of adjoint functors.} (NB when I speak of pairs of adjoint functors, the one written above the other is the left adjoint.)
+
+\textsc{Proof}. Let
+\[
+\eta_0 \in \Ob \cA_0, \qquad\qquad \xi'_0 \in \Ob \cA'_0,
+\]
+we must define a bifunctorial bijection
+\[
+\Hom_{\cA_0}(f_!^0(\xi'_0), \eta_0) \simeq \Hom_{\cA'_0}(\xi'_0, f_0^*(\eta_0))
+\]
+For this, we are going to write $\xi'_0$ in the form
+\[
+\xi'_0 = \rho'(\xi')\,, \qquad\qquad \xi' \in \Ob \cA',
+\]
+it will suffice to establish the bifunctorial bijection by replacing $\xi'_0$ by $\rho'(\xi')$, i.e.
+\[
+\Hom_{\cA_0}(f_!^0(\rho'(\xi')), \eta_0) \simeq \Hom_{\cA'_0}(\rho'(\xi'), f_0^*(\eta_0))
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{92}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 150}
+(Indeed, the adjunction formula is interpreted as an isomorphism of bifunctors, or, what amounts to the same thing, of functors $\cA'_0 \mathrel{\underset{\psi}{\overset{\varphi}{\rightrightarrows}}} \cA_0^{\wedge}$, now
+\[
+\begin{array}{ccc}
+\uHom(\cA'_0, \cA_0^{\wedge}) & \longrightarrow & \uHom(\cA', \cA_0^{\wedge}) \\[1ex]
+\varphi & \longmapsto & \varphi \circ \rho'
+\end{array}
+\]
+is fully faithful, since $\rho'$ is a localization functor, so it amounts to the same thing to give oneself an isomorphism $\varphi \simeq \psi$, or $\varphi \circ \rho' \simeq \psi \circ \rho'$.) We must therefore transform the expression
+\[
+\begin{array}{cccc}
+ & \Hom_{\cA_0}(\underbrace{f_!^0(\rho'(\xi'))}_{\rho f_!(\xi')}, \eta_0) & \underbrace{\simeq}_{\text{\footnotesize commutativity of (I)}} & \Hom_{\cA_0}(\rho f_!(\xi'), \eta_0) \\[3ex]
+\underbrace{\simeq}_{\text{\footnotesize adjunction $\rho$, $i$}} & \Hom_{\cA}(f_!(\xi'), i(\eta_0)) & \underbrace{\simeq}_{\text{\footnotesize adjunction $f_!$, $f^*$}} & \Hom_{\cA'}(\xi', \underbrace{f^*i(\eta_0)}_{i'(f_0^*(\eta_0))}) \\[3ex]
+\underbrace{\simeq}_{\text{\footnotesize commutativity of (II)}} & \Hom_{\cA'}(\xi', i'(f_0^*(\eta_0))) & \underbrace{\simeq}_{\text{\footnotesize adjunction $\rho'$, $i'$}} & \Hom_{\cA'_0}(\underbrace{\rho'(\xi')}_{\xi'_0}, f_0^*(\eta_0)),
+\end{array}
+\]
+which is the announced bijection.
+
+I summarize the essentials of the results obtained on $f_!$, $f_!^{\lc}$:
+
+\textbf{Theorem 2.} \textit{Let $f : S' \longrightarrow S$ be an arrow in} $\Cat$\textit{, let us consider the functors}
+\[
+\begin{aligned}
+\HOT_W(S') &\adj{f_!}{f^*} \HOT_W(S) \\
+\HOT^{\lc}_W(S') &\adj{f_!^{\lc}}{f^*_{\lc}} \HOT^{\lc}_W(S),
+\end{aligned}
+\]
+\msp{page 151}
+\textit{where the functors $f_!$, $f_!^{\lc}$ are described in theorem} 1 \textit{(p. 136). The adjunction morphisms}
+\[
+\left\{
+\begin{array}{lcl}
+\id & \longrightarrow & f^*f_! \\[1ex]
+\id & \longleftarrow & f_!f^*
+\end{array}
+\right.
+\]
+\textit{are described on pp. 138 to 140.}
+
+We would like to make explicit the nice formula, obtained in passing
+\[
+\boxed{\;f_!f^*(\xi) = \hot_{S,W}(S'/S) \times_S \xi\;}\ ,
+\]
+for this we must make the right-hand side explicit. Let us note the
+
+\textbf{Proposition 4.} \textit{There exists a unique functor}
+\[
+(\xi, \eta) \longmapsto \xi \times_S \eta : \HOT_W(S) \times \HOT_W(S) \longrightarrow \HOT_W(S)
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{93}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\textit{with the property that for $X$, $Y$ varying in} $\Liss S$\textit{, we have an isomorphism bifunctorial in $X$, $Y$}
+\[
+\hot_{S,W}(X) \times_S \hot_{S,W}(Y) \simeq \hot_{S,W}(X \times_S Y)
+\tag*{$(*)$}
+\]
+(\footnote[72]{\textbf{NB} The multiplication $\times_S$ in $\HOT_W(S)$ is associative, commutative, unital \textit{etc., etc.}, since this is the case in $\Liss S$.}).
+
+This is formal, using only that on $\Liss S$, the bifunctor
+\[
+(X, Y) \longrightarrow X \times_S Y
+\]
+is compatible with the localizers $W^{\dd}_S \times W^{\dd}_S$ and $W^{\dd}_S$. To see this, we are reduced to seeing that if $X \xrightarrow{u} X'$ in $\Liss S$ is in $W^{\dd}_S$, then the same holds for $X \times_S Y \xrightarrow{\ u\times_S \id_Y\ } X' \times_S Y$, for every
+\msp{page 152}
+$Y$ in $\Liss S$. In fact, we use only the smoothness of $X$, $X'$, not that of $Y$, and this is immediate, for if $X \longrightarrow X'$ is in $W^{\dd}_S$, $X \times_S Y \longrightarrow X' \times_S Y$ is in $W^{\dd}_Y$, hence also in $W^{\dd}_S$ (cf. theorem 1 applied to $Y \longrightarrow S$). This remark suggests at the same time:
+
+\textbf{Corollary 1. (False)} \textit{The bifunctorial formula} $(*)$ \textit{remains valid for $X$ in} $\Liss S$\textit{, $Y$ arbitrary in} $\Cat/S$\textit{, and also in the reverse case.} (\footnote[73]{This statement is surely \textit{false!} Counterexample p. 153, cf. corollary 1 corrected on page 154-156.})
+
+In the first case, let us consider
+\[
+Y \xrightarrow{i_Y} \Phi(Y)
+\]
+in $W^{\dd}_S$, hence an isomorphism in $(\Cat/S)(W^{\dd}_S)^{-1}$, we shall therefore have
+\[
+\begin{array}{lcl}
+\hot_{S,W}(X) \times_S\ \hot_{S,W}(Y) & \xrightarrow{\ \sim\ } & \hot_{S,W}(X) \times_S\ \hot_{S,W}(\Phi(Y)) \\[1ex]
+ & \underbrace{\xrightarrow{\ \sim\ }}_{\text{\footnotesize since $X$ \textit{and} $\Phi(Y)$ smooth over $S$}} & \hot_{S,W}(X \times_S \Phi(Y)),
+\end{array}
+\]
+now I say that
+\[
+X \times_S Y \xrightarrow{\ X\times_S i_Y\ } X \times_S \Phi(Y)
+\]
+is again in $W^{\dd}_S$. It suffices to see that it is in $W^{\dd}_X$ (cf. theorem 1), and for this, that the smooth base change $X \longrightarrow S$ induces $\Cat/S \longrightarrow \Cat/X$ compatible with the localizers $W^{\dd}_S$, $W^{\dd}_X$. But this is \textit{false} (take $X = \{s\}$).
+
+\msp{page 153}
+Let us show that the corollary is false. I am going to take $Y = \{s\}$, the one-point category at $s$, then $\Phi(Y)$ is the fibered category with discrete fibers defined by the representable functor $F$ defined by $s$, so it is $S/F$ and, in this case $S/s$: % [sic] les corollaire -> le corollaire, agreement; occurence -> occurrence, spelling
+\[
+\Phi(\{s\}) \simeq S/s \qquad\quad \text{as a category over } S.
+\]
+
+% foot: Version 9 novembre 2001
+
+\end{document}

@@ -1,0 +1,231 @@
+The edition's macros used on these pages, for reference (do not translate or return them):
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\underline{\mathrm{Hom}}}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\id}{\mathrm{id}}
+
+Translate this LaTeX into English (Les Dérivateurs, chapter XII, section 6, edition pages 130-134, manuscript pages 198-208; 5 pages).
+
+\printedpage{130}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & C(X') & \\
+C(X) \arrow[ur, "C(i')"] & & X' \arrow[ul, "i_{X'}"'] \\
+ & X \arrow[ul, "i_X"] \arrow[ur, "i'"'] &
+\end{tikzcd}
+\]
+
+est commutatif (par fonctorialité de $i_X : X \longrightarrow C(X)$), et on applique ceci au cas de $X' = C'(X)$, $i' = i'_X$.
+
+Cette remarque nous encourage à faire un saut dans l'abstraction, et d'introduire la catégorie\msp{page 198}
+\[
+\mathcal{C} = \mathcal{C}_S = \begin{cases}
+\text{catégorie des couples } (C,i), \text{ avec} \\
+C : \Cat/S \longrightarrow \Cat/S \text{ se factorisant par } \Fib_W S, \\
+i : \id_{\Cat/S} \longrightarrow C \text{ tel que } i_X \in W \ \forall\ X \text{ dans } \Cat/S,
+\end{cases}
+\tag*{$(*)$}
+\]
+une flèche
+\[
+(C,i) \longrightarrow (C',i')
+\]
+étant une flèche
+\[
+C \xrightarrow{u} C' \qquad \text{(dans } \Hom(\Cat/S, \Cat/S))
+\]
+rendant commutatif le carré \texttt{[lire : le diagramme]}
+\[
+\begin{tikzcd}[column sep=small]
+ & \id_{\Cat/S} \arrow[dl, "i"'] \arrow[dr, "i'"] & \\
+C \arrow[rr, "u"] & & C'.
+\end{tikzcd}
+\]
+
+En d'autres termes, $\mathcal{C}$ est défini comme une sous-catégiorie pleine de % [sic] sous-catégiorie -> sous-catégorie, misspelled word
+\[
+\id_{\Cat/S}\backslash\Hom(\Cat/S, \Cat/S),
+\]
+à savoir celle dont les objets $(C,i)$ satisfont les deux conditions $(*)$ plus haut (impliquant l'une et l'autre le localiseur $W$).
+
+\msp{page 199}Ces conditions impliquent ceci
+
+\begin{enumerate}
+\item[a)] $\forall\ X$ dans Cat/$S$, $(u_X : C(X) \longrightarrow C'(X)) \in W$, puisque
+\[
+\begin{tikzcd}[column sep=small]
+ & X \arrow[dl, "i_X\in W"'] \arrow[dr, "i'_X\in W"] & \\
+C(X) \arrow[rr, "u_X"] & & C'(X),
+\end{tikzcd}
+\]
+\printedpage{131}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et
+
+\item[b)] si $W$ satisfait W(4b), de sorte que $u_X \in W^{\mathrm{f}}_S$, alors ce définit un \textit{isomorphisme} entre $\varphi_C(X)$ et $\varphi_{C'}(X)$ % [sic] ce définit -> ceci définit, missing word
+\[
+\begin{tikzcd}[row sep=small]
+s \arrow[r, mapsto] & \hot_W(C(X)_s) \arrow[d, "\wr\, u_{X,s}"] \\
+s \arrow[r, mapsto] & \hot_W(C'(X)_s).
+\end{tikzcd}
+\]
+\end{enumerate}
+
+Mieux encore, dans ce cas, le foncteur composé
+\[
+\mathcal{C} \times \Cat/S \longrightarrow \Fib_W S \longrightarrow \HOT^{\mathrm{lc}}_W(S)
+\]
+donne naissance à
+\[
+\mathcal{C} \longrightarrow \Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S))
+\]
+qui transforme toute flèche de $\mathcal{C}$ en \texttt{[un]} \textit{isomorphisme,} donc se factorise par le groupoïde fondamental de $\mathcal{C}$,
+\[
+\Pi\mathcal{C} \longrightarrow \Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S)).
+\]
+
+\msp{page 200}Quant au foncteur envisagé tantôt
+\[
+\begin{aligned}
+\mathcal{C} &\quad\longrightarrow\quad \underbrace{\Hom\,(\Cat/S, \Hom(S^\circ, \Hot_W))}_{\simeq\Hom((\Cat/S)\times S^\circ, \Hot_W)} \\
+C &\quad\longmapsto\quad ((X,s) \longmapsto \hot_W(C(X)_s))\,,
+\end{aligned}
+\]
+il se déduit du précédent en composant avec
+\[
+\begin{tikzcd}[column sep=small]
+\HOT_W(S) \arrow[rr] \arrow[dr, dotted] & & \Hom(S^\circ, \Hot_W), \\
+ & \Hom(\Pi S^\circ, \Hot_W) \arrow[ur, dotted] &
+\end{tikzcd}
+\]
+plus exactement, avec le foncteur qui s'en déduit
+\[
+\Hom(\Cat/S, \HOT_W(S)) \longrightarrow \Hom(\Cat/S, \Hom(S^\circ, \Hot_W)).
+\]
+
+On voit poindre ici un principe plausible de canonicité d'isomorphismes, en ce qui concerne les foncteurs
+\[
+C_W : \Cat/S \longrightarrow \HOT^{\mathrm{lc}}_W(S)
+\]
+définis par les $C \in \mathrm{Ob}\,\mathcal{C}$, par la relation
+\[
+\Pi\mathcal{C} \approx \ \text{catégorie ponctuelle, i.e. } \mathcal{C} \text{ est 1-connexe.}
+\]
+
+De plus, les arguments utilisés jusqu'ici sont de nature à tel point formelle, que les aspects spécifiques du Modéliseur Cat
+\printedpage{132}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 201}semblent n'y jouer pratiquement aucun rôle, ou un rôle très effacé.
+
+Le carré de la page 197 montre surtout que la catégorie $\mathcal{C}$ est filtrante - $(C,i)$, $(C,i')$ s'envoient l'un et l'autre dans $(C'',i'')$, avec $C'' = C \circ C'$, et $i'' = (C * i') \circ i = (i * C') \circ i'$. Il y a même une loi de composition dans $\mathcal{C}$, nullement commutative ni unitaire c'est sûr, mais sûrement associative, et (si cette composition est notée $*$) avec des morphismes fonctoriels % [sic] (C,i') -> (C',i'), the second couple of the following formula is (C',i')
+\[
+\xi \xrightarrow{\alpha_{\xi,\xi'}} \xi * \xi' \xleftarrow{\beta_{\xi,\xi'}} \xi'
+\]
+qui assurent le caractère filtrant croissant de $\mathcal{C}$. Ces flèches semblent remplacer en quelque sorte l'unité bilatère absente, et on s'attend à ce qu'elles aient les mêmes excellentes propriétés que si on avait une telle unité, concernant les composés doubles $(\xi * \xi') * \xi'' \simeq \xi * (\xi' * \xi'')$,
+
+\msp{page 202}
+\[
+(\xi * \xi') * \xi'' \xrightarrow{\sim} \xi * (\xi' * \xi'').
+\]
+
+Il y a deux façons d'envoyer un produit binaire
+\[
+\xi * \xi', \qquad \xi' * \xi'', \qquad \xi * \xi''
+\]
+dans le produit ternaire, et bien elles doivent dans chacun des trois cas, être égales. Et de même il y a, ceci admis, encore deux façons d'envoyer $\xi$ dans le produit ternaire, en factorisant soit par $\xi * \xi'$, soit par $\xi * \xi''$, et de même pour les deux autres foncteurs $\xi'$, $\xi''$; et là encore, ces deux façons doivent être égales, dans chacun de ces trois cas - donc $3 + 3 = 6$ égalités en tout à écrire et à vérifier - on a vu pire!
+
+La philosophie calculatoire devrait être celle-ci : Si on a un produit $n$-uple
+\[
+\xi_1 * \xi_2 * \cdots * \xi_n
+\]
+(où je me dispense de mettre des parenthèses \dots), pour tout produit $m$-uple partiel $(m \in [1, n-1])$\msp{page 203}
+\[
+\xi_{i_1} * \xi_{i_2} * \cdots * \xi_{i_m} \qquad\qquad (i_1 < i_2 < \cdots < i_m),
+\]
+en utilisant à tour de bras les isomorphismes d'associativité et les $\alpha_{\xi,\xi'}$, $\beta_{\xi,\xi'}$, il n'y a pourtant qu'une seule façon de l'envoyer dans le produit $n$-uple. J'ai bien l'impression que ça doit être vrai. (Est-ce que ça implique déjà que $\mathcal{C}$ est 1-connexe?)
+
+En fait, il y a bien une unité bilatère, mais elle n'est pas dans $\mathcal{C}$, mais dans la catégorie plus grande
+\[
+\id_{\Cat/S}\backslash\Hom(\Cat/S, \Cat/S),
+\]
+qui elle, comme toute catégorie
+\[
+\id_{\mathcal{X}}\backslash\Hom(\mathcal{X}, \mathcal{X}),
+\]
+\printedpage{133}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+est une catégorie monoïdale, i.e. avec produit associatif \textit{et} unitaire. Les flèches $\alpha_{\xi,\xi'}$, $\beta_{\xi,\xi'}$ sont les flèches qui résultent de la présence de cette unité (vu que $\mathcal{C}$ est une sous-catégorie pleine), et alors il doit devenir clair qu'on a les compatibilités dites.
+
+\msp{page 204}Mais même une catégorie monoïdale, est elle 1-connexe? Par exemple $B_G$, pour $G$ un groupe disons, est bien une catégorie monoïdale et même ‘groupale’, une $G$-catégorie (tout ce qu'il y a de strict), et pourtant elle n'est \textit{pas} 1-connexe!
+
+Bien sûr, on peut court-circuiter la question de la 1-connexité de $\mathcal{C}$, en notant qu'après tout on a déjà a priori un objet privilégié dans
+\[
+\Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S)),
+\]
+i.e. un foncteur canonique
+\[
+\Cat/S \longrightarrow \HOT^{\mathrm{lc}}_W(S),
+\]
+savoir le foncteur composé
+\[
+\Cat/S \underbrace{\longrightarrow}_{\substack{\text{localisation}\\ \text{par } W_S}} (\Cat/S)W_S^{-1} \longrightarrow \underbrace{\HOT^{\mathrm{lc}}_W(S)}_{\overset{\text{déf}}{=} (\Fib_W S)(W^{\mathrm{f}}_S)^{-1}} \quad ,
+\tag*{$(*)$}
+\]
+où la deuxième flèche est définie comme le quasi-inverse de
+\[
+(\Fib_W S)(W^{\mathrm{f}}_S)^{-1} \longrightarrow (\Cat/S)W_S^{-1}
+\tag*{$(**)$}
+\]
+
+\msp{page 205}déduit de l'inclusion
+\[
+(\Fib_W S, W^{\mathrm{f}}_S) \hookrightarrow (\Cat/S, W_S).
+\]
+
+Le fait que $(*)$ soit une équivalence, se prouve justement par le fait de l'existence d'un foncteur $C : \Cat/S \longrightarrow \Cat/S$ et d'un $i : \id_{\Cat/S} \longrightarrow C$, ayant les propriétés qu'on sait, i.e. du fait que $C \neq \emptyset$. De plus, la donnée d'un objet $C$ de $\mathcal{C}$ donne un moyen commode d'expliciter le quasi-inverse dudit foncteur. Mais ce quasi-inverse a une existence canonique et indépendante du choix d'un $C$, i.e. d'un mode de calcul. Le fait que le foncteur composé $\varphi$ dans $(*)$ puisse se ‘relever’ (à isomorphisme près) en un foncteur % [sic] C \neq \emptyset -> \mathcal{C} \neq \emptyset, the non-emptiness concerns the category \mathcal{C}
+\[
+C : \Cat/S \longrightarrow \Fib_W S
+\]
+entre $\varphi(X) = \hot_{W,S}(X)$ et $\hot_{W,S}(C(X))$ et que l'isomorphisme puisse s'expliciter, lui aussi, par une flèche $X$-fonctorielle
+\[
+i_X : X \longrightarrow C(X), \qquad i_X \in W,
+\]
+dans Cat/$S$ lui-même (et non seulement dans le localisé $(\Cat/S)W_S^{-1}$),
+\printedpage{134}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 206}est une vertu particulière du \texttt{[mot illisible]}, qui ne doit pas pour autant faire oublier le caractère intrinsèque des flèches $(*)$, indépendamment de tout mode de calcul.
+
+{\reversemarginpar\marginnote{$\|$}}% double vertical bar printed in the left margin beside the first lines of this paragraph
+La clef de la situation, et des questions de canonicité, me semble être dans le fait que $(**)$ est une équivalence de catégories - et il faut avouer que, tout familier et quasiment banal qu'il soit finalement devenu pour moi, c'est là un fait tout à fait remarquable et nullement évident a priori. (Mais sans doute peut-on l'avoir aussi par les fourbis généraux à la \textsc{Quillen-Thomason}, sans se battre avec un formalisme de chemins \dots) Les ‘isomorphismes canoniques’ qu'on peut établir entre une ‘théorie $C$ ’ et une ‘théorie $C'$ ’ (via deux constructions différentes, p. ex., de catégories de chemins, ou via l'approche de \textsc{Quillen-Thomason}, sans chemins) doivent toujours revenir à ceux
+
+\msp{page 207}qu'on peu définir via la comparaison de la ‘théorie $C$ ’ d'une part, la ‘théorie $C'$ ’ de l'autre, avec ce que nous donne directement la flèche composée $(*)$ (p. 204). Finalement, il me semble que \textit{l'existence} d'une théorie des ‘fibres homotopiques’ (ou ‘$W$-homotopiques’) d'une flèche $X \longrightarrow S$ dans Cat, résulte de l'équivalence $(**)$ (p. 204), et cette théorie pourrait sans doute dans une certaine mesure se développer à partir de là, sans choix d'un foncteur $C$ ni d'une structure de catégorie de modèles au sens de \textsc{Quillen}. % [sic] qu'on peu définir -> qu'on peut définir, verb form
+
+\section*{4\quad Axiomatisation des ‘fibres $W$-homotopiques’.}
+
+La reflexion de hier me fait revenir sur l'axiomatique dans des ‘catégories de modèles’ % [sic] reflexion -> réflexion, missing accent
+\[
+(\mathcal{M}, W)
+\]
+(\footnote[119]{$W$ satisfait l'axiome de saturation faible : les isomorphismes \texttt{[sont]} dans $W$, et si deux parmi $f$, $g$, $gf$ \texttt{[sont]} dans $W$, le troisième aussi.}) plus générales que Cat, dans l'esprit de VI (cf. théorème-scholie 2, p. 108-113). Pour le moment, on va supposer seulement $\mathcal{M}$ stable par produits fibrés (on n'a pas besoin d'objet final). On introduit l'ensemble
+\[
+\mathrm{Fib}_W \subseteq \mathrm{Fl}(\mathcal{M})
+\]
+
+\msp{page 208}des \textit{$W$-fibrations} (sous-entendu ‘ultrafortes’!) par la condition
+
+\begin{quote}
+$f : X \longrightarrow Y$ est dans $\mathrm{Fib}_W$ si et seulement si le foncteur changement de base par $X$,
+\[
+\begin{aligned}
+Y' &\quad\longmapsto\quad X' = X \times_Y Y' \\
+\mathcal{M}/Y &\quad\longrightarrow\quad \mathcal{M}/X
+\end{aligned}
+\]
+\end{quote}

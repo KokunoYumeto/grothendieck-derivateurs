@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\defeq}{\overset{\text{def}}{=}}
+\newcommand{\upi}{\underline{\pi}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+
+\begin{document}
+
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+and we will have
+\[ U'/t' \simeq U/H'. \]
+The relation between $H'$ and $H$ was made explicit in §1, as
+\[ H' = p_!H, \qquad \text{where } p_! : U^{\wedge} \longrightarrow U'^{\wedge} \]
+is the left adjoint of $p^* : U'^{\wedge} \longrightarrow U^{\wedge}$, given by
+\[ p^*F' = F' \circ p. \]
+We have
+\[ p_!(H)(u') \simeq \pi_0(u'\backslash U/H). \]
+
+\textbf{Definition 1.} \cercle{a} Let $U$ be an object of Cat, $H \in \Ob U^{\wedge}$ a presheaf on $U$. We say that $H$ is \textit{totally $W$-aspheric} if for every arrow $p : U \longrightarrow U'$ of Cat, $p_!(H)$ in $U'^{\wedge}$ is a $W$-aspheric object, i.e. $U'/p_!H$ is $W$-aspheric. \cercle{b} We say that an object $V$ of \msp{page 89} Cat is \textit{totally $W$-aspheric,} if the terminal functor $e_V$ on $V$ ($v \longmapsto \{\emptyset\}$) is totally $W$-aspheric, i.e. if for every arrow $f : V \longrightarrow V'$ in Cat, the presheaf
+\[ \pi_0(f) \defeq f_!(e_V) \defeq (v' \longmapsto \pi_0(v'\backslash V)) \]
+on $V'$ is $W$-aspheric, i.e. if the category
+\[ \upi_0(f) \ \text{ or } \ \upi_0(V/V') \defeq V'/\pi_0(f) \]
+is $W$-aspheric. \texttt{[This notion is different from the notion of total asphericity in Pursuing Stacks.]}
+
+Let us note that the definition of the functors $p_!$ (or $f_!$) as adjoints, and their ``calculation'' in terms of the $\pi_0$ of certain categories, does not depend on the localizer $W$. Let us give a few details on this subject. We have an adjunction morphism in $V^{\wedge}$
+\[ f^*f_!(F) \longleftarrow F, \]
+hence
+\[ V/F \longrightarrow V/f^*f_!(F) \simeq V \times_{V'} (V'/f_!(F)), \tag*{$(*)$} \]
+the last isomorphism coming from the fact that we have commutativity, up to canonical isomorphism, in the diagram of functors
+\[
+\begin{tikzcd}[column sep=14em, row sep=large]
+V'^{\wedge} \arrow[r, "f^*=(F'\longmapsto F'\circ f)"] \arrow[d, "F'\longmapsto V'/F'"'] & V^{\wedge} \arrow[d, "F\longmapsto F/V"] \\
+\Cat/V' \arrow[r, "f^*_{\Cat}=(W'\longmapsto W'\times_{V'}V)"] & \Cat/V,
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 90}
+in other words, the operator $f^*$ on presheaves is interpreted, in geometric terms, as the operation $W' \longmapsto W' \times_{V'} V$ of base change by $V \longrightarrow V'$, on the categories over $V'$ which are fibered with discrete fibers (a property which is preserved by base change).
+
+That said, giving an arrow $(*)$ is equivalent, by the universal property of base change, to giving an arrow (canonical in this case)
+\[ f/F : V/F \longrightarrow V'/f_!(F) \]
+making the square commutative
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+V/F \arrow[r, "\text{forgetting }F", "\substack{\text{or source}\\ \text{functor}}"'] \arrow[d, "f/F"'] & V \arrow[d, "f"] \\
+V'/(F' = f_!(F)) \arrow[r, "\text{forgetting }F'"] & V'.
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+In the case that interests us especially here, $F = e_V$, $V/F \longrightarrow V$ is an isomorphism, and we obtain a canonical factorization of functors \msp{page 91}
+\[
+\begin{tikzcd}[row sep=large]
+ & V \arrow[dl, "\tilde{f}=f/e_V"'] \arrow[dd, "f"] \\
+\begin{array}{r} \upi_0(V/V') \\ = V'/f_!(e_V) \end{array} \arrow[dr, "\text{can.}"'] & \\
+ & V'.
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+Let us make the $V'$-morphism $\tilde{f}$ explicit on the fibers,
+\[ \tilde{f}_{v'} : V_{v'} \longrightarrow \upi_0(V/V')_{v'} \defeq \pi_0(v'\backslash V), \tag*{$(***)$} \]
+where in the last term, we have identified the set $\pi_0(v'\backslash V)$ with the discrete category it defines. To make this arrow $(***)$ explicit, let us note that we have a canonical inclusion
+\[ V_{v'} \longrightarrow v'\backslash V \]
+and for every category $W$, a canonical (adjunction) morphism $W \longrightarrow \pi_0(W)$, hence a composite
+\[ V_{v'} \longrightarrow v'\backslash V \longrightarrow \pi_0(v'\backslash V), \]
+which is none other than $\tilde{f}_{v'}$ in $(***)$.
+
+It should be easy to show that the factorization $(**)$ of $f$ is characterized, up to unique isomorphism, as a
+% foot: Version 7 décembre 2002
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 92}
+factorization in $\Cat/V'$
+\[
+\begin{tikzcd}[column sep=small]
+ & \tilde{V} \arrow[dr, "\pi"] & \\
+V \arrow[ur, "\tilde{f}"] \arrow[rr, "f"'] & & V',
+\end{tikzcd}
+\]
+by the following properties:
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] $\pi$ is fibered with discrete fibers, i.e. a local isomorphism (i.e. $\tilde{V}$ is isomorphic in $\Cat/V'$ to a category $V/F'$, with $F'$ in $V'^{\wedge}$). % [sic] V/F' -> V'/F', une catégorie au-dessus de V' définie par F' dans V'^∧ est de la forme V'/F'
+\item[b)] $\tilde{f}_!(e_V) = e_{\tilde{V}}$, i.e. for every $\tilde{v} \in \Ob \tilde{V}$, the category $\tilde{v}\backslash V$ is 0-connected: the colocalizations of $V$ over $\tilde{V}$ are 0-connected. % [sic] pout -> pour, faute de frappe
+\end{enumerate}
+
+Let us note here, in passing, that for \textit{every} morphism $\pi : W' \longrightarrow W$ in Cat which is fibered with discrete fibers, i.e. such that $W'$ is isomorphic in $\Cat/W$ to a category of the form $W/F$ ($F \in \Ob W^{\wedge}$), we have
+\[ \pi_!(e_{W'}) = F, \qquad \text{i.e. } W' \underbrace{\ \simeq\ }_{\text{in } \Cat/W} W/\pi_!(e_{W'}). \tag*{$(*)$} \]
+We must check that the functor
+\[ w \longmapsto \pi_0(\underbrace{w\backslash(W/F)}_{\defeq w\backslash W/F}) \]
+is canonically isomorphic to $F$. But the inclusion
+\[ \underbrace{W'_w}_{= F(w) \text{ (discrete category)}} \qquad \longrightarrow w\backslash W' \]
+\msp{page 93}
+does indeed define as before
+\[ F(w) = W'_w \longrightarrow \pi_0(w\backslash W'), \]
+we must prove that this is bijective. Now, $W'$ being $W_\infty$-smooth over $W$, we know that the inclusion $W'_w \hookrightarrow w\backslash W'$ is in $W_\infty$, a fortiori induces an isomorphism on the $\pi_0$.
+
+This established, if we have a factorization of $f : V \longrightarrow V'$ as $f = \pi\tilde{f}$ having the properties a) b) of the preceding page, we already see that we have
+\[ f_!(e_V) \simeq \pi_!(\, \underbrace{\tilde{f}_!(e_V)}_{\simeq e_{\tilde{V}} \text{ by b)}} \,) \simeq \pi_!(e_{\tilde{V}}), \]
+which already determines $\tilde{V}$ up to canonical isomorphism (thanks to a) as
+\[ \tilde{V} \simeq V'/f_!(e_V) \defeq \upi_0(V'/V), \] % [sic] \underline{\pi}_0(V'/V) -> \underline{\pi}_0(V/V'), notation employée partout ailleurs (Définition 1, (**))
+% foot: Version 7 décembre 2002
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+and it should not be very hard to convince oneself that $\tilde{f}$ is none other than the canonical arrow of page 91.
+
+\textbf{Proposition 8.} \textit{For an object $H$ of $U^{\wedge}$ to be totally $W$-aspheric, it suffices that the object $U/H$ of} Cat \textit{be totally $W$-aspheric.}
+
+\msp{page 94}
+Let us indeed suppose this latter condition satisfied and prove that $H$ is totally $W$-aspheric, i.e. that for every $p : U \longrightarrow U'$, $U'/p_!(H)$ is $W$-aspheric.
+\[
+\begin{tikzcd}[row sep=large]
+V \defeq U/H \arrow[r, "\alpha"] \arrow[dr, "f"'] & U \arrow[d, "p"] \\
+ & U'
+\end{tikzcd}
+\]
+Let $f$ be the composite functor in the diagram opposite \texttt{[above]}, we have $H \simeq \alpha_!(e_V)$ (by $(*)$ p. 92), hence
+\[ p_!(H) \simeq p_!\alpha_!(e_V) \simeq (p\alpha)_!(e_V) \simeq f_!(e_V), \]
+which is $W$-aspheric by the hypothesis on $V = U/H$.
+
+Does the converse of \texttt{[the]} prop. 8 hold, i.e. if $H$ is totally $W$-aspheric, is the same true of $V = U/H$? The difficulty comes from the fact that this means that for \textit{every} arrow $f : V \longrightarrow V'$ in Cat with source $V$, we have $f_!(e_V)$ $W$-aspheric, whereas the hypothesis is equivalent to postulating it only for arrows that factor through $U$. Let us note that if we do not make this hypothesis on $f$, but suppose instead that $f$ fits into a commutative square \msp{page 95}
+\[
+\begin{tikzcd}[row sep=large]
+V \arrow[r, "\alpha"] \arrow[d, "f"'] & U \arrow[d, "p"] \\
+V' \arrow[r, "\alpha'"] & U',
+\end{tikzcd}
+\]
+with $\alpha'$ also a local isomorphism, then we can conclude that $\upi_0(f) = \upi_0(V/V')$ is indeed aspheric. Indeed, we have a canonical isomorphism in $\Cat/U'$,
+\[ \upi_0(\alpha'f) \simeq \upi_0(f), \qquad \text{i.e. } \ \upi_0(V/V') \simeq \upi_0(V/U'), \]
+from the fact e.g. that the canonical factorization of $f$
+% foot: Version 7 décembre 2002
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=normal]
+ & V \arrow[dl, "\tilde{f}"'] \arrow[dd, "f"] & \\
+\upi_0(V/V') \arrow[dr, "\pi"'] & & \\
+ & V' \arrow[dr, dotted, "\alpha'"'] & \\
+ & & U'
+\end{tikzcd}
+\]
+provides a factorization of the same type for $\alpha'f$, as
+\[ \alpha'f = (\alpha'\pi) \circ \tilde{f}. \]
+That said, we can apply the hypothesis to $p$ and we do indeed find the $W$-asphericity of $\upi_0(f) \simeq \upi_0(\alpha'f) = \upi_0(p\alpha)$.
+
+\msp{page 96}
+The natural idea, for a converse to \texttt{[the]} prop. 8, would be to take for $U'$ the amalgamated sum of $U$ and $V'$ over $V$, which will work provided we know that $\alpha'$ really is a local isomorphism just like $\alpha$. This is indeed the case e.g. if $V \longrightarrow U$ is an open immersion, i.e. $H$ a subpresheaf of the terminal presheaf. But I fear that this is not true in general - it looks a little too good to be true! This is indeed already false in the case
+\[
+\begin{tikzcd}[row sep=huge]
+V = E_G \arrow[r, "\alpha\ \text{can}"] \arrow[d, "f"'] & B_G = U \\
+V' = B_{G'}, &
+\end{tikzcd}
+\]
+in the case e.g. where $G = \{\pm 1\}$, the group with two elements, and where the element $\alpha$ of $G'$, the image under $f$ of one of the two nonidentity arrows of $E_G$ is $\neq 1$ \texttt{[rather with square} $\neq 1$\texttt{]}. If $H'$ is the normal subgroup generated by $\alpha$ \texttt{[rather by} $\alpha^2$\texttt{]} in $G'$, the amalgamated sum is identified with $B_{G'/H'}$, but $B_{G'} \longrightarrow B_{G'/H'}$ is \textit{not} a local isomorphism (for $(B_{G'})/t_0 \longrightarrow (B_{G'/H'})/t'_0$ is not bijective on objects, being identified with $G' \overset{q}{\longrightarrow} G'/H' \ \ldots$).
+
+But on the other hand the condition of total $W$-asphericity on an object $H$ of $U^{\wedge}$ already seems so demanding, that I can hardly see myself con\msp{page 97}structing an example where it is satisfied, without $U/H$ itself being totally $W$-aspheric.
+
+The existence of totally $W$-aspheric objects in Cat is not so obvious a priori. That there are a good bunch of them is guaranteed by the
+% foot: Version 7 décembre 2002
+
+\end{document}

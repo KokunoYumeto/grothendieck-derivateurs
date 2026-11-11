@@ -1,0 +1,205 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Cat}{\mathcal{C}\mathit{at}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\RR}{\mathbb{R}}
+
+\begin{document}
+
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 88}
+We put
+\[ X' = S' \times \bar S \qquad\qquad X'' = S'' \times \bar S \]
+($\bar S$ an exact copy of $S$, cf. below) and, to glue $X'$ and $X''$, we must give ourselves an isomorphism between $X'|R \simeq R \times \bar S = \bar S \amalg \bar S$ and $X''|R \simeq R \times \bar S = \bar S \amalg \bar S$ which is an $R$-functor, \textit{i.e.} which comes from two isomorphisms
+\[
+\begin{aligned}
+\bar S &\xrightarrow{u_a} \bar S \\
+\bar S &\xrightarrow{u_b} \bar S \qquad .
+\end{aligned}
+\]
+We take
+\[
+\begin{aligned}
+u_a &= \mathsf{id}_{\bar S} \\
+u_b &= \text{reflection about the axis } \bar 0, \bar 0' \ \textit{i.e.} % Doubt resolved: PDF leaf 18 (printed p.54) reads u_b, with plain b.
+\\
+&\phantom{=}\quad u_b \text{ leaves fixed } \bar 0, \bar 0' \text{ and interchanges } \bar a \text{ and } \bar b.
+\end{aligned}
+\]
+(It is clearer if we disidentify the base and the fiber, taking fiber
+\[
+\bar S \quad = \quad
+\begin{tikzcd}
+ & \bar a & \\
+\bar 0 \arrow[ur] \arrow[dr] & & \bar 0' \arrow[ul] \arrow[dl] \\
+ & \bar b &
+\end{tikzcd}
+\qquad ).
+\]
+
+To see that $X$ is a $\D$-fibration over $S$ (whatever $\D$ is) let us prove that it is \textit{proper}\footnote[45]{N.B. $f : X \to S$ is also \textit{smooth}, for it is a trivial bundle (a product) over two opens $S - \{a\}$, $S - \{b\}$ which cover $S$. Better: $f$ is both $\Cat$-fibrant and $\Cat$-cofibrant (for this condition uses only the properties of the $X \times_S \boldsymbol{\Delta}_2 \to \boldsymbol{\Delta}_2$, for $\boldsymbol{\Delta}_2 \to S$).} over $S$ - we are reduced to seeing that $X' \to S'$ and $X'' \to S''$ are proper, which is trivial. To see that it is a $\D$-fibration, we are likewise reduced to the case of $X' \to S'$ and $X'' \to S''$, where this is also trivial. We have used the: % [sic] quelque soit -> quel que soit, spelling
+
+\textbf{Lemma.} \textit{Let $f : X \to S$, $(S_i)_{i \in I}$ a family of closed subcategories covering $S$. For every $i$, let $X_i = X \times_S S_i \xrightarrow{f_i} S_i$. For $f$ to be proper, it is necessary and sufficient that the $f_i$ be so. For $f$ to be a proper $\D$-fibration it is necessary and sufficient that the $f_i$ be so.}
+
+\msp{page 89}
+Here is the little computation which shows that $f : X \to S$ is a $\D$-equivalence. We do the computation in cohomology.\footnote[46]{But in the case of the 2-sheeted covering of $S$, there is not even any computation to do!} We must prove that
+\[ H^*(S,k) \longrightarrow H^*(X,k) \tag*{$(*)$} \]
+\printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+is an isomorphism (and likewise for any constant coefficient $M$ on $S$). Now
+\[ H^*(X,k) \overset{\mathrm{def}}{=} \RR\Gamma_X(k_X) = \RR\Gamma_S(\RR f_*(k_X)) \quad , \]
+and $(*)$ is induced by
+\[ i : k_S \longrightarrow \RR f_* k_X \quad . \]
+Now we have
+\[ \RR f_* k_X \simeq \underbrace{k_S}_{= \mathsf{Im}(i)} \quad \oplus \quad \underbrace{k_S[1]}_{k_S \text{ in degree } 1}{}^{\underline{\mathrm{tordu}}} \]
+namely ``twisted'' by the monodromy action on $S = S^1$, which is the symmetry $\lambda \mapsto -\lambda$. We have
+\[ \RR\Gamma_S(k_S[1]^{\mathrm{tordu}}) = H^1(\underbrace{\pi_1(S)}_{= \mathbb{Z}}\, , k_S^{\mathrm{tordu}}) = k_{(\mathbb{Z})} = k/(u - \mathsf{id})k = k/2k = 0 \ , \]
+hence the result.
+
+Let us note that if we look at
+\[ X' = X \times_S X \xrightarrow{f'} S \quad , \]
+we have by relative Künneth
+\[ \RR f'_*(k_{X'}) \simeq \RR f_*(k_X) \otimes^{\mathbb{L}} \RR f_*(k_X) \simeq k_S \oplus k_S[1]^t \oplus k_S[1]^t \oplus \underbrace{k_S[1]^t \otimes k_S[1]^t}_{\simeq k_S[2] \text{ untwisted}} \ , \]
+hence
+\[ H^*_{\D}(X',k) \simeq \RR\Gamma_{X'}(k_{X'}) \simeq \RR\Gamma_S(\RR f'_*(k_{X'})) \simeq \RR\Gamma_S(k_S) \oplus \RR\Gamma_S(k_S)[2] \]
+and
+\[ H^*_{\D}(S,k) \longrightarrow H^*_{\D}(X',k) \]
+is \textit{not} an isomorphism.
+
+\msp{page 90}
+Thus $f : X \to S$ which is a $\D$ fibration (proper and smooth) does satisfy the equivalent conditions $b$), $b'$) of proposition 2 (page 79), but not condition $a$), since the base change
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X' = X \times_S X \arrow[r, "{q = pr_1}"] \arrow[d, "{f' = pr_2}"'] & X \arrow[d, "f"] \\
+S' = X \arrow[r, "{p = f}"'] & S
+\end{tikzcd}
+\]
+is a $\D$-equivalence $S' \to S$, whereas $X' \to X$ is not.
+
+Here is another counterexample, on the same principle but a little simpler. Let $G$ be a finite group (for example $G = \mathbb{Z}/2\mathbb{Z}$), let us make it act on an object $Z$ of $\Cat$, let $S = [G] = B_G$ be the category reduced to one object $a$, with $G = \mathsf{End}(a)$. Let $E_G$ be the category (isomorphic to $(B_G)/a$)
+\[ \mathsf{Ob}\ E_G = G \quad , \qquad \mathsf{Hom}_{E_G}(g,g') = \{ h \in G \mid g = g'h \} \quad , \]
+obvious composition - then $E_G$ is a trivial groupoid (1-connected). The group $G$ acts freely on it on the left by translations, and $B_G = E_G/G$. % [sic] goupe -> groupe, misprint
+
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 91}
+If $G$ acts on $Z$ on the left, we can then use it to twist $Z$, by
+\[ X = E_G \times_G Z = (E_G \times Z)/\text{``diagonal'' actions of G} \quad . \]
+So we have a cartesian diagram
+\[
+\begin{tikzcd}
+ & X' \arrow[d, equal] & X'' \arrow[d, equal] \\
+X \arrow[d, "f"'] & Z \times E_G \arrow[l] \arrow[d, "pr_2"] & Z \arrow[l, dashed, "{\overset{\D}{\sim}}"'] \arrow[d] \\
+B_G \arrow[d, equal] & E_G \arrow[l] \arrow[d, equal] & e \arrow[l, dashed, "{\overset{\D}{\sim}}"'] \arrow[d, equal] \\
+S & S' & S''
+\end{tikzcd}
+\]
+Since the base change $S' = E_G = (B_G)/a \to B_G = S$ transforms $X$ over $B_G$ into a product (which is a proper and smooth $\D$-bundle over $S'$), we see that $X$ over $B_G$ is a proper and smooth $\D$-bundle (for this is a local condition on $B_G$).
+
+We now suppose that $G$ is finite of order $n > 1$, and let $k$ be a ring in which $n$ is invertible, $\D = \mathsf{Der}(k - \mathsf{Mod})$. Then $E_G \to B_G$ is a $\D$-equivalence, or, what amounts to the same thing, $e \to B_G$ is.\footnote[47]{In fact, $e$, $E_G$, $B_G$ are $\D$-aspheric.} Yet, after base change either by $S' = E_G$, or by $S'' = e$, $X' \to X$ (or what amounts to the same thing, $X'' \to X$) has hardly any reason to be one too. We have in cohomology % [sic] invesible -> inversible, misprint
+\[ \RR\Gamma_X(k_X) \simeq \RR\Gamma_{BG}(f_*(k_X)) \simeq \RR\Gamma_G(G, H^*(Z,k)) \]
+\msp{page 92}
+therefore ($n$ being invertible in $k$):
+\[ H^*(X,k) = \RR\Gamma_X(k_X) \simeq H^*(Z,k)^G \longrightarrow H^*(Z,k) \quad , \]
+this is not in general an isomorphism. We can take for example $G = \mathbb{Z}/2\mathbb{Z}$, $Z \sim S^1$ as before, and $G$ acting by reflection of $S^1$ as previously.
+
+This example is particularly convincing, for it is an example \textit{with $S$, $S'$ $\D$-aspheric,} and $S' \to S$ a local isomorphism (in fact, a principal covering of $S$). It is also an example of a smooth and proper $\D$-bundle $X \to S$, over an \textit{aspheric} base $S$, and such that the inclusion of a fiber in $X$ % [sic] convainquant -> convaincant, spelling of the adjective
+\[ X_s \longrightarrow X \]
+is \textit{not} a $\D$-equivalence.
+
+The only complaint we can make about this example, in comparison with the preceding one, is that the categories $X, S$ are not ordered sets. And $S$ cannot be a finite ordered set, for the classifying space of a finite group has cohomology in all dimensions (unless I am mistaken).
+
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 93}
+But we can take inspiration from this example to modify it so that it carries over to ordered sets. It suffices to realize, for given $G$:
+
+\textit{a}) A \textit{free} action of $G$ on an object $E$ of $\Cat$, such that $H^*(E,k)^G \simeq k$, \textit{i.e.} $B = E/G$ is $\D$-aspheric.
+
+\textit{b}) An action of $G$ on an object $Z$, such that the inclusion
+\[ H^*(Z,k)^G \longrightarrow H^*(Z,k)^G \] % [sic] H^*(Z,k)^G \longrightarrow H^*(Z,k)^G -> H^*(Z,k)^G \longrightarrow H^*(Z,k), an inclusion of the invariants (cf. p. 56)
+is not \texttt{[an]} isomorphism.
+
+\textit{c}) Choose for $E$, $Z$ ordered sets, and make sure that $B = E/G$ is also represented by an ordered category. Unless I am mistaken, the same will hold for $X = E \times Z/G$. We will have in any case % [sic] en tout les cas -> en tous les cas, agreement
+\[
+\begin{tikzcd}[column sep=large]
+ & Z \times E \arrow[d, equal] & \\
+X \arrow[d] & X' \arrow[l] \arrow[d] & Z \arrow[l] \arrow[d] \\
+S \arrow[d, equal] & S' \arrow[l] \arrow[d, equal] & S'' = \{s\}\, , \quad s \in E \ . \arrow[l] \\
+E/G & E & \text{\footnotesize asph} \\
+\text{\footnotesize asph} & \substack{\text{asph} \\ \text{if we can}} &
+\end{tikzcd}
+\]
+This gives another example with $X$ a proper and smooth $\D$-bundle, over a $\D$-aspheric base $S$, such that the inclusion of a fiber $X_s$ in $X$ is not a $\D$-equivalence. We can even manage to have $H^*(Z,k)^G \simeq k$ which implies
+\msp{page 94}
+that $X$ too is aspheric (but the fibers of $X \to S$ are not $\D$-aspheric). This therefore gives another counterexample to b) of prop. 6 (p. 84).
+
+Here is the most economical way, I think, to realize the situation I have spoken of. Topologically, I take % [sic] je prend -> je prends, conjugation
+\[
+\begin{aligned}
+G &= \{\pm 1\} \\
+E &= S^2 &\qquad& \text{Euclidean sphere, on which } \{\pm 1\} \\
+  &      &&      \text{acts by antipodism } x \mapsto -x \\
+B &= S^2/\{\pm 1\} && \text{real projective plane} \\
+Z &= S^1 && \text{where G acts as before by the reflection\,.}
+\end{aligned}
+\]
+So this is an example very close to the one at the beginning (p. 87), where we could also consider the base ($B = S^1$) as the quotient of an $E$ ($= S^1$) by $G = \{\pm 1\}$ acting freely (by
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+the antipodism $z \mapsto -z$ in $\mathbb{C} \simeq \RR^2$). But in this example, the base was not $\D$-aspheric.
+
+The most economical way of realizing the sphere $S^2$ by an ordered set is probably by its ``globular'' decomposition into three pairs of cells of dimension 0, 1, 2, giving the ordered set
+\[
+I \qquad = \qquad
+\begin{tikzcd}[row sep=large, column sep=large]
+S_2^- & S_2^+ \\
+S_1^- \arrow[u] \arrow[ur] & S_1^+ \arrow[u] \arrow[ul] \\
+S_0^- \arrow[u] \arrow[ur] & S_0^+ \arrow[u] \arrow[ul]
+\end{tikzcd}
+\]
+and the antipodism exchanges $S_i^-$ and $S_i^+$, but the quotient is not ordered, it is the category (important for the theory of 2-categories):
+\msp{page 95}
+\[
+\begin{tikzcd}[row sep=large]
+S_2 \\
+S_1 \arrow[u, shift left, "p_1^-"] \arrow[u, shift right, "p_1^+"'] \\
+S_0 \arrow[u, shift left, "p_0^-"] \arrow[u, shift right, "p_0^+"']
+\end{tikzcd}
+\qquad\qquad \text{with} \qquad\qquad
+\begin{cases}
+p_1^- p_0^- = p_1^- p_0^+ \\
+p_1^+ p_0^- = p_1^+ p_0^+
+\end{cases}
+\]
+But let us take the barycentric subdivision of the preceding cellular decomposition of $S$ whose vertices correspond to the elements of $\mathsf{Ob}\ I$, the simplices to the totally ordered subsets of $\mathsf{Ob}\ I$. We find the octahedron, having 6 vertices, 12 edges, 8 faces, and $G$ acts freely on the set of simplices, hence the quotient: 3 vertices, 6 edges, 4 faces, a cellular decomposition of the projective plane. (Its decomposition by three lines.) We present $S^1$ by the ordered set (as at the beginning) % [sic] parties totalement ordonnés -> parties totalement ordonnées, agreement
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+S_1^- & S_1^+ \\
+S_0^- \arrow[u] \arrow[ur] & S_0^+ \arrow[u] \arrow[ul]
+\end{tikzcd}
+\qquad\qquad \textit{i.e.} \qquad\qquad
+\begin{tikzcd}
+ & S_1^+ & \\
+0 = S_0^- \arrow[ur] \arrow[dr] & & S_0^+ = 0' \arrow[ul] \arrow[dl] \\
+ & S_1^- &
+\end{tikzcd}
+\]
+and $G$ acts on it by a reflection exchanging $S_1^-$ and $S_1^+$. So the ordered set $X$ will have $4 \times 13 = 52$ vertices and that is modest \ldots
+
+\end{document}

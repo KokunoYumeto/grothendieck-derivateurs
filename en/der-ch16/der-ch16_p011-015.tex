@@ -1,0 +1,256 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\id}{\mathrm{id}}
+
+% footnote marks in the text printed as superscript (n), in the footnote as superscript n
+\makeatletter
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\normalfont(\@thefnmark)}}}
+\renewcommand\@makefntext[1]{\parindent 1em\noindent\hb@xt@1.8em{\hss\@textsuperscript{\normalfont\@thefnmark}}#1}
+\makeatother
+
+\begin{document}
+
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+
+\[
+\begin{tikzcd}[column sep=small]
+\Hom(X,I_{\mathcal{H}}) \arrow[rr] \arrow[dr,dotted,"\pi_0^{X,I_{\mathcal{H}}}"'] & & \Hom(\pi_0(X),I) \arrow[dl,dotted,"\sim"'] \\ % ?? uncertain: label of the dotted right arrow, a tilde printed along the arrow -- \sim
+& \Hom(\pi_0(X),\pi_0(I_{\mathcal{H}})). &
+\end{tikzcd}
+\]
+
+The ``bi-adjunction'' of the functors $\pi_0$ and $I\longmapsto I_{\mathcal{H}}$ amounts to saying that this arrow is bijective,
+\msp{17}
+or again, that the arrow $\pi_0^{X,I_{\mathcal{H}}}$ :
+\[
+\Hom(X,I_{\mathcal{H}})\longrightarrow\Hom(\Gamma_{\mathcal{H}}(X),\Gamma_{\mathcal{H}}(I_{\mathcal{H}})\simeq I)
+\]
+is bijective.
+
+\textbf{Corollary 2.11.} \textit{The functor} $I\longmapsto I_W$ \textit{from} Ens \textit{to} $\Hot_W$ \textit{is fully faithful,} i.e. \textit{the adjunction homomorphism}
+\[
+\pi_0(I_W)\longrightarrow I
+\]
+\textit{is bijective.} (\textit{Where again,} % [sic] Où encore -> Ou encore, the accent makes no sense here
+\textit{$\pi_0$ is a functor the localization.}) % [sic] le localisation -> de localisation, wrong word
+
+Indeed, this bijectivity is obvious when one works in Cat, and follows from this at once in $\Hot_W$.
+
+\textsc{Proof of} 2.8. The adjunction formula (2.8.2) follows from the corresponding formula for Cat, obvious, and from lemma 2.6 on adjoint functors between categories of models. The adjunction in the other direction reduces to formula (2.8.4). We have canonical arrows
+\[
+\begin{tikzcd}
+\Hom_W(e_W,X) \arrow[r,shift left,"\alpha"] & \pi_0(X), \arrow[l,shift left,"\beta"]
+\end{tikzcd}
+\]
+where $\alpha$ is $\pi_0^{e_W,X}$, given that $\pi_0(e_W)=\pi_0(e_{\Cat})=e_{\Ens}$, and $\Hom(e_{\Ens},\pi_0(X))\simeq\pi_0(X)$. The arrow $\beta$ is the composite arrow
+\[
+\Ob X\xrightarrow{\ \sim\ }\Hom_{\Cat}(e_{\Cat},X)\xrightarrow{\mathrm{hot}_W}\Hom_W(e_W,X)
+\]
+\msp{18}
+noting that this arrow passes to the quotient as $\pi_0(X)\longrightarrow\Hom_W(e_W,X)$, since two homotopic maps from $e_{\Cat}$ to $X$ are equal in $\Hot_W$. I say that
+\[
+\beta\alpha=\id\ ,\qquad\qquad \alpha\beta=\id\ .
+\]
+The relation $\alpha\beta=\id$ amounts to saying that the arrow $i_x : e_{\Cat}\longrightarrow X$ defined by $x\in\Ob X$, gives $\pi_0(i_x) : e_{\Ens}\longrightarrow\pi_0(X)$ whose value is the class of $x$ in $\pi_0(X)$, this is tautological. To prove that $\beta\alpha=\id$, it then suffices to prove that $\beta$ is surjective, \textit{i.e.} the
+
+\textbf{Corollary 2.12.} \textit{For every $X$ in} Cat, \textit{the map}
+\[
+\underbrace{\Hom_{\Cat}(e_{\Cat},X)}_{\simeq\Ob X}\longrightarrow\Hom_W(e_W,X)
+\]
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\textit{is} surjective (\textit{assuming the connectedness axiom} Loc (5)).
+
+\textsc{Proof of} 2.12. If $X=\emptyset$, the assertion amounts to saying that $\Hom_W(e_W,\emptyset)=\emptyset$, but more generally, we have the
+
+\textbf{Corollary 2.13.} (Assuming Loc (5).) \textit{Let $X$ be nonempty in} Cat, \textit{then} $\Hom_W(X,\emptyset)=\emptyset$. (\textit{Thus $\emptyset$ is an initial object that is} strict \textit{in} $\Hot_W$.)
+
+Indeed, if we had $X\longrightarrow\emptyset$ in $\Hot_W$,
+\msp{page 13'}\texttt{[there is a shift in the numbering]}
+we would deduce $\pi_0(X)\longrightarrow\emptyset$, or $\pi_0(X)=\emptyset$, absurd\,!
+
+There remains the case where $X$ is nonempty. This follows from the general fact :
+
+\textbf{Lemma 2.14.} \textit{Let $\mathcal{M}$ be a category having an initial object that is} strict (\textit{if} $\Hom_{\mathcal{M}}(X,\emptyset_{\mathcal{M}})\neq\emptyset$, \textit{we have} $X=\emptyset_{\mathcal{M}}$), \textit{a final object $e$, and such that for every $X\neq\emptyset_{\mathcal{M}}$, $X\longrightarrow e$ has a section,} i.e. $\Hom(e,X)\neq\emptyset$. \textit{Let} $W\subset\Fl\mathcal{M}$
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[1$^{\circ}$)] \textit{not containing any arrows} $\emptyset_{\mathcal{M}}\longrightarrow X$ \textit{with} $X\neq\emptyset_{\mathcal{M}}$, \textit{and}
+\item[2\,$^{\circ}$)] \textit{such that for every diagram}
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-1-1.base)]
+X_1 & X_2 \arrow[l,"u_2"'] \\
+e \arrow[u,"u_1"] \arrow[ur,dotted,"s"'] &
+\end{tikzcd}
+\textit{with} $u_2\in W$ $\exists$ $s$ in $\mathcal{M}$ \textit{such that} $u_2s=u_1$
+
+\textit{in} $\mathcal{M}W^{-1}$.
+\end{itemize}
+\textit{Then}
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[a)] $\emptyset_{\mathcal{M}}$ \textit{is an initial object that is} strict \textit{in} $\mathcal{M}W^{-1}$.
+\item[b)] \textit{For every} $X\neq\emptyset_{\mathcal{M}}$, $\Hom_{\mathcal{M}}(e,X)\longrightarrow\Hom_W(e,X)$ \textit{is surjective.}
+\end{itemize}
+
+\textsc{Proof}. That $\emptyset_{\mathcal{M}}$ is an initial object of $\mathcal{M}W^{-1}$ has been seen (last assertion of lemma 2.5, dual form), let us prove that it is strict, \textit{i.e.} that if $\Hom_W(X,\emptyset_{\mathcal{M}})\neq\emptyset$, we have $X=\emptyset_{\mathcal{M}}$. Indeed, if we had $u : X\longrightarrow\emptyset_{\mathcal{M}}$ in $\mathcal{M}W^{-1}$, $u$ would be represented by
+\[
+X=X_0\xleftarrow{\ W\ }X_1\longrightarrow X_2\xleftarrow{\ W\ }\cdots X_{2n-2}\longrightarrow X_{2n-1}\xleftarrow{\ W\ }X_{2n}=\emptyset_{\mathcal{M}}.
+\]
+We proceed by induction on the half-length of this chain to see that $X=\emptyset_{\mathcal{M}}$. Indeed, the hypothesis on $W$ implies that $X_{2n-1}=\emptyset_{\mathcal{M}}$, then the one that $\emptyset_{\mathcal{M}}$ is strict implies
+$X_{2n-1}=\emptyset_{\mathcal{M}}$, whence the conclusion. % [sic] X_{2n-1} -> X_{2n-2}, the strictness of the initial object gives X_{2n-2}
+
+\msp{page 14'}
+Let us prove the surjectivity of $\Hom_{\mathcal{M}}(e,X)\longrightarrow\Hom_W(e,X)$ for $X\neq\emptyset_{\mathcal{M}}$, by showing that every reduced path of length 2n+1 is ``homotopic'' to a reduced path of length $2n-1$ :
+\[
+e=X_0\longrightarrow X_1\xleftarrow{\ W\ }X_2\longrightarrow X_3\longleftarrow\ \cdots\ \longleftarrow X_{2n}\longrightarrow X_{2n+1}=X.
+\]
+Indeed, we can replace the section
+\[
+\begin{tikzcd}
+e=X_0 \arrow[r,"u_1"'] \arrow[rr,dotted,bend right,"s"'] & X_1 & X_2 \arrow[l,"W"',"u_2"] \arrow[r,"u_3"'] & X_3 & X_4 \arrow[l,"W"']
+\end{tikzcd}
+\]
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+by
+\[
+\begin{tikzcd}
+e \arrow[r,"u_3s"'] & X_3 & \cdots, \arrow[l,"W"']
+\end{tikzcd}
+\]
+where $s$ is a section of $X_2$ over $e$ such that
+\[
+u_2s=u_1\qquad\quad\textit{in}\qquad\quad\mathcal{M}W^{-1}\ .
+\]
+This therefore proves by induction on $n$ that the path is homotopic to a path of length 1, $e\longrightarrow X$, q.e.d.
+
+We must therefore, in the present case, check 1$^{\circ}$) (this is essentially corollary 2.12.), and 2$^{\circ}$)
+\[
+\begin{tikzcd}
+X_1 & X_2 \arrow[l,"u_2\in W"'] & \\
+e \arrow[u,"u_1"] \arrow[ur,dotted,"s"'] & & .
+\end{tikzcd}
+\]
+But since $u_2\in W$, we have $\pi_0(u_2)$ an isomorphism, hence
+\msp{page 15'}
+surjective, hence $\exists$ $s$ such that $u_2s$ is homotopic to $u_1$ in Cat, which implies $u_2s=u_1$ in $\Hot_W$, q.e.d.
+
+\textbf{Final comment.} The connectedness axiom Loc (5) differs from all the other axioms Loc (1) to Loc (8) (but with the exception of Loc (8 bis) on accessibility) in that it is not a stability axiom. The other axioms Loc (1) to Loc (8) (and also Loc (8 bis) on accessibility and even the later axioms % [sic] ultérieures -> ultérieurs, agreement with axiomes
+of exactness~\footnote[7]{there will in fact be no need for them, thanks to the providential theory of K. S. \textsc{Brown}\,!}) are satisfied if $W=\Fl\mathcal{M}$ - the connectedness axiom is therefore the only one that stands in the way of the \textit{triviality} of the homotopy theory defined by $W$. This is to say that it cannot be a consequence of any of the others. On the other hand, the axiom Loc (4) of direct sums is not independent of the others. Let us point out in this connection (reminder) :
+\[
+\left\{
+\begin{array}{rl}
+\text{Loc (4 a$_0$)} & \text{is a consequence of the cocartesian square axiom Loc (6 a) (direct form).}\\[1ex]
+\text{Loc (4 a)} & \text{is a consequence of the preceding Loc (6 a)}\\
+ & \text{+ the axiom of filtering direct limits Loc (8).}\\[3ex]
+\text{Loc (4 b)} & \text{is a consequence of the fibration axiom Loc (7). Thus}\\[1ex]
+\text{Loc (4)} & \text{is a consequence of Loc (6 a, 7, 8).}
+\end{array}
+\right.
+\]
+
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\msp{page 16'}
+
+\section*{3\quad Axiom Loc (6) of the cocartesian square (or of ``Mayer-Vietoris'', or of $W$-cofibrations)~\footnote[8]{It is the name ``\textit{axiom of $W$-cofibrations}'' that strikes me at present as the best, -- it is this name that seems to me best to capture the conceptual and not technical meaning of the axiom.}}
+
+I see several variants, and am not yet totally clear in my mind about the mutual implications. I begin with the more complicated variant, but which we will need in any case :
+
+\begin{itemize}[leftmargin=5em,labelwidth=4em,align=left]
+\item[\textbf{Loc 6}] (Axiom of $W$-cofibrations, or 5-lemma, or axiom of homomorphisms of cocartesian squares). Let us consider in Cat a commutative cubical diagram
+\[
+\begin{tikzcd}[row sep=small,column sep=small]
+X_0 \arrow[rr] \arrow[dr] \arrow[dd,"f_0"'] & & X_2 \arrow[dr] \arrow[dd,"f_2" near start] & \\
+& X_1 \arrow[rr,crossing over] & & X_3 \arrow[dd,"f_3"] \\
+Y_0 \arrow[rr] \arrow[dr] & & Y_2 \arrow[dr] & \\
+& Y_1 \arrow[rr] \arrow[from=uu,crossing over,"f_1"' near start] & & Y_3,
+\end{tikzcd}
+\]
+\end{itemize}
+a homomorphism $f=(f_0,f_1,f_2,f_3)$ from a square diagram $X$ to another $Y$. We suppose that $X$ comes from an object $X_3$ of Cat from two opens $X_1$, $X_2$ of $X_3$ \textit{covering} $X_3$, and from their intersection $X_0=X_1\cap X_2$, and likewise for $Y$. (Let us call these diagrams in Cat MV diagrams (``\textit{open}'') - ``\textit{Mayer-Vietoris}''.) We then have the following~\footnote[9]{It is good to introduce properties of the diagram
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[1$^{\circ}$)] $f_0\in W$.
+\item[2$^{\circ}$)] $f_1$ and $f_2$ in $W$.
+\item[3$^{\circ}$)] $f_3$ in $W$.
+\end{itemize}
+and to formulate parts a) b) c) of Loc (6) as follows
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[a)] 1$^{\circ}$ + 2$^{\circ}$ $\Longrightarrow$ 3$^{\circ}$.
+\item[b)] 2$^{\circ}$ + 3$^{\circ}$ $\Longrightarrow$ 1$^{\circ}$.
+\item[c)] 1$^{\circ}$ + 3$^{\circ}$ $\Longrightarrow$ 2$^{\circ}$.
+\end{itemize}} :
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[a)] $f_0,f_1,f_2\in W\Longrightarrow f_3\in W$~\footnote[10]{N.B. it seems that in Loc (6 a), the statement suffices on assuming $f_0$, $f_2$ to be \textit{isomorphisms,} \textit{cf.} p. 22.}.
+\item[b)] $f_1,f_2,f_3\in W\Longrightarrow f_0\in W$.
+\item[c)] $f_0,f_3\in W\Longrightarrow f_1,f_2\in W$~\footnote[11]{One should not include c in Loc 6 \textit{cf.} p. 26.}.
+\end{itemize}
+\noindent\footnote[12]{N.B. We will see below (3.3) that Loc 6 c already implies Loc (6 a, b), \textit{i.e.} all of Loc (6). And if $W$ satisfies Loc (1 bis), \textit{i.e.} stable under direct factors, then Loc (6 a, b) $\Longrightarrow$ Loc (6 c).}.
+
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XVI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 18 mars 2019
+\msp{page 17'}
+\noindent\footnote[13]{I am going to denote by Loc (6) the axiom Loc (6 a, b), without including c in it.}.
+
+\textbf{N.B.} I distinguish these conditions as Loc (6 a), Loc (6 b), Loc (6 c). I presume that we will never have to make use of Loc (6 b), without also assuming Loc (6 a), but the reverse is surely not the case. Thus, $W_0=\{f\in\Fl\Cat\mid\pi_0(f)\text{ bijective}\}$ satisfies a), but not b). I presume (without having checked) that it is the same for the $W_n$, $n\in\mathbf{N}$, of ``\textit{$n$-homotopy equivalence}''.
+
+It could be that Loc (6 a) and Loc (6 a, b) are equivalent to the following weaker, and simpler, form. (If so, it is in the simplest form, of course, that they should be stated.)
+
+\begin{itemize}[leftmargin=5em,labelwidth=4em,align=left]
+\item[\textbf{Loc 6$'$}] (Axiom of cocartesian squares, or of Mayer-Vietoris). Let
+\[
+\begin{tikzcd}[row sep=small,column sep=small]
+X_0 \arrow[rr,"i_2"] \arrow[dr,"i_1"] & & X_2 \arrow[dr,"j_1"] & \\
+& X_1 \arrow[rr,"j_2"] & & X_3
+\end{tikzcd}
+\]
+be an MV diagram in Cat. Then
+\begin{itemize}[leftmargin=3em,labelwidth=2.5em,align=right]
+\item[a)] If $i_1\in W$, $j_1\in W$.
+\item[b)] If $j_1\in W$, $i_1\in W$.
+\end{itemize}
+\end{itemize}
+
+\msp{page 18'}
+\textbf{Proposition 3.1.}
+\[
+\begin{aligned}
+\text{Loc (6 a)}\quad &\Longrightarrow\quad \text{Loc (6$'$ a),}\\
+\text{Loc (6 b)}\quad &\Longrightarrow\quad \text{Loc (6$'$ b),}\\
+\text{Loc (6 c)}\quad &\Longrightarrow\quad \text{Loc (6$'$ a, b)}\ \footnotemark[14].
+\end{aligned}
+\]
+\footnotetext[14]{N.B. we even have Loc (6 c) $\Longrightarrow$ $\underbrace{\text{Loc 6 (a, b)}}_{\text{Loc (6)}}$.}
+
+This is seen on the cubical diagram
+\[
+\text{(Q)}\qquad\qquad
+\begin{tikzcd}[row sep=small,column sep=small]
+X_0 \arrow[rr,"i_2"] \arrow[dr,"i_1"] & & X_2 \arrow[dr,"j_1"] \arrow[from=dd,"f_2=\id"' near start] & \\
+& X_1 \arrow[rr,"j_2",crossing over] & & X_3 \\
+X_0 \arrow[uu,"f_0=\id"] \arrow[rr,"i_2"] \arrow[dr,"\id"] & & X_2 \arrow[dr,"\id"] & \\
+& X_0 \arrow[rr,"i_2"] \arrow[uu,crossing over,"f_1=i_1" near end] & & X_2, \arrow[uu,"f_3=j_1"']
+\end{tikzcd}
+\]
+where the $f_0$, $f_1$, $f_2$, $f_3$ of the statement of Loc (6) become $\id_{X_0}$, $i_1$, $\id_{X_2}$, $j_1$. Loc (6 a) therefore gives $i_1\in W\Longrightarrow j_1\in W$, \textit{i.e.} Loc (6$'$ a), and Loc (6 c) $j_1\in W\Longrightarrow i_1\in W$, \textit{i.e.} Loc (6$'$ b). For Loc (6 b) $\Longrightarrow$ Loc (6$'$ b), we use (\textit{cf.} XII, p. 78) the cube
+
+\end{document}

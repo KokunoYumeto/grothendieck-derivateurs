@@ -1,0 +1,199 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\deq}{\overset{\text{def}}{=}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\Mono}{\mathrm{Mono}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Filt}{\mathrm{Filt}}
+\newcommand{\Cof}{\mathrm{Cof}}
+% printed pairing arrow (left harpoon down / right harpoon up on one stem)
+\newcommand{\qpair}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}
+
+% footnote marks printed as superscript (n) in the text, plain superscript n in the footnote
+\makeatletter
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\normalfont(\@thefnmark)}}}
+\renewcommand\@makefntext[1]{\parindent 1em\noindent\hbox{\@textsuperscript{\normalfont\@thefnmark}}#1}
+\newcommand{\Qcouple}{\mathrel{\leftarrow\mkern-9mu{+}\mkern-9mu\rightarrow}}
+\makeatother
+
+\begin{document}
+
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 23}
+The decomposition axiom is satisfied for every prederivator of the form $\mathbf{D}_{\mathcal{M},W}$. The left exactness axiom Der 5 bis is valid, provided that the $(\mathcal{M}(I),W(I))$ fit into a structure with cofibrations, which is the case. Likewise for the localization axiom Der 2, provided that in addition $W$ is strongly saturated, which is also the case. Finally, the final object axiom says that if $I$ has a final object, then
+\[ \Ho_W(e) \longrightarrow \Ho_W(I) \]
+is fully faithful, or again that the adjunction morphism
+\[ u_!u^*(\xi) \longrightarrow \xi \]
+is an isomorphism. But by virtue of 1.12, case 3°, in this case $u^*$ maps $\mathcal{M}(e)_{\mathrm{c}} = \mathcal{M}_{\mathrm{c}}$ into $\mathcal{M}(I)_{\mathrm{c}}$, so the computation of the pair of adjoint functors $u_!^W$, $u_W^*$ can be carried out using the restrictions of $u_!$, $u^*$ to $\mathcal{M}(I)_{\mathrm{c}}$ and $\mathcal{M}_{\mathrm{c}}$ respectively. Since the adjunction morphism $u_!^{\mathrm{c}}u_{\mathrm{c}}^* \longrightarrow \mathrm{id}$ is an isomorphism, the same therefore holds for $u_!^W u_W^* \longrightarrow \mathrm{id}$, which is deduced from it by localizing, q.e.d.
+
+\textbf{2.5.} To finish constructing $\Ho_W$ as a derivator on all of Cat, one must \msp{page 24} therefore establish Der 4, Der 5: existence of the $u_*^W$, and computation of the fibers of $u_*^W$. As for Der 6, it is obtained automatically, from the fact that each $(\mathcal{M}(I),W(I))$ fits into a fibration structure $(W(I),F(I))$. (Omission in the proof of 2.4.) The natural idea is now to use the triple structure
+\[ (W(I),C(I),\ \underbrace{F[I]}_{\deq TC(I)_*}\ )\ , \tag*{(2.5.1)} \]
+but the difficulty is to prove the factorization for a couple
+\[ C(I) \longleftrightarrow TF[I]\ , \qquad \underbrace{TC(I)}_{\deq C(I)\cap W(I)} \quad \longleftrightarrow F[I]\ , \tag*{(2.5.2)} \]
+for want of being able to show, under the general conditions of 2.3 alone (special Quillen triple) that $C(I)$ and $TC(I)$ are also special. (Cf. question 1.11.) But with suitable conditions on $\mathcal{M}$, we shall manage to get by if $C = \mathit{mono}$. The relevant statement, a little technical, is found in XV cor. 7.4 (p. 98-99), which I am going to recall here.
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 25}
+\textbf{Theorem 2.6.} \textit{Let $\mathcal{M}$ be a category satisfying the following conditions.}
+\[ \left\{ \begin{minipage}{0.72\textwidth}\itshape
+\begin{itemize}[leftmargin=2.5em]
+\item[\upshape a)] $\mathcal{M}$ is ``special'', i.e. stable under small $\varinjlim$ , and its elements are accessible.
+\item[\upshape b)] Filtered inductive limits in $\mathcal{M}$ are left exact (and in $\mathcal{M}$ finite $\varprojlim$ are representable – follows from \textup{a} and \textup{c}).
+\item[\upshape c)] $\mathcal{M}$ has a cardinal filtration $(\Filt^\pi)_{\pi\geq\pi_0}$.
+\item[\upshape d)] The $\Filt^\pi$ are stable under $\varprojlim$ indexed by categories $I$ such that $\operatorname{card}\Fl(I) \leq \pi$, and under quotients ($Z \in \Filt^\pi$ and $Z \longrightarrow Z'$ an epimorphism implies $Z' \in \Filt^\pi$).
+\item[\upshape e)] If $A_1$, $A_2$ are two subobjects of an object $B$ of $\mathcal{M}$, and $A_0 = A_1 \cap A_2$, then $A_1 \amalg_{A_0} A_2 \longrightarrow B$ is a monomorphism.
+\item[\upshape f)] If we have a cocartesian square
+\begin{center}
+\begin{tikzcd}
+A_0 \arrow[r, "i"] \arrow[d] & A_1 \arrow[d] \\
+A_2 \arrow[r, "i'"] & A_3
+\end{tikzcd}
+\end{center}
+with $i$ a monomorphism, then $i'$ is a monomorphism.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.6.1)} \]
+$^{(10,11,12,13)}$\footnotetext[10]{\textbf{N.B.} a + c also means that $\mathcal{M}$ is a ``$\mathfrak{U}$-paratopos category'', and implies the existence of a cardinal filtration satisfying d) (except the assertion concerning the quotients $Z'$ of $Z$). Thus we are dealing with a $\mathfrak{U}$-paratopos satisfying in addition b) e) f). (Is it then a topos\,? \textit{No,} for e), f) are O.K. in \textit{abelian categories\,!})}\footnotetext[11]{\textbf{N.B.} Condition d) is probably unnecessary, at least if epimorphisms are effective, for d) will be satisfied in any case for $\pi = 2^c$, with $c \geq \pi_0$.}\footnotetext[12]{\textbf{N.B.} Condition e) is \textit{not} satisfied for the category (Gr), and the theorem fails for this category, which does \textit{not} have ``enough injectives'', cf. SGA 4 I 8.12.9. On the other hand, e) and f) are satisfied by \textit{abelian} categories.}\footnotetext[13]{Cf. XVIII 4.6.7 (p. 157) for a more congenial formulation of the set of conditions a) to f) for $\mathcal{M}$.}. \textit{(We shall then say that $\mathcal{M}$ is} ``very special''\textit{). Let moreover}
+\[ W \ \subset \Fl(\mathcal{M}) \tag*{(2.6.2)} \]
+\textit{be a localizer in $\mathcal{M}$, which satisfies the conditions}
+\[ \left\{ \begin{minipage}{0.72\textwidth}\itshape
+\begin{itemize}[leftmargin=2.5em]
+\item[\upshape a)] $W$ is stable under filtered $\varinjlim$ $^{\textup{(14)}}$.
+\item[\upshape b)] $W$ is moreover $\mathrm{L}_1$-accessible, i.e. there exists a \textup{small} subset $W_0 \subset W$ such that $W$ is the $\mathrm{L}_1$-envelope of $W$, i.e. such that $W$ is the smallest subset of $\Fl(\mathcal{M})$ containing $W_0$, and stable under filtered $\varinjlim$. % [sic] la L_1-enveloppe de W -> la L_1-enveloppe de W_0, W_0 being the small generating part just introduced
+\end{itemize}
+\end{minipage}\right. \tag*{(2.6.3)} \]
+\footnotetext[14]{\textbf{N.B.} a) already implies that $W = W^\natural$.}
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 26}
+\textit{Let us then put}
+\[ C \ = \ \Mono(\mathcal{M}), \qquad TC \ = \ C\cap W\ , \qquad TF \ = \ C_*\ , \qquad F = (TC)_*\ . \tag*{(2.6.4)} \]
+\textit{Under these conditions:}
+\begin{itemize}[leftmargin=2.5em]
+\item[1°)] \textit{$C \Qcouple TF$, more precisely $C \qpair TF$ is a special Quillen couple.} % reading resolved: DER_XIX_corrections.csv
+\item[2°)] \textit{For $TC \qpair F$ to be a Quillen couple, it is necessary and sufficient that $TC$ be stable under cobase change, and then it is a special Quillen couple.} % reading resolved: DER_XIX_corrections.csv
+\item[3°)] \textit{For $(W,C,F)$ to be a Quillen triple (which will necessarily be special by \textup{1°, 2°}, and in particular closed), it is necessary and sufficient that the following conditions be satisfied.}
+\[ \left\{ \begin{array}{ll}
+\text{a)} & TC\ (\deq W\cap\Mono)\ \text{\itshape is stable under cobase change.}\\[1ex]
+\text{b)} & TF\ (\deq (\Mono)_*) \ = \ \text{\itshape ``maps of injective type''}\ \subset W.
+\end{array}\right. \tag*{(2.6.5)~$^{(15)}$} \]
+\footnotetext[15]{\textbf{N.B.} These conditions (2.6.5) are equivalent to saying that $(W,C)$ is a structure of a category with cofibrations on $\mathcal{M}$.}
+\textit{And condition} b) \textit{is also equivalent to:}
+\[ \begin{minipage}{0.7\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[b$'$)] \textit{Every arrow $f$ of $\mathcal{M}$ (or only of $TF$) factors as $f = pi$, with $i$ a monomorphism, $p \in W$.}
+\end{itemize}
+\end{minipage} \tag*{(2.6.6)} \]
+\end{itemize}
+
+\textbf{Corollary 2.7.} \textit{$\mathcal{M}$ and $W$ being as in} (2.6.1), (2.6.3), \textit{for $(W,C,F)$ to be a Quillen triple that is} left proper \textit{(i.e. $C \subset \Cof_W$), it is necessary and sufficient that $W$ satisfy condition} (2.6.5. b) \textit{(i.e. $W$ contains the arrows of injective type), and moreover}
+\msp{page 27}
+
+\begin{itemize}[leftmargin=7em]
+\item[] $C \subset \Cof_W$, \textit{i.e. the condition:}
+\item[a$'$)] \textit{For every cocartesian diagram}
+\[ \begin{tikzcd}
+A_0 \arrow[r, "i"] \arrow[d, "f"'] & A_1 \arrow[d, "f'"'] \\
+A_2 \arrow[r, "i'"] & A_3
+\end{tikzcd} \tag*{(2.7.7)} \]
+\textit{with $i$ a monomorphism, if $f \in W$, then $f' \in W$. (Stability of $W$ under cobase change along monomorphisms.)}
+\end{itemize}
+
+\textit{Under these conditions, this Quillen triple is special, and a fortiori closed.}
+
+This corollary follows from 2.6. 3°), since $C \subset \Cof_W$ implies $TC \deq C\cap W = C\cap W^{\mathrm{univ}}$ (for $\Cof_W \cap W \ = \ W^{\mathrm{univ}}$), hence that $TC$ is stable under cobase change, whence condition (2.6.5. a).
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\textbf{2.8.} We say that a \textit{Quillen structure} $(W,C,F)$ on $\mathcal{M}$ is \textit{very special,} if it is obtained as in theorem 2.1., i.e. if we have the conditions:
+\[ \left\{ \begin{minipage}{0.72\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $\mathcal{M}$ is very special, i.e. satisfies conditions (2.6.1).
+\item[b)] $W$ is stable under small filtered $\varinjlim$, and is accessible (conditions (2.6.3)).
+\item[c)] $C = \Mono$.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.8.1)} \]
+Thus for a localizer $W$ in $\mathcal{M}$ to correspond to a very special Quillen structure \msp{page 28} in $\mathcal{M}$ (which will necessarily be unique), it is necessary and sufficient that $\mathcal{M}$ and $W$ satisfy conditions (2.8.1. a)\,b)), and that moreover we have:
+\[ \left\{ \begin{minipage}{0.65\textwidth}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] $TC \deq \Mono\cap W$ is stable under cobase change.
+\item[b)] $TF \deq (\Mono)_* \subset W$, i.e. $W$ contains the arrows of injective type in $\mathcal{M}$.
+\end{itemize}
+\end{minipage}\right. \tag*{(2.8.2)} \]
+\footnote[16]{We also say that the localizer $W$ is very special, if it defines a very special Quillen structure.}.
+
+We now find the
+
+\textbf{Theorem 2.9.} \textit{Let} $(W, C = \Mono, F = (TC)_* = (W\cap\Mono)_*)$ \textit{be a very special Quillen triple in a category $\mathcal{M}$} (2.8). \textit{Then:}
+\begin{itemize}[leftmargin=2.5em]
+\item[1°)] \textit{For every $I$ in} Cat, $(W(I),C(I),F[I])$ \textit{is a very special Quillen triple in $\mathcal{M}(I)$, and in particular we have}
+\[ C(I) \ = \ \Mono(\mathcal{M}(I))\ , \tag*{(2.9.1)} \]
+\textit{and moreover}
+\[ F[I]\cap W(I) \ = \ (TF)[I]\ . \tag*{(2.9.2)} \]
+\item[2°)] \textit{For every arrow $u : I \longrightarrow I'$ in} Cat, \textit{whence the pair of adjoint functors}
+\[ \begin{tikzcd}
+\mathcal{M}(I) \arrow[r, shift right, "u_*"'] & \mathcal{M}(I') \arrow[l, shift right, "u^*"']
+\end{tikzcd}\ , \tag*{(2.9.3)} \]
+\textit{we have}
+\[ \left\{ \begin{array}{rcl}
+u^*(W(I')) & \subset & W(I)\\
+u^*(C(I')) & \subset & C(I)\\
+u^*(TC(I')) & \subset & TC(I)\\
+u_*(F[I]) & \subset & F[I']\\
+u_*(TF[I]) & \subset & TF[I']\ ,
+\end{array}\right. \tag*{(2.9.4)} \]
+\textit{finally $u_*$ induces a functor}
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 29}
+\[ u_*^{\mathrm{f}} \ :\ \mathcal{M}(I)_{\mathrm{f}} \longrightarrow \mathcal{M}(I')_{\mathrm{f}} \qquad\quad ^{(17)} \tag*{(2.9.5)} \]
+\footnotetext[17]{full subcategories of fibrant objects.}
+compatible with the localizers $W(I)_{\mathrm{f}}$ \textit{and} $W(I')_{\mathrm{f}}$ \textit{induced by $W(I)$, $W(I')$ respectively, hence induces a functor}
+\[ u_*^W \ :\ \Ho_W(I) \longrightarrow \mathit{Ho}_W(I')\ . \tag*{(2.9.6)} \] % [sic] italic Ho_W(I') -> upright Ho_W(I'), inconsistent with the upright Ho_W elsewhere
+\textit{This functor is a} right adjoint \textit{to the functor}
+\[ u_W^* \ :\ \mathit{Ho}_W(I') \longrightarrow \Ho_W(I) \tag*{(2.9.7)} \] % [sic] italic Ho_W(I') -> upright Ho_W(I'), inconsistent with the upright Ho_W elsewhere
+\textit{induced by $u^*$} (2.9.3).
+\end{itemize}
+\textsc{Proof of 2.9.} To prove 1°), we must first check that the preliminary conditions (2.8.1. a)\,b)) on $\mathcal{M}$, $W$ are stable under passage from $\mathcal{M}$, $W$ to $\mathcal{M}(I)$, $W(I)$, which is done by AQT \texttt{[âne qui trotte: at a donkey's trot, i.e. by routine verification]}. Besides, one checks right away that
+\[ C(I) \ = \ \Mono(\mathcal{M}(I))\ , \]
+and theorem 2.6 (1°, 2°) then implies that
+\[ \begin{array}{ccccc}
+C(I) & \qpair & C(I)_* & \deq & TF[I]\\
+\underbrace{TC(I)}_{\deq C(I)\cap W(I)} & \qpair & (TC(I))_* & \deq & F[I]
+\end{array} \] % reading resolved: DER_XIX_corrections.csv
+are special Quillen couples. (Noting for the second, that $TC(I)$ is indeed \msp{page 30} stable under cobase change, $TC$ being so.) To check that we have a very special Quillen triple, it remains by virtue of 2.8 to check that
+\[ TF[I] \ \subset\ W(I)\ , \]
+which is written
+\[ v^*(TF[I]) \ \subset\ W(I_0)\ , \]
+where
+\[ v \ :\ I_0 \longrightarrow I \]
+is defined as in (1.12) (p. 10). In fact, we shall even have
+\[ v^*(TF[I]) \ = \ v^*v_*(TF(I_0)) \ \subset\ \underbrace{TF(I_0)}_{= F(I_0)\cap W(I_0)}\quad , \]
+and the proof is dual to that of
+\[ v^*v_!(TC(I_0)) \ \subset\ TC(I_0) \]
+(cf. (2.3.7), p. 21), it does not depend on questions of factorization in $\mathcal{M}(I)$, and comes here from the stability of $TF$ under small products. This proves 1°.
+
+The proof of 2° is now the dual of that of (2.3. 2°). Since this makes us repeat the same proof twice, this shows that we have not ``set up the sorites'' quite carefully enough. So by way of making up for this, I add a
+
+\end{document}

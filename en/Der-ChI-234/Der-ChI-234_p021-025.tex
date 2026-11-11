@@ -1,0 +1,236 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\sDia}{\mathsf{Dia}}
+\newcommand{\sOb}{\mathsf{Ob}}
+\newcommand{\sid}{\mathsf{id}}
+\newcommand{\DD}{\mathbb{D}}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 28}
+that the functor for the associated fundamental categories
+\[ \mathcal{M}(I) \xrightarrow{f^{\mathcal{M}}_*} \mathcal{M}(I') \]
+is right exact. Now here it is a direct image functor of ordinary presheaves, and this functor has no desire at all to be \textit{right} exact. (Even if $\mathcal{M}$ is \textit{abelian}, for that matter!) Let us take for example for $f : I \hookrightarrow I'$ an open immersion with $I' = \boldsymbol{\Delta}_1 \times \boldsymbol{\Delta}_1$, $I = I' - \{c\}$, $c$ a final object of $I'$
+\[
+I' = \begin{tikzcd}
+c & b \arrow[l] \\
+a \arrow[u] & 0 \arrow[l] \arrow[u]
+\end{tikzcd}
+\qquad\qquad
+I = \begin{tikzcd}
+ & b \\
+a & 0 \arrow[l] \arrow[u]
+\end{tikzcd}
+\]
+The functor $f_*$ is the one which associates to a diagram
+\[
+F = \left\{
+\begin{tikzcd}
+ & F_b \arrow[d] \\
+F_a \arrow[r] & F_0
+\end{tikzcd}
+\right\}
+\]
+the completed cartesian square
+\[
+\overline{F} = \left\{
+\begin{tikzcd}
+F_a \times_{F_0} F_b \arrow[r] \arrow[d] & F_b \arrow[d, "\beta"] \\
+F_a \arrow[r, "\alpha"] & F_0
+\end{tikzcd}
+\right\}
+\]
+Now if $F \mapsto \overline{F}$ were right exact, $F \mapsto F_a \times_{F_0} F_b$ would be so too. Now $F_a \times_{F_0} F_b = K(F) = \mathsf{Ker}(F_a \times F_b \xrightarrow{\alpha pr_1 - \beta pr_2} F_0)$, as an additive functor in $F$, is not right exact, for example it does not necessarily transform epimorphism into epimorphism. Let us take for example
+\[
+F' = \left\{
+\begin{tikzcd}
+ & F_b \arrow[d] \\
+F_a \arrow[r] & 0
+\end{tikzcd}
+\right\}
+\]
+and the obvious homomorphism $F \to F'$ which is the identity on
+\msp{page 29}
+$F_a$ and on $F_b$. It is an epimorphism and the corresponding homomorphism $\overline{F} \to \overline{F'}$ is the inclusion
+\[ F_a \times_{F_0} F_b \longrightarrow F_a \times F_b \]
+which is an epimorphism only if $\alpha = \beta = 0$.
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\textbf{Perplexity} : One should be able to define a notion of an (additive) ``\textit{triangulated}'' derivator (which would correspond to the intuition of triangulated categories; it is a derivator satisfying fairly strong axioms), so that for morphisms between these, left exactness and right exactness are \textit{equivalent.}
+
+\textbf{``Base change theorem''} for derivators. Let $\DD$ be a left derivator (existence of $f_*$) and let us consider
+\[ f : I \longrightarrow J \qquad \text{in } \sDia \quad , \]
+let $j_0 \in \sOb\ J$, we propose to ``calculate'' the functor
+\[ F \mapsto f_*(F)_{j_0} = \alpha^*_{j_0}(f_*(F)) \quad , \]
+where
+\[ \alpha_{j_0} : e \longrightarrow J \]
+is the inclusion of the one-point category $e$ in $J$, with value $j_0$.
+
+\msp{page 30}
+Let us consider the diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+I/j_0 \arrow[r, "q"] \arrow[d, "f'"'] & I \arrow[d, "f"] \\
+e \arrow[r, "p = \alpha_{j_0}"'] & J
+\arrow[from=1-2, to=2-1, dashed, shorten <=14pt, shorten >=14pt, "\gamma"']
+\end{tikzcd}
+\quad ,
+\tag*{(1)}
+\]
+where $I/j_0$ is the category $I \times_J J/j_0$ of pairs
+\[ \{(i,\varphi) \mid i \in \sOb\ I,\ \varphi : f(i) \to j_0\} \]
+and $q$ is the functor $(i,\varphi) \mapsto i$. This diagram is not commutative, but there is a canonical functor \texttt{[rather morphism of functors]}
+\[ fq \xrightarrow{\gamma} pf' \quad , \]
+where $fq$ is the functor $(i,\varphi) \mapsto f(i)$ and $pf'$ the constant functor $(i,\varphi) \mapsto j_0$ and where $\gamma(i,\varphi) : f(i) \to j_0$ is defined by $\gamma(i,\varphi) = \varphi$.
+
+More generally, let us consider a diagram in $\sDia$
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+I' \arrow[r, "q"] \arrow[d, "f'"'] & I \arrow[d, "f"] \\
+J' \arrow[r, "p"'] & J
+\arrow[from=1-2, to=2-1, dashed, shorten <=14pt, shorten >=14pt, "\gamma"']
+\end{tikzcd}
+\quad ,
+\tag*{(2)}
+\]
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+with $\gamma : fq \to pf'$. We then define a \textit{base change morphism for direct images} relative to this diagram
+\[ p^* f_* \xrightarrow{c_\gamma} f'_* q^* \]
+\msp{page 31}
+in two ways, which give the same result (general story of adjoint functors to be made explicit once and for all, in terms of a diagram of functors
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X' & X \arrow[l, "q^*"'] \\
+Y' \arrow[u, "{f'}^*"] & Y \arrow[l, "p^*"'] \arrow[u, "f^*"']
+\arrow[from=2-1, to=1-2, dashed, shorten <=14pt, shorten >=6pt]
+\end{tikzcd}
+\]
+assuming that the left adjoint functors $f'_*$, $f_*$ of the two vertical functors exist). An interesting case is the one where
+\[ pf' = fq \quad , \qquad \gamma = \sid_{fq} \]
+and where we put $c_\gamma = c$.
+
+Here
+\[ p^* f_* \xrightarrow{?} f'_* q^* \]
+amounts to
+\[
+\begin{tikzcd}[column sep=small]
+f_* \arrow[r, "?"] & p_* f'_* q^* \simeq & (pf')_* q^* \\
+ & & (fq)_* q^* \simeq (f_* q_*) q^* = f_*(q_* q^*) \quad . \arrow[u, "\gamma_* * q^*"']
+\end{tikzcd}
+\]
+Now we have
+\[ \sid \xrightarrow{\alpha} q_* q^* \qquad\qquad \text{(adjunction)} \quad , \]
+whence
+\[ f_* \xrightarrow{f_* * \alpha} f_*(q_* q^*) \]
+and composing with $\gamma * q^*$, we find what we want. And instead of this we can look for
+\[
+\begin{tikzcd}
+{f'}^*(p^* f_*) \arrow[r, "?"] \arrow[d, equal] & q^* \\
+(pf')^* f_* \arrow[d, "\gamma^* * f_*"] & \\
+(fq)^* f_* \simeq q^*(f^* f_*) \arrow[r, "q^* * \gamma'"] & q^*
+\end{tikzcd}
+\quad ,
+\]
+where $\gamma' : f^* f_* \to \sid$ is the adjunction.
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 32}
+\textbf{Der}$_4$ : The base change morphism for direct images $f_*$ associated with a diagram (1) is always an isomorphism (left derivators). Dual condition for right derivators and base change for direct images $f_!$, for the diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+j_0 \backslash I \arrow[r] \arrow[d] & I \arrow[d, "f"] \\
+e \arrow[r, "p = \alpha_{j_0}"'] & J
+\arrow[from=2-1, to=1-2, dashed, shorten <=22pt, shorten >=8pt, "\gamma"]
+\end{tikzcd}
+\tag*{(1$'$)}
+\]
+associated with $f : I \to J$ in $\sDia$, and $j_0 \in \sOb\ J$.
+
+\textbf{Der}$_5$\footnote[10]{\underline{Totally} botched, becomes reasonable only for constant coefficients on $F$.} : Let $f : I \to J$ be a \textit{strict Hot-equivalence, i.e.} $\forall j_0 \in \sOb\ J$, $I/j_0$ is contractible. Then $f^*$ is fully faithful, \textit{i.e.} the adjunction morphism
+\[ \sid_{\DD(J)} \longrightarrow f_* f^* \]
+is an isomorphism ($\DD$ a left derivator). Dually, if $f$ is a co-strict equivalence, \textit{i.e.} $f^\circ : I^\circ \to J^\circ$ is a strict equivalence, \textit{i.e.} $\forall j_0 \in \sOb\ J$, $j_0 \backslash I$ is contractible, then (if $\DD$ is a right derivator) the functor $f^*$ is fully faithful, \textit{i.e.} the adjunction morphism % Resolved: the edition line-break gives co-stricte; retain that spelling.
+\[ f_! f^* \longrightarrow \sid_{\DD(J)} \]
+is an isomorphism.
+
+N.B. Thus the functors $f_*$ (resp. $f_!$) are localization functors.
+
+\textbf{N.B.} Pages 33 to 40 have been deleted, because botched. % [sic] suprimées -> supprimées, spelling
+
+\msp{page 41}
+I am going to take up again the terminology and the axioms relating to derivators.
+
+A \textit{prederivator} is a 2-functor
+\[ \sDia^\circ \xrightarrow{\DD} \mathcal{C}at \quad , \]
+where $\sDia$ is a full 2-subcategory of $\mathcal{C}at$.\footnote[11]{$\sDia$ \textit{domain} of the derivator. The objects are the \textit{index categories} for $\DD$. The $\DD(I)$ are the categories of coefficients for $\DD$, the objects of $\DD(I)$ the ``coefficients of type $\DD$ on $I$''. % [sic] coeficients -> coefficients, spelling
+} We assume at least that $\sDia$ contains the \textit{finite ordered sets,} that $\sDia$ is stable under finite $\varprojlim$, under finite sums. That with every category $C$ and every strictly full open (resp. closed) subcategory it contain the complementary subcategory.\footnote[12]{Notation $f^*$ : inverse image of coefficients.}
+
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 42}
+We define the prederivator $\DD_{\mathcal{M},\Sigma}$ associated with a system
+\[ (\mathcal{M},\Sigma) \qquad\qquad \mathcal{M} \text{ Category,} \quad \Sigma \subset \mathsf{Fl}(\mathcal{M}) \quad . \] % Resolved: Fl abbreviates fleches, with lowercase l; retain Fl.
+If $\Sigma = \emptyset$, we write $\DD_{\mathcal{M}}$.
+
+Prederivators form a 2- category $\mathsf{PREDER}$, and
+\[ (\mathcal{M},\Sigma) \longmapsto \DD_{\mathcal{M},\Sigma} \]
+is a 2-functor
+\[ \mathsf{PREMOD}
+\begin{pmatrix}
+\text{``Category of categories} \\
+\text{of models'' (weak)}
+\end{pmatrix}
+\longrightarrow \mathsf{PREDER} \quad . \]
+For $\DD$ given, we define the induced derivator ($I \in \sDia$)
+\[ \DD_I = \big(J \longmapsto \DD(I \times J)\big) \quad , \]
+depending on $I$ contravariantly, whence a 2-functor
+\[ \begin{aligned}
+\sDia^\circ &\longrightarrow \mathsf{PREDER} \\
+I &\longmapsto \DD_I
+\end{aligned} \]
+or again a bi-2-functor
+\[ \begin{aligned}
+\mathsf{PREDER} \times \sDia^\circ &\longrightarrow \mathsf{PREDER} \\
+(\DD, I) &\longmapsto \DD_I \quad .
+\end{aligned} \]
+If $\DD$ is defined by $(\mathcal{M},\Sigma)$, then $\DD_I$ is defined by $(\mathcal{M}(I),\Sigma(I))$ :
+\[ (\DD_{\mathcal{M},\Sigma})_I \simeq \DD_{\mathcal{M}(I),\Sigma(I)} \quad , \]
+\msp{page 43}
+where $\mathcal{M}(I) = \underline{\mathsf{Hom}}(I^\circ,\mathcal{M})$ (presheaves on $I$ with values in $\mathcal{M}$), and $\Sigma(I) \subset \mathsf{Fl}\ \mathcal{M}(I)$ is deduced from $\Sigma$ by looking fiber by fiber (now assuming $\Sigma$ saturated). % Resolved: the repeated arrow-class symbol is Fl, with lowercase l.
+
+For any axioms we shall single out for certain prederivators, we shall have to check that they are stable under passage to the induced prederivators $\DD_I$, and also how they behave under duality (passage from $\DD$ to $\DD^\circ$). % [sic] qu'il sont -> qu'ils sont, agreement
+
+Definition of the dual prederivator $\DD^\circ$
+\[ \DD^\circ(I) \overset{\text{def}}{=} \DD(I^\circ)^\circ \qquad\qquad \textit{etc.} \]
+\textbf{Der 1} (First localization axiom) : \textit{a}) If $I$, $J \in \sDia$, then
+\[ \DD(I \amalg J) \longrightarrow \DD(I) \times \DD(J) \]
+is an equivalence of categories.
+
+\textit{b}) $\DD(\emptyset)$ is the final category.
+
+Stable under passage to the induced prederivators, and passage to the dual.
+
+\textbf{Corollary.} \textit{Let} $(I_\alpha)_{\alpha \in A}$ be \texttt{[a]} \textit{finite family of categories in} $\sDia$, $I = \coprod\limits_{\alpha \in A} I_\alpha$. \textit{Then}
+\[ \DD(I) \longrightarrow \prod_{\alpha \in A} \DD(I_\alpha) \]
+\textit{is an equivalence of categories.}
+
+\end{document}

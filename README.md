@@ -9,7 +9,8 @@ deciphered the manuscript and published an electronic edition of it (twenty-two 
 
 <https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html>
 
-That edition is published as PDF only. This repository holds two things built on it.
+That edition is published as PDF only. This repository holds three things built on it: the transcription, the
+critical companion and an English translation.
 
 ## 1. The LaTeX transcription (complete)
 
@@ -136,6 +137,13 @@ Source: `companion/`
   consecutive parts both contain are set once in the book. Seven such pairs, which involve the parts added in
   this release (Chapters II, XV, XVII and XVIII), are not merged yet: the book sets their pages in both parts.
 
+## 3. The English translation
+
+[`en/`](en/README.md): the whole of *Les Dérivateurs* in English, AI-translated by GPT-6.1 Sol from the transcription
+(release v2026-11-11b), with the checks of every page against the French. PDF:
+**[LesDerivateurs_translation.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/download/en-2026-11-11/LesDerivateurs_translation.pdf)**
+(933 pages).
+
 ## Raw research outputs
 
 [`raw/`](raw/README.md) holds raw research outputs, not edited for publication: the answers of GPT-6 Astra (ChatGPT
@@ -178,6 +186,11 @@ own with `lualatex`.
 - **Corrections in the transcription:** the corrections of the companion (above); the corrections of macro
   definitions and the changes of the checked texts that their tables do not list were compared with the edition's
   pages by Claude Opus 5.5 (Anthropic) (`transcription/DECISIONS.md`).
+- **English translation:** AI-translated by GPT-6.1 Sol (OpenAI API, reasoning effort max) from the transcription;
+  glossary by Claude Fable 5.2 and Claude Opus 5.5, prompt, checks, fixes and build by Claude Opus 5.5 (Anthropic)
+  (`en/README.md`).
+- **Raw research outputs** (`raw/`): the answers AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); the reviews
+  by Claude Fable 5.2 (Anthropic).
 
 ## Rights
 

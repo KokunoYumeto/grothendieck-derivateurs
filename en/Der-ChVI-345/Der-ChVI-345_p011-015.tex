@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage[no-math]{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\cat}[1]{\underline{\mathrm{#1}}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+is fully faithful ($i$ being so). Now it suffices to take
+\[
+\bar{v}_0 = v * i : (p\varphi)\circ i \mathrel{\relbar\joinrel\relbar} \mathrm{id}_{C'}\circ i.
+\] % ?? uncertain: the arrow between (p\varphi)\circ i and id_{C'}\circ i is printed as a plain line with no visible head -- plain line / arrow
+
+To sum up, we have to show that the composite of the pairs of quasi-inverse functors works in the following five cases
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+\cat{Fibsc} \arrow[rrd, shift left] & \cat{Fibsc}_0 \arrow[l, hook'] \arrow[rd, shift left] & \cat{Parf} \arrow[d, shift left] & \cat{Cofibsc}_0 \arrow[r, hook] \arrow[ld, shift left] & \cat{Cofibsc} \arrow[lld, shift left] \\
+& & \mathrm{Cat}/S \arrow[llu, shift left, "\Phi"] \arrow[lu, shift left, "\Phi_0"] \arrow[u, shift left, "C"] \arrow[ru, shift left, "\Psi_0"] \arrow[rru, shift left, "\Psi"] & &
+\end{tikzcd}
+\]
+
+Besides, by duality, we are reduced to the three cases of $\cat{Fibsc}$, $\cat{Fibsc}_0$, $\cat{Parf}$. (Perhaps the case $\cat{Fibsc}_0$, with $\Phi_0$ defined in terms of $\Phi$ and $C$, will reduce to the two cases surrounding it, of $\cat{Fibsc}$ and $\cat{Parf}$.)
+
+I see that I have to adjust my aim, first of all because I forgot that the functors
+\msp{page 14}
+$\Phi$, $\Psi$ I had in mind are \textit{not} compatible with the localizers \texttt{[= localizers]} - an arrow $f : X \longrightarrow Y$ of $\mathrm{Cat}/S$ such that the corresponding arrow in Cat is in $W$, is not going to induce an arrow in $\cat{Fibsc}\,S$ or $\cat{Cofibsc}\,S$ which is in $W$ on each fiber. This is not serious, for we can replace the functors by $\Phi' = \alpha'\Phi_0$, $\Psi' = \beta'\Psi_0$, which, unless I am mistaken, should work. But in view of the preceding Lemma, there is a perplexity, for I seem to have proved that if $\mathcal{F}$ is a full subcategory of $\mathrm{Cat}/S$ of which I assume only that it contains the essential image of one of the three categories $\cat{Fib}_0S$, $\cat{Cofib}_0S$, or $\cat{Parf}\,S$, then the inclusion into $\mathrm{Cat}/S$ induces an equivalence of the localized categories, taking in $\mathcal{F}$ as localizer the one induced by $\mathrm{Cat}/S$, i.e.
+\begin{tikzcd}[column sep=small, row sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+f : X \arrow[rr] \arrow[dr] & & Y \arrow[dl] \\
+& S &
+\end{tikzcd}
+is in $W_{\mathcal{F}}$ if and only if as an arrow of Cat, $f$ is in $W$. Now this does indeed coincide (via a nontrivial theorem to which I shall have to return in the setting of a general basic localizer $W$) with the set of localization arrows ``fiber by fiber'', in the case of $\mathcal{F} = \cat{Parf}\,S$, $\cat{Fibhot}\,S$, $\cat{Fib}_0S$, $\cat{Cofib}_0S$.
+
+\msp{page 15}
+On the other hand, this is not at all the case on taking $\mathcal{F} = \cat{Fib}\,S, \cat{Liss}\,S$ or $\cat{Cofib}\,S$. Having chosen in these categories as localizers the notion of $W$-equivalences ``fiber by fiber'', I thus seem to be saying that I find for these four categories the \textit{same} localized ones (up to equivalence) as if I took the much coarser localizer inherited by $\mathrm{Cat}/S$. This seems hard to believe, and I shall have to be very careful in proving the key statements.
+
+To see that the solid-line arrows of the big diagram p.~6 are all compatible with the localiz(at)ers \texttt{[sic]}, hence also the arrows composed by means of these, I already have to use this (for the case of the arrows $\cat{Liss} \longrightarrow \mathrm{Cat}/S$, $\cat{Prop} \longrightarrow \mathrm{Cat}/S$):
+% foot: Version 9 novembre 2001
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\circled{1}\ \ If $X, Y$ smooth or proper over $S$, and $f : X \longrightarrow Y$ an $S$-functor, if $f_s : X_s \longrightarrow Y_s$ is in $W$ for every $s \in S$, then $f \in W$. (\footnote[7]{OK if we assume L3 quater and L4.}).
+
+This considerably strengthens condition L5 on $W$, where we assumed that $f$ is a \textit{cartesian} functor between categories \textit{fibered} over $S$. (To sort out, for the various properties we need for $W$, to what standard properties we can reduce them. Everything will be OK if $W = W_\infty$.)
+
+\msp{page 16}
+I) \textbf{Definition of} $\Phi$, $\Psi$.
+
+We are going to copy the canonical construction of $\cat{Ch}(X) \longrightarrow X \times X$ (or $\cat{Ch}_\infty(X) \longrightarrow X \times X$) factoring $X \xrightarrow{\mathrm{diag}} X \times X$, and the corresponding canonical factorization of an $f : X' \longrightarrow X$ as $X' \xrightarrow{i} \bar{X}' \xrightarrow{\bar{f}} Y$ \texttt{[rather} $\bar{X}' \xrightarrow{\bar{f}} X$\texttt{]}. We shall simply replace $\cat{Ch}(X)$ by the subcategory $\cat{Ch}_+(X)$, which is none other than the category of arrows of $X$
+\[
+\cat{Fl}(X) = \cat{Hom}(\boldsymbol{\Delta}_1, X),
+\]
+equipped with the functors
+\[
+X \xrightarrow{i_X} \cat{Fl}(X) \xrightarrow{p_X=(\sigma_X,\beta_X)} X \times X,
+\]
+where $i_X$ is the arrow $x \longmapsto \mathrm{id}_x$, and $\sigma_X$, $\beta_X$ are the source and target functors. The fiber of $p_X$ at $(a,b) \in \mathrm{Ob}(X \times X)$ is the discrete category defined by the set $\mathrm{Hom}(a,b)$, that depends a great deal on $(a,b)$ and not only on its connected component in $X \times X$ - so $p_X$ is nothing like a Hot-fibration. It is in general neither proper nor smooth nor anything, on the other hand the two arrows composed with $\mathrm{pr}_1$ and $\mathrm{pr}_2$ % [sic] géneral -> général, missing accent
+\[
+\begin{tikzcd}[column sep=small]
+& \cat{Fl}(X) \arrow[ld, "\sigma_X"'] \arrow[rd, "\beta_X"] & \\
+X & & X
+\end{tikzcd}
+\]
+are nice, we have in fact
+
+\msp{page 17}
+\textbf{Lemma.} \textit{We have}
+\[
+\sigma_X^{-1}(\{x\}) \simeq x\backslash X, \qquad\qquad \beta_X^{-1}(\{x\}) \simeq X/x.
+\]
+\textit{The functor} $\sigma_X$ \textit{is} Cat-\textit{fibrant with contractible fibers (hence aspheric, hence} $W$\textit{-aspheric), the functor} $\beta_X$ \textit{cofibrant with contractible fibers (hence aspheric, hence} $W$\textit{-aspheric). They are thus also} Hot-\textit{equivalences, a fortiori} $W$\textit{-equivalences} (\footnote[8]{In fact, they are even homotopisms, cf. marginal remark below (more general - we recover the case of $\sigma_X$ by taking $X' = X$.)}).
+
+\textbf{Corollary 1.} \textit{The functor} $i_X : X \longrightarrow \cat{Fl}(X)$ \textit{is a} Hot-\textit{equivalence} (since its composite with the Hot-equivalence $\sigma_X$ is the identity).
+% foot: Version 9 novembre 2001
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+Here is the general construction of the factorization of $f : X' \longrightarrow X$, corresponding to the preceding choice of a ``category of paths'' $\mathcal{C}(X) = \cat{Fl}(X)$
+\[
+\begin{tikzcd}
+\bar{X}' \arrow[d, "\pi_f"] \arrow[rd] \arrow[rrd, "\bar{f}"] & & \\
+X' \arrow[u, dotted, bend left=60, "i_f"] \arrow[rd, "f"'] \arrow[r, phantom, "\text{\footnotesize Cart.}"] & \cat{Fl}(X) \arrow[r, "\beta_X"'] \arrow[d, "\sigma_X"'] & X \\
+& X &
+\end{tikzcd}
+\]
+where $i_f$ is deduced from the section $i$ \texttt{[rather} $i_X$\texttt{]} of $\cat{Fl}(X)$ over $X$ (\footnote[9]{\textbf{NB} $\pi_f i_f = \mathrm{id}$, and $i_f\pi_f \longrightarrow \mathrm{id}$, hence $i_f$, $\pi_f$ are homotopisms inverse to each other in Cat\,hot. This makes more precise \texttt{[the]} cor.~3, page 18.}). Thus, $\bar{X}'$ is the category of pairs
+\[
+\{(x',u) \mid x' \in \mathrm{Ob}\,X',\ \underbrace{u}_{\in\mathrm{Fl}\,(X)} : f(x') \longrightarrow y\},
+\]
+the functor $\bar{f}$ is defined by
+\[
+\bar{f}(x',u) = \mathrm{but}(u) = y
+\]
+and $i_f$ by
+\[
+i_f(x') = (x', \mathrm{id}_{f(x')} : f(x') \xrightarrow{\mathrm{id}} f(x')),
+\]
+so we do indeed have
+\[
+f(x') = \bar{f} i_f(x').
+\]
+
+\msp{page 18}
+\textbf{Corollary 2.} \textit{The functor}
+\[
+\bar{f} : \bar{X}' \longrightarrow X
+\]
+\textit{has as fibers the categories $X'/x$, it is cofibrant, the base change functors are the functors $X'/x \longrightarrow X'/y$ associated with the arrows $x \longrightarrow y$ in $X$.}
+
+In fact, we see that this category is not only cofibered, but canonically \textit{split.}
+
+(\footnote[10]{\textbf{Corollary 3.} \textit{The arrow $i_f : X' \longrightarrow \bar{X}'$ is an $X$-morphism (if $X'$ over $X$ by $f$, $\bar{X}'$ by $\bar{f}$), i.e. $f = \bar{f}\circ i_f$, and it is a} Hot-\textit{equivalence} (for $\pi_f : \bar{X}' \longrightarrow X'$ is Cat-fibrant, with contractible fibers, hence a Hot-equivalence).}).
+
+Applying this to $f : X \longrightarrow S$, we find a construction
+\[
+\mathrm{Cat}/S \xrightarrow{\Psi} \cat{Cofibsc}\,S,
+\]
+it is well and truly functorial in $X$ varying in $\mathrm{Cat}/S$. If
+\[
+\psi : X \longrightarrow Y
+\]
+% foot: Version 9 novembre 2001
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+in $\mathrm{Cat}/S$, then $\psi$ induces
+\[
+\psi/s : X/s \longrightarrow Y/s\ ,
+\]
+for $s \in S$, and this in a way compatible with the
+\msp{page 19}
+``cobase change'' functors associated with the $u : s \longrightarrow t$ in $S$
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X/s \arrow[r, "u_*^X"] \arrow[d, "\psi/s"'] & X/t \arrow[d, "\psi/t"] \\
+Y/s \arrow[r, "u_*^Y"] & Y/t \quad .
+\end{tikzcd}
+\]
+This therefore defines a morphism of split categories over $S$
+\[
+\Psi(X) \longrightarrow \Psi(Y),
+\]
+that's the one!
+
+We have a morphism functorial in $X$
+\[
+X \xrightarrow{i_X} \Psi(X)
+\]
+in $\mathrm{Cat}/X$, and it is a Hot-equivalence, hence $\in W$. On the fibers, the morphism $i_X$ induces
+\[
+X_s \xrightarrow{i_{X,s}} X/s,
+\]
+the canonical inclusion.
+
+\msp{page 20}
+\textbf{Corollary 1.} \textit{If $X \xrightarrow{f} Y$ in} $\mathrm{Cat}/S$ \textit{is in $W$, then $\Psi(X) \xrightarrow{\Psi(f)} \Psi(Y)$ too.} But we shall beware of thinking that it is in $W_S$ in the sense of $\cat{Cofib}\,S$ or $\cat{Cofibsc}\,S$.
+
+For on the fibers of $\Psi(X)$, $\Psi(Y)$ we find the arrows
+\[
+f/s : X/s \longrightarrow Y/s
+\]
+induced by $f$, which have no reason to be in $W$. Their being so means that $f : X \longrightarrow Y$ is in $W$ ``locally over S'' (\footnote[11]{cf. \circled{1} page 15.}), which (for the $W$ that interest us) is much stronger than being in $W$. (If $Y = S$, this means in fact that $p : X \longrightarrow S$ is $W$-aspheric, much stronger than $p \in W$.)
+
+So to prove that
+\[
+\cat{Cofib}\,S \longrightarrow \mathrm{Cat}/S \qquad\quad \text{or} \qquad\quad \cat{Cofibsc}\,S \longrightarrow \mathrm{Cat}/S
+\]
+% foot: Version 9 novembre 2001
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+induce equivalences for the localized categories, the functor $\Psi$ directly will not be usable. However:
+
+\textbf{Corollary 2.} \textit{Suppose $X$, $Y$ in} $\cat{Prop}\,S$ \textit{or in} $\cat{Fibhot}\,S$\textit{, and consider}
+\[
+\Psi(f) : \Psi(X) \longrightarrow \Psi(Y),
+\]
+\textit{for this to be a $W$-equivalence in} $\cat{Cofibsc}\,S$\textit{,}
+\msp{page 21}
+\textit{i.e. a $W$-equivalence fiber by fiber, it is necessary and sufficient that $f$ be a $W$-equivalence fiber by fiber} (and this must imply (\footnote[12]{cf. \circled{1} page 15.}) that $f$ is a $W$-equivalence).
+
+Indeed, in the commutative diagram
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+X_s \arrow[r, "f_s"] \arrow[d] & Y_s \arrow[d] \\
+X/s \arrow[r, "f/s"] & Y/s
+\end{tikzcd}
+\]
+the vertical arrows are in $W$, for $X$, $Y$ \texttt{[are]} proper over $S$ (or $X$, $Y$ in $\cat{Fibhot}\,S$), so $f_s$ is in $W$ if and only if $f/s$ is.
+
+\texttt{[The functor]} $\Phi$ is defined dually to $\Psi$, which amounts to interchanging the roles of $\sigma_X$, $\beta_X$ in the diagram page 17.
+
+(\footnote[13]{\textbf{Corollary 3.} \textit{If $X \in \mathit{Ob}\,$}$\cat{Fibhot}\,S$\textit{, then $\Psi(X)$ is in} $\cat{Fibsc}_0S$.\par This means in fact that the $X/s \longrightarrow X/t$ are in $W$, now the hypothesis on $X$ implies that it is in $W_\infty$. OK.})
+
+\textbf{II) Definition of} $C : \mathrm{Cat}/S \longrightarrow \cat{Parf}\,S$
+
+This time, it is the factorization of the arrows $p : X \longrightarrow S$ in Cat, as
+\[
+X \xrightarrow{j_{X/S}} \bar{X} \xrightarrow{\bar{p}} S,
+\]
+where $i_X$ \texttt{[rather} $j_{X/S}$\texttt{]} is a Hot-equivalence (hence in $W$), and $\bar{p}$ perfect. This is constructed formally as before, using $\cat{Ch}_\infty(S)$ instead of $\cat{Fl}(S)$, and the factorization
+\[
+S \xrightarrow{j_S} \cat{Ch}_\infty(S) \xrightarrow{p_S=(\sigma_S,\beta_S)} S \times S
+\]
+of $\mathrm{diag}_S : S \longrightarrow S \times S$. The situation is prettier, for $p_S$ is already ``perfect'', which formally implies that the $\bar{p}$ deduced from it, to factor $p : X \longrightarrow S$, is itself perfect.
+% foot: Version 9 novembre 2001
+
+\end{document}

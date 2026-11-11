@@ -1,0 +1,280 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+% short macros for the printed notation
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\hm}{\mathrm{hom}}
+\newcommand{\homext}{\mathrm{hom}\,\mathrm{ext}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\Ltens}{\overset{\mathbf{L}}{\otimes}}
+\newcommand{\RHom}{\mathbf{R}\mathrm{Hom}}
+\newcommand{\ab}{\mathrm{ab}}
+\newcommand{\defeq}{\overset{\text{def}}{=}}
+
+\begin{document}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+
+\texttt{[twice} (8)\texttt{]}. This being so, we have the canonical isomorphisms, for $\xi,\eta\in\Ob\Hot_0$,
+\[
+\left\{
+\begin{aligned}
+\xi\times_{\D}(\eta\times_{\D}M) &\;\simeq\; (\xi\times\eta)\times_{\D}M\\
+\hm_{\D}(\xi,\hm_{\D}(\eta,M)) &\;\simeq\; \hm_{\D}(\xi\times\eta,M).
+\end{aligned}
+\right.
+\tag*{(9)}
+\]
+
+If $\xi$, $\eta$ are represented by $X$, $Y$, the first formula e.g.
+\msp{page 6}
+is established by computing the second member as
+\[
+\varphi_!(M_{X\times Y})\simeq p_!(\;\underbrace{q'_!(M_{X\times Y})}_{\substack{\simeq\ q_!(M_Y)_X\\ \text{since $q$ is $\mathbf{D}$-smooth}}}\;)\simeq\xi\times_{\D}(\eta\times_{\D}M),
+\]
+O.K.
+\[
+\begin{tikzcd}
+X \ar[d,"p"'] & X\times_e Y \ar[l,"q'"'] \ar[d,"p'"] \ar[dl,dotted,"\varphi"'] \\
+e & Y \ar[l,"q"]
+\end{tikzcd}
+\]
+
+I also feel like proving:
+
+\textbf{Proposition 1.} \textit{Let $\xi\in\Ob\Hot_0$. Then $F\longmapsto\xi\times_{\D}F$, as a morphism of derivators $\D\longrightarrow\D$, is} right exact, \textit{and $F\longmapsto\hm_{\D}(\xi,F)$ is left exact.}
+
+We may assume that $\xi$ is defined by $X$ in Diag. Let $f:I\longrightarrow J$, let $F$ be in $\D(I)$, we have to prove
+\[
+f_*(\hm_{\D}(\xi,F))\;\simeq\;\hm_{\D}(\xi,f_*(F)).
+\]
+So let us consider
+\[
+\begin{tikzcd}
+X\times I \ar[r,"f'"] \ar[d,"{p=(x,i)\longmapsto i}"'] & X\times J \ar[d,"{q=(x,j)\longmapsto j}"] \\
+I \ar[r,"f"] & J.
+\end{tikzcd}
+\]
+
+We have
+\[
+\hm_{\D}(\xi,F)=p_*(p^*F),
+\]
+so
+\[
+f_*(\hm_{\D}(\xi,F))=\underbrace{f_*p_*}_{(fp)_*}(p^*(F))=(qf')_*p^*(F)\simeq q_*(f'_*p^*(F)).
+\]
+But
+\[
+f'_*p^*(F)\;\simeq\;q^*f_*(F),
+\]
+the base change formula for the $f_*$, for the base change $q$, which is smooth, since obtained from $X\longrightarrow e$, which is smooth, by base change $J\longrightarrow e$. We find
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 7}
+therefore
+\[
+f_*(\hm_{\D}(\xi,F))\simeq q_*q^*(f_*(F))\defeq\hm_{\D}(\xi,f_*(F)),
+\]
+q.e.d. The statement for $F\longmapsto\xi\times_{\D}F$ is dual to the one we have just proved.
+
+Let us take up again, for $\xi\in(\mathrm{hot})_0$ \texttt{[}$=\Hot_0$\texttt{]}, the adjunction formula
+\[
+\Hom(\xi\times_{\D}M,N)\simeq\Hom(M,\hm_{\D}(\xi,N))\defeq\Hom_{\xi}(M,N).
+\tag*{$(*)$}
+\]
+
+If $\xi$ is defined by $X$ in Diag, the two members of $(*)$ are identified with
+\[
+\Hom_{\D(X)}(p^*M,p^*N),
+\]
+where $p:X\longrightarrow e$ is the structural functor.
+
+Let us fix $M$, $N$, and consider the expression $(*)$ as a contrafunctor
+\[
+(\Hot_0)^o\;\longrightarrow\;\mathrm{Ens}.
+\]
+
+It would seem that in all known cases, this functor is ``representable'' by an object, if not of $\Hot_0$ itself, at least an object in Hot. If we cannot define it as an object $H$ of $\Hot_0$, the fact that we have a canonical isomorphism
+\[
+\Hom_{\xi}(M,N)\;\simeq\Hom_{\Hot}(\xi,H),
+\tag*{(10)}
+\]
+functorial in $\xi\in\Ob\Hot_0$, does not necessarily define \texttt{[it]}
+\msp{page 8}
+up to unique isomorphism. In fact, when
+\[
+\D=\D_{\mathcal{M},\Sigma}
+\]
+is defined by a category of models $(\mathcal{M},\Sigma)$, then there is a natural definition of an operation $\homext$ (``external'' Hom) with values in Hot, namely a functor
+\[
+\left\{
+\begin{aligned}
+&\mathcal{A}^o\times\mathcal{A} &&\longrightarrow &&\mathrm{Hot}\\
+&(M,N) &&\longmapsto &&\homext(M,N),
+\end{aligned}
+\right.
+\tag*{(11)}
+\]
+where $\mathcal{A}=\mathcal{M}\Sigma^{-1}$ is the fundamental category of $\D=\D_{\mathcal{M},\Sigma}$. It is true that I have not checked, if e.g. $(\mathcal{M},\Sigma)$ underlies a Quillen model category, so that (by \textsc{Thomason}) $\D$ is indeed a derivator, that this notion of $\homext$ does indeed satisfy a formula of the form (10). Here I am going to posit it [?], if need be, these additional data: specification of (11), and of a functorial isomorphism
+\[
+\underbrace{\Hom_{\xi}(M,N)}_{\begin{subarray}{l}=\ \Hom(\xi\times_{\D}M,N)\\ =\ \Hom(M,\hm_{\D}(\xi,N))\end{subarray}}
+\quad\simeq\;\Hom_{\Hot}(\xi,\homext(M,N)).
+\tag*{(12)}
+\]
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 9}
+If now $\eta$ is a second element of $\Hot_0$, we feel like writing
+\[
+\left\{
+\begin{aligned}
+\homext(\eta\times_{\D}M,N) &\;\simeq\;\homext(M,\hm_{\D}(\eta,N))\\
+&\;\simeq\;\hm_{\HOT}(\eta,\homext(M,N)),
+\end{aligned}
+\right.
+\tag*{(13)}
+\]
+where in the second member, $\hm_{\HOT}$ is the operation (1) in the case where $\D=\mathrm{HOT}$, and which is also defined in terms of the cartesian product $\xi\times\eta$ in Hot, by
+\[
+\Hom_{\Hot}(\xi,\hm_{\HOT}(\eta,\zeta))\;\simeq\;\Hom_{\Hot}(\xi\times\eta,\zeta),
+\]
+in other words, for $\eta$ fixed, the functor
+\[
+\zeta\;\longmapsto\;\hm_{\HOT}(\eta,\zeta)
+\]
+is defined as the functor right adjoint to the functor
+\[
+\xi\;\longmapsto\;\xi\times\eta.
+\]
+
+To verify formula (13) heuristically (a verification valid ``in due form'' if the three objects under consideration are in fact defined as objects of $\Hot_0\ \ldots$), we take $\Hom_{\Hot}(\xi,-)$ with values in the three members, for $\xi$ given in $\Hot_0$. For the first, we find
+\[
+\begin{aligned}
+\Hom_{\xi}(\eta\times_{\D}M,N) &\;=\;\Hom(\xi\times_{\D}(\eta\times_{\D}M),N)\\
+&\;=\;\Hom((\xi\times\eta)\times_{\D}M,N).
+\end{aligned}
+\]
+For the second
+\[
+\begin{aligned}
+\Hom_{\xi}(M,\hm_{\D}(\eta,N)) &\;=\;\Hom_{\mathcal{A}}(\xi\times_{\D}M,\hm_{\D}(\eta,N))\\
+&\;\simeq\;\Hom_{\mathcal{A}}(\eta\times_{\D}(\xi\times_{\D}M),N)\\
+&\;\simeq\;\Hom_{\mathcal{A}}((\eta\times\xi)\times_{\D}M,N),
+\end{aligned}
+\]
+\msp{page 10}
+and finally for the third
+\[
+\begin{aligned}
+\Hom_{\Hot}(\xi\times\eta,\homext(M,N)) &\;\simeq\;\Hom_{\xi\times\eta}(M,N)\\
+&\;\simeq\;\Hom((\xi\times\eta)\times_{\D}M,N),
+\end{aligned}
+\]
+so always the same thing! No doubt about it, this must work.
+
+If we have to give ourselves the $\homext$ (11) as an additional datum, with in addition a trifunctorial isomorphism (12), we must also give ourselves the trifunctorial isomorphisms (13), \textit{``compatible''} with the isomorphism (12) in the sense of the preceding calculation.
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+
+For example, taking $\eta=$ homotopy type of the circle $S^1$, formulas (13) specialize to
+\[
+\begin{aligned}
+\homext(\Sigma M,N) &\;\simeq\;\homext(M,\Omega N)\\
+&\;\simeq\;\Omega\homext(M,N)\\
+&\;\defeq\;\hm_{\HOT}(S^1,\homext(M,N)).
+\end{aligned}
+\tag*{(14)}
+\]
+
+But this formula in Hot is probably not quite the right one, for the right formalism of $\Omega$, $\Sigma$ is carried out in the categories that are \textit{pointed,} and in particular in the pointed homotopy category $\Hot_{\bullet}$. % [sic] ponctué -> ponctuée, agreement with « catégorie »
+
+I am going to spell out an example, taking the derivator
+\[
+\mathrm{Dér}(A)
+\]
+``derived'' from an abelian category $A$. Thus $\D(e)=$ derived category of $A$. To avoid
+\msp{page 11}
+incidental difficulties here, I am going to assume that $A$ is the category of $k$-modules, $k$ an arbitrary ring.
+
+To every $\xi\in\Ob\Hot$ is associated an ``abelianized''
+\[
+\xi_{\ab}\defeq H_{\bullet}(\xi)\in\underbrace{D(\mathrm{Ab})}_{\text{or }\mathbf{D}(\mathbf{Z}\text{-Mod})}\;,\qquad\quad\text{derived category of abelian groups,}
+\]
+an object which has cohomology only in degree $\le 0$. That said, if $M$ is in $D(k\text{-Mod})$, we shall have
+\[
+\left\{
+\begin{aligned}
+\xi\times_{\D}M &\;\simeq\;\xi_{\ab}\Ltens_{\mathbf{Z}}M\\
+\hm_{\D}(\xi,M) &\;\simeq\;\RHom_{\mathbf{Z}}(\xi_{\ab},M),
+\end{aligned}
+\right.
+\tag*{(15)}
+\]
+a formula which is in cahoots with the Künneth formula for homology
+\[
+(\xi\times\eta)_{\ab}\simeq\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab},
+\tag*{(16)}
+\]
+which again gives a familiar look to formulas (9), which reduce to
+\[
+\left\{
+\begin{aligned}
+\xi_{\ab}\Ltens_{\mathbf{Z}}(\eta_{\ab}\Ltens_{\mathbf{Z}}M) &\;\simeq\;(\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab})\Ltens_{\mathbf{Z}}M\\
+\RHom_{\mathbf{Z}}(\xi_{\ab},\RHom_{\mathbf{Z}}(\eta_{\ab},M)) &\;\simeq\;\RHom_{\mathbf{Z}}(\xi_{\ab}\Ltens_{\mathbf{Z}}\eta_{\ab},M).\qquad\text{(\footnotemark[2])}
+\end{aligned}
+\right.
+\]
+\footnotetext[2]{Also spell out the adjunction formula (7) (p. 4).}
+
+On the other hand, does a $\homext(M,N)$ indeed exist, if $M$, $N$ in $D(k\text{-Mod})$? We think of $\RHom_k(M,N)$, but to make a homotopy type out of it, we have to ``truncate in degrees $>0$''. We could therefore take
+\[
+\homext(M,N)\;\simeq\;\tau_{\le 0}(\RHom_k(M,N)).
+\]
+
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. III, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 2 février 2002
+\msp{page 12}
+Is the fundamental formula (10) then valid? The second member is indeed
+\[
+\Hom_{\Hot}(\xi,H)\;\simeq\;\Hom_{\mathrm{Hotab}}(\xi_{\ab},H)\qquad\quad\text{(\footnotemark[3])}
+\]
+\footnotetext[3]{? ? is this true ? ? ?}
+for $H$ is an abelian object of Hot (cf. the carpet on abelianization \ldots), from there it is in the bag:
+\[
+\begin{aligned}
+\Hom_{\underbrace{\scriptstyle\mathrm{Hotab}}_{\begin{subarray}{l}\approx\ D(\mathbf{Z}\text{-Mod})^{\le 0},\\ \text{\textit{full} subcategory}\\ \text{of }D(\mathbf{Z}\text{-Mod})\end{subarray}}}(\xi_{\ab},\tau_{\le 0}\RHom_k(M,N)) &\;\simeq\;\Hom_{D(\mathbf{Z}\text{-Mod})}(\xi_{\ab},\RHom_k(M,N))\\
+&\;\simeq\;\Hom_{D(k\text{-Mod})}(\xi_{\ab}\times M,N),
+\end{aligned}
+\]
+O.K.
+
+On the other hand, the bifunctor
+\[
+(M,N)\;\longmapsto\;\homext(M,N)\;=\;\tau_{\le 0}\RHom_k(M,N)
+\]
+factors canonically through Hotab and a fortiori through $\Hot_{\bullet}$. The ``right'' $\homext(M,N)$ would here rather be the one in Hotab, or even in the category $D^{-}(\mathbf{Z}\text{-Mod})$, obtained from that one ``by making the translation functor invertible''. It is evident, moreover, that here the $\xi_{\ab}\times_{\D}M$, where $\xi=S^1$, is not ``the right'' suspension, which must be the shift of degrees – $\xi_{\ab}$ should have cohomology only in degree $-1$, and not also in degree $0$.
+
+\end{document}

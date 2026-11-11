@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{lmodern}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Ty}{\mathrm{Ty}}
+\newcommand{\uTy}{\underline{\mathrm{Ty}}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\red}{\text{\upshape red}}
+\newcommand{\triv}{\mathrm{triv}}
+
+\begin{document}
+
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 83}
+
+\section*{8\quad The homotopy lemma for morphisms of intervals}
+
+It is the following:
+
+\textbf{Lemma 1.} \textit{Let $\tau,\tau'\in\mathrm{Ty}$, and let $f,g:\tau\rightrightarrows\tau'$ be two morphisms in $\uTy$. Then $f$, $g$ are homotopic in the category $\uHom\,\underline{\mathrm{int}}(I_\tau,I_{\tau'})$ of increasing morphisms of oriented intervals from $I_\tau$ to $I_{\tau'}$.}
+
+This category could legitimately be denoted by $\uHom_{\uTy}(\tau,\tau')$, or $\uHom(\tau,\tau')$. It is a subcategory of the category $\uHom(I_\tau,I_{\tau'})$ of \textit{all} functors from $I_\tau$ to $I_{\tau'}$, and a full subcategory of the category $\uHom^\varepsilon(I_\tau,I_{\tau'})$ of functors $f$ that are compatible with the datum of the sources and targets, i.e. that make the diagram commute
+\[
+\begin{tikzcd}[column sep=small]
+ & \varepsilon=\{0,1\} \arrow[dl, hook', "{(\sigma_\tau,\beta_\tau)}"'] \arrow[dr, hook, "{(\sigma_{\tau'},\beta_{\tau'})}"] & \\
+I_\tau \arrow[rr, "f"] & & I_{\tau'}.
+\end{tikzcd}
+\]
+
+If $f$, $g$ are in this category (not necessarily increasing morphisms, by the way), an arrow from $f$ to $g$ is thus the datum, for every $i\in I_\tau$, of an arrow $f(i)\xrightarrow{w_i}g(i)$ in $I_{\tau'}$, with the two conditions:
+
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] If $i\in\{0_\tau,1_\tau\}$, $w_i=\mathrm{id}$, and
+\item[b)] the usual commutative square for an arrow $i\longrightarrow j$ in $I_\tau$. (It suffices to have this compatibility for the transition arrows $\ul{u}_i:i-1\longrightarrow i$ in $I_\tau$ ($i\in[1,\operatorname{long}\tau]$).)
+\end{enumerate}
+
+Another way of describing this category $\uHom^\varepsilon$ is to say that it is the category
+\msp{page 84}
+\[
+\underline{\mathrm{Ch}}_\tau(I_{\tau'};0_{\tau'},1_{\tau'})\qquad(\simeq\uHom^\varepsilon(I_\tau,I_{\tau'})),
+\]
+but $\uHom_{\uTy}(\tau,\tau')$ is the full subcategory of this category consisting of the \textit{increasing paths} in $I_{\tau'}$. The homotopy lemma also means that this category $\uHom_{\uTy}(\tau,\tau')$ is always \textit{connected.} It is not necessarily 0-connected, however, for it can be empty. Let us note here, for later, the
+
+\textbf{Proposition 1:} \textit{Let $\tau,\tau'\in\mathrm{Ty}$, let $r$, $r'$ be their useful lengths. For $\mathrm{Hom}_{\uTy}(\tau,\tau')$ to be nonempty, it is necessary and sufficient that one or the other of the following two conditions be satisfied:}
+
+\begin{enumerate}[label={}, leftmargin=*]
+\item[\textit{a)}] $r\geq r'+1$
+
+\printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\item[\textit{b)}] \textit{$r=r'$, and (if $r\neq0$) $\tau$ and $\tau'$ have the same initial direction (so that $\tau_{\red}=\tau'_{\red}$).}
+\end{enumerate}
+
+(Proof $\pm$ immediate.)
+
+Let us note that if $\tau$, $\tau'$ do not have the same initial direction, then every morphism $\tau\longrightarrow\tau'$ is necessarily degenerate on the first critical interval of $I_\tau$. We will thus have $\tau=\Delta_\varepsilon^{l_0}\cdot\tau_0$ (where $l_0$ is the length of the first critical interval, and where $\tau_0$ has \texttt{[the]} initial direction opposite to that of $\tau$), and an isomorphism
+\[
+\uHom(\tau,\tau')\simeq\uHom(\tau_0,\tau'),
+\]
+where this time $\tau_0$, $\tau'$ have the same initial direction. We will therefore assume henceforth that \textit{the initial direction of $\tau$, $\tau'$ is the same.} The condition $\uHom(\tau,\tau')\neq\emptyset$ is now equivalent to $\underline{r\geq r'}$, which we can assume. I will then describe a canonical element
+\msp{page 85}
+$F_0$ of $\uHom(\tau,\tau')$, as follows. Let
+\[
+I_1,I_2,\dots,I_r
+\]
+be the critical intervals of $I_\tau$, and
+\[
+I'_1,I'_2,\dots,I'_{r'}\qquad(r'\leq r)
+\]
+those of $I_{\tau'}$. The functor $F_0$ will come from morphisms of oriented intervals (such as
+\[
+\left\{
+\begin{array}{ccc}
+I_1 & \xrightarrow{f_1} & I'_1\\[4pt]
+I_2 & \xrightarrow{f_2} & I'_2\\[4pt]
+ & \dots & \\[4pt]
+I_{r'} & \xrightarrow{f_{r'}} & I'_{r'}
+\end{array}
+\right.\qquad)
+\]
+and will therefore necessarily be trivial on the critical intervals $I_\alpha$ for $r'<\alpha\leq r$ (there are some if and only if $r>r'$). Since $I_\tau$, $I_{\tau'}$ have the same initial direction, it follows that for $\alpha\in[1,r']$, $I_\alpha$ and $I'_\alpha$ have the same signature (namely $\varepsilon_\alpha=(-1)^{\alpha+1}\varepsilon_1$, where $\varepsilon_1$ is the common signature of $I_1$ and $I'_1$). Thus
+\[
+I_\alpha=\Delta^{l_\alpha}_{\varepsilon_\alpha},\qquad I'_\alpha=\Delta^{l'_\alpha}_{\varepsilon_\alpha},
+\]
+and we define $f_\alpha$ as
+\[
+f_\alpha=\mathfrak{f}_{\varepsilon_\alpha,l'_\alpha}*\triv_\alpha,
+\]
+where
+\[
+\mathfrak{f}_{\varepsilon_\alpha,l'_\alpha}:\Delta_{\varepsilon_\alpha}\longrightarrow\Delta^{l'_\alpha}_{\varepsilon_\alpha}
+\]
+and where
+\[
+\triv_\alpha:\Delta^{l_{\alpha-1}}_{\varepsilon_\alpha}\longrightarrow1. % [sic] l_{\alpha-1} -> l_\alpha-1, the exponent is printed as l with subscript \alpha-1, while I_\alpha = \Delta^{l_\alpha} = \Delta * \Delta^{l_\alpha-1}
+\]
+In other words, for $\varepsilon=+1$ (e.g.) we have to define a morphism of the standard intervals $\underbrace{\mathbf{\Delta}^+_{l_\alpha}}_{=[0,l_\alpha]}\longrightarrow\underbrace{\mathbf{\Delta}^+_{l'_\alpha}}_{=[0,l'_\alpha]}$, and we set (with the numberings internal to $\mathbf{\Delta}_{l_\alpha}$, $\mathbf{\Delta}_{l'_\alpha}$)
+\[
+f_\alpha(0)=0,\qquad f_\alpha(i)=l'_\alpha\ \text{ for }i\in[1,l_\alpha].
+\]
+
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 86}
+The idea then, is to be in the frame of mind of a traveler who, bound to a travel plan in stages described by $\tau$, would like to arrive as quickly as possible at $1_{\tau'}$, starting from $0_{\tau'}$. He will, from the very first stage $\Delta_\varepsilon\subseteq I_1$, go to the end of $I'_1$, regretting not being able to go farther (because of the travel plan). He has to remain inactive until he has reached the moment marked by the final endpoint of $I_1$ (if this is beyond that of his first transition arrow, i.e. if $l_1>1$), then he takes his second big step to the terminal endpoint of $I'_2$ etc. He can hope, at each moment of his journey, to be ahead of (or at least not behind) the other travelers, who might have followed different tactics for advancing. If this hope were justified, that would mean that $F_0$ would be a greatest element of $\uHom(\tau,\tau')$ (\textbf{NB} all these categories $\uHom$ between intervals are ``ordered'', i.e. there is at most one arrow between two objects), i.e. a final object. This would imply that $\uHom(\tau,\tau')$ would even be contractible - something perhaps true, but surely not in so simplistic a way I fear. I have botched it, by the way: $F_0$ probably is indeed a ``greatest'' element, but for the order defined by the numbering of the vertices of $I_{\tau'}$ (so $F\leq G$ if and only if $F(i)\leq G(i)$ $\forall i\in I_\tau$), and not at all for the order defined by the category structure of $\uHom(\tau,\tau')$.
+
+\msp{page 87}
+The idea for proving the connectedness of $\uHom(\tau,\tau')$ is to bring any $F\in\mathrm{Hom}(\tau,\tau')$, by a sequence of simple homotopies, to the normal form. Let us recall that $F$ is given by an increasing sequence of transition arrows
+\[
+\ul{u}_{i_1},\ \ul{u}_{i_2},\ \dots\ ,\ \ul{u}_{i_s},\qquad i_1<i_2<\cdots<i_s,
+\]
+and a sequence of integers $\geq1$
+\[
+\lambda_1,\ \lambda_2,\ \dots\ ,\ \lambda_s
+\]
+with the condition that
+\[
+\Delta^{\lambda_1}_{\varepsilon_{i_1}}\Delta^{\lambda_2}_{\varepsilon_{i_2}}\cdots\Delta^{\lambda_s}_{\varepsilon_{i_s}}=\tau'. \tag*{$(*)$}
+\]
+The $\ul{u}_{i_\alpha}$ are the transition arrows of $I_\tau$ \textit{critical} for $F$, i.e. nondegenerate for $F$, and $\lambda_\alpha$ is the \textit{part} of $\ul{u}_{i_\alpha}$ for $F$. The normalized (``hurried'') functor $F_0$ is distinguished by the following conditions a) and b) \texttt{[and c)]}. First of all:
+
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] The sequence of signs $\varepsilon_{i_1},\varepsilon_{i_2},\dots,\varepsilon_{i_s}$ is ``alternating'', i.e. $\varepsilon_{i_\alpha}\neq\varepsilon_{i_{\alpha+1}}$ ($\alpha\in[1,s-1]$). (This expresses the fact that the hurried traveler does not do in several steps what he could do in a single one.)
+
+Since the first of these signs is necessarily $\varepsilon'_1=\varepsilon_1$, this means that the sequence of signs is the same as that of the $\varepsilon_1$, $\varepsilon_2$, \dots, $\varepsilon_{r'}$ (apart from the length). But better still, that the expression $(*)$ for $\tau'$ is its unique reduced expression, hence that $s=r'$ (useful length of $\tau'$), and that the $\lambda_i$ are the lengths $l'_i$ of the critical intervals of $I_{\tau'}$.
+
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 88}
+Let then $\alpha\in[1,s=r']$, and let us consider the $F$-critical transition arrow $\ul{u}_{i_\alpha}$, let $j_\alpha$ be the index marking the critical interval of $I_\tau$ containing the part of $\ul{u}_{i_\alpha}$ in $I_\tau$,
+\[
+\ul{u}_{i_\alpha}\in\mathrm{Fl}(I_{j_\alpha}),
+\]
+then $F$ induces (increasing) morphisms of oriented intervals
+\[
+F_\alpha=F|I_{j_\alpha}:I_{j_\alpha}\longrightarrow I'_\alpha
+\]
+and is trivial on the other critical intervals (those not of the form $I_{j_\alpha}$). The datum of the $F_\alpha$ thus determines $F$ on the $I_{j_\alpha}$, hence on \textit{all} the $I_j$, hence everywhere (by the operation $*$ of composition by gluing). Moreover condition a) ensures that each $F_\alpha$ is of a rather special nature: a single critical transition arrow $\ul{u}_{i_\alpha}$. Moreover, for us to have $F=F_0$, it will be necessary:
+
+\item[b)] $\forall\alpha\in[1,r']$, $\ul{u}_{i_\alpha}$ is the \textit{first} transition arrow of the critical interval $I_{j_\alpha}$ that contains it.
+
+And finally:
+
+\item[c)] The sequence of critical intervals of $I_\tau$
+\[
+I_{j_1},\ I_{j_2},\ \dots\ ,\ I_{j_{r'}}\qquad(\text{of alternating signs }\varepsilon_1,\ -\varepsilon_1,\ \varepsilon_1,\ \ldots)
+\]
+associated with the $F$-critical arrows, is none other than that
+\[
+I_1,\ I_2,\ \dots\ ,\ I_{r'}
+\]
+of the first $r'$ critical intervals of $I_\tau$, i.e.
+\[
+(j_1,j_2,\dots,j_{r'})=(1,2,\dots,r').
+\]
+\end{enumerate}
+
+\msp{page 89}
+This being seen, the natural idea for ``deforming'' $F$ into $F_0$, is to find a sequence of homotopies that transform $F$ so as to make it acquire successively the characteristics a), b), c) of the hurried traveler. If need be, to get to the goal faster, we will use the induction hypothesis on $n=\operatorname{long}\tau$, that the connectedness theorem is already proved when $I$ is of length $\leq n-1$. (NB This theorem is trivial for $n\leq1$, for then the categories $\uHom(\tau,\tau')$ are all either empty, or one-point.)
+
+\msp{page 90}
+1) We want to ensure a). For this, we use the induction hypothesis, to replace a group of \texttt{[illegible word]} consecutive critical arrows of the same sign, by a single critical arrow. This method only breaks down if the critical arrows are all of the same sign $\varepsilon$ and include $\ul{u}_1$ and $\ul{u}_n$. But the induction hypothesis applied to $I=[1,n-1]\subseteq I_\tau$ reduces us to the case where there are only two critical arrows $\ul{u}_1$ and $\ul{u}_n$. If the first critical interval is not reduced to $\Delta_\varepsilon$, i.e. is of length 2, then the induction hypothesis applied to $I=[1,n]\subseteq I_\tau$ reduces us to the case where the two critical arrows are $\ul{u}_1$ and $\ul{u}_2$, and we are
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+\msp{page 91}
+then reduced to the case where $\boxed{I=\Delta^2_\varepsilon,\ \tau'=\Delta^2_\varepsilon.}$ Otherwise, to the case where $\boxed{\tau=\Delta_\varepsilon\Delta^{l_2}_{-\varepsilon}\Delta_\varepsilon,\ \tau'=\Delta^2_\varepsilon,}$ and where the two critical arrows are again the first and the last, and $\tau'=\Delta^2_\varepsilon$. Those are the two irreducible cases, which will have to be treated separately.
+
+These cases granted, we thus have a way to define $F$ so as to satisfy a). Next we want:
+
+2) To ensure that the sequence of critical intervals $I_{j_1}$, $I_{j_2}$, \dots, $I_{j_{r'}}$ which contains the critical arrows $\ul{u}_{i_1}$, \dots, $\ul{u}_{i_{r'}}$, is the sequence $I_1$, \dots, $I_{r'}$. This is again immediate by the induction hypothesis, the only irreducible case being that where $r'=1$ (a single critical arrow), and where it is a matter of bringing this critical arrow down to $\ul{u}_1$. If $I_1$ is of length $>1$, then we bring it down to $\ul{u}_2$ by the induction hypothesis, and the irreducible case is that where $\boxed{\tau=\Delta^2_\varepsilon,\ \tau'=\Delta_\varepsilon,}$ a critical arrow $\ul{u}_2$, bring it down to $\ul{u}_1$. If on the other hand $I_1$ \texttt{[is]} of length 1, the irreducible case is $\boxed{\tau=\Delta_\varepsilon\Delta^{l_2}_{-\varepsilon}\Delta_\varepsilon,\ \tau'=\Delta_\varepsilon,}$ a critical arrow $\ul{u}_{l_2+2}$, bring it down to $\ul{u}_1$.
+
+Subject to treating the two new irreducible cases, we can deform $F$ into a functor that satisfies a) and c). It remains to normalize each of the $F_\alpha:I_\alpha\longrightarrow I'_\alpha$ ($\alpha\in[1,r']$). Thus we are reduced to $\Delta^n_\varepsilon\longrightarrow\Delta_\varepsilon$: a single critical arrow $\ul{u}_\alpha$, $\alpha\in[1,n]$, to be brought down to $\ul{u}_1$. If $n\geq2$, by the induction hypothesis it comes down to $\ul{u}_2$, case assumed treated in $2^o$). So
+\msp{page 92}
+we win, subject to treating the 4 irreducible cases.
+
+A) Case $\tau=\Delta^2_\varepsilon$, $\tau'=\Delta^2_\varepsilon$ or $\Delta_\varepsilon$.
+
+The category $\uHom(\Delta^2_\varepsilon,\Delta_\varepsilon)$ has two elements, the morphisms $\Delta^2_\varepsilon\longrightarrow\Delta_\varepsilon$ correspond to the transition arrows of $\Delta^2_\varepsilon$ ($=\mathbf{\Delta}^+_2$ or $\mathbf{\Delta}^-_2$). In the case $\varepsilon=+1$, these are the two maps from $\{0,1,2\}$ to $\{0,1\}$, which map 0 to 0, 2 to 1, and 1 either to 1 ($F_0$), or to 1 \texttt{[rather to 0]} ($F_1$).
+\[
+\begin{tikzcd}
+0 \arrow[r] & 1 \arrow[r] & 2
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}
+0 \arrow[r] & 1
+\end{tikzcd}
+\]
+
+We obviously have an arrow $F_1\longrightarrow F_0$ (the hurried traveler arrives faster \ldots). Similar for $\varepsilon=-1$,
+\[
+\uHom(\Delta^2_\varepsilon,\Delta_\varepsilon)\simeq\mathbf{\Delta}^1,\qquad\text{0-connected category.}
+\]
+
+The category $\uHom(\Delta^2_\varepsilon,\Delta^2_\varepsilon)$ has three elements, identified with the set of nonempty subsets of the two-element set $\mathrm{Tr}(\tau)$ of transition arrows $\ul{u}_1$, $\ul{u}_2$ of $\tau$: there are $F_{\ul{u}_1}=F_0$, $F_{\ul{u}_2}$, $F_{\ul{u}_1,\ul{u}_2}$. If $\varepsilon=+1$, these are the increasing maps (nothing more) from $\{0,1,2\}$ to $\{0,1,2\}$, mapping 0 to 0, 2 to 2, and 1 to whatever it likes. % [sic] parties non vide -> parties non vides, agreement
+
+\end{document}

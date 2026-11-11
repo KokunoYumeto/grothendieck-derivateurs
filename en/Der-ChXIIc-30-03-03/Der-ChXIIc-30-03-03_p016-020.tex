@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{marginnote}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\underline{\mathrm{Hom}}}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\id}{\mathrm{id}}
+
+\begin{document}
+
+\printedpage{130}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & C(X') & \\
+C(X) \arrow[ur, "C(i')"] & & X' \arrow[ul, "i_{X'}"'] \\
+ & X \arrow[ul, "i_X"] \arrow[ur, "i'"'] &
+\end{tikzcd}
+\]
+
+is commutative (by functoriality of $i_X : X \longrightarrow C(X)$), and we apply this to the case of $X' = C'(X)$, $i' = i'_X$.
+
+This remark encourages us to make a leap into abstraction, and to introduce the category\msp{page 198}
+\[
+\mathcal{C} = \mathcal{C}_S = \begin{cases}
+\text{category of pairs } (C,i), \text{ with} \\
+C : \Cat/S \longrightarrow \Cat/S \text{ factoring through } \Fib_W S, \\
+i : \id_{\Cat/S} \longrightarrow C \text{ such that } i_X \in W \ \forall\ X \text{ in } \Cat/S,
+\end{cases}
+\tag*{$(*)$}
+\]
+an arrow
+\[
+(C,i) \longrightarrow (C',i')
+\]
+being an arrow
+\[
+C \xrightarrow{u} C' \qquad \text{(in } \Hom(\Cat/S, \Cat/S))
+\]
+making the square \texttt{[read: the diagram]} commutative
+\[
+\begin{tikzcd}[column sep=small]
+ & \id_{\Cat/S} \arrow[dl, "i"'] \arrow[dr, "i'"] & \\
+C \arrow[rr, "u"] & & C'.
+\end{tikzcd}
+\]
+
+In other words, $\mathcal{C}$ is defined as a full subcategory of % [sic] sous-catégiorie -> sous-catégorie, misspelled word
+\[
+\id_{\Cat/S}\backslash\Hom(\Cat/S, \Cat/S),
+\]
+namely the one whose objects $(C,i)$ satisfy the two conditions $(*)$ above (both involving the localizer $W$).
+
+\msp{page 199}These conditions imply this
+
+\begin{enumerate}
+\item[a)] $\forall\ X$ in Cat/$S$, $(u_X : C(X) \longrightarrow C'(X)) \in W$, since
+\[
+\begin{tikzcd}[column sep=small]
+ & X \arrow[dl, "i_X\in W"'] \arrow[dr, "i'_X\in W"] & \\
+C(X) \arrow[rr, "u_X"] & & C'(X),
+\end{tikzcd}
+\]
+\printedpage{131}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+and
+
+\item[b)] if $W$ satisfies W(4b), so that $u_X \in W^{\mathrm{f}}_S$, then this defines an \textit{isomorphism} between $\varphi_C(X)$ and $\varphi_{C'}(X)$ % [sic] ce définit -> ceci définit, missing word
+\[
+\begin{tikzcd}[row sep=small]
+s \arrow[r, mapsto] & \hot_W(C(X)_s) \arrow[d, "\wr\, u_{X,s}"] \\
+s \arrow[r, mapsto] & \hot_W(C'(X)_s).
+\end{tikzcd}
+\]
+\end{enumerate}
+
+Better still, in this case, the composite functor
+\[
+\mathcal{C} \times \Cat/S \longrightarrow \Fib_W S \longrightarrow \HOT^{\mathrm{lc}}_W(S)
+\]
+gives rise to
+\[
+\mathcal{C} \longrightarrow \Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S))
+\]
+which transforms every arrow of $\mathcal{C}$ into \texttt{[an]} \textit{isomorphism,} hence factors through the fundamental groupoid of $\mathcal{C}$,
+\[
+\Pi\mathcal{C} \longrightarrow \Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S)).
+\]
+
+\msp{page 200}As for the functor considered earlier
+\[
+\begin{aligned}
+\mathcal{C} &\quad\longrightarrow\quad \underbrace{\Hom\,(\Cat/S, \Hom(S^\circ, \Hot_W))}_{\simeq\Hom((\Cat/S)\times S^\circ, \Hot_W)} \\
+C &\quad\longmapsto\quad ((X,s) \longmapsto \hot_W(C(X)_s))\,,
+\end{aligned}
+\]
+it is deduced from the preceding one by composing with
+\[
+\begin{tikzcd}[column sep=small]
+\HOT_W(S) \arrow[rr] \arrow[dr, dotted] & & \Hom(S^\circ, \Hot_W), \\
+ & \Hom(\Pi S^\circ, \Hot_W) \arrow[ur, dotted] &
+\end{tikzcd}
+\]
+more exactly, with the functor deduced from it
+\[
+\Hom(\Cat/S, \HOT_W(S)) \longrightarrow \Hom(\Cat/S, \Hom(S^\circ, \Hot_W)).
+\]
+
+We see emerging here a plausible principle of canonicity of isomorphisms, as regards the functors
+\[
+C_W : \Cat/S \longrightarrow \HOT^{\mathrm{lc}}_W(S)
+\]
+defined by the $C \in \mathrm{Ob}\,\mathcal{C}$, by the relation
+\[
+\Pi\mathcal{C} \approx \ \text{one-point category, i.e. } \mathcal{C} \text{ is 1-connected.}
+\]
+
+Moreover, the arguments used so far are of so formal a nature, that the specific aspects of the Modelizer Cat
+\printedpage{132}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 201}seem to play practically no role in them, or a very unobtrusive role.
+
+The square on page 197 shows above all that the category $\mathcal{C}$ is filtering - $(C,i)$, $(C,i')$ both map into $(C'',i'')$, with $C'' = C \circ C'$, and $i'' = (C * i') \circ i = (i * C') \circ i'$. There is even a law of composition in $\mathcal{C}$, by no means commutative or unital, that's for sure, but surely associative, and (if this composition is denoted by $*$) with functorial morphisms % [sic] (C,i') -> (C',i'), the second couple of the following formula is (C',i')
+\[
+\xi \xrightarrow{\alpha_{\xi,\xi'}} \xi * \xi' \xleftarrow{\beta_{\xi,\xi'}} \xi'
+\]
+which ensure the upward filtering character of $\mathcal{C}$. These arrows seem somehow to replace the missing two-sided unit, and one expects them to have the same excellent properties as if one had such a unit, concerning the double composites $(\xi * \xi') * \xi'' \simeq \xi * (\xi' * \xi'')$,
+
+\msp{page 202}
+\[
+(\xi * \xi') * \xi'' \xrightarrow{\sim} \xi * (\xi' * \xi'').
+\]
+
+There are two ways of mapping a binary product
+\[
+\xi * \xi', \qquad \xi' * \xi'', \qquad \xi * \xi''
+\]
+into the ternary product, and well, they must in each of the three cases, be equal. And likewise there are, this granted, again two ways of mapping $\xi$ into the ternary product, factoring either through $\xi * \xi'$, or through $\xi * \xi''$, and likewise for the other two functors $\xi'$, $\xi''$; and there again, these two ways must be equal, in each of these three cases - so $3 + 3 = 6$ equalities in all to write down and to check - we've seen worse!
+
+The computational philosophy should be this: If we have an $n$-fold product
+\[
+\xi_1 * \xi_2 * \cdots * \xi_n
+\]
+(where I dispense with putting in parentheses \dots), for every partial $m$-fold product $(m \in [1, n-1])$\msp{page 203}
+\[
+\xi_{i_1} * \xi_{i_2} * \cdots * \xi_{i_m} \qquad\qquad (i_1 < i_2 < \cdots < i_m),
+\]
+using the associativity isomorphisms and the $\alpha_{\xi,\xi'}$, $\beta_{\xi,\xi'}$ left and right, there is nevertheless only one way of mapping it into the $n$-fold product. I really have the impression that this must be true. (Does this already imply that $\mathcal{C}$ is 1-connected?)
+
+In fact, there is indeed a two-sided unit, but it is not in $\mathcal{C}$, but in the larger category
+\[
+\id_{\Cat/S}\backslash\Hom(\Cat/S, \Cat/S),
+\]
+which itself, like any category
+\[
+\id_{\mathcal{X}}\backslash\Hom(\mathcal{X}, \mathcal{X}),
+\]
+\printedpage{133}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+is a monoidal category, i.e. with an associative \textit{and} unital product. The arrows $\alpha_{\xi,\xi'}$, $\beta_{\xi,\xi'}$ are the arrows that result from the presence of this unit (seeing that $\mathcal{C}$ is a full subcategory), and then it should become clear that we have the said compatibilities.
+
+\msp{page 204}But even a monoidal category, is it 1-connected? For example $B_G$, for $G$ a group say, is indeed a monoidal category and even ``groupal'', a $G$-category (as strict as can be), and yet it is \textit{not} 1-connected!
+
+Of course, we can short-circuit the question of the 1-connectedness of $\mathcal{C}$, by noting that after all we already have a priori a privileged object in
+\[
+\Hom(\Cat/S, \HOT^{\mathrm{lc}}_W(S)),
+\]
+i.e. a canonical functor
+\[
+\Cat/S \longrightarrow \HOT^{\mathrm{lc}}_W(S),
+\]
+namely the composite functor
+\[
+\Cat/S \underbrace{\longrightarrow}_{\substack{\text{localization}\\ \text{by } W_S}} (\Cat/S)W_S^{-1} \longrightarrow \underbrace{\HOT^{\mathrm{lc}}_W(S)}_{\overset{\text{def}}{=} (\Fib_W S)(W^{\mathrm{f}}_S)^{-1}} \quad ,
+\tag*{$(*)$}
+\]
+where the second arrow is defined as the quasi-inverse of
+\[
+(\Fib_W S)(W^{\mathrm{f}}_S)^{-1} \longrightarrow (\Cat/S)W_S^{-1}
+\tag*{$(**)$}
+\]
+
+\msp{page 205}deduced from the inclusion
+\[
+(\Fib_W S, W^{\mathrm{f}}_S) \hookrightarrow (\Cat/S, W_S).
+\]
+
+The fact that $(*)$ is an equivalence, is proved precisely by the fact of the existence of a functor $C : \Cat/S \longrightarrow \Cat/S$ and of an $i : \id_{\Cat/S} \longrightarrow C$, having the properties we know, i.e. from the fact that $C \neq \emptyset$. Moreover, the datum of an object $C$ of $\mathcal{C}$ gives a convenient way of making the quasi-inverse of the said functor explicit. But this quasi-inverse has an existence that is canonical and independent of the choice of a $C$, i.e. of a mode of calculation. The fact that the composite functor $\varphi$ in $(*)$ can be ``lifted'' (up to isomorphism) to a functor % [sic] C \neq \emptyset -> \mathcal{C} \neq \emptyset, the non-emptiness concerns the category \mathcal{C}
+\[
+C : \Cat/S \longrightarrow \Fib_W S
+\]
+between $\varphi(X) = \hot_{W,S}(X)$ and $\hot_{W,S}(C(X))$ and that the isomorphism can be made explicit, it too, by an $X$-functorial arrow
+\[
+i_X : X \longrightarrow C(X), \qquad i_X \in W,
+\]
+in Cat/$S$ itself (and not only in the localized $(\Cat/S)W_S^{-1}$),
+\printedpage{134}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 206}is a particular virtue of the \texttt{[illegible word]}, which should not for all that make us forget the intrinsic character of the arrows $(*)$, independently of any mode of calculation.
+
+{\reversemarginpar\marginnote{$\|$}}% double vertical bar printed in the left margin beside the first lines of this paragraph
+The key to the situation, and to the questions of canonicity, seems to me to be in the fact that $(**)$ is an equivalence of categories - and one must admit that, however familiar and almost banal it has finally become to me, this is a quite remarkable fact and by no means obvious a priori. (But probably one can also get it by the general \textit{fourbis} (gear) à la \textsc{Quillen-Thomason}, without fighting with a formalism of paths \dots) The ``canonical isomorphisms'' that we can establish between a ``theory $C$ '' and a ``theory $C'$ '' (via two different constructions, e.g., of categories of paths, or via the \textsc{Quillen-Thomason} approach, without paths) must always come back to those
+
+\msp{page 207}that we can define via the comparison of the ``theory $C$ '' on the one hand, the ``theory $C'$ '' on the other, with what we get directly from the composite arrow $(*)$ (p. 204). Finally, it seems to me that \textit{the existence} of a theory of the ``homotopy fibers'' (or ``$W$-homotopic'') of an arrow $X \longrightarrow S$ in Cat, results from the equivalence $(**)$ (p. 204), and this theory could probably to a certain extent be developed from there, without a choice of a functor $C$ or of a model category structure in the sense of \textsc{Quillen}. % [sic] qu'on peu définir -> qu'on peut définir, verb form
+
+\section*{4\quad Axiomatization of ``$W$-homotopic fibers''.}
+
+Yesterday's reflection makes me return to the axiomatics in ``categories of models'' % [sic] reflexion -> réflexion, missing accent
+\[
+(\mathcal{M}, W)
+\]
+(\footnote[119]{$W$ satisfies the axiom of weak saturation: isomorphisms \texttt{[are]} in $W$, and if two among $f$, $g$, $gf$ \texttt{[are]} in $W$, the third also.}) more general than Cat, in the spirit of VI (cf. theorem-scholie 2, p. 108-113). For the moment, we are going to suppose only $\mathcal{M}$ stable under fiber products (we do not need a final object). We introduce the set
+\[
+\mathrm{Fib}_W \subseteq \mathrm{Fl}(\mathcal{M})
+\]
+
+\msp{page 208}of \textit{$W$-fibrations} (``ultrastrong'' being understood!) by the condition
+
+\begin{quote}
+$f : X \longrightarrow Y$ is in $\mathrm{Fib}_W$ if and only if the base change functor by $X$,
+\[
+\begin{aligned}
+Y' &\quad\longmapsto\quad X' = X \times_Y Y' \\
+\mathcal{M}/Y &\quad\longrightarrow\quad \mathcal{M}/X
+\end{aligned}
+\]
+\end{quote}
+
+\end{document}

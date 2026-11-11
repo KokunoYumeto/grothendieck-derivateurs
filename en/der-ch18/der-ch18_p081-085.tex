@@ -1,0 +1,237 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\cardred}{\mathop{\textup{card\,red}}\nolimits}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\rbox}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners=4pt,inner sep=2pt](X){\textup{#1}};}
+
+\begin{document}
+
+\printedpage{79}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+The main result in the present section is the following:
+
+\textbf{Theorem 4.9.3.} \textit{Under the general conditions of 4.9.1 for $C$, $\pi_0$, $J$ (in particular} $\cardred J \leqslant \pi_0$\textit{), the fully faithful functor (4.9.3) is an equivalence of categories in each of the following two cases:}
+\begin{itemize}[label={}]
+{\itshape
+\item[a)] $C$ is stable under countable filtering $\varinjlim$.
+\item[b)] There exists a cardinal $\pi_0 < \pi$, and a cardinal $\pi'_0 > \pi_0$ \textup{(}\textbf{\upshape N.B.} We may suppose that $\pi'_0$ is the successor of $\pi_0$, hence $\pi'_0 \leqslant \pi$), such that $C$ is stable under direct limits large relative to $\pi_0$, and of cardinality $\pi'_0$.
+}
+\end{itemize}
+(\footnote[94]{Common case: there exists a limit ordinal $\alpha$, such that 1) $\card \alpha \leqslant \pi_0$. 2) The direct limits \texttt{[of]} type $I_\alpha = \{\beta \mid \beta < \alpha\}$ are representable in $C$.}).
+
+\textbf{Remark 4.9.4.}
+\begin{itemize}[label={}]
+\item[a)] This theorem, case a), contains theorem 4.4.13, part b) (p. 95-96), where one supposes that $C$ is stable under direct limits of cardinality $\leqslant \pi_0$, the hypothesis a) of 4.9.3 being considerably weaker.
+\item[b)] \msp{page 220}I presume that in the absence of a restrictive hypothesis of type a) or b) above, the fully faithful functor (4.9.3) is not always essentially surjective, even in the particular case where $J$ is a finite category, e.g. $J = B_G$, $G = \{\pm 1\}$. For a counterexample in the very closely related case where we take $\cM = \Ind(C)$ (instead of $\Ind_{\pi_0}(C)$), and where we consider the functor (fully faithful if $J$ is a category equivalent to a \textit{finite} category) % [sic] équivalent -> équivalente, agreement with « une catégorie »
+\[
+\Ind(\uHom(J,C)) \longrightarrow \uHom(J,\Ind(C)),
+\]
+I refer to exercise SGA 4 I 8.8.8.
+\end{itemize}
+The main application of theorem 4.9.3 consists in the
+
+\textbf{Corollary 4.9.5.} \textit{Let $\cM$ be an} accessible \textit{category (4.8.7), $J$ a category equivalent to a small category. Then the category $\cM(J^\circ) = \uHom(J,\cM)$ is accessible. More precisely, let $\pi_0$ be a} useful \textit{cardinal for $\cM$ (i.e. such that $\Ind_{\pi_0}(\cM_{\pi_0}) \xrightarrow{\sim} \cM$, i.e. a cardinal such that $\cM$ is $\pi_0$-accessible), let $\pi$ be an infinite cardinal such that $\pi^{\pi_0} = \pi \geqslant \cardred J$} (\footnote[95]{We thus have $\pi = \pi^{\pi_0} \geqslant 2^{\pi_0} > \pi_0$.}), \textit{i.e. $\pi = c^{\pi_0}$, where $c$ is any cardinal $c \geqslant \sup(\pi_0, \cardred J)$, then $\uHom(J,\cM)$ is $\pi$-accessible, more precisely we have an equivalence of categories} % doubt resolved against PDF; see corrections.csv
+\[
+\uHom(J,\cM) \xleftarrow{\ \sim\ } \Ind_\pi(\uHom(J,\cM_\pi)) \ . \tag*{(4.9.5.1)}
+\]
+
+\msp{page 221}We know indeed, with the assumptions made on $\pi_0$, $\pi$, that $\pi$ is useful for $\cM$, i.e. that
+\[
+\cM \xleftarrow{\ \sim\ } \Ind_\pi(\cM_\pi) \ ,
+\]
+on the other hand, $\cM_\pi$ is stable under $\varinjlim$ large relative to $\pi_0$ and of cardinality $\leqslant \pi$. We may therefore apply 4.9.3 b), taking $C = \cM_\pi$, $\pi$ and $\pi_0$ as here (hence $\pi_0 < 2^{\pi_0} \leqslant \pi$), and $\pi'_0 = \pi$.
+
+\printedpage{80}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\textbf{4.9.6} (\footnote[96]{Preliminary results (for the proof of 4.9.3).}). The rest of the present section 4.9 is devoted to the proof of 4.9.3, i.e. to verifying, for $J \longrightarrow \cM$, conditions a), b) of 4.9.2. In all that follows, we therefore fix a
+\[
+\varphi \ : \ J \longrightarrow \cM \ = \ \Ind_\pi(C) \ . \tag*{(4.9.6.1)}
+\]
+We may suppose $J$ reduced, hence small and $\card J \leqslant \pi_0$. We shall consider the functor deduced from the functor (4.9.2.1)
+\[
+\uHom(J,C)/\varphi \longrightarrow \prod_{j \in \Ob J} C/\varphi(j) \ , \tag*{(4.9.6.2)}
+\]
+from which the functors in question are deduced by composing with the projection functors
+\[
+\prod C/\varphi(j) \longrightarrow C/\varphi(j_0) \ . \tag*{(4.9.6.3)}
+\]
+Since the factor categories $C/\varphi(j)$ are filtering (and even large relative to $\pi$), their product is also filtering, and even large relative to $\pi$ (immediate), and likewise
+\msp{page 222}
+for the partial products. It follows at once that the projections (4.9.6.3) are cofinal, by the
+
+\textbf{Lemma 4.9.6.1.} \textit{Let $I$, $I'$ be two categories with $I'$ \textup{0}-connected (e.g. filtering), then the projection functor $pr_1 : I \times I' \longrightarrow I$ is cofinal.}
+
+Indeed, for $i' \in \Ob I'$ \texttt{[rather} $i \in \Ob I$\texttt{]}, we have
+\[
+i\backslash(I \times I') \ \simeq \ (i\backslash I) \times I' \ ,
+\]
+now $i\backslash I$ and $I'$ being 0-connected, the same is true of their product.
+
+\textbf{Lemma 4.9.6.2} (\footnote[97]{Beware, it is not true that an infinite product of 0-connected categories is 0-connected!}). \textit{Let $(I_\alpha)_{\alpha \in A}$ be a family of} filtering \textit{categories (resp. large relative to $\pi$). Then $I_A \stackrel{\text{def}}{=} \prod_{\alpha \in A} I_\alpha$ is filtering (resp. large relative to $\pi$), and for every subset $B \subset A$, the canonical projection $I_A \longrightarrow I_B$ is cofinal.} % [sic] cofinal -> cofinale, agreement with « la projection »
+
+(\footnote[98]{Cf. the elegant proof below, 4.9.6.6.}). The stability of the property ``filtering'' or ``large relative to $\pi$'' by AQT \texttt{[âne qui trotte: at a donkey's trot, i.e. by routine verification]}. We have, if $B' = A\backslash B$, $I_A \simeq I_B \times I_{B'} \longrightarrow I_B$, and we apply lemma 4.9.6.1 to conclude that this functor is cofinal, $I_{B'}$ being filtering, hence 0-connected.
+
+\msp{page 223}Since the functor (4.9.6.3) is cofinal, to establish that (4.9.2.1) is so, it suffices to prove that the functor (4.9.6.2) is so, which we shall do. Let us note moreover that the said functor is \textit{faithful}, for it fits into the commutative square
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\uHom(J,C)/\varphi \arrow[r] \arrow[d] & \prod C/\varphi(j) \arrow[d] \\
+\uHom(J,C) \arrow[r] & C^{\Ob J}\ ,
+\end{tikzcd}
+\]
+\printedpage{81}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+where the vertical arrows and the second horizontal arrow are faithful. Ultimately, to establish theorem 4.9.3, we shall study the \textit{faithful} functor (4.9.6.2)
+\[
+\begin{aligned}
+&f \ : \ \uHom(J,C)/\Phi \ \longrightarrow \ \textstyle\prod_{j \in J_0} C/\varphi(j) \\ % [sic] \Phi -> \varphi, the functor is written \varphi everywhere else
+&\text{(where we have put } J_0 = \Ob J,\ J_1 = \Fl J) \ ,
+\end{aligned}
+\tag*{$(*)$}
+\]
+and we shall prove:
+\begin{itemize}[label={}]
+\item[\textcircled{a}] This faithful functor $(*)$ is \textit{cofinal.}
+\item[\textcircled{b}] The source category $\uHom(J,C)/\varphi$ is large relative to $\pi_0$.
+\end{itemize}
+For this we shall bring out an auxiliary lemma on the cofinality of \textit{faithful} functors:
+
+\msp{page 224}\textbf{Lemma 4.9.6.3} (\footnote[99]{This lemma is part of the general sorites on cofinality and filtering categories.}). \textit{Let $f : I \longrightarrow I'$ be a functor, and let us consider the conditions:}
+{\itshape
+\begin{itemize}[label={}]
+\item[a)] $I$ filtering, $f$ cofinal, i.e. (in the presence of $I$ filtering) $f$ satisfies the familiar conditions \rbox{F 1}, \rbox{F 2}.
+\item[b)] $I'$ is filtering, and the $i'\backslash I$ (for $i' \in \Ob I'$) are filtering.
+\item[b$'$)] $I'$ \textup{0}-connected, satisfies PF (2) \textup{(}\footnote[100]{e.g. PF 2 is satisfied if $I'$ is \textit{ordered}, without having to suppose in advance $I'$ filtering, only 0-connected.}\textup{)} (equalization of double arrows).
+\item[b$''$)] $I'$ is filtering, the $i'\backslash I$ pseudo-filtering, i.e. satisfy condition PF $1'$.
+\item[c)] $I'$ filtering, and $f$ satisfies F 1, as well as the following condition.
+\begin{itemize}[label={}]
+\item[\rbox{F 3}] For every pair $(i_0,i_1)$ of objects of $I$ and every arrow $f(i_0) \xrightarrow{u'} f(i_1)$, there exist an object $i_2$ of $I$, and an arrow $v' : f(i_1) \longrightarrow f(i_2)$, such that $v'$ and $v'u'$ can be lifted to arrows $i_1 \xrightarrow{v} i_2$ and $i_0 \xrightarrow{w} i_2$ (i.e. there exist $i_2$ and $v : i_1 \longrightarrow i_2$, $w : i_0 \longrightarrow i_2$ such that we have $f(v)u' = f(w)$).
+\end{itemize}
+\end{itemize}
+\[
+\begin{tikzcd}
+i_0 \arrow[rr, bend left=20, "w"] & i_1 \arrow[r, "v"] & i_2 % doubt resolved against PDF; see corrections.csv
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}
+f(i_0) \arrow[r, "u'"] \arrow[rr, dotted, bend right=20, "f(w)"'] & f(i_1) \arrow[r, "f(v) = v'"] & f(i_2)
+\end{tikzcd}
+\]
+\begin{itemize}[label={}]
+\item[1)] We have the implications
+\[
+a \iff b \iff b' \implies b'' \iff c \ ,
+\]
+and if $f$ is \textup{faithful} (e.g. $I$ ordered), the five conditions a), b), b$'$), b$''$), c) are equivalent.
+\end{itemize}
+}
+
+\printedpage{82}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+{\itshape
+\begin{itemize}[label={}]
+\item[2)] \msp{page 225}Let $\pi$ be an infinite cardinal, and let us consider the conditions:
+\begin{itemize}[label={}]
+\item[$a_\pi$)] $I$ large relative to $\pi$, $f$ cofinal, i.e. F 1, F 2.
+\item[$b_\pi$)] $I'$ large relative to $\pi$, the $i'\backslash I$ ($i' \in \Ob I'$) also.
+\item[$b_\pi{}''$)] $I'$ large relative to $\pi$, the $i'\backslash I$ ($i' \in \Ob I'$) are $\pi$-pseudo-filtering, i.e. satisfy PS $1_\pi{}'$. % [sic] PS 1_π' -> PF 1_π', the conditions are elsewhere called PF
+\item[$c_\pi$)] $I'$ large relative to $\pi$, and $f$ satisfies F 1 and
+\begin{itemize}[label={}]
+\item[\rbox{F $3_\pi$}] \textup{(}\footnote[101]{\textbf{N.B.} The condition F $3_\pi$ is tautologically satisfied if $f$ is \textit{fully faithful.}}\textup{)}. For every family $(i_\alpha)_{\alpha \in A}$ of objects of $I$, with \textup{card} $A \leqslant \pi$, and $i \in \Ob I$, and a family of arrows $u'_\alpha : f(i_\alpha) \longrightarrow f(i)$, exists $j \in \Ob I$ and an arrow $v' : f(i) \longrightarrow f(j)$, such that $v'$ \textup{and} the $v'u'_\alpha$ come from arrows of $I$, i.e. there exist arrows $v : i \longrightarrow j$, $w_\alpha : i_\alpha \longrightarrow j$ such that $f(v)u'_\alpha = f(w_\alpha)$ $\forall\ \alpha \in A$.
+\end{itemize}
+\end{itemize}
+\[
+\begin{tikzcd}[row sep=huge]
+i_\alpha \arrow[d, dash] \arrow[rr, dotted, bend left=20, "w_\alpha"] & i \arrow[r, dotted, "v"] \arrow[d, dash] & j \arrow[d, dash] \\
+f(i_\alpha) \arrow[r, "u'_\alpha"] & f(i) \arrow[r, "v' = f(v)"] & f(j)
+\end{tikzcd}
+\]
+This being laid down, we have
+\[
+a_\pi \iff b_\pi \implies c_\pi \implies b_\pi{}'' \ ,
+\]
+and if $f$ is faithful, or $I$ ordered, the four conditions $a_\pi$, $b_\pi$, $b_\pi{}''$, $c_\pi$ are equivalent.
+\end{itemize}
+}
+(\footnote[102]{Proof of the proposition given in 4.9.6.7, page 227.}).
+
+\textbf{4.9.6.4. N.B.} In the case of interest to us, where $f$ is the functor $(*)$ (p. 223), we know that $I'$ is large relative to $\pi$. We would like to establish that $I$ is so and that $f$ is cofinal, i.e. condition $\mathrm{a}_\pi$. We shall prove it by taking $\mathrm{b}_\pi$ (which implies $\mathrm{a}_\pi$ since $f$ is faithful). It therefore remains to
+\msp{page 226}
+prove, for the functor $f$ in $(*)$, p. 223, the following two conditions:
+\begin{itemize}[label={}]
+\item[F 1)] For every system of arrows in $\cM$
+\[
+X(j) \xrightarrow{p(j)} \varphi(j) \ , \qquad j \in J_0 = \Ob J, \text{ the } X(j) \text{ in } \Ob C \ ,
+\]
+there exists a functor $F \ : \ J \longrightarrow C$ and $F \xrightarrow{q} \varphi$, finally a system of arrows $X(j) \xrightarrow{u(j)} F(j)$ in the $C/\varphi(j)$, i.e. making the diagrams commutative % [sic] commutatif -> commutatifs, agreement with « les diagrammes »
+\[
+\begin{tikzcd}[column sep=small]
+X(j) \arrow[rr, "u(j)"] \arrow[dr, "p(j)"'] & & F(j) \arrow[dl, "q(j)"] \\
+& \varphi(j)\ . &
+\end{tikzcd}
+\]
+\item[F $3_\pi$)] For every system $(F_\alpha)_{\alpha \in A}$ ($\card A \leqslant \pi$) of elements in $\uHom(C,J)$, and arrows % [sic] \uHom(C,J) -> \uHom(J,C), the F_α are functors J -> C
+\[
+F_\alpha \xrightarrow{p_\alpha} \varphi \qquad \text{in } \uHom(J,\cM),
+\]
+and for $G$ in $\uHom(J,C)$ and $G \xrightarrow{q} \varphi$ in $\uHom(J,\cM)$, given a system of arrows $u_\alpha(j)$,
+\printedpage{83}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[column sep=small]
+F_\alpha(j) \arrow[rr, "u_\alpha(j)", "\text{comm.}"'] \arrow[dr, "p_\alpha(j)"'] & & G(j) \arrow[dl, "q(j)"] \\
+& \varphi(j)\ , &
+\end{tikzcd}
+\qquad u_\alpha(j) \text{ arrow in } C/\varphi(j) \ ,
+\]
+there exists $H \xrightarrow{q} \varphi$ in $\uHom(J,C)$ and an arrow $G \xrightarrow{v} H$ in $\uHom(J,C)/\varphi$, such that for every $\alpha \in A$, the system of composite arrows
+\msp{page 227}
+\[
+\begin{tikzcd}[row sep=huge]
+F_\alpha(j) \arrow[r, "u_\alpha(j)", "\text{comm.}"'] \arrow[dr, dotted, "p_\alpha(j)"'] & G(j) \arrow[r, "v(j)", "\text{comm.}"'] \arrow[d, dotted, "q(j)"] & H(j) \arrow[dl, dotted, "q(j)"] \\
+& \varphi(j) &
+\end{tikzcd}
+\]
+(for $j \in J_0 \in \Ob J$) comes from a \textit{functor} $w_\alpha : F_\alpha \longrightarrow H$. % [sic] J_0 \in \Ob J -> J_0 = \Ob J, J_0 was defined as Ob J
+\end{itemize}
+To prove 4.9.3, we are thus reduced to proving the two preceding propositions F 1), F $3_\pi$), under one of the two conditions a) or b) of 4.9.3.
+
+\textbf{Corollary 4.9.6.5} (of 4.9.6.3). \textit{Let $(f_\alpha : I_\alpha \longrightarrow I'_\alpha)$ be a family of cofinal functors, the source categories being filtering. Then the product functor $f = \prod f_\alpha : I = \prod_\alpha I_\alpha \longrightarrow I' = \prod_\alpha I'_\alpha$ is cofinal.}
+
+Indeed, we must verify that the categories $i'\backslash I$, for $i' \in \Ob I'$, are 0-connected. Now if $i' = (i'_\alpha)_{\alpha \in A}$, we have
+\[
+i'\backslash I \ \simeq \ \prod_\alpha (i'_\alpha\backslash I_\alpha) \ ,
+\]
+and by 4.9.6.3, 1°) a $\Longrightarrow$ c, the $i'_\alpha\backslash I_\alpha$ are filtering, hence their product is filtering
+\msp{page 228}
+(cf. 4.4.6.2), hence 0-connected, q.e.d. % [sic] 4.4.6.2 -> 4.9.6.2, the lemma on products of filtrantes is 4.9.6.2
+
+\textbf{Corollary 4.4.6.6.} \textit{Let $\pi$ be an infinite cardinal. Every product of categories large relative to $\pi$ is large relative to $\pi$.} % [sic] 4.4.6.6 -> 4.9.6.6, numbering of the section and footnote 98
+
+Let $I = \prod_{\alpha \in A} I_\alpha$, let $B$ be a set of cardinality $\leqslant \pi$, we must prove that $I \xrightarrow{\mathrm{diag}_I} I^B$ is cofinal. Now this functor is identified with the product of the similar functors $I_\alpha \longrightarrow I_\alpha^B$, which are cofinal, the source categories being moreover filtering. Thus we may conclude by corollary 4.9.6.5.
+
+\textbf{4.9.6.7.} \textsc{Proof of} 4.9.6.3. (Part 1°.)
+
+a $\Longrightarrow$ b. We already know that a) implies that $I'$ is filtering (SGA 4 I 8.1.3 b). Remains to prove that for every $i' \in \Ob I'$, $i'\backslash I$ is filtering (\footnote[103]{Short-circuit: we already know that $i'\backslash I$ is 0-connected, on the other hand it is \textit{locally} filtering, since coétale over $I$ which is filtering, hence it is filtering.}). Two conditions PF $1'$ and PF 2 to verify (in addition to the fact that $i'\backslash I \neq \emptyset$, which is known by cofinality of $f$, implying that $i'\backslash I$ is 0-connected).
+\begin{itemize}[label={}]
+\item[1)] Let $(i,u')$, $(j,v')$ be two elements of $i'\backslash I$, we must see that they are bounded above by a third element. Now $I$ being filtering, $i$, $j$ are bounded above by $k$. We would therefore be done if we knew that $f(u_1)u' = f(v_1)v'$, say $w'$, for then $(k,w')$ would do.
+\end{itemize}
+
+\end{document}

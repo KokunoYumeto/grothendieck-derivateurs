@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fib}{\underline{\mathrm{Fib}}}
+\newcommand{\Ch}{\mathrm{Ch}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\begin{document}
+
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=large]
+ & \Ch(S) \arrow[d, "p_S"] \arrow[dl, dotted, "\beta_S"'] \arrow[dd, dotted, bend right=40, "\sigma_S"'] \arrow[dr, phantom, "\text{cart.}"]
+ & C_S(X)=C(X) \arrow[l, "\pi"'] \arrow[d, "p'"] \arrow[dll, bend right=40, "\bar f_X=f_{C(X)}"'] \\
+S & S\times S \arrow[l, "\pr_2^S"'] \arrow[d, "\pr_1^S"] \arrow[dr, phantom, "\text{cart.}"]
+ & X\times S \arrow[l, "\pi_1=f_X\times\mathrm{id}_S"] \arrow[d, "\pr_1"] \\
+ & S & X(=S'). \arrow[l, "f_X"'] \arrow[uu, dotted, bend right=40, "i_X"']
+\end{tikzcd}
+\]
+
+It is the inverse image of $(\Ch(S),\pr_1^Sp_S=\sigma_S)$ under $X\xrightarrow{f_X}S$, but we have made the factorization of $\sigma_S$ explicit in the diagram to reinterpret the structural arrow $\bar f_X=f_{C(X)}$, defined as
+\[
+f_{C(X)}=\beta_S\pi(=\pr_2^S\underbrace{p_S\pi}_{=\pi_1p'})
+\]
+by the formula
+\[
+f_{C(X)}=\underbrace{(\pr_2^S\pi_1)}_{\text{projection } \pr_2 \text{ from } X\times S \text{ to } S}p'.
+\]
+
+\msp{page 102}
+Now
+\[
+\begin{aligned}
+&p'\in\mathrm{Fib}, && \text{since obtained from } p_S\in\mathrm{Fib} \text{ by base change } \pi_1,\\
+&(\pr_2 : X\times S\longrightarrow S)\in\mathrm{Fib} && \text{provided that } X\longrightarrow\underbrace{e}_{\text{final object of } \mathcal{M}}\quad \text{is in Fib (same reason),}
+\end{aligned}
+\]
+so if $X\in\Fib\,e$, we have $f_{C(X)}\in\mathrm{Fib}$. Since this is an essential property that we want to have for \textit{every} $X$ in $\mathcal{M}/S$, we are going to make the additional hypothesis
+
+\textbf{Hypothesis 3.} \textit{$\forall\,X\in\mathit{Ob}\,\mathcal{M}$, $X\longrightarrow e$ is in Fib.}
+
+As for
+\[
+i_X : X\longrightarrow C(X),
+\]
+it is obtained from the section $\alpha_S$ of $(\Ch(S),\sigma_S)$ over $S$ by base change $X\longrightarrow S$. Let us now note that
+\[
+\begin{tikzcd}
+\Ch(S) \arrow[r, shift left, "\sigma_S"] \arrow[r, shift right, "\beta_S"'] & S
+\end{tikzcd}
+\qquad\qquad\qquad \text{are in } W,
+\]
+since their composites with $S\xrightarrow{\alpha_S}\Ch(S)$ are the identity, and $\alpha_S\in W$. On the other hand, $\sigma_S=\pr_1^S\circ p$ is in Fib, as a composite of two elements in Fib (NB $S\longrightarrow e$ in Fib by Hypothesis 3). Thus $\sigma_S$, $\beta_S$ are in $\mathrm{Fib}\cap W$. We shall need % [sic] \pr_1^S\circ p -> \pr_1^S\circ p_S, la flèche est notée p_S dans le diagramme et plus haut (\pr_1^Sp_S=\sigma_S)
+
+\textbf{Hypothesis 4.} \textit{The set of arrows $\mathit{Fib}\cap W$ is stable under every base change.}
+
+% foot: Version 9 novembre 2001
+
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 103}
+This therefore implies that
+\[
+C(X)\xrightarrow{\pr_1\pi'}X
+\]
+\texttt{[rather} $\pr_1p'$\texttt{]} is $\in W$ (being obtained from $\sigma_S : \Ch(S)\longrightarrow S$ by base change), so every section $i_X : X\longrightarrow C(X)$ of $C(X)$ over $X$ is in $i_X$ \texttt{[rather in} $W$\texttt{]}. We thus do indeed have a factorization, functorial in $X$
+\[
+\begin{tikzcd}
+ & C(X) \arrow[dr, "\bar f_X=f_{C(X)}"] & \\
+X \arrow[ur, "i_X"] \arrow[rr, "f_X"] & & S
+\end{tikzcd}
+\]
+with
+\[
+i_X\in W,\qquad\qquad f_{C(X)}\in\mathrm{Fib}.
+\]
+This is all we had used to establish
+\[
+(\Fib\,S)W_S^{-1}\xrightarrow{\sim}(\mathcal{M}/S)W_S^{-1}.
+\]
+But it is now a matter, under the hypothesis where we introduce an $\mathcal{L}$, of proving that for every $X$ in $\mathcal{M}/S$, the two arrows
+\[
+\begin{tikzcd}
+C(X) \arrow[r, shift left, "C(i_X)"] \arrow[r, shift right, "i_{C(X)}"'] & C(C(X))
+\end{tikzcd}
+\]
+are equal in $(\mathcal{M}/S)(W_S^{\mathcal{L}})^{-1}$. Since by hypothesis we have $W_S^{\mathcal{L}}=W_S$ in $\Fib\,S$ (Hypothesis 1), and $C(X),\ C(C(X))\in\mathrm{Ob}\,\Fib\,S$,
+\msp{page 104}
+it suffices to prove that the two arrows are equal \textit{in} $(\Fib\,S)W_S^{-1}$. This statement is independent of the datum of $\mathcal{L}$, and we feel like proving it.
+
+Perhaps there is a way to make a geometric language explicit, to find our way around. Let us identify the objects $X$ of $\mathcal{M}$ with the functors $\mathcal{M}^o\longrightarrow(\mathrm{Ens})$ that they define,
+\[
+X\longmapsto(T\longmapsto X(T)=\mathrm{Hom}_{\mathcal{M}}(T,X))\,.
+\]
+Thus, for every $T$ % [sic] pout -> pour, faute de frappe
+\[
+\Ch(X)(T)
+\]
+is a set, called \textit{the set of paths in $X(T)$.} It maps (by $p_X$) functorially (in $T$) to $(X\times X)(T)=X(T)\times X(T)$, i.e. every path $c$ in $X(T)$ has an origin $\sigma(c)$, and a target $\beta(c)$. Moreover, by $\alpha_X$, $X(T)$ maps (functorially in $T$) to the set of paths of $X(T)$: for every element $x$ in $X(T)$, there is therefore a well-defined path (denoted $1_x$ or $\alpha_x$) with source and target $x$, which we call the trivial, or empty, path. This said,
+
+% foot: Version 9 novembre 2001
+
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 105}
+for $X$ in $\mathcal{M}/S$, $C(X)$ represents the following contrafunctor in $\mathcal{M}$: for every $T$ in $\mathcal{M}$,
+\[
+C(X)(T)=\Bigl\{(x,c)\Bigm| x\in X(T),\ c : f_X(x)\xrightarrow{c}s\ \text{ a path in } S(T), \text{ with source } f_X(x)\Bigr\}\,,
+\]
+where $f_X : X\longrightarrow S$ is the structural morphism.
+
+The ``calculations'' done, two (?) days ago show that we likewise have an interpretation
+\[
+\begin{aligned}
+C(C(X))(T)=\Bigl\{(x,c,c')\Bigm| x\in X(T),\ f_X(x)\xrightarrow{c}s\xrightarrow{c'}t,\\
+c\text{ a path with source } f_X(x),\\
+c'\text{ a path with source equal to } \beta(c)\Bigr\}
+\end{aligned}
+\]
+and the maps $i_{C(X)}$ and $C(i_X)$ are identified respectively with
+\[
+\begin{aligned}
+(x,c)\quad&\longmapsto\quad(x,1_{f(x)},c)\quad f(x)\xrightarrow{1_x}f(x)\xrightarrow{c}s\\
+(x,c)\quad&\longmapsto\quad(x,c,1_{\beta(c)})\quad f(x)\longrightarrow s\xrightarrow{1_s}s
+\end{aligned}
+\]
+\texttt{[rather} $f(x)\xrightarrow{1_{f(x)}}f(x)\xrightarrow{c}s$\texttt{]}. To compare them, we have an irresistible urge to write
+\[
+c\circ 1_x=1_s\circ c=c,
+\]
+but do we have the right? We would have to be able to compose the paths, and that is very, very difficult!
+
+But we can always axiomatize. We therefore suppose that for $X$ in $\mathcal{M}$, $\Ch(X)$
+\msp{page 106}
+is not just an amorphous structure of (so-called) ``paths'' in $X$, just the datum of the source and target of the paths and of the trivial paths (these structures on $\Ch(X)$ depending functorially on $X$), but that we have a composition of paths when they are ``composable'', i.e. an arrow from a fiber product
+\[
+(c,c')\longmapsto c'\circ c : (\Ch(X),\beta_X)\times_X(\Ch(X),\sigma_X)\xrightarrow{\pi_X}\Ch(X),
+\]
+i.e. we can compose paths in $X(T)$
+\[
+x\xrightarrow{c}y\xrightarrow{c'}z
+\]
+if and only if $\text{target}\,c=\text{source}\,c'$, and moreover we of course require that $\text{source}(c'\circ c)=\text{source}\,c$, $\text{target}(c'\circ c)=\text{target}\,c'$, which is expressed by a commutative diagram
+\[
+\begin{tikzcd}
+(\Ch(X),\beta_X)\times_X(\Ch(X),\sigma_X) \arrow[rr] \arrow[dr] & & \Ch(X) \arrow[dl, "p_X"] \\
+ & X\times X. &
+\end{tikzcd}
+\]
+
+% foot: Version 9 novembre 2001
+
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+The natural thought is that with this composition and these identities, the $X(T)$, $\Ch(T)$ become the objects and the arrows of a \textit{category} - i.e. that $(X,\Ch(X),\alpha_X,p_X,\pi_X)$ define a structure of ``category in $\mathcal{M}$''. But for what we want to do now, we probably do not need everything, i.e.
+\msp{page 107}
+the relevant axiom of associativity of composition and the one on units, but only that the $1_x$ be two-sided units for composition.
+
+Supposing this additional structure on the functor Ch given, and returning to the consideration of the associated functors % [sic] supossant -> supposant, faute de frappe ; foncteurs -> foncteur, accord avec « du » et « associé »
+\[
+C : \mathcal{M}/S\longrightarrow\Fib\,S,
+\]
+we find a canonical morphism
+\[
+C(C(X))\xrightarrow{\gamma_X}C(X)
+\]
+by
+\[
+(x,c,c')\longmapsto(x,c'\circ c),
+\]
+and the axiom of two-sided units assures us at once that
+\[
+(\ast)\qquad\qquad\gamma_X\circ i_{C(X)}=\gamma_X\circ C(i_X)=\mathrm{id}_{C(X)}.
+\]
+Since $i_{C(X)}\in W$, this already proves that $\gamma_X\in W$, so $\gamma_X\in W_S$. So $\gamma_X$ becomes an isomorphism in $(\Fib\,S)W_S^{-1}$, and the relation $(\ast)$ does indeed imply $i_{C(X)}=C(i_X)$ in the localized category, q.e.d.
+
+I am going to summarize again what I have worked out.
+
+\msp{page 108}
+\textbf{Theorem-Scholie 2.} Let $\mathcal{M}$ be a category, equipped with two sets of arrows
+\[
+W,\ \mathrm{Fib}\subseteq\mathrm{Fl}(\mathcal{M}).
+\]
+We make the following hypotheses.
+
+\begin{enumerate}[label={}]
+\item[$1^o$] $W$ contains the isomorphisms, if $f$, $g$ are composable, if two of $f$, $g$, $gf$ are in $W$, the third also.
+\item[$2^o$] $\mathcal{M}$ is stable under finite $\varprojlim$, Fib contains the isomorphisms, is stable under composition and under base change (\footnote[59]{These stability hypotheses on Fib will be used only in II, and even then only in case A), taken up again in toto in the form A$'$ below (p.~112).}).
+\end{enumerate}
+
+For $S$ in $\mathcal{M}$, \fbox{$\Fib\,S$} denotes the full subcategory of $\mathcal{M}/S$ formed by the $X\longrightarrow S$ which are in Fib. We distinguish two different versions of an axiom of factorization of an arbitrary $f : X\longrightarrow S$ in $\mathcal{M}$ as $X\xrightarrow{i}\bar X\xrightarrow{\bar f}S$, with $i\in W$, $\bar f\in\mathrm{Fib}$.
+
+% foot: Version 9 novembre 2001
+
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+
+\begin{enumerate}[label={}]
+\item[A)] We are given, for every $S$ in $\mathcal{M}$, a functor
+\[
+\mathcal{M}/S\longrightarrow\mathcal{M}/S\qquad\qquad X\longmapsto C(X)\ \ (=\bar X)
+\]
+and a morphism of functors in $\mathrm{X}$
+\[
+X\xrightarrow{i_X}C(X)
+\]
+with
+\[
+i_X\in W,\qquad\qquad C(X)\in\mathrm{Ob}\,\Fib\,S.
+\]
+\item[B)] Denoting by
+\[
+\mathrm{Cof}_0\subseteq\mathrm{Fl}\,\mathcal{M}
+\]
+the set of arrows of $\mathcal{M}$ which have the right lifting property \texttt{[rather left]} with respect to Fib, we suppose ``in the style of \textsc{Quillen}'', that every arrow $f : X\longrightarrow S$ factors as
+\[
+X\xrightarrow{i_X}C(X)\xrightarrow{\bar f}S,
+\]
+with
+\[
+i\in\mathrm{Cofib}_0\cap W,\qquad\qquad\bar f\in\mathrm{Fib}.
+\]
+\texttt{[where} $\mathrm{Cof}_0=\mathrm{Cofib}_0$\texttt{]}.
+\end{enumerate}
+
+\msp{page 109}
+Let us take $S$ in $\mathcal{M}$, consider
+\[
+W_S\subseteq\mathrm{Fl}(\mathcal{M}/S)
+\]
+the set of arrows induced by $W$ (
+\begin{tikzcd}[column sep=small, row sep=small, baseline={([yshift=.5ex]current bounding box.south)}]
+f : X \arrow[rr] \arrow[dr] & & Y \arrow[dl] \\
+ & S &
+\end{tikzcd}
+is in $W_S$ if and only if it is on forgetting $S$), and let us denote by $W_S$ (by abuse of notation) the set of arrows induced by $W_S$ on $\Fib\,S$, or more generally on any full subcategory $\mathcal{F}$ of $\mathcal{M}/S$, with
+\[
+\Fib\,S\subseteq\mathcal{F}\subseteq\mathcal{M}/S.
+\]
+
+\circled{I} The functor
+\[
+(\ast)\qquad\qquad(\Fib\,S)W_S^{-1}\xrightarrow{\sim}(\mathcal{M}/S)W_S^{-1}
+\]
+induced by the inclusion is an equivalence of categories, more generally for every $\mathcal{F}$ as above
+\[
+(\Fib\,S)W_S^{-1}\longrightarrow\mathcal{F}W_S^{-1}\longrightarrow(\mathcal{M}/S)W_S^{-1}
+\]
+are equivalences of categories. A quasi-inverse functor is obtained (in both cases A) and B)) with the help of the functor
+\[
+\gamma : \mathcal{M}/S\longrightarrow(\Fib\,S)W_S^{-1}
+\]
+
+% foot: Version 9 novembre 2001
+
+\end{document}

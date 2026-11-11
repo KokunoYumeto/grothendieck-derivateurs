@@ -1,0 +1,222 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\frenchsetup{AutoSpacePunctuation=false}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fibu}{\underline{\mathrm{Fib}}\,}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\WL}{W_S^{\mathcal{L}}}
+\newcommand{\defeq}{\overset{\text{def}}{=}}
+
+\begin{document}
+
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+\mathcal{F}W_S^{-1} \arrow[r, shift left, "\delta"] & (\mathcal{M}/S)W_S^{-1}, \arrow[l, shift left, "\gamma"]
+\end{tikzcd}
+\]
+we must see that they are quasi-inverse to one \msp{page 94} another.
+
+On the $\mathcal{M}/S$ side: we must compare $X$ and $\delta\gamma(X) = C(X)$, this is done by
+\[
+i_X : X \longrightarrow C(X)
+\]
+which is in $W_S$, hence the isomorphism in the localized category
+\[
+X \simeq \delta\gamma(X) \qquad \text{in } (\mathcal{M}/S)W_S^{-1}.
+\]
+We must check that this is functorial in $X$.
+
+On the $\mathcal{F}$ side, compare $X$ and $\gamma\delta(X)$, i.e. $X$ and $C(X)$. Same story, we choose $i_X : X \simeq C(X) = \gamma\delta(X)$. Functoriality to be checked.
+
+It is now a matter of introducing a finer localized category of $\mathcal{M}/S$. For this, we suppose given another class of morphisms, I call it $\mathcal{L}$ (as in ``localization'')
+\[
+\mathcal{L} \subseteq \mathrm{Fl}(\mathcal{M}),
+\]
+e.g. in the case of $\mathcal{M} = \mathrm{Cat}$, $\mathcal{L}$ will consist of the local isomorphisms (\footnote[55]{Or also, \textit{smooth} morphisms. That should give the same result.}) (if it is a matter of defining $W_S^{\mathrm{g}}$), or the colocal isomorphisms (\footnote[56]{Or also proper morphisms.}) (if it is a matter of defining $W_S^{\mathrm{d}}$). We shall assume that $\mathcal{L}$ contains the isomorphisms, and $\mathcal{L}$ stable under composition (\footnote[57]{Perhaps this is not needed.}), but not under base change. We then define
+\[
+\WL \subseteq \mathrm{Fl}(\mathcal{M}/S)
+\]
+by
+\[
+f \in \WL \overset{\text{def}}{\Longleftrightarrow} (f \times_S S') \in W,\ \ \forall (S' \longrightarrow S) \in \mathcal{L}.
+\]
+\msp{page 95}
+
+Since $\mathcal{L}$ contains $\mathrm{id}_S$, we shall have
+\[
+\WL \subseteq W_S,
+\]
+hence a canonical functor
+\[
+\underbrace{(\mathcal{M}/S)(\WL)^{-1}}_{\defeq \Ho_W^{\mathcal{L}}(S)} \xrightarrow{\ \rho\ } \underbrace{(\mathcal{M}/S)(W_S)^{-1}}_{\defeq \Ho_W^{\mathrm{lc}}\mathcal{L}(S)} % [sic] \Ho_W^{\mathrm{lc}}\mathcal{L}(S) -> \Ho_W^{\mathrm{lc}}(S), cf. the definition \Ho_W^{\mathrm{lc}}(S) \defeq (\mathcal{M}/S)W_S^{-1} on p. 61
+\]
+% foot: Version 9 novembre 2001
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+which is a localization functor. I would like to define a functor in the reverse direction. For this, it is natural to assume (by analogy with the situation in Cat)
+
+\textbf{Hypothesis 1.} \textit{On $\Fibu S$, $W_S = \WL$, i.e. if $f : X \longrightarrow Y$ is in $W$ and $X$, $Y$ in $\Fibu S$, then for every base change $S' \longrightarrow S$ which is in $\mathcal{L}$, $f' : X_{S'} \longrightarrow Y_{S'}$ is still in $W$.}
+
+In the Quillen context, this hypothesis has a definite tendency to be satisfied whatever $\mathcal{L}$ may be, i.e. for \textit{every} base change $S' \longrightarrow S$ without restriction. In fact it suffices that the Quillen structure be ``proper'', more precisely (and less restrictively), that a \texttt{[morphism]} $\in W$ remain so after base change by a morphism $\in$ Fib. Let us single this out as a Lemma. % [sic] pout -> pour, misprint
+
+\textbf{Lemma.} \textit{The hypothesis is satisfied if we assume} \msp{page 96} \textit{that $F =$ Fib and $W$ are related by the additional condition (besides the factorization $i_X$): for every cartesian square}
+\[
+\begin{tikzcd}
+X \arrow[d, "f"'] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S & S', \arrow[l, "p"']
+\end{tikzcd}
+\]
+\textit{if $f$ is in Fib and $p$ in $W$, then $q \in W$.}
+
+\textsc{Proof}. Let
+\[
+\begin{tikzcd}
+X \arrow[rr, "f"] \arrow[dr, "p"'] & & Y \arrow[dl, "q"] \\
+& S &
+\end{tikzcd}
+\]
+with $p$, $q \in \mathrm{Fib}$, $f \in W$, let us show that for \textit{every} base change $g : S' \longrightarrow S$, $f_{S'} : X_{S'} \longrightarrow Y_{S'}$ is still in $W$. We factor $g$ as
+\[
+\begin{tikzcd}
+S' \arrow[r, "i"] \arrow[rr, bend right=15, "g"'] & \bar{S}' \arrow[r, "\bar{g}"] & S,
+\end{tikzcd}
+\qquad\qquad i \in W,\ g \in \mathrm{Fib},
+\]
+\texttt{[rather} $\bar{g} \in$ \texttt{Fib]} and we are reduced to proving that the assertion is true in the two special cases where $g \in \mathrm{Fib}$, or $g \in W$. The case $g \in \mathrm{Fib}$ follows at once from the hypothesis of the Lemma (applied to the cartesian square
+\[
+\begin{tikzcd}
+X' \arrow[r, "f'"] \arrow[d, "q"'] & Y' \arrow[d, "p"] \\
+X \arrow[r, "f"] & Y,
+\end{tikzcd}
+\]
+% foot: Version 9 novembre 2001
+\printedpage{61}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+where $p \in \mathrm{Fib}$.)
+
+In the case where $S' \longrightarrow S$ is in $W$, it follows from the hypothesis of the Lemma applied to
+\[
+\begin{tikzcd}
+Y \arrow[d, "\in\mathrm{Fib}"] & Y' \arrow[l, "p"'] \arrow[d] \\
+S & S' \arrow[l]
+\end{tikzcd}
+\]
+that \msp{page 97} $p : Y' \longrightarrow Y$ is $\in W$, and likewise for $q : X' \longrightarrow X$, and $f \in W$ again implies $f' \in W$.
+
+Let us return to the hypothesis p. 95. We shall therefore have a functor
+\[
+(\Fibu S, W_S = \WL) \longrightarrow (\mathcal{M}/S, \WL),
+\]
+hence for the localized categories a horizontal functor
+\[
+\begin{tikzcd}
+(\Fibu S)W_S^{-1} \arrow[r, "i_0"] \arrow[d, "\approx"] & (\mathcal{M}/S)(\WL)^{-1} \defeq \Ho_W^{\mathcal{L}}(S) \arrow[dl] \\
+\Ho_W^{\mathrm{lc}}(S) \defeq (\mathcal{M}/S)W_S^{-1} &
+\end{tikzcd}
+\]
+which factors the vertical functor induced by the inclusion $(\Fibu S, W_S) \longrightarrow (\mathcal{M}/S, W_S)$ - a functor which we have seen (in the two cases considered) is an equivalence. By inverting the latter and composing it with $i_0$, we thus find a functor
+\[
+\underbrace{\Ho_W^{\mathrm{lc}}(S)}_{\defeq (\mathcal{M}/S)W_S^{-1}} \quad \xrightarrow{\ i\ } \quad \underbrace{\Ho_W^{\mathcal{L}}(S)}_{\defeq (\mathcal{M}/S)(\WL)^{-1}} \qquad ,
+\]
+such that
+\[
+\rho i \simeq \mathrm{id},
+\]
+hence a \textit{retraction} of $\Ho_W^{\mathcal{L}}(S)$ onto $\Ho_W^{\mathrm{lc}}(S)$. We expect $i$ to be fully faithful, and more precisely still, \msp{page 98} that $\rho$ and $i$ be adjoint, $i$ being the right adjoint of $\rho$:
+\[
+\begin{tikzcd}
+\Ho_W^{\mathrm{lc}}(S) \arrow[r, shift right, "i"'] & \Ho_W^{\mathcal{L}}(S), \arrow[l, shift right, "\rho"']
+\end{tikzcd}
+\]
+% foot: Version 9 novembre 2001
+\printedpage{62}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+i.e. we seek
+\[
+\begin{aligned}
+i\rho &\quad \underbrace{\xleftarrow{\ i\ }}_{\textit{not}\ \text{iso}} \quad \mathrm{id} \quad \text{in } \Ho_W^{\mathcal{L}} \quad (\text{localization by } \WL)\\
+\rho i &\quad \underbrace{\xrightarrow{\ p\ }}_{\text{iso}} \quad \mathrm{id} \quad \text{in } \Ho_W^{\mathrm{lc}} \quad (\text{localization by } W_S),
+\end{aligned}
+\]
+\texttt{[too many} $i$\texttt{'s]} so for $X$ in $\mathcal{M}/S$, we seek
+\[
+\begin{aligned}
+i_X :&\quad X \quad \longrightarrow \quad C(X) \quad \text{at least in } (\mathcal{M}/S)(\WL)^{-1}\\
+p_X :&\quad X \quad \longleftarrow \quad C(X) \quad \text{at least in } (\mathcal{M}/S)(W_S)^{-1}.
+\end{aligned}
+\]
+We shall choose for $i_X$ the ``canonical'' arrow from $X$ to $C(X)$, defined in $\mathcal{M}/S$ itself, without having to localize. But in the ``Quillen case'' (when $C$ is not given as a functor $\mathcal{M}/S \longrightarrow \Fibu S$), we must see that this $i_X$ is functorial in $X$, when we look at it in the localized category $(\mathcal{M}/S)W_S^{-1}$. But this is contained in the construction of $C$ as a \textit{functor}
+\[
+\mathcal{M}/S \longrightarrow (\Fibu S)W_S^{-1}.
+\]
+We shall note that $i_X$ is in $W_S$ and no more, not in $\WL$, hence does not in general define an isomorphism of $\Ho_W^{\mathcal{L}}$.
+
+We define $p_X$ with the help of $i_X$, as the inverse of $i_X$ \textit{in} $(\mathcal{M}/S)W_S^{-1}$, which exists since \msp{page 99} $i_X$ is in $W_S$, hence \texttt{[is an]} isomorphism in $(\mathcal{M}/S)W_S^{-1} = \Ho_W^{\mathrm{lc}}$, and $p$ is therefore \texttt{[an]} isomorphism. We thus recover $\rho i \simeq \mathrm{id}$, hence that $\rho$ is a \textit{retraction} of $\Ho_W^{\mathcal{L}}$ onto $\Ho_W^{\mathrm{lc}}$.
+
+To prove the adjunction, proceeding as in the case of Cat, we are reduced to proving that for every $X$,
+\[
+\left\{
+\begin{aligned}
+&C(i_X) = i_{C(X)} : C(X) \rightrightarrows C(C(X))\\
+&\textit{in } \Ho_W^{\mathcal{L}} \ (\text{localization by } \WL).
+\end{aligned}
+\right.
+\]
+I had managed this in Cat, using a morphism
+\[
+C(C(X)) \xrightarrow{\ c\ } C(X)
+\]
+(essentially, a path composition morphism) such that $c \in \WL$, and that $c \circ C(i_X) = c \circ i_{C(X)}$. That had looked very delicate, for it was with great difficulty that I had managed to construct a reasonable functor \underline{Ch} (``paths''), where we could really and truly compose paths! For the moment I give up axiomatizing the properties of the functor \underline{Ch} that I need to make the machine work (I should come back to this shortly). I am going to begin instead with the ``Quillen case'', with $i_X \in \mathrm{Cof}_0$.
+% foot: Version 9 novembre 2001
+
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. VI, Édition des Universités de Montpellier II et Paris VII
+\msp{page 100}
+
+We take up again the description of the ``functor'' $C$ (with values in $(\Fibu S)W_S^{-1}$, and then without quotation marks), we find that $C(i_X)$, where
+\[
+X \xrightarrow{u = i_X} X' = C(X)
+\]
+is defined simply (in $(\Fibu S)W_S^{-1}$) by ``the'' arrow $C(u)$ making the diagram commute (in $\Fibu S$)
+\[
+\begin{tikzcd}
+X \arrow[r, "u\ (=i_X)"] \arrow[d, "i_X"'] & X'\ (= C(X)) \arrow[d, "i_{X'}\ (=i_{C(X)})"] \\
+C(X) \arrow[r, "C(u)\ (=C(i_X))"] & C(X')\ (= C(C(X))),
+\end{tikzcd}
+\]
+so that in $\mathcal{M}/S$ we have the diagram
+\[
+\begin{tikzcd}
+X \arrow[r, "\overbrace{i_X}^{\in\mathrm{Cof}_0\cap W}"] & \overbrace{C(X)}^{\in\mathrm{Ob}\,\Fibu S} \arrow[r, shift left, "i_{C(X)}"] \arrow[r, shift right, "C(i_X)"'] & \overbrace{C(C(X))}^{\in\mathrm{Ob}\,\Fibu S},
+\end{tikzcd}
+\]
+commutative, i.e. $i_{C(X)}i_X = C(i_X)i_X$. The corollary on page 92 tells us that the arrows $i_{C(X)}$ and $C(i_X)$ are equal in $(\Fibu S)W_S^{-1}$. But by hypothesis (p. 95), in $\Fibu S$ we have $W_S = \WL$, so the arrows are equal in $(\Fibu S)(\WL)^{-1}$, and a fortiori in $(\mathcal{M}/S)(\WL)^{-1}$, and we win.
+
+Let us see what we can do in the case where we have a \textit{functor} $C$ at our disposal. We assume of course that this functor in $\mathcal{M}/S$ \msp{page 101} is not tied to the particular $S$ in $\mathcal{M}$ that we have chosen as base, that its construction comes in \textsc{Cartan-Serre} fashion from a functor
+\[
+X \longmapsto \mathrm{Ch}(X) : \mathcal{M} \longrightarrow \mathcal{M},
+\]
+(``path object'') and functorial morphisms
+\[
+X \xrightarrow{\alpha_X} \mathrm{Ch}(X) \xrightarrow{p_X} X \times X, \qquad\qquad \boxed{p_X\alpha_X = \mathrm{diag}_X}
+\]
+(\footnote[58]{\textbf{NB} We put $\mathrm{pr}_1 \circ p_X = \sigma_X$, $\mathrm{pr}_2 \circ p_X = \beta_X$ (``source'' and ``target'' arrows for the object $X$).}). I presume we shall have to assume above all the following
+
+\textbf{Hypothesis 2.} \textit{$\alpha_X \in W$, $p_X \in$} Fib.
+
+For an $X$ over $S$, we shall construct $C_S(X)$ or $C(X)$ as follows
+% foot: Version 9 novembre 2001
+
+\end{document}

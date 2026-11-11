@@ -1,0 +1,249 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+
+\begin{document}
+
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\[
+\left\{
+\begin{aligned}
+&\left.\begin{aligned} f_U &: U \longrightarrow X' \\ f_T &: T \longrightarrow X' \end{aligned}\right\}\text{arrows in Cat}\\
+&u : H \longrightarrow H_{X'}(f_U^{\circ}\times f_T),\ \text{arrow in } \uHom(U^{\circ}\times T,\Ens),
+\end{aligned}
+\right.
+\tag*{\texttt{[}$(*)$\texttt{]}}
+\]
+\textit{where for every $X'$ in} Cat\textit{, we have put}
+\[
+H_{X'} = ((x,y)\longmapsto \Hom_{X'}(x,y)) : X'^{\circ}\times X' \longrightarrow \Ens.
+\]
+
+Surely we will even have an isomorphism of categories
+\[
+\uHom(X,X') \simeq \text{category of triples } (f_U,f_T,u) \text{ as in } (*).
+\]
+
+\subsection*{1.4\quad Construction of amalgamated sums from an open immersion where closed.} % [sic] où fermée -> ou fermée, conjonction « ou » et non adverbe « où »
+
+For a construction of a sort of amalgamated sum, in terms of a triple $(X,U,T)$ $+\ \ldots$, \msp{page 67} which would be symmetric in $U$, $T$, I feel like looking first at the ``mixed'' situation, of a diagram in solid lines
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[d, dotted, "f"] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[r, hook, dotted, "i'"] & X' & T', \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+which we would like to complete ``canonically'', if it can be done, to a morphism of triples (i.e. to an arrow in $\mathcal{T}$). The natural idea is that the $X'$ which fits into it would be the direct limit, in Cat, of the initial diagram. If $T'=T$, $f_T=\id_T$, this therefore means that $X'$ identifies with the amalgamated sum $X\amalg_U U'$, and conversely if $U'=U$, $f_U=\id_U$.
+
+Let us denote by $X'$ the amalgamated sum \texttt{[rather the direct limit]}, and make explicit, for any $X''$ in Cat, the set of arrows $g$ from $X'$ to $X''$, as a functor in $X''$. It is the set of triples
+\[
+(g_X, g_{U'}, g_{T'}) \qquad
+\left\{\begin{aligned} g_X &: X \longrightarrow X'' \\ g_{U'} &: U' \longrightarrow X'' \\ g_{T'} &: T' \longrightarrow X''\end{aligned}\right.
+\qquad \text{with} \quad
+\begin{aligned} g_X\circ i &= g_{U'} f_U \\ g_X \circ j &= g_{T'} f_T. \end{aligned}
+\tag*{$(*)$}
+\]
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[dd, "g_X"'] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[dr, "g_{U'}"'] & & T' \arrow[dl, "g_{T'}"] \\
+& X'' &
+\end{tikzcd}
+\]
+
+Note that for such a triple, $g_X$ is partially known already in terms of $g_{U'}$, $g_{T'}$, by its restrictions $g_X\circ i$ and $g_X\circ j$ to $U$ and $T$ respectively, by the formulas
+\[
+g_U = g_{U'}f_U, \qquad g_T = g_{T'}f_T.
+\]
+
+\msp{page 68} Thus the datum of a triple $(*)$ is equivalent to that of a triple
+\[
+(g_{U'}, g_{T'}, g_X) \qquad
+\left\{\begin{aligned}
+&g_X \text{ an arrow } X\longrightarrow X'' \text{ corresponding to}\\
+&g_U = g_{U'}\circ f_U \text{ and } g_T = g_{T'}\circ f_T \text{ already given (via } g_{U'}\text{, } g_{T'}\text{),}
+\end{aligned}\right.
+\]
+so by virtue of 1.3. this corresponds to
+\[
+(g_{U'}, g_{T'}, u) \qquad
+\left\{\begin{aligned}
+g_{U'} &: U' \longrightarrow X''\\
+g_{T'} &: T' \longrightarrow X''\\
+u &: H \longrightarrow \underbrace{H_{X''}\left((g_{U'}\circ f_U)^{\circ}\times(g_{T'}\circ f_T)\right)}_{(u,t)\longmapsto \Hom_{X''}(g_{U'}f_U(u),g_{T'}f_T(t))}.
+\end{aligned}\right.
+\tag*{$(*)$}
+\]
+We are going to interpret the datum of $u$, in terms of a functor
+\[
+F^{*} = (H'\longmapsto H'\circ F) : \uHom(U'^{\circ}\times T',\Ens) \longrightarrow \uHom(U^{\circ}\times T,\Ens)
+\tag*{$(**)$}
+\]
+where
+\[
+F : U^{\circ}\times T \longrightarrow U'^{\circ}\times T' \qquad \text{is given by } F = f_U^{\circ}\times f_T.
+\]
+We have an object $H''=H''_{g_{U'},g_{T'}}$ of the source category of $(**)$ determined in terms of the pair $(g_{U'},g_{T'})$, by
+\[
+H''(u',t') = \Hom_{X''}(g_{U'}(u'),g_{T'}(t')),
+\]
+and the target bifunctor of the arrow $u$ in $(*)$ is interpreted as
+\[
+F^{*}(H'') = H''\circ F : (u,t)\longmapsto \underbrace{H''(f_U(u),f_T(t))}_{=\Hom(g_{U'}f_U(u),g_{T'}f_T(t))} \quad .
+\]
+Thus, $u$ is interpreted as an arrow
+\[
+u : H \longrightarrow F^{*}(H'').
+\]
+Now the functor $F^{*}$ has a left adjoint $F_{!}$, i.e. we have
+\[
+\Hom(H,F^{*}(H'')) \simeq \Hom(F_{!}(H),H'').
+\tag*{$(*{*}*)$}
+\]
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\msp{page 69} with
+\[
+F_{!} : \uHom(U^{\circ}\times T,\Ens) \longrightarrow \uHom(U'^{\circ}\times T',\Ens).
+\]
+Put
+\[
+H' = F_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+it is a bifunctor well determined by the sole datum of the initial diagram $(*)$ p. 67, or what amounts to the same thing, in terms of % [sic] déterminée -> déterminé, accord avec « bifoncteur » (masculin)
+\[
+(U,T,H,f_U : U\longrightarrow U', f_T : T\longrightarrow T').
+\]
+
+And we see that the datum of an arrow $X'\longrightarrow X''$, $X''$ a variable object of Cat, is equivalent to that of
+\[
+g_{U'} : U'\longrightarrow X'',\ g_{T'} : T'\longrightarrow X'',\ u : H'\longrightarrow H'' = H_{X''}(g_{U'}^{\circ}\times g_{T'}),
+\]
+that is to say, by virtue of 1.3., to that of an arrow
+\[
+X'_0 \longrightarrow X'',
+\]
+where $X'_0$ denotes the object of Cat obtained from $U'$, $T'$ by gluing by means of $H'$. This therefore shows that the direct limit sought is none other than $X'_0$. We have thus found the
+
+\textbf{Theorem 1.} \textit{The direct limit $X'$ in} Cat \textit{of the diagram} $(*)$ \textit{page 67, defined in terms of a triple $(X,U,T)$ in $\mathcal{T}$ and arrows $f_U : U\longrightarrow U'$, $f_T : T\longrightarrow T'$ in} Cat\textit{, exists (without merit)} \msp{page 70} \textit{and the canonical arrows}
+\[
+U' \overset{i'}{\hookrightarrow} X' \overset{j'}{\hookleftarrow} T'
+\]
+\textit{are open and closed immersions complementary to one another. The gluing datum which defines $X'$ via $U'$, $T'$ is given by}
+\[
+H' = (\underbrace{f_U^{\circ}\times f_T}_{F})_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+\textit{where $H$ is the gluing datum which defines $X$, i.e. $H : U^{\circ}\times T\longrightarrow$} Ens \textit{is the bifunctor $(u,t)\longmapsto \Hom_X(u,t)$.}
+
+Thus we have, for $u'$ in $U'$ and $t'$ in $T'$
+\[
+\Hom_{X'}(u',t') = F_{!}(H)(u',t'),
+\]
+and it remains to make $F_{!}(H)$ explicit. Here $F=f_U^{\circ}\times f_T$ is a covariant functor on $U^{\circ}\times T$, we can interpret it as a presheaf on $U\times T^{\circ}$, and hence write
+\[
+\underbrace{F_{!}(H)(u',t')}_{\Hom_{X'}(u',t')} = \varinjlim_{(u',t')\backslash U\times T^{\circ}} \underbrace{\Hom_X(u,t)}_{H(u,t)} \ .
+\tag*{$(*)$}
+\]
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+The category $(u',t')\backslash U\times T^{\circ}$ over which we take the $\varinjlim$ is made explicit as a product
+\[
+(u',t')\backslash U\times T^{\circ} \simeq (u'\backslash U)\times(T/t')^{\circ}.
+\]
+The maps
+\[
+\Hom_X(u,t)\longrightarrow \Hom_{X'}(u',t') \qquad (=F_{!}(H)(u',t'))
+\]
+\msp{page 71} deduced from this formula are none other than the following: $u$, $t$ are given as objects of $u'\backslash U$, $T/t'$, i.e. with arrows
+\[
+u'\xrightarrow{\alpha} f_U(u), \qquad f_T(t)\xrightarrow{\beta} t',
+\]
+whence
+\[
+\Hom_X(u,t) \xrightarrow{\text{via } f=f_X:X\to X'} \Hom_{X'}(\underbrace{f(u)}_{f_U(u)},\underbrace{f(t)}_{f_T(t)}) \xrightarrow{\text{via } \alpha,\ \beta} \Hom_{X'}(u',t').
+\]
+
+Let us note for the record that for every object $Z$ of Cat, and every presheaf $G$ on $Z$, we have the formula
+\[
+\varinjlim_{Z} G \simeq \pi_0(Z/G),
+\]
+where $Z/G$ is interpreted in terms of the canonical immersion $Z\longrightarrow Z^{\wedge}$ $(G\in \Ob Z^{\wedge})$. It is therefore a fibered category over $Z$ with discrete fibers, and we have in fact an isomorphism between the full subcategory of $\Cat/Z$ formed by such fibered categories with discrete fibers, with $Z^{\wedge}$. In this perfect dictionary between presheaves of sets and fibered categories with discrete fibers, the functor $\varinjlim$ on $Z^{\wedge}$ corresponds simply to the functor $\pi_0$ on the category of objects over $Z$ in Cat, itself induced by the functor (independent of $Z$)
+\[
+\Cat \xrightarrow{\pi_0} \Ens.
+\]
+
+\msp{page 72} We can therefore rewrite the fundamental formula $(*)$ p. 70, in terms of the functor $H$ defining the gluing $X$ of $U$ and of $T$, as
+\[
+\boxed{\underbrace{\Hom_{X'}(u',t')}_{H'(u',t')} \simeq \pi_0(\underbrace{(u',t')\backslash U\times T^{\circ}/H}_{((u'\backslash U)\times(T/t')^{\circ})/H}).}
+\tag*{$(*)$}
+\]
+
+In what follows, we will probably only have to use the case where we have either $T'=T$, $f_T=\id_T$, or the reverse. We will work mainly in the first case, deducing what we will need for the dual case, by the principle of duality (automorphism $X\longmapsto X^{\circ}$ of the
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+category Cat). In this case, in the fundamental formula $(*)$ the element $t'$ of $T'$ is written as an element $t$ of $T$, and the formula is rewritten as
+\[
+\boxed{\Hom_{X'}(u',t) \simeq \pi_0(\underbrace{u'\backslash U/t}_{\text{category of triples } (u,\alpha,\beta'),\ \left\{\begin{aligned} &u\in \Ob U\\ &\alpha : u\longrightarrow t\\ &\beta' : u'\longrightarrow f_U(u)\end{aligned}\right.}).}
+\tag*{$(**)$}
+\]
+
+This is the formula that I had found directly in this case, without yet bothering to vary $T$ at the same time as $U$. I would like to make the link between the two formulas $(*)$ and $(**)$, by topological means, thus establish a canonical bijection, functorial etc.
+\[
+\pi_0(u'\backslash U/t) \xrightarrow{\sim} \pi_0(((u'\backslash U)\times(T/t)^{\circ})/H).
+\]
+
+\msp{page 73} We surely have a functor
+\[
+u'\backslash U/t \longrightarrow ((u'\backslash U)\times(T/t)^{\circ})/H
+\]
+which associates to a triple
+\[
+(u,\alpha,\beta') : u\in \Ob U,\ \alpha : u\longrightarrow t,\ \beta' : u'\longrightarrow f_U(u)
+\]
+the triple $(\bar u,\bar t,\xi)$ $(\xi\in H(\bar u,\bar t))$ on the right-hand side, with $\bar u$ in $u'\backslash U$, $\bar t$ in $T/t$, defined as follows:
+\[
+\bar u = (u,\beta'),\ \bar t = (t,\id_t), \underbrace{\xi}_{=\alpha} \in H(\bar u,\bar t) = \Hom(u,t).
+\]
+In short
+\[
+u'\backslash U/t = \text{fiber of } ((u'\backslash U)\times(T/t)^{\circ})/H \text{ at the initial object } \bar t \text{ of } (T/t)^{\circ}
+\]
+under the natural projection, composite arrow
+\[
+\begin{tikzcd}
+((u'\backslash U)\times(T/t)^{\circ})/H \arrow[d] \\
+(u'\backslash U)\times(T/t)^{\circ} \arrow[d, "\pi"] \\
+(T/t)^{\circ}.
+\end{tikzcd}
+\]
+
+We have to see that the inclusion of the fiber gives a bijection on the $\pi_0$, or what amounts to the same thing, that the inclusion of the fiber $u'\backslash U$ \textit{of} $\pi$ at the initial object $(t,\id_t)$ of $(T/t)^{\circ}$ gives a bijection on the $\varinjlim$ of the functor $H$. So the inclusion had better be aspheric, or at least co-cofinal. % [sic] co-cofinalle -> co-cofinale, orthographe
+
+\end{document}

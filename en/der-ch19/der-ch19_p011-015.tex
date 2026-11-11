@@ -1,0 +1,304 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+% printed notation
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Ho}{\mathrm{Ho}}
+\newcommand{\cc}{\mathrm{c}}
+% double-headed arrow of (2.1.4)
+\newcommand{\ddarr}{\mathrel{\twoheadleftarrow\joinrel\twoheadrightarrow}}
+% harpoon arrow of p. 11 (orthogonality)
+\newcommand{\harp}{\mathrel{\leftharpoondown\joinrel\relbar\joinrel\rightharpoonup}}
+% footnote marks printed as superscript (n) in the text, n in the note
+\makeatletter
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\normalfont(\@thefnmark)}}}
+\renewcommand\@makefntext[1]{\noindent\hbox{\@textsuperscript{\normalfont\@thefnmark}}#1}
+\newcommand{\Qcouple}{\mathrel{\leftarrow\mkern-9mu{+}\mkern-9mu\rightarrow}}
+\makeatother
+
+\begin{document}
+
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 14}
+
+\begin{itemize}[leftmargin=4em]
+\item[(2.5)] Given the two couples (2.2), with $TC \subset C$ (equivalent to $TF \subset F$), for the first relation (2.3) to hold, i.e. $TC \subset W$, it is necessary, and sufficient if $W = W^{\natural}$, that every arrow $f$ of $\M$ (or only every arrow of $TC$) factor as $f = pi$, with $i \in W$, $p \in F$. Dually, for $TF \subset W$ to hold, it is necessary and sufficient if $W = W^{\natural}$, that every arrow $f$ of $\M$ (or only every arrow of $TF$) factor as $f = pi$, with $i \in W$, $f \in C$. % [sic] i \in W, f \in C -> i \in C, p \in W (?), dual of the preceding factorisation with p \in F
+\end{itemize}
+
+We say that the Quillen structure $(W,C,F)$ is \textit{special} if the two Quillen couples (2.3) are special, i.e. if the following conditions are satisfied.
+
+\begin{itemize}[leftmargin=4em]
+\item[(2.6)]
+\begin{itemize}
+\item[a)] $\M$ is stable under small $\varinjlim$, and its elements are accessible ($\M$ ``special'').
+\item[b)] There exist \textit{small} subsets $C_0 \subset C$, $TC_0 \subset TC$ which are Q-generating on the left, i.e. such that we have
+\[
+\left\{
+\begin{array}{rclcrclcrcl}
+C & \subset & C_0^{\sim}\ , & \text{i.e.} & C & = & C_0^{\sim}\ , & \text{i.e.} & TF & = & C_{0*}\ ;\\
+TC & \subset & (TC_0)^{\sim}\ , & \text{i.e.} & TC & = & (TC_0)^{\sim}\ , & \text{i.e.} & F & = & (TC_0)_*\ .
+\end{array}\right. % reading resolved: DER_XIX_corrections.csv
+\]
+\end{itemize}
+\end{itemize}
+
+Thus, the datum of such a \textit{special} Quillen triple in $\M$, when $\M$ satisfies (2.6. a), amounts to the datum of the two subsets
+\msp{page 15}
+\[
+TC \ \subset\ C
+\tag*{(2.7)}
+\]
+of $\Fl(\M)$, satisfying the conditions:
+\[
+\left\{
+\begin{array}{ll}
+C,\ TC\ \text{``special''} &
+\left\{\begin{array}{ll}
+\text{a)} & \text{$C$, $TC$ are Q-closed on the left.}\\[1ex]
+\text{b)} & \parbox[t]{0.45\textwidth}{$C$, $TC$ are Q-generated on the left by \textit{small} subsets $C_0$, $TC_0$ of $C$, $TC$ respectively.}
+\end{array}\right.\\[5ex]
+ & \quad\ \begin{array}{ll}
+\text{c)} & TC \subset W,\ TF \overset{\text{def}}{=} C_* \subset W.\\[1ex]
+\text{d)} & \parbox[t]{0.45\textwidth}{We have one of the three equivalent additional conditions of (2.4), i.e.:}\\[5ex]
+ & \begin{array}{lrcllrcl}
+\alpha) & TC & = & C \cap W\ , & \text{i.e.} & C \cap W & \subset & TC\ .\\
+\beta) & TF & = & F \cap W\ , & \text{i.e.} & F \cap W & \subset & TF\ .\\
+\gamma) & W & = & TF \circ TC\ . & & & &
+\end{array}
+\end{array}
+\end{array}\right.
+\tag*{(2.8)}
+\]
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\textbf{Proposition 2.1.} \textit{Let}
+\[
+\begin{tikzcd}
+\M' \arrow[r, shift right, "v^*"'] & \M \arrow[l, shift right, "v_!"']
+\end{tikzcd}
+\tag*{(2.11)} % [sic] (2.11) -> (2.1.1), numbering sequence (2.1.2), (2.1.3), ...
+\]
+\textit{be a pair of adjoint functors, $\M$ being equipped with a closed Quillen structure} $(W,C,F)$. \textit{Put}
+\[
+\left\{
+\begin{array}{rcl}
+W' & = & (v^*)^{-1}(W)\\
+F' & = & (v^*)^{-1}(F)\\
+TF' & = & F' \cap W' \ = \ (v^*)^{-1}(TF)\\
+C' & = & v_!(C)^{\sim}\\
+TC' & = & v_!(TC)^{\sim}\ .
+\end{array}\right.
+\tag*{(2.1.2)}
+\]
+
+\begin{itemize}
+\item[1°)] \textit{We then have}
+\[
+\left\{
+\begin{array}{rclcrcl}
+C' & \longleftrightarrow & TF'\ , & & TC' & \longleftrightarrow & F'\ ,\\
+TC' & \subset & C'\ , & & TF' & \subset & F'\ .
+\end{array}\right.
+\tag*{(2.1.3)}
+\]
+
+\textit{For the data} (2.1.2) \textit{in $\M'$ to correspond there to a Quillen triple $(W',C',F')$, it is necessary and sufficient that the following conditions be satisfied:}
+\msp{page 16}
+\[
+\left\{
+\begin{array}{ll}
+\text{a)} & \parbox[t]{0.7\textwidth}{\textit{Factorization for $C' \longleftrightarrow TF'$ and $TC' \longleftrightarrow F'$, i.e. the relations $C' \Qcouple TF'$ and $TC' \Qcouple F'$,}}\\[4ex]
+\text{b)} & TC' \subset W',
+\end{array}\right. % reading resolved: DER_XIX_corrections.csv
+\tag*{(2.1.4)}
+\]
+\textit{or again, in place of} b)\textit{, the equivalent condition} (in the presence of a)):
+\[
+\left\{
+\begin{array}{ll}
+\text{b$'$)} & \parbox[t]{0.7\textwidth}{\textit{Every arrow $f'$ in $\M'$ (not only $f' \in TC'$) factors as $f' = p'i'$, with $i' \in W'$, $p' \in F'$.}}
+\end{array}\right.
+\tag*{(2.1.5)}
+\]
+\item[2°)] \textit{Suppose} (2.1.4. a) \textit{is satisfied (factorization). Then, for $(W',C',F')$ to be a closed Quillen triple, it} suffices \textit{that we have}
+\[
+\text{b$''$)}\qquad \boxed{\ v^*v_!(TC)\ \subset\ TC\ }\ ,
+\tag*{(2.1.6)}
+\]
+\textit{and that in addition we be in one of the following three cases:}
+\begin{itemize}
+\item[A)] \textit{$v^*$ admits a right adjoint $v_*$.}
+\item[B)] \textit{$v^*$ commutes with small} $\varinjlim$\textit{, $(W,C,F)$ is special, and $\M'$ is special, i.e. satisfies condition} (2.6. a).
+\item[C)] \textit{$v^*$ is fully faithful, and $v^*v_!(F) \subset F$.}
+\end{itemize}
+\end{itemize}
+Let us note at once the
+
+\textbf{Corollary 2.2.} \textit{Suppose that $(W,C,F)$ is a special Quillen triple, that $\M'$ is special, that $v^*$ commutes with small} $\varinjlim$\textit{, finally that we have} (2.1.6)\textit{, i.e. $v^*v_!(TC) \subset TC$. Then $(W',C',F')$ is a special Quillen triple.}
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+
+\msp{page 17}
+Indeed, by 2.1. 2°, case B, to see that $(W',C',F')$ is a closed Quillen triple, one must check (2.1.6. b$''$). But this follows from 1.8, applied to the two special Quillen couples $(C,TF)$, $(TC,F)$ in $\M$: the couples $(C',TC')$ and $(TC',F')$ are special Quillen couples, which proves at the same time that the triple $(W',C',F')$ is special, q.e.d. % [sic] (C',TC') -> (C',TF'), image of the couple (C,TF)
+
+Let us prove 2.1. The first two relations (2.1.3) are contained in 1.6, the relations $TC' \subset C'$, $TF' \subset F'$ are tautological. The criterion (2.1.4) for $(W',C',F')$ to be a closed Quillen triple, is contained in the reminder on page 13, taking into account that we already know that $TF' = F' \cap W'$ (relation (2.4. b)). That the condition (2.1.4. b), in the presence of (2.1.4. a), is equivalent to the condition (2.1.5. b$'$), is contained in the first assertion (2.5), noting that we have $W' = W'^{\natural}$ (which follows from the definition of $W'$ and from $W = W^{\natural}$).
+
+It remains to prove 2°), i.e. that condition b) is satisfied assuming a) and b$''$) (2.1.6) in each of the three cases A), B), C).
+
+\textit{Case A.} By definition of $W' = (v^*)^{-1}(W)$, to prove that $TC' \subset W'$, it suffices to prove
+\[
+v^*(TC')\ \subset\ W'\ ,  % [sic] W' -> W, v^*(TC') lies in M and W' = (v^*)^{-1}(W)
+\]
+and a fortiori, it suffices to prove
+\[
+v^*(TC')\ \subset\ TC\ ,\qquad\quad \text{i.e. } v^*(TC') \harp F\ .
+\tag*{(2.1.7)} % reading resolved: DER_XIX_corrections.csv
+\]
+Now by 1.5, applied to the pair of
+\msp{page 18}
+adjoint functors $(v^*,v_*)$, this relation is equivalent to
+\[
+TC' \harp v_*(F)\ .
+\]
+Since $TC' \overset{\text{def}}{=} v_!(TC)^{\sim}$, this is equivalent to
+\[
+v_!(TC) \harp v_*(F)\ ,
+\]
+or again (applying 1.5 again to $(v_!(TC),F)$ instead of $(TC',F)$), to
+\[
+v^*v_!(TC) \harp F\ ,\qquad\quad \text{i.e. } v^*v_!(TC) \subset \underbrace{TC}_{=\,F^*}\ ,
+\]
+now this is hypothesis b$''$).
+
+\textit{Case B.} It again suffices to prove 2.1.7. Now, since $v_!(TC)$ admits a small Q-generating set on the left, $v_!(TC)^{\sim}$ is the closure of $v_!(TC)$ under the operations of cobase change, transfinite composition, direct factors. Since $v^*$ commutes with all these operations (as it commutes with small $\varinjlim$), and since $TC$ in $\Fl(\M)$ is stable under these operations, we thus see that to show that $v^*$ maps $v_!(TC)^{\sim}$ into $TC$, it suffices to see that it maps $v_!(TC)$ into $TC$, which is again hypothesis b$''$).
+
+\textit{Case C.} We are going to check b) in the equivalent form b$'$). So let $f' \in \Fl(\M')$, $f' : X' \longrightarrow Y'$,
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\msp{page 19}
+put
+\[
+f\ =\ v^*(f'),
+\]
+and factor $f$ as $pi$, with $i \in TC$, $p \in F$, whence
+\[
+v_!v^*(f') = v_!(f) = v_!(p)v_!(i)\ .
+\]
+But $v^*$ being fully faithful, $v_!v^* \xrightarrow{\ \sim\ } \mathrm{id}$, so we find a factorization of $f'$ as $v_!(p)v_!(i)$. It therefore suffices to see that
+\[
+v_!(p)\ \in\ F'\ ,\qquad\quad v_!(i)\ \in\ W'\ ,
+\]
+which is equivalent to
+\[
+v^*v_!(p) \in F\ ,\qquad\quad v^*v_!(i) \in W\ ,
+\]
+and follows from the hypotheses that $v^*v_!(F) \subset F$ and $v^*v_!(TC) \subset TC \subset W$, q.e.d.
+
+\textbf{N.B.} I have noted cases A) and C) for conscience's sake, with no precise application in view. The most useful case will fall under case B), and deserves to be spelled out again in a
+
+\textbf{Theorem 2.3}\footnote[7]{cf. scholie 2.10, which should precede theorem 2.3.}. \textit{Let $(W,C,F)$ be a special Quillen triple in $\M$. For every $I$ in} Cat\textit{, let us consider the triple $(W(I),C\langle I\rangle,F(I))$ in $\M(I) = \underline{\mathrm{Hom}}(I^{\circ},\M)$, where the notations are those of page 10, so $W(I)$, $F(I)$ and $TF(I)$ are defined fiber by fiber, and $C\langle I\rangle = (F(I))^* = (v_{I\,!}(C(I_0)))^{\sim}$}\footnote[8]{where $v_I : I_0 \longrightarrow I$ ($I_0$ discrete category having the same objects as I).}\textit{.}
+\begin{itemize}
+\item[1°)] \textit{For every $I$ in} Cat\textit{, $(W(I),C\langle I\rangle,F(I))$ is}
+\msp{page 20}
+\textit{a special Quillen triple in $\M(I)$.}
+\item[2°)] \textit{If $u : I \longrightarrow I'$ is an arrow in} Cat\textit{, whence}
+\[
+\begin{tikzcd}
+\M(I) \arrow[r, shift left, "u_!"] & \M(I'), \arrow[l, shift left, "u^*"]
+\end{tikzcd}
+\tag*{(2.3.1)}
+\]
+\textit{then}
+\[
+\left\{
+\begin{array}{l}
+\left.\begin{array}{rcl}
+u^*(W(I')) & \subset & W(I)\\
+u^*(F(I')) & \subset & F(I)\\
+u^*(TF(I')) & \subset & TF(I)
+\end{array}\right\}\textit{tautology}\\
+\begin{array}{rcl}
+u_!(C\langle I\rangle) & \subset & C\langle I'\rangle\\
+u_!(TC\langle I\rangle) & \subset & TC\langle I'\rangle\ ,
+\end{array}
+\end{array}\right.
+\tag*{(2.3.2)}
+\]
+\textit{finally, $u_!$ induces a functor}
+\[
+\M(I)_{\cc} \longrightarrow \M(I')_{\cc} \qquad\quad \text{\footnotemark[9]}
+\tag*{(2.3.3)}
+\]
+\footnotetext[9]{Subcategories of cofibrant objects.}
+compatible with the localizers $W(I)_{\cc} = W(I)|\M(I)_{\cc}$ \textit{and} $W(I')_{\cc} = W(I')|\M(I')_{\cc}$\textit{, hence induces a functor}
+\[
+u_!^W\ :\ \Ho_W(I) \longrightarrow \Ho_W(I')\ .
+\tag*{(2.3.4)}
+\]
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XIX, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 11 février 2019
+\textit{This functor is a left adjoint to the functor $u^*_W$,}
+\[
+u^*_W\ :\ \Ho_W(I') \longrightarrow \Ho_W(I)\ ,
+\tag*{(2.3.5)}
+\]
+\textit{induced by $u^*$} (3.3.1). % [sic] (3.3.1) -> (2.3.1), the adjunction displayed in (2.3.1)
+\end{itemize}
+\textsc{Proof of 2.3.}
+
+\textit{Let us prove} 1°). We consider as in 1.10 the functor
+\[
+v = v_I\ :\ I_0 \longrightarrow I
+\]
+and the pair of adjoint functors
+\[
+\begin{tikzcd}
+\M(I) \arrow[r, shift right, "v^*"'] & \M(I_0)\ , \arrow[l, shift right, "v_!"']
+\end{tikzcd}
+\tag*{(2.3.6)}
+\]
+to which we can apply 2.2. It remains
+\msp{page 21}
+only to check
+\[
+v^*v_!(TC)\ \subset\ TC\ ,
+\tag*{(2.3.7)}
+\]
+now we have, for $X = (X_i)_{i \in I_0} \in \M(I_0)$,
+\[
+\begin{aligned}
+v_!(X)(i) &\ \simeq\ \textstyle\coprod_{j \in I_0} v_{j\,!}(X_j)(i)\\
+&\ \simeq\ \textstyle\coprod_{j \in I_0}\ \ \underbrace{X_j^{\mathrm{Hom}(i,j)}}_{\substack{\text{direct sum}\\ \text{of }\mathrm{Hom}(i,j)\text{ copies}}}\qquad ,
+\end{aligned}
+\]
+and relation (2.3.7) follows from the fact that $TC$, being Q-closed on the left, is stable under small direct sums.
+
+\textit{Let us prove} 2°). Formulas (2.3.2) are essentially tautological, the last two follow from the third and the second, by 1.5 applied to the pair of adjoint functors $(u_!,u^*)$. The relation $u_!(C\langle I\rangle) \subset C\langle I'\rangle$, and the fact that $u_!$ transforms initial object into initial object, imply (2.3.3). That $u_!$ restricted to $\M(I)_{\cc}$ is compatible with the localizers comes from $u_!(TC\langle I\rangle) \subset TC\langle I'\rangle$, and from the fact that every arrow $f$ in $\M(I)_{\cc}$ which is in $W(I)$, decomposes as $f = pi$, with $i \in TC$ and $p$ a left inverse of a $j \in TC\langle I\rangle$. This seen, together with the first two formulas (2.3.2) shows that we are under the conditions
+\msp{page 22}
+of Quillen's adjunction theorem, whence the adjunction of $u_!^W$ and $u^*_W$, q.e.d.
+
+\textbf{Corollary 2.4.} \textit{Let $W$ be a localizer in $\M$, such that there exists a special Quillen triple $(W,C,F)$ including $W$. Then the prederivator} $\Ho_W$ \textit{on} Cat \textit{satisfies the axioms Der 1 (decomposition), Der 2 (localization), Der 3 (final object), Der 4 bis (existence of the $u_!^W$), Der 5 bis (computation of the fibers of the $u_!^W$), Der 6 bis (left exactness, i.e. left exactness of $W$-cocartesian squares in the} $\Ho_W(I)$\textit{), Der 6 (right exactness of $W$-cartesian squares).} % [sic] Der 4 bis -> Dér 4 bis, accent missing as printed
+
+We have just proved Der 4 bis, and Der 5 bis is practically contained in the manner of obtaining of $u_!$, taking into account proposition 1.12, which implies that for $X$ in $\M(I)_{\cc}$, and $i'$ in $I'$, the inverse image of $X$ in $\M(i'\backslash I)$ is in $\M(i'\backslash I)_{\cc}$ \dots
+
+\end{document}

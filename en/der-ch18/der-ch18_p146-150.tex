@@ -1,0 +1,273 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\uFl}{\underline{\mathrm{Fl}}}
+\newcommand{\uIs}{\underline{\mathrm{Is}}}
+\newcommand{\uMon}{\underline{\mathrm{Mon}}}
+\newcommand{\uEp}{\underline{\textup{Ép}}}
+\newcommand{\uGamma}{\underline{\Gamma}}
+\newcommand{\defeq}{\overset{\textup{def}}{=}}
+\newcommand{\cardred}{\mathop{\textup{card\,red}}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[circle,draw,inner sep=1pt](c){\upshape #1};}
+
+\begin{document}
+
+\printedpage{144}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\msp{page 380}
+This is equivalent to the special case:
+
+\textbf{Corollary 4.14.11.} \textit{Let $\mathcal{M}$ be a paratopos, and $f$ a covariant (resp. contravariant) functor from $\mathcal{M}$ to \textup{Ens}. For $f$ to be representable, it is necessary and sufficient that $f$ commute with $\varprojlim$ .}
+
+This has been seen -- the case of contrafunctors being the most obvious (cf. 4.1 -- it suffices that $\mathcal{M}$ be a paratopos, and even that $\mathcal{M}$ admit a small generating full subcategory, cf. SGA 4 I 8.12.7 (for the dual statement). In the cases of a covariant functor, the difficulty comes from the fact that $\mathcal{M}$ does not necessarily admit a small cogenerating subcategory. One must use the existence of a (generalized) cardinal filtration, cf. loc. cit. 8.3.12.) % [sic] Dans les cas -> Dans le cas, singular "un foncteur covariant"
+
+After all these fine corollaries, we are ripe for tackling the proof of 4.14.1!
+
+\msp{page 381}
+\textsc{Proof of} 4.14.1. We know that $\mathcal{M} = \uHom(\mathcal{C},\mathcal{N})$ is accessible (4.9.5, p. 220), and $\uHom^{\Lambda_2}_{\Lambda_1}(\mathcal{C},\mathcal{N})$ is a strictly full subcategory of this category. It suffices to prove that it is an accessible subcategory in $\mathcal{M}$ (4.13.1, p. 281). For every $\xi = (I,\varphi) \in \Lambda_1$, we have a functor
+\[
+L_\xi \ : \ \mathcal{M} \ = \ \uHom(\mathcal{C},\mathcal{N}) \longrightarrow \uFl(\mathcal{N}) \ ,
+\]
+given by
+\[
+L_\xi(f) \ = \ \text{canonical arrow } \varinjlim_{i\in I} f\varphi(i) \longrightarrow f\varphi(e_I) \ .
+\]
+I say that the functor $L_\xi$ is \textit{accessible.} Indeed, let $\pi_0$ be a cardinal such that $\mathcal{N}$ satisfies $\mathrm{L}_{\pi_0}$, the same therefore holds for $\mathcal{M} = \uHom(\mathcal{C},\mathcal{N})$ and for $\uFl(\mathcal{N}) \defeq \uHom(\boldsymbol{\Delta}_1,\mathcal{N})$, the limits in question are computed argument by argument. I say that $L_\xi$ is $\pi_0$-accessible, i.e. commutes with $\varinjlim$ large relative to $\pi_0$. It suffices to see that this is so for the functors composed with the functors
+\[
+\begin{tikzcd}
+\uFl(\mathcal{N}) \arrow[r, shift left, "\sigma"] \arrow[r, shift right, "\rho"'] & \mathcal{N}
+\end{tikzcd}
+\]
+``source'' and ``target'', i.e. the functors
+\[
+f \longmapsto \varinjlim_{i\in I} f\varphi(i) \qquad \text{and} \qquad f \longmapsto f\varphi(e_I) \ .
+\]
+
+\msp{page 382}
+Now the first functor, $f \longmapsto \varinjlim\limits_{i\in I} f\varphi(i)$, is the composite of
+\[
+f \longmapsto f\circ\varphi_I \ : \ \uHom(\mathcal{C},\mathcal{N}) \longrightarrow \uHom(I,\mathcal{N})
+\]
+(which commutes with the $\varinjlim$ that are representable in $\mathcal{N}$, and in particular with the $\varinjlim$ large relative to $\pi_0$) and of the functor
+\[
+\varinjlim_{I} \ : \ \uHom(I,N) \longrightarrow \mathcal{N} \ , % [sic] \uHom(I,N) -> \uHom(I,\mathcal{N}), italic N printed instead of the script N used everywhere else
+\]
+which also commutes with direct limits representable in $\mathcal{N}$, and in particular with those large relative to $\pi_0$. As for the functor $f \longmapsto (f\circ\varphi)(e_I) = f(\varphi(e_I))$, it is clear that it too commutes with the $\varinjlim$ representable in $\mathcal{N}$, so it is $\pi_0$-accessible.
+
+\printedpage{145}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+This being so, let us note that
+\[
+\uHom_{\Lambda_1}(\mathcal{C},\mathcal{N}) \ = \ \bigcap_{\xi\in\Lambda_1} \uHom_{\{\xi\}}(\mathcal{C},\mathcal{N}) \ ,
+\]
+and that $\uHom_\xi(\mathcal{C},\mathcal{N})$ is the inverse image, under the preceding accessible functor $L_\xi$, of the strictly full subcategory $\uIs(\mathcal{N})$ of $\uFl(\mathcal{N})$ consisting of the \textit{isomorphisms} in $\mathcal{N}$. If we prove that the latter is accessible in $\uFl(\mathcal{N})$, it follows that
+\msp{page 383}
+$\uHom_\xi(\mathcal{C},\mathcal{N})$ is accessible in $\mathcal{M}$ (4.3.31, page 350). Thus, $\Phi$ being small, it follows that $\uHom_{\Lambda_1}(\mathcal{C},\mathcal{N})$ is accessible in $\mathcal{M}$ (4.13.7, page 291).
+
+We prove in the same way that $\uHom^{\Lambda_2}(\mathcal{C},\mathcal{N})$ is accessible in $\mathcal{M} = \mathrm{Hom}(\mathcal{C},\mathcal{N})$. Here, we must consider the functors % [sic] \mathrm{Hom}(\mathcal{C},\mathcal{N}) -> \uHom(\mathcal{C},\mathcal{N}), printed without underline, elsewhere underlined
+\[
+L'_\xi \ : \ \mathcal{M} = \uHom(\mathcal{C},\mathcal{N}) \longrightarrow \uFl(\mathcal{N})
+\]
+defined by
+\[
+L'_\xi \ = \ \text{canonical arrow } f\varphi(e'_I) \longrightarrow \varprojlim_{i\in I} f\varphi(i) \ .
+\]
+To prove that this functor is accessible, we proceed as before, taking however $\pi_0$ large enough that we have
+\[
+\left\{
+\begin{array}{l}
+I \in \Psi \ \Longrightarrow \ \cardred I \leqslant \pi_0. \\[1ex]
+\mathcal{N}_{\pi_0} \text{ is generating in } \mathcal{N}.
+\end{array}
+\right.
+\]
+I say that then $L'_\xi$ is $\pi_0$-accessible: indeed, proceeding as before for $L_\xi$, we are reduced to seeing that
+\[
+\varinjlim_{I} \uHom(I,\mathcal{N}) \longrightarrow \mathcal{N}
+\]
+is $\pi$-accessible. Now this is contained in SGA 4 I 9.8.
+
+\msp{page 384}
+Thus, we have proved that the two strictly full subcategories
+\[
+\uHom_{\Lambda_1}(\mathcal{C},\mathcal{N}) \ , \qquad \uHom^{\Lambda_2}(\mathcal{C},\mathcal{N})
+\]
+of $\mathcal{M} \defeq \uHom(\mathcal{C},\mathcal{N})$ are accessible in $\mathcal{M}$. The same therefore holds for their intersection (4.13.7)
+\[
+\uHom^{\Lambda_2}_{\Lambda_1}(\mathcal{C},\mathcal{N}) \ = \ \uHom_{\Lambda_1}(\mathcal{C},\mathcal{N}) \cap \uHom^{\Lambda_2}(\mathcal{C},\mathcal{N}) \ ,
+\]
+q.e.d.
+
+It remains to prove the
+
+\textbf{Lemma 4.14.12.} \textit{Let $\mathcal{N}$ be an accessible category. Then the category $\uFl(\mathcal{N}) \defeq \uHom(\boldsymbol{\Delta}_1,\mathcal{N})$ is accessible (4.9.5), and the strictly full subcategory $\uIs(\mathcal{N})$ consisting of the invertible arrows in $\mathcal{N}$ is accessible in $\uFl(\mathcal{N})$. (The same holds for the strictly full subcategory $\uMon(\mathcal{N})$ consisting of the monomorphisms in $\mathcal{N}$.)}
+
+\textsc{Proof}. Let $\mathcal{C}$ be a small strictly generating subcategory of $\mathcal{N}$, and consider the small family of functors
+\[
+h_x \ = \ (y \longmapsto \mathrm{Hom}(x,y)) \ : \ \mathcal{N} \longrightarrow \Ens \ ,
+\]
+\printedpage{146}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 385}
+whence functors
+\[
+\uFl(h_\xi) \ : \ \uFl(\mathcal{N}) \longrightarrow \uFl(\Ens) \ . % [sic] h_\xi -> h_x, the functors defined just before are h_x
+\]
+For an arrow $u : y \longrightarrow z$ in $\mathcal{N}$ to be an isomorphism (resp. a monomorphism), it is necessary and sufficient that for every $x \in \Ob\mathcal{C}$, $h_x(u)$ be so. Thus, $\uIs(\mathcal{N})$ (resp. $\uMon(\mathcal{N})$) appears as the intersection of the inverse images, under the functors $\uFl(h_\xi)$ above, of the subcategory $\uIs(\Ens)$ (resp. $\uMon(\Ens)$) of $\uFl(\Ens)$. This reduces us to the case where $\mathcal{N} = (\Ens)$. But if $\mathcal{C}$ denotes the strictly full subcategory of Ens consisting of the \textit{finite} sets, these form a strictly generating family consisting of objects of \textit{finite presentation}, and since Ens is stable under small $\varinjlim$ , hence under filtering $\varinjlim$, it follows that we have % [sic] h_\xi -> h_x, the functors defined just before are h_x
+\[
+\Ind(\mathcal{C}) \longrightarrow (\Ens) \ , \tag*{$(*)$}
+\]
+whence at once (SGA 4 I 8.8.5, p. 104)
+
+\msp{page 386}
+\[
+\Ind(\uFl(\mathcal{C})) \xrightarrow{\ \sim\ } \uFl(\Ens) \ . \tag*{$(*)$}
+\]
+So the desired accessibility result follows from the following two lemmas:
+
+\textbf{Lemma 4.14.13.} \textit{The preceding equivalence $(*)$ induces equivalences}
+\[
+\begin{aligned}
+\Ind(\uIs(\mathcal{C})) \quad &\xrightarrow{\ \sim\ } \quad \uIs(\Ens) \\
+\Ind(\uMon(\mathcal{C})) \quad &\xrightarrow{\ \sim\ } \quad \uMon(\Ens)
+\end{aligned}
+\]
+\textit{(where $\mathcal{C} = (\mathrm{Ensf})$ is the full subcategory of \textup{(Ens)} consisting of the \textup{finite} sets.)}
+
+\textbf{Lemma 4.14.14} (\footnote[166]{\textbf{N.B.} Up to equivalence, one finds the accessible categories $\mathcal{M}$ stable under small filtering $\varinjlim$, and such that $\mathcal{M}_{\mathrm{pf}}$ (subcategory of objects of \textit{finite} presentation) is strictly generating.}). \textit{Let $\mathcal{C}$ be a category equivalent to a small category. Then:}
+\begin{itemize}[nosep]
+\item[\textit{a)}] \textit{$\mathcal{M} \defeq \Ind(\mathcal{C})$ is an accessible category.}
+\item[\textit{b)}] \textit{For every full subcategory $\mathcal{D}$ in $\mathcal{C}$, the essential image of $\Ind\mathcal{D}$ in $\mathcal{M} = \Ind(\mathcal{C})$ is an L-accessible subcategory in $\mathcal{M}$.}
+\end{itemize}
+\textsc{Proof} of the two lemmas immediate and ``left to the reader''. The b) in 4.14.14 comes from the fact that the functor $\Ind(\mathcal{D}) \longrightarrow \Ind(\mathcal{C})$ coming from a functor $\mathcal{D} \longrightarrow \mathcal{C}$ (here an
+\msp{page 387}
+inclusion functor) is an L-functor (i.e. commutes with small filtering $\varinjlim$), and a fortiori is accessible (and even $\aleph_0$-accessible).
+
+\textbf{4.14.15.} One cannot help wondering whether for $\mathcal{N}$ accessible, the strictly full subcategory $\uEp(\mathcal{N})$ in $\uFl(\mathcal{N})$, consisting of the epimorphisms in $\mathcal{N}$, is accessible in $\mathcal{N}$. It is immediate that if $\mathcal{N}$ satisfies $\mathrm{L}_{\pi_0}$, then $\uEp(\mathcal{N})$ is stable in $\uFl(\mathcal{N})$ under the $\varinjlim$ of type $\mathrm{L}_{\pi_0}$, a fortiori under direct factors. It would therefore have a hard time not being accessible in $\uFl(\mathcal{N})$. Let us note all the same: % [sic] dû mal -> du mal, "avoir du mal à"
+
+\textbf{Corollary 4.14.15.1} (of 4.14.13). \textit{Let $\mathcal{N}$ be an accessible category stable under amalgamated sums $y \amalg_x z$} (\footnote[167]{I am almost sure that this hypothesis is superfluous. Compare page 390.}). \textit{Then $\uEp(\mathcal{N})$ is an accessible subcategory in $\uFl(\mathcal{N})$.}
+
+\printedpage{147}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\msp{page 388}
+Let us indeed consider the functor
+\[
+\begin{aligned}
+\gamma \ : \ \uFl(\mathcal{N}) \quad &\longrightarrow \quad \uFl(\mathcal{N}) \\
+(x \longrightarrow y) \quad &\longmapsto \quad (y \amalg_x y \xrightarrow{\ \ \text{codiag}\ \ } y) \ .
+\end{aligned}
+\]
+This functor commutes with the types of $\varinjlim$ that are representable in $\mathcal{N}$, in particular, it is accessible. On the other hand, $\uEp(\mathcal{N})$ is the inverse image under $\gamma$ of the strictly full subcategory $\uIs(\mathcal{N})$ of $\uFl(\mathcal{N})$. So the corollary follows from the fact that by 4.14.13 the latter is accessible in $\uFl(\mathcal{N})$.
+
+\textbf{4.14.16.} I presume that 4.14.1 remains valid without assuming $\mathcal{N}$ stable under the $\varinjlim$ of type $\Phi$ and under the $\varprojlim$ of type $\Psi$. If we have an essentially small category $I$, the question is whether the strictly full subcategory $\uHom_{\square}(I_\bullet,\mathcal{N})$ of $\uHom(I_\bullet,\mathcal{N})$, consisting of the functors satisfying
+\msp{page 389}
+condition a) of 4.14.1, is accessible in $\uHom(I_\bullet,\mathcal{N})$, and likewise for $\uHom^{\square}({}_\bullet I,\mathcal{N})$. For this second case, it looks OK, for if $\mathcal{C}$ is a small strictly generating subcategory of $\mathcal{N}$, and if for every $x \in \Ob$ \texttt{[}$\mathcal{C}$\texttt{]} we again consider the functor
+\[
+h_x \ : \ \mathcal{N} \longrightarrow \Ens \ ,
+\]
+whence
+\[
+\bar{h}_x \ : \ \uHom({}_\bullet I,\mathcal{N}) \longrightarrow \uHom({}_\bullet I,\Ens) \ ,
+\]
+we see that $\uHom^{\square}({}_\bullet I,\mathcal{N})$ is the intersection of the inverse images of the subcategories $\uHom^{\square}({}_\bullet I,\Ens)$ of $\uHom({}_\bullet I,\Ens)$. So the latter being accessible in $\uHom({}_\bullet I,\Ens)$, by 4.14.1 ((Ens) being stable under small $\varprojlim$ ), it does indeed follow that $\uHom^{\square}({}_\bullet I,\mathcal{N})$ is so in $\uHom({}_\bullet I,\mathcal{N})$, q.e.d.
+
+The case of $\uHom_{\square}(I_\bullet,\mathcal{N})$ in $\uHom(I_\bullet,\mathcal{N})$ seems more delicate, in the case where
+\msp{page 390}
+\[
+I = 
+\begin{tikzcd}[sep=small]
+ & {} \\
+\bullet \arrow[ur] \arrow[dr] & \\
+ & {}
+\end{tikzcd}
+\quad , \qquad \text{thus} \qquad
+I = 
+\begin{tikzcd}[sep=small]
+ & {} \arrow[dr] & \\
+\bullet \arrow[ur] \arrow[dr] & & {} \\
+ & {} \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\]
+if the envisaged statement is true, we will conclude from it that $\uEp(\mathcal{N})$ is accessible in $\uFl(\mathcal{N})$, for every accessible category, for it is the inverse image of $\uHom_{\square}(I_\bullet,\mathcal{N})$ under the canonical (accessible) functor
+\[
+\begin{aligned}
+\uFl(\mathcal{N}) \quad &\longrightarrow \quad \uHom(I_\bullet,\mathcal{N}) \\
+(x \xrightarrow{\ u\ } y) \quad &\longmapsto \quad
+\left(
+\begin{tikzcd}[sep=small, ampersand replacement=\&]
+ \& y \arrow[dr, "\mathrm{id}_y"] \& \\
+x \arrow[ur, "u"] \arrow[dr, "u"'] \& \& y \\
+ \& y \arrow[ur, "\mathrm{id}_y"'] \&
+\end{tikzcd}
+\right) \ .
+\end{aligned}
+\]
+
+\printedpage{148}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+This is to say that the envisaged generalization of 4.14.1 is not idle, but is probably useful.
+
+\msp{page 391}
+\textbf{Theorem 4.14.17} (\footnote[168]{Cf. generalization in \texttt{[the]} theorem page 422, th. 4.14.26.}). \textit{Let $p : \mathcal{E} \longrightarrow \mathcal{C}$ be a cofibrant or fibrant functor, with $\mathcal{C}$ essentially small (i.e. equivalent to a small category), and such that the fiber categories are accessible, and the cobase change (cofibrant case) or base change (fibrant case) functors associated with the arrows $u$ of $\mathcal{C}$ are accessible. Then the category $\uGamma(\mathcal{E}/\mathcal{C})$ of sections of $\mathcal{E}$ over $\mathcal{C}$ is accessible, and for every $s \in \Ob\mathcal{C}$, the ``evaluation at $s$'' functor $\varepsilon_s : \uGamma(\mathcal{E}/\mathcal{C}) \longrightarrow \mathcal{E}_s$ is accessible.}
+
+\textbf{Corollary 4.14.18.} \textit{Let $\pi_0$ be an infinite cardinal such that the fiber categories satisfy the condition $L_{\pi_0}$, and that the cobase change (resp. base change) functors between them likewise satisfy $L_{\pi_0}$. (Such a $\pi_0$ exists.)}
+\begin{itemize}[nosep]
+\item[\circled{a}] \textit{Then $\mathcal{M} = \uGamma(\mathcal{E}/\mathcal{C})$ satisfies the condition $\underline{\mathrm{L}}_{\pi_0}$, and the functors $\varepsilon_s$ too, i.e. the $\varinjlim$ large relative to $\pi_0$ in $\uGamma(\mathcal{E}/\mathcal{C})$ are computed argument by argument.}
+\item[\circled{b}] \textit{Let $\pi \geqslant \sup(\pi_0,\cardred\mathcal{C})$ be a cardinal. For an object $f$ of $\mathcal{M}$ to belong to $\mathcal{M}_\pi$, it \textup{suffices} that $\forall\ s \in \Ob C$, $f(s) \defeq \varepsilon_s(x)$ \textup{\texttt{[rather} $\varepsilon_s(f)$\texttt{]}} be in $\mathcal{E}_{s\,\pi}$. (Compare 4.5.8, page 119.)} % [sic] \Ob C -> \Ob\mathcal{C}, italic C printed instead of script C
+\item[\circled{c}] \textit{Suppose $pi_0$ chosen so as} % [sic] pi_0 -> \pi_0, the letters "pi" printed instead of the Greek letter
+\msp{page 392}
+
+\textit{to satisfy the following additional conditions: $\pi_0$ is useful for $\mathcal{M} = \uGamma(\mathcal{E}/\mathcal{C})$, and for each of the fiber categories $\mathcal{E}_s$ ($s \in \Ob\mathcal{C}$) (such a $\pi_0$ exists). Let}
+\[
+\pi_1 \ = \ \sup(\pi_0, \cardred\mathcal{C}, \cardred\mathcal{M}_{\pi_0}) \ .
+\]
+\textit{Then for every cardinal $\pi \geqslant \pi_1$ and such that $\pi^{\pi_0} = \pi$, we have}
+\[
+\mathcal{M}_\pi \ = \ \left\{
+\begin{array}{l}
+\textit{strictly full subcategory of $\mathcal{M}$ consisting of the $f \in$} \\
+\textit{$\Ob\mathcal{M}$ such that $f(s) \in \Ob\mathcal{E}_{s\,\pi}$ $\forall\ s \in S$ \textup{\texttt{[rather}} $s \in$} \\
+\textit{$\Ob C$\textup{\texttt{]}}.} % [sic] \Ob C -> \Ob\mathcal{C}, italic C printed instead of script C
+\end{array}
+\right.
+\]
+\textit{If moreover $\pi$ is chosen so that we have}
+\[
+\pi \ \geqslant \ \sup_{s\in\Ob\mathcal{C}} \cardred\mathcal{E}_{s\,\pi_0} \ ,
+\]
+\textit{then the strictly full subcategory $\mathcal{E}(\pi)$ of $\mathcal{E}$ such that $\Ob\mathcal{E}(\pi) = \bigcup_{s\in\Ob\mathcal{C}} \Ob\mathcal{E}_{s\,\pi}$ is a $\mathcal{C}$-cofibered (resp. $\mathcal{C}$-fibered) subcategory of $\mathcal{E}$, and we have}
+\[
+\uGamma(\mathcal{E}/\mathcal{C})_\pi \xleftarrow{\ \sim\ } \uGamma(\mathcal{E}(\pi)/C), % [sic] C -> \mathcal{C}, italic C printed instead of script C
+\]
+\textit{thus ($\pi$ being useful for $\mathcal{E}$) we have an equivalence of categories}
+\[
+\uGamma(\mathcal{E}/\mathcal{C}) \xleftarrow{\ \sim\ } \Ind_\pi(\uGamma(\mathcal{E}(\pi)/\mathcal{C})) \ .
+\]
+\end{itemize}
+
+\end{document}

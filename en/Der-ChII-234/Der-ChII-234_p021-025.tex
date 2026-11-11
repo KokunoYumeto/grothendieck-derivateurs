@@ -1,0 +1,179 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Ob}{\operatorname{Ob}}
+
+\begin{document}
+
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+We are reduced to proving that this last condition implies condition d) of 2.6, and we can take for $S$ the ordered set of nonempty connected open sets of $S$, this then becomes obvious.
+
+That said, we must remember that the cohomological theory of irreducible topological spaces is by no means trivial - as \textsc{Serre}'s FAC shows us\,! On the other hand, it was \textsc{Serre} who had pointed out to me that for coefficients that are \textit{constant,} the cohomology of an irreducible space is trivial.
+
+In the present case, let us already prove, if $\mathcal{X}$ is 0-connected and locally totally 0-connected, that every covering of the final object of $\mathcal{X}$ is trivial. It suffices to see that if $U$ is 0-connected, $U \longrightarrow e$ is an isomorphism. But let us consider $U \hookrightarrow U \times U$, we know that it is a direct summand, and as $U \times U$ is connected, it is an isomorphism. So $U \longrightarrow e$ \texttt{[is a]} monomorphism, hence a direct summand, and as $U \neq \emptyset$, we have $U \longrightarrow e$ an isomorphism.
+
+It remains to prove that for every constant abelian sheaf \msp{page 31} $F$ on $\mathcal{X}$, we have $H^i(X,F)=0$ for $i>0$. We proceed by induction on $i$, it is already done for $i=1$. Suppose this has been proved for the $j<i$ ($i$ fixed) for every topos that is \textit{totally} 0\textit{-connected.} Let $\xi \in H^i(\mathcal{X},F)$, let $U \longrightarrow e$ be \texttt{[an]} epimorphism such that $\xi|U=0$, and consider the spectral sequence % [sic] H^i(X,F) -> H^i(\mathcal{X},F), plain X printed where the topos \mathcal{X} is meant elsewhere
+\[
+E_2^{pq} = H^p(C(U^*,\mathcal{H}^q(F))) \Longrightarrow H^*(\mathcal{X},F).
+\]
+We have by the totally 0-connected hypothesis
+\[
+\pi_0(U^q) \simeq \pi_0(U)^q, \tag*{$(*)$}
+\]
+and the connected components of $U^q$ are totally 0-aspheric,
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[->] (0,0) -- (0,5);
+\node[left] at (0,5) {$q$};
+\draw[->] (0,0) -- (5,0);
+\node at (4.3,-0.6) {$p$};
+\node[left] at (0,4) {$i$};
+\foreach \x in {0,1,2,3,4} {\fill (\x,4) circle (2pt); \fill (\x,0) circle (2pt);}
+\end{tikzpicture}
+\end{center}
+so by the induction hypothesis
+\[
+E_1^{pq} = 0 \qquad \text{if } 0<q<i,
+\]
+so we find an exact sequence
+\[
+0 \longrightarrow H^i(C(U^*,F)) \longrightarrow H^i(\mathcal{X},F) \longrightarrow H^0(\ \underbrace{H^i(U^*,F)}_{\substack{\text{complex}\\ \text{co-semi-simplicial}\\ \text{for } i\\ \text{variable}}}\ ) = \Ker(H^i(U,F) \rightrightarrows H^i(U^2,F)).
+\]
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+By the hypothesis on $U$, the image of $\xi$ in the third term is zero, so $\xi$ belongs to the first term. But for $(*)$, the complex $C(U^*,F)$ is the \textit{trivial} complex of the powers of $I=\pi_0(U)$, with coefficients in $M$ (if $F=M_{\mathcal{X}}$). Its cohomology \msp{page 32} in degrees $>0$ is zero, so $\xi=0$, q.e.d.
+
+\noindent\textbf{Proposition 2.15.} (\footnote[39]{This is already in SGA 4, I 8.}) \textit{Let $X$ be an object of} Cat\textit{. Equivalent conditions:}
+\begin{enumerate}[label={}, leftmargin=2em, itemsep=0pt]
+\item \textit{a) $X$ is filtering, i.e. $X$ is $0$-connected and $X^o$ satisfies the equivalent conditions of theorem 2.6 ($X^{o,\wedge}$ is locally totally $0$-connected).}
+\item \textit{b) The final object of $X^\wedge$ is ind-representable.}
+\end{enumerate}
+\noindent\textsc{Proof}. We know that we have
+\[
+e_{X^\wedge} \simeq \varinjlim_{x \in X} x, \tag*{(2.15.1)}
+\]
+direct limit taken in $X^\wedge$. Indeed, this also means that for every object $a$ in $X$, we have
+\[
+\varinjlim_{x \in X} \ \underbrace{x(a)}_{\Hom_X(a,x)} \ \xrightarrow{\ \sim\ } e \qquad \text{(one-point set)}
+\]
+But let us consider the object $X' = a\backslash X \longrightarrow X$ coétale over $X$, which is therefore Cat-cofibered over $X$, we know that we have
+\[
+\pi_0(X') \simeq \varinjlim_{x \in X} \pi_0(X'_x),
+\]
+where $X'_x = \Hom(a,x)$, so we find
+\[
+\varinjlim_{x \in X} \Hom(a,x) = \pi_0(a\backslash X) = e
+\]
+since $a\backslash X$ is 0-connected.
+
+Formula (2.15.1) shows that if \msp{page 33} $X$ is filtering, $e_{X^\wedge}$ is a filtering direct limit of representable functors. We know moreover that we can reindex by a filtering \textit{ordered} category (cf. SGA 4, I 8.1.6 (this is due to P. \textsc{Deligne}\,!)).
+
+We have proved a $\Longrightarrow$ b, let us prove b $\Longrightarrow$ a. So suppose
+\[
+e_{X^\wedge} = \varinjlim_{i \in I} x_i,
+\]
+where $I$ is a (small) filtering ordered set, and $I \longrightarrow X$ a functor. Let us prove PS 1$'$ (right-hand form), i.e. for $a, b$ in $X$, \texttt{[there]} exists $\vcenter{\hbox{\begin{tikzcd}[row sep=0.1em, column sep=1.2em]
+a \arrow[dr] & \\
+& x \\
+b \arrow[ur] &
+\end{tikzcd}}}$. Indeed, since $\varinjlim\limits_{I} \Hom(a,x_i) = e$, it follows that $\Hom(a,x_i) \neq \emptyset$ for $i$ large, likewise $\Hom(b,x_i) \neq \emptyset$, so it suffices to take $\vcenter{\hbox{\begin{tikzcd}[row sep=0.1em, column sep=1.2em]
+a \arrow[dr] & \\
+& x_i \\
+b \arrow[ur] &
+\end{tikzcd}}}$. Let us prove PS 2$_{\mathrm{d}}$, i.e. that for \texttt{[a]} double arrow $a \overset{u}{\underset{v}{\rightrightarrows}} b$, \texttt{[there]} exists $b \longrightarrow x$ which equalizes.
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 34}
+Let $\xi_{i_0}$ be in $\Hom(b,x_{i_0})$, its two images in $\Hom(a,x_{i_0})$ are not necessarily equal, but become so in the direct limit, reduced to $e$, so become equal by composing with $x_{i_0} \longrightarrow x_i$ for $i$ large enough, so the composite $b \longrightarrow x_{i_0} \longrightarrow x_i$
+\[
+a \rightrightarrows b \longrightarrow x_{i_0} \longrightarrow x_i
+\]
+equalizes the double arrow.
+
+\noindent\textbf{Corollary 2.16.} \textit{Let $W$ be a basic localizer satisfying the limit axiom} Loc (8)\textit{. If $X$ in} Cat \textit{is a filtering or cofiltering category, then $X$ is $W$-aspheric.}
+
+More generally and pleasantly:
+
+\noindent\textbf{Corollary 2.17.} \textit{Let $W$ be as in 2.16. Then every filtering category is} totally $W$-aspheric (\footnote[40]{cf. XII, §V for this notion, which I have struggled a great deal to bring out and to understand\,!}), \textit{i.e. for every arrow $f : X \longrightarrow Y$ in} Cat\textit{, the object $f_!(e_X)$ of $e_Y$ (also defined as $y \longmapsto \pi_0(y\backslash X)$, and occurring in the canonical factorization of $f$ as $ip$, with $p$ étale and the cofibers} \texttt{[?]} \textit{of $p$ $0$-connected)} \msp{page 35} \textit{is $W$-aspheric. In fact, $Y/f_!(e_{X^\wedge})$ is even a filtering category.}
+
+Indeed, the functor $f_!$ commutes with direct limits, so $f_! e_{X^\wedge}$ is a filtering direct limit of the $f_!(x_i) = f(x_i)$. So $Y/f_!(e_{X^\wedge})$ is a filtering direct limit of the $Y/f(x_i)$. So it is even a filtering category, a fortiori it is $W$-aspheric.
+
+So finally, we find nontrivial examples of totally $W$-aspheric categories, i.e. examples therefore of categories without a final object. % [sic] donc -> dont (?), the conjunction "donc" makes no sense here
+
+\noindent\textbf{Corollary 2.18.} (\footnote[41]{already in SGA 4, I 8.}) \textit{Let $X$ be in} Cat\textit{, $F$ in $X^\wedge$. For $F$ to be ind-representable it is necessary and sufficient that $X/F$ be filtering.}
+
+Indeed, by (2.15), $X/F$ is filtering if and only if the final object $F$ of $X/F$ comes from an ind-object of $X/F$, but this also means that $F$ is the direct limit in $X^\wedge$ of an ind-object of $X$, i.e. that $F$ is ind-representable.
+
+\msp{page 36}
+\noindent\textbf{Question.} \textit{If $X$ in} Cat \textit{is totally $W_\infty$-aspheric, i.e. the $f_!(e_{X^\wedge})$ are $W_\infty$-aspheric for every arrow $f : X \longrightarrow Y$ in} Cat\textit{, or again for every such arrow, with the $y\backslash Y$ $0$-connected ($y \in \Ob Y$), $Y$ is $W_\infty$-aspheric - does this imply that $X$ is filtering?} That wouldn't surprise me - and even assuming only the $f_!(e_{X^\wedge})$ 1-connected (\footnote[42]{They always are (cf. XII, p. 101), it is 2-\textit{connected} that should be read here\,!}) (they are 0-connected, as soon as $X$ is). But I do not want to linger at present on this question.
+
+The answer to the preceding question is negative, as we see from the:
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent\textbf{Proposition 2.19.} (\footnote[43]{\textbf{False.}}) \textit{Let $X$ be in} Cat \textit{such that $\mathit{diag}_X : X \longrightarrow X \times X$ is cofinal} (\footnote[44]{cf. definition 3.3, p. 45.})\textit{, i.e. such that $X^o$ is totally $0$-connected. Then $X$ is totally $W_\infty$-aspheric (hence also totally $W$-aspheric for every basic localizer $W$ such that $W \supseteq W_\infty$).}
+
+Indeed, let $f : X \longrightarrow Y$ be a cofinal functor, we must prove that $Y$ is $W_\infty$-aspheric. Now we know that totally 0-connected implies $W_\infty$-aspheric (\footnote[45]{This is \textbf{false.}}) (cf. proposition 2.3, p. 17-18), so it suffices to see that $Y^o$ is totally 0-connected, i.e. $Y \xrightarrow{d_Y} Y \times Y$ cofinal. Now we have the commutative diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X \arrow[r, "d_X"] \arrow[d, "f"'] & X \times X \arrow[d, "f \times f"] \\
+Y \arrow[r, "d_Y"] & Y \times Y,
+\end{tikzcd}
+\]
+where by hypothesis $f$, hence also $f \times f$, and $d_X$ are cofinal. So $\varphi = (f \times f) \circ p_X$ \texttt{[rather} $\varphi = (f \times f) \circ d_X$\texttt{]} is cofinal, and since $\varphi = d_Y f$ and $f$ is also cofinal, we conclude that $d_Y$ is, q.e.d.
+
+\noindent\textbf{Corollary.} $\boldsymbol{\Delta}$ \textit{being totally $0$-connected, $\boldsymbol{\Delta}^o$ is totally $W_\infty$-aspheric, yet it is not filtering.}
+
+\noindent\textbf{Question.} \textit{$X$ totally $W_\infty$-aspheric $\Longrightarrow$ $X^o$ totally $0$-connected? Or at least implies PS 1$'$?}
+
+\msp{page 36bis}
+\noindent\textbf{Counterexample 2.20} to the false proposition 2.19.
+
+Let $X$ be an object of Cat, let us adjoin to it the final category $e$ as a closed subobject, i.e. let us consider an object $X'$ of Cat in which $X$ is an open subobject, $e$ the complementary closed subobject:
+\[
+X \overset{i}{\hookrightarrow} X' \overset{j}{\hookleftarrow} e.
+\]
+We know (cf. XII) that such an operation is determined, up to isomorphism, by the datum of an object
+\[
+H \in \Ob X^\wedge
+\]
+by putting
+\[
+H(x) = \Hom_{X'}(x,e),
+\]
+the category $X/e$ being identified (up to isomorphism) with $X/H$. It is therefore 0-connected if and only if the object $H$ of $X^\wedge$ is 0-connected. This also means that the morphism $i$ is co-cofinal, i.e. that $i^o : X^o \longrightarrow X'^o$ is cofinal. Suppose now $X$ $W_\infty$-aspheric and totally 0-connected, i.e. the current Loc (6), cf. XVI. Proposition 2.19 asserts that, under these conditions, $X'$ (which is itself also totally 0-connected) is even $W$-aspheric. It would therefore follow that $i \in W_\infty$. But by XII, th. 4, cor. 4 (p. 149), it would follow that
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 36ter}
+$X/e$ is $W_\infty$-aspheric, i.e. $H$ $W_\infty$-aspheric. Thus, if $X$ is totally 0-aspheric, every 0-connected object of $X^\wedge$ would be $\infty$-connected. But this is manifestly false, e.g. if we take for $X$ a test category for $W_\infty$, e.g. $X = \boldsymbol{\Delta}$.
+
+This makes me suspect that the conjecture
+\[
+X \text{ totally } W_\infty\text{-aspheric} \Longrightarrow X \text{ filtering}
+\]
+might be valid.
+
+\end{document}

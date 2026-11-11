@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french,english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\Fib}{\mathrm{Fib}}
+\newcommand{\Ob}{\mathrm{Ob}}
+
+\begin{document}
+
+\setcounter{footnote}{4}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 6}\textbf{Theorem 1.} \textit{Suppose that $\cM$ is} accessible, \textit{and stable under (small) direct limits. (There should suffice stability under amalgamated sums, and under filtering $\varinjlim$, or even ordinal \dots).} \textit{Let $\Phi_0$ be a} small \textit{subset of} $\Fl(\cM)$\textit{, $\Psi=(\Phi_0)_*$, and $\Phi$ a subset of} $\Fl(\cM)$ \textit{such that}
+\[
+\Phi_0\ \subset\ \Phi\ \subset\Psi^*\ (=\widetilde{\Phi}_0).
+\]
+\textit{Then:}
+
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{For $\Phi$ to be left closed,} i.e. $\Phi=\widetilde{\Phi}_0$\textit{, it is necessary and sufficient that it satisfy conditions} a) b) c) \textit{of proposition 2. When this is so, the couple $(\Phi,\Psi)$ is a Quillen couple.}
+
+\item[b)] \textit{Suppose only that $\Phi$ satisfies conditions} a), c) \textit{of proposition 2 (excluding condition} b) \textit{on direct factors) – thus we cannot assert that $\Phi$ is left closed. Nevertheless, $(\Phi,\underbrace{\Psi}_{=\,\Phi_*})$ satisfies the Quillen factorization property.}
+\end{itemize}
+
+\textbf{Remark.} In the proof, the existence of $\Phi_0\subset\Phi$, which plays the role of a small set of ``generators'' (on the left) for $\Phi$, plays an essential role. It would be worth developing the notion of \textit{accessible subsets}
+\msp{page 7}
+of $\Fl(\cM)$, which would imply the existence of a small set $\Phi_0\subset\Phi$ such that $\Phi\subset\widetilde{\Phi}_0$, and which would have the property that
+\[
+\begin{aligned}
+&\Phi\ \text{accessible}\quad\Longrightarrow\quad\Phi_*\ \text{accessible}\\
+&\Psi\ \text{accessible}\quad\Longrightarrow\quad\Psi^*\ \text{accessible.}
+\end{aligned}
+\]
+Any couple $(\Phi,\Psi)$ of associated closed subsets ($\Phi=\Psi^*$, $\Psi=\Phi_*$) and accessible, would thus be a Quillen couple.
+
+\section*{2\quad Weak Quillen categories, and construction thereof (Conjectural theorem-scholie)}
+
+Throughout what follows, we give ourselves a \textit{category of models}
+\[
+\left\{
+\begin{array}{ll}
+\mbox{$(\cM,W)$, where $W\subset\Fl(\cM)$} & \\[3ex]
+\mbox{\textit{$W$ weakly saturated} (\footnotemark) :} &
+\begin{array}[c]{@{}l@{\quad}p{6.5cm}@{}}
+a) & $W$ contains the isomorphisms.\\[1ex]
+b) & If two among $f$, $g$, $gf$ \texttt{[are]} in $W$, the third also.
+\end{array}
+\end{array}
+\right.
+\]
+\footnotetext{This is axiom M 5 of \textsc{Quillen}.}
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+We want to describe additional data a little weaker than those of a Quillen model category. We suppose given subsets
+\[
+C,\ F,\ TC,\ TF\ \subset\ \Fl(\cM),
+\]
+with the following properties. As a preliminary axiom, I lay down
+
+\begin{itemize}[leftmargin=3em,labelsep=0.6em]
+\item[\textbf{M 0}] Stability of $\cM$ under finite $\varprojlim$ and finite $\varprojlim$ \texttt{[rather $\varinjlim$]}.
+
+\item[\textbf{M 1}]\msp{page 8}Lifting-extension property
+\[
+C\longleftrightarrow TF,\qquad TC\longleftrightarrow F.
+\]
+
+\item[\textbf{M 2}] Factorization property for $(C,TF)$, $(TC,F)$.
+
+\item[\textbf{M 3}] Stability of $F$ under composition and under base change, of $C$ under composition and cobase change, $F$ and $C$ contain the isomorphisms.
+
+\item[\textbf{M 4}] Stability of $TF$ under composition and base change, of $TC$ under composition and cobase change, and $TF$ and $TC$ contain the isomorphisms.
+
+\item[\textbf{M}$'$] $TC\subset C\cap W$, $TF\subset F\cap W$.
+
+\item[\textbf{M}$''$] $C\subset\ \underbrace{\Cof_W}_{\text{$W$-cofibrations}}\ ,\ F\subset\ \underbrace{\Fib_W}_{\text{$W$-fibrations}}\ .$
+\end{itemize}
+
+\texttt{[A morphism $p:X\longrightarrow Y$ of $\cM$ is a $W$-fibration if for every diagram of cartesian squares of the form:}
+\[
+\begin{tikzcd}
+X \ar[d,"p"'] & X' \ar[l] \ar[d] & X'' \ar[l,"t"'] \ar[d] \\
+Y & Y' \ar[l] & Y'' \ar[l,"s"] \ ,
+\end{tikzcd}
+\]
+\texttt{if $s\in W$, then $t\in W$. The notion of $W$-cofibration is the dual notion.]}
+
+In the case of \textsc{Quillen} (Q-\textit{categories of models}), M$'$ is strengthened to
+\[
+TC=C\cap W,\qquad TF=F\cap W,
+\]
+and there is no axiom M$''$. Axiom M$''$ is equivalent to the property of ``propriety'', corresponding to Q-categories of models that are \textit{proper.}
+
+\textbf{Proposition 3.} \textit{Suppose conditions} M 0 \textit{(for the record),} M 1, M 2, M$'$, M$''$ \textit{are satisfied. Then replacing $C$, $TC$ by the saturations for the stability properties of containing the isomorphisms, of being stable under composition and under cobase change, and $F$, $TF$ by those of containing the isomorphisms and of being stable under composition and under base change, we find $C'$, $TC'$, $F'$, $TF'$ satisfying}
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 9}\textit{all the axioms} M 1 to M 4, M$'$, $M''$. % [sic] $M''$ (italic M) -> M$''$ (roman M), the axiom is printed with roman M everywhere else
+
+\textsc{Proof}. Proposition 2 assures us that M 1 continues to be satisfied, and for M 2 this is trivial. M 3 and M 4 will hold by construction. On the other hand, M$''$ remains valid, since $\Cof_W$ has the stabilities required for $C'$, and $\Fib_W$ those required for $F'$. It remains to prove M$'$, \textit{i.e.}
+\[
+TC'\ \subset\ C'\cap W,\qquad TF'\subset F'\cap W,
+\]
+and for this it suffices to see that $C'\cap W$ resp. $F'\cap W$ has the stabilities required for $TC'$ resp. $TF'$. This follows from the
+
+\textbf{Lemma.} \textit{Let $C$ be a subset of} $\Cof_W$\textit{. If $C$ contains the isomorphisms, the same is true of $C\cap W$. If moreover $C$ is stable under composition resp. under cobase change, the same is true} \texttt{[of]} \textit{$C\cap W$. Dual statement for a subset $F$ of} $\Fib_W$\textit{.}
+
+This comes from the fact that
+\[
+\boxed{\ \Cof_W\cap W=W^{\mathrm{univ}}\ (\mbox{\footnotemark})\ }
+\stackrel{\text{def}}{=}
+\begin{array}{l}
+\text{set of arrows $A\longrightarrow B$ such that for every}\\
+A\longrightarrow A',\ A'\longrightarrow B'=A'\vee_A B\ \ \text{is in $W$.}
+\end{array}
+\]
+\footnotetext{arrows \textit{couniversally} in $W$, or $W$-\textit{equivalences that are couniversal}.}
+is itself stable under composition and under cobase change, and of course we have, if $C\subset\Cof_W$,
+\[
+C\cap W\ =\ C\cap(\Cof_W\cap W)\ =\ C\cap W^{\mathrm{univ}}.
+\]
+
+\msp{page 10}So it remains to prove the
+
+\textbf{Corollary 1.} \textit{Suppose there exist subsets $C$, $F$, $TC$, $TF$ $\subset$} $\Fl(\cM)$ \textit{satisfying} M 2, M$'$ (\footnote{We do not need all of M$'$, only $TC\subset W$, $TF\subset W$.}), M$''$. \textit{Then}
+\[
+\begin{aligned}
+\Cof_W\cap W\ &=\ W^{\mathrm{univ}}\\
+\Fib_W\cap W\ &=\ W_{\mathrm{univ}}\ \ (\mbox{\footnotemark}).
+\end{aligned}
+\]
+\footnotetext{Arrows $f:X\longrightarrow Y$ \textit{universally} in $W$, \textit{i.e.} such that for every $Y'\longrightarrow Y$, $f':X'=X\times_Y Y'\longrightarrow Y'$ is in $W$.}
+
+To see this, let us show e.g. the second (the first will follow from it by duality).
+\[
+\begin{tikzcd}
+X \ar[d,"f"'] & X' \ar[l] \ar[d,"f'"] \\
+Y & Y' \ar[l]
+\end{tikzcd}
+\qquad\qquad\qquad
+f\in\Fib_W,\ f\in W\Longrightarrow f'\in W.
+\]
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+We have better:
+
+\textbf{Proposition 4.} \textit{Suppose that every arrow of $\cM$ factors as $pi$, with $i\in W$ and $p\in$} $\Fib_W$\textit{. Then, if $X$, $Y$ are in} $\underline{\Fib}_W S\subset\cM/S$ \texttt{[full subcategory of $\cM/S$ consisting of the $r:Z\longrightarrow S$, where $r\in\Fib_W$]}\textit{, then every $f:X\longrightarrow Y$ in $\cM/S$ which is in} $W_S$ \texttt{[consisting of the arrows over $S$ which are in $W$]} \textit{is in $W^{\mathrm{u}}_S$,} i.e. \textit{it remains in $W$ after any base change $S'\longrightarrow S$.}
+\[
+\begin{tikzcd}[column sep=small]
+X \ar[rr,"f"] \ar[dr,"p"'] & & Y \ar[dl,"q"] \\
+& S &
+\end{tikzcd}
+\qquad\qquad\qquad
+p,q\in\Fib_W
+\]
+
+\textit{Dual statement for the arrows of} $S\backslash\underline{\Cof}_W\subset S\backslash\cM$ \texttt{[full subcategory of $S\backslash\cM$ consisting of the $i:S\longrightarrow Z$, where $i\in\Cof_W$]}\textit{, such an arrow which is in $W$ is $S$-couniversally in $W$, if every arrow of $\cM$ factors as $qj$, with $j\in$} $\Cof_W$ \textit{and $q\in W$.}
+
+\msp{page 11}\textsc{Proof}.
+\[
+\begin{tikzcd}[column sep=small]
+X \ar[dr,"f\in W"] \ar[dd] & & \overline{X'} \ar[ll] \ar[dr,"\overline{f'}\in W"] \ar[dd] & & X' \ar[ll,"i_X"'] \ar[dr,"f'"] \ar[dd] & \\
+& Y \ar[dl] & & \overline{Y'} \ar[ll,crossing over] \ar[dl] & & Y' \ar[ll,"i_Y"',crossing over] \ar[dl] \\
+S & & \overline{S'} \ar[ll,"F"] & & S' \ar[ll,"i"',"TC"] &
+\end{tikzcd}
+\]
+We factor $S'\longrightarrow S$ as $S'\overset{i}{\longrightarrow}\overline{S'}\overset{p}{\longrightarrow}S$, with $i\in W$, $p\in\Fib_W$, by M 2. Thus $f\in W\Longrightarrow\overline{f'}\in W$. Since $X,Y\in\Ob\,\underline{\Fib}_W S$, we have $\overline{X'},\overline{Y'}\in\Ob\,\underline{\Fib}_W\overline{S'}$, and since $i:S'\longrightarrow\overline{S'}$ is in $W$, hence also $i_X$, $i_Y$, we have $f'\in W$ by M 5 (weak saturation of $W$).
+
+\textbf{Comment on Proposition 3.} We can be even more demanding, by also requiring in M 3, M 4 stability under direct factors, and (when only M 1, M2, M$'$, M$''$ % [sic] M2 -> M 2, printed without the space used everywhere else
+are satisfied) by saturating $C$, $TC$, $F$, $TF$ also for this additional stability. Proposition 2 again ensures that M 1 continues to hold (and M 2, M 3, M 4 trivially), we see that this is still so for M$'$, M$''$ provided we strengthen the weak saturation axiom M 5 on $W$ by
+\[
+\textit{stability of $W$ under direct factors,}
+\]
+which indeed implies that $\Cof_W$, $\Fib_W$ are stable under direct factors, as are $W^{\mathrm{univ}}$ and $W_{\mathrm{univ}}$.
+
+\msp{page 12}It does not seem that axioms M 0 to M 4, plus M$'$ and M$''$ suffice to develop the exact sequences of suspension and cosuspension. A tiny little bit more is needed:
+
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\textbf{Definition 2.} I call a \textit{left pre-Q-category of models,} the data of $\cM$ and of $W$, $C$, $F$, $TC$, $TF$ $\subset$ $\Fl(\cM)$, satisfying axioms M 0 to M 5, M$'$, M$''$, plus the strengthened form of the first inclusion in M$'$
+\[
+\text{M}'_0\ \text{(g)}\qquad\qquad\qquad TC=C\cap W\qquad\quad(\text{not only } TC\subset C\cap W).
+\]
+Likewise, we define the \textit{right pre-Q-category of models,} by the condition
+\[
+\text{M}'_0\ \text{(d)}\qquad\qquad\qquad\qquad\qquad\qquad TF=F\cap W.
+\]
+
+NB When the two conditions are satisfied at once, then the data of $TC$, $TF$ already follow from those of $W$, $C$, $F$, and we simply have a ``proper'' Q-category of models (in the sense of \textsc{Quillen}).
+
+\textbf{Scholie.} For me, the introduction of $C$, $TC$, $F$, $TF$ is purely auxiliary – what matters to me are the properties of $W$. Thus, the existence of $C$, $TC$, $F$, $TF$ satisfying the weak axioms M 0 to M 4, M$'$, M$''$, since it gives the factorizations
+\msp{page 13}
+spoken of in \texttt{[the]} proposition 3, entails the remarkable property of $W$ stated in that proposition, and in the corollary which precedes it. Likewise, these factorization properties (\footnote{in a slightly strengthened form it is true – a \textit{functorial} factorization for $f$ is needed \dots}) ensure the existence of a good theory of $W$-homotopic fibers and cofibers without any need for reference in this theory to $C$, $TC$, $F$, $TF$ (whose introduction gives at most some small supplements \dots). But I do not see how, from the factorization hypotheses alone, to prove the crucial exactness property for $W$-cartesian, and $W$-cocartesian squares, necessary to be able to develop the \textit{exact} sequence of cosuspension and of suspension. It is to get this exactness that the auxiliary, and transitory, introduction of the paraphernalia $(C,TC,F,TF)$ is useful, the additional axiom on the left $TC=C\cap W$ ensuring (unless I am mistaken) the exactness of $W$-cartesian squares, and the axiom on the right $TF=F\cap W$ that of $W$-cocartesian squares. (Something to be checked with more care than I have done so far.) Once this is obtained, and possibly likewise for the $(\cM(I),W(I))$ for every diagram-category $I$, we can
+\msp{page 14}
+totally forget these auxiliary sets – I feel like forgetting them in any case.
+
+My hope is that for a given $W$, even if we do not manage to find an associated Quillen triple structure $(W,C,F)$ (e.g. because there might not be one), we can find both quintuples $(W,C,F,TC,TF)$ which are left pre-Quillen, and quintuples (\textit{other} quintuples!) which are right pre-Quillen.
+
+Here is the kind of statement in proper form, for the moment conjectural or even entirely heuristic, that I have in mind:
+
+\textbf{Conjectural theorem-scholie:} \textit{We suppose that $\cM$ is stable under ``arbitrary'' $\varinjlim$, and under finite $\varprojlim$, and that $W$ is stable under filtering $\varinjlim$ (in addition to weak saturation).}
+
+\end{document}

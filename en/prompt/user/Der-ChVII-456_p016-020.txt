@@ -1,0 +1,240 @@
+The edition's macros used on these pages, for reference (do not translate or return them):
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\uCh}{\underline{\mathrm{Ch}}}
+\newcommand{\Ty}{\mathrm{Ty}}
+\newcommand{\uTy}{\underline{\mathrm{Ty}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+\newcommand{\circled}[1]{\text{\textcircled{$\scriptstyle #1$}}}
+
+Translate this LaTeX into English (Les Dérivateurs, chapter VII, edition pages 14-18, manuscript pages 22-28; 5 pages).
+
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+en prenant simplement la ‘loi’ correspondante à $\varphi$
+\[
+c \longmapsto c\circ\varphi \qquad \text{pour } c : I_\tau \longrightarrow X.
+\]
+De façon plus précise, l'application naturelle
+\[
+\underbrace{\Hom_{\Cat}(I_{\tau'},I_\tau)}_{=\mathrm{Ob}\,\uHom(I_{\tau'},I_\tau)} \longrightarrow \Hom(\mathrm{Ch}_\tau,\mathrm{Ch}_{\tau'}),
+\]
+\msp{page 22}
+où le deuxième Hom est considéré comme un Hom d'objets dans $\Cat^{\vee}=\uHom(\Cat,\mathrm{Ens})$. Ainsi, dans les deux exemples plus haut, où $\tau=\bDelta_2^+$ et $\tau'=\bDelta_1^+$ ou $\bDelta_2^+$, les foncteurs en sens inverse sont
+\[
+\begin{tikzcd}
+\bDelta_2^+\ \Big\{ & 0 \arrow[r] & 1 \arrow[r] & 2 \\
+\bDelta_1^+\ \Big\{ & 0 \arrow[u, mapsto] \arrow[rr] & & 1 \arrow[u, mapsto]
+\end{tikzcd}
+\]
+et
+\[
+\begin{tikzcd}
+\bDelta_2^+\ \Big\{ & 0 \arrow[r] & 1 \arrow[r] & 2 \\
+\bDelta_2^+\ \Big\{ & 0 \arrow[u, mapsto] \arrow[r] & 1 \arrow[ur, mapsto] \arrow[r] & 2\,. \arrow[u, mapsto]
+\end{tikzcd}
+\]
+C'est là un principe général pour ramener toutes les ‘opérations’ $\pm$ canoniques sur des chemins dans des catégories arbitraires, et des énoncés les concernant, à des questions où $X$ disparaît et où on travaille dans les catégories intervalles elles-mêmes. Un des avantages techniques, c'est que ce sont des catégories fort petites, donnant lieu de plus à une intuition topologique sûre (qui risque de se volatiliser par moments en travaillant dans des catégories de chemins), et aussi que dans de telles catégories, donc aussi dans les catégories de foncteurs entre elles, il y a toujours au plus
+\msp{page 23}
+\textit{une seule flèche} allant d'un objet donné vers un autre. En d'autres termes, dans de telles catégories tous les diagrammes sont commutatifs.
+
+Bien sûr, on voit aussi que si on a une loi de formation $L$ de chemins de type $\tau'$ à partir de chemins de type $\tau$ (avec la condition de fonctorialité par rapport à la catégorie $X$ où on prend les chemins), cette loi est nécessairement \textit{fonctorielle par rapport aux chemins :} si on a un homomorphisme
+\[
+c \xrightarrow{v} c' \qquad \text{dans } \uCh_\tau(X),
+\]
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+alors la loi $L$ ‘se prolonge’ à de tels $v$ pour donner
+\[
+L(c) \xrightarrow{L(v)} L(c'),
+\]
+avec les relations habituelles
+\[
+L(\mathrm{id}_C)=\mathrm{id}_{L(c)}, \qquad L(v'v)=L(v')L(v). % [sic] \mathrm{id}_C -> \mathrm{id}_c, capital C printed while the chemin is c (cf. L(c))
+\]
+Cela résulte de la description de $L$ comme une opération $L_\varphi$ en termes d'un foncteur bien déterminé
+\[
+I_{\tau'} \xrightarrow{\varphi} I_\tau,
+\]
+lequel à son tour donne pour toute $X$ un \textit{foncteur}
+\[
+\left\{
+\begin{array}{rcl}
+\uCh_\tau(X) & \longrightarrow & \uCh_{\tau'}(X)\\[1ex]
+c & \longmapsto & c\circ\varphi
+\end{array}
+\right.
+\]
+plus précis que simplement un \textit{application} $\mathrm{Ch}_\tau(X)\longrightarrow\mathrm{Ch}_{\tau'}(X)$ entre les ensembles d'objets correspondants. % [sic] un application -> une application, gender agreement
+
+\msp{page 24}
+On a le choix maintenant entre
+
+\begin{enumerate}[label=\alph*)]
+\item Une étude plus ou moins systématique des foncteurs entre intervalles. Je préfère attendre pour cela d'avoir besoin de ceci et de cela, et de ne faire que le strict minimum pour les constructions que j'ai en vue.
+\item Une description de la compositions des chemins. % [sic] la compositions -> la composition, number agreement
+\item Un formalisme des catégories de chemins \textit{de type non précisé.}
+\end{enumerate}
+
+Comme mon objectif est surtout de décrire de telles catégories $\uCh(X)$ (sans indice $\tau$!), avec des bonnes propriétés, je commencerai par c), regarderai ensuite b) comme un test crucial pour l'utilisabilité des notions obtenues, et enfin m'occuperai de a) quand je saurai de quoi j'aurai en besoin.
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\section*{4\quad Catégorie de chemins $\uCh(X)$}
+
+Je veux ‘inclure’ toutes les catégories $\uCh_\tau(X)$ de chemins de tous les types qu'on veut, dans une même catégorie $\uCh(X)$. Rappelons
+\[
+\uCh_\tau(X)=\uHom(I_\tau,X),
+\]
+où $I_\tau$ est l'intervalle (orienté) standard de type $\tau$.
+
+L'ensemble de tous les types d'intervalles
+\msp{page 25}
+peut être identifié au monoïde libre Ty à deux générateurs $\Delta^+$ et $\Delta^-$, dont les éléments sont les suites finies quelconques (eventuellement vides) d'objets alternativement égales à $\Delta^+$ et à $\Delta^-$. Si le premier élément est $\Delta^+$, on a un type de chemin à direction initiale directe, rétrograde dans le cas contraire. La décomposition de $I_\tau$, ou de $\mathrm{Fl}\,(I_\tau)$, en intervalles critiques correspond à l'écriture réduite d'un mot comme % [sic] eventuellement -> éventuellement, missing accent
+\[
+(\Delta^+)^{l_1}(\Delta^-)^{l_2}\ \cdots\ (\Delta^?)^{l_r} \qquad (\Delta^?=\Delta^+ \text{ si } r \text{ impair, } \Delta^?=\Delta^- \text{ si } r \text{ pair}),
+\]
+ou comme
+\[
+(\Delta^-)^{l_1}(\Delta^+)^{l_2}\ \cdots\ (\Delta^?)^{l_r} \qquad (\Delta^?=\Delta^- \text{ si } r \text{ impair, } \Delta^?=\Delta^+ \text{ si } r \text{ pair}).
+\]
+Les $l_i$ sont les longueurs des intervalles critiques successifs (ou des chaines structurales successives), leur nombre est la longueur réduite de l'intervalle.
+
+On va considérer Ty comme l'ensemble des objets d'une catégorie $\uTy$ :
+\[
+\left\{
+\begin{array}{l}
+\mathrm{Ob}\,\uTy=\Ty=\ \text{monoïde libre à deux générateurs } \Delta^+,\ \Delta^- \text{ précédents.}\\[1ex]
+\text{Si } \tau,\tau'\in\Ty,\ \Hom(\tau,\tau')=\Hom_{\Cat}(I_\tau,I_{\tau'}).
+\end{array}
+\right.
+\]
+
+(\footnote[7]{Définition un peu canulée, il faut se borner aux homomorphismes de $I_\tau$ dans $I_{\tau'}$ compatibles avec source et but - cf. p.~29.}). On notera qu'on a non seulement un ensemble $\Hom_{\Cat}(I_\tau,I_{\tau'})$, mais même une catégorie $\uHom(I_\tau,I_{\tau'})$, ce qui revient ici à dire que $\Hom(I_\tau,I_{\tau'})$ (i.e. $\Hom(\tau,\tau')$) peut être vu comme un ensemble \textit{ordonné.} Mais pour l'instant nous allons ignorer cette relation d'ordre.
+
+\msp{page 26}
+La composition des morphismes est la composition des foncteurs entre catégories $I_\tau$. Ainsi on a un foncteur \textit{pleinement fidèle} (\footnote[8]{faux, cf. annotation marginale page précédente - on ne prend pas \textit{tous} les foncteurs dans Cat entre $I_\tau$ et $I_{\tau'}$.}) canonique
+\[
+\tau \longmapsto I_\tau : \uTy \xrightarrow{\rho} (\Cat) \qquad \text{(\footnotemark[9]),}
+\]
+\footnotetext[9]{foncteur \textit{réalisation} d'un type (combinatoire) d'intervalles.}% footnote text printed at the foot of p. 17
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+par quoi la catégorie $I_\tau$ \texttt{[plutôt} $\uTy$\texttt{]} pourrait s'identifier à une sous-catégorie pleine de (Cat) (celle des $I_\tau$). Mais je préfère ne pas identifier $\tau\in\Ty$ (donnée combinatoire) avec $I_\tau$ (donnée catégorique).
+
+Soit $X$ une (petite?) catégorie. On a un contrafoncteur
+\[
+\left\{
+\begin{array}{rcl}
+S & \longmapsto & \uHom(S,X)\\[1ex]
+(\Cat)^o & \longrightarrow & (\Cat)
+\end{array}
+\right.
+\]
+défini par $X$, d'où en composant avec $\rho$ un contrafoncteur
+\[
+\uTy^{o} \xrightarrow{\mathrm{CH}_X} \Cat.
+\]
+C'est le contrafoncteur
+\[
+\left\{
+\begin{array}{l}
+\tau \longmapsto \uHom(I_\tau,X) \overset{\text{déf}}{=} \uCh_\tau(X),\\[1ex]
+\text{i.e. } \mathrm{CH}_X(\tau)=\uCh_\tau(X).
+\end{array}
+\right.
+\]
+Mais un contrafoncteur sur une petite catégorie $\uTy$ donne lieu à une \textit{catégorie fibrée} (et même scindée) sur celle-ci.
+
+\msp{page 27}
+Je vais désigner cette catégorie fibrée par $\uCh(X)$. (Provisoirement - si elle s'avère trop grosse, je la restreindrai \dots) Ainsi on a
+\[
+\begin{tikzcd}[row sep=large]
+\uCh(X) \arrow[d, "\pi_X"] \\
+\uTy\ .
+\end{tikzcd}
+\]
+La fibre de $\uCh(X)$ en $\tau\in\mathrm{Ob}\,\uTy$ est la catégorie $\uCh_\tau(X)$ des chemins de type $\tau$ dans $X$. Cela nous dit donc quelles sont les flèches dans $\uCh(X)$ au dessus des flèches identiques dans $\uTy$. Mais que sont les flèches plus générales? On se donne une flèche dans $\uTy$
+\[
+\varphi : \tau' \longrightarrow \tau, \qquad \text{i.e. } I_{\tau'} \xrightarrow{\varphi} I_\tau,
+\]
+quelles sont les flèches de $\uCh(X)$ au dessus de $\varphi$? Par le sorite général des catégories fibrées, si
+\[
+\begin{array}{lclcl}
+c\in\uCh(X)_\tau & = & \uCh_\tau(X) & \overset{\text{déf}}{=} & \uHom(I_\tau,X)\\[1ex]
+c'\in\uCh(X)_{\tau'} & = & \uCh_{\tau'}(X) & \overset{\text{déf}}{=} & \uHom(I_{\tau'},X)
+\end{array}
+\]
+on a
+\[
+\boxed{\Hom_\varphi(c',c)\simeq\Hom(c',\underbrace{\varphi^*(c)}_{=c\circ\varphi}).}
+\]
+Donc : les homomorphismes du
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+\msp{page 28}
+chemin $c'$ de type $\tau'$ dans $X$, dans le chemin $c$ de type $\tau$, ‘au dessus’ du morphisme $\varphi$ de $\tau'$ dans $\tau$, i.e. du foncteur
+\[
+\varphi : I_{\tau'} \longrightarrow I_\tau,
+\]
+est un homomorphisme $v$ de $c'$ dans $c\circ\varphi$, i.e.
+\[
+\begin{tikzcd}[row sep=large]
+I_{\tau'} \arrow[r, "\varphi"] \arrow[dr, "c'"', ""{name=A}] & I_\tau \arrow[d, "c", ""'{name=B}] \\
+& X.
+\arrow[from=A, to=B, bend left=20, shorten <=6pt, shorten >=2pt, "\circled{v}"]
+\end{tikzcd}
+\]
+La composition des flèches est évidente :
+\[
+\begin{tikzcd}[row sep=large]
+I_{\tau''} \arrow[r, "\varphi'"] \arrow[drr, "c''"', ""{name=C}] & I_{\tau'} \arrow[r, "\varphi"] \arrow[dr, "c'"', ""{name=A}] & I_\tau \arrow[d, "c", ""'{name=B}] \\
+& & X,
+\arrow[from=A, to=B, bend left=20, shorten <=6pt, shorten >=2pt, "v"]
+\arrow[from=C, to=A, shorten <=4pt, shorten >=4pt, "v'"]
+\end{tikzcd}
+\]
+on a
+\[
+\begin{array}{rccl}
+v : & c' & \longrightarrow & c\circ\varphi, \quad \text{d'où } c'\circ\varphi' \xrightarrow{v*\varphi'} \underbrace{(c\circ\varphi)\circ\varphi'}_{=c\circ(\varphi\varphi')}\\[3ex]
+v' : & c'' & \longrightarrow & c'\circ\varphi'
+\end{array}
+\]
+et
+\[
+v''=(v*\varphi')\circ v', \qquad \text{donc} \qquad
+\begin{tikzcd}
+c'' \arrow[r, "v'"] \arrow[rr, bend right=12, "\circled{v''}"'] & c'\circ\varphi' \arrow[r, "v*\varphi'"] & c\circ(\varphi\varphi').
+\end{tikzcd}
+\]
+Mais a-t-on des foncteurs source et but
+\[
+\uCh(X) \overset{\sigma}{\underset{\beta}{\rightrightarrows}} X \qquad
+\begin{array}{ccl}
+c & \longmapsto & \text{source}(c)\\[1ex]
+c & \longmapsto & \text{but}(c)
+\end{array}
+\qquad ?
+\]
+Il faudrait donc qu'un homomorphisme $v$ comme dessus
+\[
+v : c' \longrightarrow c\circ\varphi
+\]
+définisse
+\[
+\begin{array}{lrcl}
+\sigma(c) : & \text{source}(c') & \longrightarrow & \text{source}(c)\\[1ex]
+\beta(c) : & \text{but}(c') & \longrightarrow & \text{but}(c).
+\end{array}
+\]
