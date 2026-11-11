@@ -1,0 +1,1656 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\operatorname{Ob}}
+% macro conflict, first definition kept: \newcommand{\Ob}{\operatorname{Ob}}
+% macro conflict, first definition kept: \newcommand{\Hom}{\operatorname{Hom}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usetikzlibrary{babel}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ens}{\mathrm{Ens}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Ob}{\mathrm{Ob}\,}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+\newcommand{\upi}{\underline{\pi}}
+\newcommand{\uCh}{\underline{\mathrm{Ch}}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+\newcommand{\hra}{\lhook\joinrel\longrightarrow}
+
+% Reader layout additions only; all edition slips in the body are retained.
+\usepackage[a4paper,left=22mm,right=28mm,top=22mm,bottom=24mm,marginparwidth=19mm,marginparsep=3mm]{geometry}
+\usepackage{marginfix}
+\usepackage{xurl}
+\usepackage{microtype}
+\usepackage{needspace}
+\setlength{\emergencystretch}{2em}
+\clubpenalty=10000
+\widowpenalty=10000
+\setlist{beginpenalty=10000}
+\allowdisplaybreaks[1]
+\AtBeginDocument{\selectlanguage{english}
+\begin{center}
+{\Large\bfseries Les D\'erivateurs: Chapter XII, section V}\par\smallskip
+{\large Reader with mathematical audit and commentary}\par\smallskip
+Manuscript pages 59--122\quad\textperiodcentered\quad Package DER\_XIIb-a\par
+\smallskip{\small Commentary and audit: GPT-6 Astra (OpenAI, ChatGPT Pro mode)}
+\end{center}
+\noindent\small The source follows the supplied edition. Its slips are retained and discussed in the commentary; the correction register distinguishes them from transcription repairs. Manuscript and edition page markers remain in the margins.\par\medskip\normalsize\selectlanguage{french}}
+
+\begin{document}
+% ---- from Der-ChXIIb-012_p001-005.tex
+\printedpage{43}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII ; foot: Version 7 décembre 2002
+
+\msp{page 59}
+
+\section*{V\quad Sommes amalgamées et carrés $W$-cocartésiens dans $\mathrm{Cat}$}
+
+\subsection*{1\quad Généralités sur $U \overset{i}{\hookrightarrow} X \overset{j}{\hookleftarrow} T$, et les sommes amalgamées.}
+
+\subsubsection*{1.1\quad Données de recollement entre un ouvert et un fermé.}
+
+Soit $X$ dans Cat, $U$ un ouvert dans $X$, $T$ le complémentaire fermé. (\textbf{NB} Les ouverts correspondent bien aux ouverts de $\mathrm{Ob}\,X$, topologisé par sa relation de préordre naturelle $x \leq y \iff \mathrm{Hom}_X(x,y) \neq \emptyset$, de même pour les fermés. Les topologies associées aux relations de préordre sont celles où toute intersection d'ouverts est encore ouverte, i.e. toute réunion de fermés est encore fermée. Donc les ouverts d'une telle topologie sont les fermés d'une topologie duale, correspondant à la relation de préordre opposée. La relation de préordre associée à la topologie est
+\[
+x \leq y \qquad\qquad \iff \qquad\qquad x \in \overline{\{y\}},
+\]
+la topologie associée au préordre sur $I$ est celle pour laquelle les ouverts sont les réunions d'ensembles de la forme $I/x$ (lesquels forment une base d'ouverts), ou encore les \textit{`cribles'} ($x \in U$, $y \leq x \Longrightarrow y \in U$), les fermés sont les réunions d'ensembles $x\backslash I$, c'est-à-dire les cocribles. Pour toute partie $A$ de $I$, il y a un plus petit ouvert contenant $A$, qui est aussi son plus petit voisinage, c'est la réunion des $I/x$ pour $x \in A$. Et dualement il y a un plus grand fermé contenu dans $A$, dont le complémentaire est le plus petit ouvert contenant $B = I\backslash A$, donc $\bigcup_{x\in B} I/x$. L'adhérence de $A$ est la réunion des adhérences $x\backslash I$ de ses points.)
+
+\msp{page 60}
+
+La situation $(X,U,T)$ se reconstitue, à isomorphisme unique près, par la connaissance de
+
+\begin{enumerate}[label={}]
+\item[$1^\circ$)] Les deux catégories $U$, $T$.
+\item[$2^\circ$)] Le bifoncteur $\displaystyle\left\{\begin{aligned}
+&H : U^\circ \times T \longrightarrow \mathrm{Ens}\\[1ex]
+&H(u,t) = \mathrm{Hom}_X(u,t).
+\end{aligned}\right.$
+\end{enumerate}
+
+De plus, ces données $1^\circ$) $2^\circ$) en sont soumises à aucune restriction. On a, plus exactement % [sic] en sont -> ne sont, negation required by the sense
+
+\textbf{Proposition 1.} \textit{Un isomorphisme} \texttt{[plutôt une équivalence de catégories]} \textit{entre la catégorie $\mathcal{T}$ dont les objets sont les triples $(X,U,T)$, avec $X \in \mathrm{Ob}\,\mathrm{Cat}$, $U \in \mathrm{Ouv}(X)$, $T \in \mathrm{Ferm}(X)$, $U$ et $T$ complémentaires l'un de l'autre, les morphismes de $(X,U,T)$ dans $(X',U',T')$ étant les foncteurs $f : X \longrightarrow X'$ qui induisent $U \longrightarrow U'$, $T \longrightarrow T'$ (d'où
+\printedpage{44}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII ; foot: Version 7 décembre 2002
+$U = f^{-1}(U')$, $T = f^{-1}(T')$), avec la catégorie $\mathcal{T}'$ des triples $(U,T,H)$, de deux catégories $U$, $T$ et d'un bifoncteur}
+\[
+H : U^\circ \times T \longrightarrow \mathrm{Ens}
+\]
+\hspace*{2em}\textit{(ou encore un préfaiscau $U^\circ \longrightarrow T^\vee$ sur $U$, donc un objet de} $\uHom(U^\circ,T^\vee)$\textit{)),} % [sic] préfaiscau -> préfaisceau, misspelling
+
+\textit{un morphisme de $(U,T,H)$ dans $(U',T',H')$ étant un triple}
+\[
+(f_U, f_T, u) \qquad\qquad
+\left\{\begin{array}{l}
+\left.\begin{array}{llll}
+f_U : & U & \longrightarrow & U' \\[1ex]
+f_T : & T & \longrightarrow & T'
+\end{array}\right\}\text{des foncteurs}\\[2ex]
+u : H \longrightarrow H' \circ (f_U^\circ \times f_T),\\
+\text{i.e. } H(u,t) \longrightarrow H'(f_U(u), f_T(t))\\
+\text{un homomorphisme fonctoriel}\\
+\text{(flèche dans } (U \times T^\circ)^\wedge \simeq \uHom(U^\circ,T^\vee)\text{)),}
+\end{array}\right.
+\]
+\textit{composition des flèches évidente.}
+
+Si $U \hookrightarrow X \hookleftarrow T$ est un triple, et
+\[
+f_{U'} : U' \longrightarrow U,\ f_{T'} : T' \longrightarrow T
+\]
+des flèches dans Cat, il y a une façon privilégiée de `recoller' $U'$ et $T'$, de façon à ce que l'objet $(X',U',T')$ s'envoie dans $(X,U,T)$ en induisant
+
+\msp{page 61}
+
+$f_{U'}$, $f_{T'}$:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+U' \arrow[r, hook, "i'"] \arrow[d, "f_{U'}"'] & X' \arrow[d, "f"] & T' \arrow[l, hook', "j'"'] \arrow[d, "f_{T'}"] \\
+U \arrow[r, hook, "i"] & X & T, \arrow[l, hook', "j"']
+\end{tikzcd}
+\]
+elle s'obtient à l'aide des bifoncteurs
+\[
+\left\{\begin{aligned}
+&H'(u',t') \overset{\text{déf}}{=} H(f_{U'}(u'), f_{T'}(t'))\\
+&\text{i.e. } H' = H \circ (f_{U'}^\circ \times f_{T'}).
+\end{aligned}\right.
+\]
+Ce triple, i.e. cet objet de $\mathcal{T}$, représente le foncteur suivant sur $\mathcal{T}$ :
+\[
+(X'',U'',T'') \longmapsto \mathrm{Hom}_{\mathrm{Cat}}(U'',U) \times \mathrm{Hom}_{\mathrm{Cat}}(T'',T),
+\]
+i.e. on a pour tout objet $(X'',U'',T'')$ de $\mathcal{T}$ une bijection canonique, fonctorielle en cet objet
+\[
+\mathrm{Hom}_{\mathcal{T}}((X'',U'',T''),(X',U',T')) \simeq \mathrm{Hom}_{\mathrm{Cat}}(U'',U) \times \mathrm{Hom}_{\mathrm{Cat}}(T'',T). \tag*{$(*)$}
+\]
+
+\printedpage{45}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII ; foot: Version 7 décembre 2002
+
+Nul doute qu'on a même
+\[
+\uHom_{\mathcal{T}}((X'',U'',T''),(X',U',T')) \simeq \uHom_{\mathrm{Cat}}(U'',U) \times \uHom_{\mathrm{Cat}}(T'',T), \tag*{$(**)$}
+\]
+tout aussi fonctoriel, dont $(*)$ se déduit en passant aux ensembles d'objets. On dit que le triple $(X',U',T')$ est le triple \textit{induit} par le triple $(X,U,T)$, via les foncteurs $f_{U'}$, $f_{T'}$.
+
+\textbf{NB} Si $f_{U'}$, $f_{T'}$ sont pleinement fidèles, alors il en est de même de $f : X' \longrightarrow X$. Nous utiliserons cette opération de recollement privilégié surtout quand $U' = U$, $f_{U'} = \mathrm{id}_U$, ou inversement $T' = T$, $f_{T'} = \mathrm{id}_T$.
+
+\subsubsection*{1.2\quad Relation avec le recollement des topos.}
+
+La situation d'un triple
+\[
+(\mathcal{X},\mathcal{U},\mathcal{T})
+\]
+d'un topos $\mathcal{X}$, d'un ouvert $\mathcal{U}$ de $\mathcal{X}$, et d'un
+
+\msp{page 62}
+
+sous-topos fermé complémentaire, est toute similaire (\textbf{NB} Si $\mathcal{X} = \mathrm{Top}(X)$, avec $X$ dans Cat, alors $\mathrm{Ouv}(\mathcal{X}) \simeq \mathrm{Ouv}(X)$, puisque les ouverts correspondent aux sous-faisceaux du faisceau final sur $\mathcal{X}$, i.e. du préfaisceau final sur $X$. Cette bijection est compatible avec le passage aux complémentaires.) La théorie des topos dit que les couples $(\mathcal{X},\mathcal{U},\mathcal{T})$ \texttt{[plutôt triples]} se reconstituent, à équivalence définie à isomorphisme unique près, à l'aide d'un triple
+\[
+\left\{\begin{aligned}
+&\mathcal{U},\ \mathcal{T} \text{ deux topos}\\[1ex]
+&\varphi : \mathrm{Fais}\,(\mathcal{U}) \longrightarrow \mathcal{T} \text{ un foncteur exact à gauche (`accessible'),}
+\end{aligned}\right.
+\]
+ce foncteur $\varphi$ étant obtenu, quand on part de
+\[
+\mathcal{U} \xrightarrow{\;i\;} \mathcal{X} \xleftarrow{\;j\;} \mathcal{T},
+\]
+comme
+\[
+\varphi = j^*i_*.
+\]
+De plus, le triple $(\mathcal{U},\mathcal{T},\varphi)$ peut être choisi arbitrairement, avec la seule restriction (pratiquement anodine, car toujours satisfaite pour tous les foncteurs naturels qu'on rencontre) que $\varphi$ soit (en plus d'être exact à gauche) `accessible'.
+
+Dans le cas actuel $\mathcal{X} = \mathrm{Top}(X)$, $\mathcal{U} = \mathrm{Top}(U)$, $\mathcal{T} = \mathrm{Top}(T)$, le foncteur $\varphi = j^*i_*$ est non seulement exact à gauche, mais même il commute aux $\varprojlim$ quelconques, puisqu'il en est ainsi (toujours) de $i_*$, et aussi (parce que le $j$ topossique est induit par le $j : T \longrightarrow X$ catégorique) de $j^*$. En fait, on
+\printedpage{46}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII ; foot: Version 7 décembre 2002
+\msp{page 63}
+trouve ceci :
+
+\textbf{Proposition 2 :} \textit{Considérons une situation de recollement de deux topos $\mathcal{U}$, $\mathcal{T}$ par $\varphi : \mathrm{Fais}\,\mathcal{U} \longrightarrow \mathrm{Fais}\,\mathcal{T}$, foncteur exact à gauche. Supposons que $\mathcal{U} = \mathrm{Top}(U)$, $\mathcal{T} = \mathrm{Top}(T)$, avec $U$ et $T$ dans $\mathrm{Cat}$. Pour que le topos recollé $\mathcal{X}$ soit équivalent à un topos $\mathrm{Top}(X)$, avec $X$ dans $\mathrm{Cat}$, il faut et il suffit que le foncteur de recollement $\varphi$ commute aux $\varprojlim$ quelconques, ou ce qui revient au même, qu'il ait un adjoint à gauche :}
+\[
+\psi : \underbrace{\mathrm{Fais}\,\mathcal{T}}_{= T^\wedge} \longrightarrow \underbrace{\mathrm{Fais}\,\mathcal{U}}_{= U^\wedge}.
+\]
+
+On s'attend dès lors que la donnée de recollement $\varphi$, ou ce qui revient au même le foncteur $\psi$ ayant un adjoint à droite, i.e. commutant aux $\varinjlim$ quelconques, revient à celle d'une donnée de recollement $H$
+\[
+H : U^\circ \times T \longrightarrow \mathrm{Ens}
+\]
+pour $U$ et $T$. Mais on sait bien que les foncteurs $\psi : T^\wedge \longrightarrow \mathcal{C}$ dans une catégorie $\mathcal{C}$ avec $\varinjlim$ quelconques, qui commutent auxdites $\varinjlim$, forment une catégorie équivalente (par le foncteur $\psi \longmapsto \psi|T(\subseteq T^\wedge)$) à celle des foncteurs
+\[
+\psi_0 : T \longrightarrow \mathcal{C} \quad\ (= \underbrace{U^\wedge}_{\uHom(U^\circ,\mathrm{Ens})} \text{ en l'occurrence}),
+\]
+\msp{page 64}
+et la donnée d'un tel foncteur $\psi_0$ revient bien à celle d'un $H$. Donc
+
+\textbf{Corollaire.} \textit{La catégorie des données de recollement topossique $\varphi : U^\wedge \longrightarrow T^\wedge$ entre} $\mathrm{Top}(U)$, $\mathrm{Top}(T)$\textit{, telles que le topos recollé soit un `topos} paradisiaque\textit{', i.e. équivalent à un topos de la forme $X^\wedge$ (avec $X$ dans} Cat\textit{), est équivalente à celle des données de recollement $H : U^\circ \times T \longrightarrow$} Ens \textit{entre $U$ et $T$. La donnée topossique $\varphi$ associée à $H$ est le foncteur adjoint à droite de $T^\wedge \longrightarrow U^\wedge$ déduit de $T \xrightarrow{H} U^\wedge$ par prolongement commutant aux $\varinjlim$, ou encore elle est donnée par}
+\[
+\varphi(\underbrace{F}_{\in U^\wedge})(t) \simeq \mathrm{Hom}_{U^\wedge}(H(t),F),
+\]
+\textit{où dans le second membre $H$ est interprété comme un foncteur $T \longrightarrow U^\wedge$. Le topos recollé par $\varphi$ est canoniquement équivalent à} $\mathrm{Top}(X)$\textit{, où $X$ est l'objet de} Cat \textit{obtenu par recollement à l'aide de $H$.}
+
+Du point de vue de la théorie des faisceaux, cela donne l'interprétation de $H$, comme exprimant le foncteur
+\[
+\varphi = j^*i_* : U^\wedge \longrightarrow T^\wedge
+\]
+par la formule précédente.
+
+\printedpage{47}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII ; foot: Version 7 décembre 2002
+
+\msp{page 65}
+
+\subsubsection*{1.3\quad Flèches dans $\mathrm{Cat}$, de source ou but un objet recollé $(X,U,T)$.}
+
+Quand $(X,U,T)$ est donné par une donnée de recollement
+\[
+U,\ T,\ H : U^\circ \times T \longrightarrow \mathrm{Ens},
+\]
+les flèches
+\[
+f : X' \longrightarrow X
+\]
+dans Cat se décrivent immédiatement ainsi : la donnée de $f$ définit d'abord
+\[
+U' = f^{-1}(U), \qquad\qquad T' = f^{-1}(T),
+\]
+couple d'un ouvert de $X'$ et du fermé complémentaire, de sorte que cette donnée équivaut à celle de
+
+\begin{enumerate}[label={}]
+\item[$1^\circ$)] un couple $(U',T')$ dans $X'$
+\item[$2^\circ$)] un morphisme (dans $\mathcal{T}$) de $(X',U',T')$ dans $(X,U,T)$, ce qui équivaut par 1.1 à un triple
+\[
+\left\{\begin{array}{rccl}
+f_{U'} : & U' & \longrightarrow & U\\[1ex]
+f_{T'} : & T' & \longrightarrow & T\\[1ex]
+u : & H_{U',T'} & \longrightarrow & H \circ (f_{U'}^\circ \times f_{T'}),
+\end{array}\right.
+\]
+où on a posé
+\[
+\left\{\begin{aligned}
+&H_{U',T'} : U^{\prime\circ} \times T' \longrightarrow \mathrm{Ens}\\[1ex]
+&H_{U',T'}(u',t') = \mathrm{Hom}_{X'}(u',t'),
+\end{aligned}\right.
+\]
+i.e. $H_{U',T'}$ est la donnée de recollement qui conrrespond au triple $(X',U',T')$ dans $\mathcal{T}$. % [sic] conrrespond -> correspond, misspelling
+\end{enumerate}
+
+\msp{page 66}
+
+Nous serons plus intéressés par la situation inverse, i.e. par la question de déterminer les foncteurs
+\[
+\underbrace{X}_{= X_{U,T,H}} \quad \longrightarrow X'
+\]
+de $X$, obtenu par $(U,T,H)$, dans un objet quelconque de Cat. On trouve tautologiquement
+
+\textbf{Proposition 3.} $\mathrm{Hom}_{\mathrm{Cat}}(X,X')$ \textit{est en correspondance bijective canonique, fonctorielle en $X'$ dans} Cat\textit{, avec l'ensemble des triples}
+
+% ---- from Der-ChXIIb-012_p006-010.tex
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\[
+\left\{
+\begin{aligned}
+&\left.\begin{aligned} f_U &: U \longrightarrow X' \\ f_T &: T \longrightarrow X' \end{aligned}\right\}\text{flèches dans Cat}\\
+&u : H \longrightarrow H_{X'}(f_U^{\circ}\times f_T),\ \text{flèche dans } \uHom(U^{\circ}\times T,\Ens),
+\end{aligned}
+\right.
+\tag*{\texttt{[}$(*)$\texttt{]}}
+\]
+\textit{où pour tout $X'$ dans} Cat\textit{, on a posé}
+\[
+H_{X'} = ((x,y)\longmapsto \Hom_{X'}(x,y)) : X'^{\circ}\times X' \longrightarrow \Ens.
+\]
+
+Sûrement on aura même un isomorphisme de catégories
+\[
+\uHom(X,X') \simeq \text{catégorie des triples } (f_U,f_T,u) \text{ comme dans } (*).
+\]
+
+\subsection*{1.4\quad Construction de sommes amalgamées à partir d'une immersion ouverte où fermée.} % [sic] où fermée -> ou fermée, conjonction « ou » et non adverbe « où »
+
+Pour une construction d'une sorte de somme amalgamée, en termes d'un triple $(X,U,T)$ $+\ \ldots$, \msp{page 67} qui soit symétrique en $U$, $T$, j'ai envie de regarder d'abord la situation ‘mixte’, d'un diagramme en traits pleins
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[d, dotted, "f"] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[r, hook, dotted, "i'"] & X' & T', \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+qu'on aimerait compléter ‘canoniquement’, si faire se peut, en un morphisme de triples (i.e. en une flèche dans $\mathcal{T}$). L'idée naturelle, c'est que le $X'$ qui s'y insère serait la limite inductive, dans Cat, du diagramme initial. Si $T'=T$, $f_T=\id_T$, cela signifie donc que $X'$ s'identifie à la somme amalgamée $X\amalg_U U'$, et inversement si $U'=U$, $f_U=\id_U$.
+
+Désignons par $X'$ la somme amalgamée \texttt{[plutôt la limite inductive]}, et explicitons, pour $X''$ quelconque dans Cat, l'ensemble des flèches $g$ de $X'$ dans $X''$, comme foncteur en $X''$. C'est l'ensemble des triples
+\[
+(g_X, g_{U'}, g_{T'}) \qquad
+\left\{\begin{aligned} g_X &: X \longrightarrow X'' \\ g_{U'} &: U' \longrightarrow X'' \\ g_{T'} &: T' \longrightarrow X''\end{aligned}\right.
+\qquad \text{avec} \quad
+\begin{aligned} g_X\circ i &= g_{U'} f_U \\ g_X \circ j &= g_{T'} f_T. \end{aligned}
+\tag*{$(*)$}
+\]
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "f_U"'] & X \arrow[dd, "g_X"'] & T \arrow[l, hook', "j"'] \arrow[d, "f_T"] \\
+U' \arrow[dr, "g_{U'}"'] & & T' \arrow[dl, "g_{T'}"] \\
+& X'' &
+\end{tikzcd}
+\]
+
+Notons que pour un tel triple, $g_X$ est partiellement connu déjà en termes de $g_{U'}$, $g_{T'}$, par ses restrictions $g_X\circ i$ et $g_X\circ j$ à $U$ et $T$ respectivement, par les formules
+\[
+g_U = g_{U'}f_U, \qquad g_T = g_{T'}f_T.
+\]
+
+\msp{page 68} Donc la donnée d'un triple $(*)$ équivaut à celle d'un triple
+\[
+(g_{U'}, g_{T'}, g_X) \qquad
+\left\{\begin{aligned}
+&g_X \text{ une flèche } X\longrightarrow X'' \text{ correspondant à}\\
+&g_U = g_{U'}\circ f_U \text{ et } g_T = g_{T'}\circ f_T \text{ déjà donnés (via } g_{U'}\text{, } g_{T'}\text{),}
+\end{aligned}\right.
+\]
+donc en vertu de 1.3. cela correspond à
+\[
+(g_{U'}, g_{T'}, u) \qquad
+\left\{\begin{aligned}
+g_{U'} &: U' \longrightarrow X''\\
+g_{T'} &: T' \longrightarrow X''\\
+u &: H \longrightarrow \underbrace{H_{X''}\left((g_{U'}\circ f_U)^{\circ}\times(g_{T'}\circ f_T)\right)}_{(u,t)\longmapsto \Hom_{X''}(g_{U'}f_U(u),g_{T'}f_T(t))}.
+\end{aligned}\right.
+\tag*{$(*)$}
+\]
+On va interpréter la donnée de $u$, en termes d'un foncteur
+\[
+F^{*} = (H'\longmapsto H'\circ F) : \uHom(U'^{\circ}\times T',\Ens) \longrightarrow \uHom(U^{\circ}\times T,\Ens)
+\tag*{$(**)$}
+\]
+où
+\[
+F : U^{\circ}\times T \longrightarrow U'^{\circ}\times T' \qquad \text{est donné par } F = f_U^{\circ}\times f_T.
+\]
+On a un objet $H''=H''_{g_{U'},g_{T'}}$ de la catégorie source de $(**)$ déterminé en termes du couple $(g_{U'},g_{T'})$, par
+\[
+H''(u',t') = \Hom_{X''}(g_{U'}(u'),g_{T'}(t')),
+\]
+et le bifoncteur but de la flèche $u$ dans $(*)$ s'interprète comme
+\[
+F^{*}(H'') = H''\circ F : (u,t)\longmapsto \underbrace{H''(f_U(u),f_T(t))}_{=\Hom(g_{U'}f_U(u),g_{T'}f_T(t))} \quad .
+\]
+Ainsi, $u$ s'interprète comme une flèche
+\[
+u : H \longrightarrow F^{*}(H'').
+\]
+Or le foncteur $F^{*}$ a un adjoint à gauche $F_{!}$, i.e. on a
+\[
+\Hom(H,F^{*}(H'')) \simeq \Hom(F_{!}(H),H'').
+\tag*{$(*{*}*)$}
+\]
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\msp{page 69} avec
+\[
+F_{!} : \uHom(U^{\circ}\times T,\Ens) \longrightarrow \uHom(U'^{\circ}\times T',\Ens).
+\]
+Posons
+\[
+H' = F_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+c'est un bifoncteur bien déterminée par la seule donnée du diagramme initial $(*)$ p. 67, ou ce qui revient au même, en termes de % [sic] déterminée -> déterminé, accord avec « bifoncteur » (masculin)
+\[
+(U,T,H,f_U : U\longrightarrow U', f_T : T\longrightarrow T').
+\]
+
+Et on voit que la donnée d'une flèche $X'\longrightarrow X''$, $X''$ objet variable de Cat, équivaut à celle de
+\[
+g_{U'} : U'\longrightarrow X'',\ g_{T'} : T'\longrightarrow X'',\ u : H'\longrightarrow H'' = H_{X''}(g_{U'}^{\circ}\times g_{T'}),
+\]
+c'est à dire, en vertu de 1.3., à celle d'une flèche
+\[
+X'_0 \longrightarrow X'',
+\]
+où $X'_0$ désigne l'objet de Cat déduit de $U'$, $T'$ par recollement au moyen de $H'$. Cela montre donc que la limite inductive cherchée n'est autre que $X'_0$. On a ainsi trouvé le
+
+\textbf{Théorème 1.} \textit{La limite inductive $X'$ dans} Cat \textit{du diagramme} $(*)$ \textit{page 67, défini en termes d'un triple $(X,U,T)$ dans $\mathcal{T}$ et de flèches $f_U : U\longrightarrow U'$, $f_T : T\longrightarrow T'$ dans} Cat\textit{, existe (sans mérite)} \msp{page 70} \textit{et les flèches canoniques}
+\[
+U' \overset{i'}{\hookrightarrow} X' \overset{j'}{\hookleftarrow} T'
+\]
+\textit{sont des immersions ouvertes et fermées complémentaires l'une de l'autre. La donnée de recollement qui définit $X'$ via $U'$, $T'$ est donnée par}
+\[
+H' = (\underbrace{f_U^{\circ}\times f_T}_{F})_{!}(H) : U'^{\circ}\times T' \longrightarrow \Ens,
+\]
+\textit{où $H$ est la donnée de recollement qui définit $X$, i.e. $H : U^{\circ}\times T\longrightarrow$} Ens \textit{est le bifoncteur $(u,t)\longmapsto \Hom_X(u,t)$.}
+
+Ainsi on a, pour $u'$ dans $U'$ et $t'$ dans $T'$
+\[
+\Hom_{X'}(u',t') = F_{!}(H)(u',t'),
+\]
+et il reste à expliciter $F_{!}(H)$. Ici $F=f_U^{\circ}\times f_T$ est un foncteur covariant sur $U^{\circ}\times T$, on peut l'interpréter comme un préfaisceau sur $U\times T^{\circ}$, et écrire dès lors
+\[
+\underbrace{F_{!}(H)(u',t')}_{\Hom_{X'}(u',t')} = \varinjlim_{(u',t')\backslash U\times T^{\circ}} \underbrace{\Hom_X(u,t)}_{H(u,t)} \ .
+\tag*{$(*)$}
+\]
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+La catégorie $(u',t')\backslash U\times T^{\circ}$ sur laquelle on prend la $\varinjlim$ s'explicite comme un produit
+\[
+(u',t')\backslash U\times T^{\circ} \simeq (u'\backslash U)\times(T/t')^{\circ}.
+\]
+Les applications
+\[
+\Hom_X(u,t)\longrightarrow \Hom_{X'}(u',t') \qquad (=F_{!}(H)(u',t'))
+\]
+\msp{page 71} déduites de cette formule ne sont autres que les suivantes : $u$, $t$ sont données comme objets de $u'\backslash U$, $T/t'$, i.e. avec des flèches
+\[
+u'\xrightarrow{\alpha} f_U(u), \qquad f_T(t)\xrightarrow{\beta} t',
+\]
+d'où
+\[
+\Hom_X(u,t) \xrightarrow{\text{via } f=f_X:X\to X'} \Hom_{X'}(\underbrace{f(u)}_{f_U(u)},\underbrace{f(t)}_{f_T(t)}) \xrightarrow{\text{via } \alpha,\ \beta} \Hom_{X'}(u',t').
+\]
+
+Notons pour mémoire que pour tout objet $Z$ de Cat, et tout préfaisceau $G$ sur $Z$, on a la formule
+\[
+\varinjlim_{Z} G \simeq \pi_0(Z/G),
+\]
+où $Z/G$ s'interprète en termes de l'immersion canonique $Z\longrightarrow Z^{\wedge}$ $(G\in \Ob Z^{\wedge})$. C'est donc une catégorie fibrée sur $Z$ à fibres discrètes, et on a en fait un isomorphisme entre la sous-catégorie pleine de $\Cat/Z$ formée de telles catégories fibrées à fibres discrètes, avec $Z^{\wedge}$. Dans ce dictionnaire parfait entre préfaisceaux d'ensembles et catégories fibrées à fibres discrètes, le foncteur $\varinjlim$ sur $Z^{\wedge}$ correspond simplement au foncteur $\pi_0$ sur la catégorie des objets au dessus de $Z$ dans Cat, lui-même induit par le foncteur (indépendant de $Z$)
+\[
+\Cat \xrightarrow{\pi_0} \Ens.
+\]
+
+\msp{page 72} On peut donc réécrire la formule fondamentale $(*)$ p. 70, en termes du foncteur $H$ définissant le recollement $X$ de $U$ et de $T$, par
+\[
+\boxed{\underbrace{\Hom_{X'}(u',t')}_{H'(u',t')} \simeq \pi_0(\underbrace{(u',t')\backslash U\times T^{\circ}/H}_{((u'\backslash U)\times(T/t')^{\circ})/H}).}
+\tag*{$(*)$}
+\]
+
+Par la suite, nous n'aurons sans doute qu'à utiliser le cas où on a soit $T'=T$, $f_T=\id_T$, soit l'inverse. Nous travaillerons surtout dans le premier cas, en déduisant ce dont nous aurons besoin pour le cas dual, par principe de dualité (automorphisme $X\longmapsto X^{\circ}$ de la
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+catégorie Cat). Dans ce cas, dans la formule fondamentale $(*)$ l'élément $t'$ de $T'$ s'écrit comme un élément $t$ de $T$, et la formule se retranscrit comme
+% Reader layout only: reserve space for the deep boxed display.
+\par\Needspace{8\baselineskip}
+\[
+\boxed{\Hom_{X'}(u',t) \simeq \pi_0(\underbrace{u'\backslash U/t}_{\text{catégorie des triples } (u,\alpha,\beta'),\ \left\{\begin{aligned} &u\in \Ob U\\ &\alpha : u\longrightarrow t\\ &\beta' : u'\longrightarrow f_U(u)\end{aligned}\right.}).}
+\tag*{$(**)$}
+\]
+
+C'est la formule que j'avais trouvée directement dans ce cas, sans me soucier encore de faire varier $T$ en même temps que $U$. Je voudrais faire le lien entre les deux formules $(*)$ et $(**)$, par voie topologique, donc établir une bijection canonique, fonctorielle etc.
+\[
+\pi_0(u'\backslash U/t) \xrightarrow{\sim} \pi_0(((u'\backslash U)\times(T/t)^{\circ})/H).
+\]
+
+\msp{page 73} On a sûrement un foncteur
+\[
+u'\backslash U/t \longrightarrow ((u'\backslash U)\times(T/t)^{\circ})/H
+\]
+qui associe à un triple
+\[
+(u,\alpha,\beta') : u\in \Ob U,\ \alpha : u\longrightarrow t,\ \beta' : u'\longrightarrow f_U(u)
+\]
+le triple $(\bar u,\bar t,\xi)$ $(\xi\in H(\bar u,\bar t))$ dans le second membre, avec $\bar u$ dans $u'\backslash U$, $\bar t$ dans $T/t$, défini ainsi :
+\[
+\bar u = (u,\beta'),\ \bar t = (t,\id_t), \underbrace{\xi}_{=\alpha} \in H(\bar u,\bar t) = \Hom(u,t).
+\]
+En somme
+\[
+u'\backslash U/t = \text{fibre de } ((u'\backslash U)\times(T/t)^{\circ})/H \text{ en l'objet initial } \bar t \text{ de } (T/t)^{\circ}
+\]
+par la projection naturelle, flèche composée
+\[
+\begin{tikzcd}
+((u'\backslash U)\times(T/t)^{\circ})/H \arrow[d] \\
+(u'\backslash U)\times(T/t)^{\circ} \arrow[d, "\pi"] \\
+(T/t)^{\circ}.
+\end{tikzcd}
+\]
+
+Il faut voir que l'inclusion de la fibre donne une bijection sur les $\pi_0$, ou ce qui revient au même, que l'inclusion de la fibre $u'\backslash U$ \textit{de} $\pi$ en l'objet initial $(t,\id_t)$ de $(T/t)^{\circ}$ donne une bijection sur les $\varinjlim$ du foncteur $H$. Donc l'inclusion a intérêt à être asphérique, ou du moins co-cofinalle. % [sic] co-cofinalle -> co-cofinale, orthographe
+
+% ---- from Der-ChXIIb-012_p011-015.tex
+% ===================== page 11 =====================
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 74}
+Mais l'inclusion d'un objet initial est toujours asphérique, et le reste par produit avec un objet quelconque (i.e. $u'\backslash U$) de Cat (et même par tout changement de base lisse \dots), d'où la conclusion.
+
+Dans la suite, nous nous intéressons surtout à la situation de sommes amalgamées (où on change de notation un peu, à présent)
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T \arrow[l, hook', dotted, "j"'] \arrow[d, dotted] \\
+U' \arrow[r, hook, "i'"] & X' & T' \simeq T. \arrow[l, hook', dotted]
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+Le fermé $T'$ complémentaire de $U'$ dans $X'$ est alors canoniquement isomorphe au fermé $T$ complémentaire de $U$ dans $X$, l'isomorphisme étant induit par $q$. Souvent nous identifierons $T'$ et $T$, ce qui est licite en regardant $X'$ comme déduit du recollement de $U'$ et de $t$ \texttt{[plutôt }$T$\texttt{]}, par le bifoncteur $U'^{\circ}\times T\longrightarrow \mathrm{Ens}$ explicité dans la formule $(**)$ p.~72. Nous nous intéressons surtout à dégager des conditions qui assurent les deux implications suivantes
+
+\begin{itemize}
+\item[a)] $i\in W\Longrightarrow i'\in W$ (et même $\Longleftrightarrow$).
+\item[b)] $p\in W\Longrightarrow q\in W$ (et même $\Longleftrightarrow$).
+\end{itemize}
+
+\msp{page 75}
+\textbf{Proposition 4.} \textit{Soit $t\in\Ob T$. Pour que $t\in\Ob\bar{U}$, il faut et il suffit que $q(t)\in\Ob\overline{U'}$. En d'autres termes, le `bord' $\dot{T}=T\cap\bar{U}$ de $T$ dans $X$ est `le même' que son bord dans $X'$.}
+
+\textsc{Démonstration}. Dire que $t\in\Ob\bar{U}$ signifie aussi
+\[
+U/t\neq\emptyset
+\]
+et implique, par continuité, que $q(t)\in\overline{q(U)}\subseteq\overline{U'}$. Inversement, si $q(t)\in\overline{U'}$, i.e. s'il existe $u'\in U'$ tel que
+\[
+\Hom(u',q(t))(=\pi_0(u'\backslash U/t))\neq\emptyset,
+\]
+il en résulte que $u'\backslash U/t\neq\emptyset$, a fortiori $U/t$ (qui reçoit $u'\backslash U/t)\neq\emptyset$, q.e.d.
+
+\textbf{Proposition 5.} \textit{Soit}
+\[
+\begin{tikzcd}
+Y \arrow[r, "i"] \arrow[d, "p"'] & X \arrow[d, "q"] \\
+Y' \arrow[r, "i'"] & X'
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+% ===================== page 12 =====================
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textit{un carré cocartésien dans \textup{Cat}. Si $i$ est une immersion ouverte (resp. fermée), alors $i'$ aussi, et le carré est aussi cartésien. Idem pour $p$ et $q$. Si $i$ et $p$ sont des immersions ouvertes (\footnote{\textbf{NB} Nous utilisons \textit{`immersion ouverte'}, \textit{`immersion fermée'} au \textit{sens strict}\,: c'est un \textit{monomorphisme} pleinement fidèle dont l'image est une sous-catégorie \textit{pleine,} soit ouverte, soit fermée.}) (resp. \dots), alors la situation est isomorphe à celle d'un objet $X'$ de \textup{Cat}, de deux ouverts (resp. fermés) $X$, $Y'$ de $X$ ayant pour réunion $X'$, pour intersection} % [sic] de $X$ -> de $X'$, X and Y' are opens of X' (their union is X')
+\textit{$Y$. Inversement, dans une telle situationm le carré correspondant est cocartésien, i.e. $X$} % [sic] situationm -> situation, (comma), typing error
+\texttt{[plutôt }$X'$\texttt{]} \textit{s'identifie à la somme amalgamée}
+\[
+X'\simeq X\amalg_{Y}Y'.
+\]
+
+Donc aussi on a la proposition 15, page 158, et ses corollaires.
+% foot: Version 7 décembre 2002
+
+% ===================== page 13 =====================
+\printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\section*{2\quad Sommes amalgamées et $W$-équivalences.}
+
+\subsection*{2.1\quad Axiome du carré cocartésien et axiome du cube (ou `Lemme des cinq').}
+
+Nous supposons à présent donné un localiseur fondamental
+\[
+W\subseteq\mathrm{Fl}(\mathrm{Cat}),
+\]
+donc $W$ satisfait à W(1, 2 bis, 3). Nous ne supposons pas pour le moment pour les autres axiomes standard W(4) (axiome de fibration), W(5) (axiome de connexité), W(6) (axiome des limites inductives). Mais nous allons introduire à présent deux axiomes de stabilité supplémentaire, de nature différente, concernant les sommes amalgamées.
+
+\begin{description}[leftmargin=5em, style=nextline]
+\item[W(7 bis)] (Axiome du carré cocartésien.) Soient $X$ un objet de Cat, $U$, $U'$ deux ouverts de $X$ tels que $U\cup U'=X$, considérons le diagramme cocartésien correspondant (cf. prop. 5 en marge de la page \texttt{[ci-dessus]}) :
+
+\msp{page 76}
+\[
+\begin{tikzcd}[column sep=small]
+& U\cap U' \arrow[dl, hook', "i'_0"'] \arrow[dr, hook, "i_0"] & \\
+U \arrow[dr, hook, "i"'] & & U' \arrow[dl, hook', "i'"] \\
+& X &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+Alors
+\[
+i_0\in W\qquad\Longleftrightarrow\qquad i\in W
+\]
+(et symétriquement
+\[
+i'_0\in W\qquad\Longleftrightarrow\qquad i'\in W).
+\]
+\end{description}
+
+\textbf{NB} Par dualité, cet axiome est équivalent à l'axiome similaire, avec des \textit{fermés} $T$, $T'$ de $X$ de réunion $X$.
+
+\textbf{Corollaire.} \textit{Supposons \textup{W(7 bis)}. Considérons les conditions suivantes sur le carré précédent.}
+
+\begin{itemize}
+\item[\textit{a)}] \textit{$U\cap U'$ $W$-asphérique.}
+\item[\textit{b)}] \textit{$U$, $U'$ $W$-asphériques.}
+\item[\textit{c)}] \textit{$X$ $W$-asphérique.}
+\end{itemize}
+
+\textit{Alors (a et b) implique c, et (b et c) implique a.}
+
+\textbf{NB} Moralement, il faudrait aussi que (c et a) implique b, i.e. si $U\cap U'$ et $X$ sont $W$-asphériques, il en est de même de $U$ et de $U'$. Mais il ne semble pas que l'axiome du carré cocartésien permette de le prouver. Par contre, l'axiome qui suit impliquera le corollaire précédent sous sa forme complète.
+% foot: Version 7 décembre 2002
+
+% ===================== page 14 =====================
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{description}[leftmargin=5em, style=sameline]
+\item[W(7)] (`Axiome du cube', ou `Lemme des cinq'.) Soit un diagramme commutatif cubique
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+U_1\cap U'_1 \arrow[rr] \arrow[dr] \arrow[dd, "f_{U_1\cap U'_1}"'] & & U_1 \arrow[dr] \arrow[dd, "f_{U_1}"{swap,pos=.25}] & \\
+& U'_1 \arrow[rr, crossing over] & & X_1 \arrow[dd, "f"] \\
+U_2\cap U'_2 \arrow[rr] \arrow[dr] & & U_2 \arrow[dr] & \\
+& U'_2 \arrow[rr] \arrow[from=uu, crossing over, "f_{U'_1}"{pos=.25}] & & X_2
+\end{tikzcd}
+\]
+représentant un morphisme (flèches verticales) d'un
+
+\msp{page 77}
+carré cocartésien\quad $\vcenter{\hbox{\begin{tikzcd}
+U_1\cap U'_1 \arrow[r] \arrow[d] & U_1 \arrow[d] \\
+U'_1 \arrow[r] & X_1
+\end{tikzcd}}}$\quad du type envisagé dans W(7 bis) ($X_1$ réunion de deux ouverts $U_1$, $U'_1$) dans un autre (à indices 2). Considérons les conditions suivantes.
+
+\begin{itemize}
+\item[a)] $f_{U_1\cap U'_1}\in W$.
+\item[b)] $f_{U_1}$ et $f_{U'_1}$ sont \texttt{[dans]} $W$.
+\item[c)] $f\in W$.
+\end{itemize}
+
+Alors deux parmi ces conditions impliquent la troisième. En d'autres termes, quand l'une de ces conditions est satisfaite, les deux autres sont équivalentes entre elles.
+\end{description}
+
+\textbf{NB} Cet axiome est équivalent à l'axiome dual, en termes d'objets $X_1$, $X_2$ représentés chacun comme réunion de deux fermés.
+
+\textbf{Corollaire.} \textit{Supposons \textup{W(7)} satisfait. Alors le corollaire à \textup{W(7 bis)} (axiome qu'on n'a pas à utiliser ici), sous sa forme complétée (cf. le NB qui le suit) est valable : deux parmi les conditions a), b), c) impliquent la troisième.}
+
+Il suffit de regarder l'unique morphisme du diagramme $(*)$, p.~76, dans le diagramme trivial\quad $\vcenter{\hbox{\begin{tikzcd}[column sep=small]
+& e \arrow[dl] \arrow[dr] & \\
+e \arrow[dr] & & e, \arrow[dl] \\
+& e &
+\end{tikzcd}}}$\quad correspondant au cas où $X$ est la catégorie finale $e$, et $U$, $U'$ égaux à $X$. Alors le corollaire n'est autre que W(7) appliqué à ce cas particulier.
+
+Cet argument fait sentir que W(7) est sans doute plus fort que W(7 bis). Incité par ce sentiment, je m'aperçois avec plaisir qu'il est fondé :
+% foot: Version 7 décembre 2002
+
+% ===================== page 15 =====================
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 78}
+\textbf{Proposition 6.} \textit{L'axiome \textup{W(7)} (lemme des cinq) implique \textup{W(7 bis)} (axiome du carré cocartésien).}
+
+On regarde le diagramme cubique suivant
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+U\cap U' \arrow[rr, "i_0"] \arrow[dr, "i'_0"] \arrow[dd, "f_{U\cap U'}=i_0"'] & & U' \arrow[dr, "i'"] \arrow[dd, "f_{U'}=\mathrm{id}"{swap,pos=.25}] & \\
+& U \arrow[rr, crossing over, "i"] & & X \arrow[dd, "f=\mathrm{id}_X"] \\
+U' \arrow[rr, "\mathrm{id}"] \arrow[dr, "i'"] & & U' \arrow[dr, "i'"] & \\
+& X \arrow[rr, "\mathrm{id}"] \arrow[from=uu, crossing over, "f_U=i"{pos=.25}] & & X,
+\end{tikzcd}
+\]
+du carré cocartésien donné dans le carré cocartésien déduit de $X$ et de ses deux ouverts $X$, $U'$, d'intersection $U'$. Ici les deux flèches verticales $f$ et $f_{U'}$ sont des isomorphismes, donc \texttt{[dans]} $W$. Avec les notations de W(7), on a donc c) ($f\in W$), donc a) et b) sont équivalentes, i.e. $i_0\in W$ et $i\in W$ sont équivalentes.
+
+\hfill q.e.d.
+
+\textbf{Théorème 2.} \textit{Le localiseur fondamental $W_\infty$ satisfait à l'axiome \textup{W(7)}.}
+
+C'est sûrement une conséquence du critère cohomologique d'\textsc{Artin-Mazur}, compte tenu de la suite exacte de Mayer-Vietoris pour l'un et l'autre des deux carrés cocartésiens, et les variantes non commutatives de Mayer-Vietoris. Je n'ai pas écrit la vérification en forme, et devrais sans doute réparer cette omission.
+
+\msp{page 79}
+\textbf{Remarque.} La version duale (au sens de \textsc{Quillen}) de l'axiome W(7 bis) du carré cocartésien, i.e. l'axiome correspondant pour les carrés cartésiens, n'est pas valable pour $W_\infty$. L'énoncé pertinent serait le suivant : soit
+\[
+\begin{tikzcd}
+X & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S & S' \arrow[l, "p"']
+\arrow[from=1-1, to=2-1, "f"']
+\end{tikzcd}
+\]
+un carré cartésien, avec $f$ une \textit{$W$-fibration.} Alors $f\in W\Longleftrightarrow f'\in W$. Si $W$ satisfait à W(4c) (ce qui est le cas pour $W_\infty$), alors $f\in W$ implique bien que ses fibres sont $W$-asphériques, donc que c'est une $W$-équivalence universelle, i.e. $f'\in W\ \forall\, p:S'\longrightarrow S$. Mais pour l'implication inverse $f'\in W\Longrightarrow f\in W$, il faut supposer visiblement que
+\[
+\pi_0(p):\pi_0(S')\longrightarrow\pi_0(S)
+\]
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p016-020.tex
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+est \textit{surjectif.} (P. ex. si $S'=\emptyset$, on a $X'=\emptyset$, donc $f'\in W$, sans que ça implique $f\in W$!) Le fait que dans le cas cocartésien de W(7 bis), $i_0\in W\Longrightarrow i\in W$ doit être considéré comme ‘allant de soi’ - autrement le carré ne mérite pas, du point de vue $W$-homotopique, le nom de ‘cocartésien’. Par contre, l’implication inverse $i\in W\Longrightarrow i_0\in W$ m’apparaît comme un trait très particulier du dérivatuer HOT$_W$ (quand il le possède), et notamment % [sic] dérivatuer -> dérivateur, misprint
+de HOT $=$ HOT$_{W_\infty}$. Le début
+\msp{page 80}
+de la remarque signifie simplement que le dérivateur dual HOT$^\circ$ ne possède pas cette même propriété. Je dois renvoyer à ce sujet aux deux axiomes pour les dérivateurs correspondants à W(7 bis), W(7), ce que je ferai sans doute sous peu, de façon à donner un sens plus précis aux présents commentaires.
+
+\subsection*{2.2 Application aux carrés cocartésiens déduits d’une immersion ouverte ou fermée.}
+
+Les axiomes W(7), W(7 bis) (du cube, et du carré cocartésien) concernent des carrés cocartésiens de nature très particulière. Nous allons voir à présent comment en déduire des énoncés du même type pour des carrés cocartésiens beaucoup plus généraux, y compris pour des carrés qui n’ont rien de cocartésien (dans Cat) - et que nous appelerons % [sic] appelerons -> appellerons, misspelling
+‘homotopiquement cocartésiens’ (relativement à $W$), ou simplement $W$-cocartésiens. (Il y aura également des carrés $W$-cartésiens un jour \dots) Dans le cas où $W=W_\infty$, je les appelerai aussi Hot-cocartésiens. % [sic] appelerai -> appellerai, misspelling
+
+Je commencerai par le cas particulier d’un carré cocartésien associé à une immersion ouverte (diagramme ($*$), p. 74) :
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T \arrow[l, hook', dotted, "j"'] \arrow[d, dotted] \\
+U' \arrow[r, hook, "i'"] & X' & T'\simeq T. \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\]
+\msp{page 81}
+
+Le grand traquenard ici qu’il faut arriver à exorciser, c’est qu’il peut arriver que $i\in W$, sans qu’on ait $i'\in W$, et aussi $p\in W$ sans qu’on ait $q\in W$. Je m’en étais convaincu en 1983 en écrivant Pursuing Stacks (durant les semaines de ‘scratchwork’), et n’ai pas envie de rechercher un contre-exemple ici, s’il ne se présente de lui-même (ce qu’il fera sans doute).
+
+Je vais donner un cas important où ces ennuis disparaissent :
+
+\textbf{Proposition 6 :} \textit{Considérons les adhérences $\bar U$ et $\overline{U'}$ de $U$ et $U'$ dans $X$, $X'$ respectivement, et supposons que les inclusions}
+\[
+U\xrightarrow{i_0}\bar U,\qquad U'\xrightarrow{i'_0}\overline{U'}
+\]
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\textit{soient dans $W$} (\footnote[64]{cf. th. 3 p. 107 pour des conditions générales assurant que cette hypothèse est satisfaite.}). \textit{Alors}
+\[
+\left\{
+\begin{array}{llll}
+\circled{\textit{a}}\ i\in W & \iff & i'\in W & \textit{si on a }\mathrm{W}(7\text{ bis})\\
+\circled{\textit{b}}\ p\in W & \iff & q\in W & \textit{si on a }\mathrm{W}(7).
+\end{array}
+\right.
+\]
+
+\textsc{Démonstration}. Considérons d’abord le cas \circled{a} de $i$, $i'$. Soit
+\[
+k:\bar U\hookrightarrow X
+\]
+l’inclusion. Le triangle
+\begin{tikzcd}
+U \arrow[r, "i_0"] \arrow[rr, bend right=8, "i"'] & \bar U \arrow[r, "k"] & X
+\end{tikzcd}
+, où $i_0\in W$, montre que
+\[
+i\in W\iff k\in W.
+\]
+
+D’autre part, $X$ est la réunion des fermés $\bar U$, $T$, donc on a un carré cocartésien dans Cat
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+\bar U\cap T=\dot T \arrow[r, "k_0"] \arrow[d, "j_0"'] & T \arrow[d, "j"] \\
+\bar U \arrow[r, "k"] & X.
+\end{tikzcd}
+\]
+
+L’axiome W(7 bis) (sous sa forme duale (i.e. appliqué au carré formé par les catégories opposées \dots)) implique
+\msp{page 82}
+que
+\[
+k\in W\iff k_0\in W,
+\]
+d’où
+\[
+i\in W\iff (k_0:\dot T\longrightarrow T)\in W.
+\]
+De même on trouve, en appliqunt ceci à $(X',U')$ au lieu de $(X,U)$ % [sic] appliqunt -> appliquant, misprint
+\[
+i'\in W\iff (k'_0:\dot T'\longrightarrow T')\in W.
+\]
+Or on a $T\xrightarrow{\sim}T'$ (isomorphisme), et par la proposition 4 cet isomorphisme transforme $\dot T$ en $\dot T'$. Donc
+\[
+k_0\in W\iff k'_0\in W\qquad\quad\text{(trivialement)},
+\]
+d’où a).
+
+Prouvons b). Le carré commutatif induit par ($*$), p. 80,
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i_0"] \arrow[d, "p"'] & \bar U \arrow[d, "\bar p"] \\
+U' \arrow[r, hook, "i'_0"] & \overline{U'},
+\end{tikzcd}
+\]
+où $i_0,i'_0\in W$ par hypothèse, montre que
+\[
+p\in W\iff\bar p\in W,
+\]
+donc tout revient à prouver que
+\[
+\bar p\in W\overset{?}{\iff}q\in W.
+\]
+Mais $q$ induit un homomorphisme du carré ($*$) déduit de $(X,\bar U,T)$ (avec $X=\bar U\cup T$), dans le carré similaire pour $X'$
+\[
+\begin{tikzcd}
+\overline{U'}\cap T'=\dot T' \arrow[r, "k'_0"] \arrow[d, "j'_0"'] & T \arrow[d, "j'"] \\ % [sic] T -> T', the square for X' should have the corner T' (although T'\simeq T)
+\overline{U'} \arrow[r, "k'"] & X',
+\end{tikzcd}
+\]
+les flèches verticales étant notées $q_{\dot T}$, $q_T$, $\bar p$, $q$.
+\msp{page 83}
+On sait que $q_{\dot T}$, $q_T$ sont des isomorphismes, donc dans $W$, donc le ‘lemme des cinq’ W(7) nous assure que $\bar p\in W\iff q\in W$, q.e.d.
+
+\textbf{Commentaire.} Cette proposition nous amène à chercher des conditions sur un ouvert $U$ d’un $X$, qui assurent que l’inclusion $i_0:U\longrightarrow\bar U$ soit \texttt{[dans]} $W$, et \textit{que cette propriété soit conservée par tout cochangement de base $U\longrightarrow U'$.} De plus, nous recherchons des conditions qui soient de nature locale sur $\bar U$, plus exactement sur $\bar U\cap T=\dot U=\dot T$. Nous pouvons motiver ce souci (a posteriori) en disant que nous voudrions que la propriété $i_0\in W$ soit conservée, non seulement par cochangement de base quelconque $U\longrightarrow U'$, mais aussi, de plus, par passage de $X$ à toute sous-catégorie pleine $X_1$ contenant $U$, donnant donc naissance à une situation
+\[
+U\overset{i_Y}{\hookrightarrow}X_1,\qquad U\xrightarrow{(i_Y)_0}\bar U^{X_1}=\bar U\cap X_1
+\]
+\texttt{[}$Y=X_1$\texttt{?]}, similaire à la situation de départ. Plus généralement encore, nous voudrions qu’elle soit conservée en passant du triple $(X,U,T)$ à un triple “induit” $(X_1,U,T_1)$, par une flèche quelconque $g:T_1\longrightarrow T$ de but $T$ dans Cat, donnant naissance au couple de flèches
+\[
+U\xrightarrow{\mathrm{id}}U,\ g:T_1\longrightarrow T
+\]
+(cf. pages 60, 61). Le cas précédent est celui où
+\printedpage{61}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\msp{page 84}
+$T_1$ est une sous-catégorie pleine de $T$, $g$ la flèche d’inclusion, Notons à ce sujet la proposition soritale % [sic] inclusion, Notons -> inclusion. Notons, comma before a capital letter
+
+\textbf{Proposition 7.} \textit{Conditions équivalentes sur l’ouvert $U$ d’un objet $X$ de} Cat (moyennant W(7 bis)) :
+
+\begin{enumerate}[label={}, leftmargin=*]
+\item[\textit{a)}] \textit{L’inclusion $i_0:U\longrightarrow\bar U$ est $W$-asphérique, i.e. pour tout $t\in\dot U=\bar U\backslash U$, la catégorie $U/t$ est $W$-asphérique.}
+\item[\textit{b)}] \textit{L’inclusion $i_0:U\longrightarrow\bar U$ est dans $W$, et cette condition reste satisfaite, quand on remplace $(X,U)$ par $(X_1,U)$, où $(X_1,U)$ est déduit de $(X,U)$ au moyen d’une flèche $T_1\longrightarrow T(=X\backslash U)$ dans} Cat\textit{, comme rappelé ci-dessus.}
+\item[\textit{b$'$)}] \textit{Comme b), dans le cas où $T_1$ est la catégorie ponctuelle $e$, et où de plus son image est dans $\dot U$.}
+\end{enumerate}
+
+\textsc{Démonstration}. Il est évident que si dans b), b$'$) on remplace la condition “$i_0\in W$” par la condition plus forte ‘$i_0$ est $W$-asphérique’, les quatre \texttt{[plutôt trois]} conditions a) à b$'$) sont équivalentes. Il reste à prouver que la condition que les $U/t$ soient $W$-asphériques ($t\in\bar U$ - mais c’est trivial pour $t\in U$, donc il suffit de l’exprimer pour $t\in\bar U\backslash U=\dot U$) est déjà impliquée par la plus faible b$'$ et on devine qu’on a ceci :
+
+\msp{page 85}
+
+\textbf{Corollaire.} (Moyennant W(7 bis).) \textit{Soit $X$ dans} Cat\textit{, $U$ un ouvert de $X$ tel que $X\backslash U=\overline{\{t\}}$ soit la catégorie finale. Alors l’inclusion $U\xrightarrow{i}X$ est dans $W$ si et seulement si elle est $W$-asphérique, i.e. si et seulement si $U/t$ est $W$-asphérique (où $t$ est l’unique élément de $T$).}
+
+Nous démontrons ultérieurement ce corollaire (\footnote[65]{cf. cor. 4 de la proposition 15, page 149.}). La proposition 7 ne nous servira pas d’ici là - elle n’aura qu’un rôle purement esthétique à jouer, pour justifier notre propos délibéré de chercher des conditions sur $i:U\longrightarrow X$ (pour assurer que $U\longrightarrow\bar U$ est dans $W$ et le reste, quand on remplace $(X,U)$ par d’autres couples $(X_1,U_1)$ qui s’en déduisent par certaines opérations \dots) qui
+\msp{page 86}
+soient de \textit{nature locale} sur $\bar U$ (en fait, en les points de $\dot U$), et qui en tout état de cause entrainent la \textit{$W$-asphéricité} de $U\longrightarrow\bar U$.
+
+J’avais espéré que cette condition d’asphéricité (suggérée par la notion ‘d’immersion de Dwyer’) serait stable par cochangement de base quelconque $U\longrightarrow U'$, ce qui aurait assuré en même temps qu’après une telle opération, l’immersion ouverte $i':U'\longrightarrow X'$ obtenue satisfait encore à la condition que $i'_0:U'\longrightarrow\overline{U'}$ est dans $W$. Nous verrons que cette attente n’est pas fondée - la condition de $W$-asphéricité n’est \textit{pas} stable par cochangement de base, et elle ne suffit \textit{pas} même à assurer qu’après un cochangement de base, $i'_0:U'\longrightarrow\overline{U'}$ soit
+\printedpage{62}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+dans $W$. Il faudra une notion plus forte, qui est suggérée par le cas où $T=\{t\}$ est la catégorie finale et contenue dans $\bar U$ (cas auquel nous avons essayé de nous ramener dans la proposition 7). Dans ce cas, on l’a dit (corollaire précédent), la condition que $i:U\longrightarrow\bar U=X$ soit dans $W$, équivaut à la $W$-asphéricité de $i$, i.e. à la $W$-asphéricité de $U/t$, et de même pour $i':U'\longrightarrow\overline{U'}=X'$ : elle est dans $W$ si et seulement si $U'/t'$ est $W$-asphérique, où
+\msp{page 87}
+$t'$ est l’unique élément de $T'(\simeq T)=X'\backslash U'$. Donc il faut des conditions sur $U/t$ qui assurent que non seulement $U/t$, mais aussi toutes les catégories similaires $U'/t$ \texttt{[plutôt} $U'/t'$\texttt{]}, soient $W$-asphériques. Dans le cas général où $T$ est quelconque, c’est cette condition-là que nous allons imposer aux $U/t$ ($t\in\Ob T$), et il s’avérera que cette fois-ci, elles sont stables \texttt{[plutôt elle est stable]} par tout cochangement de base $U\xrightarrow{p}U'$, i.e. que les $U'/t'$ ($t'\in\Ob T'$) satisferont alors à la même condition. C’est cette condition que nous allons à présent reformuler.
+
+\subsection*{2.3 Objets totalement $W$-asphériques de \textnormal{Cat}, et morphismes totalement $W$-asphériques.}
+
+Reprenons la situation
+\[
+U\overset{i}{\hookrightarrow}X\overset{j}{\hookleftarrow}T,\qquad\qquad\text{avec }T=\{t\}\text{, catégorie finale, }t\in\bar U\text{, i.e. }X=\bar U,
+\]
+et celle d’un cochangement de base $U\longrightarrow U'$, donnant naissance à un carré cocartésien dans Cat
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T=\{t\} \arrow[l, hook', dotted, "j"'] \arrow[d, dotted, "\mathrm{iso}"] \\
+U' \arrow[r, hook, "i'"] & X' & T'=\{t'\}. \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\]
+La donnée de recollement $H$ entre $U$ et $T$, $H:\underbrace{U^\circ\times T}_{\simeq U^\circ}\longrightarrow\mathrm{Ens}$, peut s’interpréter comme un préfaisceau sur $U$, $H\in\Ob U^\wedge:U^\circ\longrightarrow\mathrm{Ens}$,
+\msp{page 88}
+et on a
+\[
+U/t\simeq U/H,
+\]
+où $U/H$ est interprété en termes du plongement canonique
+\[
+U\hookrightarrow U^\wedge.
+\]
+De même, le recollement entre $U'$ et $T'$ sera donné par un préfaisceau
+\[
+H'\in\Ob U^{\prime\wedge}:U^{\prime\circ}\longrightarrow\mathrm{Ens},
+\]
+
+% ---- from Der-ChXIIb-012_p021-025.tex
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et on aura
+\[ U'/t' \simeq U/H'. \]
+La relation entre $H'$ et $H$ a été explicitée au §1, comme
+\[ H' = p_!H, \qquad \text{où } p_! : U^{\wedge} \longrightarrow U'^{\wedge} \]
+est l'adjoint à gauche de $p^* : U'^{\wedge} \longrightarrow U^{\wedge}$, donné par
+\[ p^*F' = F' \circ p. \]
+On a
+\[ p_!(H)(u') \simeq \pi_0(u'\backslash U/H). \]
+
+\textbf{Définition 1.} \cercle{a} Soit $U$ un objet de Cat, $H \in \Ob U^{\wedge}$ un préfaisceau sur $U$. On dit que $H$ est \textit{totalement $W$-asphérique} si pour toute flèche $p : U \longrightarrow U'$ de Cat, $p_!(H)$ dans $U'^{\wedge}$ est un objet $W$-asphérique, i.e. $U'/p_!H$ est $W$-asphérique. \cercle{b} On dit qu'un objet $V$ de \msp{page 89} Cat est \textit{totalement $W$-asphérique,} si le foncteur final $e_V$ sur $V$ ($v \longmapsto \{\emptyset\}$) est totalement $W$-asphérique, i.e. si pour toute flèche $f : V \longrightarrow V'$ dans Cat, le préfaisceau
+\[ \pi_0(f) \defeq f_!(e_V) \defeq (v' \longmapsto \pi_0(v'\backslash V)) \]
+sur $V'$ est $W$-asphérique, i.e. si la catégorie
+\[ \upi_0(f) \ \text{ ou } \ \upi_0(V/V') \defeq V'/\pi_0(f) \]
+est $W$-asphérique. \texttt{[Cette notion est différente de la notion de totale asphéricité de Pursuing Stacks.]}
+
+Notons que la définition des foncteurs $p_!$ (ou $f_!$) comme adjoints, et leur `calcul' en termes de $\pi_0$ de certaines catégories, ne dépend pas du localiseur $W$. Donnons quelques précisions à ce sujet. On a un morphisme d'adjonction dans $V^{\wedge}$
+\[ f^*f_!(F) \longleftarrow F, \]
+d'où
+\[ V/F \longrightarrow V/f^*f_!(F) \simeq V \times_{V'} (V'/f_!(F)), \tag*{$(*)$} \]
+le dernier isomorphisme provenant du fait que l'on a commutativité, à isomorphisme canonique près, dans le diagramme de foncteurs
+\[
+\begin{tikzcd}[column sep=14em, row sep=large]
+V'^{\wedge} \arrow[r, "f^*=(F'\longmapsto F'\circ f)"] \arrow[d, "F'\longmapsto V'/F'"'] & V^{\wedge} \arrow[d, "F\longmapsto F/V"] \\
+\Cat/V' \arrow[r, "f^*_{\Cat}=(W'\longmapsto W'\times_{V'}V)"] & \Cat/V,
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 90}
+en d'autres termes, l'opérateur $f^*$ sur les préfaisceaux s'interprète, en termes géométriques, comme l'opération $W' \longmapsto W' \times_{V'} V$ de changement de base par $V \longrightarrow V'$, sur les catégories au dessus de $V'$ qui sont fibrées à fibres discrètes (propriété qui se conserve par changement de base).
+
+Ceci dit, la donnée d'une flèche $(*)$ équivaut, par la propriété universelle du changement de base, à celle d'une flèche (canonique en l'occurrence)
+\[ f/F : V/F \longrightarrow V'/f_!(F) \]
+rendant commutatif le carré
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+V/F \arrow[r, "\text{oubli de }F", "\substack{\text{ou foncteur}\\ \text{source}}"'] \arrow[d, "f/F"'] & V \arrow[d, "f"] \\
+V'/(F' = f_!(F)) \arrow[r, "\text{oubli de }F'"] & V'.
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+Dans le cas qui nous intéresse surtout ici, $F = e_V$, $V/F \longrightarrow V$ est un isomorphisme, et on obtient une factorisation canonique de foncteurs \msp{page 91}
+\[
+\begin{tikzcd}[row sep=large]
+ & V \arrow[dl, "\tilde{f}=f/e_V"'] \arrow[dd, "f"] \\
+\begin{array}{r} \upi_0(V/V') \\ = V'/f_!(e_V) \end{array} \arrow[dr, "\text{can.}"'] & \\
+ & V'.
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+Explicitons le $V'$-morphisme $\tilde{f}$ sur les fibres,
+\[ \tilde{f}_{v'} : V_{v'} \longrightarrow \upi_0(V/V')_{v'} \defeq \pi_0(v'\backslash V), \tag*{$(***)$} \]
+où dans le dernier membre, on a identifié l'ensemble $\pi_0(v'\backslash V)$ à la catégorie discrète qu'il définit. Pour expliciter cette flèche $(***)$, notons qu'on a une inclusion canonique
+\[ V_{v'} \longrightarrow v'\backslash V \]
+et pour toute catégorie $W$, un morphisme canonique (d'adjonction) $W \longrightarrow \pi_0(W)$, d'où un composé
+\[ V_{v'} \longrightarrow v'\backslash V \longrightarrow \pi_0(v'\backslash V), \]
+qui n'est autre que $\tilde{f}_{v'}$ dans $(***)$.
+
+Il doit être facile de montrer que la factorisation $(**)$ de $f$ est caractérisée, à isomorphisme unique près, en tant que
+% foot: Version 7 décembre 2002
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 92}
+factorisation dans $\Cat/V'$
+\[
+\begin{tikzcd}[column sep=small]
+ & \tilde{V} \arrow[dr, "\pi"] & \\
+V \arrow[ur, "\tilde{f}"] \arrow[rr, "f"'] & & V',
+\end{tikzcd}
+\]
+par les propriétés suivantes :
+\begin{enumerate}[label={}, leftmargin=*]
+\item[a)] $\pi$ est fibrée à fibres discrètes, i.e. un isomorphisme local (i.e. $\tilde{V}$ est isomorphe dans $\Cat/V'$ à une catégorie $V/F'$, avec $F'$ dans $V'^{\wedge}$). % [sic] V/F' -> V'/F', une catégorie au-dessus de V' définie par F' dans V'^∧ est de la forme V'/F'
+\item[b)] $\tilde{f}_!(e_V) = e_{\tilde{V}}$, i.e. pout tout $\tilde{v} \in \Ob \tilde{V}$, la catégorie $\tilde{v}\backslash V$ est 0-connexe : les colocalisés de $V$ au dessus de $\tilde{V}$ sont 0-connexes. % [sic] pout -> pour, faute de frappe
+\end{enumerate}
+
+Notons ici, en passant, que pour \textit{tout} morphisme $\pi : W' \longrightarrow W$ dans Cat qui soit fibré à fibres discrètes, i.e. tel que $W'$ soit isomorphe dans $\Cat/W$ à une catégorie de la forme $W/F$ ($F \in \Ob W^{\wedge}$), on a
+\[ \pi_!(e_{W'}) = F, \qquad \text{i.e. } W' \underbrace{\ \simeq\ }_{\text{dans } \Cat/W} W/\pi_!(e_{W'}). \tag*{$(*)$} \]
+Il faut vérifier que le foncteur
+\[ w \longmapsto \pi_0(\underbrace{w\backslash(W/F)}_{\defeq w\backslash W/F}) \]
+est canoniquement isomorphe à $F$. Mais l'inclusion
+\[ \underbrace{W'_w}_{= F(w) \text{ (catégorie discrète)}} \qquad \longrightarrow w\backslash W' \]
+\msp{page 93}
+définit bien comme tantôt
+\[ F(w) = W'_w \longrightarrow \pi_0(w\backslash W'), \]
+il faut prouver que c'est bijectif. Or, $W'$ étant $W_\infty$-lisse sur $W$, on sait que l'inclusion $W'_w \hookrightarrow w\backslash W'$ est dans $W_\infty$, a fortiori induit un isomorphisme pour les $\pi_0$.
+
+Ceci posé, si on a une factorisation de $f : V \longrightarrow V'$ en $f = \pi\tilde{f}$ ayant les propriétés a) b) de la page précédente, on voit déjà que l'on a
+\[ f_!(e_V) \simeq \pi_!(\, \underbrace{\tilde{f}_!(e_V)}_{\simeq e_{\tilde{V}} \text{ par b)}} \,) \simeq \pi_!(e_{\tilde{V}}), \]
+ce qui déjà détermine $\tilde{V}$ à isomorphisme canonique près (grâce à a) comme
+\[ \tilde{V} \simeq V'/f_!(e_V) \defeq \upi_0(V'/V), \] % [sic] \underline{\pi}_0(V'/V) -> \underline{\pi}_0(V/V'), notation employée partout ailleurs (Définition 1, (**))
+% foot: Version 7 décembre 2002
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et il ne doit pas être bien dur de se convaincre que $\tilde{f}$ n'est autre que la flèche canonique de la page 91.
+
+\textbf{Proposition 8.} \textit{Pour qu'un objet $H$ de $U^{\wedge}$ soit totalement $W$-asphérique, il suffit que l'objet $U/H$ de} Cat \textit{soit totalement $W$-asphérique.}
+
+\msp{page 94}
+Supposons en effet cette dernière condition satisfaite et prouvons que $H$ est totalement $W$-asphérique, i.e. que pour tout $p : U \longrightarrow U'$, $U'/p_!(H)$ soit $W$-asphérique.
+\[
+\begin{tikzcd}[row sep=large]
+V \defeq U/H \arrow[r, "\alpha"] \arrow[dr, "f"'] & U \arrow[d, "p"] \\
+ & U'
+\end{tikzcd}
+\]
+Soit $f$ le foncteur composé du diagramme ci-contre \texttt{[ci-dessus]}, on a $H \simeq \alpha_!(e_V)$ (par $(*)$ p. 92), d'où
+\[ p_!(H) \simeq p_!\alpha_!(e_V) \simeq (p\alpha)_!(e_V) \simeq f_!(e_V), \]
+qui est $W$-asphérique par hypothèse sur $V = U/H$.
+
+La réciproque de \texttt{[la]} prop. 8 est-elle valable, i.e. si $H$ est totalement $W$-asphérique, en est-il de même de $V = U/H$? La difficulté provient du fait que cela signifie que pour \textit{toute} flèche $f : V \longrightarrow V'$ dans Cat de source $V$, on ait $f_!(e_V)$ $W$-asphérique, alors que l'hypothèse équivaut à le postuler seulement pour les flèches qui se factorisent par $U$. Notons que si on ne fait pas cette hypothèse sur $f$, mais qu'on suppose au lieu de cela que $f$ s'insère dans un carré commutatif \msp{page 95}
+\[
+\begin{tikzcd}[row sep=large]
+V \arrow[r, "\alpha"] \arrow[d, "f"'] & U \arrow[d, "p"] \\
+V' \arrow[r, "\alpha'"] & U',
+\end{tikzcd}
+\]
+avec $\alpha'$ lui aussi un isomorphisme local, alors on peut conclure que $\upi_0(f) = \upi_0(V/V')$ est bien asphérique. En effet, on a un isomorphisme canonique dans $\Cat/U'$,
+\[ \upi_0(\alpha'f) \simeq \upi_0(f), \qquad \text{i.e. } \ \upi_0(V/V') \simeq \upi_0(V/U'), \]
+du fait p. ex. que la factorisation canonique de $f$
+% foot: Version 7 décembre 2002
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=normal]
+ & V \arrow[dl, "\tilde{f}"'] \arrow[dd, "f"] & \\
+\upi_0(V/V') \arrow[dr, "\pi"'] & & \\
+ & V' \arrow[dr, dotted, "\alpha'"'] & \\
+ & & U'
+\end{tikzcd}
+\]
+fournit une factorisation du même type pour $\alpha'f$, en
+\[ \alpha'f = (\alpha'\pi) \circ \tilde{f}. \]
+Ceci dit, on peut appliquer l'hypothèse à $p$ et on trouve bien la $W$-asphéricité de $\upi_0(f) \simeq \upi_0(\alpha'f) = \upi_0(p\alpha)$.
+
+\msp{page 96}
+L'idée naturelle, pour une réciproque à \texttt{[la]} prop. 8, serait de prendre pour $U'$ la somme amalgamée de $U$ et $V'$ sur $V$, ce qui marchera pourvu qu'on sache que $\alpha'$ est bel et bien un isomorphisme local tout comme $\alpha$. C'est bien le cas p. ex. si $V \longrightarrow U$ est une immersion ouverte, i.e. $H$ un sous-préfaisceau du préfaisceau final. Mais je crains que ce ne soit pas vrai en général - ça a l'air un peu trop beau pour être vrai! C'est en effet déjà faux dans le cas
+\[
+\begin{tikzcd}[row sep=huge]
+V = E_G \arrow[r, "\alpha\ \text{can}"] \arrow[d, "f"'] & B_G = U \\
+V' = B_{G'}, &
+\end{tikzcd}
+\]
+dans le cas p. ex. où $G = \{\pm 1\}$, groupe à deux éléments, et où l'élément $\alpha$ de $G'$, image par $f$ de l'une des deux flèches non identiques de $E_G$ est $\neq 1$ \texttt{[plutôt de carré} $\neq 1$\texttt{]}. Si $H'$ est le sous-groupe invariant engendré par $\alpha$ \texttt{[plutôt par} $\alpha^2$\texttt{]} dans $G'$, la somme amalgamée s'identifie à $B_{G'/H'}$, or $B_{G'} \longrightarrow B_{G'/H'}$ n'est \textit{pas} un isomorphisme local (car $(B_{G'})/t_0 \longrightarrow (B_{G'/H'})/t'_0$ n'est pas bijectif sur les objets, s'identifiant à $G' \overset{q}{\longrightarrow} G'/H' \ \ldots$).
+
+Mais d'autre part la condition de totale $W$-asphéricité sur un objet $H$ de $U^{\wedge}$ paraît déjà à tel point exigeante, que je me vois mal con\msp{page 97}struire un exemple où elle est satisfaite, sans que $U/H$ elle-même ne soit totalement $W$-asphérique.
+
+L'existence d'objets totalement $W$-asphériques dans Cat n'est pas tellement évidente a priori. Qu'il y en ait un bon paquet est assuré par la
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p026-030.tex
+\setcounter{footnote}{65}
+
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Proposition 9.}
+
+\begin{enumerate}[label=\textit{\alph*)}]
+\item \textit{Tout objet $V$ de} Cat \textit{ayant un objet final est totalement $W$-asphérique - donc tout préfaisceau d'ensembles $H$} représentable \textit{sur une catégorie $U$ (la représentabilité signifiant justement que $U/H$ a un objet final) est totalement $W$-asphérique.}
+
+\item (\footnote{!! Sans doute \textit{faux} tel quel, cf. rectification page suivante.}) \textit{(Supposons} W(7 bis) \textit{satisfait.) Soient $V$ dans} Cat, \textit{$V'$, $V''$ deux ouverts de réunion $V$. Si $V'$, $V''$, $V'\cap V''$ sont totalement $W$-asphériques, il en est de même de $V$.}
+\end{enumerate}
+
+\noindent\textsc{Démonstration} de a). Soit $V$ avec objet final et $f : V \longrightarrow V'$, d'où la factorisation
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \tilde{V} = \upi_0(V/V') \arrow[dr, "\pi"'] & \\
+V \arrow[ur, "\tilde{f}"] \arrow[rr, "f"'] & & V'
+\end{tikzcd}
+\]
+de $f$. On démontre sans mal (\footnote{Voici une démonstration simple : On a pour toute $V$ dans Cat $e_V = \varinjlim_{v \text{ dans } V} v$ (limite inductive du foncteur d'inclusion de $V$ dans $V^\wedge$), car $\forall\, x$ dans $V$
+\[
+\varinjlim_{v \text{ dans } V} \Hom(x,v) \simeq \pi_0(x\backslash V) = e.
+\]
+Comme $f_!$ commute aux $\varinjlim$ , on a donc $f_!(e_V) = \varinjlim_{v \text{ dans } V} f(v)$. Si $v_0$ est un objet final de $V$, cela montre que $f_!(e_V) = f(v_0)$, q.e.d.}) (histoire de cofinalité) ceci :
+
+\noindent\textbf{Corollaire.} \textit{L'image par $\tilde{f}$ d'un objet final de $V$ est un objet final de $\tilde{V} = \upi_0(V/V')$.}
+
+Comme un objet de Cat avec objet final est $W$-asphérique par W(3), cela établit a).
+
+Prouvons b). J'ai envie de dire que si on a $f : V \longrightarrow W$ dans Cat, alors $\upi_0(V/W)$ est réunion de deux ouverts isomorphes à $\upi_0(V'/W)$, $\upi_0(V''/W)$, dont l'intersection est isomorphe à $\upi_0(V'\cap V''/W)$. Cela signifierait ni plus ni
+\msp{page 98}
+moins que ceci : $f_!$ transforme les monomorphismes $V' \longrightarrow V$, $V'' \longrightarrow V$ (interprétés comme flèches dans $V^\wedge$, de but $e_V$) en monomorphismes, et le produit fibré $V'\cap V'' = V' \times_V V''$ en le produit fibré correspondant dans $W^\wedge$. Mais le foncteur $f_!$ commute aux $\varinjlim$ quelconques (étant un adjoint à gauche), et je ne vois aucune raison a priori pour qu'il commute (disons) aux produits fibrés (ce qui impliquerait aussi qu'il transforme monomorphismes en itou). Si je me rappelle bien, c'est ultrafaux en général. Donc je doute fort à présent que l'énoncé b) soit vrai, sans hypothèse supplémentaire. Pour assurer la monomorphie, on songe à imposer l'existence de \textit{rétractions} de $V$ sur $V'$, $V''$ et de $V'$ ou $V''$ sur $V'\cap V''$.
+
+Je viens de vérifier la chose, et donne le
+% foot: Version 7 décembre 2002
+\printedpage{69}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textbf{Corollaire 1} (rectification de \texttt{[la]} prop. 9, partie b) (\footnote{NB Il y a un énoncé légèrement plus général, en partant d'une catégorie $U$ et d'un diagramme
+$\begin{tikzcd}[ampersand replacement=\&, row sep=small]
+V'\cap V'' \arrow[r] \arrow[d] \& V' \arrow[d] \\
+V'' \arrow[r] \& V
+\end{tikzcd}$
+\textit{dans} $U^\wedge$ : si $V'$, $V''$, $V'\cap V''$ sont totalement $W$-asphériques, il en est de même de $V$.}) : \textit{L'énoncé est valable si on suppose qu'il existe une} rétraction \textit{$r'_0$ de $V''$ sur $V'\cap V''$, et de même une rétraction $r''_0$ de $V'$ sur $V'\cap V''$.} (\footnote{Corollaire rectifié faux également - les rétractions ne sont pas des flèches de $V^\wedge$, et ne passent dans $p_!$.}) % [resolved: see DER_XIIb-a_corrections.csv]
+\[
+\begin{tikzcd}
+V'\cap V'' \arrow[r, "i''_0"'] \arrow[d, "i'_0"] & V' \arrow[d, "i'"] \arrow[l, dotted, bend right=50, "r''_0"'] \\
+V'' \arrow[r, "i''"] \arrow[u, dotted, bend left=50, "r'_0"] & V \arrow[u, dotted, bend right=50, "r'"'] \arrow[l, dotted, bend left=50, "r''"]
+\end{tikzcd}
+\]
+
+(\textbf{NB} Nous verrons plus tard qu'il suffit de l'existence d'\textit{une} de ces rétractions pour assurer la conclusion.)
+
+\textsc{Démonstration}. Comme $V$ est somme amalgamée de $V'$ et $V''$, il existe une rétraction $r'$ de $V$ sur $V'$ (donnée par $\mathrm{id}_{V'}$ sur $V'$, par $i''_0r'_0$ sur $V''$) qui induit $r'_0$ sur $V''$, et de même il existe
+\msp{page 99}
+une rétraction $r''$ de $V$ sur $V''$, induisant $r''_0$ sur $V'$. L'existence de ces rétractions assure déjà que pour tout foncteur $f : V \longrightarrow W$, le diagramme transformé de
+\[
+\begin{tikzcd}[row sep=large]
+V'\cap V'' \arrow[r] \arrow[d] & V' \arrow[d] \\
+V'' \arrow[r] & V
+\end{tikzcd}
+\]
+(intérprété comme diagramme dans $V^\wedge$) est formé de monomorphismes (\footnote{\textbf{faux,} déjà dans le cas où $V = \Phi$, $V'$, $V''$ ses deux ouverts canoniques isomorphes à $\bDelta^1$, et $V'{\cap}V'' = e$.}) % [sic] intérprété -> interprété, misspelt accent
+\[
+\begin{tikzcd}[row sep=large]
+f_!(V'\cap V'') \arrow[r, hook] \arrow[d, hook] & f_!(V') \arrow[d, hook] \\
+f_!(V'') \arrow[r, hook] & f_!(V),
+\end{tikzcd}
+\]
+et de plus que $f_!(V') \cap f_!(V'')$ (qui contient $f_!(V'\cap V'')$) lui est en fait \textit{égal.} Il en résulte que l'on a un diagramme à la fois cartésien et cocartésien d'immersions ouvertes dans Cat
+% foot: Version 7 décembre 2002
+\printedpage{70}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=large]
+W/f_!(V'\cap V'') \arrow[r, hook] \arrow[d, hook] & W/f_!(V') \arrow[d, hook] \\
+W/f_!(V'') \arrow[r, hook] & W/\Bigl(f_!(V) \overset{\text{déf}}{=} f_!(e_V)\Bigr),
+\end{tikzcd}
+\]
+lequel s'identifie aussi à
+\[
+\begin{tikzcd}[row sep=large]
+\upi_0(V'\cap V''/W) \arrow[r, hook] \arrow[d, hook] & \upi_0(V'/W) \arrow[d, hook] \\
+\upi_0(V''/W) \arrow[r, hook] & \underline{\pi_0}(V/W).
+\end{tikzcd}
+\]
+
+\msp{page 100}
+L'hypothèse sur $V'$, $V''$, $V'\cap V''$ implique que les trois sommets du carré autres que $\upi_0(V/W)$ sont $W$-asphériques, donc par W(7 bis) il en est de même de ce dernier, q.e.d.
+
+\textbf{Corollaire 2} (\footnote{Plus généralement, si $I$ est une catégorie \textit{ordonnée finie,} ayant un objet initial, alors}). \textit{Moyennant} W(7 bis)\textit{, la catégorie} $\Psi = \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(B.base)]
+ \& a \\
+|[alias=B]| 0 \arrow[ur] \arrow[dr] \& \\
+ \& b
+\end{tikzcd}$ \textit{(ou $0 \longleftarrow 1 \longrightarrow 2$) est totalement $W$-asphérique} (\footnote{\textbf{Faux,} $\Psi$ n'est \textit{pas} totalement $W$-asphérique.}).
+
+On applique le corollaire 1 à $\Psi$ et à ses deux sous-catégories ouvertes, $\Psi/a$, $\Psi/b$ (isomorphes à $\bDelta^1$), et à leur intersection $\{0\} \simeq \bDelta^0 = e$. Comme ces trois catégories ont un objet final (contrairement à $\Psi$ elle-même, qui n'a qu'un objet initial \dots), elles sont totalement $W$-asphériques. Le corollaire s'applique, l'existence des rétractions $r'_0$, $r''_0$ étant ici évidente.
+
+C'est surtout la partie b) (rectifiée) de la page 9 qui assure l'existence de catégories totalement $W$-asphériques autres que celles ayant un objet final (\footnote{Je conjecture à présent que ce sont les seules! (\footnotemark)}\footnotetext{Faux, il y a les catégories filtrantes (si $W$ satisfait l'axiome des limites).}). Il est vrai qu'en sens inverse il faudrait quand même s'assurer qu'un objet $X$ $W$-asphérique de Cat n'est pas \textit{toujours} totalement $W$-asphérique! Le contre-exemple n'est pas tellement évident finalement -
+\msp{page 101}
+j'ai passé des heures avant d'en trouver un et d'y voir un peu clair! Il suffit en somme d'exhiber un exemple d'une flèche dans Cat
+\[
+f : X \longrightarrow Y
+\]
+telle que
+% foot: Version 7 décembre 2002
+\printedpage{71}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\begin{enumerate}[label=\alph*)]
+\item $\underline{\pi_0}(f) \overset{\text{déf}}{=} \upi_0(X/Y) \xrightarrow{\ \sim\ } Y$, i.e. les $\pi_0(y\backslash X)$ \texttt{[plutôt les} $y\backslash X$\texttt{]} sont 0-connexes (pour $y \in \Ob Y$),
+\end{enumerate}
+
+et telle que de plus
+
+\begin{enumerate}[label=\alph*), start=2]
+\item $X$ est $W$-asphérique, et $Y$ non.
+\end{enumerate}
+
+% a vertical bar is printed in the left margin beside the next paragraph (lines "La difficulté ..." to "... le foncteur")
+La difficulté est la suivante, quand on cherche des contre-exemples `idiots' : c'est que l'hypothèse a) implique déjà, quand $X$ est $W_\infty$-asphérique (ou seulement 1-connexe) que $Y$ est 1-connexe : le foncteur
+\[
+Y' \longmapsto X' = X \times_Y Y'
+\]
+de la catégorie des revêtements étales $Y'$ de $Y$ vers celle des revêtements étales $X'$ de $X$ est pleinement fidèle (vérification immédiate), d'où le résultat annoncé. Donc un contre-exemple doit faire appel à l'existence d'un $\pi_i(Y,y)$ non nul, avec $i \geq 2$. Cela implique
+\msp{page 102}
+qu'il n'y a pas de contre-exemple avec des catégories de la forme $Y = Z/F$ (déduites d'un foncteur $q : X \longrightarrow Z$ en prenant $F = q_!(e_X) = \pi_0(X/Z)$), où $Z$ est une catégorie telle que $\bDelta^1$ (?), $\Phi$, $\Psi$, ou $\begin{tikzcd}[ampersand replacement=\&, sep=small, baseline=(M.base)]
+ \& {} \& \\
+{} \arrow[ur] \arrow[dr] \& |[alias=M]| \phantom{x} \& {} \arrow[ul] \arrow[dl] \\
+ \& {} \&
+\end{tikzcd}$ (ayant le type d'homotopie du cercle) etc., car les composantes connexes de telles catégories $Y$ sont des $K(\pi,1)$ - les $\pi_i$ supérieures ($i \geq 2$) sont nuls.
+
+Cette difficulté vue, le contre-exemple devient évident. Je pars d'un objet 1-connexe \textit{quelconque} $Y$ de $X$ \texttt{[plutôt de} Cat\texttt{]}, et je prends $y_0 \in \Ob Y$,
+\[
+X = \uCh(Y; y_0, -) \xrightarrow{\ f\ } Y.
+\]
+On sait que $X$ est $W_\infty$-asphérique, et que $f$ est $W_\infty$-parfait, donc les inclusions
+\[
+X_y \longrightarrow y\backslash X
+\]
+sont des $W_\infty$-équivalences. L'hypothèse a) que les $y\backslash X$ soient 0-connexes équivaut donc à la même hypothèse sur les fibres $X_y$, ou
+\msp{page 103}
+encore sur une seule fibre ($f$ étant parfait, donc une $W_\infty$-fibration, et $Y$ 0-connexe), soit
+\[
+X_{y_0} \simeq \Omega(Y, y_0).
+\]
+Sa 0-connexité équivaut à l'hypothèse de 1-connexité de $Y$ (on n'a utilisé encore que celle de 0-connexité). Donc pour un contre-exemple, il suffit de prendre $Y$ 1-connexe et non $\infty$-connexe. Le cas le plus simple est celui où $Y$ a le type d'homotopie de la sphère $S^2$, réalisé p. ex. par la catégorie ordonnée ci-contre \texttt{[ci-dessous]} à 6 sommets.
+% foot: Version 7 décembre 2002
+
+\printedpage{72}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=small]
+e_2^+ \bullet & \bullet\, e_2^- \\
+e_1^+ \bullet \arrow[ur] & \bullet\, e_1^- \arrow[ul] \\
+e_0^+ \bullet \arrow[ur] & \bullet\, e_0^- \arrow[ul]
+\end{tikzcd}
+\]
+\texttt{[de plus,} $e_0^+ \leq e_1^+ \leq e_2^+$\texttt{,} $e_0^- \leq e_1^- \leq e_2^-$\texttt{]} (\footnote{C'est en somme cet exemple (à homotopie topologique près) que je réalise (sans d'abord m'en apercevoir dans l'Appendice p. 10-12, mais avec des catégories finies).}). Je résume le résultat obtenu.
+
+\textbf{Proposition 10.} \textit{Soit $Y$ une petite catégorie} 1\textit{-connexe ($y_0 \in \Ob Y$). Alors} $\uCh(Y; y_0, -)$ \textit{est $W_\infty$-asphérique, mais n'est pas totalement $W_\infty$-asphérique si $Y$ elle-même n'est $\infty$-connexe, i.e. $W_\infty$-asphérique.} (\footnote{Mais un exemple plus percutant est $\Psi = \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(A.base)]
+ \& b \\
+|[alias=A]| a \arrow[ur] \arrow[dr] \& \\
+ \& c
+\end{tikzcd}$ , qui est $W_\infty$-asphérique, mais pas totalement!}).
+
+On peut se demander si $Y$ $W_\infty$-asphérique implique que $\uCh(Y; y_0, -)$ est totalement $W_\infty$-asphérique. J'en doute fort!
+
+\msp{page 104}
+Revenons maintenant à la situation du début de la section, diagramme $(*)$, p.~87,
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T = \{t\} \arrow[l, hook', dotted, "j"'] \arrow[d, dotted, "\mathrm{iso}"] \\
+U' \arrow[r, hook, "i'"] & X' & T' = \{t'\}. \arrow[l, hook', dotted, "j'"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+Nous pouvons donner maintenant un exemple où $i$ est dans $W$ (et même $W$-asphérique) sans que $i'$ le soit :
+\[
+i \in W, \qquad i' \notin W. \tag*{$(**)$}
+\]
+On peut même supposer que $t$ soit objet final de $X$ (ce qui signifie que l'objet $H$ de $U^\wedge$ est isomorphe à $e_U$, l'objet final), et $t'$ objet final de $X'$ (i.e. $p_!(e_U) = e_{U'}$, i.e. les $u'\backslash U$ sont 0-asphériques). Dans ce cas, comme $X$, $X'$ sont $W$-asphériques, les relations $(**)$ équivalent à
+\[
+U \text{ est } W\text{-asphérique, et } U' \text{ non,} \tag*{$(***)$}
+\]
+ce qui est justement la situation que nous venons de construire (p. 101-103).
+
+On aimerait aussi trouver un exemple où dans $(*)$ on ait $p \in W$, $q \notin W$.
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p031-035.tex
+\setcounter{footnote}{76}
+
+\printedpage{73}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 105}
+
+Je prendrai encore $(X,U,\{t\})$ tel que $t$ soit objet final de $X$, mais si on veut $q\notin W$, on ne peut supposer $t'$ élément final de $X'$. Au lieu de cela, je vais supposer
+
+\begin{enumerate}[label=\alph*)]
+\item $U$, $U'$ (et aussi $X$, ayant objet final $t$) $W$-asphériques, donc $i\in W$ (et même $i$ $W$-asphérique), $p\in W$, mais
+\item $X'$ non $W$-asphérique, donc $i',q\notin W$.
+\end{enumerate}
+
+Pour ceci, notons que
+\[ U'/t'\simeq U'/p_!(e_U)\overset{\text{déf}}{=}\underline{\pi}_0(U/U'). \]
+Le corollaire de la proposition 7 (cf. p. 85), non encore démontré, nous dit que $i'\in W$ (i.e. ici, $X'$ $W$-asphérique) si et seulement si $i'$ est $W$-asphérique, i.e. $U'/t'$ est $W$-asphérique. Nous allons l'admettre ici. Tout revient donc à trouver une flèche
+\[ p:U\longrightarrow U' \]
+dans Cat avec les propriétés suivantes.
+
+\begin{enumerate}[label=\alph*)]
+\item $U$ et $U'$ sont $W$-asphériques,
+\item $\underline{\pi}_0(U/U')$ n'est pas $W$-asphérique.
+\end{enumerate}
+
+Nous allons reprendre l'exemple précédent
+\[ f:X\longrightarrow Y \]
+(p. 101-103), en prenant
+\[ U=X,\qquad \underline{\pi}_0(U/U')=Y, \]
+
+\msp{page 106}
+
+donc tout revient, à partir de l'exemple donné $X\xrightarrow{f}Y$, à construire une flèche
+\[ \pi:Y\longrightarrow U' \tag*{$(*)$} \]
+dans Cat qui satisfasse les conditions
+
+\begin{enumerate}[label=\alph*)]
+\item $\pi$ est un isomorphisme local,
+\item $U'$ est $W$-asphérique.
+\end{enumerate}
+
+On prendra alors
+\[ p=\pi f. \]
+Mais par la façon dont $X$ a été construit à partir d'un $Y$ 1-connexe et non $\infty$-connexe, par ailleurs quelconque, on est ramené finalement à trouver $(*)$ satisfaisant a), b), et de plus
+
+\begin{enumerate}[label=\alph*), start=3]
+\item \printedpage{74}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+$Y$ est 1-connexe, mais non $\infty$-connexe.
+\end{enumerate}
+
+(NB On suppose maintenant $W=W_\infty$.) Il revient au même de trouver
+
+% printed with a vertical rule at the left of this block
+\begin{quote}
+$U'$ objet \textit{asphérique} de Cat, $F\in\operatorname{Ob}U'^\wedge$ tels que $U'/F$ soit 1-connexe et non $\infty$-connexe.
+\end{quote}
+
+On songe par exemple à prendre simplement une sous-catégorie ouverte $U'_0$ de $U'$, qui soit 1-connexe et non $\infty$-connexe. Partons d'une telle catégorie $U'_0$ - par exemple une réalisation homotopique dans Cat, de la sphère $S^2$. On l'immerge comme ouvert dans un $U'$ asphérique, en lui ajoutant un objet final. On a gagné.
+
+\msp{page 107}
+
+Faisons un énoncé en forme.
+
+\textbf{Proposition 11.} \textit{On peut trouver une situation} $(*)$ (p. 124 \texttt{[plutôt 104]}) \textit{avec}
+
+\begin{enumerate}[label=\textit{\alph*)}]
+\item \textit{$t$ objet final de $X$.}
+\item \textit{$U$, $U'$ (et $X$) $W_\infty$-asphériques, donc $i,p\in W_\infty$ (et même $i$ $W_\infty$-asphérique).}
+\item \textit{$X'$ non $W_\infty$-asphérique, donc $i',q\notin W_\infty$.}
+\end{enumerate}
+
+Il suffit pour cela de partir d'un objet 1-connexe $Y$ de Cat, de lui adjoindre un objet final $u'_0$, ce qui donne $U'$, de prendre $U=\underline{\mathrm{Ch}}(Y;y_0,-)$, $p:U\longrightarrow U'$ le composé $U\xrightarrow{\text{but}}Y\underset{\text{can.}}{\overset{\text{incl.}}{\hra}}U'$, et $X$ déduit de $U$ en lui ajoutant un objet final $t$. On a alors $U'/t'\simeq Y$, d'où
+\[ X'\ W_\infty\text{-asphérique (i.e. }i'\in W_\infty)\Longleftrightarrow Y\ W_\infty\text{-asphérique.} \]
+On a le contre-exemple cherché en prenant $Y$ (1-connexe mais) non $\infty$-connexe.
+
+\subsection*{2.4\quad Application aux immersions ouvertes dwyériennes.}
+
+Donnons quand même l'enoncé \textit{positif} auquel nous en avions. % [sic] l'enoncé -> l'énoncé, missing accent
+
+\textbf{Théorème 3.} \textit{Soient $(X,U,T)$ un triple $\in\mathcal{T}$ ($U$ ouvert de $X$ dans} Cat\textit{, $T=X\backslash U$), et pour toute flèche $p:U\longrightarrow U'$ flèche de} Cat\textit{, le carré cocartésien dans} Cat
+
+\[
+\begin{tikzcd}
+U \arrow[r, hook, "i"] \arrow[d, "p"'] & X \arrow[d, "q"'] & T \arrow[l, dotted, hook'] \arrow[d, dotted, "\text{iso}"] \\
+U' \arrow[r, hook, "i'"] & X' & T'. \arrow[l, dotted, hook']
+\end{tikzcd}
+\]
+
+\printedpage{75}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 108}
+
+\textit{Supposons que pour tout $t\in\dot{T}=\dot{U}$, le préfaisceau d'ensembles}
+\[ i^*(t)=(u\longmapsto\operatorname{Hom}(u,t))\in U^\wedge \]
+\textit{soit totalement $W$-asphérique (déf. 1, p. 88)} (\footnote{\textbf{NB} On dit sous ces conditions que $i_0:U\longrightarrow\bar{U}$ est \textit{strictement $W$-asphérique} (cf. déf. 2 page suivante).}) \textit{- p. ex. que la catégorie $U/t$ soit totalement $W$-asphérique (prop. 8, page 93). (NB le cas où les $U/t$ ont un objet final, cf. prop. 9 a), i.e. celui où l'inclusion $U\longrightarrow\bar{U}$ admet un adjoint à droite, est celui envisagé par Dwyer, celui des immersions ouvertes de Dwyer} (\footnote{Je ne connais pas d'autre cas où th. 3 s'applique - faute de connaître de catégorie totalement $W$-asphérique qui n'ait un objet final, ni d'objet $F$ d'une catégorie $U^\wedge$ qui soit totalement $W$-asphérique sans être représentable, i.e. $U/F$ a un objet final. À présent, je sais que les catégories \textit{filtrantes} sont totalement $W$-asphériques si $W$ satisfait l'axiome des limites inductives.})\textit{.) Alors pour toute $p:U\longrightarrow U'$, l'immersion ouverte}
+\[ i'_0:U'\longrightarrow\overline{U'} \]
+\textit{est $W$-asphérique (et même, tout comme $i_0$, strictement $W$-asphérique), et a fortiori elle est} \texttt{[dans]} \textit{$W$. Par suite (prop. 6} \texttt{[p. 81]}\textit{) on a ceci.}
+
+\[
+\begin{aligned}
+&\text{\textcircled{a}}\qquad && i\in W && \Longleftrightarrow\quad && i'\in W\quad && \textit{moyennant } \mathrm{W}(7\text{ bis}).\\
+&\text{\textcircled{b}}\qquad && p\in W && \Longleftrightarrow\quad && q\in W\quad && \textit{moyennant } \mathrm{W}(7).\ (\footnotemark)
+\end{aligned}
+\]
+\footnotetext{Démonstration page 112.}
+
+\textbf{Corollaire 1.} \textit{Supposons} W(7)\textit{. Si $i:U\hra X$ est une immersion ouverte telle que $i_0:U\hra\bar{U}$ soit totalement} \texttt{[il suffit strictement]} \textit{$W$-asphérique, alors $i:U\longrightarrow X$ est une $W$-cofibration (`ultraforte'), par quoi j'entends ceci : pour toute flèche $U'\xrightarrow{f}U''$ dans $U\backslash$}Cat\textit{,}
+
+\msp{page 109}
+
+\textit{telle que $f\in W$, la flèche $g:X'\longrightarrow X''$ qui s'en déduit par cochangement de base à partir de l'objet $X$ de $U\backslash$}Cat\textit{, est aussi dans $W$.}
+
+\textsc{Démonstration du corollaire} : on applique le théorème 3 à l'immersion ouverte $U'\overset{i'}{\hra}X'$ déduite de $U\overset{i}{\hra}X$ par le cochangement de base $U\xrightarrow{f}U'$, en notant de plus que l'hypothèse du théorème 3 sur $i$ est préservée en passant de $i$ à $i'$.
+
+Il faut quand même introduire une terminologie adéquate :
+
+\textbf{Définition 2 :}
+
+\begin{enumerate}[label=\alph*)]
+\item Une flèche $f:X\longrightarrow Y$ est dite \textit{strictement $W$-asphérique} si pour toute $y\in\operatorname{Ob}Y$, $f^*(y)=(x\longmapsto\operatorname{Hom}_Y(f(x),y))$ est un objet totalement $W$-asphérique de $X^\wedge$ (cf. déf. 1, page 88). Elle est dite \textit{totalement $W$-asphérique} si pour tout $y\in\operatorname{Ob}Y$, $X/y$ ($\simeq X/f^*(y)$) est un objet totalement $W$-asphérique de Cat.
+
+\item \printedpage{76}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+Une immersion ouverte $i:U\longrightarrow X$ est dite \textit{$W$-dwyérienne} (resp. \textit{totalement} \texttt{[$W$-]} \textit{dwyérienne}) si l'immersion induite $i_0:U\longrightarrow\bar{U}$ est strictement (resp. totalement) $W$-asphérique. Une immersion fermée $j:T\longrightarrow X$ est dite \textit{$W$-dwyérienne} (resp. \textit{totalement $W$-dwyérienne}) si et seulement si $j^\circ:T^\circ\longrightarrow X^\circ$ est une immersion ouverte $W$-dwyérienne (resp totalement $W$-dwyérienne).
+
+\item Une flèche $i:U\longrightarrow X$ de Cat (pas nécessairement une immersion)
+
+\msp{page 110}
+
+est appelée une \textit{$W$-cofibration,} si pour toute flèche $f:U'\longrightarrow U''$ dans $U\backslash$Cat, la flèche $g:X'\longrightarrow X''$ qui s'en déduit par le cochangement de base par $X$ (objet de $U\backslash$Cat) est dans $W$ quand $f$ l'est.
+\end{enumerate}
+
+\textbf{NB} Cette notion de $W$-cofibration est stable par composition et par cochangement de base, et les isomorphismes de Cat sont des $W$-cofibrations. Si $f$ est une $W$-cofibration, $f^\circ$ l'est et inversement.
+
+(Le corollaire s'énonce en disant qu'une immersion ouverte ou fermée qui est $W$-dwyérienne est une $W$-cofibration.)
+
+\begin{enumerate}[label=\alph*), start=4]
+\item Une flèche $i:U\longrightarrow X$ dans Cat est appelée une \textit{$W$-cofibration triviale}, ou une \textit{$W$-équivalence couniverselle,} si pour toute $U'$ dans $U\backslash$Cat, i.e. toute flèche $p:U\longrightarrow U'$ dans Cat, la flèche déduite de $i$,
+\[ i':U'\longrightarrow X'=U'\amalg_U X'\quad\texttt{[plutôt }U'\amalg_U X\texttt{]}\ \ , \]
+est dans $W$. (NB Il est immédiat que cela implique bien que $i$ est une $W$-cofibration.)
+\end{enumerate}
+
+(Cette notion de $W$-cofibration triviale est elle aussi stable par composition et par cochangement de base, et les isomorphismes dans Cat en sont.)
+
+\msp{page 111}
+
+\textbf{Corollaire 2.} (Moyennant W(7).) \textit{Soit $i:U\longrightarrow X$ une immersion ouverte $W$-dwyérienne. Pour que $i$ soit une $W$-cofibration triviale, il faut et il suffit que $i\in W$, ou ce qui revient au même} (cf. page 82), \textit{que $\dot{T}\hra T$ soit dans $W$.}
+
+C'est évidemment nécessaire, et la suffisance résulte du théorème 3 a).
+
+\textbf{Questions ouvertes.}
+
+\begin{enumerate}[label=\alph*)]
+\item J'ignore si une immersion ouverte $i$ qui est une $W$-cofibration, voire une $W$-cofibration triviale, est forcément $W$-dwyérienne (\footnote{et peut-être même une immersion de Dwyer?}). Mais par le corollaire de la proposition 7 (p. 85), je sais que c'est le cas si on suppose $T$ isomorphe à la catégorie finale $e$. Il s'ensuit toute au moins ceci : Pour que non seulement $i:U\longrightarrow X$, mais aussi toutes les immersions ouvertes $i_1:U\longrightarrow X_1$ qui s'en déduisent par le procédé de prop. 7 b) au moyen de flèches quelconques $T_1\longrightarrow T$ de but $T$ dans Cat, soient des $W$-cofibrations, il faut et il suffit que $i$ soit dwyérienne. % [sic] toute au moins -> tout au moins, agreement error
+
+\item \printedpage{77}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+Y-a-t-il une bonne notion d' immersion dwyérienne, applicable à toutes les immersions
+
+\msp{page 112}
+
+et incluant le cas des immersions ouvertes et des immersions fermées?
+\end{enumerate}
+
+\textsc{Démonstration} du théorème 3 (p. 107). Il suffit de prouver que si $i$ est $W$-dwyérienne (i.e. $i_0$ strictement $W$-asphérique). alors $i'$ l'est également - car il en résultera que $i'$ est $W$-asphérique et a fortiori $\in W$. Il faut donc vérifier que pour tout $t'\in\dot{U}'=\dot{T}$, l'élément $i^*(t')=(u'\longmapsto\operatorname{Hom}_{X'}(u',t'))$ de $U'^\wedge$ est totalement $W$-asphérique. Or $t'$ provient d'un unique élément $t$ de $\dot{T}$, et on sait qu'on a % [sic] asphérique). alors -> asphérique), alors, period before lower-case word
+
+\[ i'^*(t)=p_!(i^*(t))\quad\texttt{[plutôt }i'^*(t')=p_!(i^*(t))\texttt{]},\qquad\text{où }\ p_!:U^\wedge\longrightarrow U'^\wedge. \]
+
+Par hypothèse, $F=i^*(t)$ est un élément totalement $W$-asphérique de $U^\wedge$, ce qui signifie que pour toute flèche $p:U\longrightarrow U'$ dans Cat de souce $U$, $p_!(F)$ est un élément $W$-asphérique de $U'$. En fait, on a le lemme immédiat (par transitivité $(p'p)_!\simeq p'_!p_!$). % [sic] souce -> source, missing letter
+
+\textbf{Lemme.} \textit{Soit $U$ dans} Cat\textit{, et $F$ dans $U^\wedge$. Si $F$ est totalement $W$-asphérique (resp. si $U/F$ est totalement $W$-asphérique), alors pour toute flèche $p:U\longrightarrow U'$ dans} Cat \textit{de source $U$, $F'=p_!(F)$ est un objet totalement $W$-asphérique de $U'^\wedge$ (resp.}
+
+\msp{page 113}
+
+\textit{$U'/F'$ est un objet totalement $W$-asphérique de} Cat\textit{.)}
+
+\textbf{Corollaire 3} (du théorème 3). \textit{Si $i:U\longrightarrow X$ est une immersion ouverte ou fermée $W$-dwyérienne (resp. totalement $W$-dwyérienne), alors pour toute flèche $p:U\longrightarrow U'$ dans} Cat\textit{, $i':U'\longrightarrow X'=U'\amalg_U X'$} \texttt{[plutôt $U'\amalg_U X$]} \textit{l'est aussi.}
+
+(NB Le cas non respé est essentiellement le théorème 3. Il ne dépend d'aucun axiome supplémentaire sur $W$, mais n'a d'intérêt qu'en vue des équivalences \textcircled{a} et \textcircled{b} (p. 108) qui en résultent, et qui sont valables moyennant W(7 bis) resp. W(7) seulement.)
+
+\textbf{Commentaire de motivation :} les immersions ouvertes ou fermées $W$-dwyériennes, ou totalement $W$-dwyériennes, sont stables par cochangement de base (d'après le corollaire précédent), mais n'ont pas du tout l'air de l'être par composition. À cet égard, les `immersions de Dwyer' (où on suppose l'existence de l'adjoint à droite de $i_0:U\longrightarrow\bar{U}$, dans le cas d'une immersion ouverte) se comportent mieux, étant stables par composition. (\textbf{NB} Il ne semble pas
+
+\msp{page 114}
+
+non plus clair que les flèches strictement $W$-asphériques, ou les totalement $W$-asphériques, soient stables par composition - sorry!) Ma motivation pour m'échiner sur la notion $W$-dwyérienne est double.
+
+\begin{enumerate}[label=\alph*)]
+\item J'aimerais avoir des conditions à la fois compréhensibles, et aussi générales que possible, sur une immersion (ouverte p. ex), pour que ce soit une $W$-cofibration, propriété visiblement importante (toute comme la notion duale de $W$-fibration). % [sic] toute comme -> tout comme, agreement error
+\end{enumerate}
+
+% ---- from Der-ChXIIb-012_p036-040.tex
+\printedpage{78}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\begin{enumerate}
+\item[b)] J'ai envie, pour des applications ultérieures, de disposer d'une classe d'immersions ouvertes ayant les propriétés suivantes :
+\begin{enumerate}
+\item[1°)] Ce sont des $W$-cofibrations, et
+\item[2°)] Si $U \overset{i}{\hookrightarrow} X$ est dans la classe, et si $\varepsilon \xrightarrow{j} I$ est l'inclusion ‘source-but’ de la catégorie discrète $\{0,1\}$ dans l'intervalle
+\[
+\Phi_n = 0 \longrightarrow 1 \longleftarrow 2 \longrightarrow \dots 2n-1 \longleftarrow 2n
+\]
+$(j(0)=0$, $j(1)=2n)$, $n\geq 2$, l'inclusion $\alpha$ de $(U\times I)\cup(X\times\varepsilon)$ dans $X\times I$ est dans la classe.
+\end{enumerate}
+Or cette dernière propriété de stabilité n'est \textit{pas} vérifiée par les immersions de Dwyer. (Prendre $i : \{0\} \longrightarrow \boldsymbol{\Delta}^1 = \{0,1\}$, l'inclusion $\alpha$ n'est pas immersion de Dwyer.)
+\end{enumerate}
+
+\msp{page 115}
+
+\subsection*{2.5\quad Complément : critère d'asphéricité totale d'une catégorie $W$-propre sur une autre.}
+
+Soit
+\[
+f : X \longrightarrow I
+\]
+une catégorie propre sur une catégorie d'indices $I$. Si $I$ a un objet final $i_0$, alors $X/i_0$ s'identifie à $X$, et par suite l'inclusion
+\[
+X_{i_0} \longrightarrow X
+\]
+de la fibre de $X$ en $i_0$ est $W$-asphérique \texttt{[plutôt }$W$\texttt{-coasphérique]}, et a fortiori est dans $W$. Donc $X$ est asphérique si et seulement si $X_{i_0}$ l'est. Nous voulons étendre ce résultat en un critère de \textit{totale} $W$-asphéricité, de façon précise prouver la
+
+\textbf{Proposition 11 :} \textit{Soit $f : X \longrightarrow I$ $W$-propre, et soit $i_0$ un objet final de $I$. Si $X_{i_0}$ est totalement $W$-asphérique} (déf. 1, page 88), \textit{il en est de même de $X$.} (Sous réserve que $W$ satisfasse l'axiome de connexité W(5).)
+
+La démonstration sera donnée plus bas, après quelques préliminaires ayant un intérêt indépendant. Tout d'abord, rappelons que si $X$ est $W$-propre sur $I$, alors il donne naissance à un foncteur
+\[
+\begin{aligned}
+I \quad &\longrightarrow \quad \mathrm{Hot}_W\\
+i \quad &\longmapsto \quad \mathrm{hot}_W(X_i)(\simeq \mathrm{hot}_W(X/i));
+\end{aligned}
+\]
+en le composant avec le foncteur
+\[
+\pi_0 : \mathrm{Hot}_W \longrightarrow \mathrm{Ens}
+\]
+(sous réserve que l'axiome de connexité W(5) (p. 10) soit satisfait)
+% foot: Version 7 décembre 2002
+\printedpage{79}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 116}
+on trouve un foncteur
+\[
+i \longmapsto \underbrace{\pi_0(X_i)}_{\simeq\, \pi_0(X/i)} : I \longrightarrow \mathrm{Ens}.
+\]
+Ceci posé, on a le résultat sorital
+
+\textbf{Proposition 12 :} \textit{Soit $f : X \longrightarrow I$ $W$-propre, et supposons que $W$ satisfasse l'axiome de connexité} W(5) (sinon, la $W$-propreté ne nous sera d'aucune utilité \dots) (\footnote[81]{Il vaut mieux dire : Soit $f$ $W_0$-propre, où $W_0$ est le localiseur de la 0-connexité \dots}). \textit{On a alors une bijection canonique}
+\[
+\pi_0(X) \xleftarrow{\ \sim\ } \varinjlim_{I} \pi_0(X_i), \tag*{$(*)$}
+\]
+\textit{où la flèche est induite par les applications canoniques $\pi_0(X_i) \longrightarrow \pi_0(X)$.}
+
+\textsc{Démonstration.} Passant à $f^\circ : X^\circ \longrightarrow I^\circ$, on est ramené à prouver le même résultat pour $X$ \textit{$W$-lisse} sur $I$, avec la seule différence que le foncteur
+\[
+i \longmapsto \pi_0(X_i)
+\]
+sur $I$ sera contravariant, i.e. un préfaisceau, ce qui offre l'avantage de l'intuition attachée au formalisme des préfaisceaux. Soit
+\[
+g : I \longrightarrow e, \qquad \text{d'où } gf = p : X \longrightarrow e,
+\]
+il est immédiat, par le calcul standard
+\[
+p_!(F) = \pi_0(X/F) \qquad (F \in \mathrm{Ob}\, X^\wedge)
+\]
+(où on a identifié $e^\wedge$ à (Ens)), qu'on a
+\[
+\pi_0(X) = p_!(e_X) = g_!(f_!(e_X)).
+\]
+Or le préfaisceau
+\[
+i \longmapsto \pi_0(X_i) \qquad (\simeq \pi_0(i\backslash X), \text{ car } X\ W\text{-lisse sur } I)
+\]
+\msp{page 117}
+n'est autre que $f_!(e_X)$. D'autre part, pour un préfaisceau quelconque $G$ sur $I$, on a
+\[
+g_!(G) \simeq \pi_0(I/G) \simeq \varinjlim_{I} G(i),
+\]
+et appliquant ceci à $f_!(e_X)$, on trouve la formule $(*)$ de la proposition 12.
+
+Revenons à la situation avec $f$ \textit{$W$-propre,} et considérons un foncteur
+\[
+p : X \longrightarrow Y,
+\]
+nous sommes intéressés à ‘calculer’
+\[
+p_!(e_X) = (y \longmapsto \pi_0(y\backslash X)) \in \mathrm{Ob}\, Y^\wedge.
+\]
+Considérons pour ceci le diagramme suivant
+% foot: Version 7 décembre 2002
+\printedpage{80}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+y\backslash X_i \arrow[r] \arrow[d] & y\backslash X \arrow[r] \arrow[d] & y\backslash Y \arrow[d] \\
+X_i \arrow[r] \arrow[d] & X \arrow[r, "p"] \arrow[d, "f"] & Y \\
+\underset{\simeq\, e}{\{i\}} \arrow[r] & I\rlap{\quad ,} &
+\end{tikzcd}
+\]
+où les trois carrés sont cartésiens. Comme $y\backslash Y \longrightarrow Y$ est $W$-propre, il en est de même de $y\backslash X \longrightarrow X$ par changement de base, donc du composé $y\backslash X \longrightarrow X \longrightarrow I$ par transitivité. Le diagramme montre d'autre part que la fibre de $y\backslash X$ en $i \in \mathrm{Ob}\, I$ s'identifie à $y\backslash X_i$.
+
+\msp{page 118}
+La proposition 12 nous donne donc la formule
+\[
+\pi_0(y\backslash X) = \varinjlim_{I} \pi_0(y\backslash X_i),
+\]
+laquelle formule ne peut s'empêcher d'être fonctorielle en $y$, tout comme celle de prop. 12 l'est dans $\underline{\mathrm{Prop}}_W I$. Or pour $y$ variable dans $Y$, le préfaisceau sur $Y$
+\[
+y \longmapsto \pi_0(y\backslash X_i)
+\]
+n'est autre que $p_{i\,!}(e_{X_i})$, où
+\[
+p_i : X_i \longrightarrow Y
+\]
+est le composé $X_i \longrightarrow X \xrightarrow{p} Y$ (induit par $p$). On a ainsi prouvé
+
+\textbf{Corollaire 1} (de prop. 12). \textit{Soit $f : X \longrightarrow I$ $W$-propre} (\footnote[82]{dire $W_0$-propre \dots}), \textit{et $p : X \longrightarrow Y$ un foncteur quelconque. Soit, pour tout $i \in \mathrm{Ob}\, I$, $p_i : X_i \longrightarrow Y$ le foncteur induit sur la fibre $X_i$ de $X$ en $i$. On a alors une loi} fonctorielle \textit{naturelle}
+\[
+i \longmapsto p_{i\,!}(e_{X_i}) : I \longrightarrow Y^\wedge,
+\]
+\textit{et on a la formule}
+\[
+p_!(e_X) \xleftarrow{\ \sim\ } \varinjlim_{I} p_{i\,!}(e_{X_i}), \tag*{$(*)$}
+\]
+\textit{où la flèche est induite par les morphismes canoniques}
+\[
+p_{i\,!}(e_{X_i}) \longrightarrow p_!(e_X)
+\]
+% foot: Version 7 décembre 2002
+\printedpage{81}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 119}
+\textit{induites par les inclusions $X_i \longrightarrow X$.}
+
+La loi fonctorielle de $p_{i\,!}(e_{X_i})$ en $i$ a été explicitée en cours de démonstration.
+
+Notons que lorsque $X$ sur $I$ est cofibrée et scindée, i.e. provient d'un foncteur
+\[
+i \longmapsto X_i, \quad I \longrightarrow \mathrm{Cat},
+\]
+alors la loi fonctorielle de $p_{i\,!}(e_{X_i})$ en $i$ s'explicite de façon particulièrement agréable : à une flèche
+\[
+\alpha : i \longrightarrow j, \qquad \text{d'où } \alpha_* : X_i \longrightarrow X_j,
+\]
+est associé
+\[
+p_!(\alpha) : p_{i\,!}(e_{X_i}) \longrightarrow p_{j\,!}(e_{X_j}),
+\]
+en notant qu'on a un diagramme
+\[
+\begin{tikzcd}
+X_i \arrow[rr, "\alpha_*"] \arrow[dr, "p_i"', ""{name=A}] & & X_j \arrow[dl, "p_j", ""'{name=B}] \\
+& Y &
+\arrow[from=A, to=B, bend left, "\lambda_\alpha"] % [resolved: see DER_XIIb-a_corrections.csv]
+\end{tikzcd}
+\]
+avec une flèche de commutativité
+\[
+\lambda_\alpha : p_i \longrightarrow p_j\alpha_*
+\]
+(pas \texttt{[un]} isomorphisme en général), d'où
+\[
+p_{i\,!}(e_{X_i}) \xrightarrow{(\lambda_\alpha)_!} p_{j\,!}\underbrace{\alpha_{*\,!}(e_{X_i})}_{\longrightarrow\, e_{X_j}} \longrightarrow p_{j\,!}(e_{X_j}),
+\]
+plus de doute c'est lui! (\footnote[83]{Cette flèche \texttt{[la flèche }$(\lambda_\alpha)_!$\texttt{]} devrait être explicitée avec soin!}).
+
+\msp{page 120}
+\textbf{Corollaire 2 :} \textit{Sous les conditions du corollaire 1, supposons que $I$ ait un objet final $i_0$. Alors}
+\[
+(p_{i_0})_!(e_{X_{i_0}}) \longrightarrow p_!(e_X)
+\]
+\textit{est un isomorphisme dans $Y^\wedge$.}
+
+D'où aussitôt la proposition 11 : si $X_{i_0}$ est totalement $W$-asphérique, alors $X$ l'est, car pour tout $p : X \longrightarrow Y$, $p_!(e_X) \simeq p_{i_0\,!}(X_{i_0})$, et ce dernier élément de $Y^\wedge$ est $W$-asphérique % [sic] p_{i_0 !}(X_{i_0}) -> p_{i_0 !}(e_{X_{i_0}}), elsewhere the argument of p_{i!} is e_{X_i}
+par hypothèse sur $X_{i_0}$.
+
+Notons le cas particulier :
+
+\textbf{Corollaire 3.} \textit{Soit $Z$ un objet totalement $W$-asphérique dans} Cat. \textit{Alors son produit $Z\times I$ par toute $I$ dans} Cat \textit{ayant un objet final est aussi totalement $W$-asphérique.}
+% foot: Version 7 décembre 2002
+\printedpage{82}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 121}
+
+\section*{3\quad Sommes amalgamées et intégration\quad \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+\& X_1 \\
+\int X_0 \arrow[ur] \arrow[dr] \& \\
+\& X_2
+\end{tikzcd}}
+
+\subsection*{3.1\quad Réduction canonique au cas d'un diagramme d'immersions fermées}
+
+Considérons un diagramme
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] & \\
+& X_2
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+dans Cat. Nous pouvons le regarder comme un contrafoncteur
+\[
+\Phi^\circ \longrightarrow \mathrm{Cat},
+\]
+où
+\[
+\Phi = \left( \vcenter{\hbox{\begin{tikzcd}[row sep=small, column sep=small]
+& 1 \arrow[dl] \\
+0 & \\
+& 2 \arrow[ul]
+\end{tikzcd}}} \right),
+\]
+donc comme définissant une catégorie fibrée (scindée) $\mathscr{X}$ sur $\Phi$. Il est parfois commode de représenter cette catégorie $\mathscr{X}$ par le ‘signe d'integration’ % [sic] integration -> intégration, accent missing in the print
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \\
+\int X_0 \arrow[ur] \arrow[dr] & \\
+& X_2,
+\end{tikzcd}
+\]
+et la regarder comme une sorte de ‘somme amalgamée homotopique’ de $X_1$ et $X_2$ sous $X_0$, ou comme une ‘limite inductive homotopique’ du diagramme de départ $(*)$.
+
+\msp{page 122}
+Il faut entendre par là que (pour $W \subseteq \mathrm{Fl}(\mathrm{Cat})$ donné) l'image $\mathrm{hot}_W(\mathscr{X})$ de $\mathscr{X}$ dans $\mathrm{Hot}_W$ a un ‘sens homotopique’ remarquable en termes de $(*)$, de façon précise, le diagramme $(*)$ définit un objet $\xi$ de $\mathrm{HOT}_W(\Phi)$ (qui est une catégorie de fractions de la catégorie de tous les diagrammes du type $(*)$ \dots), et si
+\[
+\pi : \Phi \longrightarrow e
+\]
+désigne la projection absolue de $\Phi$, on a
+\[
+\pi_!(\xi) = \mathrm{hot}_W(\mathscr{X}),
+\]
+% foot: Version 7 décembre 2002
+\end{document}

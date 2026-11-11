@@ -1,0 +1,1769 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage[a4paper,left=25mm,right=29mm,top=24mm,bottom=25mm,marginparwidth=18mm,marginparsep=4mm,heightrounded]{geometry}
+\usepackage{microtype}
+\usepackage{marginfix}
+\emergencystretch=2em
+\setlength{\marginparpush}{6pt}
+\AtBeginDocument{\SetMathAlphabet{\mathbf}{normal}{OT1}{lmr}{bx}{n}\SetMathAlphabet{\mathbf}{bold}{OT1}{lmr}{bx}{n}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Ch}{\underline{\mathrm{Ch}}}
+\newcommand{\Dl}{\boldsymbol{\Delta}}
+\newcommand{\fl}{\longrightarrow}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\uFib}{\underline{\mathrm{Fib}}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\HOTlc}{\mathrm{HOT}^{\mathrm{lc}}_W}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Wd}{W^{\mathrm{d}}_S}
+\newcommand{\Wf}{W^{\mathrm{f}}_S}
+\newcommand{\dashedbox}[1]{\tikz[baseline=(n.base)]\node[draw,dashed,inner sep=2pt](n){#1};}
+\newcommand{\Fib}{\mathrm{Fib}}
+\newcommand{\Parf}{\mathrm{Parf}}
+\begin{document}
+% ---- from Der-ChXI-890_p001-005.tex
+% ===================== page 1 =====================
+\printedpage{--}
+% head: (none) -- title page, no page number printed
+
+\begin{center}
+\vspace*{5cm}
+{\LARGE\textsf{LES DÉRIVATEURS}}
+
+\vspace{1.5em}
+{\large\textbf{ALEXANDRE GROTHENDIECK}}
+
+\vspace{3em}
+{\large\textbf{Chapitre XI}}
+
+\vspace{0.5em}
+{\large $\Hot$\textbf{-fibrations, foncteurs propres et foncteurs lisses etc.}\\
+\textbf{(dans} $\Cat$\textbf{)}}
+\end{center}
+
+\clearpage
+
+% ===================== page 2 =====================
+\printedpage{--}
+% head: (none) -- no page number printed
+
+\vspace*{6cm}
+\noindent Ce texte a été déchiffré et transcrit en \LaTeXe\ par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Pour les quelques corrections évidentes, ou rares commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés. Un point d'interrogation entre crochets signifie que l'on n'est pas sûr du mot qui précède.
+
+\noindent Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\noindent\textbf{maltsin@math.jussieu.fr}
+
+\hfill G. Maltsiniotis\hspace*{2.5em}
+
+\clearpage
+
+% ===================== page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+
+\noindent\texttt{[Il n'y a pas de pages 1-126]}
+
+\msp{page 127}
+
+\section*{1\quad $\Hot$-fibrations dans $\Cat$}
+
+\noindent\textbf{Théorème 1.} \textit{Soit $f : X \longrightarrow Y$ dans} $\Cat$\textit{. Conditions équivalentes :}
+
+\begin{itemize}[leftmargin=3em]
+\item[\textit{a)}] \textit{Pour tout $Y'' \xrightarrow{p} Y'$ sur $Y$, d'où $X'' = X \times_Y Y'' \xrightarrow{q} X' = X \times_Y Y'$, si $p$ est une} $\Hot$\textit{-équivalence, $q$ l'est aussi.}
+
+\item[\textit{a$'$)}] \textit{Comme a), avec $Y'' = e$, $Y'$ ayant un objet final.}
+
+\item[\textit{a$''$)}] \textit{Comme a), avec $Y'' = e$, $Y'$ ayant un objet initial} (\footnote{garder a$''$) et b$''$), conditions duales de a$'$), b$'$) \texttt{[a$''$) et b$''$) étaient barrés]}.})\textit{.}
+
+\item[\textit{b$'$)}] \textit{Pour tout $y \in \Ob Y$, $X_y \longrightarrow X/y$ est une} $\Hot$\textit{-équivalence, pour tout $y \longrightarrow y'$ dans $Y$, $X/y \longrightarrow X/y'$ est une} $\Hot$\textit{-équivalence; enfin ces conditions sont encore vérifiées pour $f' : X' \longrightarrow Y'$, pour tout changement de base $Y' \longrightarrow Y$ dans} $\Cat$\textit{. (En fait, il suffit de le demander pour la première des deux conditions, concernant $X_y \longrightarrow X/y$.)}
+
+\item[\textit{b$''$)}] \textit{Dual de b$'$), avec $X_y \longrightarrow y\backslash X$ et $y'\backslash X \longrightarrow y\backslash X$.}
+
+\item[\textit{c)}] \textit{Pour tout faisceau d'ensembles localement constant $F$ sur $X$, $f_*(F)$ est localement constant et se calcule `fibre par fibre', de même pour $R^1 f_*(F)$ si $F$ est un faisceau en groupes, et pour les $R^i f_*(F)$ si $F$ est un faisceau abélien. De plus, on veut que ces conditions restent satisfaites après tout changement de base.} (\footnote{\textit{c$'$) (version homologique). 1$^o$) en termes d'images directes de groupoïdes localement constants, et 2$^o$) en termes des $R^i f_!(L)$} \texttt{[plutôt $L_i f_!(L)$]}\textit{, pour $L$ faisceau abélien localement constant.}})
+\end{itemize}
+
+\noindent\textsc{Démonstration}. On a les implications $\pm$ tautologiques
+\[
+\mathrm{a} \implies \mathrm{a}' \implies \mathrm{b}' \implies \mathrm{c},
+\]
+et il reste à prouver que c $\implies$ a. Comme a est autoduale, étant équivalente à a$'$, b$'$, elle est aussi équivalente aux conditions duales de celles-ci, a$''$ et b$''$ (cf. cor. 2, page 75). On est ramené à prouver que si c) est satisfait, et si on a
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X \arrow[d, "f"'] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+Y & Y' \arrow[l, "p"]
+\end{tikzcd}
+\]
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+cartésien dans $\Cat$, si $p$ est une $\Hot$-équivalence, $q$ aussi. On utilise le critère d'Artin-Mazur.
+
+% ===================== page 4 (printed 2) =====================
+
+\noindent 1$^o$) Si $F$ est un faisceau d'ensembles localement constant sur $X$, il faut prouver que $H^0(X,F) \xrightarrow{\sim} H^0(X', q^*F)$.
+
+\msp{page 128}
+
+\noindent Mais
+\[
+H^0(X,F) \simeq H^0(Y,\ \underbrace{f_*(F)}_{\substack{\text{localement constant}\\ \text{par hypothèse c)}}}\ )
+\qquad
+\underbrace{\xrightarrow{\qquad\sim\qquad}}_{\substack{\text{car } p\\ \text{Hot-équivalence}}}
+\qquad
+H^0(Y', p^* f_*(F)),
+\]
+mais
+\[
+p^* f_*(F) \xrightarrow{\ \sim\ } f'_*(q^*(F)),
+\]
+car $f_*(F)$ et $f'_*(q^*F)$ se calculent `fibre par fibre' par hypothèse. Donc
+\[
+H^0(X,F) \simeq H^0(Y', f'_*(q^*(F))) \simeq H^0(X', q^*(F)),
+\]
+
+\hfill q.e.d.
+
+\noindent 2$^o$) Si $F$ est un faiscau en groupes localement constant sur $X$, il faut prouver % [sic] faiscau -> faisceau, misspelling
+\[
+H^1(X,F) \xrightarrow{\ \sim\ } H^1(X', q^*F).
+\]
+Le fait que c'est injectif résulte déjà de 1$^o$), qui implique que le foncteur
+\[
+\begin{array}{rcl}
+F\text{-torseurs sur } X & \longrightarrow & q^*(F)\text{-torseurs sur } X' \\
+P & \longmapsto & f^*P % [sic] f^*P -> q^*P, the functor is the inverse image by q from X to X'
+\end{array}
+\]
+est pleinement fidèle, par l'argument bien connu utilisant les faisceaux $\mathcal{H}$om. Il faut voir que ce foncteur est essentiellement surjectif.
+
+\msp{page 129}
+
+\noindent On a un homomorphisme de suites exactes d'ensembles ponctués
+\[
+\begin{tikzcd}[column sep=large, row sep=large,
+  every matrix/.append style={name=m},
+  execute at end picture={
+    \coordinate (lb) at ([xshift=0.4em]m-2-3.east);
+    \coordinate (lt) at ([xshift=1.8em]m-2-3.east);
+    \draw (lt |- m-1-3.north) -- (lb |- m-1-3.north) -- (lb |- m-2-3.south) -- (lt |- m-2-3.south);
+    \coordinate (rb) at ([xshift=0.6em]m-2-4.east);
+    \coordinate (rt) at ([xshift=-0.6em]m-2-4.east);
+    \draw (rt |- m-1-3.north) -- (rb |- m-1-3.north) -- (rb |- m-2-3.south) -- (rt |- m-2-3.south);
+  }]
+H^1(Y, f_*F) \arrow[r, "u"] \arrow[d, "\alpha"] & H^1(X,F) \arrow[r, "v"] \arrow[d, "\beta"] & \overbrace{H^0(Y, R^1 f_*(F))}^{\ni\, \eta} \arrow[r, "w"] \arrow[d, "\gamma"] & H^2(Y, f_*F) \arrow[d, "\delta"] \\
+H^1(Y', f'_*F) \arrow[r, "u'"] & \underbrace{H^1(X', F')}_{\ni\, \xi'} \arrow[r, "v'"] & \underbrace{H^0(Y', R^1 f'_*(F'))}_{\ni\, \eta'} \arrow[r, "w'"] & H^2(Y', f'_*F') % [sic] H^1(Y', f'_*F) -> H^1(Y', f'_*F'), the other entries of the lower row are in F'
+\end{tikzcd}
+\]
+(\footnote{où on a posé $F' = q^*(F)$.}), où les faisceaux $f_*F$, $R^1 f_*(F)$ sont localement constants par hypothèse et se calculent fibre par fibre, les faisceaux $f'_*(F')$ et $R^1 f'_*(F')$ aussi, qui implique que ces derniers sont
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+canoniquement isomorphes (par les flèches de changement de base) aux images inverses de leurs homologues $f_*(F)$, $R^1 f_*(F)$. Comme $p$ est une $\Hot$-équivalence, cela implique que les flèches $\alpha$, $\gamma$ sont \texttt{[des]} isomorphismes. Donc si $\xi' \in H^1(X', F')$, son image $\eta'$ dans $H^0(Y', R^1 f'_*(F'))$ provient d'un $\eta \in H^0(Y, R^1 f_*(F))$ bien déterminé. Il faut voir que cet $\eta$ provient d'un $\xi \in H^1(X,F)$. Ceci (si je me rappelle bien) est possible si et seulement si une certaine obstruction $w(\eta)$ dans $H^2(Y, f_*(F))$ est dans le sous-ensemble neutre du $H^2$. \textbf{NB} Le champ sur $Y^\wedge$ des $F$-torseurs sur les $X^\wedge/U$ qui remontent $\eta$ est une $\mathcal{F} = f_*F$-gerbe $\mathcal{G}_\eta$, et il faut voir qu'elle est neutre. Mais il y a mieux à faire :
+
+% ===================== page 5 (printed 3) =====================
+
+\msp{page 130}
+
+\noindent On note que cette gerbe $\mathcal{G}$ est localement constante (puisqu'elle correspond à un lien $f_*(G)$ localement constant) et que $\mathcal{G}'$ est son image inverse. Mais comme $p$ est une $\Hot$-équivalence, il s'ensuit que le foncteur
+\[
+\underline{\Gamma}(Y, \mathcal{G}) \longrightarrow \underline{\Gamma}(Y', \mathcal{G}')
+\]
+est une équivalence de catégories, donc $\xi'$ provient (à isomorphisme près) d'un unique $\xi$ de $\underline{\Gamma}(Y, \mathcal{G})$, q.e.d.
+
+\noindent 3$^o$) Soit $F$ faisceau abélien localement constant sur $X$, il faut voir \texttt{[que]}
+\[
+H^i(X,F) \xrightarrow{\ \sim\ } H^i(X', F') \qquad (F' = q^*F), \tag*{$(*)$}
+\]
+pour tout $i \in \mathbf{N}$. Mais les deux termes sont l'aboutissement des suites spectrales de Leray, de termes initiaux
+\[
+\begin{aligned}
+E_2^{pq} &\simeq H^p(Y, R^q f_*(F)) \\
+E^{\prime pq}_2 &\simeq H^p(Y', R^q f'_*(F')),
+\end{aligned}
+\]
+et $(*)$ est associé à un homomorphisme de suites spectrales, qui pour les termes initiaux est
+\[
+H^p(Y, R^q f_*(F)) \xrightarrow{\sim} H^p(Y', R^q f'_*(F)), \tag*{$(**)$} % [sic] R^q f'_*(F) -> R^q f'_*(F'), cf. the E'_2 term just above
+\]
+associé à
+\[
+p^*(R^q f_*(F)) \longrightarrow R^q f'_*(F'). \tag*{$(*{*}*)$}
+\]
+Mais par hypothèse les $R^q f_*(F)$, $R^q f'_*(F')$ sont localement constants et se calculent fibre par fibre,
+
+\msp{page 131}
+
+\noindent d'où il résulte que les homomorphismes de changement de base $(*{*}*)$ sont \texttt{[des]} isomorphismes, et comme il s'agit de faisceaux localement constants et que $p$ est une $\Hot$-équivalence, il s'ensuit que $(**)$ est \texttt{[un]} isomorphisme, donc aussi $(*)$ sur les aboutissements, q.e.d.
+
+\noindent\textbf{Définition 1.} Sous les conditions équivalentes du théorème 1, on dit que $f$ est une $\Hot$-\textit{fibration.}
+
+% ---- from Der-ChXI-890_p006-008.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+
+\textbf{Proposition 1.} \textit{Cette notion est stable par changement de base (trivial), par composition (formel sur a)). Pour que $f$ soit une \textup{Hot}-fibration, il faut et il suffit que $f$ \textup{\texttt{[plutôt}} $f^{o}$\textup{\texttt{]}} le soit.}
+
+\textbf{Proposition 2.} \textit{Soit $f : X \longrightarrow S$ une \textup{Hot}-fibration. Alors $s \longmapsto \mathrm{hot}(X_s)$ est un système local sur $S$, à valeurs dans \textup{Hot}. Donc les $X_s$ pour $s$ dans une même composante connexe de $S$ sont \textup{Hot}-isomorphes entre eux (mais pas canoniquement, si cette composante n'est pas \textup{1}-connexe).}
+
+% (a vertical change bar is printed in the left margin beside Théorème 2)
+\textbf{Théorème 2.} {\itshape Soit
+\begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname-1-1.base), column sep=small, row sep=small]
+X' \arrow[rr, "f"] \arrow[dr, "p'"'] \& \& X \arrow[dl, "p"] \\
+\& S \&
+\end{tikzcd}
+un diagramme commutatif dans \textup{Cat}, avec $p$, $p'$ des \textup{Hot}-fibrations, et soit $S_0 \subseteq S$ une partie de $S$ telle que $S_0 \longrightarrow \pi_0(S)$ soit surjectif. Pour que $f$ soit une \textup{Hot}-équivalence, il faut et il suffit que les $f_s : X_s \longrightarrow Y_s$ $(s \in S_0)$ le soient.} % [sic] f_s : X_s -> Y_s -> f_s : X'_s -> X_s, the diagram has X' and X (cf. f_s : X'_s -> X_s p. 6)
+
+a) La suffisance se prouve comme tantôt, avec le critère de Artin-Mazur.
+
+\msp{page 132}
+
+Notons que l'hypothèse sur $S_0$ assure que si $F$, $F'$ sont deux faisceaux d'ensembles localement constants sur $S$, et $u : F \longrightarrow F'$ un homomorphisme tel que $u_s : F_s \xrightarrow{\ \sim\ } F'_s$ pour $s \in S$, alors $u$ est \texttt{[un]} isomorphisme. % [sic] s \in S -> s \in S_0, otherwise the hypothesis on S_0 plays no role
+
+1$^{o}$) Soit $F$ un faisceau d'ensembles localement constant sur $X$, $F'$ son image inverse sur $X'$, il faut prouver
+\[
+H^0(X,F) \ \xrightarrow{\ \sim\ }\ H^0(X',F').
+\]
+Or
+\[
+H^0(X,F) \simeq H^0(Y, \underbrace{f_*(F)}_{\substack{\text{localement}\\ \text{constant sur } S}}) \ \longrightarrow\ H^0(Y, f'_*(F')) \simeq H^0(X',F'),
+\] % [sic] H^0(Y, f_*(F)), H^0(Y, f'_*(F')) -> H^0(S, p_*(F)), H^0(S, p'_*(F')), the brace says "localement constant sur S" and (*) uses p_*, p'_*
+il faut prouver que
+\[
+p_*(F) \ \xrightarrow{\ \sim\ } p'_*(F') \tag*{$(*)$}
+\]
+est \texttt{[un]} isomorphisme. Or par hypothèse sur $p$, $p'$, les deux faisceaux sont localement constants et se calculent fibre par fibre, d'où résulte que $(*)$ est un isomorphisme pour les fibres en $s \in S_0$, donc un isomorphisme partout. OK.
+
+2$^{o}$) Il en résulte déjà, si $F$ est un faisceau en \textit{groupes,} que le foncteur
+\[
+(F\text{-torseurs sur } X) \ \longrightarrow\ (F\text{-torseurs sur } X')
+\]
+est pleinement fidèle, donc $H^1(X,F) \longrightarrow H^1(X',F')$ \texttt{[est]} injectif; il reste à prouver que ce foncteur est essentiellement surjectif. À cause de la pleine fidélité, c'est \textit{local sur $S$} (\textbf{NB} On voit directement que l'hypothèse fait sur les $s \in S_0$ implique la même hypothèse pour tout $s \in S$, en utilisant le fait que $p$, $p'$ sont des fibrations) (\footnote{Les hypothèses faites sont bel et bien locales sur $S$ (du moins si $S_0 = S$).}). Donc on est ramené au cas où $S = S/s_0$ a un objet final $s_0$.
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+
+\msp{page 133}
+
+On a alors
+\[
+\begin{aligned}
+H^1(X,F) &\ \simeq\ H^0(S, R^1p_*(F)) \\
+H^1(X',F') &\ \simeq\ H^0(S, R^1p'_*(F')),
+\end{aligned}
+\]
+et on voit encore que
+\[
+R^1p_*(F) \ \longrightarrow\ R^1p'_*(F')
+\]
+est \texttt{[un]} isomorphisme (car il se calcule fibre par fibre, et on utilise l'hypothèse sur les $f_s$), donc induit un isomorphisme
+\[
+H^1(X,F) \ \longrightarrow\ H^1(X',F').
+\]
+
+3$^{o}$) Si $F$ est même abélien, on doit prouver
+\[
+H^i(X,F) \ \xrightarrow{\ \sim\ }\ H^i(X',F')
+\]
+pour tout $i$, et cela résulte encore de la suite spectrale de Leray pour $(p,F)$ et pour $(p',F')$.
+
+b) Inversement, supposons que $f$ soit une Hot-équivalence, et prouvons que les $f_s : X'_s \longrightarrow X_s$ sont des Hot-équivalences. Je vais utiliser le
+
+% (a vertical change bar is printed in the left margin beside the Lemme)
+\textbf{Lemme.} \textit{Soit $S \in \Ob\Cat$, $S$ \textup{0}-connexe. Alors il existe un $\overline{S} \in \Ob\Cat$, $\overline{S}$ \textup{Hot}-asphérique, et $\overline{S} \longrightarrow S$ une \textup{Hot}-fibration.}
+
+Voyons comment ceci implique le théorème 2 (partie réciproque). On peut supposer $S$ 0-connexe, et on fait le changement de base par $\overline{S} \longrightarrow S$
+
+\msp{page 134}
+
+comme dans le lemme :
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X' \arrow[rr, "f"] \arrow[dr, "p'"'] & & X \arrow[dl, "p"] & & & & \\
+& S & & & \overline{X'} \arrow[rr, "\overline{f}"] \arrow[dr, "\overline{p'}"'] & & \overline{X} \arrow[dl, "\overline{p}"] \\
+& & & & & \overline{S} \arrow[ullll, "\varphi"] &
+\end{tikzcd}
+\quad .
+\]
+
+Alors $\overline{p'}$ et $\overline{p}$ sont des Hot-fibrations, et comme $\varphi$ est une Hot-fibration, le changement de base par $\varphi$ transforme la Hot-équivalence $f$ en une Hot-équivalence $\overline{f}$. Considérons alors $\overline{s} \in \Ob\overline{S}$, et le diagramme
+\[
+\begin{tikzcd}
+\overline{X'} \arrow[r, "\overline{f}"] & \overline{X} \\
+\overline{X'}_{\overline{s}} \arrow[u, hook, "i'"] \arrow[r, "\overline{f}_{\overline{s}}"] & \overline{X}_{\overline{s}} \arrow[u, hook, "i"']
+\end{tikzcd}
+\qquad .
+\]
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XI, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 28 mai 2002
+
+Comme $\{\overline{s}\} \longrightarrow \overline{S}$ est une Hot-équivalence, la flèche $i$ qui s'en déduit par le changement de base $\overline{p} : \overline{X} \longrightarrow \overline{S}$ l'est aussi, puisque $\overline{p}$ est une Hot-fibration, et de même pour $i'$. Ainsi dans le carré commutatif précédent, $\overline{f}$, $i$ et $i'$ sont des Hot-équivalences, donc aussi $\overline{f}_{\overline{s}}$. Mais si $s = \varphi(\overline{s})$, $\overline{f}_{\overline{s}}$ s'identifie à $f_s : X'_s \longrightarrow X_s$. D'ailleurs, il est immédiat que $\varphi$, étant une Hot-fibration
+
+\msp{page 135}
+
+à source non-vide, et à but connexe, est surjective. (\textbf{NB} toutes les fibres d'une même composante connexe de $S$ sont Hot-équivalentes, donc si l'une est non-vide, toutes le sont.) Cela achève la démonstration, modulo le lemme.
+
+Il reste à prouver celui-ci. Comme $S = \emptyset$ \texttt{[plutôt} $S \neq \emptyset$\texttt{]}, je peux choisir une ‘origine’
+\[
+s_0 \in S,
+\]
+et regarder la catégorie
+\[
+\Ch_{\infty}(S; s_0, -)
+\]
+des chemins infinis dans $S$, d'origine $s_0$, fibre de $\Ch_{\infty}(S)$ par le foncteur-source
+\[
+\sigma : \Ch_{\infty}(S) \ \longrightarrow\ S.
+\]
+On sait que les fibres de $\sigma$ sont Hot-asphériques (VII), et la catégorie construite ici n'est autre que (avec les notations de VII, p.~152) que la catégorie $\overline{S'}$ qui entre dans la factorisation canonique de
+\[
+f : \{s_0\} = S' \ \longrightarrow\ S
+\]
+en
+\[
+\{s_0\} = S' \ \underbrace{\longrightarrow}_{\text{Hot-équivalence}}\ \overline{S'} \ \xrightarrow{\ \overline{f}\ }\ S,
+\]
+où ici $\overline{f}$ s'interprète simplement comme le foncteur but (i.e.\ le foncteur induit sur
+
+\msp{page 136}
+
+$\Ch_{\infty}(S; s_0, -)$ par le foncteur but
+\[
+\beta : \Ch_{\infty}(S) \ \longrightarrow\ S \ \ ).
+\]
+On a prouvé dans loc.\ cit.\ que $\overline{f}$ est une Hot-fibration (‘propre’ et ‘lisse’), mais dans un contexte qui semblait faire appel tacitement à la théorie du dérivateur HOT. Donc pour mettre les résultats ‘topologiques’ de loc.\ cit.\ sur une base solide, il faut développer les notions pertinentes de foncteur propre, foncteur lisse, sans référence à une théorie HOT. C'est ce que j'avais d'ailleurs fait déjà en 1983, du temps de Pursuing Stacks, mais sans rédaction en forme à ce sujet. Il me faut donc à présent revenir sur ces notions, de façon un peu systématique. D'ailleurs, j'aurais dû mal à construire un seul foncteur Hot-fibrant (sauf les exemples triviaux, tels les isomorphismes, ou les produits $Y \times Z \xrightarrow{\mathrm{pr}_1} Y$), si je ne disposais d'une théorie des foncteurs lisses et des foncteurs propres (\footnote{J'exagère un peu quand même -- après tout il doit être assez évident que les foncteurs de Thomason-Kan sont des Hot-fibrations (mais il y en a encore un peu trop peu !).}). % [sic] dû mal -> du mal, "avoir du mal à" (partitive article, no accent)
+
+\clearpage
+% ---- from Der-ChXIIa-012_p001-005.tex
+\printedpage{--}
+% head: (none; no running head and no page number printed on this page)
+
+\begin{center}
+\vspace*{5cm}
+{\Large \textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\bigskip\bigskip
+
+\textbf{Chapitre XII}
+
+\medskip
+
+\textbf{Caractérisation de $W_\infty$. Foncteurs $W$-propres,\\
+$W$-lisses etc. Sommes amalgamées et carrés\\
+$W$-cocartésiens dans $\Cat$.}
+\end{center}
+
+\clearpage
+
+\printedpage{--}
+% head: (none; no running head and no page number printed on this page)
+
+Ce texte a été déchiffré et transcrit en \LaTeXe{} par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Pour les quelques corrections évidentes, ou rares commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés. Un point d'interrogation entre crochets signifie que l'on n'est pas sûr du mot qui précède.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{maltsin@math.jussieu.fr}
+
+\hfill G. Maltsiniotis\hspace*{2em}
+
+\clearpage
+
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 1}
+
+\hfill 19.11.90
+
+\section*{I\quad Caractérisation de $W_\infty$.}
+
+Je voudrais caractériser $W_\infty$ en tant que partie de $\mathrm{Fl}(\Cat)$, par ses propriétés comme localiseur, et sans faire appel à la connaissance de notions utilisant déjà $W_\infty$, comme la propreté etc. Je voudrais tout au moins des propriétés sur un localiseur $W$, familières pour $W_\infty$, qui soient si fortes qu'elles impliquent $W \subseteq W_\infty$. Bien sûr, dans les démonstrations je me permets d'utiliser tout ce que je sais sur $W_\infty$.
+
+Bien sûr, il faudra au moins une forme de saturation, peut-être très faible, je présume le suivant suffira (\footnote{(non, j'ai dû le renforcer en 2 [?]).}).
+
+\begin{itemize}[leftmargin=*]
+\item[\textbf{W(1)}] (Axiome de saturation.) a) Les identités sont dans $W$, b) si $f$, $g$ \texttt{[sont]} composables et deux parmi $f$, $g$, $gf$ sont dans $W$, le troisième aussi, c) si $fg \in W$, $gf \in W$, alors $f, g \in W$.
+\end{itemize}
+
+Une propriété particulièrement cruciale, qui déjà distingue $W_\infty$ de l'ensemble des homotopismes (notion trop stricte à beaucoup d'égards), est l'axiome que j'ai appelé L4 bis :
+
+\begin{itemize}[leftmargin=*]
+\item[\textbf{W(2)}] (Axiome de localisation.) Soit $f : X \fl Y$ une flèche dans $\Cat/S$, telle que $\forall\ s \in \Ob S$, $f_s : X/s \fl Y/s$ soit dans $W$ (on dira que $f$ est dans $W$ `localement sur $S$\,'). Alors $f \in W$.
+\end{itemize}
+
+\texttt{[Les axiomes W(1) etc. sont appelés aussi} \textcircled{1} \texttt{etc. dans l'original.]}
+
+Dans le cas $Y = S$, cela donne
+
+\textbf{Corollaire :} \textit{Si $f : X \fl Y$ est $W$-asphérique, i.e. $y\backslash X \fl y\backslash Y$} \texttt{[plutôt $X/y \fl Y/y$]} \textit{dans $W$ pour tout $y \in \Ob Y$, alors $f \in W$} (\footnote{On peut considérer la validité du corollaire comme une variante affaiblie W(2 bis) de W(2) ci-dessus. Dans la proposition 1, on n'utilise que W(2 bis), forme faible de W(2).}).
+
+\textbf{Proposition 1.} \textit{Si $W$ satisfait} W(1) \textit{et} W(2)\textit{, les propriétés suivantes sur $W$ sont équivalentes :}
+
+\begin{itemize}[leftmargin=*]
+\item[\textit{a)}] \textit{Pour tout $X$ dans $\Cat$, $X \times \Dl^1 \xrightarrow{\pr_1^X} X$ est dans $W$ (i.e. $\Dl^1 \fl e$ est `universellement dans $W$\,').}
+
+\item[\textit{b)}] \textit{Si $X$ dans $\Cat$ a un objet final, alors $X$ est $W$-asphérique, i.e. $X \fl e$ est dans $W$.}
+
+\item[\textit{c)}] \textit{Tout homotopisme est dans $W$.}
+\end{itemize}
+
+\clearpage
+
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\textsc{Démonstration.} b) $\Longrightarrow$ a) (\footnote{n'utilise W(1) que sous forme faible, sans la condition de saturation c). NB Seul b) $\Longrightarrow$ c) utilise W(2 bis), les implications a) $\Longrightarrow$ c) $\Longrightarrow$ b) sont valables sous la seule hypothèse W(1).}), car pour voir que $\pr_1 \in W$, en appliquant le corollaire ci-dessus, il faut prouver que $\forall\ x \in X$
+\[ (X \times \Dl^1)/x \fl X/x \tag*{$(*)$} \]
+est dans $W$. Or
+\[ (X \times \Dl^1)/x \simeq X/x \times \Dl^1, \]
+\[
+\begin{tikzcd}
+\Dl^1 \arrow[d] & X \times \Dl^1 \arrow[l] \arrow[d] & X/x \times \Dl^1 \arrow[l] \arrow[d] \\
+e & X \arrow[l] & X/x \arrow[l]
+\end{tikzcd}
+\]
+\texttt{[la flèche verticale à droite est ajoutée]} et les deux catégories $X/x$, $X/x \times \Dl^1$ sont $W$-asphériques car elles ont un objet final, donc $(*)$ est dans $W$ par saturation faible W(1).
+
+a) $\Longrightarrow$ c). Je rappelle que
+\[ f : X \fl Y \]
+\msp{page 2}
+est un homotopisme s'il existe
+\[ g : Y \fl X \]
+telle que
+\[ gf \sim \id_X, \quad fg \sim \id_Y, \tag*{$(*)$} \]
+où la relation $(\sim)$ désigne l'homotopie dans $\uHom(X,X)$ et $\uHom(Y,Y)$ respectivement (définie par chemins allant d'un élément à l'autre). Prouvons le
+
+\textbf{Lemme.} \textit{Supposons que $W$ satisfait} W(1) \textit{et le} a) \textit{de la proposition, i.e. $X \times \Dl^1 \fl X$ dans $W$ pour tout $X$ dans} $\Cat$. \textit{Alors si $X$, $Y$} \texttt{[sont]} \textit{dans} $\Cat$ \textit{et $f, g$ dans} $\uHom(X,Y)$ \textit{sont homotopes, on a}
+\[ \hot_W(f) = \hot_W(g). \]
+\textit{De plus, $f \in W$ si et seulement si $g \in W$.}
+
+Il suffit de le prouver quand il existe un homomorphisme $f \fl g$. Cela peut s'interpréter par l'existence d'une flèche
+\[ X \times \Dl^1 \xrightarrow{F} Y \]
+dont les restrictions à $X \times \{0\}$ et $X \times \{1\}$ respectivement soient $f$, $g$. Pour prouver que $\hot_W(f) = \hot_W(g)$, il suffit de prouver que
+\[ i_0, i_1 : X \fl X \times \Dl^1 \qquad x \longmapsto (x,0),\ x \longmapsto (x,1) \]
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+sont égales dans $\Hot_W$, puisque
+\[ f = F \circ i_0, \quad g = F \circ i_1. \]
+Or cela résulte du fait que ce sont des sections de $X \times \Dl^1$ sur $X$, et que dans $\Hot_W$ la projection $X \times \Dl^1 \xrightarrow{p} X$ est \texttt{[un]} isomorphisme (donc $i_0 = i_1 = p^{-1}$ dans $\Hot_W$). De plus, le diagramme
+\[
+\begin{tikzcd}
+X \arrow[r, "i_0"] \arrow[dr, "f"'] & X \times \Dl^1 \arrow[d, "F"] \\
+& Y,
+\end{tikzcd}
+\]
+où $i_0 \in W$, montre que $f \in W$ si et seulement si $F \in W$, et de même $g \in W$ si et seulement si $F \in W$, donc $f \in W \Longleftrightarrow g \in W$.
+
+Revenons à $(*)$, on voit que dans $\Hot_W$ $g \circ f = \id_X$, $f \circ g = \id_Y$, donc $f$ et $g$ sont des $\Hot_W$-isomorphismes inverses l'un de l'autre. D'autre part, $gf \in W$, $fg \in W$, puisque $\id_X, \id_Y \in W$. Donc on gagne, si on a formulé W(1) de façon assez forte. On a prouvé donc a) $\Longrightarrow$ c).
+
+c) $\Longrightarrow$ b) est trivial, puisque si $X$ a un objet final, $X \fl e$ est un homotopisme.
+
+\msp{page 3}
+
+On doit bien sûr par la suite supposer que $W$ satisfait aux conditions équivalentes de la proposition. On prendra p. ex. la forme
+
+\begin{itemize}[leftmargin=*]
+\item[\textbf{W(3)}] (Axiome de l'élément final.) Si $X$ a un objet final, alors $X$ est $W$-asphérique.
+\end{itemize}
+
+\textbf{Corollaire 1.} \textit{Pour que $f : X \fl Y$ soit $W$-asphérique, il faut et il suffit que les $X/y$ soient $W$-asphériques} ($y \in \Ob Y$).
+
+Car pour que
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-1-1.base), column sep=small, row sep=small]
+X/y \arrow[rr] \arrow[dr] & & Y/y \arrow[dl] \\
+& e &
+\end{tikzcd}
+soit dans $W$, comme $Y/y$ est $W$-asphérique (objet final), il faut et il suffit que $X/y$ le soit aussi.
+
+\textbf{Corollaire 2.} \textit{Si $X$ dans} $\Cat$ \textit{a un objet initial, il est $W$-asphérique.} (En effet, $X \fl e$ est un homotopisme, et on applique prop. 1.) (\footnote{C'est donc l'énoncé dual de l'axiome W(3) de l'objet final.})
+
+Je mettrai pour mémoire
+
+\textbf{Corollaire 3.} \textit{Tout homotopisme dans} $\Cat$ \textit{est dans $W$. Si $f, g : X \rightrightarrows Y$ dans} $\Cat$ \textit{sont homotopes, alors elles sont égales dans} $\Hot_W$\textit{, et $f$ est dans $W$ si et seulement si $g$ l'est.}
+
+\textbf{Proposition 2.} Soit $f : X \fl Y$ dans $\Cat$. Si $f \in W$, $f^\circ \in W^\circ$ \texttt{[plutôt $f^\circ \in W$].}
+
+% ---- from Der-ChXIIa-012_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+On utilise la démonstration de I, p. 75, à l'aide de la catégorie nommée $\Phi(X)$ ($\mathrm{Ob}\,\Phi(X) = \mathrm{Fl}(X)$, mais avec une notion de flèche dans $\Phi(X)$ un peu particulière). On trouve que $f \in W \iff \Phi(f) \in W$, et de même $f^\circ \in W \iff \Phi(f) \in W$.
+
+NB. Dans la démonstration de la proposition 2, comme dans celle de la proposition 1 (pour l'implication b) $\Longrightarrow$ a)), on n'a utilisé la propriété de localisation W(2) que sous la forme faible du corollaire, i.e. sous la forme $f$ $W$-asphérique $\Longrightarrow f \in W$.
+
+\textbf{Corollaire} (de la prop. 2) : \textit{Soit $W \subseteq \mathrm{Fl}(\mathrm{Cat})$ satisfaisant l'axiome} W(1) (saturation). \textit{Alors la conjonction des axiomes} W(2), W(3) \textit{équivaut à celle des axiomes duaux} W($2'$), W($3'$) (\footnote[5]{Itou si on remplace dans cet énoncé W(2) par W(2 bis).}).
+
+Il suffit de prouver que 1,2,3 $\Longrightarrow$ $2'$,$3'$.
+
+\msp{page 4}
+
+Pour $2'$ \texttt{[plutôt} $3'$\texttt{]}, c'est le corollaire 2 ci-dessus. Pour $3'$ \texttt{[plutôt} $2'$\texttt{]}, cela résulte aussitôt de la proposition 2. (NB Cet énoncé resterait valable, si on aurait pris W(2) sous la forme faible seulement, cf. le NB page précédente.)
+
+Je dois encore mettre un axiome de la forme L5, L6 (cf. VI, p. 43-44). Mais l'énoncé de ces axiomes utilise la notion de Hot-fibrés, ou de foncteurs parfaits, i.e. fait appel à la connaissance de $W_\infty$, ce que j'aimerais éviter (si je peux). Je dois donc introduire la notion de $W$-fibration, sur le modèle de ce que j'ai fait dans le contexte des dérivateurs, dans I (cf. p. 111-126). On introduit la notion de \textbf{D}-fibration à la page 117 (prop. 5), par \texttt{[des]} conditions équivalentes, dont certaines ont un sens en termes de la donnée de $W$ sans plus. Soit donc
+\[ f : X \longrightarrow Y \]
+dans Cat et considérons les conditions
+
+\begin{enumerate}
+\item[a)] Si $Y'' \longrightarrow Y'$ dans $\mathrm{Cat}/Y$ est dans $W$, alors $X'' \longrightarrow X'$ aussi (le changement de base par $X \longrightarrow Y$ transforme $W$ dans $W$).
+\item[a$'$)] Comme a), mais avec $Y''$, $Y'$ $W$-asphériques.
+\item[a$_1$)] Comme a), dans le cas particulier où $Y'$ a un objet final et $Y''$ est la catégorie ponctuelle.
+\item[a$_2$)] Dual de a$_1$), avec objet initial de $Y'$.
+\end{enumerate}
+
+On a donc
+\[
+\begin{tikzcd}[row sep=large, column sep=1.4em]
+ & & \mathrm{a} \arrow[d, Rightarrow] & \text{$W$-fibration ultraforte} & \\
+ & & \mathrm{a}' \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \text{$W$-fibration forte} & \\
+\text{$W$-fibration gauche} & \mathrm{a}_1 & & \mathrm{a}_2 & \text{$W$-fibration droite}
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et dans le cas $W = W_\infty$ toutes ces conditions sont équivalentes. J'ai envie \texttt{[de]} prendre la plus forte de ces conditions, mais je dois me donner des moyens pour trouver des $W$-fibrations en un sens aussi fort. Par exemple j'aurais envie de savoir que si $X$
+\msp{page 5}
+est dans Cat, alors $\Ch_\infty(X) \longrightarrow X \times X$ ou $\Ch(X) \longrightarrow X \times X$ est une $W$-fibration. Dans les deux cas, et (disons) pour $W_\infty$, je le prouve en prouvant que $p$ est à la fois lisse, et propre. Il faudrait donc revoir les notions de lissité et de propreté dans le contexte de la donnée d'un $W$.
+
+Si je me rappelle bien, la propriété a$'$) \texttt{[plutôt a}$_1$\texttt{)]} était quelque chose d'assez aisément vérifiable, il suffisait de supposer que les
+\[ X_y \longrightarrow X/y \qquad \text{et} \qquad X/y \longrightarrow X/y' \]
+(pour $y \in \mathrm{Ob}\,Y$ resp. $u : y \longrightarrow y'$ dans $\mathrm{Fl}\,Y$) sont dans $W$, et que ça reste vrai par tout changement de base - ce qui revient à la condition a$_1$) sur $f$. On pourrait donc formuler une condition sur $W$ ainsi :
+
+\begin{enumerate}[leftmargin=*]
+\item[\textbf{W(4)}] (Axiome des $W$-fibrations (\footnote[6]{Voir variante affaiblie suffisante, dans le NB p. 10. Voir encore [?] de variantes pages 13, 14 ci-dessous.}).) Soit $f : X \longrightarrow Y$ dans Cat satisfaisant la condition de $W$-fibration a$_1$) ci-dessus (p. 4), alors elle satisfait même à a), i.e. le changement de base par $f$ transforme flèches dans $W$ en flèches dans $W$ (\footnote[7]{i.e. une $W$-fibration à gauche est une fibration ultraforte.}).
+\end{enumerate}
+
+Grâce à la proposition 2, il s'ensuit que la condition duale a$_2$) sur $f$ implique la condition de $W$-fibration forte, donc l'axiome W(4), en apparence asymétrique, signifie aussi que les quatre conditions de fibration sur $f$ sont équivalentes, il est donc en fait symétrique.
+
+\textbf{NB} Je ne vois pas, sans axiomes supplémentaires sur $W$, comment passer de a$_1$ à a$'$ seulement. La difficulté, c'est de montrer, moyennant a$_1$ seulement, que si $Y$ est $W$-asphérique, l'inclusion $X_y \longrightarrow X$ (où $y \in \mathrm{Ob}\,Y$) est dans $W$. Dans le contexte des dérivateurs \textbf{D}, cela se voyait par voie \textbf{D}-cohomologique.
+
+Cet axiome très fort suffit à impliquer que si $X$, $Y$ sont $W$-fibrés sur $S$, et si $f : X \longrightarrow Y$ est un $S$-morphisme qui est dans $W$, alors $f_s : X_s \longrightarrow Y_s$ est dans $W$ ($\forall\ s \in S$). Montrons déjà au moins l'inverse.
+
+\msp{page 6}
+
+\textbf{Proposition 3.} \textit{Soient $X$, $Y$ dans} Cat$/S$\textit{, $f : X \longrightarrow Y$ une $S$-flèche. Supposons ($X$, $Y$ $W$-fibrés) que $\forall\ s \in S$, $f_s : X_s \longrightarrow Y_s$ soit dans $W$, alors $f \in W$} (\footnote[8]{\textit{Sans} axiome W(4). C'est la première fois qu'on a besoin de W(2) sous sa forme forte, à l'exclusion de W(2 bis).}).
+
+Il s'impose d'utiliser l'axiome de localisation, donc de regarder les $f/s$ induits par $f$
+% foot: Version 7 décembre 2002
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=large]
+X/s \arrow[r, "f/s"'] & Y/s \\
+X_s \arrow[u, "i_s^X"] \arrow[r, "f_s"] & Y_s \arrow[u, "i_s^Y"'] \quad .
+\end{tikzcd}
+\]
+
+La condition a$_1$ suffit à impliquer que $i_s^X$ et $i_s^Y$ sont dans $W$, donc $f/s$ est dans $W$ si et seulement si $f_s$ l'est. On n'a pas eu à utiliser l'axiome W(4), et il suffisait de supposer que $X$, $Y$ soient fibrés ‘$W$-cohomologiques’ (ou $W$-fibrés à gauche) sur $S$, ou dualement, des $W$-fibrés à droite.
+
+De plus :
+
+\textbf{Corollaire} (\footnote[9]{Sans axiome W(4).}). \textit{Soit $S_0 \subseteq \mathrm{Ob}\,S$ une partie de $S$ telle que $S_0 \longrightarrow \pi_0(S)$ surjectif. Alors dans la proposition 3 il suffit de supposer $f_s \in W$ pour $s \in S_0$.}
+
+Il suffit de voir que si $u : s \longrightarrow s'$ est une flèche dans $S$, alors $f_s \in W \iff f_{s'} \in W$. On utilise le fait que $f_s \in W \iff f/s \in W$, et de même pour $f_{s'}$. Donc à voir que $f/s \in W \iff f/s' \in W$. Or on a
+\[
+\begin{tikzcd}[row sep=large]
+X/s \arrow[r, "f/s"] \arrow[d, "X/u"'] & Y/s \arrow[d, "Y/u"] \\
+X/s' \arrow[r, "f/s'"] & Y/s' \quad ,
+\end{tikzcd}
+\]
+où $X/u$ et $Y/u$ sont dans $W$, d'où le résultat.
+
+Mais revenons à la réciproque : si $f \in W$, alors a-t-on $f_s \in W_S$? \texttt{[plutôt} $f_s \in W$\texttt{?]} Il y a un argument dans ce sens dans VI, p. 23, que je vais reprendre. L'idée est celle-ci. On considère la composante connexe $Y_0$ de $Y$ \texttt{[plutôt} $S_0$ \texttt{de} $S$\texttt{]} contenant $s$, et on construit un
+\msp{page 7}
+$W$-fibré (au \textit{sens fort} a))
+\[ S' \longrightarrow S_0 \subseteq S \]
+avec $S'$ \textit{$W$-asphérique.} Comme $X \longrightarrow Y$ sur $S$ est dans $W$, il en sera donc de même de $X' \longrightarrow Y'$ sur $S'$. Comme les fibres de $X'$, $Y'$ en $s'$ s'identifient à celles de $X$, $Y$ en l'image de $s'$ dans $S$, on est ramené au cas où $S$ est $W$-asphérique. Mais alors on a
+\[
+\begin{tikzcd}[row sep=large]
+X \arrow[r, "f"] & Y \\
+X_s \arrow[u, "i_s^X"] \arrow[r, "f_s"] & Y_s \arrow[u, "i_s^Y"'] \quad ,
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+où $i_s^X$, $i_s^Y$ sont dans $W$, car déduites de $\{s\} \longrightarrow S$ (qui est dans $W$, $S$ étant $W$-asphérique) par les changements de base $W$-fibrants $X \longrightarrow S$, $Y \longrightarrow S$. Donc $f \in W \implies f_s \in W$.
+
+NB On n'a utilisé la propriété de fibration pour $X$, $Y$ qu'au sens a$'$) (\footnote[10]{Et même, dans a$'$) on pourrait exiger que $Y'' = e$, $Y'$ $W_\omega$-asphérique, où $W_\omega$ \texttt{[est]} défini page 14, $W_\omega \subseteq W \cap W_\infty \ldots$}).
+
+Il faut donc prouver, si on peut, le
+
+\textbf{Lemme} (?) (\footnote[11]{Est prouvé moyennant l'axiome W(4) (+ des petites vérifications ultérieures).}). \textit{Soit $S$ un objet} $0$\textit{-connexe de} Cat\textit{. Alors il existe un objet $W$-asphérique $S'$ de} Cat\textit{, et une $W$-fibration (au sens} fort \textit{de a), page 4) $S' \longrightarrow S$.}
+
+L'idée naturelle, c'est de prendre, pour $s_0 \in \mathrm{Ob}\,S$ fixé,
+\[ S' = \Ch(S; s_0, -) \qquad \text{ou} \qquad S' = \Ch_\infty(S; s_0, -), \]
+et la flèche
+\[ \beta : c \longmapsto \text{but } c : S' \longrightarrow S. \]
+On sait que $S'$ est $W_\infty$-aphérique et que $\beta$ est $W_\infty$-fibrante (et même parfaite). Il faut voir que $S'$ est aussi $W$-asphérique, et $\beta$ $W$-fibrante. Il faut donc revoir la démonstration dans le cas de $W_\infty$, et prouver qu'elle se transforme à $W$, % [sic] aphérique -> asphérique, lettre s omise
+\msp{page 8}
+moyennant les axiomes qu'il faut sur $W$. J'ai envie de regarder d'abord le choix $S' = \Ch(S; s_0, -)$, sans passage à une limite inductive qui m'obligerait à mettre un axiome de limites sur $W$. Les propriétés homotopiques délicates et essentielles de $\Ch(S)$ sont établies dans VII, p. 157-169, savoir que dans le diagramme
+\[ S \xrightarrow{i_S} \Ch(S) \xrightarrow{p_S} S \times S, \]
+$i_S \in W_\infty$ et $p_S$ est une $W_\infty$-fibration (en fait, \textit{propre} et \textit{lisse} pour $W_\infty$) (\footnote[12]{Dans l'énoncé des ‘propriétés essentielles’ de $\Ch(S)$, on peut travailler avec $W_\omega$, la plus petite partie de Fl(Cat) satisfaisant les axiomes W(1), W(2 bis), W(3) (cf. page 14), donc $W_\omega \subseteq W \cap W_\infty$.}). Le fait que $i_S \in W$ \texttt{[plutôt} $i_S \in W_\infty$\texttt{]} implique que les foncteurs source et but
+\[ \begin{tikzcd} \Ch(S) \arrow[r, shift left, "\sigma"] \arrow[r, shift right, "\beta"'] & S \end{tikzcd} \qquad \sigma = \mathrm{pr}_1 \circ p_S,\ \beta = \mathrm{pr}_2 \circ p_S \]
+sont dans $W_\infty$ (puisque $\sigma i_S = \beta i_S = \mathrm{id}_S$). Comme ce sont des Hot-fibrations, il en résulte que les fibres $\Ch(S; s, -)$ resp. $\Ch(S; -, s)$ sont Hot-asphériques. Mais même en admettant que $\sigma$, $\beta$ sont dans $W$ et sont des $W$-fibrations, je ne peux en conclure tout de suite que les fibres sont $W$-asphériques - il y aurait cercle vicieux! Il me faut donc une démonstration directe.
+
+Considérons le foncteur
+\[
+\begin{tikzcd}[row sep=huge]
+\Ch(S; s, -) \arrow[d, "p"'] \\
+\underline{Ty} \quad ,
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+c'est un foncteur Cat-fibrant, donc $W$-lisse (je devrai développer la notion de $W$-lissité (\footnote[13]{$f : X \longrightarrow Y$ est $W$-lisse si les $X_y \longrightarrow y\backslash X$ sont $W$-asphériques.}) avec soin, j'admettrai pour le moment les propriétés formelles familières, et les justifierai par la suite). À cause de la $W$-lissité, pour prouver $p \in W$, il suffit de
+\msp{page 9}
+prouver que les fibres de $p$ sont $W$-asphériques (\footnote[14]{On utilise ici W(2 bis), pas $W(2)$.}). Or les fibres sont les $Z_\tau = \Ch_\tau(S; s, -)$, qui sont des catégories \textit{contractiles} (i.e. $Z_\tau \longrightarrow e$ est un homotopisme), donc $W$-asphériques par W(3) (cf. cor. 3, page 3).
+
+D'autre part, si on admet que $\Ch(S) \xrightarrow{p_S} S{\times}S$ est $W$-lisse (et $W$-propre), donc $\Ch(S) \xrightarrow{\sigma_S} S$ aussi, étant à fibres $W$-asphériques comme on vient de voir, il s'ensuit que $\sigma_S \in W$, d'où $S \xrightarrow{i_S} \Ch(S)$ aussi dans $W$ (puisque $\sigma_S \circ i_S = \mathrm{id}_S$). Donc il reste à prouver seulement que
+\[ \Ch(S) \xrightarrow{p_S} S \times S \tag*{$(*)$} \]
+est $W$-propre et $W$-lisse. Il en résultera que
+\[ \Ch(S; s_0, -) \xrightarrow{\beta} S \]
+est lui aussi $W$-propre et $W$-lisse, car déduit de $p_S$ par le changement de base
+\[ S \longrightarrow S \times S \qquad s \longmapsto (s_0, s). \]
+
+Il faut ensuite voir que $W$-lisse et $W$-propre implique la propriété de $W$-fibration \textit{sous sa forme la plus forte} a) (alors que je prévois qu'a priori on ne l'aura que sous les formes faibles a$_1$, a$_2$ - pas même sous la forme a$'$). C'est ici donc que l'axiome W(4) des $W$-fibrations sera essentiel (\footnote[15]{sous la forme affaiblie W(4a$''$) (p. 13).})!
+
+Voici l'argument pour la lissité de $(*)$, dans loc. cit. p. 161 ff. Il faut prouver que pour $c \in \mathrm{Ob}\,\Ch(S)$, et une flèche $u \in \mathrm{Fl}(S \times S)$ \texttt{[plutôt} $(u,v) \in$ \texttt{Fl(}$S \times S$\texttt{)]}, une certaine catégorie de ‘relèvements de $u$ de source $c$ ’ \texttt{[plutôt ‘relèvements de} $(u,v)$ \texttt{de but} $c$ \texttt{’]}, $\mathcal{C} = \mathcal{C}(c,u,v)$, est $W$-asphérique (\footnote[16]{En fait, on prouve que $\mathcal{C}(c,u,v)$ est \textit{contractile}, donc elle est $W_\omega$-asphérique.}). Pour ceci, on la compare à une catégorie $\mathcal{C}'$ à objet final, donc contractile et a fortiori $W$-asphérique, à l'aide de deux foncteurs
+\[ \begin{tikzcd} \mathcal{C} \arrow[r, shift left, "\varphi"] & \mathcal{C}', \arrow[l, shift left, "\psi"] \end{tikzcd} \]
+et des homotopies $\varphi\psi \sim \mathrm{id}_{\mathcal{C}'}$ (sans mérite, $\mathcal{C}'$ étant contractile)
+\msp{page 10}
+et $\psi\varphi \sim \mathrm{Id}_{\mathcal{C}}$ (on trouve même une flèche $\psi\varphi \longrightarrow \mathrm{id}_{\mathcal{C}}$). Ainsi $\varphi$ est un homotopisme, donc une $W$-équivalence (cor. 3, p. 3), donc $\mathcal{C}$ est $W$-asphérique, $\mathcal{C}'$ l'étant. La propreté de $p_S$ équivaut à la lissité de $p_{(S^\circ)}$, elle est donc prouvée du même coup.
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIa-012_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+Ainsi, le lemme de la page 7 est prouvé, moyennant l'axiome W(4) qui assure qu'une flèche qui est à la fois $W$-lisse et $W$-propre, satisfait à la condition très forte a) des $W$-fibrations.
+
+\textbf{NB} En fait, il suffirait, au lieu de l'axiome W(4) sous sa forme forte, de supposer qu'une $f : X \longrightarrow Y$ qui est à la fois `homotopiquement lisse' et `homotopiquement propre', i.e. les fibres des $X/x \longrightarrow Y/y$ et des $x\backslash X \longrightarrow y\backslash Y$ sont contractiles (donc $W$-asphériques pour tout $W$ satisfaisant W(1,2,3)), soit $W$-fibration forte. Énonçons quand même ce que nous avons prouvé.
+
+\textbf{Proposition 4.} \textit{Si $W$ satisfait} W(1,2,3) (\footnote[17]{Pour W(2), il le suffit sous la forme W(2 bis).}) (nous le supposons toujours par la suite) \textit{plus} W(4) (sous une forme un peu affaiblie suffisante, cf. remarque précédente), \textit{on a ceci: Soit $f : X \longrightarrow Y$ une flèche dans} Cat$/S$\textit{, avec $X$, $Y$ des $W$-fibrés sur $S$. Si $f \in W$, alors $f_s : X_s \longrightarrow Y_s$ est dans $W$ pour tout $s \in S$.}
+
+Je me demande si j'en sais assez pour pouvoir prouver
+\[ W \subseteq W_\infty . \]
+Il faut quand même éliminer des cas canularesques, comme $W = \mathrm{Fl}(\mathrm{Cat})$, donc mettre l'axiome
+
+\begin{itemize}[leftmargin=4em, labelwidth=3em, labelsep=0.6em]
+\item[W(5)] (Axiome de connexité (\footnote[18]{Voir à ce sujet le corollaire page 22.}).) Si $f : X \longrightarrow Y$ est dans $W$, $\pi_0(f) : \pi_0(X) \longrightarrow \pi_0(Y)$ \texttt{[est]} bijectif.
+\end{itemize}
+
+\msp{page 11}Je factorise alors $f$ en (\footnote[19]{À nouveau, dans ces arguments on a intérêt à travailler avec $W_\omega$.})
+\[ X \xrightarrow{i} \bar{X} \xrightarrow{\bar{f}} Y, \]
+avec $\bar{f}$ une $W_\infty$-fibration et une $W$-fibration (\footnote[20]{en fait, $\bar{f}$ est à la fois $W_\infty$-parfait (i.e. $W_\infty$-lisse et propre) et $W$-parfait (en fait, $W_\omega$-parfait).}), $i \in W \cap W_\infty$ - cela marche finallement, % [sic] finallement -> finalement, spelling
+par la construction de VII, p. 170-171 (de \textsc{Cartan-Serre}), à partir des propiétés de % [sic] propiétés -> propriétés, missing letter
+$Y \longrightarrow \Ch(Y) \longrightarrow Y \times Y$ sans plus. Comme $\bar{f} i = f \in W$ et $i \in W$, on en déduit $\bar{f} \in W$. Comme $i \in W_\infty$, on en conclut $f \in W_\infty \iff \bar{f} \in W_\infty$. Donc pour prouver que $f$ est dans $W_\infty$, on est ramené au cas où $f$ est une $W$-fibration et une $W_\infty$-fibration. Mais alors la proposition 4 nous montre que les fibres de $f$ sont $W$-asphériques (\footnote[21]{on n'a utilisé ici que cette propriété sur les fibres, comme consequence de W(4). (On utilise W(4) sous sa forme la plus faible W(4b$''$), cf. pages 13, 14).}), et il suffit de voir qu'elles sont $W_\infty$-asphériques (proposition 3 (\footnote[22]{on n'utilise la proposition 3 que dans le cas $Y = S$, pour lequel W(2 bis) suffit.}) appliquée à $W_\infty$). Ainsi on est ramené au cas où $Y = e$, i.e. à prouver que si $X$ dans Cat est $W$-asphérique, il est $W_\infty$-asphérique.
+% [sic] (footnote 21) consequence -> conséquence, missing accent
+
+Soit $x_0 \in \mathrm{Ob}\, X$, considérons comme tantôt
+\[ E = \Ch(X, x_0, -) \xrightarrow{p} X, \]
+% foot: Version 7 décembre 2002
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+on sait que $E$ est $W \cap W_\infty$-asphérique, et que c'est une fibration pour $W$ et pour $W_\infty$. Comme $X$ est $W$-asphérique (comme $E$), $p \in W$, donc à nouveau par la proposition 4 (\footnote[23]{en fait, la condition W(4b$''$) sur $W$.}), les fibres de $p$ sont $W$-asphériques, en particulier (par W(5)) 0-connexes. On a donc prouvé le
+
+\msp{page 12}\textbf{Lemme.} (\footnote[24]{Utilise W(1, 2 bis, 3, 4b$''$) sur $W$.}) \textit{Soit $(X, x_0)$ dans} Cat$_\bullet$\textit{. Si $X$ est $W$-asphérique, alors $\Omega(X, x_0) \overset{\text{déf}}{=} \Ch(X; x_0, x_0)$ l'est aussi} (moyennant les axiomes W(1,2,3,4) sur $W$)\textit{. Donc (par itération) les $\Omega^n(X, x_0)$ sont $W$-asphériques} ($\forall\, n \in \mathbf{N}$).
+
+\textbf{Corollaire.} \textit{Si de plus $W$ satisfait l'axiome} W(5) \textit{de connexité, alors $X$ est $W_\infty$-asphérique.}
+
+En effet, `on sait' que cela signifie que tous les $\Omega^n(X, x_0)$ sont 0-connexes. Or l'axiome de connexité W(5) assure que $W$-asphérique implique 0-connexe.
+
+Mais le `on sait' est un tout petit peu léger (\footnote[25]{C'est prouvé fort simplement dans le corollaire du `theorème 1', page 190.}). Pour le justifier, il faudrait, ou bien % [sic] (footnote 25) theorème -> théorème, missing accent
+que je fasse le lien avec la théorie 1/2-simpliciale classique, et prouver que les $\Omega^n$ que je construis sont `les bons', i.e. que leur nerf redonne bien (à isomorphisme près dans Hot) les $\Omega^n$ classiques (??). En particulier, que le $\pi_0(\Omega^n(X, x_0))$ est bien le $\pi_n(X, x_0)$ `de tout le monde'. Ou bien que je prouve directement que la 0-connexité des $\Omega^n(X, x_0)$ équivaut à la $W_\infty$-asphéricité de $X$, définie cohomologiquement à la \textsc{Artin-Mazur}. C'est donc un travail qu'il me faudra faire absolument. Mais ce n'est plus qu'un simple travail de routine, et je peux énoncer dès maintenant le
+
+\textbf{Théorème 1.} (\footnote[26]{Il suffit même de W(4) sous une forme affaiblie, avec des foncteurs `fibrants' dans un sens `absolu'. Cf. le NB p. 10 - et surtout, cf. pages 13, 14.},\footnote[27]{NB Au lieu de W(5), il suffit de supposer $W \neq \mathrm{Fl}(\mathrm{Cat})$, cf. th. 2, p. 20.},\footnote[28]{Les hypothèses utiles sur $W$ sont finalement W(1), W(2 bis), W(3), W(4b$''$), et $W \neq \mathrm{Fl}(\mathrm{Cat})$.}) \textit{Soit $W \subseteq$} Fl(Cat) \textit{satisfaisant les conditions} W(1,2,3,4,5) (axiome de saturation, de localisation, de l'objet final, de fibration, de connexité)\textit{. Alors}
+\[ W \subseteq W_\infty . \]
+
+\textbf{Corollaire.} \textit{On peut caractériser $W_\infty$ comme la plus grande partie de} Fl(Cat) \textit{satisfaisant aux}
+\msp{page 13}\textit{conditions} W(1) \textit{à} W(5) \textit{précédentes.}
+
+Bien sûr, on aimerait un axiome 6 plus intéressant, qui joint aux précédents assure que $W = W_\infty$ (\footnote[29]{Cf. axiome W(6) page suivante.}). Ou est-ce que ces propriétés assurent déjà que $W = W_\infty$? Pour le voir, il faudrait peut-être que j'en sache plus sur la structure des objets $W_\infty$-asphériques? Si c'était faux, je songe à un axiome de `descente homotopique', qui impliquerait qu'un objet $W_\infty$-asphérique est aussi $W$-asphérique.
+
+% foot: Version 7 décembre 2002
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+Je note dès maintenant que si des $W_i$ ($i \in I$) satisfont aux axiomes W(1) à W(5), il en est de même de $\bigcap_i W_i$ (\footnote[30]{C'est vrai pour tout ensemble d'axiomes dans la nature d'axiomes de stabilité.}). Donc il y a un plus petit ensemble de flèches $W_\omega$ satisfaisant à ces conditions. S'il n'est égal à $W_\infty$, i.e. si les axiomes W(1) à W(5) ne caractérisent déjà $W_\infty$, ce serait un localiseur vraiment très intéressant.
+
+Je me rends compte que je n'ai utilisé qu'une forme assez faible de l'axiome W(4) - essentiellement, la validité de la proposition 4. Je vais résumer différentes variantes de l'axiome de fibration.
+
+\textbf{W(4)}
+
+\begin{itemize}[leftmargin=4em, labelwidth=2.5em, labelsep=0.6em, align=right]
+\item[a$_1$)] Si $f : X \longrightarrow Y$ dans Cat est une $W$-fibration gauche, c'est une $W$-fibration ultraforte.
+
+\item[a$_2$)] Si $f : X \longrightarrow Y$ est une $W$-fibration droite, c'est une $W$-fibration ultraforte.
+
+\item[a$'$)] Si $f : X \longrightarrow Y$ est $W$-parfait, i.e. à la fois $W$-propre et $W$-lisse (\footnote[31]{ce qui implique que c'est une $W$-fibration gauche \textit{et} droite.}), alors $f$ est une $W$-fibration ultraforte.
+
+\item[a$''$)] Si $f : X \longrightarrow Y$ est à la fois homotopiquement propre et homotopiquement lisse (cf. NB page 10), $f$ est une $W$-fibration ultraforte. (Il vaut mieux dire : Si $f$ est $W_\omega$-parfait, c'est une $W$-fibration ultraforte.)
+
+\item[b)] Soit $f : X \longrightarrow Y$ une flèche dans Cat$/S$, avec $X$ et $Y$ des $W$-fibrés sur $S$. Si $f \in W$, alors $\forall\, s \in S$, $f_s : X_s \longrightarrow Y_s$ est \texttt{[dans]} $W$.
+
+\item[b$'$)] Soit $f : X \longrightarrow Y$ une flèche de Cat$/S$ qui soit $W$-parfaite et $W_\infty$-parfaite, alors $f \in W$ implique que les fibres de $f$ sont $W$-asphériques. (Il vaut mieux dire : Si $f$ est $W_\omega$-parfait, il est une $W$-fibration ultraforte.) \texttt{[Plutôt : Soit $f : X \longrightarrow Y$ une flèche dans \textrm{Cat}$/S$ telle que $X \longrightarrow S$ et $Y \longrightarrow S$ soient $W_\omega$-parfaites. Si $f \in W$, alors $\forall\, s \in S$, $f_s : X_s \longrightarrow Y_s$ est dans $W$.]}
+
+\item[b$''$)] \msp{page 14}Soit $W_\omega \subseteq W \cap W_\infty$ la plus petite partie de Fl(Cat) satisfaisant les conditions W(1,2,3) (\footnote[32]{Il vaut mieux prendre W(2 bis) au lieu de W(2), pour trouver $W_\omega$ la plus petite possible!}) (axiomes de saturation, de localisation, de l'objet final). Soit $f : X \longrightarrow Y$ une flèche dans Cat qui soit $W_\omega$-parfaite. Si $f \in W$, alors les fibres de $f$ sont $W_\omega$-asphériques \texttt{[plutôt $W$-asphériques]}.
+\end{itemize}
+
+Entre ces propriétés de $W$, on a les implications tautologiques (sauf a$''$) $\Longrightarrow$ b), qui est essentiellement la proposition 4)
+
+% foot: Version 7 décembre 2002
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[row sep=huge, column sep=0pt]
+\mathrm{a} \arrow[d, Rightarrow] & {}= (\mathrm{a}_1 \Longleftrightarrow \mathrm{a}_2) & \hspace{2.5cm} \\
+\mathrm{a}' \arrow[d, Rightarrow] & & \smash{\left.\rule[-1.8cm]{0pt}{3.6cm}\right\}\ \text{\begin{tabular}{l}En fait,\\ toutes ces\\ conditions sont\\ équivalentes\end{tabular}}} \\
+\mathrm{a}'' \arrow[d, Rightarrow] & & \\
+\mathrm{b} \arrow[d, Rightarrow] & & \\
+\mathrm{b}' \arrow[d, Rightarrow] & & \\
+\mathrm{b}'' & &
+\end{tikzcd}
+\]
+
+(\footnote[33]{Je reviens sur les diverses variantes de W(4) plus bas, p. 53-56.}).
+
+Eh bien, dans le lemme page 12, il suffisait de supposer que $W$ satisfait à la version la plus faible b$''$) de l'axiome des fibrations (sept versions!). En effet, les fibrations $\bar{X} \longrightarrow Y$ et $E \longrightarrow X$ utilisées dans la démonstration du lemme sont $W_\omega$-parfaites, et il suffisait de savoir que si elles sont dans $W$, alors les fibres sont $W$-asphériques.
+
+Mais je ne pense pas que même la version la plus forte W(4a) de l'axiome des fibrations, jointe aux trois axiomes précédents et à W(5) (connexité), implique $W = W_\infty$. Il faudrait tout au moins y joindre l'axiome
+
+\begin{itemize}[leftmargin=4em, labelwidth=3em, labelsep=0.6em]
+\item[\textbf{W(6)}] (Axiome des limites filtrantes.) Soit $X = \varinjlim\limits_{i} X_i$ une limite inductive filtrante dans Cat. Si les $X_i$ sont $W$-asphériques, $X$ aussi.
+\end{itemize}
+
+Ceci devrait être équivalent à la propriété, en apparence plus forte, en termes de flèches de $W$ :
+
+\textbf{Proposition 5.} \textit{Supposons qu'on ait} W(6) (en plus de W(1) à W(4) (\footnote[34]{W(4) sous la forme la plus faible W(4b$''$) .})),
+\msp{page 15}\textit{et soit}
+\[ (f_i)_{i\in I} : (X_i)_{i\in I} \longrightarrow (Y_i)_{i\in I} \]
+% foot: Version 7 décembre 2002
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textit{un homomorphisme de systèmes inductifs dans} Cat\textit{, indexé par un ensemble ordonné filtrant, soient $X = \varinjlim X_i$, $Y = \varinjlim Y_i$, $f = \varinjlim f_i$, $f : X \longrightarrow Y$. Si $f_i$ est dans $W$ pour tout $i$, alors $f \in W$.}
+
+On factorise chaque $f_i$ en
+\[ X_i \xrightarrow{\alpha_i} \bar{X}_i \xrightarrow{\bar{f}_i} Y_i, \qquad \alpha_i \in W_\omega,\ \bar{f}_i \in \mathrm{Parf}\, W_\omega \]
+(\footnote[35]{$W_\omega$ introduit dans la condition W(4b$''$), page 14.}) suivant le système breveté. La construction étant fonctorielle, les $\bar{X}_i$ forment eux aussi un système inductif. De plus, comme le foncteur $S \longrightarrow \Ch(S)$ qui donne naissance à la factorisation canonique des morphismes, commute aux $\varinjlim$ filtrantes (immédiat), il s'ensuit que, si on pose
+\[ \bar{X} = \varinjlim_{i} \bar{X}_i \]
+et qu'on regarde les flèches
+\[ X \xrightarrow{\alpha} \bar{X} \xrightarrow{\bar{f}} Y, \qquad \alpha = \varinjlim \alpha_i,\ \bar{f} = \varinjlim \bar{f}_i, \]
+avec $\bar{f}\alpha = \bar{f}$, cette factorisation de $f$ est bien sa factorisation canonique. Donc $\alpha \in W$, % [sic] $\bar{f}\alpha = \bar{f}$ -> $\bar{f}\alpha = f$, the composite should be f
+$\bar{f} \in \mathrm{Parf}\, W_\omega$. Ceci vu, en vertu de prop. 3, $f \in W$, i.e. $\bar{f} \in W$, est vrai si les fibres de $\bar{f}$ sont $W$-asphériques. Mais les fibres de $\bar{f}$ s'interprètent comme limites inductives filtrantes de fibres des $\bar{f}_i$, lesquelles sont $W$-asphériques par la condition W(4b$''$) des fibrations. Donc l'axiome W(6) donne ce qu'il faut.
+
+\textbf{Conjecture} (hardie? sotte?). \textit{Si $W \subseteq$} Fl(Cat) \textit{satisfait les axiomes} W(1) \textit{à} W(6) \textit{(avec} W(4) \textit{sous sa forme la plus faible} W(4b$''$) (\footnote[36]{et peut-être W(2) sous la forme plus faible W(2 bis).})\textit{), alors $W = W_\infty$.}
+
+\msp{page 16}Mais il est bien possible qu'il faille renforcer un peu W(1) (saturation), en exigeant que tout rétracte d'un $f \in W$ soit dans $W$.
+
+\textbf{Remarque.} Considérons, pour $n \in \mathbf{N}$, l'ensemble $W_n \subseteq$ Fl(Cat) des `$n$-équivalences d'homotopie' dans Cat :
+\[ f \in W_n \iff \pi_0(f) \text{ bijectif, et } \pi_i(f, x) : \pi_i(X, x) \longrightarrow \pi_i(Y, f(x)) \text{ bijectif pour } 0 < i \leq n. \]
+
+Je croyais que ça satisfaisait à tout ce qu'on peut demander à un localiseur, sans avoir pris la peine de l'écrire avec soin. Ma ça ne peut satisfaire à W(1) jusqu'à W(4b$''$), puisqu'on % [sic] Ma -> Mais, word truncated
+n'a pas $W_n \subseteq W_\infty$!
+
+W(1) est trivial sur la définition (et on a sans larmes même la \textit{saturation forte} de $W_i$, % [sic] $W_i$ -> $W_n$ (also in the following lines), the remark concerns W_n
+i.e. si $f$ dans Cat est \texttt{[un]} isomorphisme dans $\mathrm{Hot}_{W_i} = (\mathrm{Cat})W_i^{-1}$, alors $f \in W_i$). Je crois me rappeler avoir vérifié W(2), par la même méthode que pour $W_\infty$, en utilisant un critère cohomologique à la \textsc{Artin-Mazur}, pour exprimer $f \in W_i$, et en utilisant les suites spectrales de Leray pour $X \longrightarrow S$ et $Y \longrightarrow S$. La condition W(3) est trivialement satisfaite puisque $W_n \supseteq W_\infty$ et qu'elle l'est pour $W_\infty$. Donc ça canule là où je m'y
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIa-012_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+attendais le moins : l'axiome des fibrations. Prenons la forme faible : Soit $f : X \longrightarrow Y$ une $W_\omega$-fibration et $f \in W_i$, les fibres $X_s$ sont elles $W_i$-asphériques (\footnote[37]{$\omega > \infty$, $W_\omega \subset W_\infty \subset W_n$})? On peut supposer $X$ et $Y$ 0-connexes, soit $x \in X_s$, la suite exacte d'homotopie donne
+\[
+\pi_{i+1}(X) \xrightarrow[\text{si } i \leq n-1]{\text{iso}} \pi_{i+1}(Y) \longrightarrow \pi_i(X_s) \longrightarrow \pi_i(X) \xrightarrow[\text{si } i \leq n]{\text{iso}} \pi_i(Y),
+\]
+donc
+\[
+\pi_i(X_s) = 1 \qquad \text{si } 0 \leq i \leq n-1,
+\]
+mais pour $i = n$ on trouve\msp{page 17}
+\[
+\pi_n(X_s) = \mathrm{Coker}\left(\pi_{n+1}(X) \longrightarrow \pi_{n+1}(Y)\right),
+\]
+il n'y a aucune raison que ce soit nul, comme ça devrait si $X_s \longrightarrow e$ était dans $W_n$.
+
+Il est vrai que parfois on renforce justement la condition pour $W_n$, disons qu'on définit $W'_n \subseteq W_n$ par
+\[
+f \in W'_n \iff \left\{
+\begin{array}{ll}
+\text{a)} & \pi_0(f) \text{ bijectif,} \\[1ex]
+\text{b)} & \pi_i(f,x) : \pi_i(X,x) \longrightarrow \pi_i(Y,f(x)) \text{ bijectif pour } 0 < i \leq n \text{ et } x \in X, \\[1ex]
+\text{c)} & \pi_{n+1}(f,x) : \pi_{n+1}(X,x) \longrightarrow \pi_{n+1}(Y,f(x)) \ \textit{surjectif,}
+\end{array}
+\right.
+\]
+c'est à dire aussi
+\[
+f \in W'_n \iff \left\{
+\begin{array}{l}
+\text{les `fibres homotopiques' } Z \text{ de } X \longrightarrow Y \text{ (i.e. les fibres de } \bar{X} \xrightarrow{\bar{f}} Y\text{)} \\
+\text{sont } n\text{-connexes, i.e. 0-connexe et } \pi_i(Z_y,z) = 0 \text{ pour } 1 \leq i \leq n.
+\end{array}
+\right.
+\]
+Alors $X$ dans Cat sera $W'_n$-asphérique si et seulement s'il est $W_n$-asphérique, i.e. $n$-connexe. Donc par la forme 2 de la définition de $W'_n$, l'axiome W(4b$''$) est satisfait. Il faut croire que ça pèche ailleurs! Peut-être déjà la saturation.
+
+\hspace*{3em}Si $gf$ et $g$ sont dans $W'_i$, il n'est pas forcément de même de $f$,
+
+car si $\bar{g}\bar{f}$ (et donc $\bar{g}$) est surjectif, il n'en est par forcément de même pour $\bar{f}$! Donc $W'_n$ ne mérite pas le nom de `localiseur'. % [sic] par forcément -> pas forcément, misprint
+
+Par contre, $W_n$ me paraît excellent, si on ne lui demande pas l'impossible - de satisfaire à un `axiome de fibration' qui semble bien (à peu de choses près) caractériser le seul $W_\infty$ parmi les `bons' localiseurs. En tous cas l'axiome de connexité W(5) est satisfait, et l'axiome des limites filtrantes W(6) aussi. Par ailleurs W(1) (et même la saturation forte), W(2), W(3) sont satisfaits par tout $W_{\mathbf{D}}$ associé à un dérivateur - ce qui confirme à nouveau leur importance. Les axiomes W(4) (l'axiome `draconien' des fibrations, $\pm$ spécial à $W_\infty$), W(5) (connéxité) et % [sic] connéxité -> connexité, misspelling (written connexité elsewhere)
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 18}W(6) (limites) m'apparaissent comme de nature plus spéciale, je ne songerais à imposer aucun d'eux pour l'usage terminologique de `localiseur fondamental'.
+
+\newpage
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\section*{II\quad Perplexités sur les axiomes et la terminologie.}
+
+Dans I et la plupart du temps, en travaillant avec les dérivateurs, j'ai supposé \fbox{$\ W_{\mathbf{D}} \supseteq W_\infty\ $}, hypothèse qui m'a parue essentielle (à tort (\footnote[38]{à \textit{tort} il s'avère maintenant.}) ou à raison). On voit donc que si $W_{\mathbf{D}}$ satisfait à l'axiome de fibrations W(4), même sous sa forme la plus faible W(4b$''$), il est \textit{égal} à $W_\infty$. Cela montre bien que cet axiome doit être vu comme pratiquement une \textit{caractérisation} de $W_\infty$ (parmi les localiseurs fondamentaux qui contiennent $W_\infty$ -- et ces localisateurs me paraissent les plus importants, et peut-être les seuls vraiment utiles).
+
+La théorie des \textbf{D}-fibrations dans I, p. 111-126, a été faite dans l'esprit qu'on vient de dire, en supposant $W_{\mathbf{D}} \supseteq W_\infty$. La notion de \textbf{D}-fibrations à laquelle je m'étais finalement arreté était par suite différente des notions envisagées ici dans un esprit différent (page 4). Elle revient à tester la condition a) (trop forte presque toujours, sauf pour $W = W_\infty$), caractérisant les $W$-fibrations ultrafortes, par des $Y'' \longrightarrow Y'$, où $Y''$, $Y'$ sont tous deux $W_\infty$-asphériques (ce qui est plus exigeant que $W$-asphérique). C'est seulement quand $Y''$ et $Y'$ sont $W_\infty$-asphériques (au lieu de $W$-asphériques), qu'on demande que $X'' \longrightarrow X'$ soit dans $W$. On trouve donc\msp{page 19} une notion moins exigeante que celle de $W$-fibration forte. Si on dénote ici cette condition par b), on trouve (sous réserve que $W_\infty \subseteq W$), avec les notations de la page 4 (\footnote[39]{Cf. la bonne notion de $W$-fibration dans un contexte où on ne suppose pas $W_\infty \subseteq W$, dans th. 3 et déf. 3, p. 51, 52.}) % [sic] arreté -> arrêté, missing circumflex
+% In the print, a curved arrow starts at "b" in the diagram below and points up to "b)" in the line "par b), on trouve ..." above; it is drawn here to the empty node at the top left.
+\[
+\begin{tikzcd}[column sep=small, row sep=large]
+{} & & & & \\
+& & \mathrm{a} \arrow[d, Rightarrow] & & W\text{-fibration ultraforte} \\
+& & \mathrm{a}' \arrow[d, Rightarrow] & & W\text{-fibration forte} \\
+& & \mathrm{b} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] \arrow[uuull, bend left=30] & & W\text{-fibration} \\
+W\text{-fibration gauche} & \mathrm{a}_1 & & \mathrm{a}_2 & W\text{-fibration droite.}
+\end{tikzcd}
+\]
+a$_1$), a$_2$) étaient aussi appelées \textbf{D}-fibrations cohomologique resp. \textbf{D}-fibrations homologiques (\footnote[40]{Non, c'est une notion encore plus forte, à coups de coefficients localement constants, cf. I, p. 121.}). Quand \textbf{D} satisfait Der 3a$'$ (I, p. 111) sur les \textbf{D}-coefficients localement constants sur les $X$ $W_\infty$-asphériques, alors les notions b), a$_1$), a$_2$) sont équivalentes. (Je présume que c'est le cas pour tous les \textbf{D} et tous les $W$ vraiment intéressants.) Par contre, j'ai l'impression que la notion de $W$-fibration forte, voire ultraforte, n'est guère utilisable que dans le cas $W = W_\infty$, où elle coïncide avec les précédentes. C'est dire qu'on peut probablement oublier la terminologie, et se rappeler par contre que dans le cas $W = W_\infty$, les % [sic] cohomologique -> cohomologiques, agreement with "D-fibrations"
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+$W$-fibrations ont des propriétés d'une force extrême, s'exprimant par les deux propriétés dégagées dans W(4a) et W(4b).
+
+\msp{page 20}Dans la théorie de $\mathrm{HOT}_W$, influencé par la réflexion générale sur les dérivateurs et l'axiome Der 3b, j'ai travaillé sous l'hypothèse $W \supseteq W_\infty$, mais en utilisant un axiome de fibration L5 $=$ W(4b) qui, il s'avère, implique finalement $W = W_\infty$. J'ai l'impression que je n'ai jusqu'à présent (propriétés de $f_!$ pour HOT) pas utilisé $W \supseteq W_\infty$, donc ça peut être utile, comme `ça ne coûte pas plus cher' (et oblige d'être plus attentif à ce qu'on utilise), de laisser tomber $W \supseteq W_\infty$ (impliquant $W = W_\infty$), et de mettre par contre sur $W$ des axiomes aussi forts (notamment de fibration) que les propriétés de $W_\infty$, `sans se priver en rien'. Je supposerai donc W(1), W(2), W(3), W(4a) (la forme la plus forte de l'axiome de fibration, cf. pages 13, 14) - c'est tout ce qui a été utile jusqu'à présent. Si on y joint W(5) (axiome de connexité) ça implique $W \subseteq W_\infty$. Mais pour l'instant je ne crois pas en avoir un besoin.
+
+Mais méditant sur la question, je crois avoir trouvé le
+
+\textbf{Théorème 2} (!) (\footnote[41]{Cf. pour un résultat plus fort XV 9.12, p. 133 bis. \textbf{NB} Le résultat est plus général, mais pas vraiment plus fort, car il ne donne pas $W = \Fl(\Cat)$.}) : \textit{Soit} $W \subseteq \Fl(\Cat)$ \textit{satisfaisant} W(1,2,3,4b$''$)\textit{. Si} $W$ \textit{ne satisfait pas à} W(5)\textit{, alors} $W = \Fl(\Cat)$.
+
+\textsc{Démonstration}. Soit $f : X \longrightarrow Y$ dans Cat, tel que $\pi_0(f)$ ne soit pas bijectif. Soit $I$ la catégorie discrète ayant pour ensemble d'objets l'ensemble $\pi_0(Y)$, on a donc un diagramme commutatif
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[rr, "f"] \arrow[dr, "p"'] & & Y \arrow[dl, "q"] \\
+& I, &
+\end{tikzcd}
+\]
+d'autre part un foncteur d'une catégorie dans une catégorie discrète est toujours $W_\omega$-parfait, donc $p$, $q$ sont des $W$-fibrations. Comme\msp{page 21} $f \in W$, il s'ensuit $f_i \in W$ pour tout $i \in I$ (\footnote[42]{On utilise W(4) sous forme plus forte que W(4b$''$)!}).
+
+Si $\pi_0(f)$ n'était pas surjective, prenant $i$ qui n'est pas dans l'image, on aurait $X_i = \emptyset \longrightarrow Y_i \neq \emptyset$, qui serait dans $W$. Soit donc
+\[
+f : X = \emptyset \longrightarrow Y
+\]
+dans $W$. Alors $\forall$ $Z$ dans Cat, $f \times \mathrm{id}_Z : \underbrace{X \times Z}_{= \emptyset} \longrightarrow Y \times Z$ est dans $W$ (car $Z$ est
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+$W$-fibrée sur $e$), donc $\emptyset \longrightarrow Y \times Z$ est dans $W$. Donc aussi la projection
+$\begin{tikzcd}[column sep=small, row sep=small, baseline=(\tikzcdmatrixname-1-1.base)]
+Y \times Z \arrow[rr] & & Y. \\
+& \emptyset \arrow[ul] \arrow[ur] &
+\end{tikzcd}$
+Comme cette projection est une $W$-fibration, il s'ensuit par W(4b$''$) que ses fibres sont $W$-asphériques. Comme $Y \neq \emptyset$, il y a une telle fibre, elle est $\simeq Z$. Donc $Z$ est $W$-asphérique. Donc on trouve que \textit{toute} catégorie $Z$ dans Cat est $W$-asphérique. Donc toute flèche $Z \longrightarrow Z'$ dans Cat est dans $W$, q.e.d.
+
+Supposons maintenant $\pi_0(f)$ surjective, mais non injective. Il y aurait une fibre de $\pi_0(X) \longrightarrow \pi_0(Y) = I$ qui serait de cardinal $> 1$. En prenant le $f_i$ correspondant, on trouve $X_i \longrightarrow Y_i$ avec $Y_i$ 0-connexe et $\card \pi_0(X_i) \geq 2$. Donc on est ramené au cas
+\[
+f : X \longrightarrow Y \qquad\qquad \left\{
+\begin{array}{l}
+f \in W \\[1ex]
+Y \text{ 0-connexe} \\[1ex]
+\card \pi_0(X) \geq 2.
+\end{array}
+\right.
+\]
+Considérons la factorisation canonique
+\[
+X \xrightarrow{i_f} \bar{X} \xrightarrow{\bar{f}} Y,
+\]
+avec $i_f \in W$, donc $\bar{f} \in W$. Donc par W(4b$''$) les fibres de $\bar{f}$ sont $W$-asphériques. Mais on voit tout de suite, en décomposant $\bar{X}$ suivant les composantes connexes $X_i$ de $X$, que ces fibres ont un $\pi_0$ de cardinalité $\geq \card \pi_0(X) \geq 2$. Donc on est ramené au cas où $Y = e$, i.e.
+\[
+X \ W\text{-asphérique}, \qquad \card \pi_0(X) \geq 2.
+\]
+Considérons $X \times X$, qui est aussi $W$-asphérique, et l'application diagonale\msp{page 22}
+\[
+d : X \longrightarrow X \times X = Y,
+\]
+qui est donc dans $W$. Mais $\pi_0(d)$ s'identifie à l'application diagonale $\pi_0(X) \longrightarrow \pi_0(X) \times \pi_0(X)$, qui n'est pas surjective puisque $\card \pi_0(X) \geq 2$. Donc pour la première partie, $W = \Fl(\Cat)$.
+
+Donc sous forme plus positive :
+
+\textbf{Corollaire.} \textit{Soit} $W \subseteq \Fl(\Cat)$ \textit{qui satisfait à} W(1,2,3,4b$''$)\textit{, et telle que} $W \neq \Fl(\Cat)$. \textit{Alors $W$ satisfait l'axiome de connexité} W(5)\textit{, et par suite (th. 1, page 12)} $W \subseteq W_\infty$.
+
+% ---- from Der-ChXIIa-012_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\section*{III\quad Classes remarquables de foncteurs liés à $W$.}
+
+Finalement, j'appelerai \textit{‘localiseur fondamental’} une partie $W$ de Fl(Cat) satisfaisant les trois conditions suivantes : % [sic] appelerai -> appellerai, spelling
+
+\begin{enumerate}
+\item[(i)] Saturation W(1) (cf. rappel p. 1).
+\item[(ii)] Axiome de l'élément final W(3) (page 3).
+\item[(iii)] La variante affaiblie W(2 bis) de l'axiome de localisation W(2) donnée dans le corollaire page 1 (anciennement c'était L4$'$ dans Pursuing Stacks).
+\end{enumerate}
+
+Quand j'aurai besoin de plus sur $W$, je le dirai explicitement. Ces trois axiomes ont suffi pour pratiquement tout ce que j'ai fait avec $W$ dans Pursuing Stacks, la seule exception étant un usage (si je me rappelle) unique, quelque part, d'une variante affaiblie de W(2) (pour les $S$-foncteurs \textit{cartésiens} entre $S$-catégories \textit{fibrées} - si sur toute fibre il est dans $W$, il est lui-même dans $W$).
+
+On suppose donc par la suite donné un localiseur fondamental
+\[
+W \subseteq \mathrm{Fl}(\mathrm{Cat}).
+\]
+
+\textbf{Proposition 1.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat}. \textit{Conditions équivalentes :}
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour tout isomorphisme local $Y' \longrightarrow Y$, $f' : X' \longrightarrow Y'$ est $\in W$.}
+\item[\textit{b)}] \textit{Même condition, dans le cas particulier $Y' = Y/y \longrightarrow Y$, donc $\forall\ y \in Y$, $X/y \simeq X \times_Y (Y/y)$ est $W$-asphérique.}
+\end{enumerate}
+
+\msp{page 23}\textbf{Définition 1.} Sous ces conditions équivalentes a), b) de la proposition 1, on dit que $f$ est \textit{$W$-asphérique.} On dit \texttt{[que]} $f$ est \textit{$W$-coasphérique} si $f^{\circ}$ est $W$-asphérique, i.e. si les $y\backslash X$ sont $W$-asphériques (pour $y \in \Ob Y$).
+
+\textsc{Démonstration.} Il suffit de prouver b) $\Longrightarrow$ a). Par définition d'un isomorphisme local, on voit que la condition b) est stable par changement de base $Y' \longrightarrow Y$, avec $Y'$ un isomorphisme local (puisque les $Y'/y' \xrightarrow{\sim} Y/y$, donc $X'/y' \xrightarrow{\sim} X/y$). Il suffit donc de voir que si $f$ satisfait à b), alors $f \in W$. Mais c'est l'axiome W(2 bis).
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X \arrow[d] & & & \\
+Y & & Y' \arrow[ll] & \\
+& Y/y \arrow[ul] & & Y'/y' \arrow[ll] \arrow[ul]
+\end{tikzcd}
+\end{center}
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\textbf{Remarque.} Si $f$ a un adjoint à droite $g$, alors pour tout $y \in Y$, $X/y \simeq X/g(y)$, donc $X/y$ a un objet final et est donc $W$-asphérique. Donc si $f$ a un adjoint à droite (à gauche), alors $f$ est $W$-asphérique ($W$-coasphérique).
+
+Mais même si $f$ n'a pas d'adjoint à droite, il y a quand même un adjoint généralisé
+\[
+g : Y \longrightarrow X^{\wedge}
+\]
+et on a
+\[
+X/y \simeq X/g(y) \qquad \text{(pour l'inclusion pleinement fidèle $X \hookrightarrow X^{\wedge}$),}
+\]
+donc $\mathrm{Top}(X/y)$ s'identifie au topos induit $\mathrm{Top}(X)/g(y)$. La condition $f$ $W$-asphérique signifie donc que les faisceaux $g(y)$ dans $\mathrm{Top}(X)$ sont
+\msp{page 24}
+$W$-asphériques. Pour de nombreuses autres formulations équivalentes, je renvoie à Pursuing Stacks.
+
+\textbf{Proposition 2.} \textit{Soit $X \xrightarrow{f} Y \xrightarrow{g} Z$ dans} \textup{Cat}. \textit{Si $f$ et $g$ sont $W$-asphériques ($W$-coasphériques), de même $gf$. Si $gf$ et $f$ sont $W$-asphériques ($W$-coasphériques), $g$ aussi.}
+
+\textbf{Rappel.} Un morphisme $p : S' \longrightarrow S$ dans Cat est un \textit{isomorphisme local} si $\forall\ s' \in \Ob S'$, le morphisme induit
+\[
+p_{s'} : S'/s' \xrightarrow{\sim} S/s \qquad (s = p(s'))
+\]
+est un isomorphisme : $p$ induit un isomorphisme sur les ‘localisées’ de $S'$ et $S$ en $s'$ et $s = p(s')$ respectivement. Il est immédiat que cette notion est stable par composition, que si $gf$ et $g$ sont des isomorphismes locaux, alors $f$ l'est aussi, que tout isomorphisme est un isomorphisme local. De plus, les isomorphismes locaux sont \textit{stables par changement de base,} ce qui résulte du fait (trivial et important) que si on a un carré cartésien dans Cat
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S \arrow[from=u, "f"'] & S', \arrow[l, "p"']
+\end{tikzcd}
+\end{center}
+
+et si $x' \in \Ob X'$ a pour image $x$, $s'$, $s$ dans $X$, $S'$, $S$, alors le diagramme
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X/x \arrow[d, "f/x"'] & X'/x' \arrow[l, "q/x'"'] \arrow[d, "f'/x'"] \\
+S/s & S'/s' \arrow[l, "p/s'"']
+\end{tikzcd}
+\end{center}
+
+est également cartésien. (Donc si $p/s'$ est \texttt{[un]} isomorphisme, $q/x'$ aussi.)
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 25}Revenons à la proposition 2. La stabilité de la notion de morphisme asphérique par composition résulte aussitôt de la forme a) de la condition. De même pour la condition que si $gf$ et $f$ sont $W$-asphériques, $g$ aussi - il faut montrer que si $Z' \longrightarrow Z$ est \texttt{[un]} isomorphisme local, alors $g'$ est dans $W$, or l'hypothèse implique que $g'f'$ et $f'$ le sont.
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+X \arrow[d, "f"'] & X' \arrow[l, "r"'] \arrow[d, "f'"] \\
+Y \arrow[d, "g"'] & Y' \arrow[l, "q"'] \arrow[d, "g'"] \\
+Z & Z' \arrow[l, "p"']
+\end{tikzcd}
+\end{center}
+
+\textbf{Corollaire 1.} \textit{L'image inverse d'un $f : X \longrightarrow Y$ qui est $W$-asphérique (resp. $W$-coasphérique) par un isomorphisme local (resp. par un coïsomorphisme local) est $W$-asphérique ($W$-coasphérique).}
+
+\begin{center}
+\begin{tikzcd}[row sep=huge]
+X \arrow[d] & X' \arrow[l] \arrow[d] & X'' \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l, "\text{iso local}"] & Y'' \arrow[l, "\text{iso local}"]
+\end{tikzcd}
+\end{center}
+
+Résulte formellement de la définition par a) et du fait qu'un composé de deux isomorphismes locaux (resp. coïsomorphismes locaux) est itou.
+
+\textbf{NB} Bien sûr, la notion de foncteur $W$-asphérique n'est pas stable par changement de base quelconque. Par exemple, l'inclusion $X = \{y_0\} \longrightarrow Y$ est $W$-asphérique si et seulement si les catégories discrètes $\mathrm{Hom}(y_0, y)$ sont $W$-asphériques, i.e. (sous réserve que l'on ait W(5), axiome de connexité) si et seulement si les $\mathrm{Hom}(y_0, y)$ sont de cardinal 1, i.e. $y_0$ \textit{objet initial} de $Y$. Mais si $Y \neq \{y_0\}$, prenant $y$ dans $Y$, $y \neq y_0$, et posant $Y' = \{y\} \longrightarrow Y$, on a $X' = X \times_Y Y' = \emptyset$ et $\emptyset \longrightarrow e$ n'est pas asphérique!
+
+\msp{page 26}Par contre, on s'attend que les morphismes $W$-asphériques soient stables par changements de base \textit{$W$-lisses} (qui généralisent les isomorphismes locaux), et les morphismes $W$-coasphériques par changements de base $W$-propres. Cf. plus bas.
+
+\textbf{Corollaire 2.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat} \textit{une} \textup{équivalence} \textit{de catégories. Alors $f$ est $W$-asphérique et $W$-coasphérique.}
+
+En effet, $f$ a un adjoint à gauche et un adjoint à droite, et on utilise la remarque page 23.
+
+\textbf{Proposition 3.} \textit{Soit $f : X \longrightarrow Y$ dans} \textup{Cat}. \textit{Conditions équivalentes :}
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour tout $y \in \Ob Y$, le foncteur d'inclusion}
+\[
+X_y \longrightarrow X/y \tag*{$(*)$}
+\]
+\textit{est $W$-}co\textit{asphérique.}
+\item[\textit{b)}] \textit{Pour tout $x_0 \in X$, le morphisme induit pour les colocalisées}
+\[
+x_0\backslash X \longrightarrow y_0\backslash Y \qquad \textit{(où $y_0 = f(x_0)$)}
+\]
+\textit{est à fibres $W$-asphériques.}
+\item[\textit{c)}] \textit{Pour tout morphisme $\mathbf{\Delta}^1 = Y' \longrightarrow Y$, considérons $X' = X \times_Y Y'$ sur $\mathbf{\Delta}^1$, l'inclusion $X'_1 \longrightarrow X'$ de la fibre fermée de $X'$ (fibre sur le point fermé de $Y'$) est $W$-coasphérique.}
+\item[\textit{d)}] \textit{Pour toute flèche $u_0 : y_0 \longrightarrow y_1$ dans $Y$, et tout $x_0$ dans $X_{y_0}$, la catégorie $X(x_0;u_0)$ formée des flèches $u' : x_0 \longrightarrow x$ dans $X$ de source $x_0$, et qui relèvent $u$} \texttt{[plutôt} $u_0$\texttt{]}\textit{, est $W$-asphérique.}
+\end{enumerate}
+
+\msp{page 27}\textsc{Démonstration.} Pour expliciter la condition a), il faut expliciter la catégorie $\xi_0\backslash(X_y)$, pour un objet quelconque $\xi_0 = (x_0, u_0)$ de $X/y$, $x_0 \in \Ob X$,
+\[
+u_0 : y_0 \longrightarrow y_1 = y \quad \text{dans $Y$, avec $y_0 = f(x_0)$.}
+\]
+
+Cette catégorie $\xi_0\backslash X_{y_1}$ s'explicite alors comme la catégorie des $x_1$ dans $X_{y_1}$, \textit{munis} d'une flèche de $\xi_0$ dans l'image $\xi_1 = (x_1, \mathrm{id}_{f(x_1)} = \mathrm{id}_{y_1})$ de $x_1$ dans $X/y_1$ dans $\xi_0$ \texttt{[‘dans} $\xi_0$\texttt{’ à effacer]}, i.e. d'une flèche $u$ de $x_0$ dans $x_1$, telle que $f(u)$ donne lieu au triangle commutatif dans $Y$, i.e. $f(u) = u_0$. % AUDIT resolved: regular CMTT12 editorial bracket; see corrections.csv, PDF leaf 32
+
+\begin{center}
+\begin{tikzcd}
+x_1 \arrow[dd, dash] & & \\
+& & x_0 \arrow[ull, "u"'] \arrow[dd, dash] \\
+y_1 & y_1 \arrow[l, "\mathrm{id}"'] & \\
+& & y_0 \arrow[ul, "u_0"'] \arrow[ull, "f(u)"]
+\end{tikzcd}
+\end{center}
+
+Donc c'est la catégorie notée $X(x_0;u_0)$ dans d). On voit tout de suite qu'elle est aussi isomorphe à la fibre de $x_0\backslash X \longrightarrow y_0\backslash Y$ en l'élément $u_0$ de $y_0\backslash Y$, dont il est question dans b). D'où l'équivalence de a) b) c). D'autre part, la donnée de $u_0$ dans $Y$ équivaut à celle d'un foncteur $\mathbf{\Delta}^1 \longrightarrow Y$, comme dans c), et pour exprimer alors que $\underbrace{X'_1}_{\simeq X_{y_1}} \longrightarrow X'$ est coasphérique, il suffit d'exprimer que les $x'\backslash X'_1$ ($x' \in \Ob X'$) sont $W$-asphériques. Or c'est trivial si $x' \in \Ob X'_1$ (objet initial), donc il suffit de le vérifier pour $x'$ dans $X'\backslash X'_1 = X'_0 \simeq X_{y_0}$. Alors $x'$ s'identifie à un élément $x_0$ de $X_{y_0}$, et on vérifie tout de suite que $x_0\backslash X'_1$ est isomorphe à la catégorie $X(x_0;u_0)$ de d). Cela achève la démonstration.
+
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 28}\textbf{Définition 2.} Sous les conditions de la proposition 3, on dit que $f$ est \textit{$W$-propre.} On dit que $f$ est \textit{$W$-lisse} si $f^{\circ}$ est $W$-propre, i.e. si les morphismes d'inclusion $(*)$ \texttt{[plutôt} $X_y \longrightarrow y\backslash X$\texttt{]} sont $W$-asphériques etc. (conditions duales de celles de la proposition 3).
+
+\textbf{Remarque.} La condition a) de la proposition 3 est satisfaite en particulier si l'inclusion $(*)$ a un adjoint à gauche (cf. remarque page 23). Cela signifie que les catégories $X(x_0;u)$ ont un objet initial. Cela signifie aussi que la catégorie $X$ sur $Y$ est Cat-cofibrée sur $Y$ au sens faible, i.e. qu'il existe, pour $u_0 : y_0 \longrightarrow y_1$ flèche dans $Y$, et $x_0$ dans $X_{y_0}$, un objet $u_{0*}(x_0)$ dans $X_{y_1}$ qui représente le foncteur covariant $X_{y_1} \longrightarrow (\mathrm{Ens})$, $x_1 \longmapsto \mathrm{Hom}_u(x_0, x_1)$. Ainsi, si $X$ est Cat-cofibrée au sens faible sur $Y$, et a fortiori si elle est Cat-cofibrée, alors $f : X \longrightarrow Y$ est $W$-propre. Dualement, si $f$ est faiblement Cat-fibrée, $f$ est \texttt{[}$W$\texttt{-]}lisse.
+
+\textbf{Proposition 4.} (\footnote[43]{Dire aussi : Si $X \xrightarrow{f} Y \xrightarrow{g} Z$, si $gf$ et $f$ $W$-lisses, alors $g$ est lisse en les points de $\mathrm{Im}\, f$, idem pour propre.}) \textit{La notion de morphisme $W$-propre est stable par composition, par changement de base. Les coisomorphismes locaux sont propres (trivial sur b)), a fortiori les isomorphismes sont propres, les immersions fermées sont propres.}
+
+\textit{Énoncé dual pour les morphismes lisses : stabilité par changement de base, par composition, les isomorphismes locaux sont lisses, notamment les immersions ouvertes.}
+
+\msp{page 29}La stabilité par changement de base est immédiate sur la forme c). La stabilité par composition \texttt{[est]} moins triviale :
+
+\begin{center}
+\begin{tikzcd}[row sep=large]
+{\scriptstyle x} &[-1.5em] X \arrow[d, "f"] & x\backslash X \arrow[l] \arrow[d] & \bar{X} \arrow[l] \arrow[d] \\
+{\scriptstyle y} & Y \arrow[d, "g"] & y\backslash Y \arrow[l] \arrow[d] & \bar{Y} \arrow[l] \arrow[d] \\
+{\scriptstyle z} & Z & z\backslash Z \arrow[l] & \{u\} \arrow[l]
+\end{tikzcd}
+\end{center}
+
+Dans le diagramme à carrés cartésiens ci-contre \texttt{[plutôt dont les deux carrés de droite sont cartésiens]} (déduit de $x \in \Ob X$, d'où $y = f(x)$, $z = g(y) = gf(x)$, et de $u \in \Ob z\backslash Z$), il faut prouver que $\bar{X}$ est $W$-asphérique. On sait que $\bar{Y}$ l'est ($g$ propre) et que $\bar{X} \longrightarrow \bar{Y}$ est à fibres $W$-asphériques. Il suffit donc d'utiliser la proposition 5 ci-dessous, et la remarque immédiate % AUDIT resolved: regular CMTT12 editorial bracket; see corrections.csv, PDF leaf 33
+
+\textbf{Lemme.} \textit{Si $f$ est propre, il en est de même de $x\backslash f : x\backslash X \longrightarrow y\backslash Y$, pour tout $x$ dans $X$, $y = f(x)$.}
+
+% ---- from Der-ChXIIa-012_p026-030.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+En effet, si $u'$ est dans $x\backslash X$ et $v'$ dans $y\backslash Y$, et si $x'$, $y'$ sont leurs images dans $X$, $Y$ respectivement, alors
+\[
+u'\backslash(x\backslash X)\simeq x'\backslash X,\qquad v'\backslash(y\backslash Y)\simeq y'\backslash Y,
+\]
+et la flèche entre les deux s'identifie à la flèche de localisation
+\[
+x'\backslash X\longrightarrow y'\backslash Y.
+\]
+
+\textbf{Proposition 5.} \textit{Soit $f : X\longrightarrow Y$ dans $\Cat$, supposons $f$ $W$-propre ou $W$-lisse, et à fibres $W$-asphériques, alors $f\in W$ (et même $f$ est} \textup{universellement} \textit{dans $W$, i.e. il est dans $W$ et le reste par tout changement de base).}
+
+\leavevmode\msp{page 30}Comme les hypothèses sont stables par changement de base, il suffit de prouver $f\in W$. Supposons p.~ex. $f$ propre, prouvons que $f$ est $W$-\textit{asphérique}, i.e. que les $X/y$ ($y\in\Ob\,Y$) sont $W$-asphériques. Mais $X_y\longrightarrow X/y$, étant $W$-coasphérique par hypothèse de propreté, est dans $W$ (par W(2 bis)), et comme $X_y$ est $W$-asphérique par hypothèse, $X/y$ aussi. Mais par W(2 bis), $f$ $W$-asphérique $\Longrightarrow f\in W$. Le cas $f$ lisse est dual.
+
+\textbf{Remarque.} Ainsi, si $f$ est propre, s'il est à fibres $W$-asphériques il est `universellement $W$-asphérique', i.e. est et reste $W$-asphérique par tout changement de base. Inversement, si $f$ est universellement dans $W$ (pas forcément propre), alors en particulier ses fibres sont $W$-asphériques. Mais ça n'implique bien sûr pas que $f$ soit propre, ou lisse (\footnote[44]{Mais `universellement dans $W$' implique déjà `universellement $W$-asphérique', puisque la notion de $W$-asphéricité est définie par \texttt{[la]} proposition 1 a).}).
+
+\textbf{Corollaire.} \textit{Si $W$ satisfait} \textup{W(2) (pas seulement W(2 bis))}\textit{, alors pour un $S$-morphisme $X\longrightarrow Y$ de catégories qui sont toutes deux $W$-propres sur $S$, ou toutes deux $W$-lisses, si $f_s : X_s\longrightarrow Y_s$ est dans $W$ pour tout $s\in S$, alors $f\in W$.}
+
+\leavevmode\msp{page 31}Supposons p.~ex. $f$ propre, considérons, pour $s\in\Ob\,S$
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X_s \arrow[r, "f_s"] \arrow[d, "i_s^X"'] & Y_s \arrow[d, "i_s^Y"] \\
+X/s \arrow[r, "f/s"] & Y/s,
+\end{tikzcd}
+\]
+comme $X$, $Y$ \texttt{[sont]} propres, les flèches verticales sont dans $W$ (il suffirait de beaucoup moins que la propreté \dots), donc $f_s\in W\Longrightarrow f/s\in W$. Ainsi, `$f$ est dans $W$ localement sur $S$', ce qui implique $f\in W$ par W(2).
+
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\textbf{Proposition 6.} \textit{Soit}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+S \arrow[from=u, "f"'] & S', \arrow[l, "p"]
+\end{tikzcd}
+\]
+\textit{cartésien dans} $\Cat$. \textit{Si $f$} \texttt{[est]} \textit{$W$-asphérique, $p$ $W$-lisse, alors $f'$ est $W$-asphérique.}
+
+Il faut prouver \texttt{[que]} $X'\times_{S'}S'/s'$ est $W$-asphérique ($s'\in\Ob\,S'$). Soit $s=p(s')$, on a
+\[
+\begin{tikzcd}[column sep=small]
+S & & S' \arrow[ll, "p"'] & \\
+& S/s \arrow[ul] & & S'/s', \arrow[ul] \arrow[ll, "p_0"]
+\end{tikzcd}
+\]
+avec $p_0$ $W$-lisse (lemme p.~28 \texttt{[plutôt 29]}) et à fibres $W$-asphériques, donc une $W$-équivalence universelle (prop.~5). Comme l'image inverse de $X$ sur $S/s$ est $W$-asphérique (hypothèse pour $f$), il \texttt{[s'ensuit]}
+
+\leavevmode\msp{page 32}que dans le carré cartésien ci-contre \texttt{[ci-dessous]}
+\[
+(*)\qquad\qquad
+\begin{tikzcd}[row sep=large, column sep=large]
+X/s \arrow[d] & X'/s' \arrow[l, "W"'] \arrow[d] \\
+S/s & S'/s' \arrow[l, "W"']
+\end{tikzcd}
+\]
+les flèches horizontales sont dans $W$, et la première flèche verticale l'est par hypothèse sur $f$, donc la seconde aussi, donc $X'/s'$ \texttt{[est]} $W$-asphérique.
+
+\textbf{Corollaire} (généralise \texttt{[la]} prop.~6, obtenue en faisant $Y=S$). \textit{Soit $p : S'\longrightarrow S$} \texttt{[un]} \textit{morphisme $W$-lisse dans} $\Cat$. \textit{Alors le foncteur changement de base}
+\[
+\Cat/S\longrightarrow\Cat/S'
+\]
+\textit{est compatible avec les localiseurs $W^{\mathrm{g}}_S$, $W^{\mathrm{g}}_{S'}$, i.e. transforme $f : X\longrightarrow Y$ qui est dans $W$} localement \textit{sur $S$, dans $f' : X'\longrightarrow Y'$ dans $W$ localement sur $S'$.}
+
+Cette fois, on regarde le diagramme similaire à $(*)$
+\[
+\begin{tikzcd}[column sep=small]
+X/s \arrow[dd] \arrow[dr, "f/s"] & & X'/s' \arrow[ll, "W"'] \arrow[dd] \arrow[dr, "f'/s'"] & \\
+& Y/s \arrow[dl] & & Y'/s' \arrow[ll, "W"', crossing over] \arrow[dl] \\
+S/s & & S'/s', \arrow[ll, "W"'] &
+\end{tikzcd}
+\]
+
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+où les flèches horizontales sont dans $W$, donc $f/s\in W$ (hypothèse) implique $f'/s'\in W$.
+
+\leavevmode\msp{page 33}Dualement, si $p$ est $W$-propre, le foncteur image inverse est compatible avec les localiseurs $W^{\mathrm{d}}_S$, $W^{\mathrm{d}}_{S'}$.
+
+Si $f : X\longrightarrow S$ est $W$-propre, on va définir un foncteur canonique
+\[
+\begin{aligned}
+\hot_*^{X/S,W} : S &\quad\longrightarrow\quad \Hot_W\overset{\text{déf}}{=}(\Cat)W^{-1}\\
+\text{donné sur les objets par}\qquad s &\quad\longmapsto\quad \hot_W(X_s).
+\end{aligned}
+\]
+Il faut définir, pour une flèche $u$ dans $S$, $u : s\longrightarrow s'$, une flèche
+\[
+\hot_W(X_s)\longrightarrow\hot_W(X_{s'})
+\]
+dans $\Hot_W$ - flèche que nous pouvons noter $\hot_*^{X/S,W}(u)$. On la définit par le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X_s \arrow[r, dotted] \arrow[d, "i_s^X"] & X_{s'} \arrow[d, "i_{s'}^X"] \\
+X/s \arrow[r, "X/u"] & X/s',
+\end{tikzcd}
+\]
+où les flèches verticales sont $W$-coasphériques, donc dans $W$. Ce sont donc des isomorphismes dans $\Hot_W$, d'où l'unique flèche en pointillés dans $\Hot_W$, rendant le carré commutatif. Sur cette définition il est immédiat que
+\[
+u\longmapsto\hot_W(u)
+\]
+est compatible avec composition, et unités.
+
+Ce foncteur est donc défini en supposant
+
+\leavevmode\msp{page 34}seulement que les
+\[
+X_y\longrightarrow X/y
+\]
+sont dans $W$, ce qui est nettement moins fort que propre. Si on suppose que cette hypothèse est satisfaite `universellement' (i.e. reste satisfaite après tout changement de base $S'\longrightarrow S$) (\footnote[45]{On dira que $f$ est $W$-\textit{prépropre.}}), alors on a donc, pour tout $S'$ dans $\Cat/S$, un foncteur
+\[
+\hot_*^{X'/S',W} : S'\longrightarrow\Hot_W,
+\]
+et on vérifie tout de suite que ce n'est autre que le composé dans
+
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+(*)\qquad\qquad
+\begin{tikzcd}[column sep=small]
+S' \arrow[rr, "p"] \arrow[dr, "\hot_W^{X'/S'}"'] & & S \arrow[dl, "\hot_W^{X/S}"] \\
+& \Hot_W &
+\end{tikzcd}
+\]
+\texttt{[plutôt} $\hot_*^{X'/S',W}$ \texttt{resp.} $\hot_*^{X/S,W}$\texttt{]}. On a des observations duales si $X$ est lisse sur $S$, plus généralement si les inclusions
+\[
+X_s\longrightarrow s\backslash X
+\]
+sont dans $W$. On trouve alors un contrafoncteur
+\[
+\left\{
+\begin{aligned}
+S^\circ &\quad\longrightarrow\quad \Hot_W\\
+s &\quad\longmapsto\quad \hot_W(X_s)\\
+u &\quad\longmapsto\quad \hot^*_{X/S,W}(u)\ \text{ou}\ \hot^*_{X/S}(u)
+\end{aligned}
+\right.
+\]
+
+\leavevmode\msp{page 35}et une compatibilité similaire à $(*)$, si l'hypothèse est satisfaite \textit{universellement} sur $S$, p.~ex. $f$ $W$-lisse.
+
+\textbf{Proposition 7.} \textit{Supposons $f : X\longrightarrow S$ à la fois $W$-propre et $W$-lisse, plus généralement que les morphismes}
+\[
+X_s\longrightarrow X/s,\qquad X_s\longrightarrow s\backslash X\qquad(s\in S)
+\]
+\textit{soient dans $W$, et que cette hypothèse reste verifiée après tout changement de base. Alors les foncteurs correspondants} % [sic] verifiée -> vérifiée, accent missing
+\[
+\begin{aligned}
+\lambda &\;=\;\hot_*^{X/S,W} : &&\quad S \quad\longrightarrow\quad \Hot_W\\
+\lambda^\circ &\;=\;\hot^*_{X/S,W} : &&\quad S^\circ \quad\longrightarrow\quad \Hot_W
+\end{aligned}
+\]
+\textit{transforment toute flèche $u$ de $S$ en} \texttt{[un]} \textit{isomorphisme de} $\Hot_W$\textit{, et on a}
+\[
+\lambda^\circ(u)=\lambda(u)^{-1}\qquad\textit{dans}\quad\Hot_W,
+\]
+\textit{i.e. $\lambda(u)$ et $\lambda^c irc(u)$ sont inverses l'un de l'autre.} % [sic] λ^c irc(u) -> λ°(u), command \circ misprinted as superscript c followed by "irc"
+
+\textsc{Démonstration}. La donnée de $u : s_0\longrightarrow s_1$ équivaut à celle de
+\[
+S'=\mathbf{\Delta}^1\longrightarrow S,
+\]
+d'où
+\[
+X'=X\times_S S'\qquad\text{sur } S'=\mathbf{\Delta}^1,
+\]
+avec les deux fibres
+\[
+X'_0\simeq X_{s_0},\qquad X'_1\simeq X_{s_1}.
+\]
+L'hypothèse assurant l'existence de $\lambda$ s'exprime par la condition que
+\[
+X'_1\longrightarrow X'/1\simeq X'
+\]
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\msp{page 36}est dans $W$, de sorte que le diagramme
+\[
+X'_0\xrightarrow{i_0}X'\xleftarrow[W]{i_1}X'_1
+\]
+définit une flèche $\lambda(u) : X'_0\longrightarrow X'_1$ dans $\Hot_W$, savoir $\lambda(u)=i_1^{-1}i_0$. L'hypothèse qui assure l'existence de $\lambda^\circ$ s'exprime par la condition symétrique $i_0\in W$, qui permet de définir la flèche $\lambda^\circ(u) : X'_1\longrightarrow X'_0$ par $\lambda^\circ(u)=i_0^{-1}i_1$. Quand les deux conditions sont satisfaites simultanément, on voit donc que $\lambda(u)$, $\lambda^\circ(u)$ sont inverses l'un de l'autre.
+
+\textbf{Remarques.} Pour définir $\lambda$ `universellement', il n'était pas indispensable de considérer les $X/s$ et les inclusions $X_s\longrightarrow X/s$, au lieu de cela il suffisait de regarder les changements de base $S'=\mathbf{\Delta}^1\xrightarrow{u}S$, et de faire l'hypothèse que pour tout tel changement de base, l'inclusion $X'_1\xrightarrow{i_1}X'=X_{(\mathbf{\Delta}^1,u)}$ est dans $W$. Cette hypothèse est automatiquement stable par changement de base arbitraire. (La $W$-propreté de $f : X\longrightarrow S$ signifie que $X'_1\longrightarrow X'$ est non seulement dans $W$, mais même $W$-coasphérique.) Dualement, pour la définition `universelle' de $\lambda^\circ$, il suffirait que pour tout changement de base $\mathbf{\Delta}^1\longrightarrow S$ comme dessus, l'inclusion $X'_0\xrightarrow{i_0}X'$ est dans $W$.
+
+\leavevmode\msp{page 37}La notion la plus faible raisonnable de $W$-fibré, me semble être celle où on suppose les deux choses à la fois. Les hypothèses qu'on a faites jusqu'à présent, à l'exclusion de la forme forte de $W$-propreté ou de $W$-lissité, reviennent toujours à supposer que le \textit{changement de base par $f : X\longrightarrow S$} transforme certaines flèches dans $\Cat/S$ en \texttt{[élément de]} $W$ : Pour définir $\lambda$, ces flèches sont
+\[
+\text{soit } \{s\}\longrightarrow S/s,\qquad \text{soit } \{1\}\longrightarrow\mathbf{\Delta}^1(\longrightarrow S),
+\]
+pour définir $\lambda^\circ$, ce sont
+\[
+\text{soit } \{s\}\longrightarrow s\backslash S,\qquad \text{soit } \{0\}\longrightarrow\mathbf{\Delta}^1(\longrightarrow S),
+\]
+le `soit' suivant la définition qu'on a adoptée. Dans ces exemples, il s'agit toujours de l'inclusion de l'objet final d'une catégorie $S'$, dans ladite, ou inversement de l'objet initial. Cela montre d'ailleurs (si on exige l'universalité), que la première hypothèse (assurant $\lambda$) est \textit{exactement} cela (cas de l'inclusion d'un objet final $s'$ - puisque pour un tel objet, on a $S'/s'\simeq S'$), tandis que la deuxième hypothèse exige moins, seulement pour le cas de $\mathbf{\Delta}^1$. Et dualement pour $\lambda'$ \texttt{[plutôt $\lambda^\circ$]}. Mais il convient de noter que pratiquement, la façon la plus commode, et de loin,
+
+\leavevmode\msp{page 38}pour vérifier de telles propriétés, c'est soit par la $W$-propreté de $f$, soit par la $W$-lissité - ce qui ramène à vérifier que certaines catégories bien précisées sont $W$-asphériques, sans avoir à se soucier de changements de base et de vérifier que les flèches construites en termes de changements de base arbitraires sont dans $W$. Et l'emploi de la $W$-propreté et de la $W$-lissité est d'autant plus sympathique, que ces notions sont stables par composition,
+
+% ---- from Der-ChXIIa-012_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+alors que toutes les notions dérivées, ainsi que les notions de fibrations à la clef, ont une fâcheuse tendance à ne \textit{pas} être stable par composition.
+
+On pourrait appeler pseudo-$W$-propre resp. quasi-$W$-propre (un peu mieux que pseudo) ce qu'on vient de dégager - j'entends des ricanements! Et si on veut les deux à la fois - $\lambda$ et $\lambda^{\circ}$ associés comme on a dit? Je vois le même principe de description avec des $S''\fl S'$ sur $S$, d'exiger que $X''\fl X'$ soit transformé en des \texttt{[éléments de]} $W$. Avec les choix suivants qui ont l'air sympathique
+
+\begin{itemize}
+\item[a$_1$)] \msp{page 39}$Y'$ a un objet final, $Y''=e$. La définition revient donc à la condition que les
+\[ X_s\fl X/s, \qquad X/s'\fl X/s \]
+(pour $s\in\Ob S$ où $u : s'\fl s$ dans $\mathrm{S}$) soient dans $W$, et que ça reste comme ça après tout changement de base $S'\fl S$.
+
+\item[a$_2$)] $Y'$ a un objet initial, $Y''=e$, c'est la condition duale à coups de
+\[ X_s\fl s\backslash X, \qquad s\backslash X\fl s'\backslash X. \]
+
+\item[a$_0$)] $Y'=\boldsymbol{\Delta}^1$, $Y''=e$ (\footnote[46]{NB a$_1$), a$_2$) sont notés pareil p. 4, mais a$_0$) a été oublié.}).
+
+\item[b)] $Y'$ est contractile, $Y''$ aussi (ou au choix, $Y'$ contractile, $Y''=e$)
+\end{itemize}
+
+donc la condition revient à ceci : pour toute $Y'$ sur $Y$ \textit{contractile} (notion indépendante de $W$, c'est ça son principal avantage) les inclusions des fibres de $X'=X\times_Y Y'$ sur $Y'$ dans $X'$ sont \texttt{[dans]} $W$.
+
+Je sens que même pour des $W$ générales, b) reste du domaine du vérifiable, tandis qu'on mollit si on passe à l'extrême en généralité dans ce sens :
+
+\begin{itemize}
+\item[b$'$)] Comme b), mais en supposant seulement $Y'$ $W$-asphérique (\footnote[47]{C'est essentiellement le a$'$) de p. 4}).
+\end{itemize}
+
+Enfin (la condition a) de la page 4)
+
+\begin{itemize}
+\item[c)] Si $Y''\fl Y'$ est \texttt{[dans]} $W$ sans plus, $X''\fl X'$ aussi.
+\end{itemize}
+% foot: Version 7 décembre 2002
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 40}La seule de ces notions qui ait la moindre envie d'être stable par composition, c'est la plus forte c). Par contre, la notion de flèche $W$-parfaite (cf. déf. 3) est stable spontanément par composition :
+
+\textbf{Définition 3.} On dit que $f : X\fl S$ est $W$-\textit{parfaite} si elle est à la fois $W$-propre et $W$-lisse.
+
+Dans le cas $W=W_\infty$, toutes les variantes de la page précédente, à l'exclusion seulement de a$_0$), sont équivalentes. Ce serait intéressant de dégager des conditions minimales sur $W$ pour assurer qu'il en soit ainsi. (Et il se pose la question si dans le cas de $W_\infty$, a$_0$) suffit pour impliquer le reste - je ne m'y attends guère \dots)
+
+Dans le cas général, on a le diagramme d'implications (et encore je me suis limité)
+\[
+\begin{tikzcd}[column sep=small]
+ & & \mathrm{c} \arrow[d, Rightarrow] & & \text{$W$-fibration ultraforte} \\
+ & & \mathrm{b}' \arrow[dd, Rightarrow] & & \text{$W$-fibration $W$-forte} \\
+ & \text{$W$-parfait} \arrow[dr, Rightarrow] & & & \\
+ & & \mathrm{b} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & & \text{$W$-fibration hot-forte (\footnotemark[48])} \\
+\text{$W$-fibration gauche} & \mathrm{a}_1 \arrow[dr, Rightarrow] & & \mathrm{a}_2 \arrow[dl, Rightarrow] & \text{$W$-fibration droite} \\
+ & & \mathrm{a}_0 & & \text{$W$-pseudofibration}
+\end{tikzcd}
+\]
+\footnotetext[48]{Il semblerait que ce soit ça, finalement, la ‘bonne notion’ de $W$-fibration, \textit{équivalente} à a$_1$ et a$_2$, lesquelles seraient équivalentes entre elles. Cf. prop. 9, p. 48.}
+
+\texttt{[‘$W$-parfait $\Longrightarrow$ b’ encerclé]}.
+
+\msp{page 41}\textbf{Proposition 8.} \textit{Soit $f : X\fl S$ dans} Cat. \textit{Les conditions suivantes sont équivalentes.}
+
+\begin{itemize}
+\item[\textit{a)}] \textit{$f$ est une $W$-fibration gauche, i.e. la condition} a$_1$ \textit{de la page 39 est vérifiée.}
+
+\item[\textit{b)}] \textit{$f$ est $W$-prépropre, et $\forall\; s_0\fl s_1$ dans $S$, $X/s_0\fl X/s_1$ est dans $W$.}
+
+\item[\textit{c)}] \textit{$f$ est $W$-prépropre, et une $W$-pseudofibration, i.e. la condition a$_0$ de la page 39 est vérifiée.} % AUDIT resolved: CMTI12 text-italic a with CMR8 subscript; see corrections.csv, PDF leaf 40, ms41
+\end{itemize}
+
+(\footnote[49]{\textbf{Corollaire.} \textit{Quand $f$ est} Cat-\textit{cofibrant, alors ces conditions équivalent aussi à ceci : $\forall\; u : s_0\fl s_1$ dans $S$, $u_* : X_{s_0}\fl X_{s_1}$ est dans $W$.}}).
+% foot: Version 7 décembre 2002
+
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textbf{NB} Ces conditions sont satisfaites si $f$ est en même temps $W$-prélisse, cf. prop. 7.
+
+\textsc{Démonstration}. On a a) $\Longrightarrow$ b) trivialement (faire $Y''=Y/s$, $Y''=Y/s'$ \texttt{[lien avec l'assertion? Cf. p. 4.]}).
+
+b) $\Longleftrightarrow$ c) par le raisonnement de la proposition 7, car en termes de $X'=X_u=X\times_S(\boldsymbol{\Delta}^1,u)$, la condition b) pour $u : s_0\fl s_1$ donné s'interprète dans le diagramme commutatif
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X'_0 \arrow[dr, "i'_0\in W"] \arrow[dd, "\wr"] & & X'_1 \arrow[dr, "i'_1\in W"] \arrow[dd, "\wr"] & \\
+ & \underset{(\simeq X'_0)}{X'/0} \arrow[rr, "\varphi'", crossing over] \arrow[dd, "p_0"] & & X'/1\ (\simeq X') \arrow[dd, "p_1"] \\
+X_{s_0} \arrow[dr, "i_0\in W"'] & & X_{s_1} \arrow[dr, "i_1\in W"] & \\
+ & X/s_0 \arrow[rr, "\varphi"] & & X/s_1
+\end{tikzcd}
+\]
+
+\texttt{[il y a quelques $W$ redondants dans le diagramme original]} où $i_0$, $i_1$, $i'_0$, $i'_1$ sont dans $W$ à cause de l'hypothèse de $W$-prépropreté (stable par changement de base).
+
+Donc $p_0$, $p_1$ sont \texttt{[dans]} $W$, donc $\varphi\in W$ si et seulement si $\varphi'\in W$, or $\varphi'\in W$ est la condition a$_0$.
+
+\msp{page 42}Prouvons enfin que b), c) impliquent a). Comme c) (donc aussi b)) est stable par changement de base, il suffit de montrer ceci : Si $S$ a un objet final $e$, alors pour tout $s\in\Ob S$, l'inclusion $X_s\xrightarrow{\ i\ }X$ est dans $W$. Or on a le diagramme commutatif
+\[
+\begin{tikzcd}
+X_s \arrow[r, "i_s\in W"] \arrow[dr, "i"'] & X/s \arrow[d, "u\,\in\,W\text{ par c) }\texttt{[plutôt par b)]}"] \\
+ & X/e=X,
+\end{tikzcd}
+\]
+qui montre bien $i=ui_s\in W$.
+
+Dualement, si $f$ est $W$-prélisse, alors la condition a$_0$ ($f$ une $W$-pseudofibration) est équivalente à a$_2$ ($f$ une $W$-fibration droite), et signifie aussi que les
+\[ s_1\backslash X\fl s_0\backslash X \]
+sont dans $W$. Mais la notion de ‘$W$-fibration’ sur laquelle on tombe (si on ne se contente du minable a$_0$!) est différente dans les deux cas duaux l'un de l'autre. On aimerait dans les deux cas trouver des $W$-fibrations ‘hot-fortes’ (condition b), tout au moins en mettant le paquet (s'il le faut) - i.e. pour $f$ $W$-parfait. Ça revient donc à ceci.
+
+\textbf{Question :} \textit{Soient $X\xrightarrow{\ f\ }S$, avec $f$ $W$-parfait, $S$ contractile, $s\in\Ob S$. L'inclusion $X_s\fl X$, est-elle dans $W$?}
+% foot: Version 7 décembre 2002
+
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 43}On va supposer seulement que $f$ est $W$-lisse et une $W$-fibration gauche \texttt{[plutôt que $f$ est simplement une $W$-fibration à droite, i.e que $f$ est $W$-prélisse et une $W$-pseudofibration]} (cf. prop. 8). On va se ramener au cas où $X$ est même fibrant sur $S$, en introduisant $\Phi_S(X)$ \texttt{[catégorie fibrée définie par le foncteur $S^{\circ}\fl\Cat$, $s\longmapsto s\backslash X$]} et % [sic] i.e que -> i.e. que, missing period of the abbreviation
+\[ X\xrightarrow{\ i_X\ }\Phi_S(X). \]
+
+L'ennui, c'est que j'ai fait la théorie de $\HOT_W$ jusqu'à maintenant avec l'hypothèse (qui s'avère idiote) que $W\supseteq W_\infty$ - je serai donc obligé de revoir rapidement sous quelles hypothèses plus raisonnables sur $W$ les résultats familiers sont valables. Par exemple j'aimerais que $i_X\in W$ (\footnote[50]{en fait, $i_X\in(W_\omega)^{\mathrm{d}}_S\subseteq W^{\mathrm{d}}_S\subseteq W_S$.}), de sorte qu'on ait
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X_s \arrow[r, "i_s\in W", "\text{car $X$ $W$-lisse}"'] \arrow[d, "j^X_s"'] & \Phi_S(X)_s=s\backslash X \arrow[d, "j_s^{\Phi_S(X)}"] \\
+X \arrow[r, "i_X\in W"] & \Phi_S(X),
+\end{tikzcd}
+\]
+on voit donc que pour prouver que l'inclusion $j^X_s$ est \texttt{[dans]} $W$, il suffit de prouver la même chose pour $\Phi_S(X)$, qui est fibrant (pas seulement $W$-lisse). De plus, l'hypothèse pseudo-fibration sur $X$ passe sûrement à $\Phi_S(X)$ (je réserve les deux vérifications à plus tard (\footnote[51]{O.K.})). On est donc ramené au cas de
+\[ X\in\Ob\uFib_0S, \qquad S\text{ contractile,} \]
+à prouver que l'inclusion
+\[ X_s\fl X \]
+\msp{page 44}est dans $W$. Je vais prouver ceci :
+
+\textbf{Lemme.} \textit{Soient $S$ dans} Cat, \textit{$X\in\Ob\uFib_0S$, et considérons, pour un $S'$ dans} Cat,
+\[
+\begin{aligned}
+f &\quad\longmapsto\quad f^*(X/S)=X\times_S(S',f)\\
+\uHom(S',S)^{\circ} &\quad\longrightarrow\quad \uFib_0S'.
+\end{aligned}
+\]
+\textit{(Ce foncteur est défini grâce au fait que $X$ est fibrant sur $S$, et peut s'interpréter donc, à $S$-équivalence près, en termes d'un foncteur $S^{\circ}\fl$} Cat \textit{\dots\ (\footnote[52]{\textbf{NB} $\Phi_S(X)$ était même déjà scindée, définie par le foncteur $s\longmapsto s\backslash X$.})). Les flèches de $\uHom(S',S)$ sont transformées en flèches $\in W^{\mathrm{d}}_{S'}$.}
+% foot: Version 7 décembre 2002
+
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+En effet, en termes de foncteurs
+\[ S'^{\circ}\fl\Cat, \]
+si $X$ est définie par
+\[ S^{\circ}\xrightarrow{\ \mathscr{X}\ }\Cat, \]
+alors $f^*(X)$ est définie par $\mathscr{X}\circ f$, et la flèche
+\[ \mathscr{X}\circ f\fl\mathscr{X}\circ g \]
+définie par $u : f\fl g$ n'est autre que $\mathscr{X}*u$. Sa valeur en $s'\in\Ob S'$ est obtenue en prenant
+\[ u(s') : f(s')\fl g(s'), \]
+d'où par $\mathscr{X}$
+\[ \mathscr{X}(u(s')) : \underbrace{\mathscr{X}(g(s'))}_{(\mathscr{X}\circ g)(s')}\fl\underbrace{\mathscr{X}(f(s'))}_{(\mathscr{X}\circ f)(s')} \]
+(\footnote[53]{à dégager un énoncé à part.}). Mais l'hypothèse $X\in\uFib_0S$ signifie que les $\mathscr{X}(v)$, $v\in\mathrm{Fl}(S)$, sont tous dans $W$. Donc
+\msp{page 45}$\mathscr{X}$ est dans $W$ fibre par fibre, donc dans $W^{\mathrm{d}}_{S'}$.
+
+\textbf{Corollaire 1.} \textit{Le foncteur du lemme, composé avec}
+\[ \uFib_0S'\fl\HOT^{\mathrm{lc}}_W(S')\overset{\text{déf}}{=}(\uFib_0S')(W^{\mathrm{d}}_{S'})^{-1} \]
+\textit{se factorise par le groupoïde fondamental de} $\uHom$ \textit{:}
+\[
+\begin{tikzcd}[row sep=huge]
+\uHom(S',S)^{\circ} \arrow[r] \arrow[d] & \uFib_0S' \arrow[d] \\
+\textstyle\prod(\uHom(S',S))^{\circ} \arrow[r] & \HOT^{\mathrm{lc}}_W(S').
+\end{tikzcd}
+\]
+\textit{Si $f$, $g$ sont dans une même composante connexe de $\uHom(S',S)$, alors $f^*X$ et $g^*X$ sont isomorphes (non canoniquement, en général) dans} $\HOT^{\mathrm{lc}}_W(S')$.
+
+Il est plus astucieux de ne pas fixer $X$ et de considérer
+\[ \uHom(S',S)\fl\uHom(\HOT^{\mathrm{lc}}_W(S),\HOT^{\mathrm{lc}}_W(S')) \tag*{$(*)$} \]
+correspondant à
+\[
+\begin{aligned}
+\uHom(S',S) &\quad\times\quad \HOT^{\mathrm{lc}}_W(S) &&\quad\longrightarrow\quad &&\HOT^{\mathrm{lc}}_W(S')\\
+(f &\quad,\quad\ \xi) &&\quad\longmapsto\quad && f^*(\xi).
+\end{aligned}
+\]
+Le lemme dira que les flèches de $S'\fl S$ sont transformées par $(*)$ en isomorphismes, d'où
+\[ \prod\uHom(S',S)\fl\uHom(\HOT^{\mathrm{lc}}_W(S),\HOT^{\mathrm{lc}}_W(S')), \]
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIa-012_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 46}
+donc si $f,g : S' \rightrightarrows S$ sont deux foncteurs homotopes, alors
+\[ f^* \simeq g^* : \HOTlc(S) \rightrightarrows \HOTlc(S'). \]
+
+Il s'ensuit aussitôt ceci
+
+\textbf{Corollaire 2.} \textit{Si $f$ est un homotopisme, $f^* : \HOTlc(S) \longrightarrow \HOTlc(S')$ est une équivalence de catégories.}
+
+En effet, prenant $g : S \longrightarrow S'$ telle que
+\[ fg \sim \id_S, \qquad gf \sim \id_{S'}, \]
+on trouve que
+\[ \begin{aligned}
+g^*f^* \simeq (\id_S)^* &= \id_{\HOTlc(S)} \\
+f^*g^* \simeq (\id_{S'})^* &= \id_{\HOTlc(S')},
+\end{aligned} \]
+donc on trouve que (quitte à ajuster ces isomorphismes fonctoriels) $f^*$ et $g^*$ sont des équivalences quasi-inverses l'une de l'autre.
+
+J'ai l'impression (\footnote[54]{O.K.}) que tout ça ne doit pas utiliser plus que les axiomes standard sur $W$ comme localiseur fondamental, tout au plus W(2) au lieu de la forme faible W(2 bis).
+
+Revenons à $X$ lisse sur $S$ contractile. Le corollaire 2 implique que
+\[ \begin{aligned}
+\Hot_W &\longrightarrow \HOTlc(S) \\
+\xi &\longmapsto p^*_S(\xi),
+\end{aligned} \]
+où $p_S : S \longrightarrow e$, est une équivalence. Donc dans la catégorie $\HOTlc(S)$, $X$ est isomorphe \msp{page 47} à un Cat-fibré de la forme $Z \times S \xrightarrow{\mathrm{pr}_2} S$, avec $Z$ dans Cat. Or pour $X_1 = Z \times S \longrightarrow S$, il est immédiat que $X_{1\,s} \longrightarrow X_1$ est dans $W$, car un produit cartésien de flèches \texttt{[dans]} $W$ (savoir $\id_Z$ et $s \longrightarrow S$) est dans $W$. (En fait, l'inclusion est même un homotopisme!) Notons maintenant que si $X_0$, $X_1$ sont deux objets dans $\underline{\mathrm{Liss}}_0S$, tels qu'il existe une $S$-flèche $X_0 \longrightarrow X_1$ qui soit dans $\Wd$, alors $X_{0\,s} \longrightarrow X_0$ est dans $W$ si et seulement si $X_{1\,s} \longrightarrow X_1$ l'est. En effet, on a
+\[ \begin{tikzcd}
+X_{0\,s} \arrow[r, "\in W"] \arrow[d, "i_s^{X_0}"'] & X_{1\,s} \arrow[d, "i_s^{X_1}"] & \\
+X_0 \arrow[r, "\in W", ""{name=A, below}] & X_1 & \\
+ & & \text{\footnotesize\begin{tabular}{@{}l@{}}ici on utilise sans doute\\ W(2), non seulement W(2 bis),\end{tabular}}
+\arrow[from=A, to=3-3, bend right]
+\end{tikzcd} \]
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+qui prouve le résultat.
+
+Il est vrai que le fait que $X = X_0$ et $X_1 = Z \times S$ soient isomorphes dans $\HOTlc(S)$ n'implique pas, par lui-même, l'existence d'une \msp{page 48} chaîne d'isomorphismes provenant de flèches dans $\Wd$. Mais en fait, si dans l'énoncé du corollaire 2 ci-dessus on compare $X$ dans $\underline{\mathrm{Fib}}_0S$ à $g^*f^*(X)$, grâce à une homotopie $\id_S \sim fg$, on trouve bel et bien une suite de foncteurs $\varphi_i : S \longrightarrow S$, avec $\varphi_0 = \id_S$, $\varphi_N = fg$, et $\varphi_i$ et $\varphi_{i+1}$ reliés par une flèche dans $\underline{\mathrm{Hom}}(S,S)$, donc on a une suite d'objets $X_i = \varphi_i^*(X)$ de $\underline{\mathrm{Fib}}_0S$ (avec $X_0 = X$, $X_N = g^*f^*X$), et $X_i$ et $X_{i+1}$ reliés par une flèche \textit{dans} $\underline{\mathrm{Fib}}_0S$ (pas seulement dans $\HOTlc(S)$), laquelle flèche est dans $\Wd = \Wf$. Donc on gagne, sous réserve de vérifications de routine diverses (\footnote[55]{O.K.}). Donc modulo celles-ci, on aura
+
+\textbf{Proposition 9} (\footnote[56]{C'est ok en supposant que $W$ est \textit{fortement} saturé, i.e. $\hot_W(f)$ isomorphisme $\Longrightarrow f \in W$.},\footnote[57]{Donc $W$-fibration à gauche $\Longleftrightarrow$ $W$-fibration à droite $\Longleftrightarrow$ $W$-fibration.}). \textit{Supposons que $X$ dans $\mathrm{Cat}/S$ soit une $W$-fibration à gauche (cf. prop. 8). Alors c'est même une $W$-fibration (au sens de b), page 40, où c'est appelé `$W$-fibration \textup{hot}-forte'), en d'autres termes, si $S'' \longrightarrow S'$ est sur $S$ avec $S''$, $S'$ contractiles, alors $X'' \longrightarrow X'$ est dans $W$ (\footnote[58]{on trouve seulement que $\hot_W(X'') \longrightarrow \hot_W(X')$ \texttt{[est un]} isomorphisme.}). On a sans doute mieux : si $S'' \longrightarrow S'$ est un homotopisme, alors $X'' \longrightarrow X'$ est dans $W$.}
+
+\msp{page 49}
+Prouvons (si nous pouvons) ce complément sympathique. Je précise que j'ai eu à faire l'hypothèse de $W$-prélissité (où de $W$-prépropreté) pour être sûr que l'image inverse $X \times_S S'$, par $f' : S' \longrightarrow S$, coïncide bien avec $f^*$ sur les $\HOTlc$ - autrement je n'ai aucune chance. % [sic] où -> ou, the conjunction "or" is meant
+`On sait' (tout est à revoir!) que c'est O.K. dans les trois cas $X$ $W$-lisse, $X$ $W$-propre, $X$ une $W$-fibration (mais en quel sens???). La vérification à faire (quand on travaille avec les $\Wd$) est celle-ci :
+\[ \begin{aligned}
+&X \xrightarrow{i_X} \Phi_S(X) = Y \text{ est dans } \Wd \text{ (sans mérite), et} \\
+&\text{le reste par tout changement de base.}
+\end{aligned} \tag*{$(*)$} \]
+
+Mais pour des $X, Y \in \mathrm{Ob}\,\mathrm{Cat}/S$ qui sont $W$-prélisse, la $\Wd$-équivalence coïncide avec $\Wf$, laquelle est préservée par changement de base, ainsi que l'hypothèse sur $X$, $Y$. Donc on est tranquille.
+
+On est ramené à prouver que si $X$ est $W$-prélisse sur $S$ et une $W$-pseudofibration, et si $S' \longrightarrow S$ est un homotopisme, alors $X' \longrightarrow X$ est dans $W$. Par l'argument de tantôt utilisant $X \longrightarrow \Phi_S(X)$, on se ramène au cas où $X$ est fibrée scindée.
+
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\msp{page 50}
+\[ \begin{tikzcd}
+X' \arrow[rr] \arrow[d] & & X \arrow[d] \\
+S' \arrow[rr, "f"] \arrow[dr, "p'"'] & & S \arrow[dl, "p"] \\
+ & e &
+\end{tikzcd} \]
+
+La flèche $X' = f^*(X) \longrightarrow X$ s'interprète dans $\Hot_W$ comme
+\[ p'_!(f^*(\xi)) \longrightarrow p_!(\xi) \ , \qquad \text{où } \xi = \hot_{S,W}(X). \tag*{$(*)$} \]
+
+Je dis que cette flèche est \texttt{[un]} isomorphisme, i.e. que pour tout $\eta \in \Hot_W$, la flèche transposée
+\[ \Hom_W(p_!(\xi),\eta) \longrightarrow \Hom_W(p'_!(f^*(\xi)),\eta) \tag*{$(**)$} \]
+est \texttt{[une]} bijection. Admettant la formule d'adjonction, la flèche $(**)$ s'interprète comme
+\[ \Hom_W(\xi,\underbrace{p^*(\eta)}_{\eta_S}) \longrightarrow \Hom_W(f^*(\xi),\underbrace{p'^*(\eta)}_{f^*(\eta_S)}), \]
+i.e.
+\[ \Hom_W(\xi,\eta_S) \longrightarrow \Hom_W(f^*(\xi),f^*(\eta_S)), \]
+que ce soit \texttt{[un]} isomorphisme résulte donc de $f^*$ pleinement fidèle sur les $\HOTlc$. Or on a vu que $f^*$ est une équivalence (cor. 2, page 46).
+
+\msp{page 51}
+Je vais reprendre les propositions 9 et 8, un peu mal foutues.
+
+\textbf{Théorème 3.} \textit{On suppose que $W$ satisfait à \textup{W(1,2,3)}. Soit $f : X \longrightarrow S$. Considérons les conditions suivantes.}
+
+\begin{itemize}[leftmargin=4em]
+\item[\textit{a)}] \textit{$\forall\ S'' \longrightarrow S'$ sur $S$, avec $S''$, $S'$} contractiles, \textit{$X'' \longrightarrow X'$ est dans $W$.}
+
+\item[\textit{a}$'$\textit{)}] \textit{$\forall\ S'$ sur $S$, avec $S'$ contractile, et $s' \in S'$, l'inclusion} % AUDIT resolved: the label is a prime, not d prime; see corrections.csv, PDF leaf 46
+\[ X_{s'} \hookrightarrow X' = X \times_S S' \]
+\textit{est dans $W$.}
+
+\item[\textit{a}$_1$\textit{)}] \textit{Comme a$'$), mais en supposant que $S'$ a un objet final (au lieu de $S'$ contractile).} % AUDIT resolved: the reference is a prime; see corrections.csv, PDF leaf 46
+
+\item[\textit{a}$_2$\textit{)}] \textit{Comme a$'$), mais en supposant que $S'$ a un objet initial.} % AUDIT resolved: the reference is a prime; see corrections.csv, PDF leaf 46
+
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+\item[\textit{b}$_1$\textit{)}] \textit{$f$ est $W$-}prépropre \textit{(i.e. a$'$) est satisfait quand $s'$ est un objet final de $S'$, sans autre condition sur $S'$ dans $\mathrm{Cat}/S$), et de plus pour toute flèche $s_0 \longrightarrow s_1$ dans $S$, la flèche induite $X/s_0 \longrightarrow X/s_1$ est dans $W$ (i.e. a$'$ \textup{\texttt{[plutôt a]}}) est satisfait pour $Y/s_0 \longrightarrow Y/s_1$ \textup{\texttt{[plutôt} $S/s_0 \longrightarrow S/s_1$\texttt{]}}).}
+
+\item[\textit{b}$_2$\textit{)}] \textit{$f$ est $W$-}prélisse \textit{(i.e. a$'$) est satisfait quand $s'$ est un objet initial de $S'$, sans autre condition sur $S'$), et de plus les flèches $s_0\backslash X \longrightarrow s_1\backslash X$ \textup{\texttt{[plutôt} $s_1\backslash X \longrightarrow s_0\backslash X$\texttt{]}} (pour $s_0 \longrightarrow s_1$ dans $S$) sont dans $W$, (i.e. a$'$ \textup{\texttt{[plutôt a]}}) satisfait pour $s_1\backslash Y \longrightarrow s_0\backslash Y$ \textup{\texttt{[plutôt} $s_1\backslash S \longrightarrow s_0\backslash S$\texttt{]}}).}
+
+\item[\textit{c}$_1$\textit{)}] \textit{$f$ est $W$-prépropre et une $W$-pseudofibration, i.e. la condition a$'$) est satisfaite dans les deux cas suivants: 1$^\circ$) $s'$ est un objet final de $S'$, 2$^\circ$) $S' = \mathbf{\Delta}^1$.}
+
+\item[\textit{c}$_2$\textit{)}] \textit{$f$ est $W$-prélisse et une $W$-pseudofibration, i.e. a$'$) dans les deux cas: 1$^\circ$) $s'$ est objet initial de $S'$, 2$^\circ$) $S' = \mathbf{\Delta}^1$.}
+\end{itemize}
+
+\textit{Toutes ces 8 conditions sont équivalentes. Elles impliquent la suivante :}
+
+\begin{itemize}[leftmargin=4em]
+\item[\textit{d)}] \textit{Soit $S'' \xrightarrow{u} S'$ un homotopisme dans $\mathrm{Cat}/S$, et considérons $u_X : X'' \longrightarrow X'$. Alors $\hot_W(u_X)$ est \textup{\texttt{[un]}} isomorphisme. (Donc si $W$ est fortement saturé, $u_X \in W$. Donc sous cette condition sur $W$, d) équivaut aux conditions précédentes.)}
+\end{itemize}
+
+\msp{page 52}
+\textbf{Définition 4.} On dit que $f : X \longrightarrow Y$ dans Cat est une \textit{$W$-fibration}, si elle satisfait les conditions équivalentes a) à c$_2$) de la proposition 9.
+
+\textbf{Corollaire 1.} \textit{Si $f$ est $W$-propre ou $W$-lisse, pour que $f$ soit une $W$-fibration, il faut et il suffit que $f$ soit une $W$-pseudofibration, i.e. que pour $S' = \mathbf{\Delta}^1 \longrightarrow S$, les inclusions des deux fibres}
+\[ X'_0 \xrightarrow{i_0} X' \xleftarrow{i_1} X'_1 \]
+\textit{de $X' = X \times_S S'$ soient dans $W$.}
+
+\textbf{Corollaire 2.} \textit{Supposons $f$ \textup{Cat}-fibrant. Alors $f$ est une $W$-fibration si et seulement si pout toute flèche $u : s \longrightarrow s'$ dans $S$, $u^* : X_{s'} \longrightarrow X_s$ est dans $W$. Énoncé dual si $f$ est \textup{Cat}-cofibrant.} % [sic] pout -> pour, misprint
+
+\textbf{Corollaire 3.} \textit{Supposons $f$ $W$-prépropre et $W$-prélisse (par exemple $f$ $W$-parfait). Alors $f$ est une $W$-fibration.}
+
+\textbf{Proposition 10.} \textit{Soit $f : X \longrightarrow Y$ une flèche dans $\underline{\mathrm{Fib}}_WS$ (\footnote[59]{$X$ et $Y$ tous deux prépropres ou tous deux prélisses suffit.}) (sous-catégorie pleine de $\mathrm{Cat}/S$ formée des $W$-fibrés sur $S$). Si $\forall\ s \in S$, $f_s : X_s \longrightarrow Y_s$ est dans $W$, alors $f \in W$.}
+
+Considérons
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[ \begin{tikzcd}
+X \arrow[rr, "f"] \arrow[dr, "i_X"'] & & Y \arrow[dr, "i_Y"] & \\
+ & \Phi_S(X) \arrow[rr, "\Phi_S(f)"'] & & \Phi_S(Y),
+\end{tikzcd} \]
+où $i_X, i_Y \in W$, donc $\Phi_S(f) \in W \Rightarrow f \in W$. Or le fait que $X$ \texttt{[est]} $W$-fibrée sur $S$ implique que $i_X \in \Wf$ (il suffit même que $X$ soit prépropre \texttt{[plutôt prélisse]} sur $S$), itou pour $Y$, $i_Y$. Donc l'hypothèse $f \in \Wf$ implique $\Phi_S(f) \in \Wf$, donc $\Phi_S(f) \in W$ par \texttt{[la]} proposition 5 (page 29).
+
+% ---- from Der-ChXIIa-012_p041-044.tex
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 53}
+
+\section*{IV\quad Sur l'axiome W(4) et ses variantes.}
+
+(\footnote[60]{Cf. aussi partie VI (HOT$_W$), p. 186-196}). J'ai passé des jours à essayer de prouver que toutes ces variantes sont équivalentes. Je vais donner une liste de celles, parmi ces variantes, qui avec le recul me paraissent encore avoir une utilité. (Avec des notations différentes de celles des pages 13-14.)
+
+\begin{itemize}[leftmargin=5em,labelsep=0.5em]
+\item[\fbox{W(4a)}] Toute $W$-fibration (cf. th. 3, p. 51, déf. 3, p. 52) est ultraforte, ce qui revient à ceci: pour
+\[
+\begin{tikzcd}
+X & X' \arrow[l,"q"'] \arrow[d,"f'"] \\
+Y \arrow[from=u,"f"'] & Y' \arrow[l,"p"']
+\end{tikzcd}
+\]
+cartésien dans Cat, si $f \in \underline{\Fib}_W$, $p \in W$, alors $q \in W$.
+
+\item[W(4a$'$)] Comme a), en supposant $f \in \Parf_\omega$, i.e. $f$ $W_\omega$-parfait (donc une $W_\omega$-fibration), où $W_\omega \subseteq W$ est la plus petits partie $\Sigma$ de Fl(Cat) satisfaisant W(1, 2 bis, 3). % [sic] petits -> petite, accord avec « partie »
+
+\item[\fbox{W(4b)}] Soit un diagramme commutatif
+$\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small, baseline=(X.base)]
+|[alias=X]| X \arrow[rr,"f"] \arrow[dr,"p"'] \& \& Y \arrow[dl,"q"] \\
+\& S \&
+\end{tikzcd}$
+dans Cat, avec $p, q \in \Fib_W$, $f \in W$.
+Alors $\forall s \in S$, $f_s : X_s \longrightarrow Y_s$ \texttt{[est dans} $W$\texttt{]}.
+
+\item[W(4b$'$)] Comme b), en supposant \texttt{[de plus]} $X$ et $Y$ fibrés scindés sur $S$, $f$ compatible avec \texttt{[les]} scindages (donc foncteur cartésien).
+
+\item[W(4b$''$)] Comme b), en supposant $p$, $q$ $W$\textit{-parfaits.}
+
+\item[\fbox{W(4c)}] Soit $f : X \longrightarrow Y$, avec $f \in \Fib_W \cap W$, alors les fibres de $f$ sont $W$-asphériques.
+
+\item[\dashedbox{W(4c$'$)}] Comme c), en supposant $f \in \Parf_\omega \cap W$. (C'est l'ancien W(4b$''$), dépouillé du $W_\infty$-parasite.)
+\end{itemize}
+
+\msp{page 54}
+
+J'ai cerclé les notions \texttt{[encadrées ici]} qui ont été vraiment utiles. Pratiquement, on peut parier que c'est la notion la plus forte, W(4a), qui est la seule importante. Voici les implications tautologiques (à l'exception de W(4a$'$) $\Longrightarrow$ W(4b), qui est démontré dans la démonstration de la proposition 4 (pages 6-10) (\footnote[61]{Cette démonstration utilise une notion plus forte de $W$-fibration que celle du théorème 3, p. 51.})).
+
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small]
+& \mathrm{a} \arrow[d,Rightarrow] & \\
+& \mathrm{a}' \arrow[dd,Rightarrow,"{\text{\rule[0.6ex]{2cm}{0.4pt}\ \begin{tabular}[t]{@{}l@{}}implication douteuse,\\ il faut affaiblir\\ un peu b), en\\ renforçant la\\ notion de\\ $W$-fibration\\ utilisée\\ pour énoncer b)\end{tabular}}}"] & \\
+& & \\
+& \mathrm{b} \arrow[dl,Rightarrow] \arrow[dr,Rightarrow] \arrow[dd,Rightarrow] & \\
+\mathrm{b}' & & \mathrm{b}'' \\
+& \mathrm{c} \arrow[d,Rightarrow] & \\
+& \mathrm{c}' &
+\end{tikzcd}
+\]
+
+J'ai surtout sué pour montrer que c$'$) $\Longrightarrow$ c), ou c) $\Longrightarrow$ b), sans y arriver. L'effort m'a permis de me débarrasser de diverses idées fausses, et de les remplacer par des justes, cf. plus bas. Il y a quand même un résultat positif qui surnage :
+
+\textbf{Proposition 1.} \textit{La condition b) (et sans doute même b$'$) et b$''$)} (\footnote[62]{et en supposant dans le cas de b$''$, que $W$ satisfait la condition des limites inductives W(6 bis), cf. prop. 5 du `corollaire' de la, page 14.})\textit{, mais je ne vais pas le prouver ici \dots) implique sans doute a) pour $\bar{W}$, le saturé fort de $W$. En tous cas, si $W$ est fortement saturé, les conditions a), a$'$), b) (et sûrement aussi b$'$) et b$''$)) sont équivalentes.}
+
+\textsc{Démonstration} de b) $\Longrightarrow$ a), quand $W$ est fortement saturé. En fait, moyennant b) (et sans même supposer $W$ fortement saturé), nous allons prouver que si on a
+\[
+\begin{tikzcd}
+X & X' \arrow[l,"q"'] \arrow[d,"f'"] \\
+Y \arrow[from=u,"f"'] & Y' \arrow[l,"p"']
+\end{tikzcd}
+\]
+cartésien dans Cat, avec
+\msp{page 55}
+$f$ une $W$-fibration, et $p \in W$, alors $\underline{q \in \bar{W}}$, i.e. $\hot_W(q)$ \texttt{[est un]} isomorphisme. Pour ceci, nous interprétons la flèche $q$ dans $\Hot_W$ de la façon suivante. Soit
+\[
+\xi = \hot_{Y,W}(X/Y), \qquad \xi' = p^*(\xi),
+\]
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+qui dit que $q$ s'identifie à la flèche canonique
+\[
+H_\bullet^{\HOT_W}(Y',\xi') \longrightarrow H_\bullet^{\HOT_W}(Y,\xi) \qquad \text{dans } \Hot_W = \HOT_W(e), \tag*{$(*)$}
+\]
+où on note de plus que $\xi \in \HOT_W(Y)$ est un coefficient \textit{localement constant} sur $Y$.
+
+Établissons d'abord cette interprétation de $q$. Notons que comme $X \in \underline{\Fib}_W Y$, l'image inverse $\xi' = p^*(\xi)$ n'est autre que $\hot_{Y',W}(X' = X \times_Y Y')$. D'autre part, si $g : Y \longrightarrow e$, $g' : Y' \longrightarrow e$ sont les flèches structurales, les deux membres de $(*)$ s'interprètent resp. comme $g'_!(\xi')$ et $g_!(\xi)$ (les $g'_!$ et $g_!$ au sens du prédérivateur $\HOT_W$). Or le calcul de $g'_!$, $g_!$ nous donne que les deux membres s'identifient resp. à
+\[
+\hot_W(X'), \qquad \hot_W(X),
+\]
+et nous admettons que la flèche
+\[
+\hot_W(X') \longrightarrow \hot_W(X)
+\]
+n'est autre que $\hot_W(q)$. D'ailleurs, comme $X$ est $W$-fibrée sur $S$, par définition pratiquement, $\xi$ est dans $\HOT^{\mathrm{lc}}_W(S)$. Donc il nous suffira de prouver le
+
+\msp{page 56}
+
+\textbf{Corollaire.} \textit{Supposons que $W$ satisfait à W(4b), et soit $p : S' \longrightarrow S$ dans $W$, $\xi \in \HOT^{\mathrm{lc}}_W(S)$, $\xi' = p^*(\xi)$. Alors}
+\[
+H_\bullet(S',\xi') \xrightarrow{\ \sim\ } H_\bullet(S,\xi)
+\]
+\textit{est un isomorphisme dans} $\Hot_W$.
+
+\textsc{Démonstration}. Il suffit de prouver que pour tout $\eta \in \mathrm{Ob}\,\Hot_W$ on a une bijection pour les $\Hom(-,\eta)$. Par la formule d'adjonction sur $S$, $S'$, cette application entre les Hom dans $\Hot_W$ s'identifie \texttt{[à]}
+\[
+\Hom_{\HOT_W(S)}(\xi,\eta_S) \longrightarrow \Hom_{\HOT_W(S')}(\xi',\eta_{S'}),
+\]
+où $\eta_S = p^*(\eta)$, $\eta_{S'} = p'^*(\eta)$ \texttt{[plutôt} $\eta_S = g^*(\eta)$\texttt{,} $\eta_{S'} = g'^*(\eta)$\texttt{, où} $g : S \longrightarrow e$\texttt{,} $g' : S' \longrightarrow e$ \texttt{sont les flèches structurales]}, donc $\eta_{S'} = p^*(\eta_S)$, et la flèche $(*)$ est la flèche sur les Hom induite par le foncteur
+\[
+p^*_{\mathrm{lc}} : \HOT^{\mathrm{lc}}_W(S) \longrightarrow \HOT^{\mathrm{lc}}_W(S').
+\]
+Or moyennant l'axiome W(4b) (que nous n'avons pas utilisé jusqu'à présent), ledit foncteur est une \textit{équivalence de catégories} si $p \in W$ (cf. VI, p. 204).
+
+\hfill q.e.d.
+
+De peur de les oublier, je vais maintenant faire une liste des petites questions que j'ai élucidées chemin faisant en gribouillant.
+
+\begin{itemize}[leftmargin=5em,labelsep=0.5em]
+\item[1°)] Si $X$, $Y$ sont $W$-lisses sur $S$, et $f : X \longrightarrow Y$ un $S$-morphisme tel que $f_s : X_s \longrightarrow Y_s$ soit $W$-lisse pour tout $s \in \mathrm{Ob}\,S$, il ne s'ensuit \textit{pas} que $f$ soit $W$-lisse. Mais c'est pourtant vrai quand $X$ et $Y$ sont fibrées scindées sur $S$ (ce
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 57}
+qui implique déjà leur $W$-lissité sur $S$), et $f$ compatible avec les scindages et a fortiori cartésien. Énoncé dual pour les catégories cofibrées scindées et les foncteurs strictement cartésiens entre elles qui sont $W$-propres fibre par fibre : ils sont $W$-propres.
+
+\item[2°)] J'étais intéressé, dans un cas de catégories fibrées scindées $X$, $Y$ sur $S$ et d'un foncteur strictement cartésien $f : X \longrightarrow Y$, supposé $W$-parfait fibre par fibre, de conclure que $f$ soit aussi $W$-parfait. (C'était un cas où de plus on sait que $X$, $Y$ sont aussi des $W$-fibrés sur $S$, i.e. les fonteurs changement de base $X_{s'} \longrightarrow X_s$, $Y_{s'} \longrightarrow Y_s$ sont dans $W$. Mais ça n'a pas beaucoup servi \dots) La question qui restait, en 1°), était celle de la $W$\textit{-propreté} de $f$. Mais c'est sans espoir (même pour $Y = S$), en vertu de la brillante % [sic] fonteurs -> foncteurs, lettre omise
+
+\textbf{Proposition 2.} \textit{Supposons que} $S = 0$
+$\begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(Z.base)]
+\& a \\
+|[alias=Z]| \phantom{0} \arrow[ur] \arrow[dr] \& \\
+\& b
+\end{tikzcd}$
+\textit{, et soit $Z$ une catégorie sur $S$. Alors $\Phi(Z)$ est propre sur $S$ si et seulement si $Z = \emptyset$.}
+
+Prenons alors dans 2°) ci-dessus $X = \Phi(Z)$, $Y = S$, $f : \Phi(Y) \longrightarrow S$ \texttt{[plutôt} $f : \Phi(Z) \longrightarrow S$\texttt{]} le morphisme structural (donc les $f_s$ sont $W$-parfaits), alors $f$ n'est propre que si $X = \emptyset$. Pourtant, si on prend $Z$ $W$-fibrée sur $S$, $\Phi(Z)$ l'est aussi, et on a un contre-exemple à 2°).
+\end{itemize}
+
+Mais on s'est quand même convaincu du résultat suivant :
+
+\textbf{Proposition 3.} \textit{Soient $X$, $Y$ catégories fibrées scindées sur $S$, $f : X \longrightarrow Y$ $S$-foncteur strictement cartésien, tel que}
+\msp{page 58}
+\textit{pour tout $s \in S$, $f_s : X_s \longrightarrow Y_s$ soit} $W$-fibrant. \textit{Alors,} si $W$ satisfait W(4a), $f$ \textit{est $W$-fibrant.}
+
+(J'espérais avoir que $f$ est $W$-fibrant `à l'\oe{}il', pour prouver que W(4c) implique W(4b). Mais j'étais obligé de supposer W(4a) \dots)
+\end{document}

@@ -1,0 +1,1924 @@
+% macro conflict, first definition kept: \newcommand{\Ind}{\operatorname{Ind}}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\card}{\mathrm{card}\,}
+% macro conflict, first definition kept: \newcommand{\cardred}{\operatorname{card}\,\text{\upshape réd}\,}
+% macro conflict, first definition kept: \newcommand{\Hom}{\underline{\operatorname{Hom}}}
+% macro conflict, first definition kept: \newcommand{\Ind}{\operatorname{Ind}}
+% macro conflict, first definition kept: \newcommand{\Hom}{\underline{\mathrm{Hom}}}
+% macro conflict, first definition kept: \newcommand{\Ind}{\operatorname{Ind}}
+% macro conflict, first definition kept: \newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+% macro conflict, first definition kept: \newcommand{\Ind}{\operatorname{Ind}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\providecommand{\IfDocumentMetadataT}[1]{}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage[a4paper,left=23mm,right=32mm,top=23mm,bottom=23mm,marginparwidth=24mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{pdftitle={Les Derivateurs: Chapter XVIII-c, critical reader},pdfauthor={Alexander Grothendieck (source); GPT-6 Astra (commentary and audit)}}
+\DeclareFontShape{TU}{lmr}{bx}{sc}{<->ssub*lmr/bx/n}{}
+\setlength{\emergencystretch}{4em}
+\newsavebox{\dctauAB}
+\newsavebox{\dctauABone}
+\newsavebox{\dctauAAzero}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\cardred}{\mathop{\textup{card\,réd}}\nolimits}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\rbox}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners=4pt,inner sep=2pt](X){\textup{#1}};}
+\newcommand{\bs}{\backslash}
+\newcommand{\encadre}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners,inner sep=2pt](X){#1};}
+\newcommand{\uGamma}{\underline{\Gamma}}
+\newcommand{\trois}[1]{\mathrel{\overset{#1}{\vcenter{\offinterlineskip\hbox{$\longrightarrow$}\vskip0.5pt\hbox{$\longrightarrow$}\vskip0.5pt\hbox{$\longrightarrow$}}}}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\cercle}[1]{\tikz[baseline=(X.base)]\node[draw,circle,inner sep=1pt](X){\upshape #1};}
+\newcommand{\defeq}{\overset{\text{\upshape déf}}{=}}
+\newcommand{\into}{\lhook\joinrel\longrightarrow}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\red}{\mathop{\textup{réd}}\nolimits}
+\newcommand{\uS}{\underline{S}}
+\newcommand{\incl}{\lhook\joinrel\longrightarrow}
+\newcommand{\ilim}{\varinjlim\limits}
+\newcommand{\circlabel}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\ovalbox}[1]{\tikz[baseline=(c.base)]\node[draw,rounded corners=6pt,inner sep=2pt](c){#1};}
+\begin{document}
+\sbox{\dctauAB}{\circled{$\scriptstyle\tau_{\alpha,\beta}$}}
+\sbox{\dctauABone}{\circled{$\scriptstyle\tau_{\alpha,\beta+1}$}}
+\sbox{\dctauAAzero}{\circled{$\scriptstyle\tau_{\alpha,\alpha_0}$}}
+% ---- from der-ch18_p081-085.tex
+\printedpage{79}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+Le résultat principal dans la présente section est le suivant :
+
+\textbf{Théorème 4.9.3.} \textit{Sous les conditions générales de 4.9.1 pour $C$, $\pi_0$, $J$ (notamment} $\cardred J \leqslant \pi_0$\textit{), le foncteur pleinement fidèle (4.9.3) est une équivalence de catégories dans chacun des deux cas suivants :}
+\begin{itemize}[label={}]
+{\itshape
+\item[a)] $C$ est stable par $\varinjlim$ filtrantes dénombrables.
+\item[b)] Il existe un cardinal $\pi_0 < \pi$, et un cardinal $\pi'_0 > \pi_0$ \textup{(}\textbf{\upshape N.B.} On peut supposer que $\pi'_0$ est le successeur de $\pi_0$, donc $\pi'_0 \leqslant \pi$), tels que $C$ soit stable par limites inductives grandes devant $\pi_0$, et de cardinal $\pi'_0$.
+}
+\end{itemize}
+(\footnote[94]{Cas commun : il existe un ordinal limite $\alpha$, tel que 1) $\card \alpha \leqslant \pi_0$. 2) Les limites inductives \texttt{[de]} type $I_\alpha = \{\beta \mid \beta < \alpha\}$ sont représentables dans $C$.}).
+
+\textbf{Remarque 4.9.4.}
+\begin{itemize}[label={}]
+\item[a)] Ce théorème, cas a), contient le théorème 4.4.13, partie b) (p. 95-96), où on suppose que $C$ est stable par limites inductives de cardinal $\leqslant \pi_0$, l'hypothèse a) de 4.9.3 étant considérablement plus faible.
+\item[b)] \msp{page 220}Je présume qu'en dehors d'une hypothèse restrictive du type a) ou b) ci-dessus, le foncteur pleinement fidèle (4.9.3) n'est pas toujours essentiellement surjectif, même dans le cas particulier où $J$ est une catégorie finie, p.ex. $J = B_G$, $G = \{\pm 1\}$. Pour un contre-exemple dans le cas très voisin où on prend $\cM = \Ind(C)$ (au lieu de $\Ind_{\pi_0}(C)$), et où on considère le foncteur (pleinement fidèle si $J$ est une catégorie équivalent à une catégorie \textit{finie}) % [sic] équivalent -> équivalente, agreement with « une catégorie »
+\[
+\Ind(\uHom(J,C)) \longrightarrow \uHom(J,\Ind(C)),
+\]
+je renvoie à l'exercice SGA 4 I 8.8.8.
+\end{itemize}
+L'application principale du théorème 4.9.3 consiste en le
+
+\textbf{Corollaire 4.9.5.} \textit{Soient $\cM$ une catégorie} accessible \textit{(4.8.7), $J$ une catégorie équivalente à une petite catégorie. Alors la catégorie $\cM(J^\circ) = \uHom(J,\cM)$ est accessible. Plus précisément, soient $\pi_0$ un cardinal} utile \textit{pour $\cM$ (i.e. tel que $\Ind_{\pi_0}(\cM_{\pi_0}) \xrightarrow{\sim} \cM$, i.e. un cardinal tel que $\cM$ soit $\pi_0$-accessible), soit $\pi$ un cardinal infini tel que $\pi^{\pi_0} = \pi \geqslant \cardred J$} (\footnote[95]{On a donc $\pi = \pi^{\pi_0} \geqslant 2^{\pi_0} > \pi_0$.}), \textit{i.e. $\pi = c^{\pi_0}$, où $c$ est n'importe quel cardinal $c \geqslant \sup(\pi_0, \cardred J)$, alors $\uHom(J,\cM)$ est $\pi$-accessible, plus précisément on a une équivalence de catégories} % doubt resolved against PDF; see corrections.csv
+\[
+\uHom(J,\cM) \xleftarrow{\ \sim\ } \Ind_\pi(\uHom(J,\cM_\pi)) \ . \tag*{(4.9.5.1)}
+\]
+
+\msp{page 221}On sait en effet, avec les hypothèses faites sur $\pi_0$, $\pi$, que $\pi$ est utile pour $\cM$, i.e. que
+\[
+\cM \xleftarrow{\ \sim\ } \Ind_\pi(\cM_\pi) \ ,
+\]
+d'autre part, $\cM_\pi$ est stable par $\varinjlim$ grandes devant $\pi_0$ et de cardinal $\leqslant \pi$. On peut donc appliquer 4.9.3 b), en prenant $C = \cM_\pi$, $\pi$ et $\pi_0$ comme ici (donc $\pi_0 < 2^{\pi_0} \leqslant \pi$), et $\pi'_0 = \pi$.
+
+\printedpage{80}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\textbf{4.9.6} (\footnote[96]{Résultats préliminaires (à la démonstration de 4.9.3).}). Le reste de la présente section 4.9 est consacré à la démonstration de 4.9.3, i.e. à la vérification, pour $J \longrightarrow \cM$, des conditions a), b) de 4.9.2. Dans toute la suite, on se fixe donc une
+\[
+\varphi \ : \ J \longrightarrow \cM \ = \ \Ind_\pi(C) \ . \tag*{(4.9.6.1)}
+\]
+On peut supposer $J$ réduite, donc petite et $\card J \leqslant \pi_0$. On va considérer le foncteur déduit du foncteur (4.9.2.1)
+\[
+\uHom(J,C)/\varphi \longrightarrow \prod_{j \in \Ob J} C/\varphi(j) \ , \tag*{(4.9.6.2)}
+\]
+dont les foncteurs en question se déduisent en composant avec les foncteurs projection
+\[
+\prod C/\varphi(j) \longrightarrow C/\varphi(j_0) \ . \tag*{(4.9.6.3)}
+\]
+Comme les catégories facteurs $C/\varphi(j)$ sont filtrantes (et même grandes devant $\pi$), leur produit est également filtrant, et même grand devant $\pi$ (immédiat), et de même
+\msp{page 222}
+pour les produits partiels. Il s'ensuit aussitôt que les projections (4.9.6.3) sont cofinales, en vertu du
+
+\textbf{Lemme 4.9.6.1.} \textit{Soient $I$, $I'$ deux catégories avec $I'$ \textup{0}-connexe (p.ex. filtrante), alors le foncteur projection $pr_1 : I \times I' \longrightarrow I$ est cofinal.}
+
+En effet, pour $i' \in \Ob I'$ \texttt{[plutôt} $i \in \Ob I$\texttt{]}, on a
+\[
+i\backslash(I \times I') \ \simeq \ (i\backslash I) \times I' \ ,
+\]
+or $i\backslash I$ et $I'$ étant 0-connexe, il en est de même de leur produit.
+
+\textbf{Lemme 4.9.6.2} (\footnote[97]{Attention, il n'est pas vrai qu'un produit infini de catégories 0-connexes est 0-connexe !}). \textit{Soit $(I_\alpha)_{\alpha \in A}$ une famille de catégories} filtrantes \textit{(resp. grandes devant $\pi$). Alors $I_A \stackrel{\text{déf}}{=} \prod_{\alpha \in A} I_\alpha$ est filtrante (resp. grande devant $\pi$), et pour toute partie $B \subset A$, la projection canonique $I_A \longrightarrow I_B$ est cofinal.} % [sic] cofinal -> cofinale, agreement with « la projection »
+
+(\footnote[98]{Cf. démonstration élégante ci-dessous, 4.9.6.6.}). La stabilité de la propriété “filtrante” ou “grande devant $\pi$” par AQT \texttt{[âne qui trotte]}. On a, si $B' = A\backslash B$, $I_A \simeq I_B \times I_{B'} \longrightarrow I_B$, et on applique le lemme 4.9.6.1 pour conclure que ce foncteur est cofinal, $I_{B'}$ étant filtrante, donc 0-connexe.
+
+\msp{page 223}Le foncteur (4.9.6.3) étant cofinal, pour établir que (4.9.2.1) l'est, il suffit de prouver qu'il en est ainsi du foncteur (4.9.6.2), ce que nous ferons. Notons de plus que ledit foncteur est \textit{fidèle}, car il s'insère dans le carré commutatif
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\uHom(J,C)/\varphi \arrow[r] \arrow[d] & \prod C/\varphi(j) \arrow[d] \\
+\uHom(J,C) \arrow[r] & C^{\Ob J}\ ,
+\end{tikzcd}
+\]
+\printedpage{81}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+où les flèches verticales et la deuxième flèche horizontale sont fidèles. En définitive, pour établir le théorème 4.9.3, nous allons étudier le foncteur \textit{fidèle} (4.9.6.2)
+\[
+\begin{aligned}
+&f \ : \ \uHom(J,C)/\Phi \ \longrightarrow \ \textstyle\prod_{j \in J_0} C/\varphi(j) \\ % [sic] \Phi -> \varphi, the functor is written \varphi everywhere else
+&\text{(où on a posé } J_0 = \Ob J,\ J_1 = \Fl J) \ ,
+\end{aligned}
+\tag*{$(*)$}
+\]
+et nous allons prouver :
+\begin{itemize}[label={}]
+\item[\textcircled{a}] Ce foncteur fidèle $(*)$ est \textit{cofinal.}
+\item[\textcircled{b}] La catégorie source $\uHom(J,C)/\varphi$ est grande devant $\pi_0$.
+\end{itemize}
+Nous allons pour ceci dégager un lemme auxiliaire sur la cofinalité des foncteurs \textit{fidèles} :
+
+\msp{page 224}\textbf{Lemme 4.9.6.3} (\footnote[99]{Ce lemme fait partie du sorite général sur la cofinalité et les catégories filtrantes.}). \textit{Soit $f : I \longrightarrow I'$ un foncteur, et considérons les conditions :}
+{\itshape
+\begin{itemize}[label={}]
+\item[a)] $I$ filtrante, $f$ cofinal, i.e. (en présence de $I$ filtrante) $f$ satisfait les conditions familières \rbox{F 1}, \rbox{F 2}.
+\item[b)] $I'$ est filtrante, et les $i'\backslash I$ (pour $i' \in \Ob I'$) sont filtrantes.
+\item[b$'$)] $I'$ \textup{0}-connexe, satisfait PF (2) \textup{(}\footnote[100]{p.ex. PF 2 est satisfaite si $I'$ est \textit{ordonnée}, sans avoir à supposer d'avance $I'$ filtrante, seulement 0-connexe.}\textup{)} (égalisation des double-flèches).
+\item[b$''$)] $I'$ est filtrante, les $i'\backslash I$ pseudo-filtrantes, i.e. satisfont à la condition PF $1'$.
+\item[c)] $I'$ filtrante, et $f$ satisfait à F 1, ainsi que la condition suivante.
+\begin{itemize}[label={}]
+\item[\rbox{F 3}] Pour tout couple $(i_0,i_1)$ d'objets de $I$ et toute flèche $f(i_0) \xrightarrow{u'} f(i_1)$, il existe un objet $i_2$ de $I$, et une flèche $v' : f(i_1) \longrightarrow f(i_2)$, tels que $v'$ et $v'u'$ soient relevables en des flèches $i_1 \xrightarrow{v} i_2$ et $i_0 \xrightarrow{w} i_2$ (i.e. il existe $i_2$ et $v : i_1 \longrightarrow i_2$, $w : i_0 \longrightarrow i_2$ tels qu'on ait $f(v)u' = f(w)$).
+\end{itemize}
+\end{itemize}
+\[
+\begin{tikzcd}
+i_0 \arrow[rr, bend left=20, "w"] & i_1 \arrow[r, "v"] & i_2 % doubt resolved against PDF; see corrections.csv
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}
+f(i_0) \arrow[r, "u'"] \arrow[rr, dotted, bend right=20, "f(w)"'] & f(i_1) \arrow[r, "f(v) = v'"] & f(i_2)
+\end{tikzcd}
+\]
+\begin{itemize}[label={}]
+\item[1)] On a les implications
+\[
+a \iff b \iff b' \implies b'' \iff c \ ,
+\]
+et si $f$ est \textup{fidèle} (p.ex. $I$ ordonnée), les cinq conditions a), b), b$'$), b$''$), c) sont équivalentes.
+\end{itemize}
+}
+
+\printedpage{82}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+{\itshape
+\begin{itemize}[label={}]
+\item[2)] \msp{page 225}Soit $\pi$ un cardinal infini, et considérons les conditions :
+\begin{itemize}[label={}]
+\item[$a_\pi$)] $I$ grande devant $\pi$, $f$ cofinal, i.e. F 1, F 2.
+\item[$b_\pi$)] $I'$ grande devant $\pi$, les $i'\backslash I$ ($i' \in \Ob I'$) aussi.
+\item[$b_\pi{}''$)] $I'$ grande devant $\pi$, les $i'\backslash I$ ($i' \in \Ob I'$) sont $\pi$-pseudo-filtrantes, i.e. satisfont PS $1_\pi{}'$. % [sic] PS 1_π' -> PF 1_π', the conditions are elsewhere called PF
+\item[$c_\pi$)] $I'$ grande devant $\pi$, et $f$ satisfait F 1 et
+\begin{itemize}[label={}]
+\item[\rbox{F $3_\pi$}] \textup{(}\footnote[101]{\textbf{N.B.} La condition F $3_\pi$ est tautologiquement satisfaite si $f$ est \textit{pleinement fidèle.}}\textup{)}. Pour toute famille $(i_\alpha)_{\alpha \in A}$ d'objets de $I$, avec \textup{card} $A \leqslant \pi$, et $i \in \Ob I$, et une famille de flèches $u'_\alpha : f(i_\alpha) \longrightarrow f(i)$, existe $j \in \Ob I$ et une flèche $v' : f(i) \longrightarrow f(j)$, telle que $v'$ \textup{et} les $v'u'_\alpha$ proviennent de flèches de $I$, i.e. il existe des flèches $v : i \longrightarrow j$, $w_\alpha : i_\alpha \longrightarrow j$ telles que $f(v)u'_\alpha = f(w_\alpha)$ $\forall\ \alpha \in A$.
+\end{itemize}
+\end{itemize}
+\[
+\begin{tikzcd}[row sep=huge]
+i_\alpha \arrow[d, dash] \arrow[rr, dotted, bend left=20, "w_\alpha"] & i \arrow[r, dotted, "v"] \arrow[d, dash] & j \arrow[d, dash] \\
+f(i_\alpha) \arrow[r, "u'_\alpha"] & f(i) \arrow[r, "v' = f(v)"] & f(j)
+\end{tikzcd}
+\]
+Ceci posé, on a
+\[
+a_\pi \iff b_\pi \implies c_\pi \implies b_\pi{}'' \ ,
+\]
+et si $f$ est fidèle, ou $I$ ordonné, les quatre conditions $a_\pi$, $b_\pi$, $b_\pi{}''$, $c_\pi$ sont équivalentes.
+\end{itemize}
+}
+(\footnote[102]{Démonstration de la proposition donnée dans 4.9.6.7, page 227.}).
+
+\textbf{4.9.6.4. N.B.} Dans le cas qui nous intéresse, où $f$ est le foncteur $(*)$ (p. 223), on sait que $I'$ est grande devant $\pi$. On voudrait établir que $I$ l'est et que $f$ est cofinal, i.e. la condition $\mathrm{a}_\pi$. On le prouvera en prenant $\mathrm{b}_\pi$ (qui implique $\mathrm{a}_\pi$ puisque $f$ est fidèle). Il reste donc à
+\msp{page 226}
+prouver, sur le foncteur $f$ dans $(*)$, p. 223, les deux conditions suivantes :
+\begin{itemize}[label={}]
+\item[F 1)] Pour tout système de flèches dans $\cM$
+\[
+X(j) \xrightarrow{p(j)} \varphi(j) \ , \qquad j \in J_0 = \Ob J, \text{ les } X(j) \text{ dans } \Ob C \ ,
+\]
+il existe un foncteur $F \ : \ J \longrightarrow C$ et $F \xrightarrow{q} \varphi$, enfin un système de flèches $X(j) \xrightarrow{u(j)} F(j)$ dans les $C/\varphi(j)$, i.e. rendant commutatif les diagrammes % [sic] commutatif -> commutatifs, agreement with « les diagrammes »
+\[
+\begin{tikzcd}[column sep=small]
+X(j) \arrow[rr, "u(j)"] \arrow[dr, "p(j)"'] & & F(j) \arrow[dl, "q(j)"] \\
+& \varphi(j)\ . &
+\end{tikzcd}
+\]
+\item[F $3_\pi$)] Pour tout système $(F_\alpha)_{\alpha \in A}$ ($\card A \leqslant \pi$) d'éléments dans $\uHom(C,J)$, et des flèches % [sic] \uHom(C,J) -> \uHom(J,C), the F_α are functors J -> C
+\[
+F_\alpha \xrightarrow{p_\alpha} \varphi \qquad \text{dans } \uHom(J,\cM),
+\]
+et pour $G$ dans $\uHom(J,C)$ et $G \xrightarrow{q} \varphi$ dans $\uHom(J,\cM)$, étant donné un système de flèches $u_\alpha(j)$,
+\printedpage{83}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[column sep=small]
+F_\alpha(j) \arrow[rr, "u_\alpha(j)", "\text{comm.}"'] \arrow[dr, "p_\alpha(j)"'] & & G(j) \arrow[dl, "q(j)"] \\
+& \varphi(j)\ , &
+\end{tikzcd}
+\qquad u_\alpha(j) \text{ flèche dans } C/\varphi(j) \ ,
+\]
+il existe $H \xrightarrow{q} \varphi$ dans $\uHom(J,C)$ et une flèche $G \xrightarrow{v} H$ dans $\uHom(J,C)/\varphi$, telle que pour tout $\alpha \in A$, le système de flèches composés
+\msp{page 227}
+\[
+\begin{tikzcd}[row sep=huge]
+F_\alpha(j) \arrow[r, "u_\alpha(j)", "\text{comm.}"'] \arrow[dr, dotted, "p_\alpha(j)"'] & G(j) \arrow[r, "v(j)", "\text{comm.}"'] \arrow[d, dotted, "q(j)"] & H(j) \arrow[dl, dotted, "q(j)"] \\
+& \varphi(j) &
+\end{tikzcd}
+\]
+(pour $j \in J_0 \in \Ob J$) provienne d'un \textit{foncteur} $w_\alpha : F_\alpha \longrightarrow H$. % [sic] J_0 \in \Ob J -> J_0 = \Ob J, J_0 was defined as Ob J
+\end{itemize}
+Pour prouver 4.9.3, nous sommes donc ramené à prouver les deux propositions F 1), F $3_\pi$) précédentes, sous l'une des deux conditions a) ou b) de 4.9.3.
+
+\textbf{Corollaire 4.9.6.5} (de 4.9.6.3). \textit{Soit $(f_\alpha : I_\alpha \longrightarrow I'_\alpha)$ une famille de foncteurs cofinaux, les catégories source étant filtrantes. Alors le foncteur produit $f = \prod f_\alpha : I = \prod_\alpha I_\alpha \longrightarrow I' = \prod_\alpha I'_\alpha$ est cofinal.}
+
+En effet, il faut vérifier que les catégories $i'\backslash I$, pour $i' \in \Ob I'$, sont 0-connexes. Or si $i' = (i'_\alpha)_{\alpha \in A}$, on a
+\[
+i'\backslash I \ \simeq \ \prod_\alpha (i'_\alpha\backslash I_\alpha) \ ,
+\]
+et par 4.9.6.3, 1°) a $\Longrightarrow$ c, les $i'_\alpha\backslash I_\alpha$ sont filtrantes, donc leur produit est filtrant
+\msp{page 228}
+(cf. 4.4.6.2), donc 0-connexe, q.e.d. % [sic] 4.4.6.2 -> 4.9.6.2, the lemma on products of filtrantes is 4.9.6.2
+
+\textbf{Corollaire 4.4.6.6.} \textit{Soit $\pi$ un cardinal infini. Tout produit de catégories grandes devant $\pi$ est grand devant $\pi$.} % [sic] 4.4.6.6 -> 4.9.6.6, numbering of the section and footnote 98
+
+Soit $I = \prod_{\alpha \in A} I_\alpha$, soit $B$ un ensemble de cardinal $\leqslant \pi$, il faut prouver que $I \xrightarrow{\mathrm{diag}_I} I^B$ est cofinal. Or ce foncteur s'identifie au produit des foncteurs similaires $I_\alpha \longrightarrow I_\alpha^B$, lesquels sont cofinaux, les catégories source étant de plus filtrantes. Donc on peut conclure par le corollaire 4.9.6.5.
+
+\textbf{4.9.6.7.} \textsc{Démonstration de} 4.9.6.3. (Partie 1°.)
+
+a $\Longrightarrow$ b. On sait déjà que a) implique que $I'$ est filtrante (SGA 4 I 8.1.3 b). Reste à prouver que pour tout $i' \in \Ob I'$, $i'\backslash I$ est filtrante (\footnote[103]{Court-circuit : on sait déjà que $i'\backslash I$ est 0-connexe, d'autre part elle est \textit{localement} filtrante, car coétale sur $I$ qui est filtrante, donc elle est filtrante.}). Deux conditions PF $1'$ et PF 2 à vérifier (en plus du fait que $i'\backslash I \neq \emptyset$, qui est connu par cofinalité de $f$, impliquant que $i'\backslash I$ est 0-connexe).
+\begin{itemize}[label={}]
+\item[1)] Soient $(i,u')$, $(j,v')$ deux éléments de $i'\backslash I$, il faut voir qu'ils sont majorés par un troisième élément. Or $I$ étant filtrante, $i$, $j$ sont majorés par $k$. On aurait fini donc si on savait que $f(u_1)u' = f(v_1)v'$, soit $w'$, car alors $(k,w')$ ferait l'affaire.
+\end{itemize}
+
+% ---- from der-ch18_p086-090.tex
+\printedpage{84}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}
+{} & i \arrow[drr, "u_1"] \arrow[dd, dash] & {} & {} \\
+{} & {} & j \arrow[r, "v_1"] & k \arrow[dd, dash] \\
+i' \arrow[r, "u'"] \arrow[drr, "v'"'] & f(i) \arrow[drr] & {} & {} \\
+{} & {} & f(j) \arrow[r] \arrow[uu, dash, crossing over] & f(k)
+\end{tikzcd}
+\]
+
+\begin{itemize}[label={}]
+\item \msp{page 229}Mais on applique F 2 sur $f$ à la double-flèche en question $i' \rightrightarrows f(k)$, on trouve $w : k \longrightarrow \bar{k}$,
+\[
+\begin{tikzcd}
+{} & k \arrow[r, "w"] \arrow[dd, dash] & \bar{k} \arrow[dd, dash] \\
+{} & {} & {} \\
+i' \arrow[r, shift left] \arrow[r, shift right] & f(k) \arrow[r] & f(\bar{k})
+\end{tikzcd}
+\]
+telle que
+\[
+\underbrace{f(w)(f(u_1)u')}_{= f(wu_1)u'} = \underbrace{f(w)(f(v_1)v')}_{f(wv_1)v'} \ ,
+\]
+et remplaçant $k$ par $\bar{k}$, et $u_1$, $v_1$ par $wu_1$, $wv_1$, on trouve ce qu'on veut.
+\end{itemize}
+
+\begin{enumerate}[label=\arabic*), start=2]
+\item PF (2) pour $i'\bs I$, i.e. on se donne un diagramme ci-contre \texttt{[ci-dessous]},
+\[
+\begin{tikzcd}
+{} & i \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] \arrow[dd, dash] & j \arrow[r, dotted, "w"] \arrow[dd, dash] & j' \\
+{} & {} & {} & {} \\
+i' \arrow[r, "u'"] & f(i) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(j) \arrow[r, dotted, "f(w)"] & f(j') \ ,
+\end{tikzcd}
+\]
+avec $f(u_1)u' = f(u_2)u'$, soit $v'$ (double-flèche dans $i'\bs I$ de $(i,u')$ dans $(j,v')$), on veut l'égaliser à droite. Or $I$ étant filtrant, il existe $w : j \longrightarrow j'$ telle que $wu_1 = wu_2$, or cette flèche définit une flèche $(j,v') \longrightarrow (j', f(w')v')$, qui égalise la double-flèche donnée. % [sic] f(w')v' -> f(w)v', the arrow just defined is w : j --> j'
+\end{enumerate}
+
+b $\Longrightarrow$ b$'$ est clair.
+
+b) $\Longrightarrow$ a). Comme les $i'\bs I$ sont filtrantes, donc 0-connexes, $f$ est cofinal, il reste à prouver que $I$ est filtrant, donc à vérifier PF 0 ($I$ 0-connexe), PF 1, PF 2 pour $I$. $I$ est 0-connexe, car $I'$ l'est, et $f$ cofinal, i.e. $\mathbf{W}_0$-coasphérique, d'où PF 0.
+
+\msp{page 230}Prouvons PF 1, i.e. que si
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+{} & i_1 \\
+i_0 \arrow[ur] \arrow[dr] & {} \\
+{} & i_2
+\end{tikzcd}
+est donné, on peut compléter en un carré commutatif.
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & i_1 \arrow[dr, dotted, "v_1"] & {} \\
+i_0 \arrow[ur, "u_1"] \arrow[dr, "u_2"'] & {} & i_3 \\
+{} & i_2 \arrow[ur, dotted, "v_2"'] & {}
+\end{tikzcd}
+\]
+% foot: Version 17 décembre 2025
+
+\printedpage{85}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & f(i_1) \arrow[dr, "f(v_1)"] & {} \\
+f(i_0) \arrow[ur, "f(u_1)"] \arrow[dr, "f(u_2)"'] & {} & f(i_3) \\
+{} & f(i_2) \arrow[ur, "f(v_2)"'] & {}
+\end{tikzcd}
+\]
+
+Mais considérons les objets $\xi_1 = (i_1, f(u_1))$, $\xi_2 = (i_2, f(u_2))$ de $f(i_0)\bs I$, et utilisant PF 1$'$ pour cette catégorie, on trouve $\xi_3 = (i_3, w')$ dans ladite catégorie, et des flèches de $\xi_1$, $\xi_2$ dans $\xi_3$, i.e. $v_1 : i_1 \longrightarrow i_3$, \texttt{[}$v_2 : i_2 \longrightarrow i_3$\texttt{,]} telles que $\underbrace{f(v_1)f(u_1)}_{f(v_1u_1)} = w'$, $\underbrace{f(v_2)f(u_2)}_{f(v_2u_2)} = w'$, donc
+\[
+f(v_1u_1) \ = \ f(v_2u_2) \ .
+\]
+Ainsi, on a une double-flèche $i_0 \overset{v_1u_1}{\underset{v_2u_2}{\rightrightarrows}} i_3$, égalisée par $f$. Si on prouve PF 2 sur $I$, on trouve $i_3 \xrightarrow{\alpha} \bar{i}_3$ telle que $\alpha(v_1u_1) = \alpha(v_2u_2)$, i.e. $(\alpha v_1)u_1 = (\alpha v_2)u_2$, et quitte à remplacer $i_3$ par $\bar{i}_3$, $v_1$, $v_2$ par $\alpha v_1$, $\alpha v_2$, on a gagné.
+
+Reste à prouver PF 2 sur $I$, i.e. égaliser une double-flèche
+\[
+i_0 \ \overset{v_1}{\underset{v_2}{\rightrightarrows}} \ i_1 \ .
+\]
+
+\msp{page 231}Or $I'$ satisfaisant à PF 2, on peut égaliser la double-flèche $f(u_1)$, $f(u_2)$ par une flèche $f(i_1) \xrightarrow{v'} i'$ dans $I'$, et comme $i'\bs I$ non vide, on peut supposer que $i'$ est de la forme $f(i_2)$.
+\[
+\begin{tikzcd}
+i_0 \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] \arrow[dd, dash] & i_1 \arrow[r] & i_2 \\
+{} & {} & {} \\
+f(i_0) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(i_1) \arrow[r, "v'"] & f(i_2) % doubt resolved against PDF; see corrections.csv
+\end{tikzcd}
+\]
+Admettons pour un instant la condition F 3 de c), que nous allons appliquer à $(i_1, i_2, v')$. Il existe donc $i_2 \xrightarrow{v} \bar{i}_2$, $w : i_1 \longrightarrow \bar{i}_2$ tels que l'on ait $f(w)v' = f(v)$. Il s'ensuit que $f(w)$ égalise $f(u_1)$ et $f(u_2)$, i.e. qu'on a $f(wu_1) = f(wu_2)$, i.e. la double-flèche initiale est remplacée par $(\bar{u}_1 = wu_1, \bar{u}_2 = wu_2)$, telle que $f(\bar{u}_1) = f(\bar{u}_2)$. En somme, on est ramené au cas d'une double-flèche $(u_1, u_2)$ telle que $f(u_1) = f(u_2)$, soit $v'$. Mais alors soit $\xi_1 = (i_0, v')$, $\xi_0 = (i_0, \mathrm{id}_{f(i_0)})$, on a donc une double-flèche $(u_1, u_2) : \xi_0 \rightrightarrows \xi_1$ dans $f(i_0)\bs I$. Cette catégorie % [sic] \xi_1 = (i_0, v') -> \xi_1 = (i_1, v'), u_1, u_2 go from i_0 to i_1
+\msp{page 232}est filtrante, donc cette double-flèche est égalisable à droite, ce qui implique aussitôt que la double-flèche $(v_1, v_2)$ \textit{dans $I$} est aussi égalisable à droite.
+
+Donc il reste à prouver que b$'$) implique la condition F 3. Mais considérons les deux objets $\xi_0 = (i_0, \mathrm{id}_{f(i_0)})$, $\xi_1 = (i_1, u')$ de $f(i_0)\bs I$, et utilisons la condition de filtration PF 1 sur cette catégorie, donc on trouve un objet $\xi_2 = (i_2, v')$, et deux flèches
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+\xi_0 \arrow[dr, "w"] & {} \\
+{} & \xi_2 \\
+\xi_1 \arrow[ur, "v"'] & {}
+\end{tikzcd}
+, i.e. $i_0 \xrightarrow{w} i_2$
+% foot: Version 17 décembre 2025
+\printedpage{86}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+et $i_1 \xrightarrow{v} i_2$ telles qu'on ait $f(w)\mathrm{id}_{i_0} = f(v)u' = v'$, d'où $f(w) = f(v)u'$, ce qui est la condition F 3.
+\[
+\begin{tikzcd}
+i_0 \arrow[rr, dotted, bend left, "w"] \arrow[dd, dash] & i_1 \arrow[r, dotted, "v"] \arrow[dd, dash] & i_2 \arrow[dd, dash] \\
+{} & {} & {} \\
+f(i_0) \arrow[r, "u'"] \arrow[rr, dotted, bend right, "v'"'] & f(i_1) & f(i_2)
+\end{tikzcd}
+\]
+
+Ainsi on a établi
+\[
+\text{a} \ \Longleftrightarrow \ \text{b} \ \Longleftrightarrow \ \text{b}' \ ,
+\]
+prouvons maintenant
+
+a $\Longrightarrow$ c. On sait déjà que a) implique $I'$ filtrante, et il reste à établir F 3. Or $I$ étant filtrante, il existe des flèches
+\begin{tikzcd}[row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-2.base)]
+i_0 \arrow[dr, "w"] & {} \\
+{} & i_2 \\
+i_1 \arrow[ur, "v"'] & {}
+\end{tikzcd}
+. On
+\msp{page 233}n'a pas forcément $f(w) = f(v)u'$, on a là une double-flèche $f(i_0) = f(i_1)$ dans $I'$. Mais par la condition F 2 sur $f$, il existe $i_2 \xrightarrow{\alpha} \bar{i}_2$ dans $I$ telle que $f(\alpha)$ égalise ladite double-flèche, donc $f(\underbrace{\alpha w}_{\bar{w}}) = f(\underbrace{\alpha v}_{\bar{v}})u'$, et quitte à remplacer $i_2$ par $\bar{i}_2$, et $w$, $v$ par $\bar{w} = \alpha w$, $\bar{v} = \alpha v$, on gagne. % [sic] f(i_0) = f(i_1) -> f(i_0) \rightrightarrows f(i_2), the double arrow f(w), f(v)u' goes from f(i_0) to f(i_2)
+
+Reste à prouver (pour la partie $1^\circ$) que si $f$ est \textit{fidèle}, alors c) $\Longrightarrow$ b). Il reste donc à prouver que c) implique que pour $i'$ dans $I'$, $i'\bs I$ est filtrante. On sait déjà par F 1 que $i'\bs I$ est non vide, il reste à prouver les conditions PF 1$'$, PF 2 pour $i'\bs I$. Comme $I'$ filtrante, l'on peut compléter
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} & f(i_1) \arrow[dr, dotted] & {} \\
+i' \arrow[ur] \arrow[dr] & {} & j' \ , \\
+{} & f(i_2) \arrow[ur, dotted] & {}
+\end{tikzcd}
+\]
+et par F 1 on peut supposer $j'$ de la forme $f(i_3)$.
+% foot: Version 17 décembre 2025
+
+\printedpage{87}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}[column sep=small]
+{} & i_1 \arrow[drr, dotted, "v_1\,?"] \arrow[dd, dash] & {} & {} & {} \\
+{} & {} & {} & i_3 \arrow[r] \arrow[dd, dash] & \bar{i}_3 \arrow[dd, dash] \\
+{} & f(i_1) \arrow[drr, "v_1'"] & i_2 \arrow[ur, dotted, "v_2\,?"'] \arrow[dd, dash, crossing over] & {} & {} \\
+i' \arrow[ur, "u_1'"] \arrow[dr, "u_2'"'] & {} & {} & f(i_3) \arrow[r] & f(\bar{i}_3) \\
+{} & {} & f(i_2) \arrow[ur, "v_2'"'] & {} & {}
+\end{tikzcd}
+\]
+Appliquant F 3 à $i_1$, $i_3$, $v_1'$, on peut supposer (quitte à remplacer $i_3$ par $\bar{i}_3$)
+\msp{page 234}que $v_1'$ provient d'un $v_1 : i_1 \longrightarrow i_3$. Appliquant à nouveau F 3 à $i_2$, $i_3$, $v_2'$, on peut supposer que $v_2'$ également provient d'un $v_2 : i_2 \longrightarrow i_3$. Alors $\xi_3 = (i_3, v_1'u_1' = v_2'u_2')$ est un majorant commun de $\xi_1 = (i_1, u_1')$, $\xi_2 = (i_2, u_2')$.
+
+Prouvons enfin PF 2 pour $i'\bs I$, donc on a un diagramme ci-contre \texttt{[ci-dessous]} avec $f(u_1)u' = f(u_2)u'$ (double-flèche dans $i'\bs I$), on veut égaliser dans $i'\bs I$.
+\[
+\begin{tikzcd}
+{} & i_0 \arrow[r, shift left, "u_1"] \arrow[r, shift right, "u_2"'] & i_1 \arrow[rr, bend left, "w"] & i_2 \arrow[r] & \bar{i}_2 \\
+{} & {} & {} & {} & {} \\
+i' \arrow[r, "u'"] & f(i_0) \arrow[r, shift left, "f(u_1)"] \arrow[r, shift right, "f(u_2)"'] & f(i_1) \arrow[r, dotted, "v'"] & f(i_2) \arrow[r] & f(\bar{i}_2)
+\end{tikzcd}
+\]
+Mais $I'$ étant filtrante, on peut égaliser $(f(u_1), f(u_2))$ par $f(i_1) \longrightarrow j'$, et à cause de F 1 on peut supposer $j' = f(i_2)$. Appliquant encore F 3 à $(i_1, i_2, v')$, on trouve $i_1 \longrightarrow \bar{i}_2$ tel que $f(w)$ égalise $f(u_1)$, $f(u_2)$ :
+\[
+f(wu_1) \ = \ f(wu_2) \ .
+\]
+Mais $f$ étant \textit{fidèle}, cela implique $wu_1 = wu_2$, et on a donc égalisé la double-flèche de $i'\bs I$ par $w : (i_1, -) \longrightarrow (\bar{i}_2, -)$.
+
+\subsection*{4.9.6.8. N.B.}
+
+\begin{enumerate}[label=\arabic*$^\circ$)]
+\item Si on ne suppose pas que $f$ soit fidèle, on voit que c) implique pourtant que les $i'\bs I$ satisfont PF 1$'$ (elles sont donc pseudo-filtrantes et 0-connexes). Donc $f$ est cofinal.
+
+\msp{page 235}On voit, par le même argument, que $I$ satisfait PF 1$'$, i.e. est pseudo-filtrante. Ainsi, si on introduit la condition :
+\begin{itemize}[label=\encadre{b$''$}]
+\item $I'$ est filtrante, les $i'\bs I$ ($i \in \mathrm{Ob}\, I'$) sont pseudo-filtrantes (i.e. satisfont PF 1$'$) (donc $f$ cofinal).
+\end{itemize}
+On trouve les implications
+\[
+(\text{a} \ \Longleftrightarrow \ \text{b} \ \Longleftrightarrow \ \text{b}') \ \ \Longrightarrow \ \ (\text{b}'' \ \Longleftrightarrow \ \text{c}) \ ,
+\]
+et les conditions équivalentes c), b$''$) impliquent que $I$ est également pseudo-filtrante, et que pour toute double-flèche $\xi_0 \overset{u_1}{\underset{u_2}{\rightrightarrows}} \xi_1$ dans un $i'\bs I$ ou dans $I$, il existe une flèche $\xi_1 \xrightarrow{v} \xi_2$ dans la même catégorie, telle que $vu_1$ et $vu_2 \ : \ \xi_0 \rightrightarrows \xi_2$ aient \textit{même image}
+% foot: Version 17 décembre 2025
+\printedpage{88}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\textit{dans $I'$}. Donc si $f$ est fidèle, alors ces conditions c, c$'$ \texttt{[plutôt b$''$]} impliquent que $I$ et les $i'\bs I$ satisfont aussi la condition PF 2 de la double-flèche, donc sont filtrantes, donc dans ce cas les cinq conditions a) b) b$'$) c) c$'$) \texttt{[plutôt b$''$)]} sont équivalentes. Mais aussi lorsque $I$ est ordonnée, on sait [\,?] que la condition de la double-flèche dans $I$ est satisfaite automatiquement.
+
+\item \msp{page 236}Notons aussi que dans la condition b$'$), on ne peut supprimer l'hypothèse que $I'$ satisfait PF 2 (en plus de $I'$ 0-connexe et les $i'\bs I$ filtrantes). Pour le voir, prenons $I' = I$, $f = \mathrm{id}$, donc l'hypothèse a ($\Longleftrightarrow$ b $\Longleftrightarrow$ b$'$) signifie que $I$ est filtrante, $f$ étant bien sûr cofinal. Mais b$'$ affaiblie signifie que $I$ est 0-connexe et les $i\bs I$ sont filtrantes, et on sait que ceci n'implique \textit{pas} que $I$ soit filtrante, même si on suppose $I$ pseudo-filtrante. Un exemple simple est donné par $I$ définie par
+\[
+\mathrm{Ob}\, I \ = \ \mathbf{N} \ , \qquad \mathrm{Hom}_I(i,j) \ = \ \left\{
+\begin{array}{rcccc}
+\emptyset & \text{si} & i & > & j \\[1ex]
+\{\mathrm{id}_i\} & \text{si} & i & = & j \\[1ex]
+\{\pm 1\} & \text{si} & i & < & j \ ,
+\end{array}
+\right.
+\]
+la composition des flèches se faisant par la multiplication des signes $\varepsilon_{k,j}\varepsilon'_{j,i} = (\varepsilon\varepsilon')_{k,i}$ (en posant $\mathrm{id}_i = (+1)_{i,i}$). Les catégories $i\bs I$ sont isomorphes entre elles et sont \textit{ordonnées} et pseudo-filtrantes, donc filtrantes, d'autre part, $I$ est pseudo-filtrante, pourtant elle n'est pas filtrante, car ne satisfait pas PF 2.
+
+\item D'autre part, si $f$ n'est pas fidèle, alors c) (équivalente à $b''$) n'implique pas a), comme on voit en prenant $I' = e$ ; alors b$''$) équivaut à $I$ pseudo-filtrante, qui n'implique pas que $I$ soit filtrante.
+\end{enumerate}
+
+\subsection*{\msp{page 237}\textbf{4.9.6.9.} \textsc{Démonstration de 4.9.6.3, partie} $2^\circ$.}
+
+C'est essentiellement “la même” démonstration que pour la partie $1^\circ$).
+
+a$_\pi$) $\Longrightarrow$ b$_\pi$). On peut court-circuiter la démonstration directe, en regardant, pour un ensemble $A$ de cardinal $\leqslant \pi$, le diagramme
+\[
+\begin{tikzcd}
+I \arrow[r, "\delta_A"] \arrow[d, "f"'] & I^A \arrow[d, "f^A"] \\
+I' \arrow[r, "\delta_{A'}"] & I'^A
+\end{tikzcd}
+\]
+\texttt{[plutôt $\delta'_A$]}. Comme $f$ est cofinal, $I$ filtrante, $f^A$ est aussi cofinal (4.9.8.5), d'autre part, $I$ grande devant $\pi$ signifie que $\delta_A$ est cofinal ($\forall$ $A$ avec $\mathrm{card}\, A \leqslant \pi$). Donc $f^A\delta_A = \delta_{A'}f$ est cofinal, donc $\delta_{A'}f$ et $f$ le sont, donc $\delta_{A'}$ aussi, ce qui signifie que $I'$ est grande devant $\pi$.
+
+Reste à prouver que pour $i'$ dans $I'$, $i'\bs I$ est grande devant $\pi$. Cela résulte du fait que $i'\bs I \xrightarrow{p} I$ est coétale, que $i\bs I$ est 0-connexe, et du
+
+\textbf{Lemme 4.9.6.9.1.} \textit{Soit $I$ une catégorie filtrante (resp. grande devant $\pi$). Alors pour toute $J$ sur $I$ coétale sur $I$ et $0$-connexe, $J$ est filtrante (resp. grande devant $\pi$).}
+% foot: Version 17 décembre 2025
+
+% ---- from der-ch18_p091-095.tex
+\printedpage{89}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+Le cas filtrant est déjà connu (cf. II \dots). Pour le cas “grande devant $\pi$”, on va utiliser le
+
+\textbf{Corollaire 4.9.6.9.2.} \textit{Soit $J$ une catégorie. Pour que $J$ soit grande devant $\pi$, il}
+\msp{page 238}
+\textit{faut et il suffit qu'elle soit $0$-connexe, et satisfasse PF$_\pi$ 2 (cf. page 81), ainsi que la variante suivante de PF$_\pi$ 1$'$.}
+\begin{itemize}[leftmargin=4em]
+\item[\textit{PF$_\pi$ 1)}] \textit{Pour tout objet $x_0$ de $J$, $x_0\backslash J$ satisfait PF$_\pi$ 1$'$, i.e. pour toute famille de flèches $x_0 \xrightarrow{u_\alpha} y_\alpha$ ($\alpha \in A$, $\card A \leqslant \pi$), existe une flèche $x_0 \xrightarrow{v} z$ et des flèches $v_\alpha : y_\alpha \longrightarrow z$, avec $v_\alpha u_\alpha = v \ \forall\, \alpha \in A$.}
+\end{itemize}
+
+\textsc{Démonstration}. Si $J$ est grande devant $\pi$, alors PF$_\pi$ 1) résulte aussitôt de la conjonction de PF$_\pi$ 1$'$ et PF$_\pi$ 2, d'où le “il faut”. Inversement, supposons que $J$ satisfasse PF$_\pi$ 1, PF$_\pi$ 2, et soit 0-connexe, il faut prouver qu'elle satisfait PF$_\pi$ 1$'$. Mais on sait déjà que les conditions en question, qui impliquent PF 1, PF 2, 0-connexe, impliquent que $J$ est filtrante. Donc si on a une famille $(x_\alpha)_{\alpha\in A}$, $\card A \leqslant \pi$, choisissant un $x_0 \in \Ob J$, on peut pour tout $\alpha$ trouver $y_\alpha$ qui majore $x_0$ et $x_\alpha$, d'où des flèches
+\begin{tikzcd}[row sep=0.4em, column sep=1em, baseline=(\tikzcdmatrixname-2-2.base)]
+x_\alpha \arrow[dr] & \\
+& y_\alpha \\
+x_0 \arrow[ur] &
+\end{tikzcd}, on peut leurs appliquer PF$_\pi$ 1, d'où des flèches $y_\alpha \longrightarrow z$, et en composant des $x_\alpha \longrightarrow z$, q.e.d. % [sic] leurs appliquer -> leur appliquer, grammar
+
+Prouvons maintenant le lemme. Il suffit (par le corollaire précédent) de prouver que $J$ satisfait à PF$_\pi$ 1 et PF$_\pi$ 2. Or PF$_\pi$ 1 est immédiat, puisque $\forall\, x_0$ dans $J$, $x_0\backslash J \xrightarrow{\ \sim\ } y_0\backslash I$, où $y_0$ est
+\msp{page 239}
+l'image de $x_0$ dans $I$. Quant à PF$_\pi$ 2, si on a des $x_0 \trois{u_\alpha} x_1$ dans $J$, d'où des $g(x_0) \trois{g(u_\alpha)} g(x_1)$, on égalise dans $I$ par $g(x_1) \xrightarrow{w} y$, mais comme $g$ est coétale, $\exists\, x_1 \xrightarrow{v} x_2$ dans $J$ telle que $g(v) = w$, donc on a $g(vu_\alpha) = g(vu_\beta)$ pour $\alpha, \beta \in A$, et comme $g$ est fidèle, on en conclut $vu_\alpha = vu_\beta$, donc $v$ égalise $(u_\alpha)_{\alpha\in A}$, q.e.d.
+
+Prouvons b$_\pi$) $\Longrightarrow$ a$_\pi$) : Si $I'$ et les $i'\backslash I$ sont grandes devant $\pi$, alors $I$ l'est aussi (et $f$ est cofinal, les $i'\backslash I$ étant 0-connexes, car filtrantes). Comme on sait déjà que $I$ est 0-connexe ($I'$ l'étant et $f$ cofinal), il reste, par 4.9.6.9.2, à vérifier PF$_\pi$ 1 et PF$_\pi$ 2.
+
+\msp{page 240}
+La démonstration donnée dans 1° pour le cas similaire filtrant (implication b$'$ $\Longrightarrow$ a, pages 231-232), s'applique mutatis mutandis. (La propriété F 3 a déjà été établie dans la partie 1°), comme conséquence de b, et peut donc être utilisée librement.)
+
+Donc on a prouvé a$_\pi$ $\Longleftrightarrow$ b$_\pi$. Prouvons a$_\pi$ $\Longrightarrow$ c$_\pi$. On sait déjà que a$_\pi$ implique que $I'$ est grande devant $\pi$, et bien sûr la condition F 1, reste à établir la validité de la condition F 3$_\pi$. Par F 3, $\forall\, \alpha \in A$ on peut trouver $j_\alpha$ dans $I$ et $w^0_\alpha : i_\alpha \longrightarrow j_\alpha$, $v^0_\alpha : i \longrightarrow j$ tels que % [sic] v^0_\alpha : i \longrightarrow j -> v^0_\alpha : i \longrightarrow j_\alpha, the following diagram has v^0_\alpha : i \to j_\alpha
+\[
+f(v_\alpha)u'_\alpha \ = \ f(w_\alpha) \ .
+\]
+
+\printedpage{90}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+i_\alpha \arrow[rr, bend left=20, "w^0_\alpha"] \arrow[d, dash] & i \arrow[r, "v^0_\alpha"] \arrow[d, dash] & j_\alpha \arrow[r, "\lambda_\alpha"] \arrow[d, dash] & j \arrow[d, dash] \\
+f(i_\alpha) \arrow[r, "u'_\alpha"] & f(i) \arrow[r, "f(v_\alpha)"] & f(j_\alpha) \arrow[r] & f(j)
+\end{tikzcd}
+\]
+
+Comme $I$ satisfait PF 1$_\pi$ (cf. 4.9.6.9.2), il existe $h$ dans $I$ et des $\lambda_\alpha : j_\alpha \longrightarrow j$, tels que $\lambda_\alpha v^0_\alpha = \lambda$ soit indépendant de $\alpha$, alors on a pour tout $\alpha \in A$ % [sic] h -> j, the arrows \lambda_\alpha go to j
+\[
+f(\lambda)u'_\alpha \ \Bigl( \ = \ f(\lambda_\alpha)\underbrace{f(v_\alpha)u'_\alpha}_{f(w_\alpha)} \ \Bigr) \ = \ f(\underbrace{\lambda_\alpha w^0_\alpha}_{w_\alpha}) \ ,
+\]
+donc $\lambda : i \longrightarrow j$ et les $w_\alpha = \lambda_\alpha w^0_\alpha : i_\alpha \longrightarrow j$ satisfont aux conditions voulues.
+
+c$_\pi$ $\Longrightarrow$ b$''_\pi$. Il faut prouver que si c$_\pi$ est satisfait, alors les $i'\backslash I$ satisfont PF 1$'_\pi$.
+
+\msp{page 241}
+Soit donc $\xi_\alpha = (i_\alpha, u'_\alpha)$ ($\alpha \in A$, $\card A \leqslant \pi$) une famille d'éléments de $i'\backslash I$, comme $I'$ satisfait à PF 1$_\pi$ (cf. 4.9.6.9.2), il existe $j'$ dans $I'$ et des flèches $u''_\alpha : f(i_\alpha) \longrightarrow j'$, telles que $u''_\alpha u'_\alpha = u'$ indépendant de $\alpha$. Comme $f$ satisfait F 1, on peut supposer que $j'$ est de la forme $f(j)$. Appliquant F 3$_\pi$ aux $i_\alpha$, $j$, $u''_\alpha$, on trouve $v : j \longrightarrow k$ et des $w_\alpha : i_\alpha \longrightarrow k$, tels que
+\[
+f(v)u''_\alpha \ = \ f(w_\alpha) \qquad \forall\, \alpha \in A \ ,
+\]
+d'où
+\[
+f(w_\alpha)u'_\alpha \ = \ f(v)\,\underbrace{u''_\alpha u'_\alpha}_{u'} \ = \ f(v)u' \qquad \text{indépendant de $\alpha$,}
+\]
+soit $w'$, donc les $w_\alpha$ définissent une flèche des $\xi_\alpha$ dans $\xi = (k, w')$, q.e.d.
+
+b$''_\pi$ $\Longrightarrow$ b$_\pi$ si $f$ est fidèle. On est ramené à prouver que si b$''_\pi$ est satisfait, $f$ fidèle, alors les catégories $i'\backslash I$, dont on sait déjà qu'elles satisfont PF 1$_\pi$, satisfont également PF 2$_\pi$. Soient donc $\xi = (i, u')$, $\eta = (j, v')$ deux objets de $i'\backslash I$, et $(u_\alpha)_{\alpha\in A}$ une famille de flèches $\xi \longrightarrow \eta$ (avec $\card A \leqslant \pi$), donc des flèches dans $I$ telles que $f(u_\alpha)u' = v' \ \forall\, \alpha \in A$.
+\[
+\begin{tikzcd}[column sep=large]
+i \arrow[r, shift left=2, "u_\alpha"] \arrow[r] \arrow[r, shift right=2] & j \arrow[r, dotted, "v"] & k
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}[column sep=large]
+i' \arrow[r, "u'"] \arrow[rr, bend right=15, "v'"'] & f(i) \arrow[r, shift left=2] \arrow[r] \arrow[r, shift right=2] & f(j) \arrow[r] & f(k)
+\end{tikzcd}
+\]
+
+Comme $I'$ est grande devant $\pi$, on peut égaliser par $f(j) \longrightarrow k'$, et comme $k'\backslash I \neq \emptyset$, on peut supposer $k'$ de la forme $f(k)$. Or
+\msp{page 242}
+d'après l'implication b$''$ $\Longrightarrow$ a $\Longrightarrow$ c de la partie 1°) (cf. page 235) et comme b$''_\pi$ $\Longrightarrow$ b$''$, on sait déjà que $f$ satisfait à F 3. En l'appliquant à $j$, $k$ et $f(j) \longrightarrow f(k)$, on peut
+\printedpage{91}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+supposer que $f(j) \longrightarrow f(k)$ provient de $v : j \longrightarrow k$. On aura donc $f(v)f(u_\alpha) = f(v)f(u_\beta)$ $\forall\, \alpha, \beta \in A$, donc $f(vu_\alpha) = f(vu_\beta)$. Comme $f$ est fidèle, cela implique que $vu_\alpha = vu_\beta$, i.e. $v$ égalise les $u_\alpha$. D'ailleurs, $v$ peut être considérée comme une flèche \textit{dans} $i'\backslash I$, de $(j, v')$ dans $(k, f(v)v')$. Q.e.d.
+
+\textbf{4.9.6.10.} Quand $I$ est \textit{ordonné}, alors les quatre conditions a$_\pi$, b$_\pi$, c$_\pi$, $b''_\pi$ sont équivalentes, car les $i'\backslash I$ sont ordonnés, et il est claire qu'alors b$''_\pi$ $\Longleftrightarrow$ b$_\pi$. % [sic] claire -> clair, grammar
+
+\msp{page 243}
+
+\section*{4.10\quad Le théorème de représentation indicielle : démonstration}
+
+On va d'abord reformuler le théorème 4.9.3 sous forme plus générale, en termes de catégories \textit{cofibrées}. Soit
+\[
+\mathcal{D} \longrightarrow J \tag*{(4.10.1)}
+\]
+un foncteur cofibrant, où $J$ est équivalent à une petite catégorie, et de même pour les catégories fibres $\mathcal{D}_j$ ($j \in \Ob J$). On se donne un cardinal infini $\pi$. Soit
+\[
+\mathcal{M}_j \ = \ \Ind_\pi(\mathcal{D}_j) \qquad (j \in \Ob J) \ , \tag*{(4.10.2)}
+\]
+alors les $\mathcal{M}_j$ sont les fibres d'une catégorie cofibrée $\mathcal{N}$ sur $J$, que je désigne aussi par $\Ind_\pi(\mathcal{D}/J)$, donc on pose
+\[
+\mathcal{N} \ = \ \Ind_\pi(\mathcal{D}/J) \ . \tag*{(4.10.3)}
+\]
+On a donc une inclusion pleinement fidèle de catégories cofibrées sur $J$
+\[
+\mathcal{D} \hookrightarrow \mathcal{N} \ ,
+\]
+d'où une inclusion
+\[
+\uGamma(\mathcal{D}/J) \longrightarrow \uGamma(\mathcal{N}/J) \ . \tag*{(4.10.4)}
+\]
+
+\msp{page 244}
+Dans le cas où $\mathcal{D}$ est de la forme $C \times J$, alors $\mathcal{N}$ est de la forme $\mathcal{M} \times J$, avec $\mathcal{M} = \Ind_\pi(C)$, et l'inclusion (4.10.3) n'est autre (à isomorphisme près) que
+\[
+\underline{\operatorname{Hom}}(J, C) \longrightarrow \underline{\operatorname{Hom}}(J, \mathcal{M}) \ .
+\]
+Revenant au cas général, on voit encore que :
+\begin{enumerate}[label={}, leftmargin=3em]
+\item[1°)] Le deuxième membre de (4.10.3) est stable par $\varinjlim$ grandes devant $\pi$, lesquelles se calculent fibre à fibre.
+\item[2°)] Le premier membre de (4.10.3) est formé d'objets $\pi$-accessibles du second.
+\end{enumerate}
+D'où un foncteur \textit{pleinement} fidèle
+\[
+\Ind_\pi(\uGamma(\mathcal{D}/J)) \hookrightarrow \uGamma(\mathcal{N}/J) \ . \tag*{(4.10.4)}
+\]
+\setcounter{footnote}{103}%
+(\footnote{\texttt{[Les numéros 4.10.1 à 4.10.4 sont utilisés deux fois.]}}).
+
+\printedpage{92}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\textbf{Théorème 4.10.1.} \textit{Supposons qu'on ait}
+\[
+\mathrm{card}\,\textup{réd}\, J \ \leqslant \ \pi \ , \tag*{(4.10.1.1)}
+\]
+\textit{et qu'il existe un ordinal limite $\alpha$, tel que :}
+\begin{enumerate}[label={}, leftmargin=3em]
+\item[\textit{1)}] $\card \alpha \leqslant \pi$.
+\item[\textit{2)}] \textit{Les limites inductives de}
+\msp{page 245}
+\textit{type $I_\alpha = \{\beta \mid \beta < \alpha\}$ sont représentables dans les catégories $\mathcal{D}_j$ ($j \in \Ob J$), et pour toute flèche $\alpha : j \longrightarrow j'$ dans $J$ \texttt{[trop de $\alpha$]}, $\alpha^* : \mathcal{D}_j \longrightarrow \mathcal{D}_{j'}$ commute auxdites limites.}
+\end{enumerate}
+\textit{Alors le foncteur canonique pleinement fidèle (4.10.4) est une équivalence de catégories.}
+
+Ceci va être contenu dans le résultat un peu plus précis :
+
+\textbf{Corollaire 4.10.2.} \textit{Les hypothèses étant celles de 4.10.1, avec en plus}
+\[
+\card J \ \leqslant \ \pi \tag*{(4.10.2.1)}
+\]
+\textit{(qui équivaut à (4.10.1.1) si $J$ est réduite, cas auquel on peut évidemment se réduire dans 4.10.1). Soit $\varphi \in \Ob \uGamma(\mathcal{N}/J)$, et considérons le foncteur canonique} fidèle \textit{:}
+\[
+\uGamma(\mathcal{D}/J)/\varphi \longrightarrow \prod_{j\in J} C_j/\varphi(j) \ . \tag*{(4.10.2.2)}
+\]
+\textit{Alors la catégorie source $\uGamma(\mathcal{D}/J)/\varphi$ est grande devant $\pi$, et le foncteur envisagé est cofinal.}
+
+\msp{page 246}
+De ceci, le théorème résulte de façon essentiellement soritale, tout comme dans le cas particulier 4.9.3 précédent (cf. page 223) (\footnote{Un peu court\,! Il faudrait expliciter l'argument avec soin – il y en a pour deux ou trois pages\,!}).
+
+Pour établir le corollaire, comme la catégorie but de (4.10.2.2) est grande devant $\pi$, comme produit de telles catégories (cf. 4.9.6.6, page 228), et le foncteur fidèle, il suffit en vertu de 4.9.6.3, 2°, de vérifier les conditions F 1 et F 3$_\pi$ (page 225) pour le foncteur envisagé.
+
+On va interpréter le foncteur (4.10.2.2) en termes d'une catégorie cofibrée
+\[
+\mathcal{D}_\varphi \longrightarrow J \ , \tag*{(4.10.5)}
+\]
+dont les fibres sont les $\mathcal{D}_j/\varphi(j)$. On note que si $\alpha : j \longrightarrow j'$ est une flèche de $J$, alors on a
+\[
+\left\{
+\begin{aligned}
+&\alpha_* : C_j \ \longrightarrow \ C_{j'} \\
+&\text{et} \ \ \alpha_*(\varphi(j)) \ \longrightarrow \ \varphi(j') \ ,
+\end{aligned}
+\right.
+\]
+
+\printedpage{93}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\msp{page 247}
+d'où un foncteur composé
+\[
+C_j/\varphi(j) \ \longrightarrow \ C_{j'}/\alpha^*(\varphi(j)) \ \longrightarrow \ C_{j'}/\varphi(j') \ ,
+\]
+avec transitivité à isomorphisme canonique près etc. On note que l'on a un isomorphisme canonique
+\[
+\uGamma(\mathcal{D}_\varphi/J) \ \simeq \ \uGamma(\mathcal{D}/J)/\varphi \ ,
+\]
+de sorte que le foncteur fidèle canonique (4.10.2.2) s'identifie au foncteur
+\[
+\uGamma(\mathcal{D}_\varphi/J) \longrightarrow \prod_{j\in\Ob J} (\mathcal{D}_\varphi)_j \ . \tag*{(4.10.6)}
+\]
+
+Le corollaire 4.10.2 sera alors une conséquence du résultat plus général suivant :
+
+\textbf{Corollaire 4.10.3.} \textit{Soit $\mathcal{E} \longrightarrow J$ un foncteur cofibrant, et $\pi$ un cardinal infini. On suppose :}
+\begin{enumerate}[label={}, leftmargin=3em]
+\item[\textit{a)}] $\card J \leqslant \pi$.
+\item[\textit{b)}] \textit{Les catégories fibres $\mathcal{E}_j$ sont équivalentes à des petites catégories, et grandes devant $\pi$.}
+\item[\textit{c)}] \textit{Il existe un ordinal limite tel que :}
+\begin{enumerate}[label={}, leftmargin=3em]
+\item[\textit{1°)}] $\card \alpha \leqslant \pi$.
+\item[\textit{2°)}] \msp{page 248}\textit{Les limites inductives de type $I_\alpha$ sont représentables dans les catégories $\mathcal{E}_j$, et les foncteurs cochangement de base $\lambda_* : \mathcal{E}_j \longrightarrow \mathcal{E}_{j'}$ y commutent. (C'est le cas p.ex. si les limites inductives filtrantes} dénombrables \textit{sont représentables dans les $\mathcal{E}_j$, et si les $\alpha_*$ y commutent\,; ou s'il existe un cardinal $\pi_0 \leqslant \pi$ et un cardinal $\pi'_0 > \pi_0$, tel que les limites inductives grandes devant $\pi_0$ et de cardinal $\leqslant \pi'_0$ soient représentables dans les $\mathcal{E}_j$, et que les $\alpha_*$ y commutent.)}
+\end{enumerate}
+\end{enumerate}
+\textit{Sous ces conditions, le foncteur canonique fidèle}
+\[
+\uGamma(\mathcal{E}/J) \longrightarrow \prod_{j\in\Ob J} \mathcal{E}_j \tag*{(4.10.3.1)}
+\]
+\textit{est cofinal, et la catégorie source est grande devant $\pi$.}
+
+Il est $\pm$ immédiat que les hypothèses de 4.10.1 impliquent que celles de 4.10.3 sont satisfaites pour $\mathcal{E} = \mathcal{D}_\varphi \longrightarrow J$ (4.10.5). Pour
+\msp{page 249}
+ceci, on utilise le
+
+% marginal vertical bar printed in the left margin beside the following statement
+\textbf{Lemme 4.10.4.} \textit{Soient $C$ une catégorie, et $\pi$ un cardinal infini. Alors le foncteur d'inclusion $C \longrightarrow \mathcal{M} \overset{\textup{déf}}{=} \Ind_\pi C$ commute aux $\varinjlim$ de cardinal $\leqslant \pi$.}
+
+Soit en effet $I$ telle que $\card I \leqslant \pi$, et $(x_i)_{i\in I}$ un système inductif sur $C$, y ayant une limite $x$. Soit d'autre part $X = \varinjlim\limits_{I'} \xi_{i'}$ un objet de $\Ind_\pi C$, avec $I'$ grande devant $\pi$. On a
+
+% ---- from der-ch18_p096-100.tex
+\printedpage{94}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+donc
+\[
+\begin{aligned}
+\Hom_{\mathcal{M}}(x,X) &\simeq \varinjlim_{I'} \Hom(x,\xi_{i'})\\
+&\simeq \varinjlim_{I'} \varprojlim_{I} \Hom(x_i,\xi_{i'})\\
+&\overset{\text{SGA 4 I 9.8}}{\simeq} \varprojlim_{I} \underbrace{\varinjlim_{I'} \Hom(x_i,\xi_{i'})}_{\simeq \Hom(x_i,X)}\\
+&\simeq \varprojlim_{I} \Hom(x_i,X)\ ,
+\end{aligned}
+\]
+ce qui prouve que $x$ est aussi une $\varinjlim$ des $x_i$ dans $\mathcal{M}$ tout entier.
+
+\msp{250}
+Ainsi, on est réduit à prouver 4.10.3. Appliquant 4.9.6 2°, on est ramené à prouver, pour le foncteur envisagé, les conditions F 1 et F $3_\pi$ (page 225).
+
+Dans les arguments qui suivent, on va utiliser les conditions a), b) de 4.10.3, mais non, pour l'instant, la condition c.
+
+\textbf{Lemme 4.10.5.} \textit{Sous les conditions de 4.10.3 a) b) (à l'exclusion de c), pour que (4.10.3.1) soit cofinal et $\Gamma(\mathcal{E}/J)$ grande devant $\pi$, il faut et il suffit que le foncteur envisagé satisfasse à la condition F 1, rappelée ci-dessous, et à la variante F$'$ 1 de celle-ci énoncée ci-dessous :}
+\begin{itemize}[leftmargin=3em]
+\item[F\,1)] {\itshape Pour tout système $(X(j))_{j\in\Ob J}$ d'éléments $X(j)\in\Ob\mathcal{E}_j$, existe une \textup{section} $G$ de $\mathcal{E}$ sur $J$, et un système de flèches
+\[
+X(j) \longrightarrow G(j) \qquad (j\in ObJ)\ . \tag*{\textup{(4.10.5.1)}}
+\]}
+\item[F$'$1)] {\itshape Sous les conditions de \textup{F\,1} précédent, supposons de plus une section $F$ de $\mathcal{E}$ sur $J$ \msp{251} et un système de flèches
+\[
+F(j) \longrightarrow X(j) \qquad (j\in\Ob J)\ ,
+\]
+alors $G$ et le système de flèches (4.10.5.1) peut être choisi de telle façon que les flèches composées
+\[
+F(j) \longrightarrow X(j) \longrightarrow G(j)
+\]
+définissent un homomorphisme de sections
+\[
+F \longrightarrow G
+\]
+(dans la catégorie $\uGamma(\mathcal{E}/J)$).}
+\end{itemize}
+(\footnote[106]{\textbf{N.B.} Les conditions F 1 et F$\,'$\,1 équivalent à dire que le foncteur envisagé satisfait aux conditions F1 et F3, vu encore (en vertu de 4.9.6.3, 1°) que $\uGamma(\mathcal{E}/J)$ est \textit{filtrante} sans plus, et le foncteur fidèle (4.10.3.1) cofinal. Cela implique déjà que $\uGamma(\mathcal{E}/J)$ est grande devant $\pi$.}).
+
+\textsc{Démonstration}. Il faut voir que F 1 \& F$'$ 1 équivaut à F 1 \& F $3_\pi$. L'implication $\Longleftarrow$ est $\pm$ immédiate, c'est de $\Longrightarrow$ que nous aurons besoin, donc
+\[
+\text{F 1 \& F}'\text{ 1} \quad\Longrightarrow\quad \text{F } 3_\pi\ .
+\]
+% foot: Version 17 décembre 2025
+
+\printedpage{95}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+Pour ceci, réénonçons F $3_\pi$ dans le contexte présent. On se donne une famille $(F_\alpha)_{\alpha\in A}$, $\card A\leqslant\pi$, d'objets de $\uGamma(\mathcal{E}/J)$, un objet $F$ de la même catégorie, et pour tout $j$ dans $\Ob J$, un système de flèches
+\[
+F_\alpha(j) \xrightarrow{u_\alpha(j)} F(j)\ ,
+\]
+mais sans supposer que pour $\alpha$ fixé, $j$ variable
+
+\msp{252}
+cela définisse un homomorphisme de sections $F_\alpha\longrightarrow F$. On cherche une section $G$ de $\mathcal{E}$ sur $J$, et un homomorphisme de sections $F\longrightarrow G$, tels que pour tout $\alpha$, le système des composés
+\[
+F_\alpha(j) \longrightarrow F(j) \longrightarrow G(j)
+\]
+définisse un homomorphisme de sections $F_\alpha\longrightarrow G_\alpha$. Soit donc $\lambda : j\longrightarrow j'$ une flèche de $J$, considérons les carrés (\textit{non commutatifs}) % [sic] F_\alpha -> G_\alpha -> F_\alpha -> G, the section sought is G (cf. p. 95 below: F_\alpha -> G)
+\[
+\begin{tikzcd}
+F_\alpha(j) \arrow[r,"u_\alpha(j)"] \arrow[d,"F_\alpha(\lambda)"'] \arrow[dr,phantom,"!"] & F(j) \arrow[d,"F(\lambda)"] \\
+F_\alpha(j') \arrow[r,"u_\alpha(j')"] & F(j')
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+(indexés par $\alpha\in A$). Pour $j'$ fixé dans $J$, le nombre de ces carrés est majoré par $\card\Ob(J/j')\times\card A\leqslant\pi\cdot\pi=\pi$. Il s'ensuit, comme $\mathcal{E}_{j'}$ est grande devant $\pi$, qu'il existe un objet $X(j')$ de $\mathcal{E}_{j'}$, et une flèche $v(j') : F(j')\longrightarrow X(j')$ de telle façon que pour tout $\alpha\in A$, et tout $\lambda\in\Ob J/j'$, le carré déduit de $(*)$
+
+\msp{253}
+en composant avec $F(j')\longrightarrow X(j')$ soit commutatif. On fait ce choix pour tout objet $j'$ de $J$. Appliquons alors F$'$ 1 à $F$ et au système de flèches $F(j)\xrightarrow{v(j)}X(j)$, on trouve $G$ et un système de flèches
+\[
+w(j)\ :\ X(j) \longrightarrow G(j)
+\]
+de telle façon que les flèches composées
+\[
+\begin{tikzcd}[column sep=small]
+w(j)v(j) : & F(j) \arrow[rr] \arrow[dr,dotted] & & G(j) \\
+& & X(j) \arrow[ur,dotted] &
+\end{tikzcd}
+\]
+définissent un homomorphisme de sections. Je dis que cet homomorphisme a la propriété voulue pour F $3_\pi$, i.e. que pour tout $\alpha\in A$, le système des composés
+\[
+F_\alpha(j) \longrightarrow F(j) \longrightarrow G(j)
+\]
+(pour $j\in\Ob J$ variable) définit un homomorphisme de sections $F_\alpha\longrightarrow G$. En effet, il suffit pour cela de considérer, pour une flèche $\lambda$ de $J$, le
+% foot: Version 17 décembre 2025
+\printedpage{96}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{254}
+diagramme
+\[
+\begin{tikzcd}
+F_\alpha(j) \arrow[r,"u_\alpha(j)"] \arrow[d,"F_\alpha(\lambda)"'] \arrow[dr,phantom,"!"] & F(j) \arrow[r,"v(j)"] \arrow[d,"F(\lambda)"'] & X(j) \arrow[r,"w(j)"] \arrow[d,phantom,"\text{comm.}"] & G(j) \arrow[d,"G(\lambda)"] \\
+F_\alpha(j') \arrow[r,"u_\alpha(j')"] & F(j') \arrow[r,"v(j')"] & X(j') \arrow[r,"w(j')"] & G(j')\ .
+\end{tikzcd}
+\]
+Le lemme 4.10.5 étant prouvé, tout revient donc à prouver la condition F 1, et son complément F$'$ 1, qui se prouvera dans la même haleine.
+
+\textbf{4.10.6.} On se donne donc le système d'objets
+\[
+X(j)\ \in\ \Ob\mathcal{E}_j \qquad (j\in\Ob J)\ , \tag*{(4.10.6.1)}
+\]
+et le cas échéant, un objet $F$ de $\uGamma(\mathcal{E}/J)$, et un système de flèches
+\[
+F(j) \xrightarrow{u_j} X(j)\ , \tag*{(4.6.10.2)} % [sic] (4.6.10.2) -> (4.10.6.2), numbering of 4.10.6; cited as (4.10.6.2) below
+\]
+et on se propose de construire $G$ de $\uGamma(\mathcal{E}/J)$, et un système de flèches
+\[
+X(j) \xrightarrow{w(j)} G(j)\ , \tag*{(4.10.6.3)}
+\]
+de telle façon que (si on a la donnée supplémentaire des $u(j)$) les flèches composées
+\[
+F(j) \xrightarrow{u(j)} X(j) \xrightarrow{v(j)} G(j) % [sic] v(j) -> w(j), the arrow X(j) -> G(j) is w(j) in (4.10.6.3)
+\]
+
+\msp{255}
+soient fonctorielles en $j$.
+
+On va faire une construction transfinie sur les ordinaux $\alpha$ tels que
+\[
+\card\alpha\ \leqslant\ \pi
+\]
+d'un système inductif
+\[
+(X_\alpha(j))_\alpha
+\]
+d'objets de $\prod_{j\in\Ob J}\mathcal{E}_j$. On va d'abord ignorer la donnée éventuelle (4.10.6.2). On posera
+\[
+X_0(j)\ =\ X(j)\ , \tag*{(4.10.6.4)}
+\]
+et on va donner la prescription pour passer de $X_\alpha$ à $X_{\alpha+1}$. La construction inclura aussi, pour toute flèche $\lambda : j'\longrightarrow j$ de $J$ et tout $\alpha$, la donnée de
+\[
+X_\alpha(j) \xrightarrow{t_\alpha(\lambda)} X_{\alpha+1}(j)\ , \qquad \text{flèche (dans $\mathcal{E}$) au dessus de $\lambda$,} \tag*{(4.10.6.5)} % [sic] X_\alpha(j) -> X_\alpha(j'), the source of an arrow over \lambda : j' -> j (cf. p. 97: X_\alpha(j') -> X_{\alpha+1}(j))
+\]
+et ces flèches, et les flèches de transition $X_\alpha(j)\xrightarrow{\tau_\alpha(j)}X_{\alpha+1}(j)$, doivent
+% foot: Version 17 décembre 2025
+\printedpage{97}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{256}
+satisfaire aux trois conditions suivantes :
+\begin{itemize}[leftmargin=3em]
+\item[(i)] Si $\lambda$ est une flèche identique $\mathrm{id}_J : J\longrightarrow J$, alors \fbox{$t_\alpha(\lambda)=\tau_\alpha(j)$.} % [sic] id_J : J -> J -> id_j : j -> j, the identity arrow of an object j of J
+\item[(ii)] Dans le diagramme
+\[
+\begin{tikzcd}
+X_\alpha(j') \arrow[r,"\tau_\alpha(j')"] \arrow[dr,"t_\alpha(\lambda)"] & X_{\alpha+1}(j') \arrow[r] \arrow[dr,"t_{\alpha+1}(\lambda)"] \arrow[d,phantom,"\bullet"] & X_{\alpha+2}(j') \arrow[r] \arrow[dr] & X_{\alpha+3}(j') \arrow[r] \arrow[dr,dotted] & {} \\
+X_\alpha(j') \arrow[r] & X_{\alpha+1}(j') \arrow[r,"\tau_{\alpha+1}(j')"] & X_{\alpha+2}(j') \arrow[r,"\tau_{\alpha+2}(j')"] & X_{\alpha+3}(j') \arrow[r] & {,}
+\end{tikzcd}
+\] % [sic] bottom row printed with j' (X_\alpha(j'), X_{\alpha+1}(j'), \tau_{\alpha+1}(j'), X_{\alpha+2}(j'), \tau_{\alpha+2}(j'), X_{\alpha+3}(j')) -> j, the arrows t(\lambda) go to the objects at j (cf. the text below: \tau_{\alpha+1}(j), \tau_{\alpha+2}(j))
+$\tau_{\alpha+2}(j)$ “rend le carré $\bullet$ commutatif”, i.e. égalise $t_{\alpha+1}(\lambda)\tau_\alpha(j')$ et $\tau_{\alpha+1}(j)t_\alpha(\lambda)$ :
+\[
+\boxed{\tau_{\alpha+2}(j)t_{\alpha+1}(\lambda)\tau_\alpha(j')\ =\ \tau_{\alpha+2}(j)\tau_{\alpha+1}(j)t_\alpha(\lambda)\ .}
+\]
+\item[(iii)] Si on a deux flèches consécutives $\lambda : j''\longrightarrow j'$, $\mu : j'\longrightarrow j$, on a donc le diagramme
+\[
+\begin{tikzcd}
+X_\alpha(j'') \arrow[r] \arrow[dr,"t_\alpha(\lambda)"] \arrow[ddr,"t_\alpha(\mu\lambda)"{swap,pos=0.72,inner sep=1pt}] & X_{\alpha+1}(j'') \arrow[r] \arrow[dr] & X_{\alpha+2}(j'') \arrow[r] \arrow[dr] & X_{\alpha+3}(j'') \\
+X_\alpha(j') \arrow[r] & X_{\alpha+1}(j') \arrow[r] \arrow[dr,"t_{\alpha+1}(\mu)"] & X_{\alpha+2}(j') \arrow[r] \arrow[dr] & X_{\alpha+3}(j') \\
+X_\alpha(j) \arrow[r] & X_{\alpha+1}(j) \arrow[r,"\tau_{\alpha+1}(j)"] & X_{\alpha+2}(j) \arrow[r,"\tau_{\alpha+2}(j)"] & X_{\alpha+3}(j)\ ,
+\end{tikzcd}
+\]
+\[
+\boxed{\tau_{\alpha+2}(j)t_{\alpha+1}(\mu)t_\alpha(\lambda)\ =\ \tau_{\alpha+2}(j)\tau_{\alpha+1}(j)t_\alpha(\mu\lambda)}
+\]
+\end{itemize}
+
+\msp{257}
+Ainsi, pour définir les $X_{\alpha+1}(j)$, il faut tenir compte de toutes ces contraintes. Donc :
+\begin{itemize}[leftmargin=3em]
+\item[1°)] Pour $j$ fixé, $X_{\alpha+1}(j)$ doit être but des flèches
+\[
+X_\alpha(j') \xrightarrow{t_\alpha(\lambda)} X_{\alpha+1}(j)\ ,
+\]
+pour les $\lambda\ :\ j'\longrightarrow j$ dans $\Ob J/j$ -- y compris pour $\lambda=\mathrm{id}_j$, auquel cas $t_\alpha(\lambda)\ :\ X_\alpha(j)\longrightarrow X_{\alpha+1}(j)$ jouera le rôle du morphisme de transition $\tau_\alpha(j)$.
+\item[2°)] Si $\alpha$ est de la forme $\alpha'+2$, i.e. s'il n'est ni ordinal limite, ni successeur d'un ordinal limite, alors on exige de plus, pour les morphismes de transition $\tau_\alpha(j)$, d'égaliser les couples de flèches prévus dans (ii) et (iii) ci-dessus.
+\end{itemize}
+Comme l'ensemble de ces données dans 1°), ou de ces contraintes dans 2°),
+\msp{258}
+est de cardinal $\leqslant\pi$, et que la catégorie $\mathcal{E}_j$ est grande devant $\pi$, on voit qu'on peut bel et bien trouver $X_{\alpha+1}(j)$ et des $t_\alpha(\lambda)\ :\ X_\alpha(j')\longrightarrow X_{\alpha+1}(j)$, de façon à satisfaire (si $\alpha=\alpha'{+}2$) aux contraintes rappelées dans 2°. Cela achève la description de la construction de $X_{\alpha+1}(\bullet)$, en termes de $X_\beta(\bullet)$ $(\beta\leqslant\alpha)$ et des $t_\beta(\lambda)$ $(\beta<\alpha)$.
+
+Il faut enfin définir $X_\alpha(\bullet)$ pour $\alpha$ un ordinal limite. Cette fois, on lui demande seulement de recevoir les $X_\beta(\bullet)$ pour $\beta<\alpha$. Comme l'ensemble $I_\alpha$ de ces $\beta$ est de cardinal $\leqslant\pi$, et que les $\mathcal{E}_j$ sont grandes devant $\pi$, on peut bel et bien trouver les $X_\alpha(j)$.
+% foot: Version 17 décembre 2025
+
+\printedpage{98}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{259}
+On a donc prouvé l'essentiel du
+
+\textbf{Lemme 4.10.7.} \textit{Sous les conditions de 4.10.3 a) b), et pour un système $X(\bullet)\in\Ob\prod_{j\in\Ob J}\mathcal{E}_j$ donné, on peut trouver un système inductif $(X_\alpha(i))_\alpha$ dans $\prod\mathcal{E}_j$, indexé par les ordinaux $\alpha$ telle que} $\card\alpha\leqslant\pi$, \textit{et pour toute flèche $\lambda : j'\longrightarrow j$ dans $J$ des flèches $t_\alpha(\lambda) : X_\alpha(j')\longrightarrow X_\alpha(j)$, de telle façon que l'on ait les conditions suivantes.} % [sic] (X_\alpha(i))_\alpha -> (X_\alpha(j))_\alpha, the index is j \in Ob J; [sic] X_\alpha(j') -> X_\alpha(j) -> X_\alpha(j') -> X_{\alpha+1}(j), cf. (4.10.6.5) and p. 97
+\begin{itemize}[leftmargin=3em]
+\item[\textit{1°)}] \textit{$X_0(\bullet)=X(\bullet)$.}
+\item[\textit{2°)}] \textit{Les conditions (i) (ii) (iii) (p. 256).}
+\item[\textit{3°)}] \textit{Si on se donne $F$ dans \textup{Ob}$\,\uGamma(\mathcal{E}/J)$, et des flèches $u(j) : F(j)\longrightarrow X(j)=X_0(j)$, on peut supposer que pour toute flèche $\lambda : j'\longrightarrow j$ dans $J$, on a}
+\[
+\begin{tikzcd}
+F(j') \arrow[r,"u(j')"] \arrow[d,"F(\lambda)"'] & X_0(j') \arrow[dr,"t_0(\lambda)"] & \\
+F(j) \arrow[r,"u(j)"] & X_0(j) \arrow[r,"\tau_0(j)"] & X_1(j)
+\end{tikzcd}
+\qquad\qquad \text{commutatif.}
+\tag*{$(*)$}
+\]
+\end{itemize}
+
+\msp{260}
+Il reste seulement à prouver ce dernier complément 3°. C'est une contrainte uniquement sur la construction de $X_1(\bullet)$ et des $t_0(\lambda)$. Supposons donc que l'on ait construit $X_1(\bullet)$ sans tenir compte de cette contrainte. Pour $j$ fixé, il faut donc “rendre commutatif” tous ces carrés, i.e. toutes ces double-flèches $(t_0(\lambda)u(j'),\tau_0(j)u(j)F(\lambda))$ de but $X_1(j)$. Comme l'ensemble de ces double-flèches est de cardinal $\card\Ob\mathcal{E}/j\leqslant\pi$, on peut trouver $X_1(j)\longrightarrow X'_1(j)$ dans $\mathcal{E}_j$, égalisant toutes ces double-flèches, donc quitte à remplacer $X_1(j)$ par $X'_1(j)$, on gagne.
+
+\msp{261}
+Il est temps enfin de faire appel à l'hypothèse c) de 4.10.3. Soit donc $\alpha$ un ordinal limite, comme stipulé dans cette condition. Comme $\card\alpha\leqslant\pi$, a fortiori $\card\beta\leqslant\pi$ si $\beta<\alpha$, on a donc un système inductif
+\[
+(X_\beta(\bullet))_{\beta\in I_\alpha}
+\]
+dans $\prod_{j\in J}\mathcal{E}_j$. Comme les $\varinjlim$ de type $I_\alpha$ existent dans $\mathcal{E}_j$, on peut donc considérer
+\[
+G(j)\ =\ \varinjlim_{\beta\in I_\alpha} X_\beta(j)\ \in\ \Ob\mathcal{E}_j\ .
+\]
+Si $\lambda : j'\longrightarrow j$ est une flèche de $J$, on en déduit une $\lambda$-flèche
+\[
+G(\lambda)\ :\ G(j)=\varinjlim X_\beta(j) \longrightarrow G(j')\simeq\varinjlim X_{\beta+1}(j')
+\]
+par $G(\lambda)=\varinjlim t_\beta(\lambda)$. Il faut
+\msp{262}
+faire attention que les $t_\beta(\lambda)$ ne définissent pas un homomorphisme de systèmes projectifs, mais par la condition (ii), p. 256, ils définissent un homomorphisme d'ind-objets, donc
+% foot: Version 17 décembre 2025
+
+% ---- from der-ch18_p101-105.tex
+\printedpage{99}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+un homomorphisme sur les $\varinjlim$ (\footnote{Attention, c'est ici qu'on utilise tacitement le fait que le foncteur $\lambda_* : \mathcal{E}_{j'} \longrightarrow \mathcal{E}_j$ commute aux $\varinjlim$ de type $I_\alpha$, ce qui implique que les inclusions $\mathcal{E}_j \into \mathcal{E}$ commutent à ce type de $\varinjlim$ .}). La condition (i) assure que $\lambda \longmapsto G(\lambda)$ transforme identités en identités, et la condition (iii) que l'on a $G(\mu\lambda) = G(\mu)G(\lambda)$. Donc $G$ apparaît comme une section de $\mathcal{E}$ sur $J$. On a d'autre part des flèches
+\[
+X(j) \defeq X_0(j) \longrightarrow G(j) = \varinjlim_{\beta\in I_\alpha} X_\beta(j) \ ,
+\]
+ce qui prouve F (1). D'autre part, la condition 3°) du lemme prouve la validité de F$'$ (1). Cela achève la démonstration de 4.10.3, et par là de 4.10.1 et de 4.9.3.
+
+\msp{page 263}
+
+\textbf{Corollaire 4.10.8} (du théorème 4.10.1). \textit{Soit $\mathcal{N} \longrightarrow J$ un foncteur cofibrant, tel que les fibres soient des catégories accessibles (4.8), les foncteurs cochangement de base $\lambda_*$ : $\mathcal{N}_{j'} \longrightarrow \mathcal{N}_j$ accessibles, enfin $J$ équivalente à une petite catégorie. Alors la catégorie $\mathcal{M} = \uGamma(\mathcal{N}/J)$ est accessible. Plus précisément, soit $\pi_0$ un cardinal infini tel que les catégories $\mathcal{N}_j$ soient $\pi_0$-accessibles, et que les foncteurs $\lambda_*$ soient $\pi_0$-accessibles, et soit $\pi$ un cardinal infini tel que l'on ait :}
+\begin{enumerate}[leftmargin=*]
+\item[\cercle{a}] $\pi^{\pi_0} = \pi$.
+\item[\cercle{b}] $\forall\ \lambda : j' \longrightarrow j$ \textit{dans} $J$, $\lambda_* : \mathcal{E}_j \longrightarrow \mathcal{E}_{j'}$ \textit{applique} $(\mathcal{E}_j)_{\pi_0}$ \textit{dans} $(\mathcal{E}_{j'})_{\pi_0}$.
+\item[\cercle{c}] $\cardred J \leqslant \pi$.
+\end{enumerate}
+\textit{Alors $\mathcal{M}$ est $\pi$-accessible, et plus précisément, on a}
+\[
+\mathcal{M} \ \simeq \ \Ind_\pi(\mathcal{M}_\pi) \ ,
+\]
+\textit{où $\mathcal{M}_\pi$ est la sous-catégorie pleine de $\mathcal{M}$ formée des sections $F$ de $\mathcal{M}$ sur $J$ telles que l'on ait $F(j) \in (\mathcal{E}_j)_\pi \ \forall\ j \in \operatorname{Ob} J$,} \msp{page 264} \textit{$(\mathcal{E}_j)_\pi$ désignant la sous-catégorie pleine de $\mathcal{E}_j$ formée des objets $\pi$-accessibles de $\mathcal{E}_j$.}
+
+En effet, l'hypothèse au début implique l'existence de $\pi_0$ et de $\pi$ satisfaisant les conditions dites. Les conditions a) et b) sur $\pi$, plus le fait que les foncteurs $\lambda_*$ soient $\pi_0$-accessibles, impliquent que la sous-catégorie strictement pleine $\mathcal{N}_\pi$ de $\mathcal{N}$ dont les fibres sont les $(\mathcal{N}_j)_\pi$, est une sous-catégorie cofibrée, et que de plus $\mathcal{N}$ est $J$-équivalent à $\Ind_\pi(\mathcal{N}_\pi/J)$. D'autre part, les fibres de $\mathcal{N}_\pi/J$ sont stables par $\varinjlim$ grandes devant $\pi_0$ et de cardinal $\leqslant \pi$, donc la condition “ordinale” de 4.10.1 est vérifiée (en y faisant $\mathcal{D} = \mathcal{N}_\pi$). Comme de plus $\operatorname{card} J \leqslant \pi$, on en conclut par 4.10.1 que $\mathcal{M} \simeq \Ind_\pi(\mathcal{M}_\pi)$.
+
+\msp{page 265}
+
+\textbf{Corollaire 4.10.9.} \textit{Soit $\mathcal{N} \longrightarrow J$ une “cofibration en paratopos” (\footnote{terme ambigu, cf. la double explication.}), i.e. un foncteur cofibrant tel que les fibres soient des catégories paratopos, et les foncteurs cochangement de base soient des foncteurs images inverses (resp. images directes) pour des morphismes de paratopos, i.e. qu'ils commutent aux (petites) $\varinjlim$ (resp. aux petites $\varprojlim$ ). Supposons de plus $J$ équivalente à une petite catégorie. Alors $\uGamma(\mathcal{N}/J)$ est une catégorie paratopos.}
+
+En effet, c'est une catégorie accessible en vertu de 4.10.8, d'autre part l'hypothèse sur les $\lambda_*$ implique aussitôt que $\uGamma(\mathcal{N}/J)$ est stable par petites $\varprojlim$ (resp. par petites $\varprojlim$
+\printedpage{100}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\texttt{[plutôt} $\varinjlim$ \texttt{?]}). Donc $\uGamma(\mathcal{N}/J)$ est une catégorie paratopos en vertu de 4.8.9 b $\Longrightarrow$ a (resp. c $\Longrightarrow$ a).
+
+\textbf{Corollaire 4.10.10.} \textit{Soit $\mathcal{N} \longrightarrow J$ une catégorie} fibrée \textit{(non cofibrée!), telle que les fibres soient des catégories paratopos et les foncteurs} \msp{page 266} \textit{changement de base soient des foncteurs images directes pour des morphismes de paratopos (i.e. des foncteurs accessibles, commutant aux petites $\varprojlim$ ). Supposons de plus $J$ équivalente à une petite catégorie. Alors $\uGamma(\mathcal{N}/J)$ est une catégorie paratopos.}
+
+En effet, l'hypothèse implique que pour toute flèche $\lambda : j' \longrightarrow j$ dans $J$, le foncteur $\lambda_*$ : $\mathcal{N}_{j'} \longrightarrow \mathcal{N}_j$ admet un adjoint à gauche $\lambda^* : \mathcal{N}_j \longrightarrow \mathcal{N}_{j'}$, d'où s'ensuit que $\mathcal{N} \longrightarrow J$ est aussi cofibrant, les foncteurs de cochangement de base commutant aux petites $\varinjlim$ . Donc on peut appliquer 4.8.9, qui donne le résultat voulu.
+
+\textbf{Question 4.10.11.} \textit{Soit $\mathcal{N} \longrightarrow J$ un foncteur} fibrant, \textit{tel que les $\mathcal{N}_j$ soient des catégories accessibles, et les foncteurs $\lambda^*$ de changement de base accessibles, $J$ étant équivalente à une petite catégorie. Je} \msp{page 267} \textit{conjecture que sous ces conditions, $\uGamma(\mathcal{N}/J) \defeq \Hom(J,\mathcal{N})$ est accessible, et qu'il en est de même de $\Hom\,\underline{\operatorname{cart}}_J(J,\mathcal{N})$.}
+
+C'est ce qui est prouvé dans SGA 4 I 9.24 sous des hypothèses légèrement plus fortes (à l'aide de l'ancienne notion trop forte à mon gré, de filtrations cardinales). Je serais étonné que la démonstration (un peu longuette) de loc. cit. ne s'applique pas au cas général. Mais on aimerait avoir un énoncé qui coiffe celui-ci et 4.10.8, dans le cas d'un foncteur $\mathcal{N} \longrightarrow J$ qui ne serait supposé ni fibrant ni cofibrant, mais \ldots(???).
+
+\section*{4.11\quad Application à l'existence des limites dans une catégorie de la forme $\Ind_{\pi_0}(C)$.}
+
+\textbf{Proposition 4.11.1.} \textit{Soit} \msp{page 268} \textit{$C$ une catégorie équivalente à une petite catégorie, $\pi$ un cardinal infini, posons $\mathcal{M} = \Ind_\pi(C)$. Soit $\Phi$ un ensemble de catégories de cardinal réduit $\leqslant \pi$. On se propose d'examiner si $\mathcal{M}$ est “stable par $\varinjlim$ de type $\Phi$” (i.e. stable par $\varinjlim$ de type $I$, quel que soit $I \in \Phi$). Il suffit pour cela que $C$ est stable par $\varinjlim$ de type $\Phi$, et que de plus il existe un ordinal limite $\alpha$ avec $\operatorname{card}\alpha \leqslant \pi$ et tel que $C$ soit stable par $\varinjlim$ de type $I_\alpha$ (p.ex. tel que $I_\alpha \in \Phi$). Inversement, si $\mathcal{M}$ est stable par $\varinjlim$ de type $\Phi$, et si on suppose de plus $C$ karoubienne (i.e. stable par facteurs directs), alors $C$ est stable par $\varinjlim$ de type $\Phi$. Dans l'un et l'autre cas, le foncteur d'inclusion $C \into \mathcal{M}$ commute aux $\varinjlim$ envisagées.}
+
+(\footnote{Expliciter ici les corollaires des types 4.13.20, 4.13.21 (p. 341).}).
+
+\textsc{Démonstration}. a) Condition suffisante. On applique 4.9.3 pour conclure que
+\printedpage{101}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 269}
+pour toute catégorie $J$ de cardinal réduit $\leqslant \pi$ (en particulier pour $J \in \Phi$), tout foncteur $\varphi : J \longrightarrow \mathcal{M} = \Ind_\pi(C)$ admet une représentation indicielle $\Phi : J \times I \longrightarrow C$, avec $I$ grande devant $\pi$. Ceci, plus la stabilité de $C$ par $\varinjlim$ de type $J$, suffit à établir l'existence de la $\varinjlim$ de $\varphi$.
+
+La réciproque provient du fait que si $C$ est karoubienne, alors son image essentielle dans $\mathcal{M}$ n'est autre que $\mathcal{M}_\pi$, laquelle est stable dans $\mathcal{M}$ par toute $\varinjlim$ de cardinal $\leqslant \pi$ représentable dans $\mathcal{M}$. Si $\mathcal{M}$ est stable par $\varinjlim$ de type $\Phi$, il en est de même de $\mathcal{M}_\pi$, donc de $C$, q.e.d.
+
+\textbf{Corollaire 4.11.2.} \textit{Pour que $\mathcal{M}$ soit stable par $\varinjlim$ filtrantes (resp. par petites $\varinjlim$ ), il suffit que $C$ le soit par $\varinjlim$ filtrantes (resp. par $\varinjlim$ )} de cardinal $\leqslant \pi$, \textit{et c'est aussi nécessaire si $C$ est karoubienne.}
+
+Supposons $C$ stable par $\varinjlim$ filtrantes \msp{page 270} (resp. par $\varinjlim$ de cardinal $\leqslant \pi$, alors par 4.11.1 $\mathcal{M}$ est stable par ce même type de limites inductives. D'autre part, il est stable par $\varinjlim$ grandes devant $\pi$. Il suffit donc de prouver le
+
+\textbf{Lemme 4.11.3.} \textit{Soit $\mathcal{M}$ une catégorie, $\pi$ un cardinal. Supposons que $\mathcal{M}$ soit stable par $\varinjlim$ filtrantes de cardinal $\leqslant \pi$ (resp. par $\varinjlim$ de cardinal $\leqslant \pi$, resp. par sommes des cardinal $\leqslant \pi$),} et \textit{par $\varinjlim$ grandes devant $\pi$. Alors $\mathcal{M}$ est stable par petites $\varinjlim$ filtrantes (resp. par petites $\varinjlim$ , resp. par petites sommes).} % [sic] des cardinal -> de cardinal, agreement (cf. "de cardinal" elsewhere in the statement)
+
+Ce lemme se prouve comme 4.4.14, page 97.
+
+Reste la réciproque dans 4.11.2, qui résulte de l'assertion similaire dans 4.11.1.
+
+\textbf{Corollaire 4.11.4.} \textit{Quand $\mathcal{M} = \Ind_\pi C$ est-il stable par sommes ? S'il existe un ordinal $\alpha$ tel que $\operatorname{card}\alpha \leqslant \pi$, et que $C$ soit stable par $\varinjlim$ de type $I_\alpha$, alors il suffit que $C$ soit stable par sommes de cardinal $\leqslant \pi$. Cette condition est aussi nécessaire si $C$ est karoubienne.}
+
+(\footnote{Pour autres variantes de 4.11.1, cf. 4.13.19 (p. 340) et corollaires.}).
+
+Se prouve comme 4.11.2, en utilisant 4.11.3.
+
+\msp{page 271}
+
+\textbf{Proposition 4.11.5} (\footnote{?, démonstration pas achevée.}). \textit{Soit $\Phi$ un ensemble de catégories $I$ équivalentes à des catégories finies, et “rigides”, i.e. pour tout $i \in \operatorname{Ob} I$, $\Hom_I(i,i) = \{\mathrm{id}_i\}$. Soient $C$ une catégorie équivalente à une petite catégorie, $\pi$ un cardinal infini, $\mathcal{M} = \Ind_\pi C$. Pour que $\mathcal{M}$ soit stable par $\varinjlim$ (resp. par $\varprojlim$ ) de type $\Phi$, il} suffit \textit{que $C$ le soit. Dans le cas non respé, si $C$ est karoubienne, cette condition est aussi nécessaire.}
+
+Cette dernière assertion est contenue dans l'assertion similaire dans 4.11.1. Pour la première assertion, cela résulte de la façon habituelle du
+
+\textbf{Lemme 4.11.6} (\footnote{?, démonstration non explicitée est peut-être faux!}). \textit{Soit $J$ une catégorie équivalente à une catégorie finie, $J$ rigide, $C$ une catégorie équivalente à une petite catégorie, $\pi$ un cardinal infini. Alors tout foncteur}
+\printedpage{102}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\textit{$J \longrightarrow \mathcal{M} \defeq \Ind_\pi C$ admet une représentation indicielle $J \times I \longrightarrow C$, avec $I$ grande devant $\pi$, en d'autres termes, le} \msp{page 272} \textit{foncteur canonique pleinement fidèle}
+\[
+\Ind_\pi(\Hom(J,C)) \ \longrightarrow \ \Hom(J,\mathcal{M})
+\]
+\textit{déduit de l'inclusion $C \into \mathcal{M}$, d'où $\Hom(J,C) \into \Hom(J,\mathcal{M})$ (cf. 4.9), est une équivalence de catégories.} (\textbf{N.B.} J'ignore s'il en est ainsi sans hypothèse de rigidité sur $J$.)
+
+\textsc{Démonstration}. Cela se prouve comme le résultat similaire pour $\Ind(C)$ au lieu de $\Ind_\pi C$, cf. SGA 4 I 8.8.5.
+
+\msp{page 273}
+
+% a vertical rule is printed in the left margin beside Corollaire 4.11.7
+\textbf{Corollaire 4.11.7} (\footnote{sous réserve de validité de 4.11.5.}). \textit{Pour que $\mathcal{M} = \Ind_\pi C$ soit stable par $\varinjlim$ (resp. par $\varprojlim$ )} finies, \textit{il} suffit \textit{que $C$ le soit. Et c'est aussi nécessaire dans le cas non respé, lorsqu'on suppose $C$ karoubienne.}
+
+\section*{4.12\quad Foncteurs accessibles entre catégories accessibles}
+
+\textbf{Proposition 4.12.1} (\footnote{Remonterait à 4.8.}). \textit{Soient $\mathcal{M}$, $\mathcal{N}$ deux catégories accessibles (4.8), et $f : \mathcal{M} \longrightarrow \mathcal{N}$ un foncteur accessible. Alors il existe des cardinaux infinis $\pi_0$, $\pi_1$ tels que $\pi_1 \geqslant \pi_0$ et que pour tout cardinal $\pi \geqslant \pi_1$, on ait}
+\[
+f(\mathcal{M}_\pi) \ \subset \ \mathcal{N}_{\pi^{\pi_0}} \ , \tag*{(4.12.1)} % [sic] (4.12.1) -> (4.12.1.1), the formula is cited below as (4.12.1.1) and the next one is numbered (4.12.1.2)
+\]
+\textit{et en particulier}
+\[
+f(\mathcal{M}_\pi) \ \subset \ \mathcal{N}_\pi \qquad \textit{si } \pi = \pi^{\pi_0}. \tag*{(4.12.1.2)}
+\]
+\textit{De façon plus précise, on peut prendre pour $\pi_0$ un cardinal utile pour $\mathcal{M}$} \msp{page 274} \textit{et tel que $f$ soit $\pi_0$-accessible (p.ex. le plus petit cardinal de ce type). Soit alors $\pi_1$ un cardinal tel qu'on ait $f(\mathcal{M}_{\pi_0}) \subset \mathcal{N}_{\pi_1}$, $\pi_1 \geqslant \cardred \mathcal{M}_{\pi_0}$, et enfin tel que $\mathcal{N}_{\pi_1}$ soit} \texttt{[une]} \textit{sous-catégorie strictement génératrice de $\mathcal{N}$. Le couple $(\pi_0,\pi_1)$ satisfait aux conditions énoncées.}
+
+\textsc{Démonstration}. On aura en effet
+\[
+\mathcal{N}_1 \ \xleftarrow{\ \sim\ } \Ind_{\pi_0}(\mathcal{M}_{\pi_0})
+\]
+et $f$ commutant aux $\varinjlim$ grandes devant $\pi_0$, sera connu (à isomorphisme unique près) par sa restriction à $\mathcal{M}_{\pi_0}$, laquelle se factorise par $\mathcal{N}_{\pi_1}$,
+\[
+f|\mathcal{M}_{\pi_0} : \mathcal{M}_{\pi_0} \ \longrightarrow \ \mathcal{N}_{\pi_1} \ .
+\]
+Pour prouver (4.12.1.1), posant $\pi' = \pi^{\pi_0} \geqslant \pi$, et notant que $\pi'^{\pi_0} = \pi_0$ \texttt{[plutôt} $\pi'^{\pi_0} = \pi'$\texttt{]},
+\[
+f(\mathcal{M}_\pi) \ \subset \ f(\mathcal{M}_{\pi'}) \ \overset{?}{\subset} \ \mathcal{N}_{\pi'} \ ,
+\]
+\printedpage{103}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+on voit qu'il suffit de prouver (4.12.1.2) (pour $\pi'$). Donc on peut supposer $\pi = \pi^{\pi_0}$ et prouver (4.12.1.2). Mais comme $\pi_1 \geqslant \cardred \mathcal{M}_{\pi_0}$, on sait que si $\pi$ est tel que $\pi \geqslant \pi_1$, $\pi^{\pi_0} = \pi$, alors $\mathcal{M}_\pi$ est formé des $\varinjlim\limits_{I} x_i$, les $x_i \in \mathcal{N}_{\pi_0}$, et $I$ grande devant $\pi_0$, et $\operatorname{card} I \leqslant \pi$.
+
+\msp{page 275}
+
+On a alors ($f$ étant $\pi_0$-accessible)
+\[
+f(x) \ = \ \varinjlim_{I} f(x_i) \ ,
+\]
+les $f(x_i)$ sont dans $\mathcal{N}_{\pi_1}$, donc dans $\mathcal{N}_\pi$, or $\mathcal{N}_\pi$ stable par $\varinjlim$ de cardinal $\leqslant \pi$ (puisque $\mathcal{N}$ est engendrée par $\mathcal{N}_{\pi_1}$, formée d'objets $\pi_1$-accessibles et a fortiori $\pi$-accessibles, cf. SGA 4 I 9.9). D'où $f(x) \in \mathcal{N}_\pi$, q.e.d.
+
+\textbf{Corollaire 4.12.2.} \textit{Supposons que $\pi_0$ soit aussi utile pour $\mathcal{N}$, et que $\pi_1 \geqslant \cardred \mathcal{N}_{\pi_0}$. Soit $\pi$ un cardinal $\geqslant \pi_1$, et tel que $\pi^{\pi_0} = \pi$. Alors $f$ s'identifie, à équivalence de catégories et à isomorphisme de foncteurs près, au foncteur}
+\[
+\Ind(f_\pi) \ : \ \Ind_\pi(\mathcal{M}_\pi) \ \longrightarrow \ \Ind_\pi(\mathcal{N}_\pi) \ ,
+\]
+\textit{où $f_\pi : \mathcal{M}_\pi \longrightarrow \mathcal{N}_\pi$ est le foncteur induit par $f$.}
+
+\textbf{Proposition 4.12.3} (\footnote{remonte à 4.7.}). \textit{Soient $C$ une catégorie équivalente à une petite catégorie, $\mathcal{N}$ une $\mathfrak{U}$-catégorie, $\pi_0$ un cardinal infini.} \msp{page 276} \textit{On suppose que $\mathcal{N}$ satisfait $L_{\pi_0}$ (stabilité par $\varinjlim$ grandes devant $\pi_0$). Soit $\mathcal{M} = \Ind_{\pi_0} C$, $\Hom_{!\,\pi_0}(\mathcal{M},\mathcal{N})$ la sous-catégorie strictement pleine de $\Hom(\mathcal{M},\mathcal{N})$ formée des $f$ : $\mathcal{M} \longrightarrow \mathcal{N}$ $\pi_0$-accessibles. Alors le foncteur restriction}
+\[
+\Hom_{!\,\pi_0}(\mathcal{M},\mathcal{N}) \ \longrightarrow \ \Hom(C,\mathcal{N}) \tag*{(4.12.3.1)}
+\]
+\textit{est une équivalence de catégories. On trouve un foncteur quasi-inverse comme composé}
+\[
+\Hom(C,\mathcal{N}) \ \longrightarrow \ \Hom(\underbrace{\Ind_{\pi_0}(C)}_{\mathcal{M}},\Ind_{\pi_0}(\mathcal{N})) \ \longrightarrow \ \Hom(\mathcal{M},\mathcal{N}) \ , \tag*{(4.12.3.2)}
+\]
+\textit{où la deuxième flèche est le foncteur composition $F \longmapsto L \circ F$ avec le foncteur limite inductive $L : \Ind_{\pi_0}\mathcal{N} \longrightarrow \mathcal{N}$. Le foncteur composé (4.11.3.2) a une image contenue dans $\Hom_{!\,\pi_0}(\mathcal{M},\mathcal{N})$ et induit une équivalence entre cette dernière catégorie et $\Hom(C,\mathcal{N})$.} % [sic] (4.11.3.2) -> (4.12.3.2), the composed functor is the display just labelled (4.12.3.2)
+
+\msp{page 277}
+
+\textit{En d'autres termes, on peut dire que le foncteur d'inclusion canonique}
+\[
+C \ \longrightarrow \ \Ind_{\pi_0} C \ = \ \mathcal{M}
+\]
+\textit{est} 2-universel \textit{pour les foncteurs de $C$ dans des catégories $\mathcal{N}$ satisfaisant $L_{\pi_0}$, celles-ci étant considérées comme $0$-objets d'une $2$-catégorie où les $1$-objets sont les foncteurs $\mathcal{N} \longrightarrow \mathcal{N}'$ $\pi_0$-accessibles, i.e. commutent aux $\varinjlim$ grandes devant $\pi_0$.}
+
+Cet énoncé est l'analogue, pour $C$ petite quelconque, de 4.4.16 (page 101), valable pour $C$ stable par $\varinjlim$ de cardinal $\leqslant \pi_0$. Il y a bien sûr d'autres variantes, en relation avec la commutation à d'autres types de $\varinjlim$ ( $\varinjlim$ filtrantes, sommes, limites inductives finies etc.) envisagées dans la section 4.11 précédente.
+
+La démonstration de 4.12.3 est soritale.
+
+% ---- from der-ch18_p106-110.tex
+\printedpage{104}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 278}
+\textbf{Corollaire 4.12.4.} \textit{Soient $\M$ et $\N$ deux catégories accessibles, et soit $\pi_0$ un cardinal infini tel que $\M$ soit $\pi_0$-accessible, i.e. que $\pi_0$ soit un cardinal utile pour $\M$. Soit $\pi_1 = \sup(\pi_0,\allowbreak \card\red\M_{\pi_0})$. Alors pour tout cardinal $\pi \geqslant \pi_1$ utile pour $\M$ (et en particulier, pour tout $\pi \geqslant \pi_1$ tel que $\pi^{\pi_0} = \pi$), la catégorie des foncteurs $\M \longrightarrow \N$ qui sont $\pi$-accessibles est elle-même accessible.}
+
+En effet, on aura $\M \simeq \Ind_\pi\M_\pi$, d'où par 4.12.3
+\[
+\Hom_{!\,\pi}(\M,\N) \xrightarrow{\sim} \Hom(\M_\pi,\N) ,
+\]
+or $\Hom(\M_\pi,\N)$ est accessible par 4.9.5 (p. 220). On peut préciser d'ailleurs ce point. Supposons $\pi_0$ choisi tel que $\pi_0$ soit utile non seulement pour $\M$, mais pour $\N$ également. Rappelons que l'on a $\card\Fl\M_\pi \leqslant 2^\pi$ (cf. 4.7.7, page 173).
+
+\msp{page 279}
+Posons donc
+\[
+\pi' = 2^\pi ,
+\]
+on a donc $\pi'^{\pi_0} = 2^{\pi\pi_0} = 2^\pi = \pi'$, et $\card\red\M_\pi \leqslant \pi'$. Donc 4.9.5 nous donne que
+\[
+\Hom(\M_\pi,\N) \simeq \Ind_{\pi'}(\Hom(\M_\pi,\M_{\pi'})) , % [sic] \M_{\pi'} -> \N_{\pi'}, the second argument should lie in N, as in Corollaire 4.12.5
+\]
+d'où :
+
+\textbf{Corollaire 4.12.5.} \textit{Sous les conditions de 4.12.4, si $\pi_0$ est utile pour $\M$} et \textit{pour $\N$, alors pour $\pi \geqslant \pi_1$, $\Hom_{!\,\pi}(\M,\N)$ est $\pi'$-accessible, où $\pi' = 2^\pi$, de façon plus précise, on a une équivalence de catégories}
+\[
+\Hom_{!\,\pi}(\M,\N) \simeq \Ind_{\pi'}(\Hom(\M_\pi,\N_{\pi'})) .
+\]
+
+\textbf{Remarque 4.12.6.} Si $\M$, $\N$ sont accessibles, la catégorie $\Hom_{\mathrm{acc}}(\M,\N)$ des foncteurs accessibles n'est par toujours accessible. Si $\N$ satisfait $\mathrm{L}_{\pi_0}$, cette catégorie satisfait $\mathrm{L}_{\pi_0}$, % [sic] par toujours -> pas toujours, negation "n'est pas" intended
+et les $\varinjlim$ grandes devant $\pi_0$ se calculent argument par argument.
+
+\msp{page 280}
+Si on pouvait trouver une sous-catégorie (équivalente à une petite catégorie) $\cH_\pi$ de $\cH = \Hom_{\mathrm{acc}}(\M,\N)$, pour un cardinal $\pi \geqslant \pi_0$ telle que tout objet $F$ de $\cH$ s'écrive $\varinjlim\limits_{I} F_i$, les $F_i$ dans $\cH_\pi$, $I$ grande devant $\pi$, alors si les objets de $\cH_\pi$ sont des foncteurs $\pi'$-accessibles de $\M$ dans $\N$, il en serait de même de tout $F$ dans $\cH$. Donc il existerait un cardinal infini $\pi'$ tel que tout foncteur accessible de $\M$ dans $\N$ soit $\pi'$-accessible. Mais sauf erreur, si p.ex. $\M = \N = \mathrm{Ens}$, il n'existe pas de tel cardinal. Je ne veux pas m'arrêter ici sur cette question, et faire un contre-exemple.
+
+\msp{page 281}
+
+\section*{4.13\quad Ensembles accessibles d'objets d'une catégorie accessible}
+
+\textbf{Définition 4.13.1.} Soient $\M$ une catégorie accessible, $S$ une partie de $\Ob\M$, $\uS$ la sous-catégorie pleine de $\M$ définie par $S$. On dit que $S$ est une \textit{partie accessible} de $\Ob\M$, ou encore que $\uS$ est une \textit{sous-catégorie “accessible dans $\M$”}, si
+\printedpage{105}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\begin{enumerate}
+\item[a)] $\uS$ est strictement pleine, i.e. pour $x$, $y$ deux objets isomorphes de $\M$, $x \in S$ implique $y \in S$,
+\item[b)] $\uS$ est accessible,
+\item[c)] le foncteur d'inclusion $\uS \longrightarrow \M$ est accessible.
+\end{enumerate}
+Soient $\pi_0$ un cardinal utile pour $\M$, i.e. tel que $\M \simeq \Ind_{\pi_0}(\M_{\pi_0})$, soit $\pi_1 = \sup(\pi_0, \card\red\M_{\pi_0})$. Soit d'autre part $\pi'_0$ un cardinal tel que
+
+\msp{page 282}
+$\uS$ (supposé accessible dans $\M$) soit $\pi_0$-\textit{accessible}, i.e. $\pi'_0$-utile pour $\uS$, et de plus tel % [sic] \pi_0-accessible -> \pi'_0-accessible, the following "i.e. \pi'_0-utile" refers to \pi'_0
+que $f : \uS \hookrightarrow \M$ soit $\pi'_0$-accessible. Soit $\pi'_1 \geqslant \pi'_0$ un cardinal tel que $\uS_{\pi'_0} \subset \M_{\pi'_1}$, $\pi'_1 \geqslant \card\red\uS_{\pi'_0}$. Il résulte de 4.12.1 que pour tout cardinal
+\[
+\pi \geqslant \pi'_1 , \qquad \text{tel que } \pi^{\pi'_0} = \pi, \tag*{$(*)$}
+\]
+on doit avoir
+\[
+\uS_\pi \subset \M_\pi , \qquad \text{donc } \uS_\pi \subset \M_\pi \cap \uS,
+\]
+d'ailleurs, comme $\uS \hookrightarrow \M$ est $\pi'_0$-accessible et a fortiori $\pi$-accessible, et pleinement fidèle, il s'ensuit aussitôt que $\M_\pi \cap S \subset S_\pi$, d'où
+\[
+S_\pi = \M \cap S . % [sic] \M \cap S -> \M_\pi \cap S, the preceding lines concern \M_\pi \cap S
+\]
+
+\msp{page 283}
+D'ailleurs, la condition $(*)$ implique que $\pi$ est utile pour $\uS$, donc
+\[
+\uS \xleftarrow{\sim} \Ind_\pi(\uS_\pi) .
+\]
+$\Big($ D'ailleurs, \textit{si} $\pi'_0 \geqslant \pi_0$, la relation $\pi^{\pi'_0} = \pi$ implique a fortiori $\pi^{\pi_0} = \pi$, et si $\pi'_1 \geqslant \pi_1$, on voit que $(*)$ implique que $\pi$ est utile aussi pour $\M$, i.e.
+\[
+\M \xleftarrow{\sim} \Ind_\pi(\M_\pi) .
+\]
+D'autre part, le foncteur d'inclusion $\uS \hookrightarrow \M$ se déduit essentiellement de $\uS_\pi \hookrightarrow \M_\pi$ en passant aux catégories $\Ind_\pi$. (\footnote[116]{\texttt{[Le contenu de cette parenthèse est]} “facultatif”.}). $\Big)$
+
+Ceci prouve entre autres le “il faut” dans la proposition qui suit :
+
+\textbf{Proposition 4.13.2.} \textit{Soient $\M$ une catégorie accessible, $\pi_0$ un cardinal infini utile pour $\M$, $S$ une partie de} $\Ob\M$, \textit{$\uS$ la sous-catégorie pleine de $\M$ correspondante.}
+
+\msp{page 284}
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour que $S$ soit accessible, il faut et il suffit qu'il existe un cardinal infini $\pi$ et une partie $S(\pi)$ de $\M_\pi$, tels que $S$ soit formé des objets de $\M$ qui sont isomorphes à un objet de la forme $\varinjlim\limits_{i\in I} x_i$, avec les $x_i$ dans $S(\pi)$ et $I$ grande devant $\pi$. En d'autres termes, il faut et il suffit qu'il existe un cardinal infini $\pi_1$ et une sous-catégorie pleine % [sic] \pi_1 -> \pi, the rest of the statement uses \pi
+$\uS(\pi)$ de $\M_\pi$, tels que $\uS$ soit l'image essentielle du foncteur canonique pleinement fidèle}
+\[
+\Ind_\pi(\uS(\pi)) \longrightarrow \M \qquad \bigl(\xleftarrow{\sim} \Ind_\pi(\M)\ \text{(\footnotemark[117])}\bigr) , \tag*{(4.13.2.1)} % [sic] \Ind_\pi(\M) -> \Ind_\pi(\M_\pi), footnote 117 refers to \pi utile pour \M, i.e. \M \simeq \Ind_\pi(\M_\pi)
+\]
+\footnotetext[117]{si $\pi$ utile pour $\M$.}
+\textit{prolongeant l'inclusion canonique $\uS(\pi) \hookrightarrow \M$ (cf. 4.12.3).}
+\item[\textit{b)}] \printedpage{106}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\textit{Si $S$ est accessible, on peut trouver des cardinaux $\pi'_0$, $\pi'_1$ tels que $\pi'_1 \geqslant \pi'_0 \geqslant \pi_0$ (où $\pi_0$ est un cardinal donné utile pour $\M$)}
+\msp{page 285}
+\textit{et tels que tout cardinal $\pi \geqslant \pi'_1$ avec $\pi^{\pi'_0} = \pi$ satisfasse aux conditions de c), en prenant $S(\pi) = S \cap \Ob\M_\pi$, i.e. $\uS(\pi) = \uS \cap \M_\pi$. Sous ces conditions, $\pi$ est utile pour $\uS$} et \textit{pour $\M$, $S(\pi)$ est une sous-catégorie} strictement \textit{pleine de $\M_\pi$, stable dans $\M_\pi$ par facteurs directs (ou ce qui revient au même, $\M_\pi$ étant karoubienne, une sous-catégorie karoubienne de $\M_\pi$).}
+\item[\textit{c)}] \textit{On peut prendre $\pi'_0$ le plus petit cardinal $\geqslant \pi_0$ utile pour $\uS$ et tel que $\uS \hookrightarrow \M$ soit $\pi'_0$-accessible, et $\pi'_1 = \sup(\pi'_0, \card\red\uS_{\pi'_0})$.}
+\end{enumerate}
+
+La partie b) ainsi que c) a déjà été prouvée, ce qui implique le “il faut” dans la partie a). Il reste à prouver le “il suffit” dans a). Mais l'hypothèse implique que
+\[
+\uS \xleftarrow{\sim} \Ind_\pi(S_\pi) ,
+\]
+ce qui implique que $\uS$ est accessible et même $\pi$-accessible, et elle implique aussi que $\uS$ est une sous-catégorie \textit{strictement} pleine de $\M$. Il reste à voir
+
+\msp{page 286}
+\texttt{[que]} le foncteur d'inclusion est accessible, en fait il est $\pi$-accessible, puisque (4.13.2.1) l'est (cf. 4.12.3).
+
+\textbf{Définition 4.13.3.} Soient $\M$, $S \subset \Ob\M$, $\uS \subset \M$ comme dans 4.12.1, $\pi$ un cardinal infini. On dit que $S$ est une partie $\pi$-\textit{accessible} de $\Ob\M$, ou que $\uS$ est une sous-catégorie $\pi$-accessible dans $\M$, si $S$, $\pi$ satisfont les conditions de 4.13.3 a), i.e. $\uS$ est l'image essentielle % [sic] 4.13.3 a) -> 4.13.2 a), a self-reference of the definition, the conditions a) are those of Proposition 4.13.2
+de $\Ind_\pi(S(\pi))$, où $S(\pi)$ est une sous-catégorie pleine de $\M_\pi$.
+
+Notons que, quitte à renforcer $S(\pi)$ par $S'(\pi) = {\natural}$-clôture de $S(\pi)$ dans $\M_\pi$, on peut supposer que $S(\pi)$ est une sous-catégorie \textit{strictement pleine et karoubienne}
+
+\msp{page 287}
+de $\M_\pi$. On sait alors que, $S(\pi)$ étant karoubienne, $S(\pi) \longrightarrow (\underbrace{\Ind_\pi(S(\pi))}_{})_\pi$ est une équivalence de catégories. Comme $\Ind_\pi(S(\pi)) \simeq \uS$ et que $S(\pi)$ est strictement pleine dans $\M_\pi$, donc aussi dans $\M$ et a fortiori dans $\uS$, que l'on a
+\[
+\uS(\pi) = \uS_\pi , \qquad \text{sous-catégorie de } \uS \text{ des objets } \pi\text{-accessibles de } S. \tag*{(4.13.1)}
+\]
+Je dis qu'on aura aussi
+\[
+\uS(\pi) = \uS \cap \M_\pi . \tag*{(4.13.2)}
+\]
+Comme c est clair, il reste à voir que $\uS{\cap}\M_\pi \subset \uS(\pi)$, or il est immédiat que $\uS{\cap}\M_\pi \subset S_\pi$, % [sic] c -> an inclusion sign (\supset), a letter c printed where the reverse inclusion seems meant
+et on conclut par (4.13.1). On trouve ainsi :
+
+\textbf{Proposition 4.13.4.} \textit{Soit $\M$ une catégorie accessible, $\pi$ un cardinal infini. Soit $\Sigma_\pi$ l'ensemble des}
+
+\msp{page 288}
+\textit{sous-catégories strictement pleines $\uS(\pi)$ de $\M_\pi$ qui sont karoubiennes, ou ce qui revient au même, stables dans $\M_\pi$ par facteurs directs. Soit $\Sigma'_\pi$ l'ensemble des sous-catégories de}
+\printedpage{107}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\textit{$\M$ qui sont $\pi$-accessibles dans $\M$. Considérons les applications}
+\[
+\begin{tikzcd}
+\Sigma_\pi \arrow[r, shift left, "\alpha_\pi"] & \Sigma'_\pi \arrow[l, shift left, "\beta_\pi"]
+\end{tikzcd}
+\tag*{(4.13.4.1)}
+\]
+\textit{définies ainsi : Si $\uS(\pi) \in \Sigma_\pi$, $\alpha_\pi(\uS(\pi))$ est l'image essentielle du foncteur non pleinement fidèle} $\Ind_\pi(\uS(\pi)) \longrightarrow \M$. \textit{Si $\uS \in \Sigma'_\pi$, $\beta_\pi(\uS) = \uS \cap \M_\pi$. Les applications $\alpha_\pi$, $\beta_\pi$ sont des bijections, inverses l'une de l'autre.}
+
+On n'a pas eu à supposer que $\pi$ soit utile pour $\M$, ni que $\pi$ soit minoré par un cardinal utile pour $\M$, i.e. qu'on ait $\pi \geqslant \pi_0$, où $\pi_0$ est le plus petit cardinal utile pour $\M$.
+
+\msp{page 289}
+\textbf{4.13.5.} Soit $\uS$ une sous-catégorie \textit{strictement pleine} de $\M$ (catégorie accessible), $\pi'_0$ un cardinal infini. Dire que $\uS$ est $\pi'_0$-accessible dans $\M$ signifie que les conditions suivantes sont satisfaites.
+\begin{enumerate}
+\item[1)] $\pi'_0$ est utile pour $\uS$, i.e. $\uS \xleftarrow{\sim} \Ind_{\pi'_0}(\uS_{\pi'_0})$.
+\item[2)] $\uS \hookrightarrow \M$ est $\pi'_0$-accessible.
+\item[3)] $\uS_{\pi'_0} \hookrightarrow \M_{\pi'_0}$ (qui implique que $S_{\pi'_0}$ est équivalente à une petite catégorie).
+\end{enumerate}
+Supposons ces conditions satisfaites, et soit $\pi$ un cardinal $> \pi'_0$. Est-ce que $\uS$ est $\pi$-accessible dans $\M$, i.e. les conditions similaires sont-elles satisfaites pour $\pi$ ? C'est évident pour 2°), mais risque d'être faux pour 1°, 2° \texttt{[plutôt 3°\,?]}. Mais faisons appel à 4.13.2 c). Posons
+\[
+\pi'_1 = \sup(\pi'_0, \card\red S_{\pi'_0}, \underbrace{\pi_0}_{\substack{\text{plus petit cardinal}\\ \text{infini utile}\\ \text{pour } \M}} ) .
+\]
+
+\msp{page 290}
+Alors pour $\pi \geqslant \pi'_1$ tel que $\pi^{\pi'_0} = \pi$, $\uS$ est $\pi$-accessible dans $\M$ (4.13.2 b et c). Supposons p.ex.
+\[
+\pi'_0 \geqslant \pi_0
+\]
+(pratiquement ce sera toujours vérifié) et de plus
+\[
+\pi'_0 \geqslant \card\red\M_{\pi_0} ,
+\]
+i.e. supposons
+\[
+\pi'_0 \geqslant \sup(\pi_0, \card\red\M_{\pi_0}) = \pi_1 .
+\]
+Alors
+\[
+\pi'_1 = \sup(\pi'_0, \card\red S_{\pi'_0}) \leqslant \sup(\pi'_0, \card\red\M_{\pi'_0}) \leqslant 2^{({\pi'_0}^{\pi_0})}
+\]
+(4.7.7.1, p. 177). Donc on trouve ceci :
+
+\textbf{Corollaire 4.13.6.} \textit{Soit $\pi'_0$ un cardinal $\geqslant \pi_1 = \sup(\pi_0, \card\red\M_{\pi_0})$ (\footnote[118]{\textbf{N.B.} $\pi_0$ est le plus petit cardinal utile pour $\M$.}), et soit $\uS$ une sous-catégorie $\pi'_0$-accessible dans $\M$. Alors pour tout cardinal $\pi$ tel que $\pi \geqslant 2^{({\pi'_0}^{\pi_0})}$, et tel que l'on ait $\pi^{\pi'_0} = \pi$ (i.e. $\pi$ de la forme $c^{\pi'_0}$, avec $c$ un cardinal $\geqslant 2^{({\pi'_0}^{\pi_0})}$), $\uS$ est $\pi$-accessible dans $\M$. (De plus, ces cardinaux sont réguliers pour $\uS$} et \textit{pour $\M$, donc $\uS \simeq \Ind_\pi(\uS_\pi)$, $\M \simeq \Ind_\pi(\M_\pi)$).}
+
+(\footnote[119]{Enchaîner ici avec 4.13.23 etc.}, \footnote[120]{Mettre ici le lemme 4.16.7.11 signalé en marge p. 292.}).
+
+\printedpage{108}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+\msp{page 291}
+\textbf{Proposition 4.13.7} (\footnote[121]{Le rejeter après 4.13.23.}). \textit{Soient $\M$ une catégorie accessible, $(S_\alpha)_{\alpha\in A}$ une famille de parties de} $\Ob\M$, \textit{indexée par un petit ensemble $A$, $(\uS_\alpha)_{\alpha\in A}$ la famille des sous-catégories accessibles dans $\M$ correspondante. Soit $S = \bigcap_{\alpha\in A} S_\alpha$, $\uS = \bigcap_{\alpha\in A} \uS_\alpha$, de sorte que $\uS$ est la sous-catégorie pleine de $\M$ définie par $S \subset$} $\Ob\M$. \textit{Ceci posé, si les $S_\alpha$ sont accessibles, il en est de même de $S$ – ou encore, si les $\uS_\alpha$ sont accessibles dans $\M$, il en est de même de $\uS$.}
+
+Cela résulte du résultat plus précis :
+
+\textbf{Corollaire 4.13.8} (\footnote[122]{Cf. reformulation plus raisonnable et plus correcte page 302, 302 bis.}). \textit{Avec les notations de 4.13.7 et 4.13.6, soit, pour tout $\alpha \in A$, $\pi'_\alpha$ un cardinal $\geqslant \pi_1$ tel que $S_\alpha$ soit $\pi'_\alpha$-accessible. Soit}
+\[
+\begin{aligned}
+\pi'_0 &= \sup\nolimits_{\alpha\in A} \pi'_\alpha \\
+\pi''_0 &= \sup(\card A, \sup\nolimits_\alpha 2^{({\pi'_\alpha}^{\pi_0})})
+\end{aligned}
+\]
+\textit{et soit $\pi \geqslant \pi''_0$ un cardinal tel que $\pi^{\pi'_0} = \pi$, i.e. de la forme $c^{\pi'_0}$, avec $c \geqslant \pi'_0$. Alors $S$ est $\pi$-accessible (i.e. $\uS$ est $\pi$-accessible dans $\M$). En particulier, $S$ est $2^{\pi''_0}$-accessible.} (\footnote[123]{Ça a l'air un peu abracadabrant ! Il faut de plus supposer que $\pi$ n'est pas cardinal limite !}).
+
+\msp{page 292}
+\textsc{Démonstration}. Soit $\alpha \in A$. Comme $\pi'_\alpha \leqslant \pi'_0$ et $\pi^{\pi'_0} = \pi$, on a a fortiori
+\[
+\pi^{\pi'_\alpha} = \pi , \qquad \text{de plus } \pi \geqslant \pi''_0 \geqslant 2^{(\pi_\alpha^{\pi_0})} , % doubt resolved against PDF; see corrections.csv
+\]
+donc en vertu de 4.13.6, $\uS_\alpha$ est $\pi$-accessible dans $\M$. D'autre part, comme $\uS_\alpha$ est $\pi'_\alpha$-accessible, il est stable dans $\M$ par $\varinjlim$ grandes devant $\pi'_\alpha$, a fortiori par $\varinjlim$ grandes devant $\pi'_0$ ($\geqslant \pi'_\alpha$). D'ailleurs, $\pi^{\pi'_0} = \pi$ implique $\pi \geqslant 2^{\pi_0} > \pi'_0$. Donc 4.13.8 résulte du
+
+\textbf{Corollaire 4.13.9.} \textit{Soit $\pi > \pi_0$ un cardinal tel que $\uS_\alpha$ soit $\pi$-accessible dans $\M$ pour tout $\alpha \in A$, et tel que} $\card A \leqslant \pi$. \textit{Supposons de plus qu'il existe un cardinal $\pi'_0$ tel que $\pi_0 \leqslant \pi'_0 < \pi$, tel que les $\uS_\alpha$ soient stables dans $\M$ par $\varinjlim$ grandes devant $\pi'_0$. Alors $\uS = \bigcap_{\alpha\in A} \uS_\alpha$ est $\pi$-accessible dans $\M$.}
+
+(\footnote[124]{Ce serait le moment de formuler ici le Lemme 4.16.7.11 (p. 488), qui devrait même remonter avec les premières généralités sur les parties $\pi$-accessibles dès avant 4.13.7 (immédiat après 4.13.6).}).
+
+Posons, pour tout $\alpha \in A$,
+\[
+\begin{aligned}
+\uS_\alpha(\pi) &\overset{\text{déf}}{=} \uS_\alpha \cap \M_\pi \\
+\uS(\pi) &\overset{\text{déf}}{=} \uS \cap \M_\pi = \bigcap \uS_\alpha(\pi) .
+\end{aligned}
+\]
+Chaque $\uS_\alpha(\pi)$ est stable dans $\M$ par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$ (puisqu'il en est ainsi de $\uS_\alpha$ et de $\M_\pi$) (donc il en est de même de leur intersection
+
+\msp{page 293}
+$\uS(\pi)$. A fortiori, $\uS(\pi)$ est une sous-catégorie strictement pleine et karoubienne de $\M_\pi$.)
+
+% ---- from der-ch18_p111-115.tex
+\printedpage{109}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+
+D'autre part, chaque $\underline{S}_\alpha$ étant stable dans $\mathcal{M}$ par $\varinjlim$ grandes devant $\pi'_0$, il en est de même de leur intersection $\underline{S}$. A fortiori, celle-ci est stable par $\varinjlim$ grandes devant $\pi$, donc le foncteur pleinement fidèle canonique $\Ind_\pi(\underline{S}(\pi))\longrightarrow\mathcal{M}$ se factorise par $S$ en
+\[ \Ind_\pi\underline{S}(\pi) \incl \underline{S} \; , \]
+il faut prouver que ce foncteur est essentiellement surjectif. Soit donc $x\in S=\Ob\underline{S}$, tout revient à prouver que
+\[ \varinjlim_{i\in\underline{S}(\pi)/x} x_i \xrightarrow{\ \sim\ } x \; , \tag*{$(*)$} \]
+et que $\underline{S}(\pi)/x$ est grande devant $\pi$.
+
+Notons que, comme $\pi'_0\geqslant\pi_0$, et $\pi^{\pi'_0}=\pi$, on aura $\pi^{\pi_0}=\pi$, donc $\pi$ est cardinal utile pour $\mathcal{M}$, donc $I=\mathcal{M}_\pi/x$ est grande devant $x$, et on a % [sic] grande devant $x$ -> grande devant $\pi$, apparently intended (one speaks of being large before a cardinal)
+\[ \varinjlim_{i\in I=\mathcal{M}_\pi/x} x_i \xrightarrow{\ \sim\ } x \; . \tag*{$(**)$} \]
+Donc, si on admet que $\underline{S}(\pi)/x$ est grande devant $\pi$,
+\msp{page 294}
+le fait que $(*)$ soit un isomorphisme équivaut à dire que le foncteur canonique
+\[ J \overset{\text{déf}}{=} \underline{S}(\pi)/x \incl \mathcal{M}_\pi \; = \; I \] % [sic] $\mathcal{M}_\pi = I$ -> $\mathcal{M}_\pi/x = I$, since $I=\mathcal{M}_\pi/x$ above and in the display for $J_\alpha$ below
+est \textit{cofinal} (cf. 4.4.2, p. 79). Mais on voit tout de suite que ce foncteur est un foncteur d'inclusion d'une sous-catégorie strictement pleine (stable par $\varinjlim$ grandes devant $\pi'_0$, de cardinal $\leqslant\pi$).
+
+Notons maintenant que la flèche $(**)$ similaire à $(*)$, avec $\underline{S}(\pi)$ remplacée par $\underline{S}_\alpha(\pi)$, est bel et bien un isomorphisme, puisque $x\in\Ob\underline{S}\subset\Ob\underline{S}_\alpha$, et que $\underline{S}_\alpha$ est $\pi$-accessible. Cela s'interprète par le fait que le foncteur d'inclusion
+\[ J_\alpha \overset{\text{déf}}{=} \underline{S}_\alpha(\pi)/x \incl \mathcal{M}_\pi/x \; = \; I \]
+est cofinal. C'est encore une inclusion d'une sous-catégorie $J_\alpha$ strictement pleine de $I$, stable par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant\pi$, et on a
+\[ J \; = \; \bigcap J_\alpha \; . \]
+
+Donc la condition voulue résultera du
+\msp{page 295}
+
+% marginal hand-drawn mark (manuscript) in the left margin beside the following lemma
+\textbf{Lemme 4.13.10} (\footnote[125]{Il faut supposer que $\pi$ ne soit pas un cardinal limite, pour pouvoir conclure que $I$ est stable par $\varinjlim$ de type $I_{\alpha_\pi}$, et les $J_r$ stables dans $I$ par ces limites.},\footnote[126]{Cf. forme plus générale du lemme dans 4.13.10.2, p. 302.}). \textit{Soient $\pi'_0$ et $\pi>\pi'_0$ des cardinaux infinis, $I$ une catégorie équivalente à une petite catégorie, $(J_\alpha)_{\alpha\in A}$ une famille de sous-catégories $J_\alpha$ de $I$. On suppose :}
+\begin{itemize}
+\item[\cercle{a}] \textit{$I$ est grande devant $\pi$ (}\footnote[127]{Il suffit que $I$ soit grande devant tout $\pi'<\pi$.}\textit{).} % footnote 127 printed at the foot of p. 110
+\item[\cercle{b}] \textit{$I$ est stable par $\varinjlim$ de cardinal $\leqslant\pi$, et grandes devant $\pi'_0$ (}\footnote[128]{Il suffit ici la stabilité par $\varinjlim$ de type $I_{\alpha_\pi}$, cf. page 302 [?].}\textit{).} % footnote 128 printed at the foot of p. 110
+\end{itemize}
+% foot: Version 17 décembre 2025
+
+\printedpage{110}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\begin{itemize}
+\item[\cercle{c}] \textit{$\forall\ r\in A$, $J_r$ est stable dans $I$ par les limites inductives envisagés dans b) (en particulier, $J_r$ est une sous-catégorie} strictement pleine \textit{de $I$).} % [sic] envisagés -> envisagées, agreement with « limites »
+\item[\cercle{d}] \textit{$\forall\, r\in A$, $J_r$ est une sous-catégorie} cofinale \textit{de $I$ (}grande devant $\pi$\textit{).}
+\item[\cercle{e}] $\card A\leqslant\pi$.
+\end{itemize}
+\textit{Soit $J=\bigcap_{r\in A}J_r$. Alors $J$ est encore cofinale dans $I$, et grande devant $\pi$ (et de plus stable dans $I$ par $\varinjlim$ de cardinal $\leqslant\pi$ et grandes devant $\pi'_0$).}
+
+En d'autres termes, si $I$ est grande devant $\pi$, l'intersection $J$ d'une famille $(J_\alpha)_{\alpha\in A}$ de sous-catégories strictement pleines cofinales et grandes devant $\pi$, est encore
+\msp{page 296}
+cofinale et grande devant $\pi$, \textit{pourvu que} $\card A\leqslant\pi$, et que l'on postule une propriété de stabilité de $I$ et des $J_\alpha$ dans $I$, pour les limites inductives de cardinal $\leqslant\pi$ et grandes devant un cardinal convenable $\pi'_0<\pi$ donné.
+
+\textbf{4.13.10.1.} Notons d'ailleurs que si $f : J\longrightarrow I$ est un foncteur cofinal \textit{pleinement fidèle}, avec $I$ grande devant $\pi$, alors $J$ est automatiquement grande devant $\pi$. Cela résulte p.ex. de 4.9.6.3 2° (p. 225) par le critère $\mathrm{c}_\pi$ (vu que pour $f$ pleinement fidèle, la condition F $3_\pi$ est tautologiquement satisfaite). On peut aussi le voir ainsi : Soit $B$ un ensemble avec $\card B\leqslant\pi$, il faut prouver que $J\longrightarrow J^B$ est cofinal, or on a
+\[
+\begin{tikzcd}
+J \arrow[r, "\text{cof.\,?}"] \arrow[d, "\text{cof.}"'] & J^B \arrow[d, "\text{cof.}"] \\
+I \arrow[r, "\text{cof.}"] & I^B \; ,
+\end{tikzcd}
+\]
+où trois des quatre flèches du carré sont cofinales, $J^B\longrightarrow I^B$ l'étant comme produit de foncteurs cofinaux entre catégories \textit{filtrantes} (cf. 4.9.6.5, page 227) -- on sait en effet déjà que $J$ est filtrante.
+
+\msp{page 297}
+Donc le composé
+\[ J \longrightarrow J^B \xrightarrow{\text{cof.}} I^B \]
+est cofinal. Mais comme le deuxième foncteur $J^B\longrightarrow I^B$ est pleinement fidèle, il s'ensuit aussitôt que $J\longrightarrow J^B$ est cofinal (car $\xi\backslash J$ pour $\xi\in\Ob J^B$ est le même, à isomorphisme près, qu'on considère $\xi$ comme objet de $J^B$, ou de $I^B$).
+
+Ainsi dans l'énoncé de la condition d) du lemme, il est inutile de spécifier que $J_\alpha$ est grande devant $\pi$, et de même dans la conclusion sur $J$.
+
+Comme $J\incl I$ est pleinement fidèle, pour voir que ce foncteur est cofinal, il suffit de voir qu'il satisfait F 1, i.e. que pour tout $i\in\Ob I$, existe $j\in J$ avec $i\longrightarrow j$. On va construire $j$ comme limite d'un système inductif ordinal d'objets $i_\alpha$ de $I$, indexé par les ordinaux $\alpha$ tels que $\card\alpha<\pi$. Désignons par $\alpha_\pi$ le plus petite ordinal tel que % [sic] le plus petite ordinal -> le plus petit ordinal, agreement with « ordinal »
+% foot: Version 17 décembre 2025
+\printedpage{111}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 298}
+% marginal hand-drawn mark (manuscript) in the left margin beside the following two lines
+$\card\alpha_\pi=\pi$. L'ensemble ordonné $I_{\alpha_\pi}$ des ordinaux $\alpha<\alpha_\pi$ étant grande devant $\pi'_0$ (\footnote[129]{faux si $\pi$ est un cardinal limite.}) et de cardinal $\pi$, on pourra donc prendre la limite $\varinjlim\limits_{\alpha\in I_{\alpha_0}} i_\alpha$ dans $I$. % [sic] $I_{\alpha_0}$ -> $I_{\alpha_\pi}$, the index set just defined is $I_{\alpha_\pi}$
+
+Construction de $(i_\alpha)_{\alpha\in I_{\alpha_0}}$. Soit % [sic] $I_{\alpha_0}$ -> $I_{\alpha_\pi}$, the index set just defined is $I_{\alpha_\pi}$
+\[ \alpha_\pi \; = \; \text{plus petit ordinal } \alpha \text{ tel que } \card\alpha=\pi, \tag*{(1)} \]
+donc c'est l'ordinal caractérisé par
+\[ \left\{
+\begin{aligned}
+&\card\alpha_\pi \; = \; \pi \\
+&\alpha<\alpha_\pi \;\; \Longrightarrow \;\; \card\alpha \; < \; \pi \; ,
+\end{aligned}
+\right. \tag*{(2)} \]
+% marginal hand-drawn mark (manuscript) in the left margin beside the following paragraph
+ou encore par le fait que l'ensemble ordonné $I_{\alpha_\pi}$ des ordinaux $\alpha<\alpha_\pi$ est \textit{parfaitement bien ordonné}. Ainsi, $I_{\alpha_\pi}$ \textit{est grande devant $\pi'$ pour tout cardinal $\pi'<\pi$} (\footnote[130]{Faux si $\pi$ est cardinal limite.}). Dans les conditions b) c) de 4.3.10, il suffira de supposer $I$ stable par $\varinjlim$ de type $I_{\alpha_\pi}$, et les $J_r$ ($r\in A$) stables dans $I$ par ce type de limites. % [sic] 4.3.10 -> 4.13.10, the conditions b) c) are those of Lemme 4.13.10
+
+\textbf{Lemme 4.13.10.1.} \textit{Soit $\pi$ un cardinal infini, $A$ un ensemble non vide tel que} $\card A\leqslant\pi$. \textit{Alors}
+\msp{page 299}
+\textit{il existe une application}
+\[ \varphi \; : \; I_{\alpha_\pi} \longrightarrow A \]
+\textit{telle que pour tout $r\in A$, $\varphi^{-1}(\{r\})$ soit une partie cofinale de $I_{\alpha_\pi}$, ou ce que est plus précis,} $\card\varphi^{-1}(\{r\})=\pi$. % [sic] ce que est -> ce qui est, relative pronoun subject
+
+En effet, il suffit de considérer un ensemble $A'$ de cardinal $\pi$ (p.ex. $A'=I_{\alpha_\pi}$), l'application
+\[ \psi \; = \; \mathrm{pr}_1 \; : \; A\times A'\longrightarrow A \; , \]
+et de se donner une bijection
+\[ A\times A' \xrightarrow{\ \sim\ } I_{\alpha_\pi} \]
+laquelle existe puisque
+\[ \card\,(A\times A') \; = \; \card A\cdot\card A' \; = \; \card A' \; = \; \pi \; = \; \card I_{\alpha_\pi} \; , \]
+puisque $0\neq\card A\leqslant\card A'=\pi$ et $\pi$ infini. On suppose choisie $\varphi$ comme dans 4.13.10.1, et on construira le système inductif $(i_\alpha)_{\alpha\in I_{\alpha_\pi}}$ de telle façon qu'on ait
+\[ i_\alpha \; \in \; J_{\varphi(\alpha)} \; . \]
+
+Posant
+\[ j \; = \; \varinjlim_{\alpha\in I_{\alpha_\pi}} i_\alpha \; , \]
+% foot: Version 17 décembre 2025
+\printedpage{112}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 300}
+pour tout $r$, comme
+\[ I_r \overset{\text{déf}}{=} \varphi^{-1}(r) \; \subset \; I_{\alpha_\pi} \]
+est cofinal dans $I_{\alpha_\pi}$, on aura donc
+\[ j \; = \; \varinjlim_{\alpha\in I_r} i_\alpha \; , \]
+et en vertu de $(*)$, les $i_\alpha$ pour $\alpha\in I_r$ sont dans $J_r$, donc par passage à la limite, utilisant l'hypothèse c), on trouve que $j\in J_r$, donc
+\[ j \; \in \; \bigcap_{r\in A} J_r \; = \; J \; , \]
+et comme on choisira
+\[ i_0 \; = \; i \; , \tag*{$(**)$} \]
+on aura bien trouvé $i\longrightarrow j$ avec $i\in J$. Donc il suffit de construire le système inductif $(i_\alpha)$ satisfaisant $(*)$ et $(**)$. % [sic] avec $i\in J$ -> avec $j\in J$, it is $j$ that was shown to lie in $J$
+
+Si le système inductif est construit jusqu'au cran $i_\alpha\in\Ob J_{\varphi(\alpha)}$, on continue par
+\[ i_\alpha \longrightarrow i_{\alpha+1} \; \in \; \Ob J_{\varphi(\alpha+1)} \; , \]
+ce qui est possible puisque $J_{\varphi(\alpha+1)}$ est
+\msp{page 301}
+cofinale. Donc il reste à construire $i_\alpha$ pour $\alpha$ ordinal limite. Or l'ensemble des $i_\beta$ pour $\beta<\alpha$ est de cardinal $<\pi$, et comme par a) $I$ est grande devant $\pi$ (il suffit qu'il le soit devant tout cardinal $<\pi$), il existe un $i\in\Ob I$ qui majore tous les $i_\beta$. Choisissons des
+\[ i_\beta \xrightarrow{v_\beta} i \; . \]
+
+On n'aura pas a priori commutativité dans
+\[
+\begin{tikzcd}
+i_{\beta'} \arrow[r, "\tau_{\beta,\beta'}"] \arrow[rr, bend right=15, "v_{\beta'}"'] & i_\beta \arrow[r, "v_\beta"] & i \; ,
+\end{tikzcd}
+\] % doubt resolved against PDF; see corrections.csv
+mais comme l'ensemble des double-flèches $i_{\beta'}\mathrel{\overset{v_\beta\tau_{\beta,\beta'}}{\underset{v_{\beta'}}{\rightrightarrows}}} i$ est de cardinal $<\pi$, $I$ étant grande devant $\pi$, il existe $i\longrightarrow i'$ qui les égalise tous. Comme $J_{\varphi(\alpha)}$ est cofinal dans $I$, il existe $i''\in J_{\varphi(\alpha)}$, et $i\longrightarrow i''$. On prend $i_\alpha=i''$, avec les homomorphismes composés
+\[
+\begin{tikzcd}
+i_\beta \arrow[r, "v_\beta"] \arrow[rrr, dotted, bend right=12, "\tau_{\alpha,\beta}"'] & i \arrow[r] & i' \arrow[r] & i''
+\end{tikzcd}
+\] % doubt resolved against PDF; see corrections.csv
+% foot: Version 17 décembre 2025
+\printedpage{113}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 302}
+comme morphismes de transition. Cela achève la démonstration de 4.13.10 et par là de 4.13.9, 4.13.8.
+
+\textbf{Remarque 4.13.10.2.} Voici ce qu'on a eu à utiliser vraiment, pour établir la conclusion de 4.13.10, en termes de $I$, $\pi$, $(J_r)_{r\in A}$ (et sans introduire de $\pi'_0$).
+\begin{itemize}
+\item[\cercle{a$'$}] $I$ est grande devant tout cardinal $\pi'<\pi$.
+\item[\cercle{b$'$}] $I$ est stable par $\varinjlim$ de type $I_{\alpha_\pi}$.
+\item[\cercle{c$'$}] $\forall\, r\in A$, $J_r$ est stable dans $I$ par les $\varinjlim$ de type $I_{\alpha_\pi}$.
+\item[\cercle{d$'$}] $\forall\, r\in A$, $J_r$ est cofinale dans $I$.
+\item[\cercle{e$'$}] $\card A\leqslant\pi$.
+\end{itemize}
+(\textbf{N.B.} d$'$) et e$'$) ne sont autres que d) et e) de 4.3.10, tandis que a$'$), b$'$), c$'$) sont des versions affaiblies de a), b), c) respectivement.) % [sic] 4.3.10 -> 4.13.10, the conditions d) e) are those of Lemme 4.13.10
+
+\textbf{4.13.8 (reformulation).} \textit{Soit pour $r\in A$, $\pi''_r\geqslant\pi'_r\geqslant\pi_0$ (= cardinal utile pour $\mathcal{M}$ donné) comme spécifié dans 4.13.2 b) (et c), soit $\pi'=\sup_{r\in A}\pi'_r$, $\pi''=\sup_{r\in A}\pi''_r$, de sorte que pour tout cardinal $\pi$ avec $\pi^{\pi'_0}=\pi\geqslant\pi''$, $\underline{S}_r$ soit $\pi$-accessible dans $\mathcal{M}$ (et $\pi$ utile pour $\underline{S}_r$} et \textit{pour $\mathcal{M}$). Soit $c$ un cardinal} non limite \textit{tel que $c\geqslant$} $\card A$ \textit{et $c>\pi'$ (p.ex. le successeur de} $\sup(\card A,\pi')$\textit{). Prenons $\pi$ tel que}
+\[ \pi^{\pi'} \; = \; \pi \; \geqslant \; \sup(\pi'',c) \; . \]
+\textit{Alors $\underline{S}=\bigcap_{r\in A}\underline{S}_r$ est $\pi$-accessible.}
+
+En effet, si $\alpha_c$ est le premier ordinal de cardinal $c$, comme $c$ n'est pas limite, $I_{\alpha_c}$ est grande devant tout cardinal $c'<c$, en particulier devant $\pi'$. Or pour tout $x\in\Ob\mathcal{M}$, $I=\mathcal{M}_\pi/x$ et les $J_r=\underline{S}_r/x$ sont stables par $\varinjlim$ grandes devant $\pi'$ et de cardinal $\leqslant\pi$,
+\msp{page 302 bis}
+et les $J_r$ stables dans $I$ pour ces limites, donc il en est en particulier ainsi pour les $\varinjlim$ de type $I_{\alpha_c}$. On peut donc appliquer le résultat 4.13.10.2 pour conclure que si les $J_r$ sont cofinaux dans $I$ (qui est grande devant $\pi$, $\pi$ étant utile pour $\mathcal{M}$), alors $J=\underline{S}/x$ l'est également. Cela implique alors, comme on a vu, que $\underline{S}$ est $\pi$-accessible dans $\mathcal{M}$.
+
+\textbf{4.13.10.3.} On peut reformuler la reformulation précédente, en utilisant la terminologie introduite plus bas (4.13.23) :
+
+\textit{Soit $c$ un cardinal, $\alpha_c$ le plus petit ordinal $\alpha$ tel que} $\card\alpha=c$, \textit{$\pi$ un cardinal $\geqslant c$. On suppose}
+\begin{itemize}
+\item[$(*)$] \textit{$\pi$ est utile pour $\mathcal{M}$, et $\mathcal{M}$ est stable par $\varinjlim$ de type $I_{\alpha_c}$. (Cette deuxième condition est le cas p.ex. si $c$ est} non limite \textit{et $c>\pi_0$, $\pi_0$ étant un cardinal tel que $\mathcal{M}$ satisfait \textit{2}$_{\pi_0}$, p.ex. un cardinal} utile \textit{pour $\mathcal{M}$ (}\footnote[131]{Car alors $I_{\alpha_c}$ est grande devant $\pi_0$.}\textit{)).}
+\end{itemize}
+\textit{Alors l'ensemble des sous-catégories $\underline{S}$ de $\mathcal{M}$ qui sont $\alpha_c$-$\pi$-accessible dans $\mathcal{M}$ (i.e. qui sont $\pi$-accessibles et stables dans $\mathcal{M}$ par $\varinjlim$ de type $I_{\alpha_c}$) est stable par intersection de cardinal $\leqslant c$. Plus généralement, si $\Phi$ est un ensemble de catégories telles que} % [sic] accessible -> accessibles, agreement with « sous-catégories »
+\begin{itemize}
+\item[\textit{1°)}] \textit{$I\in\Phi\Longrightarrow$} $\card I\leqslant\pi$ \textit{et}
+\item[\textit{2°)}] \textit{$I_{\alpha_c}\in\Phi$,}
+\end{itemize}
+\textit{alors l'ensemble des sous-catégories de $\mathcal{M}$ qui sont $\Phi$-$\pi$-accessibles dans $\mathcal{M}$, est stable par intersection de cardinal $\leqslant c$.}
+% foot: Version 17 décembre 2025
+
+% ---- from der-ch18_p116-120.tex
+\printedpage{114}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\msp{page 303}\noindent\textbf{Définition 4.13.11} (\footnote[132]{Refondre avec 4.13.23 etc.}). Soient $\mathcal{M}$ une catégorie accessible, $\pi_0$ un cardinal utile pour $\mathcal{M}$, $\pi > \pi_0$ un cardinal. Une catégorie $I$ est dite $\pi_0$-$\pi$-\textit{adaptée} si
+\begin{enumerate}
+\item[a)] $I$ est équivalente à une petite catégorie,
+\item[b)] $I$ est grande devant $\pi$, et
+\item[c)] $I$ est stable par $\varinjlim$ de cardinal $\leqslant \pi$, et grandes devant $\pi_0$ (\footnote[133]{\textbf{N.B.} Si $\pi = \pi_0$, la condition c) équivaut à dire que $I$ est stable par facteurs directs.}).
+\end{enumerate}
+\noindent Un système inductif $(x_i)_{i\in I}$ de type $I$ dans $\mathcal{M}$ est dit $\pi_0$-$\pi$-\textit{adapté}, si $I$ est $\pi_0$-$\pi$-adaptée, i.e. satisfait les conditions a) b) c), et si de plus on a
+\begin{enumerate}
+\item[d)] le foncteur $i \longmapsto x_i : I \longrightarrow \mathcal{M}$ commute aux $\varinjlim$ (grandes devant $\pi_0$ et de cardinal $\leqslant \pi$) envisagées dans c), et
+\item[e)] les $x_i$ sont dans $\mathcal{M}_\pi$.
+\end{enumerate}
+
+\noindent\textbf{Proposition 4.13.12.} \textit{Soient $\mathcal{M}$ une catégorie $\pi_0$-accessible, et $\pi > \pi_0$ un cardinal utile pour $\mathcal{M}$. Alors tout $x \in \Ob\mathcal{M}$ admet une représentation comme $x \xleftarrow{\ \sim\ } \ilim_{j\in J} x_j$, où le système inductif $(x_j)_{j\in J}$ dans $\mathcal{M}$ est $\pi_0$-$\pi$-adapté. De façon précise, on peut prendre $J = \mathcal{M}_\pi/x$.}
+
+\msp{page 304}\noindent En effet, la vérification des propriétés a) à d) pour le système inductif canonique, de $\varinjlim$ isomorphe à $x$, est immédiate.
+
+La proposition précédente ne dit pas si on peut prendre pour $J$ un ensemble ordonné. Dans ce cas, la condition c) signifie que pour toute partie $J'$ de $J$ grande devant $\pi_0$ et de cardinal $\leqslant \pi$, $J$ admet une borne supérieure $i_J$ dans $J$, et la condition d) que l'on a alors $x_{i_J} \xleftarrow{\ \sim\ } \ilim_{i\in J'} x_i$.
+
+L'idée naturelle, pour construire un système inductif $\pi_0$-$\pi$-adapté $(x_j)_{j\in J}$, avec $J$ ordonnée, en partant de celui qu'on a canoniquement, avec $J = \mathcal{M}_\pi/x$, est de prendre pour $I$ l'ensemble, ordonné par inclusion, des sous-catégories $J'$ de $J_0$ (sous-catégorie pleine petite de $J$ équivalente à $J$) qui sont de cardinal $\leqslant \pi$ et grandes devant $\pi_0$. (Comparer (4.7.3.3), page 165). Cet ensemble ordonné est bel et bien (petit et) \textit{grand devant} $\pi$, si on suppose que $\pi^{\pi_0} = \pi$ (cf. démonstration 4.7.5, p. 168-171).
+
+\msp{page 305}\noindent\textbf{Lemme 4.13.13.} \textit{Soient $\pi_0$, $\pi > \pi_0$ des cardinaux infinis tels que $\pi^{\pi_0} = \pi$, et $J$ une petite catégorie, grande devant $\pi$. Soit $I$ l'ensemble des sous-catégories $J'$ de $J$ qui sont grandes devant $\pi_0$, et de cardinal $\leqslant \pi$. Alors $I$ est $\pi_0$-$\pi$-adaptée.}
+
+Il reste à voir que pour tout ensemble ordonné $A$ grand devant $\pi_0$ et de cardinal $\leqslant \pi$, si $r \longmapsto J_r$ est une famille croissante d'éléments de $I$ indexée par $A$, alors
+\[
+J \ \overset{\text{déf}}{=} \ \bigcup_{r\in A} J_r \ = \ \varinjlim_{r\in A} J_r
+\]
+est dans $I$, i.e. est une sous-catégorie de $I$ de cardinal $\leqslant \pi$ (ce qui est clair) et \textit{grande devant} $\pi_0$. Cela va résulter du
+
+\printedpage{115}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\noindent\textbf{Lemme 4.13.13.1.} \textit{Soit $(J_r)_{r\in A}$ un système inductif de catégories grandes devant $\pi_0$, indexé par un ensemble ordonné $A$ grand devant $\pi_0$. Alors $J = \ilim_{r\in A} J_r$ est grande devant $\pi_0$.}
+
+\msp{page 306}\noindent Il faut voir que si $B$ est un ensemble de cardinal $\leqslant \pi_0$, alors le foncteur diagonal
+\[
+\delta \ : \ J \longrightarrow J^B \tag*{$(*)$}
+\]
+est cofinal. Or comme $A$ est grande devant $\pi_0$, $\operatorname{card} B \leqslant \pi_0$, les produits indexés par $B$ commutent aux $\varinjlim$ de type $A$ (SGA 4 I 9.8 appliqué à Cat et à $\pi_0$). Donc la flèche $(*)$ s'interprète comme limite inductive des flèches similaires
+\[
+\delta_r \ : \ J_r \longrightarrow J_r^B \ , \tag*{$(**)$}
+\]
+lesquelles sont cofinales, donc $\delta$ est cofinal comme limite inductive de foncteurs cofinaux.
+
+\noindent\textbf{Lemme 4.13.13.2.} \textit{Sous les hypothèses de 4.13.13, soient $\mathcal{M}$ une catégorie satisfaisant $\mathrm{L}_{\pi_0}$, et $(x_j)_{j\in J}$ (où $J \longrightarrow \mathcal{M}$) un système inductif dans $\mathcal{M}$, indexé par $J$. Pour toute $J' \in I$, posons}
+\[
+x_{J'} \ = \ \varinjlim_{j\in J'} x_j
+\]
+\msp{page 307}\textit{(qui existe dans $\mathcal{M}$, puisque $\mathcal{M}$ satisfait à $\mathrm{L}_{\pi_0}$). Alors les $(x_{J'})_{J'\in I}$ forment un système inductif dans $\mathcal{M}$, et $I \longrightarrow \mathcal{M}$ commute aux limites inductives grandes devant $\pi_0$ et de cardinal $\leqslant \pi$. Si $\mathcal{M}$ est $\pi_0$-accessible, et les $x_j$ ($j \in \Ob J$) sont dans $\mathcal{M}_\pi$, alors $(x_{J'})_{J'\in I}$ est un système inductif $\pi_0$-$\pi$-adapté dans $\mathcal{M}$.}
+
+Tout ceci est essentiellement trivial, et donne :
+
+\noindent\textbf{Corollaire 4.13.14} (de 4.13.12). \textit{Sous les conditions de 4.13.12, si $\pi^{\pi_0} = \pi$, on peut pour tout $x \in \Ob\mathcal{M}$ trouver une représentation $x \simeq \ilim_{i\in I} x_i$, où $(x_i)_{i\in I}$ est un système inductif $\pi_0$-$\pi$-adapté avec $I$} ensemble ordonné. \textit{De plus, si $\pi' > \pi$ et si $x \in \mathcal{M}_{\pi'}$, on peut prendre $I$ tel qu'on ait}
+\[
+\operatorname{card} I \ \leqslant \ {\pi'}^{\pi} \ .
+\]
+
+Ce dernier complément est immédiat,\msp{page 308} via les majorations habituelles.
+
+\noindent\textbf{Théorème 4.13.15} (\footnote[134]{Cf. version plus générale et plus symétrique du théorème 4.13.15 dans 4.13.22.}). \textit{Soient $\mathcal{M}$ une catégorie $\pi_0$-accessible, et $\pi > \pi'_0 \geqslant \pi_0$ tels que $\pi^{\pi_0} = \pi$} (\footnote[135]{On peut se borner à supposer $\pi$ utile pour $\mathcal{M}$ (au lieu de $\pi^{\pi_0} = \pi$), alors on trouve que a, a$'$, b, c sont équivalentes et impliquent c$'$, mais ne sont peut-être pas équivalentes à c$'$.})\textit{. Soit $\uS$ une sous-catégorie strictement pleine de $\mathcal{M}$, et soit $\uS(\pi) = \uS \cap \mathcal{M}_\pi$. Les conditions suivantes sont équivalentes.}
+\begin{enumerate}
+\item[\circlabel{a}] \textit{$\uS$ est $\pi$-accessible dans $\mathcal{M}$ (4.13.3) et $\uS$ est stable dans $\mathcal{M}$ par limites inductives grandes devant $\pi'_0$.}
+\end{enumerate}
+
+\printedpage{116}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+
+\begin{enumerate}
+\item[a$'$)] \textit{$\uS$ est $\pi$-accessible dans $\mathcal{M}$, et $\uS(\pi)$ est stable dans $\mathcal{M}_\pi$ par limites inductives grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$} (\footnote[136]{donner un nom à cette dernière condition, soit $\mathrm{L}(\pi'_0, \pi)$ (pour $\uS(\pi)$ dans $\mathcal{M}_\pi$).})\textit{.}
+\item[b)] \textit{Pour tout objet $x$ de $\mathcal{M}$, on a ceci : la sous-catégorie strictement pleine $\uS(\pi)/x$ de $J = \mathcal{M}_\pi/x$ est cofinale dans $\mathcal{M}_\pi/x$ si et seulement si $x \in \Ob\uS$. De plus, $\uS(\pi)$ est stable dans $\mathcal{M}_\pi$ pour $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$.}
+\item[\circlabel{c}] \textit{Pour tout objet $x$ de $\mathcal{M}$ et pour toute représentation $x \simeq \ilim_{i\in I} x_i$, où $(x_i)_{i\in I}$ est un système inductif $\pi'_0$-$\pi$-adapté, (4.13.11), on a ceci : la sous-catégorie strictement pleine $I_{\uS}$ de $I$ formée des $i \in \Ob I$ tels que $x_i \in \Ob\uS$, est cofinale dans $I$ si et seulement si $x \in \Ob\uS$. De plus, $S(\pi)$ est stable dans $\mathcal{M}_\pi$ par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$.} % [sic] S(\pi) -> \underline{S}(\pi), printed without the underline used everywhere else for this subcategory
+\end{enumerate}
+\msp{page 309}
+\begin{enumerate}
+\item[c$'$)] \textit{Comme d)} \texttt{[plutôt c)]}\textit{, avec $I$ ensemble ordonné.}
+\end{enumerate}
+\noindent\textbf{Corollaire 4.13.16.} \textit{Les hypothèses sur $\mathcal{M}$, $\pi_0$, $\uS$ étant celles de 4.13.15, pour qu'il existe des cardinaux $\pi > \pi'_0 \geqslant \pi_0$ satisfaisant les conditions $\pi^{\pi'_0} = \pi$ (a fortiori $\pi^{\pi_0} = \pi$) et les conditions équivalentes a) à d$'$)} \texttt{[plutôt c$'$)]} \textit{de 4.13.15, il (faut et il) suffit que $\uS$ soit accessible dans $\mathcal{M}$. De façon plus précise, si $\uS$ est accessible dans $\mathcal{M}$, soit $\pi'_0 \geqslant \pi_0$ un cardinal tel que $\uS$ soit $\pi'_0$-accessible dans $\mathcal{M}$, et soit $\pi$ un cardinal $> \pi'_0$ tel que $\pi^{\pi'_0} = \pi$. Alors $(\uS, \pi'_0, \pi)$ satisfait aux conditions équivalentes de 4.13.15.}
+
+En effet, le “il faut” est évident sur la condition a) de 4.13.15. Pour le “il suffit” on note que $\uS$ $\pi'_0$-accessible dans $\mathcal{M}$ implique que $\uS$ est stable dans $\mathcal{M}$ par $\varinjlim$ grandes devant $\pi'_0$. Donc pour vérifier a), il suffit de vérifier que $\uS$ est $\pi$-accessible dans $\mathcal{M}$. Or comme $\uS$ est\msp{page 310} $\pi'_0$-accessible et que $\pi > \pi'_0$ satisfait $\pi^{\pi'_0} = \pi$, on en conclut que $\uS$ est $\uS_\pi$-accessible, i.e. $\uS \xleftarrow{\ \sim\ } \mathrm{Ind}_\pi(\uS_\pi)$. Donc en vertu de 4.13.3, il reste à voir que $\uS_\pi \subset \mathcal{M}_\pi$, ou ce qui revient au même, que $\uS_\pi \subset \uS(\pi) \overset{\text{déf}}{=} \uS \cap \mathcal{M}_\pi$. (En fait, on aura même égalité, car il est clair que $\uS(\pi) \subset \uS_\pi \ldots$). Or $\uS(\pi)$ est une sous-catégorie de $\uS$ stable par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$ (puisque $\uS$ et $\mathcal{M}_\pi$ sont stables par ces limites \textit{dans} $\mathcal{M}$, et que ces limites dans $\uS$ et dans $\mathcal{M}$ sont itou), et $\uS(\pi)$ contient $S_{\pi'_0}$. Donc $\uS(\pi)$ contient $\uS_\pi$, en vertu de 4.7.1 (page 161), implication c) $\Longrightarrow$ b$'$), appliquée à $\uS$, $\pi'_0$, $\pi$ au lieu de $\mathcal{M}$, $\pi_0$, $\pi$. Cela prouve donc le corollaire 4.13.16. % [sic] S_{\pi'_0} -> \underline{S}_{\pi'_0}, printed without the underline
+
+\textsc{Démonstration de} 4.13.15. Voici les implications $\pm$ tautologiques,
+\[
+\begin{tikzcd}[row sep=small]
+ & & & \mathrm{c}' \\
+\mathrm{a} \arrow[r, Rightarrow] & \mathrm{a}' \arrow[r, Rightarrow, "\bullet"] & \mathrm{c} \arrow[ur, Rightarrow] \arrow[dr, Rightarrow] & \\
+ & & & \mathrm{b}\ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\msp{page 311}que je vais expliciter un peu. On a a $\Longrightarrow$ a$'$ puisque si a est satisfait, $\uS$ \textit{et} $\mathcal{M}_\pi$ sont stables \textit{dans} $\mathcal{M}$ par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$, donc aussi leur intersection $\uS(\pi)$,
+\printedpage{117}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+qui est donc aussi stable dans $\mathcal{M}_\pi$ par lesdites limites. L'implication c $\Longrightarrow$ c$'$ est une tautologie, et c $\Longrightarrow$ b aussi, compte tenu de 4.13.12, qui nous dit que le système inductif canonique $(x_i)_{i\in I}$, avec $I = \mathcal{M}_\pi/x$, de limite $x$ est $\pi_0$-$\pi$-adapté. (\textbf{N.B.} Comme $\pi^{\pi'_0} = \pi$ et $\pi'_0 \geqslant \pi_0$, on a aussi $\pi^{\pi_0} = \pi$, donc $\pi$ est utile pour $\mathcal{M}$, de sorte que 4.13.12 s'applique.)
+
+Reste à prouver la “$\pm$ tautologie” a$'$ $\Longrightarrow$ c. Soit donc une représentation $\pi_0$-$\pi$-adaptée
+\[
+x \ \simeq \ \varinjlim_{i\in I} x_i \ ,
+\]
+prouvons que
+\[
+x \ \in \ \Ob\uS \qquad\quad \Longleftrightarrow \qquad\quad I_{\uS} \text{ cofinal dans } I.
+\]
+L'implication $\Longleftarrow$ provient du fait que, $\uS$ étant $\pi$-accessible dans $\mathcal{M}$, est stable dans $\mathcal{M}$ par $\varinjlim$ grandes devant $\pi$ (\footnote[137]{On n'utilise ici, pour $\Longleftarrow$, de l'hypothèse $(x_i)_{i\in I}$ $\pi_0$-$\pi$-adapté, que le seul fait que $I$ soit grande devant $\pi$.}). Reste à prouver\msp{page 312} que si $x \in \Ob\uS$, alors $I_{\uS}$ est cofinal dans $I$. Considérons donc le diagramme de catégories
+\[
+\begin{tikzcd}
+I \arrow[r, "\varphi"] & J = \mathcal{M}_\pi/x \\
+I' = I_{\uS} \arrow[u, hook] \arrow[r, "\varphi'"] & J' = \uS(\pi)/x \ , \arrow[u, hook, "\alpha"']
+\end{tikzcd}
+\]
+c'est un carré cartésien ($I' = I_{\uS}$ est l'image inverse par $\varphi : I \longrightarrow J$ de la sous-catégorie strictement pleine $J'$ de $J$). On a les propriétés suivantes
+\begin{enumerate}
+\item[1)] $I$ est grande devant $\pi$, et $\varphi$ cofinal ($\Longrightarrow$ $J$ grande devant $\pi$).
+\item[2)] $I$ stable par $\varinjlim$ grandes devant $\pi'_0$ et de cardinal $\leqslant \pi$, et $\varphi$ commute à ces $\varinjlim$ .
+\item[3)] $J'$ est stable par $\varinjlim$ du type précédent et $\alpha$ y commute (\footnote[138]{C'est ici qu'intervient l'hypothèse de stabilité faite dans b), car d'après b), $\uS$ est $\pi$-accessible dans $\mathcal{M}$.}).
+\item[4)] $J'$ cofinal dans $J$.
+\end{enumerate}
+\noindent On vient de conclure que $I' = \varphi^{-1}(J')$\msp{page 313} est cofinale dans $I$. Comme c'est une sous-catégorie pleine (et même strictement pleine), il suffit de prouver la propriété F 1, i.e. que pour tout $i \in \Ob I$, existe $i' \in \Ob I'$ et une flèche $i \longrightarrow i'$.
+
+On va construire encore $i'$ par construction transfinie, sur l'intervalle ordinal $I_{\alpha_\pi}$, en construisant un système inductif
+\[
+(i_\alpha)_{\alpha\in I_{\alpha_\pi}} \ , \qquad\quad i_\alpha \in \Ob I \ ,
+\]
+d'objets de $I$, et un système inductif $(j_\alpha)_{\alpha\in I_{\alpha_\pi}}$, $j_\alpha \in \Ob J'$, flèches de transition notées $\tau_{\beta,\alpha} : i_\alpha \longrightarrow i_\beta$, $\tau'_{\beta,\alpha} : j_\alpha \longrightarrow j_\beta$, enfin pour tout $\alpha$ dans $I_{\alpha_\pi}$ des flèches
+\[
+\begin{tikzcd}
+\varphi(i_\alpha) \arrow[r, "u_\alpha"] \arrow[rr, dotted, bend right, "\varphi(\tau_{\alpha+1,\alpha})"'] & j_\alpha \arrow[r, "v_\alpha"] \arrow[rr, dotted, bend left, "\tau'_{\alpha+1,\alpha}"] & \varphi(i_{\alpha+1})\ ( \arrow[r, dotted, "u_{\alpha+1}"] & j_{\alpha+1}\ )
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\printedpage{118}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 17 décembre 2025
+dans $J$, telles que
+\[
+\left\{
+\begin{aligned}
+v_\alpha u_\alpha \ &= \ \varphi(\tau_{\alpha+1,\alpha}) \\
+u_{\alpha+1} v_\alpha \ &= \ \tau'_{\alpha+1,\alpha}
+\end{aligned}
+\right.
+\qquad\qquad \text{(\footnotemark[139])} \ .
+\tag*{$(**)$}
+\]
+\footnotetext[139]{cf. aussi $(****)$, page suivante.}
+
+\msp{page 314}\noindent Montrons comment la construction d'un tel système d'objets et de flèches avec
+\[
+i_0 \ = \ i \tag*{$(***)$}
+\]
+va impliquer l'existence de $i' \in \Ob I'$ et de $i \longrightarrow i'$. En effet, comme $I_{\alpha_\pi}$ est grande devant $\pi'_0$ (il est grand devant tout cardinal $< \pi$), il existe
+\[
+i' \ \overset{\text{déf}}{=} \ \varinjlim_{i\in I_{\alpha_\pi}} i_\alpha % [sic] i\in I_{\alpha_\pi} -> \alpha\in I_{\alpha_\pi}, the index of the limit is \alpha
+\]
+dans $I$, et on a une flèche de transition
+\[
+i \ = \ i_0 \longrightarrow i' \ ,
+\]
+donc il reste à prouver que $i' \in \Ob I'$, i.e. $\varphi(i') \in \Ob J'$. Or $\varphi$ commutant aux $\varinjlim$ de type $I_{\alpha_\pi}$, on aura
+\[
+\varphi(i) \ = \ \varinjlim \varphi(i_\alpha) \ .
+\]
+Il me faut encore des compatibilités
+\[
+\begin{tikzcd}
+\varphi(i_\alpha) \arrow[r, "u_\alpha"] \arrow[d, "\varphi(\tau_{\beta,\alpha})"'] & j_\alpha \arrow[d, "\tau'_{\beta,\alpha}"] & {} \arrow[d, phantom, "\text{et}" description] & j_\alpha \arrow[r, "v_\alpha"] \arrow[d, "\tau'_{\beta,\alpha}"'] & \varphi(i_{\alpha+1}) \arrow[d, "\varphi(\tau_{\beta+1,\alpha+1})"] \\
+\varphi(i_\beta) \arrow[r, "u_\beta"] & j_\alpha & {} & j_\beta \arrow[r, "v_\beta"] & \varphi(i_{\beta+1})
+\end{tikzcd}
+\tag*{$(****)$} % [sic] j_\alpha (lower right corner of the first square) -> j_\beta, target of \tau'_{\beta,\alpha} and of u_\beta
+\]
+oubliées tantôt.
+
+\msp{page 315}\noindent Les compatibilités $(****)$ impliquent qu'on a des homomorphismes
+\[
+\begin{tikzcd}
+\varphi(i) \arrow[r, shift left, "u"] & j \arrow[l, shift left, "v"]
+\end{tikzcd}
+\qquad\qquad \text{où } j \overset{\text{déf}}{=} \varinjlim_{\alpha\in I_{\alpha_\pi}} j_\alpha \quad \text{(limite \textit{dans} $J'$, donc dans $J$)} \ ,
+\]
+et les compatibilités $(**)$ impliquent que
+\[
+vu \ = \ \mathrm{id}_{\varphi(i)} \ , \qquad\quad uv = \mathrm{id}_J \ , % [sic] \mathrm{id}_J -> \mathrm{id}_j, uv is an endomorphism of j
+\]
+donc que $u$, $v$ sont des isomorphismes inverses l'un de l'autre. Comme $J'$ est une sous-catégorie \textit{strictement} pleine de $J$, il s'ensuit bien que $\varphi(i) \in J'$, i.e. $i \in I'$, q.e.d.
+
+Donc tout revient à construire les
+\[
+\underbrace{i_\alpha}_{\in \Ob I} \ , \ \tau_{\beta,\alpha} \ , \qquad\quad \underbrace{j_\alpha}_{\in \Ob J'} \ , \ \tau'_{\beta,\alpha} \ , \qquad\quad u_\alpha \ , \ v_\alpha \ ,
+\]
+
+% ---- from der-ch18_p121-125.tex
+\printedpage{119}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+satisfaisant aux contraintes $(**)$, $(***)$, $(****)$. On va faire la construction en trois étapes.
+
+\circled{1} Départ :
+\[
+i_0 \;=\; i\ .
+\]
+Comme $J'$ est cofinal dans $J$, existe $j_0\in\Ob J'$ et
+\[
+\varphi(i_0)\xrightarrow{u_0} j_0\ .
+\]
+
+\msp{page 316}
+
+\circled{2} Supposons que les $i_\beta$, $j_\beta$ soient construits pour $\beta<\alpha$, ainsi que les $\tau_{\beta',\beta}:i_\beta\longrightarrow i_{\beta'}$, $\tau'_{\beta',\beta}:j_\beta\longrightarrow j_{\beta'}$ pour $\beta,\beta'<\alpha$, enfin les $u_\beta:\varphi(i_\beta)\longrightarrow j_\beta$, $v_\beta:j_\beta\longrightarrow\varphi(i_{\beta+1})$ pour $\beta<\alpha$ resp. pour $\beta+1<\alpha$, de façon à satisfaire aux contraintes $(**)$, $(****)$, i.e. commutativités dans
+\[
+\left\{
+\begin{array}{l}
+\left.
+\begin{array}{ll}
+\circled{1} &
+\begin{tikzcd}[ampersand replacement=\&]
+\varphi(i_\beta) \arrow[r, "u_\beta"] \arrow[rr, bend right=15, "\varphi(\tau_{\beta+1,\beta})"'] \& j_\beta \arrow[r, "v_\beta"] \& \varphi(i_{\beta+1})
+\end{tikzcd}
+\\[5ex]
+\circled{2} &
+\begin{tikzcd}[ampersand replacement=\&]
+j_\beta \arrow[r, "v_\beta"] \arrow[rr, dotted, bend right=15, "\tau'_{\beta+1,\beta}"'] \& \varphi(i_{\beta+1}) \arrow[r, "u_{\beta+1}"] \& j_{\beta+1}
+\end{tikzcd}
+\end{array}
+\right\}\quad \textit{si}\ \beta+1<\alpha
+\\[8ex]
+\begin{array}{ll}
+\circled{3} &
+\begin{tikzcd}[ampersand replacement=\&]
+\varphi(i_\beta) \arrow[r, "u_\beta"] \arrow[d, "\varphi(\tau_{\beta',\beta})"'] \& j_\beta \arrow[d, "\tau'_{\beta',\beta}"] \\
+\varphi(i_{\beta'}) \arrow[r, "u_{\beta'}"] \& j_{\beta'}
+\end{tikzcd}
+\qquad\qquad \text{si } \beta<\beta'<\alpha
+\end{array}
+\\[10ex]
+\begin{array}{ll}
+\circled{4} &
+\begin{tikzcd}[ampersand replacement=\&]
+j_\beta \arrow[r, "v_\beta"] \arrow[d, "\tau'_{\beta',\beta}"'] \& \varphi(i_{\beta+1}) \arrow[d, "\varphi(\tau_{\beta'+1,\beta+1})"] \\
+j_{\beta'} \arrow[r, "v_{\beta'}"] \& \varphi(i_{\beta'+1})
+\end{tikzcd}
+\qquad\qquad \text{si } \beta<\beta' \text{ et } \beta'+1<\alpha\ ,
+\end{array}
+\end{array}
+\right.
+\]
+
+\msp{page 317}
+
+il faut construire
+% foot: Version 17 décembre 2025
+
+\printedpage{120}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\begin{itemize}[leftmargin=*]
+\item[1)] $i_\alpha\in\Ob I$,\quad et un homomorphisme $(i_\beta)_{\beta\in I_\alpha}\longrightarrow i_\alpha$, i.e. des $\tau_{\alpha,\beta}$ : $i_\beta\longrightarrow i_\alpha$ $(\beta\in I_\alpha)$, compatibles aux translations $\tau_{\beta',\beta}$ pour $\beta<\beta'<\alpha$.
+\item[2)] $j_\alpha\in\Ob J'$,\quad et un homomorphisme $(j_\beta)_{\beta\in I_\alpha}\longrightarrow j_\alpha$, i.e. des $\tau'_{\alpha,\beta}$ : $j_\beta\longrightarrow j_\alpha$ $(\beta\in I_\alpha)$, compatibles aux translations $\tau'_{\beta',\beta}$ pour $\beta<\beta'<\alpha$.
+\item[3)] Une flèche
+\[
+u_\alpha:\varphi(i_\alpha)\longrightarrow j_\alpha\ .
+\]
+\item[4)] Si $\alpha$ n'est pas ordinal limite, i.e. $\alpha=\alpha_0+1$, une flèche
+\[
+v_{\alpha_0}:j_{\alpha_0}\longrightarrow\varphi(i_{\alpha_0+1})=\varphi(i_\alpha)\ ;
+\]
+\end{itemize}
+
+et ceci de façon à satisfaire aux contraintes \circled{1}\,\circled{2}\,\circled{3}\,\circled{4} quand on y suppose $\beta+1\leqslant\alpha$ (au lieu de $\beta'<\alpha$) dans \circled{1} et \circled{2}, et $\beta'\leqslant\alpha$ (au lieu de $\beta'<\alpha$) dans \circled{3}, et $\beta'+1\leqslant\alpha$ (au lieu de $\beta'+1<\alpha$) dans \circled{4}. Donc pour les contraintes $1^\circ$, $2^\circ$, $4^\circ$, il n'y a en tenir compte \textit{que} si $\alpha$ n'est pas ordinal limite, donc $\alpha=\alpha_0+1$, et en y faisant % [sic] il n'y a en tenir -> il n'y a à en tenir, the preposition « à » appears to be missing
+\[
+\beta' \;=\; \alpha_0\ .
+\]
+Quant à la contrainte $3^\circ$, il faut en
+\msp{page 318}
+tenir compte pour $\beta'=\alpha$. Donc au total, il faut exiger
+\[
+(3_\alpha)(\beta)\qquad\qquad
+\begin{tikzcd}
+\varphi(i_\beta) \arrow[r, "u_\beta"] \arrow[d, "\varphi(\usebox{\dctauAB})"'] & j_\beta \arrow[d, "\tau'_{\alpha,\beta}" {draw, circle, inner sep=1pt}] \\
+\varphi(i_\alpha) \arrow[r, "u_\alpha" {draw, circle, inner sep=1pt}] & j_\beta % [sic] j_\beta -> j_\alpha, the target of \tau'_{\alpha,\beta} and u_\alpha is j_\alpha
+\end{tikzcd}
+\qquad \text{commutatif pour } \beta<\alpha\ (\footnotemark[140]),
+\]
+\footnotetext[140]{\textbf{N.B.} Il suffit de l'exiger pour $\beta=\alpha_0$, dans le cas $\alpha=\alpha_0+1$, cf. ci-dessous, p. 323.}
+(par restriction sur $\alpha$), et si $\alpha=\alpha_0+1$ est ordinal non limite, il faut exiger de plus
+\[
+(4_\alpha)(\beta)\qquad\qquad
+\begin{tikzcd}
+j_\beta \arrow[r, "v_\beta"] \arrow[d, "\tau'_{\alpha_0,\beta}"'] & \varphi(i_{\beta+1}) \arrow[d, "\varphi(\usebox{\dctauABone})"] \\
+j_{\alpha_0} \arrow[r, "v_{\alpha_0}" {draw, circle, inner sep=1pt}] & \varphi(i_{\alpha_0+1})=\varphi(i_\alpha)
+\end{tikzcd}
+\qquad \beta<\alpha_0
+\]
+\[
+(1_\alpha)\qquad\qquad
+\begin{tikzcd}
+\varphi(i_{\alpha_0}) \arrow[r, "u_{\alpha_0}"] \arrow[rr, bend right=15, "\varphi(\usebox{\dctauAAzero})"'] & j_{\alpha_0} \arrow[r, "v_{\alpha_0}" {draw, circle, inner sep=1pt}] & \varphi(i_{\alpha_0+1})=\varphi(i_\alpha)
+\end{tikzcd}
+\]
+% foot: Version 17 décembre 2025
+
+\printedpage{121}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\[
+(2_\alpha)\qquad\qquad
+\begin{tikzcd}
+j_{\alpha_0} \arrow[r, "v_{\alpha_0}" {draw, circle, inner sep=1pt}] \arrow[rr, bend right=15, "\tau'_{\alpha,\alpha_0}"' {draw, circle, inner sep=1pt}] & \varphi(i_{\alpha_0+1})=\varphi(i_\alpha) \arrow[r, "u_\alpha" {draw, circle, inner sep=1pt}] & j_\alpha\ .
+\end{tikzcd}
+\]
+
+Dans ces compatibilités, j'ai cerclé les flèches $\tau_{\alpha,\beta}$, $\tau'_{\alpha,\beta}$ $(\beta<\alpha)$, $\Bigl(\ \tau_{\alpha,\beta+1}\ (\beta+1<\alpha)\ \Bigr)$, $v_{\alpha_0}$, $\Bigl(\ \tau_{\alpha,\alpha_0}\ \Bigr)$, $u_\alpha$, $\Bigl(\ \tau'_{\alpha,\alpha_0}\ \Bigr)$, qui ont été introduites dans les donnés 1) 2) 3) 4), page 317. % [sic] donnés -> données, the noun « données » is meant
+
+\msp{page 319}
+
+On va distinguer donc les deux cas.
+
+\textit{2 A)} $\alpha=\alpha_0+1$.
+
+Pour construire $i_\alpha$ et les $\tau_{\alpha,\beta}:i_\beta\longrightarrow i_\alpha$, il suffit de construire $i_\alpha$ et
+\[
+\circled{$\tau_{\alpha,\alpha_0}$}\ :\ i_{\alpha_0}\ \longrightarrow\ i_\alpha=i_{\alpha_0+1}\ .
+\]
+De même pour $j_\alpha$ et les $\tau'_{\alpha,\beta}$, il suffit de construire
+\[
+\circled{$\tau'_{\alpha,\alpha_0}$}\ :\ j_{\alpha_0}\ \longrightarrow\ j_\alpha\ .
+\]
+Il faut de plus se donner
+\[
+j_{\alpha_0}\ \xrightarrow{\circled{$v_{\alpha_0}$}}\ \varphi(\underbrace{\,i_\alpha\,}_{=i_{\alpha_0+1}})\ \xrightarrow{\circled{$u_\alpha$}} j_\alpha\ ,
+\]
+donc en tout deux objets $i_\alpha$, $j_\alpha$ (dans $I$ et dans $J'$ respectivement) et quatre flèches $\tau_{\alpha,\alpha_0}$, $\tau'_{\alpha,\alpha_0}$, $v_{\alpha_0}$, $u_\alpha$. Il faut quatre compatibilités (page 318), où les deux dernières $3_\alpha(\beta)$, $4_\alpha(\beta)$ dépendent d'un paramètre $\beta<\alpha$, i.e. $\beta\leqslant\alpha_0$, ou de $\beta<\alpha_0$.
+
+\msp{page 320 biffé}
+
+\msp{page 321}
+
+On va d'abord s'occuper de deux premières compatibilités $1_\alpha$, $2_\alpha$, en termes de la donnée de
+\[
+i_{\alpha_0}\ \in\ \Ob I\ ,\qquad j_{\alpha_0}\ \in\ \Ob J'\ ,\qquad u_{\alpha_0}\ :\ \varphi(i_{\alpha_0})\ \longrightarrow\ j_{\alpha_0}\ .
+\]
+Les deux compatibilités voulues pour les deux objets $i_\alpha$, $j_\alpha$ et les quatre flèches $\tau_{\alpha,\alpha_0}$, $\tau'_{\alpha,\alpha_0}$, $v_{\alpha_0}$, $u_\alpha$ sont indiquées dans le diagramme
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+\varphi(i_{\alpha_0}) \arrow[r, "u_{\alpha_0}"] \arrow[rr, bend right=15, "\varphi(\tau_{\alpha,\alpha_0})"'] & j_{\alpha_0} \arrow[r, "v_{\alpha_0}\ ?"] \arrow[rr, bend left=20, "\tau'_{\alpha,\alpha_0}"] & \varphi(\underbrace{\,i_\alpha\,}_{?}) \arrow[r, "u_\alpha\ ?"] & j_\alpha\ .
+\end{tikzcd}
+\]
+
+On note que comme $\varphi$ est cofinal, $\exists\ i_\alpha=i\in\Ob I$ et $j_{\alpha_0}\xrightarrow{v_{\alpha_0}}\varphi(i)$. Mais on veut que le composé
+\[
+w\ :\ \varphi(i_{\alpha_0})\ \xrightarrow{u_{\alpha_0}}\ j_{\alpha_0}\ \xrightarrow{v_{\alpha_0}}\ \varphi(i)
+\]
+soit de la forme $\varphi(\tau)$, où $\tau=\tau_{\alpha,\alpha_0}:i_{\alpha_0}\longrightarrow i_\alpha$ est une flèche dans $I$. Comme $\varphi$ est un foncteur cofinal de catégories filtrantes, on sait
+% foot: Version 17 décembre 2025
+\printedpage{122}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 322}
+qu'on peut trouver $i\xrightarrow{\rho}i'$ dans $I$, tel que la flèche composée $\varphi(i_{\alpha_0})\xrightarrow{w}\varphi(i)\xrightarrow{\varphi(\rho)}\varphi(i')$ soit de la forme $\varphi(\tau)$. Donc quitte à remplacer $i$ par $i'$, et $v_{\alpha_0}$ par le composé $v'_{\alpha_0}$ : $j_{\alpha_0}\xrightarrow{v_{\alpha_0}}\varphi(i)\xrightarrow{\varphi(\rho)}\varphi(i')$, on peut supposer que $v_{\alpha_0}u_{\alpha_0}$ est de la forme $\varphi(\tau)$. Cela nous donne donc en principe l'objet $i=i_\alpha$, et les flèches $v_{\alpha_0}:j_{\alpha_0}\longrightarrow\varphi(i)$ et $\tau_{\alpha,\alpha_0}:i_{\alpha_0}\longrightarrow i_\alpha$, de façon à satisfaire à la première compatibilité dans $(*)$. Il reste à construire $j_\alpha$, $\tau'_{\alpha,\alpha_0}$, $u_\alpha$ de façon à satisfaire à la deuxième compatibilité $(*)$. Or $J'$ étant cofinal dans $J$, il existe $j_\alpha$ dans $J'$ et une flèche $u_\alpha:\varphi(i_\alpha)\longrightarrow j_\alpha$. D'autre part, comme $J'\longrightarrow J$ est pleinement fidèle, la flèche composée $j_{\alpha_0}\xrightarrow{v_{\alpha_0}}\varphi(i_\alpha)\xrightarrow{u_\alpha}j_\alpha$ dans $J$, entre objets de $J'$, provient d'une unique flèche $\tau'_{\alpha,\alpha_0}:j_{\alpha_0}\longrightarrow j_\alpha$ dans $J'$.
+
+\msp{page 323}
+
+Ainsi, on a construit les deux objets et les quatre flèches voulues, de façon à satisfaire aux contraintes $1_\alpha$, $2_\alpha$ de la page 318. Les contraintes $3_\alpha(\beta)$, $4_\alpha(\beta)$ sont-elles alors satisfaites automatiquement ?
+\[
+\begin{tikzcd}
+\varphi(i_\beta) \arrow[r, "u_\beta"] \arrow[d] & j_\beta \arrow[d] \\
+\varphi(i_{\alpha_0}) \arrow[r, "u_{\alpha_0}"] \arrow[d, "\varphi(\tau_{\alpha,\alpha_0})"'] & j_{\alpha_0} \arrow[d, "\tau'_{\alpha,\alpha_0}"] \\
+\varphi(i_\alpha) \arrow[r, "u_\alpha"] & j_\alpha
+\end{tikzcd}
+\qquad\qquad \beta<\alpha, \text{ i.e. } \beta\leqslant\alpha_0\ .
+\]
+Le carré supérieur est commutatif par hypothèse de récurrence, pour que le carré total (composé) soit commutatif, il suffit que le carré inférieur le soit. On a donc une double-flèche $(\tau'_{\alpha,\alpha_0}u_{\alpha_0},u_\alpha\varphi(\tau_{\alpha,\alpha_0})):\varphi(i_\alpha)\rightrightarrows j_\alpha$, elle n'est peut-être pas triviale, mais on sait, $J'$ étant filtrante, qu'on peut l'égaliser par une flèche $j_\alpha\longrightarrow\bar{j}_\alpha$ dans $J'$. Donc quitte à remplacer $j_\alpha$ par % [sic] \varphi(i_\alpha) -> \varphi(i_{\alpha_0}), both composites of the double arrow start at \varphi(i_{\alpha_0})
+\msp{page 324}
+$\bar{j}_\alpha$, $u_\alpha$ par le composé $\bar{u}_\alpha:\varphi(i_0)\longrightarrow j_\alpha\longrightarrow\bar{j}_\alpha$ et $\tau'_{\alpha,\alpha_0}$ par le composé $\bar{\tau}'_{\alpha,\alpha_0}:j_{\alpha_0}\longrightarrow j_\alpha\longrightarrow\bar{j}_\alpha$ (sans toucher à $i_\alpha$, $v_{\alpha_0}$, $\tau_{\alpha_0,\alpha}$), on peut obtenir la commutativité, d'où $3_\alpha(\beta)$. % [sic] \varphi(i_0) -> \varphi(i_\alpha), u_\alpha has source \varphi(i_\alpha); [sic] \tau_{\alpha_0,\alpha} -> \tau_{\alpha,\alpha_0}, the arrow is written \tau_{\alpha,\alpha_0} everywhere else
+
+Reste la contrainte $4_\alpha(\beta)$. Pour ceci, considérons le diagramme composite
+\[
+\begin{tikzcd}
+j_\beta \arrow[r, "v_\beta"] \arrow[d, "\tau'_{\alpha_0,\beta}"'] & \varphi(i_{\beta+1}) \arrow[d, "\varphi(\tau_{\alpha,\beta+1})"] \\
+j_{\alpha_0} \arrow[r, "v_{\alpha_0}"] & \varphi(i_{\alpha_0+1})=\varphi(i_\alpha)\ .
+\end{tikzcd}
+\]
+
+Si $\alpha_0$ n'est pas un ordinal limite, mais de la forme $\alpha_1+1$, on peut encore se ramener au cas où $\beta=\alpha_1$, en procédant comme ci-dessus. Mais on peut procéder dans tous les cas, sans un tel artifice (\,!), en considérant les double-flèches
+\[
+(*)\qquad\qquad
+\begin{tikzcd}
+j_\beta \arrow[r, shift left, "\varphi(\tau_{\alpha,\beta+1})v_\beta"] \arrow[r, shift right, "v_{\alpha_0}\tau'_{\alpha_0,\beta}"'] & \varphi(i_\alpha)
+\end{tikzcd}
+\]
+% foot: Version 17 décembre 2025
+\printedpage{123}
+% head: A. Grothendieck : Dérivateurs, Ch. XVIII, Édition des Universités de Montpellier II et Paris VII
+déduites du carré précédent. Comme
+\msp{page 325}
+l'ensemble de ces double-flèches est de cardinal $\card\alpha<\pi$, et que $J$ est grande devant $\pi$ (il suffirait qu'il le soit pour les cardinaux $\pi'<\pi$), on peut trouver une flèche $\varphi(i_\alpha)\xrightarrow{u}j$ dans $J$ qui égalise toutes ces double-flèches. Comme $\varphi$ est cofinal, on peut supposer que $j$ est de la forme $\varphi(i)$. Comme $\varphi$ est un foncteur cofinal de catégories filtrantes, il existe alors $i\xrightarrow{\rho}i'$ dans $I$, tel que le composé $\varphi(i_\alpha)\xrightarrow{u}\varphi(i)\xrightarrow{\varphi(\rho)}\varphi(i')$ soit de la forme $\varphi(\sigma)$, pour $\sigma:i_\alpha\longrightarrow i'$. Au total, on a trouvé $\sigma:i_\alpha\longrightarrow i'$, tel que $\varphi(\sigma)$ $(=\varphi(\rho)u):\varphi(i_\alpha)\longrightarrow\varphi(i')$ égalise toutes les double-flèches envisagées dans $(*)$, p. 324. Donc il s'impose de remplacer $i_\alpha$ par $\bar{i}_\alpha=i'$, $v_{\alpha_0}$ par le composé $j_{\alpha_0}\longrightarrow\varphi(i_\alpha)\xrightarrow{\varphi(\sigma)}\varphi(\bar{i}_\alpha)$, $\tau_{\alpha,\alpha_0}$
+\msp{page 326}
+par le composé $\bar{\tau}_{\alpha,\alpha_0}:i_{\alpha_0}\xrightarrow{\tau_{\alpha,\alpha_0}}i_\alpha\xrightarrow{\sigma}\bar{i}_\alpha$.
+
+Pour résumer, voici la recette pour construire, d'abord \ovalbox{$i_\alpha$, $v_{\alpha_0}$, $\tau_{\alpha,\alpha_0}$,}et \textit{ensuite} \ovalbox{$j_\alpha$, $u_\alpha$, $\tau'_{\alpha,\alpha_0}$}.
+
+On procède d'abord comme page 321, 322 pour construire le premier triple, de façon à satisfaire à la première compatibilité $(*)$ (p. 321), i.e. à $1_\alpha$. On “corrige” ensuite ce choix de $i_\alpha$, $v_{\alpha_0}$, $\tau_{\alpha,\alpha_0}$, en remplaçant $i_\alpha$ par $\bar{i}_\alpha$ pour $\sigma:i_\alpha\longrightarrow\bar{i}_\alpha$, $v_{\alpha_0}$ par $\bar{v}_{\alpha_0}=\varphi(\sigma)v_{\alpha_0}$, et $\tau_{\alpha,\alpha_0}$ par $\bar{\tau}_{\alpha,\alpha_0}=\sigma\tau_{\alpha,\alpha_0}$, de sorte à obtenir les compatibilités $4_\alpha(\beta)$ pour $\beta<\alpha_0$, comme on vient de l'indiquer. On ne touchera plus à ces choix de $i_\alpha$, $v_{\alpha_0}$, $\tau_{\alpha,\alpha_0}$, dans la suite de la construction. On construit $(j_\alpha,u_\alpha,\tau'_{\alpha,\alpha_0})$ de façon à satisfaire à la deuxième compatibilité $(*)$ (p. 321), comme
+\msp{page 327}
+indiqué page 322. Ensuite, on corrige ce choix, en remplaçant $j_\alpha$ par $\bar{j}_\alpha$, avec $\rho:j_\alpha\longrightarrow\bar{j}_\alpha$, et $u_\alpha$ par $\bar{u}_\alpha=\rho u_\alpha$, $\tau'_{\alpha,\alpha_0}$ par $\bar{\tau}'_{\alpha,\alpha_0}=\rho\tau'_{\alpha,\alpha_0}$, de façon à satisfaire aux contraintes $3_\alpha(\beta)$ de la page 318.
+
+Cela achève la construction dans le cas où $\alpha=\alpha_0+1$.
+
+\textit{Cas 2 B : $\alpha$ est ordinal limite.}
+
+Il faut donc construire les données 1) 2) 3) de la page 317 (à l'exclusion de la donnée 4), de façon à satisfaire à la seule contrainte $3_\alpha(\beta)$.
+
+On commence à construire $i_\alpha$ et les $\tau_{\beta,\alpha}$ dans $I$. C'est possible, car $I_\alpha=\{\beta\mid\beta<\alpha\}$ est de cardinal $\pi_\alpha<\pi$ – il suffit donc de supposer $I$ grande devant les cardinaux $\pi'<\pi$.
+
+On construit ensuite de même $J_\alpha$ dans $J'$ et les $\tau'_{\beta,\alpha}$ $(\beta<\alpha)$, en utilisant le % [sic] J_\alpha -> j_\alpha, the object of J' is meant
+\msp{page 328}
+fait que $J'$ est grande devant $\card\alpha=\card I_\alpha$. On doit de plus construire une flèche
+\[
+u_\alpha\ :\ \varphi(i_\alpha)\ \longrightarrow\ j_\alpha\ .
+\]
+C'est possible, car $J'$ étant cofinale dans $J$, il existe $j'$ dans $J'$ et $\varphi(i_\alpha)\longrightarrow J'$, et $J'$ étant filtrante, il existe $\bar{j}_\alpha$ et des flèches % [sic] \varphi(i_\alpha)\longrightarrow J' -> \varphi(i_\alpha)\longrightarrow j', the arrow goes to the object j'
+$\begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname-1-1.base)]
+j_\alpha \arrow[rr] \& \& j_\alpha \\
+\& j' \arrow[ur] \&
+\end{tikzcd}$, donc quitte à remplacer $j_\alpha$ par $\bar{j}_\alpha$, les $\tau'_{\alpha,\beta}$ par des $\bar{\tau}'_{\alpha,\beta}$, on trouve bien une flèche $u_\alpha:\varphi(i_\alpha)\longrightarrow j_\alpha$. Il faut ensuite s'occuper des % [sic] target j_\alpha in the small diagram -> \bar{j}_\alpha, the two arrows go to the object \bar{j}_\alpha just introduced
+% foot: Version 17 décembre 2025
+\end{document}

@@ -1,0 +1,1730 @@
+% macro conflict, first definition kept: \newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+% macro conflict, first definition kept: \newcommand{\Fl}{\operatorname{Fl}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+% Reader layout: space for manuscript and edition page labels.
+\usepackage[a4paper,left=25mm,right=32mm,top=23mm,bottom=24mm,marginparwidth=23mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\setlength{\emergencystretch}{2em}
+% Compatibility with a 2024 LaTeX kernel and the current babel-french package.
+\providecommand\IfDocumentMetadataT[1]{\IfDocumentMetadataTF{#1}{}}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{needspace}
+\frenchsetup{AutoSpacePunctuation=true}
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\HOT}{\mathrm{HOT}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\tX}{\tilde{\mathscr{X}}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\tsX}{\tilde{\mathscr{X}}}
+\newcommand{\circled}[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\tld}{^{\tilde{}}}
+\newcommand{\hto}[1][]{\overset{#1}{\lhook\joinrel\longrightarrow}}
+% Transcription repair: complete the truncated macro; the printed integral diagrams are unchanged.
+\newcommand{\intdiag}[3]{\int\begin{tikzcd}[row sep=small,column sep=small,ampersand replacement=\&,baseline=(\tikzcdmatrixname-2-1.base)] \& #2 \\ #1 \arrow[ur]\arrow[dr] \& \\ \& #3 \end{tikzcd}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Fibdisc}{\underline{\mathrm{Fib\ disc}}}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\begin{document}
+% ---- from Der-ChXIIb-012_p036-040.tex
+\printedpage{78}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\begin{enumerate}
+\item[b)] J'ai envie, pour des applications ultérieures, de disposer d'une classe d'immersions ouvertes ayant les propriétés suivantes :
+\begin{enumerate}
+\item[1°)] Ce sont des $W$-cofibrations, et
+\item[2°)] Si $U \overset{i}{\hookrightarrow} X$ est dans la classe, et si $\varepsilon \xrightarrow{j} I$ est l'inclusion ‘source-but’ de la catégorie discrète $\{0,1\}$ dans l'intervalle
+\[
+\Phi_n = 0 \longrightarrow 1 \longleftarrow 2 \longrightarrow \dots 2n-1 \longleftarrow 2n
+\]
+$(j(0)=0$, $j(1)=2n)$, $n\geq 2$, l'inclusion $\alpha$ de $(U\times I)\cup(X\times\varepsilon)$ dans $X\times I$ est dans la classe.
+\end{enumerate}
+Or cette dernière propriété de stabilité n'est \textit{pas} vérifiée par les immersions de Dwyer. (Prendre $i : \{0\} \longrightarrow \boldsymbol{\Delta}^1 = \{0,1\}$, l'inclusion $\alpha$ n'est pas immersion de Dwyer.)
+\end{enumerate}
+
+\msp{page 115}
+
+\subsection*{2.5\quad Complément : critère d'asphéricité totale d'une catégorie $W$-propre sur une autre.}
+
+Soit
+\[
+f : X \longrightarrow I
+\]
+une catégorie propre sur une catégorie d'indices $I$. Si $I$ a un objet final $i_0$, alors $X/i_0$ s'identifie à $X$, et par suite l'inclusion
+\[
+X_{i_0} \longrightarrow X
+\]
+de la fibre de $X$ en $i_0$ est $W$-asphérique \texttt{[plutôt }$W$\texttt{-coasphérique]}, et a fortiori est dans $W$. Donc $X$ est asphérique si et seulement si $X_{i_0}$ l'est. Nous voulons étendre ce résultat en un critère de \textit{totale} $W$-asphéricité, de façon précise prouver la
+
+\textbf{Proposition 11 :} \textit{Soit $f : X \longrightarrow I$ $W$-propre, et soit $i_0$ un objet final de $I$. Si $X_{i_0}$ est totalement $W$-asphérique} (déf. 1, page 88), \textit{il en est de même de $X$.} (Sous réserve que $W$ satisfasse l'axiome de connexité W(5).)
+
+La démonstration sera donnée plus bas, après quelques préliminaires ayant un intérêt indépendant. Tout d'abord, rappelons que si $X$ est $W$-propre sur $I$, alors il donne naissance à un foncteur
+\[
+\begin{aligned}
+I \quad &\longrightarrow \quad \mathrm{Hot}_W\\
+i \quad &\longmapsto \quad \mathrm{hot}_W(X_i)(\simeq \mathrm{hot}_W(X/i));
+\end{aligned}
+\]
+en le composant avec le foncteur
+\[
+\pi_0 : \mathrm{Hot}_W \longrightarrow \mathrm{Ens}
+\]
+(sous réserve que l'axiome de connexité W(5) (p. 10) soit satisfait)
+% foot: Version 7 décembre 2002
+\printedpage{79}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 116}
+on trouve un foncteur
+\[
+i \longmapsto \underbrace{\pi_0(X_i)}_{\simeq\, \pi_0(X/i)} : I \longrightarrow \mathrm{Ens}.
+\]
+Ceci posé, on a le résultat sorital
+
+\textbf{Proposition 12 :} \textit{Soit $f : X \longrightarrow I$ $W$-propre, et supposons que $W$ satisfasse l'axiome de connexité} W(5) (sinon, la $W$-propreté ne nous sera d'aucune utilité \dots) (\footnote[81]{Il vaut mieux dire : Soit $f$ $W_0$-propre, où $W_0$ est le localiseur de la 0-connexité \dots}). \textit{On a alors une bijection canonique}
+\[
+\pi_0(X) \xleftarrow{\ \sim\ } \varinjlim_{I} \pi_0(X_i), \tag*{$(*)$}
+\]
+\textit{où la flèche est induite par les applications canoniques $\pi_0(X_i) \longrightarrow \pi_0(X)$.}
+
+\textsc{Démonstration.} Passant à $f^\circ : X^\circ \longrightarrow I^\circ$, on est ramené à prouver le même résultat pour $X$ \textit{$W$-lisse} sur $I$, avec la seule différence que le foncteur
+\[
+i \longmapsto \pi_0(X_i)
+\]
+sur $I$ sera contravariant, i.e. un préfaisceau, ce qui offre l'avantage de l'intuition attachée au formalisme des préfaisceaux. Soit
+\[
+g : I \longrightarrow e, \qquad \text{d'où } gf = p : X \longrightarrow e,
+\]
+il est immédiat, par le calcul standard
+\[
+p_!(F) = \pi_0(X/F) \qquad (F \in \mathrm{Ob}\, X^\wedge)
+\]
+(où on a identifié $e^\wedge$ à (Ens)), qu'on a
+\[
+\pi_0(X) = p_!(e_X) = g_!(f_!(e_X)).
+\]
+Or le préfaisceau
+\[
+i \longmapsto \pi_0(X_i) \qquad (\simeq \pi_0(i\backslash X), \text{ car } X\ W\text{-lisse sur } I)
+\]
+\msp{page 117}
+n'est autre que $f_!(e_X)$. D'autre part, pour un préfaisceau quelconque $G$ sur $I$, on a
+\[
+g_!(G) \simeq \pi_0(I/G) \simeq \varinjlim_{I} G(i),
+\]
+et appliquant ceci à $f_!(e_X)$, on trouve la formule $(*)$ de la proposition 12.
+
+Revenons à la situation avec $f$ \textit{$W$-propre,} et considérons un foncteur
+\[
+p : X \longrightarrow Y,
+\]
+nous sommes intéressés à ‘calculer’
+\[
+p_!(e_X) = (y \longmapsto \pi_0(y\backslash X)) \in \mathrm{Ob}\, Y^\wedge.
+\]
+Considérons pour ceci le diagramme suivant
+% foot: Version 7 décembre 2002
+\printedpage{80}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+y\backslash X_i \arrow[r] \arrow[d] & y\backslash X \arrow[r] \arrow[d] & y\backslash Y \arrow[d] \\
+X_i \arrow[r] \arrow[d] & X \arrow[r, "p"] \arrow[d, "f"] & Y \\
+\underset{\simeq\, e}{\{i\}} \arrow[r] & I\rlap{\quad ,} &
+\end{tikzcd}
+\]
+où les trois carrés sont cartésiens. Comme $y\backslash Y \longrightarrow Y$ est $W$-propre, il en est de même de $y\backslash X \longrightarrow X$ par changement de base, donc du composé $y\backslash X \longrightarrow X \longrightarrow I$ par transitivité. Le diagramme montre d'autre part que la fibre de $y\backslash X$ en $i \in \mathrm{Ob}\, I$ s'identifie à $y\backslash X_i$.
+
+\msp{page 118}
+La proposition 12 nous donne donc la formule
+\[
+\pi_0(y\backslash X) = \varinjlim_{I} \pi_0(y\backslash X_i),
+\]
+laquelle formule ne peut s'empêcher d'être fonctorielle en $y$, tout comme celle de prop. 12 l'est dans $\underline{\mathrm{Prop}}_W I$. Or pour $y$ variable dans $Y$, le préfaisceau sur $Y$
+\[
+y \longmapsto \pi_0(y\backslash X_i)
+\]
+n'est autre que $p_{i\,!}(e_{X_i})$, où
+\[
+p_i : X_i \longrightarrow Y
+\]
+est le composé $X_i \longrightarrow X \xrightarrow{p} Y$ (induit par $p$). On a ainsi prouvé
+
+\textbf{Corollaire 1} (de prop. 12). \textit{Soit $f : X \longrightarrow I$ $W$-propre} (\footnote[82]{dire $W_0$-propre \dots}), \textit{et $p : X \longrightarrow Y$ un foncteur quelconque. Soit, pour tout $i \in \mathrm{Ob}\, I$, $p_i : X_i \longrightarrow Y$ le foncteur induit sur la fibre $X_i$ de $X$ en $i$. On a alors une loi} fonctorielle \textit{naturelle}
+\[
+i \longmapsto p_{i\,!}(e_{X_i}) : I \longrightarrow Y^\wedge,
+\]
+\textit{et on a la formule}
+\[
+p_!(e_X) \xleftarrow{\ \sim\ } \varinjlim_{I} p_{i\,!}(e_{X_i}), \tag*{$(*)$}
+\]
+\textit{où la flèche est induite par les morphismes canoniques}
+\[
+p_{i\,!}(e_{X_i}) \longrightarrow p_!(e_X)
+\]
+% foot: Version 7 décembre 2002
+\printedpage{81}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 119}
+\textit{induites par les inclusions $X_i \longrightarrow X$.}
+
+La loi fonctorielle de $p_{i\,!}(e_{X_i})$ en $i$ a été explicitée en cours de démonstration.
+
+Notons que lorsque $X$ sur $I$ est cofibrée et scindée, i.e. provient d'un foncteur
+\[
+i \longmapsto X_i, \quad I \longrightarrow \mathrm{Cat},
+\]
+alors la loi fonctorielle de $p_{i\,!}(e_{X_i})$ en $i$ s'explicite de façon particulièrement agréable : à une flèche
+\[
+\alpha : i \longrightarrow j, \qquad \text{d'où } \alpha_* : X_i \longrightarrow X_j,
+\]
+est associé
+\[
+p_!(\alpha) : p_{i\,!}(e_{X_i}) \longrightarrow p_{j\,!}(e_{X_j}),
+\]
+en notant qu'on a un diagramme
+\[
+\begin{tikzcd}
+X_i \arrow[rr, "\alpha_*"] \arrow[dr, "p_i"', ""{name=A}] & & X_j \arrow[dl, "p_j", ""'{name=B}] \\
+& Y &
+\arrow[from=A, to=B, bend left, "\lambda_\alpha"] % Resolved from PDF leaf 4: a solid curve, segmented only by the original renderer.
+\end{tikzcd}
+\]
+avec une flèche de commutativité
+\[
+\lambda_\alpha : p_i \longrightarrow p_j\alpha_*
+\]
+(pas \texttt{[un]} isomorphisme en général), d'où
+\[
+p_{i\,!}(e_{X_i}) \xrightarrow{(\lambda_\alpha)_!} p_{j\,!}\underbrace{\alpha_{*\,!}(e_{X_i})}_{\longrightarrow\, e_{X_j}} \longrightarrow p_{j\,!}(e_{X_j}),
+\]
+plus de doute c'est lui! (\footnote[83]{Cette flèche \texttt{[la flèche }$(\lambda_\alpha)_!$\texttt{]} devrait être explicitée avec soin!}).
+
+\msp{page 120}
+\textbf{Corollaire 2 :} \textit{Sous les conditions du corollaire 1, supposons que $I$ ait un objet final $i_0$. Alors}
+\[
+(p_{i_0})_!(e_{X_{i_0}}) \longrightarrow p_!(e_X)
+\]
+\textit{est un isomorphisme dans $Y^\wedge$.}
+
+D'où aussitôt la proposition 11 : si $X_{i_0}$ est totalement $W$-asphérique, alors $X$ l'est, car pour tout $p : X \longrightarrow Y$, $p_!(e_X) \simeq p_{i_0\,!}(X_{i_0})$, et ce dernier élément de $Y^\wedge$ est $W$-asphérique % [sic] p_{i_0 !}(X_{i_0}) -> p_{i_0 !}(e_{X_{i_0}}), elsewhere the argument of p_{i!} is e_{X_i}
+par hypothèse sur $X_{i_0}$.
+
+Notons le cas particulier :
+
+\textbf{Corollaire 3.} \textit{Soit $Z$ un objet totalement $W$-asphérique dans} Cat. \textit{Alors son produit $Z\times I$ par toute $I$ dans} Cat \textit{ayant un objet final est aussi totalement $W$-asphérique.}
+% foot: Version 7 décembre 2002
+\printedpage{82}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 121}
+
+\section*{3\quad Sommes amalgamées et intégration\quad \begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+\& X_1 \\
+\int X_0 \arrow[ur] \arrow[dr] \& \\
+\& X_2
+\end{tikzcd}}
+
+\subsection*{3.1\quad Réduction canonique au cas d'un diagramme d'immersions fermées}
+
+Considérons un diagramme
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] & \\
+& X_2
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+dans Cat. Nous pouvons le regarder comme un contrafoncteur
+\[
+\Phi^\circ \longrightarrow \mathrm{Cat},
+\]
+où
+\[
+\Phi = \left( \vcenter{\hbox{\begin{tikzcd}[row sep=small, column sep=small]
+& 1 \arrow[dl] \\
+0 & \\
+& 2 \arrow[ul]
+\end{tikzcd}}} \right),
+\]
+donc comme définissant une catégorie fibrée (scindée) $\mathscr{X}$ sur $\Phi$. Il est parfois commode de représenter cette catégorie $\mathscr{X}$ par le ‘signe d'integration’ % [sic] integration -> intégration, accent missing in the print
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& X_1 \\
+\int X_0 \arrow[ur] \arrow[dr] & \\
+& X_2,
+\end{tikzcd}
+\]
+et la regarder comme une sorte de ‘somme amalgamée homotopique’ de $X_1$ et $X_2$ sous $X_0$, ou comme une ‘limite inductive homotopique’ du diagramme de départ $(*)$.
+
+\msp{page 122}
+Il faut entendre par là que (pour $W \subseteq \mathrm{Fl}(\mathrm{Cat})$ donné) l'image $\mathrm{hot}_W(\mathscr{X})$ de $\mathscr{X}$ dans $\mathrm{Hot}_W$ a un ‘sens homotopique’ remarquable en termes de $(*)$, de façon précise, le diagramme $(*)$ définit un objet $\xi$ de $\mathrm{HOT}_W(\Phi)$ (qui est une catégorie de fractions de la catégorie de tous les diagrammes du type $(*)$ \dots), et si
+\[
+\pi : \Phi \longrightarrow e
+\]
+désigne la projection absolue de $\Phi$, on a
+\[
+\pi_!(\xi) = \mathrm{hot}_W(\mathscr{X}),
+\]
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p041-045.tex
+\printedpage{83}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+d'après le calcul connu du foncteur $\pi_!$, adjoint à gauche du foncteur $\pi^*$
+\[
+\HOT_W(e) \overset{\text{déf}}{=} \Hot_W \longrightarrow \HOT_W(\Phi)
+\]
+(\footnote[84]{Cela suppose qu'on a W(2), non seulement W(2 bis).}). Or pour tout objet $I$ dans Cat, de projection absolue $p_I : I \longrightarrow e$, le foncteur
+\[
+p_{I\,!} : \HOT_W(I) \longrightarrow \HOT_W(e) = \Hot_W
+\]
+doit être regardé comme l'équivalent `homotopique' du foncteur limite inductive $\varinjlim\limits_{I}$ des diagrammes de type $I^{\circ}$ dans la catégorie $\Hot_W$ - lesquelles limites inductives \textit{n'existent pas} dans $\Hot_W$ (sauf
+\msp{page 123}
+pour des catégories très particulières - les seules que je connaisse sont les catégories discrètes (qu'il faut peut-être même supposer finies en plus)).
+
+Notons qu'on a un diagramme de foncteurs canoniques
+\[
+\begin{tikzcd}[column sep=tiny, row sep=small, ampersand replacement=\&]
+ \& X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \& \\
+X_1 \arrow[dr, "i_1"'] \& {\shortstack{\scriptsize non\\ \scriptsize commuta-\\ \scriptsize tif!}} \& X_2 \arrow[dl, "i_2"] \\
+ \& \cX, \&
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+lequel diagramme n'a rien de commutatif dans Cat. \textit{Il est cependant commutatif dans} $\Hot_W$ (quel que soit le localiseur fondamental $W$), et même dans Cat\,hot, car si on désigne par
+\[
+i_0 : X_0 \longrightarrow \cX
+\]
+l'inclusion canonique, on a des homomorphismes canoniques
+\[
+i_1\alpha_1 \longrightarrow i_0 \longleftarrow i_2\alpha_2,
+\]
+ce qui montre que $i_1\alpha_1$ et $i_2\alpha_2$ sont homotopes, donc définissent la même flèche dans $\Hot_W$.
+
+\msp{page 124}
+Considérons dans $\Phi$ les deux fermés isomorphes à $\boldsymbol{\Delta}^1$
+\[
+\begin{aligned}
+F_1 &= 1\backslash\Phi &&= \{0,1\}\\
+F_2 &= 2\backslash\Phi &&= \{0,2\},
+\end{aligned}
+\]
+on a
+\[
+F_1\cap F_2 = 0\backslash\Phi = \{0\}, \qquad F_1\cup F_2 = \Phi.
+\]
+
+\printedpage{84}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+Soient
+\[
+\begin{aligned}
+1\backslash\cX &= \cX\times_{\Phi} 1\backslash\Phi &&= \cX\times_{\Phi} F_1\\
+2\backslash\cX &= \cX\times_{\Phi} 2\backslash\Phi &&= \cX\times_{\Phi} F_2
+\end{aligned}
+\]
+les images inverses de $F_1$, $F_2$ dans $\cX$, on a donc
+\[
+1\backslash\cX\cap 2\backslash\cX = X_0, \qquad 1\backslash\cX\cup 2\backslash\cX = \cX,
+\]
+donc le diagramme
+\[
+\begin{tikzcd}[column sep=small, row sep=small, ampersand replacement=\&]
+ \& X_0 \arrow[dl, hook', "\alpha'_1"'] \arrow[dr, hook, "\alpha'_2"] \& \\
+1\backslash\cX \arrow[dr, hook, "i'_1"'] \& \& 2\backslash\cX \arrow[dl, hook', "i'_2"] \\
+ \& \cX, \&
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+déduit du diagramme similaire
+\[
+\begin{tikzcd}[column sep=small, row sep=small, ampersand replacement=\&]
+ \& \{0\} \arrow[dl, hook'] \arrow[dr, hook] \& \\
+F_1 \arrow[dr, hook] \& \& F_2 \arrow[dl, hook'] \\
+ \& \Phi, \&
+\end{tikzcd}
+\]
+est (comme ce dernier) un carré d'immersions fermées à la fois cartésien et cocartésien. D'autre part, on a un homomorphisme
+\msp{page 125}
+canonique du diagramme $(*)$ dans $(**)$, qui est l'identité sur les sommets $X_0$ et $\cX$, et qui sur $X_1$, $X_2$ est donné par les inclusions canoniques
+\[
+\underbrace{X_1}_{\text{\scriptsize $\cX_1$ fibre de $\cX$ en 1}} \longrightarrow 1\backslash\cX, \qquad
+\underbrace{X_2}_{\text{\scriptsize $\cX_2$ fibre de $\cX$ en 2}} \longrightarrow 2\backslash\cX.
+\]
+Ces inclusions, on le sait, sont $W$-asphériques (elles ont même un adjoint à droite), a fortiori elles sont dans $W$. Donc le diagramme non commutatif $(*)$ est isomorphe, en tant que diagramme dans $\Hot_W$, au diagramme commutatif cartésien et cocartésien $(**)$ formé d'immersions fermées. Comme $\cX$ est bel et bien somme amalgamée de ses deux fermées % [sic] fermées -> fermés, cf. « les deux fermés » p. 83
+$1\backslash\cX$, $2\backslash\cX$ sous leur intersection $X_0$, cela étaye l'intuition qui voit $\cX$ comme une `somme amalgamée homotopique'. Donnons tout de suite l'application suivante :
+
+\textbf{Proposition 13.} \textit{Soit un diagramme} $\begin{tikzcd}[column sep=small, row sep=tiny, ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] \& \\
+ \& X_2
+\end{tikzcd}$ \textit{dans} Cat\textit{, d'où le diagramme} $(*)$\textit{, p. 123,}
+
+\printedpage{85}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[column sep=small, row sep=small, ampersand replacement=\&]
+ \& X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \& \\
+X_1 \arrow[dr, "i_1"'] \& \& X_2 \arrow[dl, "i_2"] \\
+ \& \cX, \&
+\end{tikzcd}
+\]
+\msp{page 126}
+\textit{commutatif dans} $\Hot_W$ \textit{(mais non dans} Cat\textit{, sauf si $X_0 = \emptyset$). Supposons que $W$ satisfait} W(7 bis) (axiome du carré cocartésien, cf. p. 75). \textit{Alors on a}
+\[
+\left\{
+\begin{aligned}
+\alpha_1\in W &\iff i_2\in W\\
+\alpha_2\in W &\iff i_1\in W. \text{ (\footnotemark[85])}
+\end{aligned}
+\right.
+\]
+\footnotetext[85]{\textbf{NB} Pour l'implication $\Longrightarrow$ on n'a besoin que de la forme directe de W(7 bis), i.e. (avec les notations de XVI) de Loc(6$'$a).}
+\textsc{Démonstration}. Utilisant l'homomorphisme précédent de $(*)$ dans $(**)$, on voit que chacune des flèches $\alpha_1$, $\alpha_2$, $i_1$, $i_2$ est dans $W$, si et seulement si la flèche correspondante $\alpha'_1$, $\alpha'_2$, $i'_1$ ou $i'_2$ l'est. Donc les équivalences ci-dessus équivalent à
+\[
+\begin{aligned}
+\alpha'_1\in W &\iff i'_2\in W\\
+\alpha'_2\in W &\iff i'_1\in W,
+\end{aligned}
+\]
+lesquelles sont vraies en vertu de W(7 bis) (formulation duale) appliqué à $\cX$ et aux deux fermés $1\backslash\cX$, $2\backslash\cX$ de $\cX$.
+
+\Needspace{13\baselineskip}
+\textbf{Corollaire :} \textit{Considérons} deux \textit{diagrammes de type} $\Phi^{\circ}$\textit{, et un homomorphisme} $f = (f_0, f_1, f_2)$ \textit{de l'un dans l'autre (cf. diagramme en traits pleins ci-contre} \texttt{[ci-dessous]}\textit{):}
+\[
+\begin{tikzcd}[column sep=small, row sep=small, ampersand replacement=\&]
+ \& X_1 \arrow[dd, "f_1"'] \arrow[drr, dotted, "i_1"] \& \& \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[drr, "\alpha_2"] \arrow[dd, "f_0"'] \& \& \& \cX \arrow[dd, dotted, "f_{\cX}"] \\
+ \& X'_1 \arrow[drr, dotted, "i'_1"] \& X_2 \arrow[ur, dotted, "i_2"] \arrow[dd, "f_2"'] \& \\
+X'_0 \arrow[ur, "\alpha'_1"] \arrow[drr, "\alpha'_2"] \& \& \& \cX', \\
+ \& \& X'_2 \arrow[ur, dotted, "i'_2"] \&
+\end{tikzcd}
+\]
+\textit{d'où un homomorphisme}
+\msp{page 127}
+\[
+f_{\cX} = \int f : \quad \cX = \int
+\begin{tikzcd}[column sep=small, row sep=tiny, ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}
+\qquad\longrightarrow\qquad
+\cX' = \int
+\begin{tikzcd}[column sep=small, row sep=tiny, ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X'_1 \\
+X'_0 \arrow[ur] \arrow[dr] \& \\
+ \& X'_2,
+\end{tikzcd}
+\]
+
+\printedpage{86}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\textit{s'insérant dans un diagramme cubique (cf. diagramme précédent complété par des pointillés). Considérons les conditions suivantes.}
+
+\begin{itemize}
+\item[\textit{a)}] $f_0\in W$\textit{.}
+\item[\textit{b)}] $f_1$ \textit{et} $f_2$ \textit{sont} \texttt{[dans]} $W$\textit{.}
+\item[\textit{c)}] $f_{\cX} = \int(f_0, f_1, f_2)\in W$\textit{.}
+\end{itemize}
+
+\textit{Supposons l'axiome} W(7) (`lemme des 5', cf. page 76) \textit{satisfait. Alors deux parmi les conditions a), b), c) impliquent la troisième}
+\[
+\left\{
+\begin{aligned}
+a \mathbin{\&} b &\quad\Longrightarrow\quad c\\
+b \mathbin{\&} c &\quad\Longrightarrow\quad a\\
+c \mathbin{\&} a &\quad\Longrightarrow\quad b.
+\end{aligned}
+\right.
+\]
+
+En effet, on a un homomorphisme du diagramme cubique ci-dessus dans le diagramme similaire, où $X_1$, $X_2$, $X'_1$, $X'_2$ sont remplacés respectivement pas les fermés % [sic] pas -> par, misprint
+$1\backslash\cX$, $2\backslash\cX$ de $\cX$, et $1\backslash\cX'$, $2\backslash\cX'$ de $\cX'$, les deux carrés supérieur et inférieur étant des inclusions d'ouverts \texttt{[plutôt de fermés]} de $\cX$ resp. de $\cX'$. Ainsi, les conditions a), b), c) sont équivalentes respectivement aux conditions similaires pour le nouveau diagramme cubique
+\msp{page 128}
+(a) et c) n'ayant d'ailleurs pas changé, et b) donnant
+\begin{itemize}
+\item[b$'$)] $f'_1 : \cX/1 \longrightarrow \cX'/1$\ \ et\ \ $f'_2 : \cX/2 \longrightarrow \cX'/2$\ \ sont dans $W$.
+\end{itemize}
+\texttt{[plutôt} $f'_1 : 1\backslash\cX \longrightarrow 1\backslash\cX'$ \texttt{et} $f'_2 : 2\backslash\cX \longrightarrow 2\backslash\cX'$\texttt{]}). Alors la conclusion du corollaire est équivalente à W(7) (formulation duale) dans le cas du nouveau diagramme cubique, q.e.d.
+
+\subsection*{3.2\quad Comparaison de \ $\displaystyle\int
+\begin{tikzcd}[column sep=small, row sep=tiny, ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}$ \ avec une somme amalgamée ordinaire.\\
+Carrés $W$-homotopiquement cocartésiens.}
+
+La catégorie intégrée $\cX = \displaystyle\int
+\begin{tikzcd}[column sep=small, row sep=tiny, ampersand replacement=\&, baseline=(\tikzcdmatrixname-2-1.base)]
+ \& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}$ est solution du problème universel suivant, variante 2-catégorique de celui qui définit la limite inductive des diagrammes. Il s'agit, pour $Y$ objet variable dans Cat, de considérer les systèmes de trois foncteurs $f_0$, $f_1$, $f_2$ et des deux homomorphismes fonctoriels $\lambda_1$, $\lambda_2$ :
+\printedpage{87}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[column sep=large, row sep=large, ampersand replacement=\&]
+ \& X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \arrow[dd, "f_0", ""{name=M, pos=0.62}] \& \\
+X_1 \arrow[dr, "f_1"', ""{name=A, pos=0.45}] \& \& X_2 \arrow[dl, "f_2", ""{name=B, pos=0.45}] \\
+ \& Y, \&
+\arrow[from=A, to=M, bend left, shorten=3pt, "\lambda_1"]
+\arrow[from=B, to=M, bend right, shorten=3pt, "\lambda_2"']
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\[
+\begin{aligned}
+\lambda_1 :\quad & f_1\alpha_1 \quad\longrightarrow\quad f_0\\
+\lambda_2 :\quad & f_2\alpha_2 \quad\longrightarrow\quad f_0.
+\end{aligned}
+\]
+
+\msp{page 129}
+Se donner une flèche de Cat
+\[
+\cX \longrightarrow Y
+\]
+`revient au même' que de se donner un système $(f_0, f_1, f_2, \lambda_1, \lambda_2)$ comme dessus, et ceci `fonctoriellement en $Y$'. C'est là le cas particulier de la détermination générale des foncteurs de la catégorie fibrée `intégrée' d'un contrafoncteur
+\[
+I^{\circ} \longrightarrow \Cat, \qquad
+\begin{aligned}
+i &\quad\longmapsto\quad X_i\\
+u &\quad\longmapsto\quad u^*
+\end{aligned}
+\]
+vers une catégorie $Y$, en termes d'un système de foncteurs
+\[
+X_i \xrightarrow{f_i} Y,
+\]
+et d'homomorphismes fonctoriels
+\[
+f_i\circ u^* \xrightarrow{\lambda_u} f_j
+\]
+pour $u : i \longrightarrow j$, d'où $u^* : X_j \longrightarrow X_i$, avec des conditions de transitivité pour des flèches composées, dont on n'a pas à tenir compte dans le cas actuel, vu qu'il n'y a pas de flèches composées à regarder dans $I = \Phi$ (sauf des composées avec une flèche identique, qu'on peut se dispenser de regarder ici \dots).
+
+\msp{page 130}
+Si en particulier on a un diagramme \textit{commutatif} dans Cat
+
+% ---- from Der-ChXIIb-012_p046-050.tex
+\printedpage{88}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+Q \quad = \qquad
+\begin{tikzcd}
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] & \\
+X_1 \arrow[dr, "f_1"'] & & X_2 \arrow[dl, "f_2"] \\
+ & Y, &
+\end{tikzcd}
+\]
+on peut le compléter par
+\[
+f_0 \overset{\text{déf}}{=} f_1\alpha_1 = f_2\alpha_2
+\]
+en un diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \arrow[dd, "f_0", ""'{name=F0, pos=0.65}] & \\
+X_1 \arrow[dr, "f_1"', ""{name=F1, pos=0.4}] & & X_2 \arrow[dl, "f_2", ""'{name=F2, pos=0.4}] \\
+ & Y, &
+\arrow[from=F1, to=F0, bend left, "\mathrm{id}", shorten <=2pt, shorten >=2pt]
+\arrow[from=F2, to=F0, bend right, "\mathrm{id}"', shorten <=2pt, shorten >=2pt]
+\end{tikzcd}
+\]
+ce qui montre qu'on a une donnée du type $(*)$ ci-dessus, définissant donc une flèche
+\[
+\varphi_Q : \quad \sX = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}
+\qquad \longrightarrow \qquad Y
+\]
+qui donne lieu à un diagramme cubique
+
+\msp{page 131}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \arrow[dd, "\mathrm{id}"'] \arrow[rrd, "i_1", ""'{name=I1}] & & \\
+X_0 \arrow[ru, "\alpha_1"] \arrow[rrr, dotted, "i_0", ""'{name=I0, pos=0.8}] \arrow[rrd, "\alpha_2"] \arrow[dd, "\mathrm{id}"'] & & & \sX \arrow[dd, "\varphi"] \\
+ & X_1 \arrow[rrd, "f_1"] & X_2 \arrow[ru, "i_2"', ""{name=I2}] \arrow[dd, "\mathrm{id}"'] & \\
+X_0 \arrow[ru, "\alpha_1"] \arrow[rrr, dotted, "f_0"] \arrow[rrd, "\alpha_2"] & & & Y, \\
+ & & X_2 \arrow[ru, "f_2"'] &
+\arrow[from=I1, to=I0, "\lambda_1"', shorten <=1pt, shorten >=1pt]
+\arrow[from=I2, to=I0, bend left, "\lambda_2", shorten <=1pt, shorten >=1pt] % Resolved from PDF leaf 11: a solid curve, unlike the genuinely dotted i_0 line.
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+
+\printedpage{89}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+commutatif sauf le carré supérieur, i.e. on a
+\[
+\varphi i_1 = f_1, \qquad \varphi i_2 = f_2, \qquad \text{et de plus} \quad \varphi i_0 = f_0,
+\]
+$\varphi$ transformant de plus les homomorphismes fonctoriels
+\[
+\lambda_1 : i_1\alpha_1 \longrightarrow i_0, \qquad \lambda_2 : i_2\alpha_2 \longrightarrow i_0
+\]
+en les homomorphismes fonctoriels identiques pertinents.
+
+\setcounter{footnote}{85}
+\textbf{Définition 3.} On dit que le diagramme commutatif
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] & \\
+X_1 \arrow[dr, "f_1"] & & X_2 \arrow[dl, "f_2"'] \\
+ & Y &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+est \textit{$W$-homotopiquement cocartésien} (\footnote{ou simplement $W$-cocartésien, ou qu'il définit $Y$ comme somme amalgamée $W$-homotopique de etc.}) si l'homomorphisme canonique
+\[
+\sX = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}
+\qquad \xrightarrow{\ \varphi\ } \qquad Y
+\]
+qu'il définit est dans $W$. (\footnote{Introduire $\varphi$ dans une proposition en forme, et donner ses propriétés essentielles : flèches strictement cartésiennes sont transformées en flèches \textit{identiques} $+$ lemmes 1 et 2 des p. 152, 154.})
+
+\msp{page 132}
+On a alors le :
+
+\textbf{Corollaire 1.} \textit{Supposons} W(7 bis)\textit{. Si le carré} $(*)$ \textit{est $W$-homotopiquement cocartésien, alors}
+\[
+\left\{
+\begin{aligned}
+\alpha_1 \in W &\quad\iff\quad f_2 \in W \\
+\alpha_2 \in W &\quad\iff\quad f_1 \in W.
+\end{aligned}
+\right.
+\]
+
+Cela résulte aussitôt du diagramme cubique de la page précédente, où toutes les flèches verticales sont dans $W$, et de l'énoncé similaire concernant la face supérieure du cube, donné dans la proposition 13, p. 125.
+
+\Needspace{13\baselineskip}
+\textbf{Corollaire 2.} \textit{Supposons} W(7)\textit{. Considérons un diagramme cubique}
+% foot: Version 7 décembre 2002
+
+\printedpage{90}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \arrow[dd, "p_1"'] \arrow[rrd, "f_1"] & & \\
+X_0 \arrow[ru, "\alpha_1"] \arrow[rrd, "\alpha_2"] \arrow[dd, "p_0"'] & & & Y \arrow[dd, "p"] \\
+ & X'_1 \arrow[rrd, "f'_1"] & X_2 \arrow[ru, "f_2"] \arrow[dd, "p_2"'] & \\
+X'_0 \arrow[ru, "\alpha'_1"] \arrow[rrd, "\alpha'_2"] & & & Y', \\
+ & & X'_2 \arrow[ru, "f'_2"] &
+\end{tikzcd}
+\]
+\textit{où les deux faces inférieure et supérieure du cube sont des carrés $W$-homotopiquement cocartésiens. Considérons les conditions}
+
+\msp{page 133}
+\begin{enumerate}[label={}]
+\item[\textit{a)}] $p_0 \in W$\textit{.}
+\item[\textit{b)}] $p_1$ \textit{et} $p_2 \in W$\textit{.}
+\item[\textit{c)}] $p \in W$\textit{.}
+\end{enumerate}
+
+\textit{Alors deux de ces conditions impliquent la troisième.}
+
+Résulte aussitôt de la définition 3, et du résultat similaire (cor. page 126) pour le diagramme cubique similaire, avec $Y$, $Y'$ remplacées par $\sX = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}$
+et $\sX' = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X'_1 \\
+X'_0 \arrow[ur] \arrow[dr] & \\
+ & X'_2
+\end{tikzcd}$\;.
+
+\section*{3.3\quad Intégration propre versus intégration lisse. Énoncé d'équivalence entre les deux points de vue. Commentaires sur le cas des limites $W$-homotopiques quelconques.}
+
+La définition 3, et les corollaires précédents, n'ont d'intérêt que dans la mesure où on dispose de critères maniables, permettant d'affirmer qu'un carré commutatif est bel et bien homotopiquement cocartésien. C'est ce qu'on va essayer de faire tantôt. Il y a aussi une perplexité, concernant le rôle privilégié joué, dans la théorie développée ici, par les immersions fermées, à l'exclusion des immersions ouvertes. Nous avons en somme ramené, du
+% foot: Version 7 décembre 2002
+\printedpage{91}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 134}
+point de vue homotopique, les diagrammes quelconques $\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}$ dans Cat, au cas d'un diagramme d'immersions fermées, où la somme amalgamée prend des allures familières. Mais pourquoi pas aussi bien le ramener au cas d'immersions ouvertes? On considérerait alors le diagramme de départ comme définissant une catégorie \textit{cofibrée} sur
+\[
+\Phi^{\circ} = \Psi = \
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 1 \\
+0 \arrow[ur] \arrow[dr] & \\
+ & 2,
+\end{tikzcd}
+\]
+soit $\tX$. On a dans $\Psi$ les deux ouverts
+\[
+\underbrace{\Psi/1}_{=\{0,1\}} = U_1, \qquad \underbrace{\Psi/2}_{=\{0,2\}} = U_2, \qquad U_1 \cap U_2 = \{0\},
+\]
+d'où dans $\tX$ deux ouverts images inverses
+\[
+\tX/1, \qquad \tX/2, \qquad \text{avec } \tX/1 \cap \tX/2 = X_0,
+\]
+d'où un diagramme commutatif d'inclusions ouvertes
+\[
+\begin{tikzcd}
+ & X_0 \arrow[dl, "\alpha'_1"'] \arrow[dr, "\alpha'_2"] & \\
+\tX/1 \arrow[dr, "i'_1"'] & & \tX/2 \arrow[dl, "i'_2"] \\
+ & \tX, &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+\msp{page 135}
+lequel reçoit le diagramme non commutatif
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \arrow[dd, dotted, "i_0", ""'{name=J0, pos=0.6}] & \\
+X_1 \arrow[dr, "i_1"', ""{name=J1, pos=0.4}] & & X_2 \arrow[dl, "i_2", ""'{name=J2, pos=0.4}] \\
+ & \tX, &
+\arrow[from=J0, to=J1, dotted, bend right, "\tilde{\lambda}_1"', shorten <=2pt, shorten >=2pt]
+\arrow[from=J0, to=J2, dotted, bend left, "\tilde{\lambda}_2", shorten <=2pt, shorten >=2pt]
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{92}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+les flèches
+\[
+X_1 \longrightarrow \tX/1, \qquad X_2 \longrightarrow \tX/2
+\]
+étant dans $W$ (et même $W$-coasphériques - elles ont même un adjoint à gauche).
+
+Donc on trouve, comme précédemment
+\[
+\left\{
+\begin{aligned}
+\alpha_1 \in W &\quad\iff\quad i_2 \in W \\
+\alpha_2 \in W &\quad\iff\quad i_1 \in W,
+\end{aligned}
+\right.
+\]
+et de même on peut formuler un ‘lemme des cinq’ comme le corollaire page 125 \texttt{[plutôt 126]}, mais avec $\tX$, $\tX'$ au lieu de $\sX$, $\sX'$.
+
+De plus, $\tX$ est la solution d'un problème universel dans Cat, en termes de données
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] \arrow[dd, "f_0", ""'{name=G0, pos=0.6}] & \\
+X_1 \arrow[dr, "f_1"', ""{name=G1, pos=0.4}] & & X_2 \arrow[dl, "f_2", ""'{name=G2, pos=0.4}] \\
+ & Y, &
+\arrow[from=G0, to=G1, bend right, "\tilde{\lambda}_1"', shorten <=2pt, shorten >=2pt]
+\arrow[from=G0, to=G2, bend left, "\tilde{\lambda}_2", shorten <=2pt, shorten >=2pt]
+\end{tikzcd}
+\]
+
+\msp{page 136}
+la seule différence avec celui formulé à la page 128 étant la direction opposée des flèches $\lambda_1$, $\lambda_2$. Pour tout carré commutatif
+\[
+\begin{tikzcd}
+ & X_0 \arrow[dl, "\alpha_1"'] \arrow[dr, "\alpha_2"] & \\
+X_1 \arrow[dr, "f_1"'] & & X_2 \arrow[dl, "f_2"] \\
+ & Y, &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+on trouve encore une flèche canonique
+\[
+\tilde{\varphi} : \tX \longrightarrow Y.
+\]
+
+Il serait tout aussi raisonnable de dire que le carré $(*)$ est $W$-homotopiquement cocartésien, lorsque $\tilde{\varphi}$ est \texttt{[dans]} $W$, que d'adopter la définition 3, page 131 - on trouverait exactement les mêmes corollaires. Les deux définitions seraient elles équivalentes?? % [sic] seraient elles -> seraient-elles, hyphen of the inverted subject missing
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p051-055.tex
+\printedpage{93}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+
+Je note que $\tsX$ étant cofibrée sur $\Psi=\Phi^\circ$, $\tsX^\circ$ est fibrée sur $\Psi^\circ=\Phi$. De façon précise, on aura
+\[
+\tsX^\circ = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & (X_1)^\circ \\
+(X_0)^\circ \arrow[ur, "\alpha_1^\circ"] \arrow[dr, "\alpha_2^\circ"'] & \\
+ & (X_2)^\circ,
+\end{tikzcd}
+\]
+\msp{page 137}
+et il s'agit donc de comparer les deux intégrales
+\[
+\sX = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] & \\
+ & X_2
+\end{tikzcd}
+, \qquad
+\tsX^\circ = \int
+\begin{tikzcd}[row sep=small, column sep=small]
+ & (X_1)^\circ \\
+(X_0)^\circ \arrow[ur, "\alpha_1^\circ"] \arrow[dr, "\alpha_2^\circ"'] & \\
+ & (X_2)^\circ
+\end{tikzcd}
+,
+\]
+notamment comme objets de $\HOT_W(\Phi)$. Pour cela, je reprends la construction du foncteur
+\[
+X \longmapsto \Phi(X) : \Cat \longrightarrow \Cat
+\]
+de I, p. 72-75, mais je préfère ici noter ce foncteur $\Sigma(X)$ (car $\Phi$ désigne déjà une petite catégorie $\begin{tikzcd}[row sep=tiny, column sep=small]
+ & 1 \arrow[dl] \\
+0 & \\
+ & 2 \arrow[ul]
+\end{tikzcd}$). On utilisera les homomorphismes fonctoriels en $X$ :
+\[
+\begin{tikzcd}[column sep=small]
+ & \Sigma(X) \arrow[dl, "p_X"'] \arrow[dr, "q_X"] & \\
+X & & X^\circ,
+\end{tikzcd}
+\]
+qui sont $W$-asphériques, donc $\in W$. De plus, $\Sigma(X^\circ)=\Sigma(X)$, $p_{X^\circ}=q_X$, $q_{X^\circ}=p_X$. Ainsi, si
+\[
+\begin{aligned}
+X_* \quad &= \qquad
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& X_1 \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] \& \\
+ \& X_2
+\end{tikzcd}
+\qquad \in \quad \Hom(\Phi^\circ,\Cat)\\
+X_*^\circ \quad &= \qquad
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& (X_1)^\circ \\
+(X_0)^\circ \arrow[ur, "\alpha_1^\circ"] \arrow[dr, "\alpha_2^\circ"'] \& \\
+ \& (X_2)^\circ
+\end{tikzcd}
+\qquad \in \quad \Hom(\Phi^\circ,\Cat),
+\end{aligned}
+\]
+\msp{page 138}
+on trouve
+\[
+\Sigma(X_*) =
+\left(
+\begin{tikzcd}[row sep=small, column sep=small]
+ & \Sigma(X_1) \\
+\Sigma(X_0) \arrow[ur, "\Sigma(\alpha_1)"] \arrow[dr, "\Sigma(\alpha_2)"'] & \\
+ & \Sigma(X_2)
+\end{tikzcd}
+\right)
+\]
+et les flèches
+\printedpage{94}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}[column sep=small]
+ & \Sigma(X_*) \arrow[dl, "p_{X_*}"'] \arrow[dr, "q_{X_*}"] & \\
+X_* & & X_*^\circ,
+\end{tikzcd}
+\]
+dans $\underline{\Hom}(\Phi^\circ,\Cat)$. Ces flèches sont dans $W$ terme à terme, donc les homomorphismes dans $\Cat$
+\[
+\begin{tikzcd}[column sep=small]
+ & \int\Sigma(X_*) \arrow[dl, "\int p_{X_*}"'] \arrow[dr, "\int q_{X_*}"] & \\
+\sX=\int X_* & & \int X_*^\circ=\tsX^\circ
+\end{tikzcd}
+\]
+sont dans $W$.
+
+Finalement, l'innocent carré commutatif
+\[
+Q \quad = \qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_0 \arrow[dl] \arrow[dr] & \\
+X_1 \arrow[dr] & & X_2 \arrow[dl] \\
+ & Y &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+(et le diagramme correspondant
+\[
+\widehat{Q} \quad = \qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_0 \arrow[dl] \arrow[dr] & \\
+X_1 \arrow[dr] & & X_2 \arrow[dl] \\
+ & \sX=\int X_* \arrow[d, "\varphi_Q"] & \\
+ & Y &
+\end{tikzcd}
+\qquad\qquad )
+\tag*{$(**)$}
+\]
+donne naissance, en le transformant
+\msp{page 139}
+par $X\longmapsto X^\circ$ et par $X\longmapsto\Sigma(X)$, et en tenant compte des homomorphismes fonctoriels en $X$ $\begin{tikzcd}[row sep=small, column sep=small]
+ & \Sigma(X) \arrow[dl] \arrow[dr] & \\
+X & & X^\circ
+\end{tikzcd}$, à trois diagrammes du type $(**)$, i.e. modelés sur la catégorie opposée de
+\[
+\Gamma \quad = \qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 0 & \\
+1 \arrow[ur, "\alpha_1"] & & 2 \arrow[ul, "\alpha_2"'] \\
+ & 3 \arrow[ul, "i_1"] \arrow[ur, "i_2"'] & \\
+ & 4 \arrow[u, "\varphi"'] &
+\end{tikzcd}
+\qquad
+\text{\parbox[c]{0.35\textwidth}{\footnotesize (i.e. $\boldsymbol{\Delta}^1\times\boldsymbol{\Delta}^1$ (\footnotemark[88]), auquelle on a rajouté un objet initial)}} % [sic] auquelle -> à laquelle, grammatical form (catégorie is feminine)
+\]
+\footnotetext[88]{faux, car le carré n'est pas commutatif}
+\printedpage{95}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+(\footnote[89]{On a $\alpha_1i_1\neq\alpha_2i_2$, mais la relation $\alpha_1i_1\varphi=\alpha_2i_2\varphi$.}), savoir
+\[
+\widehat{Q}, \qquad \widehat{\Sigma(Q)}, \qquad \widehat{Q^\circ},
+\]
+et deux homomorphismes de diagrammes (\texttt{[dans]} $\underline{\Hom}(\Gamma^\circ,\Cat)$)
+\[
+\begin{tikzcd}[column sep=small]
+ & \widehat{\Sigma(Q)} \arrow[dl] \arrow[dr] & \\
+\widehat{Q} & & \widehat{Q^\circ}
+\end{tikzcd}
+\qquad
+\text{(déduit de }
+\begin{tikzcd}[column sep=small]
+ & \Sigma(Q) \arrow[dl] \arrow[dr] & \\
+Q & & Q^\circ
+\end{tikzcd}
+\text{),}
+\tag*{$(***)$}
+\]
+lesquels sont dans $W$ terme à terme (i.e. sont dans $W_\Gamma\subseteq\Fl(\underline{\Hom}(\Gamma^\circ,\Cat))$). Explicitement, en les sommets $i=0,1,2$, resp. $4$ de $\Gamma$, $(***)$ n'est autre que
+\[
+D_i =
+\left(
+\begin{tikzcd}[column sep=small]
+ & \Sigma(X_i) \arrow[dl, "p_{X_i}"'] \arrow[dr, "q_{X_i}"] & \\
+X_i & & X_i^\circ
+\end{tikzcd}
+\right)
+\qquad \text{resp.} \qquad
+\begin{tikzcd}[column sep=small]
+ & \Sigma(Y) \arrow[dl, "p_Y"'] \arrow[dr, "q_Y"] & \\
+Y & & Y^\circ,
+\end{tikzcd}
+\]
+en le sommet 3 c'est
+\[
+\begin{tikzcd}[column sep=small]
+ & \int\Sigma(X_*) \arrow[dl, "\int p_{X_*}"'] \arrow[dr, "\int q_{X_*}"] & \\
+\sX=\int X_* & & \int X_*^\circ=\tsX^\circ,
+\end{tikzcd}
+\]
+obtenu par intégration des flèches
+\[
+\begin{tikzcd}[column sep=small]
+ & \Sigma(X_*) \arrow[dl, "p_{X_*}"'] \arrow[dr, "q_{X_*}"] & \\
+X_* & & X_*^\circ.
+\end{tikzcd}
+\]
+\msp{page 140}
+Regardant la restriction des deux morphismes de diagrammes $(***)$ aux parties des trois diagrammes de type $\Gamma^\circ$ au dessus de la queue $\{3,4\}$ de $\Gamma$ on trouve le diagramme en traits pleins que voici
+\[
+\begin{tikzcd}[column sep=3em, row sep=normal]
+ & \int\Sigma(X_*) \arrow[dl, "W"'] \arrow[dr, "W"] \arrow[dd, "\varphi_{\Sigma(Q)}"'] & & \Sigma\tsX \arrow[dl, dotted, "W"'] \arrow[dr, dotted, "W"] \arrow[dd, dotted, "\Sigma\tilde{\varphi}_Q"] & \\
+\sX \arrow[dd, "\varphi_Q"'] & & \tsX^\circ \arrow[dd, "\varphi_{Q^\circ}=(\tilde{\varphi}_Q)^\circ"'] & & \tsX \arrow[dd, dotted, "\tilde{\varphi}_Q"] \\
+ & \Sigma(Y) \arrow[dl, "W"'] \arrow[dr, "W"] & & \Sigma(Y) \arrow[dl, dotted, "W"'] \arrow[dr, dotted, "W"] & \\
+Y & & Y^\circ & & Y
+\end{tikzcd}
+\]
+\printedpage{96}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+qu j'ai complété par un deuxième volet en pointillés. Dans ce diagramme de quatre carrés accolés, les côtés horizontaux des carrés représentent des flèches de $\Cat$ qui sont dans $W$. On trouve ainsi : % [sic] qu j'ai -> que j'ai, missing letter
+\[
+\varphi_Q\in W \iff \varphi_{\Sigma Q}\in W \iff (\varphi_{Q^\circ}=\tilde{\varphi}_Q^\circ)\in W \iff \Sigma\tilde{\varphi}_Q\in W \iff \tilde{\varphi}_Q\in W.
+\]
+On trouve aussi que les cinq flèches verticales sont isomorphes, en tant que flèches de $\Hot_W$. Pour résumer :
+
+\textbf{Proposition 14.} \textit{Considérons un diagramme (carré commutatif)}
+\[
+Q \quad = \qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_0 \arrow[dl] \arrow[dr] & \\
+X_1 \arrow[dr] & & X_2 \arrow[dl] \\
+ & Y &
+\end{tikzcd}
+\]
+\textit{dans} $\Cat$\textit{, et le diagramme `opposé' déduit par} $X\longmapsto X^\circ$
+\[
+Q^\circ \quad = \qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_0^\circ \arrow[dl] \arrow[dr] & \\
+X_1^\circ \arrow[dr] & & X_2^\circ \arrow[dl] \\
+ & Y^\circ, &
+\end{tikzcd}
+\]
+\msp{page 141}
+\textit{et les flèches correspondantes}
+\[
+\left\{
+\begin{array}{rlclcl}
+\varphi_Q : & \sX_Q & = &
+\left(\displaystyle\int
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}
+\right)
+& \longrightarrow & Y \\[2ex]
+\varphi_{Q^\circ} : & \sX_{Q^\circ} & = &
+\left(\displaystyle\int
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& X_1^\circ \\
+X_0^\circ \arrow[ur] \arrow[dr] \& \\
+ \& X_2^\circ
+\end{tikzcd}
+\right)
+& \longrightarrow & Y^\circ.
+\end{array}
+\right.
+\]
+\textit{Enfin, considérons aussi les flèches $\tilde{\varphi}_Q$, $\tilde{\varphi}_{Q^\circ}$ canoniques, relative à l'intégrale propre $\int_{\mathrm{pr}}$} % [sic] relative -> relatives, agreement with « les flèches »
+\printedpage{97}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\textit{(au lieu de l'intégrale lisse $\int=\int_{\mathrm{lis}}$)}
+\[
+\left\{
+\begin{array}{rlclcl}
+\tilde{\varphi}_Q : & \tsX_Q & = &
+\left(\displaystyle\int_{\mathrm{pr}}
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& X_1 \\
+X_0 \arrow[ur] \arrow[dr] \& \\
+ \& X_2
+\end{tikzcd}
+\right)
+& \longrightarrow & Y \\[2ex]
+\tilde{\varphi}_{Q^\circ} : & \tsX_{Q^\circ} & = &
+\left(\displaystyle\int_{\mathrm{pr}}
+\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=small]
+ \& X_1^\circ \\
+X_0^\circ \arrow[ur] \arrow[dr] \& \\
+ \& X_2^\circ
+\end{tikzcd}
+\right)
+& \longrightarrow & Y^\circ.
+\end{array}
+\right.
+\]
+\textit{On a alors ce qui suit :}
+
+\begin{enumerate}[label={}, leftmargin=2.5em]\itshape
+\item[\circled{\textit{a}}] $\varphi_{Q^\circ}\simeq(\tilde{\varphi}_Q)^\circ$, $\varphi_Q\simeq(\tilde{\varphi}_{Q^\circ})^\circ$ (d'où résulte déjà que $\left\{\begin{array}{lcl}\varphi_Q\in W & \Longleftrightarrow & \tilde{\varphi}_{Q^\circ}\in W\\ \varphi_{Q^\circ}\in W & \Longleftrightarrow & \tilde{\varphi}_Q\in W\end{array}\right.$ (\footnote[90]{\upshape et que les flèches $\varphi_Q$ et $\tilde{\varphi}_{Q^\circ}$ d'une part, $\varphi_{Q^\circ}$ et $\tilde{\varphi}_Q$ d'autre part, sont isomorphes comme flèches dans $\Hot_W$.})).
+
+\item[\circled{\textit{b}}] Les relations
+\[
+\varphi_Q\in W, \qquad \varphi_{Q^\circ}\in W, \qquad \tilde{\varphi}_Q\in W, \qquad \tilde{\varphi}_{Q^\circ}\in W
+\]
+sont équivalentes, en d'autres termes : pour que le carré soit $W$-homotopiquement cocartésien (version intégrale lisse), il faut et il suffit que le carré opposé $Q^\circ$ le soit, et ces conditions équivalent aussi aux conditions correspondantes en termes des intégrales propres (au lieu des intégrales lisses).
+
+\item[\circled{\textit{c}}] Les quatre flèches $\varphi_Q$, $\varphi_{Q^\circ}$, $\tilde{\varphi}_Q$, $\tilde{\varphi}_{Q^\circ}$ de $\Cat$ en tant que flèches dans $\Hot_W$, sont isomorphes dans $\underline{\Fl}(\Hot_W)$. Plus précisément, en tant que flèches de $\Cat$,
+\msp{page 142}
+elles définissent des objets isomorphes de $\HOT_W(\boldsymbol{\Delta}^1)$.
+
+\item[\circled{\textit{d}}] Plus précisément encore, les quatre diagrammes dans $\Cat$ de type $\Gamma^\circ$, où
+\[
+\Gamma = \;
+\begin{tikzcd}[row sep=tiny, column sep=small]
+ & 1 \arrow[dl, "\alpha_1"'] & & \\
+0 & & 3 \arrow[ul, "i_1"'] \arrow[dl, "i_2"] & 4, \arrow[l, "\varphi"'] \\
+ & 2 \arrow[ul, "\alpha_2"] & &
+\end{tikzcd}
+\]
+$\alpha_1i_1\varphi=\alpha_2i_2\varphi$, dans lesquels s'insèrent les quatre flèches qu'on vient d'envisager, savoir
+\[
+\widehat{Q} = 
+\begin{tikzcd}[row sep=tiny, column sep=small]
+ & X_1 \arrow[dr, "i_1"] & & \\
+X_0 \arrow[ur, "\alpha_1"] \arrow[dr, "\alpha_2"'] \arrow[rr, dotted] & & \sX_Q \arrow[r, "\varphi_Q"] & Y, \\
+ & X_2 \arrow[ur, "i_2"'] & &
+\end{tikzcd}
+\]
+\end{enumerate}
+
+% ---- from Der-ChXIIb-012_p056-060.tex
+\setcounter{footnote}{90}
+
+\printedpage{98}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1^\circ \arrow[dr,"i^{\prime}_{1}"] & & \\
+\widehat{Q^\circ} = X_0^\circ \arrow[ur,"\alpha_1^\circ"] \arrow[dr,"\alpha_2^\circ"'] \arrow[rr,dotted] & & \mathcal{X}_{Q^\circ} \arrow[r] & Y^\circ, \\
+ & X_2^\circ \arrow[ur,"i^{\prime}_{2}"'] & &
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \arrow[dr] & & \\
+\widehat{Q}\tld = X_0 \arrow[ur] \arrow[dr] \arrow[rr,dotted] & & \tilde{\mathcal{X}}_{Q} \arrow[r] & Y, \\
+ & X_2 \arrow[ur] & &
+\end{tikzcd}
+\]
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1^\circ \arrow[dr] & & \\
+\widehat{Q^\circ}\tld = X_0^\circ \arrow[ur] \arrow[dr] \arrow[rr,dotted] & & \tilde{\mathcal{X}}_{Q^\circ} \arrow[r] & Y^\circ, \\
+ & X_2^\circ \arrow[ur] & &
+\end{tikzcd}
+\]
+(\footnote{\textbf{NB} On devrait encore compléter ces diagrammes (non commutatifs) par les flèches en pointillés \dots}) \textit{sont isomorphes dans} $\Hot_W(\Gamma)$\textit{. De façon plus précise encore, on a les isomorphismes dans} $\uHom(\Gamma^\circ,\Cat)$
+\[
+(\widehat{Q}\tld)^\circ \simeq \widehat{Q^\circ},
+\]
+\textit{d'où en l'appliquant à $Q^\circ$ au lieu de $Q$,}
+\[
+(\widehat{Q^\circ}\tld)^\circ \simeq \widehat{Q},
+\]
+\textit{ce qui implique (via les isomorphismes canoniques valables dans} $\HOT_W(S)$ \textit{pour tout objet $S$ dans} $\Cat$ \textit{et tout} $X_* \in \mathrm{Ob}\,\uHom(S,\Cat)$\textit{,} $X_* \simeq X_*^\circ$ (\footnote{via le foncteur $\Sigma$ utilisé plus haut \dots})\textit{), qu'on a les isomorphismes canoniques}
+\[
+\left.\begin{aligned}
+\widehat{Q} &\simeq \widehat{Q^\circ}\tld \\
+\widehat{Q^\circ} &\simeq \widehat{Q}\tld
+\end{aligned}\right\}
+\qquad \text{\textit{dans} } \HOT_W(\Gamma),
+\]
+\textit{mais aussi directement}
+\[
+\widehat{Q} \simeq \widehat{Q^\circ}, \qquad \widehat{Q}\tld \simeq \widehat{Q^\circ}\tld \qquad \text{\textit{dans} } \HOT_W(\Gamma)
+\]
+\msp{page 143}\textit{(et il reste à vérifier qu'on a ainsi un système} transitif \textit{d'isomorphismes canoniques dans} $\HOT_W(\Gamma)$\textit{, entre les quatre objets envisagés, ce qui doit être essentiellement sorital \dots).}
+
+\subsection*{Remarques.}
+
+\begin{enumerate}
+\item[1)] Ce qu'on vient de dire dans le cas des diagrammes dans Cat de type $\Phi^\circ = \Psi$, a l'air de garder un sens pour les diagrammes de type quelconque
+\[
+X_* : S^\circ \longrightarrow \Cat, \qquad s \longmapsto X_s
+\]
+\printedpage{99}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+($S$ un objet de Cat). On peut l'intégrer de façon lisse, $\int X_* = \int_{\mathrm{lis}} X_*$, obtenant une catégorie fibrée (scindée) sur $S$, ou de façon propre, $\int_{\mathrm{pr}} X_*$, obtenant une catégorie cofibrée scindée sur $S^\circ$. On peut également considérer $X_*^\circ$, composé de $X_*$ avec l'automorphisme $Y \longmapsto Y^\circ$ dans Cat, et l'intégrer de façon soit propre, soit lisse. Dans tous ces cas, on trouve un diagramme de type $\widehat{S}^\circ$, où $\widehat{S}$ est déduit de $S$ en ajoutant un élément qui s'envoie par une flèche ‘canonique’ (donnée) dans chacun des autres (\textit{sans} relations de commutation!) Un
+\msp{page 144}\textit{système inductif} de morphismes dans Cat
+\[
+f \qquad X_s \xrightarrow{f_s} Y
+\]
+donne alors un morphisme
+\[
+\int_{\mathrm{lis}} X_* \xrightarrow{\varphi_Q} Y,
+\]
+où $Q$ désigne le diagramme, de type $\widehat{S}^\circ$, formé des $X_s$, de $Y$, des $u^* : X_t \longrightarrow X_s$ (pour $u : s \longrightarrow t$ dans $S$) et des $f_s$. De même on aura
+\[
+\int_{\mathrm{prop}} X_* \xrightarrow{\tilde{\varphi}_Q} Y,
+\]
+et si
+\[
+\Gamma = (\widehat{S} + \text{objet initial}),
+\]
+on trouve des diagrammes $\widehat{Q}$, $\widehat{Q}\tld$ de type $\Gamma^\circ$ dans Cat. Sauf erreur, les relations entre $\widehat{Q}$, $\widehat{Q}\tld$, $\widehat{Q^\circ}$, $\widehat{Q^\circ}\tld$ sont les mêmes que celles explicitées dans la proposition 14 ci-dessus. Je ne vais pas m'arrêter là-dessus avec le soin requis, sauf en cas de besoin. On dira qu'un diagramme $Q$ définit $Y$ comme $\varinjlim\limits_{I}$ $W$-homotopique \texttt{[où} $I = S^\circ$\texttt{]} si $\varphi_Q \in W$. Il revient au même de dire que $\varphi_{Q^\circ} \in W$, ou que $\tilde{\varphi}_Q \in W$ ou que $\tilde{\varphi}_{Q^\circ} \in W$ \dots
+\msp{page 145}
+
+\item[2)] Le cas ‘universel’, pour
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-2-1.base), row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}\par\smallskip
+% Reader layout: separate the two inline diagrams without changing the wording.
+donné, d'un carré commutatif $Q = {}$%
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-2-1.base), row sep=tiny, column sep=small]
+ & X_1 \arrow[dr] & \\
+X_0 \arrow[ur] \arrow[dr] & & Y \\
+ & X_2 \arrow[ur] &
+\end{tikzcd}
+dans Cat, donnant naissance à
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & & X_1 & & & \\
+\varphi_Q : &[1em] \left(\vrule height 6ex depth 6ex width 0pt\right. &[-1.5em] \int X_0 \arrow[ur] \arrow[dr] & & \left.\vrule height 6ex depth 6ex width 0pt\right) &[2em] \longrightarrow &[2em] Y, \\
+ & & & X_2 & & &
+\end{tikzcd}
+\]
+est celui de $Y = X_1 \amalg_{X_0} X_2$, donnant naissace à % [sic] naissace -> naissance, letter n omitted
+\printedpage{100}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \arrow[dr] & \\
+Q_0 = Q(X_*) = X_0 \arrow[ur] \arrow[dr] & & X_1 \amalg_{X_0} X_2. \\
+ & X_2 \arrow[ur] &
+\end{tikzcd}
+\]
+
+Le cas général s'y ramène, car on aura un diagramme commutatif
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & X_1 & & & \\
+\left(\vrule height 6ex depth 6ex width 0pt\right. &[-1.5em] \int X_0 \arrow[ur] \arrow[dr] & & \left.\vrule height 6ex depth 6ex width 0pt\right) \arrow[rr,"{\varphi_{Q_0}=\varphi_{Q(X_*)}}"] \arrow[ddrr,"\varphi_Q"] &[4em] \hphantom{MMMM} &[4em] X_1 \amalg_{X_0} X_2 \arrow[dd,"\alpha_Q"] \\
+ & & X_2 & & & \\
+ & & & & & Y.
+\end{tikzcd}
+\]
+\end{enumerate}
+
+Mais il doit y avoir des cas intéressants où $\varphi_{Q_0}$ n'est \textit{pas} dans $W$, i.e. le carré Cat-cocartésien
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-2-1.base), row sep=tiny, column sep=small]
+ & X_1 \arrow[dr] & \\
+X_0 \arrow[ur] \arrow[dr] & & X_1 \amalg_{X_0} X_2 \\
+ & X_2 \arrow[ur] &
+\end{tikzcd}
+n'est pas $W$-homotopiquement cocartésien, et où pourtant on peut trouver un carré commutatif $Q$
+\msp{page 146}complétant $X_*$, de telle façon que ce carré soit $W$-homotopiquement commutatif \texttt{[plutôt cocartésien]}, i.e. que $\varphi_Q = \alpha_Q \varphi_{Q_0}$ soit dans $W$. C'est d'autant plus plausible que dans Cat, les sommes amalgamées ont tendance à ne pas avoir des bonnes propriétés homotopiques, même si l'une des flèches $\alpha_1$, $\alpha_2$ est \texttt{[un]} monomorphisme (voire une immersion ouverte), contrairement à ce qui se passe dans $\boldsymbol{\Delta}^\wedge$, et plus généralement dans les catégories de la forme $Z^\wedge$ ($Z$ dans Cat).
+
+\subsection*{3.4\quad Critères pour les carrés homotopiquement cocartésiens.}
+
+Les critères que j'ai dégagé sont tous contenus dans l'énoncé suivant :
+
+\textbf{Théorème 4} (\footnote{\textbf{NB} Dans ce théorème, et les corollaires 1, 2, 3, on n'a besoin que de la \textit{forme faible} de W(7 bis), savoir $i_0 \in W \Longrightarrow i \in W$ (cf. p. 79) (Loc(6$'$a) avec les notations de XVI).},\footnote{\textbf{NB} Au total, le théorème (partie directe) est valable sans hypothèse W(7 bis) ou W(7 bis faible) sur $W$, et il en est de même de ses corollaires 1 à 3 (à l'exclusion des corollaires 4, 5, qui eux utilisent W(7 bis) dans toute sa force).}). \textit{Considérons un diagramme carré commutatif dans} Cat
+\[
+Q \quad = \quad
+\begin{tikzcd}
+X_0 \arrow[r,"\alpha_1"] \arrow[d,"\alpha_2"'] \arrow[dr,dotted,"f_0"] & X_1 \arrow[d,"f_1"] \\
+X_2 \arrow[r,"f_2"'] & Y,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\printedpage{101}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\textit{et considérons le morphisme canonique}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & X_1 & & & \\
+\varphi_Q : \quad \mathcal{X} = \Bigl(\int &[-1.2em] X_0 \arrow[ur,"\alpha_1"] \arrow[dr,"\alpha_2"'] & & \Bigr) &[2em] \longrightarrow &[2em] Y, \\
+ & & X_2 & & &
+\end{tikzcd}
+\]
+\msp{page 147}\textit{l'intégrale étant l'intégrale} lisse. \textit{(Il y a un énoncé dual concernant l'intégrale propre de}\newline
+\begin{tikzcd}[baseline=(\tikzcdmatrixname-2-1.base), row sep=small, column sep=small]
+ & X_1 \\
+X_0 \arrow[ur] \arrow[dr] & \\
+ & X_2
+\end{tikzcd}
+\textit{.)}
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour que $\varphi_Q$ soit $W$-lisse, il faut et il suffit que $f_1$, $f_2$ et $f_0 = f_1\alpha_1 = f_2\alpha_2$ le soient.} (Moyennant W(7 bis) (\footnote{Pour la partie directe ($f_0$, $f_1$, $f_2$ lisses $\Longrightarrow \varphi_Q$ lisse), on n'a besoin que de W(7 bis) (\footnotemark), forme faible. Ce n'est que pour la réciproque (qui ne m'a encore jamais servie) qu'on a besoin de W(7 bis), dans toute sa force.}\footnotetext{On n'a pas même besoin de W(7 bis) faible, cf. annotation page 156. On utilise une hypothèse restrictive sur $W$ dans la réciproque seulement ($\varphi_Q$ lisse $\Longrightarrow f_0$, $f_1$, $f_2$ lisses).})).
+
+\item[\textit{b)}] \textit{La fibre de $\varphi_Q$ en un élément $y$ de $Y$ est isomorphe à}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & X_{1\,y} & \\
+\int &[-1.2em] X_{0\,y} \arrow[ur] \arrow[dr] & &[2em] (\simeq \mathcal{X}_y). \\
+ & & X_{2\,y} &
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+\end{enumerate}
+
+\textbf{Corollaire 1.} (\footnote{Valable sans hypothèse sur $W$ (autre que Loc(1,2,3 bis)).}) \textit{Supposons $f_1$, $f_2$ et $f_1\alpha_1 = f_2\alpha_2$ $W$-lisses, et les catégories intégrées $(**)$ $W$-asphériques pour tout $y \in \mathrm{Ob}\,Y$. (NB Il s'agit encore de l'intégrale lisse, mais peu importe au fond, car on a vu (cf. partie supérieure du diagramme p. 140, qui implique que $\mathcal{X}$} \texttt{[est]} \textit{$W$-asphérique si et seulement si $\tilde{X}$ l'est) que l'une est $W$-asphérique si et seulement si l'autre l'est.) Alors $\varphi_Q \in W$, i.e. le carré $(*)$ est $W$-homotopiquement cartésien} \texttt{[plutôt cocartésien]}\textit{. Par dualité, même conclusion si on suppose $f_1$, $f_2$, $f_1\alpha_1 = f_2\alpha_2$} propres \textit{au lieu de lisses. (Car $Q$ $W$-homotopiquement trivial} \texttt{[plutôt cocartésien]}\textit{, si et seulement si $Q^\circ$ l'est, par} \texttt{[la]} \textit{prop. 14.)}
+
+\msp{page 148}En effet, un morphisme dans Cat qui est $W$-lisse et à fibres $W$-asphériques est dans $W$ (et c'est même une $W$-équivalence universelle \dots).
+
+\textbf{Corollaire 2}. \textit{On suppose que $W$ satisfait} W(7 bis) (axiome du carré cocartésien) (\footnote{inutile.}).
+\printedpage{102}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 7 décembre 2002
+\textit{Supposons le carré $Q$ cocartésien dans} Cat (\footnote{NB On n'utilise pas vraiment que $Q$ soit cocartésien, plutôt que $Q$ est \textit{cartésien,} et $f_2$ (donc aussi $\alpha_1$) une immersion ouverte (resp. fermée), et que pour $y \in Y\backslash X_2$, $X_{1\,y}$ soit $W$-asphérique. (Dans le cas où $Q$ est cocartésien, $X_{1\,y}$ est $\simeq e$.)})\textit{, et que $\alpha_1$ soit une immersion ouverte (resp. fermée) et $f_1$ lisse (resp. propre). Alors $Q$ est $W$-homotopiquement cocartésien.} (\footnote{On a besoin ici de W(7 bis), forme directe, i.e. de Loc(6$'$a) (notation de XVI).})
+
+Il suffit d'établir le résultat non respé, l'autre en résultera par dualité (puisque $Q$ est $W$-cocartésien si et seulement si $Q^\circ$ l'est). Par hypothèse $f_1$ est $W$-lisse, d'autre part $\alpha_1$ et $f_2$ sont des immersions ouvertes, donc $W$-lisses, donc $f_1\alpha_1$ est $W$-lisse aussi. (D'ailleurs $\alpha_2$ aussi, car le carré est aussi cartésien, donc $\alpha_2$ déduit de $f_1$ (qui est $W$-lisse par hypothèse) par changement de base $X_2 \longrightarrow Y$.) Donc $\varphi_Q$ est \texttt{[}$W$\texttt{-]}lisse, et il suffit de voir que ses fibres sont $W$-asphériques. Le calcul $(**)$ donne, pour $y$ dans $Y\backslash X_2$,
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & e & \\
+\mathcal{X}_y \simeq \quad \int &[-1.2em] \emptyset \arrow[ur] \arrow[dr] & &[1em] \simeq e, \qquad \text{O.K.} \\
+ & & \emptyset &
+\end{tikzcd}
+\]
+Et pour $y$ dans $X_2$
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & X_{1\,y} & \\
+\mathcal{X}_y \simeq \int &[-1.2em] X_{0\,y} \arrow[ur,"\sim"] \arrow[dr] & &[2em] . \\
+ & & e &
+\end{tikzcd}
+\]
+\msp{page 149}Comme $X_{0\,y} \longrightarrow X_{1\,y}$ est un isomorphisme, donc est dans $W$, il s'ensuit que $e \longrightarrow \mathcal{X}_y$ l'est aussi (prop. 13, p. 125), moyennant W(7 bis), donc $\mathcal{X}_y$ est $W$-asphérique, O.K. (\footnote{On n'a besoin que de la forme directe de W(7 bis), i.e. (notation de XVI) de Loc(6$'$a).}).
+
+\textbf{Corollaire 3.} (Moyennant W(7 bis) (\footnote{inutile.}).) \textit{Soit $X$ dans} Cat\textit{, $U_1$, $U_2$ deux ouverts de $X$ tels que $X = U_1 \cup U_2$, $U_0 = U_1 \cap U_2$ l'ouvert intersection. Alors le carré d'immersions ouvertes}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+U_0 \arrow[r,hook] \arrow[d,hook] & U_1 \arrow[d,hook] \\
+U_2 \arrow[r,hook] & X
+\end{tikzcd}
+\]
+\textit{est $W$-cocartésien. (Énoncé dual pour deux fermés $T_1$, $T_2$ tels que $T_1 \cup T_2 = X$, avec $T_0 = T_1 \cap T_2$.)}
+
+On applique le corollaire 2. On sait que le carré est cocartésien dans Cat (\footnote{On n'a pas même besoin de le savoir, cf. annotation marginale du corollaire 2.}), de plus $U_1 \lhook\joinrel\longrightarrow X$ est bien $W$-lisse, étant une immersion ouverte.
+
+% ---- from Der-ChXIIb-012_p061-065.tex
+\printedpage{103}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Corollaire 4.} (Moyennant W(7 bis) (\footnote[104]{Ici on a besoin de W(7 bis) forme forte, i.e. $i_0\in W \iff i\in W$ (cf. annotation th. 4).}).) \textit{Soit $U \hto[i] X$ une immersion ouverte telle que $T=X\backslash U$ soit isomorphe à la catégorie ponctuelle $e$. Pour que $i\in W$, il faut et il suffit que $i$ soit $W$-asphérique, i.e. que $U/t$ (où $t$ est l'unique objet de $T$) soit $W$-asphérique.}
+
+Il suffit bien sûr de prouver que
+\[
+i\in W \Longrightarrow U/t \ W\text{-asphérique.}
+\]
+
+\msp{page 150}
+Considérons le carré cartésien
+\[
+\begin{tikzcd}[row sep=large,column sep=large]
+U/t \arrow[r, hook, "i/t"] \arrow[d, "p"'] & X/t \arrow[d, "q"] \\
+U \arrow[r, hook, "i"] & X,
+\end{tikzcd}
+\]
+nous allons prouver qu'il est $W$-cocartésien. Moyennant W(7 bis), il s'ensuivra que $i\in W$ implique $i/t\in W$, et comme $X/t$ est $W$-asphérique (ayant un objet final), cela signifie que $U/t$ est $W$-asphérique, ce qu'on veut prouver.
+
+Il suffit, en vertu du corollaire 2, de prouver que le carré est cocartésien dans Cat, puisque $i/t$ est une immersion ouverte ($i$ l'étant), et $X/t\longrightarrow X$ est un isomorphisme local, donc $W$-lisse. On voit que $(X/t)\backslash(U/t)\simeq e$ (catégorie ponctuelle), d'ailleurs l'unique élément de $(X/t)\backslash(U/t)$ est l'élément final $t_0 : t\xrightarrow{\mathrm{id}_t} t$ de $X/t$. Ainsi $H_{t_0}\simeq e_{U/t}$ (préfaisceau final), et $p_{!}(H_{t_0})\simeq H'_t \overset{\text{déf}}{=} (u\longmapsto \mathrm{Hom}_X(u,t))$, ce qui caractérise la somme amalgamée dans Cat
+\dots
+
+Le corollaire 4 n'est autre que le corollaire non démontré de la proposition 7 (p. 85).
+
+Voici une variante du corollaire 4.
+
+\noindent\textbf{Corollaire 5.} (Moyennant W(7 bis) (\footnote[105]{forme forte.}).) \textit{Soit $i : U \hto X$ une immersion ouverte, soit $t_0\in\mathrm{Ob}\,T$ un point \textup{fermé} de $T=X\backslash U$, tel que $\{t_0\}$}
+\msp{page 151}
+\textit{soit isomorphe à la catégorie ponctuelle, i.e. $\mathrm{Hom}_X(t_0,t_0)=\{\mathrm{id}\}$. Supposons que pour tout $t\in T\backslash\{t_0\}$, $U/t$ soit $W$-asphérique. Pour que l'on ait $i\in W$, il faut et il suffit que $i$ soit asphérique, i.e. que $U/t_0$ soit également $W$-asphérique.}
+
+Il faut prouver que $i\in W$ implique que $U/t_0$ est $W$-asphérique. Considérons l'inclusion
+\[
+i_0 : U\longrightarrow U' \overset{\text{déf}}{=} X\backslash\{t_0\},
+\]
+l'hypothèse sur les $U/t$, pour $t\in T\backslash\{t_0\}$, signifie que $i_0$ est $W$-asphérique. Donc $i_0$ est dans $W$, et comme le composé $i : U\xrightarrow{i_0} U'\xrightarrow{i'} X$ est dans $W$, cela implique que
+% foot: Version 7 décembre 2002
+\printedpage{104}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+$i' : U'\longrightarrow X$ est dans $W$. Nous sommes maintenant dans la situation du corollaire 4, qui implique que $i'$ est $W$-asphérique. Donc $i=i'i_0$ est $W$-asphérique, comme composé de deux morphismes $W$-asphériques, q.e.d.
+
+\noindent\textsc{Démonstration de th. 4.}
+
+\noindent\circled{a} Critère de lissité de $\varphi_Q : \mathcal{X} = \intdiag{X_0}{X_1}{X_2} \longrightarrow Y$.
+
+Comme $\{1\}$, $\{2\}$ sont des ouverts de $\Phi = \begin{tikzcd}[row sep=small,column sep=small,baseline=(\tikzcdmatrixname-2-1.base)]
+ & 1 \arrow[dl] \\
+ 0 & \\
+ & 2 \arrow[ul]
+\end{tikzcd}$, $i_1 : X_1\longrightarrow\mathcal{X}$ et $i_2 : X_2\longrightarrow\mathcal{X}$ sont des immersions ouvertes. Comme $\varphi_Q\circ i_1 = f_1$,
+\msp{page 152}
+$\varphi_Q\circ i_2=f_2$, on voit déjà que
+\[
+f_1 \text{ et } f_2 \text{ lisses} \iff \varphi_Q \text{ lisse sur l'ouvert réunion de } i_1(X_1) \text{ et } i_2(X_2)\text{, i.e. sur } \mathcal{X}\backslash i_0(X_0).
+\]
+Il reste à exprimer la lissité de $\varphi_Q$ en les points $x_0$ de $i_0(X_0)$. Soient $x_1$, $x_2$, $y$ les images de $x_0$ dans $X_1$, $X_2$, $Y$ respectivement. Il faut exprimer que les fibres de
+\[
+(\varphi_Q)/x_0 : \mathcal{X}/x_0\longrightarrow Y/y \tag*{$(*)$}
+\]
+sont asphériques. Nous allons pour cela expliciter $\mathcal{X}/x_0$ et la flèche $(*)$ en termes du carré commutatif
+\[
+(**)\qquad\qquad
+\begin{tikzcd}[row sep=large,column sep=large]
+X_0/x_0 \arrow[r, "\alpha_1/x_0"] \arrow[d, "\alpha_2/x_0"'] & X_1/x_1 \arrow[d, "f_1/x_1"] \\
+X_2/x_2 \arrow[r, "f_2/x_2"] & Y/y,
+\end{tikzcd}
+\]
+induit par $Q$. Je dis
+
+\noindent\textbf{Lemme 1.} \textit{Soit un carré commutatif}
+\[
+Q \quad = \quad
+\begin{tikzcd}[row sep=large,column sep=large]
+X_0 \arrow[r, "\alpha_1"] \arrow[d, "\alpha_2"'] & X_1 \arrow[d, "f_1"] \\
+X_2 \arrow[r, "f_2"] & Y
+\end{tikzcd}
+\]
+\textit{dans} Cat, \textit{$x_0\in\mathrm{Ob}\,X_0$, $x_1$, $x_2$, $y$ ses images dans $X_1$, $X_2$, $Y$ respectivement, $Q/x_0$ le carré $(**)$ ci-dessus, induit par $Q$ sur les localisées $X_0/x_0$ etc., $\mathcal{X} = \intdiag{X_0}{X_1}{X_2}$. On a alors un}
+% foot: Version 7 décembre 2002
+\printedpage{105}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 153}
+\textit{isomorphisme canonique}
+\[
+\mathcal{X}/x_0 \quad\simeq\quad \intdiag{X_0/x_0}{X_1/x_1}{X_2/x_2} ,
+\]
+\textit{et la flèche $(\varphi_Q)/x_0$, localisée de $\varphi_Q : \mathcal{X}\longrightarrow Y$ en $x_0$, s'identifie à la flèche $\varphi_{(Q/x_0)}$ :}
+\[
+\varphi_{(Q/x_0)} : \quad \intdiag{X_0/x_0}{X_1/x_1}{X_2/x_2} \qquad\longrightarrow\qquad Y/y.
+\]
+
+\noindent\textsc{Démonstration} du Lemme. On sait que
+\[
+\mathcal{X}/x_0\longrightarrow\mathcal{X}
+\]
+est Cat-fibrée (scindée) (à fibres discrètes), et comme
+\[
+\mathcal{X}\longrightarrow\Phi
+\]
+est aussi Cat-fibrée (scindée), il s'ensuit qu'il en est de même de la flèche composée
+\[
+\mathcal{X}/x_0\longrightarrow\Phi.
+\]
+Donc pour `calculer' $\mathcal{X}/x_0$, en tant que catégorie sur $\Phi$, il faut expliciter ses trois fibres, et les deux foncteurs de changement de base qui les relient. On trouve aussitôt que ces fibres sont canoniquement isomorphes à
+\[
+X_0/x_0, \qquad X_1/x_1, \qquad X_2/x_2,
+\]
+et on admettra (!) que les foncteurs changement de base
+\msp{page 154}
+\[
+X_0/x_0\longrightarrow X_1/x_1, \qquad X_0/x_0\longrightarrow X_2/x_2
+\]
+(définis à isomorphisme unique près) ne sont autres que les localisés $\alpha_1/x_0$ et $\alpha_2/x_0$ de $\alpha_1 : X_0\longrightarrow X_1$ et $\alpha_2 : X_0\longrightarrow X_2$. Cela montre donc qu'on a un isomorphisme
+\[
+\mathcal{X}/x_0 \quad\simeq\quad \intdiag{X_0/x_0}{X_1/x_1}{X_2/x_2} ,
+\]
+% foot: Version 7 décembre 2002
+\printedpage{106}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et l'on admettra aussi que la flèche $(\varphi_Q)/x_0 : \mathcal{X}/x_0\longrightarrow Y/y$ s'identifie à $\varphi_{(Q/x_0)}$.
+
+Pour exprimer la $W$-lissité de $\varphi_Q$ en $x_0\in\mathrm{Ob}\,X_0\subseteq\mathrm{Ob}\,\mathcal{X}$, on est donc ramené à exprimer la $W$-asphéricité des fibres de
+\[
+\varphi_{(Q/x_0)} : \quad \intdiag{X_0/x_0}{X_1/x_1}{X_2/x_2} \qquad\longrightarrow\qquad Y/y.
+\]
+Pour expliciter ces fibres, on a besoin d'un autre lemme auxiliaire
+
+\noindent\textbf{Lemme 2} (\footnote[106]{NB C'est le b) du th. 4.}). \textit{Soit un carré commutatif dans} Cat
+\[
+Q \quad = \quad
+\left(
+\begin{tikzcd}[row sep=large,column sep=large]
+X_0 \arrow[r, "\alpha_1"] \arrow[d, "\alpha_2"'] & X_1 \arrow[d, "f_1"] \\
+X_2 \arrow[r, "f_2"] & Y
+\end{tikzcd}
+\right),
+\]
+\textit{d'où}
+\[
+\varphi_Q : \quad \left( \intdiag{X_0}{X_1}{X_2} \right) \qquad\longrightarrow\qquad Y,
+\]
+
+\msp{page 155}
+\textit{et soit $y\in\mathrm{Ob}\,Y$. Alors la fibre de $\varphi_Q$ en $y$}
+\[
+\mathcal{X}_y = \varphi_Q^{-1}(\ \underbrace{\{y\}}_{\text{catégorie ponctuelle}}\ )
+\]
+\textit{est donnée par (comme catégorie au dessus de $\Phi$)}
+\[
+\mathcal{X}_y \quad\simeq\quad \intdiag{X_{0\,y}}{X_{1\,y}}{X_{2\,y}} .
+\]
+
+\noindent\textsc{Démonstration.} Il est immédiat qu'on a
+\[
+\mathcal{X}_y\cap\underbrace{\mathcal{X}_s}_{X_s}\simeq(X_s)_y \qquad\quad \text{pour } s\in\mathrm{Ob}\,\Phi=\{0,1,2\},
+\]
+% foot: Version 7 décembre 2002
+\printedpage{107}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+et (le hasard fait bien les choses) les foncteurs changement de base
+\[
+X_0\longrightarrow X_1, \qquad X_0\longrightarrow X_2
+\]
+envoient la sous-catégorie (non pleine) $X_{0\,y}$ de $X_0$ dans les sous-catégories (non pleines) $X_{1\,y}$ et $X_{2\,y}$ de $X_1$ et $X_2$ respectivement.
+\[
+\begin{tikzcd}[row sep=large,column sep=large]
+X_{s\,y} \arrow[r] \arrow[d] \arrow[dr, phantom, "\scriptstyle\text{cart.}"] & \mathcal{X}_y \arrow[r] \arrow[d] \arrow[dr, phantom, "\scriptstyle\text{cart.}"] & \{y\} \arrow[d] \\
+X_s \arrow[r] \arrow[d] \arrow[dr, phantom, "\scriptstyle\text{cart.}"] & \mathcal{X} \arrow[r] \arrow[d] & Y \\
+\{s\} \arrow[r] & \Phi &
+\end{tikzcd}
+\]
+On a donc une sous-catégorie fibrée de $\mathcal{X}$, sous réserve de vérifier que les flèches strictement cartésiennes
+\[
+x_0\longrightarrow\alpha_1(x_0), \qquad x_0\longrightarrow\alpha_2(x_0)
+\]
+dans $\mathcal{X}$, pour $x_0$ dans $X_{0\,y}$, sont dans $\mathcal{X}_y$, i.e. sont au-dessus de la flèche identique de $y$. Or c'est là la propriété essentielle
+\msp{page 156}
+du foncteur $\varphi_Q : \mathcal{X}\longrightarrow Y$, qu'on a oublié d'expliciter dans 3.2. Ça a vraiment l'air de marcher (comme sur des roulettes!)
+
+Appliquons le Lemme 2 au diagramme carré $Q/x_0$ et à $\varphi_{(Q/x_0)}$ (page 154), on voit donc que les fibres à examiner en les $u\in\mathrm{Ob}\,Y/y$ ($u : y'\longrightarrow y$) peuvent s'écrire comme les intégrales
+\[
+\mathcal{X}(x_0,u) \quad\overset{\text{déf}}{=}\quad \intdiag{(X_0/x_0)_u}{(X_1/x_1)_u}{(X_2/x_2)_u} .
+\]
+Utilisons maintenant le fait que $f_1$, $f_2$ sont $W$-lisses (exprimant que $\varphi_Q$ est $W$-lisse dans $\mathcal{X}\backslash X_0$), donc que $(X_1/x_1)_u$ et $(X_2/x_2)_u$ sont $W$-asphériques. Dans le carré $W$-cocartésien
+\[
+\begin{tikzcd}[row sep=large,column sep=small]
+ & (X_1/x_1)_u \arrow[dr, "{i_1(x_0,u)}"] & \\
+(X_0/x_0)_u \arrow[ur, "{\alpha_1(x_0,u)}"] \arrow[dr, "{\alpha_2(x_0,u)}"'] & & (\mathcal{X}/x_0)_u\simeq\mathcal{X}(x_0,u) \\
+ & (X_2/x_2)_u \arrow[ur, "{i_2(x_0,u)}"'] &
+\end{tikzcd}
+\]
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p066-070.tex
+\printedpage{108}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+(\footnote[107]{attention, ce n'est pas un carré commutatif. Dire plutôt que $(\mathcal{X}/x_0)_u \simeq \int \begin{tikzcd}[ampersand replacement=\&, row sep=0.4em, column sep=0.4em, baseline=(\tikzcdmatrixname-2-1.base)] \& {} \\ {} \ar[ur]\ar[dr] \& \\ \& {} \end{tikzcd}$ est lisse sur $\Phi$ à fibres $W$-asphériques (si $f_0$, $f_1$, $f_2$ sont lisses), donc $W$-asphérique puisque $\Phi$ l'est.}), il faut exprimer que $(\mathcal{X}/x_0)_u$ est $W$-asphérique, sachant que $(X_1/x_1)_u$ et $(X_2/x_2)_u$ le sont. Donc cela équivaut à % Resolved from PDF leaf 31: the original diagram has exactly these two unlabelled arrows and no vertex labels.
+\[
+i_1(x_0,u) \in W \qquad (\text{ou } i_2(x_0,u) \in W),
+\]
+donc aussi (moyennant W(7 bis)) à
+\msp{page 157}
+\[
+\alpha_1(x_0,u) \in W, \qquad \text{i.e. } (X_0/x_0)_u \ W\text{-asphérique.}
+\]
+Dire que c'est vrai pour tout $u$ dans $Y/y$, signifie que $f_0 : X_0 \longrightarrow Y$ est lisse en $u$ \texttt{[plutôt en $x_0$]}.
+
+Donc on a prouvé a), sous la forme plus précise :
+
+\textbf{Corollaire 6.} \textit{Soit $x \in \Ob \mathcal{X}$ (où $\mathcal{X} = \int \begin{tikzcd}[ampersand replacement=\&, row sep=tiny, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)] \& X_1 \\ X_0 \ar[ur]\ar[dr] \& \\ \& X_2 \end{tikzcd}$.) On veut exprimer la $W$-lissité de}
+\[
+\varphi_Q : \mathcal{X} \longrightarrow Y
+\]
+\textit{en $x$.}
+
+\begin{enumerate}[label={}, leftmargin=2.5em]
+\item[\textit{a)}] \textit{Si $x \in \Ob X_i$ ($i \in \{1,2\}$), $\varphi_Q$ est $W$-lisse en $x$ si et seulement si $f_i : X_i \longrightarrow Y$ l'est.}
+\item[\textit{b)}] \textit{Supposons} \textup{W(7 bis)} (\footnote[108]{Inutile pour la partie directe, en supposant \texttt{[phrase incomplète]}.})\textit{. Soit $x_0 \in \Ob X_0$, et supposons $f_1$, $f_2$ lisses en $x_1$, $x_2$. Alors $\varphi_Q$ est $W$-lisse en $x_0$ si et seulement si $f_0 : X_0 \longrightarrow Y$ l'est.}
+\end{enumerate}
+
+\textit{Donc} (moyennant W(7 bis)) \textit{dans les trois cas $x \in \Ob X_i$ ($i \in \{0,1,2\}$) on trouve que $\varphi_Q$ est $W$-lisse en $x$ si et seulement si $f_i : X_i \longrightarrow Y$ l'est} \texttt{[pas vraiment pour $i=0$]}.
+
+\cercle{b} Quant à b) du théorème 4, c'est le lemme 2 ci-dessus. Donc tout est prouvé!
+
+\msp{page 158}
+
+\subsection*{3.5\quad Applications aux sommes amalgamées dans une catégorie $X^{\wedge}$ (avec $X \in \Ob \Cat$).}
+
+D'abord une caractérisation des sommes amalgamées impliquant une immersion ouverte :
+
+\textbf{Proposition 15.} \textit{Soit}
+% foot: Version 7 décembre 2002
+\printedpage{109}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+Q : \qquad
+\begin{tikzcd}
+U \ar[r, "i"] \ar[d, "p"'] & X \ar[d, "q"] \\
+U' \ar[r, "i'"] & X'
+\end{tikzcd}
+\]
+\textit{un carré commutatif dans} $\Cat$\textit{. Pour que ce carré soit cocartésien dans} $\Cat$\textit{, avec $i$ (donc $i'$) une immersion ouverte, il faut et il suffit que les conditions suivantes soient satisfaites :}
+
+\begin{enumerate}[label={}, leftmargin=2.5em]
+\item[\textit{a)}] \textit{$Q$ est cartésien.}
+\item[\textit{b)}] \textit{$i'$ est une immersion ouverte (donc $i$ aussi).}
+\item[\textit{c)}] \textit{Si $T' = X' \backslash U'$, et $T = X \times_{X'} T' = X \backslash U$, $T \longrightarrow T'$ est un isomorphisme.}
+\item[\textit{d)}] \textit{Pour tout $t \in T$, si $t'$ est son image dans $T'$, le foncteur induit par $p$}
+\[
+p/t : \underbrace{U/t}_{= V_t} \longrightarrow \underbrace{U'/t'}_{= V'_{t'}}
+\]
+\textit{satisfait à $(p/t)_!(e_{U/t}) \simeq e_{U'/t'}$, ou ce qui revient au même, les `fibres colocales' de $p/t$, $v' \backslash V_t$, avec $v'$ dans $V'_{t'}$, sont} $0$\textit{-connexes.}
+\end{enumerate}
+
+\msp{page 159}
+Démonstration immédiate - ça devrait plutôt remonter au §1.
+
+\textbf{Corollaire 1.} \textit{Soit $Q$ un carré} cartésien (cf. page 158), \textit{avec $i'$ une} immersion ouverte \textit{(donc $i$ aussi), et $q$} $W$-lisse \textit{(donc $p$ aussi). On suppose que $W$ satisfait l'axiome} W(5) \textit{de connexité} (\footnote[109]{Donc il suffit $q$ $W_0$-lisse, où $W_0 = \{f \in \Fl \Cat \mid \pi_0(f) \text{ bijectif}\}$.})\textit{. Soit $T' = X' \backslash U'$, $T = X \backslash U$, supposons que $T' \longrightarrow T$ soit un isomorphisme. Alors $Q$ est cocartésien.}
+
+Il suffit de prouver la condition d) de prop. 15. Considérons le carré
+\[
+\begin{tikzcd}
+U/t \ar[r, hook, "i/t"] \ar[d, "p/t"'] & X/t \ar[d, "q/t"] \\
+U'/t' \ar[r, hook, "i'/t'"] & X'/t',
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+je dis qu'il est \textit{cartésien.} Cela résulte de la seule hypothèse que $Q$ soit cartésien, sans hypothèse de lissité sur $q$ ni que $i'$ soit une immersion ouverte, et se voit p. ex. en regardant le diagramme cubique :
+% foot: Version 7 décembre 2002
+\printedpage{110}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& U/t \ar[rr] \ar[dl] \ar[dd] & & X/t \ar[dl] \ar[dd] \\
+U'/t' \ar[rr, crossing over] \ar[dd] & & X'/t' & \\
+& U \ar[rr] \ar[dl] & & X \ar[dl] \\
+U' \ar[rr] & & X' \ar[from=uu, crossing over] &
+\end{tikzcd}
+\]
+(\footnote[110]{NB Ici $t$ est un élément quelconque de $\Ob X$, $t'$ son image dans $X'$.}). Dans ce diagramme, la face antérieure et postérieure du cube est cartésienne, par définition de $U/t$ et de $U'/t'$
+\msp{page 160}
+respectivement, et la base l'est par hypothèse. Il en résulte que la face supérieure du cube est également un carré cartésien.
+
+Ceci vu, commme $q$ est lisse, il en est de même de $q/t$ dans le carré cartésien $(*)$, donc aussi de $p/t$ par changement de base. D'autre part, la lissité de $q$ implique que $q/t$ est à fibres $W$-asphériques, donc par changement de base il en est de même de $p/t$ (qui est donc une $W$-équivalence universelle, i.e. une $W$-fibration triviale). De plus, à cause de la lissité de $p/t$, pour $v'$ dans $U'/t'$, l'inclusion % [sic] commme -> comme, repeated letter
+\[
+(U/t)_{v'} \longrightarrow v' \backslash (U/t)
+\]
+est dans $W$, donc (par W(5)) définit une bijection sur les $\pi_0$. Comme $(U/t)_{v'}$ est $W$-asphérique par ce qui précède, il s'ensuit (par W(5)) que son $\pi_0$ est de cardinal 1, donc il en est de même de $v' \backslash (U/t)$, i.e. celui-ci est 0-connexe. Or c'est là la condition d) de la proposition 15, qu'il fallait établir.
+
+\msp{page 161}
+\textbf{Corollaire 2.} \textit{Soit $Q$ un carré cartésien} (p. 158), \textit{avec $i'$ (donc aussi $i$) une immersion ouverte, et $q$ (donc aussi $p$) un} isomorphisme local. \textit{Soit $T = X \backslash U$, $T' = X' \backslash U'$ (donc $T \simeq X \times_{X'} T'$), et supposons $T' \longrightarrow T$ isomorphisme. Alors $Q$ est cocartésien.}
+
+C'est un cas particulier du corollaire 1, mais sans référence explicite à un localiseur $W$. On peut pendre $W = W_{\infty}$, ou $W = W_0$, pour se ramener au corollaire 1. Mais il est plus raisonnable de dire que dans le carré cartésien $(*)$, l'hypothèse que $q$ soit un isomorphisme local implique que $q/t$ est un isomorphisme, donc $p/t$ l'est aussi. Il en résulte bien que les $v' \backslash (U/t)$ sont 0-connexes, cette catégorie étant isomorphe à $v' \backslash (U'/t')$, donc a un objet initial. % [sic] pendre -> prendre, missing letter
+
+Soit maintenant $X$ un objet de Cat, et considérons un diagramme cocartésien dans $X^{\wedge}$ :
+\[
+\begin{tikzcd}
+G \ar[r, "i"] \ar[d, "p"'] & F \ar[d, "q"] \\
+G' \ar[r, "i'"] & F',
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+% foot: Version 7 décembre 2002
+\printedpage{111}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 162}
+où $i$ est un monomorphisme. On sait que le caractère cocartésien du carré se vérifie `argument par argument' par le caractère cocartésien de
+\[
+\begin{tikzcd}
+G(x) \ar[r, "i(x)"] \ar[d, "p(x)"'] & F(x) \ar[d, "q(x)"] \\
+G'(x) \ar[r, "i'(x)"] & F'(x),
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+dans Ens, $\forall\, x$ dans $X$. Or un tel carré cocartésien dans Ens, avec $i(x)$ \texttt{[un]} monomorphisme, est aussi cartésien. Cela implique que le carré $Q$ dans $X^{\wedge}$ est également cartésien.
+
+Considérons, d'autre part, le foncteur canonique
+\[
+\varphi_X : F \longmapsto X/F : X^{\wedge} \longrightarrow \mathrm{Cat}.
+\]
+Il vaut mieux, d'ailleurs, le regarder comme un foncteur
+\[
+\varphi_X : X^{\wedge} \longrightarrow \mathrm{Cat}/X,
+\]
+et je rappelle, pour mémoire, que ce foncteur est pleinement fidèle, et que son image essentielle est formée des catégories $X'$ sur $X$ telles que
+\[
+X' \longrightarrow X
+\]
+\msp{page 163}
+soit un isomorphisme local, ou ce qui revient au même, que $X'$ soit \textit{fibrée} sur $X$ à fibres discrètes :
+\[
+\varphi_X : X^{\wedge} \xrightarrow{\ \sim\ } \underbrace{\Fibdisc\, X}_{\substack{\text{catégories fibrées}\\ \text{à fibres discrètes}}} \ .
+\]
+Notons que toute flèche $X' \longrightarrow X''$ dans $\Fibdisc\, X$ est un isomorphisme local (tautologique sur $\begin{tikzcd}[ampersand replacement=\&, row sep=small, column sep=tiny, baseline=(\tikzcdmatrixname-1-1.base)] X'/x' \ar[rr] \ar[dr, "\text{iso.}"'] \& \& X''/x'' \ar[dl, "\text{iso.}"] \\ \& X/x \& \end{tikzcd}$), ce qui montre que si on a un diagramme
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+X_1 \ar[dr] & & X_2 \ar[dl] \\
+& X_0 &
+\end{tikzcd}
+\]
+dans $\Fibdisc\, X$, le produit fibré $X_3 = X_1 \times_{X_0} X_2$ dans Cat est tel que $X_3 \longrightarrow X_2$ est un isomorphisme local, donc aussi $X_3 \longrightarrow X$. C'est-à-dire $\Fibdisc(X)$ est stable par produits fibrés. Ceci implique que les produits fibrés existent dans $\Fibdisc\, X$, et que ce sont les produits fibrés dans Cat, ou dans Cat$/X$.
+% foot: Version 7 décembre 2002
+
+\printedpage{112}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 164}
+De même pour les produits finis dans $\Fibdisc\, X$, ce sont les produits finis dans Cat$/X$. Bref
+
+\textbf{Lemme 1.} \textit{La sous-catégorie pleine} $\Fibdisc\, X$ \textit{de} $\Cat/X$ \textit{est stable par} $\varprojlim$ \textit{finies, donc les} $\varprojlim$ \textit{existent dans} $\Fibdisc\, X$ \textit{et le foncteur d'inclusion}
+\[
+\Fibdisc\, X \longrightarrow \Cat/X
+\]
+\textit{y commute, et en particulier transforme carrés cartésiens de} $\Fibdisc\, X$ \textit{en carrés cartésiens de} $\Cat/X$\textit{, ou ce qui revient au même, de} $\Cat$\textit{. De plus, en vertu de l'équivalence}
+\[
+\varphi_X : X^{\wedge} \xrightarrow{\ \sim\ } \Fibdisc\, X \hookrightarrow \Cat/X,
+\]
+\textit{le foncteur $\varphi_X$ de $X^{\wedge}$ dans} $\Cat/X$ \textit{est exacte à gauche, en particulier il transforme carrés cartésiens de $X^{\wedge}$ en carrés cartésiens de} $\Cat/X$\textit{, ou encore de} $\Cat$\textit{.} % [sic] exacte -> exact, agreement with "le foncteur"
+
+\msp{page 165}
+Notons aussi qu'étant exact à gauche, le foncteur $\varphi_X$ de $X^{\wedge}$ dans Cat$/X$ transforme monomorphismes en monomorphismes. D'autre part :
+
+\textbf{Lemme 2.} \textit{Les monomorphismes qui sont des isomorphismes locaux sont exactement les immersions ouvertes. Donc dans} $\Fibdisc\, X$\textit{, les monomorphismes sont les immersions ouvertes, et le foncteur $\varphi_X : F \longmapsto X/F$ transforme monomorphismes en immersions ouvertes.}
+
+Revenons alors au diagramme cocartésien $(*)$ (p. 161), et au diagramme correspondant dans Cat (et même dans $\Fibdisc\, X$)
+\[
+\begin{tikzcd}
+X/G \ar[r, hook, "X/i"] \ar[d, "X/p"'] & X/F \ar[d, "X/q"] & T \ar[l, hook', dotted] \ar[d, dotted] \\
+X/G' \ar[r, hook, "X/i'"] & X/F' & T'. \ar[l, hook', dotted]
+\end{tikzcd}
+\]
+Comme $(*)$ est cartésien, le carré précédent est cartésien, par ce qui précède. Je veux prouver qu'il est également cocartésien
+\msp{page 166}
+(dans Cat$/X$, ou dans Cat, cela revient au même), et pour ceci j'applique le corollaire 2 de la proposition 15 (p. 161), compte tenu que $X/q$ est un isomorphisme local, et $X/i'$ (étant un isomorphisme local \texttt{[et un]} monomorphisme) une immersion ouverte. Il suffit de prouver que, $T'$ et $T$ étant les sous-catégories fermées complémentaires des ouverts $X/G'$ de $X/F'$ et de $X/G$ de $X/F$, que $T \longrightarrow T'$ est \texttt{[un]} isomorphisme.
+
+{\small \texttt{[Maintenant, $F$ et $G$, et $F'$ et $G'$, mais pas $p$ et $q$, échangent leur rôles.]}} % [sic] leur rôles -> leurs rôles, agreement
+
+La vérification est immédiate : $T$ est la catégorie des flèches $x \longrightarrow G$ dans $X^{\wedge}$ (de source $x$ dans $X$) qui ne se factorisent pas par $G$ \texttt{[plutôt par $F$]}, $T'$ celle des flèches $x \longrightarrow G'$
+% foot: Version 7 décembre 2002
+
+% ---- from Der-ChXIIb-012_p071-072.tex
+\printedpage{113}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+qui ne se factorisent pas par $F'$, le foncteur $T \longrightarrow T'$ étant le foncteur composition de $x \longrightarrow G$ avec $G \xrightarrow{q} G'$
+\[
+\begin{tikzcd}[row sep=large]
+F \arrow[r, hook] \arrow[d] & G \arrow[d] \\
+F' \arrow[r, hook] & G'
+\end{tikzcd}
+\]
+(NB Le composé ne se factorise pas par $F'$, car autrement, à cause du caractère cartésien de $Q$, $x \longrightarrow G$ se factoriserait par $F$.) Mais pour $x$ donné, la donnée de $x \longrightarrow G$ ne se factorisant pas par $F$ est celle d’un élément \msp{page 167} de $G(x)\backslash F(x)$, et à cause du caractère cocartésien de $Q$,
+\[
+(G(x)\backslash F(x)) \longrightarrow (G'(x)\backslash F'(x))
+\]
+est bijectif, i.e. ‘il revient au même’ de se donner $x \longrightarrow G$ ne se factorisant pas par $F$, ou $x \longrightarrow G'$ ne se factorisant pas par $F'$.
+
+Ainsi on a prouvé le
+
+\textbf{Théorème 5.} \textit{Soit $X$ dans} Cat\textit{, et}
+\[
+Q : \qquad
+\begin{tikzcd}[row sep=large, baseline=(current bounding box.center)]
+F \arrow[r, hook, "i"] \arrow[d, "p"'] & G \arrow[d, "q"] \\
+F' \arrow[r, hook, "i'"] & G'
+\end{tikzcd}
+\]
+\textit{un carré cocartésien dans $X^\wedge$, avec $i$} \texttt{[un]} \textit{monomorphisme. Alors $i'$ est} \texttt{[un]} \textit{monomorphisme, le carré $Q$ est aussi cartésien, et le carré correspondant dans} Cat$/X$ \textit{ou dans} Cat
+\[
+\begin{tikzcd}[row sep=large]
+X/F \arrow[r, hook, "X/i"] \arrow[d, "X/p"'] & X/G \arrow[d, "X/q"] \\
+X/F' \arrow[r, hook, "X/i'"] & X/G'
+\end{tikzcd}
+\]
+\msp{page 168} \textit{est à la fois cartésien et cocartésien. De plus, si $W$ est un localiseur fondamental dans} Cat\textit{, satisfaisant} W(7 bis) (en plus de W(1,2,3))\textit{, alors le carré $X/Q$ dans} Cat \textit{est $W$-cocartésien.}
+
+\printedpage{114}
+% head: A. Grothendieck : Dérivateurs, Ch. XII, Édition des Universités de Montpellier II et Paris VII
+Ce dernier énoncé résulte de ce qui précédait et du corollaire 2 du théorème 4, compte tenu que $X/q$ est un isomorphisme local, donc est $W$-lisse.
+
+\textbf{Corollaire :} (\footnote[111]{\textbf{NB} Si on veut seulement $i \in W_X \Longrightarrow i' \in W_X$, $p \in W_X \Longrightarrow q \in W_X$, il suffit que l’on ait W(7 bis) \textit{faible}, i.e. $i_0 \in W \Longrightarrow i \in W$ dans l’énoncé de W(7 bis), p. 76 (Loc(6$'$a) avec les notations de XVI).}) \textit{On a} (moyennant W(7 bis)) \textit{les équivalences}
+\[
+\begin{aligned}
+i \in W_X \quad &\Longleftrightarrow \quad i' \in W_X \\
+p \in W_X \quad &\Longleftrightarrow \quad q \in W_X,
+\end{aligned}
+\]
+\textit{où}
+\[
+W_X \subseteq \mathit{Fl}(X^\wedge)
+\]
+\textit{est défini par (cf. Pursuing Stacks \ldots)}
+\[
+u \in W_X \qquad\qquad \Longleftrightarrow \qquad\qquad X/u : X/F \longrightarrow X/G \quad \textit{est dans } W.
+\]
+
+Ainsi, dans une catégorie $X^\wedge$, les sommes amalgamées impliquant un monomorphisme se comportent de façon parfaite du point de vue homotopique, plus exactement pour les localiseurs $W_X$, pourvu \msp{page 169} seulement que $W$ satisfasse à W(7 bis). Notamment, les monomorphismes dans $X^\wedge$ sont des ‘$W_X$-cofibrations’, en un sens similaire de celui de la définition 2 c) (pages 99, 100 \texttt{[plutôt 109, 110]}).
+
+\texttt{[page 170 n’existe pas.]}
+\end{document}

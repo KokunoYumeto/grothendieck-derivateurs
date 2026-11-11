@@ -1,0 +1,1436 @@
+\PassOptionsToPackage{hyperfootnotes=false}{hyperref}
+% macro conflict, first definition kept: \newcommand{\cocart}{\text{\scriptsize cocart.}}
+% macro conflict, first definition kept: \newcommand{\Fl}{\operatorname{Fl}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usetikzlibrary{babel,decorations.pathreplacing}
+\usepackage{enumitem}
+
+% Reader typography: no mathematical readings are altered by these settings.
+\usepackage[a4paper,left=25mm,right=32mm,top=23mm,bottom=25mm,
+ marginparwidth=23mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{dcomment}{\Needspace{10\baselineskip}}
+\setlength{\emergencystretch}{2em}
+\setlength{\marginparpush}{5pt}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\AtBeginDocument{\hypersetup{
+ hidelinks,
+ pdftitle={Les Derivateurs: Chapter XVII, pp. 1--70, with commentary},
+ pdfauthor={Alexander Grothendieck},
+ pdfsubject={Mathematical audit and commentary, manuscript pages 1--70}}}
+
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1\ifstrequal{#1}{1}{\\[2pt]{[page 1]}}{}}}
+\newcommand{\msp}[1]{\ifstrequal{#1}{page 1}{}{\marginpar{\footnotesize [#1]}}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\defeq}{\overset{\textup{déf}}{=}}
+\newcommand{\cocart}{\textup{cocart.}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Mc}{\mathcal{M}_{\mathrm{c}}}
+\newcommand{\Esp}{\operatorname{Esp}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ho}{\operatorname{Ho}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\pr}{\mathrm{pr}}
+\begin{document}
+% ---- from der-ch17_p001-005.tex
+% ===================== PDF page 1 =====================
+\printedpage{--}
+% head: (none)
+% no page number printed on this page
+
+\begin{center}
+\vspace*{5cm}
+
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\vspace{2cm}
+
+\textbf{Chapitre XVII}
+
+\medskip
+
+\textbf{Catégories à fibrations et à cofibrations}\\
+\textbf{(Modèles (3))}
+
+\bigskip
+{\small\textsf{With commentary}}\\[0.6ex]
+{\footnotesize Commentary and audit AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic)}
+
+\end{center}
+
+\clearpage
+
+% ===================== PDF page 2 =====================
+\printedpage{--}
+% head: (none)
+% no page number printed on this page
+
+\vspace*{5cm}
+
+Ce texte a été déchiffré et transcrit en \LaTeXe{} par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Seules quelques corrections mineures évidentes ont été effectuées. Pour les rares ajouts ou commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{georges.maltsiniotis@imj-prg.fr}
+
+\hspace*{\fill}G. Maltsiniotis\hspace*{2cm}
+
+\clearpage
+
+% ===================== PDF page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 1}
+
+\section*{1\quad Préliminaires\footnote{\textbf{N.B.} Ces préliminaires seront complètement repris et dépassés dans le paragraphe 2. À ne pas lire !}}
+
+\textbf{Proposition 1.} \textit{Soit $\mathcal{M}$ une catégorie stable par $\varinjlim$ quelconques, $C \subset \Fl(\mathcal{M})$ contenant les isomorphismes, stable par cochangement de base et par composition} transfinie. \textit{Soit, pour tout petit ensemble ordonné $I$, $C_I \subset \Fl(\mathcal{M}(I^{\circ}))$ l'ensemble des flèches $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ telles que $\forall\ i_0 \in I$, dans le diagramme} % ?? uncertain: superscript of I -- \circ or degree sign
+
+\[
+\begin{tikzcd}[column sep=large]
+X'_{i_0} = \varinjlim\limits_{i<i_0} X_i \arrow[r] \arrow[d, "\alpha_{i_0} = \varinjlim\limits_{i<i_0} u_i"'] \arrow[dr, phantom, "\text{cocart.}"] & X_{i_0} \arrow[d, "\beta_{i_0}"'] \arrow[dd, dotted, shift left=3ex, "u_{i_0}"] & \\
+Y'_{i_0} = \varinjlim\limits_{i<i_0} Y_i \arrow[r] & \tilde{Y}_{i_0} \arrow[d, "\tilde{u}_{i_0}"'] & \text{\footnotesize (défini comme somme amalgamée)} \\
+& Y_{i_0}\ , &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+\textit{la flèche $\tilde{u}_{i_0}$ soit dans $C$\footnote{Condition stable par passage de $I$ à un sous-ensemble ordonné \textit{ouvert} $I'$ de $I$.}. Je dis que si $I$ est} bien ordonné, \textit{alors $u_\bullet \in C_I$ implique}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{que $\varinjlim u_i : \varinjlim X_i \longrightarrow \varinjlim Y_i$ est dans $C$, et}
+\item[b)] $\forall\ i \in I$, $(u_i : X_i \longrightarrow Y_i) \in C$\footnote{Dire aussi que l'on a
+\begin{itemize}[leftmargin=2em]
+\item[b$'$)] \textit{Si $i' \leq i$, alors dans le diagramme similaire à $(*)$,}
+\end{itemize}
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X'_{i'} \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] \& X'_i \arrow[d] \\
+Y'_{i'} \arrow[r] \& \tilde{Y}'_i \arrow[d, "u_{i',i}"] \\
+\& Y'_i\ ,
+\end{tikzcd}
+\]
+\textit{on a} $u_{i',i} \in C$ (on retrouve $(*)$ en faisant $i' = i_0$, $i = i_0 + 1$). Le cas b) s'obtient en faisant $i' = 0$, $i$ quelconque, d'où $(X'_i \longrightarrow Y'_i) \in C$. L'appliquant à $i+1$ au lieu de $i$, on trouve $(u_i : X_i \longrightarrow Y_i) \in C$.}.
+\end{itemize}
+
+. % a lone full stop printed on its own line
+
+\textbf{Corollaire.} \textit{Soit $W \subset \mathcal{M}$ localiseur modérément saturé, tel que $TC \overset{\text{déf}}{=} C \cap W$ soit stable par cochangement de base, et par composition} transfinie. \textit{Soit $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $C_I$. Alors $u_\bullet \in W_{I^{\circ}}$ (i.e. $\forall\ i \in I$, on a $u_i \in W$) si et seulement si $u_\bullet \in (TC)_I$, i.e. si et seulement si pour tout $i \in I$, la flèche $\tilde{u}_i$ dans $(*)$ est dans $TC$, ou ce qui}
+\msp{page 2 n'existe pas}
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 3}
+\textit{revient au même, dans $W$ (puisque par hypothèse elle est déjà dans $C$). Si cette condition est satisfaite, alors $\varinjlim u_i : \varinjlim X_i \longrightarrow \varinjlim Y_i$ est dans $W$.}
+
+% ===================== PDF page 4 (continued) =====================
+
+\textsc{Démonstration} du corollaire. Supposons $u_\bullet \in (TC)_I$, alors par la proposition, $\varinjlim\limits_{i\in I} u_i$ est dans $TC$, ou ce qui revient au même, dans $W$. D'autre part, appliquant ce même résultat aux systèmes inductifs induits sur $I_{<i_0}$, on trouve que dans $(*)$, la flèche $\alpha_{i_0}$ est dans $TC$, donc aussi $\beta_{i_0}$ par cochangement de base, donc aussi $u_{i_0} = \tilde{u}_{i_0}\beta_{i_0}$. Donc il reste à prouver qu'inversement, si on suppose les $u_{i_0} \in W$, alors les $\tilde{u}_{i_0}$ sont eux aussi dans $W$ (i.e. dans $TC = C \cap W$), ou ce qui revient au même, que les $\beta_{i_0}$ sont dans $W$, ou encore dans $TC$. Mais comme $TC$ est stable par cochangement de base, il suffit pour cela de prouver que $\alpha_{i_0} \in TC$, ou encore $\alpha_{i_0} \in C$. Donc on est ramené à prouver que
+\begin{itemize}[leftmargin=2.5em]
+\item[c)] $u \in W_{I^{\circ}} \cap C_I \Longrightarrow (\,\varinjlim\limits_{i<i_0} u_i) \in W$ pour tout $i_0 \in I$,
+\end{itemize}
+donc, changeant de notation, à prouver \texttt{[phrase incomplète]}. Nous prouverons ensemble a) b) c) par induction transfinie sur le nombre ordinal $\alpha$ tel que $I \simeq I_\alpha = \{\text{ensemble des ordinaux } i < \alpha\}$.
+
+\msp{page 4}
+
+1$^\circ$) Cas $\alpha = 0$, i.e. $I = \emptyset$ : il est trivial.
+
+2$^\circ$) Si c'est ok pour $I_\alpha$, aussi pour $I_{\alpha+1} = \{\beta \mid \beta \leq \alpha\}$. Ici, $I_{\alpha+1}$ ayant un plus grand élément $\alpha$, a) est contenu dans b) (pour $i = \alpha$, plus grand élément de $I_{\alpha+1}$.) Pour prouver b), il reste à prouver que $u_\alpha \in C$. On regarde le diagramme $(*)$ pour $i_0 = \alpha$. Par l'hypothèse de récurrence (forme a), appliquée à $I_\alpha$, on a $\alpha_{i_0} \in C$, donc par cochangement de base $\beta_{i_0} \in C$, donc par composition $u_{i_0} = \tilde{u}_{i_0}\beta_{i_0} \in C$. Pour prouver c), il reste à prouver que $\varinjlim\limits_{i<\alpha} u_i \in W$. Mais par l'hypothèse de récurrence appliquée à $I_\alpha = \{i \mid i < \alpha\}$, on sait déjà que $(u_i)_{i<\alpha} \in (TC)_{I_\alpha}$, donc par la partie prouvée du corollaire ou de la proposition, $\varinjlim\limits_{i<\alpha} u_i \in TC$.
+
+3$^\circ$) Si $\alpha$ est un ordinal limite, et si a) b) c) sont vrais pour $I_\beta$ avec $\beta < \alpha$, ils le sont aussi pour $I_\alpha$. Cette fois, b) est contenu dans l'hypothèse de
+\msp{page 5}
+récurrence, il faut prouver a), i.e. que
+\[
+u_\alpha \overset{\text{déf}}{=} \varinjlim_{i<\alpha} u_i \ :\ \underbrace{X_\alpha}_{\overset{\text{déf}}{=} \varinjlim\limits_{i<\alpha} X_i} \longrightarrow \underbrace{Y_\alpha}_{\overset{\text{déf}}{=} \varinjlim\limits_{i<\alpha} Y_i}
+\]
+est dans $C$. Quant à c), il est déjà contenu dans la hypothèse de récurrence. Donc il reste finalement à prouver
+\[
+u_\alpha \ \in \ C
+\]
+quand on suppose que la proposition est prouvée pour les ordinaux $\beta < \alpha$.
+
+On va construire un troisième système ordinal sur $I_\alpha$, en introduisant pour tout $0 \leq i < \alpha$, i.e. $i \in I_\alpha$, $Z_i$ par le carré cocartésien
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}
+X_i \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha \arrow[d] \\
+Y_i \arrow[r] & Z_i\ .
+\end{tikzcd}
+\]
+
+Les flèches de transition entre les $Z_i$ sont évidentes, et on aura $\varinjlim\limits_{i} Z_i \xrightarrow{\ \sim\ } Y_\alpha$. Ainsi, $u_\alpha : X_\alpha (= Z_{-1}) \longrightarrow Y_\alpha$ est décomposé en composé transfini de morphismes
+\msp{page 6}
+\[
+Z_i \xrightarrow{v_{i+1}} Z_{i+1} \qquad (-1 \leq i < \alpha)
+\tag*{$(*)$}
+\]
+et
+\[
+\varinjlim_{i<i_0} Z_i \xrightarrow{v_{i_0}} Z_{i_0} \qquad i_0 \text{ ordinal limite } < \alpha.
+\tag*{$(**)$}
+\]
+
+(\textbf{N.B.} Le cas où $i_0$ n'est \textit{pas} ordinal limite n'est autre que $(*)$ pour $i = \beta_0 - 1$.) Tout revient à prouver que ces flèches sont dans $C$ (donc leur composé transfini aussi). % [sic] $\beta_0 - 1$ -> $i_0 - 1$, the case discussed is that of $i_0$
+
+Cas $(*)$.
+\[
+\begin{tikzcd}
+X_i \arrow[r] \arrow[d, "u_i"'] \arrow[dr, phantom, "\text{cocart.}"] & X_{i+1} \arrow[r] \arrow[d, "\beta_{i+1}"'] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha \arrow[d] \\
+Y_i \arrow[r] & \tilde{Y}_{i+1} \arrow[r] \arrow[d, "\tilde{u}_{i+1}"'] \arrow[dr, phantom, "\text{cocart.}"] & Z_i \arrow[d, "v_{i+1}"] \\
+& Y_{i+1} \arrow[r] & Z_{i+1}\ .
+\end{tikzcd}
+\tag*{\footnotemark}
+\]
+\footnotetext{Pour se donner confiance -- on pourrait traiter toute de suite le cas général.} % [sic] toute de suite -> tout de suite, French idiom
+
+Comme $\tilde{u}_{i+1} \in C$, $v_{i+1} \in C$ par cochangement de base, OK. Il faut cependant traiter à part le cas $i = 0$, i.e. la flèche $X_\alpha \longrightarrow Z_0$, qui est incluse dans
+\[
+\begin{tikzcd}
+X_0 \arrow[r] \arrow[d, "u_0"'] \arrow[dr, phantom, "\text{cocart.}"] & X_\alpha = Z_{-1} \arrow[d, "v_0"] \\
+Y_0 \arrow[r] & Z_0\ ,
+\end{tikzcd}
+\]
+où $u_0 \in C$, donc $v_0 \in C$, OK.
+
+Cas $(**)$. Si $i_0 < \alpha$ est ordinal limite, inspectons $(**)$. On a par passage à la limite
+\[
+Z'_{i_0} \overset{\text{déf}}{=} \varinjlim_{i<i_0} Z_i \ \simeq\ Y'_{i_0} \amalg_{X'_{i_0}} X_\alpha
+\]
+(cf. diagramme $(*)$ pour la définition de $X'_{i_0}$, $Y'_{i_0}$), s'insérant dans le diagramme suivant greffé sur $(*)$
+
+% ---- from der-ch17_p006-010.tex
+\setcounter{footnote}{4}
+
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 7}
+
+\[
+\begin{tikzcd}
+X'_{i_0} \arrow[r] \arrow[d, "\alpha_{i_0}"'] \arrow[dr, phantom, "\cocart"] & X_{i_0} \arrow[r] \arrow[d, "\beta_{i_0}"'] \arrow[dr, phantom, "\cocart"] & X_{\alpha} \arrow[d] \\
+Y'_{i_0} \arrow[r] & \tilde{Y}_{i_0} \arrow[r] \arrow[d, "\tilde{u}_{i_0}"'] \arrow[dr, phantom, "\cocart"] & Z'_{i_0} \arrow[d, "v_{i_0}"] \\
+& Y_{i_0} \arrow[r] & Z_{i_0}\ .
+\end{tikzcd}
+\]
+
+On a $\tilde{u}_{i_0} \in C$ par hypothèse, donc $v_{i_0} \in C$, ce qui achève la démonstration.
+
+\textbf{Proposition 2.} \textit{$(\mathcal{M}, C)$ et le cas échéant $W$, comme dans proposition 1 et son corollaire, $I$ ensemble ordonné localement fini, i.e. tel que $\forall\ i_0 \in I$, $I/i_0$ soit fini. Soit}
+\[
+u_{\bullet}\ : X_{\bullet} \longrightarrow Y_{\bullet}
+\]
+\textit{une flèche dans\footnote{en fait, l'hypothèse que $X_{\bullet}$, $Y_{\bullet}$ dans $\mathcal{M}(I^{\circ})_{\mathrm{c}}$ est inutile, tant dans la proposition 2 que dans ses deux corollaires.} $\mathcal{M}(I^{\circ})_{\mathrm{c}} =$ sous-catégorie pleine de systèmes inductifs sur $I$, à valeurs dans $\mathcal{M}$, tels que $\underbrace{\emptyset_{\mathcal{M}(I^{\circ})}}_{\substack{\textup{objet}\\ \textup{initial}\\ \textup{de } \mathcal{M}(I^{\circ})}} \longrightarrow Z_{\bullet}$ soit dans $C_I$ (définie dans prop. 1), i.e. tel que $\forall\ i_0 \in I$, la flèche}
+\[
+Z'_{i_0} \ = \ \varinjlim_{i < i_0} Z_i \ \longrightarrow \ Z_{i_0}
+\]
+\textit{soit dans $C$, et supposons $u_{\bullet} \in C_I$. Alors}
+\begin{enumerate}
+\item[a)] $\varinjlim\limits_{i \in I} u_{\bullet} : X_I \defeq \varinjlim\limits_{i \in I} X_i \longrightarrow Y_I \defeq \varinjlim\limits_{i \in I} Y_i$ \textit{est dans $C$,}
+\msp{page 8}\\
+\textit{et}
+\item[b)] \textit{$\forall\ i_0 \in I$, on a $\alpha_{i_0}, \beta_{i_0} \in C$ dans le diagramme $(*)$ p. 1.}
+\end{enumerate}
+
+\textbf{Corollaire.} \textit{De plus (supposant donné $W$ comme dans prop. 1, cor. 1), les conditions suivantes sur une $u_{\bullet}$ entre $X_{\bullet}$, $Y_{\bullet}$ $C$-cofibrants sont équivalentes.}
+\begin{enumerate}
+\item[$1^{\circ}$)] \textit{$u_{\bullet} \in (TC)_I$, i.e. les $\tilde{u}_{i_0} \in TC$ ($\forall\ i_0 \in I$).}
+\item[$2^{\circ}$)] \textit{$u_{\bullet} \in T_I \cap W_{I^{\circ}}$, i.e. $\forall\ i_0 \in I$, $\tilde{u}_{i_0} \in C$, $u_{i_0} \in W$.} % [sic] T_I -> C_I, the explanation that follows gives \tilde u_{i_0} \in C, i.e. the condition C_I
+\item[$3^{\circ}$)] \textit{Pour tout $i_0 \in I$, on a}
+\[
+\alpha_{i_0},\ \beta_{i_0},\ \tilde{u}_{i_0},\ u_{i_0} \ \in \ TC
+\]
+\textit{(i.e. $\alpha_{i_0}, \tilde{u}_{i_0} \in TC$, ce qui implique $\beta_{i_0} \in TC$, puis $u_{i_0} \in TC$ par cochangement de base et par composition).}
+\end{enumerate}
+\textit{Et ces conditions impliquent}
+\begin{enumerate}
+\item[$4^{\circ}$)] \textit{que $u_I : X_I \longrightarrow Y_I$ est dans $TC$.}
+\end{enumerate}
+
+Voyons comment ou dans quelle mesure le corollaire se déduit de la proposition. On a bien sur % [sic] sur -> sûr, accent missing (printed "bien sûr" elsewhere)
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}[column sep=small]
+& 3^{\circ} \arrow[dl, Rightarrow] \arrow[dr, Rightarrow] & \\
+1^{\circ} & & 2^{\circ}
+\end{tikzcd}
+\]
+tautologiquement. D'ailleurs, la proposition appliquée à $TC$ au lieu de $X$ montre qu'on a $1^{\circ} \Longrightarrow 3^{\circ}$ \& $4^{\circ}$, car en l'appliquant aux ensembles $I_{<i_0}$ on trouve que $\alpha_{i_0} \in TC\ \forall\ i_0 \in I$. Donc la proposition 2 implique % [sic] X -> C, the proposition is applied to TC instead of C
+\[
+(1^{\circ} \Longleftrightarrow 3^{\circ}) \Longrightarrow 2^{\circ}\ (\&\ 4^{\circ}).
+\]
+
+\msp{page 9}
+
+Donc pour prouver $2^{\circ} \Longrightarrow 3^{\circ}$, il resterait à prouver que $2^{\circ}$ suffit à impliquer $4^{\circ}$ (et ceci quel que soit $I$ ensemble ordonné localement fini) -- car en appliquant ceci aux $I_{<i_0}$, on trouve que $2^{\circ}$ implique $\alpha_{i_0} \in TC = C \cap W$ (non seulement $\alpha_{i_0} \in C$, selon la proposition 2), donc $\beta_{i_0} \in TC \subset W$, donc $\tilde{u}_{i_0} \in W$ par saturation, donc $\tilde{u}_{i_0} \in TC$, d'où $3^{\circ}$.
+
+Notons d'autre part que le b) dans la proposition 2 est conséquence de a), appliqué à la restriction de $u_{\bullet}$ à $I_{<i_0}$. Au total, il y a donc à prouver seulement les deux choses
+\[
+\left\{
+\begin{aligned}
+&\text{a)} & u_{\bullet} \in C_I &\quad\Longrightarrow\quad u_I \in C \\
+&\text{b)} & u_{\bullet} \in C_I \cap W &\quad\Longrightarrow\quad u_I \in C \cap W\ \ (\defeq TC) \\
+& & &\qquad\qquad\ \ (\text{et } u_{\bullet} \in (TC)_I)
+\end{aligned}
+\right.
+\tag*{$(*)$}
+\]
+
+Nous le prouverons par réduction au cas particulier de la proposition 1, déjà prouvée.
+
+J'ai d'ailleurs aussi envie de prouver le
+
+\textbf{Corollaire 2.} \textit{$\mathcal{M}$, $C$ (et éventuellement $W$). Les hypothèses sur $X_{\bullet}, Y_{\bullet} \in \mathcal{M}(I^{\circ})_{\mathrm{c}}$ et sur $u_{\bullet} \in C_I$, enfin sur $I$ localement fini, sont celles de la proposition 2. Pour toute partie $J$ de $I$, soit}
+\[
+u_J \defeq \varinjlim_{i \in J} u_i \ :\ X_J \defeq \varinjlim_{i \in J} X_i \ \longrightarrow\ Y_J \defeq \varinjlim_{i \in J} Y_i\ .
+\]
+\textit{Soient $I' \subset I''$ deux parties} ouvertes \textit{de $I$, et considérons le diagramme}
+
+\msp{page 10}
+
+\[
+\begin{tikzcd}
+X_{I'} \arrow[r, "\tau_X"] \arrow[d, "\alpha = u_{I'}"'] \arrow[dr, phantom, "\cocart"] & X_{I''} \arrow[d, "\beta"'] \arrow[dd, bend left=30, "u_{I''}"] & \\
+Y_{I'} \arrow[r, "\tilde{\tau}_Y"] \arrow[dr, dotted, "\tau_Y"'] & \tilde{Y}_{I''} \arrow[d, "\tilde{u}"'] & \text{\footnotesize (défini comme somme amalgamée)} \\
+& Y_{I''}\ . &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\textit{Alors on a}
+\[
+\left\{
+\begin{aligned}
+&\textit{$u_{I'}, u_{I''} \in C$ (donc aussi $\beta \in C$) (i.e. pour tout $J$ ouvert dans $I$,}\\
+&\textit{$u_J : X_J \longrightarrow Y_J$ est dans $C$)\,\footnotemark, et $\tau_X, \tau_Y \in C$ (donc aussi $\tilde{\tau}_Y \in C$)}\\
+&\textit{(i.e. pour $I' \subset I''$ inclusion d'ouverts, et $X_{\bullet}$ $C$-cofibrant dans $\mathcal{M}(I^{\circ})$,}\\
+&\textit{on a $X_{I'} \longrightarrow X_{I''}$ dans $C$)\,\footnotemark, et enfin, même}\\
+&\qquad\qquad\qquad\qquad\boxed{\tilde{u} \in C.}
+\end{aligned}
+\right.
+\]
+\addtocounter{footnote}{-1}\footnotetext{C'est bien sûr contenu dans prop. 2, appliquée à $u_{\bullet}|_J$.}\stepcounter{footnote}\footnotetext{C'est pour cette assertion $\tau_X \in C$ (d'où $\tilde{\tau}_Y, \tau_Y \in C$, moyennant $\tilde{u} \in C$) qu'on a besoin de l'hypothèse $X_{\bullet} \in \mathcal{M}(I^{\circ})_{\mathrm{c}}$, $\tilde{u} \in C$ vrai sans cette hypothèse.}
+
+\textbf{N.B.} Le cas de la proposition 2 sous la forme $(*)$ a), page 9, (i.e. aussi le fait que les $u_{I'}$, $u_{I''}$, \dots\ sont dans $C$) est obtenu en prenant $I'' = I$, $I' = \emptyset$, le diagramme devient
+\[
+\begin{tikzcd}
+\emptyset \arrow[r] \arrow[d, "\mathrm{id}"'] \arrow[dr, phantom, "\cocart"] & X_I \arrow[d, "\mathrm{id}"] \\
+\emptyset \arrow[r] & X_I \arrow[d, "\tilde{u} = u_I"] \\
+& Y_I\ ,
+\end{tikzcd}
+\]
+et la conclusion est donc $u_I \in C$\footnote{Le cas $(Y_{I'} \xrightarrow{\tau_Y} Y_{I''}) \in C$ est obtenu en prenant $X_{\bullet} = \emptyset_{\bullet}$, on aura
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+\emptyset \arrow[r, "\tau_X", "\sim"'] \arrow[d] \arrow[dr, phantom, "\cocart"] \& \emptyset \arrow[d] \\
+Y_{I'} \arrow[r, "\mathrm{id}"] \arrow[dr, "\tau_Y"'] \& \tilde{Y}_{I''} = Y_{I'} \arrow[d, "\tilde{u} = \tau_Y"] \\
+\& Y_{I''}\ .
+\end{tikzcd}
+\]}. La \textit{définition} de $C_I$, i.e. la condition $u \in C_I$, se retrouve en exigeant $\tilde{u} \in C$ dans $(*)$ ci-dessus, dans le cas $I'' = I/i_0$, $I' = I_{<i_0}$. Il est remarquable
+\msp{page 11}
+que cette définition de $C_I$ donne une conclusion aussi forte que $\tilde{u} \in C$ pour \textit{tout} couple $I' \subset I''$ de sous-ensembles ouverts de $I$.
+
+C'est finalement sous cette forme qu'on va prouver la proposition 2 -- c'est \textit{ça} à présent qui me semble \textit{le} bon énoncé dans cette direction. Avec le complément, bien sûr, que si de plus $u_{\bullet} \in W_{I^{\circ}}$, i.e. les $u_i$ sont dans $W$, alors $u_{\bullet}$ est même dans $(TC)_I$, ou encore
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+simplement que les $u_{I'}$ \textit{sont dans} $TC$ (d'où il résultera donc que $\tilde{u}$ dans $(*)$, p. 10, est aussi dans $TC$).
+
+On va procéder par construction transfinie. On peut supposer bien sûr que $I'' = I$. On va quand même d'abord prouver le cas particulier où $I' = \emptyset$, i.e. prouver au moins que $u_I \in C$. On construit par récurrence transfinie une suite strictement croissante d'ouverts
+\[
+I_{\alpha} \ \subset \ I,
+\]
+aboutissant à
+\[
+I_{\alpha_0} \ = \ I,
+\]
+en posant
+\[
+\left\{
+\begin{aligned}
+I_0 \ &= \ \emptyset\,, \\
+I_{\alpha} \ &= \ \textstyle\bigcup_{\beta < \alpha} I_{\beta} && \text{si $\alpha$ ordinal limite}\,, \\
+I_{\alpha+1} \ &= \ I_{\alpha} \cup (I/s_{\alpha}) && \text{si $I_{\alpha} \neq I$, et en choisissant $s_{\alpha} \in I \backslash I_{\alpha}$}\,.
+\end{aligned}
+\right.
+\]
+
+\msp{page 12}
+
+(On finit par avoir $I_{\alpha_0} = I$, bien sûr.) On pose
+\[
+\begin{aligned}
+X_{\alpha} \ &= \ X_{I_{\alpha}} \ = \ \varinjlim_{i \in I_{\alpha}} X_i \\
+Y_{\alpha} \ &= \ Y_{I_{\alpha}} \ = \ \varinjlim_{i \in I_{\alpha}} Y_i \\
+u_{\alpha} \ &= \ u_{I_{\alpha}} \ \ :\ \ X_{\alpha} \longrightarrow Y_{\alpha}\ ,
+\end{aligned}
+\]
+homomorphisme de systèmes inductifs transfinis. On aura
+\[
+X_{\alpha_0} \ = \ X_I, \qquad Y_{\alpha_0} \ = \ Y_I, \qquad u_{\alpha_0} \ = \ u_I,
+\]
+et on doit donc prouver que $u_{\alpha_0} \in C$. Pour ceci, on applique la proposition 1, il suffit donc de prouver que $(u_{\alpha}) \in C_{I_{\alpha_0+1}}$ (où $I_{\alpha_0+1} = \{\text{ordinaux } i \mid i < \alpha_0 + 1, \text{ i.e. } i \leq \alpha_0\}$). Donc il faut prouver que les flèches $\tilde{u}_{i_0}$ dans $(*)$ p. 1 (où cette fois les $i$, $i_0$ sont des ordinaux, $i_0 \leq \alpha_0$) sont dans $C$. Je vais distinguer les deux cas où $\alpha = i_0$ est ordinal limite, qui est trivial car alors $X_{i_0} \xleftarrow{\ \sim\ } \varinjlim\limits_{i < i_0} X_i$, $Y_{i_0} \xleftarrow{\ \sim\ } \varinjlim\limits_{i < i_0} Y_i$, et $\tilde{u}_{i_0} = \mathrm{id}$, et le cas $\alpha$ non limite, i.e.
+\[
+\begin{tikzcd}
+X_{I_{\alpha-1}} \arrow[r] \arrow[d, "u_{\alpha-1}"'] & X_{I_{\alpha}} \arrow[d, "\beta_{\alpha}"'] \arrow[dd, bend left=30, "u_{\alpha}"] \\
+Y_{I_{\alpha-1}} \arrow[r] & \tilde{Y}_{I_{\alpha}} \arrow[d, "\tilde{u}_{\alpha}"'] \\
+& Y_{I_{\alpha}}\ ,
+\end{tikzcd}
+\]
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 13}
+à prouver que $\tilde{u}_{\alpha} \in C$. Lorsqu'on suppose de plus $u_0 \in W_{I_0}$, i.e. les $u_i \in W$, il faut de plus prouver que $\tilde{u}_{\alpha} \in TC = C \cap W$. La proposition 2 et son corollaire 1 résulteront de là. Pour prouver $\tilde{u}_{\alpha} \in C$ resp. $\tilde{u}_{\alpha} \in TC$, on peut supposer $I_{\alpha} = I$ (quitte à changer de notation). On pose donc
+\[
+\begin{aligned}
+I_{\alpha} \ &= \ I, & I_{\alpha-1} \ &= \ I' \\
+I/s_{\alpha-1} \ &= \ I_0, & I_0 \cap I' \ &= \ I'_0\ ,
+\end{aligned}
+\]
+de sorte qu'on a un diagramme commutatif d'inclusions ouvertes
+\[
+\begin{tikzcd}
+I_0 \cap I' = I'_0 \arrow[r, hook] \arrow[d, hook] & I_0 \arrow[d, hook] \\
+I' \arrow[r, hook] & I = I_0 \cup I'.
+\end{tikzcd}
+\]
+On utilisera seulement le fait que $I_0$, donc $I'_0$, est fini, i.e. que dans le couple $(I' \subset I)$, $I$ peut s'écrire sous la forme $I = I' \cup I_0$, avec $I_0$ un ouvert \textit{fini,} pour en conclure que dans le diagramme
+\[
+\begin{tikzcd}
+X_{I'} \arrow[r, "\tau^X_{I',I}"] \arrow[d, "u_{I'}"'] \arrow[dr, phantom, "\cocart"] & X_I \arrow[d, "v_{I',I}"'] \arrow[dd, bend left=30, "u_I"] \\
+Y_{I'} \arrow[r] \arrow[dr, "\tau^Y_{I',I}"'] & \tilde{Y}_I \arrow[d, "\substack{\tilde{u} =\\ u_{I',I}}"'] \\
+& Y_I
+\end{tikzcd}
+\]
+on a $\tilde{u} \in C$ resp. $\tilde{u} \in TC = C \cap W$.
+
+\msp{page 14}
+
+Il faut des notations générales, d'une part pour une inclusion $J \subset K$ d'ouverts de $I$, donnant lieu au diagramme
+\[
+\begin{tikzcd}
+X_J \arrow[r, "\tau^X_{J,K}"] \arrow[d, "u_J"'] \arrow[dr, phantom, "\cocart"] & X_K \arrow[d, "\tilde{u}_{J,K}"'] \arrow[dd, dotted, bend left=30, "u_K"] & \\
+Y_J \arrow[r] \arrow[dr, dotted, "\tau^Y_{J,K}"'] & Y_{J,K} \arrow[d, "u_{J,K}"'] & \text{\footnotesize (anciennement $\tilde{Y}_K$)} \\
+& Y_K\ , &
+\end{tikzcd}
+\tag*{(1)}
+\]
+et pour des inclusions de trois ouverts emboîtés $J \subset K \subset L$ de $I$,
+
+% ---- from der-ch17_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}
+X_J \arrow[r] \arrow[d, "u_J"'] \arrow[dr, phantom, "\cocart"] & X_K \arrow[r] \arrow[d, "\tilde{u}_{J,K}"'] \arrow[dr, phantom, "\cocart"] & X_L \arrow[d, "\tilde{u}_{J,L}"'] \arrow[dd, bend left=40, "\tilde{u}_{K,L}"] \\
+Y_J \arrow[r] & Y_{J,K} \arrow[r] \arrow[d, "u_{J,K}"'] \arrow[dr, phantom, "\cocart"] & Y_{J,L} \arrow[d, "u^L_{J,K}"'] \arrow[dd, bend left=40, "u_{J,L}"] \\
+ & Y_K \arrow[r] & Y_{K,L} \arrow[d, "u_{K,L}"'] \\
+ & & Y_L\ ,
+\end{tikzcd}
+\tag*{(2)}
+\]
+donnant lieu à une nouvelle flèche $u^L_{J,K}$, déduite de $u_{J,K}$ par le cochangement de base \msp{page 15} $Y_{J,K} \longrightarrow Y_{J,L}$. Nous utiliserons ce diagramme dans les deux cas où $(J \subset K \subset L)$ est l'un des deux triplets
+\[
+\left\{
+\begin{aligned}
+& I'_0 \hookrightarrow I_0 \hookrightarrow I \\
+& I'_0 \hookrightarrow I' \hookrightarrow I,
+\end{aligned}
+\right.
+\]
+issus du carré cocartésien (dans Cat) (carré MV)
+\[
+\begin{tikzcd}
+I'_0 \arrow[r, hook] \arrow[d, hook] & I_0 \arrow[d, hook] \\
+I' \arrow[r, hook] & I\ .
+\end{tikzcd}
+\tag*{(3)}
+\]
+
+Il faut insérer les deux diagrammes correspondants du type $(*)$ \texttt{[de la page 10]} dans un même diagramme. On notera à ce propos que les carrés dans $\mathcal{M}$ déduits de (3) en lui appliquant $J \longmapsto X_J$ et $J \longmapsto Y_J$
+\[
+\begin{matrix} (4_X) \\[12ex] (4_Y) \end{matrix}
+\qquad\qquad
+\begin{tikzcd}[column sep=small, row sep=small]
+X_{I'_0} \arrow[rr] \arrow[dr] \arrow[dd, dotted, "u_{I'_0}"] & & X_{I_0} \arrow[dr] \arrow[dd, dotted, "u_{I_0}"] & \\
+ & X_{I'} \arrow[rr] \arrow[dd, dotted, "u_{I'}"'] & & X_I \arrow[dd, dotted, "u_I"'] \\
+Y_{I'_0} \arrow[rr] \arrow[dr] & & Y_{I_0} \arrow[dr] & \\
+ & Y_{I'} \arrow[rr] & & Y_I
+\end{tikzcd}
+\qquad\qquad
+\left.\vrule height 9ex depth 9ex width 0pt\right\}\ (4)
+\]
+sont cocartésien dans $\mathcal{M}$. (Transitivité des $\varinjlim$ \ldots). % [sic] cocartésien -> cocartésiens, agreement with « les carrés »
+
+\msp{page 16}
+On a un homomorphisme $(u_{I'_0}, u_{I_0}, u_{I'}, u_I)$ déduit de $u$ du carré $(4_X)$ dans les carré $(4_Y)$, % [sic] les carré -> le carré, singular noun with plural article
+et cet homomorphisme lui aussi s'insère dans un diagramme, incluant les deux avatars déjà signalé de (2). Voici le diagramme pertinent : % [sic] signalé -> signalés, agreement with « les deux avatars »
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+% the footnote mark (9) stands in the printed label of the display; \footnotemark/\footnotetext used because \footnote cannot be set inside a display tag
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & X_{I_0} \arrow[rrr] \arrow[dd] & & & X_I \arrow[dd] \\
+X_{I'_0} \arrow[ur] \arrow[rr] \arrow[dd] & & X_{I'} \arrow[urr] \arrow[dd] & & \\
+ & Y_{I'_0,I_0} \arrow[rrr] \arrow[dd, "u_{I'_0,I_0}"] & & & Y_{I'_0,I} \arrow[dd, "u^I_{I'_0,I_0}"] \arrow[dddl] \\
+Y_{I'_0} \arrow[ur] \arrow[rr] \arrow[dr, dotted] \arrow[dddrr, dotted] & & Y_{I'_0,I'} \arrow[urr] \arrow[ddd] & & \\
+ & Y_{I_0} \arrow[rrr] \arrow[dddrrr, dotted] & & & Y_{I_0,I} \arrow[ddd, "u_{I_0,I}"] \\
+ & & & Y_{I',I} \arrow[ddr, "u_{I',I}"] & \\
+ & & Y_{I'} \arrow[ur] \arrow[drr, dotted] & & \\
+ & & & & Y_I\ .
+\end{tikzcd}
+\tag*{(5~\footnotemark[9])}
+\]
+\footnotetext[9]{diagramme imbitable, à remplacer par diagramme (6) ci-dessus.}
+
+Le cube supérieur est le cube dans $\mathcal{M}$ à 6 faces cocartésiens déduit des trois flèches de $X_{I'_0}$ dans $X_{I_0}$, $X_{I'}$, $Y_{I'_0}$. % [sic] faces cocartésiens -> faces cocartésiennes, gender agreement
+On aura besoin de savoir que la \textit{base} du cube est un carré cocartésien. La partie antérieure du diagramme est l'avatar de (2) correspondant aux inclusions $I'_0 \subset I' \subset I$, la partie derrière l'avatar pour l'inclusion $I'_0 \subset I_0 \subset I$. Donc les deux autres carrés verticaux, en dessous du cube supérieur, sont également cocartésiens, ainsi que le carré oblique en pointillés, lequel n'est autre que la base $(4_Y)$ du diagramme (4). De ces caractères du diagramme (5) résulte aisément (quoique \msp{page 17} j'ai mis une bonne journée de gribouillis en bonheur-la-chance, avant de m'en rendre compte enfin \ldots) que le carré en losange à traits pleins
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & Y_{I'_0,I} \arrow[dl] \arrow[dr] & \\
+Y_{I',I} \arrow[dr] & & Y_{I_0,I} \arrow[dl] \\
+ & Y_I &
+\end{tikzcd}
+\]
+est également cocartésien. On le voit trivialement sur le diagramme déployé
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}[column sep=tiny, row sep=small]
+ & & Y_{I'_0} \arrow[dl] \arrow[dr] & & \\
+ & Y_{I'_0,I'} \arrow[dl] \arrow[dr] & \cocart & Y_{I'_0,I_0} \arrow[dl] \arrow[dr, "u_{I'_0,I_0}"] & \\
+Y_{I'} \arrow[dr] & \cocart & Y_{I'_0,I} \arrow[dl] \arrow[dr, "u^I_{I'_0,I_0}"] & \cocart & Y_{I_0} \arrow[dl] \\
+ & Y_{I',I} \arrow[dr, "u_{I',I}"] & \cocart & Y_{I_0,I} \arrow[dl] & \\
+ & & {?\simeq Y_I \simeq Y_{I'} \amalg_{Y_{I'_0}} Y_{I_0}\ ,} & &
+\end{tikzcd} % ?? uncertain: coproduct sign -- \amalg or \sqcup
+\tag*{(6)}
+\]
+qui est finalement le diagramme pertinent (le diagramme (5) ne servait à rien, c'est un mauvais bout par lequel j'ai pris les choses). On voit sur le diagramme (6) que pour prouver $u_{I',I} \in C$ resp. $TC$, il \msp{page 18} suffit de prouver $u_{I'_0,I_0} \in C$ resp. $TC$. Mais c'est là une assertion relative à l'inclusion d'ensembles ordonnés $I'_0 \subset I_0$ \textit{finis.} On est donc réduit à prouver le lemme suivant, où $I_0$ devient $I$ :
+
+\textbf{Lemme.} \textit{Soit $I$ un ensemble ordonné fini, $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ une flèche dans $\mathcal{M}(I^\circ)$, où $\mathcal{M}$ est une catégorie munie d'un ensemble $C \subset \mathrm{Fl}(\mathcal{M})$ de flèches tel que $C$ soit stable par cochangement de base et par composition, et contienne les isomorphismes. On suppose $u_\bullet \in C_I$, i.e. que pour tout $i \in I$, la flèche $u_{I_{<i},I/i}$ est dans $C$. Alors pour toute partie ouverte $I'$ de $I$, la flèche $u_{I',I}$ est dans $C$}~\footnote[10]{\textbf{N.B.} Bien sûr, $u_{J,K} \in C$ si $J \subset K$ sont deux ouverts de $I$, comme on voit en appliquant le lemme à $K$ au lieu de $I$.}\textit{.}
+
+\textbf{Corollaire.} \textit{Si de plus $W \ \subset\ \mathrm{Fl}(\mathcal{M})$ est un localiseur modérément saturé, tel que $TC \overset{\textup{déf}}{=} W \cap C$ soit stable par cochangement de base (et l'est de toutes façons par composition, et contient les isomorphismes), alors on a}
+\[
+C_I \cap W_{I^\circ} \ = \ (TC)_I,
+\]
+\textit{donc si $u_\bullet \in C_I$ (cf. ci-dessus) et les $u_i \in W$, alors $u_\bullet \in (TC)_I$, donc en appliquant ce qui est dit pour $C$ à $TC$, on a $u_{I',I} \in TC$ pour toute} \msp{page 19} \textit{partie ouverte $I'$ de $I$.}
+
+On prouvera en même temps le lemme et son corollaire, en procédant par récurrence sur $\operatorname{card} I = n$. Si $n = 0$, i.e. $I = \emptyset$, les énoncés sont triviaux. Par transitivité, en utilisant les diagrammes du type (2), on est ramené au cas où $I = I' \cup \{i_0\}$, où $i_0 \in I \backslash I'$. On pose encore $I_0 = I/i_0$, $I'_0 = I_0 \cap I'$, et le raisonnement qu'on vient de faire nous montre qu'il suffit de prouver que $u_{I'_0,I_0} \in C$ resp. $\in TC$. Si $I'_0 \neq I$, cela résulte de l'hypothèse de récurrence. % [sic] I'_0 \neq I -> I_0 \neq I, the alternative « Sinon, i_0 est un objet final de I » requires I_0 = I
+Sinon, $i_0$ est un objet final de $I$, et $I' = I_{<i_0}$, et alors $u_{I',I} \in C$ est inclus dans la définition de $C_I$. Reste à prouver alors que $u_{I',I} \in TC$ si les $u_i \in W$. On a le diagramme
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\[
+\begin{tikzcd}
+X_{I'} \arrow[r] \arrow[d, "u_{I'}"'] \arrow[dr, phantom, "\cocart"] & X_I \arrow[d, "\tilde{u}_{I',I}"'] \arrow[dd, dotted, bend left=40, "u_I"] \\
+Y_{I'} \arrow[r] & Y_{I',I} \arrow[d, "u_{I',I}"'] \\
+ & Y_I\ ,
+\end{tikzcd}
+\]
+\msp{page 20} et l'hypothèse de récurrence implique $u_{I'} \in TC$, donc $\tilde{u}_{I',I} \in TC$ par cochangement de base. D'autre part, la flèche $u_I : X_I \longrightarrow Y_I$ s'identifie à $X_{i_0} \longrightarrow Y_{i_0}$ ($i_0$ étant élément final de $I$), elle est donc dans $W$. Donc par saturation, $u_{I',I} \in W$, donc $u_{I',I} \in TC$, q.e.d.
+
+Ainsi, la proposition 2 est prouvée, ainsi que son corollaire 1 -- et on voit que si dans la proposition 2 et son corollaire, on suppose $I$ \textit{fini,} alors il est inutile dans les hypothèses pour $C$, resp. $TC = C \cap W$, de supposer la stabilité par composition \textit{transfinie,} la composition ordinaire suffit. Mais il reste à prouver le corollaire 2, que je viens de prouver dans le cas $I$ \textit{fini,} sans avoir à faire appel à une hypothèse ``transfinie''. Il faut maintenant prouver que c'est encore OK dans le cas localement fini, en supposant $C$ stable par composition transfinie. (Il n'y a plus à revenir sur le cas de $W$, car on sait déjà maintenant que $C_I \cap W_{I^\circ} = (TC)_I$, par le corollaire 1 déjà prouvé.)
+
+\msp{page 21}
+La démonstration est essentiellement la même que pour le cas particulier déjà traité $I' = \emptyset$, $I'' = I$, et on aurait pu aussi bien rédiger la démonstration dans ce cadre, à l'aide d'une suite strictement croissante transfinie d'ouverts dans $I$, $I_\alpha$, avec \fbox{$I_0 = I',$} $I_{\alpha_0} = I''$ $(= I)$, et
+\[
+\begin{aligned}
+I_\alpha \ &= \ I_{\alpha-1} \cup I/s_{\alpha-1} && \text{si $\alpha$ non limite, $I_{\alpha-1} \neq I$, en choisissant $s_{\alpha-1} \in I \backslash I_{\alpha-1}$,} \\
+I_\alpha \ &= \ \textstyle\bigcup_{\beta<\alpha} I_\beta && \text{si $\alpha$ limite,}
+\end{aligned}
+\]
+et en posant encore
+\[
+X_\alpha \ = \ X_{I_\alpha}, \qquad Y_\alpha \ = \ Y_{I_\alpha}, \qquad u_\alpha = u_{I_\alpha} \ : \ X_\alpha \longrightarrow Y_\alpha.
+\]
+Soit $\alpha_0$ tel que $I_{\alpha_0} = I$ (indice terminal de la suite), il faut prouver que dans
+\[
+\begin{tikzcd}
+X_0 \arrow[r] \arrow[d] & X_{\alpha_0} \arrow[d] \\
+Y_0 \arrow[r] & Y_{0,\alpha_0} \arrow[d, "u_{0,\alpha_0}"] \\
+ & Y_{\alpha_0}\ ,
+\end{tikzcd}
+\]
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 22} on a
+\[
+u_{0,\alpha_0} \ \in \ C.
+\]
+
+Compte tenu du complément marginal à la proposition 1 (qui se prouve de la même façon \ldots), on est ramené à prouver que l'homomorphisme des systèmes ordinaux envisagés est dans $C_{I_{\alpha_0+1}}$ (où $I_{\alpha_0+1}$ est l'ensemble des ordinaux $\leq \alpha_0$). Or qu'il en soit ainsi se prouve exactement comme tantôt, à cela près qu'on doit d'abord faire une vérification de $(*)$ p.~1 ($\tilde{u}_\bullet \in C$) pour $i_0 = 0$. Alors le diagramme $(*)$ p.~1 est
+\[
+\begin{tikzcd}
+\emptyset \arrow[r] \arrow[d, "\mathrm{iso}"] & X_0 = X_{I'} \arrow[d, "\mathrm{iso}"', "\mathrm{id}"] \\
+\emptyset \arrow[r] & X_0 = X_{I'} \arrow[d, "u_0 = u_{I'}"] \\
+ & Y_0 = Y_{I'}\ ,
+\end{tikzcd}
+\]
+et il faut donc vérifier $u_0 = u_{I'} \in C$. Or ceci est contenu dans la proposition 2 elle-même, déjà prouvé, qu'on doit donc utiliser. % [sic] prouvé -> prouvée, agreement with « la proposition 2 »
+Le reste se prouve comme avant. Ainsi, le corollaire 2 de la proposition 2 est également prouvé.
+
+\textbf{Commentaires :} Il y a un malaise, car les proposition 1 et proposition 2 (ainsi que leurs corollaires) ont essentiellement la même conclusion, avec des hypothèses sur $I$ qui sont \msp{page 23} différentes : bien ordonné dans un cas, localement fini dans un autre. L'idée naturelle, c'est de donner un énoncé commun, qui coiffe les deux à la fois, avec $I$ artinien, i.e. toute suite décroissante est stationnaire. Ce qu'il faut, c'est une hypothèse sur $I$ d'une part, sur $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $\mathcal{M}(I^\circ)$ d'autre part, qui assure ceci :
+
+\begin{enumerate}
+\item[$(*)$] $\forall\ i_0 \in I$, et toute partie ouverte $J'$ de $J = I/i_0$, la flèche $u_{J',J}$ dans le diagramme
+\[
+\begin{tikzcd}
+X_{J'} \arrow[r] \arrow[d, "u_{J'}"'] \arrow[dr, phantom, "\cocart"] & X_J \arrow[d, "\tilde{u}_{J',J}"'] \arrow[dd, bend left=40, "u_J"] \\
+Y_{J'} \arrow[r] & Y_{J',J} \arrow[d, "u_{J',J}"'] \\
+ & Y_J
+\end{tikzcd}
+\]
+est dans $C$.
+\end{enumerate}
+
+\textbf{Question :} est-il exacte qu'il suffit, pour la validité de $(*)$, de supposer % [sic] exacte -> exact, agreement with « il »
+\begin{enumerate}
+\item[a)] $u_\bullet \in C_I$, i.e. $u_{J',J} \in C$ quand $J = I/i_0$, $J' = J \backslash \{i_0\}$, et
+\item[b)] \textit{$I$ localement fini ?}
+\end{enumerate}
+
+% ---- from der-ch17_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 24}
+
+\textbf{Lemme.} \textit{Soit $P \subset I$ l'ensemble des $i_0 \in I$ tels que pour tout ouvert $K$ de $J = I/i_0$, la flèche $u_{K,J}$ est dans $C$. Ceci dit, soit $i_0 \in I$ tel que tout $i < i_0$ soit dans $P$. Alors $i_0 \in P$.} (On suppose $u_\bullet \in C_I$, mais $I$ quelconque.)
+
+En effet, soit $K \subset J = I/i_0$ un ouvert. Si $K = J$, il est trivial que $u_{K,J} \in C$ (c'est un isomorphisme). Si $K = J$, on a % [sic] Si K = J (second occurrence) -> Si K \neq J, the first case already treats K = J
+\[
+K \ \subset\ J' \overset{\text{déf}}{=} J\backslash\{i_0\} \ \subset\ J,
+\]
+et pour prouver que $u_{K,J} \in C$, il suffit de prouver que $u_{K,J'}, u_{J',J} \in C$. Or $u_{J',J} \in C$ par hypothèse $u_\bullet \in C_I$. Et $u_{K,J'} \in C$ par ce que a été prouvé pour le cas de $J'$, compte tenu que par hypothèse sur $i_0$, tout $i \in J'$ (i.e. tout $i < i_0$) est dans $P$. % [sic] par ce que a été prouvé -> par ce qui a été prouvé, grammar
+
+\textbf{Corollaire.} \textit{Si $I$ est artinien, $P = I$.}
+
+Car toute partie $P$ de $I$ ayant la propriété qu'on vient de dire ($I/i_0 \subset P \Longrightarrow i_0 \in P$) est égale à $I$. Si en effet il y avait $x_0 \notin P$, il existerait $x_1 < x_0$ avec $x_0 \notin P$, et par récurrence on construirait une suite strictement décroissante dans $I$, absurde. % [sic] avec x_0 \notin P -> avec x_1 \notin P, the new element must lie outside P
+
+\msp{page 25}
+
+\section*{2\quad Description de $C_I \subset \Fl(\M(I^\circ))$, pour $I$ ensemble ordonné}
+
+Soit $\M$ une catégorie, stable par (petites) $\varinjlim$ , $C \subset \Fl(\M)$ (“cofibrations”). On suppose
+\[
+\left\{
+\begin{array}{lll}
+\text{a)} & C & \text{contient les isomorphismes et est stable}\\
+ & & \text{par cochangement de base.}\\[1ex]
+\text{b)} & C & \text{stable par composition transfinie.}
+\end{array}
+\right.
+\tag*{(2.1)}
+\]
+
+Soit $I$ un (petit) ensemble ordonné, et considérons
+\[
+\M(I^\circ) \ =\ \underline{\mathrm{Hom}}(I,\M),
+\]
+on va définir une partie
+\[
+C_I \ \subset\ \Fl(\M(I^\circ))
+\]
+ainsi, pour $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ flèche dans $\M(I^\circ)$ :
+\[
+u_\bullet \in C_I \quad\Longleftrightarrow\quad
+\begin{array}{l}
+\forall\ i_0 \in I \text{ et pour tout ouvert } J \subset I/i_0 = K,\\
+\text{la flèche } u_{J,K} \text{ est dans } C.
+\end{array}
+\tag*{(2.2)}
+\]
+
+Voici la définition de $u_{J,K}$. Pour tout ouvert $J$ de $I$, on pose
+\[
+\left\{
+\begin{array}{rclrcl}
+X_J & = & \varinjlim\limits_{i\in J} X_i, & Y_J & = & \varinjlim\limits_{i\in J} Y_i,\\[2ex]
+u_J : X_J & \longrightarrow & Y_J, & u_J & = & \varinjlim\limits_{i\in J} u_i,
+\end{array}
+\right.
+\tag*{(2.3)}
+\]
+et on considère, pour $K \subset J$, le diagramme
+% foot: Version 9 février 2019
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 26}
+
+\[
+\begin{tikzcd}
+X_K \arrow[r, "\tau^X_{K,J}"] \arrow[d, "u_K"'] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X_J \arrow[d, "\tilde{u}_{K,J}"'] \arrow[dd, bend left=40, "u_J"] \\
+Y_K \arrow[r, "\tau^Y_{K,J}"] & Y_{K,J} \rlap{$\ = Y_K \amalg_{X_K} X_J$} \arrow[d, "u_{K,J}"'] \\
+ & Y_J \ .
+\end{tikzcd}
+\]
+
+\textbf{Théorème 2.1.} \textit{Soit $\M$ $\mathfrak{U}$-catégorie stable par petites $\varinjlim$ , $C \subset \Fl(\M)$, satisfaisant les conditions de stabilité} \textup{(2.1)} \textit{(par cochangement de base et par composition transfinie), $I$ un petit ensemble ordonné, $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ une flèche dans $\M(I^\circ)$.}
+\begin{itemize}[leftmargin=3em]
+\item[$1^\circ$)] \textit{On suppose $u_\bullet \in C_I$ (cf.} \textup{(2.2)}\textit{). Soient $K \subset J$ deux ouverts de $I$. Alors $u_{K,J}$ (défini dans} \textup{(2.4)}\textit{) est dans $C$.}
+\item[$2^\circ$)] \textit{Supposons $I$ artinien. Pour qu'on ait $u_\bullet \in C_I$, i.e. pour que $u_{K,J}$ soit dans $C$ pour tout couple $(K \subset J)$ d'ouverts tel que $J$ ait un plus grand élément, i.e. soit de la forme $I/i_0$ (i.e. aussi, par} $1^\circ$\textit{), pour} \textup{tout} \textit{couple d'ouverts $J \subset K$), (il faut et) il suffit qu'il en soit ainsi dans le cas particulier où $J = I/i_0$, $J' = I'/i_0 \overset{\text{déf}}{=} I/i_0 - \{i_0\} = \{i \in I \mid i < i_0\}$.}
+
+\msp{page 27}
+\item[$3^\circ$)] \textit{Supposons encore $I$ artinien}\footnote[11]{J'ignore si cette hypothèse est nécessaire, cf. commentaire p. 39.}\textit{. Soit $W \subset \Fl(\M)$ un localiseur modérément saturé, tel que $TC \overset{\text{déf}}{=} C \cap W$ satisfasse également aux conditions de stabilité} \textup{(2.1)} \textit{(par cochangement de base, par composition transfinie). Les conditions suivantes sur une flèche $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $\M(I^\circ)$ sont équivalentes.}
+\begin{itemize}[leftmargin=2em]
+\item[a)] \textit{$u_\bullet \in (TC)_I$, i.e. pour tout $i_0 \in I$ et $K$ ouvert de $J = I/i_0$, la flèche $u_{K,J}$ est dans $TC$.}
+\item[b)] \textit{$u_\bullet \in C_I \cap W_{I^\circ}$, i.e. pour tout $i_0 \in I$, on a $u_{i_0} \in W$, et pour tout ouvert $K$ de $I/i_0 = J$, on a $u_{K,J} \in C$.}
+\end{itemize}
+\end{itemize}
+
+Donnons tout de suite les corollaires principaux.
+
+\textbf{Corollaire 2.2.} \textit{Supposons $(u_\bullet : X_\bullet \longrightarrow Y_\bullet) \in C_I$. Alors}
+\begin{itemize}[leftmargin=3em]
+\item[a)] \textit{$\forall\ i \in I$, $u_i : X_i \longrightarrow Y_i$ est dans $C$.}
+\item[b)] \textit{La flèche}
+\[
+u_I \ :\ X_I \longrightarrow Y_I
+\tag*{(2.2.1)}
+\]
+\textit{est dans $C$. Plus généralement, pour toute partie ouverte $J$ de $I$, la flèche}
+\[
+u_J \ :\ X_J \longrightarrow Y_J
+\tag*{(2.2.2)}
+\]
+\textit{est dans $C$.}
+\end{itemize}
+% foot: Version 9 février 2019
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 28}
+
+Pour a), on applique $1^\circ$) (ou simplement la \textit{définition} de $C_I$) dans le cas de l'inclusion d'ouverts $\emptyset \hookrightarrow I/i$, vu qu'on a
+\[
+u_{\emptyset,I/i} \ \simeq\ u_i \ .
+\]
+Pour b), on applique $1^\circ$) à l'inclusion $\emptyset \longrightarrow I$, vu que
+\[
+u_{\emptyset,I} \ \simeq\ u_I \ ,
+\]
+et plus généralement
+\[
+u_{\emptyset,J} \ \simeq\ u_J \ .
+\]
+
+\textbf{Corollaire 2.3.} \textit{Supposons $u_\bullet \in C_I \cap W_{I^\circ}$. Alors pour toute inclusion d'ouverts $K \subset J$ de $I$, on a $u_{K,J} \in TC$, et en particulier (prenant $K = \emptyset$), on a $u_J \in TC$. Enfin, pour tout $i \in I$, on a $u_i \in TC$.}
+
+\textbf{Corollaire 2.4.} \textit{Soit $X_\bullet$ dans $\M(I^\circ)_{\mathrm{c}}$ un système inductif $C$-cofibrant, i.e. tel que $\emptyset_I \longrightarrow X_\bullet$ soit dans $C_I$, i.e. tel que pour tout $i_0 \in I$ et tout ouvert $K$ de $J = I/i_0$, la flèche de transition $\tau_{K,J} : X_K = \varinjlim\limits_{i\in K} X_i \longrightarrow X_J \simeq X_{i_0}$ soit dans $C$. Alors pour} \textup{tout} \textit{couple d'ouverts $K \subset J$, la flèche}
+\[
+\tau_{K,J} \ :\ \varinjlim_{i\in K} X_i \longrightarrow \varinjlim_{i\in J} X_i
+\]
+\textit{est dans $C$}\footnote[12]{et réciproquement, caractérise les objets $C$-cofibrants.}\textit{. En particulier (faisant $K = I/k$, $J = I/j$ pour $k \leq j$), si $k \leq j$ sont dans $I$, le morphisme de transition}
+\[
+\tau_{k,j} \ :\ X_k \longrightarrow X_j
+\]
+\msp{page 29}
+\textit{est dans $C$. Enfin, si $W \subset \Fl(\M)$ est comme dans} \textup{(2.1.\ $3^\circ$)}\textit{, et si $\emptyset_I \longrightarrow X$ est dans $W_{I^\circ}$, i.e. les $X_i$ sont $W$-coasphériques, alors $X_\bullet$ est dans $\M(I^\circ)_{TC}$ (où $TC = C \cap W$), et pour tout ouvert $J$ de $I$, $X_J = \varinjlim\limits_{i\in J} X_i$ est dans $\M_{TC}$, donc $X_J$ est $W$-coasphérique, et pour tout couple d'ouverts $K \subset J$, la flèche de transition $\tau_{K,J}$ est dans $TC$.}
+
+Signalons enfin le complément suivant au théorème 2.1, qui résultera de sa démonstration :
+
+\textbf{Corollaire 2.5.} \textit{Supposons que l'espace topologique associé à $I$ (dont les ouverts sont les ouverts de $I$, et les $I/i$ forment une base d'ouverts) soit} \textup{noethérien}\textit{, i.e. toute suite croissante d'ouverts est stationnaire. Alors toutes les conclusions dans le théorème} \textup{2.1} \textit{et ses corollaires restent valables, en supposant seulement la stabilité de $C$ ou de $TC = C \cap W$ par composition simple (au lieu de composition transfinie), en plus des deux autres stabilités.}
+% foot: Version 9 février 2019
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 30}
+
+\textsc{Démonstration} du théorème 2.1 et du corollaire 2.5.
+
+2.1. $1^\circ$) On peut supposer $J = I$, $K \subset I$. On construit une suite transfinie strictement croissante d'ouverts $I_\alpha$, avec
+\[
+\left\{
+\setlength{\arraycolsep}{4pt}
+\begin{array}{rcll}
+I_0 & = & K, & \\[1ex]
+I_{\alpha+1} & = & I_\alpha \cup I/s_\alpha & \text{où } s_\alpha \in I\backslash I_\alpha \text{ (si } I_\alpha \neq I\text{, sinon, la construction transfinie s'arrête),}\\[1ex]
+I_\alpha & = & \bigcup_{\beta<\alpha} I_\beta & \text{si } \alpha \text{ ordinal limite.}
+\end{array}
+\right.
+\]
+
+Il existe un $\alpha_0$ tel qu'on ait $I_{\alpha_0} = I$. On voit alors comme au paragraphe 1
+\msp{page 31}
+que pour tout $\alpha$, on a
+\[
+u_{I_\alpha,I_{\alpha+1}} \ \in\ C,
+\tag*{$(*)$}
+\]
+car il est déduit de $u_{(I/s_\alpha)\cap I_\alpha,I/s_\alpha}$ par cochangement de base. Cf. diagramme (6), p. 17, qu'il faudrait dégager en lemme, débarrassé des particularités techniques de la situation, i.e. un lemme sur les homomorphismes de carrés cartésiens :
+
+\textbf{Lemme 2.6.} \textit{Soit un homomorphisme de carrés cocartésiens $X_\bullet$, $Y_\bullet$, dans une catégorie $\M$ avec sommes amalgamées (\textbf{N.B.} il suffit que les sommes amalgamées intervenant ci-dessus existent) :}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+X_0 \arrow[rr] \arrow[dr] \arrow[dd, "f_0"'] & & X_1 \arrow[dr] \arrow[dd, "f_1" near end] & \\
+ & X'_0 \arrow[rr, crossing over] & & X'_1 \arrow[dd, "f'_1"] \\
+Y_0 \arrow[rr] \arrow[dr] & & Y_1 \arrow[dr] & \\
+ & Y'_0 \arrow[rr] \arrow[from=uu, crossing over, "f'_0" near start] & & Y'_1 \ .
+\end{tikzcd}
+\tag*{(2.6.1)}
+\]
+
+\textit{Soient $Z_0$, $Z_1$ les deux carrés latéraux et considérons, pour tout carré commutatif}
+$Z = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X \arrow[r] \arrow[d] \& X' \arrow[d] \\
+Y \arrow[r] \& Y'
+\end{tikzcd}$ \textit{, la flèche $u_Z$ du diagramme}
+\[
+\begin{tikzcd}
+X \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X' \arrow[d] & \\
+Y \arrow[r] & \tilde{Z} \arrow[r, "u_Z"'] & Y' \ .
+\end{tikzcd}
+\]
+% foot: Version 9 février 2019
+
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 32}
+
+\textit{Alors la flèche $u_{Z_1}$ se déduit de $u_{Z_0}$ par cochangement de base, de façon plus précise, on a un carré cocartésien, où} $T = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X_0 \arrow[r] \arrow[d] \& X_1 \arrow[d] \\
+Y_0 \arrow[r] \& Y_1
+\end{tikzcd}$ \textit{et} $T' = \begin{tikzcd}[ampersand replacement=\&, baseline=(\tikzcdmatrixname.center)]
+X'_0 \arrow[r] \arrow[d] \& X'_1 \arrow[d] \\
+Y'_0 \arrow[r] \& Y'_1
+\end{tikzcd}$ \textit{désignent la face postérieure et antérieure du cube} \textup{(2.6.1) :}
+\[
+\begin{tikzcd}
+\tilde{Z}_0 \arrow[r, "u_{Z_0}"] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & Y'_0 \arrow[d] \\
+\tilde{Z}_1 \arrow[r, "u_{Z_1}"] & Y'_1 \ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\textit{qu'on voit sur la base du diagramme}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+X_0 \arrow[rr] \arrow[dr] \arrow[dd, "f_0"'] & & X_1 \arrow[dr] \arrow[dd, "f_1" near end] & & \\
+ & X'_0 \arrow[rr, crossing over] & & X'_1 \arrow[dd] \arrow[dddr, "f'_1"] & \\
+Y_0 \arrow[rr] \arrow[dr] \arrow[dr, phantom, shift left=2ex, "\text{\tiny cocart.}"] & & Y_1 \arrow[dr] & & \\
+ & \tilde{Z}'_0 \arrow[rr] \arrow[dr, "u_{Z_0}"'] \arrow[from=uu, crossing over] & & \tilde{Z}'_1 \arrow[dr, "u_{Z_1}"'] & \\
+ & & Y'_0 \arrow[rr] \arrow[from=uuul, crossing over, "f'_0" near end] \arrow[ur, phantom, "\text{\tiny cocart.}"] & & Y'_1 \ ,
+\end{tikzcd} % ?? uncertain: arrow to which the label f'_0 belongs and exact positions of the two "cocart." labels -- f'_0 printed beside the long diagonal X'_0 -> Y'_0 near Z̃'_0 -> Z̃'_1
+\tag*{$(**)$}
+\]
+\textit{dans lequel le cube est un cube totalement cocartésien, déduit du carré cocartésien $X$ en l'“exponentiant” par la flèche $f_0 : X_0 \longrightarrow Y_0$} \texttt{[plutôt, par la flèche} $(f_0,f_1)$ \texttt{de} $\underline{\Fl}(\M)$\texttt{]}\textit{.}
+
+La base du cube, et le carré
+\msp{page 33}
+composé de celui-ci et de $(*)$ (base du diagramme polyédral $(**)$) étant cartésien, il en est de même de $(*)$.
+
+\textbf{Lemme 2.7.} \textit{Soit $(I_\alpha)_{\alpha\leq\alpha_0}$ une suite ordinale croissante d'ouverts de $I$. Alors $u_{I_0,I_{\alpha_0}} : Y_{I_0,I_{\alpha_0}} \longrightarrow Y_{I_{\alpha_0}}$ est composé transfini, indexé par l'ensemble des ordinaux $-1 \leq \alpha < \alpha_0$, d'une suite de flèches $v_\alpha$, où chaque $v_\alpha$ est déduit de $u_{I_\alpha,I_{\alpha+1}}$ par cochangement de base (et de $u_{I_0} : X_{I_0} \longrightarrow Y_{I_0}$ pour $\alpha = 0$).}
+
+Pour le voir, on introduit la suite transfinie d'objets $Z_\alpha = Y_{I_\alpha,I_{\alpha_0}}$, définis par le diagramme
+% foot: Version 9 février 2019
+
+% ---- from der-ch17_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}
+X_{I_\alpha} \arrow[r] \arrow[d] & X_{I_{\alpha_0}} \arrow[d] \\
+Y_{I_\alpha} \arrow[r] & Y_{I_\alpha,I_{\alpha_0}} \rlap{${}= Z_\alpha$} \arrow[d] \\
+& Y_{I_{\alpha_0}} \rlap{\ ,}
+\end{tikzcd}
+\]
+on a $Z_0 = Y_{I_\alpha,I_{\alpha_0}}$, $Z_{\alpha_0} = Y_{I_\alpha,I_{\alpha_0}}$, $Z_\alpha = \varinjlim\limits_{\beta<\alpha} Z_\beta$ si $\alpha$ \msp{34} ordinal limite. Donc il reste à déterminer les $v_{\alpha,\alpha+1} : Z_\alpha \longrightarrow Z_{\alpha+1}$ (pour $\alpha < \alpha_0$), ce qu'on voit sur le diagramme
+\[
+\begin{tikzcd}
+X_{I_\alpha} \arrow[r] \arrow[d] & X_{I_{\alpha+1}} \arrow[r] \arrow[d] & X_{I_{\alpha_0}} \rlap{${}= Z_0$} \arrow[d] \\
+Y_{I_\alpha} \arrow[r] & Y_{I_\alpha,I_{\alpha+1}} \arrow[r] \arrow[d, "u_{I_\alpha,I_{\alpha+1}}"] & Y_{I_\alpha,I_{\alpha_0}} \rlap{${}= Z_\alpha$} \arrow[d, "v_{\alpha,\alpha+1}"] \\
+& Y_{I_{\alpha+1}} \arrow[r] & Y_{I_{\alpha+1},I_{\alpha_0}} \rlap{${}= Z_{\alpha+1}\ .$}
+\end{tikzcd}
+\]
+
+Reprenons la démonstration de 2.1. On va prouver 1° par les deux lemmes précédents. Notons que lorsque l'espace sous-jacent à $I$ est noethérien, alors la construction transfinie est forcément finie, donc on n'a pas besoin de la stabilité de $C$ par composés transfinis infinis.
+
+\msp{35}
+
+Prouvons 2°. On suppose donc que pour tout $i_0 \in I$, on ait $u_{I_{<\alpha_0},I/i_0} \in C$, on veut en déduire que $u_\bullet \in C_I$, i.e. $u_{J,I/i_0} \in C$ pour \textit{tout} ouvert.
+
+\noindent\textbf{Lemme 2.8.} (Sous hypothèse artinienne sur $I$.) \textit{Soit $P \subset I$ l'ensemble des $i_0 \in I$ tels que pour $u_\bullet|I/i_0$ soit dans $C_{I/i_0}$, i.e. que pour tout $i \leq i_0$, et tout ouvert $K$ de $I/i$, on ait $u_{K,I/i} \in C$. Soit $i_0 \in I$ tel que $I_{<i_0} \subset P$. Alors $i_0 \in P$.}
+
+\noindent\textsc{Démonstration}. Il reste à prouver que si $K \subset I/i_0 = J$ est un ouvert, alors $u_{K,J} \in C$. On peut supposer $K \neq I/i_0$, i.e. $K \subset I_{<i_0} \overset{\text{déf}}{=} J'$. Mais alors par hypothèse initiale sur $u_\bullet$, on a $u_{J',J} \in C$, et d'autre part, par hypothèse sur $i_0$, $u_\bullet|J'$ est dans $C_{J'}$. Donc par le théorème 2.1. 1°, on a $u_{K,J'} \in C$. Donc par transitivité $u_{K,J} \in C$, q.e.d.
+
+\noindent\textbf{Corollaire 2.9.} \textit{Si $I$ est artinien, alors $P = I$, i.e. $u_\bullet \in C_I$.}
+
+Cela prouve donc 2.1. 2°. Notons que $\mathrm{Esp}(I)$ est noethérien, il en est de même de tout ouvert (tel $J'$ ci-dessus), donc \msp{36} pour la conclusion du lemme, inutile de supposer $C$ stable par composition infinie.
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+Prouvons 2.1. 3°. On a a) $\Longrightarrow$ b), car par 2.1. 1°, $u_\bullet \in (TC)_I$ implique que pour $i \in I$, $u_i : X_i \longrightarrow Y_i$ est dans $TC$ (cf. cor. 2.1 a). Donc il reste à prouver b) $\Longrightarrow$ a), i.e. si $u_\bullet \in C \cap W_{I^\circ}$, alors $u_\bullet \in (TC)_I$, i.e. les $u_{K,I/i_0}$ sont dans $TC$. On sait déjà que $u_{K,I/i_0} \in C$ par hypothèse $u_\bullet \in C_I$, donc il faut prouver que c'est dans $W$. On est ramené à prouver que $u_K \in W$, i.e. $u_K \in TC$, car par le diagramme (où $J = I/i_0$)
+\[
+\begin{tikzcd}
+X_K \arrow[r] \arrow[d, "u_K"'] \arrow[dr, phantom, "\text{cocart.}"] & X_J \arrow[d, "\tilde{u}_{K,J}"'] \arrow[dd, bend left=50, "u_J"] \\
+Y_K \arrow[r] & Y_{K,J} \arrow[d, "u_{K,J}"'] \\
+& Y_J \rlap{\ ,}
+\end{tikzcd}
+\]
+$u_K \in TC$ implique $\tilde{u}_{K,J} \in TC$, et comme $u_J \simeq u_{i_0} \in W$ par hypothèse, il en résulte bien $u_{K,J} \in W$ par saturation. Mais on va s'y prendre autrement :
+
+\msp{37}
+
+\noindent\textbf{Lemme 2.9.} \textit{$I$ ensemble ordonné quelconque, $C$, $W$ comme dans th.} 2.1, 1° \textit{et} 3°, \textit{$u_\bullet : X_\bullet \longrightarrow Y_\bullet$ dans $C_I \cap W_{I^\circ}$. Soit $P$ l'ensemble des $i_0 \in I$ tels que $u_\bullet|I/i_0$ soit dans $(TC)_{I/i_0}$. Si $i_0 \in I$ est tel que $I_{<i_0} \subset P$, alors $i_0 \in P$.}
+
+En effet, il reste à prouver que pour tout ouvert $K$ de $J = I/i_0$, $K \neq J$, on a $u_{K,J} \in TC$. Mais pour ceci, il suffit de voir que $u_K, u_J \in W$ (comme on venait de le voir). Or $u_J \simeq u_{i_0} \in W$ par hypothèse. D'autre part $u_\bullet|K \in (TC_K)$ puisque $K \subset I_{<i_0} \subset P$, donc par le théorème 2.1, 1°, on conclut que $u_K \in TC$.
+
+Si maintenant on suppose $I$ artinien, il résulte de 3.9 que $P = I$, donc $u_\bullet \in (TC)_I$, q.e.d. % [sic] 3.9 -> 2.9, the lemma just stated is Lemme 2.9
+
+Cela achève la démonstration du théorème 2.1, et aussi du corollaire 2.5, vu que pour la démonstration du lemme 2.9 également, les hypothèses infinies sur $C$, $C \cap W$ sont inutiles si $\mathrm{Top}(I)$ est noethérien, donc ses ouverts sont aussi noethériens.
+
+\noindent\textbf{Remarques.}
+\begin{enumerate}[leftmargin=2.5em]
+\item[1)] Dans 2.1. 2°, l'hypothèse $I$ artinien n'est par superflue, comme on voit en prenant $I = \mathbf{N}^{\mathrm{opp}} \simeq \mathbf{Z}^{\leq 0}$, \msp{38} et pour une flèche % [sic] n'est par superflue -> n'est pas superflue, negation "pas" intended
+\[ \emptyset_{\M(I)} \longrightarrow Y_\bullet\ . \]
+
+Dire que cette flèche est dans $C_I$ signifie que les morphismes de transition $Y_i \xrightarrow{u_i} Y_{i+1}$ sont dans $C$, \textit{et} que les $Y_i$ sont $C$-cofibrants, i.e. $\emptyset_{\M} \longrightarrow Y_i$ est dans $C$, pour tout $i$. Mais la condition envisagée dans 2.1. 1° est seulement que les $u_i$ sont dans $C$. Donc en prenant pour $Y_\bullet$ un système inductif constant de valeur $Y$, avec $Y$ non $C$-cofibrant, i.e. $\emptyset_{\M} \longrightarrow Y$ non dans $C$, on a un contre-exemple.
+
+Avec le même $I$, on voit que $u_\bullet : X_\bullet \longrightarrow Y_\bullet$ est dans $C$ si et seulement si
+\begin{enumerate}[leftmargin=2.5em]
+\item[a)] les $u_i \in C$, et
+\item[b)] les $u_{i,i+1} : Y_{i,i+1} \longrightarrow Y_{i+1}$ sont dans $C$.
+\end{enumerate}
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+Si de plus les $u_i$ sont dans $W$, donc dans $TC$, on voit comme ci-dessus que $u_{i,i+1} \in TC$ pour tout $i$, donc $u_\bullet \in (TC)_I$. Donc ici on a encore
+\[ (TC)_I \ = \ C_I \cap W_{I^\circ}\ , \]
+quoique $I$ ne soit pas artinien. J'ignore si l'hypothèse artinienne dans 2.1. 3° est superflue ou non.
+\item[2)] Soit $u_\bullet \in \mathrm{Fl}(\M(I^\circ))$\footnote[13]{$I^\circ = I^{\mathrm{opp}}$.}, donc $u_\bullet$ est un objet de $\underline{\mathrm{Fl}}(\M(I^\circ)) \simeq \M(I^\circ \times \boldsymbol{\Delta}^1) = \M((I \times (\boldsymbol{\Delta}^1)^{\mathrm{opp}})^{\mathrm{opp}})$. On vérifie que pour que cet objet soit $C$-cofibrant, il faut et il suffit que
+\begin{enumerate}[leftmargin=2.5em]
+\item[1°)] $X_\bullet$ soit $C$-cofibrant, et
+\item[2°)] $u_\bullet \in C_I$ (ce qui implique que $Y_\bullet$ est aussi cofibrant).
+\end{enumerate}
+\end{enumerate}
+\msp{39}
+
+\section*{3\quad Catégories de modèles à cofibrations}
+
+Soit $\M$ une catégorie munie de deux ensembles de flèches
+\[ W,\ C\ \subset\ \mathrm{Fl}(\M)\ . \]
+On suppose que $\M$ contient un objet initial, et :
+\begin{description}[leftmargin=3em, labelwidth=2.5em]
+\item[Cof$_0$] $W$ est modérément saturé, i.e. contient les isomorphismes et si $f$, $g$ sont composables, et si deux parmi $f$, $g$, $gf$ sont dans $W$, le troisième aussi.
+\item[Cof$_1$] $C$ contient les isomorphismes, est stable par composition et par cochangement de base.
+\item[Cof$_2$] $TC \overset{\text{déf}}{=} C \cap W$ est stable par cochangement de base.
+\item[Cof$_3$] Toute flèche $f$ dans $\M$ s'écrit
+\[ f \ = \ pi \]
+avec $i \in C$, $p \in W$.
+\end{description}
+Ce sont les axiomes de K. S. \textsc{Brown} (forme duale), qui suppose de plus que les objets de $\M$ sont $C$-cofibrants, i.e. $\emptyset_{\M} \longrightarrow X$ est dans $C$. Je ne ferai pas cette hypothèse. La sous-catégorie $\Mc$ de $\M$ formée des \msp{40} objets $C$-cofibrants satisfait aux axiomes de \textsc{Brown}, de plus on prouve que
+\[ \mathrm{Ho}_W(\Mc) \xrightarrow{\ \sim\ } \mathrm{Ho}_W(\M) \]
+est une équivalence. Ainsi les résultats de \textsc{Brown} relatifs à $\Mc$, muni des ensembles de flèches induits par $W$, $C$, sont applicables à $\mathrm{Ho}_W(\M)$ et à ses avatars (tels $\mathrm{Ho}_W(S\backslash\M)$, $\mathrm{Ho}_W(\M/T)$ et $\mathrm{Ho}_W(S\backslash\underset{u_0}{\M}/T)$, \ où $u_0 : S \longrightarrow T$ est donné). Il se trouve que pour l'essentiel, les résultats homotopiques standard (notamment suite exacte de cofibrations relatifs aux opérations homotopiques “à droite” (ou faut-il dire à gauche ? il s'agit pourtant de questions d'exactitude à droite, non à gauche)) sont valables. Il me faudra revenir dessus de façon plus circonstanciée par la suite. Notamment, il y a une bonne théorie de carrés $W$-cocartésiens (et \textit{dans} $\Mc$\textit{,} il y a assez de $W$-cofibrations\footnote[14]{Plus précisément, par K. S. \textsc{Brown}, \textit{dans} $\Mc$\textit{,} les objets de $C$ sont des $W_{\mathrm{c}}$-cofibrations.}, \ldots),
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\msp{41}
+et de plus, ceux-ci sont \textit{exacts.} La catégorie $\mathrm{Ho}_W(\M) \simeq \mathrm{Ho}_W(\Mc)$ “se calcule” par un calcul de fractions à gauche dans $\pi\Mc$, où $\pi\Mc$ est la catégorie déduite de $\Mc$ en y remplaçant les $\mathrm{Hom}_{\Mc}(X,Y) = \mathrm{Hom}_{\M}(X,Y)$ par le quotient par une relation d'homotopie convenable :
+\begin{description}[leftmargin=9em, labelwidth=8em, font=\normalfont]
+\item[$f,g : X \rightrightarrows Y$] sont QB-homotopes (au sens de \textit{Quillen-Brown}) s'il existe un $X' \xrightarrow{\alpha} X$ dans $W$ (et on peut supposer $X' \in \mathrm{Ob}\,\Mc$ également) tel que $f\alpha \overset{1}{\sim} g\alpha$ au sens de \textsc{Quillen}, i.e. il existe un objet cylindre
+\begin{tikzcd}[baseline=(current bounding box.center)]
+I_{X'} \arrow[r, "\in W"] & X' \\
+X' \vee X' \arrow[u, "\in C"] \arrow[ur, dotted] &
+\end{tikzcd}
+pour $X'$, tel que $(f\alpha, g\alpha)\ :\ X' \vee X' \longrightarrow Y$ se factorise par un $h' : I_{X'} \longrightarrow Y$.
+\end{description}
+
+C'est de ce critère que résulte l'exactitude (à gauche) des carrés $W$-cocartésiens.
+
+Je veux voir comment une structure de cofibrations sur $\M$ s'étend aux catégories $\M(I^\circ) = \underline{\mathrm{Hom}}(I, M)$. On a dans $\M(I^\circ)$ \msp{42} l'ensemble $W_{I^\circ}$, et $C_I$ (il vaut mieux sans doute le noter aussi $C_{I^\circ}$) défini au paragraphe précédent. Il s'agit de vérifier les axiomes. L'axiome $\mathrm{Cof}_0$ est immédiat, et bien connu pour $I$ une catégorie quelconque. % [sic] \underline{Hom}(I, M) -> \underline{Hom}(I, \mathcal{M}), italic M printed where the script \mathcal{M} is used everywhere else
+
+$\mathrm{Cof}_1$ : $C_{I^\circ}$ contient les isomorphismes, c'est clair, parce que $C$ les contient. Stable par composition $X_\bullet \xrightarrow{u} Y_\bullet \xrightarrow{v} Z_\bullet$, regardons $K \subset J$, posons $w = v \circ u$,
+\[
+\begin{tikzcd}[execute at end picture={\draw[decorate,decoration={brace,mirror,amplitude=6pt}] ([yshift=-2pt]B.south west) -- ([yshift=-2pt]E.south east) node[midway,below=7pt]{$\scriptstyle w_{K,J}$};}]
+X_K \arrow[r] \arrow[d] & X_J \arrow[d] & & \\
+Y_K \arrow[r] \arrow[d] & Y_{K,J} \arrow[r, "u_{K,J}"] \arrow[d] & Y_J \arrow[d] & \\
+Z_K \arrow[r] & |[alias=B]| \bullet \arrow[r, "u'_{K,J}"] & Z_{K,J} \arrow[r, "v_{K,J}"] & |[alias=E]| Z_J \rlap{\ ,}
+\end{tikzcd}
+\]
+\vspace{1ex}
+
+$w_{K,J}$ est composé de $v_{K,J}$, qui est dans $C$, et $u'_{K,J}$, qui l'est car déduit de $u_{K,J}$ par cochangement de base.
+
+(\textbf{N.B.} On a déjà fait le raisonnement avec un seul $u_\bullet$, et \textit{trois} ouverts $J \subset K \subset L$. Il \msp{43} y aurait lieu d'introduire la notion de $C$-carré
+\begin{tikzcd}[baseline=(current bounding box.center)]
+X_0 \arrow[r] \arrow[d] & X_1 \arrow[d] \\
+X_2 \arrow[r] & X_3
+\end{tikzcd}, comme un carré tel que
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+$X_1 \amalg_{X_0} X_2 \longrightarrow X_3$ soit dans $C$ (\textbf{N.B.} notion symétrique pour les foncteurs de symétrie des carrés), et dire que le composé de deux $C$-carrés est un $C$-carré.)
+
+Cochangement de base
+\[
+\begin{tikzcd}
+X_\bullet \arrow[r, "u"] \arrow[d] & Y_\bullet \arrow[d] \\
+X'_\bullet \arrow[r, "u'"] & Y'_\bullet \rlap{\ .}
+\end{tikzcd}
+\]
+
+Considérons $K \subset J$, on a
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+& X_K \arrow[r] \arrow[d] \arrow[ddl] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X_J \arrow[d] \arrow[dr] & \\
+& Y_K \arrow[r] \arrow[ddl] \arrow[dl, phantom, "\text{\scriptsize cocart.}"] & Y_{K,J} \arrow[r, "u_{K,J}"] \arrow[ddl] \arrow[d, phantom, "\text{\scriptsize cocartésien}"] & Y_J \arrow[ddl] \\
+X'_K \arrow[r, crossing over] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X'_J \arrow[d] \arrow[dr, crossing over] \arrow[from=1-3, crossing over] & {} & \\
+Y'_K \arrow[r] & Y'_{K,J} \arrow[r, "u'_{K,J}"] & Y'_J \rlap{\ ,} &
+\end{tikzcd}
+\]
+où les trois carrés latéraux marqués “cocart.” sont cocartésiens, ainsi que le carré en plan incliné. Il en résulte, d'abord que le quatrième carré latéral du cube est lui aussi cocartésien, \msp{44} puis que le carré ayant deux côtés $u_{K,J}$, $u'_{K,J}$ est cocartésien. (\textbf{N.B.} comparer le diagramme similaire p. 32 -- il y aurait un lemme commun à dégager, distinguant deux cas \ldots)
+
+$\mathrm{Cof}_2$. Pour prouver que $C_{I^\circ} \cap W_{I^\circ}$ est stable par cochangement de base, je ne vois pas de façon de le faire, si je ne sais déjà qu'on a
+\[ C_{I^\circ} \cap W_{I^\circ} \ = \ (TC)_{I^\circ}\ , \tag*{$(*)$} \]
+et alors on applique le résultat précédent (où $W$ n'entrait pas) à $TC$ au lieu de $C$. Mais pour avoir $(*)$, il faut que je suppose qu'on est dans l'un des deux cas suivants (de façon à pouvoir appliquer le théorème 2.1 et son corollaire 2.5).
+\begin{enumerate}[leftmargin=2.5em]
+\item[a)] $I$ fini, ou plus généralement $I$ artinien \textit{et} $\mathrm{Top}(I)$ est noethérien.
+\item[b)] $I$ artinien, et de plus $C$ et $TC$ sont stables par composition transfinie.
+\end{enumerate}
+$\mathrm{Cof}_3$. L'axiome de facorisation me paraît a priori le plus délicat\footnote[15]{L'argument qui suit s'applique à d'autres situations de factorisation, par exemple pour un précouple de Quillen donné $(\Phi, \Psi)$ dans $\M$.}. Mais cela sort finalement sans trop de mal. Soit donné % [sic] facorisation -> factorisation, missing letter
+\[ f \ : \ X_\bullet \longrightarrow Y_\bullet \]
+
+% ---- from der-ch17_p026-030.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{45}dans $\mathcal{M}(I^\circ)$, considérons les triples
+\[
+(J,\ Z,\ i,\ p)\ ,
+\]
+où $J\subset I$ est un ouvert, $Z$ un objet de $\mathcal{M}(J^\circ)$, et $i$, $p$ sont des flèches
+\[
+\left\{
+\begin{aligned}
+& X|J \xrightarrow{\ i\ } Z \xleftarrow{\ p\ } Y|J \\
+& \text{avec } i\in C_{J^\circ},\ p\in W_{J^\circ}.
+\end{aligned}
+\right.
+\]
+On ordonne les quadruples par prolongement. Si on a un ensemble totalement ordonné, de $(J_\alpha,Z_\alpha,i_\alpha,p_\alpha)$, posant $J=\bigcup I_\alpha$, on trouve de $Z$, $i$, $p$ uniques sur $J$ qui prolongent % [sic] \bigcup I_\alpha -> \bigcup J_\alpha, the union is of the open sets J_\alpha
+les $Z_\alpha$, $i_\alpha$, $p_\alpha$ donnés, de plus on aura $i\in C_{J^\circ}$, $p\in W_{J^\circ}$, car l'appartenance à $C_{J^\circ}$ resp. $W_{J^\circ}$ est question locale sur $J$. Donc par Zorn, on est ramené à prouver que si $(J,Z,i,p)$ est maximal, on a $J=I$ – d'ou la factorisation voulue $f=pi$. Donc à prouver que si % [sic] d'ou -> d'où, missing accent
+$J\neq I$, le quadruple n'est pas maximal. Considérons le fermé non vide $I\backslash J$. $I$ est supposé artinien, il y a un \textit{élément minimal} $i_0$ de $I\backslash J$. Posons
+\msp{46}
+\[
+J' \;=\; J\cup\{i_0\} \;=\; J\cup I/i_0,
+\]
+et montrons qu'on peut prolonger le triplet $Z$, $i$, $p$ en $Z'$, $j'$, $p'$ sur $J'$. Posant $K'=I/i_0$, % [sic] j' -> i', the triplet is Z, i, p
+$K=J\cap K=I_{<i_0}$, on a donc % [sic] J\cap K -> J\cap K', as in the diagram below
+\[
+\begin{tikzcd}
+K=J\cap K' \arrow[r, hook] \arrow[d, hook] & K'=I/i_0 \arrow[d, hook] \\
+J \arrow[r, hook] & J'=J\cup K'.
+\end{tikzcd}
+\]
+
+On voit alors que les prolongements de $(Z,i,p)$ de $J$ à $J'$ correspondent à ceux de $(Z|K',i|K',p|K')$ à $K$. Pour ceci, on note que pour une flèche $\varphi$ d'objets de $\mathcal{M}(J'^\circ)$, cette flèche est dans $C_{J'^\circ}$ resp. $W_{J'^\circ}$, si et seulement si ses restrictions à $J$ et à $K'$ le sont.
+
+On est donc ramené au cas standard d'un ensemble ordonné avec objet final $e_0$, ensemble ordonné qu'on va noter $I$, et l'ensemble ordonné $I'$ des objets $i<e_0$, i.e. $I'=I\backslash\{i_0\}$. % [sic] I\backslash\{i_0\} -> I\backslash\{e_0\}, I' consists of the i < e_0
+On a $f:X_\bullet\longrightarrow Y_\bullet$, flèche dans $\mathcal{M}(I^\circ)$, une factorisation de $f|I'$ en $p'\circ i'$ avec $i'\in C_{I'^\circ}$, $p'\in W_{I^\circ}$, % [sic] W_{I^\circ} -> W_{I'^\circ}, factorisation of f|I' on I'
+\msp{47}
+et il s'agit de la prolonger en une factorisation similaire de $f$. On note que la donnée d'un objet $X_\bullet$ de $\mathcal{M}(I^\circ)$ équivaut à celle d'un objet $X'_\bullet$ de $\mathcal{M}(I'^\circ)$ (la restriction de $X$ à $I'$) et d'une flèche
+\[
+X'_{I'} \xrightarrow{\ \alpha_X\ } X_{e_0}=X_0
+\]
+dans $\mathcal{M}$, où $X'_{I'}=\varinjlim\limits_{i'\in I'}X'_{i'}$. Donc la donnée de la flèche $f:X_\bullet\longrightarrow Y_\bullet$ revient à celle de $f'=f|I':X'_\bullet\longrightarrow Y'_\bullet$, et d'une flèche $f_0:X_0\longrightarrow Y_0$ rendant commutatif le carré
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+X'_{I'} \arrow[r, "\alpha_X"] \arrow[d, "f'_{I'}"'] & X_0 \arrow[d, "f_0"] \\
+Y'_{I'} \arrow[r, "\alpha_Y"] & Y_0\ .
+\end{tikzcd}
+\]
+
+De même, trouver une factorisation de $f$ en $pi$, qui prolonge une factorisation donnée $f'=p'i'$ sur $J'$, revient à la donnée d'un diagramme commutatif
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+& X'_{I'} \arrow[rr, "\alpha_X"] \arrow[dl, "i'_{I'}"'] \arrow[dd, "f'_{I'}"] & & X_0 \arrow[dl, "i_0"'] \arrow[dd, "f_0"] \\
+Z_{I'} \arrow[rr, "\alpha_Z"'] \arrow[dr, "p'_{I'}"'] & & Z_0 \arrow[dr, "p_0"'] & \\
+& Y'_{I'} \arrow[rr, "\alpha_Y"'] & & Y_0\ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\msp{48 vide}
+\msp{49}
+où l'objet $Z_0$, et les trois flèches $\alpha_Z$, $i_0$, $p_0$ sont à déterminer. Si on a $i'\in C_{I'^\circ}$, $p\in W_{I'^\circ}$, % [sic] p -> p', the given factorisation is f'=p'i'
+alors on conclut par théorème 2.1. $1^\circ$ (cor. 2.2) que
+\[
+i'_{I'}\ \in\ C\ ,
+\]
+et si on veut que $i\in C_{I^\circ}$, $p\in W_{I^\circ}$, il reste seulement à exiger
+\[
+p_0\in W, \qquad (i'_{I',I}:\underbrace{Z_{I'}\amalg_{X_{I'}}X_0}_{Z'_0}\longrightarrow Z_0)\in C,
+\]
+d'après le théorème 2.1. $2^\circ$. On va alors construire le diagramme $(*)$, à partir du diagramme similaire ci-dessous
+\[
+\begin{tikzcd}
+& X_{I'} \arrow[rr, "\alpha_X"] \arrow[dl, "i'_{I'}\in C"'] \arrow[dd, "\text{cocart.}" {pos=0.25}, "f'_{I'}" {pos=0.75}] & & X_0 \arrow[dl, "i'_0\in C"'] \arrow[dd, "f_0" {pos=0.25}] \arrow[dr, dotted, "i_0=j_0i'_0"] & \\
+Z_{I'} \arrow[rr, "\alpha'_Z"] \arrow[dr, "p'_{I'}"'] & & Z'_0=Z_{I',I} \arrow[rr, dotted, "j_0\in C"] \arrow[dr, "p'_0"'] & & Z_0 \arrow[dl, dotted, "p_0\in W"] \\
+& Y_{I'} \arrow[rr, "\alpha_Y"] & & Y_0 &
+\end{tikzcd}
+\]
+(avec $Z_0$ de $(*)$ remplacé par $Z'_0=Z_{I',I}$) en factorisant la flèche canonique $p'_0:Z'_0\longrightarrow Y_0$ en
+\[
+p'_0 \;=\; p_0j_0\ , \qquad \text{avec } p_0\in W,\ j_0\in C\ ,
+\]
+et en posant
+\[
+i_0 \;=\; j_0i'_0\ ,
+\]
+ce qui achève la construction.
+
+On a ainsi prouvé le
+
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+
+\msp{50}\textbf{Théorème 3.1.} \textit{Soit $(\mathcal{M},W,C)$ une catégorie à cofibrations (cf. page \textup{39}), $\mathcal{M}$ stable par $\varinjlim$ finies. Pour tout ensemble odonné $I$, considérons le tuple $(\mathcal{M}(I^\circ),W_{I^\circ},C_{I^\circ})$ correspondant, où $C_{I^\circ}$ est défini au paragraphe \textup{2} (cf. à ce sujet le théorème \textup{2.1}). Supposons que $I$ soit un ensemble ordonné \textup{artinien} (p.ex. $I$ localement fini, i.e. les $I/i$ finis). Supposons de plus qu'on soit dans l'un des deux cas suivants :} % [sic] odonné -> ordonné, missing letter
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{L'espace \textup{Esp}$(I)$ est noethérien, i.e. toute suite croissante d'ouverts de $I$ est stationnaire (p.ex. $I$ fini).}
+\item[b)] \textit{$C$ et $TC=C\cap W$ sont stables, non seulement par composition ordinaire, mais aussi par composition transfinie. Dans ce cas, on suppose aussi $\mathcal{M}$ stable par petites $\varinjlim$ filtrantes (donc par petites $\varinjlim$ quelconques).}
+\end{itemize}
+\textit{Sous ces conditions, $(\mathcal{M}(I^\circ),W_{I^\circ},C_{I^\circ})$ est également une catégorie à cofibrations.}
+
+\textbf{Proposition 3.2.} \textit{Soit $u:I\longrightarrow I'$ une application croissante entre ensembles ordonnés, d'où un couple de foncteurs adjoints}
+\[
+\begin{tikzcd}
+\mathcal{M}(I^\circ) \arrow[r, shift left, "u_{!}"] & \mathcal{M}(I'^\circ) \arrow[l, shift left, "u^*"]
+\end{tikzcd}\ .
+\tag*{(3.2.1)}
+\]
+\msp{51}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{Le foncteur $u^*$ est compatible avec les localiseurs $W_{I'^\circ}$, $W_{I^\circ}$. Si $I$ est discrète, ou $u$ étale, alors $u^*$ applique $C_{I'^\circ}$ dans $C_{I^\circ}$. Il en est encore de même quand $u$ est localement cofiltrant, i.e. si pour tout $i'\in\operatorname{Ob}I'$, la catégorie $i'\backslash I$ est localement filtrante, i.e. ses composantes connexes sont cofiltrantes (condition $\mathrm{PS}_{\mathrm{g}}$ \textup{1} sur $i'\backslash I$)} \textsuperscript{(}\footnote[16]{inutile de parler de ``faiblement'' localement cofiltrant, car il s'agit d'ensembles ordonnés où il n'y a pas à distinguer entre notions forte et faible.}\textsuperscript{)}.
+\item[b)] \textit{Dans tous les cas, $u_!$ transforme $C_{I^\circ}$ en $C_{I'^\circ}$, $TC_{I^\circ}$ en $TC_{I'^\circ}$, enfin $\mathcal{M}(I^\circ)_{\mathrm{c}}$ en $\mathcal{M}(I'^\circ)_{\mathrm{c}}$.}
+\end{itemize}
+
+\textsc{Démonstration}. Prouvons a), dans le cas le plus gênant, où on suppose seulement que $u$ est localement faiblement cofiltrant. On applique II 7.4 (p. 92), qui nous dit que $\forall i\in\operatorname{Ob}I$,
+\msp{52}
+considérant le morphisme induit par $u$
+\[
+I/i \longrightarrow I'/i' \qquad (\text{où } i'=u(i)),
+\]
+celui-ci est \textit{(globalement)} faiblement cofiltrant, et que pour tout ouvert $U$ de $I/i$, désignant par $U'$ l'ouvert engendré par son image, le morphisme induit $v:U\longrightarrow U'$ est encore faiblement cofiltrant, et a fortiori \textit{cofinal.} Soit alors $f':X'\longrightarrow Y'$ une flèche dans $C_{I'^\circ}$, prouvons que
+\[
+\underbrace{u^*(f')}_{f}\ :\ \underbrace{u^*(X')}_{X}\ \longrightarrow\ \underbrace{u^*(Y')}_{Y}
+\]
+est dans $C_{I^\circ}$, i.e. que pour tout $i\in I$, et $U$ ouvert de $I/i$, dans le diagramme canonique
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+X_U \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] & X(i) \arrow[d] \\
+Y_U \arrow[r] & Y_{U,i} \arrow[d, "v_{U,i}"] \\
+& Y(i)\ ,
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\msp{53}
+la flèche $v_{U,i}$ est dans $C$. Le diagramme $(*)$ s'envoie dans le diagramme similaire pour $f':X'\longrightarrow Y'$, $i'=u(i)$, et l'ouvert $U'\subset I'/i'$ engendré par $u(U)$ :
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X_U \arrow[rr] \arrow[dr, "f_U"] \arrow[dd, "c_U^{X'}"'] & & X(i) \arrow[dr] \arrow[dd, "\text{cocart.}"' {pos=0.2}, "\mathrm{id}"' {pos=0.75}] & & \\
+& Y_U \arrow[rr] \arrow[dd, "c_U^{Y'}"' {pos=0.3}] & & Y_{U,i} \arrow[dr, "v_{U,i}"] \arrow[dd, "c^{f'}_{U,i}"] & \\
+X'_{U'} \arrow[rr, "\text{cocart.}"' {pos=0.6}] \arrow[dr, "f'_{U'}"'] & & X'(i') \arrow[dr] & & Y(i) \arrow[dd, "\mathrm{id}"] \\
+& Y'_{U'} \arrow[rr] & & Y'_{U',i'} \arrow[dr, "v_{U',i'}"'] & \\
+& & & & Y'(i')\ .
+\end{tikzcd}
+\tag*{$(**)$}
+\]
+
+Par cofinalité, les deux flèches verticales $c_U^{X'}$ et $c_U^{Y'}$ sont des isomorphismes, en plus de $X(i)\xrightarrow{\ id\ }X'(i')$, donc la quatrième flèche du cube, $c^{f'}_{U,i}$, est un isomorphisme. Comme $v_{U',i'}$ est dans $C$, $v_{U,i}$ aussi, on gagne.
+
+Prouvons b). Soit donc
+\[
+f\ :\ X\longrightarrow Y
+\]
+une flèche dans $C_I$, et soit
+\[
+f' \;=\; u_!(f)\ :\ u_!(X)=X' \longrightarrow u_!(Y)=Y',
+\]
+prouvons que c'est dans $C_{I'^\circ}$, donc que
+\msp{54}
+pour deux ouverts $U'\subset V'$ de $I'$ (où on peut supposer que $V'=I'/i'$), dans le diagramme-base de $(**)$, $v_{U',V'}$ soit dans $C$. Soit $U=u^{-1}(U')$, $V=u^{-1}(V')$, et considérons le % ?? uncertain: hyphen at line end in "diagramme-base" -- kept as a compound hyphen, or "diagrammebase"
+diagramme similaire à $(**)$, défini par les deux inclusions d'ouverts $U'\subset V'$, $U\subset V$. Cette fois, comme la formation de $u_!$ commute aux restrictions aux ouverts, par transitivité des $\varinjlim$ , les trois flèches vertivales $c^X_{U'}$, $c^Y_{U'}$, $c^X_{V'}$ sont des isomorphismes, donc aussi $c^f_{U',V'}$. De % [sic] vertivales -> verticales, misprint
+même, la flèche $Y_V\longrightarrow Y'_{V'}$ (à la place de $Y(i)\longrightarrow Y'(i')$) est un isomorphisme. Comme $v_{U,V}\in C$, il en est de même de $v_{U',V'}$, ce qui prouve que $f'\in C_{I'^\circ}$. On procède de même pour $TC_I$. Enfin, l'assertion que $u_!$ applique $\mathcal{M}(I^\circ)_{\mathrm{c}}$ dans $\mathcal{M}(I'^\circ)_{\mathrm{c}}$ résulte des définitions et de $u_!(C_{I^\circ})\subset C_{I'^\circ}$.
+
+\textbf{Corollaire 3.3} (de prop. 3.2 et th. 3.1). \textit{Soit $u:I\longrightarrow I'$ comme dans \textup{3.2}. Supposons de plus $I$ artinien, et}
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\msp{55}
+\textit{qu'on soit pour $\mathcal{M}$, $W$, $C$, $I$ dans l'une des conditions \textup{a), b)} du théorème \textup{3.1}. Alors $u_!$ induit une flèche}
+\[
+u_{!\,\mathrm{cof}}\ :\ \mathcal{M}(I^\circ)_{\mathrm{c}} \longrightarrow \mathcal{M}(I'^\circ)_{\mathrm{c}}\ \subset\ \mathcal{M}(I'^\circ)
+\]
+\textit{qui transforme flèches de $W(I^\circ)$ en flèches de $W(I'^\circ)$ (i.e. compatible avec les localiseurs). Il induit donc un foncteur sur les localisés, d'où un}
+\[
+u_!^W\ :\ \mathrm{Ho}_W(I^\circ) \longrightarrow \mathrm{Ho}_W(I'^\circ) \qquad \mbox{\textsuperscript{(}\footnotemark[17]\textsuperscript{)}}.
+\tag*{(3.3.1)}
+\]
+\footnotetext[17]{\textbf{N.B.} Cette flèche est définie, même sans supposer $I'$ ordonné, car $u_{!\,\mathrm{cof}}$ transforme encore flèches de $W(I^\circ)$ en flèches de $W(I'^\circ)$. Cf. commentaire p. 86.}
+
+\textsc{Démonstration}. Par le théorème 3.1, on sait que $\mathcal{M}(I^\circ)$, $W(I^\circ)$, $C(I^\circ)$ est une structure de catégorie de modèles à cofibrations. On sait par ailleurs que $TC_{I^\circ}=C_{I^\circ}\cap W(I^\circ)$, par th. 2.1. $3^\circ$ (p. 27). Donc par 3.2, $u_!$ applique $C_{I^\circ}\cap W(I^\circ)$ dans $TC_{I'^\circ}=C_{I'^\circ}\cap W(I'^\circ)$, et a fortiori, en des flèches dans $W(I'^\circ)$. Par ailleurs, par la théorie des catégories à cofibrations, on trouve que toute flèche $f$ entre objets cofibrants est composée $f=pi$, où $i\in C_{I^\circ}$, et où $p$ est dans $W(I^\circ)$, et de plus \textit{inverse à gauche} d'une flèche dans $C_{I^\circ}\cap W(I^\circ)$, i.e. d'une flèche de $(TC)_{I^\circ}$. Quand
+\msp{56}
+$f\in W(I^\circ)$, alors $i\in W(I^\circ)$, donc $i\in W(I^\circ)\cap C_{I^\circ}=(TC)_{I^\circ}$. Au total, toute flèche $f\in W(I^\circ)_{\mathrm{c}}$ est composée $pi$ dans $\mathcal{M}(I^\circ)_{\mathrm{c}}$, où $i\in(TC)_{I^\circ}$, et $p$ est inverse à gauche d'une $j\in(TC)_{I^\circ}$. Comme $u_!$ transforme $(TC)_{I^\circ}$ en $(TC)_{I'^\circ}$, il transforme $f$ en $f'=p'i'$, avec $i'\in(TC)_{I'^\circ}\subset W_{I'^\circ}$, et $p'$ inverse à gauche d'une $j'=u_!(j)$ qui est également dans $W_{I'^\circ}$. Mais alors $i'\in W(I'^\circ)$, donc aussi $f'=p'i'\in W_{I'^\circ}$, ce qui prouve que $u_!(W(I^\circ)_{\mathrm{c}})\subset W(I'^\circ)$. La dernière assertion provient du lemme suivant, appliqué à $(\mathcal{M}(I^\circ),W(I^\circ),C_{I^\circ})$ au lieu de $(\mathcal{M},W,C)$ :
+
+\textbf{Lemme 3.4.} \textit{Soit $(\mathcal{M},W,C)$ une catégorie à cofibrations. Alors l'inclusion $\mathcal{M}_{\mathrm{c}}\subset\mathcal{M}$ induit une équivalence}
+\[
+\mathcal{M}_{\mathrm{c}}W_{\mathrm{c}}^{-1} \xrightarrow{\ \sim\ } \mathcal{M}W^{-1}=\mathrm{Ho}_W\ .
+\]
+
+Nous donnerons la démonstration (par AQT \texttt{[âne qui trotte]}) ultérieurement.
+
+Cela achève la démonstration de 3.3.
+
+\textbf{3.5.} Il se pose la question si le foncteur $u_!^W$ de (3.3.1) est bien un adjoint à gauche
+\msp{57}
+du foncteur en sens inverse $u^*_W$, induit par $u^*$. Notons que c'est le cas si $u^*$ transforme $\mathcal{M}(I'^\circ)_{\mathrm{c}}$ en $\mathcal{M}(I^\circ)_{\mathrm{c}}$, et quand on suppose que $I'$ est également artinien et satisfait également à l'une des hypothèses a) b) du théorème 3.1. Car alors $(\mathcal{M}(I^\circ),W(I^\circ),C_{I^\circ})$ est une catégorie à cofibrations par le théorème 3.1, on peut lui appliquer le lemme précédent, donc $u^*_W$ et $u_!^W$ se réalisent à partir d'un couple de foncteurs
+\[
+\begin{tikzcd}
+\mathcal{M}(I^\circ)_{\mathrm{c}} \arrow[r, shift left, "u_{!}^{\mathrm{c}}"] & \mathcal{M}(I'^\circ)_{\mathrm{c}} \arrow[l, shift left, "u_{\mathrm{c}}^*"]
+\end{tikzcd}\ ,
+\]
+
+% ---- from der-ch17_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+lesquels sont visiblement adjoint l'un de l'autre (puisque induits par un couple de foncteurs % [sic] adjoint -> adjoints, accord avec « lesquels »
+adjoints $u_!$, $u^*$), et de plus compatibles aux localiseurs. Donc on peut appliquer le lemme des foncteurs adjoints pour les localisés. Pour résumer :
+
+\textbf{Corollaire 3.5.} \textit{Supposons que $I$, $I'$ soient artiniens, et qu'on soit dans l'un des deux cas suivants :}
+\begin{enumerate}
+\item[a)] \textit{Les espaces} $\Esp(I)$, $\Esp(I')$ \textit{sont noethériens (p.ex. $I$, $I'$ finis).}
+\msp{page 58}
+\item[b)] \textit{$C$ et $TC = C\cap W$ sont stables par composition transfinie.}
+\end{enumerate}
+\textit{Supposons de plus que $u^*$ applique $\M(I'^\circ)_{\mathrm{c}}$ dans $\M(I^\circ)_{\mathrm{c}}$, ce qui est le cas notamment si $u$ est localement cofiltrant, i.e. les ensembles ordonnés localisés $i'\backslash I$ sont localement cofiltrants. Alors le foncteur $u_!^W$ construit dans (3.3.1) est adjoint à gauche de $u_W^*$.}
+
+\textbf{Remarque 3.6.} Quand on a un couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathcal{C} \arrow[r, shift left, "u_!"] & \mathcal{C}' \arrow[l, shift left, "u^*"]
+\end{tikzcd}
+\ ,
+\]
+avec les localiseurs $W$, $W'$ de $\mathcal{C}$, $\mathcal{C}'$, $u^*$ compatible aux localiseurs, et si de plus on a une sous-catégorie pleine $\mathcal{C}_0$ de $\mathcal{C}$ telle que
+\begin{enumerate}
+\item[a)] $u_!|\mathcal{C}_0$ transforme flèches de $W$ en flèches de $W'$, et
+\item[b)] l'inclusion $\mathcal{C}_0 \hookrightarrow \mathcal{C}$ induit une \textit{équivalence} $\mathcal{C}_0W_0^{-1} \xrightarrow{\sim} \mathcal{C}W^{-1}$ (où $W_0 = W\cap\Fl(\mathcal{C}_0)$),
+\end{enumerate}
+on trouve deux foncteurs canoniques
+\[
+\begin{tikzcd}
+\mathcal{C}W^{-1} \arrow[r, shift left, "u_!^W"] & \mathcal{C}'W'^{-1} \arrow[l, shift left, "u_W^*"]
+\end{tikzcd}
+\ ,
+\]
+où $u_!^W$ est défini seulement à isomorphisme canonique près.
+
+\msp{page 59}
+Contrairement à ce que prétend \textsc{Anderson}, il n'est par vrai en général que ces deux % [sic] par -> pas, faute de frappe
+foncteurs soient adjoints, sans hypothèses supplémentaires. Voici un contrexemple : on prend $\mathcal{C} = \mathcal{C}'$, $u_! = u^* = \id_{\mathcal{C}}$, $W' = \operatorname{Is}(\mathcal{C})$, $W = \Fl(\mathcal{C})$, donc $u_W^*$ est le foncteur canonique
+\[
+\underbrace{\Pi\,\mathcal{C}}_{\text{groupoïde fondamental}} \qquad \longleftarrow \mathcal{C}\ .
+\]
+Supposons que $\mathcal{C}$ soit 1-connexe, i.e. $\Pi\,\mathcal{C}$ soit équivalente à $e$. Soit $e\in\Ob\mathcal{C}$ tel que $\operatorname{End}_{\mathcal{C}}(e)$ soit le groupe unité, et prenons $\mathcal{C}_0 = \{e\}$. Alors l'hypothèse sur $\mathcal{C}_0$ est satisfaite. Mais si $u_!^W$ était adjoint à gauche de $u_W^*$, $e$ serait objet initial de $\mathcal{C}$. Par exemple si $\mathcal{C}$ a un objet final $e$ (ce qui implique que $\mathcal{C}$ est 1-connexe et $e$ rigide), cet objet final devrait être initial si \textsc{Anderson} avait raison avec “it is clear that \ldots”.
+
+\msp{page 60}
+Néanmoins :
+
+\textbf{Théorème 3.7.} \textit{Soit $(\M,W,C)$ une catégorie à cofibrations stable par $\varinjlim$ finies, et $u : I \longrightarrow I'$ une application croissante entre ensembles ordonnés artiniens. On suppose qu'on est sous l'une des hypothèses suivantes.}
+\begin{enumerate}
+\item[a)] $\Esp(I)$, $\Esp(I')$ \textit{sont noethériens, p.ex. $I$, $I'$ finis.}
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\item[b)] \textit{$C$ et $TC \overset{\text{déf}}{=} C\cap W$ sont stables par composition transfinie, et $\M$ stable par petites $\varinjlim$ filtrantes.}
+\end{enumerate}
+\textit{Alors le foncteur} $u_!^W : \Ho_W(I^\circ) \longrightarrow \Ho_W(I'^\circ)$ \textit{construit dans} (3.3.1) \textit{est adjoint à gauche du foncteur $u_W^*$ en sens opposé.}
+
+\textsc{Démonstration.} On utilise le diagramme bien connu
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & I \arrow[d, "\partial_1"'] \arrow[dd, bend left=60, "w"] \\
+I \arrow[r, shift left, "\partial_0\ (\text{ouv.})"] \arrow[d, "u"'] \arrow[dr, phantom, "\text{cocart.}"] & I\times\boldsymbol{\Delta}^1 \arrow[l, dotted, shift left, "\pr_1"] \arrow[d] \\
+I' \arrow[r, shift left, "\text{imm. ouv.}"] & C(u) \arrow[l, dotted, shift left, "v"]
+\end{tikzcd}
+\]
+pour factoriser $u$ en
+\[
+u \;=\; vw\ ,
+\]
+où $w$ est une \textit{immersion fermée,} et $v$ est déduit de $\pr_1 : I\times\boldsymbol{\Delta}^1 \longrightarrow I$ par push-out. C'est une rétraction du mapping-cone C(u) sur l'ouvert $I'$, dont le complémentaire fermé s'identifie à $I$ via $w$.
+
+\msp{page 61}
+Le foncteur de recollement entre $I'$, $I$
+\[
+H \;:\; I'^\circ\times I \;\longrightarrow\; \mathrm{Ens}
+\]
+est donné par
+\[
+\underbrace{H(i',i)}_{=\,\Hom_{C(u)}(i',i)} \;=\; \Hom_{I'}(i',u(i))\ . \tag*{$(*)$}
+\]
+La rétraction $v$ de $C(u)$ dans $I'$ applique $i$ dans $u(i)$, et une flèche $i'\longrightarrow i$ correspondant à $i'\longrightarrow u(i)$ dans $I'$ via $(*)$, est transformé par $v$ en cette même flèche $i'\longrightarrow u(i)$. Calculons, % [sic] transformé -> transformée, accord avec « une flèche »
+pour $i'_0$ donné, la catégorie $i'_0\backslash\Bigl(C(u),\ v : C(u)\longrightarrow I'\Bigr)$, des couple d'un objet $\xi$ de $C(u)$ % [sic] des couple -> des couples, accord du pluriel
+et d'une flèche $i'_0\longrightarrow v(\xi)$ dans $I'$. On voit que $i'_0\backslash C(u)$ admet l'ouvert $i'_0\backslash I'$, avec le complémentaire fermé $i'_0\backslash I$,
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+I' \arrow[r, hook, "\text{ouvert}"'] & C(u) \arrow[d] & I \arrow[l, hook', "\begin{array}{l}\text{fermé}\\ \text{complémentaire}\\ \text{de } I'\end{array}"'] \\
+ & I'\ ,
+\end{tikzcd}
+\]
+ces deux catégories étant recollées par le bifoncteur
+\[
+\begin{aligned}
+(i'_0\backslash I')^\circ \times (i'_0\backslash I) &\quad\longrightarrow\quad \mathrm{Ens}\\
+\Bigl((\alpha : i'_0\longrightarrow i'), (\beta : i'_0\longrightarrow u(i), i)\Bigr) &\quad\longmapsto\quad \Hom_{i'_0\backslash I'}(i',u(i))
+\end{aligned}
+\]
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+induit par $(*)$\,; i.e. les flèches de $(\alpha : i'_0\longrightarrow i') \in \Ob\,(i'_0\backslash I')$ dans $(\beta : i'_0\longrightarrow u(i)) \in i'_0\backslash I$ sont les flèches $i' \xrightarrow{\gamma} u(i)$ telles que le triangle
+\[
+\begin{tikzcd}
+ & i'_0 \arrow[dl, "\alpha"'] \arrow[dr, "\beta"] & \\
+i' \arrow[rr, "\gamma"] & & u(i)
+\end{tikzcd}
+\]
+commute.
+
+\msp{page 62}
+Si $i' = i'_0$, $\alpha = \id_{i'_0}$, alors cette commutativité revient à $\gamma = \beta$, ce qui signifie qu'il y a une flèche et une seule de $\alpha$ dans $(i,\beta)$. Cela montre donc que $(i'_0,\id_{i'_0})$ est un objet initial de $i'_0\backslash C(u)$. On a donc prouvé le lemme :
+
+\textbf{Lemme 3.8.} \textit{Soit $u : I\longrightarrow I'$ une flèche dans} (Cat)\textit{, factorisons-le en}
+\[
+I \xrightarrow{\;w\;} C(u) \xrightarrow{\;v\;} I'\ ,
+\]
+\textit{où $C(u)$ est le mapping-cone défini page} 60\textit{, $w$ une immersion fermée de complémentaire $I'$, $v$ la rétraction canonique de $C(u)$ sur $I'$. Ceci posé, pour tout $i'_0\in\Ob I'$, la catégorie $i'_0\backslash(C(u),v)$ admet un objet initial – donc $v : C(u)\longrightarrow I'$ est (tout ce qu'il y a de) cofiltrante.}
+
+Nous pouvons maintenant prouver 3.7. Tout d'abord, les hypothèses faites sur $I$, $I'$ se transportent à $C(u)$ (hypothèse artinienne, et éventuellement hypothèse noethérienne sur $\Esp(C(u))$). Donc
+\msp{page 63}
+on peut appliquer les résultats précédents, notamment 3.5, aux flèches $v$, $w$. Le lemme précédent montre bien que $v$ satisfait aux conditions de 3.5, donc le foncteur $v_!^W$ construit dans 3.3.1 est adjoint à gauche de $v_W^*$. Considérons d'autre part le foncteur $w_!^W$ construit dans 3.3.1, je dis que la même conclusion s'applique. Cela provient du fait que $w$ est une immersion fermée. En effet, dans ce cas il est immédiat que
+\[
+w_! \;:\; \M(I^\circ) \;\longrightarrow\; \M(I'^\circ), \qquad\quad \text{où } I = C(u), % [sic] I = C(u) -> I' = C(u), w a pour but le mapping-cone C(u)
+\]
+est compatible avec les localiseurs, puisque l'on a
+\[
+\left\{
+\begin{array}{lcll}
+w_!(X)(j) & \simeq & X(j) & \text{si } j\in I,\\[1ex]
+w_!(X)(j) & \simeq & \emptyset_{\M} & \text{si } j\in J\backslash I,
+\end{array}
+\right.
+\]
+par le calcul des fibres
+\[
+w_!(X)(j) \;\simeq\; \varinjlim_{i\in I/j} X(i)\ .
+\]
+Donc la définition de $w_!^W$ donnée dans 3.3.1 revient en fait à passer directement aux catégories localisées pour $w_!$, sans avoir à se restreindre à $\M(I^\circ)_{\mathrm{c}}$, et le lemme des foncteurs adjoints nous dit que
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 64}
+ce foncteur est adjoint à gauche de $w_W^*$.
+
+Comme on a évidemment
+\[
+u_!^W \;\simeq\; v_!^W\circ w_!^W\ , \qquad\quad u_W^* \;\simeq\; w_W^*\circ v_W^*\ ,
+\]
+on en conclut que $u_!^W$ est bien adjoint à gauche de $u_W^*$, q.e.d.
+
+\textbf{Corollaire 3.9.} \textit{Soit $(\M,W,C)$ une catégorie à cofibrations. Alors le prédérivateur $\mathbf{D}_W$, restreint à la catégorie} $\mathrm{Diag}_0$ \textit{formée des catégories $I$} ordonnées \textit{artiniennes et telles que} $\Esp(I)$ \textit{soit noethérien, satisfait aux axiomes} Dér 1 (décomposition), Dér 2 (localisation), Dér 3 (objet final), Dér 4 bis (existence de $u_!$), Dér 5 bis (mode de calcul des $u_!$), Dér 6 (exactitude des carrés $W$-cocartésiens). \textit{Si $C$, $TC = C\cap W$ sont stables par composition transfinie, on a le même résultat sur la catégorie} Diag \textit{formée des catégories $I$ ordonnées artiniennes sans plus.}
+
+\msp{page 65}
+\textbf{3.10.} Ainsi, pour avoir un dérivateur au plein sens du terme, soit sur $\mathrm{Diag}_0$, soit sur Diag, il ne manque que Dér 4 (existence des $u_*$), Dér 5 (calcul des $u_*$) et Dér 6 (exactitude des carrés $W$-cartésiens). On va les obtenir en principe à l'aide d'une structure de \textit{catégorie à fibrations} $(\M,F,W)$ associé à $(\M,W)$, i.e. l'espèce de structure duale de celle intro- % [sic] associé -> associée, accord avec « structure »
+duite page 39. Ces deux structures n'ont pas à être reliées entre elles d'une façon autre que par le fait qu'elles correspondent au même $W$. Elles sont considérablement plus faciles à construire que des structures de Quillen $(W,C,F)$, où $C$, $F$ doivent être reliés de façon extrêmement stricte, avec les propriétés $C \longleftrightarrow \underbrace{TF}_{=\,F\cap W}\ ,\ \underbrace{TC}_{=\,C\cap W} \longleftrightarrow F$ (dont il n'est pas question dans l'axiomatique de K. S. \textsc{Brown}), et factorisation pour $(C,TF)$ et $(TC,F)$.
+
+\msp{page 66}
+Mais revenant à la construction des $u_!^W$, il reste le problème de les construire pour une flèche $u : I'\longrightarrow I$ \textit{quelconque} dans Cat. % [sic] u : I' -> I -> u : I -> I', u_!^W va de Ho_W(I°) dans Ho_W(I'°)
+
+À vrai dire, la construction du foncteur
+\[
+u_!^W \;:\; \Ho_W(I^\circ) \;\longrightarrow\; \Ho_W(I'^\circ) \tag*{(3.3.1)}
+\]
+est valable sans supposer que $I'$ soit une catégorie ordonnée – ça peut être une catégorie quelconque. Cela provient du fait que le foncteur induit par $u_!$,
+\[
+u_{!\,\mathrm{cof}} \;:\; \M(I^\circ)_{\mathrm{c}} \;\longrightarrow\; \M(I'^\circ)
+\]
+est encore compatible avec les localiseurs, comme on voit par le calcul des fibres
+\[
+u_!(X)(i) \;\simeq\; \varinjlim_{i\in I/i'} X(i)\ . % [sic] u_!(X)(i) -> u_!(X)(i'), la fibre est prise en i'
+\]
+Ainsi, on est ramené aux cas où $I' = e$, quitte à remplacer $I$ par $I/i'$, et en notant que % [sic] aux cas -> au cas, singulier
+$(I/i'\longrightarrow I$ étant étale) l'image inverse de $X$ sur $I/i'$ est cofibrant (cf. 3.2.a). % [sic] cofibrant -> cofibrante, accord avec « l'image inverse »
+
+\msp{page 67}
+Mais il se présente à nouveau la perplexité si le foncteur (3.3.1) ainsi construit est bien adjoint à gauche de $u_W^*$. On peut songer à utiliser encore la même factorisation en $u = vw$, en
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+utilisant le mapping-cone. La difficulté, cependant, c'est qu'à présent $J = C(u)$ n'est plus une catégorie ordonnée, donc on n'a pas une définition toute prête de $C_{J^\circ}\subset\Fl(\M(J^\circ))$, donnant lieu à une sous-catégorie $\M(J^\circ)_{\mathrm{c}}$ etc. En fait, il semblerait qu'on soit pratiquement paralysé, tant qu'on n'arrive à construire sur $\M(J^\circ)$ également une structure de catégorie à cofibrations, se comportant bien par rapport au foncteurs $v_!$. La % [sic] au foncteurs -> aux foncteurs, accord du pluriel
+“démonstration” d'\textsc{Anderson} de l'existence de $u_!$ pour \textit{toute} flèche dans Cat, foire totalement (même pour $I\longrightarrow e$, $I$ ensemble ordonné fini – mais là j'ai pu rétablir la situation), car il se ramène au cas où $I$ est ordonné localement fini, et il
+\msp{page 68}
+admet sans plus que \textit{dans ce cas} $u_!^W$ est adjoint à gauche de $u_W^*$, et \textit{de plus,} que si $u$ est $\mathbf{W}_0$-connexe, donc $u^* : \M(I'^\circ)\longrightarrow\M(I^\circ)$ pleinement fidèle, qu'il en soit de même de $u_W^*$ déduit par passage aux localisés. Or même si on admet que $u_!^W$ est adjoint à gauche de
+$u_*^W$, faute de disposer d'un morphisme d'adjonction tout près “en bas” (dans $\Ho_W(I'^\circ)$), % [sic] u_*^W -> u_W^*, notation employée partout ailleurs
+déduit du morphisme d'adjonction dans $\M(I^\circ)$, il n'est absolument pas clair que $u_W^*$ soit pleinement fidèle, i.e. $u_!^W$ un foncteur de localisation. Le contrexemple 3.6 montre bien que, même si on a adjonction (i.e. si $e$ est un objet initial de $\mathcal{C} = \mathcal{C}'$), le foncteur $u^* = \id_{\mathcal{C}}$ a beau être pleinement fidèle (et même une équivalence de catégories), le foncteur localisé n'a aucune raison de l'être : cela pouverait que tout objet de Cat ayant un objet initial % [sic] pouverait -> prouverait, faute de frappe
+est équivalent à $e$\,!
+
+\msp{page 69}
+\textbf{3.11.} Disons qu'on a une \textit{catégorie à cofibrations stricte,} si dans l'axiome $\mathrm{Cof}_3$ de factorisation (cf. p. 39), la factorisation peut être prise fonctoriellement en $f$. Il revient $\pm$ au même de dire que l'axiome de factorisation reste valable, quand on pense à une catégorie $\M(I)$ pour $I$ dans Cat, en y définissant $W(I)$ et $C(I)$ (à ne pas confondre avec $C_I$) fibre par fibre. Cela revient au même tout au moins si $\M$ est équivalente à une petite catégorie. Sinon, il faut supposer fonctorialité pour toute \textit{petite} sous-catégorie pleine de $\underline{\mathrm{Fl}}(\M)$. Il vaut mieux définir la catégorie à cofibrations stricte par cette propriété de stabilité.
+
+On voit alors que le prédérivateur $\mathbf{D} = \mathbf{D}_{\M}$ sur Cat est un dérivateur \textit{relativement à} $\mathcal{D} = \mathrm{Diag}_0$ défini plus haut (catégories ordonnées $I$ artiniennes, telles que $\Esp(I)$ soit noethérien), ou même relativement à $\mathcal{D} = \mathrm{Diag}$ (catégories ordonnées $I$ artiniennes sans plus) lorsque $C$ et $TC$ sont stables par composition transfinie. J'entends par là que $u_!$ existe quand $u$ est une flèche de $\mathcal{D}$,
+\msp{page 70}
+et que ça reste valable quand on passe à un dérivateur induit $\mathbf{D}_Z$ ($Z$ dans Cat quelconque)\,; en d'autre termes, que $v_!$ existe quand $v$ est de la forme $\id_Z\times u$, où $u : I\longrightarrow I'$ est une % [sic] d'autre termes -> d'autres termes, accord du pluriel
+flèche de $\mathcal{D}$, et que le calcul se fait \textit{au dessus de} $I'$ selon la règle Dér 5 bis. Cela signifie donc que la flèche de changement de base pour les $f_!$ est un isomorphismes dans le cas % [sic] un isomorphismes -> un isomorphisme, accord du singulier
+suivant :
+\[
+\begin{tikzcd}[row sep=huge, column sep=huge]
+I\times Z \arrow[d, "u\times\id_Z"] & (i'\backslash I)\times Z \arrow[l] \arrow[d, "\pr_2"] \\
+I'\times Z & \{i'\}\times Z \arrow[l]
+\end{tikzcd}
+\ ,
+\]
+où $i'$ est un objet quelconque de $I'$.
+\end{document}

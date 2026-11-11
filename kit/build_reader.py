@@ -35,8 +35,8 @@ if "\\begin{document}" not in text:
     errors.append("text.tex: not a complete document")
 pre, body = text.split("\\begin{document}", 1) if "\\begin{document}" in text else ("", text)
 body = body.rsplit("\\end{document}", 1)[0]
-MS = re.compile(r"\\msp(?:in)?\{(?:page\s*)?(\d+(?:bis|ter|quater|')?)\}")   # 36, 36bis, 12'
-marks = [(m.group(1), m.start()) for m in MS.finditer(body)]
+MS = re.compile(r"\\msp(?:in)?\{(?:page\s*)?(\d+(?:bis|ter|quater|'|\$'\$)?)\}")   # 36, 36bis, 12'  ($'$ = math prime, 11 Nov)
+marks = [(m.group(1).replace("$'$", "'"), m.start()) for m in MS.finditer(body)]
 pos_of = {}
 for n, k in marks:
     pos_of.setdefault(n, k)

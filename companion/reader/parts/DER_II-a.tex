@@ -46,7 +46,7 @@
 \clearpage
 
 % ===================== PDF page 3 =====================
-\dcpairedpage{1}{1}
+\printedpage{1}
 % head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
 % foot: Version 8 juillet 2001
 
@@ -262,14 +262,12 @@ Si on a \fbox{$x_0 \xrightarrow{v} x_1$} dans $C'$, on en déduit
 \msp{page 7}
 et on a commutativité dans
 \[
-\resizebox{\linewidth}{!}{%
-\begin{tikzcd}[column sep=large,ampersand replacement=\&]
-\varprojlim\limits_{C'} \alpha^*F \arrow[r, "c_{x_1}"] \arrow[d, "c_{x_0}"'] \& \Gamma(x_0\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_0\backslash C'), F(x_0)) \arrow[d, "V^*"] \& \\
-\operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_1)) \simeq \Gamma(x_1\backslash C', F(x_1)) \arrow[r, "\substack{v^*\\ (F(x_1) \longrightarrow F(x_0))}"'] \& \Gamma(x_1\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_0)) \& \\
-\pi_0(x_1\backslash C') \arrow[r, "\pi_0(V)"] \arrow[d, dotted] \& \pi_0(x_0\backslash C') \arrow[d, dotted] \& \text{commutatif.} \\
-F(x_1) \arrow[r, "F(v)"] \& F(x_0) \&
+\begin{tikzcd}[column sep=large]
+\varprojlim\limits_{C'} \alpha^*F \arrow[r, "c_{x_1}"] \arrow[d, "c_{x_0}"'] & \Gamma(x_0\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_0\backslash C'), F(x_0)) \arrow[d, "V^*"] & \\
+\operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_1)) \simeq \Gamma(x_1\backslash C', F(x_1)) \arrow[r, "\substack{v^*\\ (F(x_1) \longrightarrow F(x_0))}"'] & \Gamma(x_1\backslash C', F(x_0)) \simeq \operatorname{Hom}(\pi_0(x_1\backslash C'), F(x_0)) & \\
+\pi_0(x_1\backslash C') \arrow[r, "\pi_0(V)"] \arrow[d, dotted] & \pi_0(x_0\backslash C') \arrow[d, dotted] & \text{commutatif.} \\
+F(x_1) \arrow[r, "F(v)"] & F(x_0) &
 \end{tikzcd}
-}
 \]
 On considère le préfaisceau d'ensembles
 \[ x \longmapsto \pi_0(x\backslash C') \qquad \text{sur } C, \]
@@ -1336,7 +1334,7 @@ Let $Y/P$ be its category of elements. There is a canonical factorization
 \]
 For an object $(y,c)$ of $Y/P$, the comma category $(y,c)\backslash A$ is precisely the connected component $c$ of $y\backslash A$. Thus $q$ is cofinal. Conversely, if $f$ itself is cofinal, then $P=1_Y$ and $Y/P=Y$. Consequently $T(A)$ says exactly that the category of elements of every ordinary presheaf $f_!1_A$ is weakly contractible. The occurrence of $y\backslash Y$ in the printed question is a slip: it is $y\backslash A$ that must be connected.
 
-A filtered category satisfies $T$. Its ordinary cofinal images are filtered by Corollary~3.4 below, and their nerves are weakly contractible. The difficult direction is whether this test forces the equalization of parallel arrows. The counterexample inserted on pages~36bis--36ter withdraws the attempted negative answer; it does not prove the converse.
+A filtered category satisfies $T$. Its ordinary cofinal images are filtered by Corollary~3.4 below, and their nerves are weakly contractible. The difficult direction is whether this test forces the equalization of parallel arrows. The counterexample inserted on pages~36bis--36ter withdraws the attempted negative answer; it does not prove the converse. The converse holds for monoids and for categories with finitely many objects and fails in general; both are proved in the commentary ``Total asphericity is not filteredness'' below.
 
 There is a terminological precaution for the later literature. In \citet[Definition~1.7.2 and Proposition~1.7.1]{Maltsiniotis2020}, a category is called totally aspherical when it is aspherical and its diagonal is aspherical, equivalently when products of representable presheaves are aspherical. This is a different quantifier from $T(A)$. In particular, the fact that the simplex category is a strict test category does not settle the question on this page. We retain $T(A)$ only inside this commentary, to keep the question itself unchanged.
 \end{dcomment}
@@ -1461,7 +1459,63 @@ is a nonzero cycle. Since there are no three-simplices, it is not a boundary. Mo
 
 In a preorder, parallel arrows are already equal. Nonemptiness and common successors therefore imply filteredness. The converse follows from preservation of filteredness by ordinary cofinal images, as in Corollary~3.4. This proves the last assertion.\hfill$\square$
 
-For general categories the argument leaves precisely the parallel-arrow equalization problem. The distinction is substantive: a one-object group category satisfies the common-successor condition for every group, while filteredness forces that group to be trivial. Our literature check did not locate a resolution of the full implication $T(A)\Rightarrow A\text{ filtered}$ under the exact quantifier used here. This is a bounded report on the sources checked, not a claim that the question is known to be open throughout the literature.
+For general categories the argument leaves precisely the parallel-arrow equalization problem. The distinction is substantive: a one-object group category satisfies the common-successor condition for every group, while filteredness forces that group to be trivial. The next commentary settles it: the implication $T(A)\Rightarrow A\text{ filtered}$ holds when some object receives an arrow from every object, and fails for the category of finite ordinals and increasing injections.
+\end{dcomment}
+
+
+\dgrblock{dgrb108}{Total asphericity is not filteredness}
+\begin{dcomment}{development}{p36:pourrait être valable.}{Total asphericity is not filteredness}
+The question whether $T(A)$ forces $A$ to be filtered has a negative answer in general and a positive one for monoids and for categories with finitely many objects. Both rest on a description of $T(A)$ in which no target category appears. For a functor $H:A\to\mathrm{Set}$ write $\operatorname{El}(H)$ for its category of elements: the objects are the pairs $(a,h)$ with $h\in H(a)$, and an arrow $(a,h)\to(a',h')$ is an arrow $v:a\to a'$ with $H(v)h=h'$. The statements below were not found in the sources consulted, except where a reference is given; no priority is claimed.
+
+\textbf{Theorem (a criterion on set-valued functors).}\ours
+\textit{For a small category $A$ the following are equivalent: (i) $T(A)$; (ii) $A$ is nonempty and connected, and for every functor $H:A\to\mathrm{Set}$ every connected component of $\operatorname{El}(H)$ has the integral homology of a point; (iii) the same with ``is weakly contractible''. If they hold, every connected component $E$ of every $\operatorname{El}(H)$ satisfies $T(E)$.}
+
+\textit{Proof.}
+Let $K:A\to\mathrm{Set}$ have nonempty connected $\operatorname{El}(K)$, and let $A_K$ be $A$ with one object $x$ adjoined, $A_K(x,a)=K(a)$, no arrows into $x$ but its identity, and composition given by the action of $A$ on $K$. For the inclusion $A\to A_K$ the category $x\backslash A$ is $\operatorname{El}(K)$, and $a\backslash A$ has an initial object for $a\in A$; so the inclusion is cofinal. A chain of arrows of $A_K$ not contained in $A$ consists of $x$ (possibly repeated) followed by a chain of $\operatorname{El}(K)$. Hence $N(A_K)$ is $NA$ with the cone on $N\operatorname{El}(K)$ attached along the forgetful map, and
+\[
+ \widetilde H_{j+1}(BA_K)\longrightarrow\widetilde H_j(B\operatorname{El}(K))\longrightarrow\widetilde H_j(BA)
+\]
+is exact. Under (i) both $BA$ and $BA_K$ are weakly contractible, so $\operatorname{El}(K)$ has the homology of a point. A component of $\operatorname{El}(H)$ for an arbitrary $H$ is $\operatorname{El}(K)$ for the subfunctor $K$ of the elements lying in it. This proves (i)$\Rightarrow$(ii).
+
+(ii)$\Rightarrow$(iii). Let $E$ be a component of $\operatorname{El}(H)$ and $L:E\to\mathrm{Set}$ a functor. Then $\operatorname{El}(L)\cong\operatorname{El}(H')$ for the functor $H'(a)=\coprod_hL(a,h)$ on $A$, the sum over the $h\in H(a)$ with $(a,h)\in E$. So $E$ again has property (ii). Let $\Pi E$ be the groupoid obtained by inverting all arrows of $E$, fix an object $e_0$, and identify $G=\operatorname{Aut}_{\Pi E}(e_0)$ with $\pi_1(BE,e_0)$. For a subgroup $\Gamma\subseteq G$ the functor $L_\Gamma(e)=\operatorname{Hom}_{\Pi E}(e_0,e)/\Gamma$ has bijective transition maps, and $\operatorname{El}(L_\Gamma)\to E$ is the connected covering with fundamental group $\Gamma$. By (ii) for $E$ its first homology $\Gamma^{\mathrm{ab}}$ vanishes. Taking $\Gamma$ cyclic gives $G=1$. A simply connected CW complex with the homology of a point is weakly contractible.
+
+(iii)$\Rightarrow$(i). Let $f:A\to B$ be cofinal. For $b\in B$ the category $b\backslash A$ is $\operatorname{El}(a\mapsto B(b,f(a)))$; it is nonempty and connected, hence weakly contractible by (iii), and Quillen's Theorem~A makes $Bf$ a weak equivalence. The constant functor with value a point shows that $BA$ is weakly contractible. So is $BB$. The last assertion was shown in the second step.\hfill$\square$
+
+In particular the integral-homology form of $T(A)$ (every cofinal image has the homology of a point) is equivalent to $T(A)$. With coefficients in a nonzero commutative ring $R$ the same proof, with the homology form of Theorem~A, gives: every cofinal image of $A$ has the $R$-homology of a point if and only if $A$ is nonempty and connected and the components of all $\operatorname{El}(H)$ do. For $R=\mathbf Q$ this is weaker: a finite group satisfies it.
+
+\textbf{Proposition (exact colimits suffice).}\ours
+\textit{If $A$ is nonempty and connected and $\varinjlim_A$ is exact on functors $A\to\mathrm{Ab}$, then $T(A)$.}
+
+\textit{Proof.}
+For $H:A\to\mathrm{Set}$ and $F:\operatorname{El}(H)\to\mathrm{Ab}$ put $(\Sigma_HF)(a)=\bigoplus_{h\in H(a)}F(a,h)$. The functor $\Sigma_H$ is exact and $\varinjlim_{\operatorname{El}(H)}F=\varinjlim_A\Sigma_HF$. So colimits over $\operatorname{El}(H)$ are exact, and so are colimits over a component $E$ (extend by zero). The left derived functors of $\varinjlim_E$ on the constant functor $\mathbf Z$ are the groups $H_j(BE)$; they vanish for $j>0$. Criterion (ii) applies.\hfill$\square$
+
+\textbf{Theorem (a category with $T$ that is not filtered).}\ours
+\textit{Let $\Delta'$ be the category of the ordered sets $[n]=\{0,\dots,n\}$, $n\geq0$, and strictly increasing maps. Then $T(\Delta')$ holds and $\Delta'$ is not filtered; it is not sifted either.}
+
+\textit{Proof.}
+The two maps $[0]\to[1]$ are not equalized by any injection, so $\Delta'$ is not filtered. A pair of maps $[0]\to[N]\leftarrow[0]$ is two points of $[N]$, and whether the first is smaller than, equal to or larger than the second is preserved by increasing injections; so the category of such pairs has three components and the diagonal of $\Delta'$ is not cofinal.
+
+For exactness we show: \emph{for every $n$ there are $M$ and an integral combination $t=\sum_gt_g\,g$ of maps $g:[n]\to[M]$ of $\Delta'$, with $\sum_gt_g=1$, such that $t\circ h$ is the same combination for all maps $h:[m]\to[n]$ with the same $m$.} For $n=1$, $M=2$, one can take $t=(0,1)-(0,2)+(1,2)$, naming a map by its values. In general, a map $g:[n]\to[M]$ is determined by its gaps $e_0=g(0)$, $e_i=g(i)-g(i-1)-1$, $e_{n+1}=M-g(n)$, that is, by a monomial $z^e$ of degree $M-n$ in $z_0,\dots,z_{n+1}$; a combination $t$ becomes a homogeneous polynomial $P_t$, and $\sum t_g=P_t(1,\dots,1)$. Let $D_i$ be the substitution $z_{i+1}\mapsto z_i$ followed by renumbering to variables $y_0,\dots,y_n$. Omitting the value $g(i)$ merges two gaps and the omitted point, so $P_{t\delta^i}=y_iD_i(P_t)$ for the map $\delta^i:[n-1]\to[n]$ that omits $i$. We construct, for all $n\geq0$ and $k\geq1$, a homogeneous polynomial $C_{n,k}$ with integer coefficients, $C_{n,k}(1,\dots,1)=1$, such that $y_i^kD_i(C_{n,k})$ does not depend on $i$. Put $C_{0,k}=1$. Given $Q=C_{n-1,2k}$ in the variables $y_0,\dots,y_n$, we want $D_i(C_{n,k})=F_i:=Q\prod_{l\neq i}y_l^k$ for all $i$; then $y_i^kD_i(C_{n,k})=Q\prod_ly_l^k$. In the coordinates $x_i=z_i-z_{i+1}$ ($0\leq i\leq n$), $u=z_{n+1}$, the map $D_i$ is reduction modulo $x_i$. The prescriptions agree modulo $(x_i,x_j)$: for $j=i+1$ both give $D_i(Q)\prod_lw_l^k$, and for $j\geq i+2$ they give $w_{j-1}^{2k}D_{j-1}(Q)\prod_{l\neq i,j-1}w_l^k$ and $w_i^{2k}D_i(Q)\prod_{l\neq i,j-1}w_l^k$, which are equal by the property of $Q$. For a nonempty set $S$ of indices let $\Phi_S$ be the common value of the $F_i$, $i\in S$, after setting $x_i=0$ for all $i\in S$ (in homogeneous lifts written in the coordinates $x,u$). Then
+\[
+ C_{n,k}=\sum_{S\neq\varnothing}(-1)^{|S|+1}\Phi_S
+\]
+reduces to $F_j$ modulo $x_j$, because the terms $S$ and $S\cup\{j\}$, $j\notin S$, cancel modulo $x_j$ and the term $S=\{j\}$ remains. It is homogeneous, and its value at $(1,\dots,1)$, a point where all $x_i$ vanish, is $F_0(1,\dots,1)=1$. Now let $t$ correspond to $C_{n,1}$. Then $s=t\delta^i$ is independent of $i$, and from $\delta^{b+1}\delta^a=\delta^a\delta^b$ ($a\leq b$) we get $s\delta^a=s\delta^b$; by induction on $n$, $s\circ h'$ depends only on the source of $h'$, and every non-identity $h:[m]\to[n]$ factors through some $\delta^i$. This proves the claim.
+
+Let $F\subseteq F'$ be functors $\Delta'\to\mathrm{Ab}$. Any two objects of $\Delta'$ map to a third, so every element of $\varinjlim F$ is the class of one element $\xi\in F([n])$. Suppose its image in $\varinjlim F'$ is zero. The colimit is the quotient of $\bigoplus_mF'([m])$ by the elements $F'(v)\eta-\eta$, so $\xi=\sum_k(F'(v_k)\eta_k-\eta_k)$ in this direct sum, for finitely many $v_k:[s_k]\to[r_k]$ and $\eta_k\in F'([s_k])$. Choose $N$ and maps $d_m:[m]\to[N]$ for the finitely many $m$ that occur; applying $F'(d_m)$ on each summand gives $F'(d_n)\xi=\sum_k\bigl(F'(d_{r_k}v_k)-F'(d_{s_k})\bigr)\eta_k$ in $F'([N])$. Choose $t$ for $N$ and write $F'(t)=\sum_gt_gF'(g)$. Since $t\circ d_{r_k}v_k=t\circ d_{s_k}$, applying $F'(t)$ gives $F'(\tau)\xi=0$ for $\tau=t\circ d_n$, a combination of maps $[n]\to[M]$ with coefficient sum $1$. As $F\subseteq F'$, also $F(\tau)\xi=0$. The class of $F(g)\xi$ in $\varinjlim F$ is the class of $\xi$ for every $g$, so the class of $F(\tau)\xi$ is that of $\xi$; it is zero. So $\varinjlim_{\Delta'}$ preserves monomorphisms and is exact; $\Delta'$ is nonempty and connected, and the proposition applies.\hfill$\square$
+
+That colimits of abelian groups over this category are exact is attributed to Isbell and Mitchell in \citet[A.5]{AdamekKoubekReiterman1981}, together with the general criterion: $\varinjlim_A$ is exact on abelian groups if and only if each component of the category with the same objects and the integral combinations of arrows of coefficient sum $1$ as morphisms is filtered. The withdrawn corollary on this page claimed $T$ for $\Delta^{\mathrm{op}}$, which is false; the category $\Delta'$ is an example of what that corollary was after.
+
+\textbf{Theorem (monoids; finitely many objects).}\ours
+\textit{Let $A$ have an object $q$ that receives an arrow from every object. Then $T(A)$ holds if and only if $A$ is filtered. This applies to every monoid, and to every category with finitely many objects, where both $T(A)$ and filteredness provide such an object $q$.}
+
+\textit{Proof.}
+Assume $T(A)$. \emph{Step 1: for parallel arrows $a,b:p\to q'$ there are an object $r$ and an integral combination $t$ of arrows $q'\to r$, with coefficient sum $1$, such that $ta=tb$.} Let $P_c=\mathbf Z[A(c,-)]$, let $d:P_{q'}\to P_p$ be $c\mapsto ca-cb$, with kernel $K$ and image $J$, and let $H$ be the quotient of $A(p,-)$ by the relations $ca\sim cb$, so that $0\to J\to P_p\to\mathbf Z[H]\to0$ is exact. The functors $P_c$ are projective with $\varinjlim P_c=\mathbf Z$, and $\varinjlim d=0$. So $L_1\varinjlim\mathbf Z[H]$ is the kernel of $\varinjlim J\to\varinjlim P_p$; this map is zero, because $\varinjlim P_{q'}\to\varinjlim J$ is surjective and $\varinjlim d=0$. Hence $L_1\varinjlim\mathbf Z[H]=\varinjlim J=\operatorname{coker}(\varinjlim K\to\mathbf Z)$, the image of $\varinjlim K$ being generated by the coefficient sums of the elements of the groups $K(r)$. The left side is $H_1(B\operatorname{El}(H))$, and $\operatorname{El}(H)$ is connected (every object receives an arrow from the class of $\mathrm{id}_p$); by the criterion it vanishes. So $1$ is a sum of coefficient sums of finitely many elements of groups $K(r_i)$; pushing them to a common successor $r$ of the $r_i$ (the common-successor proposition of the preceding commentary) and adding gives $t$.
+
+\emph{Step 2: the monoid $M=A(q,q)$ is filtered.} For $x,m\in M$, Step~1 for the pair $x,xm$, followed by an arrow $r\to q$, gives $t\in\mathbf Z[M]$ with coefficient sum $1$ and $tx=txm$. The element $\nu=tx$ of $\mathbf Z[Mx]$ is invariant under right multiplication $\rho$ by $m$. Let $S$ be its finite support. Each point of $S$ has a $\rho$-preimage in $S$, distinct points have distinct preimages, so $\rho$ permutes $S$ and $\nu$ is constant on its cycles; the coefficient sum $1$ is thus an integral combination of cycle lengths. Among all points of $Mx$ that are $\rho$-periodic choose one, $w$, of least period $\pi$. If $\pi>1$, let $\ell$ be a prime dividing $\pi$ and apply the same to $w$ in place of $x$: some cycle in $Mw$ has length prime to $\ell$, and its points $w'$ satisfy $w'm^\pi=w'$ too, so their period is a proper divisor of $\pi$, a contradiction. Hence there is $y$ with $yxm=yx$. Given $m,m'\in M$, take $y$ with $ym=y$ (case $x=1$), then $y'$ with $y'ym'=y'y$; then $y'ym=y'y=y'ym'$.
+
+\emph{Step 3.} Let $a,b:p\to q'$ be parallel, choose $g:q'\to q$, and by Step~1 an element $t=\sum n_ic_i\in\mathbf Z[M]$ of coefficient sum $1$ with $tga=tgb$. In the filtered monoid $M$ there is $y$ with $yc_i=y$ for all $i$. Then $yga=\sum n_iyc_iga=\sum n_iyc_igb=ygb$. With common successors this shows that $A$ is filtered. The converse is the fact that filtered categories satisfy $T$.\hfill$\square$
+
+So Grothendieck's expectation is right in every finite case and for all monoids, and the smallest counterexamples have infinitely many objects. For the monoid $\{1,e,f\}$ with $uv=v$ for $u,v\in\{e,f\}$, which is cofiltered with contractible classifying space, the theorem says that $T$ fails; a cofinal image of the homotopy type of $S^2$ is obtained by adjoining a source $x$ with two arrows $h,i:x\to*$ on which $e$ and $f$ act by the constant map with value $i$. Whether $T(A)$ implies exactness of $\varinjlim_A$ on abelian groups, the converse of the proposition, is not decided here.
 \end{dcomment}
 
 
@@ -1528,7 +1582,7 @@ dans Cat
 % foot: Version 8 juillet 2001
 s'interprètent comme les foncteurs de même nom pour le dérivateur $\HOT_{W_0}$, ou plus directement, pour le dérivateur (qu'on pourrait faussement considérer comme canularesque) $\mathbf{D}_{(\Ens)}$.
 
-\dgrblock{dgrb108}{The represented derivator at dimension zero}
+\dgrblock{dgrb109}{The represented derivator at dimension zero}
 \begin{dcomment}{exposition}{p37}{The represented derivator at dimension zero}
 Grothendieck now uses sets to separate the genuinely categorical part of cofinality from its higher homotopical refinements. The equivalence $\HOT_{W_0}(I)\simeq\operatorname{Fun}(I^{\mathrm{op}},\mathrm{Set})$ has a short proof that explains why no hidden higher information survives. Let $d:\mathrm{Set}\longrightarrow\mathrm{Cat}$ assign the discrete category, and let $\pi_0$ be connected components. There is an adjunction $\pi_0\dashv d$, with $\pi_0d=1$. For each category $C$, the unit $C\longrightarrow d\pi_0C$ is a $W_0$-equivalence. Applied pointwise to an $I^{\mathrm{op}}$-diagram, these units give a natural objectwise $W_0$-equivalence from that diagram to its discrete component diagram. Thus the two functors become inverse after localization. Since the construction commutes with restriction, it gives the stated equivalence of diagram theories.
 
@@ -1615,7 +1669,7 @@ Je rappelle pour mémoire une (troisième\,?) caractérisation des flèches $u :
 \msp{page 41}
 La notion de $W_0$-fibration apparaît comme extrêmement forte - beaucoup plus forte à certains égards que celle (disons) de $W_\infty$-fibration ou de $W_\omega$-fibration. Elle équivaut à ceci (comme on voit aussitôt) : pour toute composante connexe $I'_\alpha$ de $I'$, désignant par $I_\alpha$ la composante connexe correspondante de $I$, et pour tout $J_\alpha$ 0-connexe et au dessus de $I_\alpha$, le produit fibré $I'_\alpha \times_{I_\alpha} J_\alpha$ est encore 0-connexe. (Ça ressemble aux histoires de totale 0-connexité d'un topos\,!) Mais cela signifie aussi que $I'_\alpha \longrightarrow I_\alpha$ est une $W_0$-équivalence universelle. Cela implique que ses fibres sont 0-connexes, et la réciproque est vraie si $u : I' \longrightarrow I$ est $W_0$-propre ou $W_0$-lisse. Ainsi, la condition essentielle pour une $W_0$-fibration est celle que les fibres des flèches induites $I'_\alpha \longrightarrow I_{u(\alpha)}$ \pl\ $I'_\alpha \longrightarrow I_\alpha$\texttt{]} soient 0-connexes. En fait, on a ceci
 
-\dgrblock{dgrb109}{The lift categories behind ordinary base change}
+\dgrblock{dgrb110}{The lift categories behind ordinary base change}
 \begin{dcomment}{exposition}{p40}{The lift categories behind ordinary base change}
 The base-change assertion is an application of the lift-category criterion already developed in the commentary on Chapter~I, manuscript pp.~68--70 (``The category of lifts behind properness'' and ``Completing the tests in the proper base-change theorem''). Its present specialization is useful because all the relevant tests are tests of connectedness. For $u:A\longrightarrow B$, properness means that, for every $a\in A$ and arrow $\beta:u(a)\longrightarrow b$, the category
 \[
@@ -1638,7 +1692,7 @@ The passage from a $W_0$-equivalence to an equivalence measured by constant coef
 \item[\textit{c)}] \textit{Pour que ce soit une $W_0$-fibration faible, il} faut \textit{que $\forall\, i \in I$, l'inclusion $I'_i \hookrightarrow i\backslash I'$ soit une $W_0$-équivalence, i.e. $\pi_0(I'_i) \xrightarrow{\;\sim\;} \pi_0(i\backslash I')$ soit bijectif,} et \textit{que $i \longmapsto \pi_0(i\backslash I')$ soit un préfaisceau localement constant sur $I$ (i.e. $\underline{\pi_0}(I'/I)$ soit un} revêtement \textit{étale de $I$). Cette condition est aussi suffisante, si $u$ est $W_0$-lisse. De plus (pour mémoire) $u$ est une $W_0$-fibration faible si et seulement si $u^{\mathrm{opp}}$ l'est.}
 \end{itemize}
 
-\dgrblock{dgrb110}{Why arrows detect universal connectedness}
+\dgrblock{dgrb111}{Why arrows detect universal connectedness}
 \begin{dcomment}{exposition}{p42:Cette condition est aussi suffisante}{Why arrows detect universal connectedness}
 Proposition~3.1 says that universal preservation of connected components can be checked on vertices and single arrows. Its proof is a useful model for reading the much stronger componentwise condition in part~(b). We give the details because the proposition is stated, rather than proved, here.
 
@@ -1663,7 +1717,7 @@ La plus grande différence entre la notion de $W_0$-fibration, et celle de $W_0$
 \msp{page 43}
 des $W_\omega$-fibrations faibles et a fortiori des $W_0$-fibrations faibles), mais pas des $W_0$-fibrations\,; car dans le cas où $I'$, $I$ sont 0-connexes, il faudrait que les fibres soient 0-connexes (cf. b) ci-dessus), i.e. que $u$ soit un isomorphisme\,!
 
-\dgrblock{dgrb111}{Monodromy explains the strictness}
+\dgrblock{dgrb112}{Monodromy explains the strictness}
 \begin{dcomment}{examples}{p43:i.e. que $u$ soit un isomorphisme}{Monodromy explains the strictness}
 The covering example isolates what the componentwise test excludes. This is the same monodromy issue as in the commentary on Chapter~I, manuscript p.~98 (``Sets already detect the missing monodromy''), now applied to the two precise definitions in (3.8). Let $G$ be a nontrivial group. Its translation groupoid $E G$ has object set $G$ and exactly one arrow between each ordered pair of objects. The functor
 \[
@@ -1732,7 +1786,7 @@ u_!e_{I'} = u_!u^*(e_I) \xrightarrow{\text{adj.}} e_I
 \]
 en prenant le Hom dans $F$. Donc dire que (3.2.4) est \texttt{[un]} isomorphisme pour tout $F$ signifie que (3.2.5) est \texttt{[un]} isomorphisme. Passant aux valeurs des deux membres en $i$, on trouve $\pi_0(i\bs I') \xrightarrow{\sim} 1$, i.e. que $i\bs I'$ est 0-connexe, q.e.d.
 
-\dgrblock{dgrb112}{What the ordinary cofinality theorem tests}
+\dgrblock{dgrb113}{What the ordinary cofinality theorem tests}
 \begin{dcomment}{exposition}{p45:i.e. que $i\bs I'$ est 0-connexe, q.e.d.}{What the ordinary cofinality theorem tests}
 Grothendieck has now proved the criterion announced on the opening page, with the sufficient directedness condition replaced by the exact connectedness condition. The proof is the representability calculation already explained in ``The presheaf represented by a change of index'': the functor $F\longmapsto\Gamma(I',u^*F)$ is represented by $u_!1_{I'}$, and
 \[
@@ -1840,7 +1894,7 @@ $u(r)(\gamma\alpha) = u(r)(\gamma\beta)$, donc $u(r)\gamma$ égalise $(\alpha, \
 
 La vérification de d) par AQT \texttt{[abréviation dont le sens échappe aux éditeurs]}.
 
-\dgrblock{dgrb113}{The filtered criterion and eventual lifting}
+\dgrblock{dgrb114}{The filtered criterion and eventual lifting}
 \begin{dcomment}{development}{p49:La vérification de d) par AQT}{The filtered criterion and eventual lifting}
 Corollary~3.4 converts connectedness of comma categories into the two concrete operations needed for filtered colimits: reaching the image of $u$, and equalizing parallel arrows after reaching it. The proof of parts~(b) and~(c) is present on the page. There is one harmless slip in the statement of~(c): its last assertion concerns filteredness of $I$, not the already assumed filteredness of $I'$. Part~(d) is left under the abbreviation AQT. Its proof uses full faithfulness in two different places.
 
@@ -1950,7 +2004,7 @@ le foncteur induit $I'/i \longrightarrow I/i$ est $\cM$-cofinal. La réciproque 
 \msp{page 52}
 Mais quand $\cM = (\text{Ens})$, cette perplexité disparaît. On trouve la
 
-\dgrblock{dgrb114}{The missing pointwise limit hypothesis}
+\dgrblock{dgrb115}{The missing pointwise limit hypothesis}
 \begin{dcomment}{exposition}{p51}{The missing pointwise limit hypothesis}
 Grothendieck isolates a real difference between testing every coefficient on a slice and testing only coefficients restricted from the ambient category. There is also a second issue here: full faithfulness for coefficients in $\mathcal M$ does not imply full faithfulness after replacing $\mathcal M$ by its presheaf completion. The sufficient implication (4.8) is valid. The converse discussed on page~51, including its asserted ordered case, requires hypotheses ensuring that the relevant pointwise Kan-extension limits exist in $\mathcal M$.
 
@@ -2001,7 +2055,7 @@ car on a évidemment
 \]
 
 
-\dgrblock{dgrb115}{Biasphericity, lax epimorphisms, and factorization categories}
+\dgrblock{dgrb116}{Biasphericity, lax epimorphisms, and factorization categories}
 \begin{dcomment}{later}{p53}{Biasphericity, lax epimorphisms, and factorization categories}
 The new question in Section~4 is whether a diagram and all its natural transformations can be recovered after restriction. The answer is governed by factorizations of arrows, just as ordinary cofinality was governed by objects of comma categories. This is the ordinary version of the factorization test encountered in the commentary on Chapter~I, manuscript p.~49 (``The factorization category controls base change''). The proof of Proposition~4.1 continues beyond these pages; we give the complete argument for its corrected statement here.
 

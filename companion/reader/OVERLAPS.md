@@ -1,12 +1,15 @@
 # Pages commented in two parts of the companion
 
-The companion comments the text in parts (I-a, I-b, II-a, ...). Eight pairs of consecutive parts both contain the same
-five printed pages of the Künzer–Malgoire–Maltsiniotis edition: these pages end the earlier part and open the later
+The companion comments the text in parts (I-a, I-b, II-a, ...). Fifteen pairs of consecutive parts both contain the
+same five printed pages of the Künzer–Malgoire–Maltsiniotis edition: these pages end the earlier part and open the later
 one. The overlaps start and end inside manuscript pages, so they are given here by printed page and by manuscript page.
+The book sets the pages of the nine pairs below once; six of the pairs that came with the parts added on 11 November
+2026 are not merged yet (see the last section).
 
 | Pair | Edition pages | Manuscript pages | Text kept | Not set in the book |
 |---|---|---|---|---|
 | I-a / I-b | 34–38 | 59 (end)–66 (beginning) | I-a | I-b, pp. 34–38 |
+| II-a / II-b | 29–33 | 45–53 (page markers) | II-a | II-b, pp. 29–33 |
 | VI-a / VI-b | 39–43 | 63 (end)–70 (beginning) | VI-a | VI-b, pp. 39–43 |
 | VI-b / VI-c | 84–88 | 137 (end)–145 (beginning) | VI-b | VI-c, pp. 84–88 |
 | VII-a / VII-b | 34–38 | 49′ (end)–57 (beginning) | VII-a | VII-b, pp. 34–38 |
@@ -239,3 +242,26 @@ called "the next block", since an XIII-a block stands between them. Three biblio
 
 - `DER_I-b_corrections.csv` row 3 (printed35; ms61; display(1): \Hom(q^*M, q^*N) \isolongto \Hom(p^*M, p^*N) -> \Hom(q^*M, q^*N) \longrightarrow \Hom(p^*M, p^*N), transcription). The edition (I-a PDF leaf 37, printed p. 35) prints the arrow of display (1) with a tilde: \isolongto is the right reading; the change to \longrightarrow is undone in the I-b text. The row is removed from DER_I-b_corrections.csv.
 - `DER_I-b_corrections.csv` row 5 (printed36; ms62; HOT cohomology display: \Hom_{\cA}(\hot(X), M) -> \underline{\Hom}_{\cA}(\hot(X), M), transcription). The edition (I-a PDF leaf 38, printed p. 36) prints Hom_A(hot(X), M) without underline; the change to \underline{\Hom} is undone in the I-b text. The row is removed from DER_I-b_corrections.csv.
+
+## The six pairs not merged yet
+
+The parts added on 11 November 2026 (II-b, XV-b, XVI, XVII-a, XVII-b, XVIII-a to XVIII-e) bring seven more pairs. The first, II-a / II-b (pp. 29–33), is merged: II-b has no commentary on those pages, so the
+book sets them from II-a. Each of the other six is again one five-page file of the transcription; the manuscript pages below are the page markers inside the overlap.
+
+| Pair | Edition pages | Manuscript page markers | Blocks of the earlier / later part on these pages |
+|---|---|---|---|
+| XV-a / XV-b | 34–38 | 57–66 | 6 / 4 |
+| XVII-a / XVII-b | 29–33 | 58–70 | 10 / 4 |
+| XVIII-a / XVIII-b | 39–43 | 127–138 | 8 / 5 |
+| XVIII-b / XVIII-c | 79–83 | 220–228 | 5 / 5 |
+| XVIII-c / XVIII-d | 119–123 | 316–328 | 1 / 3 |
+| XVIII-d / XVIII-e | 159–163 | 419–429 | 4 / 5 |
+
+`SKIP_PAGES` does not cover them yet, and nothing has been carried between their parts: the book sets these pages in
+both parts, each with its own commentary. Their texts differ in one reading, settled by a correction row: XVII p. 32,
+where the word division "intro- / duite" of the edition is the word "introduite" (XVII-b); otherwise they differ only
+in comments, one space and the LaTeX code of a few displays (XVIII pp. 120 and 160). The II-a / II-b pair differed in
+one more reading, II p. 33, where the edition labels the second item of Proposition 4.1 a′), as II-a has it, while
+II-b kept the transcription's former d′); the book now sets those pages from II-a. The transcription takes the pages of
+every pair from the earlier part, with these readings (at XVII p. 32 the later part's) and the later parts'
+resolutions of three doubtful readings (XV p. 37, XVIII pp. 79 and 81).

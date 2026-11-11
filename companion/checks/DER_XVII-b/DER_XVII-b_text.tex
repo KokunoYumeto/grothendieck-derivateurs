@@ -1,0 +1,1615 @@
+% macro conflict, first definition kept: \newcommand{\Fl}{\mathrm{Fl}}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}}
+% macro conflict, first definition kept: \newcommand{\Fl}{\mathrm{Fl}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage[a4paper,left=23mm,right=30mm,top=23mm,bottom=25mm,
+            marginparwidth=22mm,marginparsep=4mm]{geometry}
+\usepackage{marginfix}
+\usepackage{xurl}
+\usepackage{etoolbox}
+\setlength{\emergencystretch}{2em}
+\AtBeginEnvironment{thebibliography}{\raggedright\small}
+\AtBeginDocument{%
+  \ifdefined\hypersetup
+    \hypersetup{hidelinks,
+      pdftitle={Les Derivateurs: Chapter XVII, pp. 57--118, with commentary},
+      pdfauthor={Alexander Grothendieck},
+      pdfsubject={Manuscript pages 57--118; mathematical audit and commentary}}%
+  \fi
+  \begin{otherlanguage*}{english}
+  \noindent{\Large\bfseries Les D\'erivateurs: Chapter XVII, part b}\par
+  \smallskip
+  \noindent{\small Source text: Alexander Grothendieck. Commentary and audit AI-produced by
+  GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic). Manuscript pp.~57--118;
+  edition printed pp.~29--60. Edition slips remain in the source;
+  intended readings are recorded in the accompanying registers.}\par
+  \medskip\hrule\medskip
+  \end{otherlanguage*}}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Esp}{\operatorname{Esp}}
+\newcommand{\Fl}{\operatorname{Fl}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ho}{\operatorname{Ho}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+\newcommand{\postilde}{^{\sim}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\fnm}[1]{\textsuperscript{(}\footnotemark[#1]\textsuperscript{)}}
+\newcommand{\cl}{^{\sim}}% tilde printed as exponent after a symbol or a parenthesis
+\newcommand{\encircled}[1]{\tikz[baseline=(X.base)]\node[draw,circle,inner sep=1pt](X){#1};}
+\newcommand{\encoval}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners=4pt,inner sep=2pt](X){#1};}
+\newcommand{\Dl}{\boldsymbol{\Delta}}
+\newcommand{\tl}{^{\sim}}
+\newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\begin{document}
+% ---- from der-ch17_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+lesquels sont visiblement adjoint l'un de l'autre (puisque induits par un couple de foncteurs % [sic] adjoint -> adjoints, accord avec « lesquels »
+adjoints $u_!$, $u^*$), et de plus compatibles aux localiseurs. Donc on peut appliquer le lemme des foncteurs adjoints pour les localisés. Pour résumer :
+
+\textbf{Corollaire 3.5.} \textit{Supposons que $I$, $I'$ soient artiniens, et qu'on soit dans l'un des deux cas suivants :}
+\begin{enumerate}
+\item[a)] \textit{Les espaces} $\Esp(I)$, $\Esp(I')$ \textit{sont noethériens (p.ex. $I$, $I'$ finis).}
+\msp{page 58}
+\item[b)] \textit{$C$ et $TC = C\cap W$ sont stables par composition transfinie.}
+\end{enumerate}
+\textit{Supposons de plus que $u^*$ applique $\M(I'^\circ)_{\mathrm{c}}$ dans $\M(I^\circ)_{\mathrm{c}}$, ce qui est le cas notamment si $u$ est localement cofiltrant, i.e. les ensembles ordonnés localisés $i'\backslash I$ sont localement cofiltrants. Alors le foncteur $u_!^W$ construit dans (3.3.1) est adjoint à gauche de $u_W^*$.}
+
+\textbf{Remarque 3.6.} Quand on a un couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathcal{C} \arrow[r, shift left, "u_!"] & \mathcal{C}' \arrow[l, shift left, "u^*"]
+\end{tikzcd}
+\ ,
+\]
+avec les localiseurs $W$, $W'$ de $\mathcal{C}$, $\mathcal{C}'$, $u^*$ compatible aux localiseurs, et si de plus on a une sous-catégorie pleine $\mathcal{C}_0$ de $\mathcal{C}$ telle que
+\begin{enumerate}
+\item[a)] $u_!|\mathcal{C}_0$ transforme flèches de $W$ en flèches de $W'$, et
+\item[b)] l'inclusion $\mathcal{C}_0 \hookrightarrow \mathcal{C}$ induit une \textit{équivalence} $\mathcal{C}_0W_0^{-1} \xrightarrow{\sim} \mathcal{C}W^{-1}$ (où $W_0 = W\cap\Fl(\mathcal{C}_0)$),
+\end{enumerate}
+on trouve deux foncteurs canoniques
+\[
+\begin{tikzcd}
+\mathcal{C}W^{-1} \arrow[r, shift left, "u_!^W"] & \mathcal{C}'W'^{-1} \arrow[l, shift left, "u_W^*"]
+\end{tikzcd}
+\ ,
+\]
+où $u_!^W$ est défini seulement à isomorphisme canonique près.
+
+\msp{page 59}
+Contrairement à ce que prétend \textsc{Anderson}, il n'est par vrai en général que ces deux % [sic] par -> pas, faute de frappe
+foncteurs soient adjoints, sans hypothèses supplémentaires. Voici un contrexemple : on prend $\mathcal{C} = \mathcal{C}'$, $u_! = u^* = \id_{\mathcal{C}}$, $W' = \operatorname{Is}(\mathcal{C})$, $W = \Fl(\mathcal{C})$, donc $u_W^*$ est le foncteur canonique
+\[
+\underbrace{\Pi\,\mathcal{C}}_{\text{groupoïde fondamental}} \qquad \longleftarrow \mathcal{C}\ .
+\]
+Supposons que $\mathcal{C}$ soit 1-connexe, i.e. $\Pi\,\mathcal{C}$ soit équivalente à $e$. Soit $e\in\Ob\mathcal{C}$ tel que $\operatorname{End}_{\mathcal{C}}(e)$ soit le groupe unité, et prenons $\mathcal{C}_0 = \{e\}$. Alors l'hypothèse sur $\mathcal{C}_0$ est satisfaite. Mais si $u_!^W$ était adjoint à gauche de $u_W^*$, $e$ serait objet initial de $\mathcal{C}$. Par exemple si $\mathcal{C}$ a un objet final $e$ (ce qui implique que $\mathcal{C}$ est 1-connexe et $e$ rigide), cet objet final devrait être initial si \textsc{Anderson} avait raison avec “it is clear that \ldots”.
+
+\msp{page 60}
+Néanmoins :
+
+\textbf{Théorème 3.7.} \textit{Soit $(\M,W,C)$ une catégorie à cofibrations stable par $\varinjlim$ finies, et $u : I \longrightarrow I'$ une application croissante entre ensembles ordonnés artiniens. On suppose qu'on est sous l'une des hypothèses suivantes.}
+\begin{enumerate}
+\item[a)] $\Esp(I)$, $\Esp(I')$ \textit{sont noethériens, p.ex. $I$, $I'$ finis.}
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\item[b)] \textit{$C$ et $TC \overset{\text{déf}}{=} C\cap W$ sont stables par composition transfinie, et $\M$ stable par petites $\varinjlim$ filtrantes.}
+\end{enumerate}
+\textit{Alors le foncteur} $u_!^W : \Ho_W(I^\circ) \longrightarrow \Ho_W(I'^\circ)$ \textit{construit dans} (3.3.1) \textit{est adjoint à gauche du foncteur $u_W^*$ en sens opposé.}
+
+\textsc{Démonstration.} On utilise le diagramme bien connu
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & I \arrow[d, "\partial_1"'] \arrow[dd, bend left=60, "w"] \\
+I \arrow[r, shift left, "\partial_0\ (\text{ouv.})"] \arrow[d, "u"'] \arrow[dr, phantom, "\text{cocart.}"] & I\times\boldsymbol{\Delta}^1 \arrow[l, dotted, shift left, "\pr_1"] \arrow[d] \\
+I' \arrow[r, shift left, "\text{imm. ouv.}"] & C(u) \arrow[l, dotted, shift left, "v"]
+\end{tikzcd}
+\]
+pour factoriser $u$ en
+\[
+u \;=\; vw\ ,
+\]
+où $w$ est une \textit{immersion fermée,} et $v$ est déduit de $\pr_1 : I\times\boldsymbol{\Delta}^1 \longrightarrow I$ par push-out. C'est une rétraction du mapping-cone C(u) sur l'ouvert $I'$, dont le complémentaire fermé s'identifie à $I$ via $w$.
+
+\msp{page 61}
+Le foncteur de recollement entre $I'$, $I$
+\[
+H \;:\; I'^\circ\times I \;\longrightarrow\; \mathrm{Ens}
+\]
+est donné par
+\[
+\underbrace{H(i',i)}_{=\,\Hom_{C(u)}(i',i)} \;=\; \Hom_{I'}(i',u(i))\ . \tag*{$(*)$}
+\]
+La rétraction $v$ de $C(u)$ dans $I'$ applique $i$ dans $u(i)$, et une flèche $i'\longrightarrow i$ correspondant à $i'\longrightarrow u(i)$ dans $I'$ via $(*)$, est transformé par $v$ en cette même flèche $i'\longrightarrow u(i)$. Calculons, % [sic] transformé -> transformée, accord avec « une flèche »
+pour $i'_0$ donné, la catégorie $i'_0\backslash\Bigl(C(u),\ v : C(u)\longrightarrow I'\Bigr)$, des couple d'un objet $\xi$ de $C(u)$ % [sic] des couple -> des couples, accord du pluriel
+et d'une flèche $i'_0\longrightarrow v(\xi)$ dans $I'$. On voit que $i'_0\backslash C(u)$ admet l'ouvert $i'_0\backslash I'$, avec le complémentaire fermé $i'_0\backslash I$,
+\[
+\begin{tikzcd}[column sep=large, row sep=huge]
+I' \arrow[r, hook, "\text{ouvert}"'] & C(u) \arrow[d] & I \arrow[l, hook', "\begin{array}{l}\text{fermé}\\ \text{complémentaire}\\ \text{de } I'\end{array}"'] \\
+ & I'\ ,
+\end{tikzcd}
+\]
+ces deux catégories étant recollées par le bifoncteur
+\[
+\begin{aligned}
+(i'_0\backslash I')^\circ \times (i'_0\backslash I) &\quad\longrightarrow\quad \mathrm{Ens}\\
+\Bigl((\alpha : i'_0\longrightarrow i'), (\beta : i'_0\longrightarrow u(i), i)\Bigr) &\quad\longmapsto\quad \Hom_{i'_0\backslash I'}(i',u(i))
+\end{aligned}
+\]
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+induit par $(*)$\,; i.e. les flèches de $(\alpha : i'_0\longrightarrow i') \in \Ob\,(i'_0\backslash I')$ dans $(\beta : i'_0\longrightarrow u(i)) \in i'_0\backslash I$ sont les flèches $i' \xrightarrow{\gamma} u(i)$ telles que le triangle
+\[
+\begin{tikzcd}
+ & i'_0 \arrow[dl, "\alpha"'] \arrow[dr, "\beta"] & \\
+i' \arrow[rr, "\gamma"] & & u(i)
+\end{tikzcd}
+\]
+commute.
+
+\msp{page 62}
+Si $i' = i'_0$, $\alpha = \id_{i'_0}$, alors cette commutativité revient à $\gamma = \beta$, ce qui signifie qu'il y a une flèche et une seule de $\alpha$ dans $(i,\beta)$. Cela montre donc que $(i'_0,\id_{i'_0})$ est un objet initial de $i'_0\backslash C(u)$. On a donc prouvé le lemme :
+
+\textbf{Lemme 3.8.} \textit{Soit $u : I\longrightarrow I'$ une flèche dans} (Cat)\textit{, factorisons-le en}
+\[
+I \xrightarrow{\;w\;} C(u) \xrightarrow{\;v\;} I'\ ,
+\]
+\textit{où $C(u)$ est le mapping-cone défini page} 60\textit{, $w$ une immersion fermée de complémentaire $I'$, $v$ la rétraction canonique de $C(u)$ sur $I'$. Ceci posé, pour tout $i'_0\in\Ob I'$, la catégorie $i'_0\backslash(C(u),v)$ admet un objet initial – donc $v : C(u)\longrightarrow I'$ est (tout ce qu'il y a de) cofiltrante.}
+
+Nous pouvons maintenant prouver 3.7. Tout d'abord, les hypothèses faites sur $I$, $I'$ se transportent à $C(u)$ (hypothèse artinienne, et éventuellement hypothèse noethérienne sur $\Esp(C(u))$). Donc
+\msp{page 63}
+on peut appliquer les résultats précédents, notamment 3.5, aux flèches $v$, $w$. Le lemme précédent montre bien que $v$ satisfait aux conditions de 3.5, donc le foncteur $v_!^W$ construit dans 3.3.1 est adjoint à gauche de $v_W^*$. Considérons d'autre part le foncteur $w_!^W$ construit dans 3.3.1, je dis que la même conclusion s'applique. Cela provient du fait que $w$ est une immersion fermée. En effet, dans ce cas il est immédiat que
+\[
+w_! \;:\; \M(I^\circ) \;\longrightarrow\; \M(I'^\circ), \qquad\quad \text{où } I = C(u), % [sic] I = C(u) -> I' = C(u), w a pour but le mapping-cone C(u)
+\]
+est compatible avec les localiseurs, puisque l'on a
+\[
+\left\{
+\begin{array}{lcll}
+w_!(X)(j) & \simeq & X(j) & \text{si } j\in I,\\[1ex]
+w_!(X)(j) & \simeq & \emptyset_{\M} & \text{si } j\in J\backslash I,
+\end{array}
+\right.
+\]
+par le calcul des fibres
+\[
+w_!(X)(j) \;\simeq\; \varinjlim_{i\in I/j} X(i)\ .
+\]
+Donc la définition de $w_!^W$ donnée dans 3.3.1 revient en fait à passer directement aux catégories localisées pour $w_!$, sans avoir à se restreindre à $\M(I^\circ)_{\mathrm{c}}$, et le lemme des foncteurs adjoints nous dit que
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 64}
+ce foncteur est adjoint à gauche de $w_W^*$.
+
+Comme on a évidemment
+\[
+u_!^W \;\simeq\; v_!^W\circ w_!^W\ , \qquad\quad u_W^* \;\simeq\; w_W^*\circ v_W^*\ ,
+\]
+on en conclut que $u_!^W$ est bien adjoint à gauche de $u_W^*$, q.e.d.
+
+\textbf{Corollaire 3.9.} \textit{Soit $(\M,W,C)$ une catégorie à cofibrations. Alors le prédérivateur $\mathbf{D}_W$, restreint à la catégorie} $\mathrm{Diag}_0$ \textit{formée des catégories $I$} ordonnées \textit{artiniennes et telles que} $\Esp(I)$ \textit{soit noethérien, satisfait aux axiomes} Dér 1 (décomposition), Dér 2 (localisation), Dér 3 (objet final), Dér 4 bis (existence de $u_!$), Dér 5 bis (mode de calcul des $u_!$), Dér 6 (exactitude des carrés $W$-cocartésiens). \textit{Si $C$, $TC = C\cap W$ sont stables par composition transfinie, on a le même résultat sur la catégorie} Diag \textit{formée des catégories $I$ ordonnées artiniennes sans plus.}
+
+\msp{page 65}
+\textbf{3.10.} Ainsi, pour avoir un dérivateur au plein sens du terme, soit sur $\mathrm{Diag}_0$, soit sur Diag, il ne manque que Dér 4 (existence des $u_*$), Dér 5 (calcul des $u_*$) et Dér 6 (exactitude des carrés $W$-cartésiens). On va les obtenir en principe à l'aide d'une structure de \textit{catégorie à fibrations} $(\M,F,W)$ associé à $(\M,W)$, i.e. l'espèce de structure duale de celle introduite % [sic] associé -> associée, accord avec « structure »
+page 39. Ces deux structures n'ont pas à être reliées entre elles d'une façon autre que par le fait qu'elles correspondent au même $W$. Elles sont considérablement plus faciles à construire que des structures de Quillen $(W,C,F)$, où $C$, $F$ doivent être reliés de façon extrêmement stricte, avec les propriétés $C \longleftrightarrow \underbrace{TF}_{=\,F\cap W}\ ,\ \underbrace{TC}_{=\,C\cap W} \longleftrightarrow F$ (dont il n'est pas question dans l'axiomatique de K. S. \textsc{Brown}), et factorisation pour $(C,TF)$ et $(TC,F)$.
+
+\msp{page 66}
+Mais revenant à la construction des $u_!^W$, il reste le problème de les construire pour une flèche $u : I'\longrightarrow I$ \textit{quelconque} dans Cat. % [sic] u : I' -> I -> u : I -> I', u_!^W va de Ho_W(I°) dans Ho_W(I'°)
+
+À vrai dire, la construction du foncteur
+\[
+u_!^W \;:\; \Ho_W(I^\circ) \;\longrightarrow\; \Ho_W(I'^\circ) \tag*{(3.3.1)}
+\]
+est valable sans supposer que $I'$ soit une catégorie ordonnée – ça peut être une catégorie quelconque. Cela provient du fait que le foncteur induit par $u_!$,
+\[
+u_{!\,\mathrm{cof}} \;:\; \M(I^\circ)_{\mathrm{c}} \;\longrightarrow\; \M(I'^\circ)
+\]
+est encore compatible avec les localiseurs, comme on voit par le calcul des fibres
+\[
+u_!(X)(i) \;\simeq\; \varinjlim_{i\in I/i'} X(i)\ . % [sic] u_!(X)(i) -> u_!(X)(i'), la fibre est prise en i'
+\]
+Ainsi, on est ramené aux cas où $I' = e$, quitte à remplacer $I$ par $I/i'$, et en notant que % [sic] aux cas -> au cas, singulier
+$(I/i'\longrightarrow I$ étant étale) l'image inverse de $X$ sur $I/i'$ est cofibrant (cf. 3.2.a). % [sic] cofibrant -> cofibrante, accord avec « l'image inverse »
+
+\msp{page 67}
+Mais il se présente à nouveau la perplexité si le foncteur (3.3.1) ainsi construit est bien adjoint à gauche de $u_W^*$. On peut songer à utiliser encore la même factorisation en $u = vw$, en
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+utilisant le mapping-cone. La difficulté, cependant, c'est qu'à présent $J = C(u)$ n'est plus une catégorie ordonnée, donc on n'a pas une définition toute prête de $C_{J^\circ}\subset\Fl(\M(J^\circ))$, donnant lieu à une sous-catégorie $\M(J^\circ)_{\mathrm{c}}$ etc. En fait, il semblerait qu'on soit pratiquement paralysé, tant qu'on n'arrive à construire sur $\M(J^\circ)$ également une structure de catégorie à cofibrations, se comportant bien par rapport au foncteurs $v_!$. La % [sic] au foncteurs -> aux foncteurs, accord du pluriel
+“démonstration” d'\textsc{Anderson} de l'existence de $u_!$ pour \textit{toute} flèche dans Cat, foire totalement (même pour $I\longrightarrow e$, $I$ ensemble ordonné fini – mais là j'ai pu rétablir la situation), car il se ramène au cas où $I$ est ordonné localement fini, et il
+\msp{page 68}
+admet sans plus que \textit{dans ce cas} $u_!^W$ est adjoint à gauche de $u_W^*$, et \textit{de plus,} que si $u$ est $\mathbf{W}_0$-connexe, donc $u^* : \M(I'^\circ)\longrightarrow\M(I^\circ)$ pleinement fidèle, qu'il en soit de même de $u_W^*$ déduit par passage aux localisés. Or même si on admet que $u_!^W$ est adjoint à gauche de
+$u_*^W$, faute de disposer d'un morphisme d'adjonction tout près “en bas” (dans $\Ho_W(I'^\circ)$), % [sic] u_*^W -> u_W^*, notation employée partout ailleurs
+déduit du morphisme d'adjonction dans $\M(I^\circ)$, il n'est absolument pas clair que $u_W^*$ soit pleinement fidèle, i.e. $u_!^W$ un foncteur de localisation. Le contrexemple 3.6 montre bien que, même si on a adjonction (i.e. si $e$ est un objet initial de $\mathcal{C} = \mathcal{C}'$), le foncteur $u^* = \id_{\mathcal{C}}$ a beau être pleinement fidèle (et même une équivalence de catégories), le foncteur localisé n'a aucune raison de l'être : cela pouverait que tout objet de Cat ayant un objet initial % [sic] pouverait -> prouverait, faute de frappe
+est équivalent à $e$\,!
+
+\msp{page 69}
+\textbf{3.11.} Disons qu'on a une \textit{catégorie à cofibrations stricte,} si dans l'axiome $\mathrm{Cof}_3$ de factorisation (cf. p. 39), la factorisation peut être prise fonctoriellement en $f$. Il revient $\pm$ au même de dire que l'axiome de factorisation reste valable, quand on pense à une catégorie $\M(I)$ pour $I$ dans Cat, en y définissant $W(I)$ et $C(I)$ (à ne pas confondre avec $C_I$) fibre par fibre. Cela revient au même tout au moins si $\M$ est équivalente à une petite catégorie. Sinon, il faut supposer fonctorialité pour toute \textit{petite} sous-catégorie pleine de $\underline{\mathrm{Fl}}(\M)$. Il vaut mieux définir la catégorie à cofibrations stricte par cette propriété de stabilité.
+
+On voit alors que le prédérivateur $\mathbf{D} = \mathbf{D}_{\M}$ sur Cat est un dérivateur \textit{relativement à} $\mathcal{D} = \mathrm{Diag}_0$ défini plus haut (catégories ordonnées $I$ artiniennes, telles que $\Esp(I)$ soit noethérien), ou même relativement à $\mathcal{D} = \mathrm{Diag}$ (catégories ordonnées $I$ artiniennes sans plus) lorsque $C$ et $TC$ sont stables par composition transfinie. J'entends par là que $u_!$ existe quand $u$ est une flèche de $\mathcal{D}$,
+\msp{page 70}
+et que ça reste valable quand on passe à un dérivateur induit $\mathbf{D}_Z$ ($Z$ dans Cat quelconque)\,; en d'autre termes, que $v_!$ existe quand $v$ est de la forme $\id_Z\times u$, où $u : I\longrightarrow I'$ est une % [sic] d'autre termes -> d'autres termes, accord du pluriel
+flèche de $\mathcal{D}$, et que le calcul se fait \textit{au dessus de} $I'$ selon la règle Dér 5 bis. Cela signifie donc que la flèche de changement de base pour les $f_!$ est un isomorphismes dans le cas % [sic] un isomorphismes -> un isomorphisme, accord du singulier
+suivant :
+\[
+\begin{tikzcd}[row sep=huge, column sep=huge]
+I\times Z \arrow[d, "u\times\id_Z"] & (i'\backslash I)\times Z \arrow[l] \arrow[d, "\pr_2"] \\
+I'\times Z & \{i'\}\times Z \arrow[l]
+\end{tikzcd}
+\ ,
+\]
+où $i'$ est un objet quelconque de $I'$.
+
+% ---- from der-ch17_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+L'hypothèse \textit{stricte} pour une catégorie à cofibrations me paraît assez anodine, dans la plupart des cas à ma connaissance, elle est satisfaite. Mais même moyennant cette hypothèse, je ne vois aucun moyen de prouver l'existence de $u_!$ pour \textit{toute} flèche de Cat, et c'est une situation bien sûr très gênante. On voudrait absolument dégager des conditions qui assurent la validité de Dér 4 bis et de Dér 5 bis (existence de $u_!$ pour
+\msp{page 71}
+\textit{toute} flèche de Cat, et mode de calcul des fibres \dots).
+
+\section*{4\quad Catégories à cofibrations spéciales}
+
+\textbf{4.1.} Je suppose à présent que
+\begin{itemize}[leftmargin=3em]
+\item[\circled{a}] $\mathcal{M}$ est stable par $\varinjlim$ filtrantes, et
+\item[\circled{b}] que ses objets sont accessibles,
+\end{itemize}
+de sorte qu'on est sous les conditions d'application du théorème de factorisation (XV, \S1). On suppose :
+\begin{itemize}[leftmargin=3em]
+\item[\circled{c}] donné $W, C \subset \Fl(\mathcal{M})$, satisfaisant les conditions $\Cof_1$, $\Cof_2$ de page 39. Pour $\Cof_3$, cf. plus bas.
+\item[\circled{d}] $C$, $TC \defeq C \cap W$ \textit{stables par composition transfinie} (c'est le cas si la structure provient d'une structure de Quillen close $(W, C, F)$).
+\end{itemize}
+\[
+TF \defeq C_* \;\subset\; \Fl(\mathcal{M})\ , \tag*{(4.1)}
+\]
+il résulte du théorème de factorisations que toute flèche $f$ de $\mathcal{M}$ se factorise en
+\[
+f \;=\; pi\ , \qquad p \in TF,\ i \in C\ ,
+\]
+\textit{pourvu} qu'on fasse l'hypothèse
+\begin{itemize}[leftmargin=3em]
+\item[\circled{e}] \mbox{}
+\[
+\exists\, C_0 \subset C,\ \textit{petite} \text{ partie de } C, \text{ telle que } C \subset \tilde{C}_0, \text{ i.e. } TF = (C_0)_*. \tag*{(4.3)}
+\]
+\end{itemize}
+Sous ces conditions, si on suppose
+\begin{itemize}[leftmargin=3em]
+\item[\circled{f}] \mbox{}
+\[
+TF \subset W\ , \tag*{(4.4)}
+\]
+\end{itemize}
+\msp{page 72}
+alors l'axiome de factorisations $\Cof_3$ est satisfait. Inversement, si $\Cof_3$ est satisfait, et si $W$ est stable par facteurs directs, alors on a 4.4. Donc si $W$ est stable par facteurs directs, $\Cof_3$ équivaut à (4.4).
+
+\textbf{4.2.} Il me semble que ces conditions, en pratique, ne seront guère jamais remplies, que si $W$ (qui est donné en tout premier lieu, satisfaisant $\Cof_0$ \textsuperscript{(}\footnote[18]{i.e. saturation faible.}\textsuperscript{)}), n'est pas stable par $\varinjlim$
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+filtrantes. À ce moment, pour construire la structure à cofibrations, on part de $C_0$ petite partie de $\Fl(\mathcal{M})$, prise telle que l'on ait
+\[
+(C_0)_* \;\subset\; W\ , \tag*{(4.5)}
+\]
+on prend pour $C$ au choix le saturé $C'_0$ de $C_0$ par cochangement de base et composition transfinie, ou $C = \tilde{C}_0 =$ ensemble des facteurs directs de $C'_0$. Les conditions $\Cof_1$ (stabilités de $C$), $\Cof_3$ (factorisation) sont satisfaites automatiquement, et il reste à s'occuper de $\Cof_2$, qui revient à la stabilité de $C{\cap}W$ par cochangement de base (la stabilité par composition et que ça contienne les isomorphismes, étant immédiates). C'est une condition délicate, et la seule façon standard que je vois pour l'assurer, c'est en supposant
+\[
+C_0 \;\subset\; \Cof_W\ ; \tag*{(4.6)}
+\]
+\msp{page 73}
+la stabilité de $W$ par $\varinjlim$ filtrantes (donc aussi par facteurs directs) assure alors qu'on a également
+\[
+C \;\subset\; \Cof_W\ , \tag*{(4.7)}
+\]
+et par suite
+\[
+\left\{
+\begin{aligned}
+& C \cap W \subset \Cof_W \cap W = W^{\mathrm{univ}}, \\
+& \text{d'où }\ TC \defeq C \cap W = C \cap W^{\mathrm{univ}}\ ,
+\end{aligned}
+\right. \tag*{(4.8)}
+\]
+ce qui assure la stabilité de $C \cap W$ par cochangement de base. La stabilité de $TC$ par composition transfinie résulte de celle de $C$, et de la stabilité de $W$ par composition transfinie.
+
+\textbf{4.3.} Je reviens aux conditions générales\circled{a} à\circled{f} de 4.1, sans supposer nécessairement $W$ stable par $\varinjlim$ filtrantes. Je veux à présent étendre la structure à cofibrations aux $\mathcal{M}(I)$, $I$ quelconque dans Cat. Nous n'avons pas pour ceci (je crois) à utiliser les développements des paragraphes 2, 3, mais nous ferons le lien avec ceux-ci par la suite.
+
+Désignons par $I_0$ la catégorie discrète ayant mêmes objets que $I$, d'où un foncteur canonique
+\[
+v = v_I \ :\ I_0 \longrightarrow I\ . \tag*{(4.9)}
+\]
+L'idée est de définir la structure de $\mathcal{M}(I)$ via la structure évidente de $\mathcal{M}(I_0) \simeq \mathcal{M}^{I_0}$, en jouant sur le couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathcal{M}(I_0) \arrow[r, shift left, "\varphi = v_!"] & \mathcal{M}(I) \arrow[l, shift left, "\psi = v^*"]
+\end{tikzcd}
+\ .
+\]
+\msp{page 74}
+Nous allons présenter les choses de façon un peu plus générale.
+
+\textbf{Définition 4.4.} J'appelle structure de cofibrations \textit{spéciale} une structure $(\mathcal{M}, W, C)$ satisfaisant les conditions a) à f) de 4.1, que je reformule :
+\begin{itemize}[leftmargin=3em]
+\item[\circled{a}] $\mathcal{M}$ stable par petites limites inductives, et les objets de $\mathcal{M}$ sont accessibles.
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\item[\circled{b}] $W$ est faiblement saturé (i.e. $\Cof_0$ de p. 39), $C$ stable par cochangement de base et par composition, $TC \defeq C{\cap}W$ stable par cochangement de base (et par composition automatiquement).
+\item[\circled{b$'$}] $C$ et $TC$ sont stables même par composition \textit{transfinie.}
+\item[\circled{c}] $\exists$ petite partie $C_0 \subset C$ telle que $C \subset \tilde{C}_0$ ($\Longrightarrow \tilde{C} = \tilde{C}_0$).
+\item[\circled{d}] $TF \defeq C_* \subset W$ (ce qui implique, joint à\circled{a} à\circled{c}, l'axiome de factorisation $\Cof_3$ de page 39).
+\end{itemize}
+
+\textbf{4.5.} Nous allons donner une recette générale d'extension d'une telle structure, quand on dispose d'un couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathcal{M} \arrow[r, shift left, "v_!"] & \mathcal{M}' \arrow[l, shift left, "v^*"]
+\end{tikzcd}
+\ ,
+\]
+$\mathcal{M}$ étant muni d'une structure de cofibrations spéciale $(W, C)$, et $\mathcal{M}'$ satisfaisant la condition liminaire\circled{a}. On définira alors les parties $W'$, $C'$ de $\Fl(\mathcal{M}')$
+\msp{page 75}
+par
+\[
+\left\{
+\begin{aligned}
+W' \;&=\; (v^*)^{-1}(W) \\
+C' \;&=\; \text{clôture stable par cochangement de base} \\
+&\phantom{\;=\;}\ \ \text{et composition transfinie de } v_!(C),
+\end{aligned}
+\right. \tag*{(4.5.1)}
+\]
+donc
+\[
+v_!(C) \;\subset\; C' \;\subset\; (v_!(C))\postilde \;=\; \tilde{C}'\ . \tag*{(4.5.2)}
+\]
+Je dis que $(W', C')$, et au choix $(W', \tilde{C}')$, est une structure de cofibrations spéciale sur $\mathcal{M}'$. On va vérifier les différentes conditions de 4.4. La condition a) est déjà acquise.
+
+b) \textsuperscript{(}\footnote[19]{\textbf{N.B.} Il vaut mieux commencer par prouver c).}\textsuperscript{)}. La saturation faible de $W'$ résulte de celle de $W$, via (4.5.1). La stabilité de $C'$ par cochangement de base et par composition (même transfinie) est acquise par définition de $C'$, et itou pour $\tilde{C}'$ (étant Q-close à gauche). Stabilité de $TC' \defeq C'{\cap}W'$ par cochangement de base ? Il suffit de voir que si on a un carré cocartésien
+\[
+\begin{tikzcd}
+X'_0 \arrow[r, "i'"] \arrow[d] \arrow[dr, phantom, "\text{\scriptsize cocart.}"] & X'_1 \arrow[d] \\
+X'_2 \arrow[r, "j'"] & X'_3
+\end{tikzcd}
+\]
+dans $\mathcal{M}'$, avec $i'$ dans $TC' = C' \cap W'$, alors $j' \in W'$ (car on sait déjà $j' \in C'$), i.e.
+\marginpar{$||$}% marginal sign || printed in the left margin of this line
+$v^*(j') \in W'$. Nous allons supposer que $v^*$ \textit{commute aux sommes amalgamées,} et on est donc ramené à prouver que $v^*(i') \in TC$. Donc % [sic] $v^*(j') \in W'$ -> $v^*(j') \in W$, since $W' = (v^*)^{-1}(W)$
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 76}
+on doit prouver le
+
+\textbf{Lemme 4.5.2.} \textit{Sous les conditions} (4.5.3) \textit{et} (4.5.4) \textit{ci-dessous, on a}
+\[
+v^*(C') \;\subset\; C\ , \qquad v^*(TC') \;\subset\; TC\ ,
+\]
+\textit{et si $C = \tilde{C}$, on a $v^*(\tilde{C}') \subset C$, $v^*(T\tilde{C}') \subset TC$.}
+
+Pour $v^*(C') \subset C$, il faut d'abord prouver
+\[
+v^*(v_!(C)) \;\subset\; C\ , \tag*{(4.5.3)}
+\]
+et je ne vois aucun moyen -- il faut le poser comme hypothèse. De plus, que $v^*$ commute aux $\varinjlim$ quelconques (cochangement de base déjà admis -- à présent on a besoin des limites inductives filtrantes)
+\[
+v^* \text{ commute aux petites } \varinjlim \text{ quelconques} \tag*{(4.5.4)}
+\]
+pour conclure de (4.5.3) que $v^*(C' =$ clôture de $v_!(C)$ pour cochangement de base et composition transfinie) est également dans $C$. Passant à $v^*(TC') \subset TC$, par ce qui précède, $v^*(C') \subset C$, il suffit de prouver $v^*(TC') \subset W$, mais $v^*(TC') \subset v^*(W') \subset W$ par définition de $W'$.
+
+Supposons $C = \tilde{C}$, i.e. $C$ stable par facteurs directs, et prouvons $v^*(\tilde{C}') \subset C$, $v^*(T\tilde{C}') \subset TC$. Par c) plus bas, $\tilde{C}'$ est formé des facteurs directs
+\msp{page 77}
+d'éléments de $C'$, donc $v^*(C') \subset C$ implique $v^*(\tilde{C}') \subset C$ puisque $C$ stable par facteurs directs.
+
+Prouvons enfin $v^*(T\tilde{C}') \subset TC \defeq C \cap W$. Comme $T\tilde{C}' = \tilde{C}' \cap W'$, cela résulte de $v^*(\tilde{C}') \subset C$, et de $v^*(W') \subset W$.
+
+Prouvons b$'$). La stabilité de $C'$ et de $\tilde{C}'$ par composition transfinie est acquise, il reste à prouver la stabilité de $TC' = C' \cap W'$ et de $T\tilde{C}' = \tilde{C}' \cap W'$. Il suffit de voir que le composé transfinie $f$ en question est dans $W'$, donc que $v^*(f) \in W$, mais cela résulte du fait que $v^*$ commute à la composition transfinie par (4.5.4), et que $v^*$ transforme $TC'$ et $T\tilde{C}'$ dans $TC$.
+
+\textit{Prouvons} c) pour $C'$ (donc aussi pour $\tilde{C}'$). Soit $C_0$ une petite partie de $C$ telle que $C \subset \tilde{C}_0$, i.e. $C$ est contenu dans la clôture de $C_0$ par les trois opérations de cochangement de base, de composition transfinie, des facteurs directs. On voit alors que $v_!(C)$ est dans la clôture de $v_!(C_0)$ pour les opérations, donc aussi $C'$, et on peut alors prendre $C'_0 = v_!(C_0)$.
+
+\textit{Prouvons enfin} d), c'est la même assertion pour $C'$ et pour $\tilde{C}'$, puisque
+\[
+C'_* \;=\; \tilde{C}'_*\ (\ \defeq\ TF'\ )\ ,
+\]
+\msp{page 78}
+il faut donc prouver
+\[
+TF' \defeq C'_* \;\subset\; W'\ .
+\]
+Cela va résulter du
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\textbf{Lemme 4.5.3.} \textit{On a $TF' = (v^*)^{-1}(TF)$.}
+
+C'est formel par définition de $TF'$ comme
+\[
+TF' \;=\; (v_!(C))_*\ ,
+\]
+de $TF$ comme
+\[
+TF \;=\; C_*\ ,
+\]
+et de l'adjonction de $v_!$, $v^*$. Comme $TF \subset W$, on en conclut
+\[
+TF' \;=\; (v^*)^{-1}(TF) \;\subset\; (v^*)^{-1}(W) = W'\ ,
+\]
+q.e.d.
+
+Donc on a prouvé ceci :
+
+\textbf{Proposition 4.6.} \textit{Considérons un couple de foncteurs adjoints}
+\[
+\begin{tikzcd}
+\mathcal{M} \arrow[r, shift left, "v_!"] & \mathcal{M}' \arrow[l, shift left, "v^*"]
+\end{tikzcd}
+\ ,
+\]
+\textit{où $\mathcal{M}$ est muni d'une structure de cofibrations} spéciale $(W, C)$\textit{. On suppose de plus les conditions suivantes satisfaites.}
+\[
+\begin{aligned}
+&1^\circ)\quad \mathcal{M}' \textit{ stable par petites } \varinjlim\ \textit{, ses éléments sont accessibles.} \\
+&2^\circ)\quad v^* \textit{ commute aux petites } \varinjlim\ . \\
+&3^\circ)\quad v^*(v_!(C)) \subset C.
+\end{aligned} \tag*{(4.6.1)}
+\]
+\msp{page 79}
+\textit{Considérons les parties $W'$, $C'$ de} $\Fl(\mathcal{M}')$ \textit{définies par}
+\[
+\left\{
+\begin{aligned}
+W' \;&=\; (v^*)^{-1}(W), \\
+C' \;&=\; \textit{clôture de } v_!(C) \textit{ par cochangement de base et par composition} \\
+&\phantom{\;=\;}\ \textit{transfinie.}
+\end{aligned}
+\right. \tag*{(4.6.2)}
+\]
+\textit{Alors $(\mathcal{M}', W', C')$ est une structure à cofibrations spéciale. Si de plus $C = \tilde{C}$, i.e. $C$ est stable par facteurs directs, alors $(\mathcal{M}', W', \tilde{C}')$ est également une structure à cofibrations spéciale} \textsuperscript{(}\footnote[20]{\textbf{N.B.} C'est là un fait général pour les catégories à cofibrations spéciales, et devrait être explicité plus bas (cf. 5.1). L'hypothèse sur $C$ est inutile ici (ou plutôt, il suffit au lieu de cela que $W$ soit stable par facteurs directs \textit{et} par composition transfinie, ce qui n'est pas une hypothèse plus réjouissante \dots).}\textsuperscript{)}.
+
+\textbf{4.7.} J'aimerais, en vue d'énoncés du type 3.7 (établissant l'existence de foncteurs du type $u_!^W$), avoir une prise sur $TC' = C'{\cap}W'$, et sur $T\tilde{C}' = \tilde{C}'{\cap}W'$, de façon précise, j'aimerais avoir la relation
+\[
+v_!(TC)\ \subset TC' \subset v_!(TC)\postilde\ , \tag*{(4.7.1)}
+\]
+voire la relation légèrement plus forte
+\[
+\underbrace{v_!(TC)\ \subset TC'}_{} \ \overset{\text{tautol.}}{\subset}\ \underbrace{T\tilde{C}' \;\subset\; (v_!(TC))\postilde}_{}\ , \tag*{(4.7.2)}
+\]
+
+% ---- from der-ch17_p041-045.tex
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+qui se décompose en deux
+\[
+\left\{
+\begin{array}{rcl}
+v_{!}(TC) & \subset & TC' \\
+T\tilde{C}' & \subset & (v_{!}(TC))\cl.
+\end{array}
+\right.
+\tag*{(4.7.3)}
+\]
+La moins délicate des deux est la \msp{page 80} première, $v_{!}(TC) \subset TC'$, qui revient, en vertu des définitions, impliquant
+\[
+v_{!}(TC) \subset v_{!}(C) \subset C' \, ,
+\]
+à
+\[
+v_{!}(TC) \;\subset\; W' \; ,
+\]
+i.e. par définition de $W'$, à
+\[
+v^{*}v_{!}(TC) \;\subset\; TC \; ,
+\tag*{(4.7.4)}
+\]
+ce qui est une hypothèse de type (4.6.1) $3^{\circ}$), à joindre aux hypothèses (4.6.1).
+
+La relation hypothétique
+\[
+\underbrace{T\tilde{C}'}_{=\,\tilde{C}'\cap W'} \;\subset\; (v_{!}(TC))\cl, \quad \text{ou seulement} \quad TC' \subset (v_{!}(TC))\cl,
+\tag*{$(*)$}
+\]
+m'apparaît de nature nettement plus délicate. Comme $T\tilde{C}' \supset TC' \supset v_{!}(TC)$, elle équivaut à l'\textit{égalité} de $(T\tilde{C}')_{*}$ resp. $(TC')_{*}$ et $(v_{!}(TC))_{*} = (v^{*})^{-1}(TC)_{*}$. Posons
+\[
+\left\{
+\begin{array}{lcl}
+(TC)_{*} & \defeq & F \\
+(TC')_{*} & \defeq & F' \;\supset\; (T\tilde{C}')_{*} \;=\; F'_{\sim} \; .
+\end{array}
+\right.
+\tag*{(4.7.5)}
+\]
+On a donc, en vertu de l'inclusion
+\[
+v_{!}(TC) \;\subset\; TC' \; ( \;\subset\; T\tilde{C}' \; ) \; ,
+\]
+la relation
+\[
+F'_{\sim} \;\subset\; F' \;\subset\; (v^{*})^{-1}(F) \; ,
+\tag*{(4.7.6)}
+\]
+et la question est donc si on a égalité $F' = (v^{*})^{-1}(F)$, voire $F'_{\sim} = (v^{*})^{-1}(F)$ (d'où $F'_{\sim} = F'$).
+
+\msp{page 81}
+
+En fait, on montre assez facilement qu'on a $F'_{\sim} = F'$, i.e. $T\tilde{C}' \defeq \tilde{C}' \cap W' \subset (C' \cap W')\cl$ -- c'est une histoire générale de catégories à cofibrations spéciales \textsuperscript{(}\footnote[21]{cf. prop. 5.1 ci-dessous.}\textsuperscript{)}. Mais je ne vois guère comment prouver (sous des hypothèses convenables) que $F' = (v^{*})^{-1}(F)$. Il me faudra revenir là-dessus au besoin \textsuperscript{(}\footnote[22]{voir cependant prop. 5.8 ci-dessous.}\textsuperscript{)}. Pour l'instant, je me bornerai à récolter le fruit de 4.6 dans un cas particulier :
+
+\textbf{Proposition 4.8.} \textit{Soit} $(\mathcal{M}, W, C)$ \textit{une catégorie à cofibrations spéciale} (déf. 4.4, page 94)\textit{. Soit $I$ objet de} Cat\textit{, $I_0$ la catégorie discrète associée, considérons $v : I_0 \longrightarrow I$ et} % [sic] page 94 -> page 74, apparently: the same déf. 4.4 is cited as "page 74" on printed p. 42
+% foot: Version 9 février 2019
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+\mathcal{M}(I_0) \arrow[r, shift left, "v_{!}"] & \mathcal{M}(I) \arrow[l, shift left, "v^{*}"]
+\end{tikzcd} \; ,
+\]
+\textit{enfin munissons $\mathcal{M}(I_0) = \mathcal{M}^{I_0}$ de la structure de catégorie à cofibrations,} produit \textit{de celles des facteurs, i.e. définissons $W(I_0)$, $C(I_0)$ “fibre à fibre”. (Cela coïncide avec la définition générale donnée au paragraphe} 2\textit{, pour $I_0$ muni de la structure d'ordre discret, et fait de $\mathcal{M}(I_0)$ une catégorie à cofibrations spéciale.) Alors le couple $(v_{!}, v^{*})$ satisfait} \msp{page 82} \textit{aux conditions de la proposition} 4.6\textit{, ainsi qu'à la condition supplémentaire à} (4.6.1)\textit{,}
+\[
+4^{\circ}) \qquad v^{*}(v_{!}(TC(I))) \;\subset\; TC(I) \; .
+\tag*{(4.8.1)}
+\]
+\textit{Donc on trouve une structure de catégorie à cofibrations spéciale sur $\mathcal{M}(I)$, en posant}
+\[
+W(I) \;=\; (v^{*})^{-1}(W(I_0))
+\tag*{(4.8.2)}
+\]
+\textit{(c'est en fait équivalent à la définition habituelle de $W(I)$) et}
+\[
+C(I) \quad = \quad
+\begin{array}[t]{l}
+\textit{clôture de } v_{!}(C(I_0)) \textit{ pour les opérations de cochangement de}\\
+\textit{base et composition transfinie.}
+\end{array}
+\tag*{(4.8.3)}
+\]
+\textit{On a de plus sous ces conditions :}
+\[
+\underbrace{TF(I)}_{\defeq\,(C(I))_{*}} \;=\; (v^{*})^{-1}( \; \underbrace{TF(I_0)}_{\substack{\defeq\,(C_{I_0})_{*},\\ \textit{se définit aussi}\\ \textit{fibre par fibre}}} \; ) \; ,
+\tag*{(4.8.8)}
+\]
+\[
+\left\{
+\begin{array}{rcl}
+v_{!}( \, \overbrace{(TC)(I_0)}^{C(I_0)\cap W(I_0)} \, ) & \subset & TC(I) \qquad\qquad\qquad \text{\fnm{23}} \\
+F(I) \defeq (TC(I))_{*} & \subset & (v^{*})^{-1}(F(I_0)).
+\end{array}
+\right.
+\tag*{(4.8.9)}
+\]
+\footnotetext[23]{Ces inclusions devraient être des égalités, mais je ne sais pas le prouver sans faire des hypothèses plus fortes, du type \textit{catégorie de Quillen spéciale.}}
+
+\textsc{Démonstration}. On sait déjà que $\mathcal{M}(I)$ est stable par petites $\varinjlim$ , et que tout élément est accessible, comme il résulte aussitôt des propriétés idoines de $\mathcal{M}$. Il est clair aussi que $v^{*}$ commute aux petites $\varinjlim$ . Il reste à prouver (4.6.1. $3^{\circ}$), et $4^{\circ}$ dans (4.8.1), i.e. \msp{page 83} que $v^{*}v_{!} : \mathcal{M}(I_0) \longrightarrow \mathcal{M}(I_0)$ applique $C$ dans $C$, $TC$ dans $TC$. Or on a
+\[
+v_{!}(F_0)(i) \;=\; \varinjlim_{(\alpha,j)\in i\backslash I_0} F_0(j) \qquad\quad \text{\fnm{24}}
+\]
+\footnotetext[24]{où $j \in \mathrm{Ob}\, I_0 = \mathrm{Ob}\, I$, et $\alpha : i \longrightarrow v(j) = j$.}
+et $i\backslash I_0$ est la catégorie discrète au dessus de $I_0$, dont la fibre en $j \in \mathrm{Ob}\, I_0 \;=\; \mathrm{Ob}\, I$ est $\mathrm{Hom}_I(i,j)$ :
+\[
+i\backslash I_0 \;\;=\;\; \coprod_{j\in \mathrm{Ob}\, I} \text{(catégorie discrète associée à $\mathrm{Hom}_I(i,j)$)} \; ,
+\]
+% foot: Version 9 février 2019
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+donc
+\[
+v_{!}(F_0)(i) \;=\; \coprod_{j\in \mathrm{Ob}\, I = \mathrm{Ob}\, I_0} \underbrace{F_0(j)^{\mathrm{Hom}_I(i,j)}}_{\substack{\text{somme directe}\\ \text{de } \mathrm{Hom}_I(i,j)\\ \text{copies de } F_0(j)}} \, ,
+\]
+donc on trouve
+\[
+v^{*}v_{!}F_0( \, \underbrace{\; i \;}_{\in \mathrm{Ob}\, I_0 \,=\, \mathrm{Ob}\, I} \, ) \;=\; v_{!}(F_0)(i) \;=\; \text{\tikz[baseline=0pt]\draw[->] (0,0) .. controls (0.4,0) .. (0.5,0.45);} \quad .
+\]
+% the curved arrow points up to the underbraced expression F_0(j)^{Hom_I(i,j)} of the preceding display
+Comme $C$ et $TC$ sont stables par sommes directes quelconques (l'étant par sommes directes finies, à cause des conditions de stabilité finies sur $C$ et $TC$, et aussi par somme infinies à cause de l'axiome de stabilité transfinie \dots\textsuperscript{(}\footnote[25]{mérite un lemme général \dots}\textsuperscript{)}), il s'ensuit bien que $v^{*}v_{!}$ applique $C(I_0)$ et $TC(I_0)$ en eux-mêmes. % [sic] somme infinies -> sommes infinies, agreement with the plural adjective
+
+Ainsi, la première assertion de 4.8 résulte de 4.6. De plus, (4.8.8) et (4.8.9) ont été vus dans 4.7, dans les conditions générales de 4.6 et en supposant de plus le $4^{\circ}$ de (4.7.4).
+
+\msp{page 84}
+
+\section*{5\quad Relation des catégories à cofibrations spéciales avec les catégories de Quillen spéciales}
+
+Soit $(\mathcal{M}, W, C)$ une catégorie à cofibrations spéciale. J'introduis
+\[
+TF \;=\; C_{*}, \qquad\quad TC \;=\; C \cap W, \qquad\quad F \;=\; (TC)_{*} \; ,
+\tag*{(5.1)}
+\]
+donc on a
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+TC \arrow[r, hook] \arrow[d, leftrightarrow] & C \arrow[d, leftrightarrow, "\shortmid"{marking, sloped}] \\
+F & TF \arrow[l, hook']
+\end{tikzcd} \; ,
+\tag*{(5.2)}
+\]
+$(C, TF)$ étant un précouple de Quillen clos à droite. On sait alors (XV 4.2 cor. 1, page 31) que $\tilde{C}$ est formé des facteurs directs d'éléments de $C$. Posons
+\[
+T\tilde{C} \;=\; \tilde{C} \cap W \; ,
+\tag*{(5.3)}
+\]
+d'où
+\[
+TC \;\subset\; T\tilde{C} \; .
+\tag*{(5.4)}
+\]
+
+\textbf{Proposition 5.1} \textit{Soit $(\mathcal{M}, W, C)$ une catégorie à cofibrations spéciale. On a $T\tilde{C} \subset (TC)\cl$ (et même $T\tilde{C} \subset (TC)^{\natural}$ \textsuperscript{(}\footnote[26]{\textbf{N.B.} Pour une partie $A$ de $\mathrm{Fl}(\mathcal{M})$, $A^{\natural}$ désigne l'ensemble des facteurs directs d'éléments de $A$.}\textsuperscript{)}), ou ce qui revient au même en vertu de (5.4), $TC$ et $T\tilde{C}$ ont même $Q$-clôture à gauche :}
+\[
+T\tilde{C} = (T\tilde{C})\cl = (TC)\cl \qquad\quad \textit{(et même } T\tilde{C} \subset (TC)^{\natural}\textit{),}
+\tag*{(5.5)}
+\]
+% foot: Version 9 février 2019
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\textit{d'où}
+\[
+(\tilde{C})_{*} = C_{*} \, (= TF), \qquad\quad (T\tilde{C})_{*} = (TC)_{*} \, (= F) \qquad\quad \text{\fnm{27}}.
+\tag*{(5.6)}
+\]
+\footnotetext[27]{Ces relations ne dépendent pas de l'hypothèse $W$ stable par facteurs directs.}
+\textit{De plus, si $W$ stable par facteurs directs (ou si seulement tout facteur direct d'une flèche de $TC$ est dans $W$), et si de plus $W$ est stable par composition transfinie, alors $(\mathcal{M}, W, \tilde{C})$ est une catégorie à cofibrations spéciale. De plus, $T\tilde{C}$ est $Q$-saturé à gauche, donc} (par 5.5)
+\[
+T\tilde{C} \;=\; (TC)^{\natural} \; .
+\tag*{(5.7)}
+\]
+
+\msp{page 85}
+
+\textsc{Démonstration}. Prouvons
+\[
+T\tilde{C} \;\subset\; (TC)\cl \, ,
+\]
+et plus précisément, que tout élément de $T\tilde{C}$ est facteur direct d'un élément de $TC$ :
+\[
+T\tilde{C} = (TC)^{\natural} \; .
+\]
+Soit donc $f \in T\tilde{C} \defeq \tilde{C}\cap W$, considérons leur factorisation de $f$ en $pi$, avec $i \in C$, $p \in TF$. Comme $TF \subset W$, on a $p \in W$, donc $i \in W$, donc $i \in C \cap W \defeq TC$. Comme $f \in C$, $p \in TF$, il existe $q : Y \longrightarrow X'$ tel que $pq = \mathrm{id}_Y$, $qf = i$,
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[rr, "f\in C\cap W"] \arrow[dr, "i\in C"'] & & Y \arrow[dl, dotted, shift right, "q"'] \\
+& X' \arrow[ur, shift right, "p\in TF"'] &
+\end{tikzcd}
+\]
+donc $f$ apparaît comme facteur direct de $i \in TC$, q.e.d.
+
+Prouvons que $(\mathcal{M}, W, \tilde{C})$ est une catégorie à cofibrations spéciale (déf. 4.4, page 74). Condition a) sur $\mathcal{M}$ acquise, condition b), la partie sur $W$, aussi. La stabilité de $\tilde{C}$ par cochangement de base et par composition OK, aussi (pour b$'$) la stabilité par composition transfinie. Stabilité de $T\tilde{C} = \tilde{C} \cap W$ par cochangement de base : il reste à prouver que si on a un carré cocartésien
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X \arrow[r, "i"] \arrow[d] \arrow[dr, phantom, "\text{cocart.}"] & Y \arrow[d] \\
+X' \arrow[r, "i'"] & Y'
+\end{tikzcd} \; ,
+\]
+si $i \in \tilde{C}\cap W$, alors $i' \in W$ (car on sait déjà que $i' \in \tilde{C}$). Mais la démonstration précédente montre que c'est facteur direct \textit{dans} $X\backslash\mathcal{M}$ d'une flèche dans $TC$, donc $i'$ est facteur direct d'une flèche de $TC \subset W$. Donc si $W$ est stable par facteurs directs, $i' \in W$.
+% foot: Version 9 février 2019
+
+\printedpage{43}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 86}
+
+Cela achève de prouver b). Pour b$'$), il reste à voir que $T\tilde{C}$ est stable par composition transfinie. Je ne vois pas d'autre façon de le voir, qu'en supposant que $W$ lui-même est stable par composition transfinie (ce qui paraît à peine moins exigeant que la stabilité de $W$ par $\varinjlim$ \texttt{[filtrantes]}). Cela achève de prouver b, b$'$). La condition c) sur $C$ implique la même condition sur $\tilde{C}$. Enfin, comme $\tilde{C}_{*} = C_{*}$, la condition d) est la même pour $C$ et $\tilde{C}$. Cela achève de prouver que $(\mathcal{M}, W, \tilde{C})$ est une catégorie à cofibrations spéciale. (\textbf{N.B.} on avait besoin de deux hypothèses supplémentaires sur $W$, stabilité par facteurs directs et par composition transfinie, pour établir que $T\tilde{C}$ est stable par cochangement de base et par composition transfinie). Le dernière assertion de 5.1 et la relation (5.7) qui en résulte, revient à dire que $T\tilde{C} = \tilde{C} \cap W$ est stable par facteurs directs, ce qui est évident par la même propriété de $\tilde{C}$, et l'hypothèse faite sur $W$ de stabilité par facteurs directs (ou seulement que les facteurs directs d'éléments de $T\tilde{C}$ sont dans $W$, donc dans $T\tilde{C}$). % [sic] Le dernière -> La dernière, gender agreement with "assertion"
+
+\msp{page 87}
+
+\textbf{Proposition 5.2.} \textit{Soit $(\mathcal{M}, W, C)$ une catégorie à cofibrations spéciale. Alors avec les notations de} (5.1)\textit{, on a}
+\[
+W \;=\; TF \circ TC,
+\tag*{(5.8)}
+\]
+\[
+TF \;=\; F \cap W.
+\tag*{(5.9)}
+\]
+
+\textsc{Démonstration}. Soit $f \in W$, écrivons $f = pi$, avec $i \in C$, $p \in TF$, donc $p \in W$, donc $i \in W$, donc $i \in C \cap W = TC$, d'où (5.8).
+
+Prouvons (5.9). On a $TF \subset F \cap W$, prouvons inversement qu'une $f \in F \cap W$ est dans $TF$. Écrivons $f = pi$, avec $p \in TF$, $i \in TC$.
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X \arrow[rr, "f\in F\cap W"] \arrow[dr, "i\in TC"'] & & Y \\
+& X' \arrow[ur, "p\in TF"'] &
+\end{tikzcd}
+\]
+Comme $f \in F$, $i \in TC$, et $TC \longleftrightarrow F$ par définition de $F$, $\exists\, r : X' \longrightarrow X$ tel que $ri = \mathrm{id}_X$, $fr = p$. Donc $f$ est facteur direct de $p \in TF$, et comme $TF = C_{*}$ est stable par facteurs directs, on conclut que $f \in TF$.
+
+\textbf{Corollaire 5.3.} \textit{Soit $(\mathcal{M}, W, C)$ une catégorie à cofibrations spéciale. Pour que $(W, C, F)$, $(F \defeq (TC)_{*})$ soit un triple de Quillen dans $\mathcal{M}$, il faut et il suffit que le couple $(TC, F)$ satisfasse à l'axiome de factorisation (i.e. que ce soit un précouple de Quillen). Pour que cette structure de Quillen soit clos, il faut et il suffit que $C$ soit stable par facteurs directs.} % [sic] soit clos -> soit close, agreement with "cette structure"
+
+\msp{page 88}
+
+\textsc{Démonstration}. La nécessité de l'axiome de factorisation pour $(TC, F)$, pour avoir un triple de Quillen, est tautologique. Pour la suffisance, ayant déjà les deux précouples de Quillen $(C, TF)$, $(TC, F)$ avec
+% foot: Version 9 février 2019
+
+% ---- from der-ch17_p046-050.tex
+\printedpage{44}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+TC \arrow[r, hook] \arrow[d, leftrightarrow] & C \arrow[d, leftrightarrow] \\
+F & TF \arrow[l, hook'] \ ,
+\end{tikzcd}
+\tag*{(5.2)}
+\]
+et $TC = C \cap W$, le fait que $(W, C, F)$ est un triple de Quillen est le corollaire 4 p. 36 de XV : Les conditions $TC = C \cap W$, $TF = F \cap W$, $W = TF \circ TW$ sont équivalentes, et équivalentes au fait que $(W, C, F)$ soit un triple de Quillen.
+
+Par la définition de Quillen des triples \textit{clos,} par les propriétés
+\[
+\underbrace{W = TF \circ TC}_{\substack{\text{vraie pour tous}\\ \text{le triples}\\ \text{de Quillen}}}, \qquad C = (TF)^*, \qquad \underbrace{F = (TC)_*}_{\substack{\text{vraie dans}\\ \text{le cas actuel}}}\ , % [sic] le triples -> les triples, agreement with "tous"
+\]
+il reste à exprimer que $C = (TF)^*$, ce qui équivaut à $C$ stable par facteurs directs (cf. loc. cit. cor. 1, p. 31), q.e.d.
+
+\textbf{Remarque 5.4.} Les énoncés 5.2 et 5.3, et la relation $T\tilde{C} \subset (TC)^\natural$ dans proposition 5.1, ne font pas appel à la totalité de l'hypothèse que $(\mathcal{M}, W, C)$ soit une catégorie à cofibrations spéciale, mais seulement que l'on ait une catégorie à cofibrations, avec $C \mathrel{\leftarrow\!\!\!+\!\!\!\rightarrow} \underbrace{TF}_{\defeq C_*} \subset W$, % ?? uncertain: arrow symbol between C and TF -- double-headed arrow crossed by a small bar/plus sign
+\msp{page 89}
+i.e. une catégorie avec $W$, $C$ satisfaisant Cof$_0$, Cof$_1$, Cof$_2$ de la page 39, plus $TF \defeq C_* \subset W$, plus l'axiome de factorisation pour $(C, TF)$ (lequel implique Cof$_3$).
+
+\textbf{Corollaire 5.5.} \textit{Soit $(\mathcal{M}, W, C)$ une catégorie à cofibrations spéciale, telle qu'il existe une} petite \textit{partie $TC_0 \subset TC = C \cap W$, avec}
+\[
+TC \ \subset \ TC_0\cl\ ,
+\tag*{(5.5.1)}
+\]
+\textit{ou ce qui revient au même, $(TC)\cl = (TC_0)\cl$, i.e.}
+\[
+\underbrace{F}_{\defeq (TC)_*} \ = \ (TC_0)_*\ .
+\tag*{(5.5.2)}
+\]
+\textit{Alors $(W, C, F)$ est un triple de Quillen. Ce triple est clos si et seulement si $C$ est stable par facteurs directs.}
+
+En effet, le théorème de factorisation dans XV §1 implique que moyennant l'hypothèse faite sur $TC_0 \subset TC$, le couple $(TC, F)$ satisfait à la condition de factorisation. En effet, par les conditions b, b$'$ de la définition 4.4, $TC$ a les propriétés de stabilité voulues (contient les isomorphismes, est stable par cochangement de base et par composition transfinie).
+
+\msp{page 90}
+\textbf{Définition 5.6.} Les triples de Quillen déduits comme dans 5.5 d'une catégorie à cofibrations spéciale sont dits \textit{spéciaux.} Ainsi un triple de Quillen $(W, C, F)$ dans $\mathcal{M}$ est spécial s'il satisfait les conditions a) à d) dans la définition (4.4), concernant $(W, C)$ exclusivement, plus les deux conditions suivantes.
+% foot: Version 9 février 2019
+
+\printedpage{45}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\begin{itemize}[leftmargin=3em]
+\item[\encircled{c$'$}] $\exists$ petite partie $TC_0$ de $TC$, telle que $TC \subset (TC_0)\cl$.
+\item[\encircled{e}] $F = (TC)_*$.
+\end{itemize}
+
+\textbf{Corollaire 5.7.} \textit{Soit $(W, C, F)$ un triple de Quillen} clos \textit{dans $\mathcal{M}$. Pour que ce triple soit spécial, il faut et il suffit qu'il satisfasse les conditions suivantes.}
+\begin{itemize}[leftmargin=3em]
+\item[\encircled{a}] \textit{$\mathcal{M}$ stable par petites $\varinjlim$\,, et ses éléments sont accessibles.}
+\item[\encoval{c, c$'$}] \textit{Il existe une petite partie $C_0$ de $C$, $TC_0$ de $TC$, telles que l'on ait}
+\[
+C \ = \ C_0\cl\ , \qquad TC \ = \ (TC_0)\cl\ .
+\tag*{(5.7.1)}
+\]
+\end{itemize}
+En effet, toutes les autres conditions a) à e), y inclus c$'$) de 5.6, sont automatiquement satisfaites.
+
+\msp{page 91}
+\textbf{Proposition 5.8.} \textit{Considérons un couple de foncteurs adjoints}
+\[
+\begin{tikzcd}
+\mathcal{M} \arrow[r, shift left, "v_!"] & \mathcal{M}' \arrow[l, shift left, "v^*"] \ ,
+\end{tikzcd}
+\tag*{(5.8.1)}
+\]
+\textit{où $\mathcal{M}$ est munie d'un triple de Quillen spécial clos $(W, C, F = (TC)_*)$, avec $TC = C \cap W$} (cf. définition 5.6). \textit{On suppose satisfaites les conditions suivantes} (comparer prop. 4.6, relations (4.6.1), et (4.7.4)) :
+\[
+\left\{
+\begin{array}{ll}
+\text{a)} & \mathcal{M}' \ \textit{stable par petites}\ \varinjlim\ \textit{, ses éléments sont accessibles.}\\[1.5ex]
+\text{b)} & v^* \ \textit{commute aux petites}\ \varinjlim\ .\\[1.5ex]
+\text{c)} & v^*(v_!(C)) \subset C,\ v^*(v_!(TC)) \subset TC.
+\end{array}
+\right.
+\tag*{(5.8.2)}
+\]
+\textit{Définissons $(W', C', F')$ dans $\mathcal{M}'$} (comparer prop. 4.6, notamment 4.6.2) \textit{par}
+\[
+\left\{
+\begin{array}{lcl}
+W' & = & (v^*)^{-1}(W)\\[1ex]
+C' & = & v_!(C)\cl\\[1ex]
+F' & = & (TC')_*\ , \qquad \textit{où}\ \ TC' \ \defeq \ C' \cap W'\ .
+\end{array}
+\right.
+\tag*{(5.8.3)}
+\]
+\textit{Alors $(W', C', F')$ est un triple de Quillen clos spécial dans $\mathcal{M}'$, et on a de plus}
+\[
+F' \ = \ (v^*)^{-1}(F)\ , \qquad TF' \ = \ (v^*)^{-1}(TF)\ ,
+\tag*{(5.8.4)}
+\]
+\[
+TC' \ = \ (v_!(TC))\cl\ .
+\tag*{(5.8.5)}
+\]
+
+\msp{page 92}
+\textsc{Démonstration}. Par 4.6, on sait déjà que $(\mathcal{M}', W', C')$ est une catégorie à cofibrations spéciale. (\textbf{N.B.} Ce qui est noté $C'$ ici, était noté $\tilde{C}'$ dans la proposition 4.5. On doit utiliser la dernière assertion de 4.6, où on suppose $C$ stable par facteurs directs, OK car $(W, C, F)$ supposé clos.) Pour prouver que $(W', C', F' \defeq (TC')_*)$ est un triple de Quillen
+% foot: Version 9 février 2019
+\printedpage{46}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+spécial, il reste, par 5.3 et définition 5.6, à prouver qu'il existe une petite partie $TC'_0$ de $TC'$, telle que
+\[
+(\ TC'_0 \ \subset\ )\ TC' \ \subset \ (TC'_0)\cl\ .
+\tag*{(5.8.6)}
+\]
+(Ce triple de Quillen sera de plus clos, puisque $C'$ est Q-clos à gauche par définition.) Soit donc $TC_0$ une petite partie de $TC$ telle que
+\[
+TC \ \subset \ (TC_0)\cl\ ,
+\tag*{(5.8.7)}
+\]
+qui existe par hypothèse sur $(W, C, F)$. On prendra
+\[
+TC'_0 \ \defeq \ v_!(TC_0)\ .
+\tag*{(5.8.8)}
+\]
+On a vu dans 4.7 qu'on a
+\[
+v_!(TC) \ \subset \ TC'
+\tag*{(5.8.9)}
+\]
+(résulte de l'hypothèse $v^*(v_!(TC)) \subset TC$ dans (5.8.2. c)), a fortiori
+\[
+TC'_0 \ = \ v_!(TC_0) \ \subset \ TC'\ ,
+\]
+\msp{page 93}
+il reste à prouver
+\[
+TC' \ \overset{?}{\subset} \ (TC'_0)\cl\ ,
+\tag*{(5.8.10)}
+\]
+ce qui équivaut à $(TC')\cl \subset (TC'_0)\cl$, ou encore à
+\[
+(TC'_0)_* \ \overset{?}{\subset} \ (TC')_* \ \defeq \ F'\ ,
+\tag*{(5.8.10 bis)}
+\]
+alors qu'on a a priori l'inclusion inverse (déduite de $TC'_0 \subset TC'$)
+\[
+F' \ \subset \ (TC'_0)_*\ .
+\tag*{(5.8.11)}
+\]
+Or par adjonction, on a
+\[
+\begin{aligned}
+(\ \underbrace{TC'_0}_{v_!(TC_0)}\ )_* \ &= \ (v_!(TC_0))_*\\
+&= \ (v^*)^{-1}(\ \underbrace{(TC_0)_*}_{= (TC)_* \defeq F}\ )\\
+&= \ (v^*)^{-1}(F)\ ,
+\end{aligned}
+\]
+donc (5.8.11) s'écrit
+\[
+F' \ \subset \ (v^*)^{-1}(F)\ , \qquad \text{i.e.}\ \ v^*(F') \ \subset \ F
+\tag*{(5.8.12)}
+\]
+(comparer (4.7.6)), et il faut montrer que cette inclusion est une égalité (sur quoi j'avais buté p. 80, 81 \ldots), ce qui n'est autre que la première des deux relations (5.8.4). Mais c'est sous la forme initiale (5.8.10) (transposée de (5.8.4)) que nous allons prouver la chose, finalement. Notons que l'on a
+% foot: Version 9 février 2019
+\printedpage{47}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 94}
+\[
+(\underbrace{v_!(TC_0)}_{TC'_0})\cl \ = \ (v_!(TC))\cl\ ,
+\]
+puisque $TC$ est la clôture de $TC_0$ pour les opérations de cochangement de base, de composition transfinie, et de facteurs directs, et que $v_!$ commute à ces opérations. Donc on doit montrer simplement
+\[
+TC' \ \subset \ (v_!(TC))\cl
+\tag*{(5.8.12 bis)}
+\]
+(où il n'est plus question de $TC_0$). Mais le théorème de factorisation s'applique au couple
+\[
+\Big( (v_!(TC))\cl,\ (v_!(TC))_* = (v^*)^{-1}(F) \Big)\ ,
+\]
+puisque $(v_!(TC))\cl = (TC'_0)\cl$, $TC'_0$ petit. Si donc on a $f' \in TC' = C' \cap W'$, factorisons $f'$ en $p'i'$, avec
+\[
+i' \ \in \ (v_!(TC))\cl\ , \qquad p' \ \in \ (v^*)^{-1}(F)\ .
+\tag*{(5.8.13)}
+\]
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+X' \arrow[rr, "f' \in C' \cap W'"] \arrow[dr, "i'"'] & & Y' \arrow[dl, dotted, shift right, "q'"'] \\
+& X'_1 \arrow[ur, shift right, "p'"'] &
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+Notons qu'on a
+\msp{page 95}
+\[
+(v_!(TC))\cl \ \subset \ TC' \ (\ \defeq \ C' \cap W'\ )
+\tag*{(5.8.14)}
+\]
+car $v_!(TC) \subset TC' \subset C'$, donc $(v_!(TC))\cl \subset \tilde{C}' = C'$, et il reste à prouver que $v_!(TC)\cl \subset W'$, i.e. $v^*((v_!(TC))\cl) \subset W$. Or je dis qu'on a même
+\[
+v^*((v_!(TC))\cl) \ \subset \ TC\ ,
+\]
+i.e.
+\[
+v_!(TC)\cl \ \subset \ (v^*)^{-1}(TC)\ .
+\tag*{(5.8.15)}
+\]
+Cela résulte du fait que $TC$ est Q-clos, donc Q-saturé à gauche, ce qui implique, comme $v^*$ commute aux petites $\varinjlim$\,, que $(v^*)^{-1}(T)$ l'est également. D'autre part, il contient $v_!(TC)$, donc aussi le Q-saturé à gauche de $v_!(TC)$. Mais ce dernier est \textit{égal} à la Q-clôture $(v_!(TC))\cl$, par le théorème de factorisation, vu que $TC'_0 \subset v_!(TC) \subset (TC'_0)\cl$, avec $TC'_0$ petit. % [sic] (v^*)^{-1}(T) -> (v^*)^{-1}(TC), the set in question is TC
+
+Ainsi, (5.8.13) et (5.8.14) impliquent $i' \in TC' = C' \cap W'$, donc $i' \in W'$, d'où $p' \in W'$, i.e. $v^*(p') \in W$, et comme par hypothèse
+% foot: Version 9 février 2019
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 96}
+(5.8.13) on a $v^*(p') \in F$, on a $v^*(p') \in TF$, i.e.
+\[
+p' \ \in \ (v^*)^{-1}(TF) \ = \ TF' \ (\ \defeq \ C'\ )\ , % [sic] C' -> C'_*, cf. (5.8.16) TF' ( = C'_* )
+\]
+l'égalité $(v^*)^{-1}(TF) = TF'$, i.e.
+\[
+(v^*)^{-1}(C_*) \ = \ (v_!(C))_*\ ,
+\]
+résultant de l'adjonction de $v_!$, $v^*$. Au total, on a donc
+\[
+p' \ \in \ TF' \ (\ = \ C'_*\ )\ ,
+\tag*{(5.8.16)}
+\]
+et comme $f' \in C'$, le diagramme $(*)$, page 114, nous montre qu'il existe
+\[
+q' \ : \ Y' \longrightarrow X'_1\ ,
+\]
+avec $p'q' = \mathrm{id}$, $q'f' = i'$. Donc $f'$ est facteur direct de $i' \in v_!(TC)\cl$, donc on a $f' \in v_!(TC)\cl$, d'où la relation
+\[
+TC' \ \subset \ v_!(TC)\cl\ ,
+\]
+ce qui achève de prouver que $(W', C', F')$ est un triple de Quillen spécial et clos.
+
+Les deux relations (5.8.4) ont été prouvées chemin faisant (la deuxième étant essentiellement triviale, et la première représentant la difficulté principale dans la démonstration). Reste à établir (5.8.5). Mais on sait déjà (5.8.9) que
+\[
+v_!(TC) \ \subset \ TC'\ ,
+\]
+\msp{page 97}
+d'où
+\[
+v_!(TC)\cl \ \subset \ TC',
+\]
+puisque $TC'$ est Q-clos à gauche (ou parce que ça a été prouvé dans (5.8.14)), on a déjà prouvé l'inclusion en sens inverse (5.8.12 bis), assertion équivalente à (5.8.4) (et qui représentait la principale difficulté).
+
+\textbf{Remarque 5.9.} Si on ne suppose pas que la structure sur $\mathcal{M}$ soit close, alors la démonstration donnée de 5.8 montre qu'on trouve pourtant sur $\mathcal{M}'$ une structure de Quillen spéciale, en définissant cette fois $C'$ comme dans 4.6. Mais je doute qu'on aura jamais à travailler avec des triples de Quillen spéciaux qui ne soient aussi clos. De toute façon, si $W$ est stable par petites $\varinjlim$ filtrantes\footnote[28]{ce qui implique la stabilité par facteurs directs, et implique aussi la même propriété pour $W' \defeq (v^*)^{-1}(W)$.} (et je doute qu'on trouve des triples de Quillen spéciaux en dehors de ce cas), alors si $(W, C, F)$ est un triple de Quillen spécial, il en est de même de $(W, \tilde{C} = C^\natural, F)$, et je présume qu'on a tout intérêt à remplacer le triple initial par celui-ci. % footnote mark printed in the text as superscript (28)
+% foot: Version 9 février 2019
+
+% ---- from der-ch17_p051-055.tex
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 98}
+
+\section*{6\quad Application à la construction des dérivateurs (associés aux triples de Quillen spéciaux)}
+
+\textbf{Théorème 6.1.}\footnote[29]{C'est le résultat principal dans cette partie XVII des notes.} \textit{Soit $(W,C,F)$ un triple de Quillen clos spécial sur la catégorie $\mathcal{M}$} (cf. déf. 5.6, p. 90, et cor. 5.7). \textit{Pour tout $I$ dans} Cat\textit{, considérons la catégorie}
+\[
+\mathcal{M}(I) \;=\; \underline{\mathrm{Hom}}(I^{\circ},\mathcal{M}) \;, \tag*{(6.1.1)}
+\]
+\textit{et considérons}
+\[
+W(I),\ F(I) \;\subset\; \Fl(\mathcal{M}(I)) \;,
+\]
+\textit{définis par}
+\[
+\begin{aligned}
+&\text{\textit{$u : X \longrightarrow Y$ dans $\mathcal{M}(I)$ est dans $W(I)$ (resp. $F(I)$) si et seulement}}\\
+&\text{\textit{si $\forall\, i \in \Ob I$, $u(i) : X(i) \longrightarrow Y(i)$ est dans $W$ (resp. $F$).}}
+\end{aligned}
+\tag*{(6.1.2)}
+\]
+
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{Il existe une structure de Quillen close (nécessairement unique) dans $\mathcal{M}(I)$, ayant $W(I)$ et $F(I)$ comme ensembles des quasi-isomorphismes et de fibrations respectivement. On a donc aussi}
+\[
+\left\{
+\begin{aligned}
+TF(I) \;&=\; F(I)\cap W(I) \;=\; \{u\in \Fl(\mathcal{M}(I)) \mid u(i)\in TF \ \ \forall\, i\in \Ob I\},\\
+C(I) \;&=\; TF(I)^{*}.
+\end{aligned}
+\right.
+\tag*{(6.1.3)}
+\]
+\textit{Cette structure de Quillen est} spéciale.
+
+\msp{page 99}
+\item[b)] \textit{Soit $I_0$ la catégorie discrète ayant même ensemble d'objets que $I$, et}
+\[
+v_I \ \ \text{\textit{ou}}\ \ v \;:\; I_0 \longrightarrow I
+\tag*{(6.1.4)}
+\]
+\textit{le foncteur canonique. Désignons par}
+\[
+C(I) \;=\; (TF(I))^{*}, \qquad TC(I) \;=\; C(I)\cap W(I) \;=\; F(I)^{*}
+\tag*{(6.1.5)}
+\]
+\textit{les ensembles de cofibrations resp. de cofibrations triviales dans $\mathcal{M}(I)$, et utilisons les mêmes notations $C(I_0)$, $TC(I_0)$ pour $I_0$. On a alors}
+\[
+\begin{aligned}
+&\text{\textit{$u : X_0 \longrightarrow Y_0$ dans $\mathcal{M}(I_0)$ est dans $C_0$ (resp. $TC_0$) si et seulement si}}\\
+&\text{\textit{pour tout $i$ dans $\Ob I$, $u(i) : X_0(i) \longrightarrow Y_0(i)$ est dans $C$ (resp. $TC$).}}
+\end{aligned}
+\tag*{(6.1.6)}
+\]
+\textit{Enfin on a}
+\[
+\left\{
+\begin{aligned}
+C(I) \;&=\; (v_!(C(I_0)))\tl\\
+TC(I) \;&=\; (v_!(TC(I_0)))\tl\,.
+\end{aligned}
+\right.
+\tag*{(6.1.7)} % ?? uncertain: shape of the small superscript mark after the closing parenthesis -- tilde (\tilde{}) or breve (\breve{})
+\]
+
+\item[c)] \textit{Soit}
+\[
+u \;:\; I \longrightarrow I'
+\]
+\textit{une flèche dans} Cat\textit{, considérons le couple des foncteurs adjoints}
+\[
+\begin{tikzcd}
+\mathcal{M}(I) \arrow[r, shift left, "u_!"] & \mathcal{M}(I') \arrow[l, shift left, "u^{*}"]
+\end{tikzcd}
+\;.
+\tag*{(6.1.8)}
+\]
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 100}
+\textit{Ce couple satisfait aux conditions de Quillen pour les couples de foncteurs adjoints entre catégories de Quillen} (Hom. Alg. Chp. I, §4, th. 3, p. 4.5), \textit{de sorte qu'ils définissent par passage aux localisés un couple des foncteurs adjoints}
+\[
+\begin{tikzcd}
+\mathrm{Ho}_W(I) \arrow[r, shift left, "u_!^{W}"] & \mathrm{Ho}_W(I') \arrow[l, shift left, "u^{*}_{W}"]
+\end{tikzcd}
+\;.
+\tag*{(6.1.9)}
+\]
+\textit{On a, plus précisément, les relations}
+\[
+\left\{
+\begin{aligned}
+u_!(C(I)) \;&\subset\; C(I')\\
+u_!(TC(I)) \;&\subset\; TC(I')\;,
+\end{aligned}
+\right.
+\tag*{(6.1.10)}
+\]
+\textit{d'où}
+\[
+(u_!(\mathcal{M}(I)_{\mathrm{c}})) \;\subset\; \mathcal{M}(I')_{\mathrm{c}}\;,
+\tag*{(6.1.11)}
+\]
+\textit{et de plus}
+\[
+\begin{aligned}
+&\text{\textit{pour toute flèche $f$ dans $\mathcal{M}(I)_{\mathrm{c}}$, telle que $f \in W(I)$, on a}}\\
+&\text{\textit{$u_!(f) \in W(I')$, i.e. $(u_!)_{\mathrm{c}} : \mathcal{M}(I)_{\mathrm{c}} \longrightarrow \mathcal{M}(I')_{\mathrm{c}}$ est compatible}}\\
+&\text{\textit{avec les localiseurs.}}
+\end{aligned}
+\tag*{(6.1.12)}
+\]
+\textit{D'autre part on a}
+\[
+\left\{
+\begin{aligned}
+u^{*}(F(I')) \;&\subset\; F(I)\\
+u^{*}(TF(I')) \;&\subset\; TF(I)\\
+u^{*}(W(I')) \;&\subset\; W(I)\;,
+\end{aligned}
+\right.
+\tag*{(6.1.13)}
+\]
+\textit{donc}
+\[
+\left\{
+\begin{aligned}
+&u^{*}(\mathcal{M}(I')_{\mathrm{f}}) \;\subset\; \mathcal{M}(I)_{\mathrm{f}}\\
+&u^{*}_{\mathrm{f}} : \mathcal{M}(I')_{\mathrm{f}} \longrightarrow \mathcal{M}(I)_{\mathrm{f}} \text{ \textit{est compatible avec les localiseurs.}}
+\end{aligned}
+\right.
+\tag*{(6.1.14)}
+\]
+
+\msp{page 101}
+\item[d)] \textit{Supposons que $I$ soit une catégorie ordonnée, et considérons l'ensemble $C_I \subset \Fl(\mathcal{M}(I))$ défini dans §2}\footnote[30]{Au paragraphe 2, c'était noté $C_{I^{\circ}}$ au lieu de $C_I$.} (cf. page 25, cf. aussi th. 2.1, p. 26, et ses corollaires). \textit{On a alors}
+\[
+\left\{
+\begin{aligned}
+C_I \;&\supset\; C(I)\\
+TC_I \;&\supset\; TC(I)\;,
+\end{aligned}
+\right.
+\tag*{(6.1.15)}
+\]
+\textit{et on a égalité quand $I$ est un ensemble ordonné} artinien.
+\end{itemize}
+
+\textsc{Démonstration}. L'assertion a) est un cas particulier de 5.8, appliqué au couple de foncteurs adjoints
+\[
+\begin{tikzcd}
+\mathcal{M}(I_0) \arrow[r, shift left, "v_!"] & \mathcal{M}(I) \arrow[l, shift left, "v^{*}"]
+\end{tikzcd}
+\;.
+\]
+Les conditions (5.8.2) sont satisfaites, cela a été vu dans (4.8). La proposition 5.8 nous dit alors l'existence d'une structure de triple de Quillen close sur $\mathcal{M}(I)$, dont l'ensemble des quasi-isomorphismes $W(I)$ et l'ensemble des fibrations $F(I)$, sont donnés par la première formule (5.8.3) et par la première formule (5.8.4), ce qui équivaut aux définitions (6.1.2). (\textbf{N.B.} Le fait que $\mathcal{M}(I_0)$, avec la structure $W(I_0)$, $C(I_0)$, $F(I_0)$ évidente (produit), est
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+\msp{page 102}
+bien une catégorie de Quillen spéciale close, est $\pm$ tautologique.)
+
+\textit{Prouvons} b). La relation (6.1.6) est tautologique. Les relations (6.1.7) sont contenues dans 5.8 (cf. deuxième relation dans (5.8.3) pour $C' = v_!(C)\tl$, i.e. $C(I) = (v_!(C(I_0)))\tl$, et (5.8.5) pour $TC(I) = (v_!(TC(I_0)))\tl$).
+
+\textit{Prouvons} c). La première assertion est, par \textsc{Quillen}, un cas particulier des relations (6.1.10) à (6.1.14), c'est elles qu'il s'agit d'établir. Les relations (6.1.13) et par suite (6.1.14) sont tautologiques en vertu des définitions, donc il s'agit d'établir \textit{(6.1.10)} et (6.1.12).
+
+Pour les formules (6.1.10), j'utilise le diagramme commutatif
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+I \arrow[d, "u"'] & I_0 \arrow[l, "v"'] \arrow[d, "u_0"] \\
+I' & I'_0\;, \arrow[l, "v'"']
+\end{tikzcd}
+\]
+et je note que les foncteurs $u_!^{\mathcal{M}}$, $u_{0\,!}^{\mathcal{M}}$, commutant aux petites limites inductives, se
+\msp{page 103}
+comportent bien pour l'opération
+\[
+\Phi \longmapsto \Phi\tl\,,
+\]
+quand $\Phi$ est une partie de $\Fl(\mathcal{M}(I))$ resp. de $\Fl(\mathcal{M}(I_0))$ qui est Q-accessible, i.e. telle qu'il existe une \textit{petite} partie $\Phi_0 \subset \Phi$ avec $\Phi \subset \tilde{\Phi}_0$, plus précisément, on a
+\[
+u_!(\Phi\tl) \;\subset\; (u_!(\Phi))\tl\,.
+\]
+Ceci noté, on a par b)
+\[
+C(I) \;=\; (v_!(C(I_0)))\tl\,,
+\]
+d'où
+\[
+u_!(C(I)) \;\subset\; (\underbrace{u_!(v_!(C(I_0)))}_{(uv)_!(C(I_0))})\tl\,,
+\]
+et le deuxième membre s'écrit aussi
+\[
+(v'_!u_{0\,!}(C(I_0)))\tl \;\overset{?}{\subset}\; (v'_!(I'_0))\tl \;=\; C(I')\;. % [sic] (v'_!(I'_0)) -> (v'_!(C(I'_0))), the C( ) around I'_0 apparently omitted
+\]
+Donc tout revient à montrer que
+\[
+u_{0\,!}(C(I_0)) \;\subset\; C(I'_0)\;,
+\tag*{(6.1.16)}
+\]
+ce qui résulte aussitôt du calcul de $u_{0\,!}$ à coups de sommes directes, et du fait que $C$ est stable par sommes directes quelconques. Cela prouve donc $u_!(C(I)) \subset C(I')$, et on prouve de même $u_!(TC(I)) \subset TC(I')$, qui se ramène de même au cas particulier
+\[
+u_{0\,!}(TC(I_0)) \;\subset\; TC(I'_0)\;.
+\tag*{(6.1.17)}
+\]
+
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\msp{page 104}
+
+Il reste à prouver (6.1.12), et on procède comme pour 3.3 (p. 54), en utilisant le fait qu'une flèche $f$ dans $\mathcal{M}(I)_{\mathrm{c}}$ qui est dans $W(I)$, s'écrit dans $\mathcal{M}(I)_{\mathrm{c}}$ sous la forme $f = pi$, où $i \in TC(I)$, et où $p$ est inverse à gauche (rétraction) d'une flèche $j \in TC(I)$. On aura donc $u_!(f) = u_!(p)u_!(i)$, et $u_!(i) \in TC(I')$ par (6.1.10), et $u_!(p)$ est inverse à gauche de $u_!(j) \in TC(I')$. On a alors $u_!(i), u_!(j), u_!(p) \in W(I')$, d'où $u_!(f) \in W(I')$, q.e.d.
+
+Prouvons enfin d). Compte tenu de la définition de $C_I$, pour établir $C(I) \subset C_I$, il suffit de voir ceci :
+
+\textbf{Corollaire 6.2.}\footnote[31]{\textbf{N.B.} Ce résultat se généralise, sous les conditions générales dans 6.2.5.} \textit{Soit $I$ quelconque dans} Cat\textit{, soient $U \subset V$ deux fermés dans $I$ (i.e. des ouverts dans $I^{\circ}$), et soit $f : X_{\bullet} \longrightarrow Y_{\bullet}$ une flèche dans $C(I)$ (resp. dans $TC(I)$). Posons encore}
+\msp{page 105}
+\[
+X_U \;=\; \varinjlim_{i\in U} X(i), \qquad X_V \;=\; \varinjlim_{i\in U} X(i)\;, % [sic] second index i\in U -> i\in V, X_V should be the limit over V
+\]
+\textit{et de même pour $Y$, et considérons le diagramme}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X_U \arrow[r, "\text{trans.}"] \arrow[d, "u_U"'] \arrow[dr, phantom, "\text{cocart.}"] & X_V \arrow[d] \arrow[dd, dotted, bend left=60, "u_V"] \\
+Y_U \arrow[r] \arrow[dr, dotted, "\text{trans.}"'] & Y_{U,V} \arrow[d, "u_{U,V}"'] \\
+ & Y_V\;.
+\end{tikzcd}
+\tag*{(6.2.1)}
+\]
+\textit{Alors la flèche $u_{U,V}$ est dans $C$ (resp. $TC$).}
+
+\textsc{Démonstration} de 6.2. Admettons que la restriction d'une flèche de $C(I)$ resp. $TC(I)$ à un fermé $V$ de $I$ est dans $C(V)$ resp. $TC(V)$ (cf. \dots{} ci-dessous). Cela nous permet de supposer $V = I$. La donnée de $U$, qui est un ouvert de $I^{\circ}$, équivaut à la donnée d'une flèche $v : I^{\circ} \longrightarrow \Dl^1$ (en prenant la fibre en 0), ou encore à la donnée d'une flèche $u : I \longrightarrow (\Dl^1)^{\circ} \simeq \Dl^1$ (en prenant le fibre en 1). Or % [sic] le fibre -> la fibre, gender (cf. "la fibre en 0" just before)
+\[
+u \;:\; I \longrightarrow \Dl^1\;, \qquad U \;=\; I_1 \overset{\text{déf}}{=} u^{-1}(\{1\})\;.
+\tag*{(6.2.2)}
+\]
+
+\msp{page 106}
+On a alors
+\[
+X_U \;=\; u_!(X)(1), \quad X_I \;=\; u_!(X)(0)\;,
+\]
+et le morphisme de transition $X_U \longrightarrow X_I$ est déduit de la flèche $0 \xrightarrow{\ \partial\ } 1$ dans $\Dl^1$, et de même pour $Y$. Soit
+\[
+\xi \;=\; u_!(X), \qquad \eta \;=\; u_!(Y)\;,
+\]
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+donc le diagramme (6.2.1) s'identifie au diagramme déduit de
+\[
+\varphi \;:\; \xi \longrightarrow \eta\;, \qquad \varphi \;=\; u_!(f)\;,
+\]
+comme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+\xi(1) \arrow[r, "\xi(\partial)"] \arrow[d, "\varphi(1)"'] \arrow[dr, phantom, "\text{cocart.}"] & \xi(0) \arrow[d] \arrow[dd, dotted, bend left=60, "\varphi(0)"] \\
+\eta(1) \arrow[r] \arrow[dr, dotted, "\eta(0)"'] & \tilde{\eta} \arrow[d, "\tilde{\varphi}"'] \\
+ & \eta(0) \qquad .
+\end{tikzcd}
+\tag*{(6.2.3)}
+\]
+Or par 6.1.10 appliqué à $u : I \longrightarrow \Dl^1$, la relation $f \in C(I)$ resp. $f \in TC(I)$ implique $\varphi \in C(\Dl^1)$ resp. $\varphi \in TC(\Dl^1)$. Donc pour établir 6.1, on est ramené au cas particulier où $I = \Dl^1$, $U = \{1\}$, $V = I$, donc à prouver le
+
+\textbf{Lemme 6.2.4.} \textit{Soit $\varphi : \xi \longrightarrow \eta$ une flèche dans $\mathcal{M}(\Dl^1)$. Si $\varphi \in C(\Dl^1)$ (resp.}
+\msp{page 107}
+\textit{$\varphi \in TC(\Dl^1)$), alors la flèche $\tilde{\varphi}$ dans le diagramme} (6.2.3) \textit{est dans $C$ (resp. $TC$).}
+
+Plus généralement, et plus précisément :
+
+\textbf{Lemme 6.2.5.} \textit{Soit $\mathcal{M}$ une catégorie stable par sommes amalgamées, et $\Phi$ une partie Q-close à gauche} (on prendra $\Phi = C$, et $\Phi = TC$, dans le cas du lemme 6.2.4). \textit{Soit $\Psi = \Phi_{*}$, et considérons, pour toute $I$ dans} Cat\textit{, $\Phi(I)$, $\Psi\langle I\rangle$ dans $\mathcal{M}(I)$, définis par :}
+\[
+\begin{aligned}
+&\text{\textit{$u : X \longrightarrow Y$ dans $\mathcal{M}(I)$ est dans $\Psi\langle I\rangle$ si et seulement si $\forall\, i \in \Ob I$,}}\\
+&\text{\textit{$u(i) : X(i) \longrightarrow Y(i)$ est dans $\Psi$,}}
+\end{aligned}
+\tag*{(6.2.5.1)}
+\]
+\[
+\Phi(I) \;=\; \Psi\langle I\rangle^{*}.
+\tag*{(6.2.5.2)}
+\]
+
+Prenons le cas $I = \Dl^1 = \{0 \xrightarrow{\ \partial\ } 1\}$, et soit $u : X \longrightarrow Y$ une flèche dans $\mathcal{M}(\Dl^1)$, correspondant à un carré commutatif
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X(1) \arrow[r, "X(\partial)"] \arrow[d, "u(1)"'] & X(0) \arrow[d, "u(0)"] \\
+Y(1) \arrow[r, "Y(\partial)"] & Y(0)\;.
+\end{tikzcd}
+\tag*{(6.2.5.3)}
+\]
+
+Considérons le diagramme correspondant
+
+% ---- from der-ch17_p056-060.tex
+\noindent\printedpage{54}\msp{page 108}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+X(1) \arrow[r, "X(\partial)"] \arrow[d, "u(1)"'] \arrow[dr, phantom, "\text{cocart.}"] & X(0) \arrow[d] \arrow[dd, dotted, bend left=40, "u(0)"] \\
+Y(1) \arrow[r] \arrow[dr, dotted, "Y(\partial)"'] & \tilde{Y} \arrow[d, "\tilde{u}"'] \\
+ & Y(0)
+\end{tikzcd}
+\qquad .
+\tag*{(6.2.5.4)}
+\]
+
+Pour qu'on ait $u \in \Phi(\boldsymbol{\Delta}^1)$, il faut et il suffit que l'on ait
+\[
+u(0),\ u(1),\ \tilde{u} \ \in\ \Phi\ .
+\tag*{(6.2.5.5)}
+\]
+
+J'ai déjà vérifié la chose (sous forme duale), mais ne retrouve plus l'endroit (peut-être n'ai-je pas pris des notes). Je n'ai pas envie de rechercher la démonstration ici.
+
+Pour achever de prouver 6.1. d), i.e. l'égalité $C(I) = C_I$ pour $I$ artinien, j'ai envie de prouver encore quelque chose de plus générale que voici : % [sic] plus générale -> plus général, agreement with « quelque chose »
+
+\textbf{Corollaire 6.3.} \textit{Soient $(\mathcal{M}, \Phi, \Psi)$ et $I \longmapsto \Phi(I) \subset \mathrm{Fl}(\mathcal{M}(I))$ comme dans \textup{6.2.5.} Soit $I$ un ensemble ordonné, et considérons aussi $\Phi_I$ défini (dans la situation duale) page \textup{25 (2.2)} (mais avec des notations duales \dots). Je dis que l'on a}
+\[
+\Phi_I \ \supset\ \Phi(I)\ ,
+\tag*{(6.3.1)}
+\]
+\msp{page 109}\textit{et on a égalité si $I$ est noethérien, i.e. $I^{\circ}$ est artinien.}
+
+\textsc{Démonstration}. La démonstration de $\Phi(I) \subset \Phi_I$ est celle qu'on vient de donner. Il reste à prouver que si $I$ est noethérien, on a $\Phi_I \subset \Phi(I)$. Étant donnée $i : A \longrightarrow B$ dans $\Phi_I$, il faut prouver que $u \in \Phi(I)$, % [sic] u -> i, the arrow in question is i : A -> B
+i.e. que pour un diagramme commutatif dans $\mathcal{M}(I)$,
+\[
+\begin{tikzcd}
+A \arrow[r, "\alpha"] \arrow[d, "i"'] & X \arrow[d, "p"] \\
+B \arrow[r, "\beta"'] \arrow[ur, dotted, "h"] & Y
+\end{tikzcd}
+\tag*{(6.3.2)}
+\]
+avec $p \in \Psi\langle I\rangle$, i.e. $p(i) : X(i) \longrightarrow Y(i)$ dans $\Psi$ pour tout $i$, $\exists\ h : B \longrightarrow X$ laissant le diagramme commutatif. On va revenir aux notations duales, en travaillant dans $\mathcal{M}(I^{\circ})$, avec $I$ artinien. On considère l'ensemble $\mathcal{H}$ des couple % [sic] des couple -> des couples, plural
+$(U, h_U)$ d'un ouvert $U$ de $I$ et d'un $h_U : B|U \longrightarrow X|U$, rendant commutatif la restriction à $U$ de (6.3.2). % [sic] commutatif -> commutative, agreement with « la restriction »
+On ordonne $\mathcal{H}$ par prolongement, on note que toute partie totalement ordonnée $(U_\alpha, h_{U_\alpha})$ dans $\mathcal{H}$ a une borne supérieure, savoir $U = \bigcup_\alpha U_\alpha$, $h_U$ défini par les $h_{U_\alpha}$ sur les $U_\alpha$.
+% foot: Version 9 février 2019
+
+\printedpage{55}\msp{page 110}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+(\textbf{N.B.} L'ensemble $\mathcal{H}$ n'est pas vide, car $(\emptyset, h_{\emptyset})$ est dans $\mathcal{H}$ -- mais c'est contenu dans l'énoncé précédent que toute partie totalement ordonnée de $\mathcal{H}$ y a une borne supérieure \dots). Par Zorn, il existe un élément maximal $(U, h_U)$. À prouver que $U = I$, et on aura terminé. Ou encore que si $(U, h_U)$ tel que $U \neq I$, ce n'est \textit{pas} maximal. Soit $F = I\backslash U \neq \emptyset$ le fermé complémentaire. Par l'hypothèse artinienne sur $I$, $F$ a un élément minimal $i_0$. Soit
+\[
+U' \ =\ U \cup \overbrace{I/i_0}^{V} \ =\ U \cup \{i_0\}\ ,
+\]
+on va prolonger $h_U$ en $h_{U'}$ sur $U'$, on aura terminé. Pour ceci, soit $V_0 = V \cap U = V\backslash\{i_0\}$, on est ramené à prolonger la restriction $h_{V_0}$ de $h_U$ à $V_0$, de $V_0$ à $V$. Au total, on peut supposer $I = I/i_0$ muni d'un élément final $i_0$, $U = I\backslash\{i_0\}$, et montrer qu'une $(U, h_U) \in \mathcal{H}$ se prolonge à $I$. Soient $A'$, $B'$, $X'$, $Y'$ les restrictions de $A$, $B$, $X$, $Y$ à $U$ (qu'on pourra aussi noter $I'$). La donné de $A$ % [sic] La donné -> La donnée, missing feminine ending
+équivaut à celle de $A'$, celle de $A_0 = A(i_0) \in \mathrm{Ob}\,\mathcal{M}$, et d'une flèche de
+\[
+A'_{I'} \ \overset{\text{déf}}{=}\ \varinjlim\limits_{i' \in I'} A'(i') \ \xrightarrow{\ \lambda_A\ }\ A_0\ (\ \simeq A_I\ )\ ,
+\]
+\msp{page 111}et de même pour $B$, $X$, $Y$. Plus précisément, la catégorie $\mathcal{M}(I^{\circ})$ s'interprète comme celle des triples $X = (X', X_0, \lambda_X)$, où $X' \in \mathcal{M}(I'^{\circ})$, $X_0 \in \mathcal{M}$, et $\lambda_X : X'_{I'} \longrightarrow X_0$. À ce compte, la donnée du diagramme (6.3.2) équivaut à celle d'un diagramme carré similaire
+\[
+\begin{tikzcd}
+A' \arrow[r, "\alpha'"] \arrow[d, "i'"'] & X' \arrow[d, "p'"] \\
+B' \arrow[r, "\beta'"'] \arrow[ur, dotted, "h'"] & Y'
+\end{tikzcd}
+\tag*{(6.3.3)}
+\]
+\textit{dans} $\mathcal{M}(I'^{\circ})$, d'où un diagramme dans $\mathcal{M}$
+\[
+\begin{tikzcd}
+A'_{I'} \arrow[r, "\alpha'_{I'}"] \arrow[d, "i'_{I'}"'] & X'_{I'} \arrow[d, "p'_{I'}"] \\
+B'_{I'} \arrow[r, "\beta'_{I'}"'] \arrow[ur, dotted, "h'_{I'}"] & Y'_{I'}\ ,
+\end{tikzcd}
+\tag*{(6.3.4)}
+\]
+d'un autre diagramme carré \textit{dans} $\mathcal{M}$
+\[
+\begin{tikzcd}
+A_0 \arrow[r, "\alpha_0"] \arrow[d, "i_0"'] & X_0 \arrow[d, "p_0"] \\
+B_0 \arrow[r, "\beta_0"'] & Y_0\ ,
+\end{tikzcd}
+\tag*{(6.3.5)}
+\]
+et enfin d'un homomorphisme $\lambda = (\lambda_A, \lambda_B, \lambda_X, \lambda_Y)$ du carré (6.3.4) dans le carré (6.3.5) :
+% foot: Version 9 février 2019
+\printedpage{56}\msp{page 112}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+\[
+\begin{tikzcd}
+A'_{I'} \arrow[rr, "\alpha'_{I'}"] \arrow[dr, "i'_{I'}"'] \arrow[dd, "\lambda_A"'] & & X'_{I'} \arrow[dr, "p'_{I'}"] \arrow[dd, "\lambda_X" near start] & \\
+ & B'_{I'} \arrow[ur, dotted, "h'_{I'}"] \arrow[rr, crossing over, "\beta'_{I'}" near end] & & Y'_{I'} \arrow[dd, "\lambda_Y"] \\
+A_0 \arrow[rr, "\alpha_0" near start] \arrow[dr, "i_0"'] & & X_0 \arrow[dr, "p_0"] & \\
+ & B_0 \arrow[from=2-2, crossing over, "\lambda_B"' near start] \arrow[ur, dotted, "h_0"'] \arrow[rr, "\beta_0"] & & Y_0
+\end{tikzcd}
+\qquad\qquad \text{\footnotemark[32]}
+\tag*{(6.3.6)}
+\]
+\footnotetext[32]{\textbf{N.B.} La condition $p \in \Psi\langle I\rangle$ s'exprime par $p' \in \Psi\langle I'\rangle$ et \fbox{$p_0 \in \Psi.$}}
+
+D'autre part, la question de prolonger $(I', h') \in \mathcal{H}$ en $(I, h)$, revient à celle de trouver $h_0 : B_0 \longrightarrow X_0$ dans $\mathcal{M}$, de façon qu'avec $h'_{I'}$ cela fasse encore un diagramme commutatif de (6.3.6), ce qui revient à dire que d'une part les deux triangles formés dans le carré de base sont commutatifs :
+\[
+p_0h_0 \ =\ \beta_0, \qquad\quad h_0i_0 \ =\ \alpha_0\ ,
+\tag*{(6.3.7)}
+\]
+et d'autre part le carré diagonal défini par $h'_{I'}$, $h_0$ soit commutatif (ce qui exprime qu'on a une flèche $h$ de $B$ dans $X$) :
+\[
+\lambda_X h'_{X'} \ =\ h_0\lambda_B\ . % [sic] h'_{X'} -> h'_{I'}, the arrow is h'_{I'} everywhere else (cf. (6.3.16))
+\tag*{(6.3.8)}
+\]
+
+\msp{page 113}Mais le diagramme (6.3.6), où la flèche en traits pointillés denses $h'_{I'}$ est déjà acquise, et $h_0$ en pointillés espacés reste à trouver, donne naissance au diagramme, dans lequel est mis en évidence la flèche $\tilde{i} \in \Phi$ qui exprime l'hypothèse $i \in C(i)$, % [sic] C(i) -> C(I), cf. i' \in C(I')
+compte tenu de $i' \in C(I')$ :
+\[
+\begin{tikzcd}
+A'_{I'} \arrow[rr, "\alpha'_{I'}"] \arrow[dr, "i'_{I'}"'] \arrow[dd, "\lambda_A"'] & & X'_{I'} \arrow[dr, "p'_{I'}"] \arrow[dd, "\lambda_X" near start] & \\
+ & B'_{I'} \arrow[ur, dotted, "h'_{I'}"] \arrow[rr, crossing over, "\beta'_{I'}" near end] & & Y'_{I'} \arrow[dd, "\lambda_Y"] \\
+A_0 \arrow[ur, phantom, "\text{cocart.}"] \arrow[rr, "\alpha_0" near start] \arrow[dr, "r"'] \arrow[ddr, dotted, "i_0"'] & & X_0 \arrow[dr, "p_0\in\Psi"] & \\
+ & \tilde{B} \arrow[from=2-2, crossing over, "s"' near start] \arrow[ur, dotted, "\tilde{h}_0"] \arrow[rr, dotted, "\tilde{\beta}_0"] \arrow[d, "\tilde{i}\in\Phi"'] & & Y_0 \\
+ & B_0\ , \arrow[uur, dotted, "h_0"'] \arrow[urr, "\beta_0"'] & &
+\end{tikzcd}
+\tag*{(6.3.9)}
+\]
+% foot: Version 9 février 2019
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+où la flèche $\tilde{h}_0$ en traits pointillés denses de $\tilde{B} \overset{\text{déf}}{=} A_0 \amalg_{A'_{I'}} B'_{I'}$ dans $X_0$, est définie par les conditions de commutativité
+\[
+\tilde{h}_0r \ =\ \alpha_0, \qquad\quad \tilde{h}_0s \ =\ \lambda_X h'_{I'}\ ,
+\tag*{(6.3.10)}
+\]
+ce qui est licite, vu que
+\[
+\begin{aligned}
+\alpha_0\lambda_A \ &=\ (\lambda_X h'_{I'})i'_{I'} \\
+&=\ \lambda_X(h'_{I'}i'_{I'}) \\
+&=\ \lambda_X\alpha'_{I'}.
+\end{aligned}
+\]
+
+\msp{page 114}Quant à la flèche $\tilde{\beta}_0 : \tilde{B} \longrightarrow Y_0$, elle est donnée par la condition de commutativité
+\[
+\tilde{\beta}_0r \ =\ p_0\alpha_0, \qquad\quad \tilde{\beta}_0s \ =\ \lambda_Y\beta'_{I'}\ ,
+\tag*{(6.3.11)}
+\]
+ce qui est encore licite, puisque
+\[
+(p_0\alpha_0)\lambda_A \ =\ (\lambda_Y\beta'_{I'})i'_{I'}
+\]
+en vertu de la commutativité du cube (6.3.6). Pour établir la commutativité totale du diagramme (6.3.9) (traits pleins, et traits pointillés denses pour $h'_{I'}$, $\tilde{h}_0$ et $\tilde{\beta}_0$ -- à l'exclusion de $h_0$ pas encore construit), il faut encore vérifier d'une part les relation % [sic] les relation -> les relations, plural
+\[
+\left\{
+\begin{aligned}
+\tilde{h}_0r \ &=\ \alpha_0, \quad p_0\tilde{h}_0 \ =\ \tilde{\beta}_0, \\
+\lambda_X h'_{I'} \ &=\ \tilde{h}_0s
+\end{aligned}
+\right.
+\qquad\qquad \text{\footnotemark[33]},
+\tag*{(6.3.12)}
+\]
+\footnotetext[33]{\textbf{N.B.} la première et la troisième de ces relations sont déjà connues, cf. (6.3.10).}
+établissant la commutativité du cube supérieur avec le carré diagonal (diagramme du type (6.3.6), la flèche pointillée $h_0$ y incluse), d'autre part les relations
+\[
+\left\{
+\begin{aligned}
+\tilde{i}r \ &=\ i_0 \qquad \text{(et $\tilde{i}s = \lambda_B$ pour mémoire)} \\
+\beta_0\tilde{i} \ &=\ \tilde{\beta}_0\ ,
+\end{aligned}
+\right.
+\tag*{(6.3.13)}
+\]
+où la première ligne est déjà connue par définition de $\tilde{B}$ et de $\tilde{i}$. La deuxième
+\msp{page 115}se ramène aux deux relations
+\[
+\begin{aligned}
+(\beta_0\tilde{i})r \ &=\ \beta_0(\tilde{i}r) \\
+&=\ \beta_0i_0 \\
+&=\ p_0\alpha_0 \\
+&=\ \tilde{\beta}_0r\ ,
+\end{aligned}
+\]
+OK par commutativité du carré de base de (6.3.5),
+\[
+\begin{aligned}
+(\beta_0\tilde{i})s \ &=\ \beta_0(\tilde{i}s) \\
+&=\ \beta_0\lambda_B \\
+&=\ \lambda_Y\beta'_{I'} \\
+&=\ \tilde{\beta}_0s\ ,
+\end{aligned}
+\]
+% foot: Version 9 février 2019
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+OK par commutativité du carré antérieur dans (6.3.6).
+
+Donc il reste à vérifier la deuxième relation (6.3.12),
+\[
+p_0\tilde{h}_0 \ =\ \tilde{\beta}_0\ ,
+\]
+ce qui se ramène à
+\[
+\begin{aligned}
+(p_0\tilde{h}_0)r \ &=\ p_0(\tilde{h}_0r) \\
+&=\ p_0\alpha_0 \\
+&=\ \tilde{\beta}_0r\ ,
+\end{aligned}
+\]
+OK par (6.3.11),
+\[
+\begin{aligned}
+(p_0\tilde{h}_0)s \ &=\ p_0(\tilde{h}_0s) \\
+&=\ p_0(\lambda_X h'_{I'}) \\
+&=\ (p_0\lambda_X)h'_{I'} \\
+&=\ (\lambda_Y p'_{I'})h'_{I'} \\
+&=\ \lambda_Y(p'_{I'}h'_{I'}) \\
+&=\ \lambda_Y\beta'_{I'} \\
+&=\ \tilde{\beta}_0s\ ,
+\end{aligned}
+\]
+OK.
+
+Ceci posé, je dis que les contraintes (6.3.7), (6.3.8) sur $h_0$ reviennent à la commutativité des deux triangles dans les carré % [sic] les carré -> le carré, singular (one square (6.3.14))
+\[
+\begin{tikzcd}
+\tilde{B} \arrow[r, "\tilde{h}_0"] \arrow[d, "\tilde{i}\in\Phi"'] & X_0 \arrow[d, "p_0\in\Psi"] \\
+B_0 \arrow[r, "\beta_0"'] \arrow[ur, dotted, "h_0"] & Y_0\ ,
+\end{tikzcd}
+\tag*{(6.3.14)}
+\]
+\msp{page 116}i.e. aux deux relations
+\[
+h_0\tilde{i} \ =\ \tilde{h}_0\ , \qquad\quad p_0h_0 \ =\ \beta_0\ .
+\tag*{(6.3.15)}
+\]
+
+La deuxième de ces relations n'est autre que la première relation (6.3.7), et il reste à voir que la première relation (6.3.15) équivaut à l'ensemble des deux relations restantes dans (6.3.7), (6.3.8) :
+\[
+h_0i_0 \ =\ \alpha_0\ , \qquad\quad \lambda_X h'_{I'} \ =\ h_0\underbrace{\lambda_B}_{\tilde{i}s}
+\tag*{(6.3.16)}
+\]
+% foot: Version 9 février 2019
+
+% ---- from der-ch17_p061-062.tex
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+Or la relation en question $h_0\tilde{i} = \tilde{h}_0$ équivaut à l'ensemble des deux relations
+\[
+\begin{aligned}
+(h_0\tilde{i})r &= h_0(\tilde{i}r)\\
+&= h_0i_0\\
+&\overset{?}{=} \alpha_0\\
+&= \tilde{h}_0r,
+\end{aligned}
+\]
+équivalent à $h_0i_0 = \alpha_0$,
+\[
+\begin{aligned}
+(h_0\tilde{i})s &= h_0(\tilde{i}s)\\
+&= h_0\lambda_B\\
+&\overset{?}{=} \lambda_Xh'_{I'}\\
+&= \tilde{h}_0s,
+\end{aligned}
+\]
+équivalent à $h_0\lambda_B = \lambda_Xh'_{I'}$, c'est OK.
+
+Ceci posé, dans le carré (6.3.14), les hypothèses $i \in \Phi(I)$, $p \in \Psi\langle I\rangle$ impliquent $\tilde{i}_0 \in \Phi$, $p_o \in \Psi$. Donc la flèche cherchée $h_0$ existe, q.e.d. % [sic] p_o -> p_0, index printed as letter o, elsewhere index 0 (h_0, i_0)
+
+Cela achève la démonstration du corollaire 6.3, et par là aussi, celle de la dernière partie, d), de 6.1. On est heureux\,!
+
+\msp{page 117}
+
+\textbf{Proposition 6.4.}\footnote[34]{Sous réserve d'existence des $\varinjlim$ et des $\varprojlim$ pertinentes dans $\mathcal{M}$. On peut supposer pour simplifier $\mathcal{M}$ stable par $\varinjlim$ et $\varprojlim$ .} % mark printed as superscript (34)
+\textit{Soit $\mathcal{M}$ une catégorie, et $\Phi \longleftrightarrow \Psi$ un couple Q-clos en Q-dualité ($\Phi = \Psi^*$, $\Psi = \Phi_*$). Soit $u : I \longrightarrow I'$ une flèche dans} Cat\textit{, d'où une suite de foncteurs adjoints}
+\[
+\begin{tikzcd}[column sep=large]
+\mathcal{M}(I) \arrow[r, shift left=3, "u_!"] \arrow[r, shift right=3, "u_*"'] & \mathcal{M}(I') \arrow[l, "u^*"']
+\end{tikzcd}\ .
+\]
+\textit{On définit $\Phi(I)$, $\Psi\langle I\rangle$, $\Phi(I')$, $\Psi\langle I'\rangle$ comme dans} 6.2.5. \textit{On a alors :}
+
+\cercle{a}
+\[
+\left\{
+\begin{aligned}
+u_!(\Phi(I)) &\ \subset\ \Phi(I')\ ,\\
+u^*(\Psi\langle I'\rangle) &\ \subset\ \Psi\langle I\rangle\ .
+\end{aligned}
+\right.
+\tag*{(6.4.1)}
+\]
+
+\cercle{b} \textit{On a l'équivalence}
+\[
+u^*(\Phi(I')) \subset \Phi(I) \qquad\Longleftrightarrow\qquad u_*(\Psi\langle I\rangle) \subset \Psi\langle I'\rangle\ .
+\tag*{(6.4.2)}
+\]
+
+\cercle{c} \textit{Les relations équivalentes} (6.4.2) \textit{ont lieu dans chacun des trois cas suivants :}
+\begin{enumerate}[label={}, leftmargin=2.5em]
+\item 1°) \textit{$u$ est coétale.}
+\item 2°) \textit{$I$ est discrète.}
+\item 3°) \textit{Pour tout $i' \in \operatorname{Ob} I'$, les composantes connexes de $I/i'$ admettent un objet final.}
+\end{enumerate}
+
+\newpage
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. XVII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 9 février 2019
+
+\textbf{Corollaire 6.5.} \textit{Soit $(W,C,F)$ un triple de Quillen clos spécial dans $\mathcal{M}$, et définissons, pour toute $I$ dans} Cat\textit{, $C(I)$, $TC(I)$ et $F(I)$, $TF(I)$ comme dans le théorème} 6.1. a)\textit{. On a alors}
+
+\msp{page 118}
+
+\textit{les équivalences}
+\[
+\Bigl(u^*(C(I'))\ \subset\ C(I)\Bigr) \quad\Longleftrightarrow\quad \Bigl(u_*(TF)\ \subset\ TF'\Bigr)\ ,
+\tag*{(6.5.1)}
+\]
+\[
+\Bigl(u^*(TC(I'))\ \subset\ TC(I)\Bigr) \quad\Longleftrightarrow\quad \Bigl(u_*(F)\ \subset\ F'\Bigr)\ .
+\tag*{(6.5.2)}
+\]
+\textit{Les conditions équivalentes} (6.5.1) \textit{ainsi que} (6.5.2) \textit{sont satisfaites quand on est dans l'un des cas} 1°) 2°) 3°) \textit{de} 6.4. c).
+
+\textsc{Démonstration} de 6.4. Les assertions \cercle{a} , \cercle{b} sont $\pm$ tautologiques, par adjonction, comparer XIII, prop. 2, et cor., page 46. Pour prouver c), il suffit de traiter le cas 3°), car 1° $\Longrightarrow$ 3°, 2° $\Longrightarrow$ 3°. Mais le calcul de
+\[
+u_*(X)(i')\ \simeq\ \varprojlim_{i\in I/i'} X(i)
+\]
+montre que si les composantes connexes $(I/i')_\alpha$ de $I/i'$ ont chacune un objet final $e_\alpha$, alors
+\[
+u_*(X)(i')\ \simeq\ \prod_\alpha X(e_\alpha)\ .
+\]
+Or $\Psi$, étant clos à droite, est stable par produits quelconques, donc $X \in \Psi\langle I\rangle$ implique que les $u_*(X)(i')$ sont dans $\Psi$, donc $u_*$ est dans $\Psi\langle I'\rangle$, q.e.d.
+\end{document}

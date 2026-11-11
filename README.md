@@ -17,10 +17,21 @@ A LaTeX transcription of the whole edition: the table of contents and every page
 in four files, as in the edition). It follows the edition's layout and conventions: the manuscript's page numbers and
 the editors' notes in typewriter type between square brackets, the edition's printed page numbers in the margin, the
 running heads and footers as TeX comments. Slips of the edition are kept as printed and marked `% [sic]` in the
-source; doubtful readings are marked `% ??`.
+source; doubtful readings are marked `% ??`, and where the check of the companion resolved a doubt, the comment gives
+the resolution.
+
+The transcription carries the corrections found in checking each of the companion's parts: the transcription
+errors and the resolved doubtful readings that each part's table of corrections lists, and the other changes of the
+checked text that agree with the edition's pages. The decisions on those other changes, one per change with the page,
+the reason and the text before and after, are in `transcription/DECISIONS.md` and `transcription/DECISIONS.json`;
+`DECISIONS.md` also gives the check of the ten corrections that change the definition of a macro, eight of which are
+applied (in Chapters I, II, VI and XIX). Not applied: five listed corrections that the check against the edition's
+pages overruled (two in Chapter XVII, one each in Chapters II, VII and XVI). On pages that two parts both contain, the
+transcription follows the earlier part. The transcription as it was before these corrections is in the history of this repository
+(release v2026-11-10b and earlier).
 
 - PDF: **[LesDerivateurs_transcription.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/latest/download/LesDerivateurs_transcription.pdf)**
-  (934 pages)
+  (930 pages)
 - Source: `transcription/`, one folder per edition file, one file per five pages
   (`transcription/Der-ChI-234/Der-ChI-234_p001-005.tex`, ...). Each of these files is a complete LaTeX document.
   `transcription/LesDerivateurs_transcription.tex` sets them all in one book.
@@ -56,18 +67,20 @@ The edition files and the versions transcribed (the version is printed at the fo
 The files are named as on the editors' page; the editors ask that links point to their page, not to the files, whose
 names change with each version.
 
-**Compiling.** 232 of the 243 files compile without LaTeX errors. In eleven files LuaLaTeX reports errors, mostly
-commutative diagrams with an arrow to a cell that does not exist and unbalanced braces in displays; the PDF is still
-produced, and these places should be read against the edition: Chapter I pp. 51–55; Chapter II pp. 16–20;
-Chapter VII pp. 101–105; Chapter XII section 6 pp. 61–64; Chapter XIV p. 11; Chapter XV pp. 31–35 and 46–50;
-Chapter XVI pp. 36–40; Chapter XVII pp. 21–25; Chapter XVIII pp. 121–125 and 176–180 (pages of the edition's files).
-Six files carry LaTeX-only changes that leave the text as read: in Chapter II pp. 26–30 and Chapter VII pp. 76–80 a
-macro is renamed (`\def` to `\defeq`, `\No` to `\Nop`) because TeX or French babel already uses the name; in
-Chapter VII pp. 106–109 a TikZ style uses `-` instead of the tikz-cd key `no head`; in Chapter XII appendix pp. 6–10,
-Chapter XV pp. 46–50 and Chapter XVII pp. 1–5 a diagram inside a footnote or an italic passage uses
-`ampersand replacement=\&`.
+**Compiling.** 240 of the 243 files compile without LaTeX errors. In three files LuaLaTeX reports one error each (in a
+diagram, a formula and a footnote); the PDF is still produced, and these places should be read against the edition:
+Chapter XII section 6 pp. 61–64; Chapter XIV p. 11; Chapter XV pp. 31–35 (pages of the edition's files). Six files carry
+LaTeX-only changes that leave the text as read: in Chapter II pp. 26–30 and Chapter VII pp. 76–80 a macro is renamed
+(`\def` to `\defeq`, `\No` to `\Nop`) because TeX or French babel already uses the name; in Chapter VII pp. 106–109 a
+TikZ style uses `-` instead of the tikz-cd key `no head`; in Chapter XII appendix pp. 6–10, Chapter XV pp. 46–50 and
+Chapter XVII pp. 1–5 a diagram inside a footnote or an italic passage uses `ampersand replacement=\&`. Where a
+corrected page uses a macro or a package that its file did not have, the file's preamble has gained that definition or
+package (seventeen files). In fourteen files the preamble has the corrected macro definition or package option of a
+table row (`transcription/DECISIONS.md`), and fifteen files load `lmodern`, without which LuaLaTeX has no glyph for
+the bold capital Greek letters and accented letters that their formulas set in a math alphabet; the master file loads
+it too.
 
-## 2. The critical companion (in progress)
+## 2. The critical companion (complete)
 
 A reading of the text with an English commentary set into Grothendieck's French at the places it concerns, marked by
 a vertical rule. The commentary explains the definitions and arguments, gives the mathematical context and the later
@@ -83,17 +96,17 @@ priority. Each part also has
 - a bibliography with links.
 
 The companion sets the corrected text of the pages it covers. These corrections are listed in each part's
-`corrections.csv`; the files in `transcription/` are the transcription before them.
+`corrections.csv`, and the transcription in `transcription/` carries them too (section 1).
 
 - PDF: **[LesDerivateurs_companion.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/latest/download/LesDerivateurs_companion.pdf)**
-  (1,226 pages: the text and commentary, the register of claims, the corrections, the bibliography)
+  (1,886 pages: the text and commentary, the register of claims, the corrections, the bibliography)
 
-The companion covers:
+The companion has all 32 of its parts. It covers:
 
 | Chapter | Covered |
 |---|---|
 | I | whole chapter (parts I-a, I-b) |
-| II | pages 1–35 of the 65 of the edition file (part II-a) |
+| II | whole chapter (parts II-a, II-b) |
 | III, IV, V | whole chapters (part III-V) |
 | VI | whole chapter (parts VI-a, VI-b, VI-c) |
 | VII | whole chapter (parts VII-a, VII-b, VII-c) |
@@ -105,20 +118,23 @@ The companion covers:
 | XII, appendix | whole appendix (part XIIapp) |
 | XIII | whole chapter (parts XIII-a, XIII-b) |
 | XIV | whole chapter (part XIV) |
-| XV | pages 1–40 of the 77 of the edition file (part XV-a) |
+| XV | whole chapter (parts XV-a, XV-b) |
+| XVI | whole chapter (part XVI) |
+| XVII | whole chapter (parts XVII-a, XVII-b) |
+| XVIII | whole chapter (parts XVIII-a to XVIII-e) |
 | XIX | whole chapter (part XIX) |
-
-In progress: the rest of Chapters II and XV; Chapters XVI, XVII and XVIII. The table of contents of the companion lists
-these parts as not yet included.
 
 Source: `companion/`
 
 - `companion/checks/DER_<part>/`: for each part, the text with its anchors (`_text.tex`), the commentary blocks
   (`_blocks.tex`), the overview (`_overview.tex`), the register of claims (`_claims.csv`), the corrections
-  (`_corrections.csv`) and the bibliography (`_references.bib`);
+  (`_corrections.csv`) and the bibliography (`_references.bib`); in seventeen parts also `_text_pro.tex`, the text
+  before the decisions of `transcription/DECISIONS.md` undid some of the returned changes (the returned text; in I-b
+  and VII-a with three readings fixed in the review of the overlaps);
 - `companion/reader/`: the book, `LesDerivateurs_companion.tex`, with its bibliography and the per-part files it
   inputs (`parts/`), all written by `kit/build_global_reader.py`; `OVERLAPS.md` explains how pages that two
-  consecutive parts both contain are set once in the book.
+  consecutive parts both contain are set once in the book. Seven such pairs, which involve the parts added in
+  this release (Chapters II, XV, XVII and XVIII), are not merged yet: the book sets their pages in both parts.
 
 ## Building
 
@@ -149,6 +165,13 @@ own with `lualatex`.
 - **Transcription:** AI-transcribed (Claude Opus 5.5, Anthropic).
 - **Companion:** commentary AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude
   Opus 5.5 (Anthropic). The register of claims and the corrections are produced the same way.
+- **Commentary from reviewed answers:** eight commentary blocks in parts II-a, III-V and XIIb-a, seven paragraphs of
+  other blocks there, nineteen rows of the register of claims (II-a, III-V, VII-c, VIII-X, XIIb-a) and three
+  bibliography entries are AI-produced by Claude Fable 5.2 (Anthropic), from answers of GPT-6 Astra (OpenAI, ChatGPT
+  Pro mode) that it reviewed; each of these rows names the answer and the reviewer.
+- **Corrections in the transcription:** the corrections of the companion (above); the corrections of macro
+  definitions and the changes of the checked texts that their tables do not list were compared with the edition's
+  pages by Claude Opus 5.5 (Anthropic) (`transcription/DECISIONS.md`).
 
 ## Rights
 

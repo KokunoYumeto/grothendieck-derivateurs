@@ -12,10 +12,10 @@
 \usepackage{microtype}
 \usepackage{marginnote}
 \usepackage{xurl}
-\usepackage{adjustbox}
-\usepackage{needspace}
-\usepackage{marginfix}
 \usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{adjustbox}
+\usepackage{marginfix}
 \usepackage{lmodern}
 \usepackage{array}
 \usepackage{ragged2e}
@@ -23,7 +23,8 @@
 \usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{derivateurs_companion}
-\usetikzlibrary{decorations.pathreplacing,babel}
+\usetikzlibrary{decorations.pathreplacing,babel,arrows.meta,decorations.pathmorphing}
+\DeclareFontShape{TU}{lmr}{bx}{sc}{<->ssub*lmr/bx/n}{}
 \frenchsetup{AutoSpacePunctuation=false}
 \setlength{\emergencystretch}{2em}
 \hypersetup{pdftitle={Les Dérivateurs: an integrated reader, with commentary},pdfauthor={Alexander Grothendieck},
@@ -123,7 +124,10 @@
 J.~Malgoire and G.~Maltsiniotis (Universités de Montpellier~II et Paris~VII),
 \url{https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html}. The \LaTeX{} transcription of that
 edition is AI-transcribed (Claude Opus~5.5, Anthropic). The commentary, the register of claims and the corrections
-are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic).
+are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic). Eight
+commentary blocks in parts II-a, III-V and XIIb-a, seven paragraphs of other blocks there, nineteen entries of the
+register of claims and three bibliography entries are AI-produced by Claude Fable~5.2 (Anthropic), from answers of
+GPT-6 Astra that it reviewed.
 
 \bigskip
 \noindent\textbf{Rights}
@@ -149,7 +153,7 @@ nous ne revendiquons aucun droit que nous ne détenons pas. Si vous détenez des
 \input{parts/DER_I-a}
 \input{parts/DER_I-b}
 \input{parts/DER_II-a}
-\addtocontents{toc}{\protect\dgrtocmissing{II-b}{Part 2 of 2}}
+\input{parts/DER_II-b}
 \input{parts/DER_III-V}
 \input{parts/DER_VI-a}
 \input{parts/DER_VI-b}
@@ -168,10 +172,15 @@ nous ne revendiquons aucun droit que nous ne détenons pas. Si vous détenez des
 \input{parts/DER_XIII-b}
 \input{parts/DER_XIV}
 \input{parts/DER_XV-a}
-\addtocontents{toc}{\protect\dgrtocmissing{XV-b}{Part 2 of 2}}
-\addtocontents{toc}{\protect\dgrtocmissingchapter{XVI}{Les localiseurs fondamentaux}}
-\addtocontents{toc}{\protect\dgrtocmissingchapter{XVII}{Catégories à fibrations et à cofibrations (Modèles (3))}}
-\addtocontents{toc}{\protect\dgrtocmissingchapter{XVIII}{Catégories et ensembles accessibles}}
+\input{parts/DER_XV-b}
+\input{parts/DER_XVI}
+\input{parts/DER_XVII-a}
+\input{parts/DER_XVII-b}
+\input{parts/DER_XVIII-a}
+\input{parts/DER_XVIII-b}
+\input{parts/DER_XVIII-c}
+\input{parts/DER_XVIII-d}
+\input{parts/DER_XVIII-e}
 \input{parts/DER_XIX}
 \backmatter
 \dgrbackchapter{Register of claims}
@@ -185,7 +194,8 @@ Part & proved & sketched & stated & assumed & conjectured & false & open & total
 I-a & 53 & 24 & 136 & 19 & 7 & 14 & 0 & 253 \\
 I-b & 72 & 37 & 101 & 22 & 9 & 12 & 0 & 253 \\
 II-a & 50 & 21 & 145 & 1 & 5 & 20 & 3 & 245 \\
-III-V & 54 & 27 & 128 & 10 & 11 & 9 & 10 & 249 \\
+II-b & 67 & 45 & 108 & 4 & 0 & 21 & 9 & 254 \\
+III-V & 54 & 27 & 127 & 8 & 11 & 12 & 10 & 249 \\
 VI-a & 88 & 29 & 137 & 19 & 16 & 23 & 0 & 312 \\
 VI-b & 115 & 18 & 59 & 17 & 9 & 15 & 17 & 250 \\
 VI-c & 88 & 27 & 72 & 9 & 8 & 5 & 5 & 214 \\
@@ -194,7 +204,7 @@ VII-b & 54 & 16 & 82 & 3 & 5 & 17 & 7 & 184 \\
 VII-c & 70 & 26 & 62 & 4 & 30 & 35 & 11 & 238 \\
 VIII-X & 11 & 19 & 104 & 5 & 24 & 12 & 10 & 185 \\
 XI-XIIa & 124 & 35 & 90 & 43 & 12 & 9 & 11 & 324 \\
-XIIb-a & 91 & 25 & 70 & 7 & 0 & 16 & 12 & 221 \\
+XIIb-a & 91 & 23 & 70 & 7 & 0 & 18 & 12 & 221 \\
 XIIb-b & 74 & 11 & 36 & 4 & 3 & 4 & 1 & 133 \\
 XIIc-a & 51 & 21 & 89 & 14 & 11 & 9 & 19 & 214 \\
 XIIc-b & 63 & 20 & 31 & 4 & 3 & 5 & 1 & 127 \\
@@ -203,9 +213,18 @@ XIII-a & 56 & 19 & 172 & 27 & 44 & 12 & 17 & 347 \\
 XIII-b & 33 & 13 & 63 & 17 & 5 & 11 & 9 & 151 \\
 XIV & 18 & 6 & 27 & 8 & 2 & 4 & 0 & 65 \\
 XV-a & 88 & 23 & 66 & 17 & 1 & 28 & 2 & 225 \\
+XV-b & 86 & 31 & 125 & 16 & 7 & 15 & 9 & 289 \\
+XVI & 79 & 35 & 137 & 31 & 17 & 10 & 28 & 337 \\
+XVII-a & 100 & 14 & 53 & 9 & 0 & 9 & 4 & 189 \\
+XVII-b & 110 & 9 & 42 & 7 & 2 & 6 & 4 & 180 \\
+XVIII-a & 141 & 33 & 95 & 0 & 6 & 41 & 2 & 318 \\
+XVIII-b & 144 & 28 & 97 & 0 & 8 & 19 & 13 & 309 \\
+XVIII-c & 112 & 37 & 51 & 3 & 4 & 15 & 2 & 224 \\
+XVIII-d & 100 & 46 & 50 & 5 & 5 & 16 & 1 & 223 \\
+XVIII-e & 98 & 26 & 52 & 7 & 6 & 20 & 13 & 222 \\
 XIX & 62 & 17 & 148 & 7 & 4 & 11 & 20 & 269 \\
 \midrule
-total & 1418 & 484 & 1965 & 263 & 213 & 300 & 160 & 4803 \\
+total & 2455 & 786 & 2774 & 343 & 268 & 477 & 245 & 7348 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -298,6 +317,42 @@ total & 1418 & 484 & 1965 & 263 & 213 & 300 & 160 & 4803 \\
 \dgrclaim{false}{52}{II-C-078}{Proposition4.1(d prime) as printed: all coslice functors i\textbackslash{}I prime\ensuremath{\to}i\textbackslash{}I are cofinal is equivalent to full faithful restriction.}
 \par\endgroup
 
+\section*{II-b \textperiodcentered\ Chapter II, part 2 of 2, manuscript pages 54--99}
+\pdfbookmark[1]{II-b}{dgrclaims.II-b}
+\begingroup\raggedright
+\input{parts/DER_II-b_defs}
+\dgrclaim{open}{45}{IIb-A004}{Find a common cofinality statement encompassing 3.4 and XVIII Proposition 4.9.6.3.}
+\dgrclaim{open}{51}{IIb-A026}{Does M-connectedness imply M-cofinality of all slice maps, when slice diagrams need not extend globally?}
+\dgrclaim{false}{52}{IIb-A031}{The printed condition that every i\ensuremath{\backslash} I\ensuremath{\prime}\ensuremath{\to} i\ensuremath{\backslash} I is cofinal is equivalent to full faithfulness of restriction.}
+\dgrclaim{open}{54-56}{IIb-A038}{Does invertibility of y\_i\ensuremath{\to} u\_*u\textasciicircum{}*y\_i for all representables imply W\_0-connectedness?}
+\dgrclaim{false}{59}{IIb-A052}{Are W\_0-connected functors precisely ordinary localization functors, equivalently are conservative W\_0-connected functors equivalences?}
+\dgrclaim{false}{63bis-64bis}{IIb-A069}{If binary coproduct on D(e) is faithful, left Kan extension along every discrete fibration is faithful.}
+\dgrclaim{open}{64bis}{IIb-A073}{Can a D-connected functor fail to be D-aspherical (the literal printed question)?}
+\dgrclaim{open}{64bis}{IIb-A074}{Can D-connectedness fail to imply D-biasphericity when both coproduct and product conservativity are absent?}
+\dgrclaim{false}{65}{IIb-A080}{D-connectedness is an exception to closure of the seven classes under composition.}
+\dgrclaim{false}{46}{IIb-A085}{Nonemptiness of every comma category i\ensuremath{\backslash} I\ensuremath{\prime} is equivalent to F0 together with F1.}
+\dgrclaim{false}{67}{IIb-B013}{For every base-change- and composition-stable L, N(S(N(L)))=N(L).}
+\dgrclaim{false}{67}{IIb-B015}{For every A contained in W, S(N(S(A)))=S(A).}
+\dgrclaim{false}{77}{IIb-B050}{The printed second line (5.20) states A\textasciicircum{}natural=sup\_\{p in A\} p\textasciicircum{}natural.}
+\dgrclaim{false}{79}{IIb-B057}{For a Galois extension L/K, the fixed-point polarity has intermediate fields as its closed subsets of L and all subgroups as its closed subsets of G.}
+\dgrclaim{false}{81}{IIb-B062}{The lifting relation on classes is not induced by a relation on individual arrows.}
+\dgrclaim{false}{81-82}{IIb-B064}{If phi records (left edge,right edge), the lifting condition for classes (Phi right,Psi left) is phi inverse(Phi times Psi) subset D0 as printed.}
+\dgrclaim{false}{83}{IIb-B071}{The condition in (6.3) is equivalent to saying A is stable under pullback along L.}
+\dgrclaim{false}{84}{IIb-B072}{With the initial definitions, P and Q are closed under arbitrary unions.}
+\dgrclaim{false}{85}{IIb-B078}{The pullback-stability of T\_W(A) proves T\_W(A) belongs to the Q defined in (6.2).}
+\dgrclaim{false}{86}{IIb-B088}{The prose before (6.8) identifies all closed pairs with pairs whose two members are composition-closed.}
+\dgrclaim{open}{89}{IIb-B100}{Find an effective intrinsic characterization of T\_W(W\_asph) and T\_W(W\_coas).}
+\dgrclaim{open}{89}{IIb-B101}{Define Net\_W=Stab(W\_bias) and seek a characterization using bilocal factorization categories.}
+\dgrclaim{open}{89}{IIb-B102}{Determine Stab(Equ), the stabilizer of categorical equivalences.}
+\dgrclaim{false}{89}{IIb-B103}{The printed final inclusion says Equ subset P(W) for a fundamental localizer W.}
+\dgrclaim{false}{90}{IIb-C009}{Remark 7.2, literally: every discrete fibration is locally filtered.}
+\dgrclaim{open}{91}{IIb-C019}{Remark 7.4(1): are locally cofiltered or precofiltered functors stable under arbitrary base change?}
+\dgrclaim{false}{92}{IIb-C022}{Remark 7.4(3), literal intermediate assertion: a cofiltered functor is W\_0-aspherical.}
+\dgrclaim{false}{92-95}{IIb-C027}{Proposition 7.4(c), literally: for any open U\ensuremath{\subset} X/x let V be the lower open generated by the image of all X/x; then U\ensuremath{\to} V is cofiltered (respectively weakly cofiltered).}
+\dgrclaim{false}{98-99}{IIb-C063}{The abbreviated total-connectedness criterion C\textasciicircum{}\{op\}\ensuremath{\to} C\textasciicircum{}\{op\}\ensuremath{\times} C\textasciicircum{}\{op\} final, without nonemptiness.}
+\dgrclaim{false}{99}{IIb-C065}{The parenthetical locally cofiltered = components filtered, and the label PS*1 = the x\ensuremath{\backslash} C satisfy PS*1\ensuremath{\prime}, in the first closing diagram.}
+\par\endgroup
+
 \section*{III-V \textperiodcentered\ Chapter III, manuscript pages 1--12; Chapter IV, manuscript pages 73--83; Chapter V, manuscript pages 1--52}
 \pdfbookmark[1]{III-V}{dgrclaims.III-V}
 \begingroup\raggedright
@@ -325,7 +380,10 @@ total & 1418 & 484 & 1965 & 263 & 213 & 300 & 160 & 4803 \\
 \dgrclaim{false}{V:15--16,24}{V-P052}{Fixed-endpoint path categories are full subcategories of the unqualified functor categories.}
 \dgrclaim{conjectured}{V:25--26}{V-P081}{A nonempty category of endpoint-preserving functors between generalized intervals is connected.}
 \dgrclaim{conjectured}{V:26}{V-P082}{The same nonempty endpoint-preserving functor category is contractible.}
+\dgrclaim{false}{V:37}{V-I026}{The localization $\varphi:\Cathot\to\Hot$ has a right adjoint $\psi$, called a Kan envelope.}
 \dgrclaim{conjectured}{V:46}{V-I057}{Essential constancy should almost never occur in practice.}
+\dgrclaim{false}{V:47}{V-I059}{If such an ind-map induces an isomorphism in Ind(Cathot), its union map is necessarily a weak equivalence.}
+\dgrclaim{false}{V:47}{V-I060}{A weak equivalence between the envelope unions is an isomorphism in Cathot.}
 \dgrclaim{conjectured}{V:49}{V-I064}{The required minimal lengths of stagewise homotopies may tend to infinity, obstructing a global categorical homotopy.}
 \dgrclaim{false}{V:49}{V-I065}{For a Thomason fibrant K\ensuremath{'}, are categorically homotopic functors X\ensuremath{\to}K\ensuremath{'} always connected by one natural transformation?}
 \dgrclaim{conjectured}{V:49-50}{V-I066}{Different reasonable theories of paths might yield canonically and transitively isomorphic unions in Cathot, as well as isomorphic ind-objects.}
@@ -700,6 +758,8 @@ total & 1418 & 484 & 1965 & 263 & 213 & 300 & 160 & 4803 \\
 \dgrclaim{open}{104}{XIIba-C009}{Can one similarly find a sieve pushout with $p\in W$ but $q\notin W$?}
 \dgrclaim{open}{111}{XIIba-C035}{Must a sieve that is a W-cofibration, or even a couniversal W-equivalence, be W-dwyerienne?}
 \dgrclaim{open}{111}{XIIba-C036}{Must such a sieve even satisfy the original Dwyer right-adjoint condition?}
+\dgrclaim{false}{111}{XIIba-C037}{The source asserts the converse to the W-dwyerienne criterion when the complementary category T is terminal.}
+\dgrclaim{false}{111}{XIIba-C038}{Under the cited gluing framework, i and all its changes of complementary category $T_1\to T$ are W-cofibrations iff i is W-dwyerienne.}
 \dgrclaim{open}{111--112}{XIIba-C039}{Is there a useful Dwyer notion for arbitrary full inclusions which includes both the sieve and cosieve cases?}
 \dgrclaim{false}{112}{XIIba-C040}{The proof says that W-dwyerienne stability makes $i'$ W-aspherical and in W.}
 \dgrclaim{open}{113}{XIIba-C045}{Are W-dwyerienne and totally W-dwyerienne inclusions stable under composition?}
@@ -974,6 +1034,342 @@ total & 1418 & 484 & 1965 & 263 & 213 & 300 & 160 & 4803 \\
 \dgrclaim{false}{64}{XV5-057}{The projection in Corollary 5.11 is described parenthetically as fibrant.}
 \par\endgroup
 
+\section*{XV-b \textperiodcentered\ Chapter XV, part 2 of 2, manuscript pages 57--137}
+\pdfbookmark[1]{XV-b}{dgrclaims.XV-b}
+\begingroup\raggedright
+\input{parts/DER_XV-b_defs}
+\dgrclaim{open}{58–59}{XVb-A009}{Without requiring every Filt\textasciicircum{}pi object to be pi-accessible, footnote22 asserts (a)\ensuremath{\Leftrightarrow}(b), (a)\ensuremath{\Rightarrow}(c\ensuremath{'}), (b)\ensuremath{\Rightarrow}(c), and tentatively (c\ensuremath{'})\ensuremath{\Rightarrow}(c).}
+\dgrclaim{false}{62–63}{XVb-A021}{As printed, all of Ss\_pi(Y) is a cofinal subcategory of M\textasciicircum{}pi/Y.}
+\dgrclaim{false}{72}{XVb-A041}{The individual good-index sets I\_\{M\_alpha\} are parenthetically asserted to be filtered without a cofinality hypothesis.}
+\dgrclaim{open}{75}{XVb-A049}{The exactness assumption(e) might be eliminated from the general machinery.}
+\dgrclaim{false}{76}{XVb-A056}{If C is an L-accessible class of monomorphisms containing all isomorphisms under(a)–(e), there is a small C\_0\ensuremath{\subset}C with C\ensuremath{\subset}tilde(C\_0).}
+\dgrclaim{false}{76–77}{XVb-A057}{For any pi witnessing C accessibility,6.1 further asserts C\ensuremath{\subset}tilde(C\textasciicircum{}pi), with C\textasciicircum{}pi=C\ensuremath{\cap}Fl\textasciicircum{}pi(M).}
+\dgrclaim{false}{77}{XVb-A059}{Under the proposed unconditional hypotheses of6.1,6.2 asserts C\_*=C\_\{0*\} and tilde(C)=tilde(C\_0) for a small generating C\_0.}
+\dgrclaim{false}{79}{XVb-A066}{For every nonisomorphism f:A\ensuremath{\to}B in C, there exists A\ensuremath{\subsetneq}A\_1\ensuremath{\subset}B with A\ensuremath{\to}A\_1\ensuremath{\in}tilde(C\textasciicircum{}pi) and A\_1\ensuremath{\to}B\ensuremath{\in}C.}
+\dgrclaim{open}{83}{XVb-A078}{The proof needs the comparison j:C\ensuremath{'}=A amalg\_\{A\ensuremath{'}\}B\ensuremath{'}\ensuremath{\to}B to lie in C, and does not even know that it is monic.}
+\dgrclaim{false}{83–84}{XVb-A080}{The diagram of C\_i and gamma\_i is called pi-adapted after checking continuity, without establishing that its objects lie in the bounded filtration stage.}
+\dgrclaim{false}{84}{XVb-A081}{Since colim gamma\_i is an isomorphism in C and C is pi-accessible, the indices with gamma\_i\ensuremath{\in}C are claimed cofinal.}
+\dgrclaim{false}{84}{XVb-A082}{The attempted proof concludes Lemma6.4 and Theorem6.1 by choosing an index with both alpha\_i\ensuremath{\in}C\textasciicircum{}pi and gamma\_i\ensuremath{\in}C.}
+\dgrclaim{open}{84–85}{XVb-B001}{The generation assertion of §6 may be false: an accessible or L-accessible class need not be the left Q-closure of a set.}
+\dgrclaim{conjectured}{85}{XVb-B002}{For a fundamental localizer W, the classes Cof\_W and W\textasciicircum{}\{univ\} in Cat should be accessible, in particular for W=W\_infty.}
+\dgrclaim{open}{85}{XVb-B003}{If C=tilde(C) is closed under filtered colimits and generated on the left by a set, and W is L-accessible, is C intersect W generated on the left by a set, even when C consists of monomorphisms?}
+\dgrclaim{false}{90}{XVb-B026}{For every monomorphism i:A->B, there is a generator i\_prime mapping to it whose pushout strictly enlarges A inside B.}
+\dgrclaim{false}{99}{XVb-B046}{In the cartesian square (7.4.3), if the left vertical f belongs to F and the bottom p belongs to W, then the top q belongs to W.}
+\dgrclaim{open}{102}{XVb-B056}{Effective unions of subobjects may fail in Cat.}
+\dgrclaim{open}{104}{XVb-B066}{Is the presheaf model structure necessarily also right proper?}
+\dgrclaim{false}{106}{XVb-B073}{Footnote38(d\_prime): j\_A sends every W-equivalence of categories to a universally W\_A-equivalent map of presheaves, and this is equivalent to the local test condition.}
+\dgrclaim{false}{112–114}{XVb-B089}{Lemma8.7: finite cocompleteness, two-out-of-three for W, composition/pushout stability of C, a fold factorization with left factor in C and right factor in W, and the stated coproduct inclusions suffice for mapping-cylinder factorizations C then W.}
+\dgrclaim{conjectured}{115}{XVb-B096}{If the connected-component axiom fails in the presence of the other listed axioms, perhaps W is the class of all functors.}
+\dgrclaim{conjectured}{116}{XVb-C010}{Loc(3bis) should suffice when tested only on split fibred categories and split cartesian morphisms, assuming Loc(1,2).}
+\dgrclaim{open}{121}{XVb-C033}{Can coproduct reflection f1\ensuremath{\sqcup}f2\ensuremath{\in}W\ensuremath{\Rightarrow}f1,f2\ensuremath{\in}W be proved with only the preceding basic assumptions?}
+\dgrclaim{open}{122}{XVb-C037}{Footnote 47: the converse, arbitrary coproduct preservation under only Loc(1,2,3,6c\ensuremath{'}), is not known to the author.}
+\dgrclaim{conjectured}{125}{XVb-C051}{Loc(8) and Loc(5bis) are conjectured independent under the basic localizer axioms.}
+\dgrclaim{conjectured}{125}{XVb-C052}{The author expects every localizer useful in practice to satisfy connectivity and decomposition, while these are not needed in preceding general developments.}
+\dgrclaim{conjectured}{125}{XVb-C053}{Connectivity may matter when recovering contractibility and asphericity structures from one another.}
+\dgrclaim{conjectured}{130}{XVb-C068}{The author expects connectivity to hold automatically for localizers that will be introduced.}
+\dgrclaim{false}{133 bis}{XVb-C084}{The editorial bracket says (c\ensuremath{'})\ensuremath{\Rightarrow}(c) is the trivial implication and the quotient argument below proves (c)\ensuremath{\Rightarrow}(c\ensuremath{'}).}
+\dgrclaim{false}{136}{XVb-C104}{10.1(3b) with current Loc(1ter,2,3,5b) read literally: every f\ensuremath{\in}W induces an equivalence on locally constant objects.}
+\par\endgroup
+
+\section*{XVI \textperiodcentered\ Chapter XVI, manuscript pages 1--124}
+\pdfbookmark[1]{XVI}{dgrclaims.XVI}
+\begingroup\raggedright
+\input{parts/DER_XVI_defs}
+\dgrclaim{false}{9}{XVI-A038}{With filtered-colimit stability, finite Loc (4a) is equivalent to full Loc (4).}
+\dgrclaim{false}{10-11}{XVI-A045}{Lemma2.5: product closure for an arbitrary subset W implies preservation of binary, finite, or arbitrary products by localization.}
+\dgrclaim{conjectured}{17'}{XVI-A089}{The same forward/reverse distinction holds for all finite n-equivalence classes W\_n.}
+\dgrclaim{open}{17',22-23,25}{XVI-A092}{Does (6-prime a) imply (6a), hence provide the desired intrinsic cofibration theory?}
+\dgrclaim{open}{23}{XVI-A112}{Does (6-prime a) alone make trivial Dwyer inclusions stable under every pushout?}
+\dgrclaim{open}{23-24}{XVI-A114}{Is a square W-homotopy cocartesian exactly when the integral of its span maps to its corner by a W-map?}
+\dgrclaim{open}{24}{XVI-A116}{Every presheaf monomorphism is in Cof\_WA under the stated excision hypotheses.}
+\dgrclaim{conjectured}{27}{XVI-A130}{Loc (6c) is probably satisfied only when W is retract closed.}
+\dgrclaim{conjectured}{29}{XVI-B013}{W-smooth maps and W-proper maps, hence W-perfect maps, should be closed under retracts.}
+\dgrclaim{open}{29}{XVI-B014}{Fibf\_W and F\_W need not be closed under composition; examples should be supplied.}
+\dgrclaim{conjectured}{37}{XVI-B026}{Loc(7), or even Loc(7b), probably does not imply Loc(6a) or Loc(6\ensuremath{'}a); possible left Kan extensions without left exactness are suggested.}
+\dgrclaim{false}{40}{XVI-B039}{B(F)\ensuremath{\Rightarrow}C(F) for arbitrary F\ensuremath{\subset}Fl(Cat).}
+\dgrclaim{false}{50}{XVI-B059}{A(Parf\_\{W0\}) is the assertion Parf\_\{W0\}\ensuremath{\subset}W.}
+\dgrclaim{open}{52–53}{XVI-B063}{Objectwise universally equivalent replacements alone may not suffice to transfer B from G to F.}
+\dgrclaim{false}{57}{XVI-B072}{For arbitrary weakly W-fibrant input, the infinite-path unit is universally a W0-equivalence whenever W0 satisfies Loc8bis.}
+\dgrclaim{open}{64–65}{XVI-B084}{Does D imply A without sequential-colimit stability, perhaps with the extra condition printed Loc3ter?}
+\dgrclaim{open}{65}{XVI-B085}{Does D\_W0 imply A under the printed assumption that W and W0 satisfy Loc8bis?}
+\dgrclaim{conjectured}{65}{XVI-B086}{The minimum weak fundamental localizer W\ensuremath{\omega} almost certainly fails Loc8 and even Loc8bis.}
+\dgrclaim{open}{65}{XVI-B087}{It is not clear whether W\ensuremath{\omega} satisfies F; if it fails F then it also fails D and D\ensuremath{\Rightarrow}A is vacuous there.}
+\dgrclaim{conjectured}{66}{XVI-B088}{Does F imply A under Loc1ter,3bis,8bis?}
+\dgrclaim{open}{66–67}{XVI-B089}{Does enough intrinsic W-cofibrations imply Loc6a?}
+\dgrclaim{open}{70}{XVI-B098}{Without Loc8bis it remains unclear whether the arrows in the eight-condition diagram are strict.}
+\dgrclaim{open}{70}{XVI-B099}{The truncation localizers bold W\_n should be tested for Loc7F.}
+\dgrclaim{conjectured}{28–29}{XVI-B100}{The W\ensuremath{\omega}-perfect maps and the locally constant W\ensuremath{\omega}-Grothendieck fibrations should play a role dual to Dwyer maps.}
+\dgrclaim{false}{73}{XVI-C005}{Neither W\_\ensuremath{\omega} nor Parf\_\{W\_\ensuremath{\omega}\} is closed under filtered colimits.}
+\dgrclaim{conjectured}{79}{XVI-C019}{All fundamental localizers used in contemporary examples appear to satisfy Loc(8) and Loc(9).}
+\dgrclaim{false}{79}{XVI-C021}{W\_\ensuremath{\infty} satisfies Loc(1 ter,2,3 bis,4,5,6,7,8,9).}
+\dgrclaim{conjectured}{85–86}{XVI-C034}{A future descent axiom Loc10 should characterize W\ensuremath{\infty} uniquely together with Loc5 and D\_\{W\_\ensuremath{\omega}\}.}
+\dgrclaim{conjectured}{86–87}{XVI-C036}{There exists a fundamental localizer strictly contained in W\ensuremath{\infty}; in particular W\ensuremath{\omega}\ensuremath{\neq}W\ensuremath{\infty}.}
+\dgrclaim{open}{87}{XVI-C037}{The smallest fundamental localizer satisfying D\_\{W\_\ensuremath{\omega}\} might be strictly smaller than W\ensuremath{\infty}.}
+\dgrclaim{false}{87–88}{XVI-C039}{The listed axioms define a localizer tilde W\ensuremath{\infty}\ensuremath{\subset}W\ensuremath{\infty}, which consequently satisfies Loc5.}
+\dgrclaim{conjectured}{87–88}{XVI-C040}{The proposed tilde W\ensuremath{\infty} is strictly smaller than W\ensuremath{\infty}.}
+\dgrclaim{conjectured}{88}{XVI-C042}{Hot\_\{tilde W\ensuremath{\infty}\} might model Whitehead simple homotopy types.}
+\dgrclaim{open}{88}{XVI-C043}{A Whitehead invariant might be defined on pointed Hot\_\{tilde W\ensuremath{\infty}\}, provisionally as an element of K(Z[\ensuremath{\pi}1]).}
+\dgrclaim{conjectured}{88–89}{XVI-C044}{Elementary Whitehead expansion/collapse of a finite simplicial complex should induce an isomorphism of its face-poset model in Hot\_\{tilde W\ensuremath{\infty}\}.}
+\dgrclaim{false}{88; fn43}{XVI-C045}{Barycentric subdivision leaves the strict categorical homotopy type of a finite face poset unchanged.}
+\dgrclaim{open}{91;124}{XVI-C048}{Whether n-equivalence localizers W\_n have enough intrinsic W\_n-fibrations is asked; knowing Loc7F alone supplies no canonical perfect-path calculation.}
+\dgrclaim{conjectured}{92–93}{XVI-C050}{Simplicial approximation suggests that homotopy-equivalent polyhedra have suitably subdivided models that are categorically homotopy equivalent.}
+\dgrclaim{open}{93–95}{XVI-C052}{Is the maximum map sd(I)\ensuremath{\to}I always a categorical homotopy equivalence?}
+\dgrclaim{conjectured}{96}{XVI-C055}{A fundamental localizer strictly below W\ensuremath{\infty} might retain simple homotopy types and support Whitehead and higher Whitehead invariants.}
+\dgrclaim{open}{96}{XVI-C056}{Before a finer localizer is constructed, determine whether the intended Whitehead invariant is invariant under categorical homotopy equivalence of finite poset models.}
+\dgrclaim{open}{97–98}{XVI-C057}{For which W are (Cat,W,Cof\_W) and (Cat,W,Fib\_W) Brown cofibration/fibration categories?}
+\dgrclaim{open}{97–98}{XVI-C058}{For which W and u do derived direct images u\_!,u\_* exist, with exact homotopy pushout/pullback squares?}
+\dgrclaim{open}{98}{XVI-C059}{Which derivator axioms does HOT\_W satisfy, on which diagram domain, and when is it a full derivator on all small categories?}
+\dgrclaim{open}{98}{XVI-C060}{When can W be the weak-equivalence class of a closed Quillen model structure on Cat, preferably a proper one?}
+\dgrclaim{open}{99–100}{XVI-C063}{The explicit integrated-span construction models W-homotopy pushouts; the author asks whether its identification needs Loc3bis.}
+\dgrclaim{conjectured}{100}{XVI-C065}{Loc3bis alone probably does not imply the source’s homotopy-pushout exactness axiom Der6*.}
+\dgrclaim{false}{102}{XVI-C068}{D\_\{W\_\ensuremath{\omega}\} implies W\ensuremath{\subset}W\ensuremath{\infty}.}
+\dgrclaim{open}{105–106}{XVI-C073}{Do Loc6a,Loc8,Loc9 imply enough intrinsic fibrations, Loc7F?}
+\dgrclaim{open}{106–107}{XVI-C074}{Can infinite paths in simplicial presheaves make localized right homotopy operations concrete without Loc7?}
+\dgrclaim{open}{121}{XVI-C097}{Does Loc6a,Loc8,Loc9 imply the coproduct decomposition axiom Loc4?}
+\dgrclaim{open}{122–123}{XVI-C100}{Let V be the least fundamental localizer satisfying6\ensuremath{'}a,8, with or without3bis. Is V accessible, and is V strictly contained in W\ensuremath{\infty}?}
+\dgrclaim{open}{123–124}{XVI-C102}{Does Thomason’s model structure extend to special localizers or to other broader fundamental localizers?}
+\dgrclaim{conjectured}{124}{XVI-C104}{For special localizers, Loc6a may admit a direct elementary proof without the full Thomason construction.}
+\dgrclaim{open}{124}{XVI-C105}{Do the suggested homological or cohomological equivalence localizers satisfy Loc7F?}
+\par\endgroup
+
+\section*{XVII-a \textperiodcentered\ Chapter XVII, part 1 of 2, manuscript pages 1--70}
+\pdfbookmark[1]{XVII-a}{dgrclaims.XVII-a}
+\begingroup\raggedright
+\input{parts/DER_XVII-a_defs}
+\dgrclaim{false}{3}{XVIIa-A011}{The printed reduction says alpha\_i\ensuremath{\in}TC is equivalent to alpha\_i\ensuremath{\in}C in the proof of the reverse implication.}
+\dgrclaim{false}{7}{XVIIa-A022}{Footnote 5 claims that cofibrancy of X and Y is unnecessary in Proposition 2 and both its corollaries, including all conclusions of Corollary 2.}
+\dgrclaim{false}{19}{XVIIa-A047}{The proof says that the case I'\_0\ensuremath{\neq}I is covered by induction on the size of I, with the alternative giving a terminal object i0.}
+\dgrclaim{open}{23}{XVIIa-A053}{Does u\ensuremath{\in}C\_I together with local finiteness imply u\_\{K,I/i\}\ensuremath{\in}C for every i and every lower ideal K\ensuremath{\subset}I/i?}
+\dgrclaim{false}{24}{XVIIa-A057}{The printed condition (I/i\ensuremath{\subset}P\ensuremath{\Rightarrow}i\ensuremath{\in}P) forces P=I for artinian I.}
+\dgrclaim{open}{27,38}{XVIIa-B008}{Question: can the artinian hypothesis be removed from Theorem 2.1(3), with $C_I$ understood in the strong sense?}
+\dgrclaim{false}{32}{XVIIa-B021}{The intermediate cube in the proof of Lemma 2.6 is totally cocartesian, if this is read as saying all six faces are pushouts.}
+\dgrclaim{false}{33–34}{XVIIa-B022}{Lemma 2.7 as printed: every increasing ordinal sequence of opens yields the relative map as a transfinite composite of successor relative maps, including an extra initial factor.}
+\dgrclaim{false}{55}{XVIIa-C021}{Footnote 17 asserts that the candidate in (3.3.1) exists even when I prime is an arbitrary small category, without distinguishing the finite and cocomplete branches.}
+\dgrclaim{open}{56--57}{XVIIa-C025}{Is the constructed candidate u\_!\textasciicircum{}W left adjoint to the localized restriction u\_W\textasciicircum{}*?}
+\dgrclaim{false}{58--59}{XVIIa-C028}{The preceding density and homotopicality hypotheses alone imply that the transported candidate L is left adjoint to the localized G.}
+\dgrclaim{false}{66}{XVIIa-C052}{The cofibrant-replacement Kan-extension candidate extends to arbitrary small targets under only the finite-colimit assumptions of the finite-source branch.}
+\dgrclaim{open}{67}{XVIIa-C054}{Does this candidate for arbitrary target admit the desired adjunction, given that C(u) may no longer be a poset and the established diagram cofibration structure is unavailable there?}
+\par\endgroup
+
+\section*{XVII-b \textperiodcentered\ Chapter XVII, part 2 of 2, manuscript pages 58--118}
+\pdfbookmark[1]{XVII-b}{dgrclaims.XVII-b}
+\begingroup\raggedright
+\input{parts/DER_XVII-b_defs}
+\dgrclaim{false}{64,69}{XVIIb-A065}{Theorem 3.7, formulated for covariant diagrams on artinian posets, immediately proves the corresponding restriction of the presheaf prederivator on the same artinian posets.}
+\dgrclaim{false}{66}{XVIIb-A017}{For arbitrary target category $I^{\prime}$ and artinian-poset source $I$, the displayed formula $(u_!X)(j)=\operatorname{colim}_{(u\downarrow j)}X$ still constructs a weak-equivalence-preserving functor on cofibrant diagrams without further hypotheses.}
+\dgrclaim{open}{67}{XVIIb-A019}{Without a suitable cofibration structure on diagrams over non-posets, the mapping-cylinder proof of Theorem 3.7 has not yet established the adjunction for arbitrary target shapes.}
+\dgrclaim{false}{68}{XVIIb-A021}{The inference attributed here to Anderson, from ordinary full faithfulness of restriction to full faithfulness of localized restriction without further control of derived unit/counit, is not a valid formal implication.}
+\dgrclaim{open}{70–71}{XVIIb-A026}{Find hypotheses on a strict cofibration category guaranteeing all small left homotopy Kan extensions and their pointwise formula.}
+\dgrclaim{open}{79}{XVIIb-A056}{Under suitable additional assumptions, seek $L(TC)\subset TC^{\prime}\subset\widetilde{L(TC)}$, or the stronger $\widetilde{C^{\prime}}\cap W^{\prime}\subset\widetilde{L(TC)}$.}
+\dgrclaim{open}{81}{XVIIb-B002}{Under what additional assumptions does $F'=(v^*)^{-1}(F)$ hold for the transferred cofibration structure?}
+\dgrclaim{false}{82}{XVIIb-B013}{Footnote 23 proposes the literal equality $v_!(TC(I_0))=TC(I)$ under stronger special-model hypotheses.}
+\dgrclaim{conjectured}{82}{XVIIb-B014}{Footnote 23 proposes $F(I)=(v^*)^{-1}F(I_0)$ under stronger special-model hypotheses.}
+\dgrclaim{conjectured}{97}{XVIIb-B055}{The informal expectation that special Quillen triples probably occur only when W is stable under all small filtered colimits.}
+\dgrclaim{false}{101}{XVIIb-C013}{As printed, $C(I)=C_I$ and $TC(I)=TC_I$ whenever $I$ is artinian, with $\mathcal M(I)=\operatorname{Fun}(I^{op},\mathcal M)$.}
+\dgrclaim{false}{116}{XVIIb-C044}{The proof of6.3 completes the equality assertion of6.1(d).}
+\par\endgroup
+
+\section*{XVIII-a \textperiodcentered\ Chapter XVIII, part 1 of 5, manuscript pages 50--138}
+\pdfbookmark[1]{XVIII-a}{dgrclaims.XVIII-a}
+\begingroup\raggedright
+\input{parts/DER_XVIII-a_defs}
+\dgrclaim{false}{53}{XVIII-A50-014}{The operation subsequently denoted $X\boxtimes Y$ was initially proposed as a bicategorical product of pseudo-topoi.}
+\dgrclaim{false}{60–61}{XVIII-A50-033}{Equation4.2.8 claims restriction $\operatorname{Cont}(S\text{-hat}^{op},N)\to[S^{op},N]$ is an equivalence for arbitrary N.}
+\dgrclaim{false}{61}{XVIII-A50-034}{The unrestricted functor category $[S\text{-hat}^{op},N]$ appearing twice on p61 is identified with the continuous-functor category.}
+\dgrclaim{open}{63}{XVIII-A50-037}{The remaining tensor problem is to construct a left adjoint to its fully faithful restricted-nerve embedding.}
+\dgrclaim{conjectured}{63}{XVIII-A50-038}{Lemma4.2.3: for arbitrary pseudo-topos M,N and s\ensuremath{\in}M,t\ensuremath{\in}N, evaluation F\ensuremath{\mapsto}F(s,t) on M\ensuremath{\boxtimes}N is representable by s\ensuremath{\boxtimes}t.}
+\dgrclaim{false}{64}{XVIII-A50-040}{Elementary tensors should decompose as products of two objects depending separately and cocontinuously on the factors.}
+\dgrclaim{open}{66}{XVIII-A66-003}{Does the tensor of arbitrary pseudo-topoi remain a pseudo-topos?}
+\dgrclaim{false}{66}{XVIII-A66-004}{Lemma 4.3.2: for complete $\mathcal E$, pointwise corepresentability of $\alpha:\mathcal E\to X^\wedge$ is sufficient for a left adjoint.}
+\dgrclaim{false}{66}{XVIII-A66-006}{The displayed evaluation $\xi\mapsto\operatorname{Hom}_{X^\wedge}(x,\alpha\xi)$ has domain $\mathcal E^\circ$.}
+\dgrclaim{false}{67}{XVIII-A67-004}{Lemma 4.3.3(b): the images under the reflector of a small dense family in $\mathcal F$ form a small dense family in $\mathcal F$.}
+\dgrclaim{false}{76}{XVIII-A76-003}{This proposed $I$ is grand devant $\pi$.}
+\dgrclaim{false}{76}{XVIII-A76-006}{“On a donc prouvé PTA\ensuremath{\Rightarrow}c.”}
+\dgrclaim{false}{78}{XVIII-A78-004}{It remains to prove that $\operatorname{Ind}_{\pi}C$ is closed under colimits in ordinary $\operatorname{Ind}C$.}
+\dgrclaim{false}{82}{XVIII-A82-001}{Proposition4.4.4: condition(b) implies condition(c).}
+\dgrclaim{false}{82}{XVIII-A82-008}{Alternative(e\ensuremath{\prime}): finality of one diagonal $J\to J^{A_0}$ with $|A_0|=\pi$ is sufficient without further hypotheses.}
+\dgrclaim{false}{82}{XVIII-A82-009}{The attempted F2 argument using three terminal subcategories proves finality without the added hypothesis.}
+\dgrclaim{false}{82}{XVIII-A82-010}{Corollary4.4.5: $F\in\operatorname{Ind}\prime_\pi C$ if and only if $C/F$ satisfies all four conditions of4.4.4.}
+\dgrclaim{false}{85}{XVIII-A85-002}{The index $I=\operatorname{Fun}(J,C)/\varphi$ is an ordered filtered set.}
+\dgrclaim{false}{88}{XVIII-A88-004}{The preceding lemma is equivalent to closure of the restricted ind-category under all pi\textasciicircum{}+-filtered colimits of its objects.}
+\dgrclaim{conjectured}{94}{XVIII-A91-011}{Question/negative expectation: even if $C$ has colimits of cardinal at most $\pi$, evaluation $C^J/\varphi\to C/\varphi(j)$ need not be final for $\varphi:J\to\operatorname{Ind}(C)$.}
+\dgrclaim{false}{102}{XVIII-A91-029}{Claim as written: unrestricted restriction $\operatorname{Fun}(M,E)\to\operatorname{Fun}(C,E)$ is fully faithful because C strictly generates M.}
+\dgrclaim{false}{106}{XVIII-A91-037}{Claim encoded in the diagram: restriction sends every filtered-colimit-preserving functor Ind(C)\ensuremath{\to}E to a functor Ind\_pi(C)\ensuremath{\to}E preserving all size\ensuremath{\leq}pi colimits.}
+\dgrclaim{false}{107}{XVIII-A91-042}{Proposition4.5.2 as first stated: conditions a,a\ensuremath{\prime},a\ensuremath{\prime}\ensuremath{\prime},b,c,c\ensuremath{\prime} are equivalent for every pi\ensuremath{\geq}pi1.}
+\dgrclaim{false}{108}{XVIII-A91-046}{Claim implicit in(4.5.2.2): presheaves F\ensuremath{\in}M that are pi-accessible in the ambient presheaf category are closed under all ambient colimits of size\ensuremath{\leq}pi.}
+\dgrclaim{false}{109}{XVIII-A91-049}{The proposed proof of c\ensuremath{\Rightarrow}a invokes SGA4 I9.16 after constructing the claimed cardinal filtration.}
+\dgrclaim{false}{109}{XVIII-A91-051}{Corollary4.5.3 as first stated: (Filt\textasciicircum{}pi)\_\{pi\ensuremath{\geq}pi1\} is a cardinal filtration of M.}
+\dgrclaim{false}{110}{XVIII-A91-054}{Corollary4.5.4 as first stated: Filt\textasciicircum{}pi is closed under every colimit in M indexed by a category with at most pi arrows.}
+\dgrclaim{false}{111}{XVIII-A91-057}{The earlier proof of4.3.6(b\ensuremath{\Rightarrow}c) is asserted to have already established this same pointwise filtration with the desired cardinal bounds.}
+\dgrclaim{false}{113}{XVIII-A91-062}{Lemma4.5.5 as first stated: whenever pi>pi0 and J is pi0\textasciicircum{}+-filtered, every set of at most pi arrows of J lies in a pi0\textasciicircum{}+-filtered subcategory with at most pi arrows.}
+\dgrclaim{false}{114}{XVIII-A91-064}{Claim as printed: closing a set \ensuremath{\Phi} of at most pi arrows under identities and finite compositions produces a subcategory with at most pi0 arrows, although pi>pi0.}
+\dgrclaim{false}{114}{XVIII-A91-066}{Claim as written: [S]\textasciicircum{}\{\ensuremath{\leq}pi0\} is the smallest pi0\textasciicircum{}+-directed subposet of P(S) containing all singleton subsets.}
+\dgrclaim{false}{115}{XVIII-A91-069}{The cardinality calculation for [S]\textasciicircum{}\{\ensuremath{\leq}pi0\} is taken to prove that a directed hull in P(S) must have size pi\textasciicircum{}\{pi0\}.}
+\dgrclaim{false}{115}{XVIII-A91-070}{The source concludes that its original equivalences can hold only for cardinals with pi\textasciicircum{}\{pi0\}=pi.}
+\dgrclaim{false}{117–118}{XVIII-A116-009}{The proof claims that a fixed Filt\textasciicircum{}pi is closed under all colimits large relative to pi0.}
+\dgrclaim{false}{120}{XVIII-A116-014}{The right adjoint to evaluation at c on covariant functors C\ensuremath{\to}E is claimed to have value E\textasciicircum{}\{Hom(c,d)\} at d.}
+\dgrclaim{false}{126–129}{XVIII-A116-031}{Proposition4.5.13(1): the six conditions a,a-prime,a-double-prime,b,b-prime,b-double-prime are equivalent.}
+\dgrclaim{false}{126}{XVIII-A116-036}{The definition of Filt-prime\textasciicircum{}pi via the supposed common condition P(pi) in4.5.13 is unambiguous.}
+\dgrclaim{conjectured}{127}{XVIII-A116-047}{Footnote50 suggests that condition C on M is equivalent to the analogous condition on C for filtered diagrams of at most pi arrows.}
+\dgrclaim{conjectured}{127–128}{XVIII-A116-049}{Outside A,B,C, the one-step colimit classes D\_pi may fail to form a cardinal filtration.}
+\dgrclaim{false}{133}{XVIII-A116-042}{The proof infers D\_pi=M\_pi from generation under pi\textasciicircum{}+-filtered colimits, solely by inclusion D\_pi\ensuremath{\subset}M\_pi and Lemma4.5.14.}
+\dgrclaim{false}{134}{XVIII-A116-058}{Lemma4.5.14,b\ensuremath{\Rightarrow}c: pi\textasciicircum{}+-filtered generation by a strictly full M0 implies M\_pi\ensuremath{\subset}M0.}
+\dgrclaim{false}{134}{XVIII-A116-059}{Lemma4.5.14 final assertion: under M0\ensuremath{\subset}M\_pi and strict generation by M\_pi, conditions a,b,b-prime,c are equivalent to M0=M\_pi.}
+\dgrclaim{conjectured}{134}{XVIII-A116-060}{Condition B implies condition C for the paratoposes under discussion.}
+\dgrclaim{conjectured}{134–135}{XVIII-A116-061}{Condition C does not imply condition B.}
+\dgrclaim{false}{135}{XVIII-A116-064}{If G0*G1\ensuremath{\to}G is surjective then (G0\ensuremath{\to}G,G1\ensuremath{\to}G) is a strict epimorphic family in groups and Cat.}
+\dgrclaim{false}{135}{XVIII-A116-065}{Footnote53 retains strict epimorphy for the special axes H\ensuremath{\to}H×H with H nontrivial.}
+\dgrclaim{false}{137}{XVIII-A116-069}{Corollary4.5.16: under C, an object covered by a universally epimorphic family of<=pi objects in D\_pi belongs to D\_pi.}
+\dgrclaim{false}{137}{XVIII-A116-070}{A universally epimorphic outer family composed with universal strict epimorphic inner families is universally strict epimorphic.}
+\dgrclaim{false}{138}{XVIII-A116-074}{The one-step class of arbitrary colimits of<=pi-arrow diagrams in C need not equal M\_pi.}
+\par\endgroup
+
+\section*{XVIII-b \textperiodcentered\ Chapter XVIII, part 2 of 5, manuscript pages 127--228}
+\pdfbookmark[1]{XVIII-b}{dgrclaims.XVIII-b}
+\begingroup\raggedright
+\input{parts/DER_XVIII-b_defs}
+\dgrclaim{conjectured}{127}{XVIIIb-A010}{The pullback-commutation hypothesis on M should be equivalent to its analogue on C for filtered colimits of cardinal at most pi.}
+\dgrclaim{conjectured}{127–128}{XVIIIb-A011}{Outside the three sufficient hypotheses the Filt-prime filtration may fail to be a cardinal filtration.}
+\dgrclaim{false}{133–134}{XVIIIb-A025}{Lemma4.5.14(b-prime) implies M\_pi is contained in M0.}
+\dgrclaim{false}{133–134}{XVIIIb-A026}{If M0 is contained in M\_pi and M\_pi is dense, all four conditions of4.5.14 are equivalent to M0=M\_pi.}
+\dgrclaim{conjectured}{134–135}{XVIIIb-A028}{Universal strict-epimorphism hypotheses B should imply filtered pullback exactness C, whereas C need not imply B.}
+\dgrclaim{false}{135}{XVIIIb-A031}{A surjection G0*G1\ensuremath{\to}G makes the two corresponding group maps a strict epimorphic family in Gr and Cat.}
+\dgrclaim{false}{135}{XVIIIb-A032}{The two coordinate inclusions H\ensuremath{\to}H×H form a strict epimorphic family, as claimed by the special-case exemption in footnote53.}
+\dgrclaim{false}{142}{XVIIIb-A051}{If card-red(C0)<=pi1, then that closure has skeletal morphism cardinal <=pi1\textasciicircum{}(pi0).}
+\dgrclaim{false}{143}{XVIIIb-A053}{That iterated closure has skeletal morphism cardinal <=pi1\textasciicircum{}(pi0).}
+\dgrclaim{false}{145–146}{XVIIIb-A058}{With pi1=card-red(S), one has card-red(M\_pi)<=pi1\textasciicircum{}pi for pi>=pi0.}
+\dgrclaim{false}{145}{XVIIIb-A059}{The equality pi1\textasciicircum{}pi=2\textasciicircum{}pi holds whenever pi>=pi0, as printed in the parenthesis of4.6.2.1.}
+\dgrclaim{false}{147}{XVIIIb-A063}{Full faithfulness of Ind\_pi0(C)\ensuremath{\to}M alone implies that every object of C is pi0-accessible in M.}
+\dgrclaim{open}{149–150}{XVIIIb-A076}{Do e\_pi0, or merely alpha(pi0) and beta(pi0), plus cocompleteness and a small strict generator imply a pi0-paratopos at the same cardinal?}
+\dgrclaim{false}{150}{XVIIIb-A079}{Being a paratopos is equivalent to being Ind-prime\_pi0(S) for some arbitrary small S, as written without a completeness condition.}
+\dgrclaim{conjectured}{154}{XVIIIb-A088}{Conjecture4.6.6(a): condition L plus a small strictly generating subcategory of accessible objects should imply a suitable Ind presentation/cardinal filtration.}
+\dgrclaim{conjectured}{155–156}{XVIIIb-A093}{If these closures form a cardinal filtration, they should equal M\_pi; their existence does not by itself make M\_pi/X filtered.}
+\dgrclaim{open}{159–160}{XVIIIb-A106}{Are there useful examples of(a)–(f) beyond topoi and abelian categories and their elementary combinations?}
+\dgrclaim{open}{160}{XVIIIb-A108}{Internal groups in groups are abelian groups; could analogous constructions M boxtimes M provide further paratopos examples?}
+\dgrclaim{false}{162–164}{XVIIIb-B014}{(a\ensuremath{\prime}\ensuremath{\prime}) implies (c\ensuremath{\prime}), without a size hypothesis on C.}
+\dgrclaim{false}{167}{XVIIIb-B029}{If $\pi=\pi_1=\pi_0$, then $\Filt^\pi=\Filt^{\prime\pi}$ is the subcategory of representables and agrees with $C^{\natural}$ only when C is Karoubian.}
+\dgrclaim{open}{175}{XVIIIb-B048}{Is $\Filt^\pi$ closed under retracts at $\pi^{\pi_0}=\pi$, equivalently can the missing (c)=> (b) be proved?}
+\dgrclaim{false}{177}{XVIIIb-B055}{The initial level need not be retract-closed; specifically $\Filt^{\prime\pi_0}=\Filt^{\pi_0}\simeq e$ for non-Karoubian C because every small highly filtered category is cofinal to e.}
+\dgrclaim{false}{178–179}{XVIIIb-B059}{If every slice $\mathcal F^\pi/F$ is $\pi^+$-filtered, the realization $\Ind_\pi(\mathcal F^\pi)\to\mathcal M$ is an equivalence.}
+\dgrclaim{conjectured}{181–182}{XVIIIb-B070}{Canonical generalized filtrations of Ind categories need not have every larger cardinal useful; some may be superfluous.}
+\dgrclaim{open}{184}{XVIIIb-B079}{Can both exponents $\pi^{\pi_0}$ in Lemma 4.7.19 be replaced by $\pi_0$?}
+\dgrclaim{open}{185}{XVIIIb-B082}{Are the sharper bounds $2^\pi$ and $(\pi')^\pi$ valid for the general intrinsic filtration of Lemma 4.7.19?}
+\dgrclaim{false}{180}{XVIIIb-B098}{The initial level $\mathcal F^{\pi_0}$ of any accessible generalized filtration is a generating subcategory of M.}
+\dgrclaim{open}{189}{XVIIIb-C008}{The condition that some family of arrows from C to every X is strict epimorphic may differ from the all-arrows density criterion.}
+\dgrclaim{false}{190-191}{XVIIIb-C010}{The feared failure of density under passage from C to a containing full subcategory C-prime would invalidate earlier arguments.}
+\dgrclaim{open}{199-200}{XVIIIb-C018}{Essential surjectivity of Ind\_\{pi0\}(S)->M does not follow merely by the asserted construction; saturating S under existing bounded colimits is proposed but not shown sufficient.}
+\dgrclaim{open}{202}{XVIIIb-C024}{4.8.6(1): find a category satisfying4.8.1(a) at pi0 but not the Ind-presentation condition at pi0.}
+\dgrclaim{open}{202}{XVIIIb-C026}{4.8.6(2): find serviceable additional assumptions making the dense-presentable-generator condition imply an Ind-presentation at the same rank.}
+\dgrclaim{open}{203}{XVIIIb-C027}{4.8.6(3): is Filt\textasciicircum{}pi in Ind\_\{pi0\}(C) closed under retracts for pi>pi0, at least when pi\textasciicircum{}pi0=pi?}
+\dgrclaim{open}{205}{XVIIIb-C032}{4.8.6(4): find nonuseful cardinals, preferably arbitrarily large ones, for one accessible category.}
+\dgrclaim{open}{205}{XVIIIb-C033}{4.8.6(4): find useful cardinals that fail quantitative regularity, preferably arbitrarily large ones.}
+\dgrclaim{false}{209}{XVIIIb-C046}{The displayed formula X=colim\_J x\_j=product\_\{Ob J\}x\_j computes the projective limit.}
+\dgrclaim{false}{210-211}{XVIIIb-C049}{4.8.11 first sentence: on an accessible finitely complete M, every accessible finite-limit-preserving functor M->Set is representable.}
+\dgrclaim{conjectured}{213}{XVIIIb-C056}{Footnote91 conjecture: if M and M-op are both accessible, then M is essentially small.}
+\dgrclaim{conjectured}{220}{XVIIIb-C071}{4.9.4(b): without the closure hypotheses the comparison can fail essential surjectivity even for J=B(Z/2).}
+\dgrclaim{false}{224}{XVIIIb-C082}{4.9.6.3(b-prime) as printed: connectedness and equalization of parallel pairs in I-prime alone imply condition(a).}
+\par\endgroup
+
+\section*{XVIII-c \textperiodcentered\ Chapter XVIII, part 3 of 5, manuscript pages 220--328}
+\pdfbookmark[1]{XVIII-c}{dgrclaims.XVIII-c}
+\begingroup\raggedright
+\input{parts/DER_XVIII-c_defs}
+\dgrclaim{conjectured}{220}{XVIIIc-A006}{Without an additional closure hypothesis on C, the comparison Ind\_pi([J,C])->[J,Ind\_pi C] need not be essentially surjective even for J=B(Z/2).}
+\dgrclaim{false}{224}{XVIIIc-A024}{The printed condition b-prime (I-prime connected and satisfying PF2, with no comma condition) is equivalent to a and b.}
+\dgrclaim{false}{244}{XVIIIc-B005}{Every section with values in D\_j is \ensuremath{\kappa}-presentable in \ensuremath{\Gamma}(N/J).}
+\dgrclaim{false}{248}{XVIIIc-B014}{Existence and preservation of colimits large before \ensuremath{\pi}\_0 of size\ensuremath{\leq}\ensuremath{\pi}\_0\ensuremath{'}, with \ensuremath{\pi}\_0\ensuremath{\leq}\ensuremath{\pi}<\ensuremath{\kappa} and \ensuremath{\pi}\_0\ensuremath{'}>\ensuremath{\pi}\_0, imply the stated ordinal hypothesis |\ensuremath{\delta}|\ensuremath{\leq}\ensuremath{\pi}.}
+\dgrclaim{false}{262}{XVIIIc-B030}{The local consecutive-stage condition (ii) implies the t\_\ensuremath{\beta}(a) define a morphism of ind-objects for arbitrary limit \ensuremath{\delta}.}
+\dgrclaim{conjectured}{266-267}{XVIIIc-B041}{Question 4.10.11(a): for a small-base fibration with accessible fibres and accessible inverse images, \ensuremath{\Gamma}(N/J) is accessible.}
+\dgrclaim{conjectured}{267}{XVIIIc-B042}{Question 4.10.11(b): the category of cartesian sections under the same hypotheses is accessible.}
+\dgrclaim{open}{267}{XVIIIc-B043}{Find a common formulation covering fibred and opfibred sections, and possibly more general functors to the base.}
+\dgrclaim{open}{272}{XVIIIc-B060}{Does 4.11.6 remain true without rigidity?}
+\dgrclaim{conjectured}{280}{XVIIIc-C008}{For M=N=Set, accessible functors have no common preservation cardinal.}
+\dgrclaim{false}{285}{XVIIIc-C015}{4.13.2(c): one may take pi0' minimal useful for S and for preservation by its inclusion, and pi1'=max(pi0',card\_red S\_\{pi0'\}), without bounding ambient ranks.}
+\dgrclaim{false}{288}{XVIIIc-C019}{4.13.4: the canonical functor Ind\_pi(A)\ensuremath{\to}M used in the classification is non-fully-faithful.}
+\dgrclaim{false}{291}{XVIIIc-C028}{Footnote123: the fixed-point formulation4.13.8 additionally requires pi to be a non-limit cardinal.}
+\dgrclaim{false}{292}{XVIIIc-C029}{The fixed-point equation pi\textasciicircum{}\{pi0'\}=pi entails pi\ensuremath{\geq}2\textasciicircum{}\{pi0\}>pi0'.}
+\dgrclaim{false}{293}{XVIIIc-C033}{The hypotheses of4.13.9 imply pi\textasciicircum{}\{pi0'\}=pi and hence global usefulness of pi for M.}
+\dgrclaim{false}{298}{XVIIIc-C039}{The initial ordinal of cardinal pi is rho\textasciicircum{}+-filtered for every rho<pi.}
+\dgrclaim{false}{300}{XVIIIc-C043}{The construction may satisfy both i0=i for arbitrary i and i\_alpha\ensuremath{\in}J\_\{phi(alpha)\} for every alpha without adjustment.}
+\dgrclaim{false}{308-309}{XVIIIc-C062}{4.13.15: under pi>pi0'\ensuremath{\geq}pi0 and pi\textasciicircum{}\{pi0\}=pi, conditions a,a',b,c,c' are equivalent.}
+\dgrclaim{false}{308}{XVIIIc-C068}{Footnote135: merely requiring usefulness of pi keeps a,a',b,c equivalent, without necessarily c'.}
+\dgrclaim{false}{314}{XVIIIc-C076}{The initial ordinal pi is sufficiently filtered for taking the final alternating-chain colimits under pi>pi0' alone.}
+\dgrclaim{false}{322-323}{XVIIIc-C079}{After the two successor factorization identities are imposed, naturality of u with the immediately preceding stage may still fail.}
+\par\endgroup
+
+\section*{XVIII-d \textperiodcentered\ Chapter XVIII, part 4 of 5, manuscript pages 316--429}
+\pdfbookmark[1]{XVIII-d}{dgrclaims.XVIII-d}
+\begingroup\raggedright
+\input{parts/DER_XVIII-d_defs}
+\dgrclaim{false}{336}{XVIII-d-A021}{The initial ordinal of cardinality $\pi$ is large before every cardinal $\pi^\prime<\pi$.}
+\dgrclaim{false}{345}{XVIII-d-A041}{In Proposition 4.13.24, the condition that $\Phi$ contain a nonzero limit ordinal can simply be omitted with no replacement.}
+\dgrclaim{false}{347–348}{XVIII-d-B006}{GCH makes $(\pi')^{\pi_0}=\pi'$ automatic for every infinite $\pi'>\pi_0$.}
+\dgrclaim{conjectured}{353–354}{XVIII-d-B020}{Question 4.13.33 conjectures that the replete full essential image of every accessible functor between accessible categories is accessible and accessibly embedded; equivalently the functor factors through such a full image.}
+\dgrclaim{conjectured}{354}{XVIII-d-B022}{If $\mathcal M$ is accessible with $\pi_0^+$-filtered colimits and $A$ is a small full subcategory, the smallest replete full subcategory containing $A$ and closed under those colimits is conjectured accessible and accessibly embedded.}
+\dgrclaim{conjectured}{355}{XVIII-d-B023}{The same small-envelope conjecture is made after additionally closing under a small family $\Phi$ of small colimit shapes which exist in $\mathcal M$.}
+\dgrclaim{conjectured}{370}{XVIII-d-B052}{Footnote 163 conjectures that the target completeness assumptions in Theorem 4.14.1 can be dropped; it points forward to 4.14.16 for removal of the limit-shape assumption.}
+\dgrclaim{false}{373}{XVIII-d-B057}{The ordinal of cardinal pi is pi0-plus-filtered merely because pi>pi0.}
+\dgrclaim{false}{379}{XVIII-d-C009}{Corollary 4.14.9 as printed: every small-limit-preserving functor between locally presentable categories has a left adjoint, and taking left adjoints gives an equivalence to the opposite category of cocontinuous functors.}
+\dgrclaim{false}{379}{XVIII-d-C011}{Lemma 4.14.10, left-adjoint half: a functor from a pseudo-topos (a cocomplete locally small category with a small family generating by strict epimorphisms) to a locally small category has a left adjoint if and only if it preserves all small limits.}
+\dgrclaim{false}{380}{XVIII-d-C013}{Corollary 4.14.11, covariant half: every small-limit-preserving $F:\mathcal M\to\mathbf{Set}$ on a locally presentable category is representable.}
+\dgrclaim{open}{387}{XVIII-d-C031}{Question 4.14.15: for every accessible $\mathcal N$, is the full category of epimorphisms accessible in $\mathcal N^{[1]}$?}
+\dgrclaim{conjectured}{388–390}{XVIII-d-C037}{Conjecture 4.14.16: one may remove the target existence assumptions in 4.14.1 and still obtain accessibility of the subcategory of diagrams that satisfy the prescribed universal cone conditions.}
+\dgrclaim{false}{391}{XVIII-d-C044}{Corollary 4.14.18(b), opfibration case: if pi\ensuremath{\geq}max(pi\_0,cardred C), a section whose values are pi\textasciicircum{}+-presentable is itself pi\textasciicircum{}+-presentable.}
+\dgrclaim{false}{392}{XVIII-d-C046}{Corollary 4.14.18(c): after choosing pi\_0 useful for the fibres and the section category, pi\_1=max(pi\_0,cardred C,cardred M\_pi\_0), and pi\ensuremath{\geq}pi\_1 with pi\textasciicircum{}\{pi\_0\}=pi, the pi-presentable sections are exactly the pointwise pi-presentable sections.}
+\dgrclaim{false}{395–396}{XVIII-d-C057}{Corollary 4.14.20(c): under the printed threshold and pi\textasciicircum{}\{pi\_0\}=pi, intrinsic presentables of the cartesian/cocartesian section category are exactly the ambient presentables in it, and exactly its pointwise presentable sections.}
+\dgrclaim{false}{411}{XVIII-d-D017}{As printed, the inclusion E\_1\ensuremath{\to}E in the opfibration has a right adjoint, and the inclusion E\_0\ensuremath{\to}E in the fibration has a left adjoint.}
+\dgrclaim{false}{420}{XVIII-d-D031}{Corollary 4.14.25(1), literally: E and E\_0 have \ensuremath{\pi}-large filtered colimits and E\_0\ensuremath{\to}E preserves them iff E\_0 has them and all H(\ensuremath{-},x\_1) preserve them contravariantly; it then asserts existence of the same colimits in E\_1.}
+\dgrclaim{false}{426–429}{XVIII-d-D049}{Under these bounds, if \ensuremath{\pi}\textasciicircum{}\{\ensuremath{\pi}\_0\}=\ensuremath{\pi}\ensuremath{\geq}\ensuremath{\pi}\_1, each \ensuremath{\pi}-presentable object of a fibre is \ensuremath{\pi}-presentable in E.}
+\dgrclaim{false}{426}{XVIII-d-D050}{As printed in 4.15.2(c), the subcategory E\_\ensuremath{\pi} itself satisfies L\_\{\ensuremath{\pi}\_1\}, hence L\_\ensuremath{\pi}.}
+\dgrclaim{false}{426}{XVIII-d-D051}{As printed in 4.15.2(c), Ind\_\ensuremath{\pi}(E\_\{s,\ensuremath{\pi}\})\ensuremath{\to}E is an equivalence for a single fixed fibre s.}
+\dgrclaim{false}{426}{XVIII-d-D052}{Corollary 4.15.2(d): under the same hypotheses E(\ensuremath{\pi})=E\_\ensuremath{\pi}, not just E(\ensuremath{\pi})\ensuremath{\subset}E\_\ensuremath{\pi}.}
+\par\endgroup
+
+\section*{XVIII-e \textperiodcentered\ Chapter XVIII, part 5 of 5, manuscript pages 419--19}
+\pdfbookmark[1]{XVIII-e}{dgrclaims.XVIII-e}
+\begingroup\raggedright
+\input{parts/DER_XVIII-e_defs}
+\dgrclaim{false}{420–421}{XVIIIe-A005}{4.14.25(1), literally: $\mathcal E$ and $\mathcal E_0$ admit $L_\pi$-colimits and $\mathcal E_0\to\mathcal E$ preserves them iff $\mathcal E_0$ admits them and each $H(-,x_1)$ takes them to limits.}
+\dgrclaim{false}{426,429–431}{XVIIIe-A023}{4.15.2(c), rank conclusion: under its printed hypotheses every fibrewise pi-presentable object is pi-presentable in the total category.}
+\dgrclaim{false}{426}{XVIIIe-A024}{The displayed functor Ind\_pi(E\_\{s,pi\})->E is an equivalence.}
+\dgrclaim{false}{426,431–432}{XVIIIe-A025}{4.15.2(d): E(pi)=E\_pi at the stated numerical rank.}
+\dgrclaim{false}{430}{XVIIIe-A032}{The inequalities pi>=pi1>=pi\_lambda imply that H\_lambda(-,y) is pi0-accessible.}
+\dgrclaim{open}{434}{XVIIIe-A042}{Find usable necessary and sufficient local conditions on f ensuring accessibility of every pullback over a small Karoubian category.}
+\dgrclaim{open}{434}{XVIIIe-A043}{It might suffice to test only Delta1 and the walking retract P; the author expresses doubt.}
+\dgrclaim{conjectured}{434}{XVIIIe-A044}{Testing Delta1 and the two three-object categories Q=(2->1->0 with the retract0<->1) and Q-prime=(2<-1<->0) should suffice.}
+\dgrclaim{open}{438}{XVIIIe-A054}{The analogous construction for a fibration is not supplied; the author suggests testing the walking retract P.}
+\dgrclaim{conjectured}{456–457}{XVIIIe-B029}{Key lemma4.15.8.1: for a left-cancellative monoid M with |M|\ensuremath{\leq}\ensuremath{\pi}\ensuremath{_0}, every \ensuremath{\pi}\ensuremath{_0}\ensuremath{^+}-directed diagram in BM has a tail whose transition elements are units.}
+\dgrclaim{false}{461–462}{XVIIIe-B040}{Condition(b) asserts literal identity of every sufficiently late transition in every diagram valued in a left-cancellative quotient of End\_C(x).}
+\dgrclaim{conjectured}{462}{XVIIIe-B042}{Condition(b\ensuremath{'}) excludes \ensuremath{\pi}\ensuremath{^+}-long diagrams in the relevant left-cancellative monoids with all strict transitions noninvertible.}
+\dgrclaim{false}{461–462}{XVIIIe-B043}{Theorem4.15.9 declares all of(a),(a\ensuremath{'}),(a\ensuremath{''}),(b),(b\ensuremath{'}) equivalent as printed.}
+\dgrclaim{conjectured}{461}{XVIIIe-B044}{Grothendieck conjectures that Ind\_\ensuremath{\pi} C is the idempotent completion whenever |C|\ensuremath{\leq}\ensuremath{\pi}.}
+\dgrclaim{false}{462–463}{XVIIIe-B045}{Corollary4.15.10 says all printed equivalent conditions hold when \ensuremath{\pi}>|C|.}
+\dgrclaim{open}{465-466}{XVIIIe-R005}{For every universe U there might be an infinite cardinal pi in U such that every ultrafilter on a U-small set selecting a cell of every partition into at most pi pieces is principal.}
+\dgrclaim{false}{466}{XVIIIe-R006}{Every suitably definable replete full subcategory of an accessible category closed under sufficiently filtered colimits is accessible and accessibly embedded.}
+\dgrclaim{false}{467-468}{XVIIIe-R008}{For fixed z, failure of Hom(x,z) to be nonempty should be witnessed by a uniformly bounded member of a suitable presentable-object presentation of x.}
+\dgrclaim{open}{467-468}{XVIIIe-R009}{For every infinite field k, one may take pi=|k| in the small-subalgebra obstruction criterion for absence of k-points.}
+\dgrclaim{open}{468-469}{XVIIIe-R010}{If f:M->N\textasciicircum{}op preserves sufficiently filtered colimits and T is accessible in N and stable under the corresponding cofiltered limits in N, is f\textasciicircum{}\{-1\}(T) accessible in M?}
+\dgrclaim{conjectured}{470}{XVIIIe-R014}{The full L\_pi-colimit closure S(pi) of the image of an accessible functor is accessible in M.}
+\dgrclaim{false}{470}{XVIIIe-R015}{The decreasing family S(pi) stabilizes for all sufficiently large pi.}
+\dgrclaim{false}{470}{XVIIIe-R017}{The same accessibility and eventual-stationarity claims should hold for the image of g\textasciicircum{}op:N\textasciicircum{}op->M when g:N->M\textasciicircum{}op preserves sufficiently filtered colimits.}
+\dgrclaim{false}{471}{XVIIIe-R019}{A full subcategory of a presheaf category closed under sufficiently filtered colimits automatically inherits a small dense subcategory of accessible objects.}
+\dgrclaim{open}{471}{XVIIIe-R020}{A category with a small dense family of presentable objects and sufficiently filtered colimits is accessible.}
+\dgrclaim{false}{472}{XVIIIe-R021}{If M and M\textasciicircum{}op are accessible, then M is essentially small.}
+\dgrclaim{open}{472}{XVIIIe-R022}{An accessible category with a small codense subcategory is essentially small.}
+\dgrclaim{open}{472}{XVIIIe-R023}{A locally small category with small dense and codense subcategories is essentially small.}
+\dgrclaim{false}{473}{XVIIIe-R025}{The subcategory of existing I-colimit cocones in an accessible M is accessible and accessibly embedded even if some I-diagrams have no colimit.}
+\dgrclaim{false}{475}{XVIIIe-R032}{Corollary4.16.6.2(b'): if C has no nonidentity idempotents, the Delta1-tests alone imply (a).}
+\dgrclaim{open}{476}{XVIIIe-R035}{Question4.16.6.4: do accessible fibres and transition functors of a fibration or opfibration imply accessibility after Q and Q' base change?}
+\dgrclaim{open}{476-476bis}{XVIIIe-R037}{If E is accessible over small Karoubian C, then for every accessible M and accessible M->C, the strict pullback E x\_C M and both projections are accessible.}
+\dgrclaim{open}{484-485}{XVIIIe-R047}{It is asked whether there is a U-ordinal-length family of fields with no morphisms from an earlier field to a later one.}
+\dgrclaim{false}{4}{XVIIIe-C011}{The printed identity in the inverse proof is ff\ensuremath{\prime}=f\ensuremath{\prime}=f=1.}
+\dgrclaim{false}{4}{XVIIIe-C013}{The last sentence asserts that k\_\ensuremath{\Phi} is a field quotient for every \ensuremath{\Phi}\ensuremath{\in}\ensuremath{\mathcal F}.}
+\dgrclaim{conjectured}{11}{XVIIIe-C030}{If \ensuremath{\pi} is the least cardinal in U belonging to no strictly smaller infinite universe, every \ensuremath{\pi}-ultrafilter on a U-small set is principal.}
+\dgrclaim{false}{14}{XVIIIe-C038}{The source defines both complementary classes S and S\ensuremath{\prime} by Hom(A,k)=\ensuremath{\varnothing}.}
+\dgrclaim{false}{15}{XVIIIe-C044}{Under the principal-ultrafilter hypothesis the source identifies k-points with coordinates satisfying \{xi\}=intersection(\ensuremath{\Phi}).}
+\dgrclaim{open}{19}{XVIIIe-C053}{Does the preceding small-subalgebra witness property hold simply at \ensuremath{\pi}\ensuremath{\ge}|k|? Does any such U-small bound exist?}
+\par\endgroup
+
 \section*{XIX \textperiodcentered\ Chapter XIX, manuscript pages 1--50}
 \pdfbookmark[1]{XIX}{dgrclaims.XIX}
 \begingroup\raggedright
@@ -1026,6 +1422,7 @@ Part & transcription & edition slip kept & doubt resolved & total \\
 I-a & 8 & 29 & 5 & 42 \\
 I-b & 3 & 69 & 3 & 75 \\
 II-a & 11 & 65 & 1 & 77 \\
+II-b & 3 & 73 & 4 & 80 \\
 III-V & 14 & 114 & 6 & 134 \\
 VI-a & 11 & 43 & 5 & 59 \\
 VI-b & 2 & 67 & 3 & 72 \\
@@ -1044,9 +1441,18 @@ XIII-a & 0 & 33 & 2 & 35 \\
 XIII-b & 5 & 28 & 1 & 34 \\
 XIV & 0 & 2 & 1 & 3 \\
 XV-a & 2 & 37 & 5 & 44 \\
+XV-b & 4 & 42 & 2 & 48 \\
+XVI & 10 & 80 & 6 & 96 \\
+XVII-a & 1 & 71 & 4 & 76 \\
+XVII-b & 5 & 52 & 2 & 59 \\
+XVIII-a & 0 & 65 & 8 & 73 \\
+XVIII-b & 3 & 104 & 8 & 115 \\
+XVIII-c & 7 & 121 & 7 & 135 \\
+XVIII-d & 0 & 121 & 2 & 123 \\
+XVIII-e & 1 & 129 & 5 & 135 \\
 XIX & 6 & 36 & 10 & 52 \\
 \midrule
-total & 100 & 1021 & 74 & 1195 \\
+total & 134 & 1879 & 122 & 2135 \\
 \bottomrule
 \end{tabular}
 \end{center}

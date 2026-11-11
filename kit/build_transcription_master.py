@@ -63,6 +63,10 @@ PREAMBLE = r"""\documentclass[11pt,oneside]{article}
 \usepackage{mathrsfs}
 \usepackage{tikz-cd}
 \usepackage{enumitem}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{marginnote}
+\usepackage{lmodern}
 \usetikzlibrary{babel,arrows.meta,decorations.markings,decorations.pathreplacing}
 \usepackage[a4paper,left=25mm,right=32mm,top=25mm,bottom=25mm,marginparwidth=24mm,marginparsep=4mm]{geometry}
 \usepackage{luacode}
@@ -107,8 +111,13 @@ the manuscript's page numbers and the editors' notes in typewriter type between 
 source has one file for every five pages (\texttt{transcription/<edition file>/}). The edition's printed pages are
 marked in the margin (p.~$n$), the manuscript's pages in brackets. Running heads and footers are kept as \TeX{}
 comments in the source files; slips of the edition are kept as printed, flagged \texttt{\%~[sic]} in the source, and
-doubtful readings are flagged \texttt{\%~??}. The corrections to this transcription found by the commentary are
-listed, and applied to the text it covers, in the companion volume.
+doubtful readings are flagged \texttt{\%~??}; where the check of the companion resolved a doubt, the comment gives the
+resolution. The text carries the corrections made in that check, for every part of the companion: the
+transcription errors and resolved doubts listed in each part's table of corrections (five that the check against
+the edition's pages overruled are not applied), and those other changes of the checked text that agree with the
+edition's pages (the decisions are in \texttt{transcription/DECISIONS.md}).
+These corrections are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); the corrections of macro definitions
+and the changes the tables do not list were compared with the edition's pages by Claude Opus~5.5 (Anthropic).
 
 \bigskip
 \noindent\textbf{Rights}

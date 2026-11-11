@@ -1,0 +1,781 @@
+% GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p128}{The intrinsic size of an object}
+Grothendieck is trying to replace a convenient measure of the size of a presentation by a measure belonging to the object itself. This is the reason for the repeated comparison of $\Filt^{\pi}$, $\Filt'^{\pi}$ and $\mathcal M_\pi$. The first two remember how an object has been assembled from a chosen small category $C$; the third asks which diagrams a represented functor can see. A change of presentation should not alter the last answer.
+
+There is a shift of convention to make before using modern references. In these pages ``grand devant $\pi$'' means that every diagram having at most $\pi$ arrows admits a cocone. Thus, with $\lambda=\pi^+$, this is $\lambda$-filteredness, and an object called $\pi$-accessible here is $\lambda$-presentable in the usual terminology. No regularity of $\pi$ is being assumed. The successor $\pi^+$ is regular, and it is this regular cardinal which enters the standard interchange theorem for sets. We shall retain the manuscript's indices while making this translation whenever a modern formulation is needed.
+
+The essential calculation is
+\[
+ \Hom\left(\varinjlim_{j\in J}X_j,\varinjlim_{i\in I}Y_i\right)
+ =\varprojlim_{j\in J}\Hom\left(X_j,\varinjlim_{i\in I}Y_i\right).
+\]
+If $|\Fl J|\leq\pi$, $I$ is $\pi^+$-filtered and every $X_j$ is $\pi$-accessible, the right side becomes
+$\varprojlim_j\varinjlim_i\Hom(X_j,Y_i)$ and then
+$\varinjlim_i\varprojlim_j\Hom(X_j,Y_i)$. The last interchange holds in sets: at most $\pi$ representatives can be put at one stage, and at most $\pi$ required equalities can be made true at a later stage. This proves closure of $\mathcal M_\pi$ under the indicated colimits. It also explains why relations, and not merely generators, enter a size bound.
+
+The historical comparison with \citet[Expos\'e~I, \S9]{SGA4I1972} concerns this same passage from bounded presentations to bounded represented functors. The manuscript's provisional claim that one of the presentation filtrations is automatically the intrinsic filtration must therefore be read with its hypotheses. The following pages repeatedly repair precisely that identification. The relevant modern recognition theorem is the characterization by a small strong generator of presentable objects, recorded as Theorem~1.20 in \citet{AdamekRosicky1994}; the word ``strong'' carries mathematical content.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p129}{Finite pieces of a diagram}
+Grothendieck wants to make an arbitrary bounded colimit into an ordinary filtered colimit without enlarging its cardinal. His argument works if a finite subdiagram is a finite set of constraints. It would not work if it meant a finite subcategory closed under composition: one endomorphism can generate infinitely many arrows.
+
+Here is a precise construction which also makes the counting transparent. For a finite set $V$ of objects of $I$ and a finite set $E$ of arrows whose endpoints lie in $V$, put
+\[
+ X_{V,E}=\operatorname{coeq}\left(
+ \coprod_{f\in E}X_{s(f)}\rightrightarrows
+ \coprod_{v\in V}X_v\right).
+\]
+The two maps use respectively the inclusion of the source summand and the given arrow followed by the inclusion of its target. These are finite colimits and therefore belong to $C$. Enlarging $(V,E)$ induces a canonical map of coequalizers. The ordered set of these pairs is filtered, has cardinal at most $\pi$ when $|\Fl I|\leq\pi$, and its colimit is $\varinjlim_I X_i$. Indeed, a compatible family of maps from all $X_{V,E}$ to an object $Y$ is exactly a family of maps $X_i\to Y$ satisfying every arrow relation of $I$. This proves the asserted universal property, including diagrams with loops.
+
+The calculation illustrates an advantage of the primed filtration. It allows arbitrary bounded presentations to be flattened into a single bounded filtered presentation when finite colimits in $C$ are available. It does not replace ordinary filteredness by $\pi_0^+$-filteredness. The latter requires simultaneous solutions of much larger families of constraints and is the source of the cardinal exponent appearing later.
+\end{dcomment}
+
+\begin{dcomment}{development}{p133}{The retract which a filtered presentation supplies}
+Grothendieck is isolating the argument which should identify the small stages with the intrinsically accessible objects. The argument does identify them when the stages are closed under the stated colimits. The standalone lemma goes further than its proof permits: presentability gives a retract, and strict fullness does not put that retract back into the subcategory.
+
+\textbf{Corrected implication.}\quad Suppose every object of $\mathcal M$ is a $\pi^+$-filtered colimit of objects of $\mathcal M_0$. Then every object of $\mathcal M_\pi$ is a retract of an object of $\mathcal M_0$. Consequently the printed implication $b\Rightarrow c$ holds if $\mathcal M_0$ is closed under retracts.
+
+To prove this, write $X=\varinjlim_i X_i$ with $X_i\in\mathcal M_0$. If $X$ is $\pi$-accessible, its identity is represented by some $s:X\to X_i$. Writing $r:X_i\to X$ for the colimit map gives $rs=1_X$. Nothing in this argument says that $X$ itself belongs to an arbitrary strictly full subcategory. If $\mathcal M_0$ is closed under the colimits in condition~$a$, the missing conclusion does follow: $r$ is a coequalizer of $sr$ and $1_{X_i}$, so $X\in\mathcal M_0$. This is why the later use of $a\Rightarrow c$ in Proposition~4.5.17 remains sound.
+
+\textbf{Counterexample to the unrestricted lemma.}\ours\quad In $\Ens$, let $\mathcal M_0$ contain exactly the sets of cardinal at most $\pi$ other than singletons. This is a strictly full subcategory of $\mathcal M_\pi$. Every set with at least two elements is the $\pi^+$-filtered union of its subsets of cardinal at most $\pi$ whose cardinal is not one: the union of at most $\pi$ such subsets is another such subset, and each element belongs to a two-element subset. The empty set has its constant presentation.
+
+For the singleton, index by the ordinal $\lambda=\pi^+$, put $X_\alpha=\{0,1\}$, and give every strictly increasing transition the idempotent map $e$ with $e(0)=e(1)=0$. The identity transitions are identities, and $e^2=e$ makes this a functor. Its colimit is a singleton, since every element becomes $0$ at a later stage. The ordinal is $\pi^+$-filtered, but the singleton is absent from $\mathcal M_0$. Thus even the additional assumptions $\mathcal M_0\subset\mathcal M_\pi$ and density of $\mathcal M_\pi$ do not repair the printed equivalence.
+
+The retract principle is standard in the theory of presentable objects; the same argument appears in the higher categorical formulation of \citet[Lemma~5.4.2.4]{Lurie2009HTT}. We include the explicit counterexample to audit this particular formulation; it is not a claim of priority. Our literature comparison concerns the valid retract statement, not an alleged later proof of the erroneous implication.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p135}{A strict covering family which loses strictness under pullback}
+Grothendieck wants an elementary reason that exactness of filtered colimits is weaker than universality of every strict epimorphic family. Groups do provide that reason, but the direct-product example printed here does not: its initial family is already non-strict. The corrective footnote withdraws the general assertion and mistakenly exempts this special case.
+
+Take $H=C_2$, and regard its two copies as the coordinate subgroups of $C_2\times C_2$. Their intersection is trivial. Map the first generator to $(12)\in S_3$ and the second to $(23)\in S_3$. These homomorphisms are compatible on every overlap test: if two maps into the two coordinate subgroups have the same composite into the direct product, both composites are trivial. A common extension would send the two commuting coordinate generators to two noncommuting transpositions. Hence no extension exists. The family is not strictly epimorphic in groups. The same argument applies to one-object group categories, so it is not strictly epimorphic in $\mathrm{Cat}$ either.
+
+Replace the direct product by
+\[
+ G=C_2*C_2=\langle a,b\mid a^2=b^2=1\rangle.
+\]
+The two free-factor inclusions are strictly epimorphic in groups. Compatibility on the intersection imposes no relation, and the universal property of the free product gives the unique extension. They are strictly epimorphic as functors of one-object categories as well. Compatibility forces the chosen target objects to coincide; the two homomorphisms into the automorphism group of that object then extend uniquely to $G$.
+
+Now let $K=\langle ab\rangle$. The reduced-word description shows that $ab$ has infinite order, so $K\simeq\mathbb Z$, and that $K$ meets either free factor trivially. Pullback along $K\hookrightarrow G$ gives the family consisting of two copies of $1\to\mathbb Z$. This family is not even epimorphic: the zero endomorphism and the identity of $\mathbb Z$ agree after both maps. Thus strict epimorphic families in groups, and in categories, need not be universal. Filtered colimits in both examples are nevertheless left exact; their objects, arrows or algebraic operations are governed by finite equations in sets.
+
+The repair preserves the intended distinction while changing the ambient group. It also warns against replacing a strict epimorphic family by the assertion that its images generate a target. Generation detects uniqueness of an extension; strictness requires existence for every compatible family.
+\end{dcomment}
+
+\begin{dcomment}{status}{p137}{What the covering argument actually proves}
+Grothendieck is using descent along a bounded covering family to keep a presentation bounded. Corollary~4.5.15 makes the necessary descent condition explicit: the families are universally \emph{strictly} epimorphic. In Corollary~4.5.16 the word ``strictement'' disappears from the hypothesis, although the proof still invokes transitivity of precisely that stronger notion.
+
+With the stronger hypothesis restored, the proof is complete. Replace each $X_\alpha$ by a universal strict cover with at most $\pi$ sources in $C$. The composite is again a universal strict cover, and its index set has cardinal at most $\pi\cdot\pi=\pi$. Corollary~4.5.15 applies. The weaker printed hypothesis does not justify that invocation of transitivity. We have not established a counterexample satisfying all the standing hypotheses, in particular $\pi\geq\pi_1$, and therefore record a gap in this proof rather than declaring its conclusion false.
+
+There is a second point in the preceding ``cela r\'esulte aussit\^ot''. Stability under universal strict covers is not, by itself, stability under arbitrary colimits. An arbitrary colimit cocone is strictly epimorphic but need not remain epimorphic after pullback, as the free-product example shows even when filtered colimits are exact. Thus the proposed deduction of the full case~C of Proposition~4.5.13 requires an additional argument. The audit keeps that issue separate from the valid universal-cover calculation and from the general intrinsic closure statement which follows.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p138}{Why closing under relations gives the right category}
+Grothendieck now replaces a single bounded presentation by a closure operation. This is a less explicit description, but it has the advantage of being intrinsic once the initial generating category has been fixed. The distinction is between allowing one layer of relations and allowing every further relation needed by the construction.
+
+Let $D$ be the smallest strictly full subcategory containing $C$ and closed under colimits indexed by categories of cardinal at most $\pi$. The represented-functor calculation already gives $D\subset\mathcal M_\pi$. To obtain the reverse inclusion, use the canonical presentation of an object $X$ by $D/X$. Density supplies its colimit, and bounded-colimit closure makes the indexing category $\pi^+$-filtered. If $X$ is $\pi$-accessible, its identity factors through one stage. The resulting retract is a coequalizer of an idempotent and an identity, and therefore still lies in $D$. This is the complete version of the short appeal to Lemma~4.5.14.
+
+For sets, the construction is particularly concrete. Starting with a singleton and closing under at most $\pi$-sized coproducts and coequalizers gives every set of cardinal at most $\pi$, and these are exactly the $\pi^+$-presentable sets. A map from such a set into a $\pi^+$-filtered union is represented at one stage because its at most $\pi$ elements can be treated simultaneously; equality of two maps is treated in the same way. Conversely, a larger set is the $\pi^+$-filtered union of its subsets of cardinal at most $\pi$, and its identity cannot factor through a proper subset. This simple model explains the intended statement without identifying an arbitrary one-step presentation with the completed closure.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p140}{The small category behind a cocomplete category}
+Grothendieck's purpose is to recover a small category which contains all the operations needed to reconstruct $\mathcal M$. The transfinite argument does not require a precise estimate for every Hom set. It requires only that each stage have a set of isomorphism classes, that its Hom sets be small, and that the closure operation stabilize at a specified regular ordinal.
+
+Put $\lambda=\pi_0^+$. Choose a small skeleton at each stage. There is a set of categories with at most $\pi_0$ arrows, a set of functors from each of them to that skeleton, and hence a set of chosen colimits. Local smallness then makes the full category on those chosen objects small. At limit stages take the union of the chosen sets of objects and then the full category they span. All these operations remain in the fixed universe.
+
+If a diagram with at most $\pi_0$ arrows takes values in $C_\lambda$, its objects occur at at most $\pi_0$ earlier stages. Regularity of $\lambda$ bounds those stages by a single $\alpha<\lambda$. Its colimit therefore occurs in $C_{\alpha+1}$. This proves $C_\lambda$ is closed under the required colimits, and proves stabilization. The source's references to ``cardinaux'' in the indexing sequence must here mean ordinals; it is their cofinality which the proof uses.
+
+The remaining reconstruction has a different, categorical, content. For $X_i,Y_j\in C$ and the relevant filtered indices,
+\[
+ \Hom_{\mathcal M}(\varinjlim_iX_i,\varinjlim_jY_j)
+ \simeq\varprojlim_i\varinjlim_j\Hom_C(X_i,Y_j).
+\]
+This is the Hom formula for the filtered completion. It proves full faithfulness. The category $C/X$ has the bounded colimits inherited from $C$ and is therefore $\lambda$-filtered; density makes its colimit $X$. This proves essential surjectivity. These two arguments establish Proposition~4.6.1 independently of the sharper numerical estimate criticized in the next block.
+\end{dcomment}
+
+\begin{dcomment}{development}{p143}{Counting presentations does not count all new arrows}
+Grothendieck has correctly counted the possible small diagrams, but then uses that count as a bound on the morphisms between their colimits. The warning in footnotes~56 and~57 identifies the problem accurately. A colimit can acquire many maps \emph{from} an old object, and its universal property controls maps out of the colimit, not these maps into it.
+
+\textbf{Counterexample to the stated cardinal estimate.}\ours\quad Let $\kappa>2^{\aleph_0}$, and consider algebras with a binary operation $m_\xi$ for every $\xi<\kappa$, subject only to the equations
+\[
+ m_\xi(x,x)=x \qquad(\xi<\kappa).
+\]
+This is a finitary equational category. Its free algebra $F(1)$ on one generator has one element: induction on terms reduces every term in that generator to the generator itself. Thus the full subcategory $C_0$ with sole object $F(1)$ has one arrow.
+
+The binary coproduct $F(1)\amalg F(1)$ is $F(2)$. Its elements include the terms $m_\xi(x,y)$, and these are pairwise distinct. To verify the last assertion without assuming a normal-form theorem, fix $\xi\neq\eta$ and interpret the operations on $\{0,1\}$, taking $m_\xi$ to be the first projection and $m_\eta$ the second projection. Assign either projection to every remaining operation. All the idempotence equations hold, but the two specified terms have different values at $(0,1)$. They cannot therefore be equal in the free algebra. It follows that
+\[
+ |\Hom(F(1),F(2))|=|F(2)|\geq\kappa>2^{\aleph_0}.
+\]
+Take $\pi_0=\pi_1=\aleph_0$. The hypothesis
+$\cardred C_0\leq\pi_1$ holds, but the full closure under even one binary coproduct has more than $\pi_1^{\pi_0}$ arrows in a skeleton. This disproves the quantitative assertions of Lemma~4.6.1.1(2) and Corollary~4.6.1.2 as stated. Their qualitative essential-smallness assertions remain true by the preceding argument.
+
+The construction is an application of the standard free-algebra method, used here to test this particular estimate. We checked the primary representation discussions in \citet{AdamekRosicky1994} and the manuscript's two warnings; we did not locate this exact counterexample there. The marking records our supplied argument, without a priority claim.
+
+A separate edge case affects Corollary~4.6.2(1). In $\Ens$ the one-object full subcategory $S=\{1\}$ is dense, so the printed definition gives $\pi_1=\cardred S=1$. The proposed upper bound is then $1^\pi=1$, although $\mathcal M_\pi$ contains many nonisomorphic objects. One must first replace $\pi_1$ by an infinite bound, such as $\max(\aleph_0,\cardred S)$. Moreover the equality $\pi_1^\pi=2^\pi$ used there requires $2\leq\pi_1\leq\pi$, exactly as the following proof shows. These corrections remove the immediate numerical contradictions; they do not retroactively validate an estimate obtained from the false unrestricted lemma. We retain the small-category reconstruction and distinguish it from the unproved quantitative refinement.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p147}{A rigid object need not be small}
+Grothendieck's objection to the converse in SGA~4 is decisive. Full faithfulness of a completion functor can be vacuous when the chosen subcategory generates very little of the ambient category. A rigid object makes the point in the smallest possible example.
+
+In the category of unital rings, every endomorphism $f:\mathbb R\to\mathbb R$ is the identity. It is injective because its kernel is an ideal in a field and $f(1)=1$. A positive real number is the square of a nonzero real number, so its image is positive. Thus $f$ preserves the order, and it fixes $\mathbb Q$. If $f(x)\neq x$, a rational number strictly between them contradicts order preservation. Hence $\End(\mathbb R)=\{1\}$.
+
+Nevertheless $\mathbb R$ is not $\aleph_0$-accessible in the manuscript's convention. Let $I$ be the ordered set of its countable unital subrings. The subring generated by a countable union of countable subrings is countable, so $I$ is $\aleph_1$-filtered. Its union is $\mathbb R$, since every individual real belongs to a countable subring. If $\Hom(\mathbb R,-)$ preserved this colimit, the identity would factor through one countable subring $A\subset\mathbb R$. The composite of that factorization with the inclusion would be the identity, forcing $A=\mathbb R$, a contradiction.
+
+The full subcategory on $\mathbb R$ is nevertheless equivalent to the terminal category, and its filtered completion is again terminal. Its inclusion into rings is fully faithful. This proves that the necessity assertion of \citet[Expos\'e~I, Corollary~9.18(a)]{SGA4I1972}, taken at the stated generality, is false. For the intended application $\mathcal M=\Ind_{\pi_0}(C)$ there is no difficulty: evaluation at $c\in C$ computes $\Hom(c,-)$, and the relevant filtered colimits of presheaves are pointwise. It is this calculation, rather than full faithfulness alone, which gives presentability.
+\end{dcomment}
+
+\begin{dcomment}{later}{p149}{Paratopoi and locally presentable categories}
+Grothendieck is now giving two descriptions of the same cocomplete category: a presentation by small objects and a reflection from a presheaf category. In modern language his $\pi_0$-paratopos is a locally $\pi_0^+$-presentable category. The connection with the work of \citet{GabrielUlmer1971} is structural; the publisher's contents place presentable objects, generators, and locally presentable categories together in the central part of that monograph. The equivalences used here are recorded more explicitly as Theorems~1.20 and~1.46 in the publisher's chapter introduction to \citet{AdamekRosicky1994}.
+
+The adjunction explains the equivalence with the presheaf formulation. If
+$L:\widehat S\rightleftarrows\mathcal M:N$ is a reflection and $N$ preserves $\pi_0^+$-filtered colimits, then
+\[
+ \Hom_{\mathcal M}(Lh_s,X)\simeq N(X)(s).
+\]
+Thus each reflected representable $Lh_s$ is $\pi_0$-accessible. Since a presheaf is the colimit of its representables and $L$ preserves colimits, these objects generate $\mathcal M$. Conversely, restricted Yoneda on a suitable small category of presentables is fully faithful, and its left adjoint sends a presheaf to the corresponding weighted colimit in $\mathcal M$.
+
+There is a missing hypothesis in the later variable-cardinal statement, part~3(c). It says only that $\mathcal M\simeq\Ind'_{\pi_0}(S)$ for small $S$, omitting that $S$ admits colimits of cardinal at most $\pi_0$. The proof on manuscript page~152 restores the hypothesis. Without it, take $S$ to be a discrete category on two objects. Every filtered diagram in $S$ is constant, so its filtered completion is still $S$, which has no coproduct of its two distinct objects. The corrected statement is the cocomplete recognition theorem; allowing arbitrary $S$ leads instead to the accessible categories of the next section.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p151}{Exactness comes from the set-valued model}
+Grothendieck wants the cardinal used for generation also to control the passage between limits and colimits. This is available because the small-category presentation gives a faithful calculation of the particular colimits in question, not because an arbitrary colimit-preserving reflection is left exact.
+
+Let $C$ admit colimits indexed by categories of cardinal at most $\pi_0$. The objects of $\Ind_{\pi_0}(C)$ may be identified with the presheaves which take these colimits to limits. One implication follows because representables have this property and $\pi_0^+$-filtered colimits of sets commute with such limits. Conversely, if $F$ has the property, then its category of elements $C/F$ is $\pi_0^+$-filtered: the colimit in $C$ of any bounded diagram of elements receives the unique compatible element supplied by preservation. The empty diagram gives nonemptiness. The canonical Yoneda presentation of $F$ is therefore a presentation of the required filtered kind.
+
+Limits of these presheaves are pointwise, since limits commute with limits. Their $\pi_0^+$-filtered colimits are pointwise by the set-theoretic interchange theorem. Evaluating any proposed comparison map at $c\in C$ consequently reduces it to the corresponding comparison in sets. In particular, for $\pi\geq\pi_0$ and $|\Fl J|\leq\pi$, the map
+\[
+ \varinjlim_{i\in I}\varprojlim_{j\in J}F_{ij}
+ \longrightarrow
+ \varprojlim_{j\in J}\varinjlim_{i\in I}F_{ij}
+\]
+is an isomorphism whenever $I$ is $\pi^+$-filtered. This proves Corollary~4.6.4 and includes the equalizer and base-change assertions in Theorem~4.6.3(2).
+
+The converse recognition argument in part~3 is stated by reference to a corrected use of \citet[Expos\'e~I, Proposition~9.11]{SGA4I1972}. Its conclusion allows an increase of cardinal. The set of subobjects and the set of generating maps into each object enter that argument, so exactness at one prescribed rank does not itself put the generators at that rank. The question in footnote~59 asks precisely whether this increase can be avoided.
+\end{dcomment}
+
+\begin{dcomment}{development}{p152}{Exactness does not determine the generating cardinal}
+Grothendieck suspects that the fixed-cardinal converse in footnote~59 is false. A topological example gives a negative answer for every infinite cardinal in his convention. It makes the obstruction visible in open covers: colimits may be exact while no nonzero object can be detected at the proposed size.
+
+\textbf{Proposition.}\ours\quad For every infinite $\pi_0$ there is a Grothendieck topos with a small dense subcategory and exact filtered colimits which is not a $\pi_0$-paratopos. In fact its only $\pi_0^+$-presentable object is the initial object.
+
+Put $\lambda=\pi_0^+$, $\kappa=\lambda^+$, and choose a set $X$ of cardinal $\kappa$. Give it the topology whose nonempty opens are the complements of subsets of cardinal less than $\kappa$. This is a topology: finite unions of the excluded small subsets remain small, and an arbitrary union of nonempty opens contains one such open. Every nonempty open has cardinal $\kappa$. Let $\mathcal E=\operatorname{Sh}(X)$.
+
+We first describe an obstruction valid for any noninitial sheaf $F$. Its support $U$, the image of $F\to1$ regarded as an open subset of $X$, is nonempty. Equivalently, $U$ is the set of points where $F$ has a nonempty stalk; it is open because a germ comes from a local section. Choose distinct points $x_\alpha\in U$ for $\alpha<\lambda$, and set
+\[
+ U_\beta=U\setminus\{x_\alpha:\beta\leq\alpha<\lambda\}
+ \qquad(\beta<\lambda).
+\]
+Each $U_\beta$ is open, since the removed set has cardinal at most $\lambda<\kappa$. The opens increase, their union is $U$, and each is a proper subset of $U$. The ordinal $\lambda$ is a $\lambda$-filtered indexing poset: every set of fewer than $\lambda$ ordinals below it is bounded below it.
+
+Write $F_\beta=F\times U_\beta$, where an open is identified with its subterminal sheaf. Then
+\[
+ F=\varinjlim_{\beta<\lambda} F_\beta .
+\]
+This equality can be checked on stalks. At a point in $U$ the point eventually belongs to $U_\beta$, and the stalk then equals $F_x$; outside $U$ every stalk is empty. Each map $F_\beta\to F$ is a monomorphism. If $F$ were $\lambda$-presentable, its identity would factor through one of these monomorphisms. A monomorphism with a right inverse is an isomorphism, forcing the supports $U_\beta$ and $U$ to be equal. This contradicts their construction. Thus no noninitial $F$ is $\lambda$-presentable.
+
+For completeness, $\mathcal E$ has the other properties in the question; the general sheaf-theoretic facts used here are in \citet[Expos\'e~II, Theorem~4.1 and Corollary~4.1.1]{SGA4I1972}. The category of opens is small, and its representable sheaves give the usual dense generating family. All colimits exist by sheafifying presheaf colimits. Filtered colimits are left exact: they are computed by first taking a pointwise filtered colimit of presheaves and then applying the left exact associated-sheaf functor; finite limits of sheaves agree with finite limits of presheaves. Hence $e_{\pi_0}$ holds, as do $\alpha(\pi_0)$ and $\beta(\pi_0)$. Since $X$ is nonempty, the topos is nondegenerate and cannot be generated by its initial object alone. It is therefore not a $\pi_0$-paratopos.
+
+The construction uses the standard sheaf-theoretic relation between support and open covers; it does not contradict the variable-cardinal theorem, since a sheaf topos is locally presentable at a sufficiently large rank. We checked the primary SGA~4 material on sheaves and accessibility and the representation descriptions in \citet{AdamekRosicky1994}; searches concerning compact topologies and presentable sheaves did not locate this exact co-small formulation. The proof is supplied as a development of the manuscript's question, without a claim of priority.
+\end{dcomment}
+
+\begin{dcomment}{context}{p155}{Removing cocompleteness changes the problem}
+Grothendieck is now testing which part of the reconstruction survives when many colimits do not exist. The small objects can still be intrinsically accessible, but the category $\mathcal M_\pi/X$ need not be filtered. A collection of small objects is therefore not yet a collection of small stages of every object.
+
+The modern definition of an accessible category makes the missing presentation part explicit. For a regular $\lambda$, one asks for $\lambda$-filtered colimits and a small full category of $\lambda$-presentable objects from which every object is obtained by such a colimit. Equivalently, the category is a suitable filtered completion of a small category, after allowing retracts among its presentables. This is the structural alternative in Conjecture~4.6.6(b). Its relation to the source's proposed ``cardinal filtration'' requires the generalized filtration developed next; one should not substitute a modern definition into condition~(a) and thereby turn the unproved implication into a tautology.
+
+There is a useful chronological distinction. \citet{GabrielUlmer1971} had treated the cocomplete theory, while \citet{MakkaiPare1989} had already developed accessible categories and their categorical constructions before these manuscript pages. \citet{AdamekRosicky1994} subsequently provided a systematic account of both theories. These references place the present calculations in an established mathematical development; they do not establish that Grothendieck was using those treatments here. The source's immediate interlocutor is its own SGA~4 terminology, whose meaning of ``accessible category'' is reconsidered explicitly in \S4.8.
+
+What has been proved on these pages is enough for the cocomplete case. What remains to be proved for a general completion is control of the indices and their retracts. That is why the next section studies three related filtrations instead of assuming that a single bound on a presentation is already the correct invariant.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p158}{The three conditions on monomorphisms}
+Grothendieck returns to the purpose of the size theory: constructing and controlling monomorphisms without losing the boundedness needed by a transfinite argument. The three categorical conditions separate an image factorization, the formation of a union, and a pushout. They agree in familiar exact settings but express different demands.
+
+In an abelian category, condition~(d) is the equality of image and coimage. For subobjects $A_1,A_2\subset B$, the kernel of $A_1\oplus A_2\to B$, $(a_1,a_2)\mapsto a_1+a_2$, is the image of
+\[
+ A_1\cap A_2\longrightarrow A_1\oplus A_2,
+ \qquad t\longmapsto(t,-t).
+\]
+The pushout over the intersection is the quotient by this kernel, so it embeds in $B$. This proves~(e). If $A\hookrightarrow B$ is monic and $f:A\to C$, its pushout is
+$(B\oplus C)/\{(a,-f(a)):a\in A\}$, with the evident categorical cokernel interpretation. The map from $C$ is monic: an element $(0,c)$ in the displayed image forces $a=0$ because $A\to B$ is monic, and then $c=0$. The same statement follows from the corresponding kernel diagram in any abelian category. This proves~(f).
+
+The distinction is visible in groups. For the two coordinate subgroups of $C_2\times C_2$, the pushout over their trivial intersection is $C_2*C_2$; its map to the direct product kills the nontrivial commutator, so~(e) fails. For~(f), take the normal Klein four subgroup $V\subset A_4$ and a surjection $q:V\to C_2$ with kernel generated by one of its nonidentity elements. In the pushout of $V\hookrightarrow A_4$ along $q$, that element is killed. Its conjugates in $A_4$ are the other two nonidentity elements of $V$, so all of $V$ is killed. An element of $V$ mapping to the generator of $C_2$ is therefore killed too. The induced map from $C_2$ is not monic. For commutative unital rings, the pushout of $\mathbb Z\hookrightarrow\mathbb Q$ along $\mathbb Z\to\mathbb F_p$ is the zero ring, so $\mathbb F_p\to0$ gives another failure of~(f).
+
+The last paragraph of the source uses an extremal quotient: a map which cannot factor through a proper subobject. Under~(d), its effective-epi--mono factorization has an invertible mono, hence the quotient is effective. This reduction is correct. One must still keep track of the size of the kernel-pair presentation when asserting preservation of $\pi$-accessibility; finite-colimit closure alone does not bound a kernel pair of an arbitrary quotient.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p160}{Pointed sets and the return to homological algebra}
+Grothendieck asks for examples beyond abelian categories and topoi. Pointed sets give a small but useful additional example of all six conditions. It shows that the monomorphism properties do not by themselves force additivity or the topos axioms.
+
+The category $\Ens_*$ has all colimits, obtained from disjoint unions and quotient identifications while identifying the specified basepoints. Finite pointed sets form an essentially small dense category, and every pointed set is the filtered union of its finite pointed subsets. Filtered colimits and finite limits are computed on underlying sets with their induced basepoints, so filtered colimits are exact. These verify~(a), (b), and~(c).
+
+For~(d), a pointed map factors through its image, with a surjection onto that image; the surjection is the coequalizer of its kernel pair. For~(e), two pointed subsets of a pointed set have intersection containing the basepoint, and their pushout over that intersection is precisely their union. For~(f), the pushout of an inclusion $A\subset B$ along a pointed map $A\to C$ is the quotient of $B\amalg C$ identifying each $a$ with its image. Such identifications do not identify two distinct elements of $C$: any passage through $B$ can return to $C$ only through the same element of the embedded subset $A$. Thus $C$ still embeds in the pushout.
+
+This category is not abelian: the coproduct of two pointed two-element sets has three elements, whereas their product has four. It is not a nondegenerate topos either: its initial and terminal objects coincide, while a topos with $0\simeq1$ is degenerate. Thus the example answers the concrete request for further settings without suggesting a classification.
+
+The reference to T\^ohoku has a different force. \citet[Theorem~1.10.1]{Grothendieck1957Tohoku} proves the existence of enough injectives under AB5 and a generator. The present conditions seek a categorical environment in which analogous constructions with monomorphisms can be made beyond the additive case. Finally, the familiar identification of group objects in groups with abelian groups follows from interchange: the internal multiplication and the ambient multiplication have the same unit and satisfy
+$(ab)*(cd)=(a*c)(b*d)$; substituting units shows that the two multiplications coincide and are commutative. This explains the concrete phenomenon behind the closing suggestion, but supplies no general theorem for the speculative construction $\mathcal M\boxtimes\mathcal M$.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p161}{Presentation size and intrinsic smallness}
+Grothendieck now removes the existence of small colimits from the hypotheses on $C$. This changes the task. A presheaf may still be assembled from objects of $C$ by sufficiently filtered colimits, but a construction performed on such presentations need not be available inside $C$ itself. He therefore keeps several measures of size in play until he can prove that they agree.
+
+For this section put $\lambda=\pi_0^+$. A category ``grande devant $\pi_0$'' is a $\lambda$-filtered category: every diagram having at most $\pi_0$ arrows admits a cocone. The category $\mathcal M=\Ind_{\pi_0}C$ is thus the ordinary $\lambda$-Ind completion, regarded as a full subcategory of $\widehat C=\Ens^{C^{\mathrm{op}}}$. Its $\lambda$-filtered colimits are computed pointwise. Grothendieck's $\mathcal M_\pi$ consists of the $\pi^+$-presentable objects, those $F$ for which $\Hom(F,-)$ preserves $\pi^+$-filtered colimits. The successor is essential: his diagrams have cardinality $\leq\pi$, whereas modern regular-cardinal notation uses cardinality strictly below the filtering cardinal.
+
+The three tests in Proposition 4.7.1 now have distinct meanings. Conditions (a)--(a$''$) measure a particular presheaf through its elements. Condition (b) bounds a presentation by representables while retaining $\lambda$-filteredness. Condition (c) measures the object intrinsically in $\mathcal M$. The intermediate (c$'$) is intrinsic in the larger category $\widehat C$ and can initially be stronger. Finally $\Filt'^\pi$ is a closure under repeated bounded filtered colimits, whereas $\Filt^\pi$ asks for one presentation. The prime has changed meaning from the preceding cocomplete discussion; here its definition is the one in (b$'$), not a presentation by arbitrary colimits in an ambient cocomplete category.
+
+Two easy implications deserve to be made explicit. Representables are $\pi^+$-presentable in $\widehat C$, and a colimit of at most $\pi$ such presentable objects is again $\pi^+$-presentable, because $\pi^+$-filtered colimits of sets commute with limits over categories of at most $\pi$ arrows. This gives $\Filt'^\pi\subseteq(\widehat C)_\pi$. Since $\mathcal M\hookrightarrow\widehat C$ preserves the filtered colimits in question, ambient presentability implies presentability in $\mathcal M$. Neither argument bounds the number of objects of $C$.
+
+The cardinal $\pi_1$ enters when one replaces the total number of elements by a pointwise bound. If $|\Fl C_0|\leq\pi$ and every $|F(c)|\leq\pi$, then $C_0/F$ has at most $\pi$ arrows. Without the bound on $C_0$, this summation is unavailable. The printed unconditional arrow (a$''$)$\Rightarrow$(c$'$) must therefore be treated separately; the example below shows an actual failure, rather than merely an incomplete proof.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p164}{A pointwise singleton with a large presentation}
+Grothendieck wants the presheaf description to give a manageable test for accessibility. A thin category separates the pointwise size from the amount of data needed to present the presheaf, and makes the missing hypothesis in (a$''$)$\Rightarrow$(c$'$) visible without any algebraic complications.
+
+Fix an infinite $\pi\geq\pi_0$, and let $\kappa>\pi$ be a regular cardinal. Take $C$ to be the ordinal $\kappa$, with one arrow $\alpha\to\beta$ when $\alpha\leq\beta$. This is a small category in the working universe, and it is $\pi^+$-filtered: a family of at most $\pi$ ordinals below $\kappa$ has a supremum below $\kappa$. Write $h_\beta=C(-,\beta)$. Its value at $\alpha$ is a singleton if $\alpha\leq\beta$ and empty otherwise. Consequently
+\[
+ F=\varinjlim_{\beta<\kappa}h_\beta
+\]
+is the terminal presheaf, with $F(\alpha)=\{*\}$ at every object. In particular $F\in\Ind_{\pi_0}C$, and condition (a$''$) holds even with the bound $1$.
+
+Yet there is no natural transformation $F\to h_\beta$: evaluation at $\beta+1$ would require a map from a singleton to the empty set. Thus
+\[
+ \varinjlim_{\beta<\kappa}\Hom(F,h_\beta)=\varnothing,
+ \qquad
+ \Hom\left(F,\varinjlim_{\beta<\kappa}h_\beta\right)=\{1_F\}.
+\]
+The same presentation witnesses failure of $\pi^+$-presentability both in $\widehat C$ and in $\Ind_{\pi_0}C$. Conditions (c$'$) and (c) fail. All arrows and colimits used here are ordinary categorical ones; there is no issue of a choice of model for the Ind completion.
+
+The repair to Proposition 4.7.1 is to impose $\pi\geq\pi_1$ on the arrow (a$''$)$\Rightarrow$(c$'$), or to use condition (a), which bounds the whole category of elements. Under that size hypothesis, the six-way equivalence of Corollary 4.7.2(1) is unaffected. One should not extend that equivalence to small $\pi$ merely because all the values of a presheaf happen to be small.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p166}{Removing the retract without increasing the bound}
+Grothendieck's factorization of $1_F$ is the decisive accessibility argument, but it initially produces a retract of one stage. He explicitly stops short of the claimed implication (c)$\Rightarrow$(b). The missing step has a positive answer. It belongs to the retract-removal result of Makkai--Par\'e, Proposition 2.3.11; an accessible verification and a stronger closure statement are given by \citet[Corollaries 4.13 and 4.15, including footnote 2]{Chen2021Sifted}. We give the elementary construction needed here, keeping track of the number of arrows.
+
+\textbf{Retract lemma.} Let $\pi\geq\pi_0$ be infinite. If a presheaf $H$ is a retract of
+\[
+ F=\varinjlim_{i\in I}h_{c_i},
+ \qquad I\text{ is }\pi_0^+\text{-filtered},\qquad |\Fl I|\leq\pi,
+\]
+then $H$ has a presentation of the same form with an indexing category having at most $\pi$ arrows. No closure property of $C$ is needed.
+
+\textit{Proof.} Choose $s:H\to F$ and $r:F\to H$ with $rs=1_H$, and put $e=sr$. Let $q_i:h_{c_i}\to F$ be the presentation maps. By Yoneda and pointwise computation of the colimit, for each $i$ there are an object $t(i)$ of $I$ and a morphism $v_i:c_i\to c_{t(i)}$ satisfying
+\[
+ q_{t(i)}h_{v_i}=e q_i.
+\]
+Put $\alpha_i=rq_i$. Define $J$ to have the same \emph{labelled} objects as $I$. A morphism from label $i$ to label $j$ is an actual morphism $u:c_i\to c_j$ satisfying $\alpha_jh_u=\alpha_i$. Inside this category retain only the subcategory generated by the images of all arrows of $I$ and by the arrows $v_i:i\to t(i)$. The latter are morphisms over $H$, since $re=r$. Finite compositions of an infinite set of at most $\pi$ generators give at most $\pi$ arrows, so $|\Fl J|\leq\pi$.
+
+We check filteredness with all compatibility conditions included. Let $D:K\to J$ have at most $\pi_0$ arrows. For each vertex $a$ of $K$, use the chosen map $v_{D(a)}$; choose an $I$-cocone on their targets and call its vertex $k$. This produces maps
+\[
+ w_a:c_{D(a)}\longrightarrow c_k,
+ \qquad q_kh_{w_a}=s\alpha_{D(a)},
+\]
+each a composite of a chosen $v_i$ with an $I$-arrow. For an arrow $f:a\to b$ of $K$, the two maps $w_bD(f)$ and $w_a$ have equal composites into $F$, because the $\alpha_i$ are a cocone over $H$. Equality in the filtered colimit
+\[
+ F(c_{D(a)})=\varinjlim_{i\in I}C(c_{D(a)},c_i)
+\]
+is witnessed after an $I$-arrow out of $k$. There are at most $\pi_0$ such equalities. The $\pi_0^+$-filteredness of $I$ gives a single further arrow $k\to l$ which makes all of them hold simultaneously: take a cocone on the diagram consisting of $k$, the chosen witnesses, and the arrows from $k$ to them. The resulting maps $c_{D(a)}\to c_l$ are arrows of $J$ and form the required cocone. This also handles the empty diagram, since $I$ is nonempty. Thus $J$ is $\pi_0^+$-filtered.
+
+Finally the maps $\alpha_i$ induce $\varinjlim_Jh_{c_i}\to H$. At an object $c$ of $C$, every element of $H(c)$ lifts along $s$ to $F(c)$ and therefore comes from some $C(c,c_i)$; the map is surjective. Suppose two such representatives $u:c\to c_i$ and $u':c\to c_j$ have the same image in $H(c)$. After composition with $v_i$ and $v_j$, their images in $F(c)$ are equal, since both are the image under $s$ of that common element. Filteredness supplies a common $I$-stage where the two representatives agree. The arrows to that stage, and $v_i,v_j$, all belong to $J$, so the original representatives agree in the colimit over $J$. The map is injective at every $c$, hence an isomorphism.\hfill$\square$
+
+Apply the lemma to the retract produced on manuscript p.~166. At $\pi^{\pi_0}=\pi$ it proves the originally intended equality
+\[
+ \Filt^\pi=\Filt'^\pi=(\widehat C)_\pi\cap\mathcal M
+ =\mathcal M_\pi.
+\]
+Thus the statement of Corollary 4.7.2(2) survives, while the proof actually written on these pages requires this additional argument. The construction uses the author's explicit permission that an indexing category need not be ordered; replacing it by a cofinal poset without a cardinal estimate would lose the point of the lemma.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p167}{The initial level already contains idempotent splittings}
+Grothendieck's concern about retracts also reaches the endpoint $\pi=\pi_0$. Here the literal assertion that $\Filt^{\pi_0}$ consists only of representables is false under the definition just given. The obstruction is present in the smallest possible nontrivial idempotent category.
+
+Let $E$ have one object $*$ and endomorphism monoid $\{1,e\}$ with $e^2=e$ and $e\neq1$. Every diagram $K\to E$, of any size, admits a cocone whose components are $e$: for either possible arrow $a$ of $E$, one has $ea=e$. Hence $E$ is $\lambda$-filtered for every regular $\lambda$. It has no terminal object, since its unique object has two endomorphisms.
+
+Take $C=E$. The representable $h_*$ has value $\{1,e\}$. The natural endomorphism induced by $e$ sends both elements to $e$, and its image is the singleton presheaf $P$. The colimit of the diagram $E\to\widehat E$ that sends the object to $h_*$ and $e$ to this endomorphism is $P$. It is a $\pi_0^+$-filtered presentation with just two indexing arrows, so $P\in\Filt^{\pi_0}$. It is not representable, since its value has one element rather than two.
+
+This also clarifies the phrase ``cofinale \`a $e$'' in footnote 76. The unique functor $E\to e$ is final, as it is for any nonempty filtered category. This neither makes $E$ equivalent to $e$ nor supplies a final functor $e\to E$. In particular it does not say that the colimit of every diagram on $E$ is one of its values. The relevant conclusion of the smallness assumption is a retract, as the next argument shows.
+
+The corrected general statement is
+\[
+ \Filt^{\pi_0}=\Filt'^{\pi_0}
+ =\mathcal M_{\pi_0}\simeq\Kar(C).
+\]
+Indeed, if $I$ is $\pi_0^+$-filtered and $|\Fl I|\leq\pi_0$, the identity diagram of $I$ has a cocone $u_i:i\to i_*$. For any diagram $D:I\to\widehat C$, these arrows induce a map from its colimit $L$ to $D(i_*)$. Its composite with $D(i_*)\to L$ is $1_L$, by the colimit universal property. Thus a bounded presentation at the initial level gives a retract of a representable. Conversely every retract of a representable is the colimit of the two-arrow idempotent category just used. The same argument shows that this class is closed under further colimits of the prescribed size, proving the equality with $\Filt'^{\pi_0}$.
+
+For the equality with $\mathcal M_{\pi_0}$, write a $\pi_0^+$-presentable object as its defining $\pi_0^+$-filtered colimit of representables and factor its identity through one stage. Conversely representables are presentable and retracts preserve presentability. This is the ordinary categorical form of the idempotent-completion statement in \citet[Lemma 5.4.2.4]{Lurie2009HTT}. In particular the conclusion does not require $C$ itself to be Karoubian. What Karoubian completeness provides is the further identification $\Kar(C)\simeq C$.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p170}{Closing a small diagram under filteredness witnesses}
+Grothendieck is building a categorical version of a downward size argument: a prescribed small part of a filtered indexing category should lie inside a small filtered subcategory. The fixed-point assumption $\pi^{\pi_0}=\pi$ is exactly what pays for adjoining all witnesses of size at most $\pi_0$ at each step. The proof is sound after two pieces of construction data, implicit in the prose but absent from clause 3(c), are restored.
+
+Let $J$ be $\pi_0^+$-filtered and let $K$ be a set of at most $\pi$ arrows. First include their endpoints and identities and close under composition. This gives a subcategory $K_0$ with at most $\pi$ arrows. At a successor stage retain \emph{all} arrows of $K_\alpha$. For each set $A\subseteq\Ob K_\alpha$ of cardinality at most $\pi_0$, choose an object $z_A$ and arrows $a\to z_A$ for all $a\in A$, and adjoin the arrows as well as their target. Include the empty set here, so that nonemptiness is ensured even when $K_0$ is empty. For each pair of objects $x,y$ and each family $B\subseteq K_\alpha(x,y)$ of cardinality at most $\pi_0$, adjoin an arrow $y\to z_B$ which coequalizes $B$. Then close under identities and finite composition. At a limit stage take the union.
+
+There are at most $\pi^{\pi_0}=\pi$ choices of a small family of existing arrows or objects. Each contributes at most $\pi_0$ new arrows. Closing under composition still leaves at most $\pi$ arrows. Thus all $K_\alpha$ with $|\alpha|\leq\pi$ have size at most $\pi$. The printed reference to subsets of $\Ob J$ and $\Fl J$ in the counting argument must refer to the current $K_\alpha$; there is no bound on $J$ itself. Likewise the printed final bound $1$ is $\pi$.
+
+Set $\delta=\pi_0^+$, regarded as its initial ordinal. It is regular, and $\delta\leq\pi$ because $\pi^{\pi_0}=\pi$ forces $\pi>\pi_0$. A family of at most $\pi_0$ arrows of $K_\delta$ is contained in some earlier $K_\alpha$: take the supremum of their appearance stages, which is below $\delta$. The next stage supplies the required common target or common coequalizer. These two properties imply the full cocone criterion. For a diagram of at most $\pi_0$ arrows, first send all vertices to one target; for each diagram arrow compare the two induced maps to that target. Coequalize each pair, send the resulting targets to one common target, and then coequalize the resulting family of parallel arrows out of the first common target. This produces one map which coequalizes every pair. Thus $K_\delta$ is $\pi_0^+$-filtered.
+
+This proves the extension lemma. It also proves that the poset $\mathscr I$ of all such subcategories is $\pi^+$-directed: a family of at most $\pi$ of them has union of arrow sets of cardinality at most $\pi$, and the extension construction supplies an upper bound. Every arrow of $J$ lies in an object of $\mathscr I$. A compatible family of cocones on the restrictions to those subcategories is therefore exactly a cocone on all of $J$. Applying the universal property twice gives
+\[
+ \varinjlim_{J'\in\mathscr I}\ \varinjlim_{j\in J'}D(j)
+ \;\simeq\;\varinjlim_{j\in J}D(j).
+\]
+If $|\Fl J|\leq\pi'$, then $|\mathscr I|\leq(\pi')^\pi$, since every subcategory is determined by at most $\pi$ arrows. This is the announced bound in Lemma 4.7.3; the exponent $\pi_0$ printed in its proof on p.~166 is not the bound established by this counting.
+
+The same construction is the familiar mechanism for raising the index of accessibility; compare \citet[Theorem 3.4]{Vasey2020Accessible}. In the higher categorical setting its poset form is used in \citet[Lemma 5.4.2.8 and Proposition 5.4.2.9]{Lurie2009HTT}. In each form the essential work is to retain enough witnesses while keeping their total size under control.
+\end{dcomment}
+
+\begin{dcomment}{later}{p175}{The bounded closure question has a positive answer}
+Grothendieck introduces the second threshold $\pi_1$ because he has not yet removed retracts or shown that a bounded iteration can be replaced by one bounded presentation. The general closure result now available answers precisely this difficulty. For infinite $\pi>\pi_0$, set $\lambda=\pi_0^+$ and $\mu=\pi^+$. Then \citet[Corollary 4.13]{Chen2021Sifted} identifies the closure of representables under $\mu$-small $\lambda$-filtered colimits with the presheaves admitting a single such presentation. In the notation of these pages this says
+\[
+ \Filt^\pi=\Filt'^\pi\qquad(\pi>\pi_0).
+\]
+The endpoint follows from the idempotent calculation above. The fixed-point presentability statement is the Makkai--Par\'e result recovered in Chen's Corollary 4.15. This answers the question on pp.~175--176 affirmatively; it is not an open problem of the current theory.
+
+The distinction between the two arguments remains useful. Retract closure alone repairs the inference in the proof of 4.7.1 and suffices at $\pi^{\pi_0}=\pi$. The statement about arbitrary repeated colimits also resolves $\Filt^\pi=\Filt'^\pi$ when no fixed-point condition holds. One cannot obtain the latter merely by writing a formal double colimit: a diagram of already presented objects has transition maps which need not have been specified at chosen presentation stages. The bounded closure theorem supplies the necessary control of these maps.
+
+These improvements do not make every cardinal useful for $\mathcal M$. Equality of the two \emph{presentation} filtrations is distinct from equality with the \emph{intrinsic} filtration $\mathcal M_\pi$. The latter compares the ability to lift morphisms out of an object with the size of a presentation inside the chosen Ind completion. The arithmetic condition in the small-subcategory construction still has work to do there.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p176}{Reading the generalized filtration axioms}
+Grothendieck's purpose is to retain only the properties of the preceding constructions that are needed to recover the category from its small objects. Two subscripts in the printed statement of 4.7.7 obscure that purpose. In (b), the closure bound is printed $\pi_0$ followed by the editors' question mark; the proof on p.~174 uses $\pi$. In (c), the presenting poset is printed large relative to $\pi_0$; Lemma 4.7.3 gives a poset large relative to $\pi$, and the factorization of a $\pi$-accessible object's identity on p.~177 requires this stronger assertion. We retain the edition's text, but the following discussion of its consequences uses those two repaired conditions explicitly.
+
+In modern notation an accessible generalized filtration thus consists of increasing, essentially small, replete full subcategories $\mathcal F^\pi$, each consisting of $\pi^+$-presentable objects, with the specified bounded closure and generation properties. At a fixed point $\pi^{\pi_0}=\pi$, every object has a $\pi^+$-filtered presentation by objects of $\mathcal F^\pi$. An identity map out of a $\pi^+$-presentable object then factors through one stage, producing a retract. Closure under the permitted colimits supplies its splitting, and hence
+\[
+ \mathcal F^\pi=\mathcal M_\pi.
+\]
+This is the content of 4.7.9. The hypothesis on the presenting index cannot be weakened to mere $\pi_0^+$-filteredness in this step: presentability at the larger cardinal says nothing about preservation of an arbitrary less-filtered colimit.
+
+The cardinal estimates in 4.7.7.1 express essential smallness quantitatively. Write $\rho\geq\pi_1$. A presheaf with at most $\rho$ elements at each object of a skeleton $C_0$ can be described by sets chosen inside $\rho$ and functions assigned to the arrows of $C_0$. There are at most $2^\rho$ choices: $|\Fl C_0|\leq\rho$, there are at most $2^\rho$ functions between subsets of $\rho$, and $(2^\rho)^\rho=2^\rho$. Between two such presheaves there are at most
+\[
+ (\rho^\rho)^{|\Ob C_0|}\leq 2^\rho
+\]
+natural transformations. Consequently a skeleton of this full category has at most $2^\rho$ arrows. Taking $\rho=\pi$ gives the first estimate for $\Filt^\pi$; taking $\rho=\pi^{\pi_0}$ gives the estimate for $\mathcal M_\pi$ after the inclusion of 4.7.6. This proves the details omitted on p.~173.
+
+Finally, for any $\pi\geq\pi_0$, let $\rho=\pi^{\pi_0}$. Since $\rho^{\pi_0}=\rho$, monotonicity of presentability yields
+\[
+ \mathcal F^\pi\subseteq\mathcal M_\pi
+ \subseteq\mathcal M_\rho=\mathcal F^\rho.
+\]
+The equality $\mathcal M_\pi=\mathcal M_\rho$ printed in the proof of 4.7.10 must be an inclusion. Even in sets, increasing the cardinal bound admits genuinely larger objects. The conclusion (4.7.10.1) has the correct direction.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p179}{Recovering the category at a useful cardinal}
+Grothendieck's useful cardinal is a cardinal at which the chosen level of the filtration actually presents the whole category. This is stronger than the assertion that its objects are small. The distinction explains both the comparison functor in 4.7.11 and the later preference for the canonical filtration.
+
+Let $A\subseteq\mathcal M_\pi$ be an essentially small full subcategory, and assume $\mathcal M$ admits $\pi^+$-filtered colimits. Its extension
+\[
+ T:\Ind_\pi A\longrightarrow\mathcal M
+\]
+is fully faithful. Indeed, for presentations $X=\varinjlim_i a_i$ and $Y=\varinjlim_j b_j$ over $\pi^+$-filtered categories,
+\[
+ \Hom_{\mathcal M}(TX,TY)
+ \simeq \varprojlim_i\varinjlim_j\Hom_A(a_i,b_j),
+\]
+using the universal property in the first variable and presentability in the second. This is also the Hom formula in the Ind category. The extension has all of $\mathcal M$ as its essential image precisely when every object has such a presentation.
+
+The equivalent condition in 4.7.12 uses the canonical presentation. If $A/F$ is $\pi^+$-filtered and the restricted Yoneda functor determined by $A$ is fully faithful, then the canonical map
+\[
+ \varinjlim_{(a\to F)\in A/F}a\longrightarrow F
+\]
+is an isomorphism. To see this, apply $\Hom(a_0,-)$ for $a_0\in A$: presentability moves it inside the colimit, and the category-of-elements calculation identifies the resulting set with $\Hom(a_0,F)$. Full faithfulness of restricted Yoneda reflects the isomorphism. If $T$ is already an equivalence, the same category-of-elements description proves the converse immediately. However, density of a fixed-point level does not by itself imply density of every smaller level. The stated generalized-filtration axioms do not supply that missing hypothesis. The next block exhibits a counterexample to (b)$\Rightarrow$(a) in the proposition as printed; the repair is to require the level $A$ to be dense, or to require its canonical cocones to be colimit cocones.
+
+At a useful level every $\pi^+$-presentable object is a retract of a member of $A$. Taking $A=\mathcal F^\pi$ and using its retract closure gives $\mathcal F^\pi=\mathcal M_\pi$. This explains the equality in the endpoint clause of Definition 4.7.13, with usefulness understood through the realization equivalence rather than the faulty bare slice criterion; it is not an additional form of cardinal arithmetic. Nor is ``regular for the filtration'' the usual set-theoretic regularity of the cardinal $\pi$. It means useful together with a specified quantitative presentation bound. The ordinary regular filtering cardinal in all these statements is $\pi^+$, regardless of the cofinality of $\pi$ itself.
+
+Replacing $\mathcal F^\pi$ by $\mathcal M_\pi$ preserves the generalized filtration. Essential smallness follows from $\mathcal M_\pi\subseteq\mathcal F^{\pi^{\pi_0}}$. Bounded closure is the general fact that $\pi^+$-presentables are closed under colimits of diagrams having at most $\pi$ arrows whenever those colimits exist. For the quantitative part, if $F\in\mathcal M_{\pi'}$, first use
+\[
+ F\in\mathcal F^{(\pi')^{\pi_0}}.
+\]
+Then apply the old generation bound at the fixed-point level $\pi$. The new index has cardinal at most
+\[
+ \bigl((\pi')^{\pi_0}\bigr)^\pi=(\pi')^\pi.
+\]
+This supplies the small substitution omitted from the proof of 4.7.15: equality of the two filtrations at the generating level $\pi$ alone does not identify their arbitrary target levels $\pi'$.
+\end{dcomment}
+
+\begin{dcomment}{development}{p179}{A filtered slice need not be a presentation}
+Grothendieck wants to recognize a useful level by its slices, so that the Ind realization can be checked without choosing presentations. This recognition needs a density hypothesis. The ordinary category-of-elements theorem applies to a presheaf on the chosen level; identifying its realization with the original object is a separate assertion. The following example shows that the axioms stated in 4.7.7--4.7.8 do not imply it. We checked the general recognition criteria for Ind completions cited above; none dispenses with the generation requirement. The example is supplied as a local audit result, without a priority claim.
+
+\textbf{Counterexample to the slice criterion in 4.7.12}\ours.
+For every infinite $\pi_0$, there is an accessible generalized filtration satisfying even the repaired strong forms of (b) and (c), such that $\mathcal F^{\pi_0}/X$ is $\pi_0^+$-filtered for every $X$, but $\Ind_{\pi_0}(\mathcal F^{\pi_0})\to\mathcal M$ is not essentially surjective.
+
+\textit{Proof.} Let $\mathcal M=\Ens$, let $\theta=2^{\pi_0}$, and define
+\[
+ \mathcal F^\pi=
+ \begin{cases}
+ \{\varnothing\},&\pi_0\leq\pi<\theta,\\
+ \Ens_{\leq\pi},&\pi\geq\theta.
+ \end{cases}
+\]
+Take replete full subcategories; the first is equivalent to the one-object category. This is an increasing exhaustive filtration. Each level is essentially small. It consists of $\pi^+$-presentable sets. Sets have all the required filtered colimits. A filtered colimit of empty sets is empty, while a colimit indexed by a category with at most $\pi$ arrows of sets of size at most $\pi$ again has size at most $\pi$. Thus condition (b), even with the intended bound $\pi$, holds.
+
+If $\pi^{\pi_0}=\pi$, then necessarily $\pi\geq2^{\pi_0}=\theta$. Every set $X$ is the union of its subsets of cardinality at most $\pi$, indexed by the $\pi^+$-directed poset $[X]^{\leq\pi}$. If $X\in\mathcal F^{\pi'}$ with $\pi'>\pi$, the indexing poset has cardinal at most $(\pi')^\pi$. The threshold determined by $\mathcal F^{\pi_0}$ is $\pi_1=\pi_0$, so its proviso is automatic. This verifies condition (c), with the stronger, intended $\pi^+$-filtered index. All accessible generalized-filtration axioms are satisfied.
+
+For every set $X$ there is exactly one map $\varnothing\to X$. Thus $\mathcal F^{\pi_0}/X$ is a one-object one-arrow category and is $\pi_0^+$-filtered. But a filtered colimit of copies of $\varnothing$ remains $\varnothing$. The realization $\Ind_{\pi_0}(\mathcal F^{\pi_0})\to\Ens$ has only the empty set in its essential image, and is not an equivalence.\hfill$\square$
+
+The correction is substantive. A slice may be filtered because the chosen level sees almost nothing. Requiring the level to be dense restores the proof in the preceding block. Alternatively replace condition (b) by the conjunction that the slice is $\pi^+$-filtered and that its canonical diagram has colimit $F$. The later conclusions about useful cardinals should use the equivalence in condition (a); the counterexample does not affect the fixed-point levels, where the generation axiom supplies actual presentations.
+\end{dcomment}
+
+\begin{dcomment}{status}{p181}{Useful cardinals and the accessibility spectrum}
+Grothendieck suspects that an accessible category may have larger nonuseful cardinals. The relevant modern invariant is its \emph{accessibility spectrum}. The sharp relation $\kappa\mathrel{\triangleleft}\lambda$ between regular cardinals requires every set of size below $\lambda$ to have a cofinal family of its subsets of size below $\kappa$, of cardinality below $\lambda$. It controls the general raising theorem. The equation $\pi^{\pi_0}=\pi$ implies $\pi_0^+\mathrel{\triangleleft}\pi^+$, since a set of size at most $\pi$ has at most $\pi$ subsets of size at most $\pi_0$. A mere inequality between cardinals does not give this control.
+
+The example in \citet[Remark 3.7 and Example 3.8]{Vasey2020Accessible}, attributed there to Ad\'amek--Rosick\'y, settles the existence question in 4.7.16. We give the details, including the explicit successor ranks and the unbounded choice needed for 4.8.6(4). The latter is an elementary verification of the cited criterion, not a priority claim.
+
+Fix $\kappa=\aleph_1$, and let $\mathcal D$ be the category of nonempty $\kappa$-directed posets and monotone maps. For every regular $\lambda\geq\kappa$, its $\lambda$-filtered colimits are computed as filtered colimits of posets: representatives and order relations can be compared at a common stage, and fewer than $\kappa$ elements acquire an upper bound at one stage. We first verify that
+\[
+ P\text{ is }\lambda\text{-presentable in }\mathcal D
+ \quad\Longleftrightarrow\quad |P|<\lambda.
+\]
+For the forward implication, adjoin a new greatest element $\top$ to $P$. The resulting poset $P^\top$ is the $\lambda$-directed union of the subposets $S\cup\{\top\}$ for $S\subseteq P$, $|S|<\lambda$. Every stage belongs to $\mathcal D$, because it has a greatest element. If $P$ is presentable, the inclusion $P\hookrightarrow P^\top$ factors through one stage. Its image then forces $P\subseteq S$, proving $|P|<\lambda$. Conversely, when $|P|<\lambda$, lift a map from $P$ into a $\lambda$-filtered colimit by choosing representatives for its elements and witnesses for all its order relations. There are fewer than $\lambda$ choices. A common stage makes them into a monotone map. Fewer than $\lambda$ equality witnesses likewise prove essential uniqueness. This is exactly preservation of the colimit by $\Hom(P,-)$.
+
+Every object $P$ of $\mathcal D$ is a $\kappa$-directed union of its subposets having fewer than $\kappa$ elements and a greatest element. Indeed, the union of fewer than $\kappa$ such subposets has fewer than $\kappa$ elements; adjoin an upper bound in $P$ to obtain a larger subposet of the same kind. These subposets cover $P$. Their isomorphism classes form a set and they are $\kappa$-presentable by the criterion just proved. Thus $\mathcal D$ is $\aleph_1$-accessible. An idempotent on one of these presentables splits through its image, which is again $\kappa$-directed and has fewer than $\kappa$ elements. Taking a skeleton $C$ of the presentables therefore gives a small idempotent-complete category with
+\[
+ \mathcal D\simeq\Ind_{\aleph_0}C.
+\]
+This meets the Karoubian-base requirement in 4.7.16.
+
+Now let $\theta>\kappa$ be any singular cardinal of countable cofinality, and put $\lambda=\theta^+$. We claim that the inclusion poset $[\theta]^{<\kappa}$ has no cofinal subset of cardinality at most $\theta$. Suppose a candidate family is $\mathscr A=\bigcup_{n<\omega}\mathscr A_n$, where $|\mathscr A_n|\leq\theta_n<\theta$, $\theta_n\geq\kappa$, and $\sup_n\theta_n=\theta$. Since every member has cardinality below $\kappa$, the union of $\mathscr A_n$ has cardinality at most $\theta_n$. Choose $a_n\in\theta$ outside that union. The countable set $\{a_n:n<\omega\}$ lies in $[\theta]^{<\kappa}$ but is contained in no member of $\mathscr A$, a contradiction.
+
+The poset $Q=[\theta]^{<\kappa}$ itself belongs to $\mathcal D$. If it were a $\lambda$-filtered colimit of $\lambda$-presentables, each stage would have at most $\theta$ elements. For each $a<\theta$, choose a stage representing $\{a\}\in Q$. There are fewer than $\lambda$ such choices, so one later stage has image $Y\subseteq Q$ containing all these singletons. A monotone image of a $\kappa$-directed poset is $\kappa$-directed. Therefore $Y$ is cofinal in $Q$: any subset of $\theta$ of size below $\kappa$ is contained in an upper bound of its singletons in $Y$. But $|Y|\leq\theta$, contradicting the preceding paragraph. Thus $\mathcal D$ is not $\theta^+$-accessible.
+
+For a first explicit pair one may take $\theta=\aleph_\omega$. Singular cardinals of countable cofinality are unbounded, so this \emph{one} category has arbitrarily large nonuseful manuscript cardinals $\pi=\theta$, although its initial cardinal $\pi_0=\aleph_0$ is useful. Moreover its small dense subcategory $C$ remains formed of $\theta^+$-presentables and it has $\theta^+$-filtered colimits. Hence it also gives the dense-presentable-generator separation requested in 4.8.6(1). Questions about the presentability ranks or internal sizes of individual objects are different; compare \citet[Definitions 2.5 and 2.10]{LiebermanRosickyVasey2019Sizes}.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p181}{Usefulness already gives the quantitative bound}
+Grothendieck's distinction between useful and regular cardinals reflects the unresolved presentation problem at this point of the manuscript. Once the retract-free presentation theorem is available, a useful cardinal is regular, and the proviso involving $\pi_1$ can be omitted. We include the argument because the requirement that the index be ordered deserves its own cardinal check.
+
+Suppose $\Ind_\pi(A)\simeq\mathcal M$, where $A=\mathcal F^\pi=\mathcal M_\pi$, and let $F\in\mathcal F^{\pi'}$ with $\pi'>\pi$. Set $\mu=(\pi')^\pi$. Then $\mu^\pi=\mu$, and $F$ is $\mu^+$-presentable. Apply the fixed-point presentation theorem, now with initial cardinal $\pi$ and generating category $A$: it gives a $\pi^+$-filtered category $J$ of at most $\mu$ arrows and a presentation of $F$ by objects of $A$. This estimate is independent of $|\Fl A|$.
+
+To make the index ordered, put $\kappa=\pi^+$. We show that a $\kappa$-filtered category $J$ with $|\Fl J|\leq\mu=\mu^\pi$ has a cofinal functor from a $\kappa$-directed poset $P$ with $|P|\leq\mu$. Begin with a discrete poset labelled by the objects of $J$ and its evident functor $u$ to $J$. Build larger posets through $\kappa$ stages. Every existing element will have fewer than $\kappa$ predecessors. At a successor stage, for each subset $S$ of the current poset of size below $\kappa$, take its downward closure and adjoin a new upper element. This downward closure has size below $\kappa$; choose a cocone on its image in $J$ to define the value of the new element and all new transition maps.
+
+We also impose cofinality. For each pair $p,q$ of existing elements and each fork $j\to u(p)$, $j\to u(q)$ in $J$, adjoin another upper element over the downward closure of $\{p,q\}$, choosing its image cocone to include this fork. The category of this augmented diagram still has fewer than $\kappa$ arrows, so such a cone exists. In both constructions the predecessors of a new element are exactly the selected downward-closed set. Distinct new elements are initially incomparable; composition is defined by the chosen cocone, so the functor remains well defined. At limit stages take unions.
+
+There are at most $\mu^{<\kappa}=\mu$ choices at each stage and $\kappa\leq\mu$ stages. Thus $|P|\leq\mu$. Regularity of $\kappa$ ensures that any subset of $P$ of size below $\kappa$ is present at one earlier stage, and then receives an upper bound, so $P$ is $\kappa$-directed. For each $j\in J$, the comma category $j\backslash P$ is nonempty because the initial stage includes $j$. Any two of its objects are joined to a common object by one of the added fork cones. The functor $P\to J$ is therefore cofinal. Reindexing the presentation of $F$ along it retains the bound
+\[
+ |P|\leq\mu=(\pi')^\pi.
+\]
+This is the full ordered-index bound in Definition 4.7.13, with no threshold proviso. Thus useful-but-nonregular cardinals do not occur under the repaired realization definition. Superfluous cardinals still occur, as the accessibility-spectrum discussion explains. The source's distinction is a faithful record of the stage reached in its argument, but should not be carried into a statement of the current theory.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p184}{Changing the starting point and bounding a slice}
+Grothendieck wants the filtration to be intrinsic enough that deleting its first levels does not change the useful cardinals which remain. The only part of the definition that remembers the starting point quantitatively is the threshold $\pi_1$. Proposition 4.7.17 records this bookkeeping correctly once the repaired filtration axioms are used.
+
+If $\pi_0'\geq\pi_0$ and $\pi^{\pi_0'}=\pi$, then
+\[
+ \pi\leq\pi^{\pi_0}\leq\pi^{\pi_0'}=\pi.
+\]
+The old generation property therefore applies. The new threshold $\pi_1'$ is at least $\pi_1$, so its size proviso is more restrictive and the old bound implies the new one. Usefulness concerns the same full subcategory $\mathcal F^\pi$ and the same realization functor, hence is unchanged. For regularity the converse needs the proviso to be automatic: $2^\pi\geq\pi_1'$ ensures $(\pi')^\pi\geq\pi_1'$ whenever $\pi'>\pi$. No additional category-theoretic argument is hidden here.
+
+The slice estimate in 4.7.19 can be proved without the extra ordering $\pi'\geq\pi$ imposed midway through its proof. Assume only the stated $\pi,\pi'\geq\pi_1$ and set
+\[
+ a=\pi^{\pi_0},\qquad b=(\pi')^{\pi_0},\qquad
+ \Gamma=(\pi')^a.
+\]
+Choose a skeleton of $C$ and of $\mathcal M_\pi$. Its object set and arrow set have cardinal at most $2^a$. For $G\in\mathcal M_\pi$ and $F\in\mathcal M_{\pi'}$, the preceding bounds give $|G(c)|\leq a$ and $|F(c)|\leq b$. Hence
+\[
+ \begin{split}
+ |\Hom(G,F)|
+ &\leq\prod_{c\in\Ob C_0}|F(c)|^{|G(c)|}\\
+ &\leq(b^a)^{|\Ob C_0|}
+ \leq\bigl((\pi')^{\pi_0}\bigr)^{a\pi_1}
+ =(\pi')^a=\Gamma.
+ \end{split}
+\]
+The product, rather than a bare sum, is the direct count of all component maps of a natural transformation; naturality can only reduce the number. The infinite-cardinal identities use $\pi_0,\pi_1\leq a$. Since $\pi'\geq2$, also $2^a\leq\Gamma$. There are therefore at most $\Gamma$ objects in the chosen representative slice, and at most
+\[
+ \Gamma^2\,2^a=\Gamma
+\]
+arrows. This proves $\cardred(\mathcal M_\pi/F)\leq(\pi')^{\pi^{\pi_0}}$ in exactly the range of the statement. All counts are counts on skeletons; the literal set of objects of a replete full subcategory need not itself be small.
+
+For 4.7.18 one needs only the first count, with $\pi=\pi_0'$. It gives $\pi_1'\leq2^{(\pi_0')^{\pi_0}}\leq2^{2^{\pi_0'}}$. If $\pi^{\pi_0'}=\pi$, then $\pi\geq2^{\pi_0'}$, and $(\pi')^\pi\geq2^\pi\geq\pi_1'$. This is the precise reason the threshold disappears after increasing the initial level.
+\end{dcomment}
+
+\begin{dcomment}{development}{p185}{Two different proposed improvements of the counting bounds}
+Grothendieck asks two different questions in the footnotes to 4.7.19. Footnote 78 literally asks whether the exponent $\pi^{\pi_0}$ can be replaced by $\pi_0$. Footnote 79 asks about the more plausible bounds $2^\pi$ and $(\pi')^\pi$. These must be separated: the first has an elementary negative answer already for sets. We record the calculation because it prevents a small printed exponent from being mistaken for a still-open refinement. This is a local verification given here, not a claim of priority.
+
+\textbf{Failure of a uniform initial exponent}\ours.
+Fix an infinite $\pi_0$. In $\Ens$, let $\mathcal F^\rho$ be the sets of cardinality at most $\rho$, and let $\pi=\pi'=2^{\pi_0}$. Then
+\[
+ \cardred\mathcal F^\pi>2^{\pi_0},
+ \qquad
+ \cardred(\mathcal F^\pi/1)>(\pi')^{\pi_0}.
+\]
+Thus neither occurrence of $\pi^{\pi_0}$ in 4.7.19 can uniformly be replaced by $\pi_0$.
+
+\textit{Proof.} We first verify the categorical setting. A set $X$ with $|X|\leq\rho$ is $\rho^+$-presentable: a map from $X$ to a $\rho^+$-filtered colimit has at most $\rho$ elementwise witnesses, and all witnesses and equalities can be moved to a common stage. If $|X|>\rho$, its presentation as the union of subsets of cardinality at most $\rho$, indexed by the $\rho^+$-directed poset of those subsets, prevents the identity of $X$ from factoring through a stage. Thus $\mathcal F^\rho=\mathcal M_\rho$. Every set is a filtered union of its subsets of cardinality at most $\pi_0$, so $\pi_0$ is useful for this canonical filtration. A skeleton $C$ of $\mathcal F^{\pi_0}$ has at most $2^{\pi_0}$ arrows and at least that many endomorphisms of a $\pi_0$-element set; hence its reduced cardinal is exactly $2^{\pi_0}$ and $\pi_1=\pi$.
+
+Now choose $X$ with $|X|=\pi$. It has exactly $\pi^\pi=2^\pi$ endomorphisms. Any skeleton containing a representative of its isomorphism class has the same number of endomorphisms of that representative. Therefore $\cardred\mathcal F^\pi\geq2^\pi>\pi=2^{\pi_0}$. In the slice over the singleton, the unique map $X\to1$ has precisely the same endomorphism set. Hence
+\[
+ \cardred(\mathcal F^\pi/1)\geq2^\pi
+ >\pi=(2^{\pi_0})^{\pi_0}=(\pi')^{\pi_0}.
+\]
+The strict inequalities are Cantor's theorem, and all hypotheses of 4.7.19 are met.\hfill$\square$
+
+In fact the elementary upper count also gives $\cardred\mathcal F^\pi=2^\pi$ in this example, so the first bound proposed in footnote 79 is sharp for sets. That observation does not prove its validity for arbitrary accessible categories. Our checks of the sources cited here, including the bounded-colimit theorem of Chen and the discussion of sizes by Lieberman--Rosick\'y--Vasey, did not locate a proof or counterexample for the full pair of numerical inequalities in footnote 79 with these exact hypotheses. We leave that specific comparison unsettled; we do not label it a recognized open problem of the literature.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p188}{Density records all relations}
+Grothendieck now separates the existence of sufficiently filtered colimits from the assertion that a small family actually generates every object by such colimits. The distinction is indispensable once arbitrary colimits are unavailable. We continue to write $\lambda=\pi_0^+$: his $\pi_0$-accessible objects are the objects whose covariant Hom functors preserve $\lambda$-filtered colimits. His strictly generating functors are usually called \emph{dense} functors. Thus the principal assertion of 4.8.1 is that a category of the form $\Ind_{\pi_0}(C)$ has a dense small subcategory of $\lambda$-presentable objects. The converse with that very same cardinal requires a separate argument; it is not included in the proposition's displayed implication chain. For an arbitrary generalized filtration, the term useful must retain the comparison-equivalence condition of 4.7.12: filteredness of its initial overcategories alone does not imply density, as the earlier audit explains. The canonical ind-completion examples satisfy the density hypothesis.
+
+The density criterion can be proved without assuming that the ambient category has arbitrary colimits. Let $i:C\to\mathcal M$, and set $N_iX(c)=\Hom(i(c),X)$. A natural transformation $N_iX\to N_iY$ is exactly a compatible family of maps $i(c)\to Y$ indexed by objects $(c,p:i(c)\to X)$ of $C/X$. Consequently
+\[
+ \operatorname{Nat}(N_iX,N_iY)
+ \cong \lim_{(c,p)\in(C/X)^{\mathrm{op}}}\Hom(i(c),Y).
+\]
+Full faithfulness of $N_i$ says precisely that the evident cocone with vertex $X$ has the colimit universal property. The assertion supplies this particular colimit; it does not presuppose all colimits in $\mathcal M$. This is the content of the equivalence between b) and c) in 4.8.2, and explains the usefulness of the formulation inherited from SGA~4, I, 7.2 \citep{SGA4I1972}.
+
+The passage through strict epimorphic families checks a different-looking compatibility condition. A family $(p_a:X_a\to X)$ is strict epimorphic when maps $u_a:X_a\to Y$ descend uniquely whenever $u_av=u_bw$ for every pair $v:Z\to X_a$, $w:Z\to X_b$ with $p_av=p_bw$. Density implies this property for the family of all maps from $i(C)$: its compatibility condition includes the arrows of $C/X$. Conversely, when $i$ is fully faithful, the compatibility along $C/X$ implies the required compatibility for arbitrary $Z$. Indeed, apply the joint epimorphicity of the family of all $i(c)\to Z$, which follows from the strict epimorphic hypothesis at $Z$, and use fullness to regard their composites with $v,w$ as arrows of $C$. This explains exactly where the full faithfulness hypothesis enters. It also prevents us from replacing a dense subcategory by a mere collection of generators without recording its morphisms.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p197}{The apparent difficulty with enlargement disappears}
+Grothendieck is checking that his earlier constructions survive enlargement of the generating category. The worry on manuscript pages 190--191 is withdrawn by Proposition 4.8.2; it is not an unresolved defect in the preceding theory. The useful fact is stronger than the permanence of density. Suppose that for every object $Z$, the family of all maps $i(c)\to Z$ is strict epimorphic. Adjoin arbitrary maps $q_a:Z_a\to X$ to the canonical family over $X$. Given compatible descent data on the enlarged family, its restriction supplies a unique $u:X\to Y$. To prove $uq_a=u_a$, precompose with every $i(c)\to Z_a$. Each resulting equality is already among the compatibility equations of the enlarged family. These maps are jointly epimorphic, so $uq_a=u_a$. Thus this particular strict epimorphic family remains strict after enlargement, with no pullback hypothesis.
+
+There is also a short proof directly with natural transformations. If $C\subset C'\subset\mathcal M$, $C'$ is full, and $C$ is dense, a transformation $N_{C'}X\to N_{C'}Y$ restricts to a unique arrow $u:X\to Y$ on $C$. For $p:c'\to X$ and every $a:c\to c'$, naturality gives
+\[
+ \eta_{c'}(p)a=\eta_c(pa)=upa.
+\]
+The maps from $C$ to $c'$ are jointly epimorphic, hence $\eta_{c'}(p)=up$. Faithfulness follows by restriction. Therefore $C'$ is dense. This proof isolates the global hypothesis missing from the tempting assertion that \emph{every} strict epimorphic family is preserved by arbitrary enlargement: the testing families are available at every newly adjoined domain.
+
+Two local notational slips should not obscure this argument. In the display on manuscript page~195 the required equations are $up_x=u_x$ and $up_\alpha=u_\alpha$, not equations with the auxiliary comparison maps $v_x,v_\alpha$. Footnote~82 should refer to condition a), as does footnote~81: condition c) is the density condition itself, so it is not a weaker assumption. Both readings are present in the edition and are retained in the transcription.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p202}{The compact part is an idempotent completion}
+Grothendieck identifies the part of an ind-completion that is already present at its initial cardinal. This is the first place where the completion by retracts must be treated as a structural operation. For $\mathcal M=\Ind_{\pi_0}(C)$, every representable is $\lambda$-presentable, and so is every retract of a representable. Conversely, write a $\lambda$-presentable $F$ as a $\lambda$-filtered colimit $\varinjlim_i y(c_i)$. Preservation of that colimit by $\Hom(F,-)$ makes $1_F$ factor through one of its terms:
+\[
+ F\xrightarrow{s}y(c_i)\xrightarrow{r}F,
+ \qquad rs=1_F.
+\]
+Hence $\mathcal M_{\pi_0}$ is exactly the retract closure of $y(C)$. Idempotents split in $\mathcal M$: a filtered presentation of the splitting is obtained by iterating the idempotent along an ordinal of cofinality greater than $\pi_0$, or by the finite idempotent indexing category used earlier in this commentary. Since idempotents split in the presheaf category, their splitting objects lie in the ind-completion. We have therefore proved
+\[
+ \mathcal M_{\pi_0}\simeq\Kar(C),\qquad
+ \Ind_{\pi_0}(\mathcal M_{\pi_0})\simeq\mathcal M.
+\]
+The second equivalence follows either from the same presentations or by factoring the identity through the fully faithful comparison functor. It is the useful-cardinal assertion of 4.8.5; the separate quantitative notion called regularity in the manuscript additionally uses the presentation-size estimate from 4.7.6.
+
+The list in footnote~84 is the corresponding Morita invariance statement. A fully faithful $u:C\to C'$ whose image contains every object of $C'$ up to retract induces an equivalence on idempotent completions. Restriction then induces an equivalence of presheaf categories: any set-valued presheaf extends uniquely, up to unique isomorphism, across a split idempotent, because its value at that retract must be the image of the induced idempotent of a set. The left and right Kan extensions are the inverse equivalences. They also preserve the indicated ind-subcategories. Conversely, an equivalence induced on $\Ind_{\pi_0}$ identifies its $\lambda$-presentable objects, and therefore identifies $\Kar(C)$ with $\Kar(C')$. The same argument at $\lambda=\aleph_0$ gives ordinary $\Ind$. This proves the equivalences in the footnote; the variance of $u_*$ must be $C^\wedge\to C'^\wedge$, as the editors already indicate.
+
+The modern higher-categorical formulation identifies the compact objects of an ind-completion with the idempotent completion of its input \citep[Lemma~5.4.2.4]{Lurie2009HTT}. The ordinary proof above shows which part of that statement is already fully present here: the identity of a compact object factors through a single stage, and the resulting projector is the only extra object that completion has introduced at this cardinal.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p204}{A retraction can fail cofinality without losing a small presentation}
+Grothendieck's example separates two operations that are easy to confuse: retracting a category and choosing a final functor into it. Take the full subcategory $D_0\subset\boldsymbol\Delta$ on $[0]$ and $[1]$. Its terminal object is $[0]$, while $[1]\to[0]$ has two sections. Choose one, $s:[0]\to[1]$. Adjoin a new terminal object $t$ to $D_0$, obtaining $D$. The maps
+\[
+ a\longrightarrow[0]\xrightarrow{s}[1]
+ \qquad(a\in D_0)
+\]
+form a natural cocone, so they define a retraction $p:D\to D_0$ with $p(t)=[1]$ and $p|_{D_0}=1$. This $p$ is not final. If it were, then for every $a\in D_0$ the colimit of $\Hom(a,p(-))$ would be a singleton. Since $D$ has terminal object $t$, that colimit is $\Hom(a,[1])$. Taking $a=[0]$ gives two elements.
+
+Nevertheless a finite final indexing category remains. More generally a section $1\to y(x)$ of the terminal presheaf map $y(x)\to1$ determines an idempotent $e:x\to x$. For every arrow $v:a\to x$, naturality gives $ev=\alpha_a$, independent of $v$. Let $E$ have one object and endomorphisms $1,e$, with $e^2=e$. The functor $E\to D_0$ picking $x$ is final: in $(a\downarrow E)$ every object $v:a\to x$ maps, using $e$, to $\alpha_a$. This comma category is nonempty and connected. The category $E$ is itself large in front of every cardinal: the constant components $e$ give a cocone on every diagram in $E$. Thus a failed retraction argument supplies no counterexample to bounded ind-presentations.
+
+Question 4.8.6(3) is answered affirmatively by the retract-presentation argument in our commentary on \S4.7. The conclusion holds for the manuscript's indexing convention, which allows non-ordered filtered categories. If one insists on a poset presentation, a finite indexing category with a nontrivial idempotent can no longer be used without changing its size; this is precisely why the indexing convention belongs in the statement. At fixed points $\pi^{\pi_0}=\pi$, the equality $\Filt^\pi=\Filt'^\pi$ then follows from 4.7.3. The example here explains why the proof should work on presentations themselves, rather than assuming that an arbitrary categorical retraction is final.
+\end{dcomment}
+
+\begin{dcomment}{status}{p206}{Accessibility and the chosen cardinal}
+Grothendieck's change of terminology brings the chapter to the modern structural notion: an accessible category is generated by a small subcategory under sufficiently filtered colimits, with the generators presentable at the same cardinal. His earlier weak notion only asked for a small generating family of accessible objects. The cardinal is part of the assertion. In particular, the existence of a dense family of $\mu$-presentable objects and of $\mu$-filtered colimits does not by itself provide the filtered presentation required in the definition.
+
+Questions 4.8.6(1) and the nonuseful-cardinal part of (4) have a common concrete answer. Let $\mathcal K$ be the category of nonempty $\aleph_1$-directed posets and monotone maps. It is $\aleph_1$-accessible: each object is the $\aleph_1$-directed union of its countable subposets with a greatest element. Its $\lambda$-presentable objects, for regular $\lambda\geq\aleph_1$, are precisely the posets of cardinal less than $\lambda$. Our commentary on \S4.7 proves these facts and the resulting obstruction, following \citet[Example~3.8]{Vasey2020Accessible}. For every singular $\theta>\aleph_1$ of countable cofinality, the poset $[\theta]^{<\aleph_1}$ has no cofinal subset of cardinal at most $\theta$. If it were a $\theta^+$-filtered colimit of $\theta^+$-presentables, a single stage image would contain all $\theta$ singleton subsets. That image would be $\aleph_1$-directed and of cardinal at most $\theta$, hence would be a forbidden cofinal subset. Thus $\mathcal K$ is not $\theta^+$-accessible, although its original small dense family of countable presentables remains $\theta^+$-presentable. It satisfies 4.8.1(a), but not (b), at manuscript cardinal $\theta$. Taking arbitrarily large such $\theta$ answers the unbounded version of (4) for this one category.
+
+The modern change-of-cardinal theorem explains the allowed upward steps through a sharp-inequality hypothesis; see \citet[Proposition~5.4.2.9 and Remark~5.4.2.10]{Lurie2009HTT}. Grothendieck's sufficient equation $\pi^{\pi_0}=\pi$ is a concrete way to ensure the requisite closure of small subsets under the previous stage's operations. The example shows why the cardinal condition has mathematical content.
+
+For question~(2), cocompleteness is a sufficient condition already established in 4.6.3. More economically, adjoining the existence of all colimits with at most $\pi_0$ arrows to $L_{\pi_0}$ supplies cocompleteness by the earlier decomposition of a small diagram into bounded pieces. The closure of the chosen generators under those colimits then makes the overcategories filtered at the required cardinal. This is a repair by adding operations that create cones, rather than merely adding more generators.
+
+The useful-but-nonregular alternative in question~(4) is excluded by the repaired presentation argument of \S4.7. If $\pi$ is useful in the sense of the comparison equivalence, write $\mathcal M=\Ind_\pi(\mathcal M_\pi)$. For $\pi'>\pi$ put $\mu=(\pi')^\pi$, so that $\mu^\pi=\mu$. Given $F\in\mathcal M_{\pi'}\subseteq\mathcal M_\mu$, the fixed-point presentation theorem, with base category $\mathcal M_\pi$, supplies a $\pi^+$-filtered presentation of $F$ of size at most $\mu$. The bounded cofinal-poset construction in our commentary on \S4.7 makes this index ordered without increasing its size. This is precisely the quantitative regularity required in 4.7.13, without an additional threshold $\pi_1$. The nonuseful cardinals supplied above therefore exhaust the possible kind of failure asked for in question~(4).
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p209}{Limits are bounded by products}
+Grothendieck's cardinal estimate makes finite limits manageable at sufficiently large stages of the filtration. It uses the restricted Yoneda embedding, not a special property of the object being limited. An existing limit in $\mathcal M$ is carried to the pointwise limit of its restricted representable functors, because each $\Hom(c,-)$ preserves limits. If $X=\lim_{j\in J}X_j$, then
+\[
+ X(c)\hookrightarrow\prod_{j\in\Ob J}X_j(c),
+ \qquad |X(c)|\leq\pi^{|\Ob J|}
+\]
+whenever $|X_j(c)|\leq\pi$. The source display has two slips: an inductive limit in place of a projective one, and an equality with the product in place of an inclusion. A limit imposes the compatibility equations associated with the arrows of $J$; deleting those equations generally enlarges it. The next displayed inequality is correct and is all the proof needs.
+
+For example, let $J$ be the parallel-pair category and take two functions $f,g:A\rightrightarrows B$. Its limit is the equalizer $\{a\in A:f(a)=g(a)\}$, with the redundant $B$-coordinate determined by $a$. For $A=B=\{0,1\}$, $f=1$, and $g$ the transposition, that limit is empty, while the product over the two objects of $J$ has four elements. Thus the equality cannot be read literally even in sets. For a finite nonempty shape and infinite $\pi$, the estimate becomes $\pi^{|\Ob J|}=\pi$; the empty shape is the terminal presheaf and has singleton values. The latter should be treated separately when the notation $\Filt^{\pi^0}=\Filt^1$ would fall outside the filtration's declared range. This proves the intended finite-limit bound without changing any substantive conclusion of 4.8.10.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p210}{Prorepresentability is the missing word}
+Grothendieck is trying to recover colimits from completeness by representing a limit of covariant representable functors. That strategy is sound, but the first sentence of Lemma~4.8.11, as printed, is false: accessibility and preservation of finite limits imply \emph{prorepresentability}, not representability. This is exactly the conclusion of the cited SGA~4, I, 8.13.2(b). The following sentence, which adds all small limits, is the representability statement; SGA~4, I, 8.12.8.1 supplies the additional step \citep{SGA4I1972}.
+
+An explicit example keeps the two conclusions apart. Put $A_n=\{0,1\}^n$, with the truncation surjections $A_{n+1}\to A_n$, and define a covariant functor on sets by
+\[
+ T(X)=\varinjlim_{n<\omega} X^{A_n}.
+\]
+The transition maps repeat a function on the two extensions of each binary word. Thus $T(X)$ is the set of functions from $\{0,1\}^{\mathbb N}$ to $X$ which depend on finitely many coordinates. It is equally the functor of continuous maps from the Cantor space to the discrete space $X$; compactness ensures that such a map factors through some $A_n$.
+
+Each functor $X^{A_n}$ preserves all limits and filtered colimits, since $A_n$ is finite. Filtered colimits commute with finite limits in sets. It follows, by interchanging two colimits for the accessibility assertion, that $T$ is finitary and preserves finite limits. However, the comparison
+\[
+ T(\{0,1\}^{\mathbb N})\longrightarrow
+ \prod_{k<\omega}T(\{0,1\})
+\]
+does not contain the family of coordinate functions in its image. A preimage would have to be the identity function on $\{0,1\}^{\mathbb N}$, which depends on every coordinate. Therefore $T$ fails to preserve this countable product and cannot be representable. Its defining inverse system $(A_n)$ is its prorepresentation. This is a fully explicit counterexample to the printed first sentence, with $\mathcal M=\mathrm{Set}$ satisfying even stronger hypotheses than those stated.
+
+The application $c\Rightarrow b$ in 4.8.9 survives. If $D:K\to\mathcal M$ is small and $\mathcal M$ is accessible and complete, the functor
+\[
+ H(X)=\lim_{k\in K^{\mathrm{op}}}\Hom(Dk,X)
+\]
+preserves all small limits. Choose a sufficiently large useful cardinal so that all $Dk$ are presentable and $K$ has smaller cardinality. Interchange of its defining small limit with sufficiently filtered colimits makes $H$ accessible. The solution-set form of the adjoint functor theorem now represents $H$, and its representing object is $\varinjlim_KD$.
+
+For completeness, the required solution set consists of all pairs $(A,a)$ with $A$ in a small presentable generating subcategory at a suitable cardinal and $a\in H(A)$. Every $(X,x)$ receives a map from such a pair because $H$ preserves the generating filtered colimits. The category of elements of $H$ is complete, since $H$ preserves all limits. A complete locally small category with a small weakly initial family has an initial object: take the product of the family to obtain a weakly initial object $P$, then equalize all endomorphisms of $P$. If $e:E\to P$ is that equalizer, choose $r:P\to E$ by weak initiality. Since $ere=e$, monicity gives $re=1_E$. For any $h:E\to E$, the endomorphism $ehr$ of $P$ satisfies $ehre=e$, hence $h=1_E$. Equalizers of two maps out of $E$, together with weak initiality of $E$, then show uniqueness of every such map. Thus $E$ is initial. This proves the representability step with the hypothesis actually needed.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p212}{Finite limits of a bounded ind-completion}
+Grothendieck isolates the real issue in Lemma~4.8.12: the pointwise limit must still admit a presentation with the stronger filteredness condition. The statement is true. Its ordinary ind-version is SGA~4, I, 8.9.1(c), and the later manuscript returns to it in 4.11.7 \citep{SGA4I1972,Grothendieck1990XVIII}. We give the bounded argument, since it needs only a span and does not assume an indexed representation theorem for arbitrary finite categories with endomorphisms.
+
+Suppose $C$ has finite limits, and put $\lambda=\pi_0^+$. The terminal presheaf is represented by the terminal object of $C$. For two $\lambda$-filtered presentations, the product indexing category is $\lambda$-filtered and filtered colimits commute with finite products in sets; hence their product is a $\lambda$-filtered colimit of the representing products. It remains to treat a pullback $F\times_HG$.
+
+Choose small $\lambda$-filtered presentations $F=\varinjlim_i y(a_i)$, $G=\varinjlim_j y(b_j)$, and $H=\varinjlim_k y(c_k)$. Let $L$ have objects $(i,j,k,u,v)$, where $u:a_i\to c_k$ and $v:b_j\to c_k$ induce the given maps to $H$. Its arrows are triples of index arrows making the two squares commute. The category $L$ is $\lambda$-filtered. To see this, begin with a diagram in $L$ having fewer than $\lambda$ arrows. Choose cones on its $i$-, $j$-, and $k$-components. The maps from the resulting $a_i,b_j$ to $H$ factor at some stages of the $c$-diagram, since representables are $\lambda$-presentable. Move them and the previously chosen $k$-cone to a common stage. Each desired compatibility equation holds in $H$, so it holds after a further transition. There are fewer than $\lambda$ such equations; $\lambda$-filteredness supplies one further stage satisfying all of them. The resulting object of $L$ is the required cone. The same argument with an empty starting diagram gives nonemptiness.
+
+There is a canonical comparison
+\[
+ \varinjlim_{(i,j,k,u,v)\in L}y(a_i\times_{c_k}b_j)
+ \longrightarrow F\times_HG.
+\]
+Evaluate at $d\in C$. A pair of elements on the right is represented by maps $d\to a_i$, $d\to b_j$ whose images agree in $H(d)$. Factor the two maps to $H$ through a common $c_k$ and enlarge $k$ until their composites from $d$ agree; the pair then factors through $a_i\times_{c_k}b_j$. This proves surjectivity. If two representatives have the same image, first move their $i$- and $j$-indices forward until the two coordinate maps agree; then choose a common $k$ and impose the finitely many compatibility equations just used in the filteredness proof. The two representatives become equal in the left-hand colimit. This proves injectivity, naturally in $d$.
+
+The displayed comparison is therefore an isomorphism. Its source is a $\lambda$-filtered colimit of representables, which proves the lemma. Together with arbitrary products it supplies all small limits. If instead all small cofiltered limits are assumed, an arbitrary product is the inverse limit of its finite subproducts, indexed by the opposite of the directed poset of finite subsets. Thus the alternative formulation using filtered projective limits in 4.8.9 is justified as well.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p213}{An accessible category can have an accessible opposite}
+Grothendieck's proposed converse in footnote~91 would turn accessibility on both sides into a smallness criterion. Partial injections show why the existence of many filtered colimits is insufficient for this purpose. Let $\mathcal P$ have small sets as objects and partial injective functions as arrows. Thus an arrow $X\dashrightarrow Y$ consists of a subset $D\subseteq X$ and an injection $D\hookrightarrow Y$. Taking the inverse partial function defines an isomorphism $\mathcal P^{\mathrm{op}}\cong\mathcal P$. This category is finitely accessible; precise published treatments of the example include \citet[\S3.2, Proposition~3.6, Lemma~3.8, Theorem~3.9]{Heunen2013L2}. We give a direct argument, also keeping track of the larger cardinals used in this chapter.
+
+Adjoining a basepoint identifies $\mathcal P$ with the category of pointed sets and pointed functions whose fibre over each nonbasepoint has at most one element. A partial function sends points outside its domain to the basepoint. Let $(X_i)_{i\in I}$ be a filtered diagram in $\mathcal P$, and form its colimit $L_*$ in pointed sets. The canonical map $(X_i)_*\to L_*$ has at most one element over every nonbasepoint. Indeed, if two points of $X_i$ have the same nonzero image, filteredness gives a stage at which they have the same nonzero image; the transition map is a partial injection, so the points were equal. Consequently the canonical maps define partial injections $X_i\dashrightarrow L$, where $L=L_*\setminus\{*\}$.
+
+The same argument proves the universal property within $\mathcal P$. A cocone $X_i\dashrightarrow Y$ gives a unique pointed function $L_*\to Y_*$. If two nonzero elements of $L_*$ have the same nonzero image, represent them at a common stage. The cocone map at that stage is injective wherever it is defined; hence the representatives, and therefore the two colimit elements, coincide. The induced map is a partial injection. Thus filtered colimits exist in $\mathcal P$ and are created by this embedding into pointed sets.
+
+Now let $\lambda$ be an infinite regular cardinal. A set $A$ of cardinal $<\lambda$ is $\lambda$-presentable in $\mathcal P$. To factor a partial injection $A\dashrightarrow L$ through a $\lambda$-filtered diagram, choose a representative for each of its fewer than $\lambda$ defined values and move them to one stage. Distinct colimit values cannot have coincident representatives, so this gives a partial injection with exactly the prescribed domain. If two such factorizations have the same composite to $L$, the equality of their values, including any values that become the basepoint, is witnessed at later stages. There are fewer than $\lambda$ witnesses; $\lambda$-filteredness puts them at one stage. This proves both surjectivity and injectivity of the presentability comparison map.
+
+Conversely, $X$ is the colimit of its subsets of cardinal $<\lambda$, ordered by inclusion. This poset is $\lambda$-filtered by regularity. If $X$ were $\lambda$-presentable, its identity would factor through one of these inclusions $B\hookrightarrow X$. The composite being the total identity forces $X=B$, so $|X|<\lambda$. We have therefore proved the exact description
+\[
+ \mathcal P_\lambda^{\mathrm{pres}}
+   =\{X:|X|<\lambda\},\qquad
+ \mathcal P\simeq
+ \operatorname{Ind}_{\lambda}\bigl(\mathcal P_\lambda^{\mathrm{pres}}\bigr),
+\]
+where $\operatorname{Ind}_{\lambda}$ in this display has its modern, regular-cardinal meaning. In the notation of the manuscript take $\lambda=\pi^+$: the $\pi$-accessible sets in $\mathcal P$ are exactly those of cardinal at most $\pi$. A skeleton of this subcategory is small, including its partial injections.
+
+An isomorphism in $\mathcal P$ is an ordinary bijection: an inverse under partial composition forces both domains to be the whole sets. Thus $\mathcal P$ has objects of every small cardinality and is not essentially small relative to the chosen universe. Both it and its opposite are accessible. The conjectured converse is false; the equivalence in Corollary~4.8.14 between small accessible categories and small idempotent-complete categories is unaffected. The obstruction is visible without any higher category theory: a coproduct of two singleton sets does not exist in $\mathcal P$. The cocones in which exactly one singleton map is defined force both structural arrows to be everywhere defined and their images to be distinct. The cocone sending both singleton points to the same singleton then cannot factor through a partial injection. Completeness hypotheses cannot be dropped from the familiar duality restrictions for locally presentable categories.
+\end{dcomment}
+
+\begin{dcomment}{status}{p216}{The small-category theorem and its boundary}
+Grothendieck's intended conclusion is that enough filteredness forces a diagram in a small category to become constant up to splitting an idempotent. The reduction to a one-object category is valid. If a $\pi_0^+$-directed poset is the union of at most $\pi_0$ subsets, at least one subset is cofinal: otherwise choose one obstruction to cofinality for each subset and take a common upper bound, contradicting the union. The same subset, with its inherited order, remains $\pi_0^+$-directed. Applying this to the fibres of the object function gives a cofinal presentation whose values are one fixed object $c$; its remaining data lie in $\End_C(c)$.
+
+The cancellation reduction and eventual-stationarity assertion on page~216 are not proved in these pages. Nor does the later annotation establish the exact endpoint printed in 4.8.13. The official continuation, 4.15.10--4.15.11, proves the conclusion under the strict inequality $\pi_0>\cardred C$ and explicitly describes it as a weaker form of 4.8.13 \citep{Grothendieck1990XVIII}. We use that strict-bound theorem for the applications here. It proves Corollary~4.8.14, because an essentially small category allows the cardinal to be enlarged. Thus an essentially small category is accessible exactly when it is idempotent complete; an accessible category with a common presentability bound on all objects is essentially small. The higher-categorical counterpart is \citet[Corollaries~5.4.3.5--5.4.3.6]{Lurie2009HTT}.
+
+The equality case $\pi_0=\cardred C$ is deliberately kept separate in the audit. The checked forward reference and the general small-category result do not settle that fixed-cardinal assertion. We do not describe it as a currently open problem merely because its proof is absent here. What is established for this reading is the strict-bound result, the consequent small-category characterization, and the exact remaining endpoint in the printed proposition.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p218}{A coherent diagram needs a common index}
+Grothendieck's aim is to present an entire diagram by diagrams in the small category, so that its arrows and relations are visible before taking the colimit. Write $[J,C]$ for $\uHom(J,C)$ and assume $|\mathrm{Mor}\,J|\leq\pi_0$. For $A:J\to C$ and a $\pi_0^+$-filtered diagram $(X_i)$ in $[J,\mathcal M]$, the set of natural transformations is the equalizer
+\[
+ \operatorname{Nat}(A,X)=
+ \operatorname{Eq}\left(
+ \prod_{j\in\Ob J}\Hom(Aj,Xj)
+ \rightrightarrows
+ \prod_{u:j\to k}\Hom(Aj,Xk)\right).
+\]
+Both products have at most $\pi_0$ factors. The defining commutation theorem in sets therefore proves that $A$ is $\pi_0^+$-presentable. The usual Hom formula for ind-objects then gives full faithfulness of
+\[
+ \Ind_{\pi_0}([J,C])\longrightarrow[J,\Ind_{\pi_0}(C)].
+\]
+This argument proves uniqueness of morphisms between already indexed presentations. It does not produce the presentation of an arbitrary diagram.
+
+For a diagram $\varphi$, let $K=[J,C]/\varphi$. If $K$ is $\pi_0^+$-filtered and each evaluation $K\to C/\varphi(j)$ is final, the tautological diagram in $[J,C]$ has colimit $\varphi$, because colimits in the target functor category are computed objectwise. Conversely, suppose $\varphi=\varinjlim_{i\in I}A_i$ is already an indexed presentation. Any family of at most $\pi_0$ objects of $K$, together with at most $\pi_0$ relations, factors through one stage $A_i$ by the presentability just proved. Any equality between those factorizations holds at a further common stage. Thus $K$ is $\pi_0^+$-filtered and $I\to K$ is final. The same factorization-and-equality argument applied at a single $j$ shows that $I\to C/\varphi(j)$ is final. Since its factorization through $K$ has final first factor, evaluation from $K$ is final as well. This proves the two directions of 4.9.2 with the size condition in its precise place.
+\end{dcomment}
+
+\begin{dcomment}{development}{p220}{An involution that no stage can carry}
+Grothendieck expects the indexed-representation theorem to fail for a finite category with a nontrivial automorphism. His reference to SGA~4, I, 8.8.8 gives the ordinary filtered example. The complete chapter also uses a countable signed-chain category in 4.9.6.8(2), on manuscript page~236. The following transfinite adaptation proves the failure of indexed representation for every infinite cardinal used here. We checked both antecedents and the manuscript's indexed-representation criteria; the cardinal-scaled argument below is supplied for this reading, without a claim of priority.
+
+\textbf{A bounded-filtered involution obstruction}\ours.
+For every infinite cardinal $\pi$, there is a small category $C$ and a diagram $B(\mathbb Z/2)\to\Ind_\pi(C)$ outside the essential image of
+\[
+ \Ind_\pi\bigl([B(\mathbb Z/2),C]\bigr)
+ \longrightarrow[B(\mathbb Z/2),\Ind_\pi(C)].
+\]
+\textit{Proof.} Put $\lambda=\pi^+$ and let the objects of $C$ be the ordinals $\alpha<\lambda$. There are no maps $\alpha\to\beta$ when $\alpha>\beta$, just the identity when $\alpha=\beta$, and two maps, labelled $+1,-1$, when $\alpha<\beta$. Composition multiplies the labels. This is a small category, and its only endomorphisms are identities. The positive maps define a functor $A:\lambda\to C$. The ordinal $\lambda$ is $\lambda$-filtered, since every set of fewer than $\lambda$ ordinals has supremum less than $\lambda$. Therefore
+\[
+ F=\varinjlim_{\alpha<\lambda}y(A\alpha)
+\]
+belongs to $\Ind_\pi(C)$. For a fixed $\beta$, the tail $\alpha>\beta$ is cofinal, and $\Hom_C(\beta,\alpha)=\{+1,-1\}$ with identity transition maps on these two labels. Hence $F(\beta)=\{+1,-1\}$. For a morphism labelled $\epsilon$, the presheaf action is multiplication by $\epsilon$. Multiplication by $-1$ consequently defines a natural involution $\sigma:F\to F$, and it has no fixed point in any $F(\beta)$.
+
+A functor $B(\mathbb Z/2)\to C$ must have trivial action, because every endomorphism in $C$ is an identity. A natural map from such an object $\beta$ to $(F,\sigma)$ would be an element of $F(\beta)$ fixed by $\sigma$. No such element exists. Thus
+\[
+ [B(\mathbb Z/2),C]/(F,\sigma)=\varnothing.
+\]
+In particular condition a) of 4.9.2 fails, and no indexed presentation can exist. Equivalently, every ind-colimit of the trivial actions still has trivial action, whereas $\sigma\neq1_F$. This proves the assertion.\hfill$\square$
+
+At the ordinary filtered level the construction is the signed-chain version of the unequal two-interval example in SGA~4 \citep[I, Exercise~8.8.8]{SGA4I1972}; the signed-chain category itself also occurs later in this chapter \citep[4.9.6.8(2)]{Grothendieck1990XVIII}. The transfinite chain is essential here: replacing it by the countable chain would not produce an object of $\Ind_\pi(C)$ when $\pi$ is infinite. The obstruction is therefore a direct answer to the cardinal version posed on manuscript page~220, rather than an appeal to a counterexample at the wrong filteredness rank.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p221}{Why colimits inside the small category repair coherence}
+Grothendieck's sufficient hypothesis makes the successive approximations to a diagram converge to an actual diagram in $C$. The countable case has a particularly transparent proof. Fix $\varphi:J\to\Ind_\pi(C)$, with $|\mathrm{Mor}\,J|\leq\pi$, and assume that $C$ has colimits of countable chains. Begin with arbitrary maps $X_0(j)\to\varphi(j)$ from objects of $C$. Since each $C/\varphi(j)$ is $\pi^+$-filtered, one can choose $X_1(j)$ and, for every arrow $u:j\to k$, a lift
+\[
+ d_0(u):X_0(j)\longrightarrow X_1(k)
+\]
+of its composite to $\varphi(k)$. The identity arrows give the transition maps $t_0(j)=d_0(1_j)$. Repeat this construction, imposing at the next stage all relations
+\[
+ d_{n+1}(v)d_n(u)
+ =t_{n+1}(\ell)d_n(vu)
+ \qquad(j\xrightarrow{u}k\xrightarrow{v}\ell).
+\]
+Before refinement the two sides have the same image in $\varphi(\ell)$, so they become equal at a further stage of its category of elements. There are at most $\pi$ equations and objects to dominate, and a common refinement imposes all of them. Taking $u=1_j$ gives compatibility of the $d_n(v)$ with the transition maps. Thus their colimits define arrows of a functor $X:J\to C$, with $X(j)=\varinjlim_nX_n(j)$; the displayed relation proves composition and the identity relation proves the identity law.
+
+There is a subtle but necessary final step. Yoneda need not preserve these colimits in $C$. Instead, every $\varphi(j)$, being a $\pi^+$-filtered colimit of representables, carries any existing colimit in $C$ indexed by at most $\pi$ arrows to a limit of sets. Indeed each representable has that property and $\pi^+$-filtered colimits of sets commute with those limits. Consequently the compatible elements of $\varphi(j)(X_n(j))$ define an element of $\varphi(j)(X(j))$, hence a map $X(j)\to\varphi(j)$. These maps form a natural transformation. This proves F~1 of page~226.
+
+To prove F~$3_\pi$, start with $X_0(j)=G(j)$ and the given pointwise maps $u_\alpha(j):F_\alpha(j)\to G(j)$. Besides the composition equations, impose the equations making $G\to X$ natural and making each composite $F_\alpha\to G\to X$ natural. For example the two maps $d_0(v)u_\alpha(j)$ and $t_0(k)u_\alpha(k)F_\alpha(v)$ already agree after mapping to $\varphi(k)$, so they can be equalized at the next refinement. Their number is still at most $\pi$. The resulting $G\to X$ and $F_\alpha\to X$ have exactly the compatibility requested by F~$3_\pi$. The faithful-functor lemma below now proves 4.9.3(a).
+
+The same construction works along any infinite limit ordinal $\delta$ of cardinal at most $\pi$ for which the relevant chain colimits exist in $C$. At a limit stage $\beta<\delta$, choose a cone in each $C/\varphi(j)$ on the preceding chain. At a successor stage, impose the compatibility of the new arrow lifts with every earlier transition and all composition equations. At most $\pi$ data are involved, so the same filteredness argument applies. At the final colimit the equations make the arrow maps independent of the chosen stage, and the preceding preservation argument supplies the map to $\varphi$. This proves the intended two-cardinal case: if $\mu<\pi$ and $C$ has $\mu^+$-filtered colimits of cardinal $\mu^+\leq\pi$, use $\delta=\mu^+$. The theorem's printed b) reuses $\pi_0$ with a different role from its headline; writing the ind-rank as $\pi$ and the smaller rank as $\mu$ removes that ambiguity.
+
+For Corollary~4.9.5 take $C=\mathcal M_\pi$, with $\pi^{\pi_0}=\pi$ and $|\mathrm{Mor}\,J|\leq\pi$. This $C$ is closed under the existing $\pi_0^+$-filtered colimits of cardinal at most $\pi$, and the argument applies. Thus the theorem gives the claimed accessibility at the stated larger cardinal. The later statement that a small diagram category in an accessible category is accessible is therefore a continuation of this precise coherence argument; its higher-categorical counterpart is \citet[Proposition~5.4.4.3]{Lurie2009HTT}.
+\end{dcomment}
+
+\begin{dcomment}{development}{p222}{Connected factors can require unbounded zigzags}
+Grothendieck's warning in footnote~97 explains why the product argument must use filteredness, not merely connectedness. We make the obstruction quantitative; this also gives a concrete test for an infinite-product argument elsewhere in the reader. We checked the product assertions in 4.9.6 and the standard filtered-category criteria in SGA~4, I, 8.1. The following exact component calculation is supplied here as a small development, without a priority claim.
+
+\textbf{Components of a product of fences}\ours.
+Let $P_n$ have objects $0,1,\ldots,n$ and, besides identities, one arrow along each adjacent edge, always directed from the even vertex to the odd vertex. Then every $P_n$ is connected, whereas two objects $a=(a_n)$ and $b=(b_n)$ of $\prod_{n\geq1}P_n$ are connected if and only if
+\[
+ \sup_{n\geq1}|a_n-b_n|<\infty.
+\]
+Consequently the product has exactly $2^{\aleph_0}$ connected components.
+
+\textit{Proof.} There are no composable nonidentity arrows in $P_n$, so its underlying undirected graph is the path with $n$ edges. A zigzag of length $r$ in the product projects to a zigzag of length $r$ in every factor; therefore $|a_n-b_n|\leq r$ for all $n$. Conversely, suppose all these distances are at most $r$. Choose the unique shortest path in each factor. Turn it into a zigzag with the fixed orientation pattern forward, backward, forward, backward, and so on, by inserting identity arrows when the next edge has the opposite direction. At most two positions are needed for each edge, and further identities pad every path to length $2r$. The resulting coordinatewise arrows are arrows of the product, so they give one finite zigzag from $a$ to $b$.
+
+There are at most continuum many objects in the product. For every real $t\in[0,1]$, take $a_n(t)=\lfloor tn\rfloor$. If $s\neq t$, the distances $|a_n(s)-a_n(t)|$ are unbounded, hence these objects lie in distinct components. This gives the matching lower bound.\hfill$\square$
+
+Filtered categories avoid this defect because any finite family of objects has a common target, and any parallel pair can be equalized. For a product of $\pi^+$-filtered categories, choose a cocone coordinatewise for each diagram of at most $\pi$ arrows. Choice assembles these cones into a cocone in the product, including the empty-diagram case. Every projection to a subproduct is final: its comma categories are products of a category with an initial object and the complementary filtered product. This proves 4.9.6.1--4.9.6.2 while accounting for the warning.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p225}{The faithful cofinality test, with its hypotheses restored}
+Grothendieck reduces the construction of a coherent presentation to the ability to lift a bounded family of arrows after one common refinement. Faithfulness then turns equations seen downstairs into actual equations upstairs. This is the precise role of F~$3_\pi$; the evaluation functor into the product of the categories of elements is faithful because a natural transformation is determined by its components.
+
+The printed condition b$'$ in 4.9.6.3 is incomplete. It only says that $I'$ is connected and equalizes parallel pairs, so it cannot imply an assertion about $I$ or $f$. The functor $\varnothing\to1$ satisfies it and is not final. The proof in the continuation uses, in addition, that every $(i'\downarrow f)$ is filtered; inserting that clause gives the intended b$'$. The assertions involving b) and the faithful test c) are correct. Here is a proof of the version needed in these pages.
+
+Suppose $f:I\to I'$ is faithful, $I'$ is $\pi^+$-filtered, F~1 holds, and F~$3_\pi$ holds. Given a diagram $D:K\to I$ with at most $\pi$ arrows, choose a cone $u_k:fDk\to z$ in $I'$, and then a map $z\to f(i)$ by F~1. F~$3_\pi$ gives $v:i\to h$ and $w_k:Dk\to h$ whose images are the composites of those cone maps with $f(v)$. For an arrow $a:k\to\ell$ of $K$ we have
+\[
+ f(w_\ell D(a))=f(w_k).
+\]
+Faithfulness gives $w_\ell D(a)=w_k$, so $I$ is $\pi^+$-filtered. Its nonemptiness follows from F~1 and nonemptiness of $I'$.
+
+Apply the same construction to a bounded diagram of objects $(i_k,p_k:z\to f(i_k))$ in $(z\downarrow f)$. In $I'$ take a cone on its image together with $z$ and all $p_k$. After F~1 and F~$3_\pi$, the maps $w_k$ obtained above satisfy
+\[
+ f(w_k)p_k=p
+\]
+for one map $p:z\to f(h)$. They are therefore a cone in the comma category. The empty case is F~1. Every comma category is $\pi^+$-filtered, hence nonempty and connected, so $f$ is final. This proves c$_\pi\Rightarrow$b$_\pi\Rightarrow$a$_\pi$ under faithfulness, including all quantifiers used in 4.9.6.4.
+
+Faithfulness cannot simply be discarded. For a nontrivial group $G$, the functor $BG\to1$ satisfies F~1 and every F~$3_\pi$, since all equations in the target are automatic and arbitrary arrows upstairs can be chosen. But $BG$ is not filtered: distinct automorphisms cannot be equalized. This example identifies the exact step that fails when equality of images is substituted for equality of arrows.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p228}{Completing the argument of manuscript page 228}
+On manuscript page~228 Grothendieck's proof has reached the point just before the two candidate arrows from $i'$ are equalized. The remaining step is short once finality is used in the correct comma category. If $I$ is filtered and $f$ is final, every $(i'\downarrow f)$ is connected. Given two of its objects, join them by a finite zigzag. Project that zigzag to $I$ and take a cone there. Commutativity along each arrow of the zigzag makes the composites from $i'$ agree at its vertex, so that vertex is an object receiving maps from the two original comma objects. Parallel arrows in the comma category can be equalized by filteredness of $I$; the resulting arrow is still over $i'$. Hence the comma category is filtered. This finishes the particular step begun in 4.9.6.7.
+
+For the stronger cardinal statement, begin with a diagram of at most $\pi$ arrows in $(i'\downarrow f)$. Choose one object and a finite connecting zigzag to each of the others. The union of their projections and of the original diagram still has at most $\pi$ arrows, because $\pi$ is infinite. A cone in $I$ simultaneously imposes all relations and all equalities of maps from $i'$. Thus every comma category is $\pi^+$-filtered. Likewise a bounded diagram in $I'$ can be lifted object by object using F~1; connect, inside the appropriate comma categories, the two choices associated with each arrow. A cone on the resulting bounded diagram in $I$ yields a cone in $I'$. This proves a$_\pi\Rightarrow$b$_\pi$.
+
+Conversely, suppose $I'$ and all $(i'\downarrow f)$ are $\pi^+$-filtered. Finality is immediate. First derive F~$3_\pi$. Given $u'_\alpha:f(i_\alpha)\to f(i)$, filteredness of $(f(i_\alpha)\downarrow f)$ supplies arrows $w_\alpha:i_\alpha\to k_\alpha$ and $v_\alpha:i\to k_\alpha$ with $f(w_\alpha)=f(v_\alpha)u'_\alpha$. Regard all $v_\alpha$ as arrows from $(i,1)$ in $(f(i)\downarrow f)$. A cone on this bounded diagram supplies maps $h_\alpha:k_\alpha\to h$ with all $h_\alpha v_\alpha$ equal to one $v:i\to h$. The arrows $h_\alpha w_\alpha$ prove F~$3_\pi$.
+
+Now choose a cone on $fD$ in $I'$, follow its vertex by a map to some $f(i)$, and apply F~$3_\pi$. This gives arrows $w_k:Dk\to h$ which satisfy all the cone equations after applying $f$. For each arrow $a:k\to\ell$, the two arrows $w_\ell D(a),w_k$ are parallel arrows in $(fDk\downarrow f)$. Filteredness there gives $e_a:h\to h_a$ equalizing them. In $(f(h)\downarrow f)$ take a cone on the bounded diagram consisting of $(h,1)$ and these arrows $e_a$. Its map $e:h\to H$ factors through every $e_a$, so the maps $ew_k$ satisfy every cone equation in $I$. This proves $\pi^+$-filteredness of $I$ without faithfulness, and establishes b$_\pi\Rightarrow$a$_\pi$.
+
+Finally, for final functors $f_\alpha:I_\alpha\to I'_\alpha$ with filtered sources, the comma category of the product functor is
+\[
+ ((i'_\alpha)_\alpha\downarrow\prod_\alpha f_\alpha)
+ \cong\prod_\alpha(i'_\alpha\downarrow f_\alpha).
+\]
+Each factor is filtered by the argument just given; their product is filtered and therefore connected. This proves 4.9.6.5. Applying it to the diagonal functors $I_\alpha\to I_\alpha^B$ gives the diagonal proof of the next corollary, whose heading is misnumbered 4.4.6.6 in the edition. The direct coordinatewise cone proof gives the same result and avoids treating infinite products of merely connected categories as connected.
+\end{dcomment}

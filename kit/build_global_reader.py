@@ -92,6 +92,7 @@ CHUNKS = [
 # part-file line that opens the next part (or to \printedpage{to+1}). Manuscript pages in the comments.
 SKIP_PAGES = {
     "DER_I-b": (34, 38),      # ms. 59 (end)-66 (beginning), set from DER_I-a
+    "DER_II-b": (29, 33),     # set from DER_II-a (II-b has no blocks there; its copy of p. 33 misread a′) as d′), 11 Nov)
     "DER_VI-b": (39, 43),     # ms. 63 (end)-70 (beginning), set from DER_VI-a
     "DER_VI-c": (84, 88),     # ms. 137 (end)-145 (beginning), set from DER_VI-b
     "DER_VII-b": (34, 38),    # ms. 49' (end)-57 (beginning), set from DER_VII-a
@@ -392,7 +393,12 @@ def defined_macros(defs_text):
 # ------------------------------------------------------------------------------------------------------------------
 # A chunk: its text with the commentary set in, split at chapter boundaries.
 SEPARATOR = "\n\\clearpage\n\\section*{Overview of these pages}\n"
-MS = re.compile(r"\\msp(?:in)?\{(?:page\s*)?(\d+(?:bis|ter|quater|')?)\}")      # as kit/build_reader.py
+MS = re.compile(r"\\msp(?:in)?\{(?:page\s*)?(\d+(?:bis|ter|quater|'|\$'\$)?)\}")      # as kit/build_reader.py  ($'$ = math prime, 11 Nov)
+
+
+def ms_labels(t):
+    """The ms-page labels of a text; a math prime (50$'$) is the label 50' (11 Nov 2026)."""
+    return [x.replace("$'$", "'") for x in MS.findall(t)]
 BLOCK = re.compile(r"\\begin\{dcomment\}\{([^}]*)\}\{([^}]*)\}\{([^}]*)\}(.*?)\\end\{dcomment\}", re.S)
 MARK = re.compile(r"^% ---- from (\S+)[ \t]*$", re.M)
 CREDIT = re.compile(r"GPT-6|OpenAI|ChatGPT|Anthropic|AI-produced|AI-written|AI-assisted")
@@ -478,7 +484,7 @@ def skip_pages(cid, body, notes):
     if bad or any(envs.values()) or flat.count("{") - flat.count("\\{") != flat.count("}") - flat.count("\\}"):
         notes.append(f"{cid}: WARNING the cut at edition pages {lo}-{hi} is not clean; overlap not cut")
         return body
-    ms = MS.findall(cut)
+    ms = ms_labels(cut)
     notes.append(f"{cid}: edition pages {lo}-{hi} (ms. {ms[0] if ms else '?'}-{ms[-1] if ms else '?'}) not set: "
                  f"the book sets them from the other chunk of the overlap ({len(BLOCK.findall(cut))} blocks of this "
                  f"chunk there, carried over in its source)")
@@ -520,7 +526,7 @@ def qualify_labels(cid, t):
 
 
 def ms_range(t):
-    labels = MS.findall(t)
+    labels = ms_labels(t)
     return (labels[0], labels[-1]) if labels else None
 
 
@@ -555,7 +561,7 @@ def split_pieces(cid, body, expected, notes):
                     continue
                 n, words = m.group(1), m.group(2)
                 homes = [j for j, (_, t) in enumerate(pieces)
-                         if (words and words.strip() in BLOCK.sub("", t)) or (not words and n in MS.findall(t))]
+                         if (words and words.strip() in BLOCK.sub("", t)) or (not words and n in ms_labels(t))]
                 if k in homes or len(homes) != 1 or homes[0] > k:
                     continue
                 home = homes[0]
@@ -1077,7 +1083,10 @@ TITLE_PAGE = r"""\begin{titlepage}
 J.~Malgoire and G.~Maltsiniotis (Universités de Montpellier~II et Paris~VII),
 \url{https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html}. The \LaTeX{} transcription of that
 edition is AI-transcribed (Claude Opus~5.5, Anthropic). The commentary, the register of claims and the corrections
-are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic).
+are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic). Eight
+commentary blocks in parts II-a, III-V and XIIb-a, seven paragraphs of other blocks there, nineteen entries of the
+register of claims and three bibliography entries are AI-produced by Claude Fable~5.2 (Anthropic), from answers of
+GPT-6 Astra that it reviewed.
 
 \bigskip
 \noindent\textbf{Rights}

@@ -1,0 +1,640 @@
+% Commentary by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+% GPT-6 Astra (OpenAI, ChatGPT Pro mode): manuscript pp.58--80.
+
+\begin{dcomment}{exposition}{p58:est défini seulement à isomorphisme canonique près.}{The adjunction must survive the choice of resolutions}
+Grothendieck has constructed the candidate for a left homotopy Kan extension and now asks for the property that makes this candidate useful: maps out of it must correspond to maps into the restricted diagram. The distinction matters because an equivalence between two localized categories remembers neither a preferred direction of replacement nor the comparison maps with the original functor. Corollary~3.5 has enough compatibility to descend an actual adjunction. Remark~3.6 removes that compatibility and exposes what is lost.
+
+Write $F\dashv G$, let $j:\mathcal C_0\hookrightarrow\mathcal C$ be the chosen full subcategory, and write $\gamma$ and $\delta$ for localization. If $\operatorname{Ho}(j)$ is an equivalence and $Fj$ preserves weak equivalences, the composite
+\[
+ \overline F=\operatorname{Ho}(Fj)\operatorname{Ho}(j)^{-1}
+\]
+is certainly a functor. Its construction has not supplied a natural transformation $\overline F\gamma\to\delta F$. Such a comparison is part of the data of a left derived functor, with a universal property; it cannot be reconstructed from the objectwise choice alone.
+
+The smallest example makes the distinction quite concrete. Let $\mathcal C$ be the walking arrow $0\to1$, use all arrows as $W$, only isomorphisms as $W'$, and take $F=G=1_{\mathcal C}$. Inverting the single nonidentity arrow makes $\mathcal C[W^{-1}]$ equivalent to the terminal category. Both subcategories $\{0\}$ and $\{1\}$ therefore give localization equivalences. Choosing $\mathcal C_0=\{1\}$ makes $\overline F$ select~$1$, while $\overline G:\mathcal C\to1$ is the unique functor. An adjunction would require
+\[
+ \operatorname{Hom}_{\mathcal C}(1,0)
+ \simeq \operatorname{Hom}_{1}(*,*) .
+\]
+The first set is empty and the second is a singleton. Choosing $\{0\}$ instead gives an adjunction, since $0$ is initial. Even then $\overline G$ is not fully faithful: the empty hom-set from~$1$ to~$0$ again maps to a singleton. This also proves the second warning on manuscript p.~68. The two failures concern the formal inferences; they do not disprove a correctly constructed homotopy Kan extension or a correctly justified homotopy-cofinality theorem.
+
+A useful sufficient repair is a functor $Q:\mathcal C\to\mathcal C_0$ and a natural weak equivalence $q:jQ\to1_{\mathcal C}$, with $F$ homotopical on $\mathcal C_0$ and $G$ homotopical on all of its domain. The comparison is then $\delta Fq$, rather than an unspecified isomorphism after localization. This is the left-deformation construction of \citet[Theorems~2.2.8 and~2.2.11]{Riehl2014}. A more intrinsic sufficient condition is that the total derived functors are absolute Kan extensions; their adjunction is the unnumbered theorem of \citet{Maltsiniotis2007Adjunction}.
+
+The direction of $q$ explains the example. The constant choice $Q(X)=0$ admits $q_X:0\to X$; the constant choice $Q(X)=1$ admits no component $1\to0$. Thus the obstruction is visible before any hom-set calculation in the localization. The passage to the categorical mapping cylinder in the next proof is a way of recovering compatible adjunctions without first choosing a functorial resolution of every diagram.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p59}{Why the mapping cylinder repairs the argument}
+Grothendieck replaces the given map of indexing posets by two maps for which the adjunction can be controlled separately. The construction called a mapping-cone here is a categorical mapping cylinder. It is also the collage of the bifunctor $\operatorname{Hom}_{I'}(-,u-)$, the gluing construction already encountered in the commentary on Chapter~XII, manuscript pp.~59--61. Here its particular purpose is to make one factor preserve cofibrancy and the other preserve weak equivalences without deriving it.
+
+Keep the convention of Theorem~3.7 explicit: $\mathcal M(I^\circ)=\operatorname{Fun}(I,\mathcal M)$ consists of covariant diagrams. The objects of $C(u)$ are the disjoint union of those of $I'$ and $I$. Within either piece the original arrows remain; a mixed arrow from $j\in I'$ to $i\in I$ is an arrow $j\to u(i)$ in $I'$; there are no mixed arrows in the reverse direction. Composition is induced by composition in $I'$ and by $u$. Thus the inclusion $w:I\hookrightarrow C(u)$ is a cosieve, and the inclusion $s:I'\hookrightarrow C(u)$ is a sieve. The retraction $v$ is the identity on $I'$ and equals $u$ on $I$.
+
+The essential feature of $v$ can be read directly from its hom-sets:
+\[
+ \operatorname{Hom}_{C(u)}(s j,x)
+ \simeq\operatorname{Hom}_{I'}(j,vx).
+\]
+Thus $s\dashv v$, with $vs=1$. In particular $(j,1_j)$ is initial in $(j\downarrow v)$. For an object $(x,\beta:j\to vx)$ of this comma category, its unique arrow from $(j,1_j)$ is the arrow represented by $\beta$ itself. This proves Lemma~3.8, including uniqueness, for arbitrary categories. An initial object gives a common predecessor for every finite diagram and equalizes each parallel pair; hence the required cofilteredness follows. The result is stronger than a statement that the comma category has contractible nerve.
+
+The other factor is controlled by extension by the initial object. If $j\notin I$, the category $(w\downarrow j)$ is empty, because a cosieve admits no arrow from its objects to an object outside it. If $j\in I$, that category has terminal object $(j,1_j)$. Consequently
+\[
+ (w_!X)_j=\begin{cases}
+ X_j,&j\in I,\\
+ \varnothing_{\mathcal M},&j\in I'.
+ \end{cases}
+\]
+An objectwise weak equivalence is sent to the same weak equivalence on $I$ and to an identity on $I'$. Both $w_!$ and $w^*$ are therefore homotopical, and their unit and counit descend. No inference of the kind disproved in Remark~3.6 is needed.
+
+There are two small inheritance checks behind the application of the earlier cofibration theorem. A chain in $C(u)$ can cross from one piece to the other at most once, so artinianity passes from the two pieces to their collage. An increasing chain of open subsets stabilizes once its intersections with the two pieces stabilize, which proves the stated noetherianity assertion. Corollary~3.5 therefore applies to $v$, while the preceding extension argument applies to $w$. Compatibility of the already constructed left Kan extensions with composition identifies $u_!^W$ with $v_!^Ww_!^W$. Composing the two actual adjunctions proves Theorem~3.7.
+
+For a small worked instance, take $I$ to be two isolated objects and $I'=e$. The cylinder has an initial vertex $*$ and two arrows $*\to a$, $*\to b$. Extending the pair $(A,B)$ along $w$ gives $(\varnothing\to A,\varnothing\to B)$; taking its colimit along $v$ gives $A\amalg B$. Its cocones to $Y$ are exactly the pairs of arrows $A\to Y$, $B\to Y$. With cofibrant replacements $QA\to A$ and $QB\to B$, the same construction gives the derived coproduct $QA\amalg QB$. The proof above, rather than the mere existence of these replacements, supplies its adjunction in the homotopy categories.
+\end{dcomment}
+
+\begin{dcomment}{context}{p64:on a le même résultat sur la catégorie}{The invariant theory and the auxiliary structures}
+The point of Corollary~3.9 is that a one-sided structure on the coefficient category already constructs the corresponding half of the theory of diagrams. Cofibrations organize the calculation of left homotopy Kan extensions. A dual structure of fibrations organizes right homotopy Kan extensions. Grothendieck does not require the two chosen classes to determine one another by lifting properties before recognizing the resulting operations as part of the same homotopy theory.
+
+This viewpoint is stated particularly clearly in the letter to Thomason of 2 April 1991: weak equivalences specify the essential data, while fibrations and cofibrations serve to construct operations and establish their existence \citep[point~1, printed pp.~3--4]{Grothendieck1991Letter}. Brown's categories of fibrant objects provided a one-sided precedent \citep[Section~1]{Brown1973}; the text here works dually and allows noncofibrant objects before passing to the cofibrant subcategory. A Quillen structure imposes the further agreement of the pairs $(C,F\cap W)$ and $(C\cap W,F)$ through lifting and factorization. That agreement is a powerful construction device, but it is a stronger condition than having two separate ways to calculate the operations attached to $W$.
+
+Two conventions need attention when reading the corollary. First, its axiom numbers are Grothendieck's. Dér~2 is the localization or evaluation-conservativity assertion. Dér~3 concerns the full faithfulness of the constant-diagram functor when the indexing category has a final object; it does not assert that $\mathbf D(e)$ has a final object. Dér~4 bis and Dér~5 bis are the existence and pointwise-computation assertions for left Kan extensions. Dér~6 includes the corresponding exactness of base change on the specified homotopy-cocartesian squares. This older list should not be substituted term by term for a modern list numbered Der1--Der4.
+
+Second, the preceding theorem is about covariant diagrams $\mathcal M(I^\circ)$, whereas the usual presheaf notation is $\mathcal M(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal M)$. Passing to the presheaf prederivator reverses the admissible indexing orders. The artinian condition of Theorem~3.7 becomes a noetherian condition on $I$; the extra topological condition becomes noetherianity of $\operatorname{Esp}(I^\circ)$. Corollary~3.9 and the corresponding sentence of~3.11 omit this reversal in their wording. Grothendieck gives the corrected presheaf formulation explicitly in Chapter~XIX, Proposition~3.2 and the discussion in~3.4 \citep{Grothendieck1990XIX}. The finite examples are unaffected, but the infinite indexing convention should be fixed before applying the result.
+
+This also explains why the comma symbols change. For a covariant diagram $X:I\to\mathcal M$ the value of $u_!X$ at $j$ is a colimit over $(u\downarrow j)=I/j$. For a presheaf $X:I^{\mathrm{op}}\to\mathcal M$ it is a colimit over $(j\downarrow u)^{\mathrm{op}}$. The printed $i'\backslash I$ in the square on manuscript p.~70 is therefore correct in the presheaf convention of~3.11. The square carries its canonical comma natural transformation; it is not meant as an equality of its two composites in the underlying ordinary category of categories.
+\end{dcomment}
+
+\begin{dcomment}{development}{p66:Ainsi, on est ramené aux cas}{A finite source can require an infinite supply of coefficients}
+Grothendieck observes that the target of a Kan extension need not itself be ordered: the calculation can be made over comma categories. This is correct in the transfinite setting, but it does not extend the finite-colimit alternative without a further hypothesis. The new comma categories may be much larger than the source. We make the obstruction precise in a case where weak equivalences introduce no additional difficulty.
+
+Take $\mathcal M=\mathrm{FinSet}$, let $W$ be the isomorphisms, and let every map be a cofibration. All the finite cofibration axioms hold: finite colimits exist, pushouts preserve isomorphisms, and $f=1\circ f$ is a cofibration--weak-equivalence factorization. Every object is cofibrant. For the functor $e\to BG$, covariant restriction is the forgetful functor
+\[
+ U:\mathrm{FinSet}^{G}\longrightarrow\mathrm{FinSet}.
+\]
+The comma category $(e\downarrow *)$ is the discrete set $G$, so the proposed pointwise formula on a singleton requires $\coprod_G1$. If $G$ is infinite this colimit is absent from $\mathrm{FinSet}$. There is also a sharper test for whether any left adjoint exists.
+
+\textbf{Finite-action criterion.}\ours\par
+For a group $G$, set
+\[
+ N=\bigcap_{[G:H]<\infty}H.
+\]
+The forgetful functor $U$ has a left adjoint if and only if $[G:N]$ is finite. When it exists, the left adjoint sends a finite set $S$ to $(G/N)\times S$, with $G$ acting on the first factor.
+
+\emph{Proof.}
+Suppose $F\dashv U$, put $P=F(1)$, and let $p\in P$ be the point specified by the unit. Equivariance and the adjunction give a natural bijection
+\[
+ \operatorname{Hom}_G(P,A)\longrightarrow U(A),\qquad
+ f\longmapsto f(p).
+\]
+In particular $P$ is nonempty. For the trivial two-element $G$-set, an equivariant map is precisely a function on the orbit set of $P$. If $P$ has $k$ orbits, the left side has $2^k$ elements and the right side has two. Thus $k=1$ and $P$ is transitive. Write $H=\operatorname{Stab}_G(p)$, so $P\simeq G/H$ and $H$ has finite index.
+
+For every finite-index subgroup $K\subset G$, apply the bijection to $A=G/K$ and the distinguished point $K$. The required map taking $p$ to $K$ forces $H\subset K$. Hence $H\subset N$. The reverse inclusion follows because $H$ itself occurs in the intersection, so $H=N$ and $[G:N]<\infty$.
+
+Conversely, the intersection defining $N$ is normal, since conjugation permutes the finite-index subgroups. For every finite $G$-set $A$ and every $a\in A$, its stabilizer has finite index, so $N$ fixes~$a$. All finite actions therefore factor through $G/N$. If $G/N$ is finite, $(G/N)\times S$ is a finite $G$-set, and an equivariant map from it to $A$ is uniquely specified by the arbitrary function $s\mapsto f(N,s)$. This is the required adjunction, naturally in both variables.\hfill$\square$
+
+For $G=\mathbb Z$, the intersection of the subgroups $n\mathbb Z$ is zero and has infinite index. Thus $U$ has no left adjoint, even though the source of $e\to B\mathbb Z$ has one object and no nonidentity arrows. Equivalently, a hypothetical universal point in a finite $\mathbb Z$-set would have a finite orbit of length $r$, but could not map to the distinguished point in the cycle of length $r+1$. This disproves the unrestricted finite-colimit reading of the sentence on manuscript p.~66.
+
+The criterion also separates existence of a left adjoint from the pointwise colimit formula. An infinite group with no nontrivial finite quotients has $N=G$, so all its finite actions are trivial and $U$ is an equivalence. Its left adjoint exists although the infinite discrete coproduct appearing in the proposed formula does not. In the general theory, Dér~5 bis is therefore substantive even when Dér~4 bis has been obtained.
+
+We did not find this explicit finite-action criterion in the derived-functor and ABC sources checked here, nor in a targeted search for adjoints of the finite-action forgetful functor. The elementary argument is supplied as a diagnostic continuation of the text, with no claim of priority. The repair needed for Grothendieck's construction is to retain the transfinite colimit hypotheses, or to require that each comma category and its colimit remain within the range of the finite theorem.
+\end{dcomment}
+
+\begin{dcomment}{later}{p70}{Strict factorization and arbitrary diagram shapes}
+Grothendieck introduces strictness to make the theorem uniform in an extra parameter. A natural transformation of $Z$-diagrams is itself a functor $Z\to\operatorname{Arr}(\mathcal M)$. A functorial factorization on the arrow category factors all its components together and supplies the transition maps between the intermediate objects. Thus the coefficient category $\mathcal M^Z$, with weak equivalences and cofibrations tested componentwise, again has the required factorization axiom. Colimits and the stated closure properties are also tested componentwise. Applying the earlier theorem to these new coefficients constructs the extension along $u\times1_Z$.
+
+There is a converse behind the qualification about size. If $\mathcal M$ is small, factor the universal arrow diagram indexed by $\operatorname{Arr}(\mathcal M)$; its two endpoint functors and their universal natural transformation recover a functorial factorization on all arrows. For an essentially small category, first choose a small equivalent one. In a large category the all-small-diagrams assertion only makes this choice on every small full subcategory of the arrow category, which is the formulation Grothendieck finally adopts. No global choice on a proper class is needed for the application to a particular small~$Z$.
+
+The arbitrary-shape question at the end of~3.11 was subsequently answered under hypotheses appropriate to all small homotopy colimits. In \citet[Theorems~9.6.3 and~9.6.5]{RadulescuBanu2009}, the existence of the left adjoint and its pointwise comma-category formula are proved separately for ABC cofibration categories; Theorem~10.3.2 identifies the resulting strong left Heller derivator. Here we use the numbering of arXiv:math/0610009v4. Its axioms CF5 and CF6 provide small coproduct and sequential-composition control. The theorem therefore does not assert that the finite axioms alone suffice. The construction proceeds through direct simplicial resolutions of arbitrary categories, rather than requiring a projective Quillen structure on every original diagram category.
+
+\citet[Theorem~6.11 and Corollary~6.21]{Cisinski2010} gives the corresponding presheaf and derivator statements in a fibration-oriented convention, with the required homotopical completeness assumptions; the dual statements concern cofibrations. These references establish the later affirmative results without turning the source's uncertainty into a present-day open problem. They also explain why strictness and specialness should remain distinct: strictness is a coherent factorization condition, while the next section adds a set of generators and transfinite closure to obtain a particular transfer construction.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p71}{What the small set of cofibrations contributes}
+Grothendieck now changes the method. The induction over a well-founded indexing order is replaced by an induction that attaches solutions to lifting problems. A small set of maps can test all the required right lifting properties at once. This is why the set $C_0$ enters the argument precisely when the indexing category is allowed to have arbitrary arrows and endomorphisms.
+
+For a class $S$ of maps, write
+\[
+ S^{\perp}=\{p:s\mathrel{\perp}p\text{ for every }s\in S\},
+ \qquad
+ \widetilde S={}^{\perp}(S^{\perp}).
+\]
+The tilde denotes closure for the lifting relation, not closure under weak equivalence. If $C_0\subset C\subset\widetilde{C_0}$, then $C^{\perp}=C_0^{\perp}$ by the two inclusions in the lifting relation. Under the smallness hypotheses, $\widetilde{C_0}$ is also the class of retracts of relative $C_0$-cell maps. These are the two descriptions connected by the small-object argument; they should not be identified without its hypotheses.
+
+Here is the factorization mechanism in the form needed in~4.1. Given $f:X\to Y$, begin with $X_0=X$. At a successor stage, form the coproduct of all maps $a:A\to B$ in $C_0$, indexed further by all commutative squares from $a$ to $X_\alpha\to Y$. Push this coproduct out along its maps to $X_\alpha$, obtaining $X_\alpha\to X_{\alpha+1}$ and an induced map $X_{\alpha+1}\to Y$. At a limit stage take the colimit of the preceding objects. The set of generators and local smallness ensure that each attaching family is a set. Choose a regular cardinal large enough for the domains of all the generators, and carry the construction to a limit ordinal of at least that cofinality. Every map from a generating domain to the final object then factors through some stage, so its associated lifting square is solved at the next stage. The resulting map $p:X_\lambda\to Y$ lies in $C_0^{\perp}=C^{\perp}$.
+
+The left factor $i:X\to X_\lambda$ lies in $C$. Indeed, a coproduct of cofibrations can be attached one summand at a time: well-order the indexing set, replace one source summand by its target at each step, and take colimits at limits. Each step is a pushout of a map in $C$, and transfinite closure finishes the argument. The same closure applies to the successive attaching maps and then to their composite. This gives $f=pi$ with $i\in C$ and $p\in C_*$; the extra assumption $C_*\subset W$ supplies the required weak equivalence. For the standard modern formulation, see \citet[Theorem~12.2.2 and Corollary~12.2.4]{Riehl2014}.
+
+The converse on manuscript p.~72 is a short retract argument. Factor $p\in C_*$ as $p=q i$ with $i\in C$ and $q\in W$. In the square having top map $1_{\operatorname{dom}p}$, left map $i$, right map $p$, and bottom map $q$, a lift $h$ satisfies $hi=1$ and $ph=q$. Therefore $p$ is a retract of $q$ in the arrow category. Retract closure of $W$ gives $p\in W$. This is exactly where that additional hypothesis is used.
+
+The accessibility assumption should also be read at its stated strength. It provides a smallness cardinal for each relevant object, and the set $C_0$ permits a common bound for the domains occurring in the construction. It does not, by itself, state that the whole category has a set of presentable generators. Thus a special cofibration category is not automatically being identified here with a combinatorial model category. A second lifting/factorization pair and its compatibility with $W$ are still to be constructed.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p73}{Why intrinsic cofibrations control the weak equivalences}
+The difficulty in~4.2 is not producing a large class of cofibrations. Pushouts and transfinite compositions already do that. The problem is keeping those maps that are also weak equivalences stable under arbitrary cobase change. Grothendieck's intrinsic class $\operatorname{Cof}_W$ addresses precisely this issue: a map belongs to it when pushout along it preserves weak equivalences between objects under its source. This class is determined by $W$, while $C_0$ is a chosen supply of maps with which to construct factorizations.
+
+Suppose $W$ is stable under filtered colimits of diagrams of arrows. Pushout stability of $\operatorname{Cof}_W$ follows from the associativity of pushouts. For a transfinite composite of intrinsic cofibrations, push a weak equivalence through the successive stages. At a successor stage it remains a weak equivalence by the defining property; at a limit stage it remains one by filtered-colimit stability. This proves the transfinite closure needed to pass from $C_0$ to its cellular closure.
+
+The same hypothesis on $W$ also gives retract closure, by a useful elementary argument. If an arrow $f$ is a retract of an arrow $g\in W$, let $e$ be the corresponding idempotent endomorphism of $g$ in the arrow category. The sequence
+\[
+ g\xrightarrow{e}g\xrightarrow{e}g\xrightarrow{e}\cdots
+\]
+has colimit $f$. To see this, compose the retraction and section maps with the defining cocones; the identities for a split idempotent establish both universal properties. All objects of this sequence lie in $W$, so its colimit does as well. Retracts of intrinsic cofibrations are then intrinsic cofibrations: any pushout comparison for the retract is a retract of the corresponding comparison for the original arrow. This proves the passage from the cellular closure to $\widetilde{C_0}$.
+
+The equality $\operatorname{Cof}_W\cap W=W^{\mathrm{univ}}$ used in the text relies here on the factorization already obtained, and admits a direct verification. Let $a:A\to B$ be both intrinsic and weakly invertible, and take any map $A\to A'$. Factor the latter as $A\xrightarrow c Z\xrightarrow q A'$ with $c\in C\subset\operatorname{Cof}_W$ and $q\in W$. Pushing $a$ along $c$ gives a weak equivalence $Z\to B\amalg_A Z$. Since the pushout $Z\to B\amalg_A Z$ of $a$ is itself intrinsic, pushing the weak equivalence $q$ along it gives a weak equivalence
+\[
+ B\amalg_A Z\longrightarrow B\amalg_A A'.
+\]
+The commutative square with these two maps and $q$ shows, by two-out-of-three, that $A'\to B\amalg_A A'$ is a weak equivalence. Conversely, if all pushouts of $a$ are weak equivalences, the two horizontal pushouts of $a$ in any cobase-change comparison are in $W$; two-out-of-three shows that the comparison is in $W$ whenever its input is. Thus $a$ is intrinsic.
+
+Consequently $TC=C\cap W^{\mathrm{univ}}$ is pushout-stable. Its transfinite stability follows from that of $C$ and the limit-stage hypothesis on $W$. The negative wording ``n'est pas stable'' at the end of manuscript p.~72 is printed in the edition but conflicts with the positive stability hypothesis used throughout this argument. We retain the wording in the source and record the intended sign in the correction register.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p75:La condition a) est déjà acquise.}{The transfer proof and its exact hypotheses}
+The adjunction in~4.5 is meant to reconstruct a diagram from its values at objects. Grothendieck first proves the transfer abstractly so that the construction does not depend on a particular indexing category. Write $L=v_!$ and $U=v^*$. The proposed weak equivalences are detected by $U$, while the proposed cofibrations are built from the images under $L$ of the old cofibrations. These are different parts of the construction, and the proof must show that their intersection behaves correctly.
+
+Let $C'=\operatorname{cell}(LC)$ denote closure under pushouts and transfinite composition, including isomorphisms, and let $W'=U^{-1}W$. The two substantive assumptions are
+\[
+ U\text{ preserves small colimits},\qquad UL(C)\subset C.
+\]
+Every operation forming $C'$ is then sent to the corresponding operation in the source category. Induction through a cellular construction gives $U(C')\subset C$. Therefore
+\[
+ U(C'\cap W')\subset C\cap W=TC.
+\]
+If $a'\in C'\cap W'$ is pushed out in the target, its image under $U$ is a pushout of a trivial cofibration. It remains in $TC$, so the target pushout lies in $W'$ as well as in $C'$. For a transfinite composite of maps in $C'\cap W'$, preservation of the relevant colimits gives a transfinite composite in $TC$; the same conclusion follows. This proves the two closure statements whose compatibility was initially in doubt.
+
+The set of generators is transferred using the left adjoint, not the right one. If $C_0\subset C\subset\widetilde{C_0}$, then $L$ preserves pushouts and transfinite composites, and every functor preserves retract diagrams. Hence
+\[
+ L(C_0)\subset C'\subset\widetilde{L(C_0)}.
+\]
+The target smallness hypothesis permits the small-object argument for this new set. Notice that the assertion is about a generating set for the lifting closure; it does not claim that every map of $C'$ is a cell complex on $L(C_0)$ without taking retracts.
+
+Finally, right lifting properties pass across an adjunction exactly. A commutative square from $L(a)$ to $p'$ corresponds to a square from $a$ to $U(p')$, and diagonal fillers correspond under the same bijection. Since left lifting properties survive pushouts, transfinite compositions and retracts,
+\[
+ (C')^{\perp}=(LC)^{\perp}
+ =U^{-1}(C^{\perp})=U^{-1}(TF)\subset U^{-1}(W)=W'.
+\]
+The small-object factorization therefore has a weakly invertible right factor. These arguments prove Proposition~4.6 without assuming that $U$ preserves all weak equivalences by some separate theorem: that property is part of the definition of $W'$.
+
+For the optional replacement of $C'$ by $\widetilde{C'}$, the proof needs $C$ to be retract-closed. Then $U(\widetilde{C'})\subset C$, and the pushout and transfinite arguments apply again to $\widetilde{C'}\cap W'$. This does not require silently adding retract closure of $W'$. Footnote~20 offers a different route, developed in Proposition~5.1, using additional stability assumptions on $W$. The announcement in~4.5 should be read with the hypotheses collected in the actual proposition, not as a theorem preceding them.
+
+In the diagram application, $U$ is evaluation on the discrete object set and genuinely does preserve colimits. The composite $UL$ is a coproduct of the old objects indexed by arrows of the indexing category. The stability of $C$ under such coproducts, proved by attaching summands as above, is what makes the abstract assumption $UL(C)\subset C$ usable there. The next question concerns trivial cofibrations and is not answered merely by this cofibration calculation.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p79:qui se décompose en deux}{The remaining comparison is a comparison of lifting classes}
+Grothendieck has enough structure to factor arrows in the new category, but he needs more to derive arbitrary left Kan extensions in a controlled way. The further issue is whether the transferred trivial cofibrations are generated, for lifting purposes, by the images of the original trivial cofibrations. It is this question, rather than the already established existence of a special cofibration structure, that occupies~4.7.
+
+The forward inclusion is transparent once the hypotheses are separated. Since $L(TC)\subset L(C)\subset C'$, one has
+\[
+ L(TC)\subset TC'
+ \quad\Longleftrightarrow\quad UL(TC)\subset W
+ \quad\Longleftrightarrow\quad UL(TC)\subset TC.
+\]
+The last equivalence uses $UL(C)\subset C$. Thus equation~(4.7.4) is an additional preservation condition, not a consequence of Proposition~4.6 alone.
+
+Assume it from now on. The inclusion $LC\supset L(TC)$ does not control the reverse comparison $TC'\subset\widetilde{L(TC)}$: a cofibration built from $LC$ may happen to be weakly invertible without presenting itself as an attachment of maps from $L(TC)$. Passing to right lifting classes isolates the exact missing assertion. With $F=(TC)^{\perp}$ and $F'=(TC')^{\perp}$, adjunction gives
+\[
+ (L(TC))^{\perp}=U^{-1}(F),\qquad
+ F'\subset U^{-1}(F).
+\]
+The reverse inclusion is equivalent to $TC'\subset{}^{\perp}((L(TC))^{\perp})$, which is precisely the desired Quillen-closure inclusion. The equivalence is a formal Galois calculation and does not assume an unproved identification of a lifting closure with a cellular closure.
+
+The same argument applies after retract completion, replacing $TC'$ by $\widetilde{C'}\cap W'$. Proposition~5.1 will compare these two trivial classes; Proposition~5.8 will provide the stronger transfer theorem with the required factorization hypotheses. The question on manuscript p.~80 should therefore be read as a problem that directs the next section. The later propositions answer it under further hypotheses; they do not assert that every special cofibration structure already satisfies this stronger comparison.
+\end{dcomment}
+
+
+% Commentary by GPT-6 Astra (OpenAI, ChatGPT Pro mode), manuscript pp.81--98.
+
+\begin{dcomment}{exposition}{p81:Pour l'instant, je me bornerai}{Free diagrams and the missing coproduct lemma}
+Grothendieck now has a way to give a diagram its cofibrations without choosing an order in which to construct its objects. The price of this freedom is to begin with a diagram having no relations, then attach relations by pushouts. This is the purpose of the adjunction attached to the inclusion of the objects of $I$. Write $L=v_!$ and $R=v^*$. Since $\mathcal M(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal M)$, the free diagram on a family $(X_j)$ is
+\[
+ (LX)(i)=\coprod_{j\in\operatorname{Ob}I}
+             \operatorname{Hom}_I(i,j)\cdot X_j.
+\]
+Here $S\cdot X=\coprod_{s\in S}X$ is a copower. The exponent in the source denotes this coproduct, not a product or an internal Hom. An arrow $i'\to i$ acts by precomposition on the indexing sets $\operatorname{Hom}_I(i,j)$. Thus an arbitrary collection of maps $X_j\to Y(j)$ extends uniquely to a natural transformation $LX\to Y$: on the summand indexed by $i\to j$, use the corresponding structure map of the contravariant diagram $Y$. This also verifies the variance of the formula directly.
+
+The assertion that the product category has a special cofibration structure contains a smallness argument worth making explicit. If $C_0$ is a generating set for the right lifting tests in $\mathcal M$, put a map of $C_0$ in one coordinate and the identity of the initial object in every other coordinate. The union of these sets over $\operatorname{Ob}I$ is still a set. A family of maps has the right lifting property against it exactly when every component lies in $C_*$. This gives the required generating set for the product. Colimits and the stated closure properties are computed componentwise. Likewise, a diagram of accessible objects is accessible: choose a regular cardinal larger than the cardinality of the arrows of $I$ and larger than the smallness bounds for all its components. The naturality equations express its Hom functor as an equalizer of two products of component Hom functors. At this cardinal, the relevant filtered colimits of sets commute with those products and the equalizer. The same argument works with sufficiently long ordinal chains in the small-object formulation of accessibility. No common small generating family for the whole category $\mathcal M$ is required by this argument.
+
+The coproduct assertion singled out in footnote~25 follows from precisely the two closure operations already assumed. Suppose $\mathcal A$ contains the isomorphisms and is stable under pushout and continuous transfinite composition. Given a set of maps $a_s:A_s\to B_s$ in $\mathcal A$, well-order its index set as an ordinal $\lambda$ and form
+\[
+ X_\alpha=
+ \left(\coprod_{s<\alpha}B_s\right)
+ \amalg
+ \left(\coprod_{\alpha\leq s<\lambda}A_s\right)
+ \qquad(\alpha\leq\lambda).
+\]
+The arrow $X_\alpha\to X_{\alpha+1}$ is the pushout of $a_\alpha$ along its coproduct inclusion. At a limit ordinal the displayed object is the colimit of the previous ones, as follows by specifying a map out of each summand. Therefore $X_0\to X_\lambda$, which is $\coprod_s a_s$, lies in $\mathcal A$. The empty family gives the identity of the initial object. Apply this argument separately to $C$ and to $TC$. It proves that $RL$ preserves both classes and supplies the lemma requested in the footnote. This is the familiar cellular coproduct argument; compare \citet[Lemma~2.1.13]{Hovey1999}.
+
+The outcome of Proposition~4.8 is consequently quite concrete. A freely attached diagram cell is a family of copies of a coefficient cell, one for each incoming arrow at an object. Closing under pushouts and transfinite attachment produces diagram cofibrations; the right lifting tests are pointwise. The first formula (4.8.1) has $TC(I)$ where both occurrences must be $TC(I_0)$, since $RL$ is an endofunctor of the category of families. The proof itself uses the correctly typed assertion.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p83:Ainsi, la première assertion}{A free cell does not make every cofibration free}
+The two hoped-for equalities in footnote~23 have different meanings. The equality concerning fibrations is established under the stronger assumptions of Proposition~5.8. The literal equality between $v_!(TC(I_0))$ and $TC(I)$ cannot hold in that generality: the class on the left consists of free maps, whereas the class on the right is allowed to attach them to diagrams that already have relations. A small equivariant example makes the distinction visible without any homotopical calculation.
+
+Give $\mathbf{Set}$ the model structure in which every map is a weak equivalence, cofibrations are injections, and fibrations are surjections. We work with the usual axiom of choice. Injections lift against surjections by choosing a preimage for each new element. Conversely, lifting against $\varnothing\to\{*\}$ characterizes surjections, and a map lifting against all surjections is injective, by the retract argument after factoring it through the injection
+\[
+ A\longrightarrow A\amalg B\longrightarrow B.
+\]
+Here the second map is $f$ on $A$ and the identity on $B$. Thus both weak factorization systems are the injection--surjection system. It is generated by the single map $\varnothing\to\{*\}$, so this is a special closed triple in Grothendieck's sense.
+
+Let $I=BG$ for the group $G=\mathbb Z/2$, viewed as a one-object category. Contravariant diagrams are right $G$-sets, $R$ forgets the action, and $L(S)=S\times G$ is free. Consider the equivariant inclusion
+\[
+ k:\{*\}\longrightarrow\{*\}\amalg G,
+\]
+where $*$ is fixed and $G$ acts regularly on the second summand. This is the pushout of $L(\varnothing\to\{*\})$, so it belongs to $TC(I)$; all maps are weak equivalences in the transferred structure. It also has the requisite lifting property directly. Given a lifting square against an equivariant map whose underlying function is surjective, the image of $*$ is already specified. Choose a preimage of the image of the identity element of the free orbit, and extend that choice equivariantly to $G$. This defines the diagonal and verifies both triangle identities.
+
+On the other hand, $k$ is not isomorphic in the arrow category to $L(a)$ for any injection $a:S\to T$. The domain of $L(a)$ is the free $G$-set $S\times G$. A nonempty free $G$-set has no fixed points, whereas the domain of $k$ has one. Even the identity of the fixed point would already disprove the literal equality. The nonidentity map $k$ shows why the failure belongs to the geometry of attachment rather than to a convention about including identities.
+
+The correct conclusion under the hypotheses of Proposition~5.8 is
+\[
+ TC(I)=\widetilde{\,v_!(TC(I_0))\,},
+ \qquad F(I)=(v^*)^{-1}(F(I_0)).
+\]
+The tilde in the first equality is indispensable. Theorem~6.1(b) gives exactly this statement. Modern descriptions by representable cells have the same distinction; see \citet[Theorem~12.3.2]{Riehl2014}. We therefore read the first hope in footnote~23 as needing this closure, and the second as the precise question that the next section resolves.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p84}{What the retract argument actually identifies}
+Grothendieck introduces fibrations here in order to measure the remaining obstruction to constructing a model structure. The cofibration factorization is already available. His task is to decide what happens when the cofibrations are enlarged by retracts and whether the trivial cofibrations admit a second factorization. These are separate questions, and the calculation of Proposition~5.1 answers the first without assuming an answer to the second.
+
+For a class $A$ of arrows write $A^{\perp}$ for its right lifting class and ${}^{\perp}A$ for its left lifting class. In this notation Grothendieck's $Q$-closure is
+\[
+ \widetilde A={}^{\perp}(A^{\perp}).
+\]
+It is a closure defined by lifting. By contrast, closure under pushouts, transfinite compositions and retracts is the class now usually called weak saturation. The two coincide for a set of generating maps when the small object argument applies. They must not be identified merely because a class is stable under those three operations. A left lifting class has all three stability properties, but the converse requires an additional argument.
+
+Let $f:A\to B$ lie in $\widetilde C\cap W$. Use the available factorization $f=pi$, with $i:A\to E$ in $C$ and $p:E\to B$ in $TF=C^{\perp}$. Since $TF\subset W$, the two-out-of-three property gives $i\in C\cap W=TC$. The definition $f\in\widetilde C={}^{\perp}TF$ supplies a map $s:B\to E$ with
+\[
+ ps=\operatorname{id}_B,\qquad sf=i.
+\]
+In the arrow category under $A$, the maps $(\operatorname{id}_A,s)$ and $(\operatorname{id}_A,p)$ exhibit $f$ as a retract of $i$. This proves the strong, correctly qualified conclusion
+\[
+ TC\subset\widetilde C\cap W
+       \subset\operatorname{Retr}(TC)
+       \subset\widetilde{TC}.
+\]
+Taking $Q$-closures gives
+\[
+ \widetilde{\,\widetilde C\cap W\,}=\widetilde{TC},
+ \qquad (\widetilde C\cap W)^{\perp}=(TC)^{\perp}.
+\]
+This is all that is needed to identify $F'_{\sim}$ with $F'$ on manuscript p.~81. In the source's proof, the occurrence $f\in C$ and the corresponding diagram label should be read as $f\in\widetilde C$. The lifting argument remains valid with exactly that hypothesis. Its modern general form is the retract argument of \citet[Lemma~11.2.3]{Riehl2014}.
+
+The first equality in (5.5), identifying $\widetilde C\cap W$ with its own $Q$-closure, goes beyond this argument. The preceding prose asserts equality of the two closures, and that is the formulation proved here. Likewise, the equality with $\operatorname{Retr}(TC)$ printed at the start of the proof must at that point be read as the inclusion just established. If retracts of trivial cofibrations belong to $W$, the reverse inclusion follows: a retract of a map in $TC$ belongs to $\widetilde C$ and, by this additional hypothesis, to $W$. Hence
+\[
+ \widetilde C\cap W=\operatorname{Retr}(TC).
+\]
+We retain these source displays in the transcription and use their justified forms in the audit. No counterexample to the extra first equality of (5.5) under the full stated assumptions is asserted here.
+
+There is a reason for keeping the retract under its fixed source. Push out the retract diagram in $A\backslash\mathcal M$ along $A\to A'$. Functoriality of pushout preserves its two splitting identities, so the new map is a retract of a pushout of $i\in TC$. That pushout still lies in $TC$. Retract stability of $W$ therefore proves the required weak-equivalence assertion after pushout. Transfinite stability of the enlarged trivial class follows under the further hypothesis used by Grothendieck, namely transfinite stability of $W$ itself. The other conditions for a special cofibration structure pass to $\widetilde C$ because its right lifting class and its generating set have not changed. This proves his stated sufficient result without silently adding the missing second factorization.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p88}{The second factorization is the remaining requirement}
+Grothendieck's comparison with Quillen theory becomes short once the role of the two factorizations is isolated. The factorization associated with $C$ already determines which fibrations must be trivial, even before a general fibration factorization has been constructed. Proposition~5.2 is the calculation that makes this assertion exact.
+
+Set $F=(TC)^{\perp}$. If $f\in W$, factor $f=pi$ with $i\in C$ and $p\in TF$. Since $p\in W$, two-out-of-three gives $i\in TC$; conversely, a composite of an arrow in $TC$ and an arrow in $TF$ belongs to $W$. Thus $W=TF\circ TC$. To identify $TF$, take $f:A\to B$ in $F\cap W$ and use this factorization again. The lifting property of $f$ against $i$ gives $r:E\to A$ satisfying
+\[
+ ri=\operatorname{id}_A,\qquad fr=p.
+\]
+The maps $(i,\operatorname{id}_B)$ and $(r,\operatorname{id}_B)$ exhibit $f$ as a retract of $p$. A right lifting class is retract-stable, so $f\in TF$. The reverse inclusion is immediate from $TC\subset C$ and $TF\subset W$. We have proved $TF=F\cap W$ without needing $W$ itself to be retract-stable.
+
+It follows that the new requirement for a Quillen triple is precisely a factorization by $(TC,F)$. If $TC_0\subset TC$ is a set with $(TC_0)^{\perp}=(TC)^{\perp}$, the small object argument factors every map as a relative $TC_0$-cell map followed by an arrow of $F$. The left map belongs to $TC$ because this class is stable under pushouts and transfinite compositions; coproducts were accounted for above. This proves Corollary~5.5. The source's formula $W=TF\circ TW$ on p.~88 has $TC$ as its intended second factor.
+
+Once the second factorization exists, $W$ is in fact retract-stable. Here is a proof that does not presuppose this conclusion or retract stability of $TC$. Let $f:A\to B$ be a retract of $w:C\to D\in W$, with splitting pairs $(a,b):f\to w$ and $(r,s):w\to f$, so $ra=\operatorname{id}_A$ and $sb=\operatorname{id}_B$. First suppose $f\in F$. Factor $w=vu$, with $u:C\to E\in TC$ and $v:E\to D\in TF$. Lifting $u$ against $f$ in the square with top $r$ and bottom $sv$ gives $\ell:E\to A$ such that $\ell u=r$ and $f\ell=sv$. The pairs $(ua,b)$ and $(\ell,s)$ now exhibit $f$ as a retract of $v$. Thus $f\in TF\subset W$, because $TF=C^{\perp}$ is retract-stable.
+
+For arbitrary $f$, use the second factorization $f=hg$, with $g:A\to Z\in TC$ and $h:Z\to B\in F$. Push out $g$ along $a$, writing $E=C\amalg_A Z$ and $j:C\to E$, $t:Z\to E$ for the structure maps. Pushout stability gives $j\in TC$. The compatible maps $w$ and $bh$ induce $k:E\to D$ with $kj=w$ and $kt=bh$, so two-out-of-three gives $k\in W$. The compatible maps $gr$ and $\operatorname{id}_Z$ induce $q:E\to Z$ satisfying
+\[
+ qj=gr,\qquad qt=\operatorname{id}_Z,\qquad hq=sk.
+\]
+The last identity can be checked on the two pushout summands. Therefore $(t,b)$ and $(q,s)$ exhibit $h$ as a retract of $k$. The special case already proved gives $h\in W$, and hence $f=hg\in W$. This is the argument of \citet[Lemma~11.3.3]{Riehl2014}, observed here to require only the indicated factorization, lifting, and pushout properties.
+
+If $C$ is retract-stable, so is $TC=C\cap W$. Factoring a map of ${}^{\perp}F$ by $(TC,F)$ and retracting its left factor therefore proves $TC={}^{\perp}F$. The first factorization similarly gives $C={}^{\perp}TF$. Thus the source's criterion for a closed triple supplies the full modern lifting characterizations as well. The second factorization is essential in this explanation; this argument cannot be inserted earlier into Proposition~5.1 to justify its extra equality.
+
+The terminology ``special closed triple'' thus points toward cofibrant generation: there is one set of tests for trivial fibrations and another for fibrations. Its smallness assumption is imposed on all coefficient objects. Modern treatments generally impose only the smallness needed for the chosen generators; see \citet[Theorem~2.1.14 and Definition~2.1.17]{Hovey1999}. If the underlying category is locally presentable, the resulting model category is combinatorial in the now customary terminology. Grothendieck's condition that each object is accessible does not itself state local presentability, which also requires an appropriate set of objects generating the category by filtered colimits. Corollary~5.7 should therefore not be translated by replacing the word ``special'' with ``combinatorial'' without that extra hypothesis.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p91:est un triple de Quillen clos spécial}{The two factorizations meet in the transfer theorem}
+Grothendieck now returns to the equality of fibrations that had resisted the argument of \S4. The extra structure supplied by the second generating set does exactly what is needed: it produces a candidate trivial cofibration factorization in the target, and the previously constructed cofibrations then force that candidate to be the correct one. The proof is a transfer argument, but its decisive step is again a retract under a fixed source.
+
+Write $L=v_!$, $R=v^*$, and choose generating sets $I_0\subset C$ and $J_0\subset TC$ in the coefficient category. To avoid the ambiguity between the raw image of a class and its closure, put
+\[
+ C'=\operatorname{cof}(LI_0),\qquad
+ K'=\operatorname{cof}(LJ_0),\qquad
+ W'=R^{-1}(W),
+\]
+where $\operatorname{cof}$ denotes the class of retracts of relative cell maps. The smallness assumptions ensure that these are also the corresponding left lifting classes. Adjointness transports lifting squares and their diagonals, giving
+\[
+ (LI_0)^{\perp}=R^{-1}(TF),\qquad
+ (LJ_0)^{\perp}=R^{-1}(F).
+\]
+The equality for trivial fibrations is therefore formal. The equality for fibrations will follow only after $K'$ has been identified with $C'\cap W'$.
+
+First, $K'\subset C'$ because $J_0\subset C$. It is also contained in $W'$. Indeed, $RL(TC)\subset TC$ by hypothesis, while $R$ preserves pushouts and transfinite colimits. It follows by induction along an attachment that $R$ carries every relative $LJ_0$-cell map into $TC$. Functors preserve retract diagrams, and $TC$ is retract-stable in the closed coefficient model structure, so $R(K')\subset TC\subset W$. This proves $K'\subset C'\cap W'$. Notice that preservation of weak equivalences alone would not prove this step: it is the cellular construction and the stronger assertion about $RL(TC)$ that control the entire attachment.
+
+For the converse, let $f:A\to B$ belong to $C'\cap W'$. Factor it by the small object argument for $LJ_0$ as
+\[
+ A\xrightarrow{j}E\xrightarrow{p}B,
+ \qquad j\in K',\quad Rp\in F.
+\]
+The first part of the proof gives $j\in W'$. As $f\in W'$, two-out-of-three gives $p\in W'$, hence $Rp\in F\cap W=TF$. Thus $p\in R^{-1}(TF)=(C')^{\perp}$. The lifting property of $f\in C'$ supplies a section $s:B\to E$ with $ps=\operatorname{id}_B$ and $sf=j$. Consequently $f$ is a retract of $j$, and $K'$ is retract-stable. This proves
+\[
+ C'\cap W'=K',\qquad
+ (C'\cap W')^{\perp}=R^{-1}(F).
+\]
+Both target factorizations, both lifting properties, and the equality of the target weak equivalences with the prescribed inverse image are now established. The generating sets are $LI_0$ and $LJ_0$.
+
+This presentation also explains the status of Remark~5.9. If the source triple is not closed, use the pushout--transfinite closure $C'$ of $L(C)$ and the relative $LJ_0$-cell class for the left factor. Its image under $R$ still lies in $TC$. The same argument shows that every map in $C'\cap W'$ is a retract of one of these cell maps, which suffices to identify the right lifting class. The cell maps themselves lie in $C'\cap W'$, so their small-object factorization supplies the required factorization for that larger class. One need not first assert that either of these classes is closed under retracts.
+
+In the modern transfer theorem, the condition that the right adjoint preserve all colimits can be replaced by a direct acyclicity condition on the transferred trivial cells, together with the smallness needed to form the two factorizations. This is the form of \citet[Theorem~11.3.2]{Hirschhorn2003}. Grothendieck's hypotheses give a transparent sufficient test for that acyclicity condition. Their main application here is exceptionally well suited to them: restriction from diagrams to their objects computes colimits pointwise, and the free diagram functor produces coproducts of coefficient cells.
+\end{dcomment}
+
+\begin{dcomment}{development}{p97:Mais je doute qu'on aura jamais}{Special triples need not preserve ordinary filtered colimits}
+Grothendieck closes the section by expressing doubt that special triples occur outside the case where weak equivalences are stable under filtered colimits. The smallness conditions do explain why sufficiently filtered colimits behave well. They do not force the bound to be finite. A countably presented coefficient gives a concrete separation, already in abelian groups.
+
+\textbf{A special closed triple with a failing sequential colimit.}\ours\par
+Let $A=\mathbb Z[1/2]$ and, in $\mathbf{Ab}$, define
+\[
+ \begin{split}
+ W_A&=\{f\mid\operatorname{Hom}(A,f)\text{ is bijective}\},\\
+ I_A&=\{0\longrightarrow A,\quad A\oplus A\xrightarrow{\nabla}A\},\\
+ C_A&={}^{\perp}W_A,\qquad F_A=\operatorname{Mor}(\mathbf{Ab}).
+ \end{split}
+\]
+Then $(W_A,C_A,F_A)$ is a special closed Quillen triple. Its weak equivalences are not closed under sequential colimits in the arrow category.
+
+\emph{Proof.} We first identify the right lifting tests. Lifting against $0\to A$ says that every map $A\to Y$ lifts through $f:X\to Y$; equivalently, $\operatorname{Hom}(A,f)$ is surjective. A lifting square from the fold $\nabla$ to $f$ is a pair of homomorphisms $a,b:A\to X$ with $fa=fb$. A diagonal exists exactly when $a=b$: it must be the common map $A\to X$. The right lifting property against the fold is therefore injectivity of $\operatorname{Hom}(A,f)$. We obtain
+\[
+ I_A^{\perp}=W_A.
+\]
+The domains of $I_A$ are small. More explicitly, $A$ has the countable presentation with generators $x_n$, $n\geq0$, and relations $2x_{n+1}=x_n$. For a map from this presentation into an $\aleph_1$-filtered colimit, choose representatives of the countably many images of the generators and stages witnessing the countably many relations. Filteredness at $\aleph_1$ provides a common stage at which they define a homomorphism. The same argument applied to the countably many generator equalities proves eventual equality of two such homomorphisms. Thus $A$, and likewise $A\oplus A$, is $\aleph_1$-presentable. Every abelian group has a presentation of some set cardinality, so the analogous argument supplies the accessibility condition for every object of $\mathbf{Ab}$.
+
+The small object argument now gives the weak factorization system $(C_A,W_A)$, with $C_A=\operatorname{cof}(I_A)$. The standard theorem being used is \citet[Theorem~2.1.14]{Hovey1999}; all its smallness conditions have just been checked. Since $W_A$ is the inverse image of the isomorphisms of abelian groups under the functor $\operatorname{Hom}(A,-)$, it contains the isomorphisms, satisfies two-out-of-three, and is closed under retracts.
+
+If $f:X\to Y$ lies in both $C_A$ and $W_A$, apply its left lifting property to the square having $f$ on both vertical sides and identities horizontally. Its diagonal $h:Y\to X$ satisfies $hf=\operatorname{id}_X$ and $fh=\operatorname{id}_Y$. Therefore
+\[
+ C_A\cap W_A=\operatorname{Is}(\mathbf{Ab}).
+\]
+The second weak factorization system is consequently $(\operatorname{Is}(\mathbf{Ab}),\operatorname{Mor}(\mathbf{Ab}))$: factor a map as its identity followed by itself, and invert the left map to solve every lifting problem. This verifies all model axioms. Both left classes are defined by lifting and hence are stable under pushout, transfinite composition and retracts. The generating cofibrations are $I_A$; the generating trivial cofibrations form the empty set, whose right lifting class is all arrows and whose left lifting class is the isomorphisms. Together with cocompleteness and accessibility of the coefficient objects, this verifies every condition of a special closed triple.
+
+To see the failure, consider the sequence in the arrow category whose $n$th arrow is $0\to\mathbb Z$ and whose transition square is $(\operatorname{id}_0,\times2)$. Every homomorphism $A\to\mathbb Z$ is zero, because the image of each $x_n$ must be divisible by arbitrarily high powers of $2$. Thus all these arrows lie in $W_A$. Their colimit is
+\[
+ 0\longrightarrow
+ \operatorname*{colim}(\mathbb Z\xrightarrow{2}\mathbb Z
+              \xrightarrow{2}\cdots)
+ \cong\mathbb Z[1/2]=A.
+\]
+The map $\operatorname{Hom}(A,0)\to\operatorname{Hom}(A,A)$ is not surjective, since its target contains the nonzero identity. The colimit arrow is not in $W_A$, as required.\hfill$\square$
+
+The example does preserve $\aleph_1$-filtered colimits of weak equivalences, by the presentability calculation in the proof. The general distinction is formalized in \citet[Proposition~4.1]{RaptisRosicky2015}: generating cofibrations between $\kappa$-presentable objects give stability of weak equivalences under $\kappa$-filtered colimits in a combinatorial model category. We checked that result, the standard small-object and transfer constructions, and searches for this particular $\operatorname{Hom}(\mathbb Z[1/2],-)$ example; we did not find this precise illustration in the literature. The construction is a specialization of established methods, and the mark \ours{} records the argument assembled here, with no claim of priority.
+\end{dcomment}
+
+
+% Commentary on manuscript pp. 99--118, by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p99}{The projective structure and its free diagrams}
+Grothendieck has now supplied the structure that was missing from the mapping-cone argument. A diagram can be replaced without discarding its transition maps, and the replacement is good for every left Kan extension. The weak equivalences and fibrations are still tested at individual objects; it is the cofibrations that encode the compatibility needed to make these tests into a theory of diagrams.
+
+We fix the variance before using the theorem. Here
+\[
+ \mathcal M(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal M),
+ \qquad
+ (u^*X)(i)=X(u(i)).
+\]
+For $j\in I$, evaluation has a left adjoint $F_j$, given by
+\[
+ (F_jA)(i)=\coprod_{I(i,j)}A.
+\]
+A square from $F_jf$ to a diagram map $p$ is exactly a square from $f$ to $p(j)$; the same correspondence identifies their fillers. Thus, if $S$ and $T$ generate the two lifting systems in $\mathcal M$, the sets
+\[
+ \{F_js:j\in I,\ s\in S\},\qquad
+ \{F_jt:j\in I,\ t\in T\}
+\]
+generate the projective cofibrations and projective trivial cofibrations. The smallness conditions in the preceding sections justify the required factorizations. Formula (6.1.7) is the version using all objectwise cofibrations at once instead of selected generators. This is the modern projective model structure; the construction and its acyclicity check appear in \citet[Theorem~12.3.2]{Riehl2014}.
+
+The Quillen property of $u_!\dashv u^*$ can also be seen without repeating the cellular construction. If $f\in C(I)$ and $p\in TF(I')$, transpose a lifting square from $u_!f$ to $p$ across the adjunction. Its right side is $u^*p$, which is still an objectwise trivial fibration. A filler exists by the definition of $C(I)$ and transposes back. Replacing $(C,TF)$ by $(TC,F)$ gives the second preservation statement. In particular, the conclusion does not depend on $u$ preserving the order properties used earlier to construct cofibrant diagrams.
+
+There is a useful economy in (6.1.9). Restriction preserves every weak equivalence, so its functor on homotopy categories is already defined. Only the left adjoint needs to be derived: for a projectively cofibrant replacement $QX\to X$,
+\[
+ \mathbf L u_!(X)=u_!(QX).
+\]
+The adjunction asserts a natural bijection of morphisms in the localized categories, not merely the existence of this formula on objects. This is the precise additional conclusion that the earlier counterexample made necessary. The elementary lifting criterion for a Quillen adjunction and the preservation of weak equivalences between cofibrant objects are recorded in \citet[Lemmas~11.3.11 and~11.3.14]{Riehl2014}.
+\end{dcomment}
+
+\begin{dcomment}{development}{p101:et on a égalité quand $I$ est un ensemble ordonné}{The order hypothesis follows the variance}
+The comparison with the earlier order-theoretic cofibrations is meant to show that the new construction recovers the old one. At this point a change of notation matters: the earlier argument used covariant diagrams on an artinian poset, whereas (6.1.1) now uses contravariant diagrams on $I$. Accordingly, the sufficient condition is that $I^{\mathrm{op}}$ be artinian, or that $I$ be noetherian. Corollary~6.3 states exactly this condition. The word \emph{artinien} in 6.1(d), repeated in the sentence preceding 6.3, is printed in the edition and is retained in the source text.
+
+\textbf{An inverse-sequence counterexample}\ours.
+The condition printed in 6.1(d) is false in general. We work in sets with the axiom of choice and take
+\[
+ W=\operatorname{Mor}(\mathrm{Set}),\qquad
+ C=\{\text{injections}\},\qquad F=\{\text{surjections}\}.
+\]
+These classes give a closed special Quillen structure. Indeed, injections and surjections are mutually determined by lifting, every map $A\to B$ factors as
+\[
+ A\longrightarrow A\amalg B\longrightarrow B,
+\]
+and the single map $\varnothing\to\{*\}$ generates the lifting system. The other specialness conditions hold because sets have all small colimits, each set is small for a sufficiently large regular cardinal, and injections are stable under pushout and transfinite composition. Since every map is in $W$, the two required factorizations are the same one.
+
+Let $I=\mathbb N$ with its usual order. It is artinian but not noetherian. In $\mathcal M(I)$ consider $f:\varnothing\to\mathbf1$, where $\mathbf1$ is the constant singleton inverse sequence. Every nonempty upward closed subset of $I$ is a tail $[n,\infty)$. The colimit of $\mathbf1$ over its opposite is a singleton, while the colimit over the empty subset is empty. Therefore every relative-colimit map associated with closed subsets $U\subseteq V$ is one of
+\[
+ \varnothing\longrightarrow\varnothing,\qquad
+ \varnothing\longrightarrow\{*\},\qquad
+ \{*\}\xrightarrow{1}\{*\}.
+\]
+All are injections. In particular $f\in C_I$, whether one uses the defining principal closed-set tests or the equivalent tests for arbitrary closed pairs.
+
+Nevertheless, $f$ is not projectively cofibrant. Define a presheaf $E$ by
+\[
+ E(n)=\{k\in\mathbb N:k\geq n\},\qquad
+ E(n+1)\longrightarrow E(n)
+ \quad\text{the inclusion}.
+\]
+The map $E\to\mathbf1$ is an objectwise surjection, hence a projective trivial fibration. A filler for the square from $\varnothing\to\mathbf1$ to $E\to\mathbf1$ would choose compatible elements $k_n\in E(n)$. Compatibility forces all $k_n$ to be the same integer, which would have to belong to every tail. There is no such integer. Thus $C(I)\ne C_I$.
+
+This example isolates the missing hypothesis: the partial-lift argument must start at objects with no predecessors in the direction of the diagram. For inverse sequences indexed by $\mathbb N$, that direction has no starting object. We checked the standard projective and Reedy constructions in \citet[\S\S12.3 and~14.2]{Riehl2014} and \citet[Observation~4.16]{RiehlVerity2014Reedy}; the example is our explicit diagnostic for the printed variance error, with no claim of priority.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p104:pour établir $C(I) \subset C_I$}{Relative colimits measure the new attachment}
+Grothendieck wants a cofibration of diagrams to remain a cofibration when part of the indexing category has already been assembled. The map to inspect is therefore not just the map between two colimits. It is the remaining attachment after the source diagram and the chosen part of the target have been put together:
+\[
+ X_V\amalg_{X_U}Y_U\longrightarrow Y_V.
+\]
+For a cosieve $U\subseteq V$ in $I$, the actual diagram direction is $V^{\mathrm{op}}$, and $U^{\mathrm{op}}$ is a sieve. These are exactly the subsets on which a partial covariant diagram can be constructed before its complement. In these formulas $X_U$ means $\operatorname{colim}_{U^{\mathrm{op}}}X$, and similarly for $V$; the repeated $U$ in the edition's definition of $X_V$ is a slip.
+
+The reduction to an arrow is useful because it separates the categorical bookkeeping from the lifting argument. After restricting to $V$, take the characteristic map $V\to[1]$ whose fibre at $1$ is $U$. Left Kan extension turns the pair of colimits into the arrow $X_U\to X_V$, and turns a map of diagrams into its square of colimits. The relative map of that square is then the displayed attachment. Only the preservation of projective cofibrations by left Kan extension and the arrow-category calculation remain to be checked.
+
+The restriction step is explicitly deferred in the source. It is justified by 6.4(c) and 6.5: a cosieve inclusion is a discrete opfibration, and its right Kan extension is given objectwise by either evaluation or an empty product. Thus restriction preserves the two projective left classes by adjunction. The temporary assumption in the proof of 6.2 is discharged within these pages.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p108:Je n'ai pas envie de rechercher la démonstration ici.}{The omitted arrow-category calculation}
+The short lemma that Grothendieck leaves unwritten is the local lifting step used throughout the remainder of the proof. We give it with precisely the pushout hypothesis he states. This also explains why the three maps in (6.2.5.5) are slightly more than one needs to test.
+
+Let $\Phi={}^\perp\Psi$ and $\Psi=\Phi^\perp$. Write a map of arrows as
+\[
+\begin{tikzcd}
+ A_1\arrow[r]\arrow[d,"f_1"']&A_0\arrow[d,"f_0"]\\
+ B_1\arrow[r]&B_0,
+\end{tikzcd}
+\qquad
+ P=A_0\amalg_{A_1}B_1,\qquad t:P\longrightarrow B_0.
+\]
+Then $f\in{}^\perp(\Psi\langle[1]\rangle)$ if and only if $f_1,t\in\Phi$. When these conditions hold, $f_0\in\Phi$ as well.
+
+For sufficiency, take a square from $f$ to a map of arrows $p:(E_1\to E_0)\to(F_1\to F_0)$ whose two components belong to $\Psi$. First choose a filler $h_1:B_1\to E_1$ against $f_1$ and $p_1$. The given map $A_0\to E_0$ and the composite $B_1\xrightarrow{h_1}E_1\to E_0$ agree on $A_1$. They define $P\to E_0$. Together with $B_0\to F_0$, this is a square from $t$ to $p_0$. A filler $h_0:B_0\to E_0$ solves it. Its restriction to $B_1$ is the prescribed composite, so $(h_1,h_0)$ is a natural filler of the original square.
+
+For necessity of the relative condition, take any square from $t$ to $q:E\to F$ in $\Psi$, with upper map $a:P\to E$ and lower map $b:B_0\to F$. Consider the map of arrows
+\[
+ (B_1\xrightarrow{a|_{B_1}}E)
+ \longrightarrow
+ (B_1\xrightarrow{b|_{B_1}}F)
+\]
+with components $(1_{B_1},q)$. The maps $(f_1,a|_{A_0})$ and $(1_{B_1},b)$ define a square from $f$ to this map. A filler has first component $1_{B_1}$; its second component is exactly a filler for the prescribed square from $t$ to $q$. Thus $t\in\Phi$.
+
+To test $f_1$, one must make an arbitrary square at the first vertex into a square of arrows. Suppose that square has maps $a:A_1\to E$, $b:B_1\to F$ and right side $q:E\to F$ in $\Psi$. Form
+\[
+ K=F\amalg_{B_1}B_0.
+\]
+There is a map of arrows $(E\to K)\to(F\to K)$ with components $(q,1_K)$. The given maps at vertex $1$, together with $A_0\to B_0\to K$ and $B_0\to K$ at vertex $0$, form a square from $f$. A filler supplies the desired map $B_1\to E$. Hence $f_1\in\Phi$. This construction uses a pushout in place of any terminal-object argument.
+
+Finally, $A_0\to P$ is the pushout of $f_1$, and $f_0$ is its composite with $t$. A left lifting class is closed under pushout and composition, so $f_0\in\Phi$. This proves the printed criterion, including its redundant component condition. The same two-stage construction is the direct-category case of the relative-latching lifting argument of \citet[Observation~4.16]{RiehlVerity2014Reedy}; no model structure or factorization axiom is used here.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p109:On va revenir aux notations duales}{The lift is built in the direction of the arrows}
+The long cube calculation has a simple purpose: when a new vertex is added, its lift must extend the lifts already chosen on all incoming arrows. The relative latching map incorporates that compatibility in a single lifting problem. We formulate the argument in a fixed covariant convention so that its order hypothesis is visible throughout.
+
+Let $J$ be a small artinian poset, let $A,B,X,Y:J\to\mathcal M$, and suppose $p:X\to Y$ is objectwise in $\Psi$. Assume that the relevant colimits exist. For $j\in J$, put
+\[
+ L_jA=\operatorname{colim}_{k<j}A_k,\qquad
+ L_jB=\operatorname{colim}_{k<j}B_k,\qquad
+ \ell_j(f):A_j\amalg_{L_jA}L_jB\longrightarrow B_j.
+\]
+If every $\ell_j(f)$ belongs to $\Phi$, any square from $f:A\to B$ to $p$ has a natural filler.
+
+Indeed, order partial fillers on downward closed subsets by extension. The empty subset supports a filler, and a chain has an upper bound obtained by taking the union of its domains and its compatible component maps. Zorn's lemma gives a maximal partial filler $h_U$. If $U\ne J$, choose a minimal element $j$ of $J\setminus U$. Every $k<j$ lies in $U$, so the partial filler gives a map $L_jB\to X_j$. Together with $A_j\to X_j$ it induces
+\[
+ A_j\amalg_{L_jA}L_jB\longrightarrow X_j.
+\]
+The original square and the naturality of the maps make this a square with lower map $B_j\to Y_j$ and right side $p_j$. The lifting relation $\Phi\perp\Psi$ supplies $h_j:B_j\to X_j$. Its restriction along $L_jB\to B_j$ is the map already prescribed by $h_U$, hence it is compatible with every incoming arrow. There are no arrows from $j$ to an old object of $U$, since $U$ is downward closed. The result is a filler on $U\cup\{j\}$, contradicting maximality. Therefore $U=J$.
+
+This proves the difficult inclusion in 6.3 without shortening any of its mathematical content. Grothendieck's $\widetilde B$, $\widetilde i$ and $\widetilde h_0$ are the pushout, relative latching map and upper arrow just displayed. The identities on pp.~113--116 verify that the proposed upper arrow and lower arrow make the required square commute; they hold by the pushout universal property. The sentence at the end must use the given hypothesis $i\in\Phi_I$, not the printed $i\in\Phi(I)$, which is the conclusion.
+
+The passage from $J$ back to the source's contravariant notation is $J=I^{\mathrm{op}}$. Thus $I$ must be noetherian. The colimit assumption is inherited from the use of the classes defined in \S2; pushouts alone, the hypothesis of the arrow lemma, do not ensure that arbitrary $L_jA$ exist. No small-object argument enters this proof. Its induction is legitimate for any small well-founded poset, including those whose ranks are transfinite.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p113}{A diamond and the compatibility at its last vertex}
+Grothendieck's cube records information that an objectwise cofibration test would miss. A finite example makes the attachment visible. Work in simplicial sets, whose cofibrations are the monomorphisms \citep[Example~11.3.5]{Riehl2014}, and let $J$ be the poset with objects $a,b,c,d$ and relations $a<b<d$ and $a<c<d$. We use covariant diagrams, or equivalently the source's notation $\mathcal M(J^{\mathrm{op}})$.
+
+Define a diagram $B$ by
+\[
+ B_a=\Delta^0,\qquad
+ B_b=B_c=\Delta^1,\qquad
+ B_d=\Delta^1\amalg_{\Delta^0}\Delta^1,
+\]
+where the maps out of $B_a$ choose the initial endpoint of each interval, and the maps into $B_d$ are the two inclusions. The latching objects are
+\[
+ L_aB=\varnothing,\qquad
+ L_bB=L_cB=\Delta^0,\qquad
+ L_dB=\Delta^1\amalg_{\Delta^0}\Delta^1.
+\]
+Every latching map is a simplicial monomorphism: at $d$ it is the identity. Consequently $B$ is projectively cofibrant by the lifting argument just given. Its colimit is $B_d$, since $d$ is terminal in $J$; its realization is two intervals joined at an endpoint. A compatible map out of $B_b$ and $B_c$ is exactly a pair of paths with the same value at their initial endpoints. The pushout in the latching object expresses precisely this requirement.
+
+Now retain the first three values but replace $B_d$ by $\Delta^0$, with both maps from the intervals collapsing them. All four values remain cofibrant simplicial sets. However, the last latching map becomes
+\[
+ \Delta^1\amalg_{\Delta^0}\Delta^1\longrightarrow\Delta^0,
+\]
+which is not a monomorphism, since it identifies distinct vertices. The diagram is therefore not projectively cofibrant. A choice of lifts at its four objects need not be compatible along the two paths through the diamond. This is why the proof asks for $\widetilde i\in\Phi$, rather than merely the component map $i_0\in\Phi$.
+\end{dcomment}
+
+\begin{dcomment}{later}{p116}{The direct part of Reedy theory}
+The proof just completed has become the direct part of Reedy theory. For a category with degrees and unique direct--inverse factorizations, a new vertex has both incoming and outgoing constraints. Relative latching maps encode the former and relative matching maps the latter. In a direct category the inverse part has only identities, so matching objects are terminal and Reedy fibrations are objectwise fibrations. Whenever the projective structure exists, the two model structures then agree because their fibrations and weak equivalences agree.
+
+\citet[Definition~4.14, Observation~4.16 and Theorem~4.18]{RiehlVerity2014Reedy} give the relative maps, the lifting construction and the resulting model structure; their Lemma~7.1 also identifies trivial Reedy cofibrations by trivial relative latching maps. The familiar natural-number degree convention in that treatment is sufficient for finite posets. Grothendieck's well-founded-poset argument allows transfinite rank directly, without requiring a uniform finite bound on the lengths of chains entering a vertex. The equality in 6.3 concerns this direct situation, after the variance has been fixed; it is not an equality of the projective and arbitrary Reedy structures on every diagram category.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p118:Les conditions équivalentes}{Why terminal comma components preserve cofibrations}
+The final proposition asks when restriction can serve on the left of a Quillen adjunction as well as on the right. The distinction is useful in applying the construction to a subdiagram. Restriction always preserves the objectwise right classes. To preserve the left classes as well, its right adjoint must preserve the corresponding objectwise right classes. The commentary on Chapter~XII, manuscript p.~114 (``A terminal fibre controls all the ordinary direct images''), discusses terminal fibres and ordinary direct images; the additional point here is the product stability of right lifting classes.
+
+Here is the formal detail behind the equivalence in 6.4(b). With all required copowers available, one has
+\[
+ \Psi\langle I\rangle=\Phi(I)^\perp.
+\]
+One inclusion follows from the definition $\Phi(I)={}^\perp(\Psi\langle I\rangle)$. For the other, use the free evaluation diagrams $F_iA=I(-,i)\cdot A$. If $a\in\Phi$, then $F_ia\in\Phi(I)$ by adjunction. A map right-orthogonal to $\Phi(I)$ therefore has each component right-orthogonal to $\Phi$, hence in $\Psi$. Transposing lifting problems across $u^*\dashv u_*$ now proves both directions of (6.4.2). Factorizations are not needed.
+
+The geometric hypothesis makes right Kan extension particularly simple. Its actual pointwise formula for presheaves is
+\[
+ (u_*X)(i')=\lim_{(I/i')^{\mathrm{op}}}X.
+\]
+If each connected component of $I/i'$ has a terminal object $e_\alpha$, that object is initial in the opposite indexing category. A cone on the restricted diagram is then determined by its map into $X(e_\alpha)$. Splitting the index into its components gives
+\[
+ (u_*X)(i')\cong\prod_\alpha X(e_\alpha).
+\]
+For a morphism of diagrams the same formula gives a product of its components. Right lifting classes are closed under products: solve a square against the product by projecting to each factor, choosing the factorwise fillers, and using the universal property of the product. The empty product gives an identity map of a terminal object. Thus the displayed formula proves the required preservation.
+
+For completeness, if $u$ is a discrete opfibration and $(i,\gamma:u(i)\to i')$ is an object of $I/i'$, lift $\gamma$ uniquely to $i\to\gamma_!i$. Its target lies over $i'$, and $(i,\gamma)$ has a unique map to $(\gamma_!i,1_{i'})$. A morphism in the comma category leaves this target unchanged by uniqueness of lifting. Consequently the comma category is a disjoint union of components, each with one of these terminal objects. If $I$ is discrete, the comma category itself is discrete and the assertion is immediate. These facts prove the two implications that the source abbreviates as $1^\circ\Rightarrow3^\circ$ and $2^\circ\Rightarrow3^\circ$.
+\end{dcomment}
+
+\begin{dcomment}{development}{p118}{A converse when the source is a poset}
+Grothendieck's terminal-component condition is sufficient for every Q-dual pair. The elementary model of sets used above shows that, for a poset source, it is also a necessary condition if one wants such preservation even in this one test theory. This identifies exactly how much of the comma category the assertion detects.
+
+\textbf{Proposition}\ours.
+Let $u:I\to I'$ be a functor between small categories, with $I$ a poset. Give sets the model structure with all maps weak equivalences, injections cofibrations and surjections fibrations, and give presheaf categories their projective structures. The following conditions are equivalent:
+\begin{enumerate}
+\item Every connected component of every $I/i'$ has a terminal object.
+\item $u^*$ preserves projective cofibrations.
+\item $u^*$ takes every representable presheaf on $I'$ to a projective presheaf on $I$.
+\end{enumerate}
+Here projective means having the lifting property against objectwise surjections, and the axiom of choice is understood.
+
+We first establish the elementary description of projectives needed for the converse. If $P$ is a presheaf on a small poset $I$, form the canonical objectwise surjection
+\[
+ q:\coprod_{(i,x),\ x\in P(i)} I(-,i)\longrightarrow P.
+\]
+It is surjective at $j$ because the summand indexed by $(j,z)$ sends $1_j$ to every given $z\in P(j)$. If $P$ is projective, choose a section $s$ of $q$. The induced map of categories of elements takes each connected component of $\int P$ into a single representable summand, say the summand indexed by $(i,x)$. For any element $(j,z)$ in that component, $qs=1$ says that the arrow selected by $s$ has the form $j\to i$ and sends $x$ to $z$. Hence $(j,z)$ has an arrow to $(i,x)$ in $\int P$, so $(i,x)$ belongs to the same component. Because $I$ is a poset there is at most one such arrow. Thus $(i,x)$ is terminal in that component.
+
+Conversely, if every component of $\int P$ has a terminal element $(i_\alpha,x_\alpha)$, the maps represented by these elements give an isomorphism
+\[
+ \coprod_\alpha I(-,i_\alpha)\xrightarrow{\ \sim\ }P.
+\]
+At $j$, existence and uniqueness of the arrow to the appropriate terminal element give respectively surjectivity and injectivity. A representable is projective by evaluation, and a coproduct of representables is projective by choosing a lift in each summand. We have proved that projective presheaves on a poset are exactly coproducts of representables, equivalently presheaves whose categories of elements have terminal connected components. The general background is the description of indecomposable projectives as retracts of representables and its Cauchy-complete refinement in \citet[Proposition~0.7 and Theorem~0.8]{vanOosten2021Topos}; the poset case eliminates nonidentity idempotents.
+
+Condition~1 implies condition~2 by 6.4 and 6.5. Condition~2 implies condition~3 because $\varnothing\to I'(-,i')$ is a projective cofibration: any lifting problem against an objectwise surjection is a lifting problem for an element at $i'$. Restriction preserves the initial presheaf. Finally,
+\[
+ \int\bigl(u^*I'(-,i')\bigr)=I/i',
+\]
+including both its objects and its morphisms. The description of projectives just proved therefore makes condition~3 imply condition~1, completing the proof.
+
+The poset hypothesis has a precise role. In a general category a projective presheaf may be a proper retract of a representable, controlled by a nontrivial idempotent; a terminal object in its category of elements need not exist. We checked the projective-presheaf results just cited and the projective diagram construction in \citet[\S12.3]{Riehl2014}. We did not locate this exact formulation of the converse to 6.4(c) in those sources. The proposition is an elementary application of those established results, developed here to clarify the scope of Grothendieck's criterion, not a claim of priority.
+\end{dcomment}
+
+
+\begin{dcomment}{later}{p118}{The pointwise formula and the derivator theorem}
+Grothendieck has now constructed enough compatible diagram structures to return to the purpose of the chapter: computing a homotopy Kan extension at one object. The last restriction criterion is the bridge. We spell out this application because the printed chapter stops immediately after the criterion, before drawing the conclusion in these terms.
+
+We keep the convention of \S6, so that $\mathcal M(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal M)$. Given $u:I\to I'$ and $i'\in I'$, put $S=i'\backslash I$, with objects $(i,\alpha:i'\to u(i))$, and let $q:S\to I$ and $p:S\to e$ be the projections. An arrow of $S$ over $a:i\to j$ is forced by the equation $\beta=u(a)\alpha$. Thus $q$ is a discrete opfibration. More explicitly, for each $j\in I$, the category $S/j$ splits according to the composite $i'\to u(i)\to u(j)$; the part indexed by $\gamma:i'\to u(j)$ has terminal object $((j,\gamma),\mathrm{id}_j)$. This verifies exactly condition~3 of Proposition~6.4, with no claim that arbitrary restrictions preserve projective cofibrations.
+
+There is also a direct check of the required preservation of cofibrations which uses only coproducts, and therefore does not import the right Kan extension existence proviso in Proposition~6.4. Write $F_i(A)(j)=\coprod_{I(j,i)}A$ for the free presheaf at $i$. Unique outgoing lifts along $q$ give
+\[
+ q^*F_i(A)\cong\coprod_{s\in q^{-1}(i)}F_s(A).
+\]
+Restriction preserves colimits and retracts. This formula and the generating descriptions in Theorem~6.1(b) show that it preserves projective cofibrations and trivial cofibrations. Choose a projectively cofibrant replacement $QX\to X$; then $q^*QX$ is projectively cofibrant on $S$. Ordinary left Kan extension gives
+\[
+ (u_!QX)(i')\cong p_!q^*QX
+   =\mathop{\mathrm{colim}}_{S^{\mathrm{op}}}q^*QX.
+\]
+The first expression computes the value of $\mathbf L u_!X$, and the second computes $\mathbf Lp_!(q^*X)$. Evaluation and restriction preserve all objectwise weak equivalences, so the replacement maps identify this comparison independently of the chosen cofibrant representative. We obtain the canonical pointwise formula
+\[
+ i'^*\mathbf L u_!X\cong
+ \mathop{\mathrm{hocolim}}_{(i'\backslash I)^{\mathrm{op}}}q^*X.
+\]
+Here the opposite on the comma category is essential. In the covariant convention of \S3 the corresponding indexing category is $I/i'$, without this opposite. The formula is the content of the left Kan extension axiom, not merely an objectwise recipe unrelated to the adjunction.
+
+The other elementary properties can also be read directly from the diagram model structures. Diagrams on a disjoint union form a product of diagram categories; cofibrant and fibrant representatives show that their homotopy categories decompose accordingly. Evaluations jointly detect isomorphisms: represent a homotopy-category morphism between cofibrant--fibrant objects, and use saturation of weak equivalences in a closed model category in each component. If $I$ has a terminal object $t$, the constant-presheaf functor is left adjoint to evaluation at $t$, with identity unit; both functors preserve weak equivalences, so constant diagrams remain fully faithful after localization. These are the precise elementary assertions behind the older axiom names.
+
+The full, two-sided existence theorem is now available without the chapter's special-generation hypotheses, for a model category admitting all small limits and colimits. \citet[Theorem~6.11 and its dual]{Cisinski2003} establishes the homotopy Kan extension and pointwise assertions; his ``left'' terminology there is attached to the right Kan extension convention. For combinatorial model categories, \citet[Theorem~1.28, Proposition~1.30, and Theorem~1.32]{Groth2013} presents the projective--injective argument and records the general theorem. The present chapter provides the projective, colimit side; existence of all ordinary right Kan extensions is not part of its cocompleteness assumption.
+\end{dcomment}
+
+\begin{dcomment}{later}{p118}{What the coherent diagram remembers}
+Grothendieck's decision to localize the category of whole diagrams has a precise counterpart in the language of higher categories. Suppose, for a direct comparison, that $\mathcal M$ is a combinatorial simplicial model category, and let $\mathcal C_\infty$ be the coherent nerve of its simplicial subcategory of cofibrant--fibrant objects, with universes fixed as usual. Rectification identifies
+\[
+ \operatorname{Ho}\bigl(\mathcal M^{I^{\mathrm{op}}}\bigr)
+ \simeq h\operatorname{Fun}\bigl(N(I^{\mathrm{op}}),\mathcal C_\infty\bigr).
+\]
+One precise reference is \citet[Proposition~4.2.4.4, Remark~4.2.4.5, and Corollary~4.2.4.8]{Lurie2009HTT}; the statement is made there with size-controlled subcategories, which give the displayed comparison after choosing an ambient universe. Projective and injective presentations have the same weak equivalences. The homotopy Kan extensions above present the corresponding higher categorical Kan extensions.
+
+The comparison is with the homotopy category of a coherent diagram category. It does not identify that category with $\operatorname{Fun}(I^{\mathrm{op}},h\mathcal C_\infty)$. Passing to the homotopy category before forming diagrams discards the compatibility of homotopies. The latching maps in the proof of Corollary~6.3 provide a concrete model-level account of precisely this compatibility: each new lift must extend the lifts already chosen, and its domain is a pushout recording those earlier choices.
+\end{dcomment}
+

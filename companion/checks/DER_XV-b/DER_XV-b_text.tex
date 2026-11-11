@@ -1,0 +1,1866 @@
+% macro conflict, first definition kept: \newcommand{\card}{\mathrm{card}}
+% macro conflict, first definition kept: \newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+% macro conflict, first definition kept: \newcommand{\cercle}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=0.8pt](c){#1};}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[english,french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\raggedright\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\raggedright\footnotesize [#1]}}
+\newcommand{\Filt}{\mathrm{Filt}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Ss}{\mathrm{Ss}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Ci}{\mathcal{C}}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\uFl}{\underline{\mathrm{Fl}}}
+\newcommand{\into}{\lhook\joinrel\longrightarrow}
+\newcommand{\cercle}[1]{\tikz[baseline=(X.base)]\node[draw,circle,inner sep=0.6pt](X){#1};}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\Cof}{\mathrm{Cof}}
+\newcommand{\Fib}{\mathrm{Fib}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\univ}{\mathrm{univ}}
+\newcommand{\chap}{^{\wedge}}
+\newcommand{\Simp}{\boldsymbol{\Delta}}
+\newcommand{\Cub}{\square}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\inj}{\mathrm{inj}}
+\newcommand{\marginbar}{\marginpar{$\Vert$}}
+\newcommand{\Hot}{\mathrm{Hot}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\hot}{\mathrm{hot}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\HOT}{\mathrm{HOT}}
+
+% Reader layout only; all edition slips remain in the source body.
+\usepackage[a4paper,left=23mm,right=32mm,top=22mm,bottom=23mm,marginparwidth=23mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{needspace}
+\setmonofont{Latin Modern Mono}
+\let\dcOriginalTexttt\texttt
+\renewcommand{\texttt}[1]{\dcOriginalTexttt{\spaceskip=.515em plus .20em minus .14em\relax #1}}
+\BeforeBeginEnvironment{dcomment}{\Needspace{12\baselineskip}}
+\setlength{\emergencystretch}{1.5em}
+\setlength{\marginparpush}{4pt}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue,
+  pdftitle={Les Derivateurs: Chapter XV, pp. 57--137, with commentary},
+  pdfauthor={Alexander Grothendieck}}
+
+\begin{document}
+
+\begin{otherlanguage}{english}
+\pagenumbering{roman}
+\thispagestyle{empty}
+\vspace*{15mm}
+\noindent{\Large Alexander Grothendieck}\par\medskip
+\noindent{\huge\bfseries Les D\'erivateurs}\par\medskip
+\noindent{\Large Chapter XV, part 2}\par\bigskip
+\noindent{\large Text with commentary}\par
+\vspace{18mm}
+\noindent Manuscript pages 57--137, including the opening continuation
+of page 56 and the supplements to page 133.\par\medskip
+\noindent Source: the electronic edition deciphered and transcribed by
+M. K\"unzer, J. Malgoire, and G. Maltsiniotis, version 5 November 2010.\par
+\vspace{12mm}
+\noindent\textbf{Reading this companion.}
+The French text follows the edition. English commentary is set
+beside a vertical rule and labelled by its manuscript-page anchor.
+Marginal references distinguish the edition's printed page (``p.'')
+from the manuscript page (in brackets). The overview and verified
+bibliography follow the text. The accompanying CSV registers give the
+claim-by-claim audit and the distinction between transcription corrections
+and retained edition slips.\par\medskip
+\noindent A superscript ``ours'' identifies a proof developed for this
+commentary; it makes no claim of historical priority.\par
+\vfill
+\noindent Commentary and audit AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode),\par
+\noindent checked and integrated by Claude (Anthropic).\par
+\end{otherlanguage}
+\clearpage
+\pagenumbering{arabic}
+
+% ---- from Der-ChXV-05-11-10_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+l'inclusion
+\[
+\underbrace{X'_{i_0}}_{\in\, \Filt^\pi} \;\longrightarrow\; X \;\simeq\; \varinjlim X_i \;.
+\]
+Comme $X'_{i_0} \in \Filt^\pi$, donc est $\pi$-accessible, il existe un $i_1 > i_0$ tel que $X'_{i_0} \longrightarrow X$ se factorise par
+\[
+X'_{i_0} \;\longrightarrow\; X_{i_1} \;.
+\]
+Appliquant ce même résultat à $X_{i_1}$, $X'_{i_1}$ \textit{etc.}, on trouve une suite infinie de morphismes
+\[
+\begin{tikzcd}[column sep=small]
+X_{i_0} \arrow[dr] & & X_{i_1} \arrow[dr] & & X_{i_2} \arrow[dr] & \\
+& X'_{i_0} \arrow[ur] & & X'_{i_1} \arrow[ur] & & X'_{i_2} \quad \cdots
+\end{tikzcd}
+\]
+telle que les morphismes composés de deux en deux soient, sur la ligne supérieure, les transitions
+\[
+X_{i_m} \longrightarrow X_{i_n} \qquad (\; i_m \;<\; i_n \;) \;,
+\]
+et sur la ligne inférieure, les inclusions
+\[
+X'_{i_m} \hookrightarrow X'_{i_n} \qquad (\; \hookrightarrow X \;) \;.
+\]
+Soit $i_\omega = \sup_n i_n$ dans $I$, donc
+\[
+X_{i_\omega} \;=\; \varinjlim_{n} X_{i_n} \;\simeq\; \varinjlim_{n} X'_{i_n} \;\simeq\; X'_{i_\omega} \;,
+\]
+donc $X_{i_\omega} \longrightarrow X$ est un monomorphisme.
+
+\msp{page 57}
+
+La dernière assertion de 5.7 résulte aussitôt du fait qu'une limite inductive filtrante de monomorphismes dans $\M$ est un monomorphisme (condition $(e)$, p.~46).
+
+On peut préciser la proposition 5.6 obtenue ainsi :
+
+\textbf{Proposition 5.7}. \texttt{[Deux fois 5.7.]} \textit{Soient $\M$ une catégorie satisfaisant les conditions} (a), (b), (c), (d) (p.~44, 45) et (e) (p.~46). \textit{Soit $\M$ une partie de} $\Ob\M$\textit{, stable par isomorphie, $\pi$ un cardinal tel que les objets de} $\Filt^\pi$ \textit{soient $\pi$-accessibles. Les conditions suivantes sont équivalentes :} % [sic] Soit $\M$ (calligraphique) -> Soit $M$, la partie de Ob M est notée M partout ailleurs
+
+\begin{enumerate}[label={}]
+\item[a)] \textit{$M$ est $\pi$-accessible, et stable par $\varinjlim$ filtrantes.}
+\item[b)] \textit{$M$ est $\pi$-accessible, et $M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrante de cardinal $\leq \pi$.}
+\item[c)] \textit{Il existe une partie $M^\pi$ de} $\Filt^\pi$\textit{, stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$ et telle que pour tout $X \in \Ob\M$, on ait $X \in M$ si et seulement si l'ensemble $J_M$ des $Z_\alpha \in J$ tels que $Z_\alpha \in M^\pi$ est cofinal dans $J$.}
+\end{enumerate}
+
+(\textit{De plus, sous la condition} (c), \textit{on a}
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 58}
+$M^\pi = M \cap \Filt^\pi$.)
+\begin{enumerate}[label={}]
+\item[c$'$)] \textit{Il existe une partie $M_0$ de} $\Filt^\pi$ \textit{telle que $M$ soit la plus petite partie de $\M$ stable par limites inductives filtrantes.} (\textit{De plus, on peut alors prendre $M_0$} petite.)\footnote[22]{\textbf{N.B.} On a
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+(a) \arrow[r, Leftrightarrow] \arrow[d, Rightarrow] \& (b) \arrow[d, Rightarrow] \\
+(c') \arrow[r, Rightarrow, "?"] \& (c)
+\end{tikzcd}
+\quad ,
+\]
+sans conditions sur $\pi$ (sauf $\pi \geq \pi_0$).}.
+\end{enumerate}
+
+\textbf{Corollaire 5.8.} \textit{Les applications}
+\[
+M \;\longmapsto\; M^\pi = M \cap \Filt^\pi \;,
+\]
+\[
+M^\pi \quad\longmapsto\quad \parbox[t]{0.5\textwidth}{\textit{l'ensemble des $X \in \Ob\M$ tels que l'ensemble $\Ss_\pi^{M^\pi}(X)$ des $Z_\alpha \in \Ss_\pi(X)$ qui sont dans $M^\pi$ soit cofinal} (= \textit{plus petit sous-ensemble de $\Ob\M$ stable par $\varinjlim$ filtrantes})}
+\]
+\textit{établissent des bijections, inverses l'une de l'autre, entre l'ensemble des $M \subset \Ob\M$ satisfaisant les conditions équivalentes de la proposition} 5.7\textit{, et l'ensemble des parties $M^\pi$ de} $\Filt^\pi$ \textit{stables par $\varinjlim$ filtrantes de cardinal $\leq \pi$.}
+
+\textsc{Démonstration de} 5.7. L'implication $(b) \Longrightarrow (c)$ est tautologique, compte tenu de la définition de la $\pi$-accessibilité de $M$, et de la proposition 5.3. Et $(a) \Longrightarrow (b)$ provient de la stabilité de $\Filt^\pi$ par $\varinjlim$ filtrantes de cardinal $\leq \pi$ (condition $(d)$).
+
+Il reste donc à prouver $(c) \Longrightarrow (a)$. (C'est ici qu'on doit utiliser l'hypothèse particulière sur $\pi$.) Une fois ceci vu, on saura l'équivalence de $(a)$, $(b)$, $(c)$, et d'autre part, il est immédiat que $(a) \Longrightarrow (c')$, en
+\msp{page 59}
+prenant $M_0 = M \cap \Filt^\pi$. D'autre part, $(c') \Longrightarrow (c)$ (sans hypothèses sur $\pi\,$?), car on peut supposer que la partie $M_0$ de $\Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$. Mais alors, connaissant l'équivalence de $(a)$, $(b)$ $(c)$, d'où aussitôt le corollaire, il s'ensuit que l'enveloppe stable par $\varinjlim$ filtrantes de $M_0$ dans $\M$ n'est autre que la partie accessible déduite de $M_0$ dont il est question dans $(c)$, et on gagne. % [sic] $(b)$ $(c)$ -> $(b)$, $(c)$, virgule manquante
+
+Donc tout revient à prouver que, si tous les objets de $\Filt^\pi$ sont accessibles, alors $(c)$ implique $(a)$. Montrons d'abord que $(c)$ implique le critère d'appartenance (5.3) (p.~51), donc par la proposition 5.6 “revue et corrigée” dans la note 21, il s'ensuit déjà que $(c) \Longrightarrow (b)$, et il restera à établir $(b) \Longrightarrow (a)$, \textit{i.e.} que $(b)$ implique la stabilité de $M$ par $\varinjlim$ filtrantes quelconques (pas seulement grandes devant $\pi$).
+
+Que $(c)$ implique (5.3) va résulter du lemme suivant, appliqué à $I = \Ss_\pi(X)$ :
+
+\textbf{Lemme 5.8.} \texttt{[Deux fois 5.8.]} \textit{Soit $I$ un ensemble ordonné} $\pi$-adapté, i.e. \textit{filtrant et tel que toute partie filtrante $K$ de $I$, de cardinal $\leq \pi$, ait une borne supérieure $i_K$ dans $I$. Je dis qu'une partie $J$ de $I$ est} $\pi$-cofinale, \textit{si elle est cofinale, et si pour toute partie filtrante $K$ de $J$ de cardinal $\leq \pi$, sa borne supérieure $i_K$ dans $I$ est}
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 60}
+\textit{dans $J$.} (\textit{Il s'ensuit donc que $J$ est lui aussi $\pi$-adapté, pour la structure d'ordre induite.}) \textit{Ceci dit, l'intersection de deux parties $\pi$-cofinales de $I$ est encore $\pi$-cofinale.}
+
+Il suffit de voir qu'elle est cofinale, car sa stabilité par bornes supérieures dans $I$ de parties filtrantes de cardinal $\leq \pi$ est tautologique (si elle est vraie pour des $J_\alpha$, elle est vraie pour $\bigcap_\alpha J_\alpha$). Soit $i_0 \in I$, et construisons un élément de $J \cap J'$ qui majore $i_0$. On construit de proche en proche une double suite
+\[
+\begin{tikzcd}
+i_1 \arrow[dr] & & i_2 \arrow[dr] & & \cdots \\
+& i'_1 \arrow[ur] & & i'_2 \arrow[ur] &
+\end{tikzcd}
+\]
+avec les $i_\alpha$ dans $J$, les $i'_\alpha$ dans $J'$, et $i_1 \geq i_0$. On a donc
+\[
+\sup i_\alpha \;=\; \sup i'_\alpha \;,
+\]
+et si $i$ est la valeur commune des deux membres, on a $i \in J \cap J'$.
+
+Ceci vu, pour prouver la validité de (5.3), on note que la partie $J' = \Ss_\pi^{(M^\pi)}(X)$ de $I = \Ss_\pi(X)$, formée des $Z_\alpha \subset X$ tels que $Z_\alpha \in M^\pi$, est stable par bornes supérieures de parties filtrantes de cardinal $\leq \pi$, vu que $M^\pi$ est stable
+\msp{page 61}
+par $\varinjlim$ de cardinal $\leq \pi$. Donc si $J$ est une partie $\pi$-cofinale de $\Ss_\pi(X)$, $J \cap J'$ est cofinale dans $J$, \textit{i.e.} dans $I$, si et seulement si $J'$ est cofinale dans $I$ (\textit{i.e.} si et seulement si $X \in M$, par la condition $(c)$). Car $J \cap J'$ cofinale $\Longrightarrow$ $J'$ cofinale tautologiquement, et $J'$ cofinale implique $J'$ $\pi$-cofinale, donc $J \cap J'$ $\pi$-cofinale par le lemme 5.8, donc cofinale.
+
+Reste à prouver seulement que $(b) \Longrightarrow (a)$, \textit{i.e.} la stabilité de $M$ par limites inductives filtrantes quelconques, moyennant $(b)$. Ici à nouveau, cela ne doit pas utiliser l'hypothèse particulière sur $\pi$, ni même l'hypothèse d'exactitude $(e)$ sur $\M$, mais être une histoire générale d'accessibilité :
+
+\textbf{Proposition 5.9.} \textit{Soit $\M$ une catégorie satisfaisant} (a), (b), (c), (d$_0$) (pages 44, 45), \textit{$\pi \geq \pi_0$ un cardinal, $M$ une partie $\pi$-accessible de} $\Ob\M$, i.e. \textit{satisfaisant la condition $b_\pi$ de} XIII, p.~88. \textit{Alors $M$ est stable par $\varinjlim$ filtrantes si et seulement si $M^\pi \overset{\text{déf}}{=} M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$.}
+
+Je n'ai pas envie d'expliciter ici la démonstration, ayant l'impression pénible de refaire à perpette la même démonstration (ici et dans XIII). Je devrai revenir là-dessus dans une situation plus décantée.
+
+\msp{page 62}
+
+Je vais quand même esquisser la démonstration. Soit $X = \varinjlim\limits_{I} X_i$, $I$ filtrant, les $X_i$ dans $M$, il faut prouver que $X \in M$ (moyennant l'hypothèse de stabilité sur $M^\pi = M \cap \Filt^\pi$).
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\[
+\begin{tikzcd}
+& \Ci \arrow[r] \arrow[d] \arrow[dl, dotted, "\mathfrak{z}"'] \arrow[dr, phantom, "\text{\footnotesize cart.}"] & I \arrow[d, "\varphi"] \\
+\underline{M}^\pi & \underline{M}^\pi/\underline{M} \arrow[l, dotted, "\text{\footnotesize “source”}"] \arrow[r, "\text{\footnotesize “but”}"'] & \underline{M}
+\end{tikzcd}
+\] % resolved: the PDF glyph is fraktur z; see corrections.csv, leaf 4.
+
+$\Ci$ est une catégorie cofibrée sur $I$, dont les fibres sont
+\[
+\Ci_i \;\simeq M^\pi/X_i \;,
+\]
+or comme $X_i \in M$, on voit, à cause de la condition de $\pi$-accessibilité, que $M^\pi/X_i$ est \textit{filtrante.} On va le dégager en
+
+\textbf{Lemme 5.10.} \textit{Soit $M$ une partie $\pi$-accessible de $\M$. Alors pour tout $Y \in M$, $M^\pi/Y$ est une catégorie} filtrante, \textit{et $\Ss_\pi(Y)$ y est cofinale.}
+
+\msp{page 63}
+
+Considérons le foncteur canonique
+\[
+I \;=\; \Ss_\pi(Y) \xrightarrow{\;\varphi\;} \underline{M}^\pi/Y \;=\; I' \;,
+\]
+où la catégorie source $I$ est filtrante. Par SGA 4 I 8.1.3, ce foncteur est cofinal si et seulement s'il satisfait deux conditions F\,1, F\,2, et alors $I'$ est également filtrante. La condition F\,1 est la condition habituelle que tout $i' \in \Ob I'$ est “majoré” par un $\varphi(i)$, \textit{i.e.} tout $Z \longrightarrow Y$, avec $Z \in M^\pi$, est “majoré” par un \textit{monomorphisme} $Z_\alpha \hookrightarrow Y$, avec $Z_\alpha \in M^\pi$, ce qui résulte du fait que c'est majoré par $Z_\alpha \hookrightarrow Y$ avec $Z_\alpha \in \Filt^\pi$, \textit{i.e.} $Z_\alpha \in \Ss_\pi(Y)$, et que parmi ces $Z_\alpha$ ceux qui sont dans $M^\pi$ sont cofinaux (vu que $Y \in M$). L'autre condition\footnote[23]{Comme $I$ est filtrante.} est qu'une double flèche $i' \overset{f'}{\underset{g'}{\rightrightarrows}} \varphi(i)$ peut
+\msp{page 64}
+s'égaliser par une flèche $\varphi(h)$, avec $h : i \longrightarrow j$. Mais en fait, pour un $i' \in \Ob I'$, \textit{i.e.} un $Z \longrightarrow Y$ donné ($Z \in M^\pi$), et un $i \in \Ob I$, \textit{i.e.} un $Z_\alpha \hookrightarrow Y$ donné ($Z_\alpha \in M^\pi$), il existe au plus \textit{une} flèche dans $I' = \underline{M}^\pi/Y$ de $Z \longrightarrow Y$ dans $Z_\alpha \hookrightarrow Y$. Donc la condition F\,2 est trivialement satisfaite (on prend $h = \mathrm{id}_i$).
+
+\textbf{Corollaire 5.11.} \textit{Si $(X_i)_{i \in I}$ est un système inductif filtrant, avec les $X_i$ dans $M^\pi$, alors la catégorie $\Ci = \underline{M}^\pi/\underline{M} \times_{\underline{M}} (I,\varphi)$, construite page} 62, \textit{est filtrante, et le foncteur canonique} (\textit{fibrant}) \textit{$\Ci \longrightarrow I$ est cofinal.}
+
+Que $\Ci$ soit filtrante et $\Ci \longrightarrow I$ cofinal résulte formellement du fait que $I$ l'est, que les fibres de $\Ci$ le sont, et que $\Ci$ est cofibrée sur $I$. (Mérite un lemme, à toutes fins utiles.)
+
+\textbf{N.B.} On peut remplacer $\Ci$ par $\Ci_0$ dont les fibres sont les
+\[
+\Ss_\pi^{M^\pi}(X_i) \;\subset\; \underline{M}^\pi \;; \qquad \text{cofinale dans } \Ci_i = \underline{M}^\pi/X_i \;,
+\]
+\msp{page 65}
+on trouve une sous-catégorie de $\Ci$ cofinale dans $\Ci$, et qui est cette fois ordonnée tout comme $I$.
+
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+On a
+\[
+X_i \;=\; \varinjlim_{Z_\alpha \in \Ci_i} Z_\alpha \;,
+\]
+donc
+\[
+X \;=\; \varinjlim_{\alpha \in \Ci} Z_\alpha \;,
+\]
+au total on est arrivé à représenter $X$ comme $\varinjlim$ filtrante d'éléments $Z_\alpha$ qui sont (non seulement dans $M$, mais même) dans $M^\pi$.
+
+Changeons la notation, en prenant
+\[
+X \;=\; \varinjlim_{i \in I} X_i \;, \qquad I \text{ ensemble ordonné filtrant, } X_i \in M^\pi \;\; \forall\, i \in I \;,
+\]
+soit $I'$ l'ensemble des parties \textit{filtrantes} $J \subset I$ telles que $\mathrm{card}\, J \leq \pi$, $I'$ ordonné par inclusion. Alors $I'$ est grand devant $\pi$, et on a un système inductif
+\[
+(X_J)_{J \in I'} \;, \qquad X_J \;=\; \varinjlim_{i \in J} X_i \;.
+\]
+Par l'hypothèse de stabilité de $M^\pi$ (qui n'a pas encore servi), les $X_J$ sont dans $M^\pi$. On a donc
+\[
+X \;=\; \varinjlim_{J \in I'} X_J \;, \qquad \text{les } X_J \text{ dans } M^\pi\text{, } I' \text{ grande devant } \pi \;,
+\]
+donc $X \in M$ puisque $M$ est $\pi$-admissible, \quad \textit{q.e.d.}
+
+\msp{page 66}
+
+\textbf{Définition 5.12.}
+\begin{enumerate}[label={}]
+\item[1)] Soit $\M$ une catégorie satisfaisant les conditions $(a)$, $(b)$, $(c)$, $(d)$ (p.~44-46). Soit $\pi \geq \pi_0$ un cardinal. Une partie $M$ de $\Ob\M$ est dite \textit{L-$\pi$-accessible,} si elle est $\pi$-accessible et stable par petites $\varinjlim$ filtrantes\footnote[24]{On dit alors que $M$ est \textit{L-stable.}}, ou ce qui revient au même (5.9), si elle est $\pi$-accessible et si $M^\pi = M \cap \Filt^\pi$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$. (\textbf{N.B.} Si les objets de $\Filt^\pi$ sont $\pi$-accessibles, 5.8 nous dit que cela signifie aussi qu'il suffit pour cela qu'il existe une partie $M_0$ de $\Filt^\pi$ telle que $M$ soit la L-enveloppe (enveloppe stable par $\varinjlim$ filtrantes) de $M_0$ -- condition qui est de toutes façons toujours nécessaire, en prenant $M_0 = M^\pi$.)
+\item[2)] Soit $M$ une partie de $\Ob\M$. On dit qu'elle est \textit{L-accessible,} si elle satisfait à l'une des quatre conditions équivalentes suivantes :
+\begin{enumerate}[label={}]
+\item[\textit{a})] Il existe un cardinal $\pi$ tel que $M$ soit L-$\pi$-accessible.
+\item[\textit{a}$'$)] $M$ est accessible et L-stable.
+\item[\textit{b})] Il existe une petite partie $M_0$ de $\Ob\M$, telle que $M$ soit la L-enveloppe de $M_0$\footnote[25]{Cette condition ne dépend pas de la filtration cardinale choisie de $\M$.}.
+\item[\textit{b}$'$)] Il existe une partie $M_0$ de $\M$ contenue dans une partie $\Filt^\pi$ (ou ce qui revient au même, telle que la sous-catégorie pleine $\underline{M}_0$ de $\M$ soit essentiellement petite, \textit{i.e.} équivalente à une petite catégorie, telle que $M$ soit la \textit{L}-enveloppe de $M_0$).
+\end{enumerate}
+\end{enumerate}
+
+% ---- from Der-ChXV-05-11-10_p041-045.tex
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 67}
+L'équivalence de $(a)$ et $(a')$, ou de $(b)$ et $(b')$ est plus ou moins tautologique. L'équivalence de $(a)$ et $(b)$ résulte aussitôt du N.B. inclus dans $1^{\circ}$, compte tenu que les cardinaux $\pi$ tels que les objets de $\Filt^{\pi}$ soient $\pi$-accessibles sont cofinaux dans l'ensemble des cardinaux dans $\mathfrak{U}$. (\textit{Cf.} 3.2, page 16).
+
+\textbf{Proposition 5.13.} \textit{Toute réunion finie de parties L-$\pi$-accessibles de} $\Ob\mathcal{M}$ \textit{est L-$\pi$-accessible. L'intersection d'une famille $(M_{\alpha})_{\alpha\in A}$ de parties L-$\pi$-accessibles, avec} $\card A \leq \pi$\textit{, est L-$\pi$-accessible.}
+
+\textsc{Démonstration}. La première assertion provient du fait qu'une réunion \textit{finie} de parties L-stables de $M$ est L-stable, et qu'on a itou pour la notion de $\pi$-accessibilité. Les deux choses se prouvent d'ailleurs pratiquement de la même façon, en utilisant le
+
+\textbf{Lemme 5.14.} \textit{Soit $I$ un ensemble ordonné filtrant, $(I_{\alpha})_{\alpha\in A}$ une famille} finie \textit{non vide de parties de $I$, telle que $\bigcup I_{\alpha} = I$. Alors il existe $\alpha \in A$ tel que $I_{\alpha}$ soit cofinal.}
+
+\msp{page 68}
+\textsc{Démonstration} par l'absurde. Si pour aucun $\alpha$, $I_{\alpha}$ n'était cofinal, on en conclurait que pour tout $\alpha$ il existe un $i_{\alpha}$ tel que $I/i_{\alpha} \cap I_{\alpha} = \emptyset$. Soit $i$ majorant les $i_{\alpha}$, on aura donc $I/i \cap I_{\alpha} = \emptyset \ \ \forall\, \alpha \in A$, contrairement à l'hypothèse que $\bigcup I_{\alpha} = I$.
+
+Le cas d'une \textit{intersection} de parties L-$\pi$-accessibles : elle est bien sûr L-stable, donc il reste à prouver qu'elle est $\pi$-accessible, \textit{i.e.} satisfait la condition $\mathrm{b}_{\pi}$ de \textit{loc. cit.}
+
+\msp{page 69}
+Soit donc
+\[
+X \;=\; \varinjlim_{i\in I} X_{i} \; , \qquad\quad X_{i} \in \Filt^{\pi} \; ,
+\]
+une représentation $\pi$-adaptée de $X$, avec $I$ un ensemble ordonné $\pi$-adapté. Donc on a
+\[
+\begin{aligned}
+X \in M_{\alpha} \quad &\Longleftrightarrow \quad \text{l'ensemble } I_{M_{\alpha}} \text{ des } i \in I \text{ tels que } X_{i} \in M_{\alpha}\\
+&\phantom{\Longleftrightarrow} \quad \text{est cofinal dans } I.
+\end{aligned}
+\tag*{$(*)$}
+\]
+D'ailleurs, comme $M_{\alpha}^{\pi} = M_{\alpha} \cap \Filt^{\pi}$ est stable par $\varinjlim$ filtrante de cardinal $\leq \pi$, on voit tout de suite que la partie $I_{M_{\alpha}}$ de $I$ est stable par bornes supérieures dans $I$ de parties $J$ de $I_{M_{\alpha}}$ filtrantes et de cardinal $\leq \pi$. Donc $I_{M_{\alpha}}$ cofinal équivaut à $I_{M_{\alpha}}$ $\pi$-\textit{cofinal} (\textit{cf.} 5.8, page 59). Soit $M = \bigcap_{\alpha\in A} M_{\alpha}$, je veux prouver que
+\[
+X \in M \quad \Longleftrightarrow \quad \text{l'ensemble } I_{M} \ (= \textstyle\bigcap I_{M_{\alpha}}) \text{ est cofinal dans } I.
+\tag*{$(**)$}
+\]
+Or $(*)$ implique que $X \in M$ $(= \bigcap M_{\alpha})$ équivaut à $I_{M_{\alpha}}$ $\pi$-cofinal pour tout $\alpha$. Donc au total on veut prouver
+\[
+I_{M_{\alpha}} \text{ cofinal dans } I \text{ pour tout } \alpha \quad\ \Longleftrightarrow \quad\ \textstyle\bigcap I_{M_{\alpha}} \text{ est cofinal dans } I.
+\tag*{$(***)$}
+\]
+
+\msp{page 70}
+On a bien sûr $\Longleftarrow$, donc il reste à prouver $\Longrightarrow$. Si l'ensemble d'indices $A$ est fini, cela résulte du lemme 5.8, compte tenu que la cofinalité des $I_{M_{\alpha}}$ implique leur $\pi$-cofinalité. On doit donc simplement améliorer 5.8, par le
+
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\textbf{Lemme 5.15.} \textit{Soient $\pi$ un cardinal, $I$ un ensemble ordonné filtrant $\pi$-adapté, et soit $(I_{\alpha})_{\alpha\in A}$ une famille de parties $I_{\alpha}$ $\pi$-cofinales} (cf. 5.8), \textit{telle que} $\card A \leq \pi$. \textit{Alors $\bigcap I_{\alpha}$ est $\pi$-cofinale.}
+
+Il suffit de prouver qu'elle est cofinale, car la propriété de stabilité par bornes supérieures de parties filtrantes de cardinal $\leq \pi$ est évidente. Quitte à remplacer $I$ par $I/i_{0}$, et les $I_{\alpha}$ par leurs traces sur $I/i_{0}$, la question est simplement de prouver que $\bigcap_{\alpha} I_{\alpha} \neq \emptyset$. On va construire un élément $s$ de $\bigcap I_{\alpha}$ par induction transfinie. Prenons un bon ordre sur $A$, et prouvons par récurrence transfinie
+\msp{page 71}
+que pour tout $\alpha \in A$, l'ensemble
+\[
+J_{\alpha} \;=\; \bigcap_{\beta<\alpha} I_{\beta}
+\]
+est cofinal. Si on sait que $J_{\alpha}$ est cofinal, il en est de même de $J_{\alpha+1} = J_{\alpha} \cap I_{\alpha}$, par 5.8. Donc on est ramené à prouver que $J_{\alpha}$ est cofinal si $\alpha$ est un ordinal limite, donc à prouver le lemme 5.15 pour une suite transfinie \textit{décroissante} de parties $\pi$-cofinales $J_{\beta}$ $(\beta < \alpha)$ quand $\card \alpha \leq \pi$, telle que $J_{\beta} = \bigcap_{\beta'<\beta} J_{\beta'}$ quand $\beta$ est limite. À prouver que l'intersection est $\pi$-cofinale -- et on est réduit à prouver qu'elle est non vide. On va construire par récurrence transfinie une suite \textit{croissante} d'éléments
+\[
+i_{\beta} \;\in\; J_{\beta} \qquad\quad (\, \beta \;\leq\; \alpha \,) \; .
+\]
+Si $i_{\beta}$ est construit, comme $J_{\beta+1}$ est cofinal, il existe $i_{\beta+1} \geq i_{\beta}$ dans $J_{\beta+1}$, O.K. Si $\beta$ est un ordinal limite, on prend
+\[
+i_{\beta} \;=\; \sup_{\beta'<\beta} i_{\beta'} \; ,
+\]
+$i_{\beta}$ est dans chaque $I_{\beta_{0}}$ pour $\beta_{0} < \beta$,
+\msp{page 72}
+puisque les $i_{\beta'}$ pour $\beta_{0} \leq \beta' < \beta$ sont tous dans $J_{\beta_{0}} \supset J_{\beta'}$, donc aussi leur limite, donc
+\[
+i_{\beta} \;\in\; \bigcap_{\beta_{0}<\beta} J_{\beta_{0}} \;=\; J_{\beta} \; .
+\]
+Donc la récurrence transfinie marche, et nous donne donc un élément $s_{\alpha}$ de $J_{\alpha}$\,!
+
+Je vais prouver aussi en forme l'assertion pour $\bigcup_{\alpha\in A} M_{\alpha}$, quand $A$ est fini. Posant cette fois $M = \bigcup_{\alpha} M_{\alpha}$, il faut prouver, moyennant les relations $(*)$ (p. 68), qu'on a
+\[
+\begin{aligned}
+&X \in M &&\Longleftrightarrow \quad &&\text{l'ensemble } \ I_{M} \ \ (= \ \textstyle\bigcup_{\alpha} I_{M_{\alpha}})\\
+&(\textit{i.e.} \ \exists \ \alpha \text{ avec } X \in M_{\alpha}) && &&\text{est cofinal dans } I \ ,
+\end{aligned}
+\tag*{$(**)$}
+\]
+et moyennant $(*)$ le premier terme de cette équivalence à établir signifie qu'il existe $\alpha$ avec $I_{M_{\alpha}}$ cofinal dans $I$. Bien sûr, si un des $I_{M_{\alpha}}$ est cofinal dans $I$, a fortiori leur réunion. Mais inversement, si la réunion est cofinale, elle est filtrante et réunion des parties (filtrantes) $I_{M_{\alpha}}$, dont l'une doit donc être cofinale dans elle par le lemme 5.14, donc aussi dans $I$, \textit{q.e.d.}
+
+\msp{page 73}
+\textbf{Corollaire 5.16} (de la proposition 5.13). \textit{Toute réunion finie de parties L-accessibles de $\mathcal{M}$ est L-accessible. Toute intersection $\bigcap M_{\alpha}$ d'une famille petite de parties L-accessibles de $\mathcal{M}$, est L-accessible.}
+
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\section*{6\quad Essai avorté pour un critère d'engendrement des parties L-accessibles de $\Fl(\mathcal{M})$.}
+
+Soit $\mathcal{M}$ une catégorie munie d'une filtration cardinale $(\Filt^{\pi})_{\pi\geq\pi_{0}}$, et soit $S$ un objet de Cat, considérons
+\[
+\mathcal{M}(S) \;=\; \uHom(S,\mathcal{M}) \; ,
+\]
+et munissons $\mathcal{M}(S)$ de la filtration par les
+\[
+\mathcal{M}^{\pi}(S) \;=\; \uHom(S,\mathcal{M}^{\pi} = \underline{\Filt}^{\pi}(\mathcal{M})) \; .
+\]
+Je dis que c'est là une filtration cardinale de $\mathcal{M}(S)$. Il faut vérifier les conditions $(a)$, $(b)$, $(c)$ de SGA 4 I 9.12. Les conditions $(a)$ ($\Filt^{\pi}$ essentiellement petite) et $(b)$ (condition $\mathrm{L}_{\pi_{0}}$, et stabilité de $\Filt^{\pi}$ par $\varinjlim\limits_{I}$ , $I$ filtrante grande devant $\pi_{0}$ et de cardinal $\leq \pi$) passent aussitôt de $\mathcal{M}$ à $\mathcal{M}(S)$. La condition $(c)$ est plus délicate (représentation
+\msp{page 74}
+d'un objet comme $\varinjlim$ filtrante grande devant $\pi$ d'objets de $\Filt^{\pi}$). Je ne vais pas refaire le travail, fait dans un cas beaucoup plus général et plus délicat dans SGA 4 I §9, savoir dans le corollaire 9.24 du théorème 9.22 (p. 177). La seule restriction, c'est qu'on y suppose les objets de $\mathcal{M}$ accessibles, et désignant par $\pi_{1}$ le plus petit cardinal tel que $\pi_{1} \geq \pi_{0}$ et que les objets de $\Filt^{\pi_{0}}$ soient $\pi_{1}$-accessibles, on se borne pour la filtration cardinale de $\uHom(S,\mathcal{M})$ aux cardinaux \fbox{$\pi \geq c = 2^{c_{0}}$,} où
+\[
+c_{0} \;=\; \sup(\pi_{1}, \card \Fl(S)) \; .
+\]
+C'est une restriction raisonnable et anodine.
+
+Pour l'instant, je suis intéressé surtout au cas où $S = \boldsymbol{\Delta}_{1}$, donc à
+\[
+\uHom(\boldsymbol{\Delta}_{1},\mathcal{M}) \;=\; \uFl(\mathcal{M}) \; ,
+\]
+auquel cas on a $c_{0} = \pi_{1}$, donc il suffit de se borner aux cardinaux $\pi \geq 2^{\pi_{1}}$ pour avoir une bonne filtration cardinale sur $\uFl(\mathcal{M})$.
+
+C'est donc l'ensemble des deux conditions $(b)$, $(c)$ sur $\mathcal{M}$ (p. 44) qui est stable par passage aux $\uHom(S,\mathcal{M}) = \mathcal{M}(S)$. Il en est de même de la condition $(a)$ (stabilité par petites limites inductives), et aussi de la condition\msp{page 75}
+$(d)$ (p. 45). De même la condition d'exactitude $(e)$ (p. 46) sur les $\varinjlim$ filtrantes (elles doivent transformer les monomorphismes en monomorphismes).
+
+Pour être tranquille, je vais faire sur $\mathcal{M}$ les hypothèses $(a)$ à $(e)$ inclus (bien que $(e)$ me semble un peu artificielle, on devrait pouvoir l'éliminer, dans un second souffle\,!). Ces conditions ont donc la propriété de stabilité souhaitable par passage aux $\mathcal{M}(S)$, et en particulier par passage à $\Fl(\mathcal{M})$. Quitte à augmenter $\pi_{0}$, on peut donc supposer que les $\Fl^{\pi}(\mathcal{M}) = \mathrm{Hom}(\boldsymbol{\Delta}_{1},\mathcal{M}^{\pi})$ $(\pi \geq \pi_{0})$ forment aussi une filtration cardinale de $\uFl(\mathcal{M})$.
+
+On dispose donc des notions de parties $\pi$-accessibles, accessibles, L-$\pi$-accessibles, L-accessibles de $\Fl(\mathcal{M}) \ = \ \Ob\uFl(\mathcal{M})$. Ces notions sont stables par réunions et intersections finies, et les notions absolues (sans $\pi$) stables par intersections ``quelconques'' (\textit{i.e.} pour des \textit{petites} familles de parties). Ce sera là une chose particulièrement\printedpage{42}%
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 76}
+cruciale, le cas d'une intersection $C \cap W$\,!
+
+Le résultat principal, pour lequel j'ai fait les gammes du paragraphe précédent, est le suivant :
+
+\setcounter{footnote}{25}
+\textbf{Théorème 6.1}\footnote{Démonstration canulée, énoncé peut-être \textit{faux}\,!!}. \textit{Soit $\mathcal{M}$ une catégorie satisfaisant les conditions dites :}
+\begin{enumerate}[label={}]
+\item[a)] \textit{Stabilité par petites} $\varinjlim$ \textit{(pas nécessairement filtrantes).}
+\item[b)] $\mathcal{M}$ \textit{munie d'une filtration cardinale} $(\Filt^{\pi})_{\pi\geq\pi_{0}}$.
+\item[c)] \textit{Les objets de $\mathcal{M}$ sont accessibles.}
+\item[d)] \textit{Les} $\Filt^{\pi}$ \textit{sont stables par} $\varinjlim$ \textit{indexées par des catégories $I$ telles que} $\card \Fl(I) \leq \pi$\textit{, et si $Z \in \Filt^{\pi}$, tout quotient $Z'$ de $Z$ (tel que $Z \longrightarrow Z'$ ne se factorise pas par un sous-objet $Z'_{0}$ de $Z'$, différent de $Z'$) est dans} $\Filt^{\pi}$.
+\item[e)] \textit{Les limites inductives filtrantes dans $\mathcal{M}$ transforment les monomorphismes en monomorphismes.}
+\end{enumerate}
+\textit{Soit $C$ une partie L-accessible de} $\Fl(\mathcal{M}) = \Ob\uFl(\mathcal{M})$, i.e. (5.12) \textit{une partie stable par} $\varinjlim$ \textit{filtrantes, et accessible. Supposons de plus $C$ formée de monomorphismes}\footnote{Finalement, on se débarrasse de cette hypothèse.}\textit{, et que $C$ contient les} isomorphismes. \textit{Alors il existe une partie petite $C_{0} \subset C$, telle que $C \subset \widetilde{C_{0}}$. Plus précisément, si $\pi$ est un cardinal tel que $C$ soit $\pi$-accessible, et si on pose $C^{\pi} = C \cap \Fl^{\pi}(\mathcal{M})$, alors on a}
+\msp{page 77}
+\[
+C \;\subset\; \widetilde{C^{\pi}} \;=\; \widetilde{C_{0}} \; ,
+\tag*{(6.1.1)}
+\]
+\textit{où $C_{0}$ est n'importe quelle petite partie de $C^{\pi}$ telle que tout objet de $C^{\pi}$ soit isomorphe à un objet de $C_{0}$.}
+
+\textbf{Corollaire 6.2.} \textit{On a $C_{*} = C_{0\,*}$, $\widetilde{C} = \widetilde{C_{0}}$.}
+
+\textbf{Corollaire 6.3.} \textit{Conditions équivalentes sur la partie L-accessible $C$ de} $\Fl(\mathcal{M})_{\mathrm{mono}}$\textit{, contenant les isomorphismes :}
+\begin{enumerate}[label={}]
+\item[a)] \textit{$C = \widetilde{C}$.}
+\item[b)] \textit{$C$ est stable par cochangement de base et par composition.}
+\item[b$'$)] \textit{$C$ est stable par cochangement de base, et par sommes amalgamées simples,} i.e. \textit{si $A \longrightarrow B_{1}$, $A \longrightarrow B_{2}$ sont dans $C$, alors $A \longrightarrow B_{1} \amalg_{A} B_{2}$ aussi.}
+\item[c)] \textit{$C^{\pi}$ est stable dans} $\Fl^{\pi}(\mathcal{M}) = \Fl(\mathcal{M}^{\pi})$ \textit{par cochangement de base et par composition.}
+\item[c$'$)] \textit{$C^{\pi}$ est stable dans} $\Fl(\mathcal{M}^{\pi})$ \textit{par cochangement de base et par sommes amalgamées} (cf. b$'$).
+\end{enumerate}
+\textit{Quand ces conditions sont satisfaites, alors $(C,C_{*})$ est un couple de Quillen, justiciable du théorème} 1 \textit{du paragraphe} 1 (p. 10).
+
+La dernière assertion résulte du théorème 6.1 et du corollaire au théorème 1 du paragraphe 1. On a
+\printedpage{43}%
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 78}
+d'autre part tautologiquement
+\[
+\begin{tikzcd}
+(a) \arrow[r, Rightarrow] & (b) \arrow[r, Rightarrow] \arrow[d, Rightarrow] & (b') \arrow[d, Rightarrow] \\
+ & (c) \arrow[r, Rightarrow] & (c') \ ,
+\end{tikzcd}
+\]
+et il reste à prouver $(c') \Longrightarrow (a)$, ce qu'on fera plus bas.
+
+Prouvons donc 6.1. Dans (6.1.1) l'égalité $\widetilde{C_{0}} = \widetilde{C^{\pi}}$ est tautologique. Donc tout revient à prouver
+\[
+C \;\subset\; \widetilde{C^{\pi}} \; .
+\]
+Une difficulté ici, c'est qu'on ne sait \textit{pas} que $\widetilde{C^{\pi}}$ soit stable par $\varinjlim$ filtrantes -- on le sait seulement pour $C$. Soit donc
+\[
+A \;\into\; B
+\]
+une flèche dans $C$, prouvons qu'elle est dans $\widetilde{C^{\pi}}$. Pour ceci, on va construire, par induction transfinie, une suite transfinie \textit{strictement} croissante de sous-objets $A_{\alpha}$ de $B$ contenant $A = A_{0}$,
+\[
+\underbrace{A}_{=\,A_{0}} \;\; \overset{i_{\alpha}}{\into} \;\; A_{\alpha} \;\; \overset{i_{\beta,\alpha}}{\into} \;\; A_{\beta} \xrightarrow{\ j_{\beta}\ } B \; ,
+\]
+telle que l'on ait
+\[
+i_{\alpha} \;\in\; \widetilde{C^{\pi}} \; , \qquad\quad \text{plus généralement les } i_{\beta,\alpha} \;\in\; \widetilde{C^{\pi}} \; , \qquad\quad j_{\alpha} \;\in\; C \; ,
+\]
+et que l'on ait
+\[
+A_{\alpha} \;=\; \varinjlim_{\beta<\alpha} A_{\beta} \qquad\quad \text{si } \alpha \text{ ordinal limite} \; .
+\]
+
+\msp{page 79}
+Cela précise déjà la définition récurrente pour $\alpha = \alpha_{0}$ ordinal limite. Notons que le $A_{\alpha_{0}}$ construit en termes des $A_{\beta}$ $(\beta < \alpha_{0})$ satisfait bien aux conditions que
+\begin{enumerate}[label={}]
+\item[\textit{a})] les $i_{\alpha_{0},\beta} : A_{\beta} \longrightarrow A_{\alpha_{0}}$ sont dans $\widetilde{C^{\pi}}$, car $\widetilde{C^{\pi}}$ est stable par ``limites inductives ordinales strictes'' (\textit{cf.} 1.19, p. 8),
+\item[\textit{b})] $j_{\alpha_{0}} \, : \, A_{\alpha_{0}} \longrightarrow B$ est dans $C$, car c'est la limite inductive filtrante du système des $A_{\beta} \longrightarrow B$ $(\beta < \alpha_{0})$ qui sont dans $C$, et $C$ est stable par ces limites.
+\end{enumerate}
+Il reste donc à préciser comment on passe de $A_{\alpha}$ à $A_{\alpha+1}$. Cela revient à prouver le
+
+\textbf{Lemme 6.4.} \textit{Soit $f : A \into B$ dans $C$, telle que $f$ ne soit pas un isomorphisme. Alors il existe un sous-objet $A_{1}$ de $B$,} distinct de $A$, \textit{tel que $A \longrightarrow A_{1}$ soit dans $\widetilde{C^{\pi}}$, et $A_{1} \longrightarrow B$ dans $C$.}
+
+Si ce lemme est admis, cela signifie que la construction transfinie se continue aussi longtemps que l'on trouve des $A_{\alpha}$ tels que $A_{\alpha} \neq B$, \textit{i.e.} $A_{\alpha} \into B$ ne soit pas un isomorphisme. Mais comme les $A_{\alpha}$ sont tous différents, si $\pi$ est l'ensemble des sous-objets de $B$ (on sait que c'est un
+
+% ---- from Der-ChXV-05-11-10_p046-050.tex
+\printedpage{44}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 80}
+ensemble petit, à cause des hypothèses faites sur $\M$), les ordinaux $\alpha$ pour lesquels $A_\alpha$ existe satisfont $\mathrm{card}\,A_\alpha \leq \pi$. Donc il doit exister un $\alpha$ tel que $A_\alpha = B$. Mais alors $i_\alpha : A \longrightarrow A_\alpha$ est égal à $f$, donc $f \in \widetilde{C^{\pi}}$, \quad \textit{q.e.d.}
+
+Il reste donc à prouver 6.4. Pour ceci, soit $I$ l'ensemble des sous-objets de $B$ qui sont dans $\Filt^{\pi}$, ordonné par inclusion. (Si $B$ est dans $\Filt^{\pi}$, $A$ aussi, donc $f$ est déjà dans $C^{\pi} \subset \widetilde{C^{\pi}}$, et il n'y a rien à prouver.) C'est un ensemble filtrant grand devant $\pi$ (et même $\pi$-\textit{adapté}), dont la $\varinjlim$ est $B$ (5.3, p. 46). Considérons les
+\[
+A_i \;=\; B_i \cap A \;,
+\]
+ils sont dans $\Filt^{\pi}$, comme sous-objets d'objets de $\Filt^{\pi}$ (condition $(d)$ sur la filtration cardinale). Ainsi, la flèche $f$ apparaît comme limite inductive filtrante des flèches
+\[
+f_i \;:\; A_i \longrightarrow B_i \;.
+\]
+Il est trivial que le système des $A_i$ est cofinal dans $\Ss_{\pi}(A)$, donc $A = \varinjlim A_i$, d'où $f = \varinjlim f_i$.
+
+\msp{page 81}
+D'autre part, je dis que le système inductif des $f_i$ dans $\underline{\Fl}(\M)$ est \textit{bien adapté à $\pi$.} On sait déjà que $I$ est bien adapté à $\pi$, le sup dans $I$ d'une partie filtrante $J$ de cardinal $\leq \pi$ étant le sup dans l'ensemble ordonné $\Ss(B)$ (lequel sup se trouve dans $\Ss_{\pi}(B)$). Il est essentiel, pour notre argument, de savoir que si $i_J = \sup J$, alors non seulement $B_{i_J} = \varinjlim\limits_{i\in J} B_i$, mais \marginpar{$\|$}% marginal double vertical bar printed in the left margin at this line
+aussi $A_{i_J} = \varinjlim\limits_{i\in J} A_i$, de sorte que le système inductif des $f_i$ est $\pi$-adapté dans $\underline{\Fl}(\M)$. Il semble qu'il faille donc une condition d'exactitude sur $\M$ voisine de $(e)$, savoir :
+
+\begin{itemize}
+\item[\cercle{e$'$}] Les foncteurs $\varinjlim$ filtrantes commutent au changement de base.
+\end{itemize}
+
+(Il le suffit ici dans le cas très particulier d'un changement de base par un monomorphisme $A \longrightarrow B$, et d'une limite inductive filtrante de sous-objets de $B$ pour des morphismes d'inclusion comme transitions.) Notons que \cercle{e}, \cercle{e$'$} se trouvent généralement comme conséquence de la condition % [sic] Il le suffit -> Il suffit, ungrammatical as printed
+
+\begin{itemize}
+\item[(e$_0$)] Les $\varinjlim$ filtrantes dans $I$ sont exactes à gauche.
+\end{itemize}
+
+\msp{page 82}
+Ceci posé, on voit donc, $C$ étant $\pi$-accessible et $I$ grand devant $\pi$, que l'ensemble $I_C$ des $i \in I$ tels que $f_i \in C$ est \textit{cofinal} dans $I$. Mais comme $f_i \in \Filt^{\pi}$, $f_i \in C$ équivaut à $f_i \in C^{\pi}$. Comme $A \longrightarrow B$ n'est pas un isomorphisme, il existe un $i_0$ tel que $B_{i_0} \not\subset A$, puis un $i \geq i_0$ tel que $f_i \in C^{\pi}$, et aussi $B_i \not\subset A$ (puisque $B_i \supset B_{i_0}$). Ainsi on a prouvé ceci :
+
+\begin{itemize}
+\item[($*$)] Sous les hypothèses de (6.4) et moyennant l'hypothèse \cercle{e$'$} sur $\M$, il existe un sous-objet $B'$ de $B$ satisfaisant les conditions suivantes.
+\begin{itemize}
+\item[\textit{a})] $B' \in \Filt^{\pi}$.
+\item[\textit{b})] $B' \not\subset A$.
+\item[\textit{c})] Posant $A' = B' \cap A$, l'inclusion
+\[
+i' \;:\; A' \;\longrightarrow\; B'
+\]
+est dans $C^{\pi}$.
+\end{itemize}
+
+\printedpage{45}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+
+De plus, l'ensemble des $J \subset \Ss_{\pi}(B)$ formé des $B'$ en question est cofinal dans $\Ss_{\pi}(B)$, et même $\pi$-cofinal.
+\end{itemize}
+
+Il faut prouver encore ce dernier point -- que $J$ (dont on sait qu'il est cofinal) est même $\pi$-cofinal, \textit{i.e.} stable par sup (dans $\Ss_{\pi}(B)$) des parties filtrantes $J' \subset J$ telles que $\mathrm{card}\, J' \leq \pi$. Mais cela résulte aussitôt du fait que $C$ étant stable par
+
+\msp{page 83}
+limites inductives filtrantes, $C^{\pi} = C \cap \Filt^{\pi}$ est stable par $\varinjlim$ filtrantes de cardinal $\leq \pi$, en vertu de la condition $(d)$ sur $\Filt^{\pi}$. Considérons maintenant le carré cocartésien
+\[
+\begin{tikzcd}
+A' \arrow[r, hook, "i'"] \arrow[d, hook] & B' \arrow[d] & & \\
+A \arrow[r, "i"] & C' = A \amalg_{A'} B' \arrow[r, "j"] & B \;.
+\end{tikzcd}
+\]
+Comme $i' \in C^{\pi}$, on a $i \in \widetilde{C^{\pi}}$ (car $\widetilde{C^{\pi}}$ stable par cochangement de base). D'autre part, j'ai besoin du fait que $j$ soit dans $C$, et je ne sais pas même qu'il est un monomorphisme ! Aussi il faut repasser aux notations indicielles
+\[
+\begin{tikzcd}
+A_i \arrow[r, hook, "\alpha_i"] \arrow[d, hook] & B_i \arrow[d] & \\
+A \arrow[r, hook, "\beta_i"] & C_i \arrow[r, "\gamma_i"] & B \;.
+\end{tikzcd}
+\]
+Comme la formation des sommes amalgamées commute aux limites inductives filtrantes, on voit que $\varinjlim C_i \simeq A \amalg_{\varinjlim A_i} \varinjlim B_i = A \amalg_A B = B$, donc la limite inductive des $\gamma_i$ est un isomorphisme (essentiellement $\mathrm{id}_B$). D'autre part, le même argument montre que le système inductif des $C_i$ $(i \in J)$ dans $\M$ est $\pi$-adapté, donc aussi celui des $\gamma_i$\footnote[28]{\textit{Sauf} qu'on ne sait pas que les $C_i$ soient dans $\Filt^{\pi}$ -- en fait, ils ne seront pas en général, puisqu'on ne suppose pas que $A, B \in \Filt^{\pi}$.}
+\msp{page 84}
+dans $\underline{\Fl}(\M)$. Comme $\varinjlim \gamma_i$ est un isomorphisme, il est dans $C$. Comme $C$ est $\pi$-accessible, il s'ensuit que l'ensemble $J'$ formé des $i \in J$ tels que $\gamma_i \in C$ est lui aussi cofinal\footnote[29]{\textit{Canulé, cf.} annotation précédente.}. Donc on trouve $i$ avec $\alpha_i \in C^{\pi}$, $\gamma_i \in C$, ce qui établit le lemme 6.4, et achève la démonstration du théorème 6.1.
+
+\section*{7\quad Construction de triples de Quillen clos avec $\boldsymbol{C} = \mathbf{Mon} \subset \mathbf{Cof}_{\boldsymbol{W}}$}
+
+Finalement, tous les beaux développements des paragraphes 5, 6 ne me donnent pas le “sweeping result” souhaité. Peut-être est-il faux -- peut-être la propriété d'engendrement
+\printedpage{46}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+“$^{\sim}$” par une petite partie (pour les ensembles accessibles, ou L-accessibles) est-elle beaucoup plus rarement satisfaite, que je ne l'aurais imaginé. Pour bien faire, il faudrait que je traite jusqu'au % resolved: the quoted raised wave denotes Q-closure; see corrections.csv, leaf 13.
+\msp{page 85}
+bout quelques exemples, p. ex. celui de $\Cof_W$, et de $W^{\mathrm{univ}}$ dans Cat, pour un localiseur fondamental plus ou moins général, et surtout dans le cas $W = \mathbf{W}_{\infty}$. Sûrement $\Cof_W$ et $W^{\mathrm{univ}}$ sont accessibles (il faudrait que je le vérifie pourtant), et si le “théorème” hypothétique du paragraphe 6 est faux pour eux, du moins en aurai-je le cœur net. Mais il reste pourtant la question : si $C = \widetilde{C}$ est stable par $\varinjlim$ filtrantes, et de la forme $\widetilde{C_0}$, $C_0$ petit, et si $W$ est L-accessible également, alors $C \cap W$ est-il aussi de la forme $\widetilde{TC_0}$, avec $TC_0$ petit ? Je viens encore d'essayer de le prouver, en supposant de plus $C \subset$ mono, et ne vois aucun moyen d'y parvenir. Il faudrait donc un contre-exemple pour dissiper ces perplexités ! Et le mieux serait dans Cat, tant qu'à faire.
+
+Il surnage pourtant un résultat tangible positif, que je vais maintenant essayer de bien cerner et prouver :
+
+\msp{page 86}
+\textbf{Théorème 7.1.} \textit{Soit $\M$ une catégorie stable par petites $\varinjlim$ filtrantes, $M_0 \subset \Ob\,\M$ un sous-ensemble de} $\Ob\,\M$ \textit{générateur par monomorphismes stricts, plus précisément on suppose ceci :}
+
+\begin{quote}
+\itshape
+Pour tout monomorphisme $i : A \hookrightarrow B$ dans $\M$ qui n'est pas un isomorphisme, il existe un monomorphisme $B' \overset{j}{\hookrightarrow} B$ ayant les propriétés suivantes :
+\begin{itemize}
+\item[\textup{a)}] $B' \in M_0$.
+\item[\textup{b)}] $j$ ne se factorise pas par $i$.
+\item[\textup{c)}] $A' = A \times_B B'$ existe dans $\M$, ainsi que $C = A \amalg_{A'} B'$, $A'$ est dans $M_0$, et dans le diagramme canonique
+\[
+\begin{tikzcd}
+A' \arrow[r, hook, "i'"] \arrow[d, hook] & B' \arrow[d, hook] \arrow[dr, hook, dotted, "j"] & \\
+A \arrow[r, hook, "\alpha"] \arrow[rr, hook, dotted, bend right=20, "i"'] & C \arrow[r, "\beta"] & B
+\end{tikzcd}
+\tag*{(7.1.1)}
+\]
+la flèche $\beta$ est un monomorphisme.
+\end{itemize}
+\end{quote}
+
+(\textbf{N.B.} Ces conditions sont satisfaites si on suppose, en plus de la condition que $M_0$ soit générateur pour les monomorphismes, que $M_0$ contient, avec tout objet $B'$, et pour tout objet $A'$ qui est soit un quotient, soit un sous-objet de $B'$, un objet $A'_0$ isomorphe à $A'$ ; et si de plus $\M$ satisfait aux conditions d'exactitude suivantes :
+\begin{itemize}
+\item[1$^{\circ}$)] Toute flèche $f$ de $\M$ se factorise en $ip$, avec $i$ monomorphisme, $p$ épimorphisme, et :
+\item[2$^{\circ}$)] Si $A_1$, $A_2$ sont deux sous-objets d'un objet $B$ de $\M$, alors l'intersection $A_0 = A_1 \times_B A_2$ existe, ainsi que la
+\printedpage{47}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+\msp{page 87}
+somme amalgamée $C = A_1 \amalg_{A_0} A_2$, et le morphisme canonique $C \longrightarrow B$ est un monomorphisme.)
+\end{itemize}
+
+\textit{Supposons de plus que $\M$ satisfait la condition} \cercle{e}, p. 76, i.e. \textit{que toute $\varinjlim$ filtrante de monomorphismes est un monomorphisme.}
+
+1$^{\circ}$) \textit{Soit} $\Mon \subset \Fl(\M)$ \textit{l'ensemble des monomorphismes, et} $\Mon_0$ \textit{le sous-ensemble de} $\Mon$ \textit{formé des $i \in$} $\Mon$ \textit{tels que source et but appartiennent à $M_0$. On a alors}
+\[
+\Mon \;\subset\; \widetilde{\Mon_0} \quad , \qquad \text{\textit{d'où}} \quad
+\left\{
+\begin{aligned}
+\widetilde{\Mon} \quad &= \quad \widetilde{\Mon_0} \\
+(\Mon)_{*} \quad &= \quad (\Mon_0)_{*} \;.\text{\footnotemark[30]}
+\end{aligned}
+\right.
+\tag*{(7.1.2)}
+\]
+\footnotetext[30]{\textbf{N.B.} On a là un critère d'injectivité d'objets dans les catégories $\M/Y$ -- il suffit de tester la condition d'injectivité par des monomorphismes $i$ qui sont dans $\Mon_0$.}
+
+2$^{\circ}$) \textit{Si $M_0$ est} petit \textit{et si les objets de $M_0$ sont accessibles} (p. ex. $\M$ satisfait \cercle{c}, p. 76), \textit{et si} $\Mon$ \textit{est stable par cochangement de base, alors il existe une factorisation fonctorielle de toute flèche $f$ de $\M$ en}
+\[
+f \;=\; p\, i \;,
+\]
+\textit{avec $i \in$} $\Mon$, \textit{$p \in$} $(\Mon)_{*}$. (\textbf{N.B.} Une flèche $p : X \longrightarrow Y$ de $\M$ est dans $(\Mon)_{*}$ si et seulement si elle fait de $X$ un objet \textit{injectif} de $\M/Y$ -- donc l'assertion de factorisation assure que dans les catégories induites $\M/Y$ “il y a assez d'injectifs”.) \textit{De plus, on a}
+\[
+\Mon \;=\; \widetilde{\Mon_0} \quad .
+\tag*{(7.1.3)}
+\]
+
+3$^{\circ}$) \textit{Soit $W$ une partie de} $\Fl(\M)$ \textit{qui est} L-accessible (i.e. \textit{accessible, et stable par limites inductives filtrantes}). (\textit{On suppose à présent que $\M$ satisfait les conditions} (a), (b), (c), (d), (e) \textit{de la page 76, d'où une bonne théorie des parties L-accessibles de} $\Ob\,(\M)$ \textit{ou de} $\Fl(\M)$.) \textit{On suppose, plus précisément, que $W$ satisfait les conditions :}
+
+\msp{page 88}
+\[
+\left\{
+\begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}}
+\text{a)} & \textit{$W$ est L-accessible} (\textit{i.e.} stable par $\varinjlim$ filtrantes, et accessible). \\[1.5ex]
+\text{b)} & \textit{Soient $\alpha$, $\beta$ composables, avec $\beta\alpha$ et $\alpha$ dans $W$, alors $\beta \in W$.} (\textbf{N.B.} Cette condition sera satisfaite si $W$ est un localiseur modérément saturé, et c'est à cette situation que nous allons appliquer notre énoncé.) \\[1.5ex]
+\text{c)} & $\Mon \cap W$ \textit{est stable par cochangement de base.}
+\end{array}
+\right.
+\tag*{(7.1.4)}
+\]
+\textit{et que $\M$ satisfait les conditions supplémentaires}
+\[
+\left\{
+\begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}}
+\text{e$'$)} & \textit{Les $\varinjlim$ filtrantes commutent au changement de base.} \\[1.5ex]
+\text{f)} & \textit{La condition d'exactitude} (7.2.1) \textit{ci-dessous.}
+\end{array}
+\right.
+\tag*{(7.1.5)}
+\]
+\textit{Soit $\pi$ un cardinal tel que $W$ soit $\pi$-accessible, et $M_0 \subset$} $\Filt^{\pi}$ (\textit{donc $M_0$ essentiellement petite}). \textit{Alors on a}
+\[
+W \cap \Mon \;\subset\; \widetilde{(W \cap \Mon)^{\pi}}
+\tag*{(7.1.6)}
+\]
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+(\textit{où pour toute partie $C$ de} $\Fl(\M)$, \textit{on pose} $C^{\pi} = C \cap \Fl^{\pi}(\M)$), \textit{donc}
+\[
+\widetilde{W \cap \Mon} \;=\; \widetilde{(W \cap \Mon)^{\pi}} \;,
+\tag*{(7.1.7)}
+\]
+\textit{donc $\widetilde{W \cap \Mon}$ est Q-engendré par une} petite \textit{partie de} $W \cap \Mon$.
+
+\textbf{Corollaire 7.2.} \textit{Soit $\M$ satisfaisant} (a), (b), (c), (d), (e) \textit{et aux conditions supplémentaires :}
+\[
+\left\{
+\begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}}
+\text{e$'$)} & \textit{Les $\varinjlim$ filtrantes commutent au changement de base.} \\[1.5ex]
+\text{f)} & \textit{Si $A_1$, $A_2$ sont deux sous-objets d'un objet $B$ de $\M$, et $A_0 = A_1 \cap A_2$, alors $A_1 \amalg_{A_0} A_2 \hookrightarrow B$ est un monomorphisme}\,\footnotemark[31].
+\end{array}
+\right.
+\tag*{(7.2.1)}
+\]
+\footnotetext[31]{Une autre façon de le dire : si $C = \sup_{\Ss(B)}(A_1, A_2)$, le carré cartésien
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A_0 \arrow[r] \arrow[d] \& A_1 \arrow[d] \\
+A_2 \arrow[r] \& C
+\end{tikzcd}
+\]
+est aussi cocartésien.}
+
+\textit{Soit $W$ une partie de} $\Fl(\M)$ \textit{satisfaisant les conditions suivantes.}
+\[
+\left\{
+\begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}}
+\text{a)} & \textit{$W$ est un localiseur modérément saturé.} \\[1.5ex]
+\text{b)} & \textit{$W$ est L-accessible,} i.e. \textit{il est stable par $\varinjlim$ filtrantes, et est accessible.} \\[1.5ex]
+\text{c)} & $\Mon \cap W$ \textit{est stable par cochangement de base,} i.e. \textit{si on a un diagramme} cocartésien
+\begin{center}
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow[r, hook, "i"] \arrow[d, "\alpha"'] \arrow[dr, phantom, "\scriptstyle\text{cocart.}"] \& B \arrow[d, "\beta"] \\
+A' \arrow[r, "i'"] \& B'
+\end{tikzcd}
+\end{center}
+\textit{avec $i$ monomorphisme appartenant à $W$, alors $i'$ est un monomorphisme appartenant à $W$.}\,\footnotemark[32]
+\end{array}
+\right.
+\tag*{(7.2.3)}
+\]
+\footnotetext[32]{\textit{Cf.} plus bas pour une quatrième condition $(d)$ sur $W$, qui assure que $W$ s'insère dans un triple de Quillen.}
+
+\msp{page 89}
+\textit{Sous ces conditions, on a}
+\[
+\underbrace{\Mon}_{C} \cap W \;=\; \widetilde{W \cap \Mon} \quad , \qquad \text{i.e. } \Mon \cap W \text{ \textit{est Q-clos à gauche}} \;,
+\tag*{(7.2.4)}
+\]
+
+% ---- from Der-ChXV-05-11-10_p051-055.tex
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\textit{et}
+\[
+\text{\textit{il existe une petite partie} } TC_0 \subset \Mon, \text{ \textit{telle que} } \Mon \cap W = \widetilde{TC_0}\ . \tag*{(7.2.5)} % [sic] (7.2.5) -> numéro probablement autre (peut-être (7.2.3)), le même numéro (7.2.5) est repris plus bas pour une autre formule et précède (7.2.4)
+\]
+
+\textit{(De façon plus précise, si} $\pi \geq \pi_0$ \textit{est un cardinal tel que} $W$ \textit{soit} $\pi$\textit{-accessible, on peut prendre} $TC_0 = (\Mon \cap W)^{\pi}$ \textit{(ou une partie} petite \textit{de} $(\Mon \cap W)^{\pi}$ \textit{ayant les mêmes classes d'isomorphie).) Donc} (th.~1 de §1) \textit{le couple} $(TC = \Mon \cap W,\ F = (TC)_*)$ \textit{est un couple de Quillen clos, et il y a même une factorisation} fonctorielle \textit{de toute flèche} $f$ \textit{en}
+\[
+f \ = \ p\, i \ ; \qquad i \ \in \ TC \ , \qquad p \ \in \ F \ . \tag*{(7.2.4)}
+\]
+\textit{Si on pose}
+\[
+C \ = \ \Mon \ , \qquad TC \ = \ \Mon \cap W \ , \qquad F \ = \ (TC)_* \ , \qquad TF \ = \ C_* \ , \tag*{(7.2.5)}
+\]
+\textit{le triple} $(W, C, F)$ \textit{est un triple de Quillen clos, si et seulement si on a les conditions supplémentaires suivantes.}
+\[
+\left\{
+\begin{array}{lll}
+\text{(7.2.6)} & \cercle{g}\ \text{\textit{(sur $\mathcal{M}$ seulement)}} & \parbox[t]{0.36\textwidth}{Mon \textit{stable par cochangement de base.}} \\[4ex]
+\text{(7.2.7)} & \underbrace{TF}_{\overset{\text{déf}}{=}\,(\Mon)_*} \ \subset \ W & \parbox[t]{0.36\textwidth}{i.e. \textit{si} d) \textit{toute} $f : X \longrightarrow Y$ \textit{qui fait de} $X$ \textit{un objet injectif de} $\mathcal{M}/Y$\textit{, est dans} $W$ \textit{(donc aussi dans} $W_{\mathrm{univ}}$\textit{).}}
+\end{array}
+\right.
+\]
+
+\msp{page 90}
+
+\textsc{Démonstration de} 7.1. On peut donner un énoncé un peu plus délicat, en supposant d'emblée donnée, non une partie $M_0$ de $\Ob \mathcal{M}$, mais une partie
+\[
+\Mon_0 \ \subset \ \Mon \ , \tag*{(7.1)}
+\]
+satisfaisant la condition suivante
+
+\begin{quote}
+Pour tout monomorphisme $i : A \longrightarrow B$ dans $\mathcal{M}$, il existe $i' \in \Mon_0$, $i' : A' \longrightarrow B'$, et une flèche $i' \longrightarrow i$ dans $\underline{\Fl}(\mathcal{M})$,
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A' \arrow[r, "{i'}"] \arrow[d] & B' \arrow[d] \\
+A \arrow[r, "i"] & B \ ,
+\end{tikzcd}
+\tag*{(7.2)}
+\]
+telle que la flèche correspondante
+\[
+C \ = \ A \amalg_{A'} B' \ \longrightarrow \ B
+\]
+soit un monomorphisme, et que $B' \longrightarrow B$ ne se factorise pas par $A$.
+\end{quote}
+
+C'est cela qui était visé par la condition (7.1.1) sur $M_0$, qui implique (7.2) sur $\Mon_0$ défini en termes de $M_0$ comme dit dans 1°.
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Dans ce qui suit, on suppose donnée une partie $\Mon_0 \subset \Fl(\mathcal{M})$ satisfaisant (7.2). En pratique, elle sera souvent déduite d'une partie $M_0$ de $\Ob \mathcal{M}$, génératrice pour les monomorphismes, comme explicité dans 1°, mais on n'a pas besoin du fait que $i' \longrightarrow i$ soit un monomorphisme (\textit{i.e.} (7.1.1) est plus forte que ce qu'il nous faut). P. ex. si $B' \in M_0$ et $B' \longrightarrow B$ est donné, ne se factorisant pas par $A$, on pourra prendre $A' = B' \times_B A$ et $i' : A' \longrightarrow B'$ (pour assurer $i' \in \Mon_0$, il faudra donc supposer $M_0$ stable par passage aux sous-objets), et il y a des chances
+
+\msp{page 91}
+
+que $C \longrightarrow B$ sera alors bel et bien un monomorphisme \ldots
+
+1°) Il faut prouver
+\[
+\Mon \ \subset \ \widetilde{\Mon_0}
+\]
+moyennant (7.2) (et la stabilité de $\mathcal{M}$ par $\varinjlim$ filtrantes). Cela va résulter directement du
+
+\textbf{Lemme 7.3.} \textit{Soient $\mathcal{M}$ une catégorie stable par limites inductives filtrantes, et $C_0$, $C$ des parties de} $\Fl(\mathcal{M})$\textit{. On supposera}
+\begin{enumerate}[label={}]
+\item[\cercle{a}] \textit{$C$ formée de monomorphismes, et}
+\item[\cercle{b}] \textit{que la condition suivante (généralisant} (7.2) \textit{ci-dessus) soit vérifiée.}
+\end{enumerate}
+
+\begin{quote}
+\textit{Pour toute flèche $i : A \hookrightarrow B$ dans $C$ telle que $i$ ne soit pas un isomorphisme, il existe $i' : A' \longrightarrow B'$ dans $\widetilde{C_0}$, et une flèche $i' \longrightarrow i$ dans} $\underline{\Fl}(\mathcal{M})$\textit{, telle que dans le diagramme}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A' \arrow[r, "{i'}"] \arrow[d, hook] & B' \arrow[d] \arrow[rd, dotted] & \\
+A \arrow[r, "\alpha"] \arrow[rr, dotted, bend right, "i"'] & D \ = \ A \amalg_{A'} B' \arrow[r, "\beta"] & B \ ,
+\end{tikzcd}
+\tag*{(7.3.1)}
+\]
+\textit{la flèche $\beta$ soit dans $C$, et que $B' \longrightarrow B$ ne se factorise pas par $A$ (ou, ce qui revient au même, que le sous-objet de $B$ défini par $D$ et $\beta$ ne soit pas égal à celui défini par $A$ et $i$).}
+\end{quote}
+
+\textit{On suppose de plus}
+\begin{enumerate}[label={}]
+\item[\cercle{c}] \textit{$C$ stable par} $\varinjlim$ \textit{filtrantes, et}
+\item[\cercle{d}] \textit{que pour tout $B \in \Ob \mathcal{M}$, l'ensemble des sous-objets de $B$ est petit.} (Condition des plus anodines! C'est une condition \textit{sur} $\mathcal{M}$, n'impliquant pas $C$).
+\end{enumerate}
+\textit{Alors on a}
+\[
+C \ \subset \ \widetilde{C_0} \ , \qquad \text{\textit{donc} } \widetilde{C} \ \subset \ \widetilde{C_0} \ , \tag*{(7.3.2)}
+\]
+\textit{donc, si $C_0 \subset C$, on conclut}
+
+\msp{page 92}
+\[
+\widetilde{C} \ = \ \widetilde{C_0} \ . \tag*{(7.3.3)}
+\]
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+(Ce lemme implique aussitôt la première assertion de 7.1, 1°.) Prouvons ce lemme, \textit{i.e.} que toute $i \in C$ est dans $\widetilde{C_0}$, en construisant par récurrence transfinie une suite strictement croissante de sous-objets de $B$,
+\[
+A_\alpha \ \overset{j_\alpha}{\hookrightarrow} \ B \ , \qquad \text{avec les } j_\alpha \in C \ ,
+\]
+et avec :
+
+\cercle{1°} $A_0 = A$. On prouvera que $A \xrightarrow{\ i_\alpha \,=\, i_{\alpha,0}\ } A_\alpha$ dans $\widetilde{C_0}$, et il y aura un ordinal final $\alpha$ tel que $A_\alpha = B$\,; on en conclura donc que $i = i_\alpha$ est dans $\widetilde{C_0}$.
+
+Si $i$ est un isomorphisme, on sait que $i \in \widetilde{C_0}$, il n'y a rien à prouver (la construction transfinie s'arrête au cran 0). Les deux pas de la construction, après le pas initial 1°, sont :
+
+\cercle{2°} Soit $A_\alpha$ construit. Si $A_\alpha = B$, la construction est arrêtée. Si $A_\alpha \xrightarrow{j_\alpha} B$ n'est pas un isomorphisme, on applique (7.3.1) à $j_\alpha \in C$, pour trouver un $D \overset{j}{\hookrightarrow} B$, donc $j \in C$ et $D \supsetneqq A_\alpha$. De plus,
+\[
+i_{\alpha+1,\alpha} \ : \ A_\alpha \ \longrightarrow \ A_{\alpha+1} \ \overset{\text{déf}}{=} \ D \qquad \text{est dans } \widetilde{C_0} \ , \tag*{(7.3.4)}
+\]
+car déduit de $i' \in \widetilde{C_0}$ par cochangement de base.
+
+\cercle{3°} Si $\alpha$ est ordinal limite, on pose
+\[
+A_\alpha \ = \ \varinjlim_{\beta < \alpha} A_\beta \ , \tag*{(7.3.5)}
+\]
+
+\msp{page 93}
+
+et la flèche canonique
+\[
+A_\alpha \ \xrightarrow{j_\alpha} \ B
+\]
+est dans $C$, car les $j_\beta$ le sont et $C$ est stable par limites inductives filtrantes.
+
+On a ainsi achevé la description des systèmes transfinis. Pour tout $\alpha$, on a
+\[
+\card \alpha \ \leq \ \card \Ss(B) \ ,
+\]
+puisque l'application $\beta \longmapsto A_\beta$ de l'ensemble $I_\alpha = \{\beta \mid \beta < \alpha\}$ dans $\Ss(B)$ est \textit{strictement} croissante. Donc il existe un cardinal $\alpha$ tel que $\card \alpha \leq \card \Ss(B)$, tel que $A_\alpha = B$. Mais alors $i \in \widetilde{C_0}$, comme limite inductive (ou composé) transfinie de flèches appartenant à $\widetilde{C_0}$. (Il suffit de la condition $\forall\ \beta$, $i_{\beta+1,\beta} \in \widetilde{C_0}$ pour impliquer que tous les morphismes de transition $i_{\beta',\beta}$ sont dans $\widetilde{C_0}$.)
+
+Revenons à 7.1, 2°. Il reste à prouver que si Mon est stable par cochangement de base, alors on a
+\[
+\Mon \ = \ \widetilde{\Mon_0} \quad .
+\]
+
+Mais comme Mon est déjà stable par composition, et par limites inductives filtrantes quelconques (donc aussi par facteurs directs), il s'ensuit par le corollaire 2 du théorème 1, §1 (p. 11), que $\Mon = \widetilde{\Mon_0}$\ \ . L'énoncé de factorisation est le théorème 1 du §1.
+
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 94}
+
+Prouvons 7.1, 3°, \textit{i.e.} la formule (7.1.6),
+\[
+W \cap \Mon \ \subset \ \widetilde{(W \cap \Mon)^{\pi}} \ .
+\]
+
+Pour ceci, on applique encore le lemme 7.3 à
+\[
+C_0 \ = \ (W \cap \Mon)^{\pi} \ , \qquad C \ = \ W \cap \Mon \ .
+\]
+
+Les conditions (\textit{a}), (\textit{b}), (\textit{c}), (\textit{d}) du lemme sont vérifiées. C'est clair pour toutes, sauf pour (\textit{b}), qui demande une vérification non tautologique. Soit donc
+\[
+f \ : \ A \hookrightarrow B \ , \qquad f \in \Mon \cap W,\ f \text{ non isomorphisme} \ .
+\]
+
+On considère $B$ comme limite inductive\footnote[33]{\textit{D'un système inductif $\pi$-adapté.}}
+\[
+B \ = \ \varinjlim_{I} B_i \ , \qquad I \ = \ \Ss_{\pi}(B) \ .
+\]
+Pour tout $i$, on pose
+\[
+A_i \ = \ A \cap B_i \ = \ A \times_B B_i \ ,
+\]
+et
+\[
+f_i \ : \ A_i \ \hookrightarrow \ B_i \ ,
+\]
+donc
+\[
+f \ = \ \varinjlim_{i \in I} f_i \ .
+\]
+On a besoin de savoir que le système inductif des flèches $f_i$ est $\pi$-adapté, ce qui nous amène à postuler la condition d'exactitude supplémentaire suivante sur $\mathcal{M}$ :
+
+\msp{page 95}
+\[
+e')\quad \text{les } \varinjlim \text{ filtrantes dans } \mathcal{M} \text{ commutent au changement de base}\ , \tag*{(7.4)}
+\]
+
+il suffit même de le supposer dans le cas très particulier qu'on a envisagé ici.
+
+Comme $W$ est $\pi$-accessible, et $(f_i)_{i \in I}$ est $\pi$-adapté, comme $\varinjlim f_i \in W$, il s'ensuit que l'ensemble $I_W$ des $i \in I$ tels que $f_i \in W$ est cofinal. Comme $A \overset{f}{\hookrightarrow} B$ n'est pas un isomorphisme, il existe donc un $i \in I_W$ tel que $B_i \hookrightarrow B$ ne se factorise pas par $A$. On a alors le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A_i \arrow[r, hook, "f_i"] \arrow[d, hook] \arrow[rd, phantom, "\text{\footnotesize cocart.}"] & B_i \arrow[d, hook] \arrow[rd, dotted, hook, "\text{\footnotesize incl.}"] & \\
+A \arrow[r, hook, "\alpha_i"] \arrow[rr, dotted, hook, bend right, "f"'] & C_i \arrow[r, "\beta_i"] & B \ ,
+\end{tikzcd}
+\]
+
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+avec $f_i \in (C \cap W)^{\pi} = C_0$, donc $\alpha_i \in \widetilde{C_0}$. On a besoin de savoir que $\alpha_i \in W$, donc une condition supplémentaire sur $W$ :
+
+\begin{quote}
+Si on a un carré cocartésien
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, hook, "i"] \arrow[d] & B \arrow[d] \\
+A' \arrow[r, "{i'}"] & B' \ ,
+\end{tikzcd}
+\tag*{(7.5)}
+\]
+avec $i \in \Mon \cap W$, alors $i' \in W$\footnote[34]{\textbf{N.B.} Cette condition est vérifiée.}.
+\end{quote}
+
+(j'ai renforcé (7.1.4) en conséquence).
+
+\msp{page 96}
+
+Comme par hypothèse $f = \beta_i \alpha_i$ est dans $W$, et $\alpha_i \in W$, il s'ensuit par (7.1.4), (\textit{a}) que $\beta_i \in W$. Il faudra que nous sachions de plus que $\beta_i$ est un monomorphisme, donc $\beta_i \in \Mon \cap W = C$, ce qui achèvera d'établir la condition manquante (\textit{b}) de 7.3. C'est la condition d'exactitude (7.2.1), qu'il me faut visiblement rajouter aux hypothèses dans 7.1, 3°. Ayant fait cela, le lemme 7.3 s'applique et établit 7.1, 3°.
+
+\textsc{Démonstration de} 7.2. Posons
+\[
+C \ = \ \Mon \ , \qquad TC \ = \ C \cap W \ , \qquad TC_0 \ = \ TC^{\pi} \ ,
+\]
+donc par 7.1, 3°, on a
+\[
+\underbrace{TC_0}_{\substack{\text{essentiellement}\\ \text{petite}}} \ \subset \ TC \ \subset \ \widetilde{TC_0} \ = \ \widetilde{TC} \ ,
+\]
+et par le théorème 1, §1 (p. 10-12), cor. 2, pour vérifier que $TC = \widetilde{TC_0}$ (\textit{i.e.} $TC$ est Q-clos à gauche), il revient au même de voir qu'il est Q-stable à gauche, \textit{i.e.} stable par composition, par cochangement de base, par $\varinjlim$ ordinales strictes, par facteurs directs. Or les deux derniers sont impliqués par le fait que $TC = C \cap W$ est stable par $\varinjlim$ filtrantes, vu que $W$ l'est, et $C$ aussi par la condition \cercle{e} (p. 76) sur $\mathcal{M}$. D'autre part, $C = \Mon$ et $W$ étant stables par composition, itou pour $C \cap W$. Donc il reste le cochangement de
+
+\msp{page 97}
+
+base, et c'est assuré par 7.2.3, (\textit{c}) (dont on avait déjà besoin dans 7.1, 3°, pour établir $C \cap W \subset \widetilde{TC_0}$). (\textbf{N.B.} les hypothèses de 7.2 sont pratiquement celles de 7.1, 3°, sauf qu'on suppose que $W$ est un localiseur (sous-entendu : modérément saturé), de façon précise on n'a utilisé, jusqu'à présent, comme hypothèse supplémentaire, que la stabilité de $W$ par composition.)
+
+Il reste à établir que $(W, C = \Mon, F = (TC)_*)$ est un triple de Quillen clos, si et seulement si les conditions (7.2.6) et (7.2.7), \textit{i.e.}
+\[
+\left\{
+\begin{aligned}
+& C = \Mon \ \ \text{stable par cochangement de base,} \\
+& TF = C_* = (\Mon)_* \subset W,
+\end{aligned}
+\right.
+\]
+
+% ---- from Der-ChXV-05-11-10_p056-060.tex
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+sont satisfaites. La nécessité est évidente, par définition des triples de Quillen clos, et pour la suffisance, on note qu'il résulte du théorème 7.1, 2$^\circ$, et de la partie déjà prouvée de 7.2, que $(C,TF)$, $(TC,F)$ sont des couples de Quillen clos, et on a de plus
+\[
+TC \;=\; C\cap W\ , \qquad TF \;\subset\; F\cap W
+\]
+(puisque $TF\subset W$ par (7.2.7), et $TF\subset F$ puisque $TC\subset C$). On sait
+\msp{page 98}
+(paragraphe 4.3, corollaire 4, page 36) qu'il en résulte que $(W,C,F)$ est un triple de Quillen clos. Cela achève la démonstration de 7.1 et 7.2.
+
+Résumons l'essentiel :
+
+\textbf{Corollaire 7.4.}\footnote[35]{\textbf{N.B.} C'est finalement ce corollaire qui est le résultat principal de la présente section.} \textit{Soit $\mathcal{M}$ une catégorie satisfaisant les conditions} (a), (b), (c), (d), (e) (p.~76) \textit{et} (e$'$), (f) ((7.2.1), p.~88), \textit{enfin} (g) (7.2.6), i.e. \textit{stabilité de l'ensemble} Mon \textit{des monomorphismes de $\mathcal{M}$ par cochangement de base. Soit $W\subset \Fl(\mathcal{M})$ un localiseur dans $\mathcal{M}$, qui est} stable par $\varinjlim$ filtrantes \textit{et de plus} (\textit{condition plus subtile, mais pratiquement anodine}) accessible. \textit{On pose}
+\[
+C \;=\; \Mon\ , \qquad TC \;=\; C\cap W\ , \qquad TF \;=\; C_*\ , \qquad F \;=\; (TC)_*\ .
+\]
+\textit{Alors :}
+\begin{itemize}[leftmargin=*]
+\item[1$^\circ$)] \textit{$(C,TF)$ est un couple de Quillen} (\textit{énoncé indépendant de la donnée de $W$}), \textit{et même un couple de Quillen à factorisation fonctorielle.}
+\item[2$^\circ$)] \textit{Pour que $(TC,F)$ soit un couple de Quillen, il faut et il suffit que $TC$ soit stable par cochangement de base.} (\textit{Et alors il y a factorisation fonctorielle.})\footnote[36]{\textbf{N.B.} Dans les cas 1$^\circ$ et 2$^\circ$, $C$, $TC=C\cap W$ sont Q-engendrés à gauche par des \textit{petites} parties.}.
+\item[3$^\circ$)] \textit{Pour que $(W,C,F)$ soit un triple de Quillen clos, il faut et il suffit que les conditions suivantes soient satisfaites.}
+\[
+\left\{
+\begin{aligned}
+&\text{a)}\quad TC \overset{\text{déf}}{=} W\cap \Mon\ \textit{stable par cochangement de base.}\\
+&\text{b)}\quad TF \overset{\text{déf}}{=} (\Mon)_* = \textit{applications de type injectif} \subset W.
+\end{aligned}
+\right.
+\tag*{(7.4.1)}
+\]
+\item[4$^\circ$)] \msp{page 99}\textit{Pour que $(W,C,F)$ soit un triple de Quillen clos et propre à gauche} (i.e. $C\subset \Cof_W$), \textit{il faut et il suffit qu'on ait la condition} (7.4.1), (b) (i.e. \textit{$W$ contient les morphismes de type injectif}), \textit{et de plus}
+\[
+\begin{aligned}
+&C\subset \Cof_W,\ \textit{ou encore : pour tout carré cocartésien}\\
+&\qquad\qquad\begin{tikzcd}[ampersand replacement=\&, row sep=large, column sep=large]
+A \arrow[r, "i"] \arrow[d, "\alpha"'] \& B \arrow[d, "\beta"] \\
+A' \arrow[r, "i'"] \& B'\ ,
+\end{tikzcd}\\
+&\textit{avec $i$ un monomorphisme, alors } \alpha\in W \Longrightarrow \beta\in W.
+\end{aligned}
+\tag*{(7.4.2)}
+\]
+
+\item[5$^\circ$)] \printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{Pour que $(W,C,F)$ soit un triple de Quillen clos et} propre, \textit{il faut et il suffit que les deux conditions de 4$^\circ$ soient satisfaites, ainsi que l'on ait :}
+\[
+\begin{aligned}
+&F\subset \Fib_W,\ \textit{ou encore : pour tout carré cartésien}\\
+&\qquad\qquad\begin{tikzcd}[ampersand replacement=\&, row sep=large, column sep=large]
+X \arrow[r, "q"] \arrow[d, "f"'] \& X' \arrow[d, "f'"] \\
+Y \arrow[r, "p"'] \& Y'\ ,
+\end{tikzcd}\\
+&\textit{si } f\in F \ (\text{i.e. } f\in (C\cap W)_*)\ \textit{et } p\in W,\ \textit{on a } q\in W.
+\end{aligned}
+\tag*{(7.4.3)}
+\]
+\end{itemize}
+
+\textsc{Démonstration de} 7.4. Les parties 1$^\circ$, 2$^\circ$, 3$^\circ$ ne sont qu'un résumé de ce qui a été établi. Pour 4$^\circ$, il faut voir que les conditions dites impliquent (7.4.1), $(a)$, or on a $C\subset \Cof_W$, donc $C\cap W\subset \Cof_W\cap W = W^{\univ}$
+\msp{page 100}
+donc $C\cap W = C\cap W^{\univ}$, qui est stable par cochangement de base, puisque $C$ et $W^{\univ}$ le sont. Quant à 5$^\circ$, c'est une tautologie, compte tenu de 4$^\circ$.
+
+\section*{8\quad Application aux catégories de modèles $(A\chap,W_A)$}
+
+Soit $A$ dans Cat, et considérons dans $A\chap$ le localiseur $W_A$, image inverse par
+\[
+\left\{
+\begin{aligned}
+i_A : A\chap \quad &\longrightarrow \quad \Cat\\
+F \quad &\longmapsto \quad A/F
+\end{aligned}
+\right.
+\tag*{(8.1)}
+\]
+d'un localiseur fondamental donné $W$, satisfaisant les conditions
+\[
+\mathrm{W}\,(\underbrace{1}_{\text{sat.}},\underbrace{2}_{\text{loc.}},\underbrace{3}_{\text{objet fin.}}\,,\underbrace{5}_{\text{conn. }\pi_0}\,,\underbrace{6}_{\varinjlim},\underbrace{7\text{ bis}}_{\substack{\text{carrés coc.}\\ \text{ou ``M.V.''}}}\,,\underbrace{8}_{\text{acc.}}),\quad
+\text{\parbox[t]{4.3cm}{où W\,(8) est l'accessibilité de $W$ (donc $W$ est L-accessible s'il satisfait aussi W\,(6)).}}
+\tag*{(8.2)}
+\]
+
+Pour pouvoir cependant appliquer les développements sur les parties accessibles d'une grosse catégorie du §5, il faut vérifier les conditions $(a)$, $(b)$, $(c)$, $(d)$, $(e)$ du §5, tant dans Cat, que (surtout) dans $A\chap$.
+
+a) Stabilité par petites $\varinjlim$ filtrantes, O.K.
+
+b) Filtration cardinale. Bien connu pour $A\chap = \underline{\mathrm{Hom}}(A,\mathrm{Ens})$, à partir de celle de Ens par les cardinaux (\textit{cf.} SGA 4 I, 9.24, p.~177). Pour Cat, on définit une filtration cardinale
+\[
+(\Cat^{\pi})_{\pi\geq\pi_0}\ , \qquad \text{où } \pi_0 = \text{cardinal des ensembles dénombrables}\ ,
+\tag*{(8.3)}
+\]
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 101}
+par la condition, pour $A$ dans Cat,
+\[
+A\in \mathrm{Filt}^{\pi}(\Cat) \;=\; \Cat^{\pi} \qquad\Longleftrightarrow\qquad \operatorname{card}\Fl(A) \;\leq\; \pi\ .
+\tag*{(8.4)}
+\]
+
+Il faut vérifier les conditions $(a)$, $(b)$, $(c)$ de \textit{loc. cit.} 9.12. La condition $(a)$ est évidente, $(b)$ est contenue dans la condition plus forte de stabilité de $\Cat^{\pi}$ par $\varinjlim\limits_{I}$, pour $I$ une catégorie telle que $\operatorname{card}\Fl(I)\leq\pi$ (c'est la condition $(d_0)$ de ces notes, p.~45-46). Notons que $\Cat^{\pi}$ est également stable par $\varprojlim$ finies (et si $\pi$ est de la forme $2^c$, il est stable même par limites projectives $\varprojlim\limits_{I}$, avec $\operatorname{card}\Fl(I)\leq c\ \ldots$). La condition $(c)$ se vérifie aisément par la méthode du §5, en notant que pour $X$ dans Cat, l'ensemble
+\[
+\mathrm{Ss}_{\pi}(X)
+\]
+des sous-catégories de $X$ qui sont dans $\Cat^{\pi}$ est filtrant croissant et grand devant $\pi$, et que $X$ en est la limite inductive. D'autre part, il est clair aussi que si $X\in\Cat^{\pi'}$ avec $\pi'>\pi$, alors
+\[
+\operatorname{card}\mathrm{Ss}_{\pi}(X) \;\leq\; \pi'^{\pi}\ ,
+\]
+ce qui achève d'établir la condition $(c)$.
+
+De plus, la condition $(d)$ de p.~45 se vérifie immédiatement pour les $\Cat^{\pi}$, et aussi pour les $A^{\wedge\pi}$ (pour $\pi\geq\operatorname{card}\Fl(A)$).
+
+Aussi que les monomorphismes sont stables par $\varinjlim$ filtrantes (condition $(e)$, page 46).
+
+\msp{page 102}
+Passons aux conditions supplémentaires $(e')$, $(f)$, $(g)$ exigées dans le corollaire 7.4. La condition $(e')$ (commutativité des $\varinjlim$ filtrantes au changement de base) est satisfaite dans $A\chap$ et dans Cat. La condition $(f)$ dit que pour deux sous-objets $A_1$, $A_2$ d'un objet $B$, si $A_0=A_1\cap A_2$, alors
+\[
+A_1\amalg_{A_0}A_2 \longrightarrow B
+\]
+est un monomorphisme. Je doute que c'est vrai dans Cat, et ce n'est pas grave, car c'est à $A\chap$, non à Cat, qu'on voudra appliquer 7.4 -- et c'est évidemment vrai dans $A\chap$, et dans tout topos, l'étant dans (Ens). Enfin, la stabilité des monomorphismes par cochangement de base est sûrement fausse dans Cat, mais vraie dans $A\chap$ -- donc c'est O.K.
+
+Comme $W$ est stable par $\varinjlim$ filtrantes (W\,(6)), et que $i_A$ y commute, $W_A$ est également stable. De même, $W_A$ est L-accessible, en vertu du
+
+\textbf{Lemme 8.1.} \textit{Soient $\mathcal{M}$, $\mathcal{M}'$ deux catégories satisfaisant} (a), (b), (c), (d), (e), \textit{et $\varphi:\mathcal{M}\longrightarrow\mathcal{M}'$ un foncteur commutant aux $\varinjlim$ filtrantes. Alors pour toute partie L-accessible $M'$ de $\mathcal{M}'$, $\varphi^{-1}(M')$ est L-accessible.}
+
+\msp{page 103}
+\textit{De façon précise, soit $\pi$ un cardinal tel que $M'$ soit $\pi$-accessible et que $\varphi$ applique $\mathcal{M}^{\pi}$ dans $\mathcal{M}'^{\pi}$ (par exemple, pour cette dernière condition, il suffit $\pi=2^c$ pour $c$ assez grand,} cf. loc. cit. 9.14, p.~153). \textit{Alors $M=\varphi^{-1}(M')$ est $\pi$-accessible.}
+
+Vérification immédiate.
+
+On a donc le
+
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textbf{Lemme 8.2.} \textit{Soit $A$ dans} Cat. \textit{Alors $(A\chap,W_A)$ satisfait aux conditions préliminaires du corollaire} 7.4, \textit{ainsi qu'aux conditions suivantes.}
+\[
+\underbrace{\Mon(A\chap)}_{\substack{\textit{ensemble des}\\ \textit{monomorphismes}\\ \textit{dans } A\chap}} \quad\subset\ \Cof_{W_A}\ ,
+\tag*{(8.2.1)}
+\]
+\[
+\Mon\cap W_A \qquad \textit{stable par cochangement de base}\ ,
+\tag*{(8.2.2)}
+\]
+\textit{en d'autres termes} (\textit{compte tenu que} Mon \textit{est stable par cochangement de base}), \textit{pour un carré cocartésien}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+A \arrow[r, hook, "i"] \arrow[dr, "\alpha"'] & B \arrow[dr, "\beta"] & \\
+& A' \arrow[r, hook, "i'"] & B'\ ,
+\end{tikzcd}
+\tag*{(8.2.3)}
+\]
+\textit{avec $i$ un monomorphisme, si $\alpha\in W_A$ (resp. $i\in W_A$), on a $\beta\in W_A$ (resp. $i'\in W_A$). En fait, on a mieux :}
+\[
+i\ \in\ W_A \ \Longleftrightarrow\ i'\ \in\ W_A\ , \qquad \alpha\ \in\ W_A \ \Longleftrightarrow\ \beta\ \in\ W_A\ .
+\tag*{(8.2.4)}
+\]
+
+\msp{page 104}
+Il reste à vérifier (8.2.4), qui a été vu dans XII \ldots
+
+On conclut donc de 7.4 1$^\circ$, 2$^\circ$, 3$^\circ$ :
+
+\textbf{Corollaire 8.3.} \textit{Posons}
+\[
+\left\{
+\begin{aligned}
+C \;&=\; \Mon(A\chap)\ , & TC \;&=\; C\cap W\ ,\\
+F \;&=\; (TC)_*\ , & TF \;&=\; C_*\ .
+\end{aligned}
+\right.
+\tag*{(8.3.1)}
+\]
+\textit{Alors $(C,TF)$ et $(TC,F)$ sont des couples de Quillen à factorisation fonctorielle.} (\textbf{N.B.} \textit{$C$ et $TC$ étant de plus Q-engendrés à gauche par des petites parties de} $\Fl(A\chap)$.) \textit{Pour que $(W_A,C,F)$ soit un triple de Quillen clos, il faut et il suffit qu'on ait}
+\[
+\underbrace{TF}_{\overset{\text{déf}}{=}\,(\Mon)_*} \quad\subset\ W_A\ ,
+\tag*{(8.3.2)}
+\]
+i.e. \textit{que toute flèche $f:X\longrightarrow Y$ de type injectif dans $A\chap$} (i.e. \textit{qui fait de $X$ un objet injectif de $A\chap/Y$}) \textit{soit dans $W_A$.}
+
+\textit{Quand cette condition est satisfaite, le triple de Quillen $(W_A,C,F)$ est propre à gauche, par} 8.2.1.
+
+Il n'est pas clair qu'il soit forcément propre-tout-court, \textit{i.e.} qu'on ait
+\[
+F\ \subset \Fib_W \qquad (?)\ .
+\tag*{(8.3.3)}
+\]
+
+Nous y reviendrons par la suite. Pour l'instant, la chose essentielle, c'est d'examiner la condition (8.3.2) sur $A$.
+
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 105}
+\textbf{Théorème 8.4.} \textit{Soit $W$ un localiseur fondamental dans} Cat \textit{satisfaisant} $\mathrm{W}\,(1,2,3,6,7,8)$, \textit{notations de} XII, (i.e. \textit{tous les axiomes envisagés jusqu'à présent, sauf peut-être celui} W\,(4) \textit{des fibrations} \texttt{[et celui W\,(5) de connexité]}), \textit{supposons de plus $W$ stable par facteurs directs} (\textit{renforcement} W\,(1\,bis) \textit{de l'axiome de saturation modérée} W\,(1)).\footnote[37]{\textbf{N.B.} Pour la validité de 1$^\circ$, 3$^\circ$ on n'a pas besoin de W\,(6) ( $\varinjlim$ ) ni de W\,(8) (accessibilité), ni même de W\,(7) (axiome du carré cocartésien). Ce dernier est nécessaire déjà pour assurer la partie $(a)$ du corollaire 8.5. Mais pour la partie 2$^\circ$ du théorème 8.4, on a besoin de \textit{tous} les axiomes du localiseur fondamental $W$, sauf seulement W\,(4) \texttt{[et W\,(5)]}.} \textit{Soit $A$ un objet de} Cat, \textit{et $W_A=i_A^{-1}(W)$ le localiseur de $A\chap$ déduit de $W$. Avec les notations de} 8.3 :
+\begin{itemize}[leftmargin=*]
+\item[1$^\circ$)] \textit{Les conditions suivantes sont équivalentes.}
+\begin{itemize}[leftmargin=*]
+\item[a)] \textit{On a} (8.3.2),
+\[
+TF\ \subset\ W_A\ ,
+\]
+i.e. \textit{toute flèche de type injectif dans $A\chap$ est dans $W_A$.}
+\item[b)] \textit{Soit}
+\[
+L \;=\; L_A
+\tag*{(8.4.1)}
+\]
+\textit{l'élément de Lawvere dans $A\chap$, donc le préfaisceau}
+\[
+a \quad\longmapsto\quad
+\begin{aligned}
+&\textit{ensemble des sous-préfaisceaux de $a$}\\
+&(\text{i.e. }\textit{ensemble des ouverts de $A/a$},\\
+&\text{i.e. }\textit{des cribles de $A/a$})\ ,
+\end{aligned}
+\]
+\textit{et considérons la flèche $L\longrightarrow e_A$ (objet final de $A\chap$). On veut que cette flèche soit $W_A$-asphérique,} i.e. \textit{soit universellement dans $W_A$ -- ou ce qui revient au même, que pour tout $a\in A$, $L_A\times a$ $(=L_{A/a})$ soit un objet $W_A$-asphérique}
+\msp{page 106}
+\textit{de $A\chap$ (ou, ce qui revient au même, de $(A/a)\chap$).}
+\item[c)] \textit{Il existe un objet $I$ de $A\chap$ tel que $I\longrightarrow e_A$ soit $W_A$-asphérique, avec deux sections $\delta_0$, $\delta_1$ de $I$ sur $e_A$, avec} $\mathrm{Ker}(\delta_0,\delta_1)=\emptyset_A$ \textit{(préfaisceau vide).}
+\item[d)] \textit{Les catégories localisées $A/a=B$ sont des} catégories-test \textit{pour $W$} (cf. \textit{Pursuing Stacks}, \textit{§65, notamment pages 172-173), ce qui revient à dire que l'on a ceci, pour chacune des catégories $B=A/a$ :}
+\[
+\begin{aligned}
+&\textit{Les foncteurs}\\
+&\left\{
+\begin{aligned}
+&i_B:\ \ B\chap \ \longrightarrow\ \Cat\ \ (\ F\ \longmapsto\ B/F\ )\\
+&j_B:\ \ \Cat\ \longrightarrow\ B\chap\ \ (\ C\ \longmapsto\ (b\longmapsto \mathrm{Hom}(B/b,C))\ )
+\end{aligned}
+\right.
+\end{aligned}
+\tag*{(8.4.2)}
+\]
+(\textit{où $j_B$ est l'adjoint à droite de $i_B$}) \textit{sont tous les deux ``model preserving''}, i.e.
+\[
+\left\{
+\begin{aligned}
+W_B \;&=\; i_B^{-1}(W) \qquad \textit{(par définition de $W_B$, en fait)}\\
+W \;&=\; j_B^{-1}(W_B)\ ,
+\end{aligned}
+\right.
+\tag*{(8.4.3)}
+\]
+\end{itemize}
+\end{itemize}
+
+% ---- from Der-ChXV-05-11-10_p061-065.tex
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}[label={},leftmargin=4.5em]
+\item \textit{et les foncteurs localisés}
+\[
+\begin{tikzcd}
+\mathrm{Hot}_{B,W} \arrow[r, shift left, "\overline{i_B}"] & \mathrm{Hot}_W \arrow[l, shift left, "\overline{j_B}"]
+\end{tikzcd}
+\]
+\textit{sont des équivalences de catégories. De plus, ces équivalences de catégories sont quasi-inverses l'une de l'autre, les morphismes d'adjonction étant déduits des morphismes d'adjonction pour le couple de foncteurs adjoints $(i_B, j_B)$, ces morphismes d'adjonction étant de plus dans $W$ resp. dans $W_B$.}\footnote[38]{\textbf{N.B.} La condition $(d)$, d'apparence très forte, est équivalente à la condition d'apparence plus anodine :\par
+$d'$) le foncteur $j_A : \mathrm{Cat} \longrightarrow A^\wedge$ transforme éléments de $W$ en flèches $W_A$-asphériques ;\par\noindent
+et il suffit même de l'exiger pour $C \longrightarrow e$ dans Cat, où $C$ est un objet de Cat ayant objet final.\par\noindent
+\texttt{[La condition ($d'$) ci-dessus est trop forte et n'est pas équivalente à la condition ($d$) ; en revanche la condition plus faible envisagée ensuite est bien équivalente à ($d$)].}}
+\end{itemize}
+
+\msp{page 107}
+
+\begin{enumerate}[leftmargin=2.5em]
+\item[$2^\circ$)] \textit{Si les conditions équivalentes de $1^\circ$ sont satisfaites, alors le triple}
+\[
+(W_A\,,\ C = \mathrm{Mon}_{A^\wedge}\,,\ F = (C \cap W_A)_*)
+\]
+\textit{est un triple de Quillen (clos) propre à gauche.}
+\item[$3^\circ$)] \textit{Si les conditions équivalentes de $1^\circ$ sont satisfaites, et si de plus $A$ est $W$-asphérique, alors (et alors seulement) $A$ elle-même est une} catégorie-test \textit{pour $W$, ce qui revient à dire que les conditions sur la catégorie $B$ dans} (d) \textit{sont satisfaites quand $B$ est} soit \textit{$A$, soit une catégorie localisée $A/a$.}
+\end{enumerate}
+
+\textbf{Corollaire 8.5.} \textit{Les conditions équivalentes de $1^\circ$ et de $3^\circ$ sont satisfaites dans chacun des cas suivants (et ceci quel que soit $W$, satisfaisant aux hypothèses dites).}
+\begin{enumerate}[leftmargin=2.5em]
+\item[a)] $A = \Simp$, $\Simp^{\sim}$, $\Cub$, $\Cub^{\sim}$ \textit{(catégories des simplexes combinatoires standard, ordonnés ou non, et des cubes combinatoires standard, ordonnés ou non \ldots)}\footnote[39]{$\Cub^{\sim}$ est essentiellement la catégorie $A$ “universelle”, stable par produits finis, et contenant un “intervalle séparant” $(I,\delta_0,\delta_1)$ comme dans $(b)$.}.
+\item[b)] \textit{$A$ est stable par produits finis}\footnote[40]{En fait, il suffit que $I \longrightarrow e$ soit quarrable, \textit{i.e.} que $A$ ait un objet final, et que les produits $I \times a$ ($a \in \mathrm{Ob}\,A$) existent dans $A$.}\textit{, et contient un objet $I$ tel que $I$ ait deux sections $\delta_0$, $\delta_1$ sur l'objet final, avec $\delta_0$, $\delta_1$ disjointes,} i.e. $\mathrm{Ker}(\delta_0,\delta_1) = \emptyset_{A^\wedge}$ \textit{(sous-préfaisceau vide du préfaisceau final).}
+\end{enumerate}
+
+\msp{page 108}
+
+Le cas $(b)$ du corollaire est justiciable de la condition $(c)$ dans $1^\circ$. (De plus, $A$ ayant un objet final, est $W$-asphérique, donc on est dans les conditions de $3^\circ$.) Les cas $\Simp$, $\Simp^{\sim}$, $\Cub$ (et $\Cub^{\sim}$, qui tombe en fait dans le cas $(b)$) sont traités dans Pursuing Stacks \S34 (p. 47-50) \texttt{[voir aussi \S36]}.
+
+\textsc{Démonstration du théorème} 8.4. La partie essentielle, techniquement, est bien sûr $1^\circ$\footnote[41]{La partie $2^\circ$ en résulte, grâce au corollaire 8.3.}. On a les implications $\pm$ tautologiques
+\[
+(a) \ \Longrightarrow\ (b) \ \Longrightarrow\ (c)\ ,
+\]
+où $(a) \Longrightarrow (b)$ provient du fait que $L$ est évidemment un objet injectif de $A^\wedge$. (L'objet de Lawvere d'un topos quelconque est un objet injectif.) Il reste à établir
+\[
+(c) \ \Longrightarrow\ (d) \ \Longrightarrow\ (a)\ .
+\]
+% foot: Version 5 novembre 2010
+
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+
+Que l'on ait $(c) \Longrightarrow (d)$ (et $(c) \Longrightarrow (b)$) est établi dans Pursuing Stacks, voir le résumé des notions $W$-test dans Pursuing Stacks, \S65, p. 168-179; l'énoncé pertinent ici est la proposition 3, page 173.
+
+Il reste à établir $(d) \Longrightarrow (a)$ – mais à présent on joue sur du velours! Je note ici le lemme suivant, dont la place serait plutôt à la fin du \S4 des généralités sur les triples de Quillen :
+
+\msp{page 109}
+
+\textbf{Lemme 8.6.} \textit{Soit $\mathcal{M}$ une catégorie, $(C,TF)$ un précouple de Quillen dans $\mathcal{M}$, et $W \subset \mathrm{Fl}(\mathcal{M})$ une partie de} $\mathrm{Fl}(\mathcal{M})$ \textit{stable par facteurs directs. Conditions équivalentes :}
+\begin{enumerate}[leftmargin=2.5em]
+\item[a)] \textit{$TF \subset W$.}
+\item[b)] \textit{Toute flèche $f$ dans $\mathcal{M}$ se factorise en $f = pi$, avec $i \in C$, $p \in W$.}
+\item[b$'$)] \textit{Comme} (b), \textit{avec $f$ dans $TF$.}
+\end{enumerate}
+
+\textsc{Démonstration}. Les implications $(a) \Longrightarrow (b) \Longrightarrow (b')$ sont tautologiques et ne font pas appel à l'hypothèse de stabilité sur $W$. Mais pour un $f \in TF$ donné, pour voir qu'il est dans $W$, si $W$ est stable par facteurs directs, il suffit que cet-$f$-là se factorise en $pi$, avec $i \in C$, $p \in W$. En effet, on voit aussitôt qu'alors $f$ est facteur direct de $p$ (car $i \in C$), et comme $p \in W$, on a $i \in W$, \quad \textit{q.e.d.} % [sic] $i \in W$ -> $f \in W$, the conclusion to be proved concerns f
+
+Revenons à 8.4, démonstration de $(d) \Longrightarrow (a)$.
+
+\texttt{[Suit un passage rayé, en bas de la page 109 et en haut de la page 110.]}
+
+\msp{page 110}
+
+Finalement, mon projet de démonstration se modifie, car bien que $(d)$ ait l'air très, très fort comme condition, telle quelle je ne vois pas, finalement, comment en déduire $(a)$. Mais en fait on peut considérer que l'équivalence de $(b)$, $(c)$, $(d)$ est mise ici pour mémoire, elle est établie dans \textit{loc. cit.}, donc je n'ai à me préoccuper que de l'implication $(c) \Longrightarrow (a)$, qui va résulter
+\msp{page 111}
+du lemme 8.6, qui nous ramène à prouver que toute flèche $f : X \longrightarrow Y$ dans $A^\wedge$ se factorise en $pi$, avec $i$ monomorphisme et $p \in W_A$. On fait l'argument du mapping-cone \texttt{[plutôt mapping-cylinder]}, en partant de
+\[
+\begin{tikzcd}[column sep=small]
+e_A \amalg e_A \arrow[rr, hook, "{(\delta_0,\delta_1)}", "\text{mono}"'] \arrow[dr] & & I \arrow[dl, "(W_A)_{\mathrm{univ}}"] \\
+& e_A\ , &
+\end{tikzcd}
+\]
+d'où pour tout $X$ dans $A^\wedge$, en prenant le produit par $X$,
+\[
+\begin{tikzcd}[column sep=small]
+X \amalg X \arrow[rr, hook, "{(\delta_0^X,\delta_1^X)}", "\text{mono}"'] \arrow[dr, "{(\mathrm{id},\mathrm{id})}"] & & X \times I \arrow[dl, "\mathrm{pr}_1^X \in W_A"] \\
+& X\ , &
+\end{tikzcd}
+\]
+% foot: Version 5 novembre 2010
+\printedpage{61}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+et on construit le mapping-cone \texttt{[plutôt mapping-cylinder]} de $f$ par le diagramme cocartésien
+\[
+\begin{tikzcd}[column sep=4em,row sep=4em]
+ & X \arrow[r, "f"] \arrow[d, hook, shift right, "\delta_0^X"'] \arrow[dr, phantom, "\text{cocart.}"] & Y \arrow[d, hook, shift right, "\beta"'] \\
+X \arrow[r, dotted, "\delta_1^X"] \arrow[rr, dotted, bend right, "i_f"'] & X \times I \arrow[r, "f'"] \arrow[u, dotted, shift right, "\mathrm{pr}_1^X"'] & Z(f)\ , \arrow[u, dotted, shift right, "p_f"']
+\end{tikzcd}
+\qquad
+\begin{array}{c}
+p_f \text{ déduit de} \\
+\mathrm{pr}_1^X : X \times I \to X
+\end{array}
+\tag*{(8.6.1)}
+\]
+la factorisation cherchée de $f$ est
+\[
+f \ = \ p_f\, i_f\ , \qquad \text{où}\quad i_f = f'\delta_1^X\ .
+\]
+Ici, comme $\mathrm{pr}_1^X \in W_A$, on en conclut que
+\msp{page 112}
+$\delta_0^X$, $\delta_1^X$ (qui en sont des sections) sont dans $W_A$, comme $\delta_0^X$ est un monomorphisme, on a donc $\delta_0^X \in TC$, donc ($TC$ étant stable par cochangement de base) $\beta \in W_A$, donc enfin $p_f$ (qui est une rétraction de $Z(f)$ sur $Y$) est aussi dans $W_A$. Il reste à voir que $i_f$ est un monomorphisme, ce qui se voit sur le diagramme plus complet (\textit{cf.} XII, p. 230) que j'ai sous les yeux : $i_f$ apparaît comme composé de deux monomorphismes $X \longrightarrow Y \amalg X$ et $Y \amalg X \longrightarrow Z(f)$ \ldots{} Le théorème 8.4 est démontré.
+
+Je vais quand même isoler l'argument formel sempiternel (que j'ai utilisé surtout sous forme duale) dans un
+
+\textbf{Lemme 8.7.} \textit{Soit $\mathcal{M}$ une catégorie, $W$ un localiseur modérément saturé dans $\mathcal{M}$, $C$ une partie stable par composition et par cochangement de base. On se propose, pour $X$ fixé dans $\mathcal{M}$, de trouver une factorisation fonctorielle de toute flèche $f : X \longrightarrow Y$} (i.e. \textit{du morphisme costructural d'un $Y$ dans $X\backslash\mathcal{M}$) en $p_f i_f$, avec $i_f \in C$, $p_f \in W$. On suppose pour ceci qu'on a}
+\msp{page 113}
+\textit{une factorisation de ce type pour $X \amalg X \xrightarrow{(\,\mathrm{id}\,,\mathrm{id}\,)} X$,} i.e. \textit{un objet $I_X$ et une factorisation}
+\[
+\begin{tikzcd}[column sep=6em]
+X \amalg X \arrow[r, hook, "{i_X = (\delta_0^X,\delta_1^X)}"] \arrow[rr, dotted, bend right, "{(\mathrm{id}_X,\mathrm{id}_X)}"'] & I_X \arrow[r, "p_X"] & X\ ,
+\end{tikzcd}
+\]
+\textit{avec $i_X \in C$, $p_X \in W$. On associe alors à toute $f$ le mapping cone} \texttt{[plutôt cylinder]} \textit{$Z(f)$ comme dans le diagramme} (8.6.1) \textit{(où il faut lire $I_X$ au lieu de $X \times I$), et on a alors $p_f \in W$, $i_f \in C$ comme voulu. Mais il faut supposer, pour savoir que $i_f \in C$, que $X \in \mathcal{M}_C$ (objets $C$-cofibrants),} i.e. \textit{que pour tout $Y$, $X \longrightarrow Y \amalg X$ est dans $C$. (De plus, on a supposé tacitement $\mathcal{M}$ stable par $\varinjlim$ finies.)}
+% foot: Version 5 novembre 2010
+
+\printedpage{62}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+
+\textit{Le diagramme complet est}
+\[
+\left\{
+\begin{array}{c}
+\begin{tikzcd}[ampersand replacement=\&,column sep=4em,row sep=3.5em]
+ \& X \arrow[r, "f"] \arrow[d, "\mathrm{inj}_0^X"'] \arrow[dr, phantom, "\text{cocart.}"] \& Y \arrow[d] \\
+X \arrow[r, "\mathrm{inj}_1^X"] \arrow[dr, dotted, "\delta_1^X"'] \& X \amalg X \arrow[r, "f''"] \arrow[d, "i_X"'] \arrow[dr, phantom, "\text{cocart.}"] \& Y \amalg X \arrow[d, "j"] \\
+ \& I_X \arrow[r, "f'"'] \arrow[uu, dotted, bend right=45, "p_X"{pos=.12,swap}] \& Z(f) \arrow[uu, dotted, bend right=45, "p_f"{pos=.25,swap}]
+\end{tikzcd}
+\\[1ex]
+f = p_f i_f, \quad \textit{où} \quad i_f = f' \circ \delta_1^X = j \circ (\underbrace{f'' \circ \mathrm{inj}_1^X}_{\lambda})\ .
+\end{array}
+\right.
+\tag*{(8.7.1)}
+\]
+
+\msp{page 114}
+
+On a $i_X \in C$ par hypothèse, donc $j \in C$ (stabilité de $C$ par cochangement de base), on a $\lambda : X \longrightarrow Y \amalg X$ dans $C$ car $X$ dans $\mathcal{M}_C$, donc le composé $i_f = j \circ \lambda$ est dans $C$ (stabilité de $C$ par composition) – on gagne!
+
+\textbf{Commentaires.} Pour l'équivalence de $(a)$, $(b)$, $(c)$ dans le théorème 8.4, $1^\circ$, on n'a donc pas eu à faire appel aux développements de Pursuing Stacks, qui servent seulement à établir l'équivalence des trois conditions en question avec la condition “modélisante” $(d)$. Pour résumer :
+\begin{enumerate}[leftmargin=2.5em]
+\item[$1^\circ$)] Les implications
+\[
+(a) \ \Longrightarrow\ (\,(b) \ \Longleftrightarrow\ (c) \ \Longleftrightarrow\ (d)\,)
+\]
+sont valables sous les seules conditions
+\[
+\mathrm{W}\,(1,\ 2\,\mathrm{bis},\ 3)\ ,
+\]
+et pour l'équivalence de $(a)$ aux autres conditions, il suffit de
+\[
+\mathrm{W}\,(1\,\mathrm{bis},\ 2\,\mathrm{bis},\ 3)
+\]
+(où W\,(1\,bis) renforce W\,(1) par la condition des facteurs directs, tandis que W\,(2\,bis) affaiblit W\,(2), en exigeant seulement que les morphismes $W$-asphériques soient dans $W$). Les conclusions de 8.4, $3^\circ$, relatives au cas où $A$ est $W$-asphérique, sont valables également sous les conditions W\,(1, 2\,bis, 3) sans plus.
+\end{enumerate}
+
+\msp{page 115}
+
+\begin{enumerate}[leftmargin=2.5em]
+\item[$2^\circ$)] Le corollaire 8.5, se référant aux conditions $(b)$, $(c)$, $(d)$ de $1^\circ$ (à l'exclusion de $(a)$, qui suppose $W$ stable par facteurs directs), est valable pour un $W$ satisfaisant
+\[
+\mathrm{W}\,(1,\ 2\,\mathrm{bis},\ 3,\ \underbrace{7\,\mathrm{bis}}_{\substack{\text{carré}\\ \text{cocartésien}}}\,)\ .
+\]
+% foot: Version 5 novembre 2010
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+\item[$3^\circ$)] Pour la validité de 8.4, $2^\circ$, \textit{i.e.} pour avoir un triple de Quillen $(W_A,C,F)$, il nous faut (presque) tout l'éventail des conditions sur $W$,
+\[
+\mathrm{W}\,(1\,\mathrm{bis},\ 2\,\mathrm{bis},\ 3,\ \underbrace{\ 6\ }_{\text{limites}},\ \underbrace{7\,\mathrm{bis}}_{\substack{\text{carré}\\ \text{cocartésien}}},\ \underbrace{\ 8\ }_{\text{accessibilité}})\ ^{\footnotemark[42]}\ ,
+\]
+\footnotetext[42]{\textbf{N.B.} On devrait renuméroter les axiomes W\,(\ldots).}
+à l'exclusion de W\,(4), et en se contentant pour W\,(2) de la forme affaiblie W\,(2\,bis) sans plus. (Même l'axiome de connexité W\,(5) n'a pas servi, mais je l'avais d'abord inclus, car il y a peu de chances qu'on aura jamais à travailler avec des $W$ qui n'y satisfont pas! Il se pourrait d'ailleurs, en présence des autres axiomes, ou seulement de W\,(1\,bis, 2\,bis, 3, 7\,bis), que si W\,(5) n'est \textit{pas} satisfait, on ait $W = \mathrm{Fl}\,\mathrm{Cat}$ tout entier, donc $W_A = \mathrm{Fl}\,A^\wedge$!)
+\end{enumerate}
+
+\msp{page 116}
+
+\section*{9\quad Révision des notations, pour les axiomes d'un localiseur fondamental\footnote[43]{\textit{Cf.} XVII \texttt{[plutôt XVI]} pour une version définitive (?).}}
+
+\begin{description}[style=sameline,leftmargin=6.5em]
+\item[Loc\,(1)] (Saturation).
+\begin{enumerate}[leftmargin=2.5em]
+\item[$a$)] Les isomorphismes sont dans $W$.
+\item[$b$)] Si $f$, $g$ sont composables, et deux parmi $f$, $g$, $gf$ sont dans $W$, le troisième aussi.
+\item[$c$)] Si $X \underset{g}{\overset{f}{\rightleftarrows}} Y$, si $gf$ et $fg$ sont dans $W$, alors $f$ et $g$ aussi.
+\end{enumerate}
+\end{description}
+\noindent Variante renforcée :
+\begin{description}[style=sameline,leftmargin=6.5em]
+\item[Loc\,(1\,bis)] Loc\,(1) plus
+\begin{enumerate}[leftmargin=2.5em]
+\item[$d$)] $W$ est stable par facteurs directs.
+\end{enumerate}
+\item[Loc\,(2)] (Axiome de l'objet final). Si $X$ dans Cat a un objet final, alors $X$ est $W$-asphérique, \textit{i.e.} $X \longrightarrow e$ est dans $W$.
+\item[Loc\,(3)] (Axiome de localisation, forme faible). Soit $f : X \longrightarrow Y$ tel que pour tout $y \in Y$, $X/y$ soit $W$-asphérique (\textit{i.e.} le morphisme $f/y : X/y \longrightarrow Y/y$ déduit de $f$ par changement de base $Y/y \longrightarrow Y$ est dans $W$). Alors $f \in W$.
+\end{description}
+\noindent Variante renforcée de Loc\,(3) :
+\begin{description}[style=sameline,leftmargin=6.5em]
+\item[Loc\,(3\,bis)] (Axiome de localisation, forme forte). Soit $f : X \longrightarrow Y$ un morphisme dans $\mathrm{Cat}/S$, tel que $\forall\ s \in S$, $f/s : X/s \longrightarrow Y/s$ (déduit de $f$ par changement de base $S/s \longrightarrow S$) soit dans $W$. Alors $f \in W$. (\textbf{N.B.} Sauf erreur, il suffit le l'exiger si $X$, $Y$ sont Cat-fibrés scindés sur $S$, et $f$ $S$-cartésien compatible avec le scindage – en supposant Loc\,(1, 2)). % [sic] il suffit le l'exiger -> il suffit de l'exiger, "le" for "de"
+\end{description}
+% foot: Version 5 novembre 2010
+
+% ---- from Der-ChXV-05-11-10_p066-070.tex
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 117}
+
+\begin{description}[labelwidth=5.5em,leftmargin=6.5em,style=sameline]
+\item[Loc\,(4)] (Axiome du carré cocartésien). Soit $X$ dans Cat, $X_1$, $X_2$ deux ouverts de réunion $X$, $X_0 = X_1\cap X_2$, d'où un diagramme cocartésien dans Cat,
+\[
+\begin{tikzcd}
+X_0 \arrow[r, "i_1"] \arrow[d, "i_2"'] & X_1 \arrow[d, "j_2"] \\
+X_2 \arrow[r, "j_1"] & X\ .
+\end{tikzcd}
+\]
+On a alors $i_1\in W \iff j_1\in W$ (et symétriquement $i_2\in W \iff j_2\in W$).
+
+\item[Loc\,(6)]\footnote[44]{Il y aura un Loc\,(5) plus “basique” plus bas.} (Axiome des $W$-fibrations). Il y a des variantes \cercle{a}, (a$'$), \cercle{b}, (b$'$), (b$''$), (c), (c$'$), \textit{cf.} XII, p. 53-59. La forme la plus forte \cercle{a} est celle-ci :
+
+Soit $f : X\longrightarrow Y$ dans Cat une $W$-fibration au sens ancien, \textit{i.e.} telle que pour toute $Y''\longrightarrow Y'$ dans $\Cat/Y$, avec $Y'$, $Y''$ contractiles, la flèche $X''\longrightarrow X'$ déduite par le changement de base $X\longrightarrow Y$ soit dans $W$. Alors $f$ est dans $\Fib_W$, \textit{i.e.} le foncteur de changement de base par $f$, $\Cat/Y\longrightarrow\Cat/X$, transforme flèches dans $W$ en flèches dans $W$.
+
+\item[Loc\,(7)] (Axiome des limites inductives). $W$ est stable par limites inductives filtrantes.
+\end{description}
+
+Forme renforcée de Loc\,(7) :
+
+\begin{description}[labelwidth=5.5em,leftmargin=6.5em,style=sameline]
+\item[Loc\,(7\,bis)] (L-accessibilité). $W$ est stable par $\varinjlim$ filtrantes \textit{et} accessible, \textit{i.e.} il existe une petite partie $W_\pi$ de $\Fl(\Cat)$, telle que $W$ soit la plus petite partie de $\Fl(\Cat)$ stable par $\varinjlim$ filtrantes, contenant $W_\pi$.
+\end{description}
+
+\msp{page 118}
+
+\begin{description}[labelwidth=5.5em,leftmargin=6.5em,style=sameline]
+\item[Loc\,(8)]\footnote[45]{J'ai changé la numérotation, pour tenir compte d'un Loc\,(5) plus bas, qui est encore un axiome de stabilité \texttt{[initialement les axiomes Loc\,(6) à Loc\,(8) étaient notés Loc\,(5) à Loc\,(7)]}.} (Axiome de connexité). $f\in W\Longrightarrow \pi_0(f)$ bijectif.
+\end{description}
+
+\textbf{N.B.} Tous les axiomes, sauf le dernier (et un chouïa de l'avant dernier) sont des axiomes de stabilité – ils disent tous que $W$ est “grand” : il contient certaines flèches, et s'il contient telles flèches, il contient telles autres. Loc\,(8), et dans une certaine mesure Loc\,(7\,bis), sont des axiomes “limitatifs” sur la taille de $W$ : Loc\,(7) nous dit que $W\subset\mathbf{W}_0$ (= ensemble % [sic] Loc (7) -> Loc (8), apparently: the inclusion in W_0 is the axiome de connexité Loc (8)
+des $f\in\Fl\,\Cat$ telles que $\pi_0(f)$ soit bijectif), Loc\,(7\,bis) nous dit l'existence d'un cardinal tel que $W$ soit égal à la L-enveloppe de $W^\pi$ (donc $W\subset\text{L-env}(W^\pi)$).
+
+J'ai essayé de ranger les axiomes par ordre d'importance pratique. J'ai fini par rajouter l'axiome de connexité à la fin, car dans les développements théorique sur les localiseurs % [sic] théorique -> théoriques, agreement with "développements"
+généraux, il n'intervient pratiquement jamais. Mais je rappelle (XII, p. 20, th. 2) que si $W$ satisfait Loc\,(1, 2, 3, 6), et si Loc\,(8) n'est \textit{pas} satisfait, alors $W=\Fl(\Cat)$\,; donc en présence de Loc\,(1, 2, 3, 6), Loc\,(8) \textit{équivaut} à $W\neq\Fl(\Cat)$ tout entier.
+
+\msp{page 119}
+
+Les axiomes qui ont servi pour 8.4, 1°, 3° et 8.5, $(b)$ sont
+\[
+\mathrm{Loc}\,(1\,\mathrm{bis},\ 2,\ 3)\ .
+\]
+
+\printedpage{65}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Ceux qui sont nécessaires pour 8.5, $(a)$ sont
+\[
+\mathrm{Loc}\,(1\,\mathrm{bis},\ 2,\ 3,\ 4)\ .
+\]
+Enfin, ceux nécessaires pour 8.4, 2° sont
+\[
+\mathrm{Loc}\,(1\,\mathrm{bis},\ 2,\ 3,\ 4,\ 7\,\mathrm{bis})\ ,
+\]
+et ils impliquent la \textit{saturation forte de $W$} (\textit{cf.} paragraphe suivant).
+
+Il me faut réparer un oubli, ayant traité un peu par le mépris (!) les questions de composantes connexes, jusqu'à présent.
+
+\textbf{Proposition 9.1.} \textit{Supposons que $W$ satisfait} Loc\,(1, 2, 3, 4) \textit{sans plus. Soit $f_i : X_i\longrightarrow Y_i$ $(i\in I)$ une famille} finie \textit{de flèches de} Cat. \textit{Pour que $f=\coprod f_i : \coprod X_i\longrightarrow\coprod Y_i$ soit dans $W$, il suffit que $\forall\ i\in I$, on ait $f_i\in W$. Si $W$ satisfait de plus à} Loc\,(7) (\textit{axiome des limites inductives}), \textit{alors cette conclusion reste valable sans condition de finitude sur $I$.}
+
+\textsc{Démonstration}. Le cas $I$ fini se traite par récurrence sur $n=\operatorname{card}I$, on est ramené aussitôt au cas où $n=2$\footnote[46]{Le cas infini s'y ramène sous l'hypothèse Loc\,(7), par passage à la limite.}. On voit d'abord le
+
+\msp{page 120}
+
+\textbf{Corollaire 9.2.} \textit{Sous l'hypothèse} Loc\,(1, 4), \textit{soit $f : X\longrightarrow Y$ une flèche de} Cat, \textit{et $Z$ un objet de} Cat. \textit{Alors $f\in W$ si et seulement si $f\amalg\id_Z : X\amalg Z\longrightarrow Y\amalg Z$ est dans $W$.}
+
+Immédiat sur le carré cocartésien, où $\inj_0^X$ est une immersion ouverte de Dwyer,
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X \arrow[r, "f"] \arrow[d, "\inj_0^X"'] & Y \arrow[d, "\inj_0^Y"] \\
+X\amalg Z \arrow[r, "f'=f\amalg\id_Z"'] & Y\amalg Z\ ,
+\end{tikzcd}
+\]
+qui montre que $f\in W\iff f'\in W$.
+
+En itérant ce résultat, on trouve, si
+\[
+f_1\ :\ X_1\longrightarrow Y_1\ ,\qquad f_2\ :\ X_2\longrightarrow Y_2
+\]
+sont donnés, que
+\[
+f_1\ \in\ W\ ,\ f_2\ \in\ W\quad\Longrightarrow\quad f_1\amalg f_2\ \in\ W\ ,
+\]
+en regardant le diagramme de deux carrés cocartésiens :
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+X_1 \arrow[r, "f"] \arrow[d] & Y_1 \arrow[d] \\ % [sic] f -> f_1, the arrow X_1 -> Y_1 is f_1 (cf. f'_1 = f_1 ∐ id_{X_2})
+X_1\amalg X_2 \arrow[r, "f'_1=f_1\amalg\id_{X_2}"'] \arrow[d, "f'_2=\id_{X_1}\amalg f_2"'] & Y_1\amalg X_2 \arrow[d, "g_2=\id_{Y_1}\amalg f_2"] \\
+X_1\amalg Y_2 \arrow[r, "g_1=f_1\amalg\id_{Y_2}"'] & Y_1\amalg Y_2\ .
+\end{tikzcd}
+\]
+
+\printedpage{66}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+Si $f_1$ et $f_2$ sont dans $W$, il en est de même de $f'_1$, $f'_2$, $g_1$, $g_2$, par 9.2, donc aussi de $f_1\amalg f_2=g_2f'_1$.
+
+\msp{page 121}
+
+Mais je ne vois aucun moyen de prouver la réciproque, que $f_1\amalg f_2\in W\Longrightarrow f_1,f_2\in W$. Grâce à ce qui a été prouvé, on est ramené au cas où $f_1$, $f_2$ sont des immersions ouvertes de Dwyer, mais il ne semble pas que cela nous avance d'un cheveu\,! En somme, il faut savoir que les applications canoniques $Y_i\hookrightarrow\coprod Y_i$ sont dans $\Fib_W$. Comme $Y_i$ est un sommand direct, on est ramené au cas d'une immersion canonique $Y_1\hookrightarrow Y_1\amalg Y_2=Y$ : si $f : X\longrightarrow Y$ est dans $W$, en est-il de même de $X_1=X\times_Y Y_1\longrightarrow Y_1$\,? C'est une propriété qui, bien sûr, serait conséquence de l'ancien W\,(4\,a) (XII, p. 53), ou seulement W\,(4\,a$'$), donc de l'actuel Loc\,(6\,a$'$). Il suffit même de la forme W\,(4\,c$'$) $=$ Loc\,(6\,c$'$) la plus faible de toutes, comme on voit en décomposant $X_1\longrightarrow Y$ en $X\xrightarrow{\ i\ }X'\xrightarrow{\ p\ }Y$, avec $i\in W$ (plus précisément, $i_1\ :\ X_1\longrightarrow X'_1$ et $i_2\ :\ X_2\longrightarrow X'_2$ dans $W$\,!), et $p\ \in\ \mathrm{Parf}_W$. Par Loc\,(6\,c$'$), $f\in W$, donc $p\in W$ implique que les fibres de $p$ sont $W$-asphériques, ce qui implique que $p$ est dans $W_{\mathrm{univ}}$, donc $p_1 : X'_1\longrightarrow Y_1$ est dans $W$.
+
+\msp{page 122}
+
+Donc notons par acquis de conscience :
+
+\textbf{Corollaire 9.3.} \textit{Si $W$ satisfait} Loc\,(1, 2, 3, 6\,c$'$) (\textit{où} Loc\,(6\,c$'$) \textit{est la variante la plus faible de toutes de l'axiome des fibrations}), \textit{alors pour toute famille $(f_i : X_i\longrightarrow Y_i)_{i\in I}$ de flèches dans} Cat, \textit{$f=\coprod f_i\in W\Longrightarrow$ les $f_i$ sont dans $W$ $\forall\ i\in I$}\footnote[47]{En fait, je ne sais prouver l'implication en sens inverse, moyennant seulement Loc\,(1, 2, 3, 6\,c$'$).}. \textit{Et si $i : Y_0\hookrightarrow Y$ est une flèche qui est à la fois immersion ouverte et immersion fermée} (i.e. \textit{un isomorphisme avec un sommand direct de $Y$}), \textit{alors $i$ est dans} $\Fib_W$, i.e. \textit{si $f : X\longrightarrow X'$ est une flèche dans} $\Cat/Y$, \textit{alors $f\in W$ implique $(f_0 : X_0\longrightarrow Y_0)\in W$, où $X_0=X|Y_0$, $X'_0=X'|Y_0$.} % [sic] f_0 : X_0 -> Y_0 -> f_0 : X_0 -> X'_0, apparently: f is a flèche X -> X' and X'_0 is defined but otherwise unused
+
+Mais il est assez scandaleux d'avoir à utiliser un axiome aussi fort, pour en conclure un résultat aussi anodin\,! Je note ceci :
+
+\textbf{Proposition 9.4.} \textit{Soit $W\subset\Fl(\Cat)$, satisfaisant} Loc\,(1) \textit{sans plus. Les conditions suivantes sont équivalentes} (\textit{et impliquées par} Loc\,(1, 2, 3, 4, 6\,c$'$)).
+\begin{enumerate}[label={}, leftmargin=2.5em]
+\item[a)] \textit{Si $f_1 : X_1\longrightarrow Y_1$, $f_2 : X_2\longrightarrow Y_2$ sont deux flèches de} Cat, \textit{alors}
+\[
+f_1\amalg f_2\in W\iff f_1\in W,\ f_2\in W\,.
+\]
+\item[b)] \textit{Les deux conditions suivantes sur $W$ sont satisfaites :}
+
+\msp{page 123}
+
+\begin{enumerate}[label={}, leftmargin=2.5em]
+\item[1°)] \textit{Si $f\ :\ X\longrightarrow Y$ est dans $W$, alors il l'est coüniversellement sous $\emptyset$,} i.e. \textit{pour tout $Z$ dans} Cat, \textit{$f\amalg\id_Z : X\amalg Z\longrightarrow Y\amalg Z$ est dans $W$.} (\textbf{N.B.} \textit{Ceci équivaut à : toute somme finie de flèches $f_i\in W$ est dans $W$ – et itou même pour sommes infinies, si} Loc\,(7), \textit{axiome des limites, est satisfait.})
+\item[2°)] \textit{Soit $Y_0\hookrightarrow Y$ une inclusion d'un sommand direct d'un objet de} Cat. \textit{Alors si $X\xrightarrow{\ f\ }Y$ est dans $W$, de même $X_0=X|Y_0\longrightarrow Y_0$.} (\textbf{N.B.} \textit{Ceci équivaut à la condition que l'inclusion d'un sommand direct est toujours une $W$-fibration.})
+\end{enumerate}
+
+\textit{De plus, si $\pi_0(Y)$ est fini, ou si $W$ satisfait l'axiome des limites} Loc\,(7), \textit{il suffit d'exiger 2° pour $Y_0$ une composante connexe de $Y$.}
+
+\printedpage{67}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\item[c)] \textit{Pour toute famille} finie \textit{$(f_i)_{i\in I}$ de flèches $f_i : X_i\longrightarrow Y_i$ dans} Cat,
+\[
+\coprod f_i\in W\iff f_i\ \in\ W\ \ \textit{pour tout}\ i\in I.
+\]
+\end{enumerate}
+\textit{De plus, si $W$ satisfait} Loc\,(7), \textit{alors il est inutile dans} (c) \textit{de se borner à $I$ fini.} (\textit{Et en tous cas, les conditions équivalentes} (a), (b), (c) \textit{impliquent pour} toute \textit{famille de flèches $(f_i)_{i\in I}$, $\coprod f_i\in W\Longrightarrow f_i\in W$ $\forall\ i\in I$.})
+
+\msp{page 124}
+
+D'après 9.3, ces conditions sont satisfaites moyennant Loc\,(1, 2, 3, 4, 6\,c$'$), mais Loc\,(6\,c$'$) est un marteau-pilon pour une mouche\,! On aurait envie plutôt d'ajouter un axiome aux axiomes Loc\,(1) à Loc\,(4) et Loc\,(6) à Loc\,(8), qui avec Loc\,(8) serait l'axiome le plus anodin de tous.
+
+\begin{description}[labelwidth=5.5em,leftmargin=6.5em,style=sameline]
+\item[Loc\,(5)] (Axiome de décomposition, forme faible). Si $(f_i)_{i\in I}$ est une famille finie de flèches de Cat, alors $f=\coprod f_i$ est dans $W$ si et seulement si les $f_i$ le sont. (Ce sont les conditions équivalentes de 9.4.)\footnote[48]{Il peut être commode aussi d'introduire la condition encore plus faible :
+\begin{description}[nosep,labelwidth=4.5em,leftmargin=5em,style=sameline]
+\item[Loc\,(5\,a)] Si $f_1$, $f_2$ sont dans $W$, alors $f_1\amalg f_2\in W$.\\
+C'est aussi la condition $(b)$, 1° de la proposition 9.4.
+\item[Loc\,(5\,b)] Si $f_1\amalg f_2$ est dans $W$, alors $f_1$ et $f_2$ aussi.\\
+$\iff$ Si $Y_0\subset Y$ est un sommand direct, alors $Y_0\hookrightarrow Y$ est dans $\Fib_W$.
+\end{description}}
+
+\item[Loc\,(5\,bis)] (Axiome de décomposition, forme forte). Comme Loc\,(5), mais sans supposer $I$ finie.\footnote[49]{\texttt{[Réécrivons :]}
+\begin{description}[nosep,labelwidth=4.5em,leftmargin=5em,style=sameline]
+\item[Loc\,(5)] \textit{a}) Si $f_1,f_2\in W$, alors $f_1\amalg f_2\in W$.\\
+\textit{b}) Si $f_1\amalg f_2\in W$, alors $f_1,f_2\in W$\\
+($\iff b'$) tout $Y_0\hookrightarrow Y$ sommand direct est dans $\Fib_W$\,).
+\item[Loc\,(5\,bis)] Comme Loc\,(5), mais $(a)$ remplacé par ($a$\,bis) une famille (pas nécessairement finie).
+\end{description}}
+\end{description}
+
+Ainsi, moyennant l'axiome des limites Loc\,(7), les deux axiomes précédents sont équivalents. De plus, notons ceci :
+
+\textbf{Corollaire 9.5} (de la proposition 9.4). \textit{L'axiome} Loc\,(5\,bis) \textit{équivaut à chacune des propriétés suivantes :}
+\begin{enumerate}[label={}, leftmargin=3em]
+\item[\cercle{a}] \textit{Pour tout $Y$ de} Cat, \textit{décomposé en ses composantes connexes $Y_i$ $(i\in I=\pi_0(Y))$, et pour toute flèche $f\ :\ X\longrightarrow Y$ dans} Cat, \textit{on a $f\ \in\ W$ si et seulement si les $f_i : X_i=X|Y_i\longrightarrow Y_i$ sont dans $W$.}
+\item[\cercle{b}] \textit{Pour $Y$, $Y_i$ comme dans} \cercle{a}, \textit{pour toute}
+
+\msp{page 125}
+
+\textit{flèche $f\ :\ X\longrightarrow X'$ dans $\Cat/Y$, on a $f\ \in\ W$ si et seulement si $\forall\ i\ \in\ I$, le morphisme $f_i : X_i\longrightarrow X'_i$ au-dessus de $Y_i$ est dans $W$.}
+\end{enumerate}
+
+\textbf{Corollaire 9.6.} \textit{Si l'axiome} Loc\,(5) \textit{est satisfait, alors l'axiome de connexité} Loc\,(8) \textit{équivaut à ceci : pour toute flèche $f\ :\ X\longrightarrow Y$ dans $W$, avec $Y$ $0$-connexe, $X$ est $0$-connexe.}
+
+\printedpage{68}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+N.B. Les axiomes Loc\,(8) (connexité) et Loc\,(5\,bis) (de décomposition) ont l'air de nature voisine, étant liés l'un et l'autre à la décomposition des objets de Cat en composantes connexes. (Néanmoins, je pense qu'ils sont indépendants.) Je présume qu'on n'aura jamais à travailler vraiment avec des $W$ qui ne satisfont à ces deux axiomes\,! (En plus de Loc\,(1, 2, 3), qui eux constituent le “minimum vital”.) Mais apparemment il n'y en a pas besoin dans les développements théoriques généraux jusqu'ici. (Mais l'axiome de connexité Loc\,(8) pourrait jouer un rôle, quand on parle de la détermination réciproque des structures de contractibilité, et de $W$-asphéricité, \textit{cf.} Pursuing Stacks. % [sic] "(Mais l'axiome ... Pursuing Stacks." -> closing parenthesis missing, the parenthesis opened at "(Mais" is never closed
+
+\msp{page 126}
+
+Notons ceci :
+
+\textbf{Proposition 9.7.}\footnote[50]{\textit{Cf.} version plus forte dans 9.9 plus bas (débarrassée de l'hypothèse Loc\,(5).)} \textit{Supposons que $W$ satisfait} Loc\,(1, 2, 3, 5), i.e. \textit{c'est un localiseur fondamental satisfaisant la condition de décomposition} (\textit{forme faible}). \textit{Si l'axiome} Loc\,(8) \textit{de connexité n'est} pas \textit{satisfait, alors la sous-catégorie} $\mathrm{Hot}^*_W$ \textit{des $X\ \in$} Cat \textit{non vides est équivalente à la catégorie ponctuelle} (\textit{donc} $\mathrm{Hot}_W$ \textit{est équivalente soit à la catégorie ponctuelle, si $\emptyset\longrightarrow e$ est un isomorphisme dans} $\mathrm{Hot}_W$, \textit{soit à $\boldsymbol{\Delta}_1$ dans le cas contraire}\footnote[51]{Le premier cas est aussi celui où $\exists\ f\in W$ avec $\pi_0(f)$ \textit{non surjectif,} ou encore $\emptyset\longrightarrow X$ dans $W$, avec $X$ non vide.}.)
+
+Ceci est une variante du th. 2 de XII (p. 20), où on faisait l'hypothèse Loc\,(6\,c$'$), plus forte que Loc\,(5) et même que Loc\,(5\,bis), mais avec la conclusion plus forte que $W=\Fl(\Cat)$.
+
+\textsc{Démonstration}. Soit
+\[
+f\ :\ X\longrightarrow Y\ ,\qquad f\ \in\ W\ ,
+\]
+telle que $\pi_0(f)$ ne soit pas \textit{surjective.} Si $Y_0$ est une composante connexe qui n'est pas dans $\mathrm{Im}\pi_0(f)$, alors $X_0=X|Y_0$ est vide, et par Loc\,(7), $\emptyset\longrightarrow Y_0$ est dans $W$. Donc $\forall\ Z$ dans Cat, % [sic] Loc (7) -> Loc (5), apparently: the step X_0 -> Y_0 in W uses the decomposition hypothesis Loc (5) of 9.7, not Loc (7)
+$\underbrace{\emptyset\times Z}_{=\,\emptyset}\longrightarrow Y_0\times Z$ est dans $W$, et pour toute flèche $g : Z\longrightarrow Z'$, $\id_{Y_0}\times g : Y_0\times Z\longrightarrow Y_0\times Z'$ est dans $W$. Prenant $g$ telle que $\pi_0(g)$ ne soit pas injective, p. ex. $e\amalg e\longrightarrow e$, on trouve une flèche $\varphi=\id_{Y_0}\times g$ dans $W$ telle que $\pi_0(\varphi)$ ne soit pas injective.
+
+\msp{page 127}
+
+Soit donc $\varphi\ :\ I\longrightarrow J$ dans $W$, avec $\pi_0(\varphi)$ non injective. Procédant comme tantôt en utilisant Loc\,(5), on est ramené au cas où de plus $J$ est $0$-connexe. (\textbf{N.B.} Dans les deux cas, on aurait pu aussi invoquer 9.6.) Choisissons deux éléments $i_0$, $i_1$ dans $I$ dans deux composantes connexes distinctes, soient $j_0$, $j_1$ leurs images dans $J$. On va traiter $(I,i_0,i_1)$ et $(J,j_0,j_1)$ comme des “intervalles homotopiques”. Le fait que $i_0$, $i_1$ appartiennent à des composantes distinctes de $I$ implique que deux flèches $f_0,f_1 : X\rightrightarrows Y$ sont “homotopes par rapport à $(I,i_0,i_1)$”, \textit{i.e.} il existe $h\ :\ X\times I\longrightarrow Y$ dans Cat telle que $f_0\ =\ h\partial_0^X$, $f_1=h\partial_1^X$, où
+\[
+\partial_0^X\ ,\ \partial_1^X\ :\ X\ \longrightarrow\ I\times X
+\]
+sont données par $x\longmapsto(i_\alpha,x)$ $(\alpha\in\{0,1\})$. Pour trouver $h$, on décompose $I$ en
+\[
+I\ =\ I_0\amalg I_1\ ,\qquad\quad \text{avec}\quad i_0\in I_0,\ i_1\in I_1\ ,
+\]
+d'où $I\times X\ \simeq\ (I_0\times X)\amalg(I_1\times X)$, et on définit $h$ par ses restrictions $h_0$, $h_1$ aux deux morceaux $I_0\times X$, $I_1\times X$, savoir
+\[
+h_0\ =\ f_0\circ\mathrm{pr}_2^{I_0}\ ,\qquad\quad h_1\ =\ f_1\circ\mathrm{pr}_2^{I_1}\ ,
+\]
+
+% ---- from Der-ChXV-05-11-10_p071-075.tex
+\printedpage{69}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+où
+\[
+\pr_2^{I_\alpha}\ :\ I_\alpha\times X \longrightarrow X\ .
+\]
+
+\msp{page 128}Considérons maintenant le diagramme (traits pleins)
+\[
+\begin{tikzcd}[column sep=small]
+& X\amalg X \arrow[dl, "{(\partial_0^X,\partial_1^X)}"'] \arrow[dr, "{(\partial_0^{\prime X},\partial_1^{\prime X})}"] & \\
+I\times X \arrow[rr, "\varphi\times\id_X\,=\,\varphi_X"] \arrow[dr, "h"'] & & J\times X \arrow[dl, dotted, "h'"] \\
+& Y\ , &
+\end{tikzcd}
+\]
+où $\partial_0^{\prime X}$, $\partial_1^{\prime X}$ sont définis comme $\partial_0^X$, $\partial_1^X$, mais utilisant $j_0,j_1\in\Ob J$ au lieu de $i_0,i_1\in\Ob I$. S'il existait dans Cat une flèche $h'$ (pointillée) telle que $h'\circ\varphi_X=h$, il s'ensuivrait que $h'$ est une homotopie de $f_0$ et $f_1$ suivant $(J,j_0,j_1)$. Comme $J$ est 0-connexe, il s'ensuivrait aussitôt que $f_0$, $f_1$ sont homotopes au sens habituel dans Cat, donc que $f_0$ et $f_1$ ont même image dans $\Hot_W$. Mais si on ne peut trouver une flèche $h'$ dans Cat, du moins peut-on la trouver dans $\Hot_W$, puisque $\varphi_X\in W$, donc un isomorphisme dans $\Hot_W$ (et $h'$ dans $\Hom_W(J\times X,Y)$ sera même uniquement déterminé). Donc dans $\Hot_W$, on a
+\[
+f_0\ =\ h'\partial_0^{\prime X}\ ,\qquad\quad f_1\ =\ h'\partial_1^{\prime X}\ .
+\]
+
+\msp{page 129}Pour prouver que
+\[
+f_0\ =\ f_1\qquad\text{dans}\quad\Hom_W(X,Y)\ ,
+\]
+il suffit de voir que
+\[
+\partial_0^{\prime X}\ =\ \partial_1^{\prime X}\qquad\text{dans}\quad\Hom_W(X,J\times X)\ .
+\]
+Or en fait $\partial_0^{\prime X}$ et $\partial_1^{\prime X}$ sont homotopes, car $e\underset{j_1}{\overset{j_0}{\rightrightarrows}}J$ sont homotopes ($j_0$ et $j_1$ appartenant à la même composante connexe de $J$), donc aussi leur produit par $\id_X$.
+
+On voit donc que pour deux objets quelconques $X$, $Y$ de Cat, toutes les flèches de $X$ dans $Y$ sont égales dans Hot. L'argument fait prouve même que toutes les flèches \textit{dans} $\Hot_W$ de $X$ dans $Y$ sont égales. Cela signifie que la catégorie $\Hot_W^*$ (où pour deux objets quelconques $X$, $Y$, $\Hom_{\Cat}(X,Y)$, et a fortiori $\Hom_W(X,Y)$ est $\neq\emptyset$) est équivalente à la catégorie ponctuelle. Quant à $\Hot_W$ elle-même, dont l'ensemble des objets est $\{\emptyset\}\amalg\Ob\Hot_W^*$, avec $\emptyset$ objet initial, elle sera donc équivalente à la catégorie ponctuelle, ou bien à $\boldsymbol{\Delta}_1$, selon que $\emptyset\longrightarrow e$ est un isomorphisme dans $\Hot_W$, ou non.
+
+\msp{page 130}\textbf{Commentaire 9.8.} Si les axiomes Loc\,(1, 2, 3, 5)~\footnote[52]{En fait, ce commentaire vaut même en l'absence de l'hypothèse Loc\,(5), \textit{cf.} 9.9 ci-dessous.} sont satisfaits, alors l'axiome de connexité Loc\,(8) \textit{équivaut} à chacun des suivants :
+
+\printedpage{70}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\begin{enumerate}[leftmargin=*]
+\item[\textit{a})] $\Hot_W$ n'est équivalente ni à $e$, ni à $\boldsymbol{\Delta}_1$.
+\item[\textit{b})] $\Hot_W$ a une infinité de classes d'isomorphie.
+\item[\textit{c})] $f_0:X_0\longrightarrow Y_0$ (flèche donnée d'avance dans Cat, telle que $\pi_0(f_0)$ n'est pas un isomorphisme, et $X_0\neq\emptyset$) n'est \textit{pas} un isomorphisme de $\Hot_W$.
+\item[\textit{d})] $X_0$ et $Y_0$ ne sont pas isomorphes dans $\Hot_W$ (où $X_0$, $Y_0$ sont deux objets donnés d'avance dans Cat, avec $X_0$, $Y_0$ non vides et $\card\pi_0(X_0)\neq\card\pi_0(Y_0)$).
+\end{enumerate}
+
+% marginal mark: a double vertical rule in the left margin beside the first two lines of this paragraph
+\marginbar On peut donc dire que l'axiome de connexité joue le rôle d'un \textit{axiome de non trivialité} pour la catégorie $\Hot_W$ localisée de Cat. Il sera satisfait automatiquement pour tous les localiseurs fondamentaux $W$ qu'on sera amené à construire ou à introduire. Mais on n'aura pratiquement jamais à l'invoquer comme une hypothèse, en vue de certaines conclusions.
+
+Je m'aperçois finalement que dans la proposition 9.7 l'hypothèse Loc\,(5) est inutile :
+
+\textbf{Proposition 9.9.}~\footnote[53]{\textit{Cf.} meilleur énoncé 9.12 (p. 133 bis).} \textit{Soit $W$ un localiseur fondamental dans} Cat (i.e. \textit{on a} Loc\,(1, 2, 3) \textit{sans plus}), \textit{plus la condition que la} somme \textit{de $f_1,f_2\in W$ est dans $W$}~\footnote[54]{Cette condition Loc\,(5\,a) est vérifiée notamment si $W$ satisfait de plus l'un des deux axiomes Loc\,(4) (\textit{cf.} 9.1), ou Loc\,(6\,c$'$) (\textit{cf.} 9.3).}. \textit{Si l'axiome de connexité n'est pas satisfait, alors} $\Hot_W$ \textit{est équivalente à la catégorie ponctuelle} (\textit{si $\emptyset\longrightarrow e$ est un isomorphisme dans} $\Hot_W$~\footnote[55]{Cela signifie aussi qu'il existe $Z\neq\emptyset$ dans Cat, tel que $\emptyset\longrightarrow Z$ soit un isomorphisme dans $\Hot_W$.}) \textit{ou à $\boldsymbol{\Delta}_1$} (\textit{dans le cas contraire}), \textit{et} $\Hot_W^*$ ($\overset{\text{déf}}{=}\Hot_W\backslash\{\emptyset\}$) \textit{est équivalente à la catégorie ponctuelle.}
+
+\msp{page 131}La condition sur les sommes assure que dans $\Hot_W$ la somme de deux objets existe, et que $\Cat\longrightarrow\Hot_W$ commute aux sommes de deux objets. Ceci dit, soit
+\[
+f\ :\ X\longrightarrow Y \tag*{$(*)$} % the label (*) is printed at the left margin
+\]
+une flèche telle que $f\in W$, mais $\pi_0(f)$ non surjectif. Supposons d'abord $X\neq\emptyset$ (cas le moins évident). Si $Y_0$ est un sommand non vide de $Y$ tel que $f$ se factorise par $Y_1=Y\backslash Y_0$, alors $f$ est somme de
+\[
+f_1\ :\ X\ =\ X_1\longrightarrow Y_1\qquad\quad\text{et}\qquad\quad f_0\ :\ X_0\ =\ \emptyset\longrightarrow Y_0
+\]
+dans Cat, donc aussi dans $\Hot_W$. Donc on a une somme $f\ =\ f_0\amalg f_1$ dans $\Hot_W$ qui est un isomorphisme, donc pour tout $Z$ dans $\Hot_W$,
+\[
+\Hom_W(Y_0,Z)\times\Hom_W(Y_1,Z)\ \xrightarrow{\ \sim\ }\ \underbrace{\Hom_W(X_0,Z)}_{=\,e}\times\Hom_W(X_1,Z)
+\]
+(\textbf{N.B.} $\emptyset$ est objet initial de $\Hot_W$, l'étant de Cat), \textit{i.e.} le composé
+\[
+Z(Y_0)\times Z(Y_1)\ \xrightarrow{\pr_2}\ Z(Y_1)\ \xrightarrow{Z(f_1)}\ Z(X_1)
+\]
+est bijectif. Comme $X\ =\ X_1\neq\emptyset$, donc aussi $Y_1\neq\emptyset$, et $Y_0\neq\emptyset$, les ensembles $Z(Y_0)$, $Z(Y_1)$, $Z(X_1)$ sont $\neq\emptyset$ si $Z\neq\emptyset_{\Cat}$. Le composé étant bijectif, la première flèche $\pr_2$ est injective, ce qui implique
+\printedpage{71}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 132}que $Z(Y_0)$ est réduit à un point (les deux facteurs $Z(Y_0)$, $Z(Y_1)$ étant $\neq\emptyset$). Cela signifie que $Y_0$ est un objet initial dans $\Hot_W^*$. Il s'ensuit notamment que $Y_0\amalg Y_0$ est aussi un objet initial, et l'application canonique $Y_0\amalg Y_0\longrightarrow Y_0$ est donc un isomorphisme dans $\Hot_W$, alors que l'application induite sur les $\pi_0$ n'est pas injective. (C'est $\pi_0(Y_0)\amalg\pi_0(Y_0)\longrightarrow\ \pi_0(Y_0)$, avec $\pi_0(Y_0)$ non vide.) Ce cas va être traité ci-dessous.
+
+Si dans $(*)$ $X$ est vide, $Y$ non vide (puisque $\pi_0(f)$ non surjectif), alors $Y$ est objet initial de $\Hot_W$, et on voit encore que $Y\amalg Y\longrightarrow Y$ est un isomorphisme dans $\Hot_W$, bien que n'induisant pas un isomorphisme des $\pi_0$. La proposition 9.9 va donc résulter du
+
+\textbf{Lemme 9.10.} \textit{Soit $W$ localiseur fondamental sans plus} (\textit{axiomes} Loc\,(1, 2, 3)). \textit{Supposons qu'il existe $f:I\longrightarrow J$ dans} Cat \textit{tel que} $\hot_W(f)$ \textit{soit un isomorphisme, mais que $\pi_0(f)$} ne soit pas injectif~\footnote[56]{Ou bien tel que $I$ soit 0-connexe, et $J$ non 0-connexe (\textit{i.e.} $\card\pi_0(I)\ =\ 1$, $\card\pi_0(J)\ \geq\ 2$). Ce deuxième cas se traite par la même méthode essentiellement.}. \textit{Alors} $\Hot_W^*$ \textit{est équivalente à la catégorie ponctuelle $e$, et} $\Hot_W$ \textit{est équivalente à $e$} (\textit{si $\emptyset\longrightarrow e$ est un isomorphisme dans} $\Hot_W$) \textit{ou à $\boldsymbol{\Delta}_1$} (\textit{dans le cas contraire}).
+
+\msp{page 133}La démonstration est celle donnée pour 9.7 : on prouve que si $X$, $Y$ sont deux objets de Cat, \textit{non vides}, alors deux flèches $f_0,f_1:X\rightrightarrows Y$ sont égales dans $\Hot_W$, par un argument d'homotopie, en choisissant deux points $i_0$, $i_1$ de $I$ qui sont dans deux composantes connexes distinctes, et tels que leurs images $j_0$, $j_1$ dans $J$ soient dans la même composante.
+
+\textbf{Proposition 9.11.} \textit{Soit $W$ un localiseur fondamental} (i.e. \textit{on a} Loc\,(1, 2, 3)). \textit{Alors les conditions suivantes sont équivalentes.}
+\begin{enumerate}[leftmargin=*]
+\item[a)] \textit{On a} Loc\,(5\,bis) (\textit{axiome de décomposition, forme forte}) \textit{et} Loc\,(8) (\textit{axiome de connexité}).
+\item[b)] \textit{On a} Loc\,(5\,bis), \textit{et} $\Hot_W$ \textit{n'est pas équivalente à $e$ ou à $\boldsymbol{\Delta}_1$} (cf. \textit{commentaire} 9.8).
+\item[c)] \textit{Pour toute $f:X\longrightarrow Y$, on a $f\in W$ si et seulement si $\pi_0(f)$ est un isomorphisme, et pour toute composante connexe $X_i$ de $X$, si $Y_i$ désigne la composante connexe correspondante de $Y$, la flèche induite $f_i:X_i\longrightarrow Y_i$ est dans $W$.}
+\end{enumerate}
+
+La raison pour laquelle je n'isole pas cette propriété en un des axiomes Loc\,(\ldots), c'est que ce n'est \textit{pas} un axiome de stabilité, mais un axiome de nature mixte.
+
+\msp{page 133 bis}\textbf{Proposition 9.12.} \textit{Soit $W$ un localiseur fondamental} (\textit{sans plus}), i.e. \textit{satisfaisant} Loc\,(1, 2, 3). \textit{Les conditions suivantes sont équivalentes.}
+\begin{enumerate}[leftmargin=*]
+\item[a)] \textit{$W$ satisfait l'axiome de connexité} Loc\,(8), i.e. $f\in W\Longrightarrow\pi_0(f)$ \textit{bijectif.}
+\item[b)] \textit{Si $f,g:X\rightrightarrows Y$ dans} Cat \textit{sont telles que} $\hot_W(f)=\hot_W(g)$, \textit{alors} $\pi_0(f)=\pi_0(g)$.
+\item[c)] \textit{Il existe $X$, $Y$ dans} Cat \textit{tel que l'application} $\hot_W^{X,Y}:\Hom_{\Cat}(X,Y)\longrightarrow\Hom_W(X,Y)$ \textit{ne soit pas constante.}
+\item[c$'$)] \textit{La sous-catégorie} $\Hot_W^*$ \textit{de} $\Hot_W$, \textit{formée des objets non vides, n'est pas équivalente à la catégorie ponctuelle.}
+\item[c$''$)] \textit{La catégorie} $\Hot_W$ \textit{n'est pas équivalente à la catégorie $e$ ni à la catégorie $\boldsymbol{\Delta}_1$.}
+\item[d)] \textit{L'ensemble des classes d'isomorphie d'objets de} $\Hot_W$ \textit{est infini.}
+\end{enumerate}
+
+\printedpage{72}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textsc{Démonstration}. On a $(a)\Longrightarrow(b)$, puisque $(a)$ équivaut à dire que le foncteur $\pi_0:\Cat\longrightarrow\mathrm{Ens}$ se factorise par $\Hot_W$. D'ailleurs le foncteur correspondant
+\[
+\Hot_W\ \longrightarrow\ (\mathrm{Ens})
+\]
+est essentiellement surjectif -- il y a un inverse à isomorphisme près, $I\longmapsto\hot_W(I)$. Cela prouve que $(a)$ implique $(d)$, et on a $(d)\Longrightarrow(c')$, $(d)\Longrightarrow(c'')$ tautologiquement. Un argument plus ou moins tautologique montre d'ailleurs que si $\Hot_W^*$ est équivalente à $e$, alors $\Hot_W$ est équivalente à $e$ ou à $\boldsymbol{\Delta}_1$ (car $\emptyset$ est objet initial de $\Hot_W$) -- donc $(c'')\Longrightarrow(c')$. Donc on a plus ou moins tautologiquement
+\[
+\begin{tikzcd}
+(\mathrm{a}) \arrow[r, Rightarrow] \arrow[d, Rightarrow] & (\mathrm{d}) \arrow[r, Rightarrow] & (\mathrm{c}'') \arrow[r, Rightarrow] & (\mathrm{c}') \\
+(\mathrm{b}) \arrow[rr, Rightarrow] & & (\mathrm{c}) \arrow[ru, Rightarrow] &
+\end{tikzcd}
+\]
+où les implications $(b)\Longrightarrow(c)\Longrightarrow(c')$ sont elles aussi triviales \texttt{[c'est plutôt l'implication (c$'$) $\Longrightarrow$ (c) qui est triviale~; l'implication (c) $\Longrightarrow$ (c$'$) est démontrée après l'énoncé du corollaire 9.13, avant la preuve de ce dernier]}. Donc
+\msp{page 133 ter}tout revient à prouver que $(c)\Longrightarrow(a)$, ou encore :
+
+\textbf{Corollaire 9.13.} \textit{Si l'axiome de connexité n'est pas satisfait, alors si $X$, $Y$ sont deux objets de} Cat, \textit{toutes les flèches $X\longrightarrow Y$ dans} Cat \textit{sont égales dans} $\Hot_W$, i.e. \textit{l'application} $\Hom_{\Cat}(X,Y)\longrightarrow\Hom_W(X,Y)$ \textit{est constante.}
+
+Cela implique donc que tous les objets de Cat$^*$, \textit{i.e.} tous les objets non vides de Cat, sont isomorphes dans $\Hot_W$, et on trouve un isomorphisme canonique entre elles, avec transitivité. Soit alors $\mathcal{H}$ la catégorie quotient de Cat, ayant mêmes objets que Cat, et ayant exactement une flèche entre deux objets non vides de Cat et exactement une flèche de $\emptyset$ dans tout autre objet de Cat (et pas de flèche d'un objet non vide de Cat dans $\emptyset$). C'est donc une catégorie équivalente à $\boldsymbol{\Delta}_1$. On a vu que $\Cat\longrightarrow\Hot_W$ se factorise en
+\[
+\Cat\ \xrightarrow{\text{can.}}\ \mathcal{H}\ \longrightarrow\ \Hot_W\ .
+\]
+Si $\Cat\longrightarrow\mathcal{H}$ transforme toute flèche appartenant à $W$ en isomorphisme, alors il est immédiat que $\mathcal{H}$ est solution au problème universel définissant $\Hot_W$, donc que $\mathcal{H}\longrightarrow\Hot_W$ est un isomorphisme. Cela signifie aussi que $W$ ne contient pas de flèche $\emptyset\longrightarrow X$ avec $X$ non vide (auquel cas $W$ contient toutes les flèches). Donc dans ce cas $\Hot_W\simeq\boldsymbol{\Delta}_1$. Dans le cas contraire, soit $\mathcal{H}'$ la catégorie déduite de $\mathcal{H}$ en inversant les flèches $\emptyset\longrightarrow X$, \textit{i.e.} le groupoïde 1-connexe sur l'ensemble d'objets $\Ob\Cat$. Ce n'est plus une catégorie quotient de Cat, mais on a encore une factorisation
+\[
+\Cat\ \xrightarrow{\text{épi}}\ \mathcal{H}\ \ \xrightarrow{\text{loc.}}\ \mathcal{H}'\ \longrightarrow\ \Hot_W\ ,
+\]
+\printedpage{73}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\msp{page 133 quater}et cette fois c'est $\mathcal{H}'$ qui est solution du problème universel ($\Cat\longrightarrow\mathcal{H}'$ transformant flèches de $W$ en isomorphismes). Donc dans ce cas, $\mathcal{H}'\longrightarrow\Hot_W$ est un isomorphisme, et $\Hot_W$ est équivalente à $e$. Dans les deux cas, $\Hot_W^*$ est équivalente à $e$.
+
+Donc, la proposition 9.12 résulte du corollaire 9.13, qu'il s'agit à présent de démontrer.
+
+Soit $f:I\longrightarrow J$ dans Cat telle que $\pi_0(f)$ ne soit pas injective. On a vu dans la démonstration de 9.7 comment on en déduit (en choisissant deux éléments $i_0$, $i_1$ dans deux composantes connexes distinctes de $I$, telles que $j_0=f(i_0)$ et $j_1=f(i_1)$ soient dans une même composante connexe de $J$) que pour $X$, $Y$ dans Cat, deux flèches $f_0,f_1:X\rightrightarrows Y$ sont toujours égales dans $\Hot_W$ (\textit{cf.} lemme 9.10).
+
+Soit maintenant
+\[
+f\ :\ I\longrightarrow J
+\]
+dans Cat telle que $\pi_0(f)$ ne soit pas surjective, donc $J=J_0\amalg J_1$, avec $f$ se factorisant par $J_0$, et $J_1\neq\emptyset$. Considérons alors la catégorie discrète à deux objets,
+\[
+\varepsilon\ =\ \{0,1\}\ ,
+\]
+et deux flèches
+\[
+g_0,\ g_1\ :\ J\ \rightrightarrows\ \varepsilon\ ,
+\]
+$g_0$ étant constante de valeur 0, et $g_1$ étant égale à 0 sur $J_0$, à 1 sur $J_1$. On a
+\[
+g_0f\ =\ g_1f\ ,
+\]
+donc, comme $f\in W$,
+\[
+g_0\ =\ g_1\qquad\quad\text{dans}\quad\Hot_W\ .
+\]
+On en conclut, en prenant un point $j_1$ dans $J_1$, et l'inclusion $\alpha_{j_1}:e\longrightarrow J$ correspondante, que
+\msp{page 133 quinquies}
+\[
+g_0\alpha_{j_1}\ =\ g_1\alpha_{j_1}\ ,
+\]
+\textit{i.e.} les deux sections de $\varepsilon$ sur $e$ sont égales dans $\Hot_W$. Comme le foncteur $\Cat\longrightarrow\Hot_W$ commute aux produits finis \texttt{[cette propriété n'est pas établie sous les seules conditions Loc\,(1,2,3)~; elle est démontrée dans Pursuing Stacks, section 64, en remplaçant Loc\,(3) par l'axiome plus fort Loc\,(3\,bis)]}, il s'ensuit que pour $X$ dans Cat, les deux flèches
+\[
+X\ \underset{\partial_1^X}{\overset{\partial_0^X}{\rightrightarrows}}\ X\times\varepsilon\ =\ X\amalg X
+\]
+sont égales dans $\Hot_W$. Si alors
+\[
+f_0,\ f_1\ :\ X\ \rightrightarrows\ Y
+\]
+sont deux flèches dans Cat, elles sont de la forme
+\[
+f_0\ =\ h\partial_0^X\ ,\qquad\quad f_1\ =\ h\partial_1^X\ ,
+\]
+avec
+\[
+h\ =\ (f_0,f_1)\ :\ X\amalg X\ \longrightarrow\ X\ , % [sic] X\amalg X \longrightarrow X -> X\amalg X \longrightarrow Y, h\partial_i^X = f_i : X \to Y requires target Y
+\]
+et comme $\partial_0^X=\partial_1^X$ dans $\Hot_W$, on en conclut $f_0=f_1$ dans $\Hot_W$, \quad \textit{q.e.d.}
+
+% ---- from Der-ChXV-05-11-10_p076-077.tex
+\printedpage{74}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+
+\msp{page 134}
+
+\section*{10\quad Application au dérivateur $\HOT_W$}
+
+\textbf{Théorème 10.1.} \textit{Soit $W$ un localiseur dans} Cat \textit{satisfaisant les conditions} Loc\,(1, 2, 3, 4, 7\,bis) (\textit{axiomes de saturation forme forte} (\textit{facteurs directs}), \textit{de l'objet final, de localisation forme faible, du carré cocartésien, de la L-accessibilité}~\textsuperscript{(57)}\footnotetext[57]{\textbf{N.B.} Loc\,(1\,bis), \textit{i.e.} $W = W^{\natural}$, est déjà impliqué par la condition que $W$ soit stable par $\varinjlim$ filtrantes.}). \textit{Soit} $\HOT_W$ \textit{le prédérivateur sur} (Cat) \textit{associé à} $(\mathrm{Cat}, W)$ \textit{de la façon habituelle,}
+\[
+I \longmapsto \mathrm{Cat}(I)\,W(I)^{-1} \;=\; \underline{\mathrm{Hom}}(I^{\circ}, \mathrm{Cat})\,W(I)^{-1}\,. \tag*{(10.1.1)}
+\]
+\textit{On a alors ce qui suit.}
+
+1\,$^{\circ}$) \textit{Pour toute flèche $u : I \longrightarrow J$ dans} Cat, \textit{le foncteur $u_!$} (\textit{adjoint à gauche de $u^*$}) \textit{existe} (\textbf{N.B.} On n'a pas besoin pour ceci de Loc\,(4) ni de Loc\,(7\,bis), il suffit que $W$ soit un localiseur fondamental \texttt{[on a néanmoins besoin de l'axiome de localisation forme forte Loc\,(3\,bis)]}), \textit{et il se calcule de la façon standard} (\textit{axiomes} Der~4\,bis \textit{et} Der~5\,bis). \textit{Le foncteur $u_*$, adjoint à droite de $u^*$, existe}~\textsuperscript{(58)}\footnotetext[58]{\textit{Toujours\,! Cf.} XIX, p. 29.} [\textit{si $u$ est de la forme $v \times \mathrm{id}_S$, où $v : I_0 \longrightarrow J_0$ est une flèche entre catégories ordonnées finies, et $S$ un objet quelconque de} Cat], \textit{et ce foncteur $u_*$ se calcule de façon standard} (\textit{axiomes} Der~4 \textit{et} Der~5). \textit{Donc on a une théorie des carrés $W$-cartésiens et des carrés $W$-cocartésiens dans les catégories} $\HOT_W(S)$, \textit{et des suites}
+\msp{page 135}
+\textit{longues de suspension et de cosuspension dans les catégories} $\HOT^{\bullet}_W(S)$. (\textit{Plus exactement, ce sont des théories relatives aux dérivateurs induits} $\HOT_{W,S}$, $\HOT^{\bullet}_{W,S}$ \textit{sur $S$,} $I \longmapsto \HOT_W(S \times I)$ \textit{resp.} $I \longmapsto \HOT^{\bullet}_W(S \times I)$ \ldots). \textit{De plus, les carrés cocartésiens et les carrés cartésiens relatifs aux dérivateurs induits} $\HOT_{W,S}$ \textit{sont} exacts, i.e. \textit{les suites longues de suspension et de cosuspension sont exactes} (\textit{axiomes d'exactitude à droite et à gauche} Der~6\,bis \textit{et} Der~6).
+
+2\,$^{\circ}$) \textit{Le prédérivateur} $\HOT_W$ \textit{satisfait aussi l'axiome} Der~1 \textit{de décomposition finie}~\textsuperscript{(59)}\footnotetext[59]{Sans aucun axiome sur $W$\,! \texttt{[On a besoin simplement que les identités soient dans} $W$\texttt{.]}} (\textit{pour} $I = \coprod_{\alpha} I_{\alpha}$), \textit{et l'axiome} Der~2 \textit{de localisation. De plus, $W$ est fortement saturé,} i.e. $f \in W \iff \hot_W(f)$ \textit{isomorphisme.}
+
+3\,$^{\circ}$) \textit{Concernant l'axiome} Der~3 \textit{et ses variantes} (\textit{cf.} I, pages 111-112, 125), \textit{on a ceci :}
+
+a)~\textsuperscript{(60)}\footnotetext[60]{On n'a besoin ici que de Loc\,(1\,ter, 2, 3) (Loc\,(1\,ter) est la saturation forte, \textit{i.e.} $f \in W \iff \hot_W(f)$ isomorphisme).}. \textit{Soit $f : S' \longrightarrow S$ une flèche dans} Cat. \textit{Pour que ce soit une} $\HOT_W$\textit{-équivalence,} i.e. \textit{pour que le foncteur} $f^* : \HOT_W(S) \longrightarrow \HOT_W(S')$ \textit{induise une} équivalence \textit{entre les sous-catégories pleines formées des objets} constants \textit{sur $S$, $S'$, il faut et il suffit que $f$ soit dans $W$. L'énoncé correspondant dans les dérivateurs induits} $\HOT_{W,I}$ \textit{est également valable, pour $I \neq \emptyset$. Donc a fortiori,} $\HOT_W$ \textit{et} $\HOT_{W,I}$ \textit{satisfont}
+\msp{page 136}
+\printedpage{75}
+% head: A. Grothendieck : Dérivateurs, Ch. XV, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 5 novembre 2010
+\textit{l'axiome de l'objet final,} i.e. \textit{si $S$ dans} Cat \textit{a un objet final, alors $S \longrightarrow e$ est une} $\HOT_W$\textit{-équivalence, et même une} $\HOT_{W,I}$\textit{-équivalence pour toute $I$ dans} Cat.
+
+b) \textit{Supposons que $W$ satisfasse} Loc\,(1\,ter, 2, 3, 5\,b) (\textit{donc l'axiome} Loc\,(5\,b) \textit{des $W$-fibrations, variante} b). \textit{Alors pour toute $f : S' \longrightarrow S$ dans $W$,} $\HOT^{\mathrm{lc}}_W(S) \longrightarrow \HOT^{\mathrm{lc}}_W(S')$ \textit{est une} équivalence de catégories (\textit{la réciproque étant clair par} (a)). \textit{Itou pour} % [sic] clair -> claire, accord avec « réciproque »
+\[
+\HOT^{\mathrm{lc}}_{W,I}(S) \longrightarrow \HOT^{\mathrm{lc}}_{W,I}(S') \qquad (\text{i.e. \textit{pour}}\ \ \HOT^{\mathrm{lc}/I}_W(S \times I) \longrightarrow \HOT^{\mathrm{lc}/I}_W(S' \times I)\ ).
+\]
+\textit{En d'autres termes, pour le dérivateur} $\HOT_W$ \textit{et pour tous les} $\HOT_{W,I}$ ($\mathbf{D}$ \textit{étant un des ces dérivateurs})~\textsuperscript{(61)}\footnotetext[61]{À vérifier avec soin dans le cas $\mathbf{D} = \HOT_{W,I}$.}, \textit{toute $\mathbf{D}$-équivalence est une $\mathbf{D}$-équivalence} 2\textit{-complète,} i.e. \textit{pour $f : S' \longrightarrow S$, pour que $f^* : \mathbf{D}(S) \longrightarrow \mathbf{D}(S')$ induise une équivalence entre les sous-catégories $\mathbf{D}^{\mathrm{lc}}(S) \longrightarrow \mathbf{D}^{\mathrm{lc}}(S')$, il suffit déjà qu'elle induise un foncteur pleinement fidèle sur les sous-catégories pleines formées des objets constants, et ceci équivaut} (\textit{si $I \neq \emptyset$}) \textit{à la condition que $f \in W$.} % [sic] des ces dérivateurs -> de ces dérivateurs, faute de frappe
+
+\msp{page 137}
+
+\textbf{Commentaire.} Dans cet énoncé récapitulatif de ce que je sais prouver à présent pour $\HOT_W$, j'ai un peu mélangé les provenances diverses – ce qui est mis “pour mémoire” de VI (et qui ne dépend pas de Loc\,(4, 7 ou 7\,bis)), \textit{i.e.} ce qui dépend pour l'essentiel de la construction de $u_!$ donnée dans VI (donc ce qui concerne $u_!$ dans 1$^{\circ}$, \textit{moins} l'exactitude à droite, et tout ce qui concerne 3$^{\circ}$, $(a)$, $(b)$).
+
+La démonstration de 10.1 résultera des développements du paragraphe suivant \texttt{[qui n'existe pas]}, compte tenu du résultat principal du paragraphe 8 (th. 8.4), et du paragraphe 7 (cor. 7.4), qui sont les ingrédients “durs” du théorème 10.1.
+\end{document}

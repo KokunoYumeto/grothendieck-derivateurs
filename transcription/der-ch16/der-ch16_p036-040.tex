@@ -8,6 +8,7 @@
 \usepackage{tikz-cd}
 \usepackage{enumitem}
 \usetikzlibrary{decorations.pathreplacing,babel}
+\usetikzlibrary{arrows.meta}
 
 \newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
 \newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
@@ -126,13 +127,30 @@ est une équivalence de catégories. Donc l'implication $\mathrm{B}\Longrightarr
 \noindent\msp{page 63}%
 4.4.14. Je résume les implications obtenues jusqu'à présent, y compris les implications conditionnelles, dans le diagramme récapitulatif suivant :
 \[
-\begin{tikzcd}[row sep=large, column sep=large]
-|[draw,circle,inner sep=1pt]| \mathrm{A} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{A}_{W_0} \arrow[d,Rightarrow] & \\
-\mathrm{B} \arrow[r,Rightarrow] \arrow[d,Rightarrow] \arrow[u, dotted, bend left=40, "\text{$W$ (1 ter, 3 bis)}"] & \mathrm{B}_{W_0} \arrow[d,Rightarrow] & \\
-\mathrm{C} \arrow[r,Rightarrow] \arrow[d,Rightarrow] & \mathrm{C}_{W_0} \arrow[d,Rightarrow] \arrow[uu, dotted, bend right=25, "\text{$W_0$ (7)}"'] & \\
-\mathrm{D} \arrow[r,Rightarrow] \arrow[dr, dotted, "\text{$W$ (8 bis)}"'] & \mathrm{D}_{W_0} \arrow[r, Rightarrow, "{\text{\begin{tabular}{@{}l@{}}N.B. on verra sur l'exemple de $\mathbf{W}_0$\\ que cette implication est \textit{stricte,}\\ même sous l'hypothèse\\ Loc (1 ter, 2 bis, 4, 5, 6 a, 8, 9).\end{tabular}}}"] \arrow[d, dotted, "\text{$W$ (8 bis) $+$ $W_0$ (8 bis)}"] \arrow[uuu, dotted, bend right=50, "\text{$W_0$ (8 bis)}"'] &[12em] \mathrm{F} \\
-& |[draw,circle,inner sep=1pt, label={right:{$\;,$}}]| \mathrm{A} &
-\end{tikzcd}
+\begin{tikzpicture}[baseline=(C.base),font=\small]
+\node[draw,circle,inner sep=1pt] (A) at (0,0) {$\mathrm A$};
+\node (AW) at (2,0) {$\mathrm A_{W_0}$};
+\node (B) at (0,-1.2) {$\mathrm B$};
+\node (BW) at (2,-1.2) {$\mathrm B_{W_0}$};
+\node (C) at (0,-2.4) {$\mathrm C$};
+\node (CW) at (2,-2.4) {$\mathrm C_{W_0}$};
+\node (D) at (0,-3.6) {$\mathrm D$};
+\node (DW) at (2,-3.6) {$\mathrm D_{W_0}$};
+\node (F) at (7.8,-3.6) {$\mathrm F$};
+\node[draw,circle,inner sep=1pt] (Ab) at (2,-4.8) {$\mathrm A$};
+\node[anchor=west] at (2.25,-4.8) {$\,,$};
+\foreach \p/\q in {A/AW,B/BW,C/CW,D/DW,A/B,B/C,C/D,AW/BW,BW/CW,CW/DW,DW/F}
+  \draw[double,double distance=1pt,-{Implies}] (\p) -- (\q);
+\draw[dotted,->] (B.west) to[out=145,in=215] node[left,font=\scriptsize] {$W$ (1 ter, 3 bis)} (A.west);
+\draw[dotted,->] (CW.east) to[out=70,in=-70] node[right,font=\scriptsize] {$W_0$ (7)} (AW.east);
+\draw[dotted,->] (DW.east) to[out=60,in=-40,looseness=1.45] node[right,font=\scriptsize] {$W_0$ (8 bis)} (AW.east);
+\draw[dotted,->] (D.south east) -- node[below left,font=\scriptsize] {$W$ (8 bis)} (Ab.north west);
+\draw[dotted,->] (DW) -- node[right,font=\scriptsize] {$W$ (8 bis) $+$ $W_0$ (8 bis)} (Ab);
+\node[anchor=south west,align=left,font=\scriptsize] at (3.4,-3.45) {N.B. on verra sur l'exemple de $\mathbf{W}_0$\\
+que cette implication est \textit{stricte,}\\
+même sous l'hypothèse\\
+Loc (1 ter, 2 bis, 4, 5, 6 a, 8, 9).};
+\end{tikzpicture}
 \]
 où j'ai cerclé la condition la plus forte et la plus importante de toutes, $\mathrm{A}=$ Loc (7), qui apparaît en deux extrémités opposées du diagramme.
 
