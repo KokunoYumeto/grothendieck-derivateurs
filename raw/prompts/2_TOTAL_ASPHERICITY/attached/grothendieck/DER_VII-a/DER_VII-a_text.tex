@@ -1,0 +1,1670 @@
+% macro conflict, first definition kept: \newcommand{\Ch}{\mathrm{Ch}}
+% macro conflict, first definition kept: \newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=0.4pt](c){\scriptsize #1};}
+% macro conflict, first definition kept: \newcommand{\Ty}{\underline{\mathrm{Ty}}}
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Fltr}{\operatorname{Fl}\operatorname{tr}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+\newcommand{\bD}{\boldsymbol{\Delta}}
+\newcommand{\iddots}{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu\raise4pt\hbox{.}\mkern2mu\raise7pt\hbox{.}\mkern1mu}}
+\newcommand{\Ch}{\underline{\mathrm{Ch}}}
+\newcommand{\uHom}{\underline{\mathrm{Hom}}}
+\newcommand{\uFl}{\underline{\mathrm{Fl}}}
+\newcommand{\opp}{\mathrm{opp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\uCh}{\underline{\mathrm{Ch}}}
+\newcommand{\Ty}{\mathrm{Ty}}
+\newcommand{\uTy}{\underline{\mathrm{Ty}}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\circled}[1]{\text{\textcircled{$\scriptstyle #1$}}}
+\newcommand{\ul}[1]{\underline{\mathrm{#1}}}
+\newcommand{\red}{\text{\upshape réd}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Cr}{\mathrm{Cr}}
+\newcommand{\lng}{\operatorname{long}}
+\newcommand{\card}{\operatorname{card}}
+\newcommand{\uTyp}{\underline{\mathrm{Typ}}}
+\newcommand{\ovalbox}[1]{\tikz[baseline=(X.base)]\node[draw,rounded corners=6pt,inner sep=2pt](X){#1};}
+\begin{document}
+% ---- from Der-ChVII-456_p001-005.tex
+% ===================== page 1 =====================
+\printedpage{}
+% head: (none; title page, no page number printed)
+
+\begin{center}
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\bigskip\bigskip
+
+\textbf{Chapitre VII}
+
+\medskip
+
+\textbf{Catégories de chemins (2)}
+\end{center}
+
+\newpage
+
+% ===================== page 2 =====================
+\printedpage{}
+% head: (none; no page number printed)
+
+Ce texte a été déchiffré et transcrit en \LaTeXe\ par M. Künzer. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Pour les quelques corrections évidentes, ou rares commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés. Un point d'interrogation entre crochets signifie que l'on n'est pas sûr du mot qui précède.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{[e-mail address removed]}
+
+\hfill G. Maltsiniotis\hspace*{3em}
+
+\newpage
+
+% ===================== page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 1}
+Comme le formalisme ‘simplifié’ des chemins que j'ai voulu dégager à la va-vite s'est révélé d'une lourdeur insupportable, de nature à le rendre quasiment inutilisable, je vais essayer de dégager un formalisme souple, collant à l'intuition, au prix seulement d'un effort conceptuel supplémentaire.
+
+\section*{1\quad Intervalles et leur variantes} % [sic] leur variantes -> leurs variantes, plural agreement
+
+On appelle \textit{catégorie intervalle standard} une catégorie définie par un ensemble ordonné, dont l'ensemble des élements est un intervalle d'entiers $[0,n]$ ($n\in\mathbf{N}$, on n'exclut pas le cas $n=0$, i.e. de la catégorie ponctuelle $\{0\}$) : % [sic] élements -> éléments, missing accent
+\[
+\Ob I=[0,n]\subseteq\mathbf{N},
+\]
+et satisfaisant l'hypothèse suivante :
+
+\begin{enumerate}
+\item[a)] pour toute paire de deux sommets consécutifs $i-1$, $i$ de $I$ ($1\leq i\leq n$), il y a une flèche qui les relie, donc soit $i\longrightarrow i+1$, soit $i\longleftarrow i+1$ \texttt{[plutôt} $i-1\longrightarrow i$\texttt{,} $i-1\longleftarrow i$\texttt{]} (cette flèche est notée $\underline{u}_i$,
+\[
+(i-1)\xrightarrow{\underline{u}_i}i\qquad\quad\text{ou}\qquad\quad(i-1)\xleftarrow{\underline{u}_i}i\ \ ).
+\]
+\item[b)] La catégorie $I$ est engendrée par l'ensemble de ses flèches $\underline{u}_i$ (appelées \textit{flèches de transition}).
+\end{enumerate}
+
+La flèche de transition est dite \textit{directe} si elle va de $i-1$ à $i$, \textit{rétrograde} dans le sens inverse. Si on affecte l'intervalle $[i-1,i]$ du signe $+$ ou $-$ suivant que $\underline{u}_i$ est directe ou rétrograde, on voit donc que les
+\msp{page 2}
+intervalles standard de longueur donnée $n$ correspondent biunivoquement aux systèmes de signes $+$ ou $-$ sur les $n$ intervalles de transition $[i-1,i]$ ($1\leq i\leq n$), il y en a donc $2^n$. Le sommet $0$ est l'\textit{origine} ou la \textit{source} de l'intervalle, le sommet $n$ l'\textit{extrémité} ou le \textit{but} de l'intervalle.
+
+Un intervalle standard est \textit{orienté,} du fait qu'on à la relation d'ordre \textit{total} naturelle sur l'ensemble de ses sommets, savoir celle des entiers dans $[0,n]$. Quand on parlera de la relation d'ordre sur $I$, qu'un sommet $i$ en \textit{‘précède’} ou \textit{‘suit’} un autre $j$ ($i\leq j$ ou $i\geq j$ respectivement), c'est de cette relation d'ordre qu'on voudra parler. Celle associée à la structure de catégorie ne sera jamais regardée comme une relation d'ordre. Il y a également une relation d'ordre total naturelle sur l'ensemble des flèches de transition $\underline{u}_i$ ($1\leq i\leq n$), donnée par la relation d'ordre des entiers $i$, $1\leq i\leq n$, qui les indexent. On dira qu'une flèche $i$ \texttt{[plutôt} $\underline{u}_i$\texttt{]} de transition \textit{précède} ou \textit{suit} une autre \texttt{[}$\underline{u}_j$\texttt{]}, ou qu'elle est \textit{successeur immédiat} ou \textit{prédécesseur immédiat} d'une autre (si $i=j+1$ ou $i=j-1$). % [sic] qu'on à -> qu'on a, verb; [sic] un sommet i en ‘précède’ -> un sommet i ‘précède’, superfluous "en"
+
+\newpage
+
+% ===================== page 4 =====================
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+Si on a un ensemble d'entiers
+\[
+E\subseteq\mathbf{Z},
+\]
+on considérera dans $E$ la relation d'équivalence engendrée par la relation entre deux éléments $(i,j)$ de $E$ : $j$ est successeur immédiat de $i$ \textit{dans} $\mathbf{Z}$ (i.e. $j=i+1$). Deux éléments distinct $i$, $j$ de $E$ sont congrus pour cette relation si et seulement si l'intervalle d'entiers qu'ils déterminent est $\subseteq E$, donc % [sic] distinct -> distincts, plural agreement
+\[
+\text{si } i<j,\ i \text{ et } j \text{ sont \textit{‘connectés’} dans } E \text{ si et seulement si } [i,j]\subseteq E.
+\]
+
+\msp{page 3}
+Quand on parlera des ‘composantes connexes’ de $E$, il s'agira toujours des classes suivant cette relation d'équivalence.
+
+Nous identifierons l'ensemble des flèches de transition $\Fltr(I)$ de $I$ à l'intervalle d'entiers $[1,n]$, donc à une partie de $\mathbf{Z}$. Si on a une partie $E\subseteq\Fltr(I)$, on y a donc la notion de flèches de transition ‘connectées’ dans $E$, et la notion de connexité pour $E$. Si $i<j$, $\underline{u}_i$ et $\underline{u}_j$ sont connectées si et seulement si toutes les flèches de transition intermédiaires entre $\underline{u}_i$ et $\underline{u}_j$ sont dans $E$. Et $E$ est connexe si et seulement s'il est soit vide, soit formée d'une suite de flèches de transition dont chacune est successeur immédiat de celle qui la précède, % [sic] soit formée -> soit formé, agreement with "il"
+\[
+E=\{\underline{u}_i,\underline{u}_{i+1}\ldots,\underline{u}_{i+l-1}\}, % [sic] \underline{u}_{i+1}\ldots -> \underline{u}_{i+1},\ldots, missing comma
+\]
+où $l$ est le cardinal de $E$. Une telle $E$ est appelée une \textit{chaîne} de flèches de transition, et $l$ est sa longueur. Une chaîne est dite \textit{composable} si le composé $\underline{u}_{i+l-1}\circ\cdots\circ\underline{u}_{i+1}\circ\underline{u}_i$ \texttt{[ou} $\underline{u}_i\circ\underline{u}_{i+1}\circ\ldots\circ\underline{u}_{i+l-1}$\texttt{]} a un sens, i.e. si elles sont toutes de même sens, soit directe, soit rétrograde.
+
+On désigne par $\Fltr^+(I)$, $\Fltr^-(I)$ l'ensemble des flèches de transition directes, ou rétrogrades, respectivement. Leurs composantes connexes ne sont autres que les chaînes composables maximales. Ainsi, les chaînes composables maximales forment une partition de l'ensemble des flèches de transition, en intervalles d'entiers mutuellement disjoints. Les chaînes forment elles-mêmes un ensemble totalement ordonné
+\[
+C_1,\ C_2,\ \ldots\ C_r\qquad\quad(1\leq r\leq n).
+\]
+L'entier $r$ s'appelle la \textit{‘longueur utile’} de l'intervalle
+\msp{page 4}
+$I$, c'est donc le cardinal de l'ensemble de ses chaînes composables maximales.
+
+Deux chaînes composables maximales \texttt{[consécutives]} sont toujours de signe opposé, si l'une est directe l'autre est rétrograde, et inversement. La première chaîne composable maximale $C_1$ (disons simplement \textit{‘chaîne structurale’}) a le même signe que $\underline{u}_1$; \texttt{[on]} dit que la \textit{direction initiale} de $I$ est directe, resp. rétrograde, s'il en est ainsi de $\underline{u}_1$, ou ce qui revient au même, de $C_1$. De même on définit la \textit{direction finale} de $I$ comme celle de $\underline{u}_n$, ou encore celle de $C_r$. Direction initiale et finale sont égales si la longueur utile $r$ est
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+impaire, inégales si elle est paire. (\textbf{NB} Ce n'est que pour $n=0$, i.e. quand $I=\{0\}$ est la catégorie ponctuelle, que direction initiale et direction finale ne sont pas définies.)
+
+Les chaînes composables correspondent aux sous-catégories pleines de $I$ qui sont isomorphes à une catégorie $\bDelta_i$ (où $i$ est la longueur de la chaîne). Notons que $\bDelta_i$ n'a pas d'autre automorphisme que l'identité, donc les chaînes maximales de longueur donnée $i\geq 1$ correspondent exactement aux foncteurs
+\[
+\bDelta_i\lhook\joinrel\longrightarrow\ I
+\]
+qui sont injectifs sur les sommets. Un tel foncteur est pleinement fidèle, et un monomorphisme. Ce foncteur définit une application strictement croissante ou strictement décroissante sur
+\msp{page 5}
+les sommets, suivant que la chaîne est directe ou rétrograde.
+
+Notons que tout simplexe type $\bDelta_i$, $i\geq 0$, peut être vu comme un intervalle, de longueur $i$, de longueur utile $1$ (si $i\geq 1$, $0$ si $i=0$). Son origine est $0$, son extrémité est $i$. Mais appelons une catégorie quelconque une \textit{catégorie intervalle} si elle est isomorphe à un intervalle standard. Notons ici
+
+\textbf{Proposition 1.} \textit{Soit $I$ un intervalle standard de longueur $n\geq 1$.}
+
+\begin{enumerate}
+\item[\textit{a)}] \textit{Soit $i\in I$. Pour que $i\in\{0,n\}$, i.e. pour que $i$ soit un des deux} ‘bouts’ \textit{(ou} ‘extrémités’\textit{) (source ou but) de $I$, il faut et il suffit que l'une des deux catégories $I/i$ ou $i\backslash I$ soit la catégorie ponctuelle et que l'autre soit isomorphe à un} $\bDelta_j$ (\footnote{où $j$ est la longueur de l'unique chaîne structurale qui ‘touche’ $i$ (i.e. telle que $i$ soit dans la sous-catégorie pleine définie par ladite chaîne).}). \textit{(Caractérisation intrinsèque des bouts d'un intervalle.) Pour que $i$ soit la source, il faut et il suffit que $i\backslash I$} \texttt{[phrase incomplète]}
+\item[\textit{b)}] \textit{Tout foncteur $I\longrightarrow I$ qui fixe les deux extrémités de $I$ est l'identité.}
+\end{enumerate}
+
+\textbf{Corollaire.} \textit{Le groupe des automorphismes de $I$ a au plus deux éléments. S'il en a deux, l'automorphisme non trivial échange les deux extrémités. (On dit alors que l'intervalle est} symétrique.\textit{)}
+
+\msp{page 6}
+NB Si $i$ n'est pas un bout, et si néanmoins l'une des deux catégories $i\backslash I$, $I/i$ est ponctuelle, disons $I/i$, alors au voisinage immédiat de $i$, $I$ a la forme
+\[
+\begin{tikzcd}[row sep=0pt]
+\bullet & \bullet \arrow[l, "\underline{u}_i"'] \arrow[r, "\underline{u}_{i+1}"] & \bullet \\
+i-1 & i & i+1
+\end{tikzcd}
+\]
+($\underline{u}_i$ rétrograde, $\underline{u}_{i+1}$ directe - si c'était $i\backslash I$ la ponctuelle, alors $\underline{u}_i$ serait directe, $\underline{u}_{i+1}$ rétrograde - en tous les cas ces deux flèches sont de sens opposé, i.e. non composables). On trouve donc que $i\backslash I$ est une catégorie de la forme
+
+% ---- from Der-ChVII-456_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & & & i \arrow[dl] \arrow[dr] & & & \\
+ & & i-1 & & i+1 & & \\
+ & \iddots \arrow[dl] & & & & \ddots \arrow[dr] & \\
+ i-r & & & & & & i+r, % [sic] i+r -> i+s, s est la longueur de la chaîne contenant u_{i+1}
+\end{tikzcd}
+\]
+
+où $r$ est la longueur de la chaîne structurale contenant $\underline{u}_i$, $s$ celle de la chaîne structurale contenant $\underline{u}_{i+1}$. Cette catégorie est une somme amalgamée $\bD_r \amalg \bD_s$ (recollées suivant leur origine), mais n'est pas isomorphe à une $\bD_j$, p.~ex. faute d'avoir un objet final.
+
+Cette observation prouve a). Pour prouver b), il suffit de prouver que l'ordre total sur $I$ est déterminé de façon intrinsèque, par le choix de \textit{l'origine} $s_0$ de $I$ (parmi ces % [sic] ces -> ses, possessif
+deux extrémités). Supposons que l'on ait déjà déterminé intrinsèquement les sommets $s_0$, $s_1$, $\ldots$, $s_i$ ($i \geq 0$). Comment déterminer $s_{i+1}$? (Quand $i < n$.) Soit $I'$ la sous-catégorie pleine de $I$
+\msp{page 7}
+formée des $j \in I$ qui ne sont pas parmi les $s_j$ \texttt{[plutôt} $s_k$\texttt{]} déjà construits, sauf le dernier $s_i$ (donc $s_i \in I'$, $\operatorname{card} I' \geq 2$). Alors $I'$ est isomorphe à un intervalle standard, avec $s_i$ correspondant à l'origine. Une des catégories $i\backslash I$, $I/i$ est ponctuelle, l'autre isomorphe à une catégorie $\bD_j$, et de plus, $i$ est objet initial ou final de $\bD_j$. Si c'est l'objet initial $0$, on prend pour $s_{i+1}$ le successeur immédiat de $i$ dans $\bD_j$. Si c'est l'objet final $j$, on prend pour $s_{i+1}$ le prédécesseur immédiat $j-1$.
+
+Si on était parti du but $n$ de $I$, au lieu de partir de la source, on aurait trouvé la relation d'ordre total opposée. Affectant l'élément but du numéro d'ordre $0$, on trouve une renumération de $I$, $i$ devenant $n-i$, et les flèches de transition qui étaient directes pour la relation d'ordre initiale, deviennent rétrogrades dans la relation d'ordre opposée, et inversement. On voit ainsi :
+
+\textbf{Proposition 2.} \textit{Si $I$ est un intervalle standard, il existe un unique couple $(I',\theta)$, où $I'$ est un intervalle standard, et $\theta$ un isomorphisme $I \xrightarrow{\sim} I'$ qui transforme le but de $I$ dans la source de $I'$ (et la source de $I$ en le but de $I'$).}
+
+Cet intervalle $I'$ est appelé l'intervalle \textit{opposé} de $I$. Il faut le voir, intrinsèquement, comme la `même' categorie $I$, % [sic] categorie -> catégorie, accent manquant
+mais avec une `orientation' opposée.
+
+\msp{page 8}
+
+Une façon plus claire de voir ceci est la suivante. Soit $J$ une catégorie intervalle, i.e. isomorphe à un intervalle standard. Alors il y a exactement (si $I \not\simeq e$) \textit{deux} couples $(I,\theta)$ d'un intervalle standard $I$ et d'un isomorphisme $\theta : I \xrightarrow{\sim} J$. Ces deux isomorphismes induisent sur $J$ deux ordres totaux, opposés l'un de l'autre. Chaque couple est déterminé de façon unique par ledit ordre total, qu'on appelera % [sic] appelera -> appellera, orthographe
+une \textit{orientation} de l'intervalle $J$. Ainsi $J$ a deux orientations, et chacune détermine un \textit{isomorphisme orienté} (i.e. respectant
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+les orientations) de $J$ avec un intervalle standard (\footnote[2]{\textbf{NB} On parlera de l'intervalle \textit{orienté opposé} $I^{\mathrm{opp}}$ d'un intervalle \textit{orienté} $I$, qu'il faut se garder de confondre avec la catégorie opposée $I^o$. Ici $I^{\mathrm{opp}}$ a même catégorie sous-jacente que $I$, mais avec une orientation opposée.}). Ces deux intervalles sont les mêmes si et seulement s'il existe un automorphisme de $J$ (nécessairement unique) qui échange ses deux orientations, ou ce qui revient au même, qui échange entre elles les deux extrémités. (Ainsi les catégories opposées l'une de l'autre
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & \bullet \arrow[dl] \arrow[dr] & & & & \bullet & \\
+ \bullet & & \bullet & & \bullet \arrow[ur] & & \bullet \arrow[ul]
+\end{tikzcd}
+\]
+sont chacunes % [sic] chacunes -> chacune, orthographe
+des intervalles symétriques.) Choisir une orientation revient aussi `a % [sic] `a -> à, accent imprimé comme guillemet
+choisir l'origine parmi les deux extrémités.
+
+Notons que la \textit{catégorie opposée} à un intervalle est un intervalle, et la catégorie opposée à un intervalle standard est l'intervalle standard qui s'en déduit en changeant tous les signes sur les intervalles de transition $[i-1,i]$ ($1 \leq i \leq n$). On se gardera de confondre la propriété $I \simeq I^o$, avec la propriété de symétrie.
+
+\msp{page 9}
+
+Ainsi les deux catégories ($\Psi_1$ et $\Phi_1$) ci-dessus sont symétriques, mais opposées l'une de l'autre sans être isomorphes. D'autre part, les $\bD_i$ ne sont pas symétriques, mais chacune isomorphe à la catégorie opposée.
+
+Si $I$ est isomorphe à la catégorie opposée $I^o$, et si $\theta$ est un tel isomorphisme (nécessairement unique), alors il est immédiat que $\theta$ renverse l'orientation (sinon ce serait l'identité sur les sommets, et les flèches de transition seraient à la fois directes et indirectes), donc $\theta(0) = n$, $\theta(1) = n-1$, et on veut que $\underline{u}_1$ et $\underline{u}_n$ sont de même signe. Mais si $I$ est symétrique, $\underline{u}_1$ et $\underline{u}_n$ sont de signe opposé. Donc $I$ ne peut être à la fois symétrique et isomorphe à l'intervalle opposé \texttt{[plutôt à la catégorie opposée; exception :} $I = \{0\}$\texttt{]}.
+
+Pour toute catégorie $\bD_i$, celle-ci étant un intervalle, il y a (si $i > 0$) \textit{deux orientations.} En tant qu'intervalles orientés, il y a $\bD_i^+$ (avec l'orientation ordinaire, donné par l'ordre ordinaire sur $\operatorname{Ob} \bD_i = [0,i]$), et $\bD_i^-$ avec l'orientation opposée.
+
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 10}
+
+\section*{2\quad Sous-catégories pleines d'un intervalle}
+
+Soit $I$ une catégorie intervalle orientée, de longueur $n \geq 1$. Nous identifierons $\operatorname{Ob} I$ à l'ensemble des entiers $[0,n]$. Pour une chaîne $\underline{u}_i$, $\underline{u}_{i+1}$, $\ldots$, $\underline{u}_{i+l-1}$ de flèches de transition dans $I$, on appelle \textit{domaine} de la chaîne, l'ensemble des sources et de buts de ces éléments. C'est donc un intervalle d'entiers $[i-1, i+l-1]$, de longueur $l$ égale à celle de la chaîne, dont l'origine est déterminé % [sic] déterminé -> déterminée, accord avec l'origine
+par la première flèche $\underline{u}_i$ de la chaîne (c'est sa source, si $\underline{u}_i$ est directe, et son but si $\underline{u}_i$ est rétrograde), et dont l'extrémité est déterminée par la dernière $\underline{u}_{i+l-1}$. Les intervalles d'entiers (vus comme des sommets de $I$) correspondant aux chaînes structurales sont appelés les \textit{intervalles structuraux} ou \textit{intervalles critiques} de $I$. Contrairement aux chaînes structurales, ces intervalles ne forment pas une partition de $I$, puisque deux intervalles structuraux peuvent avoir une extrémité commune. Si les chaînes structurales sont
+\[
+C_1,\ C_2,\ \ldots\ ,\ C_r \qquad (r = \text{ longueur utile de } I)
+\]
+de longueurs
+\[
+l_1,\ l_2,\ \ldots\ ,\ l_r,
+\]
+alors les intervalles structuraux sont
+\[
+\underbrace{[0,l_1]}_{I_1},\ \underbrace{[l_1,l_1+l_2]}_{I_2},\ \ldots\ ,\ \underbrace{[l_1+\cdots+l_{r-1},l_1+\cdots+l_{r-1}+l_r]}_{I_r},
+\]
+une suite d'intervalles d'entiers dont deux consécutifs ont une extrémité commune, et tels que si $i < j$, chaque élément de $I$ % [sic] I -> I_i, comparaison des éléments de I_i et de I_j
+soit $\leq$ chaque élément de $I_j$. On appelle \textit{sommet critique} de $I$ les extrémités des intervalles structuraux.
+
+\textbf{Proposition 3.} \textit{Soit $s \in I$, soit $I' = I/s$ (sous-catégorie pleine de $I$ des $s'$ tels qu'il existe $s' \longrightarrow s$), $I'' = I/s$ \textup{\texttt{[plutôt} $I'' = s\backslash I$\texttt{]}}, $I'_0 = (I/s)\backslash\{s\}$, $I''_0 = (s\backslash I)\backslash\{s\}$} (\footnote[3]{i.e. qu'on ait : il n'y a pas de flèches entre un élément de $I'_0$ et un élément de $I''_0$.}). Pour que $s$ soit critique, il faut et il suffit que $I\backslash\{s\}$ soit catégorie somme de $I'_0$ et $I''_0$.
+
+\msp{page 11}
+
+\textbf{Proposition 4.} \textit{Soient $i,j$ dans $I$, avec $i < j$. Conditions équivalentes :}
+\begin{enumerate}
+\item[\textit{a)}] \textit{Il existe une flèche entre $i$ et $j$ (soit $i \longrightarrow j$, soit $j \longrightarrow i$).}
+\item[\textit{b)}] \textit{$i$ et $j$ appartiennent à un même intervalle structural (nécessairement unique).}
+\item[\textit{c)}] \textit{La sous-catégorie pleine de $I$ définie par l'ensemble d'objets $[i,j]$ est isomorphe à une $\bD_\alpha$ (on aura $\alpha = j-i$).}
+\end{enumerate}
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+On dira alors que $i$ et $j$ sont \textit{directement connectés} dans $I$. (Et on utilisera la même terminologie dans une catégorie quelconque : $i$ et $j$ sont directement connectés si et seulement si $\operatorname{Hom}_I(i,j)$ \textit{ou} $\operatorname{Hom}_I(j,i)$ est non vide.)
+
+\textbf{Proposition 5.} \textit{Soit $J \subseteq I$ une partie de $I$, considérons la sous-catégorie pleine de $I$ qu'elle définit. Alors :}
+\begin{enumerate}
+\item[\textit{a)}] \textit{Les composantes connexes $J_\alpha$ de $J$ sont des intervalles et l'ordre induit sur un $J_\alpha$ par celui de $I$ est une orientation (dite \textup{orientation induite}) de $J_\alpha$.}
+\item[\textit{b)}] \textit{Supposons $\operatorname{card} J > 1$. Soit $i$ le plus petit élément de $J$, $j$ le plus grand élément, donc $i < j$. Pour que $J$ lui-même soit un intervalle, il faut et il suffit que tout sommet critique dans $[i,j]$ soit élément de $J$.}
+\end{enumerate}
+
+(\footnote[4]{On appelle \textit{sous-intervalle} de $I$ une sous-categorie % [sic] sous-categorie -> sous-catégorie, accent manquant
+pleine connexe, i.e. qui est elle-même un intervalle. Notons d'ailleurs que \textit{toute} sous-catégorie $I'$ de $I$ qui est un intervalle, est nécessairement pleine, cf. plus bas \texttt{[paragraphe]} des foncteurs entre intervalles.}).
+
+\textbf{NB} Si $s \in [i,j]$ est un sommet critique de $I$ qui n'est pas dans $J$, alors par la proposition 3 il disconnecterait $J$, i.e. $J$ serait somme directe de deux sous-catégories $J'$ et $J''$ non vides ($i \in J'$, $j \in J''$), donc $J$ ne serait pas un intervalle.
+
+\msp{page 12}
+
+\textbf{Corollaire.} \textit{L'ensemble des sommets critiques de $I$ est aussi l'ensemble des sommets du plus petit sous-intervalle de $I$ contenant les extrémités. Plus généralement, si $i < j$ sont deux sommets de $I$, le plus petit sous-intervalle de $I$ contenant $i$, $j$ est formé de $i$, $j$ et des sommets critiques $s$ tels que $i < s < j$.}
+
+\textbf{Définition.} Un intervalle est dit \textit{réduit} (ou \textit{irrédondant}) si tous ses sommets sont critiques, ou ce qui revient au même, si ses chaînes structurales sont de longueur 1.
+
+Un intervalle orienté \textit{réduit} est connu, à isomorphisme près, quand on connaît
+\begin{enumerate}
+\item[a)] sa longueur $\mathrm{n}$,
+\item[b)] sa direction initiale $+$ (directe) ou $-$ (rétrograde).
+\end{enumerate}
+
+\textbf{NB} Cette direction est la même que la direction finale si $n$ est impair, elle est opposée si $n$ est pair.
+
+Ainsi, suivant les deux cas de direction initiale, on trouve
+\[
+\begin{aligned}
+0 \longrightarrow 1 \longleftarrow 2 \longrightarrow \cdots \qquad\qquad \cdots\ n & \qquad (\text{Avec } & n-1 \longrightarrow n & \quad \text{si } n \text{ impair,}\\
+& & n-1 \longleftarrow n & \quad \text{si } n \text{ pair.)}\\
+0 \longleftarrow 1 \longrightarrow 2 \longleftarrow \cdots \qquad\qquad \cdots\ n & \qquad (\text{Avec } & n-1 \longleftarrow n & \quad \text{si } n \text{ impair,}\\
+& & n-1 \longrightarrow n & \quad \text{si } n \text{ pair.)}
+\end{aligned}
+\]
+
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\textbf{Proposition 6.} \textit{Un sous-intervalle $J$, ayant $i$ et $j$ ($i < j$) comme plus petit et plus grand sommet, est réduit si et seulement si tout $s \in J$ distinct de $i$ et de $j$ est critique.}
+
+\textbf{Corollaire.} \textit{La sous-catégorie pleine de $I$ formée des sommets critiques est un sous-intervalle. On l'appelle l'intervalle réduit associé à $I$, noté $I_{\textup{réd}}$.}
+
+% ---- from Der-ChVII-456_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 13}
+
+\section*{3\quad Chemins. Catégorie de chemins d'un type donné $\tau$.}
+
+Soient $I$ un intervalle orienté, et $X$ une catégorie. On appelle \textit{chemin de type $I$ dans $X$} tout foncteur $I \longrightarrow X$, et \textit{catégorie de chemins de type $I$ dans $X$} la catégorie
+\[
+\Ch_I(X) = \uHom(I,X).
+\]
+Comme $I$ est \textit{canoniquement} isomorphe à une catégorie intervalle standard $I_0$, on peut identifier les chemins de type $I$, au de type $I_0$. Le type $\tau$ d'un chemin le longueur $n$ $(= \operatorname{card} I)$ dans $X$ peut donc être décrit par une suite de $n$ signes $+$ ou $-$ % [sic] au de type -> à ceux de type, word(s) missing; [sic] le longueur -> de longueur, wrong preposition
+\[
+\tau_1,\ \tau_2,\ \dots\ ,\ \tau_n \qquad (\tau_i \in \{-1,+1\} \text{ pour } 1 \leq i \leq n).
+\]
+À cause du fait que $I$ est engendré pas ses flèches de transition, un foncteur $c : I \longrightarrow X$ est déterminé quand on connaît % [sic] pas ses flèches -> par ses flèches, misprint
+
+\begin{enumerate}
+\item[a)] Les $c(i)$ $(i \in I)$, i.e. une suite de $n+1$ objets de $X$ :
+\[
+a_0,\ a_1,\ \dots\ ,\ a_n\ (\text{\footnotemark[5]});
+\]
+\footnotetext[5]{$a_0$ est dit la \textit{source} du chemin, $a_n$ son but.}
+
+\item[b)] Les $c(\underline{u}_i)$ (où les $\underline{u}_i$ sont les flèches de transition dans $I$), i.e. pour tout $i \in [1,n]$ une flèche $u_i$ dans $X$ entre $a_{i-1}$ et $a_i$, allant de $a_{i-1}$ dans $a_i$ si $\underline{u}_i$ est directe $(\tau_i = +1)$, et de $a_i$ dans $a_{i-1}$ si $\underline{u}_i$ est rétrograde $(\tau_i = -1)$,
+\end{enumerate}
+
+et à toute telle donnée a), b) correspond un foncteur. Ainsi on pourra identifier les chemins de type $I$ \msp{page 14} dans $X$ aux diagrammes du type précisé dans $X$. Et les morphismes entre chemins correspondent de même aux morphismes entre diagrammes $a$ et $a'$, une flèche $a \xrightarrow{\alpha} a'$ étant donc une suite de $n+1$ flèches
+\[
+\alpha_i : a_i \longrightarrow a'_i, \qquad i \in [0,n],
+\]
+satisfaisant la condition de commutativité pour les $n$ carrés
+\[
+\begin{tikzcd}
+a_{i-1} \arrow[r, "u_i"] \arrow[d, "\alpha_{i-1}"'] & a_i \arrow[d, "\alpha_i"] \\
+a'_{i-1} \arrow[r, "u'_i"] & a'_i
+\end{tikzcd}
+\qquad\qquad \text{(cas $\underline{u}_i$ directe)}
+\]
+
+\printedpage{10}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+ou
+\[
+\begin{tikzcd}
+a_{i-1} \arrow[d, "\alpha_{i-1}"'] & a_i \arrow[l, "u_i"'] \arrow[d, "\alpha_i"] \\
+a'_{i-1} & a'_i. \arrow[l, "u'_i"']
+\end{tikzcd}
+\qquad\qquad \text{(cas $\underline{u}_i$ rétrograde)}
+\]
+Si on a une flèche entre deux sommets quelconque $i$, $j$ dans $I$, avec $i < j$ et $j$ non successeur immédiat de $i$, alors $i$, $j$ appartiennent à un même intervalle critique, et dans $I$ on aura % [sic] quelconque -> quelconques, agreement
+\[
+i \xrightarrow{\underline{u}_{i+1}} i+1 \xrightarrow{\underline{u}_{i+2}}\ \cdots\ j-1 \xrightarrow{\underline{u}_j} j \qquad \text{une chaîne de longueur } j-i \geq 2 % ?? uncertain: underline under the arrow labels u -- \underline{u} or plain u
+\]
+ou
+\[
+i \longleftarrow i+1 \longleftarrow\ \ \cdots\ j-1 \longleftarrow j,
+\]
+et la flèche correspondante entre $a_i$ et $a_j$ s'obtient en composant les flèches $u_i$ correspondantes.
+
+\msp{page 15}
+
+\textbf{Exemples.}
+
+\begin{enumerate}
+\item[1.] $I = \bDelta_0 = e$, $\Ch_I(X) \simeq X$. Les chemins de longueur 0 s'identifient aux objets $a$ de $X$. L'unique élément $\mathrm{id}_e$ de $\mathrm{Fl}(I)$ donne $\mathrm{id}_a$ dans $X$.
+
+\item[2.] $I = \bDelta_1^+$, $\Ch_I(X) \simeq \uFl(X)$. Les chemins de type $\bDelta_1^+$ sont ceux de longueur 1 et \textit{directs,} i.e. donnés par une flèche
+\[
+a_0 \longrightarrow a_1
+\]
+dont la source est aussi la source $a_0$ du chemin. Par contre, les chemins de type $\bDelta_1^-$ sont donnés par des diagrammes
+\[
+a_0 \longleftarrow a_1,
+\]
+i.e. par des flèches dont le but est considéré comme source du chemin. Bien sûr, les catégories $\Ch_{\bDelta_1^+}(X)$ et $\Ch_{\bDelta_1^-}(X)$ sont canoniquement isomorphes, mais par un isomorphisme qui \textit{échange source et but du chemin.} Nous nous garderons donc bien de confondre les deux chemins précédents.
+
+\msp{page 16}
+
+\item[3.] $\bDelta_2^+$, $\bDelta_2^-$, correspondant aux diagrammes
+\[
+a_0 \longrightarrow a_1 \longrightarrow a_2
+\]
+resp.
+\[
+a_0 \longleftarrow a_1 \longleftarrow a_2,
+\]
+on peut faire une remarque similaire que pour $\bDelta_1^+$, $\bDelta_1^-$.
+
+\printedpage{11}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\item[4.] $\Phi_1$, $\Psi_1$, ce sont respectivement les intervalles
+\[
+\Phi_1 :\ 0 \xleftarrow{\underline{u}_0} 1 \xrightarrow{\underline{u}_1} 2 \qquad\qquad \text{ou} \qquad\qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 0 \\
+1 \arrow[ur] \arrow[dr] & \\
+ & 2
+\end{tikzcd}
+\qquad , % ?? uncertain: underline under the arrow labels u_0, u_1 -- \underline{u} or plain u
+\]
+et
+\[
+\Psi_1 :\ 0 \xrightarrow{\underline{u}_0} 1 \xleftarrow{\underline{u}_1} 2 \qquad\qquad \text{ou} \qquad\qquad
+\begin{tikzcd}[row sep=small, column sep=small]
+ & 0 \arrow[dl] \\
+1 & \\
+ & 2 \arrow[ul]
+\end{tikzcd}
+\qquad .
+\]
+Ils correspondent respectivement aux diagrammes
+\[
+a_0 \xleftarrow{u_0} a_1 \xrightarrow{u_1} a_2
+\]
+et
+\[
+a_0 \longrightarrow a_1 \longleftarrow a_2.
+\]
+Les catégories $\Phi_1$, $\Psi_1$ sont opposées l'une de l'autre, et ne sont pas isomorphes. Aussi n'y a-t-il en général aucun isomorphisme entre $\Ch_{\Phi_1}(X)$ et $\Ch_{\Psi_1}(X)$.
+\end{enumerate}
+
+Soit $I$ un intervalle orienté, et considérons l'\textit{intervalle opposé $I^{\opp}$}, ayant même catégorie sous-jacente mais l'orientation opposé. Comme la définition de la catégorie des chemins du type $I$ ne fait pas intervenir l'orientation de $I$, on a donc un isomorphisme canonique % [sic] l'orientation opposé -> l'orientation opposée, agreement
+\[
+\Ch_I(X) \xrightarrow{\sim} \Ch_{I^{\opp}}(X).
+\]
+
+\msp{page 17}
+
+Néanmoins on se gardera de confondre un chemin de type $I$ avec le chemin opposé de type $I^{\opp}$, la source de l'un étant le but de l'autre et inversement. C'est dire qu'un chemin doit être vu comme \textit{plus} qu'un simple foncteur
+\[
+I \longrightarrow X,
+\]
+il faut de plus se donner l'\textit{orientation de $I$} comme faisant partie de la structure de chemin. Donc la définition formelle raisonnable, qui colle à l'intuition du chemin comme allant d'une \textit{source} bien définie vers un \textit{but} également bien défini, c'est qu'un chemin (défini en termes d'une catégorie intervalle $I$) est la donné d'un couple $(\omega,c)$, où $\omega$ est une orientation de $I$, et $c$ un foncteur $c : I \longrightarrow X$. Quand on regarde la catégorie des chemins d'un `type' déterminé, ce \textit{type} est $(I,\omega)$, et non $I$. C'est quand $\omega$ est fixé une bonne fois que cette catégorie s'identifie impunément à $\uHom(I,X)$ sans plus. % [sic] la donné -> la donnée, missing final e
+
+Il faut voir cette catégorie de chemins comme munie de la structure essentielle
+\[
+\begin{tikzcd}
+\Ch_{(I,\omega)}(X) \arrow[d, "{(\sigma,\beta)}"] \\
+X \times X
+\end{tikzcd}
+\qquad
+\begin{array}{l}
+c \longmapsto (\sigma(c),\beta(c)) \\
+\text{ou $\sigma(c)$ est la \textit{source,}} \\
+\qquad \text{$\beta(c)$ le \textit{but} de $c$.}
+\end{array} % [sic] ou sigma(c) -> où sigma(c), missing accent
+\]
+
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 18}
+
+Ce foncteur s'identifie au foncteur de composition
+\[
+c \longmapsto c \circ \alpha
+\]
+où $\alpha$ est le foncteur d'inclusion
+\[
+\left\{
+\begin{array}{lll}
+\varepsilon \xrightarrow{\alpha} I & & \\[1ex]
+\varepsilon = \{0,1\}, & \multicolumn{2}{l}{\text{catégorie discrète à deux éléments,}} \\[1ex]
+\alpha \text{ donné par} & \alpha(0) = & \text{source de } I \\[1ex]
+ & \alpha(1) = & \text{but de } I.
+\end{array}
+\right.
+\]
+Si $\omega'$ est l'orientation opposée de $I$, on a un diagramme commutatif
+\[
+\begin{tikzcd}
+\Ch_{(I,\omega)}(X) \arrow[r, "\varphi", "\sim"'] \arrow[d, "{(\sigma,\beta)}"] & \Ch_{(I,\omega')}(X) \arrow[d, "{(\sigma',\beta')}"] \\
+X \times X \arrow[r, "s"] & X \times X,
+\end{tikzcd}
+\]
+où $s$ est le foncteur de symétrie
+\[
+s(x,y) = (y,x)
+\]
+(\footnote[6]{Le foncteur $\varphi$ est celui qui associe à tout chemin $c$, de type $\tau$, le \textit{chemin opposé $c^{\opp}$} ou $c^{-1}$, de type $\tau^{\opp}$. Si $\tau = \tau^{\opp}$, c'est donc un chemin \textit{de même type,} et $\varphi$ est un \textit{automorphisme} de $\Ch_\tau(X)$. Cet automorphisme (fonctoriel en $X$) est déduit d'un automorphisme $\theta$ de $I$, cf. ci-dessous.}). Donc l'isomorphisme $\varphi$ ne respecte pas les flèches structurales `source-but' $(\sigma,\beta)$.
+
+Il y a cependant un embarras quand il existe un isomorphisme d'intervalles \textit{orientés}
+\[
+\theta : (I,\omega) \xrightarrow{\sim} (I,\omega'),
+\]
+i.e. quand $I$ est symétrique. Ce n'est pas le cas pour les $\bDelta_i$ $(i \geq 1)$ (ces catégories n'ont pas d'autres automorphismes que l'identité), mais c'est le cas pour les catégories $\Phi_1$, $\Psi_1$ de l'exemple $4^o$, plus généralement \msp{page 19} pour les catégories réduites de longueur \textit{paire.} Comme chaque fois qu'on a un isomorphisme $\theta$ d'intervalles \textit{orientés,} on trouve un isomorphisme entre les catégories de chemins de type $(I,\omega)$ et $(I,\omega)^{\opp} = (I,\omega')$, \textit{compatible} cette fois avec les foncteurs $(\sigma,\beta)$ :
+\[
+\begin{tikzcd}
+\Ch_{(I,\omega)}(X) \arrow[rr, "\Psi_\theta", "\sim"'] \arrow[dr, "{(\sigma,\beta)}"'] & & \Ch_{(I,\omega')}(X) \arrow[dl, "{(\sigma',\beta')}"] \\
+ & X \times X. &
+\end{tikzcd}
+\]
+
+\printedpage{13}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 20}
+
+Il est bon de regarder un \textit{type} de chemins comme une donné non catégorique, mais combinatoire, une simple suite $\tau$ de $n$ signes $\tau_i$ $(1 \leq i \leq n)$ $+$ ou $-$ ($n =$ longueur des chemins envisagés). Cette donné combinatoire définit un intervalle orienté standard, $I_\tau$. Quand on a un intervalle orienté quelconque $(I,\omega)$, il définit un type $\tau$, et on l'identifie canoniquement au type $I_\tau$. Il vaut mieux écrire $\Ch_\tau(X)$, plutôt que $\Ch_{(I,\omega)}(X)$, pour bien indiquer que pour $X$ donné, c'est là une catégorie totalement `épinglée', sans automorphismes liés à la nature particulière de $\tau$ (à des automorphismes de $\tau$!). % [sic] une donné -> une donnée, missing final e; [sic] Cette donné -> Cette donnée, missing final e
+
+On peut préciser ce point ainsi. Soit $\tau'$ un autre type d'intervalles, et proposons-nous de déterminer des `lois' qui permettent à tout chemin de type $\tau$ dans une catégorie arbitraire $X$, d'associer un chemin de type $\tau'$ de cette même catégorie, et ceci de façon `fonctorielle', i.e. compatible avec les applications horizontales
+\[
+\begin{tikzcd}
+\mathrm{Ch}_\tau(X) \arrow[r, "\mathrm{Ch}_\tau(f)"] \arrow[d, "L_X"'] & \mathrm{Ch}_\tau(X') \arrow[d, "L_{X'}"] \\
+\mathrm{Ch}_{\tau'}(X) \arrow[r, "\mathrm{Ch}_{\tau'}(f)"] & \mathrm{Ch}_{\tau'}(X')
+\end{tikzcd}
+\]
+associées à un foncteur $f : X \longrightarrow X'$.
+
+\msp{page 21}
+
+Par exemple, prenant le type $\bDelta_2^+$ (i.e. $+1,+1$), correspondant aux chemins
+\[
+a_0 \xrightarrow{u_1} a_1 \xrightarrow{u_2} a_2,
+\]
+on peut associer à un tel chemin le chemin de type \texttt{[}$\bDelta_1^+$\texttt{]}
+\[
+a_0 \xrightarrow{u_2u_1} a_2,
+\]
+ou aussi le chemin de type $\bDelta_2^+$
+\[
+a_0 \xrightarrow{u_2u_1} a_2 \xrightarrow{\mathrm{id}} a_2,
+\]
+etc. Comme le foncteur
+\[
+\left\{
+\begin{array}{cccl}
+X & \longmapsto & \mathrm{Ch}_\tau(X) & \qquad (= \mathrm{Ob}\, \Ch_\tau(X)) \\[1ex]
+\mathrm{Cat} & \longrightarrow & (\mathrm{Ens}) &
+\end{array}
+\right.
+\]
+est \textit{représenté} par l'objet $I_\tau$ de $X$ \texttt{[plutôt de} Cat\texttt{]}, le sorite des foncteurs représentables nous dit que de telles lois de formation de chemins de type $\tau$ à partir des chemins de type $\tau'$ \texttt{[plutôt} $\tau'$ \texttt{à partir des chemins de type} $\tau$\texttt{]} correspondent biunivoquement aux flèches dans Cat
+\[
+I_{\tau'} \xrightarrow{\varphi} I_\tau\ ,
+\]
+
+% ---- from Der-ChVII-456_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+en prenant simplement la ‘loi’ correspondante à $\varphi$
+\[
+c \longmapsto c\circ\varphi \qquad \text{pour } c : I_\tau \longrightarrow X.
+\]
+De façon plus précise, l'application naturelle
+\[
+\underbrace{\Hom_{\Cat}(I_{\tau'},I_\tau)}_{=\mathrm{Ob}\,\uHom(I_{\tau'},I_\tau)} \longrightarrow \Hom(\Ch_\tau,\Ch_{\tau'}),
+\]
+\msp{page 22}
+où le deuxième Hom est considéré comme un Hom d'objets dans $\Cat^{\vee}=\uHom(\Cat,\mathrm{Ens})$. Ainsi, dans les deux exemples plus haut, où $\tau=\bDelta_2^+$ et $\tau'=\bDelta_1^+$ ou $\bDelta_2^+$, les foncteurs en sens inverse sont
+\[
+\begin{tikzcd}
+\bDelta_2^+\ \Big\{ & 0 \arrow[r] & 1 \arrow[r] & 2 \\
+\bDelta_1^+\ \Big\{ & 0 \arrow[u, mapsto] \arrow[rr] & & 1 \arrow[u, mapsto]
+\end{tikzcd}
+\]
+et
+\[
+\begin{tikzcd}
+\bDelta_2^+\ \Big\{ & 0 \arrow[r] & 1 \arrow[r] & 2 \\
+\bDelta_2^+\ \Big\{ & 0 \arrow[u, mapsto] \arrow[r] & 1 \arrow[ur, mapsto] \arrow[r] & 2\,. \arrow[u, mapsto]
+\end{tikzcd}
+\]
+C'est là un principe général pour ramener toutes les ‘opérations’ $\pm$ canoniques sur des chemins dans des catégories arbitraires, et des énoncés les concernant, à des questions où $X$ disparaît et où on travaille dans les catégories intervalles elles-mêmes. Un des avantages techniques, c'est que ce sont des catégories fort petites, donnant lieu de plus à une intuition topologique sûre (qui risque de se volatiliser par moments en travaillant dans des catégories de chemins), et aussi que dans de telles catégories, donc aussi dans les catégories de foncteurs entre elles, il y a toujours au plus
+\msp{page 23}
+\textit{une seule flèche} allant d'un objet donné vers un autre. En d'autres termes, dans de telles catégories tous les diagrammes sont commutatifs.
+
+Bien sûr, on voit aussi que si on a une loi de formation $L$ de chemins de type $\tau'$ à partir de chemins de type $\tau$ (avec la condition de fonctorialité par rapport à la catégorie $X$ où on prend les chemins), cette loi est nécessairement \textit{fonctorielle par rapport aux chemins :} si on a un homomorphisme
+\[
+c \xrightarrow{v} c' \qquad \text{dans } \uCh_\tau(X),
+\]
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+alors la loi $L$ ‘se prolonge’ à de tels $v$ pour donner
+\[
+L(c) \xrightarrow{L(v)} L(c'),
+\]
+avec les relations habituelles
+\[
+L(\mathrm{id}_C)=\mathrm{id}_{L(c)}, \qquad L(v'v)=L(v')L(v). % [sic] \mathrm{id}_C -> \mathrm{id}_c, capital C printed while the chemin is c (cf. L(c))
+\]
+Cela résulte de la description de $L$ comme une opération $L_\varphi$ en termes d'un foncteur bien déterminé
+\[
+I_{\tau'} \xrightarrow{\varphi} I_\tau,
+\]
+lequel à son tour donne pour toute $X$ un \textit{foncteur}
+\[
+\left\{
+\begin{array}{rcl}
+\uCh_\tau(X) & \longrightarrow & \uCh_{\tau'}(X)\\[1ex]
+c & \longmapsto & c\circ\varphi
+\end{array}
+\right.
+\]
+plus précis que simplement un \textit{application} $\Ch_\tau(X)\longrightarrow\Ch_{\tau'}(X)$ entre les ensembles d'objets correspondants. % [sic] un application -> une application, gender agreement
+
+\msp{page 24}
+On a le choix maintenant entre
+
+\begin{enumerate}[label=\alph*)]
+\item Une étude plus ou moins systématique des foncteurs entre intervalles. Je préfère attendre pour cela d'avoir besoin de ceci et de cela, et de ne faire que le strict minimum pour les constructions que j'ai en vue.
+\item Une description de la compositions des chemins. % [sic] la compositions -> la composition, number agreement
+\item Un formalisme des catégories de chemins \textit{de type non précisé.}
+\end{enumerate}
+
+Comme mon objectif est surtout de décrire de telles catégories $\uCh(X)$ (sans indice $\tau$!), avec des bonnes propriétés, je commencerai par c), regarderai ensuite b) comme un test crucial pour l'utilisabilité des notions obtenues, et enfin m'occuperai de a) quand je saurai de quoi j'aurai en besoin.
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\section*{4\quad Catégorie de chemins $\uCh(X)$}
+
+Je veux ‘inclure’ toutes les catégories $\uCh_\tau(X)$ de chemins de tous les types qu'on veut, dans une même catégorie $\uCh(X)$. Rappelons
+\[
+\uCh_\tau(X)=\uHom(I_\tau,X),
+\]
+où $I_\tau$ est l'intervalle (orienté) standard de type $\tau$.
+
+L'ensemble de tous les types d'intervalles
+\msp{page 25}
+peut être identifié au monoïde libre Ty à deux générateurs $\Delta^+$ et $\Delta^-$, dont les éléments sont les suites finies quelconques (eventuellement vides) d'objets alternativement égales à $\Delta^+$ et à $\Delta^-$. Si le premier élément est $\Delta^+$, on a un type de chemin à direction initiale directe, rétrograde dans le cas contraire. La décomposition de $I_\tau$, ou de $\mathrm{Fl}\,(I_\tau)$, en intervalles critiques correspond à l'écriture réduite d'un mot comme % [sic] eventuellement -> éventuellement, missing accent
+\[
+(\Delta^+)^{l_1}(\Delta^-)^{l_2}\ \cdots\ (\Delta^?)^{l_r} \qquad (\Delta^?=\Delta^+ \text{ si } r \text{ impair, } \Delta^?=\Delta^- \text{ si } r \text{ pair}),
+\]
+ou comme
+\[
+(\Delta^-)^{l_1}(\Delta^+)^{l_2}\ \cdots\ (\Delta^?)^{l_r} \qquad (\Delta^?=\Delta^- \text{ si } r \text{ impair, } \Delta^?=\Delta^+ \text{ si } r \text{ pair}).
+\]
+Les $l_i$ sont les longueurs des intervalles critiques successifs (ou des chaines structurales successives), leur nombre est la longueur réduite de l'intervalle.
+
+On va considérer Ty comme l'ensemble des objets d'une catégorie $\uTy$ :
+\[
+\left\{
+\begin{array}{l}
+\mathrm{Ob}\,\uTy=\Ty=\ \text{monoïde libre à deux générateurs } \Delta^+,\ \Delta^- \text{ précédents.}\\[1ex]
+\text{Si } \tau,\tau'\in\Ty,\ \Hom(\tau,\tau')=\Hom_{\Cat}(I_\tau,I_{\tau'}).
+\end{array}
+\right.
+\]
+
+(\footnote[7]{Définition un peu canulée, il faut se borner aux homomorphismes de $I_\tau$ dans $I_{\tau'}$ compatibles avec source et but - cf. p.~29.}). On notera qu'on a non seulement un ensemble $\Hom_{\Cat}(I_\tau,I_{\tau'})$, mais même une catégorie $\uHom(I_\tau,I_{\tau'})$, ce qui revient ici à dire que $\Hom(I_\tau,I_{\tau'})$ (i.e. $\Hom(\tau,\tau')$) peut être vu comme un ensemble \textit{ordonné.} Mais pour l'instant nous allons ignorer cette relation d'ordre.
+
+\msp{page 26}
+La composition des morphismes est la composition des foncteurs entre catégories $I_\tau$. Ainsi on a un foncteur \textit{pleinement fidèle} (\footnote[8]{faux, cf. annotation marginale page précédente - on ne prend pas \textit{tous} les foncteurs dans Cat entre $I_\tau$ et $I_{\tau'}$.}) canonique
+\[
+\tau \longmapsto I_\tau : \uTy \xrightarrow{\rho} (\Cat) \qquad \text{(\footnotemark[9]),}
+\]
+\footnotetext[9]{foncteur \textit{réalisation} d'un type (combinatoire) d'intervalles.}% footnote text printed at the foot of p. 17
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+par quoi la catégorie $I_\tau$ \texttt{[plutôt} $\uTy$\texttt{]} pourrait s'identifier à une sous-catégorie pleine de (Cat) (celle des $I_\tau$). Mais je préfère ne pas identifier $\tau\in\Ty$ (donnée combinatoire) avec $I_\tau$ (donnée catégorique).
+
+Soit $X$ une (petite?) catégorie. On a un contrafoncteur
+\[
+\left\{
+\begin{array}{rcl}
+S & \longmapsto & \uHom(S,X)\\[1ex]
+(\Cat)^o & \longrightarrow & (\Cat)
+\end{array}
+\right.
+\]
+défini par $X$, d'où en composant avec $\rho$ un contrafoncteur
+\[
+\uTy^{o} \xrightarrow{\mathrm{CH}_X} \Cat.
+\]
+C'est le contrafoncteur
+\[
+\left\{
+\begin{array}{l}
+\tau \longmapsto \uHom(I_\tau,X) \overset{\text{déf}}{=} \uCh_\tau(X),\\[1ex]
+\text{i.e. } \mathrm{CH}_X(\tau)=\uCh_\tau(X).
+\end{array}
+\right.
+\]
+Mais un contrafoncteur sur une petite catégorie $\uTy$ donne lieu à une \textit{catégorie fibrée} (et même scindée) sur celle-ci.
+
+\msp{page 27}
+Je vais désigner cette catégorie fibrée par $\uCh(X)$. (Provisoirement - si elle s'avère trop grosse, je la restreindrai \dots) Ainsi on a
+\[
+\begin{tikzcd}[row sep=large]
+\uCh(X) \arrow[d, "\pi_X"] \\
+\uTy\ .
+\end{tikzcd}
+\]
+La fibre de $\uCh(X)$ en $\tau\in\mathrm{Ob}\,\uTy$ est la catégorie $\uCh_\tau(X)$ des chemins de type $\tau$ dans $X$. Cela nous dit donc quelles sont les flèches dans $\uCh(X)$ au dessus des flèches identiques dans $\uTy$. Mais que sont les flèches plus générales? On se donne une flèche dans $\uTy$
+\[
+\varphi : \tau' \longrightarrow \tau, \qquad \text{i.e. } I_{\tau'} \xrightarrow{\varphi} I_\tau,
+\]
+quelles sont les flèches de $\uCh(X)$ au dessus de $\varphi$? Par le sorite général des catégories fibrées, si
+\[
+\begin{array}{lclcl}
+c\in\uCh(X)_\tau & = & \uCh_\tau(X) & \overset{\text{déf}}{=} & \uHom(I_\tau,X)\\[1ex]
+c'\in\uCh(X)_{\tau'} & = & \uCh_{\tau'}(X) & \overset{\text{déf}}{=} & \uHom(I_{\tau'},X)
+\end{array}
+\]
+on a
+\[
+\boxed{\Hom_\varphi(c',c)\simeq\Hom(c',\underbrace{\varphi^*(c)}_{=c\circ\varphi}).}
+\]
+Donc : les homomorphismes du
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+\msp{page 28}
+chemin $c'$ de type $\tau'$ dans $X$, dans le chemin $c$ de type $\tau$, ‘au dessus’ du morphisme $\varphi$ de $\tau'$ dans $\tau$, i.e. du foncteur
+\[
+\varphi : I_{\tau'} \longrightarrow I_\tau,
+\]
+est un homomorphisme $v$ de $c'$ dans $c\circ\varphi$, i.e.
+\[
+\begin{tikzcd}[row sep=large]
+I_{\tau'} \arrow[r, "\varphi"] \arrow[dr, "c'"', ""{name=A}] & I_\tau \arrow[d, "c", ""'{name=B}] \\
+& X.
+\arrow[from=A, to=B, bend left=20, shorten <=6pt, shorten >=2pt, "\circled{v}"]
+\end{tikzcd}
+\]
+La composition des flèches est évidente :
+\[
+\begin{tikzcd}[row sep=large]
+I_{\tau''} \arrow[r, "\varphi'"] \arrow[drr, "c''"', ""{name=C}] & I_{\tau'} \arrow[r, "\varphi"] \arrow[dr, "c'"', ""{name=A}] & I_\tau \arrow[d, "c", ""'{name=B}] \\
+& & X,
+\arrow[from=A, to=B, bend left=20, shorten <=6pt, shorten >=2pt, "v"]
+\arrow[from=C, to=A, shorten <=4pt, shorten >=4pt, "v'"]
+\end{tikzcd}
+\]
+on a
+\[
+\begin{array}{rccl}
+v : & c' & \longrightarrow & c\circ\varphi, \quad \text{d'où } c'\circ\varphi' \xrightarrow{v*\varphi'} \underbrace{(c\circ\varphi)\circ\varphi'}_{=c\circ(\varphi\varphi')}\\[3ex]
+v' : & c'' & \longrightarrow & c'\circ\varphi'
+\end{array}
+\]
+et
+\[
+v''=(v*\varphi')\circ v', \qquad \text{donc} \qquad
+\begin{tikzcd}
+c'' \arrow[r, "v'"] \arrow[rr, bend right=12, "\circled{v''}"'] & c'\circ\varphi' \arrow[r, "v*\varphi'"] & c\circ(\varphi\varphi').
+\end{tikzcd}
+\]
+Mais a-t-on des foncteurs source et but
+\[
+\uCh(X) \overset{\sigma}{\underset{\beta}{\rightrightarrows}} X \qquad
+\begin{array}{ccl}
+c & \longmapsto & \text{source}(c)\\[1ex]
+c & \longmapsto & \text{but}(c)
+\end{array}
+\qquad ?
+\]
+Il faudrait donc qu'un homomorphisme $v$ comme dessus
+\[
+v : c' \longrightarrow c\circ\varphi
+\]
+définisse
+\[
+\begin{array}{lrcl}
+\sigma(c) : & \text{source}(c') & \longrightarrow & \text{source}(c)\\[1ex]
+\beta(c) : & \text{but}(c') & \longrightarrow & \text{but}(c).
+\end{array}
+\]
+
+% ---- from Der-ChVII-456_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\msp{page 29}
+Mais comme
+\[
+\left\{
+\begin{array}{l}
+\sigma(c)=c(0_\tau),\ \beta(c)=c(1_\tau)\\[1ex]
+\text{où } 0_\tau,\ 1_\tau \text{ sont les objets source et but de l'intervalle orienté standard } I_\tau\ ,
+\end{array}
+\right.
+\]
+et de même pour $\tau'$, $v$ n'induira bien
+\[
+\underbrace{\sigma(c')}_{=c'(0_{\tau'})} \longrightarrow c(\varphi(0_{\tau'})) \overset{?}{=} \underbrace{\sigma(c)}_{c(0_\tau)},
+\]
+et itou pour $\beta(c')$ et $\beta(c)$, que si on impose
+\[
+\boxed{
+\left\{
+\begin{array}{lcl}
+\varphi(0_{\tau'}) & = & 0_\tau\\
+\varphi(1_{\tau'}) & = & 1_\tau,
+\end{array}
+\right.
+}
+\]
+i.e. que le foncteur envisagé $\varphi$ soit \textit{compatible avec la source et le but.} C'est ce visiblement qu'il fallait imposer dans la définition de % [sic] C'est ce visiblement -> C'est visiblement ce, word order
+\[
+\mathrm{Hom}_{\ul{Ty}}(\tau',\tau)=\underline{\mathrm{Hom}}^{\circled{int}}(I_{\tau'},I_\tau)\quad\text{-}
+\]
+il faut prendre les foncteurs $\varphi$ respectant les structures d'intervalle, i.e. rendant commutatif le diagramme
+\[
+\begin{tikzcd}[column sep=small]
+I_{\tau'} \arrow[rr] & & I_\tau \\
+& \varepsilon=\{0,1\} \arrow[ul, hook', "i_{\tau'}"] \arrow[ur, hook, "i_\tau"'] &
+\end{tikzcd}
+\]
+définissant l'orientation de $I_{\tau'}$ et de $I_\tau$ (\footnote[10]{En fait, il faut sans doute restreindre encore plus les morphismes en exigeant qu'il soient \textit{croissants} sur les objets - cf. page 31.}). Cette rectification faite, j'ai bon espoir que la catégorie $\ul{Ch}(X)$ qu'on vient de construire est `la bonne'. On pourrait désigner par $\ul{CH}(X)$ la catégorie plus grande, sur la catégorie $\ul{Typ}$ ayant mêmes objets que $\ul{Ty}$, mais plus de morphismes : à savoir % [sic] (in footnote 10) qu'il soient -> qu'ils soient, missing plural s
+\msp{page 30}
+\[
+\begin{array}{lcl}
+\mathrm{Hom}_{\ul{Typ}}(\tau,\tau') & = & \mathrm{Hom}_{\mathrm{Cat}}(I_\tau,I_{\tau'})\\[0.5ex]
+\mathrm{Hom}_{\ul{Ty}}(\tau,\tau') & = & \mathrm{Hom}^{\mathrm{int}}_{\mathrm{Cat}}(I_\tau,I_{\tau'})\\[0.5ex]
+ & & \text{(homomorphismes respectant la structure d'intervalle).}
+\end{array}
+\]
+On aura
+\[
+\ul{Ch}(X)\simeq\ul{CH}(X)\times_{\ul{Typ}}\ul{Ty},
+\]
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+i.e. $\ul{Ch}(X)$ est la \textit{restriction} de la catégorie fibrée $\ul{CH}(X)$ sur $\ul{Typ}$, à la sous-catégorie (non-pleine) $\ul{Ty}$ de $\ul{Typ}$.
+
+\textbf{NB} Les catégories fibrées $\ul{CH}(X)$, $\ul{Ch}(X)$ sur $\ul{Typ}$, $\ul{Ty}$ dépendent fonctoriellement de $X$, variant dans (Cat), comme il se doit. Comme de juste, on s'y intéresse surtout quand $X$ \textit{n'est pas} dans (Cat), i.e. quand $X$ est une `grosse' catégorie (telle que (Cat) elle-même). Je me dispense d'expliciter ici les questions pertinentes d'Univers.
+
+Deux tests essentiels, pour s'assurer si la notion est bonne
+\begin{enumerate}
+\item[a)] La théorie des $\mathcal{M}\Sigma^{-1}$.
+\item[b)] La composition des chemins doit bien marcher.
+\end{enumerate}
+
+\msp{page 31}
+On a le diagramme de foncteurs canoniques
+\[
+\begin{tikzcd}
+\ul{Ty} \arrow[r, hook] \arrow[d, hook] & \varepsilon\backslash\mathrm{Cat} \arrow[d] \\
+\ul{Typ} \arrow[r, hook] & \mathrm{Cat},
+\end{tikzcd}
+\]
+où les flèches horizontales sont pleinement fidèles.
+
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\section*{5\quad Propriétés des morphismes d'intervalles}
+
+Je me suis plus ou moins convaincu que pour se prêter à des calculs et à des raisonnements simples, il faut encore plus restreindre les morphismes dans la définition de la catégorie $\ul{Ty}$. Je vais exiger que les morphismes $\tau\longrightarrow\tau'$ soient des foncteurs
+\[
+w : I_\tau\longrightarrow I_{\tau'}
+\]
+qui sont compatibles avec la structure d'\textit{intervalles orientés} de $I_\tau$, $I_{\tau'}$, i.e. qu'ils transforment source en source, but en but, mais de plus qu'ils soient \textit{croissants} sur les objets (pour la relation d'ordre de progression des chemins). C'est une restriction qui géométriquement me paraît assez naturelle. (Elle est similaire à la restriction analogue, dans la définition pré-catégorique des morphismes entre $\bDelta_i$ \ldots\,) C'est cette hypothèse qui permet de faire une théorie de structure assez simple des morphismes d'intervalles. Mais pour l'instant je vais distinguer `morphismes' et `morphismes croissants'.
+
+\msp{page 32}
+Soit
+\[
+f : I_\tau\longrightarrow I_{\tau'}
+\]
+un morphisme d'intervalles orientés. Considérons les sous-catégories pleines, isomorphes à des $\Delta_i^+$ ou $\Delta_i^-$ comme intervalles orientés, définis par les intervalles critiques de $I_\tau$. Ils forment une suite $\Sigma_\tau$ de sous-catégories de $I_\tau$
+\[
+\Sigma_\tau=(\bDelta^{\varepsilon_1}_{l_1}(\tau),\bDelta^{\varepsilon_2}_{l_2}(\tau),\ldots,\bDelta^{\varepsilon_r}_{l_r}(\tau))
+\]
+dont $I_\tau$ est la somme amalgamée (on reviendra sur ce point plus \texttt{[bas]}), $r$ étant la longueur utile de $\tau$. On les appelle les \textit{sous-intervalles critiques} de $I_\tau$. Ainsi $f$ se décompose en une suite de morphismes
+\[
+f_i : \bDelta^{\varepsilon_i}_{l_i}\longrightarrow I_{\tau'},\qquad i\in[1,r],
+\]
+tels que
+\begin{enumerate}
+\item[a)] pour $i\in[1,r-1]$, le but de $f_i$ soit égal à la source de $f_{i+1}$.
+
+De plus,
+\item[b)] $f_1$ transforme source en source, et $f_r$ transforme but en but.
+\end{enumerate}
+
+Inversement, quand on se donne des $f_i$ satisfaisant ces deux conditions, ils définissent un morphisme d'intervalles $f$ unique. (Et si la condition b) n'est pas exigée, on trouve une description des morphismes de catégories $I_\tau\longrightarrow I_{\tau'}$.)
+
+\msp{page 33}
+On va d'abord regarder un foncteur quelconque
+\[
+f : \bDelta^{\varepsilon}_i\longrightarrow I_{\tau'}\qquad(\varepsilon\in\{\pm1\})\quad .
+\]
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+Supposons pour fixer les idées que $\varepsilon=+1$, i.e. que le premier membre soit un intervalle critique direct \ldots{} On trouve que $f$ se factorise par un sous-intervalle critique de $I_{\tau'}$, soit $\bDelta^{\varepsilon'}_j$. Il est donc défini par une application croissante de $\bDelta^{\varepsilon}_i$ dans $\bDelta^{\varepsilon'}_j$ (si $\varepsilon$, $\varepsilon'$ \texttt{[sont]} de même signe), une application décroissante dans le sens inverse (\footnote[11]{\textbf{Lemme.} \textit{Si $I_{\tau'}$ est un intervalle, toute partie $J$ de $I_{\tau'}$ telle que pour deux éléments de $J$, il existe toujours une flèche de l'un dans l'autre, est contenue dans un intervalle critique (unique si} $\operatorname{card} J\geq 2$\textit{).}}). Mais si on exige que $f$ soit croissant, alors il faut que \textit{ou bien} $f$ soit constant (auquel cas, si sa valeur n'est pas une extrémité de $I_{\tau'}$, il y a exactement \textit{deux} intervalles critiques de $I_{\tau'}$ par lesquels se factorise $f$) \textit{ou bien} $f$ non constant et $\varepsilon=\varepsilon'$ (et en tous cas, si $f$ non constant, alors l'intervalle critique par lequel se factorise $f$ est unique). Pour résumer :
+
+\textbf{Proposition 7.} \textit{Soient $I_\tau$, $I_{\tau'}$ deux intervalles orientés,}
+\[
+f : I_\tau\longrightarrow I_{\tau'}
+\]
+\textit{un foncteur. Alors pour tout intervalle critique $J\subseteq I_\tau$ tel que $f|J$ soit non constant, il existe un unique intervalle critique $J'\subseteq I_{\tau'}$ tel que $f|J$ se factorise par $J'$, i.e. tel que $f(J)\subseteq J'$. Si $f$ est croissant, alors $J$ et $J'$ sont de même signe,}
+\msp{page 34}
+\textit{i.e. tous deux directs, ou tous deux rétrogrades.}
+
+Ainsi, si on regarde la suite $s_0,s_1,\ldots,s_n$ des sommets critiques de $\tau$, alors
+\[
+t_0=f(s_0),\ t_1=f(s_1),\ \ldots\ ,\ t_n=f(s_n)
+\]
+forment une suite de sommets de $I_{\tau'}$, telle que deux consécutifs soient reliés par une flèche de $I_{\tau'}$. Donc la sous-catégorie pleine de $I_{\tau'}$ définie par ces $t_i$ est connexe, c'est donc un sous-intervalle. Si $f$ est croissant, ce sous-intervalle est $[t_0,t_n]$. Si $f$ est un morphisme d'intervalles, il contient tous les sommets critiques de $I_{\tau'}$. Dans tous les cas, prenant $t_i$, $t_j$ $(i<j)$ et appliquant ce qui précède à $f|J$, où $J$ est le sous-intervalle de $I$ d'origine $s_i$, d'extrémité $s_j$, on voit que tout sommet critique de $I_{\tau'}$ compris entre $t_i$ et $t_j$ est parmi les $t_k$ $(i\leq k\leq j)$. Pour résumer :
+
+\textbf{Corollaire.} \textit{Soient $s_i\leq s_j$ deux sommets critiques de $I_{\tau'}$. Alors tout sommet critique de $I_{\tau'}$ compris entre $f(s_i)=t_i$ et $f(s_j)=t_j$, est l'image d'un sommet critique $s_k$ compris entre $s_i$ et $s_j$ (i.e. $i\leq k\leq j$). En particulier, si $f$ est un morphisme d'intervalles,} % [sic] sommets critiques de I_{\tau'} (first occurrence) -> de I_\tau, the s_i are the critical vertices of \tau
+\[
+f(I_{\tau\,\red})\supseteq I_{\tau'\,\red}
+\]
+\textit{(où $I_{\tau\,\red}$ désigne l'ensemble des sommets critiques de $I_\tau$ ou aussi le sous-intervalle réduit qu'il définit).}
+
+\msp{page 35}
+On fera attention que même si $f$ est croissant, on \textit{n'a pas} en général $f(I_{\tau\,\red})\subseteq I_{\tau'\,\red}$, i.e. $f$ ne transforme pas forcément sommets critiques en sommets critiques, Exemple minimal :
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 22 décembre 2001
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+\[
+\begin{tikzcd}
+\Phi_3^+\ : & s_0 \arrow[r] \arrow[d, mapsto] & s_1 \arrow[d, mapsto] & s_2 \arrow[l] \arrow[r] \arrow[dl, mapsto] & s_3 \arrow[dl, mapsto] \\
+\bDelta_2^+\ : & {} \arrow[r] & {} \arrow[r] & {} &
+\end{tikzcd}
+\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.35\textwidth}
+$\Phi_3^+$ est réduite, les deux sommets critiques transformés en le sommet non critique 1.
+\end{minipage}
+
+Désignons par $\mathrm{Cr}(\tau)$ l'ensembles des intervalles critiques de $I_\tau$, en correspondance biunivoque (respectant l'ordre total) avec l'ensemble des flèches de transition de $I_{\tau\,\red}$, % [sic] l'ensembles -> l'ensemble, spurious plural s
+\[
+\mathrm{Cr}(\tau)\simeq\mathrm{Fl}\,\mathrm{tr}\,(I_{\tau\,\red}).
+\]
+Soit, pour un foncteur
+\[
+f : I_\tau\longrightarrow I_{\tau'},
+\]
+$\mathrm{Cr}(\tau,f)$ l'ensemble des intervalles critiques de $I_\tau$ sur lesquels $f$ ne soit pas constant. On a alors une application
+\[
+\mathrm{Cr}(\tau,f)\longrightarrow\mathrm{Cr}(\tau') \tag*{$(*)$} % label (*) printed at the left margin
+\]
+induite par $f$ via la proposition 7, associant à tout $J\in\mathrm{Cr}(\tau,f)$ l'unique $J'\in\mathrm{Cr}(\tau')$ tel que $f(J)\subseteq J'$. On a de plus
+
+\textbf{Corollaire 2.}
+\begin{enumerate}
+\item[\textit{a)}] \textit{L'image de $(*)$ est un segment de l'ensemble totalement ordonné} $\mathrm{Cr}(\tau')$\textit{, i.e. si deux intervalles critiques $J'$, $J''$ dans $I'_{\tau'}$ sont dans l'image, il en est de même de tous} % [sic] I'_{\tau'} -> I_{\tau'}, spurious prime
+\msp{page 36}
+\textit{ceux qui sont compris entre eux.}
+\item[\textit{b)}] \textit{Cette image contient aussi l'intervalle critique de $I_{\tau'}$ (il y en a au plus un) qui contient $f(0_\tau)$ (resp. $f(1_\tau)$) et dont l'intersection avec le segment $[f(0_\tau),f(1_\tau)]$ est de cardinal $\geq 2$, ainsi que tous les intervalles critiques contenus dans ledit segment.}
+\item[\textit{c)}] \textit{Si $f$ est un morphisme d'intervalles orientés, alors l'application induite}
+\[
+\mathrm{Cr}(f):\mathrm{Cr}(\tau,f)\longrightarrow\mathrm{Cr}(\tau')
+\]
+\textit{est surjective. De façon plus précise, soit $J'\subseteq$} $\mathrm{Cr}(\tau')$\textit{, et soit $J=f^{-1}(J')$. Alors} $\mathrm{Cr}(f)^{-1}(\{J'\})$ \textit{est formé des intervalles critiques dans} $\mathrm{Cr}(\tau,f)$ contenus dans $J$. \textit{On a de plus,} si $f$ est croissant, % [sic] J' \subseteq Cr(\tau') -> J' \in Cr(\tau'), J' is an element of Cr(\tau')
+\[
+\mathrm{long}(J')=\sum_{K\in\mathrm{Cr}(f)^{-1}(\{J'\})}\pi_{\mathrm{n}}(K,f),
+\]
+\textit{où $\pi_{\mathrm{n}}(K,f)$ est la `partie' (numérique) de $f|K$, i.e. la longueur de l'intervalle $[f(0_K),f(1_K)]$. (}\textbf{NB} \textit{Si $K$ est un intervalle critique de $I$ tel que $K\notin Cr(\tau,f)$, i.e. $f|K$ est constant, on posera $\pi_{\mathrm{n}}(K,f)=0$. Donc la formule précédente se lit aussi}
+\[
+\mathrm{long}(J')=\sum\limits_{\underbrace{K\in\mathrm{Cr}(I_\tau),\ K\subseteq J}_{\text{(i.e. }K\,\in\,\mathrm{Cr}(f^{-1}(J'))\text{)}}}\pi_{\mathrm{n}}(K,f).\ \textit{)}
+\]
+\end{enumerate}
+
+% ---- from Der-ChVII-456_p026-030.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+\textbf{Corollaire 3.} \textit{Si $f$ est un morphisme} croissant \textit{d'intervalles orientés, alors pour tout $J' \in \Cr(\tau')$, on a}
+\[
+(0 \leq)\ \card \Cr(f)^{-1}(\{J\}) \longrightarrow \lng(J'),
+\] % [sic] \longrightarrow -> \leq, the next sentence speaks of equality; and {J} -> {J'}, as in Cr(f)^{-1}({J'}) below
+\msp{page 37}
+\textit{l'égalité n'étant obtenue que si les parties de $f$ sur les intervalles critiques de $I_\tau$ qui sont au dessus de $J'$ sont toutes égales à $0$ ou $1$ (donc si et seulement si sur les $J \in \Cr(f)^{-1}(\{J'\})$, elles sont égales à $1$).}
+
+\textbf{Corollaire 4.} \textit{Supposons de plus $I'$} \texttt{[}$= I_{\tau'}$\texttt{]} \textit{réduit. Alors}
+\[
+\mathit{Cr}(f) : \mathit{Cr}(\tau, f) \longrightarrow \mathit{Cr}(\tau')\ (\simeq \mathrm{Fl}\,\mathrm{tr}(\tau'))
+\]
+\textit{est} bijective.
+
+Donc dans ce cas, $\tau'$ réduit, on obtient une application en sens inverse
+\[
+\begin{tikzcd}[column sep=small]
+\Tr(\tau') \simeq \Cr(\tau') \arrow[rr, "\Cr^*(f)"] \arrow[dr, "\Cr(f)^{-1}"'] & & \Cr(\tau) \\
+ & \Cr(\tau, f), \arrow[ur, hook, "\text{inclusion}"'] &
+\end{tikzcd}
+\]
+application qui transforme l'intervalle critique $J'$ $(= \{i - 1, i\})$ en l'\textit{unique} intervalle critique $J$ de $I_\tau$ tel que
+\[
+f(J) = J'.
+\]
+
+\msp{page 38}
+Mais $J \simeq \bD_i^{\varepsilon}$, et on a donc un morphisme \textit{surjectif}
+\[
+f_0 : \bD_i^{\varepsilon} \longrightarrow J' \simeq \bD_1^{\varepsilon}.
+\]
+On voit tout de suite qu'il existe alors une \textit{unique} flèche de transition $u$ de $\bD_i^{\varepsilon}$, telle que $f(u) \neq \mathrm{id}$. Donc on trouve le corollaire suivant, plus précis que le corollaire 4 :
+
+\textbf{Corollaire 5.} \textit{Soit $f : I_\tau \longrightarrow I_{\tau'}$ un morphisme croissant d'intervalles orientés, avec $I_{\tau'}$ réduit, et soit $\Tr(\tau, f)$ l'ensemble des flèches de transition $\underline{u}_i$ de $I_\tau$ telle que $f(\underline{u}_i) \neq \mathrm{id}$, i.e. telles que $\pi(u_i, f) = 1$. Alors $f$ induit une application} % [sic] telle -> telles, agreement with "flèches" (cf. "telles que" just after)
+\[
+\Tr(\tau, f) \longrightarrow \Tr(\tau')
+\]
+\textit{qui est bijective, et (bien sûr) croissante, donc un isomorphisme d'ensembles ordonnés.}
+
+Ainsi l'application $\Tr(\tau') \longrightarrow \Cr(\tau, f)$ de tantôt se précise par une application bijective
+\[
+\Tr(f)^* : \Tr(\tau') \longrightarrow \Tr(\tau, f),
+\]
+reliée à $\Cr(f)^*$ plus haut par le triangle commutatif
+\[
+\begin{tikzcd}
+ & \Tr(\tau, f) \arrow[dd, "\wr\ \alpha"] \\
+\Tr(\tau') \arrow[ur, "\Tr(f)^*"] \arrow[dr, "\Cr(f)^*"'] & \\
+ & \Cr(\tau, f),
+\end{tikzcd}
+\]
+% foot: Version 22 décembre 2001
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 39}
+l'application $\alpha$ associant à toute $u_i \in \Tr(\tau, f)$ l'unique intervalle critique qui ‘contienne’ $u_i$ (i.e. tel que $u_i$ soit une flèche dudit intervalle, ou encore, fasse partie de la ‘chaîne critique’ associée \dots).
+
+On a mieux encore :
+
+\textbf{Proposition 8.} \textit{Soient $\tau, \tau' \in \mathrm{Ty}$, $\tau'$} réduit. \textit{Pour tout morphisme croissant d'intervalles orientés}
+\[
+f : I_\tau \longrightarrow I_{\tau'}
+\]
+\textit{(on va dire simplement que $f$ est une flèche dans $\Ty$, et écrire $f \in \Hom_{\Ty}(I_\tau, I'_\tau)$), associons lui la partie $\Tr(\tau, f)$ des flèches de transition de $I_\tau$ non dégénérées pour $f$. Ces flèches forment un ensemble totalement ordonné affecté de signes $+$ ou $-$ (caractère direct ou rétrograde des flèches), et $f$ induit une bijection d'ensembles totalement ordonnés} % [sic] I'_\tau -> I_{\tau'}, the target of f is I_{\tau'}
+\[
+\underbrace{E_f}_{\subseteq \Tr(\tau)} = \Tr(\tau, f) \simeq \Tr(\tau'),
+\]
+\textit{et même un isomorphisme d'ensembles totalement ordonnés ‘affectés de signes’. Ainsi, à toute $f$ on associe une partie $E_f$ de $\Tr(\tau)$, et telle que son ‘type’ soit égal à $\tau'$. Désignons par}
+\[
+\mathfrak{P}_{\tau'}(\Tr(\tau)) \subseteq \mathfrak{P}(\Tr(\tau))
+\]
+\textit{l'ensemble des parties $E$ de $\Tr(\tau)$ dont le type soit $\tau'$.}
+
+\msp{page 40}
+\textit{Alors l'application}
+\[
+f \longmapsto \Tr(\tau, f) : \Hom_{\Ty}(\tau, \tau') \longrightarrow \mathfrak{P}_{\tau'}(\Tr(\tau))
+\]
+\textit{est} bijective \textit{: se donner un morphisme $f : \tau \longrightarrow \tau'$ dans $\Ty$,} revient au même \textit{que de se donner une suite strictement croissante de flèches de transition}
+\[
+\underline{u}_{i_1},\ \underline{u}_{i_2},\ \dots\ ,\underline{u}_{i_{n'}} \qquad (n' = \lng \tau')
+\]
+\textit{dans $I_\tau$ $(i_1 < i_2 < \cdots < i_{n'})$, telle que la suite des signatures correspondante}
+\[
+(\varepsilon_{i_1}, \varepsilon_{i_2}, \dots, \varepsilon_{i_{n'}}) = \tau'
+\]
+\textit{soit égale à $\tau'$.}
+
+\textbf{Corollaire 1.} \textit{Pour tout $\tau$, on a des bijections canoniques}
+\[
+\left\{
+\begin{array}{lcl}
+\Tr^+(\tau) & \simeq & \Hom_{\Ty}(\tau, \Delta^+) \\
+\Tr^-(\tau) & \simeq & \Hom_{\Ty}(\tau, \Delta^-),
+\end{array}
+\right.
+\]
+fonctorielles en $\tau$ \textit{(variant dans} $\Ty$\textit{).}
+% foot: Version 22 décembre 2001
+
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+Pour donner un sens au corollaire, il faut définir
+\[
+\tau \longmapsto \Tr^+(\tau), \qquad \tau \longmapsto \Tr^-(\tau)
+\]
+comme \textit{foncteurs} contravariant en $\tau$, donc pour un morphisme
+\[
+f : I_{\tau_2} \longrightarrow I_{\tau_1}
+\]
+dans $\Ty$, définir des applications
+\msp{page 41}
+\[
+\begin{array}{rcl}
+\Tr^+(f)^* : \Tr^+(\tau_1) & \longrightarrow & \Tr^+(\tau_2) \\
+\Tr^-(f)^* : \Tr^-(\tau_1) & \longrightarrow & \Tr^-(\tau_2),
+\end{array}
+\]
+en d'autres termes, une application
+\[
+\Tr(f)^* : \Tr(\tau_1) \quad \longrightarrow \quad \Tr(\tau_2)
+\]
+‘compatible avec les signatures’. Dans le corollaire 5 plus haut, on a défini une telle application seulement pour $\tau'$ réduit \texttt{[}$\tau_1 = \tau'$\texttt{,} $\tau_2 = \tau$\texttt{]} (\footnote[12]{Ce qui suit ne fait pas intervenir les signatures - c'est un sorite sur les applications croissantes entre ensembles finis totalement ordonnés.}). Pour une flèche $u$ de $I_\tau$, appelons \textit{partie ensembliste} de $f$ sur $u$, où de $u$ pour $f$, la partie ensembliste de la flèche $f(u)$ dans $I_{\tau'}$, i.e. le segment $[f(i-1), f(i)] \subseteq I_{\tau'}$ (ici $u = \underline{u}_i$). Soit % [sic] où -> ou, alternative "de f sur u, ou de u pour f"
+\[
+\underline{u}_{i_1},\ \dots\ ,\underline{u}_{i_N} \qquad \text{ou } (v_1, v_2, \dots, v_n)
+\] % [sic] v_n -> v_N, the sequence has N elements (cf. v_N below)
+la suite croissante des éléments de $\Tr(\tau, f)$, on voit alors par récurrence sur $i$ que pour $i \in [1, N-1]$, on a
+\[
+\begin{array}{rcl}
+f(\mathrm{but}(v_i)) & = & f(\mathrm{source}(v_{i+1}))\ \ (= t_i), \\
+f(\mathrm{source}(v_1)) & = & 0_{\tau'}, \\
+f(\mathrm{but}(v_N)) & = & 1_{\tau'}.
+\end{array}
+\]
+Considérons la suite
+\[
+\{\overbrace{0_{\tau'}}^{= t_0}, t_1, t_2, \dots, t_{N-1}, \overbrace{1_{\tau'}}^{= t_N}\},
+\]
+elle est définie par le sous-ensemble correspondant de $I_{\tau'}$, qu'on appelera l'ensemble des \textit{sommets critiques de $I_{\tau'}$ pour $f$.} C'est une suite contenant $0_{\tau'}$, $1_{\tau'}$, et telle que deux éléments consécutifs sont reliés dans $I_{\tau'}$ par une flèche, ce qui équivaut à dire qu'elle contient les sommets critiques (intrinsèques) de $I_{\tau'}$. D'autre part, pour tout intervalle de transition $[i-1, i]$ de $I_{\tau'}$ $(i \in [1, n'])$, % [sic] appelera -> appellera, French spelling
+% foot: Version 22 décembre 2001
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 42}
+il existe un et un seul intervalle de transition $[t_{j-1}, t_j]$ pour cette suite $(j \in [1, N])$, telle qu'on ait $[i-1, i] = [t_{j-1}, t_j]$. C'est dire qu'il existe une et une seule $v_j \in \Tr(\tau, f)$ telle que la partie de $f$ sur $v_j$ (savoir justement $[j-1, j]$) contienne (celle de) $\underline{u}_i$. Pour résumer :
+
+\textbf{Corollaire 2.} \textit{Soit $f : \tau \longrightarrow \tau'$ dans $\Ty$. Alors pour toute $u \in \Tr(\tau') = \Tr(I_{\tau'})$, il existe une et une seule $v \in \Tr(\tau)$ telle que la partie de $f$ sur $v$ contienne $u$. De plus, les signatures de $u$ et de $v$ sont égales.}
+
+C'est ainsi qu'on obtient donc une application
+\[
+\Tr(f)^* : \Tr(\tau') \quad \longrightarrow \quad \Tr(\tau) \qquad (\text{se factorisant par } \Tr(\tau, f))
+\]
+induisant
+\[
+\begin{array}{rcl}
+\Tr^+(f)^* : \Tr^+(\tau') & \longrightarrow & \Tr^+(\tau) \\
+\Tr^-(f)^* : \Tr^-(\tau') & \longrightarrow & \Tr^-(\tau).
+\end{array}
+\]
+La transitivité pour un composé
+\[
+\tau \xrightarrow{f} \tau' \xrightarrow{g} \tau''
+\]
+ou
+\[
+I_\tau \xrightarrow{f} I_{\tau'} \xrightarrow{g} I_{\tau''}
+\]
+est immédiate. Si $u$, $u'$, $u''$ sont des flèches de transition dans $I_\tau$, $I_{\tau'}$, $I_{\tau''}$ respectivement, telles que
+\[
+\begin{array}{rcll}
+\pi(g, u') & \supseteq & \pi(u''), & \qquad \text{i.e. } u' = \Tr(g)^*(u'') \\
+\pi(f, u) & \supseteq & \pi(u'), & \qquad \text{i.e. } u = \Tr(f)^*(u'),
+\end{array}
+\]
+alors on a
+\[
+\pi(gf, u) \ \supseteq\ \pi(u''), \qquad \text{i.e. } u = \Tr(gf)^*(u'').
+\]
+
+\msp{page 43}
+Si les flèches en question ont comme partie intrinsèque $[i-1, i]$, $[i'-1, i']$, $[i''-1, i'']$ respectivement, l'hypothèse est
+\[
+\begin{array}{rclrcl}
+g(i'-1) & \leq & i''-1, & g(i') & \geq & i'' \\
+f(i-1) & \leq & i'-1, & f(i) & \geq & i'
+\end{array}
+\]
+et comme $g$ est croissant, on a déduit
+\[
+\begin{array}{rcll}
+gf(i-1) & \leq & g(i'-1) & (\leq i''-1) \\
+gf(i) & \geq & g(i') & (\geq i''),
+\end{array}
+\]
+\begin{flushright}
+c.q.f.d.
+\end{flushright}
+% foot: Version 22 décembre 2001
+
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+
+Ainsi, le corollaire 1 plus haut obtient un sens précis et il est démontré du même coup, vu que les correspondances du corollaire 1 sont données par
+\[
+\underbrace{f}_{\in \Hom_{\Ty}(\tau, \Delta^{\varepsilon})} \qquad \longmapsto \Tr(f)^*(\underline{u}),
+\]
+où $\underline{u}$ est l'unique flèche de transition de $\Delta^{\varepsilon}$.
+
+On va utiliser ces sorites pour donner, pour tout $\tau \in \Ty$, une description combinatoire simple des catégories $\Ty/\tau$ et $\tau\backslash\Ty$, ou du moins de leurs ensembles d'objets.
+
+\textbf{1$^o$ Description de} $\Ob\,(\tau\backslash\Ty)$\textbf{.}
+
+À $f \in \Ob(\tau\backslash\Ty)$, i.e.
+\[
+f : \tau \longrightarrow \tau' \qquad \text{i.e. } f : I_\tau \longrightarrow I_{\tau'}
+\]
+dans $\Ty$, est associé $E = E_f = \Tr(\tau, f) \subseteq \Tr(\tau)$, l'ensemble des flèches de transition critiques (i.e. non dégénérées) pour $f$. À chaque $u \in E$, associons l'entier $\lng(\pi(f, u))$,
+\msp{page 44}
+la \textit{partie} de $f$ sur $u$. Alors $(\tau', f)$ est déterminé de façon unique par le couple
+\[
+(E, \pi), \qquad E \in \mathfrak{P}(\Tr(\tau)), \qquad \underbrace{\pi}_{\text{pondération}} : E \ \longrightarrow\ \underbrace{\mathbf{N}^*}_{\substack{= \text{ensemble des} \\ \text{entiers} \geq 1}} \quad .
+\]
+Ou si on préfère, par l'application $\pi = \pi_f$
+\[
+\Tr(\tau) \xrightarrow{\pi} \mathbf{N}, \qquad u \longmapsto \pi(u) = \pi(u, f) = \lng(\pi_{\tau'}(f(u)))
+\]
+(qui redonne $E$ comme
+\[
+E = \pi^{-1}(\mathbf{N}^*) \qquad ).
+\]
+Cette application n'est soumise à aucune restriction,
+\[
+\Ob\,(\tau\backslash\Ty) \ \xrightarrow[\sim]{\text{bij.}}\ \Hom_{\mathrm{Ens}}(\Tr(\tau), \mathbf{N}).
+\]
+On récupère $\tau'$ à partir de $\pi$ ainsi. On prend $E = \pi^{-1}(\mathbf{N}^*)$ (flèches de transition non dégénérées pour $\pi$), $E$ est totalement ordonné par l'ordre induit par celui de $\Tr(\tau)$, il est de plus signaturé \texttt{[sic]} par la signaturation \texttt{[sic]} de $\Tr(\tau)$, soit
+\[
+(\varepsilon_1, n_1),\ \dots\ ,\ (\varepsilon_r, n_r)
+\]
+la suite des signatures et pondérations, de la suite des éléments de $E$ $(\varepsilon_i \in \{\pm 1\}$, $n_i \in \mathbf{N}^*$ pour $i \in [1, r])$. Alors,
+\[
+\tau' = \Delta_{\varepsilon_1}^{n_1} \Delta_{\varepsilon_2}^{n_2} \cdots \Delta_{\varepsilon_r}^{n_r}, \qquad r = \card E,
+\]
+dans le monoïde libre $\mathrm{Ty}$, où on a désigné par $\Delta_+$, $\Delta_-$ (au lieu de $\Delta^+$, $\Delta^-$) les deux générateurs. L'application
+\[
+I_\tau \ \longrightarrow\ I_{\tau'}
+\]
+% foot: Version 22 décembre 2001
+
+% ---- from Der-ChVII-456_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 45}est décrite de façon unique en disant qu'elle est \textit{constante} sur chacune des `composantes connexes' (au sens de la numérotation des sommets de $I_\tau$) de l'ensemble $E' = E'(f) \subseteq I_\tau = [0,n]$ des sommets qui sont sources ou buts de flèches de transition dégénérées pour $f$, i.e. dans $\mathrm{Tr}(\tau)\backslash E$. Et sur le $\alpha$-ème élément de $E$ ($\alpha \in [1, r = \operatorname{card} E]$), d'indice $i_\alpha$ dans $\mathrm{Tr}(\tau)$, $f$ induit le foncteur
+\[
+\boldsymbol{\Delta}_{\varepsilon_\alpha} \simeq \underbrace{J_{i_\alpha}}_{\substack{\text{intervalle}\\ \text{de transition}\\ \text{d'indice } i_\alpha\\ \text{dans } I_\tau}} \longrightarrow I_{\tau'}
+\]
+donné par \textit{l'unique} \underline{Ty}-\textit{flèche} dans $I_\tau$ de $J_{i_\alpha}$ dans le $\alpha$-ème facteur, de type $\Delta^{n_\alpha}_{\varepsilon_\alpha}$, de $\tau'$, donné par $(*)$
+\[
+\Delta^{n_\alpha}_{\varepsilon_\alpha} \simeq \text{type de } \boldsymbol{\Delta}^{\varepsilon_\alpha}_{n_\alpha}\ \ \ldots
+\]
+
+\subsection*{2$^o$ Détermination de $\mathrm{Ob}\,(\uTy/\tau')$.}
+
+Si $(\tau, f) \in \mathrm{Ob}\,(\uTy/\tau')$, donc
+\[
+f : I_\tau \longrightarrow I_{\tau'},
+\]
+on lui associe tout d'abord la partie
+\[
+\mathrm{Cr}(\tau', f) = E'_f = E' \subseteq I_{\tau'}
+\]
+formée des sommets (dits `critiques pour $f$', cf. page 41) de $I_{\tau'}$ qui sont source ou but d'une flèche $f(u)$, où $u \in \mathrm{Tr}(\tau, f)$, i.e. $f(u)$ n'est pas dégénérée (\footnote[13]{dégager un lemme $f$ croissante inutile.}). $E'$ contient $f(I_{\tau\,\text{réd}})$ (i.e. les images par $f$ des sommets critiques de $I_\tau$),
+\msp{page 46}mais peut être plus grand. (P.ex. si $\tau = \tau'$, $f = \mathrm{id}$, $E' = I_{\tau'}$, qui est donc strictement plus grand que $I_{\tau'\,\text{réd}}$ si $\tau'$ n'est pas réduit.) Pour tout $i \in E'$, considérons $f^{-1}(\{i\}) \subseteq I_\tau$. Comme $f$ \texttt{[est]} croissant, c'est un intervalle de l'ensemble totalement ordonné $I_\tau$, donc c'est un sous-intervalle de la catégorie intervalle $I_\tau$. Comme tel, il a une signature $\tau_i \in \Ty$. On a donc une application
+\[
+\eta_f \text{ ou } \eta : E' \longrightarrow \Ty.
+\]
+Je dis que $(\tau, f) \in \mathrm{Ob}\,(\uTy/\tau')$ est déterminé de façon unique par ce couple
+\[
+(E', \eta) \begin{cases} E' \in \mathfrak{P}(I_{\tau'}) = \mathfrak{P}([0,n']) \\[1ex] \eta : E' \longrightarrow \Ty\ . \end{cases}
+\]
+De plus, celui-ci est soumis à la seule restriction que
+\[
+E' \supseteq \mathrm{Cr}(\tau') = \text{ensemble des sommets critiques de } I_{\tau'}
+\]
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+(où ce qui revient au même, que $E'$ contient $0_{\tau'}$, $1_{\tau'}$ et que deux éléments consécutifs de $E'$ sont reliés par une flèche de $I_{\tau'}$) : % [sic] où -> ou, « ou ce qui revient au même »
+\[
+\left\{
+\begin{array}{lcl}
+\mathrm{Ob}\,(\Ty/\tau') & \simeq & \text{ensemble des couples } (E',\eta), \text{ avec} \\[1ex]
+ & & E' \subseteq [0, \underbrace{\ n'\ }_{=\,\mathrm{long}\,\tau'}], \quad E' \supseteq \mathrm{Cr}(\tau'), \\[1ex]
+ & & \eta : E' \longrightarrow \Ty\ .
+\end{array}
+\right.
+\]
+Soit
+\[
+0 = t_0 < t_1 < \ \cdots\ < t_r = n'
+\]
+la suite des éléments de $E'$, soit pour \ovalbox{$i \in [1,N]$}
+\[
+\left\|
+\begin{array}{l}
+l_i = t_i - t_{i-1} \\[1ex]
+\varepsilon_i \quad \text{signature de } [t_{i-1}, t_i] \text{ dans } I_{\tau'}\ ,
+\end{array}
+\right.
+\]
+\msp{page 47}et pour \ovalbox{$i \in [0,N]$}\,, soit
+\[
+\|\ \ \tau_i = \eta(t_i).
+\]
+Alors le type $\tau$ est donné par
+\[
+\tau = \tau_0 \Delta_{\varepsilon_1} \tau_1 \Delta_{\varepsilon_2} \cdots \Delta_{\varepsilon_N} \tau_N, \tag*{$(*)$}
+\]
+\texttt{[de]} longueur $N + \sum_{i=0}^N \underbrace{\mathrm{long}(\tau_i)}_{\lambda_i \geq 0}$.
+
+\subsection*{3$^o$ Description de $\mathrm{Fl}(\uTy)$.}
+
+Si
+\[
+f : \tau \longrightarrow \tau' \qquad \texttt{[est]} \ \text{dans } \uTy\ ,
+\]
+on lui associe comme tantôt un entier \underline{$N \geq 0$} ($N = \operatorname{card}\mathrm{Cr}(\tau', f){-}1$, $N = 0$ si et seulement si $\tau' = 1$, type de l'intervalle ponctuel), des applications
+\[
+\left\{
+\begin{array}{lcl@{\qquad\qquad}ccl}
+{[1,N]} & \longrightarrow & [+1,-1] \times \mathbf{N}^*, & i & \longmapsto & (\varepsilon_i, l_i) \\[1ex]
+{[0,N]} & \longrightarrow & \Ty & i & \longmapsto & \tau_i
+\end{array}
+\right.
+\]
+(\footnote[14]{\textbf{NB} Si $N = 0$, $[1,N] = \emptyset$, et il n'y a pas de $\varepsilon_i$, $l_i$; l'application $\underbrace{[0,N]}_{=\,\{0\}} \longrightarrow \Ty$ se réduit à la donnée de $\tau_0 \in \Ty$.}). La flèche $f$ dans $\uTy$ est determinée par ces données. Le type $\tau$ est donné par la formule $(*)$ ci-dessus, le type $\tau'$ par % [sic] determinée -> déterminée, accent manquant
+\[
+\tau' = \Delta^{l_1}_{\varepsilon_1} \Delta^{l_2}_{\varepsilon_2}\ \cdots\ \Delta^{l_N}_{\varepsilon_N}, \qquad \text{longueur } n' = \textstyle\sum l_i, \tag*{$(*')$}
+\]
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+et l'application croissante de $I_\tau = [0, N + \sum \mathrm{long}(\tau_i)]$ dans $I_{\tau'} = [0, \sum l_i]$ est donnée ainsi :
+\[
+\begin{array}{l@{\qquad}cl}
+\text{constante sur } [0, 0+\lambda_0] & \longmapsto & 0 \\[1ex]
+\text{constante sur } [\lambda_0+1, \lambda_0+1+\lambda_1] & \longmapsto & l_1 \\[1ex]
+\text{constante sur } [\lambda_0+\lambda_1+2, \lambda_0+\lambda_1+2+\lambda_2] & \longmapsto & l_2 \\[1ex]
+\ldots & & \\[1ex]
+\text{constante sur } [\lambda_0+\lambda_1+\cdots+\lambda_i+(i+1), \lambda_0+\cdots+\lambda_i+\lambda_{i+1}+(i+1)] & \longmapsto & l_i.
+\end{array}
+\]
+
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 48}
+
+\section*{6\quad Composition dans $\uTy$}
+
+On a une loi de composition (partout définie) dans $\mathrm{Ob}\,(\uTy) = \Ty$, c'est celle du monoïde libre à deux générateurs $\Delta_+$, $\Delta_-$. Cette loi de composition s'interprète, au niveau catégorique (et non plus seulement combinatoire) comme une somme amalgamée
+\[
+I_{\tau\tau'} = I_\tau \amalg_{(e, \underline{1}_\tau, \underline{0}_{\tau'})} I_{\tau'},
+\]
+où $e$ est la catégorie unité, et où $\underline{1}_\tau$, $\underline{0}_{\tau'}$ représentent maintenant les morphismes $e \longrightarrow I_\tau$, $e \longrightarrow I_{\tau'}$ , ayant comme image l'élément but et l'élément source respectivement de l'intervalle orienté envisagé. On a donc un carré cocartésien dans (Cat)
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & e \arrow[dl, hook', "\underline{1}_\tau"'] \arrow[dr, hook, "\underline{0}_{\tau'}"] & \\
+I_\tau \arrow[dr, hook, "i_{\tau,\tau'}"'] & \text{\scriptsize cocart.} & I_{\tau'} \arrow[dl, hook', "j_{\tau,\tau'}"] \\
+ & I_{\tau\tau'}, &
+\end{tikzcd}
+\]
+où toutes les flèches sont des foncteurs mono et pleinement fidèles. Que ce diagramme (évidemment commutatif) soit bien cocartésien dans (Cat) revient, par définition, à dire que pour toute $X$ dans Cat, le diagramme transposé
+\[
+\begin{tikzcd}[column sep=small, row sep=small]
+ & X & \\
+\uCh_\tau(X) \arrow[ur, "\beta_\tau" near end, "\text{\scriptsize (but)}" near start] & & \uCh_{\tau'}(X) \arrow[ul, "\sigma_{\tau'}"' near end, "\text{\scriptsize (source)}"' near start] \\
+ & \uCh_{\tau\tau'}(X), \arrow[ul] \arrow[ur] &
+\end{tikzcd}
+\]
+
+\texttt{[est cartésien]}
+
+\msp{page 49}ce qui revient à la tautologie suivante qu'un chemin $C$ dans $X$ de type $\tau\tau'$ `n'est autre chose' qu'un couple $(c,c')$ d'un chemin $c$ de type $\tau$ et d'un chemin $c'$ de type $\tau'$ `mis bout à bout' (dans cet ordre), i.e. tels que
+\[
+\mathrm{but}(c) = \mathrm{source}(c')
+\]
+(et on a alors
+\[
+\begin{array}{rcll}
+\mathrm{source}(C) & = & \mathrm{source}(c) & \\[1ex]
+\mathrm{but}(C) & = & \mathrm{but}(c') & \qquad\quad ).
+\end{array}
+\]
+
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+Il se pose ici le sempiternel problème si on va noter ce chemin $c{\cdot}c'$, ce qui semble à première vue s'imposer, ou plutôt $c' \circ c$, regardant le chemin $c$ de $x = \mathrm{source}(c)$ vers $y = \mathrm{but}(c)$ comme une sorte de morphisme de $x$ dans $y$ (cf. plus bas le formalisme des catégories de fractions), $c'$ comme un morphisme de $y = \mathrm{source}(c')$ vers $z = \mathrm{but}(c')$, et en interprétant le composé $C$ comme le composé de ces deux morphismes $c$, $c'$ (dans cet ordre du point de vue des opérations à effectuer), qu'on note traditionellement $c' \circ c$ ou $c' \cdot c$, et non $c \circ c'$ ou $c \cdot c'$, hélas! C'est cette notation que nous allons suivre plus bas. % [sic] traditionellement -> traditionnellement, orthographe
+
+Mais pour l'instant on ne va pas se soucier des chemins dans des catégories quelconques $X$, mais revenir au formalisme des $\tau$ et des $I_\tau$ eux-mêmes. L'interprétation catégorique de $\tau\tau'$ comme une somme amalgamée nous assure que cette opération de composition est fonctorielle :
+
+\msp{page 50}
+\[
+\tau_1 \xrightarrow{\ f\ } \tau_2, \quad \tau'_1 \xrightarrow{\ f'\ } \tau'_2 \qquad\quad \text{donne } \tau_1\tau'_1 \xrightarrow{f*f'} \tau_2\tau'_2
+\]
+(on n'écrira pas $f \cdot f'$ pour la flèche notée $f * f'$, à cause de la confusion possible avec la composition des flèches dans $\uTy$). On a transitivité de façon évidente : si de plus $\tau_2 \xrightarrow{\ g\ } \tau_3$, $\tau'_2 \xrightarrow{\ g'\ } \tau'_3$, \texttt{[on a]}
+\[
+(gf) * (g'f') = (g * g') \circ (f * f').
+\]
+Donc on a un bifoncteur de composition
+\[
+\uTy \times \uTy \longrightarrow \uTy \qquad\quad (c,c') \longmapsto c \cdot c' \text{ ou } c * c'.
+\]
+(En fait, on a aussi un bifoncteur
+\[
+\uTyp \times \uTyp \longrightarrow \uTyp,
+\]
+mais on préfère oublier maintenant la catégorie \underline{Typ}, qui donne un formalisme nettement moins simple.)
+
+Cette composition est \textit{strictement} associative et \textit{strictement unitaire} (l'unité étant bien sûr l'élément unité 1 du monoïde libre Ty, correspondant à la catégorie ponctuelle $\{0\}$), et pas seulement `à isomorphisme près'. Et pour cause, puisque dans $\uTy$ les isomorphismes sont des identités. \textit{Donc} $\uTy$ \textit{est un monoïde dans la catégorie} (Cat) des petites catégories!
+
+\msp{page 49$'$ (il y a un décalage dans la numérotation)}Cela implique que non seulement $\mathrm{Ob}\,\uTy = \Ty$, mais aussi $\mathrm{Fl}(\uTy)$, et plus généralement tous les ensembles de la forme $\mathrm{Hom}_{\mathrm{Cat}}(X, \uTy)$ sont des monoïdes, et ceci fonctoriellement en $X$, par exemple les composantes $\mathrm{Hom}_{\mathrm{Cat}}(\boldsymbol{\Delta}_i, \uTy)$ de l'ensemble semi-simplicial `nerf' de $\uTy$,
+\[
+\mathrm{Nerf}_i(\uTy) = \mathrm{Hom}_{\mathrm{Cat}}(\boldsymbol{\Delta}_i, \uTy),
+\]
+sont des monoïdes, et les applications semi-simpliciales entre elles sont des homomorphismes de monoïdes : le nerf de $\uTy$ est un \textit{monoïde semi-simplicial.}
+
+% ---- from Der-ChVII-456_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+On va décrire ces monoïdes $\mathrm{Nerf}_i(\uTy)$, et constater que ce sont tous des monoïdes \textit{libres,} tout comme $\mathrm{Nerf}_0(\uTy) = \mathrm{Ob}\,\uTy = \mathrm{Ty}$. Les applications semi-simpliciales entre ces monoïdes sont donc connus quand on les connaît sur les \textit{générateurs} de ces monoïdes libres (lesquels générateurs sont aussi les éléments indécomposables, donc définis intrinsèquement en termes de la structure multiplicative). % [sic] connus -> connues, agreement with « applications »
+
+Pour $\mathrm{Nerf}_0(\uTy) = \mathrm{Ty}$, c'est une chose vue, les générateurs sont
+\[
+\Delta_+,\Delta_-,
+\]
+correspondant respectivement aux intervalles orientés
+\[
+\begin{array}{rccc}
+\boldsymbol{\Delta}_+ : & 0 & \longrightarrow & 1\\[4pt]
+\boldsymbol{\Delta}_- : & 0 & \longleftarrow & 1.
+\end{array}
+\]
+
+\msp{page 50$'$}
+Pour $\mathrm{Nerf}_1(\uTy) = \mathrm{Fl}(\uTy)$, i.e. pour les flèches, le résultat $3^o$) du paragraphe précédent (détermination de $\mathrm{Fl}(\uTy)$) s'interprète aussi en disant que $\mathrm{Fl}(\uTy)$ est le monoïde libre engendré par un système de générateurs infini
+\[
+\mathfrak{f}_{\varepsilon,n}\ , \qquad\quad (\varepsilon,n)\in\{+1,-1\}\times\mathbf{N},
+\]
+indexé par l'ensemble produit $\{+1,-1\}\times\mathbf{N}$. Ici $\mathfrak{f}_{\varepsilon,n}$ désigne l'unique flèche dans $\uTy$
+\[
+\mathfrak{f}_{\varepsilon,l} : \Delta_\varepsilon \longrightarrow \Delta^l_\varepsilon
+\]
+(où bien sûr l'exposant $l$ désigne une exponentiation pour la loi de composition dans $\uTy$
+\[
+\Delta^l_\varepsilon = \underbrace{\Delta_\varepsilon\circ\Delta_\varepsilon\circ\ \cdots\ \circ\Delta_\varepsilon}_{l\text{ copies}},
+\]
+et non la puissance cartésienne dans Cat, où dans $\uTy$ (où elle n'existe que si $l\in\{0,1\}$)). % [sic] où dans -> ou dans, conjunction intended
+Dans la description de $\mathrm{Fl}(\uTy)$ dans le paragraphe précédent, on a écrit le `terme général' du monoïde libre en groupant ensemble les groupes de foncteurs successifs de la forme $f_{+,0}$, $f_{-,0}$, i.e. corréspondant aux deux flèches de dégénérescence indécomposables (pour $*$) % [sic] corréspondant -> correspondant, accent
+\[
+\left\{
+\begin{array}{lccc}
+f_{+,0} : & \Delta_+ & \longrightarrow & e\\[4pt]
+f_{-,0} : & \Delta_- & \longrightarrow & e
+\end{array}
+\right.
+\]
+(\footnote[15]{\textbf{NB} Le `mot' vide de $\mathrm{Fl}(\uTy)$ correspond à la flèche $\mathrm{id}_1$, où $1$ est l'élément unité de Ty, réalisant l'`intervalle' ponctuel.}). Le sous-monoïde libre de $\mathrm{Fl}(\uTy)$ engendré par ces deux éléments est le monoïde des flèches de dégénérescence (pure) quelconques
+% foot: Version 22 décembre 2001
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 51}
+dans $\uTy$ :
+\[
+f_\tau : I_\tau \longrightarrow e \qquad\quad (\tau\in\mathrm{Ty}),
+\]
+et on a
+\[
+f_\tau * f_{\tau'} = f_{\tau\tau'},
+\]
+i.e. l'application
+\[
+\tau \longmapsto f_\tau :\quad \underbrace{\mathrm{Ob}\,(\uTy)}_{=\,\mathrm{Ty}\,=\,\mathrm{Nerf}_0(\uTy)} \quad\longrightarrow\quad \underbrace{\mathrm{Fl}(\uTy)}_{\mathrm{Nerf}_1(\uTy)}
+\]
+est un homomorphisme de monoïdes, transformant $\Delta_\varepsilon$ ($\varepsilon\in\{+1,-1\}$) dans $\mathfrak{f}_{\varepsilon,0}$. Ce n'est pas l'application de dégénérenscence de $\mathrm{Nerf}_0$ dans $\mathrm{Nerf}_1$, i.e. l'application $\tau\longmapsto\mathrm{id}_\tau$. Celle-ci est donnée par % [sic] dégénérenscence -> dégénérescence, spelling
+\[
+\begin{array}{ccc}
+\mathrm{Ob}\,(\uTy) & \longrightarrow & \mathrm{Fl}(\uTy)\\[4pt]
+\tau & \longmapsto & \mathrm{id}_\tau
+\end{array}
+\ :\
+\left|\
+\begin{array}{rcccl}
+ & \Delta_\varepsilon & \longmapsto & \mathfrak{f}_{\varepsilon,1} & \qquad(\varepsilon\in\{+1,-1\})\\[4pt]
+\text{i.e.} & \Delta_+ & \longmapsto & \mathfrak{f}_{+,1} & \\[4pt]
+ & \Delta_- & \longmapsto & \mathfrak{f}_{-,1}\ . &
+\end{array}
+\right.
+\]
+Quant aux homomorphismes source et but
+\[
+\begin{tikzcd}[column sep=large]
+\mathrm{Fl}(\uTy) \arrow[r, shift left, "\sigma\text{ (source)}"] \arrow[r, shift right, "\beta\text{ (but)}"'] & \mathrm{Ob}\,(\uTy),
+\end{tikzcd}
+\]
+ils sont évidents sur les générateurs
+\[
+\left\{
+\begin{array}{lcl}
+\sigma(\mathfrak{f}_{\varepsilon,l}) & = & \Delta_\varepsilon\\[4pt]
+\beta(\mathfrak{f}_{\varepsilon,l}) & = & \Delta^l_\varepsilon.
+\end{array}
+\right.
+\]
+
+Je vais décrire maintenant $\mathrm{Nerf}_2(\uTy)$, i.e. les systèmes
+\[
+\tau \xrightarrow{\ f\ } \tau' \xrightarrow{\ g\ } \tau''.
+\]
+
+\msp{page 52}
+Se donner $f\in\mathrm{Fl}(\uTy)$ revient à se donner une suite ordonnée de générateurs $f_{\varepsilon,l}$, donc une suite
+\[
+\begin{aligned}
+&\mathfrak{f}_{\varepsilon_1,l_1},\ \mathfrak{f}_{\varepsilon_2,l_2},\ \ \dots\ \ ,\mathfrak{f}_{\varepsilon_n,l_n}\\
+&((\varepsilon_i,l_i))_{1\leq i\leq n}\in[\{\pm1\}\times\mathbf{N}]^n.
+\end{aligned}
+\]
+On a alors
+\[
+\begin{aligned}
+x &= \Delta_{\varepsilon_1}\Delta_{\varepsilon_2}\cdots\Delta_{\varepsilon_n} &\qquad\qquad& \mathrm{long}\,x = n\\
+y &= \Delta^{l_1}_{\varepsilon_1}\Delta^{l_2}_{\varepsilon_2}\cdots\Delta^{l_n}_{\varepsilon_n} && \mathrm{long}\,y = \textstyle\sum_{i\in[1,n]} l_i.
+\end{aligned}
+\]
+% foot: Version 22 décembre 2001
+
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+Se donner $q : y\longrightarrow z$, i.e. un objet de $y\backslash\uTy$, revient à se donner une application de l'ensemble des $m=\sum l_i$ flèches de transition de $y$ dans $\mathbf{N}$. En fait, on a % [sic] q -> g, the map is called g below (« la donnée de g »)
+\[
+\mathrm{Tr}(y) = \mathrm{Tr}(\Delta^{l_1}_{\varepsilon_1})\amalg\mathrm{Tr}(\Delta^{l_2}_{\varepsilon_2})\amalg\ \cdots\ \amalg\mathrm{Tr}(\Delta^{l_n}_{\varepsilon_n})
+\]
+(`ensemble somme', i.e. réunion disjointe), donc
+\[
+\mathrm{Hom}_{\mathrm{Ens}}(\mathrm{Tr}(y)) \simeq \prod_{i\in[1,n]}\mathrm{Hom}_{\mathrm{Ens}}(\underbrace{\mathrm{Tr}(\Delta^{l_i}_{\varepsilon_i})}_{[1,l_i]},\mathbf{N}), % [sic] Hom_Ens(Tr(y)) -> Hom_Ens(Tr(y),N), second argument missing
+\]
+donc la donnée de $g$ équivaut à la donnée d'un système de $n$ applications
+\[
+\left\{
+\begin{array}{l}
+\pi_i : [1,l_i]\longrightarrow\mathbf{N} \qquad\quad (\text{pondération de }\Delta^{l_i}_{\varepsilon_i})\\[6pt]
+\text{pour } i\in[1,n].
+\end{array}
+\right.
+\]
+Mais pour $i\in[1,n]$, considérons l'élément de $\mathrm{Nerf}_2$
+\[
+\Delta_{\varepsilon_1}\xrightarrow{\mathfrak{f}_{\varepsilon_i,l_i}}\Delta^{l_i}_{\varepsilon_i}\xrightarrow{g_{\varepsilon,\pi_i}}\underbrace{\Delta^{\pi_i(1)}_{\varepsilon_i}\Delta^{\pi_i(2)}_{\varepsilon_i}\cdots\Delta^{\pi_i(l_i)}_{\varepsilon_i}}_{\Delta_{\varepsilon_i}^{\Sigma_j\pi_i(j)\overset{\text{déf}}{=}\mathrm{long}(\pi_i)}}, % [sic] \Delta_{\varepsilon_1} -> \Delta_{\varepsilon_i}, and g_{\varepsilon,\pi_i} -> g_{\varepsilon_i,\pi_i}, index i intended
+\tag*{(1)}
+\]
+
+\msp{page 53}
+où $g_{\varepsilon_i,\pi_i}$ est la flèche définie en termes de $\pi_i$ au paragraphe précédent. Mais ce n'est autre aussi que
+\[
+g_{\varepsilon_i,\pi_i} = \mathfrak{f}_{\varepsilon_i,\pi_i(1)}*\mathfrak{f}_{\varepsilon_i,\pi_i(2)}*\cdots*\mathfrak{f}_{\varepsilon_i,\pi_i(l_i)}.
+\tag*{(2)}
+\]
+L'élément de $\mathrm{Nerf}_2$ envisagé ne dépend que de
+\[
+(\varepsilon_i,l_i,\pi_i), \qquad\quad \text{où } (\varepsilon_i,l_i)\in\{\pm1\}\times\mathbf{N},\ \pi_i : [1,l_i]\longrightarrow\mathbf{N}.
+\]
+(\textbf{NB} Si $l_i=0$, $[1,l_i]=[1,0]=\emptyset$ par convention, et $\pi_i$ est l'unique application $\emptyset\longrightarrow\mathbf{N}$, donc la donnée $(\varepsilon_i,l_i,\pi_i)$ revient alors à $(\varepsilon_i,l_i)$.)
+
+Si
+\[
+(\varepsilon,l,\pi)\ \text{ comme dessus,} \qquad\quad (\varepsilon,l)\in\{\pm1\}\times\mathbf{N},\ \pi : [1,l]\longrightarrow\mathbf{N},
+\]
+désignons par
+\[
+\mathfrak{f}_{\varepsilon,l,\pi}
+\]
+l'élément de $\mathrm{Nerf}_2$ donné par
+\[
+\Delta_\varepsilon\xrightarrow{\mathfrak{f}_{\varepsilon,l}}\Delta^l_\varepsilon\ \xrightarrow{\quad\mathfrak{f}_{\varepsilon,\pi(1)}\ \ *\ \cdots\ *\ \ \mathfrak{f}_{\varepsilon,\pi(l)}\quad}\Delta^{\pi(1)}_\varepsilon\Delta^{\pi(2)}_\varepsilon\cdots\Delta^{\pi(l)}_\varepsilon.
+\]
+On peut formuler la construction précédente en disant que tout élément de $\mathrm{Nerf}_2$ peut se décomposer de façon unique en un produit
+\[
+(f,g) = \mathfrak{f}_{\varepsilon_1,l_1,\pi_1}*\mathfrak{f}_{\varepsilon_2,l_2,\pi_2}*\cdots*\mathfrak{f}_{\varepsilon_n,l_n\pi_n}, % [sic] l_n\pi_n -> l_n,\pi_n, comma missing in index
+\]
+ce qui prouve que $\mathrm{Nerf}_2(\uTy)$ est le monoïde libre sur les générateurs précédents $\mathfrak{f}_{\varepsilon,l,\pi}$. (\textbf{NB} à la suite vide correspond
+\[
+1\xrightarrow{\mathrm{id}_1}1\xrightarrow{\mathrm{id}_1}1 \qquad\qquad .)
+\]
+% foot: Version 22 décembre 2001
+
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 54}
+Si l'objet de $\mathrm{Nerf}_2$ est
+\[
+x\xrightarrow{\ f\ }y\xrightarrow{\ g\ }z,
+\]
+la construction précédente nous dit, en termes de la donnée combinatoire, i.e. de la suite de données
+\[
+(\varepsilon_1,l_1,\pi_1),\ \dots\ ,\ (\varepsilon_n,l_n,\pi_n),
+\]
+quels sont $x$, $y$, $z$ : chacun d'eux est le produit dans $\mathrm{Nerf}_0=\mathrm{Ty}$ des $n$ facteurs $x_i$, $y_i$ ou $z_i$ respectivement, pour $i\in[1,n]$, donnés dans la définition des $\mathfrak{f}_{\varepsilon_i,l_i,\pi_i}$, i.e. de
+\[
+\Delta_{\varepsilon_i},\ \Delta^{l_i}_{\varepsilon_i},\ \text{ et }\Delta^{\pi_i(1)}_{\varepsilon_i}\Delta^{\pi_i(2)}_{\varepsilon_i}\cdots\Delta^{\pi_i(l_i)}_{\varepsilon_i}=\Delta^{\mathrm{long}(\pi_i)}_{\varepsilon_i}
+\]
+(où $\mathrm{long}(\pi_i)=\sum_{j\in[1,l_i]}\pi_i(j)$). Donc
+\[
+\left\{
+\begin{array}{lcl}
+x & = & \prod^{\mathrm{Ty}}_{i\in[1,n]}\Delta_{\varepsilon_i}\\[4pt]
+y & = & \prod^{\mathrm{Ty}}_{i\in[1,n]}\Delta^{l_i}_{\varepsilon_i}\\[4pt]
+z & = & \prod^{\mathrm{Ty}}_{i\in[1,n]}\Delta^{\mathrm{long}(\pi_i)}_{\varepsilon_i}
+\end{array}
+\right.
+\]
+(\footnote[16]{attention, les produits doivent être pris en respectant l'ordre des facteurs donné par la notation indicielle en $i$.}), et on trouve de même $f$, $g$ comme des produits (au sens $*$) de $n$ facteurs $f_i$ resp. $g_i$ ($i\in[1,n]$) explicités dans les formules (1), (2) (p. 52, 53) :
+\[
+\begin{array}{lclccl}
+f_i & = & \mathfrak{f}_{\varepsilon_i,l_i} : & \Delta_{\varepsilon_i} & \longrightarrow & \Delta^{l_i}_{\varepsilon_i}\\[4pt]
+g_i & = & g_{\varepsilon_i,l_i} : & \Delta^{l_i}_{\varepsilon_i} & \longrightarrow & \Delta^{\mathrm{long}(\pi_i)}_{\varepsilon_i}, % [sic] g_{\varepsilon_i,l_i} -> g_{\varepsilon_i,\pi_i}, notation of (1), (2)
+\end{array}
+\]
+$g_i$ lui-même étant représenté comme un $*$-produit de $l_i$ facteurs indécomposables, de sorte que $f$ et $g$ apparaissent sous forme
+\msp{page 55}
+de $*$-produits de $n$, resp. de $\sum_{i\in[1,n]}l_i$ facteurs de la forme $\mathfrak{f}_{\varepsilon,\nu}$. Pour terminer de tenir en mains l'objet semi-simplicial tronqué $(\mathrm{Nerf}_i(\uTy))_{0\leq i\leq 2}$, il reste à décrire les deux applications de dégénérescence $\mathrm{Nerf}_1\longrightarrow\mathrm{Nerf}_2$ (cas où $f$ ou $g$ est une flèche identique) et surtout l'application de \textit{composition} des flèches
+\[
+\mathrm{Nerf}_2(\uTy)\xrightarrow{\ \gamma\ }\mathrm{Nerf}_1(\uTy)=\mathrm{Fl}(\uTy).
+\]
+Il suffit de donner $\gamma$ sur les générateurs, et on a tautologiquement, par définition des $\mathfrak{f}_{\varepsilon,l,\pi}$
+\[
+\gamma(\mathfrak{f}_{\varepsilon,l,\pi})=\mathfrak{f}_{\varepsilon,\mathrm{long}(\pi)}.
+\]
+(\textbf{NB} Il n'existe au plus qu'un seul morphisme de $\Delta_\varepsilon$ (de $\Delta_+$ ou de $\Delta_-$) dans un intervalle $I_\tau$. Il existe si et seulement si $\tau$ est de la forme $\Delta^l_\varepsilon$, $l\in\mathbf{N}$.)
+% foot: Version 22 décembre 2001
+
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. VII, Édition des Universités de Montpellier II et Paris VII
+Le cas $g=\mathrm{id}$ correspond au cas où
+\[
+\pi_i(j)=1 \qquad\quad \forall j\in[1,l_i],
+\]
+les $\mathfrak{f}_{\varepsilon_i,l_i,\pi_i}$ sont alors détérminés en fonction des $\mathfrak{f}_{\varepsilon_i,l_i}$, et l'application de dégénérescence est % [sic] détérminés -> déterminés, accent
+\[
+\mathfrak{f}_{\varepsilon,l}\longmapsto\mathfrak{f}_{\varepsilon,l,1_l} \qquad\quad (\text{où } 1_l \text{ est la fonction constante de valeur 1 sur } [1,l]).
+\]
+Le $f=\mathrm{id}$ est celui où les $l_i$ sont égaux à 1. Alors chaque $\pi_i : [1,1]\longrightarrow\mathbf{N}$ peut être vu comme un élément de $\mathbf{N}$, la donnée de $(\varepsilon_i,l_i,\pi_i)$ revient à celle des $(\varepsilon_i,n_i)\in\{\pm1\}\times\mathbf{N}$, i.e. la donnée % [sic] Le f = id -> Le cas f = id, word « cas » missing
+\msp{page 56}
+d'une suite de $n$ générateurs parmi les $\mathfrak{f}_{\varepsilon,l}$. L'application de dégénérescence $\mathrm{Nerf}_1\longrightarrow\mathrm{Nerf}_2$ est ici donnée sur les générateurs par
+\[
+\mathfrak{f}_{\varepsilon,l}\longmapsto\mathfrak{f}_{\varepsilon,1,l}.
+\]
+Heureusement, on n'a plus à prouver l'associativité de la composition.
+
+\textbf{NB} La simplicité de ces descriptions renforce mon sentiment que la catégorie $\uTy$ définie à présent, avec les \textit{morphismes d'intervalles orientés croissants} $I_\tau\longrightarrow I_{\tau'}$ comme flèches de $\uTy$, est bien `la bonne'. On va déjà voir si elle donne une description sympa des catégories de fractions $X\Sigma^{-1}$, sans tortillements comme précédemment.
+
+Mais on a promis de déterminer $\mathrm{Nerf}_r(\uTy)$, pour tout $r\in\mathbf{N}$. Le générateur général de $\mathrm{Nerf}_r$ est de la forme (pour $\varepsilon\in\{\pm1\}$ fixé)
+\[
+\underbrace{\Delta_\varepsilon}_{=\,\Delta^{l_0}_\varepsilon\text{avec } l_0=1}\xrightarrow{\ f_1\ }\Delta^{l_1}_\varepsilon\xrightarrow{\ f_2\ }\Delta^{l_2}_\varepsilon\longrightarrow\ \cdots\ \xrightarrow{\ f_r\ }\Delta^{l_r}_\varepsilon,
+\]
+où les $f_i : \Delta^{l_{i-1}}_\varepsilon\longrightarrow\Delta^{l_i}_\varepsilon$, $i\in[1,r]$, sont donnés par des applications
+\[
+\pi_{i-1} : [1,l_{i-1}]\longrightarrow\mathbf{N} \qquad\quad \text{telles que }\ \underbrace{\mathrm{long}(\pi_{i-1})}_{\overset{\text{déf}}{=}\ \Sigma_{j\in[1,l_i]}\pi_i(j)}\ = l_i. % [sic] \Sigma_{j\in[1,l_i]}\pi_i(j) -> \Sigma_{j\in[1,l_{i-1}]}\pi_{i-1}(j), indices shifted with respect to long(\pi_{i-1})
+\]
+(NB $\pi_0 : [1,1]=\{1\}\longrightarrow\mathbf{N}$ est identifié à $\mathrm{long}(\pi_0)=\pi_0(1)=l_1$.)
+
+\msp{page 57}
+Pour ne pas faire dépendre la définition du domaine des $\pi_i$ ($i\in[0,r-1]$) des entiers $l_i$, on peut aussi considérer les $\pi_i$ comme des applications
+\[
+\mathbf{N}^*\xrightarrow{\ \pi\ }\mathbf{N} \qquad\quad (\mathbf{N}^*=\{i\in\mathbf{N}\mid i\geq 1\})
+\]
+à supports finis (i.e. tels que $\pi(i)=0$ pour $i$ grand), et exiger de façon précise
+\[
+\begin{aligned}
+&\mathrm{supp}\,\pi_0\ \subseteq\ \{1\}\\
+&\mathrm{supp}\,\pi_1\ \subseteq\ [1,\mathrm{long}(\pi_0)]\\
+&\qquad\ \cdots\\
+&\boxed{\mathrm{supp}\,\pi_i\ \subseteq\ [1,\mathrm{long}(\pi_{i-1})]}, \qquad\quad \text{pour }\ \boxed{i\in[0,r-1]}\quad .
+\end{aligned}
+\tag*{$(**)$}
+\]
+% foot: Version 22 décembre 2001
+\end{document}

@@ -1,0 +1,876 @@
+% Commentary on manuscript pp. 1--24, produced by GPT-6 Astra.
+
+\begin{dcomment}{exposition}{p1}{The relative latching map measures a new attachment}
+Grothendieck wants a condition on a map of diagrams which survives taking their colimits. The condition must record how the new value at an index is attached to everything already constructed. Merely asking that each component be a cofibration loses precisely this information. The pushout in $(*)$ isolates the additional attachment, and the rest of the preliminaries explains how to assemble these attachments without losing control of the resulting map.
+
+We use the order convention of the manuscript: there is a unique arrow $i\to j$ when $i\leq j$, and an open subset is a lower ideal. Thus $\mathcal M(I^\circ)$ here means the category of covariant functors $I\to\mathcal M$; the circle belongs to Grothendieck's indexing convention, not to a reversal of the arrows in the diagrams being considered. Put
+\[
+ L_iX=\mathop{\rm colim}_{j<i}X_j,
+ \qquad
+ \rho_i(u):X_i\amalg_{L_iX}L_iY\longrightarrow Y_i.
+\]
+The map $\rho_i(u)$ is the relative latching map. In section~1, membership in $C_I$ means exactly that all these maps belong to $C$. When $i$ is minimal, both latching objects are initial and $\rho_i(u)=u_i$. At a nonminimal index, the latching object includes every incoming relation, rather than just a chosen list of immediate predecessors. This matters even for finite posets: two paths from an earlier object have to impose the same identification in the colimit.
+
+The hypotheses on $C$ say that attachments may be transported by pushout and composed, including through a continuous ordinal sequence. They do not require lifting properties, retract closure, or a choice of generating cofibrations. Accordingly, the first proposition is a statement about colimits and a class of morphisms; weak equivalences enter only in the corollary. Throughout these paragraphs a transfinite composite means the composite along a small ordinal-indexed chain whose value at a limit stage is the colimit of its preceding values.
+
+For a lower ideal $J\subset I$, the incoming category at any $j\in J$ is unchanged by restriction: every $i<j$ also lies in $J$. Consequently $L_j(X|_J)=L_jX$, and the relative latching test restricts to $J$. This proves the assertion in footnote~2 and explains why lower ideals, rather than arbitrary full subposets, organize the argument. The same observation will allow us to apply a colimit statement to all predecessors of a single index and recover a statement about its component.
+
+There is a change of definition ahead. In section~2, $C_I$ will be defined by all open subsets of each principal lower ideal, even for a poset that is not artinian. The present one-latching test and that stronger definition agree for artinian posets under the stated closure hypotheses. They need not agree for an arbitrary poset. Keeping track of this change prevents the later counterexample from appearing to contradict Proposition~1.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p7:ce qui achève la démonstration.}{A continuous filtration of the colimit map}
+The auxiliary objects $Z_i$ put all stages over the fixed object $X_\alpha$, so that their successive changes are pushouts of the relative latching maps. This is the right idea. Their indexing becomes more transparent if the value immediately before an attachment is distinguished from the value immediately after it. In particular, the original diagram $X$ need not itself be continuous at a limit ordinal.
+
+Here is a continuous version of the argument, including the marginal strengthening. Let the indexing ordinal be $\lambda$, and write
+\[
+ X_{<\beta}=\mathop{\rm colim}_{i<\beta}X_i,
+ \quad Y_{<\beta}=\mathop{\rm colim}_{i<\beta}Y_i,
+ \quad X=X_{<\lambda},\quad Y=Y_{<\lambda}.
+\]
+For $0\leq\beta\leq\lambda$, set
+\[
+ P_\beta=X\amalg_{X_{<\beta}}Y_{<\beta}.
+\]
+Then $P_0=X$ and $P_\lambda=Y$. If $\delta\leq\lambda$ is a nonzero limit ordinal, the universal property of colimits gives
+\[
+ \mathop{\rm colim}_{\beta<\delta}P_\beta
+ \simeq X\amalg_{X_{<\delta}}Y_{<\delta}=P_\delta.
+\]
+Indeed, a compatible cocone from the left side consists of a map from $X$ and compatible maps from the $Y_{<\beta}$ agreeing on every $X_{<\beta}$. These are exactly the data defining a map from the displayed pushout. This verifies continuity without an extra exactness assumption on $\mathcal M$.
+
+At a successor stage the square
+\[
+\begin{tikzcd}[column sep=large]
+X_\beta\amalg_{L_\beta X}L_\beta Y
+ \arrow[r,"\rho_\beta(u)"]\arrow[d]
+ &Y_\beta\arrow[d]\\
+P_\beta\arrow[r]&P_{\beta+1}
+\end{tikzcd}
+\]
+is cocartesian. To check this, a map from its pushout amounts to a map from $X$ and a map from $Y_\beta$ whose restrictions along every $X_i$, $i\leq\beta$, agree. Since $\beta$ is terminal in the subposet $i\leq\beta$, the resulting object is $X\amalg_{X_\beta}Y_\beta=P_{\beta+1}$. Thus each successor arrow belongs to $C$, and transfinite closure proves $X\to Y\in C$. Restricting the entire argument to $i\leq i_0$ proves $u_{i_0}\in C$.
+
+For the marginal assertion start the same construction at any $\gamma\leq\lambda$. It proves
+\[
+ X_{<\lambda}\amalg_{X_{<\gamma}}Y_{<\gamma}
+       \longrightarrow Y_{<\lambda}\quad\in C.
+\]
+The proof uses only the cells with indices $\gamma\leq i<\lambda$. In particular, it does not need the map $X_{<\gamma}\to Y_{<\gamma}$ to belong to $C$. The source later checks this map in order to invoke Proposition~1 as already stated; the relative filtration itself is slightly more economical.
+
+This also locates the two harmless indexing slips on manuscript page~6. The predecessor in the parenthesis is $i_0-1$, not the printed $\beta_0-1$. The special arrow $X_\alpha=Z_{-1}\to Z_0$ has source index $-1$, although the following sentence calls it the case $i=0$. Both printed readings are retained; neither affects the pushout argument. The continuous $P$-filtration avoids counting a nontrivial attachment at a limit as though the original $Z$-diagram were already continuous there.
+\end{dcomment}
+
+\begin{dcomment}{later}{p7}{The later Reedy formulation}
+The relative latching condition became a standard language for diagrams built in increasing degree. For a finite or locally finite poset, one may assign to an object the maximum length of a strictly increasing chain ending there. Every nonidentity arrow raises this natural-number degree. With inverse arrows restricted to identities, this is a direct Reedy category. The cells in the preceding proof are its relative latching maps.
+
+The general cellular decomposition of a natural transformation is developed in \citet[Proposition~6.3]{RiehlVerity2014Reedy}; their Lemma~7.1 identifies a Reedy cofibration which is an objectwise weak equivalence by the triviality of all its relative latching maps. These are the two mechanisms used here. The comparison does not import a full model structure into Grothendieck's first propositions: their proofs already work with his stated closure properties.
+
+For cofibration categories, \citet[Theorem~9.4.1(1)(a,b)]{RadulescuBanu2009} gives the later relative-colimit statement for an open embedding of direct categories. It includes both the transition map for a cofibrant diagram and the relative map associated with a Reedy cofibration. His cofibrancy conventions and existence assumptions are more restrictive than the cocomplete ambient category used in these preliminaries, so the formulations should not be identified without that qualification.
+
+An arbitrary artinian poset need not admit a natural-number degree. Its rank can be a larger ordinal. The transfinite version of the degree convention is treated explicitly, in the dual orientation, by \citet[Definition~4.6 and Theorem~4.7]{Shulman2015Reedy}. The ordinal formulation is the one appropriate to the unification Grothendieck reaches on manuscript pages~23--25.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p8}{Why objectwise equivalences become trivial attachments}
+Grothendieck next wants the same colimit construction to preserve weak equivalences. The essential hypothesis is that $TC=C\cap W$ has the same attachment stability as $C$. It permits the cellular proof to be used a second time, with $TC$ in place of $C$. No assertion that arbitrary colimits preserve $W$ is being made.
+
+The reverse implication in the corollary can be written without simultaneous induction on three differently phrased statements. Assume the $\rho_i(u)$ belong to $C$ and the $u_i$ belong to $W$. Induct through the well-founded indices, assuming that $\rho_j(u)\in TC$ for every $j<i$. Applied to the predecessor diagram, the already established cellular argument for the class $TC$ gives
+\[
+ L_iX\longrightarrow L_iY\quad\in TC.
+\]
+Its pushout $X_i\to X_i\amalg_{L_iX}L_iY$ is therefore in $TC$. Its composite with $\rho_i(u)$ is $u_i\in W$, so the two-out-of-three property gives $\rho_i(u)\in W$. Since the relative latching condition already places it in $C$, it belongs to $TC$. The induction starts at a minimal object, where $\rho_i(u)=u_i$.
+
+Conversely, if all $\rho_i(u)$ lie in $TC$, the same cellular argument shows that every component and the total colimit map belong to $TC$. Restriction to lower ideals also gives $L_iX\to L_iY\in TC$, and pushout gives the corresponding $\beta_i\in TC$. These are exactly the four maps listed in condition $3^\circ$ of the second corollary. The assertion is an equivalence between two descriptions of trivial diagram cofibrations.
+
+There is a genuine but local misprint in the argument on manuscript page~3. After reducing to $\alpha_{i_0}\in TC$, the text says ``ou encore $\alpha_{i_0}\in C$''. The proposition already supplies membership in $C$; what remains is membership in $W$. The next displayed condition (c) states precisely that remaining assertion. The intended proof therefore survives after replacing the final $C$ in that sentence by $W$. Similarly the $T_I$ printed in condition $2^\circ$ on manuscript page~8 is $C_I$ in the intended statement, as its immediately following explanation confirms.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p10}{Which conclusions need a cofibrant source diagram}
+The relative comparison map is the main invariant of Corollary~2. Its source combines the whole old $X$-diagram with the part of $Y$ already constructed, so its being a cofibration does not require either diagram to start cofibrantly. By contrast, the transition map $X_{I'}\to X_{I''}$ concerns the attachment of $X$ itself and does require a condition on $X$.
+
+This distinction is visible in the two footnotes. Footnote~5 says that the assumptions on the objects are unnecessary in Proposition~2 and both its corollaries. Read literally, this is too broad. Footnote~7 gives the correct qualification for the transition maps: $X$ must be a cofibrant diagram to deduce $\tau_X\in C$. The relative conclusion $u_{I',I''}\in C$ holds without that hypothesis.
+
+A complete counterexample to the blanket reading takes $\mathcal M=\mathrm{Set}$, $C$ the isomorphisms, and $I=\{0<1\}$. Let $X=Y$ be the diagram
+\[
+ \varnothing\longrightarrow\{*\},\qquad u=\mathrm{id}_X.
+\]
+At $0$, the relative latching map is $\mathrm{id}_{\varnothing}$. At $1$, its source is
+\[
+ X_1\amalg_{X_0}Y_0=\{*\}\amalg_{\varnothing}\varnothing=\{*\},
+\]
+and its target is $Y_1=\{*\}$; the map is again an identity. Thus $u\in C_I$. For the open subsets $I'=\{0\}$ and $I''=I$, however,
+\[
+ \tau_X:X_{I'}=\varnothing\longrightarrow X_{I''}=\{*\}
+\]
+is not an isomorphism. This example satisfies every closure hypothesis on $C$, including transfinite closure. The failure therefore concerns the missing hypothesis, not the colimit construction.
+
+Under the stated cofibrancy hypothesis the transition conclusions follow formally from the relative one. Apply it first to $\varnothing_I\to X$ to obtain $X_{I'}\to X_{I''}\in C$. Its pushout along $u_{I'}$ is $Y_{I'}\to X_{I''}\amalg_{X_{I'}}Y_{I'}$, hence also lies in $C$. Composing with $u_{I',I''}\in C$ gives $Y_{I'}\to Y_{I''}\in C$. Thus cofibrancy of $Y$ need not be assumed separately once $X$ is cofibrant and $u$ satisfies the relative latching condition. The useful division is between a condition on the map and a condition on its initial diagram.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p13}{Excision for a cover by lower ideals}
+Grothendieck reduces an attachment over a large open subset to an attachment over one new principal open subset. The reduction is an ordinary colimit identity. Stating that identity before the larger diagrams makes clear which part of the argument uses the order and which part uses the class $C$.
+
+Let $A,B$ be lower ideals of a poset, put $H=A\cap B$ and $T=A\cup B$, and let $X:T\to\mathcal M$ be any diagram. Then
+\[
+ X_T\simeq X_A\amalg_{X_H}X_B.
+\]
+To prove this, maps from the right side into an object $Q$ are cocones on $X|_A$ and $X|_B$ that agree on $H$. Every arrow of $T$ belongs to $A$ or to $B$: if its target lies in one of these lower ideals, its source lies there too. The two cocones therefore combine uniquely into a cocone on all of $X$. This establishes the displayed universal property. The same argument proves that the square of full subcategories with vertices $H,A,B,T$ is a pushout in $\mathrm{Cat}$.
+
+Now let $u:X\to Y$, and define the relative domain
+\[
+ R_{A,T}=Y_A\amalg_{X_A}X_T,
+ \qquad u_{A,T}:R_{A,T}\longrightarrow Y_T.
+\]
+We claim that $u_{A,T}$ is a pushout of $u_{H,B}$. Indeed,
+\[
+\begin{split}
+ R_{A,T}
+ &\simeq Y_A\amalg_{X_H}X_B\\
+ &\simeq Y_A\amalg_{Y_H}
+             (Y_H\amalg_{X_H}X_B)
+       =Y_A\amalg_{Y_H}R_{H,B}.
+\end{split}
+\]
+Pushing out $R_{H,B}\to Y_B$ consequently gives
+\[
+ R_{A,T}\amalg_{R_{H,B}}Y_B
+ \simeq Y_A\amalg_{Y_H}Y_B\simeq Y_T.
+\]
+These canonical isomorphisms identify the induced comparison map with $u_{A,T}$, proving the claim. If $u_{H,B}\in C$, or in $TC$, its pushout belongs to the same class. No cofibrancy assumption on $X$ or $Y$ appears in the proof.
+
+For the application in the text, take $A=I'$, $B=I_0$ and $H=I'_0$. Local finiteness ensures that $B=I/s$ is finite; hence the relative problem on $H\subset B$ can be solved by a finite induction before the transfinite assembly of the large index set is attempted. This is the precise role of local finiteness in Proposition~2. It does not imply that the full index set is finite, and here it means that every principal lower ideal is finite, not merely that every interval $[i,j]$ is finite.
+
+The reduction also explains why the square is a cover by opens. For arbitrary subposets $A,B$, there can be arrows with one endpoint in each complement. Compatible cocones on the two pieces would then fail to include the conditions imposed by those arrows, and their pushout would not compute $X_T$.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p18:Soit $I$ un ensemble ordonné fini}{The diamond follows from compatible cocones}
+The long cube is intended to prove one fact: the relative attachment across $I'\subset I$ is inherited from the smaller attachment across $I'_0\subset I_0$. The preceding excision identity proves it directly. We can also verify the diamond on its own terms, which explains why Grothendieck's second diagram succeeds where the first obscures the calculation.
+
+Continue with $H=A\cap B$, $T=A\cup B$, and write
+\[
+ R_{H,T}=Y_H\amalg_{X_H}X_T,
+ \quad R_{A,T}=Y_A\amalg_{X_A}X_T,
+ \quad R_{B,T}=Y_B\amalg_{X_B}X_T.
+\]
+Consider compatible maps $R_{A,T}\to Q$ and $R_{B,T}\to Q$ which agree on $R_{H,T}$. They determine maps $a:Y_A\to Q$ and $b:Y_B\to Q$ agreeing on $Y_H$, together with one common map $x:X_T\to Q$. The defining pushout conditions say that $x|_{X_A}=a\,u_A$ and $x|_{X_B}=b\,u_B$. Because $X_T=X_A\amalg_{X_H}X_B$, these conditions uniquely determine $x$ from $a,b$. There is therefore no extra datum beyond the compatible pair $a,b$. Such pairs are precisely maps $Y_T=Y_A\amalg_{Y_H}Y_B\to Q$. Naturality in $Q$ proves
+\[
+ R_{A,T}\amalg_{R_{H,T}}R_{B,T}\simeq Y_T.
+\]
+This is the lower diamond of diagram~(6).
+
+The same calculation explains transitivity for three nested lower ideals $J\subset K\subset L$. The map $u_{J,L}$ factors through $R_{K,L}$, and the first factor
+\[
+ R_{J,L}\longrightarrow R_{K,L}
+\]
+is the pushout of $u_{J,K}:R_{J,K}\to Y_K$ along the canonical map $R_{J,K}\to R_{J,L}$. Thus relative maps belonging to $C$ compose after one pushout. This is exactly the operation needed when one adds finitely many elements or finitely many principal opens.
+
+Everything here is an identity of ordinary pushouts. Earlier packages discussed homotopy pushouts and failures of converse excision; the present calculation requires none of those stronger hypotheses. In particular, the proof does not infer an unknown face of an arbitrary cube from a collection of homotopy-cartesian or homotopy-cocartesian faces. It identifies all the relevant objects by their actual universal properties. For continuity with the earlier commentary, compare the discussion of the cube principle in DER\_XIIb-a, manuscript pages~78--79; the issue there is different because the asserted faces are homotopical rather than specified ordinary colimits.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p18}{A finite induction with the last attachment exposed}
+The finite lemma supplies the local input for the transfinite construction. It is useful to write its induction so that the exceptional terminal-object case is unavoidable: this is the case in which the latching condition itself must be used, rather than another induction hypothesis.
+
+Fix a finite poset $I$ and a lower ideal $K$. Enumerate $I\setminus K$ by repeatedly selecting an element minimal among those remaining, and adjoin these elements one at a time. Every intermediate subset is a lower ideal. The transitivity calculation above reduces the problem to $I=K\cup\{i\}$, with all predecessors of $i$ in $K$. Let $B=I/i$ and $H=B\cap K=I_{<i}$. Excision identifies $u_{K,I}$ as a pushout of $u_{H,B}$.
+
+If $B\ne I$, the ambient poset $B$ has smaller cardinality, so the induction hypothesis applies. If $B=I$, the element $i$ is terminal and $K=I_{<i}$; the map $u_{K,I}$ is exactly $\rho_i(u)$. This proves the assertion for $C$. The printed condition on manuscript page~19 is $I'_0\ne I$, but $I'_0$ excludes $i_0$ and always differs from $I$. The condition needed in this dichotomy is $I_0\ne I$. The following sentence, ``Sinon, $i_0$ est un objet final'', confirms that reading.
+
+For the assertion involving $W$, assume in addition that every component of $u$ is in $W$. In the terminal case, the induction hypothesis puts $u_K$ in $TC$. Hence its pushout $X_i\to X_i\amalg_{L_iX}L_iY$ lies in $TC$. The composite with $\rho_i(u)$ is $u_i\in W$, and two-out-of-three gives $\rho_i(u)\in W$. Together with the already established membership in $C$, this yields $\rho_i(u)\in TC$. The smaller-poset case and the successive attachments use only pushouts and ordinary composition in $TC$.
+
+At cardinality zero every comparison is an identity of the initial object, so both inductions have the stated base case. Conversely, if all relative latching maps lie in $TC$, apply the proved lemma with $TC$ replacing $C$ and $K=\varnothing$; this gives the colimit map in $TC$. Restriction to each principal ideal gives every component in $TC$. We have therefore proved the full equality
+\[
+ C_I\cap W_{I^\circ}=(TC)_I
+\]
+for finite $I$, including both implications and all relative maps $u_{K,I}$. Only finite colimits and ordinary composition have been used. The later appeal to transfinite closure is needed to assemble infinitely many such finite pieces; it is not hidden inside the finite lemma.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p20}{A fork whose ordinary colimit loses a circle}
+The colimit theorem is meant to control the identifications made when diagrams are glued. A small example shows why its latching condition cannot be replaced by objectwise information. Work in simplicial sets, with monomorphisms as cofibrations and weak homotopy equivalences as weak equivalences, and let $I$ have the two arrows $a\leftarrow s\to b$.
+
+Define diagrams $X,Y$ by
+\[
+ X_s=\partial\Delta^1,\qquad X_a=X_b=\Delta^1,
+ \qquad
+ Y_s=\partial\Delta^1,\qquad Y_a=Y_b=\Delta^0.
+\]
+The two structure maps of $X$ are the boundary inclusions. Those of $Y$ collapse the two vertices to a point. Let $u_s$ be the identity and let $u_a,u_b$ be the collapse maps $\Delta^1\to\Delta^0$. Each component of $u$ is a weak equivalence: the first is an isomorphism and the other two identify contractible realizations. The diagram $X$ is cofibrant, since its latching maps are $\varnothing\to\partial\Delta^1$ and the two inclusions $\partial\Delta^1\hookrightarrow\Delta^1$. The diagram $Y$ fails the condition at both outer vertices.
+
+The two ordinary colimits are
+\[
+ X_I=\Delta^1\amalg_{\partial\Delta^1}\Delta^1,
+ \qquad
+ Y_I=\Delta^0\amalg_{\partial\Delta^1}\Delta^0=\Delta^0.
+\]
+The first simplicial set has two vertices and two nondegenerate edges, with the same endpoints, and no nondegenerate simplices of higher dimension. Its realization is a circle. One can see the obstruction directly in the normalized chain complex:
+\[
+ C_1=\mathbb Z e_a\oplus\mathbb Z e_b,
+ \quad C_0=\mathbb Z v_0\oplus\mathbb Z v_1,
+ \quad \partial e_a=\partial e_b=v_1-v_0.
+\]
+Thus $H_1(X_I)=\mathbb Z(e_a-e_b)$, whereas $H_1(Y_I)=0$. The colimit of $u$ is not a weak equivalence.
+
+Its relative latching maps identify the defect exactly. At $a$ and $b$ they are
+\[
+ \Delta^1\amalg_{\partial\Delta^1}\partial\Delta^1
+       =\Delta^1\longrightarrow\Delta^0,
+\]
+which are not monomorphisms. Consequently $u\notin C_I$, and the corollary makes no false prediction. This example is also a warning about the future derived colimit: replacing the two collapse maps in $Y$ by the two boundary inclusions produces the cofibrant diagram $X$ with its comparison to $Y$. The homotopical information is carried by the manner in which the common boundary is attached, even though every individual value has already been compared by a weak equivalence.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p22:Le reste se prouve comme avant.}{Starting a filtration at an arbitrary open subset}
+Grothendieck returns to Corollary~2 because the relative statement is the one needed for later Kan extensions. The proof with $I_0=I'$ can be made completely independent of the behavior of the map over $I'$ itself. This also supplies the general gluing step that is abbreviated in the lemma on manuscript page~24.
+
+Let $(A_\beta)_{\beta\leq\lambda}$ be a continuous increasing chain of lower ideals, with $A_0=K$ and $A_\lambda=J$. Assume that every relative map $u_{A_\beta,A_{\beta+1}}$ belongs to $C$. Fix the final $X_J$ and form
+\[
+ P_\beta=X_J\amalg_{X_{A_\beta}}Y_{A_\beta}.
+\]
+The initial object of this chain is the domain of $u_{K,J}$ and its final object is $Y_J$. At a successor stage, the map $P_\beta\to P_{\beta+1}$ is the pushout of $u_{A_\beta,A_{\beta+1}}$ by transitivity of pushouts. At a limit stage it is the colimit of the preceding stages, by the same cocone calculation as in the ordinal proof. It follows that $u_{K,J}\in C$. This relative filtration does not require $u_K\in C$. The source's check at index zero is valid, but belongs to its chosen reduction to the absolute Proposition~1.
+
+For later use, suppose now that $J$ is any small poset and that, for every $j\in J$ and every lower ideal $H\subset J/j$, one knows $u_{H,J/j}\in C$. Choose a well-order of the elements of $J\setminus K$. Starting at $K$, adjoin the principal lower ideals of these elements in that order, taking unions at limit stages. Repetitions do no harm. If the current ideal is $A$ and the next principal ideal is $B=J/j$, the successor relative map is a pushout of $u_{A\cap B,B}$, by excision. It therefore belongs to $C$, and the preceding filtration proves $u_{K,J}\in C$.
+
+This argument uses no well-foundedness of the order on $J$: the stronger hypothesis over every open subset of every principal ideal replaces it. In the locally finite case these local comparisons were supplied by the finite lemma. On manuscript page~24 they are supplied by the definition of the set $P$. The same construction is the main mechanism behind Theorem~2.1(1), so the preliminary proof is best read as anticipating that theorem's organization.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p23}{The artinian induction and the wording of the question}
+The two successful constructions suggest a common hypothesis: attachments should have no indefinitely descending dependence. For a poset this is well-foundedness. In the usual set-theoretic setting with choice, it is equivalent to the manuscript's artinian condition that every descending sequence eventually stabilizes. An ordinal is well founded, and a poset with finite principal lower ideals is well founded, so this hypothesis includes both of the cases already treated.
+
+One can construct a compatible ordinal filtration directly. Define the rank recursively by
+\[
+ r(i)=\sup_{j<i}\bigl(r(j)+1\bigr).
+\]
+Choose a well-order within each rank and concatenate the ranks. Every predecessor of an element then occurs earlier. For a specified lower ideal $K\subset J$, apply this construction to $J\setminus K$ and place $K$ first. Adding one element at a time gives lower ideals $A_\beta$ with $A_0=K$ and union $J$. When $A_{\beta+1}=A_\beta\cup\{i\}$, all strict predecessors of $i$ lie in $A_\beta$. Excision identifies the successor relative map with a pushout of $\rho_i(u)$. The relative filtration therefore proves $u_{K,J}\in C$ for every $K\subset J$. This is a complete proof of the proposed common generalization.
+
+The literal question on manuscript page~23 asks whether the original latching condition together with local finiteness suffices. It does, and that case has just been proved in Corollary~2. The surrounding discussion, and the immediately following artinian corollary, show that the useful new question is whether local finiteness can be weakened to the artinian condition. We record both the printed wording and its mathematical context, without silently changing the word in the source.
+
+The lemma on manuscript page~24 can also be completed in its stated generality. Suppose every $i<i_0$ belongs to $P$, set $J=I/i_0$ and $J'=J\setminus\{i_0\}$, and take a lower ideal $K\subset J$. If $K=J$ the relative map is an isomorphism. Otherwise $K\subset J'$. For every $j\in J'$, the assumption $j\in P$ supplies all the local relative comparisons over $I/j$. The principal-open gluing argument of the preceding block therefore gives $u_{K,J'}\in C$, even if $J'$ is infinite or not well founded. The map $u_{J',J}=\rho_{i_0}(u)$ is in $C$ by hypothesis, so transitivity gives $u_{K,J}\in C$.
+
+Thus $P$ is progressive. Well-founded induction gives $P=I$. The displayed progressive condition in the proof must use $I_{<i_0}\subset P$, not $I/i_0\subset P$, since the latter already contains $i_0$ and is tautological. Likewise the element chosen below $x_0\notin P$ must be $x_1\notin P$. These printed slips and the repeated case $K=J$ are recorded in the correction register. The missing gluing paragraph is a proof omission repaired by the argument above; the artinian conclusion itself is valid.
+\end{dcomment}
+
+\begin{dcomment}{development}{p24}{Well-foundedness detected by maps of set diagrams}
+Grothendieck's artinian hypothesis is more than a convenient way to arrange the induction. One can characterize it by the validity of the latching test, using only diagrams of sets. The following formulation makes the obstruction independent of any model category. We checked the cellular descriptions in \citet[Proposition~6.3 and Corollary~6.8]{RiehlVerity2014Reedy}, the ordinal degree formulation in \citet[Section~4]{Shulman2015Reedy}, and the relative-colimit theorem of \citet[Section~9.4]{RadulescuBanu2009}. We did not find this universal converse in those inspected passages. We give our formulation and proof, without a claim of priority.
+
+\textbf{Recognition by the latching test.}\ours\quad
+Work with ordinary choice, and let $I$ be a small poset. The following conditions are equivalent: $I$ is well founded; every map of set-valued $I$-diagrams whose relative latching maps are injective has all its component maps injective; every such map has an injective map on colimits.
+
+\emph{Proof.} If $I$ is well founded, the preceding relative filtration applies with $C$ the injections in $\mathrm{Set}$. Pushouts of injections are injections: in the disjoint-union description of a pushout, the imposed equivalence relation cannot identify two different elements on the opposite side, because an element in the subobject has at most one representative there. Continuous transfinite composites of injections are injections, since equality of two representatives in the colimit is witnessed at a common later stage. The filtration consequently proves the colimit assertion, and restriction to $I/i$ proves the component assertion.
+
+Conversely, suppose $I$ is not well founded. By dependent choice there is a strictly descending chain
+\[
+ i_0>i_1>i_2>\cdots.
+\]
+Let $U$ be its upward closure:
+\[
+ U=\{j\in I\mid i_n\leq j\text{ for some }n\}.
+\]
+For a set $A$, define a diagram $E(A)$ by $E(A)_j=A$ when $j\in U$ and $E(A)_j=\varnothing$ otherwise. All arrows within $U$ act by the identity of $A$; all other arrows have empty source. This is a functor because $U$ is upward closed.
+
+For $j\in U$, the poset $U\cap I_{<j}$ is nonempty and connected. To prove both assertions, choose $n$ with $i_n\leq j$; then $i_{n+1}<j$ belongs to it. Given any two of its objects $a,b$, choose $n_a,n_b$ with $i_{n_a}\leq a$ and $i_{n_b}\leq b$. For $m>\max(n_a,n_b)$, the element $i_m$ lies below both $a,b$ and still lies strictly below $j$. This supplies the zigzag $a\leftarrow i_m\to b$. A constant diagram with identity transition maps over a nonempty connected category has colimit $A$: its cocones are precisely one map $A\to Q$. The empty values outside $U$ impose no further condition. Therefore
+\[
+ L_jE(A)=A\quad(j\in U),
+ \qquad L_jE(A)=\varnothing\quad(j\notin U),
+\]
+and the latching map is an identity in both cases.
+
+Choose the noninjective map $q:\{0,1\}\to\{*\}$ and let $u=E(q)$. At $j\in U$ its relative latching map is
+\[
+ \{0,1\}\amalg_{\{0,1\}}\{*\}
+       \xrightarrow{\mathrm{id}}\{*\},
+\]
+an isomorphism; outside $U$ it is $\mathrm{id}_{\varnothing}$. Nevertheless $u_j=q$ at every $j\in U$, so the component condition fails. The same common-lower-bound argument shows that $U$ itself is nonempty and connected. Hence $\mathop{\rm colim}_I E(A)=A$, and the colimit of $u$ is again $q$, so the colimit condition fails as well. This proves the equivalence.\hfill$\square$
+
+The obstruction is especially sharp: every relative latching map in the counterexample is an isomorphism. An endless predecessor chain can make the local condition see no new attachment anywhere, although a nontrivial map is present throughout the chain. This is exactly the failure that a well-founded order excludes. The counterexample on manuscript pages~37--38 exhibits a particular instance; the recognition statement explains why the phenomenon occurs for every non-well-founded poset, after extending the descending-chain example by empty values outside its upward closure.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p25:Soit $I$ un (petit) ensemble ordonné}{A local definition that already sees every open part}
+Grothendieck restarts the discussion because he wants the useful conclusion of the preliminary arguments to become the definition. The change is substantial. In \S1, one tested the single boundary $I_{<i}\subset I/i$ at each object. In \S2, one tests every lower open $K\subset I/i$. We shall call these respectively the latching condition and the strong open condition, solely to distinguish the two definitions during this transition. The notation $C_I$ is reused in the source; the meanings agree under the artinian hypothesis, but they must not be identified before that hypothesis has been used.
+
+We write $\downarrow i=\{j\mid j\leq i\}$ and $X_K=\operatorname{colim}_{k\in K}X_k$. Here an open means a lower set, and $\M(I^\circ)$ means the category of covariant diagrams $I\to\M$. For a natural transformation $f:X\to Y$, put
+\[
+ Q_f(K,J)=X_J\amalg_{X_K}Y_K,
+ \qquad d_f(K,J):Q_f(K,J)\longrightarrow Y_J
+ \quad(K\subset J).
+\]
+Thus $Q_f(K,J)$ is Grothendieck's $Y_{K,J}$ and $d_f(K,J)$ is his $u_{K,J}$. The object $Q_f(K,J)$ contains the whole source diagram over $J$, together with the part of the target already installed over $K$. The comparison $d_f(K,J)$ attaches the remaining target data. This interpretation explains why its membership in $C$ is the correct relative condition.
+
+Three immediate specializations should be kept available. For $K=\varnothing$ the comparison is $X_J\to Y_J$. For $K=J$ it is an isomorphism. For $J=\downarrow i$ and $K=I_{<i}$ it becomes
+\[
+ X_i\amalg_{L_iX}L_iY\longrightarrow Y_i,
+ \qquad L_iX=\operatorname{colim}_{j<i}X_j.
+\]
+This is the relative latching map. On an artinian poset it supplies all the strong open tests; on a general poset it need not even imply that the individual $f_i$ belong to $C$. The reverse infinite chain on page 38 will isolate precisely this failure.
+
+Theorem 2.1(1) is stronger in a different direction: the strong open tests imply $d_f(K,J)\in C$ for arbitrary lower opens $K\subset J$, without any artinian hypothesis. Its proof is an ordinary cellular argument with principal lower opens as the pieces. All colimits in this assertion are ordinary colimits in $\M$. Neither a homotopy colimit nor a model structure has yet been used.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p27}{The three assertions of Theorem 2.1 have different hypotheses}
+The theorem separates a gluing result from two induction results. Its first part uses the strong open condition and closure of $C$ under pushout and continuous transfinite composition. Its second part identifies that condition with the latching condition when $I$ is artinian. Its third part adds a class $W$ satisfying two out of three and assumes the same closure properties for $TC=C\cap W$; under the artinian hypothesis it identifies trivial diagram cofibrations by the formula
+\[
+ (TC)_I=C_I\cap W_{I^\circ}.
+\]
+The corollaries concerning weak equivalences inherit this artinian hypothesis. In particular, Corollary 2.3 is not an additional assertion that this equality holds for every poset. The question on page 38 would make no sense under that reading.
+
+The mechanism of the third assertion is short enough to record independently. Assume, by well-founded induction, that the restrictions below $i$ already satisfy the strong $TC$ condition. If $K\subsetneq\downarrow i$ is lower, then $K\subset I_{<i}$. Applying part (1) with $TC$ to the restricted transformation gives $f_K\in TC$. In the factorization
+\[
+ X_i\xrightarrow{\ a\ }X_i\amalg_{X_K}Y_K
+       \xrightarrow{\ d_f(K,\downarrow i)\ }Y_i,
+\]
+$a$ is a pushout of $f_K$, hence belongs to $TC$. The composite is $f_i\in W$. Two out of three gives $d_f(K,\downarrow i)\in W$, while the strong $C$ condition gives membership in $C$. This proves the induction step. The reverse inclusion follows immediately by taking $K=\varnothing$.
+
+This argument shows exactly why no closure of all of $W$ under pushouts is required. Only the pushout of the already established trivial cofibration $f_K$ is formed. Nor is an arbitrary colimit of objectwise weak equivalences being declared a weak equivalence: the relative cofibration conditions are what allow part (1) to be applied. These distinctions are essential when the theorem is later used to put a cofibration structure on a diagram category.
+
+Corollary 2.4 is the corresponding absolute statement. Taking $X$ to be the initial diagram says that a cofibrant diagram has cofibration maps $Y_K\to Y_J$ for every inclusion of lower opens. This includes the individual structure maps but imposes more than their being cofibrations. At a branching object the entire latching colimit must embed by a cofibration, including the compatibility among different incoming branches.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p29}{A branching diagram and the finite meaning of the noetherian case}
+Grothendieck's open-set formulation makes a small example particularly instructive. Let $I$ be the square poset with elements $a,b,c,d$ and relations $a<b<d$, $a<c<d$, with $b,c$ incomparable. Take $\M=\mathrm{Set}$ and let $C$ be the injections. A diagram is cofibrant precisely when the maps
+\[
+ \varnothing\longrightarrow X_a,\quad
+ X_a\longrightarrow X_b,\quad X_a\longrightarrow X_c,\quad
+ X_b\amalg_{X_a}X_c\longrightarrow X_d
+\]
+are injections. The last condition controls the intersection of the two branches. When all maps have been realized as inclusions into $X_d$, it says $X_b\cap X_c=X_a$. Individual injectivity of every arrow does not imply this equality.
+
+For a complete failure, take $X_a=\varnothing$ and $X_b=X_c=X_d=\{*\}$, with the maps into $X_d$ the identity. Every structure map is injective. The latching map at $d$ is the fold $\{b,c\}\to\{*\}$, which is not. The open $K=\{a,b,c\}$ has colimit a two-element set, and its map to $X_d$ identifies the two branches. Thus the extra open-set tests detect the precise identification that ordinary pointwise cofibrancy misses.
+
+The topological adjective in Corollary 2.5 also needs its order convention. $\Esp(I)$ has the lower sets as its opens. Noetherianity means that no strictly increasing infinite sequence of lower sets exists. The process on page 30 adds a principal lower set whenever the current open is proper; in a noetherian space this process must stop after finitely many additions. The argument therefore uses only finitely many pushouts and compositions, even when the chosen principal opens themselves are infinite. This removes the transfinite \emph{closure} assumption; it does not by itself remove the need for the colimits occurring inside those opens.
+
+There is a useful simplification when noetherianity is combined with artinianity. Under the usual choice principles, an artinian poset with noetherian lower-set topology is finite. Indeed, if $I$ were infinite, choose a minimal element of $I$, then a minimal element of what remains, and continue. After $n$ choices the chosen finite set $J_n$ is lower: when an element was chosen, every strict predecessor had already been chosen. The sequence $J_0\subsetneq J_1\subsetneq\cdots$ contradicts noetherianity. Conversely every finite poset has both properties. This observation explains why finite colimits suffice in the first alternative of Theorem 3.1. Noetherianity alone allows infinite examples, such as $\mathbf N^{\mathrm{opp}}$; those examples are not artinian.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p31:qu'il faudrait dégager en lemme}{The cube reduces to one universal property}
+Grothendieck extracts Lemma 2.6 to make the long preliminary cube reusable. The useful invariant of a commutative square is its comparison from the pushout of the first three vertices to the fourth. The lemma says that a suitable pushout of squares transports this comparison by pushout. A calculation with universal properties gives the assertion without relying on the perspective of a three-dimensional drawing.
+
+In the notation of the lemma, suppose the two horizontal squares are pushouts,
+\[
+ X'_1=X_1\amalg_{X_0}X'_0,
+ \qquad Y'_1=Y_1\amalg_{Y_0}Y'_0.
+\]
+Let $Q_0=Y_0\amalg_{X_0}X'_0$ and $Q_1=Y_1\amalg_{X_1}X'_1$. There is a canonical identification
+\[
+ Q_1\cong Y_1\amalg_{X_0}X'_0,
+ \qquad Q_1\amalg_{Q_0}Y'_0
+       \cong Y_1\amalg_{Y_0}Y'_0=Y'_1.
+\]
+To check the second identification, a map from either side to an object $T$ is a pair of maps $Y_1\to T$, $Y'_0\to T$ agreeing on $Y_0$. The extra map from $X'_0$ is already supplied through $Y'_0$, and the relations imposed by $Q_0$ are exactly the stated agreement. Hence the square $Q_0\to Y'_0$, $Q_1\to Y'_1$ is cocartesian. This is the claimed pushout of defect maps.
+
+For two lower opens $A,B\subset I$, a cocone over $A\cup B$ is exactly a pair of cocones over $A$ and $B$ agreeing over $A\cap B$. A mixed relation introduces no additional condition: if $a\leq b$ and $b\in B$, lower closure puts $a$ in $B$. Consequently
+\[
+ X_{A\cup B}\cong X_A\amalg_{X_{A\cap B}}X_B,
+\]
+and likewise for $Y$. Applying the lemma with $A=I_\alpha$ and $B=\downarrow s_\alpha$ shows that the attachment from $I_\alpha$ to $I_\alpha\cup\downarrow s_\alpha$ is a pushout of the strong local comparison over $B$. This is the precise connection between the abstract cube and Theorem 2.1.
+
+The sentence introducing the lemma says ``carr\'es cart\'esiens'', although the lemma concerns cocartesian squares. The same missing prefix occurs in the final sentence of its proof in the PDF. We retain the edition's wording in the source and use the pushout calculation above for its mathematical reading. The diagram's $f'_0$ is the full map $X'_0\to Y'_0$, not either horizontal map between intermediate pushouts.
+
+The description of the intermediate cube as ``totalement cocart\'esien'' is stronger than the hypotheses justify if it means that all six faces are pushouts. Take all the $X$-vertices empty, $Y_0=Y'_0=\varnothing$, and $Y_1=Y'_1=\{*\}$. Both original horizontal squares are pushouts, but the back face with vertices $X_0,X_1,Y_0,Y_1$ is not. The bottom face of the intermediate cube is nevertheless a pushout, as the calculation proves, and this is the only extra face needed. The lemma is correct; its proof should invoke that face rather than an assertion about every face.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p33:une suite ordinale croissante d'ouverts de $I$}{The relative transfinite composition starts after the initial attachment}
+Lemma 2.7 provides the second ingredient in the global argument: once the successive local changes have been understood, they must be assembled into the desired relative map. Its printed statement combines two different starting points and does not state continuity at limit ordinals. Both points can be repaired without changing the filtration actually used in Theorem 2.1.
+
+Fix a continuous increasing filtration of lower opens $(I_\alpha)_{\alpha\leq\lambda}$ with $I_0=K$ and $I_\lambda=J$, where $I_\delta=\bigcup_{\alpha<\delta}I_\alpha$ at every nonzero limit. Set
+\[
+ Z_\alpha=X_J\amalg_{X_{I_\alpha}}Y_{I_\alpha}.
+\]
+Then $Z_0=Q_f(K,J)$ and $Z_\lambda\cong Y_J$. The universal property of a cocone over a union gives $X_{I_\delta}=\operatorname{colim}_{\alpha<\delta}X_{I_\alpha}$ and the analogous identity for $Y$. Since colimits commute with colimits, it follows that $Z_\delta=\operatorname{colim}_{\alpha<\delta}Z_\alpha$. At a successor stage the square
+\[
+\begin{tikzcd}
+ Q_f(I_\alpha,I_{\alpha+1}) \arrow[r] \arrow[d,"{d_f(I_\alpha,I_{\alpha+1})}"'] & Z_\alpha \arrow[d] \\
+ Y_{I_{\alpha+1}} \arrow[r] & Z_{\alpha+1}
+\end{tikzcd}
+\]
+is a pushout, as follows by substituting the definitions. Thus $d_f(K,J):Z_0\to Z_\lambda$ is the continuous transfinite composite of these successor pushouts. There is no additional initial factor involving $f_K$.
+
+If one wants instead the absolute map $f_J:X_J\to Y_J$, one must first prepend $X_J\to Z_0$, the pushout of $f_K$, and then take the relative composite. This is the legitimate role of an extra index $-1$. It cannot be included while the asserted composite still has domain $Q_f(K,J)$. Likewise, the displayed identification $X_J=Z_0$ on page 34 is valid only in the special case $K=\varnothing$, not for the relative assertion as stated.
+
+Continuity cannot be discarded from the lemma. In $\mathrm{Set}$ let $I$ have one object, let $X$ be empty, let $Y$ be a singleton, and take $I_n=\varnothing$ for every finite $n$, but $I_\omega=I$. Every successor attachment below $\omega$ is an identity of the empty set, whereas the requested final map is $\varnothing\to\{*\}$. It is therefore not their transfinite composite. The filtration constructed on page 30 is continuous, so this defect of the isolated statement does not invalidate the theorem. The modern terminology makes continuity explicit in the definition of a transfinite composite \citep[Definition 5.3]{RiehlVerity2014Reedy}.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p35}{Well-founded induction turns boundaries into all open tests}
+Grothendieck now uses artinianity to recover the economical definition with which the chapter began. For a poset, the relevant hypothesis is well-foundedness of the strict relation: every nonempty subset has a minimal element. Under dependent choice this is equivalent to the stated absence of an infinite strictly descending sequence. It is not a finiteness assertion about the predecessor set of an object.
+
+Assume every relative latching map lies in $C$. Let $P$ consist of those $i$ for which the transformation on $\downarrow i$ satisfies the strong open condition. Suppose all strict predecessors of $i$ lie in $P$. For a proper lower open $K\subset\downarrow i$, put $J'=I_{<i}$. The restricted transformation on $J'$ has the strong open condition, because this property is tested on the principal lower sets of its objects. Theorem 2.1(1), already proved without artinianity, gives $d_f(K,J')\in C$. By hypothesis $d_f(J',\downarrow i)\in C$. The comparison $d_f(K,\downarrow i)$ factors as a pushout of the first of these maps followed by the second; hence it belongs to $C$. The case $K=\downarrow i$ is an identity. Well-founded induction proves $P=I$.
+
+The proof is logically independent of Theorem 2.1(3), and uses part (1) only on a smaller lower open. This matters because the induction on the trivial class will repeat the argument with an extra use of two out of three. The duplicate label ``2.9'' for the corollary here and the lemma on page 37 should be read by their content, not as a logical back-reference to a later statement.
+
+Modern Reedy theory packages the same boundary calculation as a factorization by degree. For a finite or locally finite artinian poset one can use a degree in $\mathbf N$, such as the maximal length of a chain ending at an object. A general artinian poset can require an ordinal rank
+\[
+ r(i)=\sup_{j<i}\bigl(r(j)+1\bigr).
+\]
+For example $\omega+1$ is artinian but its last element has arbitrarily long finite chains below it, so no strictly increasing $\mathbf N$-valued degree exists. Grothendieck's transfinite argument therefore exceeds the finite-degree convention used in many introductions. The relative latching maps themselves are the familiar ones; it is the allowable height and the required colimits that change. The published Reedy account identifies these maps and their cellular presentations explicitly \citep[Definition 4.14 and Proposition 6.3]{RiehlVerity2014Reedy}.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p38}{What the reverse chain does and does not refute}
+Grothendieck's counterexample separates the local latching tests from cofibrancy of the values. Write $I=\mathbf Z^{\leq0}$ with its usual order. Every strict predecessor set of $i$ has final object $i-1$, so $L_iY=Y_{i-1}$. The latching test for $\varnothing\to Y$ therefore asks only that $Y_{i-1}\to Y_i$ belong to $C$. By contrast, every nonempty lower open of $\downarrow i$ has a largest element; the strong condition asks for all these transition maps and also for $\varnothing\to Y_i$.
+
+Choose, for instance, $\M=\mathrm{Set}$ and $C$ the isomorphisms. This class contains the isomorphisms and is stable under pushout and transfinite composition. Let $Y$ be the constant singleton diagram. Every latching map is the identity of a singleton, while $\varnothing\to Y_i$ is not an isomorphism. The latching criterion therefore fails to imply the strong criterion. This makes the counterexample completely concrete; it does not require a model category or a choice of $W$.
+
+For an arbitrary transformation $f:X\to Y$ on this chain, the strong condition is equivalent to $f_i\in C$ and the adjacent relative maps $d_f(\downarrow i,\downarrow(i+1))\in C$. A larger interval is obtained by finitely many such attachments, and the empty lower open supplies the pointwise condition. If in addition every $f_i\in W$, then every $f_i\in TC$. In the adjacent factorization of $f_{i+1}$, the first map is a pushout of $f_i$, hence is in $TC$, and two out of three puts the adjacent relative map in $TC$. Finite composition gives all remaining tests. Thus the equality involving $TC$ survives in this example even though the latching characterization does not.
+
+The two issues on page 38 are consequently distinct. The displayed constant diagram disproves omission of artinianity from Theorem 2.1(2). It is not a counterexample to Theorem 2.1(3) without artinianity. The latter is the question Grothendieck leaves undecided here.
+\end{dcomment}
+
+\begin{dcomment}{development}{p38}{The trivial-cofibration equality on chains without a first element}
+Grothendieck's reverse-chain calculation suggests that a missing first element need not obstruct the trivial-cofibration equality. We can extend his example by using cofinality in place of well-foundedness. The statement concerns the strong open definition of $C_I$ throughout. We checked the direct-diagram definitions in \citet[Sections 9.1--9.2]{RadulescuBanu2009} and the relative latching and cellular presentations in \citet[Definition 4.14 and Proposition 6.3]{RiehlVerity2014Reedy}; these specified passages do not state the following extension. We record the argument as a continuation of the source, without a claim of priority or a claim to settle arbitrary posets.
+
+\textbf{Proposition.}\ours\ Assume $\M$ is cocomplete, $C$ contains isomorphisms and is closed under pushout and small transfinite composition, $W$ contains isomorphisms and satisfies two out of three, and $TC=C\cap W$ has the same closure properties as $C$. Suppose every principal lower set $\downarrow i$ of $I$ is linearly ordered. Then
+\[
+ (TC)_I=C_I\cap W_{I^\circ},
+\]
+without an artinian hypothesis on $I$.
+
+\emph{Proof.} First let $K$ be a nonempty linearly ordered set. It admits a strictly increasing well-ordered cofinal subset. To construct one, choose $s_0\in K$. At a stage where the previously chosen elements are not cofinal, choose an element strictly greater than all of them; such an element exists because failure of cofinality gives a $k$ above which no earlier choice lies, and linearity then puts all earlier choices below $k$. Distinct stages give distinct elements of the set $K$, so the construction stops before an ordinal of cardinality larger than $K$. At its stopping stage the chosen subset $S=\{s_\alpha\mid\alpha<\lambda\}$ is cofinal. A largest element, if present, simply ends the construction.
+
+Now let $f\in C_I\cap W_{I^\circ}$ and fix a lower open $K\subset\downarrow i$. If $K=\varnothing$, then $f_K$ is an identity. Otherwise choose such a cofinal chain $S\subset K$. For each $\alpha<\lambda$ put
+\[
+ U_\alpha=\bigcup_{\beta<\alpha}\downarrow s_\beta.
+\]
+The earlier chosen elements are cofinal in $U_\alpha$, so their $X$- and $Y$-colimits are $X_{U_\alpha}$ and $Y_{U_\alpha}$. This identification follows directly from cocones: every object of $U_\alpha$ maps to an earlier chosen element, and a common later choice compares any two such maps. The relative latching map of $f|_S$ at $\alpha$ is therefore
+\[
+ X_{s_\alpha}\amalg_{X_{U_\alpha}}Y_{U_\alpha}
+       \longrightarrow Y_{s_\alpha},
+\]
+namely $d_f(U_\alpha,\downarrow s_\alpha)$, which lies in $C$ by the strong condition. The pointwise maps of $f|_S$ are in $W$. Proposition 1 and its corollary, applied to the well-ordered set $S$, give $\operatorname{colim}_S f\in TC$. Cofinality identifies this map with $f_K$, so $f_K\in TC$.
+
+The composite $X_i\to X_i\amalg_{X_K}Y_K\to Y_i$ is $f_i$. Its first factor is a pushout of $f_K\in TC$, and its second factor belongs to $C$. Two out of three makes that second factor a weak equivalence. These are all the strong $TC$ tests at $i$. The reverse inclusion follows by taking $K=\varnothing$ in the definition. This proves the proposition.
+
+In particular the result covers every linearly ordered small set, including dense chains and chains with no first element. It also covers branching posets in which branching occurs only upwards, so that each individual object's predecessors remain linearly ordered. The proof uses the full transfinite hypotheses; it does not assert that sequential closure alone suffices at arbitrary cofinalities.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p38}{An arrow is a cofibrant two-layer diagram}
+The second remark turns a relative assertion into an absolute one. Label the two layers so that the arrow $f:X\to Y$ is the diagram on $I\times[1]$ with $X$ at level $0$ and $Y$ at level $1$. This fixes the endpoint convention independently of the opposite-category notation in the source. A lower open in this product is determined by lower opens $B\subset A\subset I$, and its colimit is
+\[
+ X_A\amalg_{X_B}Y_B.
+\]
+The formula follows because the arrows from level $0$ to level $1$ impose precisely the relations already imposed over $B$.
+
+Suppose $X$ is strongly cofibrant and $f\in C_I$. At an object $(i,0)$ the absolute cofibration test is a test for $X$. At $(i,1)$ an arbitrary lower-open test has the form
+\[
+ X_A\amalg_{X_B}Y_B\longrightarrow Y_i,
+ \qquad B\subset A\subset\downarrow i.
+\]
+It factors through $X_i\amalg_{X_B}Y_B$. The first map is a pushout of $X_A\to X_i$, which belongs to $C$ by cofibrancy of $X$; the second is the strong comparison for $f$. Thus the two-layer diagram is cofibrant. Conversely, testing its level-$0$ objects gives cofibrancy of $X$, and taking $A=\downarrow i$ in the level-$1$ tests gives all the strong tests for $f$. Taking the whole level-$1$ principal lower set also proves cofibrancy of $Y$.
+
+This calculation explains why the relative construction is natural under iteration. A map of diagrams is itself a diagram with one additional direction, and its relative latching object is the boundary contribution in that direction. The observation is valid for the strong definition without assuming artinianity. Artinianity is needed only when one replaces all these tests by the single latching test at each object.
+\end{dcomment}
+
+\begin{dcomment}{context}{p39}{Brown's axioms and the role of noncofibrant objects}
+Grothendieck introduces cofibrations as auxiliary data for a fixed localization. The weak equivalences are required to satisfy two out of three; the cofibrations supply the pushouts and factorizations needed to construct homotopy colimits. No lifting relation with a class of fibrations is imposed. The historical reference is to the dual of Brown's theory of fibrant objects \citep{Brown1973}. The broad comparison with Quillen's axioms was treated in the earlier companion DER\_VI-b, manuscript page 108, ``The axioms among Brown and Quillen''; the new point here is the systematic inclusion of noncofibrant objects.
+
+The existence convention in ``stable par cochangement de base'' matters. The Brown interpretation includes existence of the required pushouts of cofibrations. If the words were read as closure only for pushouts that happened to exist, Cof$_0$--Cof$_3$ together with an initial object would not provide the finite constructions used below. The explicit finite-colimit hypothesis of Theorem 3.1 removes this issue there. With the Brown existence convention, the cofibrant objects form a category of cofibrant objects: a pushout of a cofibration between cofibrant objects remains cofibrant, a factorization of a map with cofibrant source has cofibrant middle object, and finite coproducts are pushouts of the cofibrations from the initial object.
+
+In particular, the cylinder needed later is obtained by factoring the fold map
+\[
+ X\amalg X\longrightarrow X
+ \quad\hbox{as}\quad
+ X\amalg X\lhook\joinrel\longrightarrow IX\xrightarrow{\sim}X.
+\]
+The hook here denotes membership in $C$, not literal injectivity in an arbitrary category. Each endpoint inclusion $X\to IX$ is a trivial cofibration: it is a composite of cofibrations, and its composite with $IX\to X$ is the identity. Thus cylinders are constructed from Cof$_3$ rather than introduced as an independent choice of extra structure.
+
+Allowing noncofibrant objects does not enlarge the localized theory. Factoring $\varnothing\to X$ gives a cofibrant replacement $QX\xrightarrow{\sim}X$. This proves essential surjectivity of $\Ho_W(\M_c)\to\Ho_W(\M)$ immediately; full faithfulness requires the approximation argument, not just the existence of these replacements. The source returns to it in Lemma 3.4. A precise modern treatment is \citet[Theorem 6.1.6]{RadulescuBanu2009}. We do not replace this argument by a tacit assumption that replacement choices are functorial.
+
+The same construction applies to slices and coslices with their induced weak equivalences and cofibrations. In a coslice $S\backslash\M$, cofibrancy means that the structure map $S\to X$ is a cofibration; it does not mean that $X$ was cofibrant in $\M$. This relative interpretation is what makes the later discussion of exact homotopy pushout squares possible.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p41}{Fractions, homotopy, and weak pushout exactness}
+Grothendieck is preparing a calculus of representatives for morphisms in the localization. His QB relation first allows a weak equivalence $\alpha:X'\to X$ in the source, then asks for an ordinary cylinder homotopy between $f\alpha$ and $g\alpha$. That is the formula printed in the PDF. It should not be silently replaced by the formula one expects from the dual of a category of fibrant objects.
+
+Every relation of the displayed kind implies equality of $f$ and $g$ in $\Ho_W(\M)$. Indeed, for the two endpoint maps $e_0,e_1:X'\to IX'$ and the cylinder projection $q$, the equations $qe_0=qe_1=1$ show that $e_0=e_1$ after localization. A map $h:IX'\to Y$ gives $f\alpha=he_0=he_1=g\alpha$ there, and invertibility of $\alpha$ gives $f=g$. This verifies the direction used whenever such an explicit homotopy is supplied.
+
+A useful, separately verified equality criterion is the Brown formulation with enlargement of the target: for cofibrant $X,Y$, equality in the localization is equivalent to the existence of a trivial cofibration $b:Y\to Y'$ and a cylinder homotopy from $bf$ to $bg$. This is the convention in \citet[Section 6.3, diagram (6.1), and Theorem 6.3.1]{RadulescuBanu2009}. Its formal cancellation is in the target, whereas the displayed QB definition cancels in the source. The source does not explicitly assert that its quotient $\pi\M_c$ is already the full category of morphisms in the localization: it still localizes by fractions. Therefore the difference between these formulas is not, by itself, a counterexample to his assertion about fractions.
+
+For the applications here one may use this target-enlargement criterion and Brown's homotopy calculus. A morphism is represented by $X\to Z\xleftarrow{\sim}Y$; the denominator may be chosen to be a trivial cofibration \citep[Theorem 6.4.5(1)(a)]{RadulescuBanu2009}. This makes both the direction of the denominator and the role of the homotopy quotient explicit.
+
+The square-exactness requirement has a concrete consequence which is useful throughout the construction. Write $\mathcal H=\Ho_W(\M)$. For a homotopy-cocartesian square completing a span $B\leftarrow A\to C$ to $P$, and any test object $T$, the comparison
+\[
+ \operatorname{Hom}_{\mathcal H}(P,T)\longrightarrow
+ \operatorname{Hom}_{\mathcal H}(B,T)
+ \times_{\operatorname{Hom}_{\mathcal H}(A,T)}
+ \operatorname{Hom}_{\mathcal H}(C,T)
+\]
+is surjective. Grothendieck explicitly gives the dual Hom-set formulation in Chapter XIV, manuscript page~6, Corollary~2, and introduces its cocartesian dual on page~7 \citep{GrothendieckDerivateursXIV}. XVII invokes Brown's calculus for square exactness here and labels the corresponding requirement D\'er~6 in Corollary~3.9. We use the verified Hom-surjectivity statement; we do not identify it with every clause of the stronger quadrangulated-category axioms proposed in XIV.
+
+Here is the proof from that calculus. Represent the homotopy pushout by a span of cofibrant objects whose two legs are cofibrations, with ordinary pushout $P$, and replace $T$ by a cofibrant representative. Suppose classes $b:B\to T$ and $c:C\to T$ agree on $A$. The fraction theorem represents them by actual maps $b':B\to T'$ and $c':C\to T'$ after one common trivial-cofibration enlargement $T\to T'$: push out their two denominators over $T$ to obtain such a common target. The equality criterion gives, after a further trivial-cofibration enlargement if necessary, a cylinder $A\amalg A\to IA\xrightarrow{q}A$ and $h:IA\to T'$ with endpoint values $b'|_A$ and $c'|_A$.
+
+To make the agreement strict, let $d_0,d_1:A\to IA$ be the endpoints and put
+\[
+ B'=B\amalg_{A,d_0}IA,
+ \qquad P'=B'\amalg_{A,d_1}C.
+\]
+The map $B\to B'$ is a trivial cofibration, being a pushout of $d_0$. The cylinder projection defines a retraction $r:B'\to B$, which is therefore a weak equivalence. The other endpoint $A\to B'$ is a cofibration: the map $B\amalg A\to B'$ is a pushout of $A\amalg A\to IA$, and $A\to B\amalg A$ is a cofibration because $B$ is cofibrant. The maps $b'$ and $h$ glue on $B'$, and their value on the other endpoint agrees with $c'$. They consequently give $P'\to T'$. The gluing lemma applied to the objectwise weak equivalence of cofibrant spans $(A,B',C)\to(A,B,C)$ gives a weak equivalence $P'\to P$. Thus
+\[
+ P\xleftarrow{\sim}P'\longrightarrow T'\xleftarrow{\sim}T
+\]
+defines the desired morphism in $\mathcal H$. Its restrictions are $b$ and $c$ because the construction on $B'$ restricts to $b'$ on $B$, the map $B\to B'$ becomes the inverse of $r$, and the construction on $C$ is $c'$.
+
+This is a weak pushout property, with no uniqueness assertion. In spaces the homotopy pushout of $*\leftarrow S^0\to *$ is $S^1$. Testing against $S^1$ gives the comparison $\mathbb Z\to\{*\}$: self-maps of the circle have all integer degrees, whereas the two point maps and their restrictions have a single unbased homotopy class. Replacing Hom-surjectivity by an ordinary pushout universal property would therefore be false. The proof above applies in a coefficient category as soon as its required cofibration structure has been established.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p43}{C-squares and the two gluing calculations}
+Grothendieck's proposed $C$-square records the same relative defect used throughout the chapter. For a commutative square with vertices $A,B,D,E$, in that order, its defect is $B\amalg_A D\to E$. Requiring this map to belong to $C$ is symmetric under interchange of the two coordinate directions. It does not require any of the four boundary arrows separately to belong to $C$.
+
+The composition statement can be proved once in a form that covers both uses in the text. Consider a commutative rectangle with top row $A\to B\to C'$ and bottom row $D\to E\to F$. Its outer defect factors as
+\[
+ C'\amalg_A D\longrightarrow C'\amalg_B E\longrightarrow F.
+\]
+The first factor is the pushout of $B\amalg_A D\to E$ along the canonical map to $C'\amalg_A D$; the second is the defect of the right-hand square. If both inner squares are $C$-squares, pushout closure and composition closure show that the rectangle is one. Transposing gives the corresponding vertical-pasting statement.
+
+There are then two applications. If one holds $K\subset J$ fixed and composes transformations $X\to Y\to Z$, this formula proves closure of $C_I$ under composition. If one holds a transformation fixed and composes inclusions $K\subset J\subset L$, it proves the relative transitivity used in the induction of Theorem 2.1. The pictures differ only in which direction of a diagram is regarded as the variable.
+
+For cobase change, form a pointwise pushout $Y'=Y\amalg_X X'$ of diagrams. Colimits over an open commute with this pushout, so
+\[
+ Q_{f'}(K,J)\amalg_{Q_f(K,J)}Y_J\cong Y'_J.
+\]
+The comparison $d_{f'}(K,J)$ is consequently a pushout of $d_f(K,J)$. This is the assertion that the polyhedral diagram on pages 43--44 is designed to show. The proof uses only the universal properties of the displayed colimits and therefore applies equally to $C$ and $TC$.
+
+These are familiar Leibniz or pushout-product calculations in later terminology. The relative latching map of a composite is explicitly treated in \citet[Observation 5.1 and Example 5.2]{RiehlVerity2014Reedy}. The reference identifies a later general organization of the calculation; no lifting axiom, monoidal model structure, or retract closure is needed for the elementary identities just proved.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p46:Pour ceci, on note que}{Factorization by adjoining one minimal missing object}
+Grothendieck's construction is the relative latching factorization, written without a degree function. Its purpose is to preserve all the factorization data already chosen on a lower open. The only new choice at a stage is a factorization in $\M$ of one map from a pushout.
+
+Suppose $f:X\to Y$ has been factored on a lower open $J$ as $X|J\xrightarrow{i}Z\xrightarrow{p}Y|J$, with $i\in C_J$ and $p$ objectwise in $W$. Choose a minimal element $s$ of $I\setminus J$. Every strict predecessor of $s$ lies in $J$, so $J\cup\{s\}$ is lower. Put $K=I_{<s}$ and form
+\[
+ P_s=X_s\amalg_{X_K}Z_K.
+\]
+The original map $f_s$ and the map $Z_K\xrightarrow{p_K}Y_K\to Y_s$ agree on $X_K$, hence define $P_s\to Y_s$. Factor it by Cof$_3$ as
+\[
+ P_s\xrightarrow{j_s}Z_s\xrightarrow{p_s}Y_s,
+ \qquad j_s\in C,\quad p_s\in W.
+\]
+The maps from the predecessor values $Z_t$ to $Z_s$ are the composites through $Z_K$ and $P_s$. They are compatible because they come from a cocone. Define $i_s$ by $X_s\to P_s\to Z_s$. The equality $p_si_s=f_s$ and the naturality equations follow from the defining pushout. The new relative latching map for $i$ is exactly $j_s$; all older latching maps are unchanged. Theorem 2.1(2) gives the strong cofibration condition on the enlarged lower open, and $p$ remains a pointwise weak equivalence.
+
+This proves the required extension and also explains the direction of $p$ in the source: it must run from $Z$ to $Y|J$. The backward arrow on page 45 is printed in the edition and is retained as an edition slip. On page 46 the restriction to $K$ must be extended to $K'$, rather than the other way around as the sentence there says.
+
+One may finish with a well-ordered recursion instead of applying Zorn to a possibly large class of partial factorizations. Fix a well-order of the set of objects of $I$, choose at each successor stage the first minimal missing object, and take the union of the strictly compatible data at a limit stage. This union is an actual diagram: each object, each arrow, and each required naturality equation already occurs at some previous stage. Cofibrancy is local on principal lower sets, so it persists at the union. The recursion stops before more distinct objects have been chosen than $I$ contains. This avoids a size ambiguity in the Zorn wording while preserving the argument. The local factorization choices can be made in the ambient universe; they need not be functorial.
+
+The argument requires the latching colimits $X_K,Z_K$ to exist. In the artinian noetherian alternative the indexing poset is finite, as proved above. In the transfinite alternative suitable small colimits must actually be available. Closure of a class of morphisms under transfinite composition cannot supply a colimit that the ambient category does not have.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p49:ce qui achève la construction.}{A factorization at a branching vertex in chain complexes}
+The last construction is easiest to see when one can write its new object explicitly. Let $\M$ be chain complexes of vector spaces over a field $k$, with homological differentials, degreewise injections as cofibrations, and chain homotopy equivalences as weak equivalences. The injections split degree by degree. We use the square poset from the earlier example, with $X=0$ and with the target diagram $Y_a=0$, $Y_b=Y_c=Y_d=k[0]$. Both maps into $Y_d$ are the identity. The initial map to this diagram is pointwise a cofibration but fails the diagram cofibration condition at $d$, where its latching map is the fold $k\oplus k\to k$.
+
+Leave the factorization unchanged at $a,b,c$. At $d$ the object $P_d$ in the preceding construction is $A=k^2[0]$ and its map to $B=Y_d=k[0]$ is $q(a_1,a_2)=a_1+a_2$. Define a complex $Z_d$ by
+\[
+ (Z_d)_1=k^2,\qquad (Z_d)_0=k\oplus k^2,
+ \qquad d(x_1,x_2)=(x_1+x_2,-x_1,-x_2),
+\]
+and zero in other degrees. Let $j:A\to Z_d$ be $j(a_1,a_2)=(0,a_1,a_2)$ in degree zero, and let $p:Z_d\to B$ be
+\[
+ p(b,a_1,a_2)=b+a_1+a_2
+\]
+in degree zero, with $p=0$ in degree one. Then $pj=q$, $p$ is a chain map, and $j$ is degreewise injective. The maps from $b$ and $c$ are the two summand inclusions followed by $j$, so the extended data form a commutative square.
+
+The map $p$ is a homotopy equivalence, not merely a quasi-isomorphism asserted without calculation. Its section sends $b$ to $(b,0,0)$. Its kernel in degree zero consists of $(-a_1-a_2,a_1,a_2)$ and is identified with $k^2$. Under this identification the differential from degree one is $-1:k^2\to k^2$. The homotopy inverse to this differential, with the same minus sign, contracts the kernel. Thus $Z_d$ is the direct sum of $B$ and a contractible complex. The resulting map of diagrams $Z\to Y$ is pointwise in $W$, and $0\to Z$ is a diagram cofibration because the new latching map is exactly $j$.
+
+The construction preserves the homotopy type at the branching vertex while replacing an identification of two branches by an explicit cofibration. Its quotient complex $Z_d/j(A)$ is $k^2\xrightarrow{(1,1)}k$ in degrees one and zero. Its degree-one homology is $\{(t,-t)\mid t\in k\}\cong k$. This records the relation joining the two branches. The example makes visible why a diagram factorization has more information than choosing independent factorizations of the component maps.
+\end{dcomment}
+
+% Commentary by GPT-6 Astra (OpenAI), manuscript pp. 50--70.
+
+\begin{dcomment}{exposition}{p50:est également une catégorie à cofibrations.}{The diagram structure and the size of its indexing category}
+Grothendieck has now reached the purpose of the preceding combinatorics: a diagram admits a replacement whose ordinary colimit can be trusted homotopically. Write $\mathcal M^I=\operatorname{Fun}(I,\mathcal M)$, remembering that this is his $\mathcal M(I^\circ)$. For a well-founded poset the cofibrations of Theorem 3.1 are exactly the maps whose relative latching maps
+\[
+ X_i\amalg_{\operatorname{colim}_{j<i}X_j}
+                 \operatorname{colim}_{j<i}Y_j\longrightarrow Y_i
+\]
+belong to $C$. Weak equivalences remain objectwise. The construction at pages 45--49 therefore gives the familiar inductive replacement: after the values below $i$ have been chosen, factor the single map from the relative latching object to the prescribed value at $i$. The boundary has already encoded every naturality equation involving an incoming arrow. No lifting property between two distinguished classes is needed.
+
+The alternatives in the theorem concern existence of these boundaries as well as preservation of the relevant classes. In case (b), finite colimits and small filtered colimits give all small colimits. Indeed, an arbitrary coproduct is the filtered colimit of its finite subcoproducts, and a general colimit is the coequalizer of the two familiar coproducts indexed by objects and arrows. Transfinite closure of $C$ and $C\cap W$ then supplies precisely the closure needed in the boundary calculations. Merely having ordinary finite composites would not justify a limit stage.
+
+There is a useful simplification of case (a). With the usual choice principles, a well-founded poset whose lower Alexandrov topology is noetherian is finite. If it were infinite, choose successively a minimal element of the remaining poset. After $n$ choices the chosen elements form a lower set: every predecessor of the next chosen element was already chosen. These finite lower sets give an infinite strictly increasing sequence of opens, a contradiction. Consequently the apparent generalization beyond finite $I$ in this branch introduces no additional posets. This observation also explains why finite colimits suffice here; one must not diagnose an absent infinite-colimit hypothesis in this particular assertion.
+
+The theorem supplies more than an objectwise cofibrant replacement. On the span $a\leftarrow b\rightarrow c$, an objectwise cofibrant diagram can still have a noncofibrant attaching map out of $b$. A replacement cofibrant for $C_I$ controls those attachments, so its pushout is the model for the homotopy pushout. The distinction is the reason for carrying the relative, rather than just the absolute, latching construction throughout the chapter.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p51:ses composantes connexes sont cofiltrantes}{Why restriction needs a condition on the indexing map}
+Grothendieck wants to know which changes of indices preserve the replacements just constructed. Preservation of weak equivalences is immediate for every restriction functor: the component of $u^*f$ at $i$ is $f_{u(i)}$. Preservation of cofibrations is different, because restriction can change the shape and the connected components of a boundary. Proposition 3.2(a) identifies a condition which prevents this change from changing the relevant colimit.
+
+Here is the poset argument behind the reference to Chapter II. Fix $i\in I$, let $U\subseteq I/i$ be a lower set, and let $U'$ be the lower set of $I'/u(i)$ generated by $u(U)$. For $b\in U'$, the comma category $(b\downarrow u|_U)$ is the poset
+\[
+ S_b=\{x\in U\mid b\leq u(x)\}.
+\]
+It is nonempty by the definition of $U'$. Every object of $S_b$ maps to $i$ in $(b\downarrow u)$, since $x\leq i$ and $b\leq u(i)$. Thus all these objects belong to one connected component of that comma category. If its connected components are cofiltered, any two objects $x,y$ of $S_b$ have a common predecessor $z$ there. Since $U$ is lower, $z\in U$, and hence $z\in S_b$. A poset has no nontrivial parallel-arrow equalization condition, so $S_b$ itself is cofiltered. In particular its underlying undirected graph is connected.
+
+The ordinary final-functor criterion now gives
+\[
+ \operatorname{colim}_{U}u^*X'\ \simeq\
+ \operatorname{colim}_{U'}X'.
+\]
+The same holds for $Y'$, and the values at $i$ and $u(i)$ are identical. Consequently the two relative boundary maps in the displayed cube differ only by isomorphisms. This proves the asserted preservation of $C_I$ without introducing any homotopy cofinality theorem. The localizer does not enter this step.
+
+For an étale map of posets the same conclusion is even more direct: the map $I/i\to I'/u(i)$ is an isomorphism. For a discrete source, each boundary is empty, so only the component maps are tested. These are two special ways of making the boundary comparison harmless. The printed phrase ``localement filtrante'' on page 51 conflicts with the immediately following definition; the proof uses cofiltered connected components, as the statement's initial terminology already indicates. We retain the printed wording and record the slip.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p53:est un isomorphisme. Comme}{A constant point which is not a cofibrant diagram}
+The condition on restriction has a visible effect even in sets. Take $\mathcal M=\mathsf{Set}$, let $C$ be the injections, and let every map be a weak equivalence. This satisfies the four axioms on page 39: injections are stable under pushout and composition, and any map factors as its source identity followed by a weak equivalence. All objects are cofibrant. The example concerns the cofibration structure; its deliberately indiscriminate weak equivalences play no role in the computation.
+
+Let $I$ have three objects $a,b,t$, with $a<t$ and $b<t$, and no relation between $a$ and $b$. For the unique map $q:I\to e$, restrict the one-point set $*$ to the constant diagram. At either minimal object the latching map is $\varnothing\to *$, an injection. At $t$ it is
+\[
+ *\amalg *\longrightarrow *,
+\]
+the fold map, which is not injective. Thus $q^*$ does not preserve cofibrant objects. The comma category $(*\downarrow q)=I$ is connected but not cofiltered: $a$ and $b$ have no common predecessor. This is exactly the obstruction detected by the hypothesis of Proposition 3.2(a).
+
+A cofibrant replacement can be written without any choices. Put $Q_a=Q_b=*$, $Q_t=\{a,b\}$, and use the two inclusions as transition maps. The relative boundary at $t$ is the identity of the two-point set. The obvious map $Q\to\operatorname{const}(*)$ is objectwise a weak equivalence. Its colimit is $Q_t$, whereas the colimit of the constant diagram is $*$. Those two objects are equivalent for the chosen $W$, but the two strict diagrams carry different attaching information. The calculation explains why the proof of Theorem 3.7 must work even when ordinary restriction fails to preserve cofibrancy.
+
+For comparison, if $I=[1]$, the boundary at its final vertex is a single copy of $*$. Its map to the final value is the identity, and the constant point is cofibrant. The passage from one predecessor to two disconnected predecessors is already sufficient to destroy preservation. Neither the cardinality of the object values nor a complicated homotopy theory is responsible.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p54:On procède de même pour}{Left Kan extension transports the whole relative boundary}
+The asymmetry between the two parts of Proposition 3.2 is deliberate. Restriction changes a boundary, but left Kan extension is designed to preserve the colimit describing that boundary. For any lower set $V'\subseteq I'$ and any diagram $X:I\to\mathcal M$, there is a canonical isomorphism
+\[
+ \operatorname{colim}_{V'}u_!X
+ \ \simeq\ \operatorname{colim}_{u^{-1}V'}X,
+\]
+whenever the indicated colimits exist. One can see it directly from cocones. An object contributing to $(u_!X)(b)$ is a pair $(i,u(i)\leq b)$ with $b\in V'$. Since $V'$ is lower, $u(i)\in V'$. Conversely every $i\in u^{-1}V'$ contributes via $b=u(i)$ and the identity arrow. These identity contributions determine every cocone, and their transition relations are exactly those of the restricted diagram on $u^{-1}V'$.
+
+Apply this twice, to $U'\subseteq V'$ and to $X,Y$. The relative boundary for $u_!f$ is thereby identified with
+\[
+ Y_{u^{-1}U'}\amalg_{X_{u^{-1}U'}}X_{u^{-1}V'}
+       \longrightarrow Y_{u^{-1}V'}.
+\]
+Theorem 2.1(1) puts this map in $C$. Applying the same reasoning to $TC=C\cap W$ puts it in $TC$ if $f\in(TC)_I$. Taking $X$ to be the initial diagram proves preservation of cofibrant objects. This is why the strong definition involving every open subset was convenient before well-foundedness was imposed: the inverse images of the target opens are arbitrary opens of the source, not necessarily single principal ideals.
+
+There is a small logical distinction in the next corollary. The source may be assumed well-founded while the target is not. The equality
+\[
+ (TC)_{I'}=C_{I'}\cap W_{I'^\circ}
+\]
+cannot then simply be imported from the artinian part of Theorem 2.1. The proof needs only the inclusion from left to right. This inclusion is automatic for the strong definition: take the empty lower set inside $I'/i'$ to see that each component lies in $TC$. Thus the unnecessary equality in the proof of Corollary 3.3 can be replaced by this inclusion, with no change to its conclusion. Existence of the ordinary Kan extension remains a separate hypothesis when one leaves the cocomplete setting.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p56:Cela achève la démonstration de 3.3.}{The mapping-cylinder argument behind Corollary 3.3}
+Grothendieck must now pass from preservation of trivial cofibrations to preservation of all weak equivalences between cofibrant diagrams. The useful fact is a one-sided factorization, stronger than the bare factorization axiom: a map between cofibrant objects factors as a cofibration followed by a weak equivalence which has a trivial-cofibration section. Here is a complete construction in the notation of page 39.
+
+For a cofibrant object $A$, factor its fold map as
+\[
+ A\amalg A\xrightarrow{(d_0,d_1)}IA\xrightarrow{r}A,
+ \qquad (d_0,d_1)\in C,\quad r\in W.
+\]
+Each inclusion $A\to A\amalg A$ is a pushout of $\varnothing\to A$, hence belongs to $C$. Thus $d_0,d_1\in C$. The equations $rd_0=rd_1=\operatorname{id}_A$ and two-out-of-three show $d_0,d_1\in TC$. Given $f:A\to B$ with $B$ cofibrant, form
+\[
+ M_f=B\amalg_{A,d_0}IA.
+\]
+The inclusion $j:B\to M_f$ is a pushout of $d_0$, so $j\in TC$. There is a map $p:M_f\to B$ whose restrictions are $\operatorname{id}_B$ and $fr$, and $pj=\operatorname{id}_B$ implies $p\in W$. The other endpoint defines $i:A\to M_f$ with $pi=f$.
+
+To check that $i$ is a cofibration, first observe that $B\amalg A\to M_f$ is the pushout of $(d_0,d_1):A\amalg A\to IA$ along $(f,\operatorname{id}_A)$. The map $A\to B\amalg A$ is a cofibration because $B$ is cofibrant. Their composite is $i$. Therefore $f=pi$ has all the claimed properties. If $f\in W$, then $i\in W$ by two-out-of-three, so both $i$ and the section $j$ are trivial cofibrations.
+
+Now let $F$ be any functor carrying trivial cofibrations between cofibrant objects to weak equivalences. Applied to this factorization, $F(j)$ is a weak equivalence and $F(p)F(j)=\operatorname{id}$, so $F(p)$ is one also. If $f\in W$, then $F(i)\in W$, and hence $F(f)=F(p)F(i)\in W$. Taking $F=u_!$ gives the assertion used here. The printed last inference on page 56 repeats $i'\in W$ where the new information is $p'\in W$; the section equation supplies the missing inference. This is a correct argument obscured by a repeated letter, not a failure of Corollary 3.3.
+\end{dcomment}
+
+\begin{dcomment}{later}{p56:Cela achève la démonstration de 3.3.}{What is required of cofibrant replacement}
+The deferred Lemma 3.4 ensures that the candidate just constructed is defined on the intended homotopy category. Essential surjectivity is immediate: factor $\varnothing\to X$ as $\varnothing\to QX\xrightarrow{q}X$, with $QX$ cofibrant and $q\in W$. Full faithfulness requires more than one such choice for each object. A morphism in a localization is represented by a finite zigzag, and its relations must remain valid after replacing the objects appearing in that zigzag.
+
+The factorization argument of pages 45--49 supplies these compatible replacements on finite direct diagrams. In particular it replaces a span or a composable pair together with its structure maps, rather than replacing its vertices independently. The mapping-cylinder argument in the preceding block compares different choices after passing to homotopy. These are the ingredients of the usual cofibrant-approximation proof. A precise later statement is \citet[Theorem 6.1.6(1)]{RadulescuBanu2009}; its proof passes through the approximation theorem and the comparison lemmas in \S6.1. It applies already to precofibration categories, so no infinite-composition hypothesis is needed for Lemma 3.4.
+
+This also clarifies the meaning of the ``canonical'' functor in (3.3.1). If
+\[
+ j_I:\mathcal M^I_{\mathrm c}[W^{-1}]
+          \longrightarrow\mathcal M^I[W^{-1}]
+\]
+is the equivalence and $\overline{u_!}$ is the functor induced on the cofibrant subcategory, then the candidate is $\overline{u_!}\,j_I^{-1}$. Its uniqueness is understood relative to the specified comparison on cofibrant objects. One does not obtain a preferred strict functor before making choices, and one does not obtain an adjunction merely by writing this composite. The next pages are devoted to that second issue.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p59:cet objet final devrait être initial}{The two-object test for an alleged derived adjunction}
+Grothendieck's counterexample isolates a genuine logical error: an equivalence after localization of a chosen subcategory does not by itself make that subcategory a suitable domain for deriving an adjunction. Everything can be computed in the walking arrow $\mathcal C=[1]=\{0\to1\}$. Put $\mathcal C'=\mathcal C$, let both ordinary functors be the identity, take $W$ to be all arrows, and take $W'$ to be the isomorphisms. The right-hand identity functor is compatible with these localizers, because it sends an isomorphism to an arrow of $W$.
+
+Localizing $\mathcal C$ at $W$ gives the groupoid with two isomorphic objects and a unique map between any ordered pair; it is equivalent to $e$. Localizing $\mathcal C'$ at $W'$ leaves $[1]$ unchanged. Choose $\mathcal C_0=\{1\}$. Its localization is $e$, and its inclusion into $\mathcal C$ induces an equivalence after localization. The restricted identity functor sends its only arrow to an isomorphism. Thus both hypotheses of Remark 3.6 hold.
+
+After identifying $\mathcal C[W^{-1}]$ with $e$, the constructed candidate $L:e\to[1]$ selects $1$, and the localized restriction $R:[1]\to e$ is the unique functor. If $L\dashv R$, then
+\[
+ \operatorname{Hom}_{[1]}(1,0)
+       \simeq\operatorname{Hom}_{e}(*,*) .
+\]
+The left side is empty and the right side has one element. Hence there is no such adjunction. In fact $L$ is right adjoint to $R$, since $1$ is terminal. The defect is the direction in which the chosen representative can map to other objects.
+
+There is a second computation, needed again on page 68. Choose instead $\mathcal C_0=\{0\}$. The candidate now selects the initial object and is indeed left adjoint to $R$. Nevertheless $R$ is not fully faithful: the map
+\[
+ \operatorname{Hom}_{[1]}(1,0)=\varnothing
+       \longrightarrow\operatorname{Hom}_{e}(*,*)=\{*\}
+\]
+is not surjective. Before localization the right adjoint was the identity, hence fully faithful; afterwards it has acquired an extra morphism because the two relative structures invert different arrows. This second version establishes exactly the warning about full faithfulness, without confusing it with the first version's failure of adjunction.
+
+The mathematical counterexample is complete and independent of the historical attribution. We verified the metadata of \citet{Anderson1978}, but did not obtain a readable copy of the original argument containing the phrase criticized here. We therefore attribute the criticism to this manuscript and do not attach it to an unverified theorem number in Anderson's publication.
+\end{dcomment}
+
+\begin{dcomment}{later}{p59:cet objet final devrait être initial}{The comparison map is part of a derived functor}
+What the two-point example lacks is the universal comparison carried by a derived functor. If $F:\mathcal C\to\mathcal C'$ and $\gamma,\gamma'$ are the localization functors, a total left derived functor comes with
+\[
+ \lambda:(\mathbf L F)\gamma\longrightarrow\gamma'F,
+\]
+and a universal property for that transformation. A functor obtained by transporting $F|\mathcal C_0$ across an equivalence of localizations is not automatically equipped with this universal property. The distinction is substantive even though both constructions are often described informally as ``apply $F$ to a replacement.''
+
+For an adjunction $F\dashv G$, absolute total derived functors $\mathbf L F$ and $\mathbf R G$ form an adjunction. The adjective ``absolute'' means that the defining Kan-extension property survives postcomposition by every functor. \citet{Maltsiniotis2007Adjunction} proves the adjunction theorem formally from these properties, including compatibility with the original unit and counit; the proof does not require a particular model-category factorization. This is a later precise repair of the general inference under discussion.
+
+In Grothendieck's terminal-object example there cannot even be a comparison $\lambda$ of the indicated direction. Its component at $0$ would have to be a map $1\to0$ in $[1]$. Thus the false assertion is not a counterexample to the modern derived-adjunction theorem. It shows why the comparison and its universal property cannot be suppressed when passing from a homotopically dense subcategory to a derived functor. The following mapping-cone proof constructs the needed adjunction in the geometric situation at hand instead of relying on that suppressed inference.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p62:est (tout ce qu'il y a de) cofiltrante.}{The mapping cone as a category of two pieces}
+Grothendieck's factorization separates two operations for which the adjunction can be controlled. It is useful to describe the category $C(u)$ before reading its comma categories. Its objects are a disjoint copy of the objects of $I'$ and a copy of those of $I$. Within each copy the old arrows remain. There are no arrows from the $I$-copy to the $I'$-copy, and the mixed arrows are
+\[
+ \operatorname{Hom}_{C(u)}(i',i)
+      =\operatorname{Hom}_{I'}(i',u(i)).
+\]
+Composition of a mixed arrow with arrows on either side is induced by composition in $I'$ and functoriality of $u$. This is the collage of the displayed profunctor $H$. The open--closed language and its profunctor description were developed earlier; the indexed blocks of DER\_XIIb-a at manuscript pages 59--68 explain that construction in its general form.
+
+Let $j:I'\hookrightarrow C(u)$ denote the open inclusion, $w:I\hookrightarrow C(u)$ the closed inclusion, and let $v:C(u)\to I'$ equal the identity on $I'$ and $u$ on $I$. The mixed-hom formula gives, naturally in $b\in I'$ and $c\in C(u)$,
+\[
+ \operatorname{Hom}_{C(u)}(j(b),c)
+       \simeq\operatorname{Hom}_{I'}(b,v(c)).
+\]
+Thus $j\dashv v$, with $vj=\operatorname{id}$. This elementary adjunction is another way to recognize the initial object of each $(b\downarrow v)$: it is $(j(b),\operatorname{id}_b)$. For an object $(c,\beta:b\to v(c))$, the unique arrow from that initial object is the mixed arrow corresponding to $\beta$, or the corresponding arrow within $I'$ when $c\in I'$. The same hom-set description proves its uniqueness, including compatibility with every triangle in the comma category.
+
+If $I$ and $I'$ are posets, the collage is a poset: each mixed hom-set is empty or a singleton, and a mixed arrow cannot be followed by an arrow back to the first piece. If both posets are well-founded, so is the collage. A decreasing sequence can cross from the closed piece into the open piece at most once; any infinite decreasing tail would then lie entirely in one of the two original posets. In the finite branch the collage is finite. More generally an increasing chain of lower sets in the collage stabilizes as soon as its intersections with both pieces stabilize, which proves the noetherian-topology assertion directly.
+
+The comma calculation therefore has exactly the strength used in Corollary 3.5. It proves that $v$ is locally cofiltered, so $v^*$ preserves cofibrant diagrams. It is not an invocation of an unspecified homotopy equivalence of the two indexing categories. The original adjunction $j\dashv v$ already identifies the relevant initial objects on the level of categories.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p64:est bien adjoint à gauche de}{The two adjunctions and their composite}
+The closed inclusion $w$ supplies the other half of Theorem 3.7 for a particularly transparent reason. A closed full subposet is upward closed. Hence, for $c\notin I$, the comma category $(w\downarrow c)$ is empty: an arrow from an object of the closed piece to $c$ would force $c$ into that piece. For $c\in I$, the same comma category has terminal object $(c,\operatorname{id})$. Therefore
+\[
+ (w_!X)(c)=
+ \begin{cases}X(c),&c\in I,\\ \varnothing_{\mathcal M},&c\notin I.
+ \end{cases}
+\]
+This is extension by the initial object, with the unique maps out of that object on mixed arrows. It preserves every objectwise weak equivalence; on the complement its components are identities. Restriction $w^*$ preserves them as well.
+
+Whenever both functors of an ordinary adjunction preserve the relevant weak equivalences, the unit and counit descend to localization. Their naturality continues to hold for formally inverted arrows, and their triangle identities remain identities after applying localization. This proves the localized adjunction in the closed-inclusion case. It also shows that its left adjoint agrees with the candidate defined using cofibrant replacement: $w_!$ already sends the replacement comparison itself to a weak equivalence.
+
+For $v$, Proposition 3.2 and the preceding comma calculation put both functors on the full cofibrant subcategories. There they remain adjoint, since fullness leaves the old hom-set bijections unchanged. Both are homotopical on these subcategories, so their adjunction descends. Lemma 3.4 transports it to the homotopy categories of all diagrams. This is the restricted adjunction of Corollary 3.5, with its hypotheses now verified.
+
+Finally, ordinary Kan extensions give $(vw)_!\simeq v_!w_!$. On a cofibrant $I$-diagram, $w_!$ again produces a cofibrant diagram, so no intermediate replacement changes the derived composite. Consequently the candidate $u_!^W$ is canonically isomorphic to $v_!^Ww_!^W$. The right adjoints satisfy $u_W^*=w_W^*v_W^*$ simply by restriction. Composing the two established adjunctions gives Theorem 3.7. There is no use of the conclusion to establish this comparison: preservation of cofibrancy supplies the comparison before the final adjunction is deduced.
+
+The symbols in the printed extension-by-initial-object formula require a local repair. Its target is $C(u)$, so the parenthetical ``$I=C(u)$'' should identify the target, and the subsequent $J$ denotes that same target. The categorical construction above makes both readings unambiguous while leaving the edition's text intact.
+\end{dcomment}
+
+\begin{dcomment}{later}{p64:ordonnées artiniennes sans plus.}{The derivator conclusion and its precise scope}
+The point of Corollary 3.9 is that homotopy colimits have acquired the two properties that make them usable: an adjunction characterizes them, and a comma-category formula computes their values. In the covariant notation used here the latter is
+\[
+ (\mathbf L u_!X)_{i'}\simeq
+ \operatorname{hocolim}_{(u\downarrow i')}X.
+\]
+The category $(u\downarrow i')$ records arrows $u(i)\to i'$. For posets it is the lower subposet $u^{-1}(I'/i')$ of $I$. Restricting a cofibrant diagram to that lower subposet preserves its latching maps. Thus ordinary pointwise Kan extension applied to a cofibrant replacement computes the right-hand side, and the comparison is compatible with the adjunction already proved.
+
+The convention in this formula must be kept visible when the corollary names the historical prederivator. Put
+\[
+ H(I)=\operatorname{Fun}(I,\mathcal M)[W^{-1}],
+ \qquad
+ \mathbf D_W(J)=\operatorname{Fun}(J^{\mathrm{op}},\mathcal M)[W^{-1}].
+\]
+Then $H(I)=\mathbf D_W(I^{\mathrm{op}})$. The preceding induction and the displayed comma formula directly concern $H$. Expressed for $\mathbf D_W$, they concern the opposite indexing categories. This makes no difference to the finite-poset domain, which is closed under opposites. In the infinite branch, the opposite of an artinian poset need not be artinian. Thus the induction as written directly proves the presheaf statement on opposites of artinian posets; it must not simply be relabelled as the same induction on artinian presheaf indices. Under the stated cocomplete and transfinite hypotheses, the later ABC theorem discussed below supplies all small shapes and hence also the asserted artinian domain. This is a qualification of the route of proof, not a counterexample to the corollary. The switch back to presheaves becomes explicit in paragraph 3.11 and determines the final comma square.
+
+The statement retains the assumptions of Theorem 3.7. In particular, the infinite branch needs the indicated small colimits in $\mathcal M$ as well as transfinite closure. The abbreviated sentence in Corollary 3.9 must not be read as deriving arbitrary small colimits from the four finite cofibration axioms. The historical list Dér~1--6 also needs its own numbering: Chapter I, manuscript pages 43 and 67--68, keeps Dér~2 as conservativity of evaluations and inserts Dér~3 before moving Kan adjunctions to Dér~4 and their pointwise formulas to Dér~5 \citep{Grothendieck1990Derivateurs}.
+
+The ``objet final'' version of Dér~3 requires constants to be fully faithful when the indexing category has a final object. The final object is in the indexing category. This part has a direct proof for the diagram localizations under discussion. In the source's presheaf convention, if $t$ is final in $J$, the constant functor $\mathcal M\to\operatorname{Fun}(J^{\mathrm{op}},\mathcal M)$ is left adjoint to evaluation at $t$: a map from a constant diagram to $X$ is uniquely determined by its component into $X_t$. Its unit is the identity. Both functors preserve the respective weak equivalences, so this adjunction and its identity unit descend to localization. The localized constant functor is therefore fully faithful. This proves precisely the final-object clause independently of the construction of general Kan extensions. The cocartesian exactness clause in Dér~6 invokes the Brown homotopy calculus discussed on pages 40--41; its Hom-surjectivity formulation is proved there by a cylinder-and-gluing construction.
+
+For the finite theory, \citet[Corollary 2.24]{Cisinski2010} gives a weak right derivator in his convention from a right derivable category, on finite direct categories, satisfying his additional axiom Der~5. His terminology calls the homotopy-colimit side ``right.'' For the small-diagram theory, \citet[Theorems 9.6.3, 9.6.5, and 10.3.2]{RadulescuBanu2009} gives the adjunction, pointwise formula, and strong Heller derivator for ABC cofibration categories. The latter axioms explicitly include the required coproduct and sequential-composition properties. These are precise later realizations of the program, with their hypotheses visible.
+
+The extra ABC closure properties do follow from the stronger transfinite assumptions imposed here. To see the coproduct assertion directly, well-order a small family of maps $f_\alpha:A_\alpha\to B_\alpha$ in $C$. Start with $\coprod_\alpha A_\alpha$, and replace $A_\alpha$ by $B_\alpha$ one summand at a time. At stage $\beta$ the object is
+\[
+ \coprod_{\alpha<\beta}B_\alpha\ \amalg\
+ \coprod_{\alpha\geq\beta}A_\alpha.
+\]
+Each successor map is a pushout of $f_\beta$. At a limit stage the displayed object is the colimit of the preceding stages, as is verified by giving a map from each summand into an arbitrary test object. Transfinite closure therefore puts $\coprod f_\alpha$ in $C$. The same argument with $TC$ proves the trivial-cofibration assertion. Applied to $\varnothing\to A_\alpha$, it also proves cofibrancy of the coproduct when the summands are cofibrant. The sequential-composition axiom is the countable instance of the assumed transfinite closure. Thus the later theorem applies to the actual cocomplete branch, rather than only to a vaguely similar axiom system. The dual of \citet[Corollary 6.21]{Cisinski2010} gives another published arbitrary-small-category result under the corresponding homotopical cocompleteness conditions of his Definition 6.1.
+
+For an ABC cofibration category with all objects cofibrant, \citet[Theorem 3.33]{Lenz2018} identifies its homotopy prederivator with that of its quasicategory of frames. The all-cofibrant ABC convention is explicit in his Definition 1.6 and Warning 1.7; it includes infinite-colimit axioms absent from the four finite axioms here. Corollary 1.41 passes from a general ABC category to its cofibrant subcategory at the level of diagram localizations, and Corollaries 4.1 and 4.5 provide the derivator and strength conclusions. Thus this comparison applies within the preceding ABC framework. It preserves coherent diagrams; it does not identify $\mathcal M^I[W^{-1}]$ with $\operatorname{Fun}(I,\mathcal M[W^{-1}])$.
+\end{dcomment}
+
+\begin{dcomment}{context}{p65:et factorisation pour}{Two auxiliary structures over one relative category}
+Grothendieck's observation on page 65 concerns the economy of the axioms. Once the weak equivalences have been fixed, a cofibration structure may organize homotopy colimits and a fibration structure may organize homotopy limits. Their common object is the relative category $(\mathcal M,W)$. A Quillen structure imposes further relations between the two distinguished classes: lifting properties and the two complementary factorizations. None of those relations was used in the mapping-cylinder proof above.
+
+This proposal has a precise later form. \citet[Definition 2.25 and Corollary 2.28]{Cisinski2010} defines a derivable category by placing compatible left and right derivability structures over the same weak equivalences, and obtains a derivator on finite direct categories. Compatibility here means the common relative category and the stated axioms; it does not insert Quillen's orthogonality relations. The finite result is the appropriate comparison with Grothendieck's paragraph.
+
+There is an indexing issue in the infinite case which the wording ``en principe'' leaves to the subsequent development. A proof by well-founded latching induction is not automatically a proof by matching induction on the same infinite poset. The opposite of a well-founded poset need not be well-founded: $\mathbb N$ is the basic example. Additional fibration hypotheses, existence of the required limits, and a construction on the relevant opposite shapes must therefore be supplied before a two-sided conclusion on all the stated shapes is justified. We record page 65 as a program, not as an already completed proof of the remaining axioms. The later ABC theory treats the two sides with their respective completeness hypotheses.
+\end{dcomment}
+
+\begin{dcomment}{development}{p66:est valable sans supposer que}{A finite source can demand an infinite Kan extension}
+Grothendieck next removes the assumption that the target category is a poset. In the cocomplete branch the pointwise argument survives: the comma category $(u\downarrow i')$ is still a well-founded poset when $I$ is one. Indeed there is at most one arrow between two of its objects because the projection to $I$ is faithful, and a nonidentity decreasing chain projects to a nonidentity decreasing chain in $I$. The projection is étale in the relevant sense, so restriction preserves cofibrancy. What does not survive automatically is the finite-colimit branch. A finite source can have infinitely many different arrows to a fixed target object.
+
+\textbf{A finite-colimit obstruction.}\ours\quad There is a category satisfying all four axioms on page 39 and possessing finite colimits, together with a functor from a one-object poset to a small category, for which the desired left adjoint does not exist.
+
+\textit{Proof.} Take $\mathcal M=\mathsf{FinSet}$, $W$ the bijections, and $C$ all maps. Cof$_0$ is immediate, Cof$_1$ follows from finite cocompleteness, and Cof$_2$ says that pushouts of bijections are bijections. For Cof$_3$, factor $f:A\to B$ as $f$ followed by $\operatorname{id}_B$. All objects are cofibrant. Let $u:e\to B\mathbb Z$ be the unique functor to the one-object category of the infinite cyclic group. Restriction is the forgetful functor from finite $\mathbb Z$-sets, equivalently finite sets with a permutation, to finite sets. Since $W$ consists of isomorphisms, the localized categories and functors are the same categories and functors.
+
+If this forgetful functor had a left adjoint, let $P$ be its value on the singleton. The adjunction would require
+\[
+ \operatorname{Hom}_{\mathbb Z}(P,\mathbb Z/n)
+       \simeq\operatorname{Hom}_{\mathsf{FinSet}}(*,\mathbb Z/n)
+\]
+for every $n\geq1$. If $P=\varnothing$, the left side has one element, contradicting $n=2$. Otherwise decompose $P$ into its finitely many nonempty cyclic orbits, of lengths $m_1,\ldots,m_r$. Choose a prime $p>\max_j m_j$. An equivariant map from an orbit of length $m_j$ to the transitive $p$-cycle would imply $p\mid m_j$: applying the generator $m_j$ times fixes the source point and hence its image. No such map exists. Thus the left side for $n=p$ is empty while the right side has $p$ elements. This contradiction proves the assertion.\hfill$\square$
+
+Here $(u\downarrow *)$ is the discrete set $\mathbb Z$, so the unavailable pointwise value is the infinite copower $\mathbb Z\times *$. The failure occurs before adjunction descent and cannot be repaired by choosing another cofibrant replacement. The example uses $\mathbb Z$ specifically; an arbitrary infinite group need not give the same finite-action obstruction.
+
+The corrected scope is to retain the cocomplete and transfinite assumptions, or to require the relevant comma colimits and their homotopical preservation separately. For the construction of the candidate in the finite branch, it suffices, for example, that every $(u\downarrow i')$ be finite: each such poset then admits the finite latching argument. This addresses existence and homotopicality; the adjunction is still a separate assertion. We checked the scope of the arbitrary-index results in \citet[\S9.6]{RadulescuBanu2009} and \citet[\S2]{Cisinski2010}; we did not find this particular $\mathsf{FinSet}$ test stated there. The displayed result is supplied as an explicit application of the elementary free-action obstruction, without a claim of priority. The manuscript's footnote on page 55 refers forward to page 86, outside this package; the audit concerns the assumptions visible here and does not claim that the later manuscript never revisits them.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p68:le foncteur localisé n'a aucune raison de l'être}{Full faithfulness is controlled by the derived counit}
+The remaining warning on page 68 concerns the passage from a left adjoint to a localization functor. For any adjunction $L\dashv R$, the right adjoint is fully faithful exactly when the counit $LR\to\operatorname{id}$ is an isomorphism. To recall the mechanism, an invertible counit identifies the adjunction bijection on $\operatorname{Hom}(RB,RC)$ with the desired bijection $\operatorname{Hom}(B,C)$. Conversely, when $R$ is fully faithful, the counit represents the identity under the same bijections and is invertible. Thus one must control the counit after deriving the functors, not merely the original counit before replacement.
+
+In the second walking-arrow example above, $L:e\to[1]$ selects $0$ and $R$ is the projection. The counit at $1$ is $0\to1$, which is not an isomorphism in the target localization, since that localization inverts only isomorphisms. This locates the entire defect in one component. The original identity adjunction had an identity counit, but its restriction to the chosen replacement subcategory changed the candidate left adjoint. The missing comparison with replacement is precisely what would have been needed to transport full faithfulness.
+
+For actual diagram categories, ordinary finality is likewise weaker than homotopy finality. The strict colimit comparison tests connectedness of comma categories, whereas homotopy colimits can detect their higher homotopy. Here is a finite computation which exhibits the counit itself. Let $P$ be the face poset of the boundary of a triangle: three vertices, three edges, and the six incidence relations from a vertex to an edge. The unique functor $q:P\to e$ is ordinarily final because $P$ is nonempty and connected. Its constant-diagram functor is fully faithful even before localization: naturality along the incidences forces all components of a transformation between constant diagrams to be the same map.
+
+Use simplicial sets with their usual weak homotopy equivalences and monomorphisms. A cofibrant replacement $Q$ of the constant point on $P$ is explicit. Assign $\Delta^0$ to each vertex and $\Delta^1$ to each edge, with the two incident vertices mapping to its distinct endpoints. The latching maps at vertices are $\varnothing\to\Delta^0$; those at edges are $\partial\Delta^1\to\Delta^1$. All are monomorphisms, so $Q$ is a cofibrant diagram. The unique transformation $Q\to\operatorname{const}(*)$ is an objectwise weak equivalence because every value is contractible. Its ordinary colimit glues three intervals cyclically along their endpoints. Its realization is the triangular circle, and its first integral homology is $\mathbb Z$: its cellular boundary sends each oriented edge to the difference of its endpoints, so its kernel is generated by the sum of the three consistently oriented edges, and there are no two-cells.
+
+Consequently the derived counit at the point is represented by this circle mapping to $*$. Integral homology sends weak homotopy equivalences of simplicial sets to isomorphisms, so factors through their homotopy category; its value shows that this counit is not invertible. Thus $q^*$ fails to be fully faithful after localization, despite being fully faithful as an ordinary functor. This calculation uses only the finite cofibrant replacement machinery established here; no appeal to an uncomputed homotopy colimit is hidden in the example.
+
+The objection does not contradict Theorem 3.7. That theorem constructs an adjunction by two controlled factorizations. Full faithfulness of a particular restriction requires the additional counit computation appropriate to that restriction, or a homotopy finality theorem with its actual hypotheses.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p69:Il vaut mieux définir la catégorie à cofibrations stricte}{Functorial factorization supplies arbitrary parameters}
+Grothendieck introduces strictness to permit an arbitrary diagram category to serve as the coefficient category in the finite or well-founded construction. A functorial factorization assigns to every arrow $f:X\to Y$ an object $E(f)$ and maps
+\[
+ X\xrightarrow{i_f}E(f)\xrightarrow{p_f}Y,
+ \qquad i_f\in C,\quad p_f\in W,
+\]
+and assigns to every commutative square a compatible arrow between the middle objects. Given a natural transformation $f:X\to Y$ of covariant $Z$-diagrams, apply this assignment to its components. The arrows $E(f_z)\to E(f_{z'})$ coming from the naturality squares satisfy the identity and composition laws because $E$ is a functor on the arrow category. Hence they form a middle $Z$-diagram and give the required objectwise factorization. Since $Z$ is arbitrary, the same assertion applies to presheaves by replacing $Z$ with $Z^{\mathrm{op}}$.
+
+The converse explains the size qualification. If $\mathcal M$ is small, use the covariant index $Z=\operatorname{Fl}(\mathcal M)$ and the universal natural transformation from its source functor to its target functor. A factorization in $\mathcal M^Z$ is exactly a functorial factorization of every arrow of $\mathcal M$; in presheaf notation the index is $\operatorname{Fl}(\mathcal M)^{\mathrm{op}}$. If $\mathcal M$ is only essentially small, transport the construction along a small skeleton. For a large category, an assertion quantifying only over small $Z$ yields factorizations on every small diagram of arrows; it does not automatically choose one globally coherent factorization on a proper class. Grothendieck's final preference for stability under small diagram categories keeps that quantification explicit.
+
+Paragraph 3.11 explicitly returns to $\mathbf D=\mathbf D_{\mathcal M}$ and $\mathcal M(I)$, hence to the historical presheaf convention. For its parameter category $Z$, the coefficient category is therefore
+\[
+ \mathcal N=\mathcal M(Z)=\operatorname{Fun}(Z^{\mathrm{op}},\mathcal M),
+ \qquad
+ \mathbf D_Z(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal N)[W^{-1}].
+\]
+Equip $\mathcal N$ with the pointwise classes $C(Z)$ and $W(Z)$. The first three cofibration axioms hold objectwise, while strictness supplies the fourth. Colimits and the relevant closure properties also pass objectwise. Apply Theorem 3.7 in this coefficient category to $u^{\mathrm{op}}:I^{\mathrm{op}}\to I'^{\mathrm{op}}$. The identification
+\[
+ \operatorname{Fun}(I^{\mathrm{op}},\mathcal N)
+ \simeq \operatorname{Fun}((I\times Z)^{\mathrm{op}},\mathcal M)
+\]
+identifies its restriction with $(u\times\operatorname{id}_Z)^*$ on the historical $\mathbf D$. This proves the parameter assertion directly for finite indices, and in the well-founded branch when $I^{\mathrm{op}}$ and $I'^{\mathrm{op}}$ are artinian. The infinite-domain qualification explained at Corollary 3.9 applies here as well.
+
+The two cofibration notations must stay distinct. $C(Z)$ tests each arrow component separately. The relative latching class in this application is $C_{I^{\mathrm{op}}}$ inside the coefficient category $\mathcal N$: it controls the attachments in the contravariant $I$ direction. Replacing it by pointwise cofibrancy would discard the boundary information that the chapter has established.
+
+Under ABC hypotheses, stability under arbitrary small diagram categories was later established without assuming a globally chosen functorial factorization; see \citet[Theorem 1.24]{Lenz2018}. That result uses infinite colimits. It therefore completes this program in the stronger setting without making the finite hypotheses sufficient by themselves.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p70}{The comma category after returning to presheaves}
+The final square is correct in the presheaf convention to which paragraph 3.11 has returned. Its slash differs from the earlier covariant formula because the underlying functor is now $I^{\mathrm{op}}\to\mathcal M$. For $u:I\to I'$ set
+\[
+ A=(i'\downarrow u)=i'\backslash I,
+ \qquad p:A\longrightarrow I.
+\]
+An object of $A$ is a pair $(i,\alpha:i'\to u(i))$. The usual pointwise formula for presheaves derives left Kan extension along $u^{\mathrm{op}}$, and the relevant comma category is canonically
+\[
+ (u^{\mathrm{op}}\downarrow i')\simeq A^{\mathrm{op}}.
+\]
+Indeed its objects are the same pairs. An arrow from $(i,\alpha)$ to $(j,\beta)$ in this opposite comma category is an arrow $j\to i$ in $I$ satisfying $u(j\to i)\beta=\alpha$, exactly the opposite of an arrow in $A$. Thus for an ordinary presheaf $X$ the formula is
+\[
+ (\operatorname{Lan}_{u^{\mathrm{op}}}X)(i')
+ \simeq \operatorname{colim}_{A^{\mathrm{op}}}X p^{\mathrm{op}}.
+\]
+The notation $\mathbf D_W(A)$ already supplies this opposite in the index of the coefficient diagram. Replacing $A$ by $u\downarrow i'$ would alter the formula.
+
+The source's parameterwise assertion is therefore
+\[
+ (i'\times\operatorname{id}_Z)^*\,
+       \mathbf L(u\times\operatorname{id}_Z)_!X
+ \ \simeq\
+ \mathbf L(\operatorname{pr}_Z)_!\,
+       (p\times\operatorname{id}_Z)^*X,
+ \qquad p:(i'\downarrow u)\longrightarrow I,
+\]
+as an isomorphism in $\mathbf D_W(Z)$. The arrows $i'\to u(i)$ define the natural transformation from the constant functor at $i'$ to $up$; after passing to presheaves, its mate is the displayed comparison. The 2-cell is part of the meaning of this comma square.
+
+Here is a direct proof in the range supplied by the preceding construction. Regard $X$ as an $I^{\mathrm{op}}$-diagram in $\mathcal N=\operatorname{Fun}(Z^{\mathrm{op}},\mathcal M)$ and choose a cofibrant replacement in that coefficient category. If $I$ and $I'$ are posets, $A$ is the upper subposet of elements $i$ for which $i'\leq u(i)$. Consequently $A^{\mathrm{op}}$ is a lower subposet of $I^{\mathrm{op}}$, and restriction preserves its latching data. The ordinary pointwise Kan formula then computes both sides from the same restricted cofibrant diagram. Its colimit isomorphism gives the required derived comparison. This proves the finite case, and the well-founded case with $I^{\mathrm{op}}$ artinian and the stated coefficient colimits and closure. The later arbitrary-shape ABC theorem removes that indexing restriction under its stronger hypotheses.
+
+A one-arrow computation makes the change of convention visible. Let $u:e\to[1]=\{0\to1\}$ select $0$, take $i'=1$, and let $X=*$ in sets with weak equivalences the bijections and cofibrations all maps. For covariant diagrams, $u\downarrow1$ is a singleton, so $(\operatorname{Lan}_u X)(1)=*$. For presheaves, however, $1\downarrow u$ is empty. Hence $(\operatorname{Lan}_{u^{\mathrm{op}}}X)(1)=\varnothing$, just as the printed square asserts. At $0$ both extensions have value $*$. In particular the presheaf extension is the diagram with values $*$ at $0$ and $\varnothing$ at $1$, with its unique restriction map $\varnothing\to *$. The covariant extension is the constant point. These are different variance conventions for the same indexing map, not contradictory values of one functor.
+
+Thus the printed $i'\backslash I$ requires no textual correction. The earlier covariant formula remains valid for $H(I)=\mathbf D_W(I^{\mathrm{op}})$; the final formula is its correctly reindexed presheaf counterpart.
+\end{dcomment}

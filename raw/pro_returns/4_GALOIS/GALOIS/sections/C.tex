@@ -1,0 +1,264 @@
+\subsection{The homotopy-category and enhancement tests}
+Throughout this part, $S=BX$, $T=BY$, and $v=Bf:S\to T$ are spaces in $\U$.  A point means a map from the one-point space; all fibres of maps of spaces are homotopy fibres.  The coefficient $\infty$-category $\mathcal C$ is locally $\U$-small, possibly $\V$-large in objects, and has $\U$-small limits and colimits.  We use the derivator $I\mapsto\Ho\Fun(NI^{\op},\mathcal C)$.  Inverting the arrows of $NI$ identifies its locally constant objects with $\Ho\Fun(S,\mathcal C)$; reversing paths accounts for the displayed contravariance.  The results below concern the specified restriction functor, not an unspecified equivalence between abstract categories.
+
+\begin{claim}{C.1}{Proved}{Ordinary full faithfulness detects the enhanced restriction}
+For every map $v:S\to T$, the functor $\Ho(v^*):\Ho\Fun(T,\mathcal C)\to\Ho\Fun(S,\mathcal C)$ is fully faithful if and only if $v^*$ is fully faithful as an $\infty$-functor.  It is an equivalence if and only if $v^*$ is an equivalence of $\infty$-categories.
+\end{claim}
+\begin{proof}
+For $M,N\in\Fun(T,\mathcal C)$ and any $\U$-small space $K$, the pointwise cotensor $N^K$ exists and $v^*(N^K)\simeq(v^*N)^K$.  The tensor--cotensor adjunction identifies
+\[
+ \Hom_{\Ho\Fun(T,\mathcal C)}(M,N^K)
+ = [K,\Map_{\Fun(T,\mathcal C)}(M,N)] .
+\]
+Full faithfulness of $\Ho(v^*)$ therefore says that the specified mapping-space map induces bijections on $[K,-]$ for every $K$.  Yoneda in the homotopy category of spaces makes this map a weak equivalence.  Essential surjectivity is the same condition before and after passing to the homotopy category.  The converse implications follow directly.  The mapping spaces are $\U$-small by our standing local-smallness convention.  No assertion about arbitrary functors between arbitrary homotopy categories is being made.
+\end{proof}
+
+\begin{claim}{C.2}{Proved}{The middle three classes coincide for enhanced coefficients}
+For the above coefficient theory, put $F_y=S\times_T^h\{y\}$ for each point $y$ of $T$.  The following conditions on $v$ are equivalent:
+\[
+ v\in W_{\mathcal C}^{1},\qquad
+ v\in W_{\mathcal C}^{\mathrm{coh}},\qquad
+ v\in W_{\mathcal C}^{\mathrm{hom}},\qquad
+ F_y\otimes M\longrightarrow M\text{ is an equivalence for every }y,M.
+\]
+Here $M\in\mathcal C$, $K\otimes M=\colim_K M$, and the displayed map is induced by $F_y\to *$.  Equivalently, $M\to M^{F_y}$ is an equivalence for every $M$.  The assertion includes empty spaces and does not assume a symmetric monoidal structure on $\mathcal C$.
+\end{claim}
+\begin{proof}
+The left Kan extension $v_!$ is left adjoint to $v^*$.  At $y$, the counit on $N\in\Fun(T,\mathcal C)$ is
+\[
+ (v_!v^*N)_y\simeq F_y\otimes N_y\longrightarrow N_y.
+\]
+Indeed an object of the indexing fibre is $(x,\gamma:v(x)\to y)$, and transport along $\gamma$ identifies the diagram being integrated with the constant diagram at $N_y$.  Hence the last condition is equivalent to full faithfulness of $v^*$, by the counit criterion and C.1.
+
+Write $p:S\to *$, $q:T\to *$.  Full faithfulness gives, for every $N$ and $M$, equivalences of mapping spaces
+\[
+ \Map(q^*M,N)\simeq\Map(p^*M,v^*N),\qquad
+ \Map(N,q^*M)\simeq\Map(v^*N,p^*M).
+\]
+Adjunction and Yoneda identify these with the cohomology comparison $q_*N\to p_*v^*N$ and homology comparison $p_!v^*N\to q_!N$.
+
+Conversely let $i_y:*\to T$ denote the selected point.  If all homology comparisons are equivalences, take $N=(i_y)_!M$.  The homotopy pullback square defining $F_y$, together with the pointwise Kan formula, identifies that comparison with $F_y\otimes M\to M$.  If all cohomology comparisons are equivalences, take $N=(i_y)_*M$; it becomes $M\to M^{F_y}$.  Tensor and cotensor with $F_y$ are adjoint, and a natural transformation from tensor to the identity is invertible exactly when its adjoint mate from the identity to cotensor is invertible.  This proves the claimed equivalences.  With $T=\varnothing$ the conditions are vacuous and necessarily $S=\varnothing$.  If a nonempty component of $T$ is missed, the corresponding fibre is empty and the condition is $0\to M$ for all $M$, forcing a trivial coefficient category.
+\end{proof}
+
+\begin{claim}{C.3}{Proved}{Constant coefficients are tensor tests}
+For every $v:S\to T$ one has $v\in W_{\mathcal C}$ if and only if the canonical map $S\otimes M\to T\otimes M$ is an equivalence in $\mathcal C$ for every $M\in\mathcal C$.
+\end{claim}
+\begin{proof}
+For constants $M,N$, the set of morphisms between them over $S$ is $\Hom_{\Ho\mathcal C}(S\otimes M,N)$.  Thus the definition of $W_{\mathcal C}$ asserts that the displayed map induces bijections into every $N$.  Yoneda in $\Ho\mathcal C$ makes it an isomorphism, equivalently an equivalence in $\mathcal C$.  This also proves the converse and handles all components simultaneously.
+\end{proof}
+
+\subsection{Sets, groupoids, truncated spaces, and spaces}
+\begin{claim}{C.4}{Proved}{The truncation calculation}
+Let $r\geq0$ be an integer and let $\mathcal C=\mathcal S_{\leq r}$ be the $\infty$-category of $r$-truncated spaces.  Then
+\[
+ W_{\mathcal C}=W_r,\qquad W_{\mathcal C}^{\mathrm{lc}}=W_{r+1},\qquad
+ W_{\mathcal C}^{\mathrm{coh}}=W_{\mathcal C}^{\mathrm{hom}}=W_{\mathcal C}^{1}.
+\]
+Membership in the common middle class is equivalent to
+\[
+ \pi_0v\text{ bijective},\qquad
+ \pi_iv\text{ isomorphic }(1\leq i\leq r),\qquad
+ \pi_{r+1}v\text{ onto}.
+\]
+The conditions on homotopy groups hold at every source point.  For $r=0$ this includes sets, and for $r=1$ groupoids.  The set-valued $W^{\mathrm{lc}}=W_1$ agrees with CATHOT C.1--C.4, which we cite without reproving its categorical-reflector statement.
+\end{claim}
+\begin{proof}
+The tensor is $K\otimes M=\tau_{\leq r}(K\times M)$.  In C.3 the test $M=*$ forces $\tau_{\leq r}v$ to be an equivalence, and conversely truncation preserves products.  This gives $W_r$.  C.2 says precisely that every fibre $F_y$ has contractible $r$-truncation.  The long exact homotopy sequence of a fibre identifies this condition with the displayed homotopy-group conditions, including the bijection on components.
+
+For the $2$-complete set-valued assertion we use the checked CATHOT C.1--C.4.  For the remaining $r\geq1$ we give the uniform higher-categorical argument.  Every mapping space in $\mathcal S_{\leq r}$ is $r$-truncated.  For each integer $m\geq0$, mapping spaces in $\Fun([m],\mathcal S_{\leq r})$ are limits of $r$-types, hence are $r$-types; its maximal subgroupoid is therefore an $(r+1)$-type.  The complete Segal nerve of $\Fun(S,\mathcal S_{\leq r})$ in degree $m$ is the space of maps from $S$ into that maximal subgroupoid.  The universal property of truncation identifies it with the corresponding mapping space out of $\tau_{\leq r+1}S$.  These levelwise identifications prove equivalence of the complete Segal nerves, hence of the functor $\infty$-categories.  Thus $W_{r+1}\subset W^{\mathrm{lc}}$.
+
+For the converse, C.2 gives the component bijection.  Choose $x\in S$, $y=v(x)$, and let $i_x,i_y$ be their inclusions.  If $v^*$ is an equivalence, the adjunction unit is an equivalence on $(i_x)_!*$ and $v_!(i_x)_!*\simeq(i_y)_!*$.  Evaluating its unit at $x$ gives the canonical map
+\[
+ \tau_{\leq r}\Omega_xS\longrightarrow\tau_{\leq r}\Omega_yT.
+\]
+It is an equivalence, so $v$ induces isomorphisms on $\pi_i$ for $1\leq i\leq r+1$.  These arguments use chosen basepoints only component by component and require no global choice of an isomorphism of fundamental groupoids.
+\end{proof}
+
+\begin{claim}{C.5}{Proved}{Strictness and the failure of two-out-of-three}
+For every finite $r\geq0$, both inclusions $W_{r+1}\subset W_{\mathcal S_{\leq r}}^1\subset W_r$ are strict.  The middle class does not satisfy two-out-of-three.  For $\mathcal C=\mathcal S$, all five coefficient classes equal $W_\infty$.
+\end{claim}
+\begin{proof}
+Take a nonzero abelian group $A$ and the Eilenberg--Mac Lane space $K(A,r+1)$.  Its projection to $*$ belongs to the middle class but not to $W_{r+1}$; the point inclusion belongs to $W_r$ but not to the middle class.  Their composite on $*$ is the identity, which proves the failure of two-out-of-three.  For spaces, C.3 tested at $M=*$ gives $W_\infty$, and C.2 tested at $M=*$ says that all fibres are contractible.  The ordinary weak equivalences induce equivalences of functor $\infty$-categories, completing the calculation.  All displayed spaces can be represented by categories of simplices of Kan models; the last-vertex map from the nerve of that category has the prescribed weak homotopy type, so these examples are examples in $\Cat$ as required.
+\end{proof}
+
+\subsection{Derived modules and loop algebras}
+\begin{claim}{C.6}{Known}{Monodromy, with the algebra and the restriction specified}
+Let $k$ be an associative unital ring and let $(S,x)$ be a nonempty connected pointed space.  Put $A_S=C_*(\Omega_xS;k)$, interpreted as the associative ring spectrum $Hk\wedge\Sigma^\infty_+\Omega_xS$, or the corresponding dg ring $k\otimes_{\Z}C_*(\Omega_xS;\Z)$; the loop operators commute with the $k$-action.  There is an equivalence over $\Mod_k$
+\[
+ \Fun(S,\Mod_k)\simeq \Mod_{A_S},
+\]
+where evaluation at $x$ corresponds to forgetting the $A_S$-action.  For a pointed map $v:(S,x)\to(T,y)$ the restriction functor corresponds to restriction of scalars along the specified algebra map $a_v:A_S\to A_T$.  No finiteness, nilpotence, or simple-connectivity hypothesis is needed.  This is the monadicity theorem \citep[Theorem 4.7.3.5]{EF_LurieHA} applied to evaluation; the compatible chain model is \citet[Corollary 9.2]{C_RiveraZeinalian2018}.
+\end{claim}
+\begin{proof}
+Evaluation $i_x^*$ is conservative because every point of $S$ is joined to $x$ by a path, and it preserves all colimits, which are pointwise.  Its left adjoint is $(i_x)_!$.  At $x$ the composite monad is $\Omega_xS\otimes(-)$; multiplication is path concatenation and the unit is the constant path.  The two hypotheses of the cited Barr--Beck theorem therefore hold, and modules for this monad are precisely modules for $A_S$.  For $v$, the equality $v_!(i_x)_!\simeq(i_y)_!$ identifies the monad comparison with the map induced by $\Omega v$, so it identifies the actual restriction, not just the categories.  With the presheaf convention, path reversal gives the same assertion using opposite loop multiplication and right modules; inversion canonically transports one convention to the other.  The chain-complex realization of $\Mod_{Hk}$ is the ring case of \citet[Theorem 5.1.6]{C_SchwedeShipley2003}.
+\end{proof}
+
+\begin{claim}{C.7}{Proved}{All coefficient classes for an arbitrary ring}
+Suppose $k\ne0$.  Then the following are exact descriptions of the indicated classes, for every map $v:S\to T$ of spaces represented by small categories:
+\begin{align*}
+ v\in W_{D(k)}
+ &\Longleftrightarrow H_j(S;k)\xrightarrow{\sim}H_j(T;k)\quad(j\geq0),\\
+ v\in W_{D(k)}^{\mathrm{coh}}=W_{D(k)}^{\mathrm{hom}}=W_{D(k)}^1
+ &\Longleftrightarrow H_0(F_y;k)\xrightarrow{\sim}k\text{ and }H_j(F_y;k)=0\quad(j>0,\ y\in T),\\
+ v\in W_{D(k)}^{\mathrm{lc}}
+ &\Longleftrightarrow \begin{cases}
+ \pi_0v\text{ bijective},\\
+ H_j(\Omega_xS;k)\xrightarrow{\sim}H_j(\Omega_{v(x)}T;k)
+       \quad(j\geq0,\ x\in S),
+ \end{cases}\\
+ &\Longleftrightarrow \begin{cases}
+ \pi_0v\text{ bijective},\quad\pi_1(v,x)\text{ isomorphic},\\
+ H_j(\widetilde S_x;k)\xrightarrow{\sim}H_j(\widetilde T_{v(x)};k)
+       \quad(j\geq0,\ x\in S).
+ \end{cases}
+\end{align*}
+Here the last map is the lift determined by the chosen basepoints of the map on the corresponding connected components; it is equivariant for the specified isomorphism of fundamental groups.  For $k=0$, every category of coefficients is terminal and every functor belongs to all five classes.
+\end{claim}
+\begin{proof}
+C.3 can be tested on $M=k$: the map is $C_*(S;k)\to C_*(T;k)$, and its equivalence implies the test for every $M$ by derived tensor product over $k$.  C.2 gives the fibre condition in the same way.  The augmented $H_0$ condition forces $F_y$ to be nonempty and connected: the fold map from the free $k$-module on a set to $k$ is an isomorphism only for a singleton, even when $k$ does not have invariant basis number.  Thus $W^1$ in particular forces a bijection on components and surjections on fundamental groups.
+
+On each connected component C.6 identifies restriction with $\operatorname{Res}_{a_v}$.  This is an equivalence if and only if $a_v$ is a quasi-isomorphism.  One direction is invariance of module categories under an equivalence of algebras.  Conversely its left adjoint is $A_T\otimes_{A_S}^{\mathbf L}(-)$, and if restriction is an equivalence, the unit at the free module $A_S$ is the underlying map $A_S\to A_T$; it must be an equivalence.  Components cannot be omitted or merged, by the preceding consequence of $W^1$.  This proves the loop-homology description without any assumption on commutativity of $k$.
+
+The degree-zero loop-homology map is the map $k[\pi_1S]\to k[\pi_1T]$ induced on free modules by $\pi_1v$.  Injectivity and surjectivity of this specified map force injectivity and surjectivity of the group map: two identified basis vectors give a nonzero difference, and a missing basis vector cannot lie in the image.  Once $\pi_1v$ is an isomorphism, the map on loop spaces preserves their component decompositions bijectively.  The identity components identify with $\Omega\widetilde S$ and $\Omega\widetilde T$, and translation by a loop identifies every other component with the identity component.  It remains to prove that a map $g:U\to V$ of simply connected CW spaces is a $k$-homology equivalence exactly when $\Omega g$ is one.
+
+Here are the comparison and convergence details for this last assertion.  Replace a pointed simply connected space by the simplicial set of its singular simplices whose one-skeleton is at the basepoint.  This is a Kan simplicial set: singular horn fillers may be chosen with the required constant edges.  It has one vertex and no nondegenerate edges, and hence trivial fundamental group.  For $j\geq2$, the usual based-simplex description of $\pi_j$ and its based homotopies computes the same groups as the full singular complex, because those representatives and homotopies already have constant edges.  Its inclusion is therefore a weak equivalence when the space is simply connected.  This replacement is natural in pointed maps and has normalized integral chains $C$ with $C_0=\Z$, $C_1=0$, free in each degree.  The cobar comparison identifies $\Omega C$ with chains on the based loop space; see \citet[Corollary 9.2 and Remark 9.3]{C_RiveraZeinalian2018}.  Use the decreasing filtration of its reduced tensor algebra by word length; the coproduct part of the cobar differential increases word length and thus preserves this filtration.  The generators $s^{-1}\overline C$ have positive degree, so only finitely many word lengths occur in any fixed total degree.  A $k$-homology equivalence of such $C$'s induces equivalences on all tensor powers after tensoring with the abelian group underlying $k$: telescope the tensor powers one factor at a time, using that the other integral chain complexes are bounded below and degreewise free.  The word-length filtration is degreewise finite, so the filtered comparison is a quasi-isomorphism.  This proves the implication from $g$ to $\Omega g$.
+
+Conversely the two-sided bar construction on integral chains of the loop monoid models chains of $B\Omega U\simeq U$.  Its ascending length filtration is preserved by the bar differential and is again finite in each total degree, now because each bar factor is suspended once.  The same tensor-power argument, followed by tensoring with $k$, proves that a $k$-homology equivalence of loop spaces induces a $k$-homology equivalence of their classifying spaces.  These integral constructions followed by scalar extension explain why the argument also applies to an associative noncommutative $k$; no coalgebra over a noncommutative base is being assumed.  Each replacement is connected by the displayed natural weak equivalence and the cobar or bar comparison, which preserve the exact homology test in both directions.
+\end{proof}
+
+\begin{claim}{C.8}{Proved}{The homological-epimorphism criterion and the point-target correction}
+For a pointed map of connected spaces, write $A=A_S$ and $B=A_T$.  Then
+\[
+ v\in W_{D(k)}^1\quad\Longleftrightarrow\quad
+ B\otimes_A^{\mathbf L}B\xrightarrow{\mu}B\text{ is an equivalence of }B\text{-bimodules}.
+\]
+For every prederivator, irrespective of enhancement, a map $X\to e$ lies in $W_D$ if and only if it lies in $W_D^1$.  Consequently the assertion in the CATHOT addendum that an acyclic-group map $BA\to e$ is not $1$-complete is false.
+\end{claim}
+\begin{proof}
+The first map is the counit of extension--restriction evaluated at the free $B$-module.  If it is an equivalence, then for every $B$-module $N$ the counit is its derived tensor product with $N$ over $B$, hence is an equivalence; thus restriction is fully faithful.  The converse follows by evaluating the counit.  In the second assertion every object of $D(e)$ is a constant coefficient, so the two definitions ask for exactly the same maps between exactly the same pairs of objects.  In particular a nontrivial integrally acyclic group gives a map $BA\to e$ in $W^1_{D(k)}$ and outside $W^{\mathrm{lc}}_{D(k)}$ for every nonzero ring.  Reversing that map gives a constant-coefficient equivalence $e\to BA$ outside $W^1$, since its homotopy fibre is the disconnected discrete group $A$.
+\end{proof}
+
+\begin{claim}{C.9}{Proved}{Integral detection and arbitrary-ring arithmetic}
+Let $P(k)$ be the set of rational primes which are not units in a nonzero unital ring $k$.  Each $k$-homology test in C.7 is equivalent to the simultaneous $\F_p$-homology tests for $p\in P(k)$, together with the $\Q$-homology test when $\operatorname{char}(k)=0$.  In particular
+\[
+ W_{D(\Z)}^{\mathrm{lc}}=W_\infty,
+ \qquad
+ W_{D(k)}^{\mathrm{lc}}=W_\infty
+ \quad\Longleftrightarrow\quad P(k)\text{ contains every prime}.
+\]
+\end{claim}
+\begin{proof}
+For any bounded-below complex $C$ of free abelian groups, consider $C\otimes_{\Z}^{\mathbf L}k$.  A bounded-below integral complex is zero if and only if its derived tensors with $\Q$ and with every $\F_p$ vanish.  Indeed, for its least nonzero homology group $A$, the universal coefficient sequences force $A/pA=A[p]=0$ for every $p$; then $A$ is a rational vector space, which the rational test detects.  For $p\in P(k)$ the derived tensor $k\otimes^{\mathbf L}\F_p$ is a nonzero complex over a field, because $k/pk\ne0$.  Tensoring with it detects whether $C\otimes\F_p$ vanishes, by the field K\"unneth theorem.  For $p\notin P(k)$ that derived tensor is zero.  The rational tensor of $k$ is nonzero exactly in characteristic zero.  Applying the all-fields criterion to $C\otimes^{\mathbf L}k$ proves both directions of the asserted arithmetic description.
+
+With $k=\Z$, the last condition of C.7 gives an integral homology equivalence of simply connected universal covers.  Its mapping cylinder has zero relative homology and is simply connected, so relative Hurewicz, applied to a least nonzero relative homotopy group, gives a contradiction.  Thus the lifted map is a weak equivalence; together with the specified $\pi_1$ isomorphism this proves $v$ is a weak equivalence.  This is the homology Whitehead argument of \citet[Corollary 4.33]{C_Hatcher2002}.  If no prime is invertible in $k$, the ring has characteristic zero (otherwise any prime coprime to its positive characteristic would be invertible), and the preceding arithmetic description makes its homology test the integral one.  Conversely, if a prime $p$ is invertible in $k$, the degree-$p$ self-map of $S^2$ is a $k$-homology equivalence between simply connected spaces and belongs to $W^{\mathrm{lc}}_{D(k)}$ by C.7, but it is not a weak equivalence because multiplication by $p$ on $\pi_2S^2=\Z$ is not an isomorphism.
+\end{proof}
+
+\subsection{Spectra and local spectra}
+\begin{claim}{C.10}{Proved}{Spectra have the integral coefficient classes}
+For spectra, $W_{\Sp}$ is the class of integral homology equivalences,
+$W_{\Sp}^{\mathrm{coh}}=W_{\Sp}^{\mathrm{hom}}=W_{\Sp}^1$ is the class of maps with integrally acyclic homotopy fibres, and $W_{\Sp}^{\mathrm{lc}}=W_\infty$.
+\end{claim}
+\begin{proof}
+The sphere generates spectra under colimits and shifts, so C.3 reduces the first test to $\Sigma^\infty_+v$.  A map between connective spectra is an equivalence if and only if it is an integral homology equivalence: its connective cofiber, if nonzero, has a least nonzero homotopy group, which the stable Hurewicz theorem identifies with its least nonzero integral homology group.  C.2 applied to the sphere gives the fibre assertion by the same argument.  Evaluation on a connected space is monadic with monad $\Sigma^\infty_+\Omega S\wedge(-)$, exactly as in C.6.  Therefore restriction is an equivalence exactly when the specified map of suspension ring spectra of loops is an equivalence.  The connective argument turns this into integral loop-homology equivalence, and C.7--C.9 identify it with weak homotopy equivalence.  All reductions are componentwise after C.2 has forced the component bijection.
+\end{proof}
+
+\begin{claim}{C.11}{Proved}{A complete generalized-homology description for local spectra}
+Let $E$ be any nonzero spectrum, let $L_E\Sp$ denote Bousfield localization at $E$-homology equivalences, and use the associated derivator.  Here $E_j(Z)=\pi_j(E\wedge\Sigma^\infty_+Z)$ is unreduced generalized homology.  Then
+\begin{align*}
+ W_{L_E\Sp}&=\{v:E_j(S)\xrightarrow{\sim}E_j(T)\ (j\in\Z)\},\\
+ W_{L_E\Sp}^{\mathrm{coh}}=W_{L_E\Sp}^{\mathrm{hom}}=W_{L_E\Sp}^{1}
+ &=\{v:E\wedge\Sigma^\infty_+F_y\xrightarrow{\sim}E\ (y\in T)\},\\
+ W_{L_E\Sp}^{\mathrm{lc}}
+ &=\{v:\pi_0v\text{ bijective and }E_j(\Omega_xS)\xrightarrow{\sim}E_j(\Omega_{v(x)}T)
+ \ (j\in\Z,\ x\in S)\}.
+\end{align*}
+The last class forces isomorphisms of the discrete fundamental groups.  These descriptions apply in particular to $E=K(n)$ at any prime and height $n\geq1$.  For such $K(n)$ the last class strictly contains $W_\infty$.  For $E=0$ all classes consist of every map.
+\end{claim}
+\begin{proof}
+The $E$-acyclic spectra form a tensor ideal, so the localized category has the symmetric monoidal product $L_E(M\wedge N)$ and unit $U=L_E\mathbb S$.  Its colimits are localized colimits of spectra.  The unit generates under colimits and shifts: apply $L_E$ to a sphere-cell presentation of any spectrum.  Since $\mathbb S\to U$ is an $E$-equivalence, $E\wedge U\simeq E$.  Consequently testing $S\otimes M\to T\otimes M$ or $F_y\otimes M\to M$ for all local $M$ is equivalent to testing $M=U$, and the latter is precisely the indicated $E$-homology test.  This proves the first two lines using C.2--C.3.
+
+On a connected component, the monad of evaluation is tensoring with $L_E\Sigma^\infty_+\Omega S$.  Barr--Beck applies as in C.6.  An equivalence of the specified restriction forces the adjunction unit on the free object generated by $U$ to be an equivalence.  After evaluation it is the map
+\[
+ L_E\Sigma^\infty_+\Omega S\longrightarrow L_E\Sigma^\infty_+\Omega T.
+\]
+Conversely this equivalence identifies the two monads and their categories of modules, proving sufficiency.  Missing or merged components are excluded by C.2: each nonempty component of a fibre has a point whose sphere summand is split by collapse, and two such summands give a nonzero kernel for the augmented fold on $E$-homology.  The same split-summand argument on loop components proves that the group map on $\pi_1$ is bijective.  In detail, identified loop components give the difference of their point classes as a nonzero kernel element, and an omitted target component has a point class outside the image; use any nonzero group $\pi_jE$.
+
+For $K(n)$ at $p$, choose a prime $\ell\ne p$.  The degree-$\ell$ self-map of $S^2$ is a $\Z_{(p)}$-homology equivalence.  C.7 for $k=\Z_{(p)}$ makes its loop map a $\Z_{(p)}$-homology equivalence.  The cofiber of its localized suspension spectrum is bounded below, so the integral Hurewicz argument in the $p$-local category makes that loop map a stable $p$-local equivalence.  Smashing with the $p$-local spectrum $K(n)$ preserves it.  Thus the degree map belongs to $W^{\mathrm{lc}}_{L_{K(n)}\Sp}$, while multiplication by $\ell$ on $\pi_2S^2$ is not invertible.  For a general nonconnective $E$, we retain the exact loop-homology criterion; we do not replace it by an unproved criterion involving $E$-homology of universal covers.
+\end{proof}
+
+\subsection{Strict inclusions and finite verification}
+\begin{claim}{C.12}{Proved}{Strictness uniform in every nonzero ring and in spectra}
+For every nonzero unital ring $k$, both inclusions
+\[
+ W_{D(k)}^{\mathrm{lc}}\subsetneq W_{D(k)}^1\subsetneq W_{D(k)}
+\]
+are strict.  The same is true for spectra.  For $k=\Q$ or $k=\F_p$ one also has $W_\infty\subsetneq W_{D(k)}^{\mathrm{lc}}$.  The first two strict inclusions hold for every nonzero coefficient $L_E\Sp$.
+\end{claim}
+\begin{proof}
+Let $K$ be the connected presentation CW complex with one vertex, oriented edges $x,y$, and two oriented $2$-cells attached by $x^3y^{-5}$ and $(xy)^2y^{-5}$.  There are no higher cells.  Its cellular boundary $C_2(K;\Z)\to C_1(K;\Z)$ is
+\[
+ \begin{pmatrix}3&2\\-5&-3\end{pmatrix},\qquad \det=1.
+\]
+Hence $\widetilde H_*(K;\Z)=0$.  Its fundamental group is nontrivial: on the set $\{0,1,2,3,4\}$ let
+\[
+ x=(0\ 1\ 2),\qquad y=(0\ 2\ 4\ 1\ 3).
+\]
+With rightmost permutations applied first, $x$ has order $3$, $y$ has order $5$, and $xy$ has order $2$.  These satisfy the relators and generate a quotient of order $60$, so the edge $x$ is not null-homotopic.  The program \texttt{code/verify\_coefficient\_examples.py} enumerates this quotient and verifies the boundary determinant; its complete output is supplied.
+
+Let $a:*\to K$ be the vertex and $b:K\to *$ the projection.  Both are integral homology equivalences, hence lie in $W_{D(k)}$ for every $k$ and in $W_{\Sp}$.  The map $b$ lies in $W^1$ by C.8 and fails $W^{\mathrm{lc}}$ by its noninjective fundamental-group map.  The fibre of $a$ is $\Omega K$, which has more than one component, so $a$ is outside $W^1$ by C.7 or C.10.  Also $ba=\id_*$, proving the corresponding failure of two-out-of-three for $W^1$.  For local spectra $K\to *$ induces a stable equivalence of suspension spectra by C.10, so the same proof applies with C.11.  For a literally specified indexing category take $\Delta/\operatorname{Sing}K$, whose objects are pairs $(n,\sigma:\Delta^n\to K)$ and whose morphisms $(m,\tau)\to(n,\sigma)$ are monotone maps $\alpha:[m]\to[n]$ with $\tau=\sigma\alpha$; composition is composition of these monotone maps.  The selected vertex gives a functor $e\to\Delta/\operatorname{Sing}K$, and the unique functor to $e$ realizes $b$.  The usual realization map of its nerve to $K$ is a weak equivalence, so the five coefficient properties transfer by restriction equivalences.
+
+The promised group-theoretic examples are obtained from the acyclic overgroup $A$ in B.10.  The one-object category $BA$ has endomorphism set $A$ and multiplication as composition.  The projection $BA\to e$ supplies the first strict inclusion, and the unit functor $e\to BA$ supplies the second.  This is the corrected use of CATHOT B.6--B.7.  Finally, a degree-$2$ map of $S^2$ gives strictness over $\Q$, and a degree-$\ell$ map for a prime $\ell\ne p$ does so over $\F_p$, by C.7.  For $\Z$ and spectra the smallest class is already $W_\infty$, so that last inclusion is equality.
+\end{proof}
+
+\subsection{Rational homotopy and schematization}
+\begin{claim}{C.13}{Known}{The rational class is the established fibrewise rational class}
+For a map of connected pointed CW spaces,
+\[
+ v\in W_{D(\Q)}^{\mathrm{lc}}
+ \quad\Longleftrightarrow\quad
+ \pi_1v\text{ is an isomorphism and }
+ \pi_jv\otimes\Q\text{ is an isomorphism for every }j\geq2.
+\]
+Thus the class is that of $\pi_1$-rational homotopy equivalences, equivalently the maps inverted by fibrewise rationalization over $B\pi_1$.  This characterization, including the cobar and local-coefficient formulations, is \citet[Theorem 3]{C_RiveraWierstraZeinalian2021}.  For spaces whose universal covers have finite-dimensional rational homology in each degree, the algebraic models of \citet[Theorems 5.10, 5.11, 6.2, and 6.4]{C_GomezTatoHalperinTanre2000} model that fibrewise rational homotopy category.  Their Definition 6.1 leaves the discrete fundamental group unchanged.
+\end{claim}
+\begin{proof}
+C.7 identifies the class with a specified $\pi_1$ isomorphism and a rational homology equivalence of the simply connected universal covers.  The rational Whitehead theorem identifies the latter with isomorphisms of rationalized higher homotopy groups; alternatively Theorem 3 of the cited 2021 paper applies directly to the equivalent loop-chain test.  Fibrewise rationalization changes the simply connected fibre of $S\to B\pi_1S$ and keeps its base and action data.  A map of these fibrations is a weak equivalence after that operation precisely under the displayed conditions.  The finite-type assumption is needed for the stated minimal algebraic models, not for the equivalence class computed here.  No assertion identifies the class with rationalization that also changes $\pi_1$: for example $B\Z\to B\Q$ is an ordinary rational homology equivalence but fails the displayed discrete-group test.
+\end{proof}
+
+\begin{claim}{C.14}{Proved}{Schematization is a strictly weaker rational test}
+On connected pointed spaces, every map in $W_{D(\Q)}^{\mathrm{lc}}$ induces an equivalence of To\"en's schematizations over $\Q$, and the converse is false.  The latter test requires an isomorphism of proalgebraic fundamental groups and cohomology isomorphisms for all finite-dimensional rational local systems, as in \citet[Lemma 3.3.2 and Theorem 3.3.4]{C_Toen2006}; its fundamental group is the proalgebraic completion, by Corollary 3.3.7 there.  These assertions concern schematization of the specified map.
+\end{claim}
+\begin{proof}
+A map in $W_{D(\Q)}^{\mathrm{lc}}$ induces the actual isomorphism of discrete fundamental groups by C.7, hence the required isomorphism of proalgebraic completions.  C.2 gives its cohomology comparison for every rational local system, including all finite-dimensional ones.  The cited criterion and existence theorem therefore give the asserted equivalence of schematizations.
+
+For strictness choose, by B.10, a nontrivial integrally acyclic simple group $A$ of cardinality greater than $\aleph_0$ in $\U$.  Every homomorphism $A\to\operatorname{GL}_n(\Q)$ is trivial: simplicity makes a nontrivial homomorphism injective, while the target is countable.  Hence its proalgebraic completion over $\Q$ is trivial and every finite-dimensional rational local system on $BA$ is constant.  Integral acyclicity, followed by scalar extension and vector-space duality, gives exactly the required rational cohomology comparisons for $BA\to *$.  Thus this projection is a schematization equivalence.  It is outside $W^{\mathrm{lc}}_{D(\Q)}$, since $A\to1$ is not an isomorphism.  The one-object indexing category, its arrows and composition, and the explicit construction of $A$ are specified in B.10 and C.12.
+
+The supplied To\"en source has a reversed implication in the sentence immediately following Definition 3.1.1, where it says that an $\mathcal O$-equivalence is a $P$-equivalence.  Lemma 3.3.2 gives $P$-equivalence $\Rightarrow\mathcal O$-equivalence.  Over $\Q$, $BC_2\to *$ disproves the written converse: it preserves ordinary rational cohomology but changes the nontrivial finite proalgebraic group $C_2$.  The proof above uses the actual criterion of Lemma 3.3.2.  For simply connected spaces of finite type, Corollary 3.3.9 identifies the schematic higher homotopy sheaves in characteristic zero with the additive-group versions of the rational homotopy groups; this agrees with C.13 in that restricted case.
+\end{proof}
+
+\begin{claim}{C.15}{Proved}{The requested values, including their edge cases}
+The following table records the exact calculations.  In the column headed ``middle'', the cohomological, homological, and $1$-complete classes coincide.  ``Fibre $k$-acyclic'' means the augmented condition in C.7, ``cover $k$-equivalence'' includes bijectivity on $\pi_0$ and isomorphisms on $\pi_1$, and ``loop $E$-equivalence'' includes bijectivity on $\pi_0$.
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{.18\textwidth}>{\raggedright\arraybackslash}p{.21\textwidth}>{\raggedright\arraybackslash}p{.27\textwidth}>{\raggedright\arraybackslash}p{.23\textwidth}}
+\hline
+Coefficient & Constant class & Middle class & $2$-complete class\\
+\hline
+Sets & $W_0$ & $\pi_0$ bijective, $\pi_1$ onto & $W_1$\\
+Groupoids & $W_1$ & $\pi_{\leq1}$ isomorphic, $\pi_2$ onto & $W_2$\\
+$r$-types & $W_r$ & $\pi_{\leq r}$ isomorphic, $\pi_{r+1}$ onto & $W_{r+1}$\\
+Spaces & $W_\infty$ & $W_\infty$ & $W_\infty$\\
+$D(\Z)$ & Integral homology equivalences & Fibre $\Z$-acyclic & $W_\infty$\\
+$D(\Q)$ & Rational homology equivalences & Fibre $\Q$-acyclic & Cover $\Q$-equivalence\\
+$D(\F_p)$ & Mod-$p$ homology equivalences & Fibre $\F_p$-acyclic & Cover $\F_p$-equivalence\\
+$D(k)$, $k\ne0$ & $k$-homology equivalences & Fibre $k$-acyclic & Cover $k$-equivalence\\
+Spectra & Integral homology equivalences & Fibre $\Z$-acyclic & $W_\infty$\\
+$L_E\Sp$, $E\ne0$ & $E$-homology equivalences & Fibre $E$-acyclic & Loop $E$-equivalence\\
+Zero coefficients & Every map & Every map & Every map\\
+\hline
+\end{tabular}
+\end{center}
+\end{claim}
+\begin{proof}
+C.4, C.5, C.7, C.10, and C.11 prove the rows.  Infinite component sets cause no additional restriction: the augmented free-module argument and the pointwise Kan formulas apply to arbitrary $\U$-small sets, and each component is then treated separately.  For nontrivial coefficients the map $\varnothing\to *$ fails already the constant class in every row, whereas the map $\varnothing\to\varnothing$ belongs to every class.  Idempotents or noninvertible endomorphisms in an indexing category introduce no additional proviso: localization of its nerve at all arrows is the space $BX$, and the coefficient diagrams considered here are exactly the functors factoring through this localization.
+\end{proof}

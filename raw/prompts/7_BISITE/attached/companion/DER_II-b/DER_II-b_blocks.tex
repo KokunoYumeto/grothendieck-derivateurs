@@ -1,0 +1,545 @@
+% Commentary by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+\begin{dcomment}{exposition}{p54:Cela achève la démonstration de 4.1.}{Reading the two-sided criterion}
+Grothendieck has now converted full faithfulness of restriction into a condition on individual arrows. This is the point at which the cofinality theorem becomes a tool for reconstructing an entire diagram. The overlap with the preceding package was discussed there under ``Biasphericity, lax epimorphisms, and factorization categories''; we retain its notation and add two clarifications needed by the argument that follows.
+
+For $u:A\to B$ and $\gamma:b_0\to b_1$, write $\operatorname{Fact}_u(\gamma)$ for the category whose objects are triples $(a,r,s)$ with $r:b_0\to u(a)$, $s:u(a)\to b_1$, and $sr=\gamma$. A morphism to $(a',r',s')$ is $h:a\to a'$ with $u(h)r=r'$ and $s'u(h)=s$. The map of connected components in (4.10) has precisely $\pi_0\operatorname{Fact}_u(\gamma)$ as its fibre over $\gamma$. Its being a bijection therefore says that every arrow has a factorization through $u$, unique up to a finite zigzag of such factorizations. This is stronger than merely obtaining a connected comma category at each object.
+
+The direction in 4.1(d$'$) must accordingly be read with care. For $B/b_1$, the relevant comma category is $\gamma\backslash(A/b_1)$, so its projection must be \emph{cofinal} in the convention of Definition 3.3. For $b_0\backslash B$, the relevant category is $(b_0\backslash A)/\gamma$, so the dual projection must be \emph{co-cofinal}. The edition prints ``cofinal'' in both places. Taken literally, the second condition is too weak: the inclusion $\{1\}\to[1]$ satisfies it, although restriction of presheaves to the terminal object is not fully faithful. The corrected orientation is also the one used in Proposition 4.4(b).
+
+There is a separate existence issue in 4.1(a$'$), already isolated in the preceding package's ``The missing pointwise limit hypothesis.'' The left Kan extension requires the colimits over the appropriate comma categories, not merely colimits of shapes $I$ and $I'$. Working in a cocomplete coefficient category is sufficient. Once the adjoints exist, the full-faithfulness equivalences are formal, and the representable counit test is valid because both $u_!u^*$ and the identity preserve colimits. No comparable argument makes the representable \emph{unit} test sufficient: its exact meaning is different.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p56:Donc il est douteux que}{The unit on representables tests density}
+Grothendieck's hesitation on pages 54--56 identifies a genuine distinction. He asks whether knowing every representable presheaf can be recovered by right Kan extension already recovers all presheaves. The condition has a familiar modern interpretation: it says that $u$ is dense. Density reconstructs the objects of the original category from their restricted Yoneda images; it does not reconstruct its entire presheaf category.
+
+Indeed, let $y_B(b)=B(-,b)$. By adjunction, the component at $c$ of the unit on $y_B(b)$ is the map
+\[
+ B(c,b)\longrightarrow
+ \operatorname{Nat}\bigl(B(u-,c),B(u-,b)\bigr).
+\]
+Thus the unit is invertible on all representables exactly when the restricted Yoneda functor $B\to\operatorname{Set}^{A^{\mathrm{op}}}$ is fully faithful. This is the definition of a dense functor; see \citet[Definition 6.5.11]{Riehl2016}. It has a different quantifier from the full faithfulness of $u^*$ on \emph{all} presheaves.
+
+A finite example settles the question without any existence qualifications. Let $B$ be the full subcategory of sets on the objects $1=\{*\}$ and $2=\{0,1\}$, and let $u:e\to B$ select $1$. For $b,c\in\{1,2\}$, evaluation on elements gives
+\[
+ B(c,b)\xrightarrow{\sim}
+ \operatorname{Set}\bigl(B(1,c),B(1,b)\bigr).
+\]
+Both sides are simply the set of functions $c\to b$, and the displayed map is the identity under the indicated identifications. Hence every unit on a representable is an isomorphism. On the other hand, $\operatorname{Fact}_u(\mathrm{id}_2)$ is empty: any composite $2\to1\to2$ is constant, whereas $\mathrm{id}_2$ is not. Proposition 4.1 therefore shows that $u$ is not $W_0$-connected.
+
+One can see the failure directly at the counit. The presheaf $u_!u^*y_B(2)$ evaluated at $2$ parametrizes factorizations $2\to1\to2$; its image in $B(2,2)$ consists of the two constant functions and misses the identity and the transposition. The representable unit has nevertheless passed every test. The two adjunction maps carry different information.
+
+This is an instance of the standard distinction between density and absolute density. \citet{AdamekElBashirSobralVelebil2001} identify lax epimorphisms with absolutely dense functors and with the connected-factorization condition. The construction above applies that distinction to the question left here; we do not claim a new density theorem. It also explains the failed proof: representables generate a presheaf category by colimits, whereas the proposed right-adjoint argument would require an appropriate cogeneration statement, which is absent.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p58:Donc c'est vraiment sans espoir.}{A contractible replacement which loses an edge}
+Grothendieck next tests whether full faithfulness might conceal a stronger, universally preserved equivalence. His four-object example separates these requirements even for finite posets. It deserves to be read as a complete computation, since the obstruction lies in a strict pullback which the homotopy type of the total category cannot detect.
+
+Write $A$ for the poset with precisely the nonidentity arrows
+\[
+ 0\longrightarrow 1,\qquad 1'\longrightarrow1,
+ \qquad 1'\longrightarrow2,
+\]
+and let $u:A\to[2]$ identify $1'$ with $1$. For the three identity arrows of $[2]$, the factorization categories are respectively the point $\{0\}$, the interval $1'\to1$, and the point $\{2\}$. For $0\to1$ and $1\to2$, they are the full subposets $0\to1\leftarrow1'$ and $1\leftarrow1'\to2$. The former has a terminal object and the latter an initial object. For $0\to2$, the factorization category is all of $A$: its nerve has no nondegenerate simplices above dimension one, and its realization is the tree with successive vertices $0,1,1',2$. All six nerves are contractible. Thus this is a homotopical epimorphism, and restriction is fully faithful for every derivator; the later criterion is \citet[Theorem 6.10]{GrothStovicek2016Trees}.
+
+Now pull back along the edge $[1]\to[2]$ selecting $0\to2$. The only objects left are $0$ and $2$, and $A$ contains no arrow between them. The pullback is the discrete two-point category, whose map to $[1]$ is not a $W_0$-equivalence. Full faithfulness has survived every factorization test and failed this base-change test.
+
+The same computation rules out the proposed factorization through an equivalence followed by a universal equivalence. Suppose $A\xrightarrow{v}C\xrightarrow{w}[2]$ were such a factorization, with $v$ an equivalence. Since $A$ is a poset, $C$ is a preorder, and its poset of isomorphism classes identifies with $A$. Any functor from $C$ to $[2]$ is constant on isomorphism classes. The inverse image of the edge $0\to2$ consequently has two nonempty components, corresponding to the objects $0$ and $2$ of $A$, and no morphism joining them. It cannot be connected. This argument uses the skeletal quotient only to count components; it does not assume that an arbitrary strict pullback preserves an equivalence.
+\end{dcomment}
+
+\begin{dcomment}{later}{p59:mais ce n'est pas une équivalence (et pas un foncteur de localisation).}{The quantifier in homotopical epimorphisms}
+Grothendieck has separated three operations that are easy to conflate: localizing a category, embedding its diagram theory by restriction, and preserving an equivalence after every strict base change. The example $BG\to e$ at the end of this page separates the first two in dimension zero. Constant $G$-sets form a full subcategory of $G$-sets, so restriction from sets is fully faithful; yet a localization of a groupoid at any collection of its arrows is equivalent to that groupoid, since all those arrows are already invertible. For $G\ne1$, its projection to $e$ is therefore not a localization.
+
+The modern term \emph{homotopical epimorphism} adds a quantifier absent from the fixed-$\D$ problem about to begin: restriction must be fully faithful for \emph{every} derivator. \citet[Definition 6.1 and Theorem 6.10]{GrothStovicek2016Trees}, in the arXiv v3 numbering, characterize this condition by weak contractibility of all the factorization categories. Their Remark 6.3(ii) expressly distinguishes full faithfulness for one specified derivator. The space-valued theory detects the universal condition; a particular theory of coefficients can forget more.
+
+This development follows the path from Heller's homotopy theories and Cisinski's comparison results to a calculus of homotopy exact squares. For the present pages, the decisive feature is concrete: connected components in 4.1 are replaced by weakly contractible nerves. The application in tilting theory is equally concrete: a homotopical epimorphism identifies a category of coherent diagrams with a full subcategory of another one, described by unit or counit conditions. No claim that every such functor is an ordinary localization is required.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p60:Je voudrais généraliser la notion}{Recovering a global diagram from its slices}
+Grothendieck now wants the factorization criterion to work with an arbitrary theory of coefficients. The difficulty is no longer the adjunction: a right adjoint is fully faithful exactly when its counit is invertible, and a left adjoint exactly when its unit is invertible. The issue is whether the tests visible from global diagrams detect every diagram on a slice. Proposition 4.4 isolates a sufficient detection condition instead of assuming such a property implicitly.
+
+Put $q=u/i:A/i\to B/i$, $\alpha:B/i\to B$, and let $\xi$ lie in $\D(e)$. With the variance of the manuscript, the comparison of homotopy limits on $B/i$ and $A/i$ is induced, after applying $\operatorname{Hom}(\xi,-)$, by the counit
+\[
+ c_\xi:q_!q^*(\xi_{B/i})\longrightarrow\xi_{B/i}
+ \qquad\hbox{in }\D(B/i).
+\]
+The subscripts in the edition's $(***)$ should be $B/i$ on the object to which $q^*$ is applied and on the target. The printed $I'/i$ in both places makes that display ill-typed; the argument itself determines the correction.
+
+If all $c_\xi$ are invertible, then for every $G\in\D(B/i)$ the maps $\operatorname{Hom}(c_\xi,G)$ are bijections. By adjunction and Yoneda, the induced comparison of homotopy limits is invertible. Taking $G=\alpha^*F$ and using the pointwise right Kan extension formula proves that $F\to u_*u^*F$ is invertible at $i$. As this holds for every $i$, the derivator axiom detecting isomorphisms pointwise gives full faithfulness. This proves the sufficient direction without requiring every slice diagram to extend globally.
+
+For the converse, full faithfulness supplies only
+\[
+ \operatorname{Hom}_{\D(B/i)}(c_\xi,\alpha^*F)
+ \quad\hbox{bijective for every }F\in\D(B).
+\]
+Adjunction turns this into bijectivity of $\operatorname{Hom}_{\D(B)}(\alpha_!c_\xi,F)$ for every $F$, so Yoneda says exactly that $\alpha_!c_\xi$ is invertible. Conservativity of $\alpha_!$ then proves that $c_\xi$ is invertible. This is condition $3^o$; the proof needs conservativity only on this family of counits, although the stronger formulation is easier to use.
+
+Condition $2^o$ implies $3^o$ by an elementary adjunction argument. If $L\dashv R$ and $R$ is essentially surjective, then an arrow $h$ for which $Lh$ is invertible induces bijections on Hom into every $Rd$, hence into every object; therefore $h$ is invertible. If $B$ is a preorder, $B/i\to B$ is fully faithful. Its left Kan extension is fully faithful, so the unit $G\to\alpha^*\alpha_!G$ is invertible and $\alpha^*$ is essentially surjective. Thus $1^o$ implies $2^o$, which implies $3^o$.
+
+The hypothesis on coproducts in 4.7 will make $3^o$ available in many coefficient theories, including pointed ones. It is a property of those coefficients, not a formal property of every derivator. The modern axioms used here---pointwise calculation of Kan extensions and pointwise detection of isomorphisms---are recorded in \citet[Definition 1.5]{Groth2013}; their different roles will matter for the parenthetical assertion about faithfulness.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p64:ne tenant compte que de la composante}{A product erases a component}
+Grothendieck's example explains why the conservative-slice hypothesis cannot simply be imposed on one chosen side of every derivator. A right Kan extension over a discrete fibre is a product, and the empty set can erase every other factor. This is an obstruction in ordinary presheaf theory, before any passage to homotopy categories.
+
+Let $B$ have two distinct arrows $\alpha,\beta:0\rightrightarrows1$, and let $p:0\backslash B\to B$ be the projection. Its domain has the shape $a\to b$, $a\to c$, with $p(a)=0$ and $p(b)=p(c)=1$. A presheaf $G$ is a diagram $G_b\xrightarrow{\lambda}G_a\xleftarrow{\mu}G_c$, and
+\[
+ (p_*G)(0)=G_a,\qquad
+ (p_*G)(1)=G_b\times G_c.
+\]
+The two restriction maps are $\lambda\operatorname{pr}_1$ and $\mu\operatorname{pr}_2$. Take $G_a=1$, $G_b=\varnothing$, $G_c=\varnothing$, and $H_a=1$, $H_b=1$, $H_c=\varnothing$. The evident map $G\to H$ is not an isomorphism, but $p_*G\to p_*H$ is the identity of the presheaf $\varnothing\rightrightarrows1$. To see nonfaithfulness as well, take $G_b=1$, $H_b=2$ while keeping the $a$-values equal to $1$ and the $c$-values empty; the two distinct maps on the $b$-component have identical direct images.
+
+For the other variance, $B/i\to B$ is a discrete fibration and its left Kan extension is a disjoint union over each fibre. In sets, a map between two such unions that preserves the indexing is bijective exactly when each component is bijective. This proves the conservativity used in 4.4 for set coefficients. Dualizing the derivator exchanges these two mechanisms, which is why failure of the particular sufficient condition does not refute the equivalence of full faithfulness and biasphericity for sets or their opposite theory.
+\end{dcomment}
+
+\begin{dcomment}{development}{p64bis:en tenant compte que les fibres sont discrètes.}{Faithfulness does not follow from the fibre calculation}
+Grothendieck uses disjoint fibres to promote a property of coproducts in $\D(e)$ to a property of $u_!$ on coherent diagrams. For conservativity, the argument is complete: an invertible $u_!h$ gives an invertible component $h_j$ at every $j$, and the derivator axiom then makes $h$ invertible. For faithfulness, pointwise evaluation does not provide the analogous conclusion. A small derived example shows that the parenthetical assertion is false.
+
+\textbf{An étale direct image killing a nonzero extension.}\ours{}
+Let $k$ be a field and take $\D(K)=D(\operatorname{Vect}_k^{K^{\mathrm{op}}})$. There is a discrete fibration $p:J\to I$ for which $p_!$ is not faithful, although binary coproducts in $\D(e)=D(k)$ are faithful.
+
+\emph{Proof.} Take $I=(0\to1)$ and let $J$ have objects $a,b,c$ and the two nonidentity arrows $a\to b$, $a\to c$. Send $a$ to $0$ and both $b,c$ to $1$. The unique lifting condition for arrows with a fixed target verifies that $p$ is a discrete fibration. A presheaf on $J$ is written $(B\to A\leftarrow C)$. Its left Kan extension is
+\[
+       p_!(B\xrightarrow{f}A\xleftarrow{g}C)
+       =(B\oplus C\xrightarrow{(f,g)}A).
+\]
+This functor is exact, since it is computed by finite direct sums at each vertex. Its derived functor is consequently given by the same formula on complexes.
+
+Consider the three representations
+\[
+ M=(k\to0\leftarrow0),\qquad
+ N=(0\to k\xleftarrow{\mathrm{id}}k),\qquad
+ E=(k\xrightarrow{\mathrm{id}}k\xleftarrow{\mathrm{id}}k).
+\]
+There is a short exact sequence $0\to N\to E\to M\to0$: the inclusion is the identity at $a,c$ and zero at $b$, and the quotient is the identity at $b$ and zero elsewhere. It does not split. A section $M\to E$ would have to be the identity at $b$ and zero at $a$; commutativity along $a\to b$ for the contravariant diagrams would then assert $\mathrm{id}_k=0$. Therefore its class
+\[
+       \delta\in\operatorname{Ext}^1_{\operatorname{Vect}_k^{J^{\mathrm{op}}}}(M,N)
+       =\operatorname{Hom}_{\D(J)}(M,N[1])
+\]
+is nonzero. The equality is the usual identification of extension classes with degree-one derived morphisms; here all objects are representations of a finite acyclic quiver.
+
+After applying $p_!$, the middle representation is $(k\oplus k\xrightarrow{(1,1)}k)$ and the quotient is $(k\to0)$. The map at the source sending $t$ to $(t,-t)$, together with the zero map at the target, gives a section of that quotient. Hence the image extension splits and $p_!\delta=0$. Binary direct sum on $D(k)$ is faithful because each summand of a morphism is recovered by composing with the canonical inclusion and projection. This proves the assertion. \hfill$\square$
+
+The example concerns only ``resp. fidèle''. It leaves the conservative conclusion, and therefore the final equivalence in 4.7, intact. For represented derivators the evaluation functors are jointly faithful and the parenthetical argument does work; it also works under an explicit joint-faithfulness hypothesis on $\D(J)\to\D(e)^{\operatorname{Ob}J}$. We checked the distinction between coherent and incoherent diagram categories in \citet[Introduction and Definition 1.5]{Groth2013} and the treatment of homotopical epimorphisms in \citet[\S6]{GrothStovicek2016Trees}; we did not find this particular counterexample to 4.7 there. The calculation is included as a repair of the statement, without a claim of priority.
+\end{dcomment}
+
+\begin{dcomment}{development}{p64bis:Je ne vais pas m'obstiner pour tirer au clair ce qui en est.}{A connected restriction with an empty factorization category}
+Grothendieck asks whether the sufficient conditions just proved leave a genuine distinction between $\D$-connectedness and $\D$-biasphericity. The edition says ``sans être $\D$-asphérique'', but that literal question has an immediate negative answer: full faithfulness makes the unit invertible on constant objects, hence implies asphericity. The surrounding discussion and the next diagram concern \emph{biasphericity}. A represented derivator supplies the requested separating example.
+
+\textbf{A two-valued coefficient theory.}\ours{}
+Let $L=\{0<1\}$ be the complete lattice, regarded as a category, and let $\D_L(K)=\operatorname{Fun}(K^{\mathrm{op}},L)$. Let $B$ be the free category on the directed cycle $x\xrightarrow{s}y\xrightarrow{t}x$, and let $u:e\to B$ select $y$. Then $u$ is $\D_L$-connected and is not $\D_L$-biaspherical.
+
+\emph{Proof.} The complete lattice $L$ has every small limit and colimit, given respectively by infima and suprema. Thus its represented prederivator is a derivator: restriction has both pointwise Kan extensions, disjoint unions of indexing categories give products of functor categories, and natural transformations are invertible exactly when their components are. It is also strong, since currying gives the required coherent-arrow identifications. These are the standard represented examples recalled in \citet[Examples 1.2(1), 1.6 and Definitions 1.5, 1.8]{Groth2013}, with the manuscript's contravariant diagram convention.
+
+An object $F$ of $\D_L(B)$ gives inequalities $F(y)\leq F(x)$ and $F(x)\leq F(y)$. Antisymmetry forces equality. All arrows of $B$ then have the unique endomorphism of that value as image. Every diagram is therefore constant, and a natural transformation between the two possible diagrams is precisely an inequality in $L$. Evaluation at $y$ identifies $u^*:\D_L(B)\to L$ with an isomorphism of categories. In particular it is fully faithful.
+
+For the identity of the omitted object, however,
+\[
+        \operatorname{Fact}_u(\mathrm{id}_x)=\varnothing.
+\]
+Indeed, a factorization through $y$ would be a path $x\to y$ followed by a path $y\to x$. Both have positive length, and in a free category their composite cannot be the length-zero identity. The empty category is not $\D_L$-aspherical: its homotopy colimit of the constant value $1$ is the initial object $0$, and the comparison $0\to1$ is not invertible. Equivalently, $L\to\D_L(\varnothing)=e$ is not fully faithful. Condition 4.4(b$''$) fails. \hfill$\square$
+
+Both potential escapes supplied by 4.7 genuinely fail here. Coproduct is maximum, so the map $(0,1)\to(1,1)$ becomes an identity after taking coproducts although its first component is not invertible. Product is minimum, so $(0,0)\to(1,0)$ gives the dual failure. The counterexample therefore does not contradict the conservative-coproduct theorem, nor the preorder-base case: the indexing category $B$ is a free category with nontrivial endomorphisms, not a preorder.
+
+The example isolates the information lost by the coefficient theory. It sees mutual reachability of objects but cannot distinguish the identity from a nonidentity cycle; the factorization condition still distinguishes them. This coefficient theory is also the classical derivator of truth values, or homotopy $(-1)$-types; see \citet[p.~33]{Shulman2023Setoids}. We checked that discussion, the density and lax-epimorphism literature cited above, the fixed-derivator qualification in \citet[Remark 6.3(ii)]{GrothStovicek2016Trees}, and searches for biasphericity in the derivator literature. We could not find this counterexample there. The claim here is the explicit proposition and proof, rather than an assertion that it has no earlier occurrence.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p65:c'est une $\D$-équivalence universelle.}{What the seven classes retain}
+Grothendieck's diagram organizes the preceding tests by the amount of coefficient information they preserve. Its arrows remain useful, but the two observations below are needed to read the diagram after the preceding counterexample.
+
+First, $\D$-connectedness is stable under composition. If $u:A\to B$ and $v:B\to C$ are $\D$-connected, then
+\[
+       (vu)^*\simeq u^*v^*
+\]
+is a composite of fully faithful functors and is fully faithful. Thus the exception printed in the footnote cannot be an exception to closure under composition. This is a formal fact, independent of any Kan-extension existence hypothesis. The footnote's further assertion that all seven classes depend only on $W_\D$ requires an independent argument for the fixed-coefficient connectedness class; it does not follow from the stated factorization criterion, whose converse has just failed.
+
+Second, connectedness always implies both asphericity and coasphericity. The adjunction unit and counit are invertible on every $F\in\D(B)$, hence on constant $F$ in particular. The distinction established above is between this global full faithfulness and the two-sided slice tests defining biasphericity. The label ``équivalence dans tous les cas connus'' records the author's experience at this stage, not an additional theorem.
+
+For universal equivalences the factorization test still gives the implication in 4.8. The category of factorizations of a fixed arrow $\gamma:b_0\to b_1$ through arbitrary objects of $B$ has an initial object $(b_0,\mathrm{id},\gamma)$ and a terminal object $(b_1,\gamma,\mathrm{id})$. Pulling $u$ back to that category produces $\operatorname{Fact}_u(\gamma)$. A universal $W_\D$-equivalence therefore makes this category $\D$-aspherical. Under the smooth, proper, or weak-fibration hypotheses, the fibre-to-comma comparisons give the converse exactly as in 4.3. These hypotheses are what connect strict base changes to the homotopy calculation; the four-object example shows why they cannot simply be omitted.
+\end{dcomment}
+
+
+% Section fragment: manuscript pages 66--89. GPT-6 Astra.
+\begin{dcomment}{exposition}{p66}{What survives the cancelled argument}
+Grothendieck is seeking a way to recover the classes of smooth and proper maps from the weak equivalences alone. The two tests in (4.10) already suggest an order-theoretic correspondence, but they use different notions of preservation. This distinction explains the cancellation on the next page; it does not make every formula in the cancelled passage false.
+
+To see exactly what is involved, write $S(A)$ for the stabilizer of $A$: a map $p:Y'\to Y$ belongs to $S(A)$ when its pullback functor on slices sends every arrow of $A$ to another arrow of $A$. Write $N(L)=\mathbf A_W(L)$ for the arrows whose pullbacks along maps of $L$ belong to $W$. Here $W$ contains isomorphisms and is closed under composition. Classes are invariant under isomorphism of arrows, and the ambient category has pullbacks. The quantifier over arrows \emph{in the slice} matters: one tests an arrow $X_1\to X_2$ together with any structure map $X_2\to Y$, not merely arrows with codomain exactly $Y$.
+
+The class $S(A)$ contains isomorphisms and is closed under composition and pullback, by the identity and composition laws for pullback functors. If $L$ is closed under pullback, then $N(L)$ is closed under composition: pull back a composite $gf$ along $p\in L$, and factor its pullback as the pullback of $f$ along a pullback of $p$, followed by the pullback of $g$ along $p$. Both factors lie in $W$. If $L$ also contains identities, $N(L)\subseteq W$; its isomorphisms belong automatically. These are the assertions preceding the cancellation, with their implicit hypotheses made explicit.
+
+For $A\subseteq W$, there are also two useful inclusions:
+\[
+ A\subseteq N(S(A)),\qquad L\subseteq S(N(L)),
+\]
+where the second requires $L$ to be closed under pullback and composition. For its proof, let $p\in L$ and $f\in N(L)$ be over the target of $p$. The pullback $p^*f$ lies in $W$. Every further test of $p^*f$ along $q\in L$ is a test of $f$ along the composite of $q$ with the appropriate pullback of $p$. That composite is in $L$, so $p^*f\in N(L)$.
+
+For classes $L$ containing identities, these inclusions even prove the two displayed idempotence conclusions on page 67. Since $N$ reverses inclusions,
+\[
+ NSNS(A)\subseteq NS(A),\qquad NSN(L)\subseteq N(L),
+\]
+and the reverse inclusions follow from $A\subseteq NS(A)$, applied to $NS(A)$ and to $N(L)$; the identity test ensures $N(L)\subseteq W$. Thus $NS$ is idempotent and $SNSN=SN$. However, $S$ need not reverse inclusions. Consequently these calculations do not supply the order-reversing adjunction that the next section needs. In particular, the stronger justification printed there, $S(A)^\flat=S(A)$, does not follow from them and can fail. The repair in \S6 is to replace $S(A)$ by a transporter into the fixed class $W$. That operation is genuinely order-reversing.
+
+There is a further empty-class detail in the cancelled argument. Formula (4.14) does not explicitly require identities in $L$, whereas (4.12) does not explicitly restrict $N(L)$ to $W$. For $L=\varnothing$, one has $N(L)=\operatorname{Fl}(\mathrm{Cat})$, so the auxiliary assertion $N(L)^\natural=N(L)$ is false when $W$ is proper: its left side is $W_{\mathrm{univ}}$. Section 6 repairs the domain issue by inserting $f\in W$ into (6.6), and later by requiring isomorphisms in $L$.
+
+The idempotence of $SN$ itself nevertheless survives in $\mathrm{Cat}$ for a fundamental localizer and every class $L$ closed under pullback and composition. If every member of $L$ has empty domain, every test is an identity of the empty category, so $N(L)$ is all functors and $SN(L)$ is all functors; applying $SN$ again gives the same class, since universal $W$-equivalences are stable under all pullbacks. Otherwise choose $p\in L$ with nonempty domain and pull it back to an object of its target lying in its image. This gives $C\to e$ in $L$ with $C$ nonempty. Further pullback gives $B\times C\to B$ in $L$ for every $B$. Thus $f\in N(L)$ implies $f\times C\in W$. Choosing an object of $C$ makes $f$ a retract of $f\times C$ in the arrow category, so $f\in W$ by closure under retracts; for fundamental localizers this is \citet[Proposition 4.2.4, p.~183]{Cisinski2006Prefaisceaux}. Hence $N(L)\subseteq W$, and the earlier proof applies. This records the surviving conclusion without endorsing either incorrect auxiliary justification.
+\end{dcomment}
+
+\begin{dcomment}{development}{p67}{A cancelled justification tested in categories}
+The cancelled lines are best understood by testing the precise identity used in their justification. The following example keeps the ambient category equal to $\mathrm{Cat}$ and uses a fundamental localizer, so the difficulty is not an artefact of passing to an unrelated category.
+
+\textbf{A stabilizer need not be a closed right-hand class.}\ours{}
+Let $W$ be the maximal fundamental localizer, consisting of all functors, and let $A=\mathrm{Equ}$ be the class of equivalences of categories. With $S$ and $N$ as above, $S(A)^\flat\ne S(A)$.
+
+Indeed, every pullback functor takes functors to functors, so $N(L)=\operatorname{Fl}(\mathrm{Cat})$ for every $L$. Consequently
+\[
+ S(A)^\flat=S\bigl(N(S(A))\bigr)
+ =S\bigl(\operatorname{Fl}(\mathrm{Cat})\bigr)
+ =\operatorname{Fl}(\mathrm{Cat}).
+\]
+To show that $S(A)$ is smaller, let $J$ be the groupoid with two objects $0,1$ and precisely one morphism between each ordered pair. Each point inclusion $e_i\to J$ is fully faithful and essentially surjective, hence an equivalence. Their strict pullback is empty, because its objects would have to map to both $0$ and $1$. Pulling $e_1\to J$ back along $e_0\to J$ therefore gives $\varnothing\to e_0$, which is not essentially surjective. Thus $e_0\to J\notin S(A)$, proving the claim.
+
+The same calculation shows why the anticipated polarity fails: although $A\subseteq B=\operatorname{Fl}(\mathrm{Cat})$, one has $S(A)\subsetneq S(B)$, whereas an order-reversing correspondence would require the opposite inclusion. This does not contradict the idempotence of either composite proved in the preceding block. For the present $W$ those composites are particularly degenerate: $NS$ is constant with value all functors, and $SN$ is likewise constant.
+
+This is an elementary diagnostic for the manuscript's cancellation. We checked the subsequent transporter construction in \S6 and the preservation definition of smooth functors in \citet[Definition 4.6]{Maltsiniotis2005Asphericite}; we did not find this particular counterexample stated there. The mark above records our verification, not a claim of priority. The later block ``The stabilizer of categorical equivalences'' identifies the whole class $S(\mathrm{Equ})$.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p69}{The relation comes before the order}
+Grothendieck pauses to isolate the formal mechanism that a successful transporter construction must satisfy. The first part of the section concerns an arbitrary relation, even though the initial presentation starts with ordered sets. Separating those two levels makes the notation more transparent and prevents the later confusion between a closed subset and an element of an ordered set.
+
+For a relation $R\subseteq P\times Q$, put
+\[
+ A^\cup=\{q\mid (p,q)\in R\text{ for every }p\in A\},
+ \qquad
+ B^\cap=\{p\mid (p,q)\in R\text{ for every }q\in B\}.
+\]
+The decisive equivalence is
+\[
+ B\subseteq A^\cup\quad\Longleftrightarrow\quad
+ A\times B\subseteq R\quad\Longleftrightarrow\quad
+ A\subseteq B^\cap.
+\]
+Both operations reverse inclusions. Every $p\in A$ is related to every member of $A^\cup$, so $A\subseteq A^{\cup\cap}$. Applying the inclusion-reversing operation gives $A^{\cup\cap\cup}\subseteq A^\cup$; applying extensivity on the other side gives the reverse inclusion. Thus the triple operation equals the single operation, and the double operation is idempotent. This proves (5.5)--(5.7) without any order on $P$ or $Q$.
+
+The fixed subsets form complete lattices. Arbitrary intersections of fixed subsets are fixed: if $A=\bigcap_i A_i$, monotonicity gives $A^{\cup\cap}\subseteq A_i$ for every $i$, and extensivity gives the opposite inclusion $A\subseteq A^{\cup\cap}$. Their join is the closure of their union. The two polar operations exchange these closed-set lattices by inverse order-reversing bijections, proving Proposition 5.1 and Corollary 5.2. Empty families cause no exception: the largest closed subset of $P$ is $P$, while the smallest is $Q^\cap$, which need not be empty.
+
+The ordered version asks for more. An ``open'' subset in this passage is a lower set, and the additional requirement is that each polar lower set be principal. For complete lattices $P,Q$, this gives maps $\beta_0:P\to Q$ and $\alpha_0:Q\to P$ characterized by
+\[
+ q\leq\beta_0(p)\quad\Longleftrightarrow\quad p\leq\alpha_0(q).
+\]
+Equivalently, $\alpha_0:Q\to P^{\mathrm{op}}$ is left adjoint to $\beta_0:P^{\mathrm{op}}\to Q$. It follows that $\beta_0$ sends joins in $P$ to meets in $Q$, including the empty join. Conversely, if it has this property, set
+\[
+ \alpha_0(q)=\bigvee\{p\in P:q\leq\beta_0(p)\}.
+\]
+The set under the join is a lower set and is closed under arbitrary joins, so its join belongs to it; this proves the displayed equivalence and constructs the adjoint. The ensuing fixed-point correspondence is the usual antitone Galois connection. A systematic later account is \citet[\S0.4, Propositions 7--8 and Theorem 2]{GanterWille1999}; the arguments needed here are supplied above, independently of terminology.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p77}{A join of closed elements need not be closed}
+The ordered version allows the closure of a subset to be represented by one element, and Grothendieck wants to pass freely between these descriptions. Formula (5.20) loses a closure in making this passage. The difficulty is mathematical, not a transcription error: the attached PDF prints the second equality exactly as transcribed.
+
+Let $c=\alpha_0\beta_0$ and let $A\subseteq P$. The precise identities are
+\[
+ \{p\}^{\cup\cap}=\mathord\downarrow c(p),\qquad
+ A^{\cup\cap}=\mathord\downarrow c\left(\bigvee_{p\in A}p\right)
+ =\mathord\downarrow c\left(\bigvee_{p\in A}c(p)\right).
+\]
+Here $\mathord\downarrow x$ denotes the set of elements below $x$. To prove the middle equality, the polar $A^\cup$ has greatest element
+$\bigwedge_{p\in A}\beta_0(p)=\beta_0(\bigvee A)$, and its polar has greatest element $\alpha_0\beta_0(\bigvee A)$. For the last equality, $p\leq c(p)\leq c(\bigvee A)$ for every $p\in A$; apply monotonicity and idempotence to the two resulting inequalities. Thus the supremum can be taken in the \emph{closed-element lattice}, where it means closure of the ambient supremum. It cannot in general be taken unchanged in $P$.
+
+A small example displays both the omitted operation and its importance. Let $E=\mathbf F_2^2$, and take $P=\mathfrak P(E)$, $Q=\mathfrak P(E^*)$, with the relation that every vector in one subset is annihilated by every functional in the other. Double annihilation sends a subset to its linear span. To check this directly, a linear functional vanishing on a set vanishes on its span; if a vector lies outside that span, extend a basis of the span by that vector and prescribe a functional taking value $1$ on it and $0$ on the original basis.
+
+Let $e_1,e_2$ be a basis and put $p_1=\{0,e_1\}$, $p_2=\{0,e_2\}$. Each $p_i$ is already closed, but their supremum in $P$ is
+\[
+ p_1\cup p_2=\{0,e_1,e_2\},
+\]
+which omits $e_1+e_2$ and is not closed. For the family $A=\{p_1,p_2\}\subseteq P$, the greatest element of $A^{\cup\cap}$ is all of $E$, whereas the supremum printed in (5.20) is only the three-element union. Moreover, $A^{\cup\cap}$ itself is a subset of $P$, namely all subsets of $E$, rather than an element of $P$. These two distinctions are exactly what the corrected formula records.
+
+This correction does not disturb the subsequent statements that $c$ is monotone, extensive and idempotent, or that the closed elements on the two sides correspond anti-isomorphically. It supplies the correct join operation on those elements and will be needed again when the elements of $P$ are themselves classes of morphisms.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p79:Les parties closes sont les parties convexes faiblement fermées contenant l'origine.}{What the double polar closes}
+The examples identify the content of a formal closure: the relation supplies tests, and the double polar retains everything that those tests cannot distinguish. The algebraic and analytic identifications require their own separation results; the abstract Galois calculation alone does not prove them.
+
+For a separating dual pair of vector spaces $E,F$ over a field $k$, the annihilator of $A\subseteq E$ is $A^\perp=\{\varphi\in F:\langle a,\varphi\rangle=0\text{ for all }a\in A\}$. Its double annihilator is the closure of $\operatorname{span}(A)$ for the weak topology of the pairing, taking $k$ discrete in the purely algebraic formulation. Here is a direct finite-coordinate proof. If $x$ is not in the weak closure of a subspace $V$, there are $\varphi_1,\ldots,\varphi_n\in F$ for which the vector of values of $x$ is outside the image of $V$ in $k^n$. A linear functional on $k^n$ vanishes on that image but not on this vector. The corresponding linear combination of the $\varphi_i$ separates $x$ from $V$. Conversely every annihilating functional is weakly continuous, so its kernel contains the weak closure of $V$. For real or complex weak topologies the same argument applies because finite-dimensional linear subspaces are closed. In finite-dimensional perfect duality all subspaces are closed, giving the familiar double-annihilator identity.
+
+For a Pontryagin dual pair $G,\widehat G$, the annihilator of $A\subseteq G$ consists of the characters trivial on $A$. It is unchanged upon replacing $A$ by the closed subgroup it generates. If $x$ lies outside that closed subgroup $H$, the locally compact abelian quotient $G/H$ has a continuous character nontrivial on $xH$. Composing it with the quotient map gives a character annihilating $A$ but not $x$. Thus the double annihilator is $\overline{\langle A\rangle}$. The separation step is the substantive theorem; \citet[Chapter 7, Proposition 38]{Morris1977} gives this annihilator statement and its proof from character separation.
+
+For the absolute polar over $\mathbf R$ or $\mathbf C$, the answer is instead the weakly closed absolutely convex hull of $A\cup\{0\}$. One inclusion follows because each inequality $|\langle -,\varphi\rangle|\leq1$ defines a weakly closed absolutely convex set containing $0$. For the other, separate a point outside that hull by a weakly continuous linear functional; the absolute convexity allows multiplication by a scalar of modulus one, and rescaling gives a functional with absolute value at most $1$ on the hull and greater than $1$ at the point. The weak continuous dual is precisely the specified testing space. The Hahn--Banach separation theorem therefore supplies the desired test. In the real semi-polar convention $\langle x,\varphi\rangle\geq-1$, negate the separating functional; the double polar is the weakly closed convex hull of $A\cup\{0\}$, without the balancedness condition. These are the two forms of the bipolar theorem; compare \citet[Chapter IV, \S1, Theorem 1.5]{SchaeferWolff1999}.
+
+The origin must not disappear from the statement. Under conventions allowing the empty set to count as convex and balanced, the list of absolute-polar closed sets must explicitly exclude it: $\varnothing^{\circ\circ}=\{0\}$ in a separating pair. In $\mathbf R^2$, for example, the absolute polar of $\{e_1,e_2\}$ is the square $\{|a|\leq1,|b|\leq1\}$, and its polar is the diamond $\{|x_1|+|x_2|\leq1\}$. The inequality follows by maximizing $ax_1+bx_2$ over the square; choosing the signs of $a,b$ gives equality. This makes the distinction between linear span, convex hull and absolutely convex hull visible in the same two-dimensional setting.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p79:les sous-groupes de $G$.}{The topology in the Galois example}
+The fixed-point relation offers another instructive instance of the same issue: the relation always gives a closure, but the description of its fixed subsets changes when the extension becomes infinite. For a Galois extension $L/K$, the polar of a subset $S\subseteq L$ is the group of automorphisms fixing every element of $S$. Its double polar is the intermediate field $K(S)$. For a subset $H\subseteq G=\operatorname{Gal}(L/K)$, the double polar is the closure of the subgroup generated by $H$ in the Krull topology. Thus all subgroups are closed when the extension is finite; for an arbitrary Galois extension the manuscript's assertion must read \emph{closed subgroups}. See \citet[Proposition 7.12 and Theorem 7.13]{Milne2022FT}, where both directions of this correspondence are proved.
+
+There is a concrete obstruction to omitting that qualification. Take $L=\overline{\mathbf F}_p$ and $K=\mathbf F_p$. The Galois group is $\widehat{\mathbf Z}$, with the Frobenius automorphism corresponding to $1$. The cyclic subgroup generated by Frobenius is isomorphic to $\mathbf Z$; its image surjects onto every finite quotient $\mathbf Z/n$, so it is dense, but it is not all of the uncountable group $\widehat{\mathbf Z}$. An element fixed by Frobenius satisfies $x^p=x$, hence lies in $\mathbf F_p$. The double polar of this cyclic subgroup is consequently the whole Galois group. It is not a closed subset for the formal polarity, even though it is a subgroup.
+
+This correction is already part of classical infinite Galois theory, rather than a later repair peculiar to derivators. The nearby allusion to inseparable analogues requires a different testing object, such as a suitable restricted Lie algebra in a height-one purely inseparable extension. No precise inseparable theorem is stated here, so the audit records an allusion, not an unrestricted extension of the Galois correspondence.
+\end{dcomment}
+
+\begin{dcomment}{later}{p82}{Lifting gives a polarity before it gives factorization}
+Grothendieck's second thought about the lifting example is the correct one. A lifting problem involves a square, but the assertion that \emph{every} square with a fixed left edge $i$ and right edge $p$ has a filler is a relation on the pair $(i,p)$. Write $i\mathbin{\square}p$ for that assertion. If $\Psi$ is a class of left maps and $\Phi$ a class of right maps, then
+\[
+ \Psi\subseteq{}^\square\Phi
+ \quad\Longleftrightarrow\quad
+ \Phi\subseteq\Psi^\square.
+\]
+The maps are order-reversing and their composites are closure operators by the preceding calculation. The text switches the order of the two factors in the square-based description: if $\varphi$ records the pair $(i,p)$, the corresponding condition is $\varphi^{-1}(\Psi\times\Phi)\subseteq\mathcal D_0$. This is a notational slip in the printed source, not an obstruction to the construction.
+
+This closure formalism isolates the lifting half of Quillen's framework. A mutually closed pair $(\mathcal L,\mathcal R)$ need not supply a factorization of every arrow. That additional existence condition is what makes it a weak factorization system. In the notation used by \citet[Definition 11.2.1]{Riehl2014}, one requires both $\mathcal L={}^\square\mathcal R$, $\mathcal R=\mathcal L^\square$, and a factorization of every map as a left map followed by a right map. The small object argument supplies factorizations under separate generation and smallness hypotheses; its conclusion is not contained in the order-theoretic anti-isomorphism.
+
+The distinction can be checked in a category with very few arrows. Let $\mathcal M$ be the ordered set with objects $0<1$ and its unique nonidentity arrow $a:0\to1$. A square with both vertical edges $a$ and identity horizontal edges has no filler, so $a$ is not left orthogonal to itself. Identities lift against every map. It follows by checking the only remaining pairs that $({}\!\operatorname{Fl}(\mathcal M),\operatorname{Is}(\mathcal M))$ and $(\operatorname{Is}(\mathcal M),\operatorname{Fl}(\mathcal M))$ are mutually closed; their factorizations happen to be the trivial ones. This example illustrates the elementary relation, without using any homotopy theory. In a general category one must still establish factorization independently.
+
+Finally, every map from a powerset to a powerset that turns arbitrary unions into intersections is determined by its values on singletons:
+\[
+ \beta(A)=\bigcap_{p\in A}\beta(\{p\}).
+\]
+Defining $pRq$ by $q\in\beta(\{p\})$ recovers the relation. This is the exact reason the lifting example returns to Grothendieck's ``first species''. The transporter construction differs because its admissible right-hand classes must already be stable under pullback, while its left-hand classes will have to be stable under composition.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p83}{Why the admissible classes must be corrected}
+Grothendieck now replaces the moving target $A$ in the stabilizer by the fixed target $W$. The resulting relation is suitable for a Galois connection, but the first choice of its two domains is too restrictive. Formula (6.2) requires the classes on the right to be closed under both pullback and composition. The transporter constructed on page 85 is closed under pullback, but it need not be closed under composition. The correction at (6.7) therefore removes composition from the definition of the right-hand domain and places it in the left-hand domain.
+
+There is also a smaller order-theoretic point on page 84. Classes closed under composition are not in general closed under unions. In the category $0<1<2$, let $L_1$ consist of the identities and $0\to1$, and let $L_2$ consist of the identities and $1\to2$. Both classes are closed under pullback and composition, but their union omits $0\to2$. Thus the assertion about arbitrary unions is false with the initial definition of $\mathcal Q$. Intersections do preserve those properties; the appropriate join is obtained by closing a union under the required operations.
+
+After (6.7), the framework is as follows. Assume $W$ contains isomorphisms and is closed under composition. Let $\mathcal P$ consist of the composition-closed classes $A$ with $\operatorname{Is}(\mathcal M)\subseteq A\subseteq W$. Let $\mathcal Q$ consist of the pullback-stable classes $L$ containing all isomorphisms. Both are complete lattices. Meets are intersections, taking the empty meet to be $W$ in $\mathcal P$ and all arrows in $\mathcal Q$. A join in $\mathcal P$ is the class of finite composites of arrows from the union; it remains in $W$. A nonempty join in $\mathcal Q$ is simply a union, while its empty join is the isomorphisms. These last empty-family conventions are necessary because every admissible class contains the isomorphisms.
+
+For the size of these lattices, fix a universe large enough to contain the chosen collection of arrows, or work in a larger universe than that used for $\mathcal M$. The arguments concern classes invariant under isomorphism of arrows and universal quantification over pullback squares. This also explains the footnote on page 85: before invariance of $W$ has been assumed, choosing one representative of each pullback is insufficient. Quantifying over every cartesian square avoids that choice. Once $W$ contains isomorphisms and is composition-closed, invariance follows, and the familiar pullback-functor notation becomes harmless.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p85}{The transporter and its adjoint}
+The corrected construction works because a larger testing class produces a smaller transporter. It is useful to give the complete argument, including the distinction between testing over one codomain and testing all arrows in a slice.
+
+For $A\in\mathcal P$, define $T_W(A)$ to consist of the maps $p:Y'\to Y$ such that every arrow $f:X_1\to X_2$ in $A$, equipped with a map $X_2\to Y$, has $p^*f\in W$. Pullback pasting shows that $T_W(A)$ is stable under arbitrary base change: a test after pulling $p$ back along $Z\to Y$ is already a test for $p$ with its structure map factoring through $Z$. It contains the isomorphisms because $A\subseteq W$ and $W$ is invariant under isomorphism. Thus $T_W(A)\in\mathcal Q$.
+
+For $L\in\mathcal Q$, define $N_W(L)$ to consist of the maps $f\in W$ whose pullbacks along all maps of $L$ into their codomain belong to $W$. The explicit requirement $f\in W$ is redundant here, since identities belong to $L$. Isomorphisms are in $N_W(L)$. For composable $f,g\in N_W(L)$ and $p\in L$ into the codomain of $g$, factor $p^*(gf)$ as the pullback of $f$ along $g^*p$, followed by $p^*g$. Pullback stability gives $g^*p\in L$, so both factors lie in $W$. Hence $N_W(L)$ is composition-closed and belongs to $\mathcal P$.
+
+The defining relation is now exactly
+\[
+ A\subseteq N_W(L)\quad\Longleftrightarrow\quad L\subseteq T_W(A).
+\]
+For the forward direction, test $p\in L$ against $f\in A$ over $Y$. The base change $X_2\times_Y Y'\to X_2$ is in $L$, so the assumption on $f$ applies. Conversely, if $p$ is a map of $L$ into the actual codomain of $f$, this is a special case of the transporter test. This proves both implications and the maximality assertions on pages 85--86. Closure of $L$ under composition is unnecessary for this adjunction; its appearance in the text's proof of $(N_W(L),L)\in\mathcal R$ is redundant.
+
+Both operations reverse inclusions, so the usual polarity argument now applies without qualification. Their composites are monotone, extensive and idempotent; their fixed classes correspond anti-isomorphically. The extreme pairs in (6.9)--(6.10) follow directly: $T_W(\operatorname{Is})$ is all arrows, $N_W(\operatorname{Fl})=W_{\mathrm{univ}}$, $N_W(\operatorname{Is})=W$, and $T_W(W)=\mathrm{Fib}_W$. In particular, every closed left class contains all universal $W$-equivalences, and every closed right class contains $\mathrm{Fib}_W$. This is the relation-theoretic content of \S6, established with only the hypotheses actually imposed there.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p87:Pour que $L$ soit stable par composition, il faut et il suffit}{When a transporter becomes a stabilizer}
+Proposition 6.1 identifies the extra condition that makes the formal correspondence compatible with iterated changes of base. Suppose $(A,L)$ is a closed pair, so $A=N_W(L)$ and $L=T_W(A)$. If $L$ is closed under composition, then $A$ is stable under base change along $L$: for $f\in A$ and $p\in L$, its pullback belongs to $W$, and each further test along $q\in L$ is a test of $f$ along $pq\in L$. Therefore $p^*f\in A$. When $f$ is an arrow over the target of $p$, use the pullback of $p$ along its codomain map; it belongs to $L$ by pullback stability. This proves the more general assertion in parentheses, since it uses only $A=N_W(L)$.
+
+Conversely, assume $A$ is stable under base change along $L$. Given composable maps $q:Z\to Y'$ and $p:Y'\to Y$ in $L$, and an arrow $f\in A$ over $Y$, first pull back along $p$. The result is in $A$, and its pullback along $q$ is again in $A\subseteq W$. Thus $(pq)^*f\in W$, whence $pq\in T_W(A)=L$. This proves the proposition completely.
+
+For a closed pair one can sharpen its wording without adding a hypothesis:
+\[
+ L\text{ is composition-closed}
+ \quad\Longleftrightarrow\quad
+ L=\operatorname{Stab}(A).
+\]
+Indeed, stability of $A$ under $L$ gives $L\subseteq\operatorname{Stab}(A)$, while the reverse inclusion always follows from $A\subseteq W$ and $L=T_W(A)$. Conversely every stabilizer is composition-closed. Thus the two names designate the same class exactly at the closed pairs satisfying Proposition 6.1. Without this extra condition the transporter may contain maps that preserve the $W$-tests but fail to preserve $A$ itself.
+
+The word ``i.e.'' before (6.8) must accordingly be read with care. Closed pairs do not automatically have a composition-closed right member. Grothendieck is particularly interested in those that do; Proposition 6.1 states the criterion. The following finite example verifies that the distinction is real under the abstract hypotheses of this section.
+\end{dcomment}
+
+\begin{dcomment}{development}{p87:Pour que $L$ soit stable par composition, il faut et il suffit}{A closed transporter which does not compose}
+The formal correction of $\mathcal Q$ in (6.7) becomes necessary in a four-object category. The example also separates the universal quantifier in a transporter from the stronger demand that it stabilize its source class.
+
+\textbf{A closed pair with a non-composition-closed right member.}\ours{}
+Let $\mathcal M$ be the chain $0<1<2<3$, with pullbacks given by minima. Write $ij$ for its unique arrow $i\to j$ and $I$ for its identities. Set
+\[
+ W=I\cup\{02,03\},\qquad A=I\cup\{03\}.
+\]
+Then $W$ and $A$ contain the isomorphisms and are closed under composition. Moreover,
+\[
+ T_W(A)=\operatorname{Fl}(\mathcal M)\setminus\{13\},
+ \qquad N_W(T_W(A))=A.
+\]
+Thus $(A,T_W(A))$ is a closed pair, but $12$ and $23$ belong to its right member while their composite $13$ does not.
+
+To verify the transporter formula, the only nonidentity arrow of $A$ to test is $03$. It can be an arrow over $y$ only when $y=3$. Pullback along $x3$ gives $0x$, which lies in $W$ precisely for $x=0,2,3$. Therefore $13$ is the unique excluded map; all identity tests succeed. This proves the first formula, including all slice tests.
+
+For the kernel formula, the identities and $03$ survive by the adjunction. The only remaining member of $W$ is $02$. Its pullback along $12$, a member of the transporter, is $01$, which is not in $W$. Hence $02$ does not survive, and the second formula follows. Finally the right member is closed as well: applying the triple-operation identity for the established Galois connection gives $T_WN_WT_W(A)=T_W(A)$. This completes all the claims.
+
+Here $W$ is an abstract class of arrows with exactly the composition and isomorphism assumptions of \S6; it is not asserted to be a fundamental localizer on $\mathrm{Cat}$, or even to satisfy two-out-of-three. We checked the finite calculation exhaustively with the supplied script and proved it above. We did not find this specific example in the checked transporter and smooth-functor sources. It serves to explain the actual generality of Proposition 6.1, without making a claim about the special localizers used elsewhere in the manuscript.
+\end{dcomment}
+
+\begin{dcomment}{status}{p89:Il y a lieu enfin de déterminer le stabiliseur}{The scope of the remaining transporter questions}
+The questions at the end of the section ask for usable local tests for classes already defined by universal preservation properties. For smooth maps, that programme was developed explicitly: \citet[Definition 4.6, Theorem 4.13, and Example 4.17]{Maltsiniotis2005Asphericite} defines preservation of asphericity under pullback, gives equivalent local conditions, and compares the result with smoothness for a fundamental localizer. Properness is obtained by opposite categories. This identifies a later theorem corresponding to the stabilizer side of Grothendieck's discussion.
+
+The transporter $T_W(W_{\mathrm{asph}})$ asks only that pullbacks of aspherical maps be $W$-equivalences; its target condition is weaker than preservation of asphericity. The inclusions on page 89 follow directly: it contains $\operatorname{Stab}(W_{\mathrm{asph}})$ because $W_{\mathrm{asph}}\subseteq W$, and it contains $\operatorname{Stab}(W)$ because the latter preserves every arrow of $W$. The corresponding statements for coasphericity are dual. They do not identify a union of those classes, nor imply that the transporter is composition-closed.
+
+We checked Maltsiniotis's asphericity paper and searched the literature under the manuscript's transporter, stabilizer and ``net'' terminology. We did not locate a theorem identifying the general biaspherical stabilizer with precisely the proposed bilocal lifting condition, or a full intrinsic description of both mixed transporters. This is a statement about the scope of our verification, not a claim that those problems remain open in every formulation. The separate question about the stabilizer of categorical equivalences has a definite answer, proved in the block ``The stabilizer of categorical equivalences''. The history of the intrinsic class $\mathrm{Fib}_W$ is discussed in ``Intrinsic fibrations and sharp maps''.
+\end{dcomment}
+
+
+% Supplementary synthesis and proofs by GPT-6 Astra.
+\begin{dcomment}{context}{p87}{Intrinsic fibrations and sharp maps}
+Grothendieck wants the admissible changes of base to be determined by the weak equivalences themselves. This is why the extreme pair in (6.10) matters more than an isolated exercise with closure operations. Once $W$ has been fixed, a morphism $p:E\to B$ belongs to $\mathrm{Fib}_W$ precisely when
+\[
+ p^*:\mathcal M/B\longrightarrow\mathcal M/E
+\]
+preserves the arrows whose underlying morphisms belong to $W$. Both the test arrow and its map to $B$ vary. Restricting the test to arrows with target $B$ would omit the further base changes built into the definition.
+
+The letter to Thomason of 2 April 1991 makes this intention explicit. In its first numbered discussion, Grothendieck proposes replacing a suitable proper fibration structure by the class determined by this preservation property; existence of enough such fibrations remains a separate factorization requirement \citep[\S1, printed p.~4]{Grothendieck1991Letter}. Thus the canonical class is available before one knows that it supports a useful model structure. The historical point is the choice of what should be intrinsic, not a rejection of the computational value of lifting and factorization axioms.
+
+In a model category the same preservation property is the definition of a \emph{sharp map} in \citet[\S2]{Rezk1998Sharp}. In a right proper model category every model fibration is sharp, and sharpness is equivalent to every strict pullback square along the map being homotopy cartesian \citep[Propositions~2.2 and~2.7]{Rezk1998Sharp}. These statements explain both the usefulness and the limitations of the comparison: Grothendieck's $\mathrm{Fib}_W$ asks for a property of pullback with respect to $W$; a chosen Quillen fibration class supplies maps with that property under the additional hypothesis of right properness. An arbitrary transporter $\mathbf L_W(A)$ only promises to send the smaller class $A$ into $W$. A second pullback can therefore leave the class of arrows on which that promise applies. The extra stability in Proposition~6.1 is exactly what permits the second step.
+\end{dcomment}
+
+\begin{dcomment}{later}{p89}{The stabilizer of categorical equivalences}
+The last question on this page has a concrete answer. The obstruction to preserving an equivalence under a strict pullback is an isomorphism of objects in the base which cannot be lifted. The relevant maps are the \emph{isofibrations}, the fibrations of the usual model structure on categories; see \citet[\S2 and Theorem~3.1]{Rezk1996Categories}. We give the argument in the notation of the manuscript, so that the answer also specifies the meaning of its stabilizer.
+
+\textbf{Proposition.} Let $\mathrm{Equ}$ be the class of equivalences of small categories. A functor $p:E\to B$ belongs to $\mathrm{Stab}(\mathrm{Equ})$ if and only if, for every $e\in E$ and every isomorphism $\gamma:p(e)\to b$ in $B$, there are an object $e'$ and an isomorphism $\widetilde\gamma:e\to e'$ with $p(e')=b$ and $p(\widetilde\gamma)=\gamma$.
+
+\emph{Proof.} Suppose first that this lifting property holds. Let $F:C\to D$ be an equivalence over $B$, with structure map $h:D\to B$. The pullback
+\[
+ F_E:C\times_B E\longrightarrow D\times_B E
+\]
+is fully faithful: a morphism in either pullback is a pair of morphisms with equal images in $B$, and full faithfulness of $F$ lifts the first member uniquely without changing that equality. To prove essential surjectivity, take $(d,e)$ in the target. Choose $c\in C$ and an isomorphism $\theta:F(c)\to d$. Apply the isomorphism-lifting property to $(h\theta)^{-1}:p(e)\to hF(c)$ and invert the resulting lift. This gives an isomorphism $\eta:e'\to e$ with $p(e')=hF(c)$ and $p(\eta)=h\theta$. The pair $(\theta,\eta)$ is an isomorphism $F_E(c,e')\to(d,e)$. Thus $F_E$ is an equivalence, as required for the stabilizer.
+
+Conversely, suppose $p\in\mathrm{Stab}(\mathrm{Equ})$. Let $J$ be the groupoid with two objects $0,1$ and exactly one morphism between each ordered pair. The data $(e,\gamma)$ define a functor $J\to B$ taking $0$ to $p(e)$, $1$ to $b$, and $0\to1$ to $\gamma$. The inclusion $\{1\}\to J$ is an equivalence over $B$. Hence
+\[
+ E\times_B\{1\}\longrightarrow E\times_BJ
+\]
+is an equivalence. Essential surjectivity at $(e,0)$ supplies $(e',1)$ and an isomorphism between it and $(e,0)$. Orienting that isomorphism from $(e,0)$ to $(e',1)$ gives the required $\widetilde\gamma$. This proves the converse.\hfill$\square$
+
+The proof also explains why the answer is sensitive to strict pullbacks. A point inclusion into $J$ is itself an equivalence, but pulling it back along the inclusion of the other point gives $\emptyset\to e$. An isofibration supplies the missing representatives over isomorphic objects. No assertion about the fundamental localizer $W$ is needed for this calculation. In particular, it answers the question about $\mathrm{Equ}$ without identifying the more delicate stabilizer of $W$-biaspherical maps with a familiar fibration class.
+\end{dcomment}
+
+
+% Section 7 commentary; GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p90:Mais je ne veux pas m'attarder}{The conditions that pass through a comma category}
+Grothendieck returns to filteredness because it supplies concrete conditions under which the cofinality arguments can be repeated after restricting a diagram. The adjective ``local'' has a precise force here. It does not mean merely that the set of objects in each connected component is directed. The commutativity of the triangles must survive the construction of a common predecessor.
+
+Write $P(C)$ for the following condition: every cospan $a\xrightarrow{r}c\xleftarrow{s}b$ admits arrows $u:d\to a$, $v:d\to b$ such that $ru=sv$. Write $E(C)$ for the equalization condition: every parallel pair $r,s:a\to b$ admits $t:d\to a$ with $rt=st$. Finally, write $I(C)$ for nonemptiness together with the existence of a common predecessor for every pair of objects. These are respectively $\mathrm{PS}_g1$, $\mathrm{PS}_g2$, and $\mathrm{PS}_g1'$ in the text. Then $C$ is cofiltered precisely when $I(C)$ and $E(C)$ hold, and locally cofiltered precisely when $P(C)$ and $E(C)$ hold. The latter condition allows the empty category. Equivalently, every connected component is cofiltered; the elementary decomposition underlying this statement is recorded, with the opposite variance, in \citet[Lemmas 4.19.6 and 4.19.8]{StacksFiltered2026}.
+
+The weaker terms need an explicit convention. In the working proof, ``weakly cofiltered'' means $I(C)$, whereas ``locally weakly cofiltered'' means $P(C)$. Footnote 64 proposes reserving the former term for nonempty connectedness together with $P(C)$. These conditions differ: the category with two parallel arrows $0\rightrightarrows1$ satisfies $I$ but fails $P$. The closing diagrams recognize the distinction and call $I$ irreducibility. We therefore retain $I$ and $P$ in statements where the terminology changes. Proposition 7.3 and its composition corollary hold with either weak convention, provided it is used consistently.
+
+Here is the argument behind the proposition, including its three independent assertions. Suppose first that $P$ holds in $Y$ and in every $y\backslash X$. Given a cospan in $X$, complete its image in $Y$ to a commutative square with lower vertex $y$. The three objects of the cospan, equipped with the resulting maps from $y$, form a cospan in $y\backslash X$. Applying $P$ there gives the required square in $X$. If instead $I$ holds in $Y$ and in the comma categories, two objects of $X$ first acquire a common predecessor for their images in $Y$, and then acquire one in the corresponding comma category. Nonemptiness follows by choosing $y\in Y$ and an object of $y\backslash X$.
+
+For equalization, start with $r,s:a\to b$ in $X$. Choose $v:y\to f(a)$ with $f(r)v=f(s)v$, using $E(Y)$. Then $r,s$ are parallel arrows in $y\backslash X$. An equalizing arrow there equalizes them in $X$. These arguments prove the cofiltered and locally cofiltered cases as well. For the revised weak convention, $P(Y)$ and connectedness imply $I(Y)$: the relation ``has a common predecessor'' is transitive by $P$, and contains every arrow and its reverse. The same observation applies to the comma categories, so the preceding argument also proves connectedness of $X$.
+
+The composition statement now has a transparent reason. A discrete opfibration $Y'\to Y$ identifies $y'\backslash(X\times_Y Y')$ with $y'_{Y}\backslash X$, by unique lifting of arrows out of $y'$. This proves the co\'etale base-change assertion of Remark 7.2. Apply it to $z\backslash Y\to Y$, and then apply Proposition 7.3 to $z\backslash X\to z\backslash Y$. The printed assertion that \emph{\'etale} maps are locally ``filtrants'' has the variance reversed; Lemma 7.5 gives the correct locally cofiltered assertion below.
+\end{dcomment}
+
+\begin{dcomment}{development}{p91}{A finite answer to the base-change question}
+Grothendieck's example separates cofilteredness from its local form only by making a fibre empty. To answer the question he leaves beside it, the pullback must instead create a connected comma category whose two branches have lost their common predecessor.
+
+\noindent\textbf{A four-object counterexample.}\ours\par
+The class of locally cofiltered functors, and the class of locally weakly cofiltered functors, are not stable under arbitrary base change, even among finite posets.
+
+\emph{Proof.} Let $f:\{1\}\hookrightarrow[1]$ select the final object of the walking arrow. Both $0\backslash\{1\}$ and $1\backslash\{1\}$ are singleton categories, so $f$ is cofiltered. Let $D$ be the diamond poset
+\[
+\begin{tikzcd}[row sep=small,column sep=small]
+ & b\arrow[dr] & \\
+a\arrow[ur]\arrow[dr] & & d\\
+ & c\arrow[ur] &
+\end{tikzcd}
+\]
+and define $v:D\to[1]$ by $v(a)=0$ and $v(b)=v(c)=v(d)=1$. The pullback of $f$ is the full inclusion $j:U\hookrightarrow D$, where $U=\{b,c,d\}$ and $b<d$, $c<d$. Since $a$ is initial in $D$, there is an isomorphism $a\backslash U\cong U$. This category is connected, but the cospan $b\to d\leftarrow c$ has no common predecessor in $U$. Thus $P(a\backslash U)$ fails; in particular this comma category is not locally cofiltered. The same pullback disproves both proposed stability assertions.\hfill$\square$
+
+This example answers the question for strict categorical pullbacks, which are the pullbacks used in the source. It does not conflict with Remark 7.2: $v$ is not a discrete opfibration, since the arrow $0\to1$ has several lifts with source $a$. Nor does it conflict with Proposition 7.4, which concerns an \emph{\'etale change of the source} followed by a factorization through an \emph{\'etale target}.
+
+The same diamond makes the variance slip in Remark 7.2 visible. The lower open subposet $V=\{a,b,c\}\subset D$ defines a discrete fibration. Its comma category $V/d$ is $V$, which is connected and not filtered: $b$ and $c$ have no common upper bound there. Thus an \emph{\'etale} functor need not be locally filtered.
+
+We checked the discussions of representable flatness in \citet[Remark 2.4]{Tendas2024} and \citet{Shulman2011Flat}, and the explicit filteredness criteria in \citet[Section 4.19]{StacksFiltered2026}. We did not locate this finite pullback construction there. The label records our supplied answer to the manuscript's question, without claiming priority for the example.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p92:La raison principale pour m'intéresser}{The image that belongs in Proposition 7.4}
+The proposition is intended to compare sections or cosections after passing to an open part of a slice. The target must therefore be the part reached by that open, rather than the part reached by the whole slice. In (c) the printed definition of $V$ omits the restriction to $U$. Its correct form is
+\[
+ V=\{z\in Y/f(x)\mid z\backslash U\ne\varnothing\}.
+\]
+Equivalently, $V$ is the lower open subcategory generated by $(f/x)(U)$. This is already forced by $U=\varnothing$: the desired target is then empty, whereas the target defined in print is all of $Y/f(x)$, because $(f/x)(x)=f(x)$ is its terminal object. More generally, the proof's assertion that $z\backslash U$ is nonempty ``par construction de $V$'' uses exactly the corrected definition. This is a slip in the edition's text, not a mistranscription; the correction is consequently explained here and retained as a recorded slip in the source.
+
+Once this target is specified, the two comparison formulas have their expected variance. With $g:U\to V$, a covariant diagram $G:V\to\mathcal M$ has
+\[
+\mathop{\rm colim}_{U}Gg\ \cong\ \mathop{\rm colim}_{V}G,
+\]
+whereas a presheaf $F:V^{\rm op}\to\mathcal M$ has
+\[
+\mathop{\rm lim}_{V^{\rm op}}F\ \cong\
+\mathop{\rm lim}_{U^{\rm op}}Fg^{\rm op}.
+\]
+Both statements follow from the same nonempty-connected comma criterion for finality. The second does not assert invariance of limits of \emph{covariant} diagrams under a final functor. The needed limits or colimits must exist in $\mathcal M$. The letter printed as $q$ in (c) is legible in the PDF; it denotes the map called $g$ in the proof and in these formulas.
+
+The homotopical qualification also has a precise scope. The cofiltered comma categories are $W$-aspherical under the stated axiom Loc~(8), so $g$ is $W$-coaspherical. Weak cofilteredness by itself gives connectedness, hence ordinary finality, but supplies no general assertion of contractibility. Footnote 65 correctly reserves the stronger conclusion for the cofiltered hypothesis. The phrase ``$W_0$-asph\'erique'' in Remark 7.4(3) must read ``$W_0$-coasph\'erique'' in the convention of this chapter.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p95:Cela achève la démonstration.}{Why the restriction argument works}
+The mechanism of Proposition 7.4 is the decomposition in Lemma 7.5, and it is useful to see why that decomposition is canonical. An \emph{\'etale} functor $h:E\to C$ is a discrete fibration. Given $(e,\alpha:c\to h(e))$ in $c\backslash E$, lift $\alpha$ uniquely to an arrow $e_0\to e$ with $h(e_0)=c$. This assigns an object $e_0$ of the discrete fibre to each object of the comma category. Every arrow of the comma category preserves $e_0$, by uniqueness of the lift. For each fixed $e_0$, the object $(e_0,1_c)$ is initial in the corresponding full subcategory. Thus
+\[
+c\backslash E\ \cong\
+\coprod_{e_0\in h^{-1}(c)}(e_0\backslash E),
+\]
+and each displayed summand has an initial object. This proves all assertions of the lemma, including the empty-fibre case.
+
+For the first assertion of 7.4(a), $y\backslash X'\to y\backslash X$ is a discrete fibration. Conditions $P$ and $E$ pass to its total category: lift a commutative cone in the base to the prescribed object above its target; uniqueness makes the lifted arrows commute. For $E$, faithfulness of a discrete fibration makes the lifted equalization an actual equality. This proves preservation of local cofilteredness and its $P$-only variant.
+
+For the second assertion, let $X\xrightarrow{g}Y'\xrightarrow{h}Y$ be the factorization, with $h$ a discrete fibration. An object $y'\in Y'$ over $y$ determines the summand of $y\backslash Y'$ whose initial object is $(y',1_y)$. Its inverse image under $y\backslash X\to y\backslash Y'$ is exactly $y'\backslash X$. Hence $y'\backslash X$ is a union of connected components of $y\backslash X$, so it inherits $P$ and $E$. This argument also explains the second diagram: the labels ``\'et.'' on its three vertical arrows are not justified, since $g:X\to Y'$ is arbitrary. The relevant map is the horizontal component inclusion and its pullback. The claimed result does not use those incorrect vertical labels.
+
+Now set $y=f(x)$. The category $X/x$ is \emph{\'etale} over $X$, and $Y/y$ is \emph{\'etale} over $Y$. Part (a) therefore makes $f/x:X/x\to Y/y$ locally cofiltered. For $z=(z_0\to y)$, its comma category $z\backslash(X/x)$ has a terminal object: take $(x,1_x)$ with the specified arrow $z_0\to y$. Every other object includes its unique morphism to this object as part of its structure. The comma category is consequently nonempty and connected. Combined with local cofilteredness this proves (b), and the same reasoning gives connectedness plus $P$ in the weaker case.
+
+For (c), use the corrected $V$ above. The category $z\backslash U$ is a nonempty lower open full subcategory of $z\backslash(X/x)$. A nonempty lower open subcategory of a cofiltered category is cofiltered: for two objects, any common predecessor still lies in the open, and the same is true of the source of an equalizing arrow. For connectedness plus $P$, the common-predecessor argument proves connectedness and the square condition restricts. These observations prove (c), and also prove Remark 7.5(1) for an arbitrary cofiltered $f:X\to Y$ and an open $U\subset X$. In that remark the defining condition for $V$ must likewise be $y\backslash U\ne\varnothing$, as its preceding words ``engendr\'e par $f(U)$'' already require.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p96}{Initial objects remove the limit axiom}
+Grothendieck singles out components with initial objects because here the cofinality argument needs no passage to filtered limits or colimits. The bracketed question in Remark 7.5(2) can be settled directly. Suppose each $y\backslash X$ is a disjoint union of categories with initial objects. If $E\to C$ is a discrete fibration and every component of $C$ has initial object $c_0$, each object of $E$ receives a unique lift of the arrow from the relevant $c_0$. The lifts with sources over $c_0$ partition $E$ into full subcategories, each having its source as an initial object. Consequently the initial-object condition is preserved by the first operation in 7.4(a). The second operation selects a union of components, by the preceding decomposition, and therefore preserves it as well.
+
+For $f/x:X/x\to Y/f(x)$ the comma categories have terminal objects and hence just one component. Their initial-object decomposition therefore consists of a single summand, so they actually have initial objects. Passing to a nonempty lower open $z\backslash U$ preserves this initial object: if an open contains any object, it contains the source of every arrow into that object, in particular the initial object. This proves the strengthened assertion in full.
+
+The examples in the text follow without an additional hypothesis. For a discrete fibration $f$, Lemma 7.5 supplies the initial objects. If $X$ is discrete, every $y\backslash X$ is discrete, so all of its components are singleton categories. The strengthened conclusion can therefore apply to a functor which is far from final before one restricts to the open image.
+
+For a fundamental localizer $W$, a category with initial object is $W$-aspherical. One can justify the initial-object version from the terminal-object axiom: the unique map to the terminal category and its section have composites related to the identity by the natural transformation from the constant initial-object functor. Fundamental localizers identify naturally transformed functors after passage to homotopy, as follows from the interval projection $C\times[1]\to C$ and the terminal-object axiom. Thus all the relevant comma categories are $W$-aspherical for every fundamental localizer. This is exactly where the appeal to Loc~(8) disappears in the manuscript's argument; mere weak cofilteredness would not give this conclusion.
+
+The later theory removes the same qualification from the full cofiltered case. A cofiltered category has weakly contractible nerve: any finite collection of simplices admits a compatible cone after finitely many common-predecessor and equalization operations, giving the required null homotopies. \citet[Theorem 2.2.11, p.~136]{Cisinski2004Minimal} proves that the weak equivalences detected by nerves form the minimal fundamental localizer. They therefore belong to every fundamental localizer. Consequently every cofiltered comma category is $W$-aspherical for every fundamental $W$, and a cofiltered functor is $W$-coaspherical without an additional Loc~(8) assumption. The source's conditional assertion remains correct; the stronger present statement uses this later minimality theorem.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p97}{Reading the six classes without the changing terminology}
+The diagrams collect the distinctions developed earlier in the chapter. Their content is more stable than their terminology: ``pseudo-filtrante'' and ``pseudo-cofiltrante'' sometimes omit the direction or change meaning. We use $P,E,I$ as above and write $T$ for the assertion that $C^{\rm op}$ is sifted. Explicitly, $T$ means $C\ne\varnothing$ and the category of cones $c\to a$, $c\to b$ is connected for every $a,b$. This is Grothendieck's total $0$-connectedness, as discussed already in DER\_II-a, ``The ordinary sifted condition and its variance.'' The six classes are
+\[
+\begin{array}{c|l}
+C_{\rm cof}&I+E\quad(\text{equivalently }P+E+\text{connected, nonempty})\\
+C_{\rm loc}&P+E\\
+C_{\rm weak}&P+\text{connected, nonempty}\\
+C_{\rm pre}&P\\
+C_{\rm irr}&I\\
+C_{\rm tot}&T.
+\end{array}
+\]
+There are inclusions $C_{\rm cof}\subset C_{\rm loc},C_{\rm weak},C_{\rm tot}$, $C_{\rm loc}\subset C_{\rm pre}$, $C_{\rm weak}\subset C_{\rm pre},C_{\rm irr}$, and $C_{\rm tot}\subset C_{\rm irr}$. The two middle classes $C_{\rm weak}$ and $C_{\rm tot}$ meet exactly in $C_{\rm cof}$, by the criterion established earlier in the chapter. The following table makes the five separating examples completely explicit; $G$ is nontrivial and $A$ is the parallel-arrow category.
+\[
+\begin{array}{c|cccccc}
+ &C_{\rm cof}&C_{\rm loc}&C_{\rm weak}&C_{\rm pre}&C_{\rm irr}&C_{\rm tot}\\\hline
+B_G&0&0&1&1&1&0\\
+\boldsymbol\Delta&0&0&0&0&1&1\\
+A=(0\rightrightarrows1)&0&0&0&0&1&0\\
+\varepsilon=\{0,1\}&0&1&0&1&0&0\\
+B_G\amalg e&0&0&0&1&0&0
+\end{array}
+\]
+
+For $B_G$, every cospan can be completed because its arrows are invertible: for $r,s\in G$, use $u=r^{-1}s$ and $v=1$, obtaining $ru=sv$. Equalization fails for a nonidentity $g$ and $1$, since $gt=t$ would imply $g=1$. The common-cone category of the unique object with itself has objects $(r,s)\in G^2$, with simultaneous right multiplication by $t\in G$ as morphisms. The quantity $sr^{-1}$ labels its connected components, giving $|G|$ components. Thus $T$ fails. This is the same obstruction as the diagonal action on $G\times G$; see \citet[Lemma 4.19.4]{StacksFiltered2026}. Every slice $B_G/*$ nevertheless has exactly one arrow between any pair of its objects and is cofiltered. This verifies the diagram's warning that cofiltered slices do not imply a locally cofiltered category.
+
+For $A$, the object $0$ is a common predecessor of any pair of objects, so $I$ holds. The cospan given by the two distinct arrows $r,s:0\to1$ cannot be completed to a commutative square: the only arrow into $0$ is its identity. Thus $P$ fails. The cone category for the pair $(0,1)$ has exactly two objects and no nonidentity arrows, so $T$ fails too. The slice $A/1$ has the shape $r\to1\leftarrow s$ and is not irreducible. This simultaneously explains the failure of irreducibility to survive a connected \emph{\'etale} change of source.
+
+For $\boldsymbol\Delta$, the category of nonempty finite ordinals and monotone maps, every pair admits a common predecessor $[0]$. A cone from $[k]$ to $[m]$ and $[n]$ is a finite monotone string in the rectangular poset $[m]\times[n]$. It is connected, in its cone category, to each of its vertices by the corresponding map $[0]\to[k]$. Any two vertices can be joined by moving horizontally and vertically through the rectangle, each move being represented by a $[1]$-string. Thus the cone category is nonempty and connected, proving $T$. The two endpoint maps $[0]\rightrightarrows[1]$ cannot be equalized even by two different maps into their sources: every nonempty ordinal has a unique map to $[0]$, and the two resulting maps to $[1]$ remain distinct. Hence $P$ fails. In particular $\Delta/[1]$ is not irreducible: the two endpoint objects have no common predecessor. Total connectedness therefore does not pass to slices.
+
+For $\varepsilon$, the conditions $P$ and $E$ hold separately on each singleton component, while all four classes requiring connectedness fail. For $B_G\amalg e$, $P$ still holds componentwise, $E$ fails in the group component, and connectedness fails globally. These calculations also settle the abbreviated ``Itou pour $\varepsilon$'' on printed page 62: it can refer to exclusion from the four connected classes, but cannot refer to failure of local cofilteredness, since $\varepsilon$ is locally cofiltered.
+
+Finally, the product notation on page 97 takes place in the presheaf category. Thus $C/(a\times_x b)$ means the category of elements of $h_a\times_{h_x}h_b$, and $C/(x\times x)$ means that of $h_x\times h_x$; it is not a product of a slice with an object. The irreducibility of every $C/x$ is $P$. Together with irreducibility of every $C/(x\times x)$ it forces $E$: compare the object defined by $r,s:a\to x$ with $(x,1_x,1_x)$ and take a common predecessor. Conversely a cofiltered category provides cones and equalizations for these finite families, so the displayed categories of elements are cofiltered. This explains the strengthened representable tests in the first diagram, without repeating the longer topos arguments of DER\_II-a.
+\end{dcomment}
+
+\begin{dcomment}{later}{p99}{Representable flatness and the pointwise Kan extension}
+Grothendieck's cofiltered functors have a standard modern name: they are \emph{representably flat}. For each $y\in Y$, the covariant set-valued functor $X\to\mathrm{Set}$, $x\mapsto Y(y,f(x))$, has category of elements $y\backslash X$; requiring this category to be cofiltered is precisely the definition. The adjective matters, since flatness for a functor into a topos has another, internal interpretation. \citet[Remark 2.4]{Tendas2024} explicitly distinguishes these notions, following the discussion of \citet{Shulman2011Flat}.
+
+One consequence places the closing section directly in the theory of presheaf topoi. For $F:X^{\rm op}\to\mathrm{Set}$, the left Kan extension along $f^{\rm op}$ is
+\[
+(f_!F)(y)=\mathop{\rm colim}_{(y\backslash X)^{\rm op}}F(x).
+\]
+If $f$ is cofiltered, the indexing category is filtered. Finite limits of presheaves are computed pointwise, and filtered colimits of sets commute with finite limits; hence $f_!$ preserves finite limits. Consequently the adjunction $f_!\dashv f^*$ is a geometric morphism in the direction determined by this inverse-image functor. This is an additional geometric adjunction alongside the usual $f^*\dashv f_*$.
+
+If $f$ is only locally cofiltered, the same formula is a coproduct, indexed by $\pi_0(y\backslash X)$, of filtered colimits. It preserves finite \emph{connected} limits. To check the distinction, a compatible tuple in a connected finite diagram of such coproducts must lie throughout in one summand; within that summand the filtered-colimit argument applies. The terminal presheaf instead has image
+\[
+(f_!1)(y)\cong\pi_0(y\backslash X),
+\]
+which need not be a singleton. This separates the local condition from representable flatness exactly where the manuscript separates local cofilteredness from cofilteredness. The general connected-limit calculation appears in \citet[Lemma 4.19.9]{StacksFiltered2026}.
+
+The last diagrams thus organize three different demands on colimits: finite limits, finite connected limits, and finite products. The product condition is the sifted condition on $X^{\rm op}$, whose later systematic treatment is \citet[Section 1]{AdamekRosickyVitale2010}. The displayed examples show why none of these demands can be substituted for another without its accompanying connectedness or square condition. The missing nonemptiness qualification in the abbreviated diagonal criteria on pages 98--99 should always be read from page 97: the empty category has a final diagonal vacuously, but is not sifted.
+\end{dcomment}

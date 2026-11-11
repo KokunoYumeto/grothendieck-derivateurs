@@ -1,0 +1,128 @@
+\subsection{The implication that always holds}
+
+\begin{proposition}[Proved: forward implication and the subterminal converse]\label{E:forward-subterminal}
+For any fundamental localizer $W$ and any presheaf $H:U^{\op}\to\Set$, total $W$-asphericity of $U/H$ implies total $W$-asphericity of $H$. If $H$ is subterminal, the converse also holds.
+\end{proposition}
+\begin{proof}
+The forward implication is Proposition~\ref{A:elements-Kan}. For the converse under the stated extra hypothesis, identify $E=U/H$ with the full sieve of $U$ on which $H$ is nonempty. Given any $f:E\to V$, form the ordinary pushout
+\[
+ \begin{tikzcd}
+ E\arrow[r,hook,"\pi"]\arrow[d,"f"']&U\arrow[d,"p"]\\
+ V\arrow[r,hook,"j"']&U'.
+ \end{tikzcd}
+\]
+The pushout of a sieve along an arbitrary functor is again a full sieve: its objects are those of $V$ and $U\setminus E$, no new arrow has target in $V$ and source outside it, and arrows between objects of $V$ remain their original arrows. This follows as well from the usual coend formula for the crossing arrows. In particular $j$ is a discrete fibration.
+
+Factor $f$ as $E\xrightarrow{q_f}D_f\xrightarrow{\rho_f}V$ by Proposition~\ref{A:comprehensive}. Since $j\rho_f$ is a discrete fibration, this same factorization is the comprehensive factorization of $jf=p\pi$. Hence
+\[
+ D_f\cong U'/(p\pi)_!1_E\cong U'/p_!H
+\]
+as categories over $U'$. Totality of $H$ makes this category $W$-aspherical. Since $f$ was arbitrary, $T_W(E)$ follows. The empty sieve is included in this proof; whether its totality holds depends on whether $\varnothing\to e$ belongs to $W$.
+\end{proof}
+
+\subsection{A finite counterexample to the converse}
+
+\begin{lemma}[Proved: fixed-arrow presheaves of an idempotent]\label{E:idempotent}
+Let $C$ be small, let $c\in C$, and let $d:c\to c$ satisfy $d^2=d$. Define
+\[
+ Q_d(v)=\{\alpha:v\to c\mid d\alpha=\alpha\}.
+\]
+This is a split subpresheaf of $C(-,c)$, with retraction $\alpha\mapsto d\alpha$. Its category of elements $C/Q_d$ is filtered and has contractible classifying space.
+\end{lemma}
+\begin{proof}
+The condition is preserved by precomposition, and the stated retraction is natural and restricts to the identity on $Q_d$. The category of elements is nonempty because $(c,d)$ is an object. Each $(v,\alpha)$ maps to $(c,d)$ by the arrow $\alpha:v\to c$. If $r,s:(v,\alpha)\rightrightarrows(w,\beta)$ are parallel, then $\beta r=\alpha=\beta s$, so the arrow $\beta:(w,\beta)\to(c,d)$ equalizes them. These are exactly the two filteredness conditions. There is also an explicit natural transformation from the identity functor of $C/Q_d$ to the constant functor at $(c,d)$, with component $\alpha$ at $(v,\alpha)$; its naturality is the defining equation for an arrow in the element category.
+\end{proof}
+
+\begin{theorem}[Refuted: row B035 and the first biconditional in Lead 5]\label{E:counterexample}
+Let $U$ be the one-object category with endomorphism monoid $\{1,e\}$, $e^2=e$. Let $R=U(-,*)$, let $Q=\{e\}\subset R$, and form the pushout of presheaves
+\[
+ H=R\amalg_QR.
+\]
+Explicitly $H(*)=\{i,h_1,h_2\}$, and $H(e)$ is the constant function with value $i$. Then $H$ is totally $\Winfty$-aspherical, and consequently totally $W$-aspherical for every fundamental localizer $W$. The category $E=U/H$ is not totally $\Winfty$-aspherical, is not totally $W_R$-aspherical for any nonzero commutative ring $R$, and is not filtered. Thus the converse of manuscript Proposition~8 is false, even for a finite category with two arrows and a three-element presheaf.
+\end{theorem}
+\begin{proof}
+First $Q\hookrightarrow R$ is split by the natural map sending both elements of $R(*)$ to $e$. Let $p:U\to C$ be completely arbitrary. It specifies $c=p(*)$ and $d=p(e)$ with $d^2=d$. Since left Kan extension preserves representables, coproducts, pushouts, and a specified splitting, there are canonical isomorphisms
+\[
+ p_!R\cong C(-,c),\qquad
+ p_!Q\cong Q_d,\qquad
+ p_!H\cong C(-,c)\amalg_{Q_d}C(-,c).
+\]
+For the second isomorphism, applying $p_!$ to the split pair gives the splitting of the idempotent induced by $d$ on $C(-,c)$; its image is exactly $Q_d$. This argument uses preservation of a split pair, not preservation of arbitrary monomorphisms by left Kan extension.
+
+The two copies of $C(-,c)$ embed as subpresheaves of $p_!H$. Their element categories are full sieves isomorphic to $C/c$, and their intersection is $C/Q_d$. They cover $C/p_!H$. A chain in that union belongs to one of the two sieves: its last object lies in one of them and all predecessors then lie there. Therefore their nerves form an actual pushout along monomorphisms, and their realizations form a homotopy pushout. Both copies of $C/c$ have terminal object $\id_c$; the intersection is contractible by Lemma~\ref{E:idempotent}. The homotopy pushout is contractible. Since this holds for every $C$ and $p$, $H$ is totally $\Winfty$-aspherical. Cisinski's minimality theorem gives the assertion for every fundamental localizer.
+
+The category $E$ has exactly three objects $i,h_1,h_2$. It has identities at all three objects, one additional idempotent $e_i:i\to i$, and two arrows $u_1:i\to h_1$, $u_2:i\to h_2$, with $u_je_i=u_j$. There are no other arrows. In particular $h_1$ and $h_2$ have no common successor. To exhibit a specified nonaspherical final image, let $\Psi$ be the outgoing fork with vertices $0,1,2$ and arrows $0\to1$, $0\to2$. The functor $E\to\Psi$ sends $i$ to $0$, $h_j$ to $j$, and $e_i$ to $\id_0$; it is full and the identity on these labelled objects, hence final by Proposition~\ref{B:other-final}. The four-object category $C$ of the outgoing-fork counterexample has arrows
+\[
+ x\overset{r,s}{\rightrightarrows}0\xrightarrow{a}1,
+ \qquad 0\xrightarrow{b}2,
+ \qquad ar=as,\quad br=bs,
+\]
+and no other nonidentity arrows beyond the two indicated composites. The inclusion $\Psi\to C$ is final: $x\backslash\Psi$ is the four-cycle poset, while the other comma categories have initial objects. Proposition~\ref{B:collage} identifies $BC$ with $S^2$. Thus the composite $E\to C$ is final and its target has $H_2(BC;R)=R$ for every nonzero $R$. This proves every asserted failure.
+\end{proof}
+
+The finite program \texttt{code/root\_presheaf\_checks.py} verifies the action laws, the pushout of sets, all arrows and composites of $E$, finality of the two displayed functors, and the nerve-chain homology of $C$. The proof of totality quantifies over all target categories and is the split-presheaf calculation above; no finite search is offered as a replacement for that universal proof.
+
+\begin{proposition}[Proved: minimality within the two-element idempotent base]\label{E:finite-idempotent-classification}
+For the fixed base $U=\{1,e\}$ of Theorem~\ref{E:counterexample}, a finite presheaf $H$ is totally $\Winfty$-aspherical if and only if $H(*)$ is nonempty and $H(e)$ has exactly one fixed point. Such a presheaf has a totally $\Winfty$-aspherical category of elements if and only if $|H(*)|\leq2$. Thus three elements are the smallest counterexample on this base.
+\end{proposition}
+\begin{proof}
+The idempotent function $H(e)$ retracts its set onto its fixed points. The connected components of $U/H$ are its fibers, one for each fixed point. The identity test for totality therefore requires exactly one fixed point $i$, and $H(e)$ is then constant with value $i$. If $H(*)=\{i\}$, the presheaf is $Q$ and is total by Lemma~\ref{E:idempotent}. Otherwise it is the union of $|H(*)|-1$ copies of $R$, all glued along their common split subpresheaf $Q$. Every left Kan extension is the corresponding finite union of copies of $C(-,c)$ along $Q_d$. Induction using the homotopy-pushout proof in Theorem~\ref{E:counterexample} makes its category of elements contractible. This proves totality.
+
+With one element, the element category is the filtered monoid $U$. With two elements, the nonfixed element is a terminal object of the element category. With at least three elements, two distinct nonfixed elements are maximal and have no common successor, so the element category is not total by Lemma~\ref{C:directed-affine}.
+\end{proof}
+
+\begin{corollary}[Proved: the exact localizer range of the presheaf converse]\label{E:localizers}
+For a fundamental localizer $W$, the implication ``every totally $W$-aspherical presheaf $H$ has totally $W$-aspherical category of elements holds for all small bases and presheaves if and only if $S^2$ is $W$-aspherical. For every fundamental localizer in which the displayed sphere category $C$ is not aspherical, Theorem~\ref{E:counterexample} gives a totally $W$-aspherical presheaf whose category of elements is not totally $W$-aspherical. In particular this holds for $\Winfty$, every nonzero homology localizer $W_R$, and every truncation localizer $W_n$ with $n\geq2$. For $W_0$ the two notions are equivalent to $U/H$ being nonempty and connected. For $W_1$ they are equivalent to $B(U/H)$ being nonempty, connected, and simply connected.
+\end{corollary}
+\begin{proof}
+The positive direction of the universal assertion is Corollary~\ref{D:sphere-presheaves}. The negative direction and the stated counterexamples follow from the specified final map $E\to C$. For $W_0$, every canonical comparison $U/H\to U'/p_!H$ is final and therefore induces a bijection on components. For $W_1$, a final functor between nonempty connected categories induces an epimorphism on fundamental groups. To see this directly, for each object $b$ of the target choose an arrow $b\to f(a_b)$. Connectedness of $b\backslash A$ supplies a zigzag between any two choices, and for an arrow $b\to b'$ it supplies a zigzag between the choice at $b$ and the composite through the choice at $b'$. The commuting triangles identify each target edge-path, relative to these chosen paths, with the image of a source edge-path. With the basepoint choice an identity, every target loop is therefore in the image on $\pi_1$. Thus a simply connected $U/H$ makes every canonical final target simply connected. The converse is the identity test. The same argument using all final images characterizes total $W_1$-asphericity of the category itself.
+\end{proof}
+
+\subsection{Flat presheaves and ind-right adjoints}
+
+\begin{proposition}[Proved: the genuine filtered-presentation criterion]\label{E:flat}
+For a small $U$ and a presheaf $H$, the category $U/H$ is filtered if and only if $H$ is a small filtered colimit of representable presheaves. Hence this condition is sufficient for total $W$-asphericity of $H$ for every fundamental localizer. It is not necessary, by Theorem~\ref{E:counterexample}.
+\end{proposition}
+\begin{proof}
+There is a canonical isomorphism of presheaves
+\[
+ H\cong\colim_{(u,h)\in U/H}U(-,u).
+\]
+At an object $v$, the map sends $(\alpha:v\to u,h)$ to $H(\alpha)h$. Every element $k\in H(v)$ is represented by $(\id_v,k)$. Every other representative of $k$ receives a morphism from that representative in the indexing category of elements, proving the required identification. If $U/H$ is filtered, this is the desired presentation.
+
+Conversely let $H\cong\colim_{i\in I}U(-,f(i))$ for a small filtered $I$. The functor $f:I\to U$ is supplied by the full faithfulness of Yoneda, after choosing the indicated representing objects. The displayed presheaf is $f_!1_I$. Proposition~\ref{A:comprehensive} gives a final functor $I\to U/H$, and Lemma~\ref{A:filtered-final} makes $U/H$ filtered. The sufficiency for totality is then Proposition~\ref{A:elements-Kan} and Theorem~\ref{A:filtered}.
+\end{proof}
+
+\begin{proposition}[Refuted: the ind-right-adjoint biconditional in Lead 5]\label{E:ind-adjoint}
+Let $i:U\hookrightarrow X$ be a sieve, and let $i_0:U\to\overline U$ have the codomain of Definition~\ref{A:definitions}. There is an ind-right adjoint precisely when every $U/x$, $x\in\overline U$, is filtered. Here an ind-right adjoint means a functor $r:\overline U\to\Ind(U)$ and bijections
+\[
+ \Hom_{\Ind(U)}(y_U(u),r(x))\cong\Hom_X(u,x)
+\]
+natural in $u\in U$ and $x\in\overline U$, where $y_U$ is Yoneda and $\Ind(U)$ is the full subcategory of presheaves given by small filtered colimits of representables. Such a sieve is totally $W$-dwy\'erienne for every fundamental localizer. The converse for $\Winfty$-dwy\'erienne sieves is false, even for a finite sieve, and the converse for totally $\Winfty$-dwy\'erienne sieves is also false in general.
+\end{proposition}
+\begin{proof}
+Yoneda identifies $r(x)$, if it exists, with the restricted representable $u\mapsto\Hom_X(u,x)$. Proposition~\ref{E:flat} gives exactly the stated criterion. Naturality in $x$ is automatic from the restricted Yoneda functor and fullness of $\Ind(U)$ in the presheaf category. If these presheaves are representable, the same argument gives an ordinary right adjoint; this is the classical Dwyer condition.
+
+For the first failed converse, adjoin to the monoid category $U$ of Theorem~\ref{E:counterexample} an object $t$ with crossing presheaf $H$, no arrows back to $U$, and only its identity as endomorphism. The inclusion $U\hookrightarrow X$ is a sieve with $\overline U=X$. Its weights are the representable at $*$ and $H$ at $t$, both total. It is therefore $\Winfty$-dwy\'erienne. But $U/t=U/H$ is not filtered, so no ind-right adjoint exists; indeed this sieve is not totally $\Winfty$-dwy\'erienne.
+
+For the second failed converse, let $A=\Delta_{\mathrm{inj}}$ from Theorem~\ref{C:counterexample} and include it as a sieve in $A^{\triangleright}$, the category obtained by adjoining a terminal object. The crossing category at that terminal object is $A$, which is total but not filtered. The remaining crossing categories are representable slices and hence filtered. This sieve is totally $\Winfty$-dwy\'erienne and has no ind-right adjoint. Every functor and category used here is small in the fixed universe.
+\end{proof}
+
+\subsection{A precise restricted-action criterion for total presheaves}
+
+\begin{proposition}[Proved: what the presheaf quantifier actually tests]\label{E:restricted-actions}
+Let $E=U/H$ and $\pi:E\to U$. For a nonzero commutative ring $R$, $H$ is totally $W_R$-aspherical if and only if $BE$ is $R$-acyclic and every connected component of
+\[
+ \El_E(L\pi),\qquad L:U\to\Set,
+\]
+is $R$-acyclic. For $\Winfty$, the corresponding criterion is that $BE$ is weakly contractible and these same components are integrally acyclic. The restriction that the action factors through $\pi$ is essential; Theorem~\ref{E:counterexample} disproves removing it.
+\end{proposition}
+\begin{proof}
+For necessity, fix $L$ and form the covariant collage $p:U\hookrightarrow U_L$ of Proposition~\ref{B:collage}. The presheaf $p_!H$ agrees with $H$ on $U$; at the new source object $x$, it is $\pi_0\El_E(L\pi)$. Its category of elements is obtained from $E$ by adjoining one source object for each of those components, with that component as its crossing element category. The same nerve computation as in Proposition~\ref{B:collage} realizes this as
+\[
+ BE\ \amalg^{h}_{B\El_E(L\pi)}\ \pi_0\El_E(L\pi).
+\]
+Both the resulting space and $BE$ are $R$-acyclic under totality, so the homology exact sequence makes the positive homology of each component vanish. Empty element categories impose no condition. For $\Winfty$, apply this argument with $R=\mathbb Z$, and use the identity test for $BE$.
+
+For sufficiency, take arbitrary $p:U\to U'$ and the final comparison $q:E\to D=U'/p_!H$. For $d=(u',c)\in D$, its comma category $d\backslash E$ is exactly component $c$ of $u'\backslash E$. The latter is $\El_E(L_{u'}\pi)$ for the covariant functor $L_{u'}(u)=\Hom_{U'}(u',p(u))$. The hypotheses therefore make all these comma categories $R$-acyclic. Lemma~\ref{C:homology-A} gives an $R$-homology isomorphism $BE\to BD$, proving total $W_R$-asphericity. For $\Winfty$, $BD$ is integrally acyclic, and finality of $q$ makes its fundamental group a quotient of the trivial group $\pi_1(BE)$, by the edge-path argument in Corollary~\ref{E:localizers}. Thus $BD$ is simply connected and acyclic, hence weakly contractible. This proves the required universal condition on $p$.
+\end{proof}

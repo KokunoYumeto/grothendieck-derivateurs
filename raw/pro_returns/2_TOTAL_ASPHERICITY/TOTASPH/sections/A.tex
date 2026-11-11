@@ -1,0 +1,97 @@
+\subsection{The axioms and the variance}
+
+\begin{definition}[Known: fundamental localizer]\label{A:localizer}
+We use the following form of Grothendieck's three axioms. A class $W$ of functors in $\Cat$ is a fundamental localizer if it satisfies LF1--LF3. LF1 means that identities belong to $W$, that $W$ has the two-out-of-three property, and that whenever $i:X\to Y$ and $r:Y\to X$ satisfy $ri=\id_X$ and $ir\in W$, then $r\in W$. LF2 says that $A\to e$ belongs to $W$ whenever $A$ has a terminal object. LF3 says that for a commutative triangle $A\xrightarrow{u}B\xrightarrow{v}C$, if every functor $u/c:A/c\to B/c$ belongs to $W$, then $u\in W$. Here both slices use the indicated functors to $C$. A category is $W$-aspherical when its unique functor to $e$ belongs to $W$.
+\end{definition}
+
+This is exactly \citet[Definitions 1.1.1 and 1.1.3]{Cisinski2004Minimal}. In LF1, two-out-of-three then also gives $i\in W$. LF3 is the relative Theorem A axiom, not merely its special case $C=B$. We do not add a filtered-colimit axiom. The ordinary finality used throughout this paper is a property of connected components and is independent of $W$.
+
+\begin{definition}[Known: manuscript Definitions 1 and 2]\label{A:definitions}
+For a presheaf $H:U^{\op}\to\Set$, write $U/H$ for its category of elements: its objects are $(u,h)$, and a morphism $(u,h)\to(v,k)$ is an arrow $a:u\to v$ with $H(a)k=h$. Given $p:U\to U'$, the functor $p_!:\Set^{U^{\op}}\to\Set^{U'^{\op}}$ is ordinary left Kan extension along $p^{\op}$. The presheaf $H$ is totally $W$-aspherical if $U'/p_!H$ is $W$-aspherical for every small $U'$ and every $p$. A category $A$ is totally $W$-aspherical if its terminal presheaf $1_A$ is so. We denote this property by $T_W(A)$.
+
+For $f:X\to Y$, put $H_y(x)=\Hom_Y(fx,y)$. The functor $f$ is \emph{strictly} $W$-aspherical if every presheaf $H_y$ is totally $W$-aspherical, and \emph{totally} $W$-aspherical if every category $X/y=X/H_y$ satisfies $T_W$. For a sieve $i:U\hookrightarrow X$, let $\overline U$ be the full cosieve on the objects $x$ for which some arrow $u\to x$, $u\in U$, exists. The sieve is $W$-dwy\'erienne, respectively totally $W$-dwy\'erienne, if $U\to\overline U$ is strictly, respectively totally, $W$-aspherical. A cosieve has either property when its opposite sieve has that property.
+\end{definition}
+
+These are the definitions at XII ms.~88--89 and 109 \citep{GrothendieckDerivateursXIIb}. In particular, the phrase ``strictement'' concerns the presheaf and ``totalement'' concerns its category of elements. The tests at $x\in U$ are representable; at an object outside $\overline U$ the crossing presheaf is empty and is not tested. For a covariant functor $K:A\to\Set$ we instead write $\El_A(K)$; its arrows satisfy $K(a)(k)=k'$. These two categories of elements have opposite variance and cannot be interchanged.
+
+\subsection{Comprehensive factorization}
+
+\begin{proposition}[Proved: the explicit comprehensive factorization]\label{A:comprehensive}
+For $f:A\to B$, define the presheaf $P_f:B^{\op}\to\Set$ by
+\[
+ P_f(b)=\pi_0(b\backslash A).
+\]
+There is a canonical factorization in $\Cat$
+\[
+ A\xrightarrow{q_f}D_f:=B/P_f\xrightarrow{\rho_f}B,
+ \qquad q_f(a)=(fa,[a,\id_{fa}]),
+\]
+where $q_f$ is final and $\rho_f$ is a discrete fibration. It is the factorization into a final functor followed by a discrete fibration, unique up to a unique isomorphism over $B$ compatible with the map from $A$. Moreover $P_f\cong f_!1_A$ naturally in $b$.
+\end{proposition}
+
+\begin{proof}
+For $\beta:b'\to b$, precomposition gives a functor $b\backslash A\to b'\backslash A$ and hence the required presheaf map. An arrow $b'\to b$ lifts uniquely to an arrow with prescribed target $(b,c)$ in $D_f$, with source $(b',P_f(\beta)c)$; thus $\rho_f$ is a discrete fibration. The comma category $(b,c)\backslash A$ for $q_f$ identifies with the full connected component $c$ of $b\backslash A$: its objects are exactly arrows $\alpha:b\to fa$ belonging to $c$, and its arrows are the same commuting triangles. It is nonempty and connected. This proves finality, including all empty-component cases.
+
+The pointwise Kan formula gives
+\[
+ (f_!1_A)(b)=\colim_{(a,\,b\to fa)\in(b\backslash A)^{\op}}\{*\}
+ =\pi_0(b\backslash A).
+\]
+The opposite on the indexing category does not affect its components; it matters for a nonconstant presheaf.
+
+For uniqueness, let $f=rq$ with $q:A\to E$ final and $r:E\to B$ a discrete fibration. Write $E\cong B/Q$ over $B$. For each $b$, the category $b\backslash E$ is a disjoint union, indexed by $Q(b)$, of categories with initial objects: the component indexed by $h$ has initial object $((b,h),\id_b)$. Thus $r_!1_E\cong Q$. Since $q_!1_A\cong1_E$, composition of left adjoints gives $f_!1_A\cong Q$, with its unit giving the compatible map from $A$. This determines the asserted isomorphism and its uniqueness.
+\end{proof}
+
+This is the contravariant form of the comprehensive factorization of \citet[Theorem 3]{StreetWalters1973}; that original source was not available as full text here. The opened modern treatment \citep[Section 1.3, Theorem 1.7, and Remark 1.9]{BergerKaufmann2017} explicitly distinguishes the final/discrete-fibration version from its dual. Our proof supplies the needed version independently.
+
+\begin{corollary}[Proved: final-image reformulation and closure]\label{A:final-images}
+For any fundamental localizer $W$ and any small category $A$, $T_W(A)$ is equivalent to the assertion that every target $B$ of an ordinary final functor $A\to B$ is $W$-aspherical. If $T_W(A)$ and $A\to B$ is final, then $T_W(B)$.
+\end{corollary}
+
+\begin{proof}
+If $f$ is final, $f_!1_A=1_B$, so its category of elements is $B$. Conversely every $D_f$ in Proposition~\ref{A:comprehensive} is the target of a final functor from $A$. Finally, final functors compose: for $A\xrightarrow{f}B\xrightarrow{g}C$, the identities $f_!1_A=1_B$ and $g_!1_B=1_C$ give $(gf)_!1_A=1_C$. Apply the first equivalence to this composite.
+\end{proof}
+
+\begin{proposition}[Proved: categories of elements map finally under Kan extension]\label{A:elements-Kan}
+Let $H:U^{\op}\to\Set$ and $\pi:U/H\to U$. For every $p:U\to U'$ there is a canonical final functor
+\[
+ q_{p,H}:U/H\longrightarrow U'/p_!H
+\]
+over $p$. In particular, $T_W(U/H)$ implies total $W$-asphericity of $H$. Total presheaves are preserved by every ordinary $p_!$.
+\end{proposition}
+
+\begin{proof}
+The lift description in Proposition~\ref{A:comprehensive} gives $\pi_!1_{U/H}\cong H$. More explicitly, $u\backslash(U/H)$ has components indexed by $h\in H(u)$, with initial object $((u,h),\id_u)$ in each component. Therefore
+\[
+ (p\pi)_!1_{U/H}\cong p_!H.
+\]
+The asserted functor is $q_{p\pi}$ of Proposition~\ref{A:comprehensive}. The first consequence follows from Corollary~\ref{A:final-images}. If $H$ is total and $r:U'\to U''$, then $r_!p_!H\cong(rp)_!H$, so $p_!H$ satisfies every required test. All these isomorphisms are natural isomorphisms of presheaves, and hence give isomorphisms of their categories of elements over the indicated base.
+\end{proof}
+
+\subsection{What filteredness supplies}
+
+\begin{lemma}[Proved: final images of filtered categories are filtered]\label{A:filtered-final}
+If $A$ is nonempty and filtered and $f:A\to B$ is final, then $B$ is nonempty and filtered.
+\end{lemma}
+
+\begin{proof}
+Given $b,c\in B$, choose $b\to fa$ and $c\to fa'$ using nonemptiness of their comma categories. A common successor of $a,a'$ gives a common successor of $b,c$. Given parallel arrows $s,t:b\rightrightarrows c$, choose $v:c\to fa$. The two objects $(a,vs)$ and $(a,vt)$ in $b\backslash A$ are connected by a finite zigzag. A filtered cocone over the finitely many objects and arrows in this zigzag gives an arrow $w:a\to a''$ with $f(w)vs=f(w)vt$. To justify the same arrow $w$ at the two appearances of $a$, first choose a cocone for the finite diagram with the occurrences distinguished, and then equalize the finitely many resulting parallel arrows out of repeated objects. Thus $f(w)v:c\to fa''$ equalizes $s,t$ in $B$.
+\end{proof}
+
+\begin{theorem}[Known: filtered categories are total for every fundamental localizer]\label{A:filtered}
+Every small filtered category is totally $W$-aspherical for every fundamental localizer satisfying exactly LF1--LF3 of Definition~\ref{A:localizer}. No additional filtered-colimit axiom is required.
+\end{theorem}
+
+\begin{proof}
+A filtered category has weakly contractible nerve. Indeed every finite collection of simplices in its nerve uses finitely many objects and arrows, and a compatible cocone gives a contraction of their inclusion into the nerve. Equivalently, after subdivision any spherical simplicial representative and any finite homotopy problem is killed by such a cone. Nonemptiness handles degree zero. This proves weak contractibility, not the existence of a single global contraction natural transformation for an infinite category.
+
+\citet[Theorem 2.2.11, p.~136]{Cisinski2004Minimal} proves that $\Winfty$ is the smallest fundamental localizer: it satisfies LF1--LF3 and is contained in every class satisfying those axioms. Hence every filtered category is $W$-aspherical. Lemma~\ref{A:filtered-final} and Corollary~\ref{A:final-images} now give totality. Cisinski's theorem is the cited external theorem in this proof; the stronger historical axiom about inductive limits is unnecessary under the modern three-axiom definition.
+\end{proof}
+
+\begin{remark}[Proved: invariance that is and is not automatic]\label{A:invariance}
+Totality is invariant under equivalence of categories and under isomorphism of presheaves, and it passes from $T_W$ to $T_{W'}$ when $W\subseteq W'$. For $W\subseteq W_0$, it implies that the category of elements in the identity test is nonempty and connected. It is not in general invariant under $\Winfty$-equivalence, as the outgoing-fork example in the audit below shows. For the universal localizer consisting of all functors, every category and every presheaf, including the empty ones, is total.
+\end{remark}
+
+\begin{proof}
+An equivalence and its quasi-inverse are final, so Corollary~\ref{A:final-images} applies in both directions. The other assertions follow directly from the quantifiers, with the noninvariance witnessed below by a specified functor to the point.
+\end{proof}

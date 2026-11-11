@@ -1,0 +1,1677 @@
+% macro conflict, first definition kept: \newcommand{\Cat}{\mathcal{C}at}
+% macro conflict, first definition kept: \newcommand{\Hom}{\mathsf{Hom}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\AMSTeX}{$\mathcal{A}\kern-.1667em\lower.5ex\hbox{$\mathcal{M}$}\kern-.125em\mathcal{S}$-\TeX}
+\newcommand{\uHom}{\underline{\mathsf{Hom}}}
+\newcommand{\Ob}{\mathsf{Ob}}
+\newcommand{\Ab}{\mathsf{Ab}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+\newcommand{\Dia}{\mathsf{Dia}}
+\newcommand{\Cat}{\mathcal{C}\mathit{at}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\Hom}{\underline{\mathsf{Hom}}}
+\newcommand{\id}{\mathsf{id}}
+\newcommand{\Del}{\mathbf{\Delta}}
+\newcommand{\Ens}{\mathcal{E}ns}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\sHom}{\mathsf{Hom}}
+\newcommand{\DER}{\mathsf{DER}}
+\newcommand{\sIm}{\mathsf{Im}}
+\newcommand{\sDia}{\mathsf{Dia}}
+\newcommand{\sOb}{\mathsf{Ob}}
+\newcommand{\sid}{\mathsf{id}}
+\newcommand{\HOT}{\mathsf{HOT}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\hot}{\mathsf{hot}}
+\newcommand{\Hot}{\mathsf{Hot}}
+\newcommand{\isoto}{\overset{\sim}{\to}}
+\newcommand{\isolongto}{\overset{\sim}{\longrightarrow}}
+\begin{document}
+% ---- from der1_p001-005.tex
+% ===================== page 1 =====================
+\printedpage{--} % no page number printed (title page)
+% head: (none)
+
+\begin{center}
+{\Large\textsf{LES DÉRIVATEURS}}
+
+\bigskip
+
+\textbf{ALEXANDRE GROTHENDIECK}
+
+\bigskip\bigskip
+
+\textbf{Chapitre I}
+
+\medskip
+
+\textbf{Généralités sur les (pré)dérivateurs}
+\end{center}
+
+\clearpage
+
+% ===================== page 2 =====================
+\printedpage{--} % no page number printed (editors' note)
+% head: (none)
+
+Ce texte a été déchiffré et transcrit en \AMSTeX{} par G. Maltsiniotis. Il a été édité par M. Künzer, J. Malgoire, et G. Maltsiniotis. La transcription est aussi fidèle que possible au manuscrit. Pour les quelques corrections évidentes, ou les rares commentaires des éditeurs, ainsi que pour la numérotation originale des pages du manuscrit, les caractères de machine à écrire \texttt{[typewriter]} entre crochets sont utilisés. Un point d'interrogation entre crochets signifie que l'on n'est pas sûr du mot qui précède.
+
+Cette édition est provisoire. Les remarques, commentaires et corrections sont bienvenus. Envoyer un message à :
+
+\textbf{[e-mail address removed]}
+
+\hfill G. Maltsiniotis
+
+\clearpage
+
+% ===================== page 3 =====================
+\printedpage{1}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 1}
+
+\section*{Dérivateurs}
+
+\subsection*{\textmd{1.}\ Préliminaires sur les foncteurs images inverses des préfaisceaux sur des catégories d'indices, et leurs adjoints multiples.}
+
+$A$ “catégorie de coefficients”,\\
+$I$ “catégorie d'indices”,\\
+$A(I)=\uHom(I^{\circ},A)$ préfaisceaux sur $I$ à valeurs dans $A$.
+
+Si $f : I \to J$, on en déduit :
+\[
+f^{*} : A(J) \to A(I) \quad ,
+\]
+et on s'intéresse à l'existence des foncteurs adjoints successifs à gauche et à droite. Notation provisoire :
+\[
+f^{?}\ f_{!}\ f^{*}\ f_{*}\ f^{!} \quad .
+\]
+
+Voici les faits principaux :
+
+\textit{a}) Sous réserve de l'existence des $\varprojlim$ (resp. $\varinjlim$) pertinentes, $f_{*}$ (resp. $f_{!}$) existe. Par exemple s'il existe \texttt{[des]} $\varprojlim$ (resp. $\varinjlim$) \textit{finies}, alors $f_{*}$ (resp. $f_{!}$) existe si $I$, $J$ sont des catégories finies.
+
+\textit{b}) Même si $A$ est une catégorie abélienne, avec $\varprojlim$ et $\varinjlim$ (par exemple $\Ab$), les \textit{biadjoints} n'existent pas toujours. Par exemple, dans le cas particulier où $J=e$ est la catégorie ponctuelle, et $I$ l'ensemble ordonné
+\[
+\begin{tikzcd}
+ & a \\
+0 \arrow[ur] \arrow[dr] & \\
+ & b
+\end{tikzcd}
+\]
+(dans le cas de $f^{!}$), ou l'ensemble ordonné opposé (dans le cas de $f^{?}$). Même si $f$ est une immersion ouverte, $f^{!}$ n'existe pas forcément (par exemple elle n'existe pas si $I$ est comme \texttt{[ci-]}dessus, et
+\[
+J=\begin{tikzcd}
+ & a \arrow[dr] & \\
+0 \arrow[ur] \arrow[dr] & & c \\
+ & b \arrow[ur] &
+\end{tikzcd}
+\qquad\qquad \text{),}
+\]
+et si $f$ est une immersion fermée, $f^{?}$ n'existe pas forcément.
+
+\textit{c}) Si $f$ est une \textit{immersion fermée}, et $A$ est \textit{ponctuée} (\textit{i.e.} admet un objet à la fois initial et final), alors $f^{!}$ existe. Si $f$ est une immersion ouverte, $f^{?}$ existe. (Toujours sous réserve
+\printedpage{2}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+de l'existence dans $A$ des limites pertinentes). Si $f$ est une immersion, $f_{*}$ et $f_{!}$ \texttt{[sont]} pleinement fidèles \textit{i.e.} $f^{*}$ \texttt{[est]} un foncteur de localisation.
+
+\textit{d}) Supposons seulement l'existence de l'objet final $e$ dans $A$ (plus au besoin certaines $\varprojlim$ finies). Si
+
+\msp{page 2}
+\[
+i : Y \hookrightarrow S
+\]
+est une immersion fermée, de complémentaire $U$
+\[
+Y \overset{i}{\hookrightarrow} S \overset{j}{\hookleftarrow} U
+\]
+de sorte que $j$ soit une immersion ouverte, alors $A(Y)$ s'identifie par le foncteur $i_{*}$ à la sous-catégorie pleine de $A(S)$ formée des $F \in \Ob\ A(S)$ tels que $F|U \simeq e_{U}$ (préfaisceau final). De même, si l'objet initial $\emptyset$ existe dans $A$, et les $\varinjlim$ pertinentes, alors $A(U)$ s'identifie par $j_{!}$ à la sous-catégorie pleine de $A(S)$ formée des $F$ tels que $F|Y=\emptyset_{Y}$ (préfaisceau initial, prenant partout la valeur $\emptyset$).
+
+Si $A$ est même \textit{ponctuée} ($e=\emptyset$), alors on a, pour tout $F\in \Ob\ A(S)$, un carré à la fois cartésien et cocartésien, fonctoriel en $F$
+\[
+\begin{tikzcd}
+ & F \arrow[dr, "\text{adj}"] & \\
+j_{!}j^{*}F \arrow[ur, "\text{adj}"] \arrow[dr] & & i_{*}i^{*}F \\
+ & e \arrow[ur] &
+\end{tikzcd}
+\qquad\qquad \text{.}
+\tag*{(1)}
+\]
+Dans le cas $A$ abélienne, ce diagramme prend la forme d'une suite exacte
+\[
+0 \longrightarrow j_{!}j^{*}F \longrightarrow F \longrightarrow i_{*}i^{*}F \longrightarrow 0 \quad .
+\]
+
+\textit{e}) Mêmes conditions pour $i$ et $j$. On suppose que $A$ a les $\varprojlim$ pertinentes, dont objet final. On a alors un carré cartésien fonctoriel en $F\in \Ob\ A(S)$ \texttt{[il faut supposer la catégorie} $A$ \texttt{ponctuée]}
+\[
+\begin{tikzcd}
+F \arrow[d, "\text{adj}"'] & i_{*}i^{!}F \arrow[l] \arrow[d] \\
+j_{*}j^{*}F & e \arrow[l]
+\end{tikzcd}
+\tag*{(2)}
+\]
+\textit{i.e.} $i^{!}F$ s'identifie par le foncteur pleinement fidèle $i_{*}$ au \textit{noyau} de $F\to j_{*}j^{*}F$. Dans le cas abélien, cela prend la forme d'une suite exacte
+\[
+0 \longrightarrow i_{*}i^{!}F \longrightarrow F \longrightarrow j_{*}j^{*}F \quad .
+\]
+
+\clearpage
+
+% ===================== page 5 =====================
+\printedpage{3}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 3}
+
+Je me dispense d'écrire le carré cocartésien dual, quand $A$ a les $\varinjlim$ pertinentes, y compris objet initial. Il semble qu'elle n'ait pas servi en pratique. Les foncteurs adjoints et biadjoints classiquement utiles sont inclus ci-dessous (où les “pas utiles” sont entre crochets)
+\[
+\begin{aligned}
+[i_{!}]\ i^{*}\ i_{*}\ i^{!} \\
+[j^{?}]\ j_{!}\ j^{*}\ j_{*}
+\end{aligned}
+\]
+\textit{i.e.} les foncteurs $i_{!}$ et $j^{?}$ n'ont pas servi classiquement.
+
+\textit{f}) Cas des catégories $\bDelta_{i}$ (simplexes type, $i\in\mathbb{N}$), et des foncteurs entre ceux-ci (applications semi-simpliciales). Il semblerait que pour une telle $f$, si $A$ est ponctuée, il y ait les \textit{bi-adjoints} à la fois à gauche et à droite. De plus, pour $\bDelta_{i}$ et $\bDelta_{j}$ fixés quand on regarde toutes les $f:\bDelta_{i}\to\bDelta_{j}$ et toutes les $g:\bDelta_{j}\to\bDelta_{i}$, que les suites totales de foncteurs multi-adjoints pour chacun des $f^{*}$, $g^{*}$ correspondants sont toutes les mêmes \texttt{[ce n'est pas vrai]}. Ça a l'air vrai du moins si $j=i+1$ (et je l'ai vérifié pour $i=0$, $i=1$), on doit trouver une “suite d'adjonctions” de longueur $2i+7=(i+1)+(i+2)+2+2$. De façon précise, la suite comporte quatre termes “extrêmes” (les deux premiers, les deux derniers) et les $(i+1)+(i+2)$ termes intermédiaires correspondant aux foncteurs de la forme $f^{*}$ ou $g^{*}$, où $f:\bDelta_{i+1}\to\bDelta_{i}$ est une des $(i+1)$ applications de dégénérescence, et $g:\bDelta_{i}\to\bDelta_{i+1}$ une des $i+2$ applications bord \texttt{[ce n'est pas tout à fait vrai; il faut se limiter aux applications qui sont injectives ou surjectives]}.
+
+% ---- from der1_p006-010.tex
+\printedpage{4}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 4}
+
+\section*{2. Préliminaires heuristiques sur les dérivateurs.}
+
+On se donne une sous-catégorie pleine $\Dia$ (comme “diagrammes”) de $\Cat$. Ça peut être tout $\Cat$, ou plus petit. Mais on supposera le plus souvent que $\Dia$ contient au moins les “catégories ordonnées” (correspondant aux ensembles ordonnés, \textit{i.e.} telles que $a$) tout morphisme est un mono et $b$) tout iso est une identité \texttt{[ce n'est pas vrai : la catégorie réduite à une double flèche satisfait à ces conditions, mais n'est pas un ensemble ordonné]}). Par abus de langage, on identifie un ensemble ordonné avec la catégorie correspondante (et une catégorie au topos qu'elle définit?). On considère $\Dia$ comme une 2-\textit{catégorie}.\footnote{N.B. Il faut des conditions de stabilité pour $\Dia$, au moins la stabilité par $I \times J$ et $I \amalg J$, en fait, nettement plus \dots}
+
+Un \textit{dérivateur} $\DD$ (sur $\Dia$, comme “\textit{domaine}” du dérivateur) est un 2-foncteur contravariant de $\Dia$ dans $\Cat$, satisfaisant certaines conditions. Donc
+\[ \DD : \Dia^{\circ} \longrightarrow \Cat \quad . \]
+Si $I \in \Ob_0 \Dia$ est une catégorie (ou un “type de diagramme”) du domaine de $\DD$, on doit donc avoir une catégorie $\DD(I)$. Les objets de $\DD(I)$ s'appelleront les \textit{objets-coefficients} (ou \textit{coefficients}) de type $\DD$, au dessus de $I$. Pour
+\[ f : I \longrightarrow J \]
+une 1-flèche de $\Dia$, on doit avoir un foncteur
+\[ f^*_{\DD} \text{ ou } f^* : \DD(J) \longrightarrow \DD(I) \quad , \]
+dit \textit{“foncteur image inverse”}. Si $F$ est un coefficient de type $\DD$ sur $J$ son “\textit{image inverse}” est donc un coefficient de type $\DD$ sur $I$. On suppose (pour simplifier!) que le 2-foncteur $\DD$ est \textit{strict}, donc qu'on a transitivité stricte
+\[ (gf)^* = f^*g^* \ , \qquad \text{si} \qquad I \xrightarrow{f} J \xrightarrow{g} K \qquad \text{dans} \ \ \Dia \ . \]
+
+\msp{page 5}
+
+De plus, si on a deux foncteurs $f, g : I \rightrightarrows J$, et un morphisme entre eux
+\[
+\begin{tikzcd}[column sep=large]
+I \arrow[r, shift left=2, "f"] \arrow[r, shift right=2, "g"'] \arrow[r, phantom, "{\downarrow}u"] & J
+\end{tikzcd}
+\quad ,
+\]
+on se donne un morphisme $u^*_{\DD}$ ou $u^*$ entre les foncteurs $g^*$ et $f^*$, d'où
+\[
+\begin{tikzcd}[column sep=large]
+\DD(I) & \DD(J) \arrow[l, shift right=2, "f^*"'] \arrow[l, shift left=2, "g^*"] \arrow[l, phantom, "{\uparrow}u^*"]
+\end{tikzcd}
+\quad .
+\]
+
+\printedpage{5}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+On doit encore avoir transitivité pour une composition de morphismes de foncteurs :
+\[
+\begin{tikzcd}[column sep=large]
+I \arrow[r, shift left=4, "f"] \arrow[r, "g"' near start] \arrow[r, shift right=4, "h"'] \arrow[r, phantom, shift left=2, "{\downarrow}u"] \arrow[r, phantom, shift right=2, "{\downarrow}v"] & J
+\end{tikzcd}
+\]
+doit donner
+\[ (vu)^* = u^*v^* \]
+donc
+\[
+\begin{tikzcd}[column sep=large]
+\DD(I) & \DD(J) \arrow[l, shift right=4, "f^*"'] \arrow[l, "g^*" near end] \arrow[l, shift left=4, "h^*"] \arrow[l, phantom, shift right=2, "{\uparrow}u^*"] \arrow[l, phantom, shift left=2, "{\uparrow}v^*"]
+\end{tikzcd}
+\quad .
+\]
+De plus, si $f$ est une identité, $f^*$ aussi
+\[ (\id_I)^* = \id_{\DD(I)} \quad , \]
+et de même si $u$ est une identité
+\[ (\id_f)^* = \id_{f^*} \quad . \]
+
+\msp{page 6}
+
+J'indique tout de suite l'axiome le plus important sur un dérivateur (au-delà de la donnée d'un 2-contra foncteur strict) :
+
+\textbf{Der}$_1$ : Si $f : I \to J$ dans $\Dia$, alors $f^*_{\DD} = f^* : \DD(J) \to \DD(I)$ a un adjoint à droite et un adjoint à gauche.
+
+Ces foncteurs seront notés (du moins provisoirement) $f^{\DD}_*$ ou $f_*$ , et $f^{\DD}_!$ ou $f_!$ , soit
+\[ f_! \, , \ f_* : \DD(I) \rightrightarrows \DD(J) \quad , \]
+de sorte qu'on trouve une suite de \textit{trois} foncteurs adjoints entre $\DD(I)$ et $\DD(J)$
+\[ f_! \, , \ f^*, \ f_* \quad . \]
+
+N.B. Pour la plupart des développements on n'aura pas besoin de l'existence à la fois des $f_!$ et des $f_*$ . Un \textit{dérivateur à gauche} ne suppose que les $f_*$ (adjoints à droite des $f^*$), et l'existence de $f_!$ seulement quand $f$ est une \textit{immersion ouverte}. Dualement, un \textit{dérivateur à droite} ne suppose que les $f_!$ (adjoints à gauche des $f^*$), et $f_*$ seulement si $f$ est une \textit{immersion fermée}. Ce sont sans doute les dérivateurs à gauche qui sont les plus importants.
+
+\msp{page 7}
+
+\textbf{Der}$_2$ : Si $f : I \to J$ est dans $\Dia$, si c'est une immersion \textit{fermée}, le biadjoint à droite $f^!_{\DD}$ ou $f^!$ de $f^*$ existe. Si c'est une immersion ouverte, le biadjoint à gauche $f^?$ existe.\footnote{Il n'y a lieu d'exiger les biadjoints que pour un dérivateur ponctué. \textsf{HOT} n'y satisfait pas.} Dans
+\printedpage{6}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+les deux cas, on veut que $f^*$ soit un foncteur de localisation, ce qui équivaut à dire que $f_*$ est pleinement fidèle, ou que $f_!$ est pleinement fidèle.\footnote{Il faut de plus caractériser l'image de $f_*$ si $f$ est une immersion fermée (les $F$ tels que $g^*F \overset{\sim}{\to} e_{\DD(U)}$) et celle de $f_!$ si c'est une immersion ouverte (les $F$ tels que $g^*F \simeq \emptyset_{\DD(Y)}$), où $g$ est l'immersion complémentaire.}
+
+N.B. Dans le cas d'un dérivateur à gauche, on suppose seulement l'existence de $f^!$ si $f$ est une immersion fermée. Donc pour résumer, pour un tel dérivateur, on suppose l'existence de
+\[
+\left\{
+\begin{aligned}
+& f_* \text{ quel que soit } f : I \to J \text{ dans } \Dia \\
+& f_! \text{ si } f \text{ est une immersion ouverte} \\
+& f^! \text{ si } f \text{ est une immersion fermée (cas ponctué seulement).}
+\end{aligned}
+\right.
+\]
+Dualement, pour un dérivateur à droite, on suppose l'existence de
+\[
+\left\{
+\begin{aligned}
+& f_! \text{ quel que soit } f : I \to J \text{ dans } \Dia \\
+& f_* \text{ si } f \text{ est une immersion fermée} \\
+& f^? \text{ si } f \text{ est une immersion ouverte (cas ponctué seulement).}
+\end{aligned}
+\right.
+\]
+Je voudrais formuler des axiomes astucieux, pour le cas d'un couple
+\[ Y \overset{i}{\hookrightarrow} I \overset{j}{\hookleftarrow} U \]
+d'une immersion ouverte $j$ et d'une immersion fermée $i$ dans $\Dia$, complémentaires l'une de l'autre. D'abord une formulation si on suppose $\DD$ “\textit{ponctué}”, \textit{i.e.} les catégories $\DD(I)$ ponctuées, et les foncteurs $f^*$ compatibles avec les ponctuations. On veut “interpréter” le carré (1) page 2 :
+
+\msp{page 8}
+
+\[
+\begin{tikzcd}
+& F \arrow[dr, "\mathrm{adj}"] & \\
+j_!j^*F \arrow[ur, "\mathrm{adj}"] \arrow[dr] & & i_*i^*F \\
+& e \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\tag*{(1)}
+\]
+
+\textbf{Der}$'_2$ : Pour tous $I, J \in \Dia$, on a
+\[ \DD(I \amalg J) \xrightarrow[(\alpha^*, \beta^*)]{\sim} \DD(I) \times \DD(J) \quad , \]
+où $\alpha, \beta$ sont les injections canoniques de $I$ et $J$ dans $I \amalg J$.
+
+\printedpage{7}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+carré à la fois cartésien et cocartésien. On cherche donc un carré dans $\DD(I)$, mais mieux que ça. Soit $J = \Del_1 \times \Del_1$ le carré standard
+\[
+\begin{tikzcd}
+& (1,0) \arrow[dl] & \\
+(1,1) & & (0,0) \arrow[ul] \arrow[dl] \\
+& (0,1) \arrow[ul] &
+\end{tikzcd}
+\]
+et considérons la catégorie $I \times J$. On a
+\[
+\begin{aligned}
+& J \longrightarrow \Hom(I, I \times J) \\
+& j \longmapsto \bigl(i \longmapsto (i,j)\bigr)
+\end{aligned}
+\]
+D'autre part, par $\DD$
+\[ \Hom(I, I \times J)^{\circ} \longrightarrow \Hom(\DD(I \times J), \DD(I)) \]
+d'où un composé
+\[ J^{\circ} \longrightarrow \Hom(\DD(I \times J), \DD(I)) \]
+ou encore
+\[ \DD(I \times J) \longrightarrow \Hom(J^{\circ}, \DD(I)) \quad . \]
+Ceci vaut pour tout $J \in \Ob \, \Dia$. On peut donc dire que la donnée d'un “coefficient” $\Phi$ sur une catégorie produit $I \times J$ donne naissance à un diagramme de type $J^{\circ}$ dans la catégorie $\DD(I)$ des coefficients sur $I$. La philosophie
+\msp{page 9}
+des dérivateurs consiste en grande partie, inversement, chaque fois qu'on a un diagramme dans une catégorie de coefficients $\DD(I)$ (sur un diagramme $I$), disons diagramme de type $K$ : $K \to \DD(I)$, de se demander s'il ne provient pas “canoniquement” d'un objet de $\DD(I \times K^{\circ})$ \textit{i.e.} d'un coefficient sur $I \times K^{\circ}$.
+
+Ainsi pour le carré p. 8. On voudrait qu'il provienne de $\DD(I \times J)$, où $J = \Del_1 \times \Del_1$, et ceci fonctoriellement, donc on désire un foncteur “canonique”
+\[ \DD(I) \longrightarrow \DD(I \times \Del_1 \times \Del_1) \]
+qui en composant avec
+\[ \DD(I \times \Del_1 \times \Del_1) \longrightarrow \Hom((\Del_1 \times \Del_1)^{\circ}, \DD(I)) \]
+\printedpage{8}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+donne le foncteur décrit par le carré (1). De plus, il faut exprimer dans le contexte présent la condition “bicartésienne” du carré (1), dans le contexte de la page 7. Question analogue pour le carré (2) de la page 2 :
+\[
+\begin{tikzcd}
+& F \arrow[dr] & \\
+i_*i^!F \arrow[ur] \arrow[dr] & & j_*j^*F \\
+& e \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\tag*{(2)}
+\]
+où il faut de plus interpréter la condition cartésienne. On va définir en fait un coefficient sur la sous-catégorie ouverte $W$ suivante de $\Del_1 \times \Del_1$
+\[
+\begin{tikzcd}
+(1,0) & \\
+& (0,0) \arrow[ul] \arrow[dl] \\
+(0,1) &
+\end{tikzcd}
+\quad ,
+\]
+
+\msp{page 10}
+
+plus exactement sur $W \times I$, et si $\alpha$
+\[ \alpha : W \times I \longrightarrow \Del_1 \times \Del_1 \times I \]
+est l'inclusion canonique, on définira le carré “cartésien” comme l'image par $\alpha_*$ de ce coefficient. Ceci nous ramène donc au problème de “globaliser” d'abord le diagramme partiel
+\[
+\begin{tikzcd}
+F \arrow[dr] & \\
+& j_*j^*F \\
+e \arrow[ur] &
+\end{tikzcd}
+\quad .
+\]
+Et de même pour le carré (1) sauf qu'on est embarassé si on choisit de le regarder surtout comme cartésien (ce qui suggère à procéder comme tantôt) ou comme \underline{co}cartésien (ce qui % [sic] embarassé -> embarrassé, spelling of the word
+
+% ---- from der1_p011-015.tex
+\printedpage{9}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+\noindent suggère de procéder de façon duale). Mais les deux coefficients qu’on trouvera par ces deux procédés, produits soit de
+\[
+\begin{tikzcd}
+F \arrow[dr] & \\
+ & i_*i^*F \\
+e \arrow[ur] &
+\end{tikzcd}
+\quad ,
+\]
+soit de
+\[
+\begin{tikzcd}
+ & F \\
+j_!j^*F \arrow[ur] \arrow[dr] & \\
+ & e
+\end{tikzcd}
+\quad ,
+\]
+devraient être \textit{canoniquement} isomorphes.
+
+\noindent\msp{page 11}Si $\DD$ est un dérivateur, la catégorie
+\[
+\mathcal{A} = A_{\DD} = \DD(e) % [sic] A_{\DD} (plain italic A) -> \mathcal{A}_{\DD}, the subscripted letter is printed in a different alphabet from the script \mathcal{A}
+\]
+joue un rôle important. On l’appelle la \textit{catégorie de base,} ou \textit{la catégorie fondamentale}, du dérivateur, ces objets sont les \textit{coefficients fondamentaux.} Pour $I$ quelconque dans $\Dia$, on a donc pour $F \in \DD(I)$, coefficient sur $I$ % [sic] ces objets -> ses objets, possessive intended
+\[
+I^\circ \longrightarrow \mathcal{A} \quad , \qquad i \longmapsto F_i
+\]
+un diagramme de type $I^\circ$ dans $\mathcal{A}$, fonctoriellement, \textit{i.e.}
+\[
+\begin{tikzcd}[row sep=small]
+\DD(I) \arrow[r] & \uHom(I^\circ,\mathcal{A}) \arrow[d, equal] \\
+ & \DD(e)
+\end{tikzcd}
+\]
+% the vertical equality sign is printed under the letter \mathcal{A} of \uHom(I^\circ,\mathcal{A}), with \DD(e) beneath it
+(\textit{cf.} page 8).
+
+\noindent\textbf{Der}$_3$ : Pour tout $I \in \Dia$, ce foncteur est \textit{conservatif,}\footnote[4]{N.B. Mais ce foncteur n’a aucune envie d’être \textit{fidèle.}} \textit{i.e.} pour que
+\[
+F \longrightarrow G
+\]
+\printedpage{10}%
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+dans $\DD(I)$ soit \texttt{[un]} isomorphisme, il faut et il suffit que pour tout $i \in I$,
+\[
+F_i \longrightarrow G_i
+\]
+le soit.
+
+\noindent\textbf{Corollaire.} \textit{Le foncteur canonique (pour $I$, $J \in \Dia$)}
+\[
+\DD(I \times J) \xrightarrow{\ \theta\ } \uHom(J^\circ, \DD(I))
+\]
+\textit{est conservatif.}
+
+En effet, si $F$ est dans $\DD(I \times J)$, on a pour $(i,j) \in I \times J$
+\[
+F_{i,j} \simeq \theta(F)(j)_i \quad .
+\]
+
+\noindent\msp{page 12}Intuitivement, on regarde un dérivateur $\DD$ comme “étant” la catégorie fondamentale $\mathcal{A}$, avec une “structure” supplémentaire, \texttt{[à]} savoir la donnée des “extensions” de $\mathcal{A}$ (comme catégorie des coefficients ponctuels) aux diagrammes $I \in \Dia$, de façon contravariante en $I$. Un coefficient $F$ dans $\DD(I) \defeq \mathcal{A}_I$ est regardé comme “étant” le diagramme $(F_i)_{i\in I}$ correspondant d’objets fondamentaux, avec une donnée supplémentaire de “globalisation”. Les $F_i$, ou “fibres” de $F$ en les $i \in I$, sont les caractéristiques locaux, du coefficient “global sur $I$” $F$. % [sic] caractéristiques locaux -> caractéristiques locales, agreement (feminine)
+
+Tous les dérivateurs connus sont obtenus de la façon standard suivante. On part d’une “catégorie de modèles”
+\[
+\mathcal{M} \quad , \quad \Sigma
+\]
+munie d’un ensemble de flèches, appelées “équivalences”, et satisfaisant aux axiomes pertinents pour le passage à une catégorie des fractions
+\[
+\mathcal{A} = \mathcal{M}\Sigma^{-1}
+\]
+qui sera la “catégorie fondamentale”. On définit pour tout $I$ dans $\Dia$
+\[
+\begin{aligned}
+\mathcal{M}_I &= \uHom(I^\circ,\mathcal{M}) \\
+\Sigma_I &= \{u \in \mathsf{Fl}(\mathcal{M}_I) \mid \forall i \in I, u_i \in \Sigma\} \\
+\mathcal{A}_I &= \mathcal{M}_I\Sigma_I^{-1}
+\end{aligned}
+\]
+
+\noindent\msp{page 13}Il est clair que $\mathcal{A}_I \defeq \DD_{\mathcal{M},\Sigma}(I)$ dépend de $I$ de façon fonctorielle contravariante, et même de façon 2-fonctorielle.
+
+Bien entendu, pour avoir vraiment un dérivateur, il faut vérifier les axiomes. Le plus fort est l’existence des $f_!$, $f_*$. Elle est prouvée par Thomason lorsque $(\mathcal{M},\Sigma)$ provient d’une “catégorie de modèles” au sens de Quillen. Ce n’est pas clair pour moi qu’alors $(\mathcal{M}_I,\Sigma_I)$ provienne également d’une catégorie de modèles (dont par exemple les fibrations \printedpage{11}%
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+et les cofibrations seraient définies à partir de ces données dans $\mathcal{M}$, comme tantôt pour les équivalences).
+
+Quand on prend pour $(\mathcal{M},\Sigma)$ une catégorie de modèles pour $\mathsf{Hot}$ (par exemple les ensembles semi-simpliciaux $\mathcal{M} = \uHom(\bDelta^\circ,\Ens)$, d’où $\mathcal{M}_I \simeq \uHom(\bDelta^\circ \times I^\circ,\Ens) \simeq \uHom(\bDelta^\circ,\underbrace{\uHom(I^\circ,\Ens)}_{\widehat{I}})$, catégorie des objets semi-simpliciaux dans le topos $\widehat{I}$, on trouve une description d’un dérivateur (non additif), qui jouera un rôle particulièrement important. Je le désigne par % ?? uncertain: number of closing parentheses after \Ens -- "))" or ")))"
+\[
+\mathsf{HOT} \quad ,
+\]
+sa catégorie des coefficients fondamentaux est $\mathsf{Hot}$, la catégorie homotopique standard.
+
+\noindent\msp{page 14}La notion de “morphisme de Dérivateurs” est claire, c’est un morphisme entre deux 2-foncteurs stricts
+\[
+\Dia^\circ \longrightarrow \mathcal{C}at
+\]
+Donc
+\[
+u : \DD \longrightarrow \DD'
+\]
+est défini par la donnée, pour tout $I \in \Dia$, de
+\[
+u_I : \DD(I) \longrightarrow \DD'(I)
+\]
+avec commutativité (stricte?) pour $f : I \to J$
+\[
+\begin{tikzcd}
+\DD(J) \arrow[r, "f^*_{\DD}"] \arrow[d, "u_J"'] & \DD(I) \arrow[d, "u_I"] \\
+\DD'(J) \arrow[r, "f^*_{\DD'}"] & \DD'(I)
+\end{tikzcd}
+\quad . \tag*{(1)}
+\]
+On a
+\[
+\begin{tikzcd}[column sep=large]
+\uHom(I,J)^\circ \arrow[r, "\DD_{I,J}"] \arrow[d, "\DD'_{I,J}"'] & \uHom(\DD(J),\DD(I)) \arrow[d, "\phi \mapsto u_I \circ \phi"] \\
+\uHom(\DD'(J),\DD'(I)) \arrow[r, "\psi \mapsto \psi \circ u_J"'] & \uHom(\DD(J),\DD'(I))
+\end{tikzcd}
+\tag*{(2)}
+\]
+et la commutativité de (1) signifie la commutativité de (2) \textit{pour les objets}. Mais bien sûr on la veut aussi pour les flèches, \textit{i.e.} on veut la commutativité du diagramme (2).\footnote[5]{Donner l’exemple de morphisme de dérivateurs défini par un foncteur de catégories de modèles $(\mathcal{M},\Sigma) \to (\mathcal{M}',\Sigma')$.}
+
+Sans doute on veut un peu plus sur les morphismes de dérivateurs - on veut une commutation aux $f_*$ et (?) aux $f_!$ (cette fois seulement à isomorphisme canonique près) \ldots\footnote[6]{Commutation à $f_*$ (resp. $f_!$) morphisme \textit{exact à gauche} (resp. \textit{exact à droite}). Les morphismes \textit{exacts} sont ceux à la fois exacts à gauche et à droite.}
+
+\printedpage{12}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+\noindent\msp{page 15}Par exemple, considérons le dérivateur
+\[
+\mathsf{HOTAB}
+\]
+dont la catégorie fondamentale est $\mathsf{Hotab}$, la sous-catégorie pleine de la catégorie dérivée $\mathsf{Der}(\mathsf{Ab})$ de $\mathsf{Ab}$, formée des complexes à cohomologie nulle en degré $> 0$. On peut décrire $\mathsf{HOTAB}$ par la catégorie de modèles $\uHom(\bDelta^\circ,\mathsf{Ab})$ des groupes abéliens semi-simpliciaux, avec comme équivalences les quasi-isomorphismes au sens habituel. Le “foncteur abélianisation” canonique
+\[
+\mathsf{Hot} \longrightarrow \mathsf{Hotab}
+\]
+se prolonge en un morphisme de dérivateurs
+\[
+\mathsf{HOT} \longrightarrow \mathsf{HOTAB} \quad .
+\]
+La question de sa compatibilité aux $f_*$ ne semble pas tautologique. Elle impliquerait, par exemple, que si
+\[
+\begin{tikzcd}
+X \arrow[d, "f"'] & X' \arrow[l, "g"'] \arrow[d, "f'"] \\
+Y & Y' \arrow[l, "j"]
+\end{tikzcd}
+\]
+est un diagramme cartésien dans $\mathcal{M} = \uHom(\bDelta^\circ,\Ens)$ avec $f$ une fibration (de Thom dans le cadre des espaces topologiques, avec $f$ par exemple fibration localement triviale) alors le diagramme de $\mathsf{Hotab}$
+\[
+\begin{tikzcd}
+\mathbb{R}\Gamma_!(X) \arrow[d] & \mathbb{R}\Gamma_!(X') \arrow[l] \arrow[d] \\
+\mathbb{R}\Gamma_!(Y) & \mathbb{R}\Gamma_!(Y') \arrow[l]
+\end{tikzcd}
+\]
+est $\mathsf{hot}$-cartésien\footnote[7]{C’est faux déjà si $Y$ est l’espace ponctuel : trivialement le $\mathbb{R}\Gamma_!$ ne transforme pas produits en sommes! Ce foncteur est sûrement \texttt{[pas]} “exact à gauche” (comme morphisme de dérivateurs).}. Et de même pour une $\mathsf{hot}$-somme amalgamée (carrée $\mathsf{hot}$-cocartésien dans $\mathsf{Hot}$). % [sic] carrée -> carré, agreement (masculine noun)
+
+\noindent\msp{page 16}Si c’est vrai, et pas connu de plus, ce serait quand même scandaleux!
+
+En procédant comme pour les morphismes de changements de base pour les $Rf_*$, on trouve en tout cas un morphisme canonique, pour $f : I \to J$
+\[
+u_Jf_*^{\DD} \longrightarrow f_*^{\DD'}u_I
+\]
+\printedpage{13}%
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+et de même
+\[
+f_!^{\DD'}u_I \longrightarrow u_Jf_!^{\DD} \quad ,
+\]
+et la question est de savoir si c’est des isomorphismes. Questions analogues pour les $f^!$, pour $f$ immersion fermée (ou pour $f^?$, pour $f$ immersion ouverte). Comme la notion de morphisme de dérivateurs devrait quand même “coller” à la notion bien connue de morphisme (triangulé) de catégories triangulées\footnote[8]{Non! Le cas des catégories triangulées est “misleading”, car pour celles-ci l’exactitude à gauche et à droite revient au même.}, donc être exact en un sens convenable, cela montre bien que l’on doit exiger la commutation d’un morphisme de dérivateurs aux $f_*$ et aux $f_!$.\footnote[9]{N.B. On conçoit qu’un foncteur entre dérivateurs puisse être exact à gauche ou exact à droite ou les deux.} Je devrais demander à Thomason s’il a regardé, pour un morphisme
+\[
+\mathcal{M} \longrightarrow \mathcal{M}'
+\]
+entre catégories de modèles, qui soit disons \textit{exact à gauche}, et “compatible” avec les équivalences, fibrations (et cofibrations (???)).
+
+\noindent\textsc{Notation} : $\mathsf{DER}$ pour la 2-catégorie des \textit{dérivateurs.}
+
+\noindent\msp{page 17}\textbf{Dualité}. Si $\DD$ est un dérivateur, on va définir un dérivateur \textit{dual} $\DD^\circ$ par
+\[
+\DD^\circ(I) \defeq \DD(I^\circ)^\circ \quad .
+\]
+Les coefficients sur $I$ de type $\DD^\circ$ sont les coefficient sur la catégorie opposée $I^\circ$ à $I$ de type $\DD$, et en tant que catégorie c’est la catégorie \textit{opposée} de celle des coefficients de type $\DD$ sur $I^\circ$. Pour définir la loi 2-fonctorielle, on note que pour $I$, $J$ dans $\Dia$ on a % [sic] les coefficient -> les coefficients, plural agreement
+\[
+\begin{tikzcd}[column sep=large]
+\uHom(I,J)^\circ \arrow[r, "\DD_{I,J}"] \arrow[d, "\wr"', "\text{dualité}"] & \uHom(\DD(J),\DD(I)) \arrow[d, "\wr"', "\text{dualité}"] \\
+\uHom(I^\circ,J^\circ) \arrow[r, "\theta"] & \uHom(\DD(J)^\circ,\DD(I)^\circ)^\circ
+\end{tikzcd}
+\quad ,
+\]
+où $\theta$ est l’unique foncteur rendant le diagramme commutatif. Alors $\theta^\circ$est un foncteur
+\[
+\uHom(I^\circ,J^\circ)^\circ \longrightarrow \uHom(\DD(J)^\circ,\DD(I)^\circ) \quad ,
+\]
+c’est ça par définition $\DD^\circ_{I,J}$ \texttt{[plutôt} $\DD^\circ_{I^\circ,J^\circ}$\texttt{]}.
+
+Si $\DD$ est défini par $(\mathcal{M},\Sigma)$, alors $\DD^\circ$ par $(\mathcal{M}^\circ,\Sigma^\circ)$, puisque
+\[
+(\mathcal{M}^\circ)_I \defeq \uHom(I^\circ,\mathcal{M}^\circ) \simeq \uHom(I,\mathcal{M})^\circ \simeq (\mathcal{M}_{I^\circ})^\circ
+\]
+% foot (pages 9--13): Version 8 juillet 2001
+
+% ---- from der1_p016-020.tex
+\printedpage{14}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+et $\Sigma^\circ{}_I$ est déduit de $\Sigma_{I^\circ}$, d'où
+\[
+(\mathcal{M}^\circ)_I(\Sigma^\circ{}_I)^{-1} \simeq (\mathcal{M}_{I^\circ}\Sigma_{I^\circ}^{-1})^\circ = \D(I^\circ)^\circ \quad .
+\]
+
+\msp{page 18}
+
+\textbf{Philosophie.} Chaque fois qu'on a un foncteur
+\[
+\mathcal{A} \xrightarrow{u_0} \mathcal{A}'
+\]
+entre deux catégories qui peuvent s'interpréter naturellement comme les catégories fondamentales de deux dérivateurs $\D$, $\D'$, il se pose la question d'interpréter $u_0$ comme provenant d'un morphisme de dérivateurs
+\[
+\D \xrightarrow{u} \D' \quad .
+\]
+Celui-ci est, en pratique, toujours déterminé canoniquement, à isomorphisme canonique près. (Mais je doute pourtant que le foncteur restriction aux catégories fondamentales
+\[
+\uHom(\D,\D') \longrightarrow \uHom(\mathcal{A},\mathcal{A}')
+\]
+soit pleinement fidèle \dots\ )
+
+On va appliquer cette philosophie aux foncteurs $f^*$, $f_!$, $f_*$ (et éventuellement $f^!$, $f^?$), pour $f : I \to J$, donc pour les foncteurs entre $\D(I)$ et $\D(J)$. Cela nous amène donc à regarder $\D(I)$ et $\D(J)$ comme des catégories fondamentales de dérivateurs convenables.
+
+\textbf{Dérivateur induit} par un dérivateur $\D$, sur une catégorie d'indices $I \in \Dia$. C'est un dérivateur $\D_I$ défini par
+\[
+\D_I(J) = \D(I \times J) \quad .
+\]
+Le foncteur associé à $\D_I$, pour deux catégories $J$, $J' \in \Dia$
+
+\msp{page 19}
+\[
+\uHom(J,J')^\circ \xrightarrow{(\D_I)_{J,J'}} \uHom(\D_I(J'),\D_I(J)) = \uHom(\D(I\times J'),\D(I\times J))
+\]
+est le composé
+\[
+\uHom(J,J')^\circ \longrightarrow \uHom(I\times J, I\times J')^\circ \xrightarrow{\D_{I\times J,I\times J'}} \uHom(\D(I\times J'),\D(I\times J)) \quad ,
+\]
+où la première flèche est le foncteur
+\[
+f \longmapsto \id_I \times f \quad .
+\]
+En d'autres termes, $\D_I$ est le composé
+\[
+\begin{aligned}
+&\Dia^\circ \longrightarrow \Dia^\circ \xrightarrow{\D} \Cat \\
+&J \longmapsto I \times J \qquad .
+\end{aligned}
+\]
+On a
+\[
+f^*_{\D_I} = (\id \times f)^*_{\D} \quad .
+\]
+Si les $f_*$ (resp. les $f_!$) existent pour $\D$, ils existent pour $\D_I$. (De même pour toute espèce de multiadjoints.) Comme $J \mapsto I \times J$ transforme immersion fermée (resp. ouverte) en itou, l'axiome \textbf{Der}$_2$ (plus précisément, chacun de ces ingrédients, \textit{cf.} annotations marginales p.~7) est stable par passage de $\D$ à $\D_I$ . De même pour \textbf{Der}$_3$. (Pour chaque nouvel axiome qu'on dégagera, il faudra vérifier la stabilité.)
+
+\printedpage{15}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 20}
+
+Soit
+\[
+f : I \longrightarrow I' \quad .
+\]
+Considérons entre $\D(I)$, $\D(I')$ les foncteurs
+\[
+\begin{tikzcd}[column sep=huge]
+\D(I) \arrow[r, shift left=3ex, "f_!"] \arrow[r, shift right=3ex, "f_*"'] & \D(I') \arrow[l, "f^*"']
+\end{tikzcd}
+\]
+(sous réserve d'existence des $f_*$ resp. $f_!$). Peut on les interpréter en termes de morphismes de dérivateurs
+\[
+\begin{tikzcd}[column sep=huge]
+\D_I \arrow[r, shift left=3ex, "\overline{f_!}"] \arrow[r, shift right=3ex, "\overline{f_*}"'] & \D_{I'} \arrow[l, "\overline{f^*}"']
+\end{tikzcd}
+\qquad ?
+\]
+Donc il faut définir, pour $J$ dans $\Dia$, des foncteurs correspondants entre $\D_I(J)$ et $\D_{I'}(J)$, \textit{i.e.} entre $\D(I \times J)$ et $\D(I' \times J)$. Or on a bien
+\[
+f \times \id_J : I \times J \longrightarrow I' \times J
+\]
+et on posera (sous réserve d'existence des deux derniers)
+\[
+\left\{
+\begin{aligned}
+&\overline{f^*}(J) = (f \times \id_J)^*_{\D} \\[1ex]
+&\overline{f_!}(J) = (f \times \id_J)^{\D}_! \\[1ex]
+&\overline{f_*}(J) = (f \times \id_J)^{\D}_* \quad .
+\end{aligned}
+\right.
+\]
+
+\msp{page 21}
+
+Autrement dit, on peut considérer
+\[
+\Dia \ni I \longmapsto \D_I \quad , \qquad \D \in \DER \quad ,
+\]
+comme fonctoriel en $I$ de trois façons (une contravariante, les deux autres covariantes), suivant qu'on utilise les $f^*$, les $f_!$ (s'ils existent) ou les $f_*$ (s'ils existent). On désignera par
+\[
+f^{\D}_! \quad , \qquad f^*_{\D} \quad , \qquad f^{\D}_*
+\]
+indifféremment les foncteurs entre $\D(I)$ et $\D(I')$ ou (de façon plus fine) entre $\D_I$ et $\D_{I'}$, dont les précédents se déduisent en passant aux catégories fondamentales correspondantes. De même pour $f^!$ ou pour $f^?$ sous réserve d'existence. Par exemple, si on suppose que les $f^!$ existent pour $\D$, quel que soit $f$ immersion fermée, alors on trouve pour un tel $f$ un morphisme de dérivateurs
+\[
+\D_I \xleftarrow{f^!_{\D}} \D_{I'} \quad .
+\]
+Il s'impose de regarder si tous ces morphismes de dérivateurs sont exacts, \textit{i.e.} si pour
+\[
+g : J \longrightarrow J'
+\]
+dans $\Dia$, ils commutent à $g_!$, $g_*$.
+
+\printedpage{16}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 22 vide}
+
+\msp{page 23}
+
+Pour expliciter cette question, on est amenés à regarder le diagramme de catégories
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+I \times J \arrow[r, "G = \id_I \times g"] \arrow[d, "F = f \times \id_J"'] & I \times J' \arrow[d, "F' = f \times \id_{J'}"] \\
+I' \times J \arrow[r, "G' = \id_{I'} \times g"] & I' \times J'
+\end{tikzcd}
+\qquad ,
+\]
+qui est d'ailleurs un carré cartésien dans $\Cat$. La commutativité de $f^*_{\D}$ aux $g_*$ s'explicite alors par la commutativité dans
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+\D(I \times J) \arrow[r, "G_*", ""{name=T, below, near end}] & \D(I \times J') \\
+\D(I' \times J) \arrow[u, "F^*"] \arrow[r, "G'_*"] & \D(I' \times J') \arrow[u, "{F'}^*"', ""{name=R, left}]
+\arrow[dashed, from=R, to=T, "\text{iso?}"]
+\end{tikzcd}
+\qquad .
+\]
+Cette commutativité sera assurée par des axiomes ultérieures sur les dérivateurs. (cf. plus % [sic] ultérieures -> ultérieurs, accord avec « axiomes »
+bas page 59). Ainsi, $f^*_{\D}$ est exact à droite \texttt{[plutôt à gauche]}, et dualement, il doit être aussi exact à gauche \texttt{[plutôt à droite]}. Donc $f^*_D : \D_{I'} \to \D_I$ est \textit{exact.} Considérons $f^{\D}_*$, % [sic] f^*_D -> f^*_{\mathbb{D}}, indice imprimé en D italique au lieu de \mathbb{D}
+cette fois c'est la commutativité de
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+\D(I \times J) \arrow[r, "G_*"] \arrow[d, "F_*"'] & \D(I \times J') \arrow[d, "F'_*"] \\
+\D(I' \times J) \arrow[r, "G'_*"] & \D(I' \times J')
+\end{tikzcd}
+\qquad ,
+\]
+c'est trivial (à isomorphisme canonique près). Ainsi, on
+\msp{page 24}
+trouve que $f^{\D}_* : \D_I \to \D_{I'}$ est \textit{exact à gauche}, et dualement $f^{\D}_!$ est \textit{exact à droite.} Mais est-ce que $f^{\D}_*$ est aussi exact à \textit{droite}? Cela signifie donc commutativité de
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge]
+\D(I \times J) \arrow[r, "G_!"] \arrow[d, "F_*"'] & \D(I \times J') \arrow[d, "F'_*", ""{name=R2, left}] \\
+\D(I' \times J) \arrow[r, "G'_!", ""{name=B, above, near end}] & \D(I' \times J')
+\arrow[dashed, from=B, to=R2]
+\end{tikzcd}
+\qquad .
+\]
+
+\printedpage{17}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+On arrive bien à définir
+\[
+G'_!F_* \xrightarrow{?} F'_*G_!
+\]
+ou ce qui revient au même par adjonction
+\[
+F_* \xrightarrow{?} {G'}^*F'_*G_!
+\]
+en utilisant le morphisme de changement de base
+\[
+{G'}^*F'_* \xrightarrow{\overset{\alpha}{\sim}} F_*G^*
+\]
+qui est \texttt{[un]} \textit{isomorphisme} (on l'a vu), d'où
+\[
+\begin{tikzcd}[column sep=large, row sep=normal]
+& {G'}^*F'_*G_! \arrow[dd, "\wr"', "\alpha * G_!"] \\
+F_* \arrow[ur, "?"] \arrow[dr, "F_* * \beta"'] & \\
+& F_*G^*G_!
+\end{tikzcd}
+\]
+où $\beta : \id \to G^*G_!$ est le morphisme d'adjonction, d'où le morphisme voulu. (On peut aussi chercher ${F'}^*(G'_!F_*) \to G_!$, et utiliser la commutation $G_!F^* \overset{\sim}{\to} {F'}^*G'_!$, \textit{i.e.} l'exactitude à \textit{droite} de $f^*_{\D}$.)
+
+\msp{page 25}
+
+Mais ce morphisme est-il un isomorphisme? Je pense que dans le cas additif ça peut être raisonnable, mais dans le cas non additif ça n'a aucune raison d'être vrai. On voit en tout cas que si pour tout $f : I \to I'$ dans $\Dia$, $f^{\D}_* : \D_I \to \D_{I'}$ est (non seulement exact à gauche mais aussi) exact à droite, alors pour tout $g : J \to J'$ dans $\Dia$, $g^{\D}_!$ est (non seulement exact à droite mais même) exacte à gauche. % [sic] exacte -> exact, accord avec « $g^{\D}_!$ est (non seulement exact\dots) »
+
+Prenons le dérivateur des préfaisceaux d'ensembles sur des $I$ variables, sa catégorie fondamentale est $\Ens$. C'est un dérivateur non ponctué. Considérons $I \to I'$ une immersion fermée non surjective, $f_* : \D(I) \to \D(I')$. Si $f^{\D}_*$ était exact à droite $f_*$ devrait transformer objet initial de $\D(I)$ en objet initial de $\D(I')$, sauf erreur (\textit{cf.} plus bas). Or il n'en est rien, puisque pour tout $F \in \sIm\bigl(f^{\D}_* : \D(I) \to \D(I')\bigr)$ la restriction de $F$ à $I' \setminus I$ est le faisceau final $e_U = (i \mapsto e)$, et non le faisceau initial $\emptyset_U = (i \mapsto \emptyset)$.
+
+On va prouver ceci :
+
+\textbf{Proposition.} \textit{Si $\D$ est un dérivateur à gauche (à droite), alors les produits finis (sommes finies) existent dans les $\D(I)$. Tout morphisme $\varphi : \D \to \D'$ de dérivateurs qui est exact à gauche (à droite) commute aux dits produits (sommes), chaque $I$ donnant $\varphi(I) : \D(I) \to \D'(I)$. En particulier, il transforme objet final (initial) en itou.}
+
+\printedpage{18}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 26}
+
+Dire que les produits finis indexés par l'ensemble fini $I$ existent dans la catégorie $\mathcal{A} = \D(e)$ (disons) équivaut à dire que le foncteur diagonal
+\[
+\mathcal{A} \xrightarrow{\Delta} \mathcal{A}^I
+\]
+admet un adjoint à gauche. Or si
+\[
+f : I \to e
+\]
+est la projection de $I$ (considéré comme ensemble ordonné discret) sur l'ensemble ordonné ponctuel $e$, le foncteur $\Delta$ s'identifie à $f^* : \D(e) \to \D(I)$ (grâce à l'axiome \textbf{Der}$_2$ sur le comportement du dérivateur pour une somme discrète de catégories d'indices). Donc l'existence du produit revient à celle de l'adjoint à droite $f_*$ de $f^*$, OK pour dérivateur à gauche. Et un homomorphisme exact à gauche de dérivateurs à gauche, comme il commute aux $f_*$, commute aux produits finis. Itou pour les sommes finies, et les dérivateurs à droite.
+
+L'exemple précédent utilise le fait que le dérivateur envisagé n'est pas ponctué. Mais même pour un dérivateur ponctué $\D$, un morphisme $f^{\D}_* : \D_I \to \D_{I'}$ n'est pas forcément exact à droite. Si on prend le dérivateur associé à une catégorie $\mathcal{M}$ quelconque (avec $\Sigma = \emptyset$),
+\[
+\D_{\mathcal{M}}(I) = \uHom(I^\circ,\mathcal{M}) \overset{\text{déf}}{=} \mathcal{M}(I)
+\]
+alors le dérivateur induit
+\[
+(\D_{\mathcal{M}})_I = \{J \mapsto \D_{\mathcal{M}}(I \times J) = \uHom((I \times J)^\circ,\mathcal{M}) \simeq \uHom(J^\circ,\uHom(I^\circ,\mathcal{M}))\}
+\]
+
+\msp{page 27}
+
+s'identifie à
+\[
+\D_{\uHom(I^\circ,\mathcal{M})} = \D_{\mathcal{M}(I)}
+\]
+\textit{i.e.}
+\[
+(\D_{\mathcal{M}})_I = \D_{\mathcal{M}(I)}
+\]
+N.B. Ici $\mathcal{M}$ et $\D_{\mathcal{M}}$ se déterminent mutuellement et le foncteur
+\[
+\mathcal{M} \longmapsto \D_{\mathcal{M}}
+\]
+\[
+\Cat \longrightarrow \DER
+\]
+est 2-fidèle, \textit{i.e.} si $\mathcal{M}$, $\mathcal{M}'$ sont deux catégories
+\[
+\uHom(\mathcal{M},\mathcal{M}') \xrightarrow{\simeq} \sHom(\D_{\mathcal{M}},\D_{\mathcal{M}'})
+\]
+est une équivalence de catégories. D'autre part, on vérifie tout de suite que $u : \mathcal{M} \to \mathcal{M}'$ est exact à gauche (ou à droite) si et seulement si $\D_u : \D_{\mathcal{M}} \to \D_{\mathcal{M}'}$ l'est.
+
+Ainsi, pour voir si un morphisme de dérivateurs de la forme
+\[
+\begin{tikzcd}[column sep=large, row sep=normal]
+f^{\D}_* : &[-2.5em] (\D_{\mathcal{M}})_I \arrow[r] \arrow[d, equal] & (\D_{\mathcal{M}})_{I'} \arrow[d, equal] \\
+& \D_{\mathcal{M}(I)} & \D_{\mathcal{M}(I')}
+\end{tikzcd}
+\]
+est exact à \textit{droite,} il revient au même de dire
+
+% ---- from der1_p021-025.tex
+\printedpage{19}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 28}
+que le foncteur pour les catégories fondamentales associées
+\[ \mathcal{M}(I) \xrightarrow{f^{\mathcal{M}}_*} \mathcal{M}(I') \]
+est exact à droite. Or ici c'est un foncteur image directe de préfaisceaux ordinaires, et ce foncteur n'a aucune envie d'être exact à \textit{droite.} (Même si $\mathcal{M}$ est \textit{abélienne}, d'ailleurs!) Prenons par exemple pour $f : I \hookrightarrow I'$ une immersion ouverte avec $I' = \boldsymbol{\Delta}_1 \times \boldsymbol{\Delta}_1$, $I = I' - \{c\}$, $c$ objet final de $I'$
+\[
+I' = \begin{tikzcd}
+c & b \arrow[l] \\
+a \arrow[u] & 0 \arrow[l] \arrow[u]
+\end{tikzcd}
+\qquad\qquad
+I = \begin{tikzcd}
+ & b \\
+a & 0 \arrow[l] \arrow[u]
+\end{tikzcd}
+\]
+Le foncteur $f_*$ est celui qui associe à un diagramme
+\[
+F = \left\{
+\begin{tikzcd}
+ & F_b \arrow[d] \\
+F_a \arrow[r] & F_0
+\end{tikzcd}
+\right\}
+\]
+le carré cartésien complété
+\[
+\overline{F} = \left\{
+\begin{tikzcd}
+F_a \times_{F_0} F_b \arrow[r] \arrow[d] & F_b \arrow[d, "\beta"] \\
+F_a \arrow[r, "\alpha"] & F_0
+\end{tikzcd}
+\right\}
+\]
+Or si $F \mapsto \overline{F}$ était exact à droite, $F \mapsto F_a \times_{F_0} F_b$ le serait aussi. Or $F_a \times_{F_0} F_b = K(F) = \mathsf{Ker}(F_a \times F_b \xrightarrow{\alpha pr_1 - \beta pr_2} F_0)$, en tant que foncteur additif en $F$, n'est pas exact à droite, par exemple il ne transforme pas nécessairement épimorphisme en épimorphisme. Prenons par exemple
+\[
+F' = \left\{
+\begin{tikzcd}
+ & F_b \arrow[d] \\
+F_a \arrow[r] & 0
+\end{tikzcd}
+\right\}
+\]
+et l'homomorphisme évident $F \to F'$ qui est l'identité sur
+\msp{page 29}
+$F_a$ et sur $F_b$. C'est un épimorphisme et l'homomorphisme correspondant $\overline{F} \to \overline{F'}$ est l'inclusion
+\[ F_a \times_{F_0} F_b \longrightarrow F_a \times F_b \]
+qui n'est un épimorphisme que si $\alpha = \beta = 0$.
+
+\printedpage{20}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\textbf{Perplexité} : On devrait pouvoir définir une notion de dérivateur (additif) “\textit{triangulé}” (qui correspondrait à l'intuition des catégories triangulées; c'est un dérivateur satisfaisant à des axiomes assez forts), de sorte que pour les morphismes entre ceux-ci l'exactitude à gauche et l'exactitude à droite soient \textit{équivalentes.}
+
+\textbf{“Théorème de changement de base”} pour dérivateurs. Soit $\DD$ dérivateur à gauche (existence de $f_*$) et considérons
+\[ f : I \longrightarrow J \qquad \text{dans } \sDia \quad , \]
+soit $j_0 \in \sOb\ J$, on se propose de “calculer” le foncteur
+\[ F \mapsto f_*(F)_{j_0} = \alpha^*_{j_0}(f_*(F)) \quad , \]
+où
+\[ \alpha_{j_0} : e \longrightarrow J \]
+est l'inclusion de la catégorie ponctuelle $e$ dans $J$, de valeur $j_0$.
+
+\msp{page 30}
+Considérons le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+I/j_0 \arrow[r, "q"] \arrow[d, "f'"'] & I \arrow[d, "f"] \\
+e \arrow[r, "p = \alpha_{j_0}"'] & J
+\arrow[from=1-2, to=2-1, dashed, shorten <=14pt, shorten >=14pt, "\gamma"']
+\end{tikzcd}
+\quad ,
+\tag*{(1)}
+\]
+où $I/j_0$ est la catégorie $I \times_J J/j_0$ des couples
+\[ \{(i,\varphi) \mid i \in \sOb\ I,\ \varphi : f(i) \to j_0\} \]
+et $q$ est le foncteur $(i,\varphi) \mapsto i$. Ce diagramme n'est pas commutatif, mais il y a un foncteur \texttt{[plutôt morphisme de foncteurs]} canonique
+\[ fq \xrightarrow{\gamma} pf' \quad , \]
+où $fq$ est le foncteur $(i,\varphi) \mapsto f(i)$ et $pf'$ le foncteur constant $(i,\varphi) \mapsto j_0$ et où $\gamma(i,\varphi) : f(i) \to j_0$ est défini par $\gamma(i,\varphi) = \varphi$.
+
+Plus généralement, considérons un diagramme dans $\sDia$
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+I' \arrow[r, "q"] \arrow[d, "f'"'] & I \arrow[d, "f"] \\
+J' \arrow[r, "p"'] & J
+\arrow[from=1-2, to=2-1, dashed, shorten <=14pt, shorten >=14pt, "\gamma"']
+\end{tikzcd}
+\quad ,
+\tag*{(2)}
+\]
+\printedpage{21}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+avec $\gamma : fq \to pf'$. On définit alors un \textit{morphisme de changement de base pour les images directes} relatif à ce diagramme
+\[ p^* f_* \xrightarrow{c_\gamma} f'_* q^* \]
+\msp{page 31}
+de deux façons, qui donnent le même résultat (histoire générale de foncteurs adjoints à expliciter une bonne fois, en termes d'un diagramme de foncteurs
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X' & X \arrow[l, "q^*"'] \\
+Y' \arrow[u, "{f'}^*"] & Y \arrow[l, "p^*"'] \arrow[u, "f^*"']
+\arrow[from=2-1, to=1-2, dashed, shorten <=14pt, shorten >=6pt]
+\end{tikzcd}
+\]
+en supposant que les foncteurs adjoints à gauche $f'_*$, $f_*$ des deux foncteurs verticaux existent). Un cas intéressant est celui où
+\[ pf' = fq \quad , \qquad \gamma = \sid_{fq} \]
+et où on pose $c_\gamma = c$.
+
+Ici
+\[ p^* f_* \xrightarrow{?} f'_* q^* \]
+revient à
+\[
+\begin{tikzcd}[column sep=small]
+f_* \arrow[r, "?"] & p_* f'_* q^* \simeq & (pf')_* q^* \\
+ & & (fq)_* q^* \simeq (f_* q_*) q^* = f_*(q_* q^*) \quad . \arrow[u, "\gamma_* * q^*"']
+\end{tikzcd}
+\]
+Or on a
+\[ \sid \xrightarrow{\alpha} q_* q^* \qquad\qquad \text{(adjonction)} \quad , \]
+d'où
+\[ f_* \xrightarrow{f_* * \alpha} f_*(q_* q^*) \]
+et en composant avec $\gamma * q^*$, on trouve ce qu'on veut. Et on peut au lieu de ceci chercher
+\[
+\begin{tikzcd}
+{f'}^*(p^* f_*) \arrow[r, "?"] \arrow[d, equal] & q^* \\
+(pf')^* f_* \arrow[d, "\gamma^* * f_*"] & \\
+(fq)^* f_* \simeq q^*(f^* f_*) \arrow[r, "q^* * \gamma'"] & q^*
+\end{tikzcd}
+\quad ,
+\]
+où $\gamma' : f^* f_* \to \sid$ est l'adjonction.
+
+\printedpage{22}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 32}
+\textbf{Der}$_4$ : Le morphisme de changement de base pour images directes $f_*$ associé à un diagramme (1) est toujours un isomorphisme (dérivateurs à gauche). Condition duale pour dérivateurs à droite et le changement de base pour images directes $f_!$, pour le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+j_0 \backslash I \arrow[r] \arrow[d] & I \arrow[d, "f"] \\
+e \arrow[r, "p = \alpha_{j_0}"'] & J
+\arrow[from=2-1, to=1-2, dashed, shorten <=22pt, shorten >=8pt, "\gamma"]
+\end{tikzcd}
+\tag*{(1$'$)}
+\]
+associé à $f : I \to J$ dans $\sDia$, et $j_0 \in \sOb\ J$.
+
+\textbf{Der}$_5$\footnote[10]{\underline{Totalement} canulé, devient raisonnable que pour coefficients constants sur $F$.} : Soit $f : I \to J$ une \textit{hot-équivalence stricte, i.e.} $\forall j_0 \in \sOb\ J$, $I/j_0$ est contractile. Alors $f^*$ est pleinement fidèle, \textit{i.e.} le morphisme d'adjonction
+\[ \sid_{\DD(J)} \longrightarrow f_* f^* \]
+est un isomorphisme ($\DD$ dérivateur à gauche). Dualement, si $f$ est une équivalence co-stricte, \textit{i.e.} $f^\circ : I^\circ \to J^\circ$ est une équivalence stricte, \textit{i.e.} $\forall j_0 \in \sOb\ J$, $j_0 \backslash I$ est contractile, alors (si $\DD$ est un dérivateur à droite) le foncteur $f^*$ est pleinement fidèle, \textit{i.e.} le morphisme d'adjonction % ?? uncertain: hyphen at line end "co-" -- "co-stricte" or "costricte"
+\[ f_! f^* \longrightarrow \sid_{\DD(J)} \]
+est un isomorphisme.
+
+N.B. Donc les foncteurs $f_*$ (resp. $f_!$) sont des foncteurs de localisation.
+
+\textbf{N.B.} Les pages 33 à 40 ont été suprimées, car canulées. % [sic] suprimées -> supprimées, spelling
+
+\msp{page 41}
+Je vais reprendre la terminologie et les axiomes relatifs aux dérivateurs.
+
+Un \textit{prédérivateur} est un 2-foncteur
+\[ \sDia^\circ \xrightarrow{\DD} \mathcal{C}at \quad , \]
+où $\sDia$ est une 2-sous-catégorie pleine de $\mathcal{C}at$.\footnote[11]{$\sDia$ \textit{domaine} du dérivateur. Les objets sont les \textit{catégories d'indices} pour $\DD$. Les $\DD(I)$ sont les catégories de coefficients pour $\DD$, les objets de $\DD(I)$ les “coeficients de type $\DD$ sur $I$”. % [sic] coeficients -> coefficients, spelling
+} On suppose tout au moins que $\sDia$ contient les \textit{ensembles ordonnés finis,} que $\sDia$ est stable par $\varprojlim$ finies, par sommes finies. Qu'avec toute catégorie $C$ et toute sous-catégorie strictement pleine ouverte (resp. fermée) elle contienne la sous-catégorie complémentaire.\footnote[12]{Notation $f^*$ : image inverse des coefficients.}
+
+\printedpage{23}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 42}
+On définit le prédérivateur $\DD_{\mathcal{M},\Sigma}$ associé à un système
+\[ (\mathcal{M},\Sigma) \qquad\qquad \mathcal{M} \text{ Catégorie,} \quad \Sigma \subset \mathsf{Fl}(\mathcal{M}) \quad . \] % ?? uncertain: "Fl" -- "Fl" or "FI"
+Si $\Sigma = \emptyset$, on écrit $\DD_{\mathcal{M}}$.
+
+Les prédérivateurs forment une 2- catégorie $\mathsf{PREDER}$, et
+\[ (\mathcal{M},\Sigma) \longmapsto \DD_{\mathcal{M},\Sigma} \]
+est un 2-foncteur
+\[ \mathsf{PREMOD}
+\begin{pmatrix}
+\text{“Catégorie des catégories} \\
+\text{de modèles” (faibles)}
+\end{pmatrix}
+\longrightarrow \mathsf{PREDER} \quad . \]
+Pour $\DD$ donné, on définit le dérivateur induit ($I \in \sDia$)
+\[ \DD_I = \big(J \longmapsto \DD(I \times J)\big) \quad , \]
+dépendant de $I$ de façon contravariante, d'où un 2-foncteur
+\[ \begin{aligned}
+\sDia^\circ &\longrightarrow \mathsf{PREDER} \\
+I &\longmapsto \DD_I
+\end{aligned} \]
+ou encore un bi-2-foncteur
+\[ \begin{aligned}
+\mathsf{PREDER} \times \sDia^\circ &\longrightarrow \mathsf{PREDER} \\
+(\DD, I) &\longmapsto \DD_I \quad .
+\end{aligned} \]
+Si $\DD$ est défini par $(\mathcal{M},\Sigma)$, alors $\DD_I$ est défini par $(\mathcal{M}(I),\Sigma(I))$ :
+\[ (\DD_{\mathcal{M},\Sigma})_I \simeq \DD_{\mathcal{M}(I),\Sigma(I)} \quad , \]
+\msp{page 43}
+où $\mathcal{M}(I) = \underline{\mathsf{Hom}}(I^\circ,\mathcal{M})$ (préfaisceaux sur $I$ à valeurs dans $\mathcal{M}$), et $\Sigma(I) \subset \mathsf{Fl}\ \mathcal{M}(I)$ est déduit de $\Sigma$ en regardant fibre par fibre (supposant maintenant $\Sigma$ saturé). % ?? uncertain: "Fl" -- "Fl" or "FI"
+
+Pour tous axiomes qu'on dégagera pour certains prédérivateurs, il faudra vérifier qu'il sont stables par passage aux prédérivateurs induits $\DD_I$, et aussi comment ils se comportent par dualité (passage de $\DD$ à $\DD^\circ$). % [sic] qu'il sont -> qu'ils sont, agreement
+
+Définition du prédérivateur dual $\DD^\circ$
+\[ \DD^\circ(I) \overset{\text{déf}}{=} \DD(I^\circ)^\circ \qquad\qquad \textit{etc.} \]
+\textbf{Der 1} (Premier axiome de localisation) : \textit{a}) Si $I$, $J \in \sDia$, alors
+\[ \DD(I \amalg J) \longrightarrow \DD(I) \times \DD(J) \]
+est une équivalence de catégories.
+
+\textit{b}) $\DD(\emptyset)$ est la catégorie finale.
+
+Stable par passage aux prédérivateurs induits, et passage au dual.
+
+\textbf{Corollaire.} \textit{Soit} $(I_\alpha)_{\alpha \in A}$ \texttt{[une]} \textit{famille finie de catégories de} $\sDia$, $I = \coprod\limits_{\alpha \in A} I_\alpha$. \textit{Alors}
+\[ \DD(I) \longrightarrow \prod_{\alpha \in A} \DD(I_\alpha) \]
+\textit{est une équivalence de catégories.}
+
+% ---- from der1_p026-030.tex
+\printedpage{24}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Der 2} (Deuxième axiome de localisation) : Pour tout $I \in \Dia$, le foncteur canonique
+\[ \D(I) \longrightarrow \underline{\mathsf{Hom}}(I^{\circ}, \mathcal{A}_{\D}) \quad , \]
+$\mathcal{A}_{\D} = \D(e)$ catégorie fondamentale pour le dérivateur $\D$, est conservatif.\\
+Stable par induction, et par dualité.
+
+\noindent\msp{page 44}\texttt{[page 44]}
+
+\noindent Un prédérivateur est appelé un \textit{dérivateur à gauche} s'il satisfait \textbf{Der 1} et \textbf{Der 2}, et de plus les axiomes suivants (dont voici le premier).
+
+\noindent\textbf{Der 3} (g) (Existence des images directes) : Pour tout $f : I \to J$ dans $\Dia$, le foncteur $f^{*} : \D(J) \to \D(I)$ admet un \textit{adjoint à droite} $f_{*}$\,.\\
+Stable par induction.
+
+On appelle $f_{*}$ le foncteur image directe (cohomologique) pour $f$. L'objet $f_{*}(F) \in \D(J)$ (pour $F \in \D(I)$) s'appelle aussi l'objet de “\textit{cohomologie relative}” de $I$ sur $J$ (par $f$), à coefficients dans $F$. On a des isomorphismes canoniques
+\[ (gf)_{*} \simeq g_{*} f_{*} \quad . \]
+
+\noindent\textbf{Corollaire.} \textit{Les catégories $\D(I)$ ont des produits finis, les foncteurs $f^{*}$ et $f_{*}$ y commutent.}
+
+Utilise \textbf{Der 1} pour $I = \emptyset$ et $I = e \amalg e$, et \textbf{Der 3} pour $I \xrightarrow{f} e$.
+
+On a un axiome dual :
+
+\noindent\textbf{Der 3} (d) : existence des adjoints à gauche $f_{!}$ des $f^{*}$, le foncteur $f_{!}$ s'appelle “image directe homologique” par $f$, et on a une notion d'\textit{homologie relative} de $I$ sur $J$ (pour $f$), à coefficients dans $F$.
+
+Par la suite, la mention (g) ou (d) à coté de la désignation \textbf{Der} $n$ d'un axiome, % [sic] coté -> côté, missing circumflex
+signifie qu'il s'applique aux dérivateurs à gauche, respectivement à droite. De même pour les énoncés, définitions \textit{etc.}
+
+\noindent\msp{page 45}\texttt{[page 45]}
+
+\noindent\textbf{Der 4}$_{0}$ (g)\footnote[13]{Inutile comme axiome, va devenir un théorème (résulte des autres axiomes).} : Soit $U \overset{j}{\hookrightarrow} X \overset{i}{\hookleftarrow} Y$ dans $\Dia$, immersions ouverte et fermée complémentaires l'une de l'autre. Alors le morphisme d'adjonction dans $\D(Y)$
+\[ i^{*} i_{*}(F_{Y}) \longrightarrow F_{Y} \]
+est un isomorphisme, donc
+\[ i_{*} : \D(Y) \longrightarrow \D(X) \]
+est pleinement fidèle, et $i^{*} : \D(X) \to \D(Y)$ est un foncteur de localisation. L'image essentielle de $i_{*}$ est formée des objets $F$ de $\D(X)$ tels que $j^{*}(F)$ soit l'objet final de $\D(U)$.
+
+% foot: Version 8 juillet 2001
+
+\printedpage{25}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Der 4}$_{0}$ (d) : Avec les notations précédentes pour $i$, $j$, le morphisme d'adjonction dans $\D(U)$
+\[ F_{U} \longrightarrow j^{*} j_{!} F_{U} \]
+est un isomorphisme, - $j_{!}$ est pleinement fidèle, $j^{*}$ un foncteur de localisation. L'image essentielle de $j_{!}$ est la sous-catégorie pleine de $\D(X)$ formée des $F$ tels que $i^{*}(F)$ soit objet initial de $\D(Y)$.
+
+Il y a les deux carrés de la page 8 et 9, mais pour interpréter la condition cartésienne ou cocartésienne c'est prématuré ici.
+
+\noindent\msp{page 46}\texttt{[page 46]}
+
+\noindent Axiomes de changement de base.
+
+\noindent\textbf{Der 4} (g) (Fibres d'une image directe) : Soient $f : X \to Y$ dans $\Dia$, $y \in Y$, considérons le diagramme connu
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X/y \arrow[r, "q"] \arrow[d, "f'"'] & X \arrow[d, "f"] \\
+e \arrow[r, "p = \alpha_{y}"'] & Y
+\end{tikzcd}
+\]
+et le morphisme de changement de base correspondant
+\[ f_{*}(F)_{y} \overset{\text{déf}}{=} p^{*} f_{*}(F) \longrightarrow f'_{*}(q^{*}(F))\bigl(\overset{\text{déf}}{=} \Gamma_{\D}(X/y, q^{*}(F))\bigr) \quad . \]
+
+\noindent C'est toujours un isomorphisme.
+
+\noindent\msp{page 47}\texttt{[page 47]}
+
+\noindent\textbf{Der 5} (g) (Axiome de cofinalité pour la cohomologie)\footnote[14]{Il est conséquence d'énoncés plus faibles.} : Soit $\alpha : X' \to X$ dans $\Dia$ “cohomologiquement cofinal” \textit{i.e.} les $x\backslash X'$ sont contractiles ($x \in X$) \textit{i.e.} $\alpha^{\circ} : {X'}^{\circ} \to X^{\circ}$ est une hot-équivalence “localement sur $X^{\circ}$\,”. Alors $\forall F \in \D(X)$, l'homomorphisme
+\[ \Gamma_{\D}(X, F) \longrightarrow \Gamma_{\D}(X', \alpha^{*} F) \]
+est un isomorphisme (dans $\mathcal{A} = \D(e)$).
+
+\noindent N.B. Si $f : X \to e$, on pose $\Gamma_{\D}(X, F) = f_{*}(F)$ (cohomologie “absolue” de $X$, à coefficients dans $F$).
+
+\noindent Même chose\footnote[15]{Faux!} si $\alpha$ est “homologiquement cofinal”, i.e. les $X'/x$ sont contractiles \texttt{[phrase barrée]}.
+
+% foot: Version 8 juillet 2001
+
+\printedpage{26}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\textbf{Remarque.} On devrait pouvoir renforcer considérablement cet axiome, en exigeant que
+\[ \alpha_{!}(\varepsilon_{X'}) \xrightarrow{\sim} \varepsilon_{X} \qquad\qquad \text{dans} \quad \HOT(X) \quad , \]
+où $\varepsilon_{X'}$, $\varepsilon_{X}$ \texttt{[sont]} les objets finaux de $\HOT(X')$, $\HOT(X)$, et où $\alpha_{!}(\varepsilon_{X'}) \to \varepsilon_{X}$ est l'homomorphisme d'adjonction, compte tenu que $\varepsilon_{X'} \simeq \alpha^{*}(\varepsilon_{X})$. On dit que $X'$ est \textit{homotopiquement trivial sur $X$}. (Et si la condition duale est satisfaite dans $\HOT(X^{\circ})$, on dit que $X'$ est cohomotopiquement trivial sur $X$.) Cette condition n'est sans doute \underline{pas} autoduale. Elle est vérifiée aussi bien si $\alpha$ est cohomologiquement cofinal, que s'il est homologiquement cofinal (hot-équivalence costricte ou stricte).
+
+\noindent N.B. Pour $f : X \to e$, dire que $f$ est cohomologiquement cofinal, homologiquement cofinal, ou que $X$ est contractile, est équivalent.
+
+\noindent\textbf{Corollaire 1} (g) (Théorème d'asphéricité pour les coefficients constants en cohomologie). \textit{Soit $f : X \to e$ dans} $\Dia$\textit{, $X$ contractile, $M \in \D(e)$. Alors l'homomorphisme d'adjonction}
+\[ M \xrightarrow{\sim} f_{*} f^{*}(M) \quad \bigl(\overset{\text{déf}}{=} \Gamma(X, f^{*}(M))\bigr) \]
+\textit{est un isomorphisme.}
+
+\noindent\textbf{Corollaire 2} (g)\footnote[16]{\underline{Faux}, sauf pour coefficients constants.} \textit{Soit $f : X \to Y$} \texttt{[une]} \textit{hot-équivalence stricte (i.e. $\forall y \in Y$, $X/y$ contractile). Alors pour $F \in \Ob\,\D(Y)$}
+\[ F \overset{\text{adj}}{\xrightarrow{\sim}} f_{*} f^{*} F \]
+\texttt{[est un]} \textit{isomorphisme.} \texttt{[Ce corollaire est barré, mais pas sa démonstration.]}
+
+\noindent\msp{page 48}\texttt{[page 48]}
+
+\noindent On applique \textbf{Der 2}, \textbf{Der 4} (g), pour se ramener à regarder, pour $y_{0} \in Y$, l'homomorphisme $\alpha$ du diagramme (commutatif!) suivant :
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+\Gamma(\{y_{0}\}, F_{y_{0}}) = F_{y_{0}} \arrow[r, "\alpha"] & \Gamma_{\D}(X/y_{0}, f^{*}(F)) \\
+\Gamma(Y/y_{0}, F) \arrow[u, "\varphi\,\wr"] \arrow[ur, "\alpha'"'] &
+\end{tikzcd}
+\quad ,
+\]
+où $\alpha'$ est déduit du foncteur induit par $f$
+\[ X/y_{0} \longrightarrow Y/y_{0} \]
+et où $\varphi$ est déduit du foncteur
+\[ \{y_{0}\} \longrightarrow Y/y_{0} \qquad \text{(objet final)}\,. \]
+
+% foot: Version 8 juillet 2001
+
+\printedpage{27}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\noindent Donc $\varphi$ est un isomorphisme par \textbf{Der 5} (g)\footnote[17]{\textit{cf.} corollaire 3, page 50, qu'on devrait remonter ici.} (N.B. Si $z \in Z$, d'où $\{z\} \to Z$, ce foncteur est cohomologiquement cofinal si et seulement si $z$ est objet final, homologiquement final \texttt{[plutôt cofinal]} si et seulement si $z$ est objet initial). Donc la conclusion du corollaire équivaut à dire que $\alpha'$ est un isomorphisme. Mais $X/y_{0} \to Y/y_{0}$ est aussi homologiquement cofinal, car si $u : y_{1} \to y_{0}$ est dans $Y/y_{0}$, on a un isomorphisme canonique
+\[ (X/y_{0})/(y_{1}, u) \simeq X/y_{1} \]
+qui est contractile. Donc par la deuxième partie de \textbf{Der 5} (g),\footnote[18]{(qui est \underline{fausse})} on gagne.
+
+\noindent\msp{page 49}\texttt{[page 49]}
+
+\noindent\textbf{Corollaire} 4 (g) (critère de changement de base pour images directes cohomologiques). \textit{Soit}
+\[
+\begin{tikzcd}[row sep=huge, column sep=huge]
+X' \arrow[r, "q"] \arrow[d, "f'"'] & X \arrow[d, "f"] \arrow[dl, dashed, "\gamma"', shorten <=4ex, shorten >=1ex] \\
+Y' \arrow[r, "p"'] & Y
+\end{tikzcd}
+\]
+\textit{dans} $\Dia$ (\textit{cf.} page 30), \textit{d'où l'homomorphisme de changement de base}
+\[ p^{*} f_{*}(F) \longrightarrow f'_{*} q^{*}(F) \qquad (F \in \Ob\,\D(X)) \quad . \]
+\textit{Pour que ce soit un isomorphisme pour tous $F$, il suffit que pour tout $y' \in \Ob\,Y'$, le foncteur induit par} (p. 9)
+\[ X'/y' \longrightarrow X/p(y') \]
+\textit{soit une hot-équivalence stricte (ou costricte);\footnote[19]{\underline{Faux} pour “stricte”, ne marche \underline{que} pour “\underline{\underline{co}}stricte”.} cela signifie aussi (dans le cas strict) que pour}
+\[ y'_{0} \in \Ob\,Y' \,,\ \ x_{0} \in \Ob\,X \,,\ \ u_{0} : f(x_{0}) \longrightarrow p(y'_{0}) \]
+\textit{la catégorie $K(y'_{0}, x_{0}, u_{0})$ des objets de la forme}
+\[ (x', v', u) \mid x' \in \Ob\,X',\ \ v' : f'(x') \to y'_{0},\ \ u : q(x') \overset{\dashleftarrow}{\longrightarrow} x_{0} \]
+\textit{rendant commutatif le carré dans $Y'$}
+\[
+\begin{tikzcd}[row sep=huge, column sep=huge]
+f(q(x')) \arrow[r, "\gamma(x')"] \arrow[d, shift right=0.5ex, "f(u)"'] & p(f'(x')) \arrow[d, "p(v')"] \\
+f(x_{0}) \arrow[r, "u_{0}"'] \arrow[u, dashed, shift right=0.5ex, "\leftarrow\ \text{\scriptsize\shortstack[l]{cas de\\hot-équivalence\\costricte}}"'] & p(y'_{0})
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\textit{est contractile.}
+
+% foot: Version 8 juillet 2001
+
+\printedpage{28}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+
+\noindent N.B. Dans le cas de la hot équivalence \underline{co}stricte, c'est la même description de
+\[ K = (x_{0}, u_{0})\backslash(X'/y'_{0}) \quad , \]
+sauf que la flèche $u$ est en sens inverse $x_{0} \to q(x')$ et itou dans le diagramme commutatif $(*)$.\\
+On applique \textbf{Der 2}, \textbf{Der 4} (g) et corollaire 1 \texttt{[plutôt} \textbf{Der 5} (g)\texttt{]}.
+
+\noindent\msp{page 50}\texttt{[page 50]}
+
+\noindent\textbf{Corollaire 5} (g). \textit{Soit $f : X \to Y$ pleinement fidèle dans} $\Dia$\textit{, et $F \in \D(X)$. Alors l'homomorphisme d'adjonction}
+\[ f^{*} f_{*}(F) \longrightarrow F \]
+\textit{est un isomorphisme.}
+
+En efffet, il suffit de le vérifier fibre par fibre (\textbf{Der 2}). Soit $x \in X$, $y = f(x) \in Y$, % [sic] efffet -> effet, tripled f
+alors
+\[ f^{*} f_{*}(F)_{x} \simeq f_{*}(F)_{y} \simeq \Gamma_{\D}(X/y, F) \]
+or à cause de la pleine fidélité $X/y \simeq X/x$.
+
+\noindent\textbf{Corollaire 3} (remonter page 48).\footnote[20]{Va résulter de \textbf{Der 6} (g) plus fort ci-dessous.} \textit{Soit $Z \in$} $\Dia$\textit{, supposons que $Z$ a un objet final $e_{Z}$. Soit $p : e \to Z$ le foncteur correspondant. Alors l'homomorphisme canonique (pour $F$ dans} $\D(Z)$\,)
+\[
+\begin{tikzcd}[row sep=huge]
+Z \arrow[d, shift left=0.6ex, "f"] \\
+e \arrow[u, shift left=0.6ex, "p"]
+\end{tikzcd}
+\qquad\qquad\qquad\qquad
+f_{*}(F) \longrightarrow p^{*}(F)
+\]
+\textit{est un isomorphisme.}\footnote[21]{Axiome de la catégorie d'indices à objet final (coefficient quelconque).}
+
+Cet homomorphisme est \texttt{[un]} cas particulier de celui-ci, pour
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+Z' \arrow[rr, "p"] \arrow[dr, "f'"'] & & Z \arrow[dl, "f"] \\
+& S &
+\end{tikzcd}
+\]
+(en faisant $Z' = S = e$, $f' = \mathsf{id}_{e}$),
+\[ f_{*}(F) \longrightarrow f'_{*}(p^{*}(F)) \quad , \qquad (\, F \in \Ob\,\D(Z)\,) \quad , \]
+et c'est un cas particulier\footnote[22]{déjà envisagé dans cor. 2, p. 47} des morphismes de
+
+% foot: Version 8 juillet 2001
+
+% ---- from der1_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent\msp{page 51}
+changement de base pour
+\[
+\begin{tikzcd}
+Z' \arrow[r, "p"] \arrow[d, "f'"'] & Z \arrow[d, "f"] \\
+S \arrow[r, "\id"] & S
+\end{tikzcd}
+\qquad .
+\]
+
+\noindent\textsc{Remarque} : On retrouve le fait que $i^*i_*(F_Y) \overset{\sim}{\to} F_Y$ est \texttt{[un]} isomorphisme, pour $i$ une immersion fermée. De plus, avec les notations de \textbf{Der 4} (g), $j^*(i_*(F_Y))$ se calcule par le théorème de changement de base (corollaire 2 \texttt{[plutôt 4]} ci-dessus), qui s'applique dans toute situation commutative
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+X' \arrow[r, "q"] \arrow[d, "f'"'] \arrow[dr, phantom, "\text{\scriptsize cart}"] & X \arrow[d, "f"] \\
+Y' \arrow[r, "p"] & Y
+\end{tikzcd}
+\]
+quand $p$ est une immersion ouverte (et $\gamma = \id$) (alors $X'/y' \to X/p(y')$ est même un isomorphisme!), et on trouve, revenant aux notations de \textbf{Der 4} (g),
+\[
+\begin{tikzcd}
+\emptyset \arrow[r, "q"] \arrow[d, "f'"'] & Y \arrow[d, hook, "i"] \\
+U \arrow[r, hook, "j"'] & X
+\end{tikzcd}
+\]
+\textit{i.e.} $j^*(i_*(F_Y)) \simeq f'_*(\varphi)$, où $\varphi = q^*(F_Y)$ est l'unique élément de la catégorie (équivalente à une catégorie ponctuelle, par \textbf{Der 1}) $\DD(\emptyset)$. D'autre part, $f'_*$ transforme objet final en objet final, d'où $j^*i_*(F_Y)$ est objet final.
+
+Inversement, soit $F$ dans $\DD(X)$, tel que $j^*(F) = e_{\DD(U)}$. Considérons
+\[
+F \xrightarrow{u} i_*i^*F \qquad\quad \text{(adjonction) ;}
+\]
+je dis que c'est un isomorphisme. En effet, par l'axiome \msp{page 52} de localisation \textbf{Der 2}, il suffit de prouver que $i^*(u)$ et $j^*(u)$ sont \texttt{[des]} isomorphismes. Pour $i^*(u)$ cela résulte du fait que $i^*$ soit foncteur de localisation, et pour $j^*$ du fait que $j^*(F)$ et $j^*(i_*i^*(F))$ sont des objets finaux dans $\DD(U)$.
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent\msp{page 53}
+
+\subsection*{Morphismes homotopiquement propres, homotopiquement lisses.}
+
+\noindent Soit $f : X \to Y$ \texttt{[un]} morphisme de catégories, considérons $y_0 \in \Ob\, Y$, et le foncteur canonique
+\[
+X_{y_0} \xrightarrow{\varphi} X/y_0 \qquad\qquad\qquad \varphi(x) = (x, \id_{f(x)}) \tag*{(1)}
+\]
+($X_{y_0}$ fibre de $X$ en $y_0$). Soit $(x_0, u_0) \in \Ob\, X/y_0$ donc $x_0 \in \Ob\, X$, $u_0 : f(x_0) \to y_0$. Considérons la catégorie coinduite par $\varphi$ sur $(x_0, u_0)$
+\[
+(x_0, u_0)\backslash(X_{y_0}) \quad ,
+\]
+pour tester si $\varphi$ est une hot-équivalence costricte \textit{i.e.} homologiquement \texttt{[plutôt cohomologiquement]} cofinal. On va l'interpréter via le foncteur induit par $f$
+\[
+x_0\backslash X \xrightarrow{\psi} f(x_0)\backslash Y
+\]
+allant de la catégorie des spécialisations de $x_0$ dans $X$ vers celle des spécialisations de $f(x_0)$ dans $Y$. On trouve alors un isomorphisme canonique de la catégorie coinduite $(x_0, u_0)\backslash X_{y_0}$ par $X_{y_0}$ au dessus de l'objet $(x_0, u_0)$ de $X/y_0$ et de la catégorie fibre $(x_0\backslash X)_{u_0}$ de $x_0\backslash X$ au dessus de $f(x_0)\backslash Y$ en $u_0$. Donc
+
+\noindent\textbf{Proposition.} \textit{Pour que les foncteurs $\varphi : X_{y_0} \to X/y_0$ ($y_0 \in \Ob\, Y$) soient des hot-équivalences costrictes, il faut et il suffit que les fibres des foncteurs $x_0\backslash X \to f(x_0)\backslash Y$ induits par $f$ soient contractiles.}
+
+\noindent\msp{page 54}
+On dit alors que $f$ est \textit{homotopiquement propre.} La notion duale s'exprime, soit par la condition que les foncteurs induits par $f$
+\[
+X_{y_0} \longrightarrow y_0\backslash Y
+\]
+soient des hot-équivalences strictes \textit{i.e.} qu'ils soient cohomologiquement \texttt{[plutôt homologiquement]} cofinaux, soit que les fibres des morphismes induits sur les ``catégories localisées'' (catégories des générisations)
+\[
+X/x_0 \longrightarrow Y/f(x_0)
+\]
+soient contractiles. (N.B. On utilise ici qu'une catégorie $Z$ est contractile si et seulement si $Z^\circ$ l'est.) On dit alors que $f$ est \textit{homotopiquement lisse.}
+
+\noindent\textbf{Proposition.} \textit{La notion de foncteur propre (resp. lisse) est stable par changement de base, par composition. Les isomorphismes, et plus généralement, les immersions fermées sont propres. L'image d'un morphisme propre est une sous-catégorie fermée.}\footnote[23]{Attention, une équivalence de catégories n'est pas propre! Si $X' \hookrightarrow X$ \texttt{[est]} une inclusion d'une sous-catégorie de $X$, elle n'est propre que si c'est une immersion fermée.}
+
+\noindent N.B. Le foncteur $X \to e$ est toujours propre et lisse, car les catégories $x_0\backslash X$ et $X/x_0$ sont contractiles (ayant objet initial ou objet final). Donc tout foncteur de projection $X \times Y \xrightarrow{pr_2} Y$ est à la fois propre et lisse.
+
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent\msp{page 55}
+\textsc{Démonstration}. Stabilité par changement de base :
+\[
+\begin{tikzcd}
+X \arrow[d, "f"'] \arrow[dr, phantom, "\text{\scriptsize cart}"] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+Y & Y' \arrow[l, "p"]
+\end{tikzcd}
+\qquad ,
+\]
+d'où pour $x' \in \Ob\, X'$
+\[
+\begin{tikzcd}[row sep=large]
+X/x \arrow[d] & X'/x' \arrow[l] \arrow[d] \\
+Y/y & Y'/y' \arrow[l]
+\end{tikzcd}
+\qquad ,
+\]
+où $x$, $y'$, $y$ sont les images de $x'$ dans $X$, $Y'$, $Y$. On vérifie que ce diagramme est \textit{cartésien}, donc les fibres de $X'/x' \longrightarrow Y'/y'$ sont isomorphes à des fibres de $X/x \longrightarrow Y/y$, donc contractiles si celles-ci le sont.
+
+Dans un cas $X \xrightarrow{f} Y$ on vérifie que pour un foncteur bilocalisé de $f$
+\[
+X/x \xrightarrow{\varphi=f/x} Y/y \quad ,
+\]
+tout ``bilocalisé''
+\[
+(X/x)/\xi \longrightarrow (Y/y)/\eta \qquad\qquad (\xi : x' \to x\,, \quad \eta : y' \to y)
+\]
+de $\varphi$ s'identifie encore à un bilocalisé de $f$
+\[
+X/x' \longrightarrow Y/y' \quad .
+\]
+Donc si $f$ est lisse, les bilocalisés $f/x$ ($x \in \Ob\, X$) le sont aussi. Notons d'autre part.
+
+\noindent\textbf{Proposition.}\footnote[24]{\textit{cf.} amélioration dans cor. 2, page suivante.} \textit{Tout morphisme propre (ou dualement lisse) à fibres contractiles est une hot-équivalence.}
+
+\noindent\msp{page 56}
+Cela provient du fait que pour un tel foncteur propre, si $F$ est un préfaisceau, ou complexe de préfaisceaux abéliens sur $X$, la formation des $Rf_*(F)$ commute au passage aux fibres, et de même pour $R^1f_*(F)$ si $F$ est un préfaisceau en groupes (pas même abéliens).
+
+\noindent\textbf{Corollaire 1.} \textit{Si $f : X \to Y$ est cohomologiquement propre à fibres contractiles, alors $Y$ est contractile si et seulement si $X$ l'est.}
+
+Grâce à ceci, on trouve que le composé de deux foncteurs propres (lisses) est propre (lisse).
+
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\noindent N.B. Contrairement à ce qui a lieu en topologie pour la notion de propreté, si $gf$ est propre et $g$ propre, $f$ ne l'est pas nécessairement, \textit{i.e.} un $S$-morphisme de $S$-catégories $X$, $Y$ propres sur $S$ n'est pas nécessairement propre. Ainsi une section de $X/S$, pour $X$ propre sur $S$, n'est pas nécessairement propre, \textit{i.e.} n'est pas nécessairement une immersion fermée. C'est déjà faux si $S = e$ (auquel cas $f : X \to e$ est toujours propre).
+
+\noindent\textbf{Corollaire 2.} \textit{Un morphisme propre ou lisse, à fibres contractiles est à la fois une hot-équivalence stricte et costricte.}
+
+En effet, on applique le corollaire 1 à $X/y \to Y/y$ ou $y\backslash X \to y\backslash Y$.
+
+\noindent\textbf{Théorème} (g) \textit{Soit une situation de changement de base dans} \textsf{Dia}
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+X \arrow[d, "f"'] \arrow[dr, phantom, "\text{cart}"] & X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+Y & Y' \arrow[l, "p"]
+\end{tikzcd}
+\qquad , \qquad\qquad p^*f_*(F) \xrightarrow{c} f'_*q^*(F)
+\]
+\textit{($F \in \DD(X)$), $\DD$ dérivateur exact à gauche. Si $f$ est (homotopiquement) propre ou $p$ homotopiquement lisse, alors $c$ est un isomorphisme.}
+
+\noindent\msp{page 57}
+La question c'est si pour tout $y' \in Y'$, posant $y = p(y')$ et considérant le foncteur induit par $q$
+\[
+X/y \longleftarrow X'/y'
+\]
+le morphisme correspondant
+\[
+\Gamma_{\DD}(X/y, F) \longrightarrow \Gamma_{\DD}(X'/y', q^*F)
+\]
+est \texttt{[un]} isomorphisme. Dans le cas $f$ propre, on considère
+\[
+\begin{tikzcd}[column sep=large]
+X_y \arrow[d, "\sim\ \ \text{costricte}"'] & X_{y'} \arrow[l, "\sim"'] \arrow[d, "\sim\ \ \text{costricte}"] \\
+X/y & X'/y' \arrow[l]
+\end{tikzcd}
+\]
+d'où la conclusion, puisque par \textbf{Der 5} (g), dans
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+\Gamma(X_y) \arrow[r] & \Gamma(X_{y'}) \\
+\Gamma(X/y) \arrow[u] \arrow[r] & \Gamma(X'/y') \arrow[u]
+\end{tikzcd}
+\]
+les flèches verticales et l'horizontale supérieure sont \texttt{[des]} isomorphismes, donc aussi l'horizontale inférieure.
+
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+Dans le cas $p$ lisse, considérons du coté $Y$, $Y'$ le carré de changement de base % [sic] coté -> côté, missing circumflex (cf. "Du côté" below)
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+Y & Y' \arrow[l] \\
+Y/y \arrow[u] & Y'/y' \arrow[l] \arrow[u]
+\end{tikzcd}
+\]
+
+\noindent\msp{page 58}
+d'où le diagramme contigu
+\[
+\begin{tikzcd}[column sep=small]
+X \arrow[dd] & & X' \arrow[ll] \arrow[dd] & \\
+& X/y \arrow[ul] & & X'/y' \arrow[ll, crossing over, "\kappa"'] \arrow[ul] \arrow[dd] \\
+Y & & Y' \arrow[ll] & \\
+& Y/y \arrow[ul] \arrow[from=uu, crossing over] & & Y'/y' \arrow[ll, "\pi"] \arrow[ul]
+\end{tikzcd}
+\qquad ,
+\]
+où les carrés latéraux (verticaux) sont cartésiens. On note que $\pi$ est lisse et à fibres contractiles (car $p$ est lisse) donc $\kappa$ aussi. Donc $\kappa$ est une hot-équivalence costricte, donc $\Gamma(X/y) \overset{\sim}{\longrightarrow} \Gamma(X'/y')$, on gagne encore.
+
+\noindent N.B. Sauf erreur, on a une réciproque du théorème, \texttt{[à]} savoir : Si $f : X \to Y$ est tel que le théorème de changement de base pour $f_*(F)$ est vrai pour \textit{tout} dérivateur (il suffit sans doute de \textsf{HOTAB} et \textsf{HOT}) et pour tout $Y' \to Y$, alors $f$ est homotopiquement propre. D'autre part, si $g : Y' \to Y$ est tel que le théorème de changement de base pour $g$ est vrai pout tout $X \to Y$ et tout $F \in \DD(X)$ ($\DD$ dérivateur exact à droite quelconque), alors $g$ est homotopiquement lisse. % [sic] pout tout -> pour tout, misprint
+
+\noindent Du côté homologique les foncteurs lisses $f$ sont exactement ceux pour lesquels $f_!$ commute à tout changement de base. Les foncteurs propres $g$ sont exactement ceux pour lesquels le changement de base par $g$ commute à $f_!$, pour tout $f : X \to Y$ et tout $\DD$ dérivateur exact à gauche.
+
+\noindent\msp{page 59}
+Ainsi, les foncteurs propres $f : X \to Y$ se caractérisent de \textit{quatre} façons remarquables
+\begin{itemize}[label={}, leftmargin=0pt, itemindent=2\parindent, labelsep=0.3em]
+\item[\textit{a})] $f_*$ commute à tout changement de base ($\forall$ dérivateur $\DD$ exact à gauche);
+\item[\textit{b})] le changement de base $f^*$ commute à tout $g_!$ ($g : Y' \to Y$, $\DD$ dérivateur exact à droite);
+\item[\textit{c})] $\forall y \in \Ob\, Y$, $X_y \to X/y$ est une hot-équivalence costricte \textit{i.e.} est un foncteur homologiquement \texttt{[plutôt cohomologiquement]} cofinal;
+\item[\textit{d})] $\forall x \in \Ob\, X$ le foncteur induit sur les colocalisés
+\[
+x\backslash X \longrightarrow f(x)\backslash Y
+\]
+\end{itemize}
+
+% ---- from der1_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\noindent est à fibres contractiles.
+
+Autre situation standard où le changement de base marche (mais où les foncteurs qui interviennent n'ont aucune raison d'être propres ou lisses).
+
+Soient
+\[
+f : I \longrightarrow I' \quad , \qquad g : J \longrightarrow J'
+\]
+dans $\Dia$, d'où le diagramme (comparer page 23)
+\[
+\begin{tikzcd}
+X' = I \times J \arrow[r, "G'"] \arrow[d, "F'"'] & I \times J' = X \arrow[d, "F"] \\
+Y' = I' \times J \arrow[r, "G"] & I' \times J' = Y
+\end{tikzcd}
+\quad .
+\]
+Ce diagramme est tel que pour tout dérivateur à gauche
+
+\noindent\msp{page 60}
+
+\noindent on a le changement de base
+\[
+G^*F_* \simeq F'_*{G'}^* \quad ,
+\]
+la raison ici étant que les foncteurs induits
+\[
+X'/y' \longrightarrow X/y
+\]
+sont des hot-équivalences \underline{\underline{co}}strictes, \textit{i.e.} que les catégories $K$ (page 49) sont contractiles. En effet, si $x_0 = (i_0, j'_0) \in \Ob X$, $y'_0 = (i'_0, j_0) \in \Ob Y'$, $u_0 = (u'_0, v'_0) : F(x_0) \to G(y'_0)$, où $u'_0 : f(i_0) \to i'_0$, $v'_0 : j'_0 \to g(j_0)$ sont donnés, on vérifie que la catégorie $K$ cherchée est isomorphe simplement à $(i_0, u'_0)\backslash(I/i'_0) \times (j_0, v'_0)\backslash(J/j'_0)$ qui est contractile ayant un objet initial \texttt{[plutôt $(i_0, u'_0)\backslash(I/i'_0) \times (j'_0\backslash J)/(j_0, v'_0)$ qui est contractile étant produit d'une catégorie ayant un objet initial et d'une catégorie ayant un objet final]}. Ouf!
+
+Je m'aperçois d'un très gros canular. Je croyais me rappeler que pour $f : X \to Y$ qui est une hot-équivalence stricte, on avait pour tout $F \in \DD(Y)$, $F \isoto f_*f^*F$ (par exemple pour $\DD = \mathsf{Der}(\mathit{Ab})$, ou $\DD = \Hot$), \textit{i.e.} $f^*$ pleinement fidèle, d'où aussi que $\Gamma_{\DD}(Y, F) \to \Gamma_{\DD}(X, f^*F)$ est \texttt{[un]} isomorphisme. Mais ce n'est vrai que si $F$ est un coefficient \textit{constant} sur $Y$, \textit{i.e.} de la forme $q^*(M)$ ($q : Y \to e$, $M \in \DD(e) = \cA_{\DD}$). C'est faux, pour $F$ général, déjà dans le cas de l'immersion $f : \{\varphi\} \to Y$, où $\varphi$ est un objet initial. Alors, $f$ est toujours une hot-équivalence stricte, mais l'homomorphisme $\Gamma(Y, F) \to \Gamma(X, f^*F)$ n'est en général pas un isomorphisme.
+
+\clearpage
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\noindent\msp{page 61}
+
+\subsection*{Notions de $\mathbb{D}$-équivalence et de $\mathbb{D}$-contractibilité.}
+
+On va donc reprendre les questions d'acyclicité et de changement de base.
+
+\noindent\textbf{Définition 1.} Soit $\DD$ un prédérivateur, et soit
+\[
+\begin{tikzcd}
+X \arrow[rr, "f"] \arrow[dr, "p"'] & & Y \arrow[dl, "q"] \\
+& e &
+\end{tikzcd}
+\]
+dans $\Dia$. On dit que $f$ est une $\DD$-\textit{équivalence} si le foncteur
+\[
+F \longmapsto f^*F \quad , \qquad \DD(Y) \longrightarrow \DD(X)
+\]
+induit un foncteur pleinement fidèle sur la sous-catégorie de $\DD(Y)$ formée des $\DD$-coefficients \textit{constants}, \textit{i.e.} si pour tous $M, N \in \Ob \cA = \DD(e)$ (“coefficients absolus”), on a
+\[
+\Hom(q^*M, q^*N) \isolongto \Hom(p^*M, p^*N) \quad . \tag*{(1)}
+\]
+Supposons que $p_*$ et $q_*$ existent. On posera, pour un faisceau $F$ sur $X$
+\[
+H^*_{\DD}(X, F) \overset{\text{déf}}{=} p_*(F) \qquad \text{(et de même } \ H^{\DD}_*(X, F) = p_!(F) \ \text{).}
+\]
+N.B. Et si $F = p^*M$, $M \in \cA$, on note simplement $H^*_{\DD}(X, M)$, $H^{\DD}_*(X, M)$.
+
+\noindent L'homomorphisme (1) s'interprète par adjonction comme
+\[
+\begin{tikzcd}[row sep=small]
+\Hom(M, q_*q^*N) \arrow[r] \arrow[d, equal] & \Hom(M, p_*p^*N) \arrow[d, equal] \\
+\Hom(M, H^*_{\DD}(Y, q^*N)) \arrow[r] & \Hom(M, H^*_{\DD}(X, p^*N))
+\end{tikzcd}
+\]
+déduit de l'homomorphisme
+\[
+q_*q^*N \longrightarrow p_*p^*N \quad , \qquad \textit{i.e.} \quad H^*_{\DD}(Y, N) \longrightarrow H^*_{\DD}(X, N) \quad . \tag*{(2)}
+\]
+Donc dire que (1) est un isomorphisme pour tous $M, N$ signifie que (2) est un isomorphisme pour tout $N$. De même, si $p_!$, $q_!$ existent cela équivaut à dire que
+\[
+p_!p^*N \longrightarrow q_!q^*N \quad , \qquad \textit{i.e.} \quad H^{\DD}_*(X, N) \longrightarrow H^{\DD}_*(Y, N) \tag*{$(2')$}
+\]
+est un isomorphisme dans $\cA$ pour tout $N \in \cA$.
+
+\clearpage
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\noindent\msp{page 62}
+
+\noindent En résumé :
+
+\noindent\textbf{Proposition 1.} \textit{Si $p_*$ et $q_*$ existent, i.e. si $H^*_{\DD}(X, \bullet)$ et $H^*_{\DD}(Y, \bullet)$ existent (il suffit même que ça existe pour des coefficients constants), alors $f$ est une $\DD$-équivalence si et seulement si $f$ induit un isomorphisme pour les $\DD$-cohomologies à coefficients constants de $X$ et $Y$. Si $p_!$ et $q_!$ existent, i.e. si $H^{\DD}_*(X, \bullet)$ et $H^{\DD}_*(Y, \bullet)$ existent, $f$ est une $\DD$-équivalence si et seulement si $f$ induit un isomorphisme pour les $\DD$-homologies à coefficients constants de $X$ et $Y$.}
+
+\noindent\textbf{Remarque 1.} Pour que $f$ soit \texttt{[une]} $\DD$-équivalence, il \textit{suffit} que pour tout $F$ \textit{constant} sur $Y$ le morphisme d'adjonction $F \to f_*f^*F$ soit \texttt{[un]} isomorphisme.
+
+\noindent\textbf{Remarque 2.} Si $f$, $f' : X \to Y$ sont dans une même composante connexe de $\underline{\Hom}(X, Y)$, alors $f$ est $\DD$-équivalence $\Leftrightarrow$ $f'$ $\DD$-équivalence.
+
+\noindent\textbf{Proposition 2.} \textit{Les isomorphismes sont des $\DD$-équivalences. Si $X \overset{f}{\to} Y \overset{g}{\to} Z$, si deux parmis $f$, $g$, $gf$ sont des $\DD$-équivalences, le troisième aussi.} % [sic] parmis -> parmi, spelling
+
+\noindent\textbf{Définition 2.} On dit que $X$ dans $\Dia$ est $\DD$-\textit{asphérique} (ou $\DD$-\textit{contractile}, ou $\DD$-\textit{trivial}) si $X \overset{p}{\to} e$ est une $\DD$-équivalence, \textit{i.e.} si $p^*$ est pleinement fidèle.
+
+Si $p_*$ existe, cela signifie donc que pour $M \in \Ob(\cA)$
+\[
+M \overset{\mathrm{adj}}{\isolongto} p_*p^*M \quad , \qquad \textit{i.e.} \quad M \isolongto H^*_{\DD}(X, M) \quad ,
+\]
+et si $p_!$ existe, cela signifie que pour tout $M$
+\[
+p_!p^*M \overset{\mathrm{adj}}{\isolongto} M \quad , \qquad \textit{i.e.} \quad H^{\DD}_*(X, M) \isolongto M \quad .
+\]
+\textbf{Corollaire.} \textit{Si $Y$} (resp. $X$) \textit{est contractile, alors $f : X \to Y$ est une $\DD$-équivalence si et seulement si $X$} (resp. $Y$) \textit{est contractile.}
+
+\noindent\textsc{Exemple}. Prenons $\DD = \HOT$. (On peut prendre $\Dia$ = catégorie des petites catégories). Alors, pour $M \in \cA = \Hot$ et $X$ petite catégorie, on a
+\[
+H^*_{\HOT}(X, M) \simeq \Hom_{\cA}(\hot(X), M) \quad ,
+\]
+où
+\[
+\hot : \mathcal{C}\mathit{at} \longrightarrow \cA = \Hot
+\]
+est le foncteur canonique qui associe à tout $X$ son “type d'homotopie”. On a
+\[
+H^{\HOT}_*(X, M) = \hot(X) \times M \quad .
+\]
+
+\noindent\msp{page 63}
+
+\noindent On en déduit que $f : X \to Y$ est une $\HOT$-équivalence (au sens de la définition 1) si et seulement si c'est une $\hot$-équivalence (ou “équivalence faible”) \textit{i.e.} si et seulement si
+\[
+\hot(f) : \hot(X) \isolongto \hot(Y)
+\]
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+est un isomorphisme.
+
+\noindent\textbf{Proposition 2.} \textit{Soit $f : X \to Y$. Conditions équivalentes (si $\DD$} \texttt{[est un]} \textit{dérivateur} à gauche). % ?? uncertain: font of "à gauche)." -- upright or italic
+
+a) \textit{$f$ est une $\DD$-équivalence, et le reste après tout changement de base $Y' \to Y$ qui est un isomorphisme local (par exemple pour $Y/F \to Y$, $F \in \Ob \widehat{Y}$).}
+
+b) \textit{Pour tout $y \in \Ob Y$, le foncteur induit $X/y \to Y/y$ est une $\DD$-équivalence.}
+
+c) \textit{Pour tout $y \in \Ob Y$, $X/y$ est $\DD$-contractile.}\footnote[25]{Autres conditions équivalentes :\par
+\indent d) \textit{Pour tout faisceau \underline{constant} $M_Y$ sur $Y$, on a $M_Y \isoto f_*f^*M_Y$.}\par
+\indent d$'$) \textit{Comme} d) \textit{avec faisceau \underline{localement} constant.}}
+
+\noindent N.B. On dit que $g : Z \to Y$ est un \textit{isomorphisme local} si pour tout $z \in \Ob Z$, posons $y = g(z)$, le morphisme induit sur les catégories localisées en $z$ et $y$
+\[
+Z/z \isolongto Y/y
+\]
+est un isomorphisme. Par exemple toute immersion ouverte, tout foncteur induit $Y/y \to Y$ (foncteur de localisation) sont des isomorphismes locaux.
+
+Il en résulte a) $\Rightarrow$ b) trivialement.
+
+b) $\Leftrightarrow$ c). Résulte du corollaire de la page précédente, si l'on sait que $Y/y$ est $\DD$-contractile\footnote[26]{Cf. cor. 1 de \textbf{Der 5} (g)}. Cela résultera de \textbf{Der 5} ci-dessous.
+
+\noindent\msp{page 64}
+
+c) $\Rightarrow$ a) “Passage du local au global”. Comme l'hypothèse c) est stable par changement de base par immersion ouverte, il suffit de prouver que c) implique que $f$ est une $\DD$-équivalence, \textit{i.e.} que pour tout $F = M_Y$ ($M \in \Ob \cA$), coefficient constant sur $Y$, l'homomorphisme d'adjonction
+\[
+M_Y \longrightarrow f_*f^*M_Y = f_*M_X
+\]
+est \texttt{[un]} isomorphisme. Il suffit de prouver que c'est un isomorphisme fibre par fibre (\textbf{Der 2}), donc que pour tout $y \in Y$,
+\[
+M_y \longrightarrow f_*(M_X)_y
+\]
+est un isomorphisme. Par \textbf{Der 4} (g), on a
+\[
+f_*(M_X)_y \isolongto \Gamma(X/y, M) \quad ,
+\]
+et l'hypothèse que $X/y$ est $\DD$-contractile donne ce qu'on veut.
+
+\noindent\textbf{Proposition 2$'$.} \textit{Dualement, si $\DD$ est un dérivateur à gauche} \texttt{[plutôt à droite]}\textit{, conditions équivalentes sur $f : X \to Y$ :}
+
+a) \textit{$f$ $\DD$-équivalence,} \texttt{[et]} \textit{le reste par tout changement de base $g : Y' \to Y$ qui est un “isomorphisme colocal” (i.e. pour tout $y' \in \Ob Y'$, le foncteur induit sur les catégories “colocalisées” $y'\backslash Y' \isolongto y\backslash Y$ (où $y = g(y')$)} \texttt{[est un isomorphisme]}\textit{).}
+
+b) \textit{Pour tout $y \in Y$, le foncteur induit $y\backslash X \to y\backslash Y$ est une $\DD$-équivalence.}
+
+c) \textit{Pour tout $y \in Y$, $y\backslash Y$ est $\DD$-contractile.}
+
+\noindent Pour le prouver, on doit utiliser que les $y\backslash Y$ sont $\DD$-contractiles (cf. cor. 1 de \textbf{Der 5} (d)).
+
+\clearpage
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. I, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\noindent\msp{page 65}
+
+\noindent\textbf{Définition 3.} Soit $\DD$ un prédérivateur (peut-être même un dérivateur à gauche ou à droite). On dit que $f$ est une $\DD$-équivalence \textit{stricte} si $f$ satisfait la condition a) de \texttt{[la]} proposition 2. On dit que c'est une $\DD$-équivalence \textit{costricte} si $f$ satisfait celle de \texttt{[la]} proposition $2'$; on dit aussi parfois que $f$ est $\DD$-cofinal. (La condition duale, \textit{i.e.} $\DD$-équivalence stricte, s'appelerait co-$\DD$-cofinal!)\footnote[27]{Meilleure terminologie : $f$ est $\DD$-\textit{asphérique} ($\DD$-équivalence stricte), $\DD$-\textit{coasphérique} ($\DD$-équivalence co-stricte).} % [sic] s'appelerait -> s'appellerait, spelling
+
+\noindent\textbf{Proposition 3.} \textit{Soit $X \overset{f}{\to} Y \overset{g}{\to} Z$. Si $f, g$ sont des $\DD$-équivalences strictes, alors $gf$ aussi. Si $gf$ et $f$ sont des $\DD$-équivalences strictes, alors $g$ aussi. Si $\DD$} \texttt{[est un]} \textit{dérivateur à gauche ou à droite, toute équivalence} \texttt{[de catégories]} \textit{est une $\DD$-équivalence stricte.} (Car elle a un adjoint à droite.)
+
+On utilise le fait que la notion d'isomorphisme local est stable par changement de base.
+
+\noindent\msp{page 66}
+
+\noindent\textbf{Proposition 4.} \textit{Soient $\DD$ un dérivateur à droite, $f : X \to Y$ un foncteur dans} $\Dia$\textit{, tel que pour $y \in Y$, $y\backslash X$ soit $\DD$-contractile (donc $f$ une $\DD$-équivalence costricte, sous réserve que $\DD$ soit un dérivateur à droite \ldots\ ). Alors pour tout $F$ dans $\DD(Y)$ (pas nécessairement à coefficients constant) on a} % [sic] constant -> constants, agreement
+\[
+H^*_{\DD}(Y, F) \isolongto H^*_{\DD}(X, f^*(F))
+\]
+\textit{est un isomorphisme. Réciproquement, si la condition est vraie pour tout $F$, alors les $y\backslash X$ sont $\DD$-contractiles.}
+
+\noindent\textsc{Démonstration}. Il revient au même de dire que pour tout $M \in \Ob \cA = \DD(e)$, on a
+\[
+\Hom(M, H^*_{\DD}(Y, F)) \overset{\mathrm{iso}}{\longrightarrow} \Hom(M, H^*_{\DD}(X, f^*(F))) \ .
+\]
+Mais par adjonction, cette flèche s'interprète comme
+\[
+\Hom(M_Y, F) \longrightarrow \Hom(M_X, f^*F) \tag*{$(*)$}
+\]
+D'autre part, si $f_!$ existe, on a
+\[
+\Hom(M_X, f^*F) = \Hom(f_!(M_X), F) \ ,
+\]
+et l'homomorphisme $(*)$ est déduit de l'homomorphisme d'adjonction
+\[
+f_!(M_X) = f_!(f^*(M_Y)) \longrightarrow M_Y \ , \tag*{$(**)$}
+\]
+en prenant les $\Hom$ dans $F$. Donc la condition équivaut à dire que cet homomorphisme est \texttt{[un]} isomorphisme, quel que soit le coefficient constant $M_Y$ sur $Y$. Pour voir si c'est un isomorphisme, on regarde fibre par fibre (\textbf{Der 2}), or les fibres s'interprètent comme $H^{\DD}_*(y\backslash X, M_X)$ (par \textbf{Der 4} (d)) et comme $M$.
+\end{document}

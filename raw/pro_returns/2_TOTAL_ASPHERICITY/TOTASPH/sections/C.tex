@@ -1,0 +1,209 @@
+\subsection{An intrinsic criterion and the failure of Lead 4}
+
+\begin{definition}[Proved: the action criterion]\label{C:action-definition}
+Let $R$ be a nonzero commutative ring with identity. We write $\mathcal P_R(A)$ for the following property of a small category $A$: for every covariant functor $H:A\to\Set$, each connected component $E$ of the category of elements $\operatorname{El}_A(H)$ is $R$-acyclic, meaning that $H_0(BE;R)=R$ and $H_j(BE;R)=0$ for $j>0$. No condition is imposed on the empty category of elements. We write $\mathcal P_\infty(A)$ when every such component is weakly contractible. These definitions use covariant, rather than presheaf, categories of elements: an arrow $(a,h)\to(a',h')$ is an arrow $v:a\to a'$ with $H(v)(h)=h'$.
+\end{definition}
+
+\begin{lemma}[Proved: homological Theorem A in the final variance]\label{C:homology-A}
+Let $f:A\to B$ be a functor. If every $b\backslash A$ is nonempty and $R$-acyclic, then $Bf:BA\to BB$ induces an isomorphism on homology with coefficients in $R$. More generally, if every $b\backslash A$ is nonempty and its reduced $R$-homology vanishes in degrees $0,\ldots,d-1$, for an integer $d\geq1$, then $Bf$ induces isomorphisms in degrees less than $d$ and an epimorphism in degree $d$.
+\end{lemma}
+\begin{proof}
+We use the bisimplicial set whose $(p,q)$-simplices are strings
+\[
+ b_0\longrightarrow\cdots\longrightarrow b_p
+ \longrightarrow f(a_0),\qquad
+ a_0\longrightarrow\cdots\longrightarrow a_q.
+\]
+The forgetful map to $NA$ is a weak equivalence after diagonal realization: for a fixed string in $A$, the remaining simplicial direction is the nerve of $B/f(a_0)$, which has terminal object $\id_{f(a_0)}$. The other projection is to $NB$. Taking normalized $R$-chains in both directions and filtering by $p$ gives the spectral sequence of this projection. Its row in degree $q=0$ is the chain complex of $NB$, because each comma category is connected; the rows in degrees $1,\ldots,d-1$ vanish after taking vertical homology. The first possible additional row has degree $d$. Thus the projection induces isomorphisms below degree $d$ and an epimorphism in degree $d$. The first-quadrant filtration is finite in each total degree, so it converges without a boundedness or finiteness assumption on the categories. If all positive rows vanish, it induces isomorphisms in every degree. The two projections commute with the canonical map $Bf$ up to the homotopy supplied by the displayed arrow $b_p\to f(a_0)$; consequently the comparison just computed is the map induced by $f$.
+\end{proof}
+
+\begin{lemma}[Proved: inheritance by categories of elements]\label{C:inherit-elements}
+If $A$ satisfies $\mathcal P_R$, then every connected component $E$ of $\operatorname{El}_A(H)$, for every $H:A\to\Set$, also satisfies $\mathcal P_R$. The corresponding assertion holds for $\mathcal P_\infty$.
+\end{lemma}
+\begin{proof}
+The elements lying in $E$ define a subfunctor $H_E\subseteq H$, because arrows preserve connected components. Let $K:E\to\Set$ be any covariant functor. Define
+\[
+ L(a)=\coprod_{h\in H_E(a)}K(a,h).
+\]
+For an arrow $v:a\to a'$ in $A$, its restriction to the summand indexed by $h$ is the map $K(v):K(a,h)\to K(a',H(v)h)$, landing in the indicated summand of $L(a')$. This defines a covariant functor $L:A\to\Set$. The map
+\[
+ ((a,h),k)\longmapsto (a,(h,k))
+\]
+is an isomorphism of categories $\operatorname{El}_E(K)\cong\operatorname{El}_A(L)$, including their specified arrows. Its connected components therefore have the required property.
+\end{proof}
+
+\begin{lemma}[Proved: integral acyclicity detects every cyclic subgroup]\label{C:cyclic-covers}
+Suppose that a connected, nonempty small category $E$ satisfies $\mathcal P_{\mathbb Z}$. Then $BE$ is weakly contractible. Consequently $\mathcal P_{\mathbb Z}(A)$ and $\mathcal P_\infty(A)$ are equivalent for every small category $A$.
+\end{lemma}
+\begin{proof}
+The constant singleton functor on $E$ shows that $BE$ is integrally acyclic. Fix an object $e_0$ and let $\Pi E$ be the groupoid obtained by inverting all arrows of $E$. The usual edge-path presentation of the fundamental group identifies $\operatorname{Aut}_{\Pi E}(e_0)$ with $G=\pi_1(BE,e_0)$. For any subgroup $K\leq G$, define
+\[
+ H_K(e)=\operatorname{Hom}_{\Pi E}(e_0,e)/K,
+\]
+where $K$ acts by precomposition, and an arrow $v:e\to e'$ acts by postcomposition with its image in $\Pi E$. All these maps are bijections. The projection $\operatorname{El}_E(H_K)\to E$ is therefore a categorical covering: each arrow has a unique lift with either a prescribed source or a prescribed target. On nerves this gives the usual covering of $BE$ whose monodromy is the transitive coset action of $G$. It is connected, and its fundamental group, at the lift represented by $\id_{e_0}$, is precisely $K$. The covering classification is also recorded in \citet[Theorem~1.38]{Hatcher2002}. These assertions follow directly here by lifting the edge-path presentation; a loop lifts to a loop exactly when its class belongs to $K$.
+
+Take $K$ to be the cyclic subgroup generated by an arbitrary element of $G$. The hypothesis gives
+\[
+ 0=H_1\bigl(B\operatorname{El}_E(H_K);\mathbb Z\bigr)
+   =K_{\mathrm{ab}}=K.
+\]
+The identification of first homology with abelianization is \citet[Theorem~2A.1]{Hatcher2002}. Thus $G$ is trivial. A simply connected acyclic CW complex is weakly contractible: if a first nonzero homotopy group existed, the Hurewicz theorem would identify it with a nonzero homology group \citep[Theorem~4.32]{Hatcher2002}. A nerve realization is a CW complex, so this applies to $BE$.
+
+For general $A$ satisfying $\mathcal P_{\mathbb Z}$, apply Lemma~\ref{C:inherit-elements} and the preceding argument to each component $E$ of each category of elements. The converse follows from homotopy invariance of integral homology.
+\end{proof}
+
+\begin{theorem}[Proved: characterization of total asphericity]\label{C:classification}
+For every small category $A$, the following conditions are equivalent:
+\begin{enumerate}
+\item $A$ is totally $\Winfty$-aspherical in the sense of XII, Definition~1.
+\item $A$ is totally $W_{\mathbb Z}$-aspherical.
+\item $A$ is nonempty and connected, and satisfies $\mathcal P_{\mathbb Z}$.
+\item $A$ is nonempty and connected, and satisfies $\mathcal P_\infty$.
+\end{enumerate}
+In particular, this is a criterion in terms of all covariant set-valued diagrams on $A$, involving no quantification over target categories or final functors. Moreover every connected component of every $\operatorname{El}_A(H)$ is itself totally $\Winfty$-aspherical whenever $A$ is totally $\Winfty$-aspherical.
+\end{theorem}
+\begin{proof}
+The implication (1)$\Rightarrow$(2) follows because a weak homotopy equivalence induces an integral homology isomorphism. Assume (2). The identity functor is final, so $A$ is integrally acyclic and hence nonempty and connected. For any connected nonempty category of elements, the collage of Part~B is a final image of $A$. Its homotopy-pushout description gives the homology exact sequence
+\[
+ \cdots\to\widetilde H_{j+1}(BA_H;\mathbb Z)
+ \to\widetilde H_j(B\operatorname{El}_A H;\mathbb Z)
+ \to\widetilde H_j(BA;\mathbb Z)\to\cdots.
+\]
+Both outside terms vanish. For a component of an arbitrary $H$, first replace $H$ by its component subfunctor. This proves (3). Lemma~\ref{C:cyclic-covers} proves (3)$\Rightarrow$(4).
+
+Assume (4), and let $f:A\to B$ be any ordinary final functor. For $b\in B$, the category $b\backslash A$ is the category of elements of the covariant functor $a\mapsto\operatorname{Hom}_B(b,f(a))$. It is connected and nonempty by finality, and therefore weakly contractible by the hypothesis. Quillen's Theorem~A \citep[Section~1, Theorem~A]{Quillen1973} implies that the specified map $Bf$ is a weak homotopy equivalence. The constant singleton functor in (4) makes $BA$ weakly contractible. Thus $BB$ is weakly contractible, proving (1) by the comprehensive-factorization criterion. The final assertion follows from Lemma~\ref{C:inherit-elements} and (4).
+\end{proof}
+
+\begin{proposition}[Proved: exact integral colimits are sufficient]\label{C:exact-sufficient}
+Let $A$ be nonempty and connected. If $\colim_A:\Ab^A\to\Ab$ is exact, then $A$ is totally $\Winfty$-aspherical.
+\end{proposition}
+\begin{proof}
+For $H:A\to\Set$, define $\Sigma_H:\Ab^{\operatorname{El}_A(H)}\to\Ab^A$ by
+\[
+ (\Sigma_HF)(a)=\bigoplus_{h\in H(a)}F(a,h),
+\]
+with the transition maps specified in the proof of Lemma~\ref{C:inherit-elements}. It is exact because direct sums of abelian groups are exact. The universal property of a cocone gives the canonical natural isomorphism
+\[
+ \colim_{\operatorname{El}_A(H)}F
+   \cong\colim_A\Sigma_HF.
+\]
+Thus the colimit functor on each category of elements is exact, and the same is true on any one of its components, by extending diagrams by zero on the other components. The bar resolution computing derived colimits identifies
+$L_j\colim_E\underline{\mathbb Z}$ with $H_j(BE;\mathbb Z)$: its term in degree $j$ is the free abelian group on strings of $j$ composable arrows of $E$, and its differential is the alternating sum of the nerve faces. Exactness therefore makes every component $E$ integrally acyclic. Now apply Theorem~\ref{C:classification}.
+\end{proof}
+
+\subsection{An explicit nonfiltered totally aspherical category}
+
+\begin{definition}[Proved: the category of injective ordinals]\label{C:delta-definition}
+Let $\Delta_{\mathrm{inj}}$ have objects $[n]=\{0,\ldots,n\}$ for $n\geq0$, and all strictly increasing functions as arrows, with ordinary composition of functions. This is a countable small category. In the next construction $\mathbb Z[S]$ denotes the free abelian group on a set $S$, and the augmentation of a finite linear combination of arrows is the sum of its coefficients.
+\end{definition}
+
+The exact-colimit example is attributed to \citet{Isbell1974Exact} in \citet[Section~2.3, after Theorem~2.5]{Husainov2002Dimension}; its bibliographic record was verified, but the original article's body was not available in this run. We do not use that unavailable body as a proof. The following explicit verification uses polynomial interpolation. A CC0 AI-authored exposition containing the construction was found during the literature search \citep[Section~4]{OpenMaths2026Derived}; we independently verify its algebraic identities here and by the accompanying program \texttt{cd\_affine\_polynomials.py}. Its provenance is recorded in the report, and it is not used as an authority.
+
+\begin{lemma}[Proved: interpolation on coordinate hyperplanes]\label{C:interpolation}
+Let $F_0,\ldots,F_n$ be polynomials in $\mathbb Z[x_0,\ldots,x_n,u]$ such that $F_i-F_j\in(x_i,x_j)$ for every pair $i,j$. There exists $C$ in this polynomial ring with $C-F_i\in(x_i)$ for every $i$. If all $F_i$ are homogeneous of the same degree, $C$ can be chosen homogeneous of that degree.
+\end{lemma}
+\begin{proof}
+For a subset $S\subseteq\{0,\ldots,n\}$ let $\rho_S$ set $x_i=0$ for $i\in S$. For $S\ne\varnothing$, the value $\Phi_S=\rho_S(F_i)$ is independent of the choice of $i\in S$: the difference of two choices belongs to $(x_i,x_j)$ and is killed by $\rho_S$. Set
+\[
+ C=\sum_{\varnothing\ne S\subseteq\{0,\ldots,n\}}
+       (-1)^{|S|+1}\Phi_S.
+\]
+Modulo $(x_j)$ the terms indexed by $S$ and $S\cup\{j\}$ cancel whenever $j\notin S$ and $S\ne\varnothing$. The remaining term is $\Phi_{\{j\}}$, congruent to $F_j$. All substitutions preserve homogeneity.
+\end{proof}
+
+\begin{lemma}[Proved: normalized affine cones]\label{C:affine-cones}
+For every $n\geq0$ there are an integer $M\geq n$ and
+\[
+ t\in\mathbb Z[\operatorname{Hom}_{\Delta_{\mathrm{inj}}}([n],[M])]
+\]
+of augmentation $1$ such that $th=th'$ whenever $h,h':[m]\to[n]$ are parallel arrows. Here composition is extended bilinearly in the free preadditive category. For $n\geq1$ one can take $M=2^{n+1}-2$.
+\end{lemma}
+\begin{proof}
+We prove a polynomial assertion simultaneously for all integers $k\geq1$. For variables $z_0,\ldots,z_{n+1}$, let $D_i$ identify $z_i$ and $z_{i+1}$ and relabel the remaining variables in order as $y_0,\ldots,y_n$. We claim that there is a homogeneous integral polynomial $C_{n,k}$ with value $1$ when all variables are $1$, such that $y_i^kD_i(C_{n,k})$ is independent of $i$.
+
+For $n=0$, use $C_{0,k}=1$. Assume the assertion for $n-1$ and all $k$. Let $Q=C_{n-1,2k}$, expressed in the variables $y_0,\ldots,y_n$, and prescribe
+\[
+ D_i(C_{n,k})=F_i:=Q\prod_{l\ne i}y_l^k.
+\]
+These prescriptions agree on every pairwise intersection of the hyperplanes $z_i=z_{i+1}$. Indeed, for $i<j$, one must check $D_{j-1}(F_i)=D_i(F_j)$. If $j=i+1$, both omitted-variable products become $\prod_lw_l^k$ and the images of $Q$ agree. If $j\geq i+2$, put $p=i$, $q=j-1$. The two expressions are respectively
+\[
+ w_q^{2k}D_q(Q)\prod_{l\ne p,q}w_l^k,
+ \qquad
+ w_p^{2k}D_p(Q)\prod_{l\ne p,q}w_l^k,
+\]
+and are equal by induction. Choose homogeneous polynomial lifts of the $F_i$. The change of coordinates
+$x_i=z_i-z_{i+1}$, $u=z_{n+1}$ is invertible over $\mathbb Z$; the kernels of the $D_i$ are the coordinate ideals $(x_i)$. Lemma~\ref{C:interpolation} therefore supplies $C_{n,k}$. It has value $1$ at the all-ones point, and the required common expression is $Q\prod_l y_l^k$. Its degree satisfies
+\[
+ d(n,k)=d(n-1,2k)+nk=k(2^{n+1}-n-2).
+\]
+
+For an injection $g:[n]\to[M]$, let its gaps be
+\[
+ e_0=g(0),\quad e_i=g(i)-g(i-1)-1\ (1\leq i\leq n),
+ \quad e_{n+1}=M-g(n).
+\]
+This gives a bijection between injections and monomials of degree $M-n$ in $z_0,\ldots,z_{n+1}$. Extend it linearly, writing $P_t$ for the polynomial of an arrow combination $t$. If $\delta^i:[n-1]\to[n]$ omits $i$, deleting $g(i)$ merges two gaps and the deleted point; hence
+\[
+ P_{t\delta^i}=y_iD_i(P_t).
+\]
+Take $P_t=C_{n,1}$ and $M=n+d(n,1)$. Its augmentation is $1$, and all $t\delta^i$ agree.
+
+We finally check that this equalizes every parallel pair, rather than just the cofaces. If their common value is $s$, the relation
+$\delta^{b+1}\delta^a=\delta^a\delta^b$ for $a\leq b$ gives $s\delta^a=s\delta^b$. Induction on $n$ therefore shows that $s$ equalizes all parallel injections into $[n-1]$. Every proper injection into $[n]$ factors through a coface; factoring two such injections proves $th=th'$. The identity is the only injection $[n]\to[n]$. The case $n=0$ is immediate.
+\end{proof}
+
+\begin{theorem}[Refuted: total asphericity need not imply filteredness]\label{C:counterexample}
+The category $\Delta_{\mathrm{inj}}$ is totally $\Winfty$-aspherical and has exact colimits of abelian-group-valued diagrams, but is not filtered. Consequently Lead~4 for $\Winfty$ and manuscript row II-C-003 have a negative answer for arbitrary small categories.
+\end{theorem}
+\begin{proof}
+The affine category $\operatorname{Aff}_{\mathbb Z}(\Delta_{\mathrm{inj}})$, defined and analyzed in Theorem~\ref{D:affine-exactness}, has the same objects and all integral arrow combinations of augmentation $1$. Any two objects map to a common larger ordinal. Given two parallel affine arrows $\alpha,\beta:[m]\to[n]$, Lemma~\ref{C:affine-cones} provides $t$ for which $th$ is independent of the ordinary injection $h:[m]\to[n]$. Since the coefficients of both $\alpha$ and $\beta$ sum to $1$, we get $t\alpha=t\beta$. Thus the affine category is filtered. Theorem~\ref{D:affine-exactness} proves exactness of integral colimits. The original category is nonempty and connected, so Proposition~\ref{C:exact-sufficient} proves total $\Winfty$-asphericity.
+
+There are two distinct injections $a,b:[0]\to[1]$, taking $0$ to $0$ and $1$ respectively. Every arrow $c:[1]\to[n]$ is injective, so $ca\ne cb$. Hence this parallel pair has no equalizer by postcomposition, and the category is not filtered. This verifies every hypothesis and the failure in a completely specified countable category; no finite-to-infinite inference is involved.
+\end{proof}
+
+\subsection{Monoids and weakly terminal objects}
+
+
+
+\begin{lemma}[Proved: directedness and affine equalizers]\label{C:directed-affine}
+A totally $\Winfty$-aspherical category $A$ is nonempty, its objects have common successors, and for every parallel pair $a,b:p\to q$ there exist an object $r$ and an integral arrow combination $t\in\mathbb Z[A(q,r)]$ of augmentation $1$ satisfying $ta=tb$.
+\end{lemma}
+\begin{proof}
+Nonemptiness and connectedness follow from Theorem~\ref{C:classification}. We give a direct proof of the common-successor assertion. If two objects $a,b$ have no common successor, their upward closures $U_a,U_b$ are disjoint cosieves. Define $H:A\to\Set$ as the quotient of the constant two-element functor by identifying its two elements at precisely the objects in $U_a\cup U_b$. Thus $\operatorname{El}_A(H)$ is the double of $A$ glued along the disjoint cosieve $U_a\amalg U_b$. Its nerve is the corresponding union of two nerves: a chain meeting a cosieve stays in it, so no mixed chain is created. This is a homotopy pushout of spaces, since the nerve inclusions are monomorphisms. Each $BU_a$ and $BU_b$ is connected, because every object of $U_a$ receives an arrow from $a$, and similarly for $b$. Since $BA$ is contractible, the reduced Mayer--Vietoris sequence gives a nonzero $H_1$ of this double: the kernel of $H_0(BU_a\amalg BU_b;\mathbb Z)\to H_0(BA;\mathbb Z)^{\oplus2}$ contains $(1,-1)$. The double is connected, contradicting Theorem~\ref{C:classification}.
+
+Proposition~\ref{B:lead2} and that theorem show $I=\mathbb Z$. Thus a finite integer combination of the displayed relations has total weight $1$. Its finitely many target objects have a common successor by the first part. Postcompose each relation with a chosen arrow to that successor, multiply it by its integer coefficient, and add. This gives the required single $t$.
+\end{proof}
+
+\begin{lemma}[Proved: a signed-measure criterion for monoids]\label{C:monoid-lemma}
+Let $M$ be any small monoid, with multiplication $yx$ denoting composition of $x$ followed by $y$. Suppose that for every $x,a\in M$ there is $t\in\mathbb Z[M]$ with augmentation $1$ such that $tx=txa$. Then $M$, viewed as a one-object category, is filtered.
+\end{lemma}
+\begin{proof}
+Fix $x,a\in M$. Right multiplication $r_a:M\to M$, $m\mapsto ma$, is a map of sets. The element $v=tx$ is a finite-support integral signed measure of mass $1$, supported on the left ideal $Mx$, and satisfies $(r_a)_*v=v$.
+
+For any self-map $r:S\to S$, an invariant finite-support signed measure is supported on finite periodic orbits, and is constant on each orbit. To verify this without positivity, take its finite support $F$. Since $r_*v=v$, every element of $F$ has at least one predecessor in $F$. There are $|F|$ possible predecessors and $|F|$ required images, so the restriction $r|_F$ maps $F$ bijectively to itself. Thus $F$ is a union of finite cycles. The invariance equation makes the coefficient constant around each cycle. Consequently the mass is an integer linear combination of the cycle lengths.
+
+There is therefore a point of $Mx$ with a positive period under $r_a$. Choose the least attainable positive period $r$. If $r>1$, choose a prime divisor $\ell$ of $r$ and a point $z\in Mx$ of period $r$. Apply the hypothesis to $z,a$. The resulting mass-one invariant measure is supported in $Mz$; since its mass is an integral combination of its cycle lengths, at least one cycle has length $s$ not divisible by $\ell$. A point $w$ on that cycle belongs to $Mz$, so $wa^r=w$ as well as $wa^s=w$. Its positive period divides $\gcd(r,s)<r$, contradicting minimality. Thus some $y$ satisfies $yxa=yx$.
+
+Given $a,b\in M$, first choose $y$ with $ya=y$ by applying this conclusion with $x=1$. Apply it again with $x=y$ and the element $b$, obtaining $z$ with $zyb=zy$. Then $zya=zy=zyb$. This is the filteredness axiom for the pair $a,b$.
+\end{proof}
+
+\begin{theorem}[Proved: monoids and categories with a weakly terminal object]\label{C:weak-terminal}
+Let $A$ have a weakly terminal object $q$, meaning that $A(a,q)\ne\varnothing$ for every object $a$. Then $A$ is totally $\Winfty$-aspherical if and only if it is filtered. In particular the equivalence holds for every monoid and every category with finitely many objects, and hence for every category with finitely many arrows.
+\end{theorem}
+\begin{proof}
+The filtered-to-total implication is established in Part~A. For the converse, apply Lemma~\ref{C:directed-affine}. Given $x,a\in M=\operatorname{End}_A(q)$, it supplies an affine combination of arrows $q\to r$ annihilating $x-xa$. Choose an arrow $r\to q$ and postcompose. Lemma~\ref{C:monoid-lemma} then proves that $M$ is filtered.
+
+Let $a,b:p\to r$ be any parallel pair in $A$. Choose $d:r\to q$. There is an affine combination of arrows out of $q$ equalizing $da$ and $db$, and by weak terminality we may postcompose it back to $q$. Write the resulting combination as $t=\sum_{i=1}^N n_ic_i\in\mathbb Z[M]$, with $\sum_i n_i=1$ and $tda=tdb$. In a filtered monoid there exists $z$ with $zc_i=z$ for all $i$: successively equalize the finite family $c_i$ with the identity, preserving previous equalities by further left multiplication. Hence
+\[
+ zda=\sum_i n_izc_ida=\sum_i n_izc_idb=zdb.
+\]
+The arrow $zd:r\to q$ equalizes $a,b$. Together with nonemptiness and common successors, this proves that $A$ is filtered.
+
+If $A$ has finitely many objects and is total, repeated use of the common-successor property gives a weakly terminal object. The empty category is neither filtered nor total, so it causes no exception. A one-object category has a weakly terminal object without any finiteness assumption on its monoid.
+\end{proof}
+
+
+
+\begin{example}[Proved: the counterexample is not sifted]\label{C:not-sifted}
+The category $\Delta_{\mathrm{inj}}$ is not sifted. In the category of cospans from $[0],[0]$ to a common ordinal, a cospan is an ordinal with two distinguished points. Their comparison, $<$, $=$, or $>$, is invariant under every morphism of cospans, since all transition functions are injective and increasing. Each comparison class is connected: it receives the canonical cospan on $[1]$, $[0]$, or $[1]$ respectively, by the injection selecting the distinguished points. Thus this cospan category has exactly three connected components, and the diagonal is not final. This prevents an attempted proof of the open implication in Remark~\ref{D:exact-converse-open} by first asserting that totality forces siftedness.
+\end{example}

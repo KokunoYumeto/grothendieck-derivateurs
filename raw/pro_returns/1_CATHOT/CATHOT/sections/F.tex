@@ -1,0 +1,908 @@
+\partsection{F}{Finite tests and the information retained by higher morphisms}\label{sec:F}
+
+Let $\mathcal A_{\mathrm{cat}}\subset\Spc$ be a full, essentially small
+$\infty$-subcategory containing one representative of every weak homotopy
+type $BA$ with $A$ a category having finitely many objects and arrows.
+Let $\mathcal A_{\mathrm{fin}}\subset\Spc$ be the full subcategory of finite
+CW homotopy types. We choose compatible small skeleta when forming
+presheaf categories. The ordinary category called $\Hot_0$ in Chapter~V
+is $h\mathcal A_{\mathrm{cat}}$. Neither the word ``finite'' nor a
+statement about $\Ind$ will be allowed to identify these two subcategories.
+All the mapping spaces in this section are derived mapping spaces of
+unpointed spaces; brackets denote their components.
+
+\begin{claim}{F.1}{Proved}{The two relevant finiteness conditions}
+Every finite CW homotopy type is represented by a finite poset. A category
+with finitely many arrows has a nerve with a finite $2$-skeleton, so each
+component of its classifying space has finitely presented fundamental
+group. Its nerve need not be homotopy equivalent to a finite CW complex.
+In particular the one-object category $BC_2$, with arrows $1,g$ and
+$g^2=1$, is finite, whereas $B(BC_2)$ is not a compact object of $\Spc$.
+\end{claim}
+\begin{proof}
+A finite CW complex is homotopy equivalent to a finite simplicial complex
+$L$ by simplicial approximation and the mapping-cylinder construction;
+we use precisely the finite clause of \citet[Theorem~2C.5]{Hatcher2002}.
+For completeness, the inductive construction replaces each attaching map
+from a triangulated sphere by a simplicial approximation, and attaches a
+finite simplicial mapping cone. The homotopy between the attaching maps
+induces the comparison equivalence of their mapping cones. Finitely many
+cells require finitely many such replacements. The poset $P(L)$ of
+nonempty faces has nerve the barycentric subdivision of $L$, whose
+realization is homeomorphic to $|L|$. The empty space is represented by
+the empty poset.
+
+For a finite category $A$, its nondegenerate $1$-simplices are its
+nonidentity arrows and its nondegenerate $2$-simplices are composable
+pairs of nonidentity arrows. Both sets are finite. In any connected
+component, choose a maximal tree in the finite $1$-skeleton. The remaining
+edges are a finite set of fundamental-group generators and the finitely
+many $2$-simplices give a finite set of relations; cells of dimension
+at least three do not change the fundamental group. This also proves
+finiteness of the number of components.
+
+In the normalized mod-$2$ bar complex of $BC_2$ there is exactly one
+nondegenerate simplex $(g,\ldots,g)$ in every degree. Every internal face
+is degenerate, because it replaces $g,g$ by $1$, and the two end faces
+cancel modulo $2$. Consequently $H^q(B(BC_2);\mathbf F_2)\cong\mathbf F_2$
+for every $q\geq0$. This rules out finite CW homotopy type. More precisely,
+write $B(BC_2)\simeq\mathbf {RP}^{\infty}$ and use the filtered system
+$\mathbf {RP}^{r}\hookrightarrow\mathbf {RP}^{r+1}$. If its identity
+factored in $\Hot$ through any $\mathbf {RP}^{r}$, its pullback on
+$H^q(-;\mathbf F_2)$ for $q>r$ would be zero, contrary to the identity.
+Thus the canonical map
+\[
+ \colim_r[\mathbf {RP}^{\infty},\mathbf {RP}^{r}]
+ \longrightarrow
+ [\mathbf {RP}^{\infty},\mathbf {RP}^{\infty}]
+\]
+is not surjective. This proves noncompactness without replacing a
+specified comparison by an abstract bijection. The multiplication table,
+all associativity equations, and normalized boundaries through degree
+nine are checked in \texttt{code/f\_checks.py}; the preceding symbolic
+calculation proves the assertion in every degree. The cohomology-ring
+calculation is also \citet[Theorem~3.19]{Hatcher2002}.
+\end{proof}
+
+\subsection{Set-valued tests}
+
+Put
+\[
+ R_1^{\mathrm{cat}}:\Hot\longrightarrow
+ \Fun((h\mathcal A_{\mathrm{cat}})^{\op},\Set),
+ \qquad R_1^{\mathrm{cat}}(Y)(A)=[A,Y].
+\]
+The same notation with superscript $\mathrm{fin}$ uses
+$h\mathcal A_{\mathrm{fin}}$.
+
+\begin{claim}{F.2}{Refuted}{Faithfulness and conservativity of finite set-valued tests}
+Both $R_1^{\mathrm{cat}}$ and $R_1^{\mathrm{fin}}$ fail to be faithful
+and fail to be conservative. There is a single endomorphism
+$s_B:BG\to BG$ such that $s_B\ne\id_{BG}$, $s_B$ is not an isomorphism
+in $\Hot$, and both restricted functors send it to the identity.
+\end{claim}
+\begin{proof}
+Let $G$ be the group of permutations of $\N=\{0,1,\ldots\}$ with finite
+support. Define an injective group homomorphism $s:G\to G$ by
+\[
+ s(\sigma)(0)=0,\qquad s(\sigma)(i+1)=\sigma(i)+1.
+\]
+It is a homomorphism by substitution in the displayed formula. It is not
+surjective because its image fixes $0$, whereas $(0\ 1)\in G$ does not.
+Let $s_B=Bs$ be the map of classifying spaces, hence a morphism of
+$\Hot$. It cannot be an isomorphism because its map on the fundamental
+group is $s$.
+
+If $P$ is any finitely generated group and $\rho:P\to G$ a homomorphism,
+the supports of the images of finitely many generators have a finite
+union. Choose $m$ such that this union lies in $\{0,\ldots,m\}$. Every
+$\rho(p)$ fixes the complement of this set. For
+$c=(0\ 1\ \cdots\ m+1)$, considered as an element of $G$, direct
+conjugation gives
+\[
+       c\rho(p)c^{-1}=s(\rho(p))\qquad(p\in P).
+\]
+The program \texttt{f\_checks.py} verifies this identity for all
+$5913$ permutations supported on initial sets of sizes one through
+seven; the formula itself proves the identity for arbitrary finite
+support.
+
+For a connected CW complex $A$, the canonical classification of maps
+to a $1$-type gives
+\[
+ [A,BG]\cong\Hom(\pi_1(A,a),G)/G,
+\]
+where $G$ acts by conjugation. One obtains this classification by
+constructing the map on the $1$-skeleton from a homomorphism, extending
+across $2$-cells using its relations, and then extending uniquely up to
+homotopy over higher cells because $\pi_i(BG)=0$ for $i>1$.
+Changing the image-basepoint path is exactly conjugation. Thus the
+preceding calculation says $(s_B)_*=\id$ on $[A,BG]$ whenever
+$\pi_1(A,a)$ is finitely generated. Apply F.1 to every connected component
+of a finite-category nerve, or of a finite CW complex. Maps from a
+disjoint union are the product of maps from its components, and the
+empty test gives the singleton set. Hence the induced natural
+endomorphism of either restricted presheaf is the identity. It agrees
+with the image of $\id_{BG}$ although the two morphisms of $\Hot$ are
+distinct. This proves both failures.
+
+This is the finite-support instance attributed to
+\citet[Proposition~4.1]{MatumotoMinamiSugawara1984} by
+\citet[Remark~2.3]{ArlinChristensen2023}. We have checked the latter source;
+the former paper was not accessible in this run, so its bibliography
+entry is explicitly unverified. The proof above does not depend on
+that attribution.
+\end{proof}
+
+\begin{claim}{F.3}{Refuted}{Fullness of finite set-valued tests}
+The functors $R_1^{\mathrm{cat}}$ and $R_1^{\mathrm{fin}}$ are not full.
+This is a separate failure from F.2: there are natural transformations
+between their values which are not induced by any morphism in $\Hot$.
+\end{claim}
+\begin{proof}
+Choose an uncountable $\U$-small set $I$ and let $F_I$ be the free group
+with basis $\{x_i:i\in I\}$. Put $X=BF_I$ and keep the countable group
+$G$ from F.2. For each finite subset $J\subset I$, choose pairwise
+disjoint transpositions $t_j\in G$, $j\in J$, and let
+$\lambda_J:F_J\to G$ be the homomorphism with
+$\lambda_J(x_j)=t_j$. Two choices for the same finite labelled set are
+simultaneously conjugate in $G$: match the finitely many pairs in their
+supports and extend the resulting bijection by a permutation with finite
+support. The same observation says that, if $J\subset J'$, the
+restriction of $\lambda_{J'}$ to $F_J$ is conjugate to $\lambda_J$.
+
+For a connected test $A$ in either test category, a homomorphism
+$\rho:\pi_1(A,a)\to F_I$ has finitely generated image, and therefore
+its image lies in $F_J$ for a finite set of basis letters $J$. Define
+\[
+ \eta_A:[A,X]\longrightarrow[A,BG],
+ \qquad [\rho]\longmapsto[\lambda_J\rho].
+\]
+Passing to $J\cup J'$ proves independence of the chosen finite support.
+If $\rho$ is replaced by a conjugate $h\rho h^{-1}$ in $F_I$, enlarge
+$J$ to contain the finitely many letters of the word $h$; then applying
+$\lambda_J$ changes the image by conjugation by $\lambda_J(h)$.
+Thus $\eta_A$ is defined on free homotopy classes. Precomposing a
+group homomorphism with the homomorphism induced by a map of test
+spaces commutes with this construction; changes of basepoint are the
+same conjugacies already checked. On disconnected test spaces use the
+construction on each component. It respects maps which send different
+components to the same component, because each component is treated
+by precisely the same precomposition rule. For the empty test there
+is the unique function between singleton sets. We have therefore
+constructed an actual natural transformation, not merely a family of
+functions.
+
+Suppose $\eta$ were represented by $f:X\to BG$. Choose a group
+homomorphism $\lambda:F_I\to G$ representing $f$. Testing the loop
+$x_i$ by $S^1$ says that $\lambda(x_i)$ is a transposition. Testing
+the pair $x_i,x_j$ by $S^1\vee S^1$ says that the pair
+$(\lambda(x_i),\lambda(x_j))$ is simultaneously conjugate to two
+disjoint transpositions. In particular $\lambda(x_i)\ne\lambda(x_j)$
+when $i\ne j$. Both test spaces have finite poset presentations by
+F.1. Thus $i\mapsto\lambda(x_i)$ injects the uncountable set $I$ into
+the countable set $G$, a contradiction. All sets and classifying
+spaces used here belong to the fixed universe. We searched the primary
+sources listed in the report for this particular fullness argument;
+we do not attach a priority claim to it.
+\end{proof}
+
+\begin{claim}{F.4}{Known}{No small set of unpointed tests repairs conservativity}
+For every $\U$-small set $\mathcal G$ of $\U$-small spaces, there is
+an endomorphism $f:X\to X$ of a $\U$-small connected $1$-type which
+is not an isomorphism in $\Hot$ and satisfies
+$[S,f]=\id_{[S,X]}$ for every $S\in\mathcal G$. In particular no such
+set jointly reflects isomorphisms or separates all morphisms.
+\end{claim}
+\begin{proof}
+This is the construction proving
+\citet[Theorem~2.1]{ArlinChristensen2023}; we give its size argument.
+Choose an uncountable regular cardinal $\alpha\in\U$ strictly larger
+than the cardinality of $\pi_1(S,s)$ for every $S\in\mathcal G$ and
+every component basepoint $s$. The collection of these groups is a
+$\U$-small set, so a successor of a sufficiently large cardinal in
+$\U$ has this property. Regard $\alpha$ as its initial ordinal and put
+\[
+ H=\bigcup_{\beta<\alpha}\operatorname{Sym}(\beta)
+       \subset\operatorname{Sym}(\alpha),
+\]
+where each permutation fixes all ordinals outside $\beta$. This is a
+$\U$-small group. Let $j:\alpha\hookrightarrow\alpha$ send $\gamma$
+to $\gamma+1$. Define $s_H:H\to H$ by transporting a permutation along
+$j$ on the successor ordinals and fixing every limit ordinal, including
+$0$. Products are preserved, the map is injective, and it is not
+surjective because every image fixes $0$. A bounded support remains
+bounded after this operation, so it does map $H$ into $H$.
+
+If $|P|<\alpha$ and $\rho:P\to H$, regularity bounds the supports of
+all $\rho(p)$ in a single infinite limit ordinal $\beta<\alpha$.
+There is a permutation $\tau\in H$ with
+$\tau(j(\gamma))=\gamma$ for all $\gamma<\beta$: extend this
+bijection from $j(\beta)$ to $\beta$ over a sufficiently large
+bounded interval of cardinality $|\beta|$, using an extra interval
+of that cardinality to make the two complements equinumerous, and
+fix its complement in $\alpha$. The bound remains below $\alpha$
+because its cardinality is below $\alpha$. Since $s_H\rho(p)$ is
+supported on $j(\beta)$, we obtain
+$\tau s_H\rho(p)\tau^{-1}=\rho(p)$ on that support and on its
+complement. Thus $Bs_H$ induces the identity on maps from every
+connected component of every $S\in\mathcal G$. Products over the
+components finish the proof, including arbitrarily many components.
+\end{proof}
+
+\begin{claim}{F.5}{Known}{The stronger nonconcreteness obstruction}
+The category $\Hot$ admits no faithful functor to $\Set_{\U}$ with
+the usual fixed-universe interpretation. The obstruction already
+occurs on simply connected, finite-dimensional CW complexes. Therefore
+faithfulness of a restricted set-valued Yoneda functor cannot be
+obtained by substituting any other $\U$-small full test subcategory.
+\end{claim}
+\begin{proof}
+We use the main theorem of \citet[p.~1 and the conclusion on p.~5 of
+the 2004 reprint]{Freyd1970}. The theorem states the failure of every
+homotopy-invariant set-valued functor to separate a nonnull map from
+the null map. The construction on p.~5 works on $(r+3)$-dimensional,
+$r$-connected CW complexes for every $r\geq1$, so based versus
+unbased homotopy classes cause no exception. This is an invocation
+of the proved theorem, not a new proof of nonconcreteness. For a
+$\U$-small category $\mathcal A$, the functor
+\[
+ \Fun(\mathcal A^{\op},\Set_{\U})\longrightarrow\Set_{\U},
+ \qquad F\longmapsto\coprod_{A\in\Ob\mathcal A}F(A)
+\]
+is faithful: the tag $A$ retains the component of each natural
+transformation. A faithful restricted Yoneda functor followed by
+this functor would contradict Freyd's theorem.
+\end{proof}
+
+\begin{claim}{F.6}{Proved}{The telescope phantom and the failure of epimorphy}
+There is an essential unpointed map
+$c:T\to K(\Z,2)$, where
+$T=\operatorname{Tel}(S^1\xrightarrow{2}S^1\xrightarrow{2}\cdots)$,
+such that $c\circ a$ is nullhomotopic for every map $a:BA\to T$
+from a finite category. If $T_r$ denotes the $r$th finite
+subtelescope, the canonical map $(T_r)_r\to T$ in $\Ind(\Hot)$ is
+not an epimorphism.
+\end{claim}
+\begin{proof}
+The telescope has fundamental group $\Z[1/2]$ by van Kampen. Any
+map from a sphere of dimension at least two, and any specified
+nullhomotopy, lies in a finite subtelescope after cellular
+approximation; the latter retracts onto a circle. Hence
+$T\simeq K(\Z[1/2],1)$. Contracting the ray of vertices gives a
+homotopy equivalent CW complex with one vertex, loops $e_r$, and
+one $2$-cell for each relation $e_r=2e_{r+1}$ in its cellular
+boundary. Its cochain differential is
+\[
+ d:\prod_{r\geq0}\Z\longrightarrow\prod_{r\geq0}\Z,
+ \qquad d((b_r))=(b_r-2b_{r+1})_r.
+\]
+Consequently $H^2(T;\Z)=\operatorname{coker}d$. Set $a_{2j}=1$
+and $a_{2j+1}=0$. If $a=d(b)$, then for every $N\geq0$
+\[
+ b_0=\sum_{j=0}^{N}2^ja_j+2^{N+1}b_{N+1}.
+\]
+In the $2$-adic integers the right-hand partial sum tends to
+$1+4+16+\cdots=-1/3$. Since $\Z\hookrightarrow\Z_2$ is injective,
+this would give $3b_0=-1$ in $\Z$, which is impossible. Thus $[a]$
+is a specified nonzero element of $H^2(T;\Z)$. Its representing
+map $c$ exists by \citet[Theorem~4.57]{Hatcher2002}; that theorem
+also gives the unpointed identification because the target is
+simply connected. The entire cohomology group is
+$\Z_2/\Z$, as calculated in
+\citet[Examples~3F.7 and~3F.9]{Hatcher2002}, although nonvanishing
+alone suffices here.
+
+Every homomorphism from a finitely generated group into
+$\Z[1/2]$ has cyclic image, since finitely many denominators have
+a common power of two. F.1 and the classification of maps into a
+$1$-type therefore imply that a map $BA\to T$, on each connected
+component, factors in $\Hot$ through a circle or a point.
+Because $[S^1,K(\Z,2)]=0$, its composite with $c$ is nullhomotopic.
+No finite-dimensionality assertion about $BA$ is used. A finite
+subtelescope also retracts onto a circle, whence
+\[
+ \Hom_{\Ind(\Hot)}((T_r)_r,K(\Z,2))
+       =\lim_r[T_r,K(\Z,2)]=\{0\}.
+\]
+Precomposing the two distinct arrows $c,0:T\rightrightarrows K(\Z,2)$
+with $(T_r)_r\to T$ therefore makes them equal. This is precisely
+the failure of that arrow to be an epimorphism.
+\end{proof}
+
+\subsection{Space-valued tests}
+
+\begin{claim}{F.7}{Proved}{The exact Ind-completion assertion}
+In the fixed universe there is an equivalence
+\[
+ \Ind_{\omega}(\mathcal A_{\mathrm{fin}})\simeq\Spc
+\]
+whose restriction to $\mathcal A_{\mathrm{fin}}$ is its given
+inclusion. Thus
+\[
+ R_{\infty}^{\mathrm{fin}}:\Spc\longrightarrow
+ \Fun(\mathcal A_{\mathrm{fin}}^{\op},\Spc),
+ \qquad X\longmapsto\Map(-,X)|_{\mathcal A_{\mathrm{fin}}}
+\]
+is fully faithful. The compact objects of $\Spc$ are exactly the
+retracts in $\Spc$ of finite CW homotopy types; no assertion that
+all such retracts have finite CW type is needed.
+\end{claim}
+\begin{proof}
+The point is compact: its derived mapping-space functor is the
+identity. Mapping out of a finite homotopy colimit gives a finite
+homotopy limit, and filtered colimits of spaces commute with finite
+homotopy limits \citep[Proposition~5.3.3.3]{Lurie2009}. The latter statement can be checked on Kan models:
+a map from a finite simplicial set and any of its finitely many
+specified horn fillings occurs at one stage; equality and homotopies
+of such finite data occur at a later common stage. A finite CW
+complex is obtained from the empty space and points by finitely
+many homotopy pushouts attaching cells. Induction proves its
+compactness for filtered colimits of spaces, not just compactness
+of its set of homotopy classes.
+
+A simplicial model for any $\U$-small space is the union of its
+finite simplicial subsets. This union is filtered and is its
+homotopy colimit, since inclusions are cofibrations; its finite
+pieces have finite CW realizations. Hence finite CW homotopy types
+generate $\Spc$ under filtered colimits. These two facts verify
+all three hypotheses of
+\citet[Proposition~5.3.5.11(2)]{Lurie2009}, giving the claimed
+equivalence. Alternatively, if
+$X=\colim_iK_i$ and $Y=\colim_jL_j$ are such filtered presentations,
+compactness and the universal property of the source colimit give
+\[
+ \Map(X,Y)\simeq
+ \lim_i\Map(K_i,Y)\simeq
+ \lim_i\colim_j\Map(K_i,L_j),
+\]
+which is exactly the mapping-space formula in the Ind-category.
+These are canonical comparison equivalences, natural in both
+variables. The restricted Yoneda functor is the defining embedding
+of that Ind-category into presheaves.
+
+If $X$ is compact, compactness applied to its finite-piece
+presentation makes $\id_X$ factor in $\Hot$ through some $K_i$.
+The corresponding homotopy $r i\simeq\id_X$ gives a homotopy
+retract; replacing $i$ by its mapping cylinder realizes the retract
+datum in $\Spc$. Conversely a retract of a compact object is compact,
+because its mapping-space functor is a retract of the corresponding
+compact mapping-space functor. This is also the idempotent-completion
+statement \citet[Lemma~5.4.2.4]{Lurie2009}.
+\end{proof}
+
+\begin{claim}{F.8}{Proved}{Finite-category space-valued tests are dense, but are not all compact}
+The functor
+\[
+ R_{\infty}^{\mathrm{cat}}:\Spc\longrightarrow
+ \Fun(\mathcal A_{\mathrm{cat}}^{\op},\Spc)
+\]
+is fully faithful. Nevertheless the filtered-colimit extension
+$\Ind_{\omega}(\mathcal A_{\mathrm{cat}})\to\Spc$ of the inclusion
+is not an equivalence. Thus ``spaces are the Ind-completion of
+finite spaces'' proves the intended positive statement only after
+specifying finite CW homotopy types, or their retract completion,
+as the compact generators.
+\end{claim}
+\begin{proof}
+F.1 gives an inclusion
+$i:\mathcal A_{\mathrm{fin}}\hookrightarrow\mathcal A_{\mathrm{cat}}$.
+For $X\in\Spc$, the presheaf $R_{\infty}^{\mathrm{cat}}X$ is the
+right Kan extension of $R_{\infty}^{\mathrm{fin}}X$ along
+$i^{\op}$. Indeed at $A\in\mathcal A_{\mathrm{cat}}$ the
+right-Kan-extension formula is
+\[
+ \lim_{(K\to A)\in(\mathcal A_{\mathrm{fin}}/A)^{\op}}
+       \Map(K,X),
+\]
+where $\mathcal A_{\mathrm{fin}}/A=\mathcal A_{\mathrm{fin}}
+\times_{\Spc}\Spc_{/A}$. The density statement in F.7
+identifies this canonical limit with $\Map(A,X)$. Restriction
+followed by this right Kan extension is the identity on these
+presheaves; right Kan extension along a fully faithful inclusion
+is fully faithful. Therefore, using F.7, maps between
+$R_{\infty}^{\mathrm{cat}}X$ and $R_{\infty}^{\mathrm{cat}}Y$
+are exactly maps $X\to Y$, with their entire mapping spaces.
+
+Every representable object of
+$\Ind_{\omega}(\mathcal A_{\mathrm{cat}})$ is compact. An
+equivalence extending the inclusion would consequently make
+$B(BC_2)$ compact in $\Spc$, contrary to F.1. The negative
+assertion concerns the specified extension of the inclusion;
+we do not infer it merely from the fact that a nerve is
+infinite-dimensional.
+\end{proof}
+
+\subsection{Finite categorical height}
+
+For each integer $n\geq1$, let $h_n\Spc$ have the same objects as
+$\Spc$ and mapping spaces $\tau_{\leq n-1}\Map(X,Y)$. We use
+``$n$-category'' in this $(n,1)$ sense. This convention retains
+homotopy classes of homotopies at $n=2$; it does not mean the
+category of $n$-truncated spaces. For either test subcategory
+$\mathcal A$, put
+\[
+ R_n^{\mathcal A}(X)=
+ \tau_{\leq n-1}\Map(-,X)|_{\mathcal A}
+ \ \in\ \mathcal P_{n-1}(\mathcal A)
+ :=\Fun(\mathcal A^{\op},\Spc_{\leq n-1}).
+\]
+Because the target is an $n$-category this functor factors through
+$h_n\Spc$. The associated functor on the homotopy category has
+maps given by coherent natural transformations modulo coherent
+homotopy. At $n=2$ these are pseudonatural transformations and
+modifications in an equivalent groupoid-enriched model. In
+particular, a collection of unrelated homotopies at individual
+test spaces is not a modification.
+
+\begin{claim}{F.9}{Known}{Conservativity returns at height two}
+For every integer $n\geq2$, both $R_n^{\mathrm{fin}}$ and
+$R_n^{\mathrm{cat}}$ reflect equivalences. In fact a map
+$f:X\to Y$ is a weak equivalence if
+\[
+ \Pi_1\Map(S^r,f):\Pi_1\Map(S^r,X)
+             \longrightarrow\Pi_1\Map(S^r,Y)
+\]
+is an equivalence of groupoids for every $r\geq0$.
+\end{claim}
+\begin{proof}
+The second assertion is
+\citet[Theorem~4.3]{ArlinChristensen2023}. We give a direct proof
+which also checks disconnected and empty spaces. The point is a
+retract of $S^0$, so the hypothesis implies that
+$\Pi_1 f:\Pi_1X\to\Pi_1Y$ is an equivalence. Thus $f$ is a
+bijection on components and an isomorphism on every based
+fundamental group. If one space is empty, the other is empty and
+there is nothing further to prove. Fix a component and a basepoint
+$x\in X$, and use $f$ to identify the two fundamental groups with
+a group $\Gamma$.
+
+For $r\geq2$, free homotopy classes of maps from $S^r$ into this
+component are the orbit set of $\pi_r(X,x)$ under the
+$\Gamma$-action. This follows by recording the path traced by
+the basepoint during a free homotopy. The map
+$u_r:\pi_r(X,x)\to\pi_r(Y,f(x))$ is a
+$\Gamma$-equivariant group homomorphism, and the hypothesis gives
+a bijection of its orbit sets. Surjectivity of the orbit map
+implies surjectivity of $u_r$: write a target element as
+$\gamma u_r(a)=u_r(\gamma a)$. If $u_r(a)=0$, injectivity of the
+orbit map forces the orbit of $a$ to equal the orbit of $0$,
+which is the singleton $\{0\}$. Thus the kernel is zero and
+$u_r$ is injective. This proves the isomorphism on every
+homotopy group, hence the weak equivalence. For $n>2$ apply
+$\tau_{\leq1}$ to the assumed equivalences of mapping
+$(n-1)$-types, and use the case just proved. Spheres and the
+point have finite poset presentations, so both test categories
+contain all the tests used.
+\end{proof}
+
+\begin{claim}{F.10}{Refuted}{Faithfulness at the highest retained dimension}
+For every finite $n\geq1$, neither $R_n^{\mathrm{fin}}$ nor
+$R_n^{\mathrm{cat}}$ is faithful on the highest retained
+morphisms. More precisely, for $T$ from F.6, $Y_n=K(\Z,n+1)$,
+and the constant map $0:T\to Y_n$, the comparison on
+$\pi_{n-1}$ of mapping spaces has a nonzero kernel. For $n=1$
+this means the map on components. Consequently these functors
+are not fully faithful as $n$-functors for any finite $n$.
+\end{claim}
+\begin{proof}
+Let $\alpha\ne0$ be the class in $H^2(T;\Z)$ constructed in F.6.
+For $n\geq2$, the exponential adjunction and the Eilenberg--Mac~Lane
+classification give
+\[
+ \pi_{n-1}\Map(T,K(\Z,n+1),0)
+   \cong H^{n+1}(S^{n-1}\times T,\{*\}\times T;\Z)
+   \cong H^2(T;\Z).
+\]
+The second isomorphism is the relative suspension isomorphism;
+its integral sphere factor is free, so no Tor term occurs. The
+first classifies families based at the constant map. At $n=1$
+use $[T,K(\Z,2)]=H^2(T;\Z)$ instead. Pulling back this class
+along any $a:A\to T$ from either finite-test category gives
+$a^*\alpha=0$ by F.6. Hence the associated top-dimensional
+morphism becomes zero at every object and every mapping-space
+component of the test presheaf.
+
+A top-dimensional morphism between maps of $(n-1)$-truncated
+presheaves is determined by these components. One can see this
+without a strict-model convention: its $(n-1)$-fold loop space
+is a limit of discrete spaces, so evaluation at all objects and
+all mapping components is injective on its set of points.
+Therefore the image of $\alpha$ is zero as a coherent
+presheaf morphism, not just at a selected basepoint. Since
+$\alpha$ was nonzero before applying $R_n$, the asserted kernel
+is nonzero. For $n=2$ this is an explicit phantom homotopy,
+namely a nonidentity automorphism of the constant map in the
+fundamental groupoid of $\Map(T,K(\Z,3))$.
+\end{proof}
+
+\begin{claim}{F.11}{Proved}{A precise gain for countable sources}
+Let $X$ have countable CW homotopy type, let $Y$ be any $\U$-small
+space, let $n\geq1$, and use finite CW tests. The canonical map
+\[
+ \theta_n:\tau_{\leq n-1}\Map(X,Y)
+   \longrightarrow
+ \Map_{\mathcal P_{n-1}(\mathcal A_{\mathrm{fin}})}
+       (R_n^{\mathrm{fin}}X,R_n^{\mathrm{fin}}Y)
+\]
+is surjective on components. It induces isomorphisms on
+$\pi_k$ for $0\leq k<n-1$ and surjections on $\pi_{n-1}$,
+with basepoints wherever required. In particular coherent
+height-two finite CW tests determine equality of homotopy
+classes of maps with countable CW source. The same conclusion
+about equality holds if one is given coherent tests on all
+finite-category homotopy types.
+\end{claim}
+\begin{proof}
+Choose finite subcomplexes
+$K_0\subset K_1\subset\cdots$ exhausting a countable CW model
+for $X$. Such an exhaustion exists by closure-finiteness and a
+countable enumeration of its cells. These inclusions are
+cofibrations, so the union is the homotopy colimit and
+\[
+ \Map(X,Y)\simeq\lim_r\Map(K_r,Y).
+\]
+Compactness of each test $A\in\mathcal A_{\mathrm{fin}}$ gives
+$R_{\infty}^{\mathrm{fin}}X\simeq
+\colim_r R_{\infty}^{\mathrm{fin}}K_r$ in the presheaf
+$\infty$-category. Objectwise truncation is left adjoint to
+inclusion of truncated presheaves. Combining that adjunction
+with the preceding colimit and Yoneda gives a canonical
+equivalence
+\[
+ \Map_{\mathcal P_{n-1}}(R_nX,R_nY)
+      \simeq\lim_r\tau_{\leq n-1}\Map(K_r,Y).
+\]
+Under these identifications $\theta_n$ is precisely the
+comparison between truncating a homotopy inverse limit and
+taking the homotopy inverse limit of the truncations.
+
+Write $m=n-1$. Each map
+$\Map(K_r,Y)\to\tau_{\leq m}\Map(K_r,Y)$ has
+$m$-connected homotopy fibres. Over any point of the
+homotopy limit of the targets, the homotopy fibre of the
+comparison is a homotopy inverse limit of a tower of
+$m$-connected nonempty spaces. A tower of nonempty connected
+spaces has nonempty homotopy inverse limit: after replacing
+bonding maps by fibrations, choose points and their path lifts
+recursively. More generally, the homotopy inverse limit of a
+tower of $m$-connected spaces is $(m-1)$-connected. This
+follows either by the same recursive extension over spheres,
+or from the homotopy-limit fibre description as the homotopy
+equalizer of the identity and shift on the product, whose long
+exact sequence has zero homotopy groups in degrees below $m$.
+For $m=0$ the assertion is only nonemptiness. Thus the
+comparison is $m$-connected, which yields exactly the
+surjectivity and isomorphisms stated. Truncating its source
+at $m$ does not change these groups.
+
+For $n=2$ the map on $\pi_0$ is a bijection. Thus a coherent
+natural equivalence between the two images of maps
+$f,g:X\to Y$ implies $f=g$ in $\Hot$. If the coherent
+equivalence was given on $\mathcal A_{\mathrm{cat}}$, restrict
+it to $\mathcal A_{\mathrm{fin}}$ before applying this
+argument. We do not infer a fullness assertion on
+$\mathcal A_{\mathrm{cat}}$, since its noncompact tests do not
+satisfy the colimit comparison used above. F.10 shows that the
+possible failure of injectivity on the highest group is real,
+even for this countable source.
+\end{proof}
+
+\begin{claim}{F.12}{Refuted}{Ordinary fullness and faithfulness at every finite height}
+For every finite $n\geq2$, neither $hR_n^{\mathrm{fin}}$ nor
+$hR_n^{\mathrm{cat}}$ is full or faithful on the ordinary sets
+of homotopy classes of maps. Nonfaithfulness has examples whose
+source has CW cardinality $\aleph_{n-1}$; nonfullness has examples
+whose source has CW cardinality $\aleph_n$. Moreover, for each
+$0\leq k\leq n-1$, the map on the retained $\pi_k$ of a mapping
+space can fail to be injective. All the groups, modules, and spaces
+in these examples are $\U$-small.
+\end{claim}
+\begin{proof}
+We first record the group-cohomological input and its cardinal control.
+For $d\geq1$, put
+\[
+ G_d=\bigoplus_{\aleph_{d-1}}\Z/2.
+\]
+This is a locally finite abelian group of cardinality $\aleph_{d-1}$.
+The established theorem
+\citet[Corollary~6.10(2)]{BC_DKLT2002}, attributed there to Chen,
+states that a torsion abelian group $G$ of cardinality $\aleph_r$
+has cohomological dimension $r+1$ over any nonzero ring in which
+the orders of its finite subgroups are invertible. In particular
+\[
+       \operatorname{cd}_{\Q}G_d=d.
+\]
+Thus there is a $\Q G_d$-module $M$ with
+$H^d(G_d;M)\ne0$. We can choose such an $M$ of cardinality at
+most $\aleph_{d-1}$: in the rational free bar resolution of the
+trivial module $\Q$, let $\Omega^i\Q$ be its $i$th syzygy and
+put $M=\Omega^d\Q$. The sequence
+\[
+ 0\longrightarrow\Omega^d\Q\longrightarrow P_{d-1}
+   \longrightarrow\Omega^{d-1}\Q\longrightarrow0
+\]
+does not split, since $\Omega^{d-1}\Q$ is not projective when
+$\operatorname{pd}_{\Q G_d}\Q=d$. Its nonzero extension class
+corresponds, by dimension shifting, to a nonzero element of
+$\operatorname{Ext}^d_{\Q G_d}(\Q,M)=H^d(G_d;M)$.
+Each bar module has cardinality $\aleph_{d-1}$, so the syzygies
+have the required bound. For $d=2$ one may more explicitly take
+$M=\Q G_2$, since \citet[Theorem~5.4]{BC_DKLT2002} proves that
+$H^2(G_2;\Q G_2)\ne0$. These are invocations of the cited proved
+group-cohomology theorems, not of Holt's conjectures for general
+locally finite groups.
+
+For a $\Q G$-module $M$ and $r\geq2$, write
+\[
+ L_G(M,r)=EG\times_G K(M,r)\longrightarrow BG
+\]
+for the split Eilenberg--Mac~Lane fibration, where the action on
+$M$ is realized functorially on the simplicial abelian group
+$K(M,r)$. It has the zero section. Its derived space of sections
+over $BH\to BG$, for any subgroup $H\leq G$, is
+\[
+ \Gamma_H(M,r)=\Map_H(EH,K(M,r)),\qquad
+ \pi_i\Gamma_H(M,r)=H^{r-i}(H;M)\quad(0\leq i\leq r),
+ \tag{F.12a}
+\]
+and its homotopy groups above degree $r$ vanish. The equation for
+$i=0$ is the classification of components as an abelian group.
+One explicit verification uses the free simplicial $\Q H$-module
+on $EH$: its normalized complex is the rational bar resolution.
+Equivariant maps to the Dold--Kan model of $M[r]$ give the good
+nonnegative truncation of the cochain complex
+$\Hom_{\Q H}(P_\bullet,M)$ shifted by $r$. Its homology in
+degree $i$ is precisely $H^{r-i}(H;M)$. This proves (F.12a),
+including its naturality under restriction of subgroups.
+When $H$ is finite, the invariants functor on $\Q H$-modules is
+exact: an arbitrary lift of an invariant vector can be averaged
+by $|H|^{-1}\sum_{h\in H}h$. Consequently
+\[
+ H^j(H;M)=0\ (j>0),\qquad
+       \Gamma_H(M,r)\simeq K(M^H,r).
+ \tag{F.12b}
+\]
+
+We next explain why this calculation controls coherent natural
+transformations, rather than merely their values at individual tests.
+Fix $n\geq2$, put $m=n-1$, and abbreviate
+$\mathcal P_m(\mathcal A_{\mathrm{cat}})$ to $\mathcal P_m$.
+For a locally finite group $G$, let $\mathcal F(G)$ be the filtered
+poset of its finite subgroups. There is a canonical equivalence
+\[
+ R_n^{\mathrm{cat}}(BG)
+     \simeq\colim_{H\in\mathcal F(G)}R_n^{\mathrm{cat}}(BH).
+ \tag{F.12c}
+\]
+To verify this, evaluate first before truncation at a finite-category
+test $A$. Each component of $A$ has finitely generated fundamental
+group by F.1. Maps from that component to $BG$ form the groupoid
+of group homomorphisms to $G$ and conjugating elements in $G$.
+A homomorphism has finite image, since $G$ is locally finite,
+and finitely many specified conjugating elements lie in a common
+finite subgroup with that image. Thus this mapping groupoid is
+the filtered colimit of the corresponding mapping groupoids for
+$BH$. There are only finitely many components of $A$, so the
+same assertion holds for the product over its components.
+Taking nerves verifies the assertion on mapping spaces. Objectwise
+truncation preserves colimits into $\mathcal P_m$, giving (F.12c).
+
+Let $p:E\to BG$ be a fibration and consider the space of sections
+of its image in $\mathcal P_m$. By (F.12c) and the universal
+property of a colimit in the slice category, it is
+\[
+ \begin{aligned}
+ &\Map_{\mathcal P_m/R_nBG}(R_nBG,R_nE)\\
+ &\qquad\simeq
+ \lim_{H\in\mathcal F(G)^{\op}}
+ \operatorname{hofib}_{BH\hookrightarrow BG}
+ \left(\tau_{\leq m}\Map(BH,E)
+          \longrightarrow\Map(BH,BG)\right).
+ \end{aligned}
+ \tag{F.12d}
+\]
+Here $BH$ is itself a finite-category test, so truncated Yoneda
+identifies the first mapping space inside each fibre exactly.
+The second mapping space is a $1$-type, already $m$-truncated.
+For a map with $m$-truncated base, taking the homotopy fibre
+commutes with $m$-truncation of its total space. This follows
+from the homotopy-group exact sequence, since the base has no
+homotopy groups above degree $m$. Hence each term of (F.12d)
+is $\tau_{\leq m}$ of the actual space of sections of $p$ over
+$BH$. In particular, if those section spaces have homotopy type
+$K(M^H,r)$ with $r>m$, every term of (F.12d) is contractible,
+and so is their limit. This last conclusion is a fully coherent
+statement; no compatible choice of individual nullhomotopies
+has been assumed.
+
+For nonfaithfulness, take $G=G_n$ and a nonzero
+$\alpha\in H^n(G;M)$ as above, and put $E=L_G(M,n)$.
+The zero section $s_0$ and a section $s_\alpha$ representing
+$\alpha$ are different components of the actual section space
+by (F.12a). They also determine different \emph{unpointed} homotopy
+classes $BG\to E$. Indeed, the homotopy fibre sequence
+\[
+ \Gamma_G(M,n)\longrightarrow\Map(BG,E)
+       \xrightarrow{p_*}\Map(BG,BG)
+\]
+shows that two fibre components can merge in the total space
+only if they belong to the same orbit of
+$\pi_1(\Map(BG,BG),\id)$. Composition with $s_0$ is a section
+of $p_*$, so every loop of the base lifts to a loop at $s_0$.
+Its action fixes the zero component. That orbit is a singleton,
+and cannot contain $\alpha\ne0$.
+On the other hand, (F.12b)--(F.12d) make the space of sections
+of $R_np$ contractible. The two induced transformations are
+therefore homotopic in $\mathcal P_m$. This proves failure of
+ordinary faithfulness for finite-category tests. Restricting
+the coherent homotopy proves the same failure for finite CW
+tests.
+
+For the additional assertion about every retained homotopy group,
+keep $G=G_n$ and replace $E$ by $L_G(M,n+k)$ for
+$1\leq k\leq n-1$. Formula (F.12a) puts the nonzero group
+$H^n(G;M)$ in $\pi_k$ of its section space at zero.
+The base $\Map(BG,BG)$ is a $1$-type, so the fibre exact
+sequence injects this group into $\pi_k\Map(BG,E)$; for
+$k\geq2$ it is an isomorphism onto that homotopy group.
+Formula (F.12d) again makes the presheaf section space
+contractible, so this nonzero element maps to zero.
+
+For nonfullness, take $G=G_{n+1}$ and choose
+$0\ne\beta\in H^{n+1}(G;M)$ with the same cardinal control.
+Let $z,s_\beta$ be the zero and $\beta$ sections of
+$L_G(M,n+1)\to BG$. Define $E_\beta\to BG$ to be the
+fibrewise path fibration whose fibre at $b$ consists of paths
+in the fibre of $L_G(M,n+1)$ from $z(b)$ to $s_\beta(b)$.
+Its fibres are $K(M,n)$, and a homotopy section would give a
+path from $z$ to $s_\beta$ in $\Gamma_G(M,n+1)$, contradicting
+$\beta\ne0$. Thus $E_\beta\to BG$ has no homotopy section.
+For finite $H\leq G$, (F.12b) implies that the two restricted
+sections are connected by a path, and their path space has
+homotopy type $K(M^H,n)$. Formula (F.12d) therefore provides
+a section
+\[
+ \eta:R_nBG\longrightarrow R_nE_\beta
+ \quad\text{with}\quad R_np\circ\eta\simeq\id_{R_nBG}
+\]
+in $\mathcal P_m$.
+
+This section cannot be induced, even up to coherent homotopy,
+by a map $f:BG\to E_\beta$. The reason, valid for either test
+category $\mathcal A$, is the exact comparison for any $1$-type
+$Z$ and $n\geq2$:
+\[
+\begin{split}
+ \Map_{\mathcal P_m(\mathcal A)}(R_nX,R_nZ)
+ &\simeq
+ \Map_{\Fun(\mathcal A^{\op},\Spc)}
+                 (R_\infty X,R_\infty Z)\\
+ &\simeq\Map(X,Z).
+\end{split}
+ \tag{F.12e}
+\]
+The first equivalence is the truncation adjunction, because
+$R_\infty Z$ already takes values in $1$-types; the second
+is F.7 or F.8. If $R_nf\simeq\eta$, (F.12e) applied to
+$Z=BG$ would give $pf\simeq\id_{BG}$, an impossible homotopy
+section. Thus $hR_n^{\mathrm{cat}}$ is not full. Restrict
+$\eta$ to finite CW tests; the same argument using (F.12e)
+shows that it has no lift there either. Finally, the bar and
+Eilenberg--Mac~Lane constructions and the finite homotopy
+pullbacks used above preserve the indicated infinite cardinal
+bounds. The entire construction remains in $\U$.
+\end{proof}
+
+This counterexample identifies why the tower argument in F.11 cannot
+be extended to arbitrary filtered indexing categories. The canonical
+comparison for finite CW tests remains
+\[
+ \tau_{\leq n-1}\lim_{i\in I^{\op}}\Map(K_i,Y)
+   \longrightarrow
+ \lim_{i\in I^{\op}}\tau_{\leq n-1}\Map(K_i,Y),
+\]
+but F.12 supplies actual failures of both injectivity and surjectivity
+on its components. At height two the nonfaithful source has cardinality
+$\aleph_1$, so the countable-source restriction in F.11 cannot simply
+be removed. The higher Brown representability theorem
+\citep[Theorem~4.2.11]{NguyenRaptisSchrade2022} concerns functors
+on the full $n$-category satisfying its exactness hypotheses; it
+does not assert fullness of these restricted finite-test presheaves.
+Likewise the conservative comparison theorems in
+\citet[Theorems~35 and~37]{Arlin2020} do not assert that these
+ordinary morphism sets are faithfully represented.
+
+\begin{center}
+\begin{tabular}{L{0.16\linewidth}L{0.18\linewidth}L{0.22\linewidth}L{0.30\linewidth}}
+\hline
+Height & Equivalence detection & Highest-dimensional faithfulness & Ordinary map-class fullness and faithfulness\\
+\hline
+$n=1$ & False (F.2) & False (F.2) & Both false (F.2--F.3)\\
+$2\leq n<\infty$ & True (F.9) & False (F.10, F.12) & Both false in general (F.12); finite CW tests give both for countable sources (F.11)\\
+$n=\infty$ & True & True & Fully faithful, including every coherence (F.7--F.8)\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{The identities sought in Chapters VII and IX}
+
+\begin{claim}{F.13}{Proved}{What testing can justify for composition and reversal}
+Let $P$ be a space with a specified morphism
+$m:P\times P\to P$ in $\Hot$, and let $T:P\to P$ be a
+specified endomorphism. Equality of the two associativity
+composites, or of $T^2$ and $\id_P$, does not follow in general
+from equality after every finite set-valued test. For each fixed
+finite height there are actual operations and endomorphisms for
+which the corresponding coherent finite-test identities hold
+but these identities in $\Hot$ fail. A coherent
+homotopy of their space-valued finite-test natural
+transformations does imply the corresponding equality in
+$\Hot$. A coherent height-two finite-test homotopy suffices
+when the source of the proposed equality has countable CW
+homotopy type. For arbitrary sources no fixed finite height
+supplies a general equality criterion: F.12 gives distinct
+ordinary homotopy classes with coherently identical finite tests
+at every prescribed finite height.
+\end{claim}
+\begin{proof}
+The associativity composites are the two typed maps
+\[
+ m\circ(m\times\id_P),\quad m\circ(\id_P\times m):
+                  P\times P\times P\longrightarrow P
+\]
+in $\Hot$, using its Cartesian product. The reversal identity
+compares $T\circ T,\id_P:P\to P$.
+
+For a literal counterexample to both implications, fix $n\geq2$
+and use the split fibration $p:E=L_G(M,n)\to BG$ and
+$0\ne\alpha\in H^n(G;M)$ in F.12. Translation by the section
+$s_\alpha$ defines a fibrewise automorphism
+$T=t_\alpha:E\to E$, with inverse $t_{-\alpha}$.
+F.12 gives a coherent path $R_ns_\alpha\simeq R_ns_0$ over
+$R_nBG$. The functor $R_n$ preserves the fibre products over
+$BG$ used in fibrewise addition: at each test the base mapping
+space is a $1$-type, and truncation at $n-1\geq1$ preserves
+such pullbacks. Therefore $R_nT\simeq\id_{R_nE}$.
+But $T^2s_0=s_{2\alpha}$ is not homotopic to $s_0$ by the
+unpointed argument in F.12, since the rational vector space
+$H^n(G;M)$ has $2\alpha\ne0$. Thus $T^2\ne\id_E$.
+Now put $m=T\circ\operatorname{pr}_1:E\times E\to E$.
+Its finite-test image is coherently homotopic to
+$\operatorname{pr}_1$, an associative operation. Its actual
+associators are $T^2\operatorname{pr}_1$ and
+$T\operatorname{pr}_1$ on $E^3$. If they were homotopic,
+fixing the other two coordinates and composing with $T^{-1}$
+would give $T\simeq\id_E$, contrary to
+$Ts_0=s_\alpha\not\simeq s_0$. These examples also give
+height-one false positives by applying $\pi_0$ to the
+height-two coherent comparison. They refute the proposed
+general testing implications, without asserting a failure of
+any particular geometrically defined path operation.
+
+A coherent space-valued homotopy
+is a path in the mapping space of presheaves between the two
+induced natural transformations. F.7 or F.8 identifies that
+path with a homotopy of the original maps, proving their
+equality in $\Hot$. If the domain is countable CW, F.11
+already gives the required injectivity on $\pi_0$ at height
+two. An equivalence-detection theorem has a premise about
+invertibility of a single morphism and a conclusion about its
+invertibility; it cannot be substituted for this premise
+about a path between two parallel morphisms.
+
+For the applications at VII ms.~127, VII ms.~150, and IX
+ms.~13, one can therefore use a geometrically constructed
+associator or reversal homotopy directly, or retain the
+coherent data required by the preceding tests. Merely checking
+that each finite family of paths gives equal elements of a
+set supplies no such coherent datum. In a strict Moore-path
+model, concatenation is an actual associative operation
+because lengths add and functions are joined on successive
+intervals; reversal of a path twice is the original path.
+Transferring those identities to a manuscript model still
+requires the specified comparison equivalence and
+compatibility of its composition and reversal maps. The
+testing theorem neither constructs that comparison nor
+makes its compatibility automatic.
+\end{proof}

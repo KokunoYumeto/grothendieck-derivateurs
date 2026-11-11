@@ -136,6 +136,12 @@ Source: `companion/`
   consecutive parts both contain are set once in the book. Seven such pairs, which involve the parts added in
   this release (Chapters II, XV, XVII and XVIII), are not merged yet: the book sets their pages in both parts.
 
+## Raw research outputs
+
+[`raw/`](raw/README.md) holds raw research outputs, not edited for publication: the answers of GPT-6 Astra (ChatGPT
+Pro mode) to eight research prompts on open questions of the manuscript, their reviews by Claude Fable 5.2, the prompts
+with everything they attached, and [how this was done](raw/METHODOLOGY.md).
+
 ## Building
 
 Both books need LuaLaTeX (TeX Live 2025 or later, with `fontspec`, `babel-french`, `tikz-cd`, `luacode`); the companion

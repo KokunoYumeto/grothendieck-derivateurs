@@ -1,0 +1,77 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/09]
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage{hyperref}
+\RequirePackage{etoolbox}
+\AtBeginEnvironment{thebibliography}{\raggedright}
+\hypersetup{hidelinks,pdftitle={Les Derivateurs: Chapter VI-c, critical reader},pdfauthor={GPT-6 Astra (OpenAI)}}
+\definecolor{dcbar}{gray}{0.55}
+% Exact substring anchors may contain TeX syntax. Only the manuscript page
+% is printed; the complete anchor remains in blocks.tex for the assembler.
+\def\dcpageonly#1:#2\@nil{#1}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+\newenvironment{dcomment}[3]{%
+  \par\medskip
+  \edef\dcms{\expandafter\dcpageonly\detokenize{#2}:\@nil}%
+  \phantomsection\addcontentsline{toc}{subsection}{\dcms: #3}%
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \selectlanguage{english}%
+  \small\noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[ms.~\expandafter\dcpageonly\detokenize{#2}:\@nil]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}
+\AtBeginDocument{%
+  \begingroup\selectlanguage{english}
+  \hypersetup{pageanchor=false}
+  \begin{titlepage}
+    \vspace*{18mm}
+    {\large Alexander Grothendieck\par}
+    \vspace{7mm}
+    {\Huge\bfseries Les Dérivateurs\par}
+    \vspace{4mm}
+    {\LARGE Chapter VI, part c\par}
+    \vspace{12mm}
+    {\Large Critical reader and mathematical commentary\par}
+    \vspace{8mm}
+    {\large Manuscript pages 138--204\par}
+    \vspace{12mm}
+    \hrule\vspace{5mm}
+    The French text follows the electronic edition. Commentary in English is
+    set apart by a vertical rule. Manuscript page locators appear in the right
+    margin, and printed edition page locators in the left margin.
+    \par\medskip
+    The audit distinguishes the argument present in the manuscript from later
+    repairs. Results marked \ours\ identify proofs supplied by the commentators;
+    the mark makes no claim of historical priority.
+    \par\medskip
+    The accompanying tables record 235 mathematical entries and 61 textual
+    records. Four transcription readings are corrected; printed mathematical
+    slips are retained and explained. The source's missing manuscript page 170
+    and incomplete final continuation remain visible.
+    \vfill
+    {\small AI-produced commentary: GPT-6 Astra (OpenAI, ChatGPT Pro mode).\par
+    Source edition transcribed by M. Künzer, J. Malgoire and G. Maltsiniotis.\par
+    Completed 9 November 2026.\par}
+  \end{titlepage}
+  \hypersetup{pageanchor=true}
+  \renewcommand{\contentsname}{Guide to the commentary}
+  \tableofcontents\clearpage
+  \endgroup
+}

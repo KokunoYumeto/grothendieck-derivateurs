@@ -1,0 +1,805 @@
+% Commentary by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p59}{An open--closed cut remembers a profunctor}
+Grothendieck begins with a cut of a category which permits arrows to cross in only one direction. This is the reason that the subsequent pushout calculation is manageable. An open subcategory $U\subset X$ is a full sieve: if an arrow has its target in $U$, its source belongs to $U$. The complementary full subcategory $T$ is therefore a cosieve, and there are no arrows from $T$ to $U$. Once the compositions internal to $U$ and $T$ are known, the remaining information is precisely the action of these compositions on the sets of arrows from $U$ to $T$.
+
+There is a reversal in the displayed specialization convention on this page. With $x\leq y$ meaning that $\Hom_X(x,y)$ is nonempty and with the opens taken to be downsets, one has
+\[
+ \overline{\{x\}}=\{y\mid x\leq y\},\qquad
+ x\leq y\ \Longleftrightarrow\ y\in\overline{\{x\}}.
+\]
+The PDF really prints $x\in\overline{\{y\}}$. That formula is incompatible with its following description of opens as sieves; it is a source slip, not a transcription error. For the walking arrow $0\to1$, the opens are $\varnothing,\{0\},\{0,1\}$ and the closure of $\{0\}$ is the whole space. All the subsequent formulas for closure and boundary use the downset convention and are correct with it. In particular, the smallest open containing $A$ is its downward closure, while its ordinary closure is its upward closure. No antisymmetry is required: categorically isomorphic objects, and more generally objects connected by arrows in both directions, cannot be distinguished by these opens.
+
+For completeness, the reconstruction in Proposition~1 can be written without a choice of compositions. Given
+\[
+ H:U^{\mathrm{op}}\times T\longrightarrow\Ens,
+\]
+form a category $\operatorname{Coll}(H)$ whose objects are the tagged disjoint union of those of $U$ and $T$, whose hom sets within each part are the original ones, whose hom sets from $T$ to $U$ are empty, and whose hom sets from $u\in U$ to $t\in T$ are $H(u,t)$. Define composition with $a:u'\to u$ by $h\mapsto H(a,1)(h)$ and composition with $b:t\to t'$ by $h\mapsto H(1,b)(h)$. The two operations commute by bifunctoriality. Every composable string contains at most one arrow crossing from $U$ to $T$, so these identities, together with associativity in the two pieces, prove associativity in the collage. The identities follow from the identity laws for $H$.
+
+A functor preserving the two parts consists of functors $f_U,f_T$ and a natural transformation $H\to H'(f_U^{\mathrm{op}}\times f_T)$. The naturality squares are exactly the equations expressing preservation of composition involving a crossing arrow. This proves full faithfulness of the correspondence of Proposition~1; the collage construction proves essential surjectivity. With tagged objects there is a specified inverse up to canonical isomorphism, which explains the editors' preference for an equivalence over an unqualified isomorphism of categories. Today $H$ is called a profunctor and $\operatorname{Coll}(H)$ its collage. The point of the terminology is that a category can be assembled from its internal categories and a bimodule of arrows between them.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p61}{The induced collage has a relative universal property}
+The induced triple is meant to express change of the two categories on which the gluing data live. Its universal property has to remember a map to the original triple. Without that map the displayed formulas $(*)$ and $(**)$ are false; both formulas are reproduced faithfully from the PDF.
+
+Write $\mathcal T$ for the category of triples and $P:\mathcal T\to\Cat\times\Cat$ for $(X,U,T)\mapsto(U,T)$. Let $b=(f_{U'},f_{T'}):(U',T')\to(U,T)$ and let $X'$ be the collage of $b^*H$. For any triple $Y=(Y,V,S)$ the correct bijection is
+\[
+\begin{split}
+ \Hom_{\mathcal T}(Y,X')\simeq
+ &\Hom_{\mathcal T}(Y,X)\mathop{\times}_{
+ \Hom(V,U)\times\Hom(S,T)}\\[-2pt]
+ &\hspace{18mm}\bigl(\Hom(V,U')\times\Hom(S,T')\bigr).
+\end{split}
+\]
+On the right one chooses a morphism $g:Y\to X$ and functors $a:V\to U'$, $c:S\to T'$ such that $g|_V=f_{U'}a$ and $g|_S=f_{T'}c$. The map on mixed hom sets of $g$ then has type
+\[
+ H_Y\longrightarrow H(f_{U'}a-,f_{T'}c-)
+                 =(b^*H)(a-,c-).
+\]
+It defines a unique lift $Y\to X'$, and restriction of a lift recovers exactly these data. Thus $X'\to X$ is a cartesian arrow of $P$, not an object representing arbitrary pairs of functors to $U$ and $T$.
+
+The same argument works on natural transformations. A transformation between two lifts is a pair of transformations on $V,S$ satisfying the naturality equations for every mixed arrow, and these are precisely the equations in the corresponding strict pullback of functor categories. This is the correctly typed version of $(**)$. One may express the statement in the language of a split fibration of gluing data, using the literal restriction operation on bifunctors; the corresponding assertion for unlabelled collages is invariant under the canonical isomorphisms.
+
+The missing datum cannot be supplied by merely inserting primes on the right of the printed formulas. Take $U=T=U'=T'=e$, both change-of-base functors the identity, and $H=\{a,b\}$. Then $X'=X$ is the category with two parallel arrows from the open object to the closed object. There are two part-preserving functors from the walking arrow to $X'$, whereas there is only one pair of functors from its two singleton parts to $U',T'$. The choice of crossing arrow is precisely the information lost by the printed right-hand side. The following observation about full faithfulness is unaffected: on the two diagonal sorts of hom sets it follows from $f_{U'},f_{T'}$, and on mixed hom sets it follows from the defining equality $H'=b^*H$.
+\end{dcomment}
+
+\begin{dcomment}{context}{p62}{The presheaf case is already present in SGA 4}
+Grothendieck's comparison with toposes recovers a particularly exact antecedent. In \citet[Expos\'e~IV, Theorem~9.5.4]{SGA4I1972}, an open subtopos and its closed complement reconstruct the ambient topos through the accessible left exact gluing functor. Exercise~9.5.10 of the same expos\'e then treats presheaf toposes: its parts~(a)--(c) identify opens with sieves, introduce the cross-hom bifunctor, and characterize the presheaf case by preservation of products by the gluing functor. Thus Proposition~2 is a return to a construction already formulated there, now serving a calculation of categorical pushouts and their homotopy properties. The letters $i,j$ are interchanged between the SGA convention and the present pages.
+
+The category of sheaves in the glued topos is the category of triples
+\[
+ (F,G,\theta),\qquad F\in\mathcal U,\quad G\in\mathcal T,
+ \quad\theta:G\longrightarrow\varphi(F).
+\]
+The comparison arrow records how a section on the closed side approaches the open side. For $X=\operatorname{Coll}(H)$, a presheaf $E$ on $X$ restricts to $F=E|_U$ and $G=E|_T$. Its values on the mixed arrows are maps
+\[
+ G(t)\times H(u,t)\longrightarrow F(u)
+\]
+natural in $u,t$. Transposing in the first variable produces $G(t)\to\Hom_{U^\wedge}(H(-,t),F)$, exactly the required gluing arrow. Conversely these maps reconstruct the restriction maps of $E$ on all arrows; their naturality supplies the mixed composition laws. This directly explains why the ordinary categorical collage and the topos gluing construction agree. The comparison is not an analogy between two shapes of diagrams: both constructions encode the same mixed restriction maps.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p64}{The adjunction which characterizes the presheaf gluing}
+The extra preservation of limits isolates those gluing functors that come from actual sets of arrows. Let $H_t=H(-,t)\in U^\wedge$. Its colimit-preserving extension from the Yoneda image of $T$ is
+\[
+ \psi(G)=\int^{t\in T}G(t)\times H_t,
+ \qquad
+ \varphi(F)(t)=\Hom_{U^\wedge}(H_t,F).
+\]
+Here the coend is an ordinary colimit in $U^\wedge$. A map $\psi(G)\to F$ is a family of maps $G(t)\times H_t\to F$ compatible with the arrows of $T$. By the ordinary set-valued adjunction between product and hom, this is exactly a natural transformation $G\to\varphi(F)$. This proves $\psi\dashv\varphi$ and the displayed formula of the corollary. It also proves that $\varphi$ preserves all small limits.
+
+Conversely, suppose that an accessible gluing functor $\varphi:U^\wedge\to T^\wedge$ preserves all small limits. The adjoint functor theorem for locally presentable categories supplies a left adjoint $\psi$. Set $H_t=\psi(y_Tt)$. Every presheaf is the colimit of its representables indexed by its category of elements; since $\psi$ is a left adjoint, this determines $\psi$ from $H$. The preceding adjunction then identifies its right adjoint with $\varphi$. Applying the explicit construction of the preceding block identifies the glued topos with $\operatorname{Coll}(H)^\wedge$. This proves the sufficient direction of Proposition~2 with the size assumption made explicit. The accessibility assumption belongs to the ambient gluing problem; it should not be silently discarded in an abstract claim that every limit-preserving functor has a left adjoint.
+
+For the converse direction of the proposition, let the glued topos be equivalent to $C^\wedge$. Its specified open subtopos corresponds under this equivalence to a subterminal presheaf. Such a presheaf takes the value either $\varnothing$ or a singleton at each object, and its support is a sieve $C_U\subset C$. The complementary full cosieve $C_T$ presents the closed complement. Restriction to $C_T$ preserves all limits, as does the right adjoint to restriction to $C_U$. Their composite is the transported gluing functor, so $\varphi$ preserves all limits. The argument uses the specified open and closed pieces but does not require the given presentations $U,T$ to coincide literally with $C_U,C_T$. Equivalences of presheaf categories preserve the limiting operations involved. This is precisely the content of the presheaf case of the SGA exercise just cited.
+
+There is a variance convention in the word ``category'' in the corollary. For fixed $U,T$, a transformation $H\to K$ induces $\psi_H\to\psi_K$, but it induces a transformation $\varphi_K\to\varphi_H$ on the right adjoints. Thus the asserted equivalence of categories of gluing data uses reversed transformations on the right-adjoint side; with ordinary pointwise transformations it is an antiequivalence. The object classification and every displayed objectwise formula remain unchanged.
+
+A useful test is $U=T=e$ and $H=S$ a set. The collage has two objects and one crossing arrow for each element of $S$. The functors are $\psi(G)=G\times S$ and $\varphi(F)=F^S$. A presheaf on the collage is a pair of sets $F,G$ with an $S$-indexed family of maps $G\to F$. If $S=\varnothing$, there is no compatibility datum and the presheaf topos is the product of two copies of $\Ens$. If $S$ is a singleton, it is the category of arrows of sets. These limiting cases also verify the direction $G\to\varphi(F)$ of the gluing arrow.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p66}{Functors out of a collage include the mixed naturality equation}
+The next construction will be recognized by mapping out of it. Proposition~3 is therefore the correct place to retain natural transformations, even though its first formulation only mentions sets of functors. A functor $\operatorname{Coll}(H)\to Y$ consists of $a:U\to Y$, $b:T\to Y$ and maps
+\[
+ \eta_{u,t}:H(u,t)\longrightarrow\Hom_Y(a(u),b(t))
+\]
+compatible with precomposition in $U$ and postcomposition in $T$. The argument constructing the collage proves both existence and uniqueness of the functor from these data.
+
+A morphism from $(a,b,\eta)$ to $(\bar a,\bar b,\bar\eta)$ is a pair of natural transformations $r:a\Rightarrow\bar a$, $s:b\Rightarrow\bar b$ satisfying, for every $h\in H(u,t)$,
+\[
+ s_t\,\eta_{u,t}(h)=\bar\eta_{u,t}(h)\,r_u.
+\]
+The components $r_u$ and $s_t$ define a natural transformation on the collage because its naturality is already known on arrows within either part, while this equation is its naturality on a crossing arrow. Conversely restriction recovers the pair and the equation. Composition and identities are componentwise. This gives the claimed isomorphism of functor categories, rather than merely an equivalence on their objects.
+
+For a functor into a collage the procedure is different in presentation but just as exact. Pulling back the open part specifies a sieve in the source, and its complement specifies the cosieve; these are forced by the functor. The residual data are then a morphism of profunctors. This is why Proposition~3 does not require the images of $a$ and $b$ to be disjoint: the target is arbitrary, and a functor out of the collage may identify objects from the two parts. The universal property of the forthcoming ordinary pushout must allow precisely these functors.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p68}{Transporting the crossing arrows by a Kan extension}
+The two categories $U,T$ can now be changed independently. Their new internal arrows are already present in $U',T'$. What must be supplied are all composites crossing from the first new category to the second, subject to the relations forced by old compositions. This is what the left Kan extension supplies.
+
+Put $F=f_U^{\mathrm{op}}\times f_T$. The ordinary pointwise formula can be written in a form that displays every generator:
+\[
+ H'(u',t')=
+ \int^{u\in U,\,t\in T}
+ \Hom_{U'}(u',f_Uu)\times H(u,t)
+                  \times\Hom_{T'}(f_Tt,t').
+\]
+The notation means the quotient of the disjoint union of these products by the relations for composition in $U$ and $T$. An element is represented by a triple
+\[
+ u'\xrightarrow{\alpha}f_Uu,\qquad
+ h\in H(u,t),\qquad f_Tt\xrightarrow{\beta}t'.
+\]
+For $a:u_0\to u_1$ in $U$ and $b:t_0\to t_1$ in $T$, the defining relations are
+\[
+ [f_U(a)\alpha,h,\beta]=[\alpha,H(a,1)h,\beta],
+ \qquad
+ [\alpha,H(1,b)h,\beta]=[\alpha,h,\beta f_T(b)],
+\]
+whenever the displayed terms are typed. This is the coend formula for $\operatorname{Lan}_F H$; the equivalent comma-category formula is the pointwise Kan-extension theorem \citep[Theorem~6.2.1]{Riehl2016}.
+
+To prove the pushout assertion directly, form $C=\operatorname{Coll}(H')$ and send a crossing arrow $h$ of $X$ to $[1,h,1]$. The relations make this a functor $X\to C$, and the inclusions of $U',T'$ agree with it on $U,T$. Now take compatible functors $X\to Y$, $U'\to Y$, $T'\to Y$. On the generator above there is only one possible extension: it must take the value $\beta\,h\,\alpha$, after applying the respective functors. The two relations hold because the original functors preserve composition. Thus there is a unique functor $C\to Y$ inducing all three given functors. This proves the strict colimit universal property, and also identifies its canonical map from $X$.
+
+Since $C$ was constructed as a collage, $U'$ is a full sieve and $T'$ its full complementary cosieve. Their internal hom sets have not been enlarged by the quotient: no string can leave the open part and subsequently return to it. This supplies the structural content of Theorem~1 beyond existence of a colimit in $\Cat$. It also clarifies the distinction from the earlier induced triple: restriction of $H$ gave a cartesian lift, whereas this left Kan extension gives the universal forward transport. The labels ``pullback'' and ``pushout'' refer to these different universal properties, not to a formal substitution of primes in the same formula.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p72}{Why connected components give the ordinary hom set}
+Grothendieck wants a topological description of a purely ordinary quotient. For a presheaf $G:Z^{\mathrm{op}}\to\Ens$, the category of elements $Z/G$ has objects $(z,g)$ and arrows
+\[
+ (z,g)\longrightarrow(z',g')\quad\text{given by}\quad
+ a:z\longrightarrow z',\qquad G(a)(g')=g.
+\]
+The colimit of $G$ is the disjoint union of its values modulo the identifications $G(a)(g')\sim g'$. These are exactly the identifications imposed on objects when one passes to connected components of $Z/G$. Hence
+\[
+ \mathop{\mathrm{colim}}_{Z^{\mathrm{op}}}G\simeq\pi_0(Z/G).
+\]
+The source writes $\varinjlim_Z G$ for this presheaf colimit. The opposite belongs in the modern indexing category; it is not a correction to the numerical value of the formula.
+
+The same convention explains the indexing category in the preceding page. If $H$ is regarded as a covariant functor on $U^{\mathrm{op}}\times T$, its ordinary left Kan extension is indexed by
+\[
+ F/(u',t')\simeq (u'\backslash f_U)^{\mathrm{op}}\times(f_T/t').
+\]
+Equivalently, regard $H$ as a presheaf on $U\times T^{\mathrm{op}}$ and take its presheaf colimit over the opposite category
+\[
+ (u'\backslash f_U)\times(f_T/t')^{\mathrm{op}}.
+\]
+This is the convention used in the PDF. Its sentence ``Ici $F=\cdots$ ... on peut l'interpr\'eter comme un pr\'efaisceau'' contains a harmless but real letter slip: it is $H$, not the indexing functor $F$, that is the set-valued presheaf.
+
+When $T'=T$, the resulting objects can be compressed to factorizations
+\[
+ (u,\alpha:u'\to p(u),\gamma:u\to t).
+\]
+An arrow from $(u,\alpha,\gamma)$ to $(v,\alpha',\gamma')$ is $a:u\to v$ with $p(a)\alpha=\alpha'$ and $\gamma'a=\gamma$. Its connected component is the crossing arrow of the pushout represented by $\gamma\alpha$. Thus the factorization category keeps track of all presentations of a new arrow and all relations between those presentations. Taking $\pi_0$ intentionally forgets its higher homotopy. The later asphericity conditions ask precisely when this forgetting is harmless for the homotopy problem, and do not follow from the existence of the ordinary colimit alone.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p74}{The one-sided formula has an explicit deformation retraction}
+The comparison of the two factorization formulas admits a direct argument which also verifies Grothendieck's cofinality claim with its variance intact. Write $E$ for the category of elements occurring in the general formula when $T'=T$. Its objects are
+\[
+ (u,\alpha:u'\to p(u),v,\beta:v\to t,h:u\to v).
+\]
+An arrow to $(u_1,\alpha_1,v_1,\beta_1,h_1)$ consists of
+\[
+ a:u\to u_1,\quad b:v_1\to v,\qquad
+ p(a)\alpha=\alpha_1,\quad \beta b=\beta_1,\quad
+ h=b h_1a.
+\]
+Let $D=u'\backslash U/t$ be the category in the boxed one-sided formula. Define
+\[
+ R:E\longrightarrow D,\qquad
+ R(u,\alpha,v,\beta,h)=(u,\alpha,\beta h).
+\]
+On arrows $R$ takes $(a,b)$ to $a$; the equality
+$\beta_1h_1a=\beta b h_1a=\beta h$ proves that this is an arrow of $D$. The inclusion $J:D\to E$ takes $(u,\alpha,\gamma)$ to $(u,\alpha,t,1_t,\gamma)$, and $RJ=1_D$.
+
+For each object of $E$, the pair $(1_u,\beta)$ gives an arrow
+\[
+ JR(u,\alpha,v,\beta,h)
+       \longrightarrow(u,\alpha,v,\beta,h).
+\]
+The equations above verify naturality, so $JR\Rightarrow1_E$. Consequently $J$ and $R$ induce inverse homotopy equivalences on nerves, and in particular inverse bijections on $\pi_0$. This proves more than the displayed comparison requires. The construction is natural in $u'$ and $t$, because precomposition of $\alpha$ and postcomposition of $\beta$ commute with $\beta h$.
+
+The reference to the initial object $(t,1_t)$ of $(T/t)^{\mathrm{op}}$ is therefore sound. An initial object is cofinal for the colimit of a \emph{presheaf}; in covariant colimit notation one has passed to the opposite and it becomes terminal. The proof does not assert that an initial object computes arbitrary covariant colimits. This is the same variance discipline needed in DER\_I-a, ``Cofinality retains an orientation'', but here the explicit retraction identifies the whole category of presentations rather than only invoking the abstract cofinality criterion.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p75}{Orbits of crossing arrows and the information discarded}
+The pushout formula can be seen in a small calculation before it is used homotopically. Let $U$ be the discrete category on $u_0,u_1$, let $T=e$ with object $t$, and let $H(u_i,t)$ be a singleton. Thus $X$ is the span $u_0\to t\leftarrow u_1$. Collapse $U$ to $U'=e$ by $p$. The category $u'\backslash U/t$ has exactly two objects and no nonidentity arrows, so the pushout $X'=X\amalg_Ue$ has two objects and \emph{two} distinct parallel arrows $u'\rightrightarrows t$. Identifying the two objects of $U$ does not identify arrows which have no relation between them. Its nerve realizes to a circle, whereas the nerve of $X$ is contractible. Here $p$ is not a weak homotopy equivalence, so this is an illustration of the formula, not a counterexample to any asserted stability under a weak equivalence.
+
+A group action makes the quotient and its lost homotopy particularly explicit. Put $U=BG$, let $T=e$, and take a right $G$-set $S$ as the presheaf $H(-,t)$. On pushing $BG$ to $e$, the mixed hom set becomes
+\[
+ \Hom_{X'}(u',t)=S/G.
+\]
+Indeed the category of elements has objects $s\in S$ and an arrow labelled $g$ from $s$ to $s'$ when $s=s'g$. All arrows are invertible, and two objects lie in the same connected component exactly when they lie in the same orbit. If $S=K\backslash G$ is a transitive right action, the automorphism group of the object $K$ is $K$. Inclusion of that object is fully faithful and essentially surjective, hence the category of elements is equivalent to $BK$.
+
+Thus a single crossing arrow in the quotient may stand for a factorization category with homotopy type $BK$. Choosing $K$ nontrivial shows that a singleton ordinary colimit says nothing about the contractibility of its category of presentations. If $S=G$ with the free right action, the stabilizer is trivial and the category of elements is contractible. If $S$ is the singleton with trivial action, it is $BG$. Both have the same orbit set. The distinction is exactly the one that motivates the total asphericity conditions later in this section.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p76}{Ordinary covers yield homotopy pushouts, with one direction of excision}
+Grothendieck's new axioms try to turn a cover by two categorical opens into an excision principle. The underlying geometric fact is especially clean. Suppose $X=U\cup V$ with $U,V$ full sieves and $A=U\cap V$. A simplex of $NX$ is a composable chain $x_0\to\cdots\to x_n$. Its last vertex lies in $U$ or in $V$; since these are sieves, all earlier vertices then lie in the same one. Hence
+\[
+ NX=NU\cup_{NA}NV
+\]
+is an actual pushout of simplicial sets. The two maps out of $NA$ are monomorphisms. On geometric realization they are inclusions of CW subcomplexes, so this pushout also computes the homotopy pushout. For cosieves the same proof uses the first vertex of the chain.
+
+This proves the direct implication of W(7 bis) for $W_\infty$: if $A\to V$ is a weak equivalence then $U\to X$ is a weak equivalence. It also proves the direct cube assertion $(a\text{ and }b)\Rightarrow c$: an objectwise weak equivalence of the two spans induces a weak equivalence of their homotopy pushouts. This invariance is the property of a derived colimit. It may be checked using the double mapping-cylinder model, or by mapping into a fibrant space, where the universal mapping space is the homotopy pullback of the three mapping spaces of the span.
+
+The reverse implication requested in W(7 bis), and the two additional implications requested in W(7), are strictly stronger assertions. The formal corollaries drawn here from the proposed axioms are valid as conditional statements, as is Proposition~6's implication W(7)$\Rightarrow$W(7 bis). However, Theorem~2 on manuscript page~78 is false for the full printed axiom. A homotopy pushout can destroy the fundamental group of its intersection. The next block gives a finite categorical counterexample, with the ordinary and homotopy pushouts agreeing throughout. This is not a failure of the nerve to preserve the relevant pushout, and is not repaired by using a derived pushout instead.
+\end{dcomment}
+
+\begin{dcomment}{development}{p78:Je n'ai pas écrit la vérification en forme}{A finite counterexample to the asserted reverse excision}
+Grothendieck hopes that a five-lemma argument will recover the homotopy type of an intersection from the two pieces and their union. The obstruction can be isolated using the familiar acyclic noncontractible complex of \citet[Example~2.38]{Hatcher2002}. We give the categorical consequence in full; the input space and its properties are classical. We checked that example, the finite simplicial replacement theorem, the subsequent distinction between the direct and reverse axioms in Chapter~XVI, and the model-independent homotopy-pushout argument. We did not find this exact finite-poset formulation attached to Theorem~2 in the sources checked; no priority is claimed.
+
+\textbf{Proposition (finite failure of W(7 bis) and W(7)).}\ours
+\emph{There is a finite poset $X$, covered by two full sieves $U,V$, such that $NU,NV,NX$ are contractible but $N(U\cap V)$ is not weakly contractible. Consequently $W_\infty$ does not satisfy either printed axiom.}
+
+\emph{Proof.} Start with a connected CW complex $K_0$ with one vertex, two oriented edges $a,b$, and two two-cells attached along
+\[
+ a^5b^{-3},\qquad b^3(ab)^{-2}.
+\]
+Its cellular differential from dimension two to dimension one is
+\[
+ d_2=\begin{pmatrix}5&-2\\-3&1\end{pmatrix}.
+\]
+Its determinant is $-1$, so $d_2$ is an isomorphism. The differential $d_1$ is zero and there are no higher cells. It follows that $\widetilde H_*(K_0;\mathbb Z)=0$.
+
+Here is an explicit verification that its fundamental group is nontrivial. With permutations composed from right to left, send
+\[
+ a\longmapsto(1\ 4\ 3\ 2\ 5),\qquad
+ b\longmapsto(1\ 2\ 3).
+\]
+The product $ab$ is $(1\ 5)(3\ 4)$, so the images satisfy $a^5=b^3=(ab)^2=1$ and define a homomorphism from the presented group to $A_5$. The image of $a$ is nonidentity, proving nontriviality. We need neither a computation of the full group nor asphericity of the presentation complex.
+
+By the finite case of \citet[Theorem~2C.5]{Hatcher2002}, choose a finite simplicial complex $K$ homotopy equivalent to $K_0$. Let $A$ be the poset of its nonempty simplices ordered by inclusion. Its nerve is the barycentric subdivision of $K$, so $|NA|$ is connected and acyclic, and has nontrivial fundamental group. Adjoin two incomparable elements $u,v$ above every element of $A$, and call the resulting finite poset $X$. Put
+\[
+ U=A\cup\{u\},\qquad V=A\cup\{v\}.
+\]
+Both are downsets of $X$, hence full sieves, and $U\cap V=A$. They have terminal objects $u$ and $v$, respectively. Their nerves are the two cones on $NA$. A chain in $X$ cannot contain both $u$ and $v$, and therefore $|NX|$ is the unreduced suspension of $|NA|$.
+
+The suspension of a connected space is simply connected, by van Kampen applied to its two thickened cones. Mayer--Vietoris gives
+\[
+ \widetilde H_n(|NX|;\mathbb Z)
+       \cong\widetilde H_{n-1}(|NA|;\mathbb Z)=0.
+\]
+Thus $|NX|$ is a simply connected acyclic CW complex. It is contractible by the homological Whitehead theorem \citep[Corollary~4.33]{Hatcher2002}. The inclusion $U\to X$ is consequently a weak homotopy equivalence. The inclusion $A\to V$ is not, since its source has nontrivial fundamental group and its target is contractible. This contradicts the reverse implication of W(7 bis). The map from the cover square of $X$ to the constant square on $e$ satisfies conditions $b,c$ of W(7) but not $a$. It therefore contradicts W(7) as well.\hfill$\square$
+
+The proposed cohomological proof fails at a specific point. Local systems on the intersection need not extend to either piece or to the union. In the example, the nontrivial representation of $\pi_1(NA)$ in $A_5$ cannot extend across either cone. Mayer--Vietoris for coefficients restricted from the ambient contractible space only sees constant coefficients on the intersection, for which its acyclicity suppresses the obstruction. The nonabelian comparison required by a weak-equivalence criterion cannot be recovered from that restricted coefficient class. This is the same general difficulty as in DER\_I-b, ``The coefficient lost in the attempted proof'', now realized in a finite categorical cover.
+\end{dcomment}
+
+\begin{dcomment}{status}{p79}{What survives of the cube principle}
+The distinction between direct and reverse excision is already visible in Grothendieck's later reorganization. Chapter~XVI separates the cube conditions into Loc(6a), Loc(6b), and Loc(6c); its Commentary~3.4 distinguishes the direct theory of homotopy cofibres from the extra reversibility property \citep[\S3, manuscript pp.~16--27]{GrothendieckDerivateursXVI}. For the pages at hand the reliable assertion for ordinary homotopy types is the direct one: weak equivalences of all three entries of a span give a weak equivalence of its homotopy pushout. A reverse five lemma cannot be added without hypotheses that exclude the preceding example. Theorem~2 has no repair with its stated hypotheses; its direct part is a theorem.
+
+The pullback remark makes a different, correct observation. Base change need not meet every connected component of the base. Take $S=\{0,1\}$ discrete, and the discrete fibration $X\to S$ with one point over $0$ and two points over $1$. Pulling back along $\{0\}\to S$ gives an isomorphism, while $X\to S$ is not even bijective on connected components. This is a nonempty version of the empty-base example printed in the source.
+
+Under the intended fibration hypothesis, contractibility of homotopy fibres is the correct test. If base change meets every component and the pullback is a weak equivalence, its homotopy fibres are contractible. Fibre transport along paths then shows that every homotopy fibre of the original fibration is contractible, so the original map is a weak equivalence. This argument explains the appearance of surjectivity on $\pi_0$; it must be applied where the source's W-fibration axioms really identify categorical fibres with homotopy fibres. Merely calling an arbitrary functor a fibration does not supply that identification. The corresponding discussion of categorical fibres was developed in DER\_VI-a, ``Why the new fibration axiom selects full homotopy theory''.
+
+The final contrast with the dual derivator should therefore be read in two parts. Its warning about detection after pullback is justified. Its attribution of unrestricted reverse excision to $\mathrm{HOT}$ depends on the false Theorem~2. Both qualifications are needed before applying the proposed axioms to the less special pushouts that follow.
+\end{dcomment}
+
+\begin{dcomment}{development}{p79}{What the symmetric cube rule can detect}
+The failed implication in Theorem~2 has a structural source. A homotopy pushout can erase information in its intersection. It is useful to determine whether passing to a bounded homotopy theory removes that obstruction, and to compare the answer with the homological argument suggested in the manuscript. The following finite family gives a uniform negative answer to the first question. We did not locate this precise family of tests in the source, its Appendix, or the later papers checked for this package; the observation is elementary and is offered without a priority claim.
+
+\textbf{Finite truncation obstruction.}\ours\quad
+For an integer $n\geq0$, let $W_{\leq n}$ consist of functors whose nerves induce a bijection on components and isomorphisms on all homotopy groups in degrees $1,\ldots,n$, at every basepoint. There is a finite poset covered by two sieves for which the reverse implication of W(7 bis) fails for $W_{\leq n}$.
+
+\emph{Proof.} Let $A_n$ be the poset of nonempty proper subsets of a set with $n+2$ elements, ordered by inclusion. A nondegenerate simplex of $NA_n$ is a strictly increasing chain of such subsets. Thus $NA_n$ is the barycentric subdivision of the boundary of the $(n+1)$-simplex, and $|NA_n|$ is homeomorphic to $S^n$. Adjoin two distinct elements $+$ and $-$, each greater than every element of $A_n$, with no order relation between them. Call the resulting poset $D_n$, and put $U_+=A_n\cup\{+\}$ and $U_-=A_n\cup\{-\}$. These are sieves, their intersection is $A_n$, and each has a greatest element. Their nerves are cones on $NA_n$. Since a chain of $D_n$ can contain at most one of $+$ and $-$, their union is exactly $ND_n$, whose realization is the suspension of $|NA_n|$, hence $S^{n+1}$.
+
+It follows that $U_+\hookrightarrow D_n$ belongs to $W_{\leq n}$: both spaces are connected, and all their homotopy groups in degrees at most $n$ vanish. On the other hand, $A_n\hookrightarrow U_-$ does not belong to $W_{\leq n}$. For $n=0$ it identifies two components. For $n\geq1$ it kills the nonzero group $\pi_n(S^n)\simeq\mathbb Z$. This is precisely the forbidden reverse implication in the cover square.\hfill$\square$
+
+The example for $n=1$ has eight objects in the union: six objects forming the barycentric subdivision of a triangle boundary and the two cone points. These tests do not replace the acyclic example at p.~78, since the latter is needed for untruncated weak equivalences. Together they show that the issue is not repaired by merely stopping the homotopy groups at some finite degree.
+
+For comparison, consider the class of functors inducing isomorphisms on nerve homology with coefficients in a fixed ring $R$. The full symmetric cube rule \emph{does} hold for that class. Here is the complete chain-level reason. If $X=U\cup U'$ is a union of two sieves and $A=U\cap U'$, every chain of composable arrows in $X$ belongs to one of the two subcategories: choose a subcategory containing its last vertex and use the sieve condition. The same statement holds for nondegenerate chains. Consequently the normalized chain complexes have the natural short exact sequence
+\[
+0\longrightarrow C_*(NA;R)
+ \xrightarrow{(\iota,-\iota')}
+ C_*(NU;R)\oplus C_*(NU';R)
+ \xrightarrow{\jmath+\jmath'} C_*(NX;R)
+ \longrightarrow0.
+\]
+Injectivity, exactness in the middle, and surjectivity can each be checked on the basis of chains: those in the intersection occur twice, all others once. For a morphism between two such covers, take the mapping cones of the three vertical chain maps. The result is again a short exact sequence of complexes. Its long exact homology sequence implies that if any two of these cones are acyclic, then so is the third. The middle cone is the direct sum of the cones for the maps on $U$ and $U'$, so its acyclicity is equivalent to the acyclicity of both summands. This proves all three implications requested in W(7). For cosieve covers, the first vertex supplies the same proof.
+
+The manuscript's proposed Mayer--Vietoris justification therefore has an exact domain of validity: it works for fixed-coefficient homology equivalences. The passage from those equivalences to weak homotopy equivalences is the step that cannot be supplied. The acyclic intersection in the preceding counterexample makes that distinction visible without any ambiguity about the existence or computation of the pushout.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p81:Je vais donner un cas important où ces ennuis disparaissent}{Separating the boundary from the ambient category}
+Grothendieck wants to isolate the part of a pushout which can change its homotopy type. The complement $T$ is carried isomorphically to $T'$, whereas the arrows entering it from $U$ are changed by a Kan extension. The useful intermediate category is therefore the closure $\bar U$, which consists of $U$ and the objects of $T$ reached by at least one arrow from $U$. Write $A=\bar U\cap T$. We then have a square
+\[
+\begin{tikzcd}
+A\arrow[r]\arrow[d]&T\arrow[d]\\
+\bar U\arrow[r]&X
+\end{tikzcd}
+\]
+of cosieve inclusions. It is both Cartesian and cocartesian. Every arrow of $X$ lies in one of these two full subcategories: if its source lies in $\bar U$, its target does too; otherwise its source lies in $T$, and its target lies in $T$. The same assertion for composable strings shows that the nerve is the union of the two corresponding simplicial subsets. Its realization is consequently a homotopy pushout, since inclusions of simplicial subsets realize as cofibrations.
+
+The formula for the pushed-out gluing presheaf shows that an object $t\in T$ receives an arrow from $U'$ after pushout exactly when it received an arrow from $U$ before pushout. Indeed, a nonempty Kan-extension value is represented by an original arrow and a morphism in $U'$; conversely, an original arrow supplies such a value at the image of its source. Thus $A\to A'$ is an isomorphism. All the movement has been confined to $\bar U\to\overline{U'}$.
+
+This explains the architecture of Proposition~6. If $U\to\bar U$ and $U'\to\overline{U'}$ are weak equivalences, two-out-of-three replaces the question about $p$ by the question about $\bar p$. The resulting map of closed-cover squares is the identity on $A$ and $T$. The ordinary homotopy gluing lemma therefore proves, for $W_\infty$, the useful implication
+\[
+p\in W_\infty\quad\Longrightarrow\quad q\in W_\infty.
+\]
+This argument requires only the usual forward gluing statement.
+
+The biconditionals in the printed proposition have stronger hypotheses. They explicitly invoke W(7~bis) and W(7), with their reverse implications as formulated on pp.~76--77. The counterexample discussed at p.~78 prevents us from treating those axioms as properties of $W_\infty$. Proposition~6 remains a valid formal deduction under its stated axioms; its proof is not a proof that ordinary weak homotopy equivalences can be detected backwards from every such pushout. This distinction will matter when the one-point test is proposed on p.~85.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p85}{The one-point test and the direction of Theorem A}
+The purpose of Proposition~7 is to turn a condition on the whole inclusion into a condition at each new point. For a sieve $i:U\hookrightarrow X$, the comma category $U/u$ has final object $(u,\mathrm{id}_u)$ whenever $u\in U$. All possible failures of asphericity are therefore concentrated at the complementary objects. Replacing $T$ by the point selecting $t$ preserves precisely the presheaf $u\mapsto\Hom_X(u,t)$, and hence precisely the category $U/t$. This proves the equivalence of the three versions in which every occurrence of ``belongs to $W$'' is replaced by ``is $W$-aspherical.'' The remaining implication is exactly the deferred corollary, not a consequence of the definition.
+
+For ordinary weak homotopy equivalences, the corollary's reverse implication is false. To see its geometry without altering the source, take a connected acyclic category $A$ whose nerve is not weakly contractible, as in the counterexample at p.~78. Form $U$ by adjoining a final object $u_+$ to $A$. Form $X$ by adjoining instead two distinct final cone points $u_+$ and $t$, with no morphisms between them. Then $U\hookrightarrow X$ is a sieve and its complement is the one-object category $\{t\}$. Every object of $A$ has its unique arrow to $t$, while $u_+$ has none, so
+\[
+U/t\simeq A.
+\]
+On the other hand, $BU$ is contractible and $BX\simeq\Sigma BA$. The suspension of a connected acyclic CW complex is simply connected and acyclic, hence weakly contractible by the Hurewicz and Whitehead theorems. Thus $U\to X$ is a weak homotopy equivalence although it is not aspherical.
+
+The missing distinction is between the homotopy type of an attachment and the homotopy type of its attaching category. A cone attachment can erase a nontrivial perfect fundamental group without leaving any homology behind. Theorem~A supplies the implication from contractible comma categories to weak equivalence; it does not supply the converse. In modern language this is also the distinction between a weak equivalence of classifying spaces and a homotopy initial functor: the comma categories here are $U/t=(i\downarrow t)$. Compare the dual of \citet[Theorem~4.1.3.1 and Corollary~4.1.3.3]{Lurie2009HTT}, applied to $i^{\mathrm{op}}$. The source has retained W(7~bis) in the corollary, and the audit retains it too. Its subsequent use for $W_\infty$ needs an independent argument in each application.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p87:C’est cette condition que nous allons à présent reformuler.}{A boundary presheaf and all its direct images}
+Grothendieck now strengthens the boundary condition in the way dictated by the actual pushout formula. The extra quantifier is the essential feature. Given $H:U^{\mathrm{op}}\to\mathbf{Set}$, let $\int_U H=U/H$ denote its category of elements. Its objects are pairs $(u,h)$ with $h\in H(u)$, and a morphism $(u,h)\to(v,k)$ is an arrow $a:u\to v$ satisfying $H(a)(k)=h$. If $X$ is obtained by adjoining a complementary point $t$ with $\Hom_X(u,t)=H(u)$, then $U/t=\int_U H$ literally records all ways to enter that point.
+
+For $p:U\to U'$, the new boundary is $p_!H$, where $p_!$ is the ordinary left Kan extension along $p^{\mathrm{op}}$. It is useful to calculate it through the category of elements, rather than to lose the variance in an informal colimit. With $\alpha:\int_UH\to U$ the projection,
+\[
+(p_!H)(u')\cong\pi_0\bigl(u'\downarrow p\alpha\bigr).
+\]
+An object on the right is $(u,h,\beta:u'\to p(u))$. Its connected component is the generator of the Kan extension represented by that triple. A map $a:u\to v$ with $H(a)(k)=h$ identifies the generator $(u,h,\beta)$ with $(v,k,p(a)\beta)$; these are exactly the relations in the pointwise colimit. This gives both the formula and its functoriality in $u'$.
+
+The ordinary asphericity of $H$ only tests $p=\mathrm{id}_U$. Total asphericity requires the entire category of elements of every $p_!H$ to be aspherical. The operation takes connected components before the resulting presheaf is assembled over $U'$. It can therefore destroy homotopy information inside each comma category while creating nontrivial topology in the assembled category. The finite example at p.~100 will make this effect visible in degree two.
+
+The definition has a deliberate stability property. If $H$ is totally $W$-aspherical and $p:U\to U'$ is any functor, then $p_!H$ is totally $W$-aspherical: for every $q:U'\to U''$ there is a canonical isomorphism $q_!p_!H\cong(qp)_!H$. Thus the strengthened condition is preserved by the very operation against which it was designed to protect the boundary. This is the formal reason the later definition of a $W$-Dwyer immersion uses these presheaves.
+
+The editors' warning about terminology is necessary. The earlier test-category usage of ``totally aspherical'' concerns products or diagonal functors. Here the quantifier runs over all outgoing functors and their set-valued left Kan extensions. The earlier companion already treated this quantifier in DER\_II-a, ms.~36, ``The quantifier in total asphericity''; the present pages apply it to a concrete gluing problem. Likewise the filtered examples should be read together with the earlier blocks on ms.~32--35, rather than as a new assertion that contractibility alone controls all direct images.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p93}{The connected-component factorization, with its proof}
+Grothendieck's relative $\underline\pi_0$ turns a map of categories into a genuine family of sets over its target. This is the right construction for understanding what ordinary Kan extension forgets. Let $f:A\to B$, put
+\[
+F(b)=\pi_0(b\downarrow f),\qquad E=B/F,
+\]
+and let $\pi:E\to B$ be the projection. Precomposition with a morphism $b'\to b$ gives the restriction map $F(b)\to F(b')$, so $F$ is a presheaf. The factorization map
+\[
+j:A\longrightarrow E,\qquad
+j(a)=\bigl(f(a),[(a,\mathrm{id}_{f(a)})]\bigr)
+\]
+is functorial: a morphism $a\to a'$ identifies the evident two objects in $f(a)\downarrow f$. We have $f=\pi j$.
+
+To prove the missing connectedness assertion, fix $e=(b,c)\in E$. An object of $e\downarrow j$ is an $a\in A$ together with $\beta:b\to f(a)$ such that the component of $(a,\beta)$ is $c$. Its morphisms are exactly the morphisms of $b\downarrow f$ between those objects. Thus
+\[
+e\downarrow j\ \cong\ (b\downarrow f)_c,
+\]
+the component indexed by $c$. It is nonempty and connected by definition. In the usual ordinary-category terminology, $j$ is a \emph{final functor}. No higher contractibility is being asserted.
+
+We also need to recover a discrete fibration from this procedure. Suppose $\pi:E\to B$ is the category of elements of a presheaf $F$. For $(e,\beta:b\to\pi e)$ in $b\downarrow\pi$, the unique lift of $\beta$ into $e$ has source $(b,F(\beta)(e))$. This assignment gives a functor to the discrete fibre $E_b$. Its composite with the fibre inclusion is naturally connected to the identity by the lifted arrows, and its restriction to the fibre is the identity. Consequently
+\[
+\pi_0(b\downarrow\pi)\cong F(b),\qquad
+\pi_!1_E\cong F.
+\]
+The same argument proves a homotopy equivalence between the comma category and the discrete fibre, which explains the appeal to smoothness on p.~93 without requiring that theory here.
+
+Finally, suppose $f=\rho k$ is another factorization with $\rho:D\to B$ discrete and $k:A\to D$ final. By the Kan-extension formula $k_!1_A=1_D$, and hence
+\[
+f_!1_A\cong\rho_!k_!1_A\cong\rho_!1_D.
+\]
+The preceding recovery calculation identifies $D$ over $B$ with $B/F=E$. This identification also respects the first factor. Indeed, for any presheaf $G$ on $B$, a functor $A\to B/G$ over $B$ is the same as a natural transformation $1_A\to f^*G$, and adjunction identifies these with natural transformations $f_!1_A\to G$. For $G=F$, the canonical first factor corresponds to $\mathrm{id}_F$; the identification obtained from $\rho_!1_D\cong F$ carries $k$ to that same map. This proves uniqueness with its compatibility, rather than only determining the middle category as an abstract object.
+
+The result is the discrete-fibration form of the comprehensive factorization of \citet{StreetWalters1973}. A complete direct proof in the opposite variance is in \citet[\S4.7, pp.~73--75, especially (4.77)--(4.79)]{Kelly1982}; Kelly also identifies an invalid Kan-extension inference in the original proof and replaces it by the component calculation used above. The theorem predates these manuscript pages. Its role here is to distinguish the final first factor from a homotopy final map, whose comma categories would have to be weakly contractible.
+\end{dcomment}
+
+\begin{dcomment}{later}{p93}{From comprehensive factorization to homotopy families}
+The geometric interpretation of $\underline\pi_0$ has continued to be useful independently of derivators. \citet[\S1.3, Lemma~1.6, and Theorem~1.7]{BergerKaufmann2017} place the two ordinary comprehensive factorizations in a general theory of comprehension schemes: presheaves supply discrete fibrations, and the unit of comprehension supplies their universal approximation. Their Proposition~1.10 and Remark~1.11 explain the associated base-change and Frobenius properties. These are structural statements about the factorization, not claims that its first factor is a weak homotopy equivalence.
+
+For the comparison with higher categories, the decisive change is to keep the homotopy type of each comma category instead of only its set of components. The homotopy-finality criterion requires $B(b\downarrow f)$ to be contractible for every $b$, as in \citet[Theorem~4.1.3.1]{Lurie2009HTT}. Here $j$ only makes these spaces connected. Thus comprehensive factorization is a useful discrete approximation, but it cannot replace a construction of a homotopy Kan extension. The examples below measure precisely what is lost when this approximation is used before forming a total category.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p96}{The converse for subterminal presheaves and its obstruction}
+Proposition~8 compares two quantifiers. Write $V=U/H$ and $\alpha:V\to U$. Total asphericity of $V$ tests every outgoing functor $f:V\to C$. Total asphericity of $H$ tests the special family $p\alpha$, with $p:U\to B$. The proposition follows because $\alpha_!1_V=H$, but reversing it requires a way of placing an arbitrary $f$ in that special family without changing its comprehensive middle category.
+
+The square criterion on p.~95 does this whenever one can complete
+\[
+\begin{tikzcd}
+V\arrow[r,"\alpha"]\arrow[d,"f"']&U\arrow[d,"p"]\\
+C\arrow[r,"\beta"']&B
+\end{tikzcd}
+\]
+with $\beta$ a discrete fibration. To justify the assertion completely, factor $f$ as a final functor $V\to E$ followed by a discrete fibration $E\to C$. Since discrete fibrations compose, the same $E$ is the comprehensive middle category of $\beta f=p\alpha$. Its category is therefore $W$-aspherical when $H$ is totally $W$-aspherical.
+
+If $H$ is subterminal, $\alpha$ is a sieve inclusion. Form the ordinary categorical pushout $B=U\amalg_V C$. Theorem~1 preserves the sieve inclusion on the other side, so $\beta:C\to B$ is again a sieve, in particular a discrete fibration. The preceding argument applies to every $f:V\to C$. This supplies the full proof of the source's subterminal case: for such $H$, the total asphericity of $H$ and of $U/H$ are equivalent.
+
+The groupoid example identifies why the same proof cannot be extended merely by replacing ``sieve'' with ``discrete fibration.'' Let $G=C_2$ and let $E_G$ be the indiscrete groupoid on two objects. Its projection to $BG$ sends both nonidentity arrows to the unique nontrivial element $g$. A functor $E_G\to BG'$ sends one of these arrows to an element $a\in G'$ and the inverse arrow to $a^{-1}$. In a cocone on this span, the two objects must become equal, and compatibility with the projection to $BG$ forces
+\[
+a=a^{-1},\quad\text{equivalently }a^2=1.
+\]
+There are no additional relations. The pushout is therefore
+\[
+B\bigl(G'/\langle\!\langle a^2\rangle\!\rangle\bigr).
+\]
+For example, with $G'=\mathbb Z$ and $a$ its generator, the induced map is $B\mathbb Z\to BC_2$. A discrete fibration between one-object groupoids must lift every arrow uniquely into the sole object, so its map of morphism sets must be bijective. This quotient map is not. The bracketed corrections in the edition, replacing $a$ by $a^2$, are thus mathematically necessary.
+
+This counterexample defeats the proposed pushout method; it does not refute the general converse of Proposition~8. We could not find that converse established or disproved in the primary sources checked, including the comprehensive-factorization treatments cited above. The report consequently records it as unresolved in this audit, rather than assigning it an unsupported present-day status. The subterminal case is proved, and the obstruction to the broader argument is explicit.
+\end{dcomment}
+
+\begin{dcomment}{development}{p97}{Total asphericity tested on final images}
+Grothendieck's search becomes more transparent if we express the quantifier through the first half of comprehensive factorization. The following elementary consequence is our formulation of what the construction already permits; it is not a claim of priority. We checked the factorization accounts of Street--Walters, Kelly, and Berger--Kaufmann, which establish the factorization but do not state this characterization of the manuscript's total-asphericity class.
+
+\noindent\textbf{Final-image criterion.}\ours\quad
+For any localizer $W$ for which asphericity is invariant under isomorphism, a small category $A$ is totally $W$-aspherical if and only if every ordinary final functor $A\to C$ has $W$-aspherical target. Moreover, the class of totally $W$-aspherical categories is closed under ordinary final functors.
+
+\emph{Proof.} If $u:A\to C$ is final, then $u_!1_A=1_C$. Hence the category of elements used in the definition of total asphericity is $C/1_C\cong C$, proving the necessity. Conversely, factor an arbitrary $f:A\to B$ comprehensively as
+\[
+A\xrightarrow{j}E=B/(f_!1_A)\xrightarrow{\pi}B.
+\]
+The first factor is final, so the assumed condition says that $E$ is $W$-aspherical. This is exactly the required test for $f$.
+
+For the closure assertion, suppose $A$ is totally $W$-aspherical and $u:A\to C$ is final. For every $g:C\to D$,
+\[
+g_!1_C\cong g_!u_!1_A\cong(gu)_!1_A.
+\]
+Its category of elements is $W$-aspherical by the hypothesis on $A$. Thus $C$ is totally $W$-aspherical.\hfill$\square$
+
+There is an equivalent extremal description which is sometimes useful for constructing examples. Among subclasses of the $W$-aspherical categories which are closed under taking targets of ordinary final functors, the totally $W$-aspherical categories form the largest one. They themselves have that closure property, and they are aspherical by taking $f=\mathrm{id}$. Conversely, if $A$ belongs to any such subclass, every comprehensive middle category of an outgoing map from $A$ belongs to it, hence is aspherical. The criterion just proved applies.
+
+The result also separates two kinds of positive examples. If $A$ has final object $a_0$, then for every $f:A\to B$,
+\[
+f_!1_A\cong B(-,f(a_0)),\qquad
+B/(f_!1_A)\cong B/f(a_0),
+\]
+whose final object is $(f(a_0),\mathrm{id})$. This is Proposition~9(a) in an explicit form. Filtered categories provide the further examples already explained in DER\_II-a, ms.~32--35, through filtered colimits of representables. For instance $(\mathbb N,\leq)$ has no final object, so the conjecture in footnote~73 cannot survive even in ordinary homotopy theory. The new criterion explains what both examples must control: all final images, not just their own classifying spaces.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p98}{Why a categorical retraction cannot be sent through this Kan extension}
+Grothendieck tries to protect a union from collapsing under $f_!$ by splitting its inclusions. Splitting is indeed preserved by every functor, but the retraction must be a morphism in the category on which that functor acts. Here $f_!$ acts on $V^{\wedge}$, whereas the retractions just constructed are functors between full subcategories of $V$.
+
+For a sieve $S\subseteq V$, the associated subterminal presheaf $1_S\subseteq1_V$ takes the value one on objects of $S$ and the empty set elsewhere. If $S$ omits an object of $V$, there cannot be a map $1_V\to1_S$: at that object it would have to be a function from a singleton to the empty set. Thus a proper sieve, even if it admits a categorical retraction, does not define a split subobject of the terminal presheaf. A functor $r:V\to S$ moves the base object; a morphism in $V^{\wedge}$ must stay over it. This is exactly the defect identified by the source's corrective footnote.
+
+What would suffice is a genuinely different hypothesis. Given a union $H=H_1\cup H_2$ in a presheaf category, suppose that for every $p$ the images of its three inclusion maps remain monomorphisms and the square remains Cartesian. Since $p_!$ preserves the pushout, the resulting categories of elements then form a union of two sieves with the expected intersection. The ordinary forward homotopy gluing lemma proves total $W_\infty$-asphericity of $H$ when the other three presheaves are totally $W_\infty$-aspherical. This is the precise exactness condition the proposed proof needs. Categorical retractions provide none of it.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p100}{The finite fork counterexample, computed completely}
+Grothendieck eventually finds a very small witness to the failure of the preceding gluing claims. The construction is in his Appendix to Chapter~XII, manuscript pp.~10--12, where the final corrective footnote identifies the homotopy type as $S^2$ \citep{GrothendieckDerivateursXIIAppendix}. We work it out here because it explains at once the failure of total asphericity and the failed use of retractions.
+
+Let $C$ have four objects $x,z,a,b$ and the nonidentity morphisms generated by
+\[
+\begin{tikzcd}[column sep=large]
+x\arrow[r,shift left=.5ex,"\alpha"]\arrow[r,shift right=.5ex,"\beta"']&z\arrow[r,"r"]\arrow[d,"s"']&a\\
+&b&
+\end{tikzcd}
+\qquad r\alpha=r\beta,\quad s\alpha=s\beta.
+\]
+Besides the four displayed arrows there are just the two composites $x\to a$ and $x\to b$. Let $A$ be its full subcategory on $z,a,b$, the outgoing fork $\Psi$, and let $f:A\hookrightarrow C$ be the inclusion. The category $A$ has initial object $z$, so $BA$ is contractible.
+
+We first compute $f_!1_A$. At $a$ and $b$ the outgoing comma category is a point. At $z$ it has initial object $(z,\mathrm{id})$. At $x$ it has four objects
+\[
+(z,\alpha),\ (z,\beta),\ (a,r\alpha),\ (b,s\alpha),
+\]
+and one arrow from each of the first two to each of the last two. Its nerve is a four-edge circle. In particular it is nonempty and connected. Thus every $c\downarrow f$ is connected, and
+\[
+f_!1_A=1_C,\qquad \underline\pi_0(A/C)=C.
+\]
+The map $f$ is final in the ordinary sense, although its comma category at $x$ is not contractible.
+
+The homotopy type of $C$ can be read without a spectral sequence. Let $K$ be the full subcategory on $x,z$, with its two parallel arrows. Its nerve realizes as a circle. The full subcategories $C_a$ on $x,z,a$ and $C_b$ on $x,z,b$ each adjoin a final object to $K$. Their nerves are therefore cones on $NK$. They cover $NC$, with intersection $NK$, because there are no arrows between $a$ and $b$. Consequently
+\[
+BC=BC_a\cup_{BK}BC_b\cong\Sigma BK\simeq S^2.
+\]
+Here the union description is literal at the level of nerves. Hence $A$ is not totally $W_\infty$-aspherical: its direct image along $f$ has category of elements $C$, with $H_2(BC;\mathbb Z)\cong\mathbb Z$.
+
+Now return to the proposed retraction repair. Inside $A$, put $A_a=\{z\to a\}$ and $A_b=\{z\to b\}$. Both have final objects, their intersection is $\{z\}$, and both admit retractions to that intersection. Proposition~9(a) therefore gives total asphericity of all three pieces. Nevertheless their union is $A$, which we have just shown is not total. The false step can be inspected at a single value. Write $y_c=C(-,c)$. Since left Kan extension carries a representable to the corresponding representable,
+\[
+f_!(1_{\{z\}})=y_z,\quad
+f_!(1_{A_a})=y_a,\quad
+f_!(1_{A_b})=y_b.
+\]
+The equality $1_{A_a}=A(-,a)$ follows because $a$ receives exactly one arrow from $z$ and none from $b$, and similarly for $b$. Evaluating the first inclusion after Kan extension at $x$ yields
+\[
+\{\alpha,\beta\}=C(x,z)\longrightarrow C(x,a)=\{r\alpha=r\beta\}.
+\]
+It is not injective. The other leg has the same defect. Their pushout is the singleton $1_C(x)$, exactly as preservation of colimits predicts. The putative intersection square has failed before any homotopy argument is applied.
+
+The same finite construction also explains the two kinds of pushout failure announced on p.~81. Adjoin a final object to $A$, giving $A^{\triangleright}$. Pushing out $A\subset A^{\triangleright}$ along $f$ adjoins a final object to $C$, because $f_!1_A=1_C$. The upper inclusion is an aspherical weak equivalence; the lower inclusion $C\to C^{\triangleright}$ is not, since $BC\simeq S^2$.
+
+To make the other leg a weak equivalence as well, replace the target of $f$ by $C^{\triangleright}$, with final point $c_+$. The composite $p:A\to C^{\triangleright}$ is a weak equivalence between contractible categories. Its direct image of $1_A$ is the subterminal presheaf supported on $C$: it is one on every object of $C$ and empty at $c_+$. The resulting pushout $P$ is $C$ with two distinct final cone points, $c_+$ and the newly attached point. Hence
+\[
+BP\simeq\Sigma BC\simeq S^3.
+\]
+Both $A\to A^{\triangleright}$ and $p$ are weak equivalences, while neither map from $C^{\triangleright}$ or $A^{\triangleright}$ to $P$ is. This proof uses the explicit nerve, so it does not depend on the invalid reverse implication of the one-point corollary on p.~85.
+\end{dcomment}
+
+\begin{dcomment}{development}{p100}{Testing the retracted assertions under their stated axiom}
+The fork example proves that ordinary weak contractibility is insufficient for total asphericity. There is a logical point still to check: several of the source's retracted conclusions explicitly assume W(7 bis), whereas $W_\infty$ does not satisfy that axiom. To refute those conditional conclusions themselves, rather than only their proposed proof, we need an example in a weak equivalence class for which the axiom holds. Fixed-coefficient homology provides such a test. The homological tools are standard; the application below is our explicit check of these conditional assertions, with no claim of priority.
+
+\textbf{A homological counterexample with W(7).}\ours\quad
+Let $R$ be a nonzero commutative ring, and let $W_R$ consist of functors inducing isomorphisms on all homology groups of their nerves with coefficients in $R$. Then $W_R$ is a fundamental localizer satisfying the full W(7). Nevertheless a union of two totally $W_R$-aspherical sieves with totally $W_R$-aspherical intersection need not be totally $W_R$-aspherical, even when both pieces retract onto their intersection.
+
+\emph{Verification of the test class.} Identities, two-out-of-three, and closure under retracts follow by applying homology. A category with a terminal object has contractible nerve and hence maps to the terminal category by an arrow in $W_R$. We spell out the relative Theorem~A axiom, since that is the remaining condition needed here. Suppose $A\xrightarrow{u}B\to C$ is a triangle and every induced map $A/c\to B/c$ is an $R$-homology equivalence. For the composite $f:A\to C$, form the bisimplicial set with $(p,q)$-simplices
+\[
+ \bigl(a_0\to\cdots\to a_p,\quad
+       f(a_p)\to c_0\to\cdots\to c_q\bigr).
+\]
+Deleting the last $a$-vertex composes the crossing arrow with the image of that last arrow under $f$; deleting the first $c$-vertex composes on its other side. These rules, with the ordinary remaining faces and identity degeneracies, make the two simplicial directions commute. Take free $R$-modules, normalize in each direction, and use the usual sign in the total differential.
+
+For each fixed $a$-chain, the second direction is the nerve of $f(a_p)\backslash C$, a category with initial object $\id_{f(a_p)}$. Its positive homology vanishes and its degree-zero homology is $R$. The spectral sequence that first takes this homology therefore identifies the homology of the total complex with $H_*(NA;R)$. In the other direction, for each fixed chain $c_0\to\cdots\to c_q$, the first simplicial direction is $N(A/c_0)$. Consequently the map induced by $u$ gives an isomorphism on that first homology page by the hypothesis on the comma categories. The comparison of the first-quadrant spectral sequences gives an isomorphism of total homology, and thus $H_*(NA;R)\cong H_*(NB;R)$. Convergence is sufficient here without any finiteness assumption: there are only finitely many bidegrees in any given total degree. This proves the relative localizer axiom. Finally the normalized-chain argument after ms.~79 proves W(7) for precisely this class $W_R$.
+
+\emph{The counterexample.} Use the finite functor $f:\Psi\to C$ computed in the preceding block, with $\Psi=(z\to a,z\to b)$. It is ordinary final, so $f_!e_\Psi=e_C$. But $BC\simeq S^2$, and
+\[
+ H_2(BC;R)=R\ne0.
+\]
+Hence $\Psi$ is not totally $W_R$-aspherical. Its two full sieves $\{z\to a\}$ and $\{z\to b\}$, and their intersection $\{z\}$, each have a terminal object. Proposition~9(a), whose proof does not use W(7), makes all three totally $W_R$-aspherical. The constant functors from the two arrows to $\{z\}$ are retractions of the inclusions of the intersection. Thus both the union assertion and its proposed retraction repair fail, and the conclusion asserting totality of the outgoing fork fails as well. All this occurs in a fundamental localizer satisfying W(7), so the conditional qualifications in those statements do not save them.\hfill$\square$
+
+The same calculation keeps two different defects apart. The proof's use of left Kan extension to preserve a monomorphism is invalid before any weak equivalence class is chosen. The example above additionally shows that the resulting total-asphericity conclusion can be false after all its stated homotopical axioms have been imposed.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p101}{Why the first obstruction occurs above the fundamental group}
+Grothendieck's assertion about coverings explains why a counterexample with a circle as target cannot work. Let $f:A\to B$ be final, so every $b\downarrow f$ is nonempty and connected. Let $L,M:B\to\mathbf{Set}$ be local systems, meaning that every arrow is sent to a bijection. Given a natural transformation $\theta:Lf\to Mf$, choose any object $(a,\beta:b\to f(a))$ of $b\downarrow f$ and define
+\[
+\bar\theta_b=M(\beta)^{-1}\theta_a L(\beta).
+\]
+If $h:a\to a'$ is a morphism in that comma category, then $f(h)\beta=\beta'$ and the naturality of $\theta$ identifies the expressions obtained from $(a,\beta)$ and $(a',\beta')$. Connectedness makes the expression independent of all choices. For $\gamma:b'\to b$, the object $(a,\beta\gamma)$ computes $\bar\theta_{b'}$, proving naturality in $b$. Its restriction to $A$ is $\theta$, using $(a,\mathrm{id})$, and the same formula proves uniqueness. Thus restriction along $f$ is fully faithful on local systems.
+
+Finality also preserves the set of connected components: it preserves the colimit of the constant singleton diagram, which is $\pi_0$. Suppose now that $BA$ is simply connected. Then $BB$ is connected, and every pulled-back local system on $A$ is constant. Fix a fibre of a local system $L$ on $B$. Each element of that fibre determines a section of the pulled-back system; full faithfulness, applied to maps from the singleton local system, makes it descend uniquely to a global section of $L$. Every monodromy action is therefore trivial. Applying this to the regular action of $\pi_1(BB)$ shows that the group itself is trivial. This supplies the omitted verification on p.~101.
+
+The four-object example above is consistent with this restriction: $BC\simeq S^2$ is simply connected but not contractible. Its critical comma category is a circle, and taking $\pi_0$ discards exactly that loop before rebuilding the total category. By contrast, if the target category is a discrete fibration over one of the height-one categories drawn on p.~102, it has no composable nonidentity arrows. Its nerve is a graph. Each connected component is a $K(\pi,1)$, so simple connectivity would force it to be contractible. The source's exclusion of these examples is thus correct for the displayed bases; it is not a statement about arbitrary categories merely sharing their homotopy type.
+
+In the modern cofinality theorem, connectedness of the comma categories is strengthened to their weak contractibility \citep[Theorem~4.1.3.1]{Lurie2009HTT}. That stronger condition controls all homotopy colimits and implies weak equivalence of classifying spaces. The ordinary finality used here controls ordinary colimits and already constrains coverings, but it leaves the higher homotopy obstruction exposed.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p103}{The information lost by taking components}
+Grothendieck has found the obstruction that the preceding attempts were missing: an ordinary direct image of a set-valued presheaf remembers connected components of comma categories, whereas a weak equivalence of nerves must preserve all homotopy groups. The path construction makes the difference particularly visible. Put $P=\underline{\mathrm{Ch}}(Y;y_0,-)$ and let $f:P\to Y$ be its endpoint functor. The earlier path theory supplies the two facts used here: $BP$ is contractible and the homotopy fibre of $Bf$ over $y$ is a based path space from $y_0$ to $y$. We write $BA=|NA|$ for the classifying space of a category. The comparison of strict fibres with comma categories is the additional consequence of the perfectness hypothesis; contractibility of $BP$ alone would not supply that comparison.
+
+For connected $Y$, the components of each such path space form a torsor for $\pi_1(BY,y_0)$. Thus simple connectivity gives
+\[
+ (f_!e_P)(y)=\pi_0(y\backslash P)=\{*\}.
+\]
+Consequently $f_!e_P=e_Y$, and the category of elements of this direct image is $Y$ itself. If $BY$ is not contractible, this single functor $f$ disproves total $W_\infty$-asphericity of $P$. This argument uses precisely the universal quantifier in Definition~1: the homotopy type of $P$ cannot determine how all its ordinary direct images behave.
+
+The six-element ordered set displayed in the text is a useful finite model of the required target. Its elements occur in three levels $\{e_k^+,e_k^-\}$, $k=0,1,2$, and every element of a lower level precedes every element of a higher level. Its order complex is therefore
+\[
+ S^0*S^0*S^0\cong S^2.
+\]
+There are six vertices, twelve edges, and eight triangular faces. Each simplex chooses at most one vertex in each level, so these are exactly the faces of the boundary of an octahedron. The two chains supplied in the editors' brackets are essential: the diagonal arrows alone would not specify this ordered set.
+
+The finite fork construction in the commentary at ms.~100 supplies the same failure without a path category: a contractible $\Psi$ admits a functor $\Psi\to C$ with connected undercategories and $BC\simeq S^2$. We shall use it below. The question about $\underline{\mathrm{Ch}}(Y;y_0,-)$ when $BY$ is contractible is a different question. Proposition~10 gives no implication in that case. We have not located a result settling that precise question for Grothendieck's particular path construction; a replacement by some equivalent contractible category would not answer it.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p107:On a le contre-exemple cherché en prenant}{Two cones and the two failures of pushout invariance}
+Grothendieck now converts the failure of total asphericity into failures of ordinary categorical pushouts. The two constructions deserve to be separated because they test different edges of the square. We can make both finite by using the functor $f:\Psi\to C$ constructed at ms.~100. Here $\Psi=(z\to a,z\to b)$ has an initial object, $BC\simeq S^2$, and every category $c\backslash\Psi$ is connected and nonempty. Hence
+\[
+ f_!e_\Psi=e_C.
+\]
+The crucial point is that this is an equality of ordinary presheaves; $f$ is not a weak equivalence.
+
+For the first square take $U=\Psi$, $U'=C$, and let $X=\Psi^\triangleright$ be obtained by adjoining a new terminal object $t$. The gluing weight for $U\subset X$ is $e_\Psi$. The pushout formula proved in \S1 says that $X'=X\amalg_\Psi C$ has gluing weight $f_!e_\Psi=e_C$. Thus $X'=C^\triangleright$, with its new terminal object $t'$. Both $X$ and $X'$ are contractible. The inclusion $i:\Psi\to\Psi^\triangleright$ is a weak equivalence and is even $W_\infty$-aspherical: its slices over old objects have terminal objects and its slice over $t$ is $\Psi$. But $i':C\to C^\triangleright$ is not a weak equivalence, because its source has the homotopy type of $S^2$. This proves the assertion at ms.~104 without any converse to the gluing lemma.
+
+For the second square first adjoin a terminal object $s$ to $C$, and write $U'=C^\triangleright$. Let $j:C\hookrightarrow U'$ be the resulting sieve and put $p=jf$. Now $U$, $U'$ and $X=U^\triangleright$ are all contractible, so both $i$ and $p$ are weak equivalences. Since $j$ is a sieve, extension by $j_!$ sends $e_C$ to the subterminal presheaf which is a singleton on $C$ and empty at $s$. Indeed, $c\backslash C$ has an initial object for $c\in C$, whereas $s\backslash C$ is empty. Therefore
+\[
+ p_!e_U=j_!e_C,
+\qquad
+ (p_!e_U)(c)=\{*\},\quad (p_!e_U)(s)=\varnothing.
+\]
+The pushout $X'=X\amalg_U U'$ is consequently obtained from $C$ by adjoining two distinct objects $s,t'$ above every object of $C$, with no arrow between $s$ and $t'$. It is the union of two terminal cones on $C$.
+
+This description computes the homotopy type directly. Every composable string in $X'$ lies in one of the two cones, because a string cannot contain both of their incomparable apexes. Hence
+\[
+ NX'=N(C^\triangleright_s)
+       \amalg_{NC}N(C^\triangleright_{t'}).
+\]
+The two inclusions of $NC$ are simplicial monomorphisms, so this ordinary union is a homotopy pushout. Its realization is the unreduced suspension of $BC$, and therefore
+\[
+ BX'\simeq\Sigma BC\simeq S^3.
+\]
+Neither $i':U'\to X'$ nor $q:X\to X'$ is a weak equivalence. This proves Proposition~11 at ms.~107 and shows exactly how an arbitrary sieve can destroy pushout invariance even when the other three categories are contractible.
+
+The text invokes the converse in Proposition~7 to justify the second construction. That converse depends on the stronger gluing axiom discussed at ms.~78--85 and cannot be used as an unconditional theorem for $W_\infty$. The suspension computation repairs this use of it. More generally, for the simply connected $Y$ of the manuscript, $\Sigma BY$ is contractible exactly when $BY$ is contractible: suspension shifts reduced integral homology, and a simply connected acyclic CW complex is contractible by the Hurewicz and Whitehead theorems. The hypothesis of simple connectivity is doing real work in this last equivalence.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p108:Démonstration page 112.}{A condition on weights that survives every direct image}
+After the counterexamples, Grothendieck seeks a hypothesis expressed in the actual gluing data. For a sieve $i:U\hookrightarrow X$, write $\overline U$ for the cosieve generated by $U$, and put $\dot T=\overline U\setminus U$. An object $t$ belongs to $\dot T$ precisely when at least one arrow $u\to t$ exists with $u\in U$. Its gluing weight is
+\[
+ H_t=\Hom_X(i(-),t)\in\widehat U.
+\]
+Only these objects need testing. At $u\in U$ the weight is representable and therefore totally aspherical; outside $\overline U$ it is empty and no assertion of asphericity is intended.
+
+The hypothesis of Theorem~3 is that every $H_t$, $t\in\dot T$, remains aspherical after every ordinary left Kan extension. A pushout along $p:U\to U'$ replaces this weight by $p_!H_t$. Its total asphericity follows without a gluing axiom: for a second functor $r:U'\to V$,
+\[
+ r_!(p_!H_t)\cong(rp)_!H_t,
+\]
+and the right-hand side is aspherical by the original hypothesis. This calculation explains both the terminology ``strictly aspherical'' for $U\to\overline U$ and its stability under arbitrary pushout.
+
+The support is preserved as well. If $H_t$ is nonempty, a representative $h\in H_t(u)$ produces a class at $p(u)$ in $p_!H_t$; a colimit of sets cannot delete that class. If $H_t$ is empty, its direct image is empty. Thus the boundary objects of the two pushouts identify with the same $\dot T$, and the preceding test covers exactly the new boundary. It follows that
+\[
+ i'_0:U'\longrightarrow\overline{U'}
+\]
+is strictly $W$-aspherical and hence $W$-aspherical. The claim at the start of the proof on ms.~112 that $i'$ itself is aspherical must read $i'_0$. A $W$-dwyérienne inclusion need not be a weak equivalence: the empty sieve into a nonempty category already demonstrates the distinction.
+
+The two equivalences printed as (a) and (b) have a different logical status from this weight calculation. They use respectively W(7 bis) and W(7), exactly as stated. Those additional axioms must remain visible; they are not automatic properties of weak homotopy equivalences of nerves. The modern Dwyer pushout theorem gives the useful forward implications in its own hypotheses, as discussed in the later-development block. The intrinsic statement here, valid before imposing either gluing axiom, is preservation of the condition on all the weights.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p108:Démonstration page 112.}{A boundary with no last object}
+The footnote about filtered categories points beyond the original adjoint criterion. The earlier companion, DER\_II-a, ms.~35--36, ``Left Kan extension carries the ind-presentation'' and ``The quantifier in total asphericity'', explains why filtered presentations make this universal condition tractable. Here their role can be seen in one concrete inclusion.
+
+Let $U$ be the ordered set $\mathbb N$ with its usual order, and let $X=\mathbb N\cup\{\infty\}$ with $n<\infty$ for every $n$. The inclusion $i:U\hookrightarrow X$ is a sieve and $\overline U=X$. For an old object $n$, the slice $U/n$ has terminal object $n$. For the new object $\infty$, the slice is $U$ itself. For any $p:\mathbb N\to B$, one has
+\[
+ F:=p_!e_{\mathbb N}\cong\varinjlim_n\Hom_B(-,p(n)).
+\]
+Write $p_{nm}:p(n)\to p(m)$ for the transition map when $n\leq m$, and let $E=B/F$. This category is nonempty, since it contains $(p(0),[\id_{p(0)}])$. Given finitely many objects $(b_j,x_j)$ of $E$, choose representatives $g_j:b_j\to p(n_j)$ of their elements. For $m\geq n_j$ for every $j$, the arrows $p_{n_jm}g_j$ give morphisms from all these objects to $(p(m),[\id_{p(m)}])$.
+
+For parallel morphisms $h,k:(b,x)\rightrightarrows(c,y)$ in $E$, choose a representative $g:c\to p(n)$ of $y$. The defining condition on these morphisms gives $[gh]=x=[gk]$ in $F(b)$. Equality in this filtered colimit means that, for some $m\geq n$,
+\[
+ p_{nm}gh=p_{nm}gk.
+\]
+Thus $p_{nm}g:(c,y)\to(p(m),[\id_{p(m)}])$ equalizes $h$ and $k$. These are exactly the nonemptiness, finite-cocone, and parallel-arrow tests for a filtered category. A filtered category has weakly contractible nerve: a cocone on the finite data of a simplicial sphere map contracts that map. Thus every such $E$ is $W_\infty$-aspherical.
+
+It follows that $i$ is totally $W_\infty$-dwyérienne. It is also a couniversal weak equivalence, without using either additional gluing axiom. After any pushout its slice over the new object is the filtered category of elements just computed, while its slices over the old objects have terminal objects. Quillen's Theorem~A therefore applies to every pushout inclusion. It is not a Dwyer immersion in the original adjoint sense. A right adjoint $r:X\to U$ to $i$ would require
+\[
+ n\leq r(\infty)\quad\text{for every }n\in\mathbb N,
+\]
+which is impossible. This distinguishes the two classes even though both $\mathbb N$ and $\mathbb N^\triangleright$ are contractible.
+
+The negative answer also holds within the full gluing framework assumed in the source's question. Let $W_{\mathbb Z}$ denote integral-homology equivalences of nerves. Every pushout just considered is a weak homotopy equivalence and therefore an integral-homology equivalence, so $i$ is couniversally a $W_{\mathbb Z}$-equivalence. Every tested category of elements is already weakly contractible, so $i$ is also totally $W_{\mathbb Z}$-dwyérienne. The development at ms.~100, \emph{Testing the retracted assertions under their stated axiom}, verifies that $W_{\mathbb Z}$ is a fundamental localizer satisfying full W(7). The failure of the right-adjoint condition is independent of the choice of weak equivalences. Thus the proposed recovery of an original Dwyer immersion fails even with W(7) imposed. The distinct converse from an arbitrary homotopical cofibration to Grothendieck's condition on every boundary weight is not established by this example.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p110}{What the cofibration condition quantifies over}
+Grothendieck's definition concerns the entire undercategory, and this is why he calls the condition ``ultraforte''. For $i:U\to X$, let
+\[
+ i_!:U\backslash\Cat\longrightarrow X\backslash\Cat,
+ \qquad (U\to A)\longmapsto(X\to X\amalg_U A).
+\]
+The condition is that this functor preserve the weak equivalences of underlying categories. In particular it tests a weak equivalence $A\to B$ after an arbitrary preliminary change of base $U\to A$. Merely requiring preservation of weak equivalences whose source is $U$ would be weaker. The modern terminology and its relation to model-category cofibrations are treated in the later-development block.
+
+The elementary closure assertions follow from the universal properties of pushouts. If $U\to X\to Z$ are two such maps, pushout along the composite is the composite of their pushout functors, up to the canonical isomorphism, so it preserves weak equivalences. If $U\to V$ is arbitrary and $i':V\to X\amalg_U V$ is the pushout of $i$, then for $A\to B$ under $V$ its two pushouts along $i'$ are canonically the pushouts along $i$ of the same map considered under $U$. This proves stability under change of base. Isomorphisms give equivalences of the undercategories. Passage to opposite categories proves the duality assertion provided that $W$ is invariant under opposites, as in the standing localizer framework.
+
+The adjective ``trivial'' is defined by a separate universal property: every pushout $A\to X\amalg_U A$ of $i$ belongs to $W$. This implies the preceding preservation condition by two-out-of-three. Indeed the natural square
+\[
+\begin{tikzcd}
+A\arrow[r]\arrow[d,"f"']&X\amalg_U A\arrow[d,"g"]\\
+B\arrow[r]&X\amalg_U B
+\end{tikzcd}
+\]
+has both horizontal maps in $W$; when $f\in W$, commutativity and two-out-of-three give $g\in W$. Stability of these universal weak equivalences under composition and pushout follows by factoring each new pushout into two pushouts of the original maps.
+
+Without an additional hypothesis one should not replace this definition by ``a $W$-cofibration which belongs to $W$''. Corollary~2 establishes that implication for the $W$-dwyérienne sieves considered there, using Theorem~3 and the stated gluing assumptions. This is the reason for retaining the full definition even though its name resembles the terminology of a model category.
+\end{dcomment}
+
+\begin{dcomment}{later}{p110}{The later theory of homotopy cofibrations}
+Grothendieck wants a property of an attachment that is visible from weak equivalences alone. This is exactly the property now called an \emph{$h$-cofibration}: the functor of cobase change on undercategories preserves weak equivalences. The terminology and a general model-categorical treatment appear in \citet[Definition~1.1]{BataninBerger2017}, who explicitly acknowledge the antecedent in Grothendieck's manuscripts. In a left proper model category their Proposition~1.6 and Corollary~1.9 identify this condition with the requirement that every pushout along the map compute a homotopy pushout. Their Lemma~1.10 also proves that an $h$-cofibration which is a weak equivalence is couniversal. These are precise later replacements for the useful direction of the present gluing programme; none requires the reverse implication of W(7 bis). The same undercategory definition is retained as ``$W$-cofibration'' by \citet[Definition~2.1 and Lemma~2.4]{ManettiMeazzini2019}.
+
+The definition here must be kept distinct from the cofibrations of a chosen Quillen model structure. For example, for every small category $C$, the map $\varnothing\to C$ is a $W_\infty$-cofibration: its cobase-change functor is $A\mapsto A\amalg C$, and the nerve of a disjoint union is a disjoint union of nerves. A weak equivalence on the first summand and the identity on the second induce a weak equivalence on the union, component by component. Thus every category is cofibrant for Grothendieck's \emph{relative} notion. This statement does not assert that every category is cofibrant in Thomason's model structure. The distinction explains why a satisfactory description of these attachments can be broader than the particular generating cofibrations used to construct a model category.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p113:Le cas non respé est essentiellement le théorème 3.}{The stronger clause uses comprehensive factorization}
+The lemma proves more than stability of a condition on a presheaf. Its parenthesized assertion says that the category of elements after direct image is itself totally aspherical, so that one may test it by arbitrary functors leaving that category. This does not follow merely by repeating the formula for a second direct image on the original base. The canonical comprehensive factorization supplies the missing step.
+
+Write $V=U/F$, let $a:V\to U$ be the projection, and set $b=pa:V\to U'$. The identity $a_!e_V=F$ gives
+\[
+ b_!e_V=p_!F=F'.
+\]
+Let $E=U'/F'$. The canonical functor $v:V\to E$ appearing in the comprehensive factorization of $b$ is final in the ordinary sense: for every $e\in E$, the category $e\backslash V$ is connected and nonempty. Equivalently,
+\[
+ v_!e_V=e_E.
+\]
+This is the factorization established at ms.~91--93; it involves connectedness, not contractibility.
+
+Now suppose that $V$ is totally $W$-aspherical, and let $r:E\to Z$ be any functor. Transitivity of ordinary left Kan extension gives
+\[
+ r_!e_E\cong r_!v_!e_V\cong(rv)_!e_V.
+\]
+The last presheaf is $W$-aspherical by totality of $V$, so $E$ is totally $W$-aspherical. This proves the parenthesized clause with its full quantifier. The unparenthesized clause is simpler: for $s:U'\to Z$, one has $s_!F'\cong(sp)_!F$, to which the definition applies directly.
+
+The same argument yields a useful formal principle. If $v:V\to E$ is an ordinary final functor and $V$ is totally $W$-aspherical, then $E$ is totally $W$-aspherical. The converse is not being asserted. In particular, an arbitrary final functor need not be a weak homotopy equivalence; the finite example at ms.~100 makes that failure explicit. Here totality of the source is precisely what permits the final functor to be used in every subsequent direct-image calculation.
+
+Corollary~3 follows by applying the two clauses to the gluing weights of each boundary object, with the support calculation already explained after Theorem~3. This proof establishes stability under pushout. It supplies no composition theorem for arbitrary strictly or totally $W$-aspherical functors: in a composite one pulls back a weight of the second functor, whereas the lemma controls left Kan extension. The distinction identifies the mathematical content of the doubt expressed on ms.~113--114.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p114}{The interval test fails because a slice has two maxima}
+The interval condition asks for a class of admissible inclusions that can also attach both ends of a homotopy. Its categorical form is a pushout product. The original Dwyer condition is too rigid for this purpose, and the example in the text can be checked at a single object.
+
+Take $X=[1]=(0<1)$, $U=\{0\}$, and
+\[
+ I=\Phi_n=(0\to1\leftarrow2\to\cdots\leftarrow2n),
+ \qquad n\geq2.
+\]
+Let $A=(\{0\}\times I)\cup([1]\times\{0,2n\})$, considered as a full subposet of $[1]\times I$. The inclusion $A\hookrightarrow[1]\times I$ is a sieve: both end vertices of $I$ are sources, and the entire lower row is already in $A$. Its generated cosieve is the whole product, since every upper-row object $(1,k)$ receives an arrow from $(0,k)$.
+
+If this were an original Dwyer immersion, the inclusion into that cosieve would admit a right adjoint. For an inclusion of ordered sets, this means that for every object $x$ of the larger poset the lower set $A/x$ has a greatest element. Test $x=(1,1)$. Its lower set inside $A$ contains exactly
+\[
+ (0,0),\quad(0,1),\quad(0,2),\quad(1,0).
+\]
+The strict relations are
+\[
+ (0,0)<(0,1),\qquad
+ (0,2)<(0,1),\qquad
+ (0,0)<(1,0).
+\]
+Thus $(0,1)$ and $(1,0)$ are distinct incomparable maximal elements, and neither is above the other. There is no greatest element. This proves the failure of the adjoint condition for every $n\geq2$.
+
+The calculation also explains why ordinary contractibility of this slice is insufficient to recover the missing adjoint: its nerve is an interval with three edges, hence contractible. An adjoint selects a universal object, a much stronger requirement. Whether another class provides the desired interval stability is a structural question about the interaction of pushout and homotopy, rather than a reason to weaken \emph{terminal object} to \emph{contractible} in this particular criterion. The subsequent use of integration replaces a difficult ordinary pushout by a category designed to retain the homotopy of the entire diagram.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p114}{A terminal fibre controls all the ordinary direct images}
+The last subsection returns to a situation in which the apparent loss of higher information can be controlled. For a $W$-proper functor over a category with a terminal object, the terminal-fibre inclusion is $W$-coaspherical. Under W(5) it is ordinary final, which is the property needed for total asphericity. Making this explicit shortens the proof and explains the editors' repeated suggestion to replace $W$-properness by $W_0$-properness.
+
+Let $f:X\to I$ be $W$-proper, let $i_0$ be terminal in $I$, and write $k:X_{i_0}\hookrightarrow X$. The properness criterion says that $k$ is $W$-coaspherical: every undercategory $x\backslash X_{i_0}$ is $W$-aspherical. If W(5) holds, a $W$-aspherical category is nonempty and connected. Hence $k$ is an ordinary final functor, and the pointwise formula gives
+\[
+ (k_!e_{X_{i_0}})(x)=\pi_0(x\backslash X_{i_0})=\{*\}.
+\]
+For every $p:X\to Y$ it follows that
+\[
+ (pk)_!e_{X_{i_0}}
+ \cong p_!k_!e_{X_{i_0}}
+ \cong p_!e_X.                                      \tag{C1}
+\]
+If $X_{i_0}$ is totally $W$-aspherical, the left side of (C1) is an aspherical presheaf on $Y$ for every $p$, proving Proposition~11 of ms.~115. This proposition has the same number as the counterexample on ms.~107; the manuscript page is needed to distinguish them. The proof uses no W(7) or W(7 bis).
+
+The general component formula in Proposition~12 explains how (C1) fits into a family. $W$-properness together with W(5) identifies $\pi_0(X_i)$ with $\pi_0(X/i)$, naturally in $i$, and therefore supplies the transition maps even when $f$ is not an opfibration. For an arbitrary functor $f$, there is a canonical bijection
+\[
+ \varinjlim_{i\in I}\pi_0(X/i)\ \cong\ \pi_0(X).        \tag{C2}
+\]
+One can see it without choosing a cleavage. A representative $(x,\beta:f(x)\to i)$ in $X/i$ has the same image in the colimit as $(x,\id_{f(x)})$, by the transition along $\beta$. A morphism $x\to x'$ identifies the latter representatives through the induced object of $X/f(x')$. Thus the colimit imposes exactly the zigzag relation defining components of $X$. Conversely each morphism in a comma category, and every transition between comma categories, preserves that zigzag component. These two observations construct mutually inverse maps in (C2).
+
+Replacing $\pi_0(X/i)$ by $\pi_0(X_i)$ proves Proposition~12. The dual proof printed in the manuscript is equally valid, but after passing to presheaves its colimit is indexed by $I^{\mathrm{op}}$; the printed $I$ at ms.~117 suppresses this reversal. The precise proper/smooth criteria, their duality and their stability under composition and base change are given in \citet[Theorem~1.2 and Proposition~4.7]{Maltsiniotis2005Asphericite}. The result here concerns ordinary components and ordinary Kan extensions, so the connectivity hypothesis cannot be omitted just because the discussion takes place in a homotopical setting.
+\end{dcomment}
+
+\begin{dcomment}{later}{p114}{Dwyer attachments and higher categorical pushouts}
+The adjoint condition belongs to the Dwyer maps of \citet[Definition~4.1 and Proposition~4.3]{Thomason1980}. One subsequent correction matters when comparing them with model-category cofibrations. Classical Dwyer maps are not closed under retracts, and some Thomason cofibrations are not Dwyer maps. \citet[Definition~1, Lemma~4 and Proposition~2]{Cisinski1999Dwyer} repairs the relevant argument with pseudo-Dwyer maps: these are retract-stable and include every Thomason cofibration. Thus the manuscript's search for a broader attachment condition addresses a distinction that cannot be removed by simply identifying the original Dwyer maps with all cofibrations.
+
+The desired stability properties concern whether an ordinary attachment retains the information needed after passage to a homotopy theory. For classical Dwyer maps, a stronger result is now available. \citet[Theorem~1.5]{HackneyOzornovaRiehlRovelli2024} prove that, for a pushout $D=B\amalg_A C$ along a Dwyer inclusion $A\hookrightarrow B$, the comparison
+\[
+ NB\amalg_{NA}NC\longrightarrow ND
+\]
+is a weak \emph{categorical} equivalence in the Joyal model structure. Their general Theorem~1.6, in its expanded statement on p.~2179, treats discretely flat cofibrations. These are defined by requiring the corresponding functor of discrete simplicial categories to preserve Bergner weak equivalences under cobase change, together with injectivity on objects. Proposition~3.3 supplies this property for Dwyer maps; Example~3.5 includes co-Dwyer maps and pseudo-Dwyer maps. This gives one modern class that accommodates both orientations requested on p.~111.
+
+This higher categorical assertion concerns the comparison between the ordinary categorical pushout and a pushout in the category of $(\infty,1)$-categories. The weak homotopy type of a category discards all noninvertible-arrow information, whereas its image among $(\infty,1)$-categories retains that information. Consequently the two ambient weak equivalence classes must be specified before comparing definitions of flatness. The theorem just cited does not identify discretely flat inclusions with the manuscript's $W$-Dwyer immersions, nor does it by itself establish the particular interval-product stability requested here. Those further identifications would require additional arguments. The concrete calculations in the preceding blocks keep the original question at the level at which it is posed.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p119}{The transition map on representatives}
+The footnote asks that the arrow induced by $\lambda_\alpha$ be written out. This matters because the triangle is only laxly commutative: replacing its natural transformation by an equality would erase the data that moves a fibre over $i$ to a fibre over $j$.
+
+Suppose $X\to I$ is the split opfibration associated to a strict functor $D:I\to\Cat$, and write $X_i=D(i)$. An arrow $\alpha:i\to j$ gives $\alpha_*:X_i\to X_j$ and chosen opcartesian arrows $x\to\alpha_*x$ in $X$. Applying $p:X\to Y$ gives a natural transformation
+\[
+ \lambda_\alpha:p_i\longrightarrow p_j\alpha_*.
+\]
+For $y\in Y$, an object of $y\backslash X_i$ is a pair $(x,\beta:y\to p_i(x))$. Define
+\[
+ L_{\alpha,y}(x,\beta)
+   =\bigl(\alpha_*x,\lambda_{\alpha,x}\beta\bigr)
+     \quad\text{in }y\backslash X_j.                 \tag{C3}
+\]
+If $h:x\to x'$ is a morphism in the first comma category, so that $p_i(h)\beta=\beta'$, its image is $\alpha_*h$. Naturality of $\lambda_\alpha$ gives
+\[
+ p_j(\alpha_*h)\lambda_{\alpha,x}\beta
+ =\lambda_{\alpha,x'}p_i(h)\beta
+ =\lambda_{\alpha,x'}\beta',
+\]
+which verifies the comma-category condition. Hence (C3) is a functor. Taking connected components yields the value at $y$ of the required presheaf map
+\[
+ (p_i)_!e_{X_i}\longrightarrow(p_j)_!e_{X_j}.
+\]
+Precomposition with a map $y'\to y$ commutes strictly with (C3), proving naturality in $y$.
+
+This also identifies the two arrows in the manuscript's displayed composite. First keep the object $x$ in $X_i$ and replace $\beta$ by $\lambda_{\alpha,x}\beta$. That is the map induced by $\lambda_\alpha$ from $(p_i)_!e_{X_i}$ to $(p_j\alpha_*)_!e_{X_i}$. Next apply $\alpha_*$ to $x$; under transitivity of Kan extension this is the counit map
+\[
+ (p_j)_!(\alpha_*)_!e_{X_i}\longrightarrow(p_j)_!e_{X_j}.
+\]
+Their composite is exactly (C3), so its direction is fixed without an appeal to an unspecified mate convention.
+
+Functoriality in $i$ follows from the split identities. For $\alpha:i\to j$ and $\gamma:j\to k$ one has
+\[
+ (\gamma\alpha)_*=\gamma_*\alpha_*,
+ \qquad
+ \lambda_{\gamma\alpha,x}
+ =\lambda_{\gamma,\alpha_*x}\lambda_{\alpha,x}.
+\]
+Substitution in (C3) gives $L_{\gamma,y}L_{\alpha,y}=L_{\gamma\alpha,y}$; identity arrows act identically. Thus the transition maps constitute an actual functor $I\to\widehat Y$, not merely objectwise maps in a localization. With a non-split opfibration the comparison isomorphisms of a cleavage make the same formulas agree after taking components.
+
+For a general $W$-proper functor, still assuming W(5), the manuscript obtains these transitions through the comma-category construction. The projection $y\backslash Y\to Y$ is a discrete opfibration, hence proper; base change and composition make $y\backslash X\to I$ proper. Its fibre over $i$ is $y\backslash X_i$. Proposition~12 applied there gives
+\[
+ \pi_0(y\backslash X)
+   \cong\varinjlim_{i\in I}\pi_0(y\backslash X_i).
+\]
+The construction is natural in $y$ and so proves the presheaf isomorphism of Corollary~1. If $I$ has a terminal object, the colimit is its value at that object, recovering (C1). In the product case $X=Z\times I$, the terminal fibre is $Z$, which proves Corollary~3 as well.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p122}{Integration retains the homotopy of the span}
+The shift to integration changes what is being glued. An ordinary pushout identifies the common category immediately. The integrated category instead retains a copy of that category and arrows connecting it to both sides. These arrows provide the homotopies needed for a derived colimit.
+
+For the span $X_1\xleftarrow{\alpha_1}X_0\xrightarrow{\alpha_2}X_2$, the manuscript uses the indexing category $\Phi=(1\to0\leftarrow2)$ and a contravariant functor on it. The associated fibred category $\mathscr X$ has objects $(k,x)$ with $x\in X_k$. It contains each $X_k$ fully, and its additional morphisms are
+\[
+ \Hom_{\mathscr X}((k,x),(0,z))
+   =\Hom_{X_k}(x,\alpha_kz),\qquad k=1,2.
+\]
+There are no arrows between the $1$- and $2$-fibres, nor from the $0$-fibre to either of them. Composition with an arrow in $X_k$ is precomposition; composition with an arrow $z\to z'$ in $X_0$ is postcomposition by its image under $\alpha_k$. These rules give the split Grothendieck construction with precisely the variance used by Grothendieck. This continues the discussion of variance in DER\_VI-b, ms.~81, \emph{Integration and the geometry of a family}, rather than replacing it by a covariant convention without explanation.
+
+For this span one can prove the homotopy-pushout assertion directly. Let $M_k$ be the full subcategory of $\mathscr X$ on its $0$- and $k$-fibres. It is a categorical mapping cylinder for $\alpha_k$. The functor
+\[
+ r_k:M_k\longrightarrow X_k
+\]
+is the identity on $X_k$ and sends $z\in X_0$ to $\alpha_kz$. If $s_k:X_k\hookrightarrow M_k$ is the inclusion, then $r_ks_k=\id$, and the canonical arrow $\alpha_kz\to z$ in $M_k$ gives a natural transformation $s_kr_k\to\id_{M_k}$, equal to the identity on $X_k$. Thus $Br_k$ is a homotopy equivalence, and its restriction to $BX_0$ is $B\alpha_k$.
+
+Every composable string in $\mathscr X$ lies in $M_1$ or $M_2$, and their intersection is exactly $X_0$. Therefore
+\[
+ N\mathscr X=NM_1\amalg_{NX_0}NM_2.
+\]
+Both maps out of $NX_0$ are monomorphisms, so this is a homotopy pushout of simplicial sets. The two homotopy equivalences $Br_k$, together with the identity on $BX_0$, now identify its homotopy type with
+\[
+ B\mathscr X\simeq
+ \operatorname{hocolim}\bigl(BX_1\leftarrow BX_0\to BX_2\bigr).
+\]
+This is the span instance of \citet[Theorem~1.2]{Thomason1979}, whose statement is also recorded by \citet[Corollary~26.9]{ChacholskiScherer2001}; the direct proof records the orientation and the connecting morphisms needed in these pages.
+
+For example, take $X_0$ to be two discrete objects and $X_1=X_2=e$. The ordinary pushout is $e$. The integrated category has four objects and four nonidentity arrows: each of the two side objects maps to each of the two middle objects. Its nerve is a square with no two-dimensional nondegenerate simplices, hence has realization $S^1$. The integration remembers the circle formed by the two independent identifications; the ordinary pushout has forgotten it.
+
+The final formula $\pi_!(\xi)=\mathrm{hot}_W(\mathscr X)$ expresses this construction in the derivator already under discussion. It is a canonical isomorphism in the localized category, rather than a literal equality of chosen representatives. For $W_\infty$ the preceding argument gives its concrete meaning. For another $W$ the formula presupposes the standing hypotheses under which the diagram localization and its homotopy Kan extension are available; an arbitrary class of arrows would not by itself justify that notation. The supplied excerpt ends at this formula. The advertised reduction to a diagram of closed immersions is begun here, not yet completed in the attached pages.
+\end{dcomment}

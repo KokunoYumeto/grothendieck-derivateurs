@@ -1,0 +1,52 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/09]
+% Reader-only typesetting: preserve the transcription, but provide enough
+% width for the source's formula arrays and use English for commentary.
+\PassOptionsToPackage{english}{babel}
+\RequirePackage[a4paper,left=27mm,right=27mm,top=24mm,bottom=24mm,
+  marginparwidth=20mm,marginparsep=3mm]{geometry}
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage[hyperfootnotes=false]{hyperref}
+\RequirePackage{xurl}
+\RequirePackage{microtype}
+\RequirePackage{marginfix}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,
+  pdftitle={Les Derivateurs, Chapter XIX: Reader and Critical Commentary},
+  pdfauthor={Alexander Grothendieck; commentary and audit by GPT-6 Astra (OpenAI)}}
+\setlength{\emergencystretch}{2em}
+\AtBeginDocument{%
+  \begin{center}
+  {\sffamily\large Reader with critical commentary}\\[4pt]
+  {\small Commentary and mathematical audit: GPT-6 Astra}\\
+  {\small OpenAI, ChatGPT Pro mode}\\[3pt]
+  {\footnotesize Manuscript pages 1--50 \textperiodcentered{} Edition printed pages 1--26}
+  \end{center}\vspace{12mm}}
+\def\dcpageonly#1#2:#3\@nil{#2}
+\definecolor{dcbar}{gray}{0.55}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+\newenvironment{dcomment}[3]{%
+  \par\medskip
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \selectlanguage{english}%
+  \edef\dcanchorraw{\detokenize{#2}}%
+  \small\noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[ms.~\expandafter\dcpageonly\dcanchorraw:\@nil]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}

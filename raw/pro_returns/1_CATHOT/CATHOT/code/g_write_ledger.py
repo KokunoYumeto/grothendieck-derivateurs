@@ -1,0 +1,26 @@
+"""Build the Part G statement ledger from the numbered section."""
+from pathlib import Path
+import csv
+root=Path(__file__).resolve().parents[1]
+rows=[
+('G.1','Finite poset nerves realize exactly finite CW homotopy types; finite category nerves have finite cells in every degree, finite components, finitely presented fundamental groups and finitely generated homology','Proved','G.1','Hatcher Theorem 2C.5','XIIapp finite examples','Finite category need not be homotopy finite; C2 is explicit.'),
+('G.2','Degreewise finite simplicial models or finite-type homotopy invariants do not suffice for realization by a finite category','Refuted','G.2','countability of finite composition tables','Part G(i)','Diagonal simply connected counterexample; no effective recognition asserted.'),
+('G.3','Every connected CW type is a small monoid classifying type, and countable CW types admit countable monoid models','Known','G.3','Fiedorowicz 1984 Theorems 3.5 and 4.7','Part G(i) and unrestricted convention','Countability reduction proved; unrestricted realization cited.'),
+('G.4','Finite monoids have finite universal group; a finite-dimensional CW classifying-space type must be simply connected','Proved','G.4','Miller 1984 Theorem B; Quillen Theorem A','Part G(i)','Karoubi-envelope map from finite maximal subgroup surjects on fundamental group.'),
+('G.5','Connected finite CW types realized by finite monoids are exactly simply connected types','Known','G.5','G.4; Ben-Bassat 2026 Theorem C','Part G(i)','Sufficiency cited from opened recent primary preprint, not independently fully audited.'),
+('G.6','Finite fundamental group is sufficient for a connected finite CW space to be a finite monoid classifying space','Refuted','G.6','G.4','Ben-Bassat 2026 Conjecture 7.1','RP2 counterexample; no claim against simply connected Theorem C.'),
+('G.7','For posets realizing S^n, n>=1, minimum objects=2n+2 and minimum arrows=2(n+1)^2','Proved','G.7','flag-complex homology and links; Barmak-Minian object result comparison','XIIapp sphere examples; Part G(ii)','All identities counted; elementary independent arrow bound; n=1,2,3 computed.'),
+('G.8','RP2 poset minimum objects=13; every object-minimal model has49 arrows; global minimum arrows lies between28 and49','Known','G.8','Cianci-Ottina v1 Corollary5.8 Theorem5.10','Part G(ii)','13-object face-orbit model checked; global arrow minimum not inferred from object minimum.'),
+('G.9','The rectangular 2x2 band with adjoined unit is a5-element monoid with classifying space S2','Proved','G.9','explicit exact projective resolution; Fiedorowicz2002 lemma','XIIapp S2 comparisons; Part G(ii)','Full homology in all degrees established analytically and resolution checked integrally.'),
+('G.10','The specified7-element band monoid has classifying space S3','Proved','G.10','explicit exact resolution; Sweeney2025v1 Example8.2','XIIapp S3 comparisons; Part G(ii)','Source semigroup has6 elements; adjoining identity gives7 arrows.'),
+('G.11','The category on0<1<2 with two arrows per distinct increasing pair and addition-mod2 composition realizes RP2','Proved','G.11','octahedral antipodal quotient; Carcacia-Campos2026 Theorem6.2 comparison','Part G(ii)','3objects9arrows, full table and Smith form checked.'),
+('G.12','A finite category with finite-dimensional CW type admits a finite acyclic quotient of no greater size inducing pi1 isomorphism','Proved','G.12','G.4 and Miller1984 Theorem B','Part G(ii) lower bounds','Only fundamental groups transfer; no higher homotopy equivalence asserted.'),
+('G.13','Finite categories realizing RP2 have minimum3objects and minimum9arrows','Proved','G.13','G.11;G.12; three-object presentations','Part G(ii)','Lower bound uses exact finite-dimensional hypothesis.'),
+('G.14','No category with<=4arrows realizes S2, and no connected category with>=2objects and<=6arrows realizes S3','Proved','G.14 and code/g_finite_models.py','exhaustive associative tables and exact boundary ranks','Part G(ii)','All candidate tables covered without isomorphism quotient; ten F2 candidates rejected by rational homology.'),
+('G.15','Finite category minima S1=(2,4),S2=(1,5),S3=(1,7); finite monoid arrow minima S2=5,S3=7','Known','G.15','G.4;G.9;G.10;G.14;Sweeney2026v2 Theorem2.7/Table5','Part G(ii)','Monoid5/6 lower bound is external exhaustive computation; local program reruns monoids only through4.'),
+('G.16','Finite and unrestricted size tables, including countably infinite monoid minima for S1 andRP2','Proved','G.16','G.3;G.4;G.7-G.15','Part G(ii)','Object and arrow minima optimized separately; RP2 poset arrow entry remains interval.'),
+('G.17','Exact RP2 poset arrow minimum; intrinsic classification of all infinite-dimensional finite categorical/monoid types; K(Z,2) finite model question','Open','G.17','known bounds and documented searches','Part G(i)-(ii)','Smallest unspecified requested integer is RP2 poset arrow minimum28..49; no claim that research questions are new.')
+]
+with (root/'research/G_results.csv').open('w',newline='') as f:
+ w=csv.writer(f);w.writerow(['id','statement','status','where_proved','depends_on','manuscript_rows_or_pages_settled','notes']);w.writerows(rows)
+print('Wrote',len(rows),'Part G rows')

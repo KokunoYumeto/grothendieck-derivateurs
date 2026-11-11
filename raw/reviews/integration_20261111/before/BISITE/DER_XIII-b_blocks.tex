@@ -1,0 +1,654 @@
+% Commentary by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p51:En pratique, j'utiliserai cette définition}{Quillenisability and the strength of its qualifiers}
+Grothendieck is looking for hypotheses on a category with weak equivalences which survive passage to diagrams. The point is not merely to construct another presentation of its homotopy category. A derivator must retain enough of the original category to restrict a diagram, replace it, and eventually take its homotopy limit. His succession of adjectives records different parts of this programme; reading them all as the modern expression ``model category'' would erase the question he is asking.
+
+Throughout these pages we use his variance:
+\[
+ \mathcal M(I)=\operatorname{Fun}(I^{\mathrm{op}},\mathcal M),
+ \qquad W(I)=\{f\mid f_i\in W\text{ for every }i\}.
+\]
+Thus the ordered category $0\to1$ indexes an arrow $X_1\to X_0$ in $\mathcal M$. A terminal object of $I$ computes the ordinary limit of such a diagram. This explains several formulas which would have the opposite orientation with covariant diagrams.
+
+The glossary supplied with the chapter makes the terminology precise. A weak Quillen structure has the two factorizations $(C,TF)$ and $(TC,F)$, their lifting properties, and $TC\subset C\cap W$, $TF\subset F\cap W$. The axiom called exactness is
+\[
+                         W=TF\circ TC.
+\]
+Exactness on the left is the stronger-looking equality $TC=C\cap W$; exactness on the right is $TF=F\cap W$. Closedness says that the four classes are determined by their respective lifting properties. The additional axiom $\mathbf M''$ concerns preservation of weak equivalences under base change along fibrations and cobase change along cofibrations. In a usual model structure these are the properness requirements. Finally, $\mathbf M0$ asks only for finite limits and finite colimits. Small completeness must therefore be supplied when an infinite Kan extension is used.
+
+There is a useful simplification precisely when \emph{closedness and exactness are both present}, as they will be in \S6. It is the retract argument, not an extra smallness theorem. Suppose $f\in C\cap W$. Exactness supplies $f=pi$ with $i\in TC$ and $p\in TF$. The left lifting property of $f$ against $p$ makes $f$ a retract of $i$ in the arrow category. A class defined by a left lifting property is closed under retracts, so $f\in TC$. For $f\in F\cap W$, use the same factorization and lift $i$ against $f$; this exhibits $f$ as a retract of $p$, and hence puts it in $TF$. Consequently
+\[
+              TC=C\cap W,\qquad TF=F\cap W
+\]
+under the closed exact hypotheses. This application of the familiar retract argument is particularly consequential here: see \citet[Lemma 1.1.9]{Hovey1999}. The proof uses neither arbitrary products nor a prior assertion that $W$ is closed under retracts.
+
+Quillenisability by itself, in Definition 1, does not include closedness. We therefore do not substitute the stronger hypothesis into \S5. Once a uniform closed exact quillenisability has been assumed in \S6, however, the preceding equalities are available in every diagram category. They will allow the apparently separate questions about finite posets, products, towers and group actions to be treated by one argument. Keeping this distinction visible preserves both the breadth of the definition and the actual force of the theorem's hypotheses.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p53}{A bound on each component is not a bound on the diagram}
+Grothendieck turns to complexes because they offer a familiar theory of derived coefficients without the large-colimit hypotheses of the preceding sections. His notation $K^\bullet(\mathcal A)$ denotes complexes and chain maps here. To avoid conflict with the now customary use of $K(\mathcal A)$ for the chain-homotopy category, we write $\operatorname{Ch}(\mathcal A)$ for that category of complexes. Localization at quasi-isomorphisms gives the derived category in either convention.
+
+For unbounded complexes the exchange of the two diagram directions is literal:
+\[
+ \operatorname{Fun}(I^{\mathrm{op}},\operatorname{Ch}(\mathcal A))
+ \simeq \operatorname{Ch}(\operatorname{Fun}(I^{\mathrm{op}},\mathcal A)).
+\]
+Both sides are the same collection of objects, differentials, transition maps and commutativities. Quasi-isomorphisms agree because kernels, cokernels and cohomology in the functor category are computed at each object. The fixed truncation conditions $X^n=0$ for $n<0$, or for $n>0$, also commute with arbitrary diagram categories. The editor's correction to the reversed inequalities on manuscript p.~52 is essential.
+
+The movable bound in $\operatorname{Ch}^+$ behaves differently. A functor into $\operatorname{Ch}^+(\mathcal A)$ gives a lower bound $b_i$ for each component. An object of $\operatorname{Ch}^+(\mathcal A(I))$ requires one bound valid for all components. These conditions agree for a finite set of objects, since one can take $\min_i b_i$, but need not agree otherwise. The same distinction applies to upper bounds and to bounded complexes. This is why the words ``si $I$ est finie'' belong to the argument, rather than merely to its notation.
+
+Here is the obstruction in its simplest form. Let $k$ be a field and put $X_n=k[n]$, with our cochain convention $X[n]^j=X^{j+n}$. Thus $X_n$ has a single nonzero term in degree $-n$. Each $X_n$ is bounded below. The degreewise product
+\[
+                         \prod_{n\geq0} k[n]
+\]
+has nonzero cohomology in every degree $0,-1,-2,\ldots$ and is not bounded below. This is not merely a defect of that chosen complex. If a product $P$ of the family existed in $D^+(k)$, the defining universal property, tested on $k[m]$, would give
+\[
+ H^{-m}(P)=\operatorname{Hom}_{D(k)}(k[m],P)
+ \cong\prod_{n\geq0}\operatorname{Hom}_{D(k)}(k[m],k[n])
+ \cong k
+\]
+for every $m\geq0$. No object of $D^+(k)$ has this property. Thus the projection from an infinite discrete category does not have a right adjoint on the theory of \emph{objectwise} bounded-below diagrams with values in $D^+(k)$.
+
+The filtered-colimit warning in footnote 31 has an equally concrete witness. Let $P_r=\bigoplus_{0\leq n\leq r}k[n]$ and include $P_r$ into $P_{r+1}$. Each $P_r$ is bounded, whereas their degreewise filtered colimit has nonzero terms arbitrarily far to the left. Hence $\operatorname{Ch}^+$, and likewise $\operatorname{Ch}^{\mathrm b}$, is not closed under arbitrary filtered colimits in $\operatorname{Ch}$. The dual example uses $k[-n]$ to treat $\operatorname{Ch}^-$. The unbounded category and the two fixed half-line categories do not have this problem.
+
+Enough injectives do give the familiar bounded-below resolutions, and enough projectives give bounded-above resolutions. What the argument on these pages does not establish is quillenisability on every infinite diagram shape for the category allowing a different bound at every object. The accessibility theorem quoted from the preceding sections cannot be applied directly to that category. We record this as a missing justification, not as a counterexample to quillenisability itself: the product calculation concerns a Kan extension, which a finite-limit model structure is not obliged to possess. Passing to unbounded complexes is the clean way to obtain the unrestricted diagram theory.
+\end{dcomment}
+
+\begin{dcomment}{context}{p54}{An answer already present in Joyal's letter}
+The questions about complexes and uniform diagram structures have a particularly close antecedent in the correspondence surrounding \emph{Pursuing Stacks}. In the letter begun on 11 April 1984, Joyal describes Heller's two model structures on simplicial presheaves and explicitly connects them with derived right and left Kan extensions for an arbitrary functor of indexing categories. In the continuation dated 15 April, Theorem 2 states the injective model structure on unbounded complexes in an arbitrary Grothendieck abelian category, with monomorphisms as cofibrations and homology isomorphisms as weak equivalences \citep[pp.~3 and 10]{Joyal1984Letter}.
+
+This locates the present hesitation accurately. The manuscript records a return to an earlier set of questions, not the historical first appearance of the unrestricted complex example. The later proofs by Beke and the constructions of $K$-injective resolutions make those statements accessible in systematic published forms. The letter is also unusually direct evidence for the role of Heller in the diagram-category approach; it supports that precise connection without requiring us to infer a chronology from similarities between later axiomatizations.
+\end{dcomment}
+
+\begin{dcomment}{later}{p54}{Unbounded resolutions answer the derived-image question}
+Grothendieck's hesitation about unbounded derived images concerns the existence of resolutions on which an ordinary functor can safely be evaluated. A complex of injective objects is not automatically suitable when it is unbounded: what is needed is a condition on the whole complex. A complex $J$ is $K$-injective when $\operatorname{Hom}^\bullet(A,J)$ is acyclic for every acyclic complex $A$. Equivalently, maps into $J$ in the homotopy category already compute maps into its image in the derived category.
+
+Spaltenstein's work was already available when these manuscript pages were written. His Theorem C treats unbounded complexes of modules, Theorem D treats sheaves of modules, and Theorem 4.5 gives the latter existence construction; these results should not be retrospectively attributed to the present text \citep{Spaltenstein1988}. For an arbitrary Grothendieck abelian category the general result is associated with \citet{Serpe2003}. A detailed modern statement, including a functorial monomorphic quasi-isomorphism into a termwise injective $K$-injective complex, is Theorem 19.12.6, Tag 079P, of the Stacks Project \citep{StacksKInjective079P}.
+
+The application to right Kan extensions is short once this existence theorem has been supplied. Let $u:I'\to I$ be a functor of small categories and let $\mathcal A$ be Grothendieck abelian. The category $\mathcal A(I')$ is again Grothendieck: exactness of filtered colimits is checked componentwise, and free diagrams on a set of generators give a set of generators. Restriction $u^*$ is exact, and its ordinary right adjoint $u_*$ exists. If $J$ is $K$-injective in $\operatorname{Ch}(\mathcal A(I'))$, then for any acyclic $A$ in $\operatorname{Ch}(\mathcal A(I))$ the ordinary adjunction gives
+\[
+ \operatorname{Hom}^\bullet(A,u_*J)
+   \cong\operatorname{Hom}^\bullet(u^*A,J).
+\]
+The right-hand side is acyclic because $u^*A$ is acyclic. Thus $u_*J$ is $K$-injective. Replacing $X'$ by such a $J$ defines $\mathbf Ru_*X'=u_*J$ on the entire unbounded derived category, and the same Hom identity proves $u^*\dashv\mathbf Ru_*$ there.
+
+The corresponding unbounded left Kan extensions also exist for Grothendieck coefficients. The precise model-theoretic input is \citet[Proposition 3.13]{Beke2000}: unbounded complexes have a cofibrantly generated model structure with monomorphisms as cofibrations and quasi-isomorphisms as weak equivalences. The underlying category is locally presentable, so this is a combinatorial model; its projective diagram structures and the Brown argument supply all left Kan extensions. Neither construction requires a finite cohomological dimension for the indexing functor. Such dimension restrictions instead govern preservation of bounded ranges. Since restriction is exact for the standard degreewise $t$-structures, its right adjoint preserves lower bounds and its left adjoint preserves upper bounds. Thus the usual statements on globally bounded-below and globally bounded-above diagrams remain meaningful, while a bounded object can acquire cohomology in arbitrarily many degrees on the other side.
+
+For this reason the letter $u_!$ here must be read as the left adjoint to restriction of diagrams. It is not a direct image with proper supports on a space. Those functors have their own geometric hypotheses; importing them would introduce difficulties unrelated to the question asked on pp.~53--54. The example of a finite group below will display the genuine boundedness issue without any such ambiguity.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p55}{Localization axioms, stability, and locally constant coefficients}
+Grothendieck now asks which parts of the derivator formalism are already forced by a good calculus of weak equivalences. Two separate gains should be distinguished. Localizing categories of diagrams preserves their coherent origin; obtaining homotopy Kan extensions requires additional functors between these localized categories. The prederivator exists before the second gain has been made.
+
+Finite disjoint unions are formal. A diagram on $I_1\amalg\cdots\amalg I_r$ is a tuple of diagrams, and weak equivalences are componentwise. Localization commutes with this finite product: finite zigzags may be padded by identities, and the relations may be checked in one coordinate at a time. This explains the absence of a quillenisability hypothesis in the stated finite version of $\mathbf{Der}1$. The same argument is not an argument for arbitrary products of unrelated relative categories, since there may be no uniform finite zigzag length. No such infinite assertion is needed here.
+
+For $\mathbf{Der}2$, the point is to represent a localized arrow by a genuine arrow after replacing its endpoints. Let $f$ be an arrow of $\mathrm{HO}_W(I)$ whose evaluations are all invertible. Under the stated homotopy calculus, choose a representative $a:A\to B$ in $\mathcal M(I)$, with the endpoint identifications weak equivalences. Every $a_i$ is invertible after localization in $\mathcal M$. Strong saturation of $W$ implies $a_i\in W$, so $a\in W(I)$ and $f$ is invertible. The source is correctly using both ingredients: componentwise detection in the original relative category and representability of arrows in the localized diagram category. Strong saturation alone would not supply the latter.
+
+The word ``triangulée'' has a deliberately broader meaning in this passage than the Verdier definition. In a pointed homotopy theory one has cofiber sequences, fiber sequences, suspension and loop objects. Suspension need not be invertible, and there is no reason for the homotopy category to be additive. Pointed spaces give the basic example. An actual triangulated category emerges in the stable case, where suspension and loop are inverse equivalences and cocartesian squares agree with cartesian squares. For strong stable derivators, the canonical triangulations and exactness of the induced functors are established in \citet[Theorem 4.16 and Proposition 4.18]{Groth2013}. This is a later completion of the stable part of the programme, not an assumption hidden in the quoted scholium.
+
+The locally constant condition on p.~56 is likewise a condition on a coherent diagram. Its transition arrows become isomorphisms after localization, but the object still belongs to $\mathrm{HO}_W(I)$, not merely to $\operatorname{Fun}(I^{\mathrm{op}},\mathrm{HO}_W(e))$. The higher coherence carries information. For ordinary model categories, the precise later answer is \citet[Theorem 1.3]{Cisinski2009LocallyConstant}: a functor inducing a weak equivalence of nerves induces an equivalence between the corresponding categories of locally constant diagrams. One can interpret this as dependence only on the infinity-groupoid obtained by inverting all arrows of the indexing category. It does not assert the result for every relative category merely satisfying the definition of quillenisability in \S5; the necessary homotopy theory must still be available.
+
+The axiom numbers are historical. The present $\mathbf{Der}3$ concerns a localizer and locally constant objects, whereas $\mathbf{Der}4$ and $\mathbf{Der}5$ below concern existence and pointwise computation of right images. Modern texts commonly number the existence and pointwise axioms as Der3 and Der4, with strength as an additional Der5. A reference to a modern numbered axiom must therefore be translated by its content.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p57}{Why uniform left structures produce right images}
+Grothendieck's word ``uniform'' puts the same replacement mechanism on every diagram category. With cofibrations and trivial cofibrations defined objectwise, restriction preserves both classes for the elementary reason that it merely selects components. This makes restriction the left-hand member of the relevant Quillen adjunction, even though its geometric name is ``inverse image''. Its right adjoint is therefore the functor on which fibrant replacement should be performed.
+
+Write $u:I'\to I$ and assume that the ordinary right Kan extension exists. The lifting adjunction immediately gives
+\[
+ u_*F(I')\subset F(I),\qquad u_*TF(I')\subset TF(I).
+\]
+For example, lifting a map of $\mathcal M(I)$ in $C(I)$ against $u_*p$ is equivalent to lifting its restriction, which lies in $C(I')$, against $p\in TF(I')$. The argument for $F$ uses $TC$ instead. Since $u_*$ preserves the terminal object, it also preserves fibrant objects. These are the facts summarized before the theorem-scholie; they do not yet appeal to a formula for a homotopy limit.
+
+The pointwise formula determines which ordinary limits must exist:
+\[
+ (u_*X')(s)=\varprojlim_{(i',\,u(i')\to s)\in I'/s}X'(i').
+\]
+Here the displayed limit is the limit of the contravariant diagram on $I'/s$. A finite category has finitely many morphisms as well as finitely many objects, so these are finite limits when $I$ and $I'$ are finite. The phrase ``$\varinjlim$ finies'' on p.~59 is a source slip: the relevant half of $\mathbf M0$ is finite \emph{limits}. For an infinite comma category, neither $\mathbf M0$ nor the word quillenisable creates the missing limit.
+
+There are two ways to continue. The manuscript isolates preservation of weak equivalences between fibrant diagrams as a new condition called admissibility, then proves it by finite gluing. This is a sound and instructive construction of finite homotopy limits. The closed exact hypotheses also permit the general Brown argument given in the next block. It shows that admissibility is automatic whenever the ordinary right Kan extension exists. Consequently the remaining substantive issue is existence of appropriate diagram structures and ordinary limits, rather than an independent homotopy-invariance property of their right adjoints.
+
+For comparison, a combinatorial model category has both the injective and projective model structures on every small diagram category. The injective structure is the modern counterpart of the objectwise-cofibration construction used here, and the projective structure of its dual. The existence statement and its derivator application are respectively Theorem 1.28 and Proposition 1.30 of \citet{Groth2013}. The original finite-limit formulation is still useful when arbitrary small limits do not exist, as in bounded complexes; it then yields only the Kan extensions for which the underlying limit problem can be solved.
+\end{dcomment}
+
+\begin{dcomment}{later}{p59}{The Brown argument makes admissibility automatic}
+The purpose of admissibility is to ensure that a limit of a suitably fibrant diagram depends only on its homotopy class. Under the closed exact hypotheses actually imposed in Definition 1, this is already a consequence of the lifting and factorization axioms. We give the argument explicitly, since it both strengthens the theorem-scholie and settles the later questions without assuming the existence of limits which the source has not provided.
+
+First recall the consequence of closedness and exactness proved above: $F\cap W=TF$. Let $T:\mathcal C\to\mathcal E$ be a functor, where $\mathcal C$ has the source's closed exact structure and $\mathcal E$ has a class $V$ containing the identity maps and satisfying two-out-of-three. Assume that $T$ carries trivial fibrations between fibrant objects into $V$. If $f:X\to Y$ is a weak equivalence between fibrant objects, factor its graph as
+\[
+ X\xrightarrow{i} Z\xrightarrow{p}X\times Y,
+ \qquad i\in TC,\quad p\in F,\quad pi=(1_X,f).
+\]
+Put $p_X=\operatorname{pr}_Xp$ and $p_Y=\operatorname{pr}_Yp$. The two projections are fibrations because $X$ and $Y$ are fibrant. Consequently $Z$ is fibrant and $p_X,p_Y\in F$. The identities $p_Xi=1_X$ and $p_Yi=f$, together with $i,f\in W$, imply $p_X,p_Y\in W$. Both maps therefore lie in $TF$. Their images under $T$ belong to $V$. Since $T(p_X)T(i)=1$, two-out-of-three first gives $T(i)\in V$ and then gives
+\[
+                         T(f)=T(p_Y)T(i)\in V.
+\]
+This is the dual form of Ken Brown's lemma \citep[Lemma 1.1.12]{Hovey1999}. We have displayed its proof to identify the exact hypotheses used: finite products, factorization, composition and pullback stability of $F$, two-out-of-three, and the equality $TF=F\cap W$. There is no appeal to smallness, accessibility, or filtered colimits.
+
+Apply this to $T=u_*$. Uniformity makes $u^*$ preserve $C(I)$, so the lifting adjunction makes $u_*$ preserve $TF(I')$. It also preserves fibrant objects. The lemma gives precisely
+\[
+ f\in W(I'),\quad X',Y'\in\mathcal M(I')_{\mathrm f}
+ \quad\Longrightarrow\quad u_*f\in W(I).
+\]
+Thus every functor $u$ for which the ordinary right Kan extension exists is admissible under the stated uniform closed exact assumptions. The finite-poset theorem remains correct, but its restriction on shapes is unnecessary for this particular homotopy-invariance assertion.
+
+The conclusion should not be enlarged in a different direction. It does not manufacture an ordinary right adjoint in a category lacking the required limits. Nor does it, by itself, prove the pointwise homotopy formula: that formula additionally needs fibrant restriction to the comma categories, as discussed at p.~72. These are genuine existence and compatibility questions. The question of preserving weak equivalences \emph{after the relevant fibrant replacements exist} is answered by the short argument above. We attribute it to the established Brown lemma, rather than present the application as a new result.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p61}{Finite limits assembled from a two-piece cover}
+Grothendieck's finite-poset induction makes the geometry of a homotopy limit visible. Instead of treating a large compatibility diagram at once, he cuts the indexing poset into two lower sets and glues the two resulting limits over their overlap. This argument remains useful even though the Brown lemma gives a shorter proof of admissibility under the stronger standing hypotheses.
+
+Let $I=I_1\cup I_2$ with $I_1,I_2$ lower subsets, and put $I_0=I_1\cap I_2$. Define $v:I\to\Psi=(1\leftarrow0\to2)$ by sending the overlap to $0$, the points belonging only to $I_1$ to $1$, and those belonging only to $I_2$ to $2$. The lower-set condition makes this assignment order preserving: an arrow cannot travel from one exclusive part into the other. Its comma categories over $0,1,2$ are precisely $I_0,I_1,I_2$. Right Kan extension along $v$ therefore produces the span
+\[
+ \varprojlim_{I_1}X\longrightarrow\varprojlim_{I_0}X
+ \longleftarrow\varprojlim_{I_2}X.
+\]
+Taking its pullback gives $\varprojlim_I X$. Indeed, a cone to $X$ is exactly a pair of cones to its restrictions whose two cones on $I_0$ agree. This proves the ordinary limit identity by its universal property, including the cases in which the overlap is empty.
+
+For a finite nonempty poset without a greatest element, partition its maximal elements into two nonempty sets $M_1,M_2$ and take $I_j=\bigcup_{m\in M_j}\{i:i\leq m\}$. Every point lies below a maximal element, so the lower sets cover $I$, and neither is all of $I$. Their overlap is also smaller. The inductive argument is therefore well founded. If $I$ has a greatest element $a$, the limit is $X_a$ in the source's contravariant convention; the empty poset has the terminal object as its limit.
+
+The homotopical step is to ensure that the span just constructed is fibrant. Right Kan extension preserves fibrancy, and a fibrant $\Psi$-diagram consists of fibrant objects $A_0,A_1,A_2$ with both arrows $A_j\to A_0$ fibrations. Its ordinary pullback then represents its homotopy pullback. The induction replaces ``take an arbitrary pullback'' by ``take a pullback whose legs satisfy a lifting condition''. The latter is the operation stable under weak equivalences of the input span.
+
+Composition of admissible functors is also transparent at this point. If $u$ and $v$ preserve weak equivalences between fibrant diagrams after right Kan extension, then $u_*$ first yields another fibrant diagram, to which $v_*$ can be applied. The canonical identification $(vu)_*\cong v_*u_*$ proves admissibility of the composite. No new comparison of replacements is required. This explains why the elementary shape $\Psi$ controls the whole finite induction.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p63}{Matching objects explain the lifting diagram}
+Grothendieck's three lifts express a recursive compatibility condition. The lift at $X_0$ must be chosen first, because the two remaining lifts are required to induce that same map after composition with $X_1\to X_0$ and $X_2\to X_0$. Choosing three unrelated lifts from objectwise fibrancy would not enforce the squares. The fibrations on the two legs are exactly what turns each final choice into a lifting problem with a prescribed target.
+
+The calculation is the smallest instance of the matching-object description for an inverse diagram. Let $I$ be a finite poset, still indexing contravariant diagrams. For $i\in I$ put
+\[
+                M_iX=\varprojlim_{j<i}X_j.
+\]
+An injectively fibrant diagram is characterized by the requirement that each natural map $X_i\to M_iX$ be a fibration. When $i$ has no smaller element, the matching object is terminal, so this says that $X_i$ is fibrant. For $I=\Psi$, the matching objects are $M_0X=e$ and $M_1X=M_2X=X_0$, giving exactly the corollary. This is the inverse-category case of the familiar Reedy description \citep[Theorem 5.1.3]{Hovey1999}.
+
+The lifting criterion can be proved without invoking the terminology. Choose a linear ordering of the finite set of vertices in which smaller vertices occur first. Given an objectwise trivial cofibration $A\to B$ and a map $A\to X$, suppose the lift $B_j\to X_j$ has been chosen for every $j<i$. These maps induce $B_i\to M_iX$. The desired map $B_i\to X_i$ is now a lift in the square whose left side is $A_i\to B_i$ and whose right side is $X_i\to M_iX$. Proceeding through the vertices gives a natural transformation $B\to X$.
+
+For necessity, start with a lifting problem $A\to X_i$, $B\to M_iX$, where $A\to B$ is a trivial cofibration. Form two diagrams which equal $X_j$ for $j<i$, take the values $A$ and $B$ at $i$, respectively, and equal the initial object outside the lower subset $\{j:j\leq i\}$. The given maps to the matching object specify their transition maps. Extension by the initial object is consistent because this subset is lower. Their comparison is objectwise a trivial cofibration, and the first diagram maps to $X$ by the identity below $i$ and the given map at $i$. A lift against $X\to e$ supplies the required $B\to X_i$. This proves the converse. The same finite recursion, factoring $X_i\to M_i(RX)$ at each stage as a trivial cofibration followed by a fibration, constructs a fibrant replacement $X\to RX$.
+
+The condition becomes more informative at a branching vertex. Consider the diamond $0<1<3$, $0<2<3$. Its top matching object is
+\[
+                           M_3X=X_1\times_{X_0}X_2.
+\]
+In cochain complexes of vector spaces over a field $k$, take $X_0=0$ and $X_1=X_2=X_3=k[0]$, with both maps from $X_3$ equal to the identity. All objects are fibrant in the usual model structure, and every nonidentity arrow of this diagram is a fibration: the maps are degreewise surjective. Yet
+\[
+                  X_3\longrightarrow M_3X=k[0]\oplus k[0]
+\]
+is the diagonal and is not surjective. The diagram is not injectively fibrant. Thus the two separate legs happen to suffice for $\Psi$, whereas a general poset requires compatibility with the entire lower matching diagram. This distinction is why replacements of diagrams carry more information than separate replacements of their components.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p64}{A homotopy pullback computed as a complex}
+Grothendieck uses the pullback lemma to make finite gluing invariant under weak equivalences. A concrete calculation shows what fibrant replacement adds to an ordinary pullback. Work with cochain complexes over a field and consider maps $a:X_1\to X_0$ and $b:X_2\to X_0$. A model for their homotopy pullback is
+\[
+ H=\operatorname{Cone}(a-b:X_1\oplus X_2\to X_0)[-1].
+\]
+With coordinates chosen so that
+\[
+ H^n=X_1^n\oplus X_2^n\oplus X_0^{n-1},
+ \quad d(x_1,x_2,h)=(dx_1,dx_2,-dh+a(x_1)-b(x_2)),
+\]
+the equation $d^2=0$ follows from the fact that $a$ and $b$ are chain maps. The third coordinate records the homotopy witnessing equality of the first two images. A strict pullback asks those images to be equal without this additional coordinate.
+
+To verify that this complex computes the derived pullback, replace $a$ by the surjective map $\widetilde X_1\to X_0$, where
+\[
+ \widetilde X_1^n=X_1^n\oplus X_0^n\oplus X_0^{n-1},
+ \quad d(x,z,h)=(dx,dz,-dh+a(x)-z),
+\]
+and the map to $X_0$ is $(x,z,h)\mapsto z$. The inclusion $x\mapsto(x,a(x),0)$ is a quasi-isomorphism: the projection back to $X_1$ has kernel the contractible complex with differential $(z,h)\mapsto(dz,-dh-z)$, contracted by $(z,h)\mapsto(-h,0)$. The new map is degreewise surjective and hence a fibration. Its ordinary pullback along $b$ imposes $z=b(x_2)$ and is exactly the displayed complex $H$.
+
+There is a short exact sequence of complexes
+\[
+ 0\longrightarrow X_0[-1]\longrightarrow H
+   \longrightarrow X_1\oplus X_2\longrightarrow0.
+\]
+Its connecting map on cohomology is induced by $a-b$. This gives the usual exact sequence for a homotopy pullback and also proves invariance directly: a componentwise quasi-isomorphism between two such spans induces an isomorphism on the two outside terms of the associated long exact sequences, and hence on the middle term. If $a-b$ is degreewise surjective, its ordinary kernel maps quasi-isomorphically to $H$. In particular this occurs when either $a$ or $b$ is degreewise surjective, exactly the fibration condition relevant to this model.
+
+For the span $0\to k[0]\leftarrow0$, the ordinary pullback is zero, while $H=k[-1]$ has $H^1(H)=k$. A fibration replacement of one leg restores this missing class. This is the algebraic version of the familiar fact that the homotopy pullback of the basepoint maps $*\to Y\leftarrow *$ is the loop object of $Y$. It explains both why the manuscript requires fibrant legs and why its gluing step cannot be replaced by taking limits in the homotopy category with no coherent diagram behind them.
+
+In the source's general framework, the corresponding invariance statement uses the $W$-fibration property included in $\mathbf M''$, or the equivalent derived-functor argument under the closed exact hypotheses. No failure of properness is being overlooked in the proof on pp.~64--65: the relevant base-change compatibility is already among its assumptions. The statement that one fibrant leg suffices concerns this particular pullback computation, not a claim that all transition maps in an arbitrary diagram can be ignored.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p66}{The proposed noetherian enlargement is actually finite}
+Grothendieck's noetherian induction is patterned on the decomposition of a closed space into irreducible pieces. A generic point makes one piece have a greatest indexing object, and a reducible piece can be glued from two smaller ones. The induction is valid. For the specific Alexandrov topology of a poset, however, the combination ``noetherian and sober'' is stronger than it first appears: it forces the poset to be finite. Thus this paragraph does not in fact add infinite diagram shapes.
+
+We verify the assertion in the precise order convention used here. Opens of $I$ are lower subsets, so opens of $I^{\mathrm{op}}$ are upper subsets of $I$. Sobriety of $I^{\mathrm{op}}$ says that every nonempty directed lower subset of $I$ has a greatest element. If $x_0<x_1<\cdots$ were a strictly increasing sequence, its downward closure would be directed. It could not have a greatest element: any alleged greatest element belongs below some $x_n$, whereas $x_{n+1}$ is strictly larger. Consequently every nonempty subset of $I$ has a maximal element; otherwise dependent choice would construct such a sequence. This is the order-theoretic sobriety criterion, with the order reversed, in \citet[Proposition B.5]{Lindenhovius2014}.
+
+Let $X$ denote $I$ with its upper topology, that is, the topology of $I^{\mathrm{op}}$. Every nonempty subspace $S\subset X$ has an isolated point: take a maximal element $m$ of $S$, so that $S\cap\{x:m\leq x\}=\{m\}$. We now use noetherianity. The union $U$ of all finite open subsets of $X$ is open. Every open subset of a noetherian space is quasi-compact, so the cover of $U$ by its finite open subsets has a finite subcover. Hence $U$ itself is finite. If $X\setminus U$ were nonempty, choose an isolated point $x$ of that subspace. There would be an open $V\subset X$ with $V\cap(X\setminus U)=\{x\}$. Then $U\cup V=U\cup\{x\}$ would be a finite open subset not contained in $U$, contradicting the definition of $U$. Therefore $X=U$ is finite.
+
+Conversely, every finite poset has a noetherian sober Alexandrov topology. Noetherianity is immediate. A nonempty irreducible closed subset has finitely many minimal elements in the lower-topology convention, and irreducibility forces exactly one of them; the closed subset is its closure. Thus the two hypotheses in the proposed enlargement are equivalent to finiteness for posets.
+
+This observation should not be confused with the false assertion that every noetherian sober topological space is finite. Spectra supply abundant infinite examples. The essential extra hypothesis is the Alexandrov topology, in which arbitrary intersections of opens remain open. Nor is it necessary to insert a defect into the manuscript's induction: its irreducible and reducible cases work. The correction is to its claimed extra scope. Infinite towers and group actions on the following pages require another argument, which the Brown lemma supplies whenever the necessary diagram structures and limits exist.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p68}{The adjunction after localization, with both inverses}
+Grothendieck wants the limit functor to retain its universal property after replacement. Knowing that it sends weak equivalences to weak equivalences makes it descend to the homotopy category; it does not alone identify its adjoint. The argument on pp.~68--71 checks that the ordinary adjunction identifies the two homotopy relations. We can make its two directions explicit without choosing a globally functorial replacement.
+
+Choose $F$ cofibrant in $\mathcal M(I)$ and $G$ fibrant in $\mathcal M(I')$. Then $u^*F$ is cofibrant and $u_*G$ is fibrant. Every morphism between these objects in the respective homotopy categories is represented by an ordinary map. Restriction followed by the ordinary counit defines
+\[
+ \beta:\operatorname{Hom}_{\mathrm{HO}(I)}(F,u_*G)
+ \longrightarrow\operatorname{Hom}_{\mathrm{HO}(I')}(u^*F,G).
+\]
+It is well defined because restriction preserves all weak equivalences. It is surjective because every ordinary map $u^*F\to G$ has a strict adjoint $F\to u_*G$. This is the one direction available before admissibility has been used.
+
+To construct the inverse, choose a trivial cofibration $i':u^*F\to F'$ with $F'$ fibrant, and let $i:F\to u_*F'$ be its strict adjoint. The object $F'$ is also cofibrant. Composition with $i'$ induces a bijection
+\[
+ \operatorname{Hom}_{\mathrm{HO}(I')}(F',G)
+    \xrightarrow{\sim}\operatorname{Hom}_{\mathrm{HO}(I')}(u^*F,G).
+\]
+For a class $g$ on the right, let $a$ be its unique inverse image and define
+\[
+                            \gamma(g)=u_*^W(a)\circ[i].
+\]
+This is where admissibility enters: $u_*^W$ is a functor on the localization of fibrant objects, so it acts on the class $a$, independently of its representative. Naturality of the ordinary counit, together with the fact that $i'$ is adjoint to $i$, gives $\beta\gamma(g)=a[i']=g$.
+
+For the other composite, represent a class $b:F\to u_*G$ by an ordinary map and let $g:u^*F\to G$ be its ordinary adjoint. Since $i'$ is a trivial cofibration and $G$ is fibrant, $g$ extends to an ordinary map $a:F'\to G$ satisfying $ai'=g$. Its class is the inverse image used in defining $\gamma$. The ordinary adjunction then gives $u_*a\circ i=b$, proving $\gamma\beta([b])=[b]$. Thus $\beta$ is bijective. Its naturality, already built into restriction and the counit, gives the required bifunctorial adjunction.
+
+This is the derived-adjunction construction; compare \citet[Lemma 1.3.10]{Hovey1999}. Independence of the chosen $F'$ follows from uniqueness of the inverse of $\beta$, rather than from an additional comparison of arbitrary replacements. It also explains the manuscript's remark that functoriality in $G$ appears a posteriori. The adjoint obtained is
+\[
+                                u_W^*\dashv u_*^W.
+\]
+The two occurrences of ``adjoint \`a gauche'' on p.~71 are slips in the source and must read ``adjoint \`a droite''. The Hom formula itself already fixes the orientation, so the proof is unaffected. Likewise the target containing $u^*F'$ on p.~70 is ill typed: $F'$ is already an $I'$-diagram, and the intended object is $u^*F$.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p71}{Pointwise right images require fibrant restriction}
+Grothendieck now wants more than an abstract right adjoint: he wants to compute its value at an object by a homotopy limit over a comma category. The comparison is canonical, but it becomes an isomorphism only after the same replacement is known to be suitable on both sides. This is the content of the invocation of local isomorphisms on p.~72.
+
+Fix $s\in I$, let $q:I'/s\to I'$ be the projection, and write $p_s:I'/s\to e$. If $X'\to RX'$ is fibrant replacement and $q^*$ preserves fibrant objects, then $q^*RX'$ is a fibrant replacement of $q^*X'$, because restriction always preserves the objectwise weak equivalences. The ordinary pointwise formula therefore identifies
+\[
+ \bigl(\mathbf Ru_*X'\bigr)_s
+   =\bigl(u_*RX'\bigr)_s
+   \cong\varprojlim_{I'/s}q^*RX'
+   \cong\mathbf R(p_s)_*q^*X'.
+\]
+The last step uses admissibility of $p_s$. Thus the comparison is computed on one common representative, rather than by comparing two unrelated fibrant replacements.
+
+For clarity, there is a simple sufficient condition for the fibrancy assertion. The functor $q$ is a discrete fibration: an arrow $j\to j'$ in $I'$ and an object $(j',u(j')\to s)$ have a unique lift with source $(j,u(j)\to u(j')\to s)$. In our contravariant convention, when the necessary coproducts exist, its left Kan extension has the formula
+\[
+                           (q_!A)_j\cong\coprod_{x\in q^{-1}(j)}A_x.
+\]
+Coproducts of trivial cofibrations have the left lifting property against every fibration, so $q_!$ preserves the objectwise trivial cofibrations. Its right adjoint $q^*$ consequently preserves fibrations and fibrant objects. This is the contravariant version of the discrete-opfibration argument in \citet[Lemma 1.31]{Groth2013}.
+
+If $I$ is a poset, each fiber has at most one element, so only the initial object is needed for this coproduct formula. In the large cocomplete model examples, all small fibers are allowed. In a setting with only finite limits and finite colimits, an arbitrary infinite fiber requires an additional existence hypothesis; it must not be supplied by notation. This is why the general admissibility result and the pointwise formula have been stated separately in the commentary. The finite-poset corollary satisfies the needed conditions, and the usual combinatorial model setting satisfies them for every small functor.
+
+Modern derivator theory packages this calculation as the pointwise Kan-extension axiom. The square of shapes contains the canonical natural transformation $uq\Rightarrow s p_s$; its mate is exactly the displayed comparison. Thinking in terms of that mate explains its compatibility with composition and base change, while the fibrant-representative calculation proves that it is invertible in the present models.
+
+The same proof gives a useful class of base-change squares, with a condition that can be checked directly. Let $v:I_1\to I$ be a discrete fibration, form the strict pullback $I'_1=I'\times_I I_1$, and denote its projections by $v':I'_1\to I'$ and $u_1:I'_1\to I_1$. Assume that the required right Kan extensions and the coproducts over the fibers exist. For each $t\in I_1$ the natural functor
+\[
+                         I'_1/t\longrightarrow I'/v(t)
+\]
+is an isomorphism. Indeed, an object of the target is an arrow $u(i')\to v(t)$. Its unique lift along $v$ is an arrow $t'\to t$ with $v(t')=u(i')$, and therefore supplies the object $((i',t'),t'\to t)$ of the source. The uniqueness of lifts gives the inverse also on morphisms. This proves the ordinary base-change identity by the pointwise limit formula.
+
+The pullback $v'$ is again a discrete fibration, so the preceding coproduct argument shows that $(v')^*$ preserves fibrant objects. Evaluate both sides of the ordinary identity on a fibrant replacement of $X'$. They then compute the two derived functors, proving the canonical isomorphism
+\[
+                      v^*\mathbf Ru_*X'
+                     \cong\mathbf R(u_1)_*(v')^*X'.
+\]
+This is the same discrete-fibration mechanism used in the comma calculation, applied to a family of objects at once; it is part of the standard pointwise derivator calculus cited above.
+
+A strict pullback square without this hypothesis need not have such an isomorphism. Take $I=(0\to1)$, let $I'=\{0\}$ and $I_1=\{1\}$ be the two endpoint inclusions, and use complexes over a field. Their pullback is empty. For $X'=k[0]$, the left side evaluated at $1$ is $k[0]$, because $\{0\}/1$ is terminal. The right side is zero, the limit of the empty diagram in complexes. Thus the base-change map cannot be an isomorphism. The pointwise axiom guarantees the designated comma squares; additional squares require the corresponding exactness argument.
+\end{dcomment}
+
+\begin{dcomment}{status}{p72}{Products and towers have a positive answer}
+Grothendieck's test cases isolate two ways in which an infinite limit could lose a weak equivalence. The first takes infinitely many independent factors; the second imposes infinitely many compatibility equations. Under the closed model hypotheses he explicitly mentions, both questions have affirmative answers. Their difficulty is the availability of suitable replacements, not a failure of weak equivalence to survive the limit of a fibrant diagram.
+
+For a set $S$, equip $\mathcal M^S$ with the product structure. The diagonal functor preserves cofibrations and trivial cofibrations componentwise. Its right adjoint, whenever it exists, is $\prod_S$. The Brown argument therefore shows that a product of weak equivalences between fibrant objects is a weak equivalence. This remains true for uncountable $S$ whenever the required products exist. No assumption about exact filtered colimits is used. The derived product is consequently computed by the product of fibrant replacements; the same conclusion appears explicitly in \citet[Example 1.3.11]{Hovey1999}.
+
+For the tower shape, use the matching-object description already seen in finite posets. A tower
+\[
+                         X_0\longleftarrow X_1\longleftarrow X_2\longleftarrow\cdots
+\]
+is fibrant precisely when $X_0$ is fibrant and every bonding map is a fibration; all other $X_n$ are then fibrant by composition. The recursive lifting proof has one step for each natural number and defines a compatible lift on the whole tower. Taking the limit is right adjoint to the constant-tower functor, which preserves the objectwise cofibrations and trivial cofibrations. Brown's lemma again gives invariance under levelwise weak equivalences between these towers. In the ordinary complete model setting this is also the inverse Reedy construction.
+
+The manuscript correctly observes that the tower assertion implies the countable product assertion. For a countable family $(X_n)$ of fibrant objects, put $P_r=\prod_{0\leq n\leq r}X_n$. The projection $P_{r+1}\to P_r$ is a pullback of $X_{r+1}\to e$, hence a fibration. A family of weak equivalences induces weak equivalences between the finite products, by the finite case; the inverse limit of the resulting map of towers is the original map of infinite products. This reduction proves the stated implication, although the direct product adjunction is shorter once the general lemma is recognized.
+
+The affirmative answer does not mean that ordinary inverse limits preserve all levelwise weak equivalences. The following example shows exactly where the bonding-map condition matters. It is also a useful safeguard when replacing an abstract existence theorem by an explicit tower of complexes.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p73}{An inverse limit of acyclic complexes can have cohomology}
+The insistence on fibrant towers is mathematically necessary, even in the most familiar algebraic model. Fix a prime $p$ and, for $n\geq1$, form the cochain complex
+\[
+ A_n=\bigl[\mathbb Z\xrightarrow{p^n}\mathbb Z
+                   \xrightarrow{\bmod p^n}\mathbb Z/p^n\bigr]
+\]
+in degrees $0,1,2$. It is acyclic: the first map is injective, the image of that map is the kernel of the second, and the second is surjective. Define $A_{n+1}\to A_n$ by multiplication by $p$ in degree $0$, the identity in degree $1$, and reduction modulo $p^n$ in degree $2$. These maps commute with both differentials. The maps of towers $A_n\to0$ are therefore quasi-isomorphisms at every level.
+
+Their ordinary inverse limit is readily computed. A compatible sequence in degree $0$ satisfies $a_n=p a_{n+1}$. Its first coordinate is divisible by every power of $p$, and hence vanishes; then every coordinate vanishes. The limit in degree $1$ is $\mathbb Z$, and the limit in degree $2$ is $\mathbb Z_p$. Thus
+\[
+               \varprojlim_n A_n=\bigl[0\longrightarrow\mathbb Z
+                                          \longrightarrow\mathbb Z_p\bigr].
+\]
+The map $\mathbb Z\to\mathbb Z_p$ is injective but not surjective. For example, $\mathbb Z_p$ is uncountable, since a sequence of digits in $\{0,\ldots,p-1\}$ uniquely determines a $p$-adic integer, while $\mathbb Z$ is countable. Consequently
+\[
+              H^2\!\left(\varprojlim_n A_n\right)=\mathbb Z_p/\mathbb Z\ne0.
+\]
+The inverse limit of the levelwise quasi-isomorphism $A_\bullet\to0$ is not a quasi-isomorphism.
+
+There is no conflict with the positive result on the preceding page. In the projective model structure on unbounded complexes of abelian groups every object is fibrant, but a fibration is degreewise surjective. The bonding map of this tower is multiplication by $p$ in degree $0$, so it is not a fibration. Individual fibrancy has not made the \emph{diagram} fibrant. A fibrant tower replacement would have an acyclic inverse limit by the Brown argument.
+
+This example separates three statements which can otherwise look deceptively similar: ordinary inverse limit is not exact; inverse limit need not preserve levelwise quasi-isomorphisms of arbitrary towers; inverse limit does preserve weak equivalences between fibrant towers in the model structure under discussion. Only the third statement is the admissibility problem posed in the manuscript. Its positive answer is compatible with the failure exhibited here.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p74:Les deux exemples précédents étaient des catégories ordonnées.}{A group action detects the difference between fixed and homotopy fixed points}
+Grothendieck introduces $B_G$ because automorphisms are absent from the finite-poset argument. The limit of a $G$-diagram is a fixed-point object. Its derived version measures the coherence of invariance under the whole action, and a single fibrant value does not guarantee that the action diagram is injectively fibrant. The algebraic example below makes the difference explicit and at the same time answers the boundedness question from \S5.
+
+Let $G=C_p=\langle g\mid g^p=1\rangle$, let $k$ be a field of characteristic $p$, and give $k$ the trivial action. Using inversion to change a right action into a left action if necessary, diagrams of complexes on $B_G$ are complexes of $R=k[G]$-modules. With $t=g-1$, one has $R\cong k[t]/(t^p)$. The trivial module has the free resolution
+\[
+ \cdots\xrightarrow{t}R\xrightarrow{t^{p-1}}R
+       \xrightarrow{t}R\longrightarrow k\longrightarrow0.
+\]
+Its exactness follows immediately from
+\[
+       \ker(t:R\to R)=(t^{p-1}),\qquad
+       \ker(t^{p-1}:R\to R)=(t).
+\]
+Applying $\operatorname{Hom}_R(-,k)$ makes every differential zero, since $t$ acts by zero on $k$. Tensoring with $k$ does the same. Therefore
+\[
+ \operatorname{Ext}^n_R(k,k)\cong k,
+ \qquad \operatorname{Tor}^R_n(k,k)\cong k
+ \qquad(n\geq0).
+\]
+For the projection $p:B_G\to e$ this gives
+\[
+ \mathbf Rp_*k=\mathbf R\operatorname{Hom}_{k[G]}(k,k),
+ \qquad \mathbf Lp_!k=k\otimes^{\mathbf L}_{k[G]}k.
+\]
+The first object has nonzero cohomology in every nonnegative degree, and the second in every nonpositive degree. Both exist in $D(k)$. Neither belongs to $D^{\mathrm b}(k)$, although the input is concentrated in degree zero. Finite cohomological dimension is therefore a boundedness condition in this example, not a prerequisite for the unbounded operations.
+
+Ordinary invariants of the original diagram give only $k[0]$. Moreover, over a field its underlying complex is already fibrant. The additional cohomology arises because injective fibrancy in the diagram category is a condition on the $k[G]$-complex, not merely on the underlying $k$-complex. Replacing that diagram by a $K$-injective $k[G]$-complex and taking ordinary invariants computes $\mathbf Rp_*$. The Brown lemma proves invariance between such fibrant diagrams, so the presence of a nontrivial automorphism group creates no exception to admissibility.
+
+Exactly the same general argument applies to the full subcategory of $\boldsymbol\Delta$ on $[0]$ and $[1]$ mentioned next in the manuscript. It is not the walking arrow: it contains all maps between those two ordinals, including the two sections and the retraction. It has two objects and seven morphisms: the four Hom sets have respectively $1,2,1,3$ elements. Thus its ordinary limit uses only the finite limits of $\mathbf M0$. Its relations matter when constructing a coherent diagram, but the assumed uniform structure and the lifting-adjunction proof already give admissibility; no further infinite-completeness assumption is needed for this test.
+\end{dcomment}
+
+\begin{dcomment}{later}{p75}{The projective construction supplies the dual theory}
+Grothendieck's change of tactic is the right one for left images. To derive a colimit, fibrations should be defined objectwise, so restriction becomes a right Quillen functor and its left adjoint acts on cofibrant diagrams. The extra small generating sets are needed to construct these projective diagram structures. Once they have been constructed, the dual Brown argument supplies homotopy invariance for every existing left Kan extension, rather than only for finite posets.
+
+Here is the construction with its size hypothesis visible. Suppose that $\mathcal M$ is a locally presentable, cofibrantly generated model category, with generating cofibrations $C_0$ and generating trivial cofibrations $T_0$. For $i\in I$, evaluation has a left adjoint $L_i$, given in the contravariant convention by
+\[
+                         (L_iA)_j=\coprod_{I(j,i)}A.
+\]
+Use the sets $\{L_ic:i\in I,c\in C_0\}$ and $\{L_it:i\in I,t\in T_0\}$. By the evaluation adjunction, their right lifting classes are exactly the objectwise trivial fibrations and the objectwise fibrations, respectively. The sets really are small: $I$ and the two generating collections are small. For a sufficiently large regular cardinal the domains are presentable, because evaluation preserves filtered colimits and
+\[
+ \operatorname{Hom}_{\mathcal M(I)}(L_iA,X)
+                        \cong\operatorname{Hom}_{\mathcal M}(A,X_i).
+\]
+The small object argument therefore gives both desired factorizations.
+
+One also checks the weak equivalences in the transferred structure. A relative cell complex built from the $L_it$ is componentwise a composite of pushouts of coproducts of trivial cofibrations. The base trivial cofibrations form a left lifting class and are closed under these operations, so the resulting map is an objectwise trivial cofibration and hence an objectwise weak equivalence. Taking retracts gives the same conclusion for every map in $TC(I)$. Moreover $TC(I)\subset C(I)$, because the objectwise trivial fibrations are objectwise fibrations. If $f\in C(I)\cap W(I)$, factor it as $f=pj$ with $j\in TC(I)$ and $p\in F(I)$. Two-out-of-three gives $p\in W(I)$, so $p\in TF(I)$ by the objectwise definitions. The lifting property of $f$ against $p$ makes $f$ a retract of $j$, hence $f\in TC(I)$. This identifies the required acyclic class and completes the model-structure verification. It is the projective transfer argument sought in the paragraph following the two formulas on p.~75. See \citet[Theorem 1.28 and Lemma 1.29]{Groth2013}; the small object argument itself is recorded in \citet[Theorem 2.1.14]{Hovey1999}.
+
+For $u:I'\to I$, restriction now preserves the objectwise fibrations and trivial fibrations. Adjointness makes $u_!$ preserve cofibrations and trivial cofibrations. The dual Brown lemma shows that it preserves weak equivalences between cofibrant diagrams, and the derived adjunction is
+\[
+                              \mathbf Lu_!\dashv u^*.
+\]
+The hypotheses of local presentability and cofibrant generation make all small diagram shapes available, including $B_G$. An objectwise construction of fibrations does not mean that cofibrant diagrams are objectwise cofibrant with no further condition; the latter would miss precisely the relations that the free diagrams $L_iA$ impose.
+
+Two slips in the source obscure this otherwise correct programme. Exactness on the right is $TF=F\cap W$, not $F\cap C$. In the factorizations $f=pi$, the membership assertions must refer to $p\in F$ or $p\in TF$, not to $f$. They are retained as printed and explained in the correction register. The role of filtered colimits also deserves precision: in the projective transfer just described, closure of trivial cofibrations under transfinite composites follows from their lifting property. A separate assertion that all weak equivalences are closed under filtered colimits is not what proves that step.
+\end{dcomment}
+
+\begin{dcomment}{context}{p76}{Why the homotopy problem returns to SGA 4}
+Grothendieck turns to cardinal filtrations because a construction on every diagram category needs a controlled supply of small pieces. The issue is already visible in the proposed right uniform quillenisation: a lifting condition must be generated by a set of maps, and the factorisations built from that set must remain available after changing the indexing category. The return to SGA~4, I, \S9 is therefore part of the homotopical argument. It supplies a way of bringing a large category within reach of set-indexed constructions.
+
+The later letter to Thomason makes this connection explicit. In its opening pages Grothendieck describes his renewed work on accessible categories and accessible parts as a rebuilding of the provisional account in SGA~4. In the next section of the letter, he distinguishes the relative category $(\mathcal M,W)$, which specifies the homotopy theory, from the cofibrations and fibrations used to construct its operations \citep[pp.~2--4 of the electronic edition]{Grothendieck1991Letter}. The present chapter places these two concerns next to one another: first find enough replacements to derive direct images; then explain the smallness that makes such replacements possible. This is also why the size of a \emph{diagram}, rather than just the sizes of its values, becomes decisive near the end of \S7.
+
+There are two historical cautions. The word ``accessible'' here follows the cardinal conventions of SGA~4: ``grand devant $\pi$'' bounds every subset of size at most $\pi$, and thus corresponds to $\pi^+$-directedness in the regular-cardinal terminology now customary. Also, the closing definition tests membership in a part against \emph{every} perfectly adapted presentation. It is stronger than merely exhibiting the part as a category of sufficiently directed colimits of small objects. The distinction is mathematically effective: the counterexamples below separate those conditions even in a powerset ordered by inclusion. The later development of accessibility does not license us to identify formulations whose quantifiers differ.
+\end{dcomment}
+
+\begin{dcomment}{status}{p76}{What has been settled before the cardinal detour}
+The final questions of \S6 can now be separated by the task they perform. For the uniform closed exact structures assumed in the theorem-scholie, the Brown lemma settles admissibility of every functor with the requisite ordinary right adjoint; its dual settles left admissibility. Products, towers, group actions and the truncated simplex category are all included. The finite-poset proof remains a direct construction of the finite calculus, while the noetherian sober Alexandrov condition adds no infinite posets.
+
+The next question is existence of those uniform structures. In the usual combinatorial setting, injective and projective diagram model structures, derived adjunctions, and the pointwise comma-category formulas furnish a strong derivator on all small categories. This is the later theorem corresponding most directly to Grothendieck's programme. In smaller categories such as bounded complexes, one retains finite operations and must check each infinite ordinary limit or colimit separately. The bounded-product example above prevents a blanket completeness assertion.
+
+Section 7 addresses the remaining constructive burden: how a large lifting class or a large collection of objects can be controlled by a small family at a sufficiently large cardinal. That question is substantial even though the preceding homotopy-invariance doubts have a formal answer. It is also where the older SGA~4 language of accessibility and the later language of presentability need to be compared with particular care. The change of subject is therefore motivated by the production of factorizations, rather than by a need to repair Brown's argument.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p77:Filtrations cardinales et parties accessibles d'une grosse catégorie}{A size filtration and a presentability rank}
+Grothendieck returns to cardinal estimates because the constructions of model structures need a controlled supply of small objects. A replacement construction may be performed object by object and still fail to be controlled uniformly over a category. The filtration is intended to provide that control: a large object is assembled from bounded pieces, while bounded constructions on bounded pieces remain bounded. The categorical purpose of the estimates should remain visible through the set theory.
+
+There is a one-cardinal shift in the language. Throughout these pages, ``grand devant $\pi$'' means that every subset of cardinal at most $\pi$ has an upper bound. In modern terminology such a nonempty poset is $\pi^+$-directed, where $\pi^+$ is the successor cardinal. Write $\kappa=\pi^+$ when translating the assertions. An object called $\pi$-accessible in the sense of SGA~4 is correspondingly $\kappa$-presentable: its covariant Hom functor preserves these directed colimits. This meaning of ``accessible object'' must also be kept distinct from the new meaning of ``accessible part'' introduced on manuscript page~86. The latter concerns a full subcategory and its position inside the ambient category.
+
+The three filtration conditions do not say that every object of $\Filt^\pi(E)$ is $\pi^+$-presentable. They say that this stage is essentially small, is closed under the specified bounded colimits, and generates $E$ under sufficiently directed colimits. Preservation of such colimits by Hom is an additional hypothesis. This explains why the hypothesis $\Filt^\pi(E)\subset E_\pi$, initially left tacit, becomes necessary on pages~90--94. Under suitable accessibility hypotheses, SGA~4 supplies useful cardinals at which size and presentability do coincide; see \citet[I, 9.16--9.18]{SGA4I1972}. It does not identify the two notions at every index of an arbitrary filtration.
+
+The universe convention is also doing real work. ``Essentially small'' means that a skeleton belongs to the fixed universe; it does not mean that there are finitely or countably many objects. Once a skeleton is chosen, the relevant comma categories are small because $E$ is a $\mathfrak U$-category. All diagrams below remain small relative to this universe. No assertion that the whole large category has a set of objects in that same universe is needed.
+
+Finally, the filtration is exhaustive even though exhaustiveness is not listed separately. Choose the presentation from condition~(c) at $\pi_0$, and choose $\rho\geq\pi_0$ larger than the cardinality of its indexing poset. Its terms lie in $\Filt^\rho(E)$, and condition~(b) places its colimit in the same stage. Thus every object eventually enters the filtration. This short argument is the content of footnote~39.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p77:Si on admet l'hypothèse du continu généralisée}{The useful exponent bound and the singular-cardinal exception}
+The bound $(\pi')^\pi$ measures how many small pieces may be needed to describe an object of size $\pi'$. It should be retained until an actual cardinal identity permits its replacement by $\pi'$. The calculation for a power-set cardinal is correct: if $\pi'=2^{c'}$ and $c'\geq\pi$ are infinite, then
+\[
+ (\pi')^\pi=(2^{c'})^\pi=2^{c'\cdot\pi}=2^{c'}=\pi'.
+\]
+Thus arbitrarily large useful choices are available without a continuum hypothesis.
+
+The subsequent claim about the generalized continuum hypothesis is false as written. If $\mu$ is singular and $\operatorname{cf}(\mu)\leq\pi<\mu$, then $\mu^\pi>\mu$, independently of GCH. Here is the elementary obstruction. Choose increasing infinite cardinals $\mu_\alpha<\mu$, for $\alpha<\delta=\operatorname{cf}(\mu)$, with supremum $\mu$. K\"onig's diagonal argument gives
+\[
+ \mu=\sum_{\alpha<\delta}\mu_\alpha
+       <\prod_{\alpha<\delta}\mu_\alpha^+
+       \leq\mu^\delta\leq\mu^\pi.
+\]
+For completeness, the strict inequality follows by partitioning a purported list of all elements of the product into pieces $S_\alpha$ of size $\mu_\alpha$. In coordinate $\alpha$, choose a value outside the $\alpha$-coordinates of $S_\alpha$; the resulting element is absent from every piece of the list. Taking $\mu=\aleph_\omega$ and $\pi=\aleph_0$ already disproves the printed assertion.
+
+Under GCH the conclusion does hold when $\pi<\operatorname{cf}(\pi')$. In that case each map $\pi\to\pi'$ has bounded image. For every infinite $\nu<\pi'$, GCH gives
+\[
+ \nu^\pi\leq(2^\nu)^\pi=2^{\max(\nu,\pi)}
+ =\max(\nu,\pi)^+\leq\pi',
+\]
+and the union of $\pi'$ such sets has size at most $\pi'$. The constant functions give the reverse inequality. The missing cofinality condition matters precisely at singular cardinals. Nothing later in the construction requires the erroneous unconditional simplification: the bound $(\pi')^\pi$, and the unconditional power-set choices, suffice.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p82:donc on gagne encore.}{Why the transfinite closure has to run far enough}
+The editors distinguish two different closure problems. If $I$ is already grand devant $\pi$ and $S\subset I$ has size at most $\pi$, a single upper bound $s$ gives the required subposet $S\cup\{s\}$. It has a largest element, so it is grand devant every cardinal. This proves the stated Lemma~1 without any exponent assumption. The longer proof is useful when the ambient poset is only grand devant $\pi_0$; that is the corrected Lemma~$1'$.
+
+Put $\lambda=\pi_0^+$. Starting with $S_0=S$, adjoin at each successor stage an upper bound for every subset of $S_\alpha$ having cardinal at most $\pi_0$, and take unions at limit stages. Suppose $\pi>\pi_0$ and $\pi^{\pi_0}=\pi$. Each successor step adds at most $\pi^{\pi_0}=\pi$ elements. A union of at most $\pi$ sets of size at most $\pi$ again has size at most $\pi$, so every $S_\alpha$, including $S_\lambda$, satisfies the desired bound.
+
+The omitted verification is that $S_\lambda$ is grand devant $\pi_0$. Given $A\subset S_\lambda$ with $|A|\leq\pi_0$, choose a stage containing each of its elements. Since $\lambda=\pi_0^+$ is regular, these at most $\pi_0$ stages are bounded below $\lambda$. Hence $A\subset S_\alpha$ for some $\alpha<\lambda$, and the next stage contains an upper bound for $A$. This is why merely iterating the operation finitely many times, or through a sequence of cofinality at most $\pi_0$, would not prove the assertion.
+
+The exponent hypothesis is sufficient rather than intrinsic. For example, when the desired bound is exactly $\pi_0^+$, enumerate the initial subset in a sequence of length $\pi_0^+$ and recursively choose an upper bound for the elements enumerated so far and the previously chosen bounds. At each proper stage there are at most $\pi_0$ requirements. Adjoining the resulting increasing sequence to the initial subset produces a subposet grand devant $\pi_0$, of cardinal at most $\pi_0^+$, without assuming $(\pi_0^+)^{\pi_0}=\pi_0^+$. We will use this elementary successor-cardinal improvement when returning to the unfinished final lemma.
+
+These are two applications of the same method: control the number of requirements at a successor step, then choose a length whose cofinality catches every small family of requirements. Modern accessibility arguments still use this mechanism. The explicit stronger size assumption in \citet[Lemma~5.4.2.8]{Lurie2009HTT} serves exactly this purpose in the setting of $\infty$-categories.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p84:représentation bien adaptée}{A presentation that is continuous on its small pieces}
+Grothendieck wants the indexing set to remember small colimits already performed. An arbitrary directed presentation has upper bounds, but its value at an upper bound need not equal the colimit of the stages below it. Replacing indices by small directed subsets builds this continuity into the presentation.
+
+Take $X=\varinjlim_{i\in I}X_i$ as in condition~(c), and let $P$ consist of the subposets $S\subset I$ of size at most $\pi$ which are grand devant $\pi_0$. Order $P$ by inclusion and put $Z_S=\varinjlim_{s\in S}X_s$. The ambient hypothesis on $I$ gives an upper bound for the union of at most $\pi$ members of $P$; adjoining that element produces another member of $P$. Thus $P$ is grand devant $\pi$. Condition~(b) gives $Z_S\in\Filt^\pi(E)$, while the elementary bound on subsets gives $|P|\leq|I|^\pi$.
+
+The equality of the two colimits can be verified directly, without a cofinality convention. A compatible family of maps $Z_S\to Y$ gives maps $X_i\to Y$ by using the singleton subset $\{i\}$. For $i\leq j$, the two-element subset $\{i,j\}$, which has largest element $j$, ensures compatibility. Conversely a cocone on the $X_i$ induces one on every $Z_S$, and these two operations are inverse. Hence $\varinjlim_P Z_S\simeq X$.
+
+Now let $A\subset P$ be grand devant $\pi_0$ and have cardinal at most $\pi$. Its union $S=\bigcup_{T\in A}T$ has size at most $\pi$. For a subset $B\subset S$ of size at most $\pi_0$, choose one $T_b\in A$ containing each $b$. An upper bound $T\in A$ for these members contains $B$, and an upper bound for $B$ inside $T$ belongs to $S$. Thus $S\in P$, and $S$ is the supremum of $A$. A cocone on the diagrams over all $T\in A$ is exactly a cocone over their union, so
+\[
+ Z_{\sup A}=Z_S\simeq\varinjlim_{T\in A}Z_T.
+\]
+This proves the continuity clause in Proposition~1, not merely the existence of suprema in its indexing poset.
+
+When all filtered colimits exist and the filtration is strict in the bounded sense of footnote~41, the same proof uses ordinary directed subposets $S$ and ordinary directed families $A$. A union of a directed family of directed subposets is directed. A subset of $I$ of size at most $\pi$ can be enlarged to a directed subset of that same size by adding upper bounds for finite subsets through countably many stages. This yields Proposition~1 bis. The word ``perfectly'' records the stronger continuity, with no change to the cardinality bound on the partial diagrams. The inverse-limit sign in the preceding display on manuscript page~85 is a source slip: the construction uses a colimit.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p86:De tels systèmes inductifs seront dits}{Sets and modules as perfectly adapted presentations}
+The basic example makes every condition concrete. In $E=\mathrm{Set}$ put $\Filt^\pi(E)=\{S:|S|\leq\pi\}$. A skeleton is a set of cardinals, so the stage is essentially small. A colimit of a diagram with at most $\pi$ objects, each of size at most $\pi$, is a quotient of a disjoint union of size at most $\pi\cdot\pi=\pi$. Thus the required bounded closure holds, even for arbitrary colimits of that size.
+
+For a set $X$ consider
+\[
+ I=[X]^{\leq\pi},\qquad X_A=A\quad(A\in I),
+\]
+with inclusion maps. The union of at most $\pi$ members has size at most $\pi$, so $I$ is grand devant $\pi$. Every nonempty directed family $J\subset I$ of size at most $\pi$ has supremum $\bigcup J$, and its colimit in sets is this same union. The colimit of the entire diagram is $X$, since the singletons cover it. If $|X|\leq\pi'$, then $|I|\leq(\pi')^\pi$ for infinite $X$; finite $X$ causes no difficulty. This is a perfectly adapted representation with the precise bound appearing in the source.
+
+A set $A$ of size at most $\pi$ is $\pi^+$-presentable. To factor a map $A\to\varinjlim_IY_i$ through one stage, choose representatives for its at most $\pi$ values, and then one upper bound for their indices. If two such factorizations induce the same map, each of their at most $\pi$ component equalities holds at some later stage; another upper bound makes the maps equal. Both surjectivity and injectivity of the Hom comparison are used. They are the categorical counterparts of choosing generators and then checking relations.
+
+For modules over a ring $R$, fix an infinite $\pi\geq|R|$. Use modules whose underlying sets have size at most $\pi$. They form an essentially small class, and bounded filtered colimits preserve the size bound. Every module $X$ is the union of its submodules of size at most $\pi$. Any set of at most $\pi$ elements generates such a submodule: a linear combination uses finitely many coefficients, so there are at most $\pi$ combinations. The poset of these submodules is grand devant $\pi$, and directed unions of at most $\pi$ of them again have size at most $\pi$. This gives the same perfectly adapted presentation.
+
+The module presentability assertion also includes relations. A module of size at most $\pi$ has a surjection from a free module on at most $\pi$ generators. That free module and its kernel have size at most $\pi$, so the kernel is generated by at most $\pi$ elements. Factoring a homomorphism through a $\pi^+$-directed colimit requires at most $\pi$ choices for generators and at most $\pi$ equations for relations; a common later stage handles them all. Equality of two factorizations is checked on the generators. Thus the chosen stage consists of $\pi^+$-presentable modules.
+
+These examples also locate an omission in the glossary. There, ``strict filtration'' is stated as closure of each stage under all filtered colimits, with no bound on the indexing cardinal. Together with condition~(c), that statement would force $E=\Filt^\pi(E)$ for every $\pi$, hence would make $E$ essentially small. The definition actually used here is the bounded one in footnote~41: closure under filtered diagrams of cardinal at most $\pi$. For instance, the union of $\pi^+$ many successively larger subsets of a set of cardinal $\pi^+$ shows why the bound cannot be discarded.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p89:Je présume que ces conditions sont équivalentes.}{Three different ways to recognize a part}
+The purpose of the new definition is to recognize membership in a class $M$ from small approximations. This would be particularly useful when $E$ is an arrow category and $M$ is a class of weak equivalences. Grothendieck proposes three tests, but their logical strengths differ.
+
+The first, $a_\pi$, says that $M$ is exactly the class of $\pi^+$-directed colimits of objects of $M^\pi=M\cap\Filt^\pi(E)$. It includes a closure assertion as well as an existence assertion. The second, $b_\pi$, says that \emph{every} perfectly adapted presentation detects membership by a cofinal set of $M$-stages. It therefore imposes a condition on the individual stages of a chosen presentation, beyond the existence of some good presentation. The third, $c_\pi$, combines strict generation, closure under $\pi^+$-directed colimits, and ordinary filteredness of $M^\pi/X$.
+
+At a useful cardinal, with $M^\pi$ consisting of $\pi^+$-presentable objects, $a_\pi$ is the familiar description by an $\operatorname{Ind}_{\pi^+}$-completion. Indeed the canonical colimit functor out of that completion is fully faithful; the Hom calculation is the one in \citet[I, 9.18(a)]{SGA4I1972}. It follows in particular that the resulting full subcategory is closed under $\pi^+$-directed colimits. This explains the modern accessibility of the inclusion, but it does not make $b_\pi$ automatic.
+
+There are two distinct issues in the proposed equivalence. Ordinary filteredness controls finite diagrams, whereas $a_\pi$ asks for compatibility of up to $\pi$ constraints at once. Separately, two cofinal collections of small approximations need not meet: one may pick only successor stages and another only limit stages. Continuity of the second presentation does not force membership to pass to its countable colimits. The following examples isolate these two failures while keeping all objects in the small stage genuinely presentable.
+\end{dcomment}
+
+\begin{dcomment}{development}{p89:Je présume que ces conditions sont équivalentes.}{Two counterexamples to the proposed equivalence}
+The distinction just made can be checked in a category with no nontrivial parallel arrows. This removes any possible ambiguity about coherence and leaves the cardinal issue exposed. We give the examples as our own verification of the conjecture on page~89. We did not find these particular examples in the relevant portions inspected of SGA~4 I, \S9, \emph{Les D\'erivateurs} XVIII, \S4.13 and Lemma~4.16.7.11, and the accessible-category references listed below; no priority is asserted.
+
+\textbf{Proposition: the implication $a_\pi\Rightarrow b_\pi$ fails at the same cardinal.}\ours
+Take $\pi=\aleph_0$ and let $E$ be the poset $\mathcal P(\omega_1)$, viewed as a category under inclusion. Give it the strict filtration by cardinality, $\Filt^\rho(E)=\{S\subset\omega_1:|S|\leq\rho\}$. Let
+\[
+ M=\{\alpha+1:\alpha<\omega_1\}\cup\{\omega_1\},
+\]
+where ordinals denote their sets of predecessors. Then $a_\pi$ and $c_\pi$ hold, while $b_\pi$ fails. Every object of $\Filt^\pi(E)$ is $\pi^+$-presentable in $E$.
+
+\emph{Proof.} Colimits in $E$ are unions. Each filtration stage is small, since it is a subset of the universe-small set $\mathcal P(\omega_1)$. A union of at most $\rho$ sets of size at most $\rho$ again has size at most $\rho$, proving the bounded closure axiom for every infinite $\rho$. Each $S\subset\omega_1$ is the union of its subsets of size at most $\rho$; their poset is $\rho^+$-directed because a union of at most $\rho$ such subsets is another one. If $|S|\leq\rho'$ and $\rho'>\rho$, the number of indices is at most $(\rho')^\rho$; the finite cases satisfy this bound as well. This verifies the full filtration axiom~(c), including its size estimate. Finally, in a $\pi^+$-directed union every countable subset of the union is contained in one stage. Since Hom sets in $E$ have at most one element, this factorization assertion proves presentability of all the countable objects.
+
+The objects of $M^\pi$ are exactly the countable successor ordinals. Each is a constant directed colimit of such objects, and $\omega_1$ is the union of all countable successor ordinals; their ordered set is countably directed. Conversely, consider a countably directed family of countable successor ordinals. If its union $\beta$ is countable and is not attained, choose a countable cofinal subfamily. A single member bounding this subfamily would contain its union, contradicting nonattainment. Therefore a countable union arising this way is an attained successor ordinal. An uncountable union is $\omega_1$. This proves $a_\pi$ and closure of $M$ under countably directed colimits.
+
+For $X\in M$, the slice $M^\pi/X$ is a nonempty linearly ordered set, hence is filtered. Its union is $X$. In a poset this says exactly that the canonical family of arrows from $M^\pi$ is strictly epimorphic: any common upper bound of that family in $M$ is an upper bound of $X$, and the required factorization is unique. Thus $c_\pi$ holds as well.
+
+Now index a diagram by the nonzero countable limit ordinals $\delta<\omega_1$, and set $X_\delta=\delta$. The index is countably directed: the supremum of any countable family is still countable, and a larger countable limit ordinal is an upper bound. Every nonempty directed subset of this index of cardinal at most $\aleph_0$ has its supremum in the index; a supremum of nonzero limit ordinals is again a nonzero limit ordinal. At that supremum the diagram value is the union of the earlier values. The presentation is therefore perfectly adapted, and its colimit is $\omega_1\in M$. Nevertheless no stage belongs to $M$. Its set $I_M$ is empty. This disproves $b_\pi$.\hfill$\square$
+
+\textbf{Proposition: the implication $c_\pi\Rightarrow a_\pi$ also fails.}\ours
+In the same filtered category $E$, replace $M$ by
+\[
+ N=\{S\subset\omega_1:S\text{ is finite}\}\cup\{\omega_1\}.
+\]
+Then $c_\pi$ holds for $N$, but $a_\pi$ does not.
+
+\emph{Proof.} Here $N^\pi$ consists of the finite subsets. For a finite $X$, the slice $N^\pi/X$ has largest element $X$; for $X=\omega_1$, it is the directed set of finite subsets, whose union is $\omega_1$. These unions prove strict generation, as in the first example. A countably directed family of finite subsets has finite union. Otherwise choose countably many distinct elements of the union and a stage containing each; an upper bound for these countably many stages would be a finite set containing infinitely many elements. A countably directed diagram in $N$ that contains $\omega_1$ has union $\omega_1$. Thus $N$ is closed under the required colimits, proving $c_\pi$.
+
+But no countably directed colimit of objects of $N^\pi$ can equal $\omega_1$, by the same finite-union argument. Hence $a_\pi$ fails.\hfill$\square$
+
+The examples are legitimate $\mathfrak U$-categories. If one requires the ambient category itself to be non-small, take $E\times\mathrm{Set}$ with
+\[
+ \Filt^\rho(E\times\mathrm{Set})=
+ \{(S,T): |S|\leq\rho,\ |T|\leq\rho\}.
+\]
+A small skeleton is obtained by retaining the actual subsets $S\subset\omega_1$ and replacing $T$ by a cardinal. Colimits are computed in each coordinate, so bounded closure follows from the union calculation above and the set-colimit calculation in the block ``Sets and modules as perfectly adapted presentations.'' For condition~(c), use the product poset $[S]^{\leq\rho}\times[T]^{\leq\rho}$. It is $\rho^+$-directed and has colimit $(S,T)$. If both coordinates have size at most $\rho'>\rho$, its cardinal is at most $(\rho')^\rho\cdot(\rho')^\rho=(\rho')^\rho$. Countable objects are $\aleph_1$-presentable by the same simultaneous choice of representatives and equations in the two coordinates. Restrict the second coordinate of $M$ or $N$ to the empty set. All presentations, strict generating families and counterexample diagrams used above then have empty second coordinate, so every preceding verification remains valid. The repair to $c_\pi$ is substantial: one needs a $\pi^+$-filtered canonical slice with the asserted canonical colimit, rather than merely an ordinary filtered slice. The first example shows that even this repaired generation condition does not recover the universal-presentation condition $b_\pi$ at the same rank.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p93:est filtrante. (Sous l'hypothèse}{Presentability supplies the strict generators}
+Grothendieck now tries to replace a diagram of large $M$-objects by one diagram of small $M$-objects. The comma category is the right construction: it records a small object together with the map by which it participates in a particular large object. The editors' reservation on page~92 concerns the claim that a chosen colimit presentation already makes \emph{all} maps from small objects into a canonical colimit presentation. Presentability supplies the missing comparison.
+
+Here is the precise assertion. Let $\kappa=\pi^+$, let $A\subset E$ be an essentially small full subcategory of $\kappa$-presentable objects, and suppose
+\[
+ X\simeq\varinjlim_{j\in J}Y_j,
+ \qquad J\ \kappa\text{-directed},\qquad Y_j\in A.
+\]
+Then $A/X$ is $\kappa$-filtered, and its canonical diagram has colimit $X$. This is the canonical-diagram form of the fully faithful $\operatorname{Ind}_\kappa$ construction in \citet[I, 9.18(a)]{SGA4I1972}.
+
+To prove the assertion, take any diagram of fewer than $\kappa$ morphisms in $A/X$. Each of its objects is a map $T\to X$ with $T$ $\kappa$-presentable, so it factors through a $Y_j$. Choose one common upper bound for the indices used. For every arrow in the given diagram, the two resulting maps into this common stage agree after passage to $X$. Presentability of its source makes that equality hold at some later stage. There are fewer than $\kappa$ equalities, so another common upper bound makes them all hold together. The resulting object $Y_{j'}\to X$ is a cocone in $A/X$. This proves $\kappa$-filteredness, including the case of the empty diagram.
+
+To identify the colimit, let a compatible family $T\to Z$ be given for all objects $(T\to X)$ of $A/X$. Restrict it to the chosen presentation $Y_j\to X$, producing a unique map $h:X\to Z$. Any $T\to X$ factors through a $Y_j$, and compatibility with that factorization says that the prescribed map $T\to Z$ is $h$ composed with $T\to X$. Thus $h$ induces the whole family, uniquely. This proves the universal property of the canonical colimit. In particular its canonical family is strictly epimorphic in the ambient category, hence also in any full subcategory containing $X$ and $A$.
+
+Apply this with $A=M^\pi$. The first half of $a_\pi$, already obtained from $b_\pi$, supplies the required presentations. The tacit hypothesis in footnote~44 supplies presentability. Under those hypotheses the lemma on page~93 is correct, and in fact its slice is $\pi^+$-filtered, a stronger conclusion than printed. The precise missing step is factorization and eventual equality for \emph{arbitrary} maps from $M^\pi$, not an additional assumption about epimorphisms in $M$.
+
+The same argument explains why this construction is stable under a sufficiently directed change of the large object. For a $\kappa$-directed diagram $(X_i)$ in $M$, form the category $C$ of triples $(T,i,T\to X_i)$. A diagram of fewer than $\kappa$ arrows in $C$ can first be moved into one fibre over $I$, and then given a cocone in that fibre by the preceding paragraph. Thus $C$ is $\kappa$-filtered. Its colimit is $\varinjlim_I X_i$, because giving a cocone on $C$ is giving compatible cocones on all the fibres. After the usual cofinal directed-poset replacement, this is a presentation by objects of $M^\pi$. If $a_\pi$ holds, it proves closure of $M$ under $\kappa$-directed colimits. The directed-poset replacement is the ordinary-category case of \citet[Proposition~5.3.1.18]{Lurie2009HTT}; it changes the index, not the colimit.
+\end{dcomment}
+
+\begin{dcomment}{development}{p95:Donc on ne peut encore appliquer directement}{The size of an indexing category cannot be replaced by the size of its image}
+The partial-colimit construction is meant to keep all intermediate objects within $\Filt^\pi$. For that purpose it must bound the indexing category. The literal condition on page~93, $\operatorname{card}\mathcal Z(C_i')\leq\pi$, bounds only the image of the diagram. That is insufficient, even if its cardinal counts image morphisms as well as image objects.
+
+\textbf{A filtered counterexample to the image bound.}\ours
+Let $E=M=\mathrm{Set}$ with the usual cardinal filtration, let $\pi=\aleph_0$, and choose an uncountable set $X$. Inside $M^\pi/X$, take the category $C'$ whose objects are injections $a:n\hookrightarrow X$ from the standard finite sets $n=\{0,\ldots,n-1\}$. A morphism from $a:n\hookrightarrow X$ to $b:m\hookrightarrow X$ is a map $u:n\to m$ satisfying $bu=a$.
+
+This category is filtered. Two objects map into an injection whose image is the union of their two finite images. Parallel arrows are equal, since their composites with the injective target map are equal. The source functor $\mathcal Z:C'\to\mathrm{Set}$ has image inside the countable category of standard finite sets and maps; hence $\operatorname{card}\mathcal Z(C')\leq\aleph_0$. Yet
+\[
+ \varinjlim_{C'}\mathcal Z\simeq X.
+\]
+Indeed every element of $X$ occurs through a one-element injection, and two representatives determine the same element precisely when they become equal in a finite union of their images. Equivalently the compatible injections give the usual directed union of the finite subsets of $X$. This colimit is not in $\Filt^{\aleph_0}(E)$.\hfill$\square$
+
+The corrected construction uses filtered \emph{indexing categories} $D\subset C_i$ with at most $\pi$ morphisms, or directed indexing posets of that size mapping to $C_i$. This correction does not require a bound on every Hom set of $C_i$. The subcategories need not be full. Start with at most $\pi$ specified objects and arrows; close under identities and composition, adjoin cones for finite diagrams, and repeat countably often. Each step adds at most $\pi$ data, since $\pi$ is infinite. The resulting filtered subcategory still has at most $\pi$ morphisms. In particular the poset of these small filtered subcategories is grand devant $\pi$: perform this construction on the union of any at most $\pi$ of them.
+
+A directed union of at most $\pi$ such subcategories is again a filtered subcategory of size at most $\pi$ and is their supremum. Colimits over this union are the colimits of the partial colimits. To apply the source's filtration axiom, which is phrased for posets, a filtered category with at most $\pi$ arrows can be replaced cofinally by a directed poset of size at most $\pi$: the usual finite-diagram construction adjoins finitely many compatibility data at each of countably many stages. Thus the corrected partial colimit lies in $\Filt^\pi$, and its presentation over the poset of small subcategories is perfectly adapted.
+
+This also repairs the rest of the argument on pages~93--95. The map from the total poset of pairs $(i,D\subset C_i)$ has target $I$, as its displayed order relation specifies; the printed target $C$ is a slip. To bound at most $\pi$ such pairs, move their indices to one index of $I$ and enlarge the union of their images to a small filtered subcategory of the corresponding fibre. Cofinality of the good partial colimits in every fibre then gives their cofinality in the total poset. The final diagram so obtained need not itself be continuous at all small directed suprema, exactly as Grothendieck observes on page~95. The reindexing on page~96 is therefore still needed.
+
+The counterexample concerns this particular image-size formulation. The corrected small-subcategory construction is the familiar filtered-diagram argument, already used in SGA~4 I, 9.13.1. We did not find the specific counterexample above in the literature checked; it records our verification of the printed hypothesis, not a claim of priority.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p97:On a prouvé $b\Longrightarrow a$}{The implication that does not need presentable objects}
+The short argument on pages~96--97 is more robust than the intervening attempt to prove closure under large colimits. It proves $b_\pi\Rightarrow a_\pi$ directly, using only the strict filtration and the existence of perfectly adapted presentations. In particular it should not inherit the tacit presentability hypothesis needed for the preceding comma-category construction.
+
+First suppose $X\in M$. Choose a perfectly adapted presentation $X=\varinjlim_I X_i$ at $\pi$. By $b_\pi$, the subset $I_M$ is cofinal. A cofinal subset of a $\pi^+$-directed poset is again $\pi^+$-directed: take an upper bound in the original poset for any at most $\pi$ elements, and then move above it into the cofinal subset. Restricting to $I_M$ therefore presents $X$ as a $\pi^+$-directed colimit of objects of $M^\pi$.
+
+For the other implication in $a_\pi$, suppose $X=\varinjlim_{i\in I}Y_i$ with $Y_i\in M^\pi$ and $I$ grand devant $\pi$. Let $P$ be the poset of nonempty directed subsets $S\subset I$ of cardinal at most $\pi$, and put $Z_S=\varinjlim_S Y_i$. Strictness places each $Z_S$ in $\Filt^\pi$. The union construction makes $(Z_S)_{S\in P}$ perfectly adapted, with colimit $X$.
+
+The key cofinal family consists of the subsets having a largest element. For any $S\in P$, choose an upper bound $s$ of all of $S$ in $I$ and put $S^+=S\cup\{s\}$. Then $S^+\in P$, it contains $S$, and
+\[
+ Z_{S^+}\simeq Y_s\in M^\pi.
+\]
+Hence $P_M$ is cofinal in $P$. The sufficiency direction in $b_\pi$ gives $X\in M$. This completes both directions of $a_\pi$.
+
+The earlier inference on page~90 applied $b_\pi$ directly to an arbitrary directed presentation and omitted its continuity hypothesis; footnote~42 explicitly retracts that inference. The argument just given is the source's own repair. After it is established, the additional hypothesis that $M^\pi$ consists of $\pi^+$-presentable objects permits the closure argument through canonical comma categories. These are two different uses of the hypotheses, and retaining that separation prevents an artificial circularity in the proof.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p98:et une application strictement croissante}{Where the manuscript ends}
+Grothendieck has reached the comparison of two presentations when the manuscript breaks off. The final words announce homomorphisms without specifying them. We therefore have a programme for a comparison lemma, not a completed statement whose omitted proof can simply be supplied. The separate larger-cardinal repair is a theorem with its own stated hypotheses; it does not turn this fragment retrospectively into a finished argument.
+
+The material that follows belongs to the edition's apparatus. Its notation and terminology indices refer to manuscript page numbers. Thus the reference ``77'' beside cardinal filtrations points to manuscript page~77, on printed page~42 of this edition. The glossary then restates definitions from the whole chapter, including sections outside these pages. Its axiom list is particularly useful here: it records finite limits and colimits in \textbf{M~0}, two factorizations in \textbf{M~2}, the properness conditions in $\mathbf M''$, and the separate requirement $W=TF\circ TC$ in \textbf{M~2\,bis}. These distinctions explain why the names of the various Quillen structures cannot be replaced indiscriminately by the single modern phrase ``model category''.
+
+The glossary is a guide to those definitions, and should be checked against their explicit formulation in the manuscript. In its account of a strict cardinal filtration, the qualification ``of cardinality at most $\pi$'' has disappeared; manuscript page~86, footnote~41, supplies it. Its final paragraph also says ``well adapted'' where the immediately preceding definition requires ``perfectly adapted''. The audit registers these two discrepancies separately, retaining the printed wording. The bound matters: by the representation axiom every object of $E$ is a filtered colimit of objects in any fixed stage, so unrestricted filtered-colimit closure would identify that stage with all of $E$. The printed glossary would then express a substantially different definition.
+
+Finally, the bibliography after the glossary is the edition's bibliography. It includes the 1996 publication of Verdier's thesis; its presence is not evidence that Grothendieck had consulted that publication while writing these pages in 1990--1991. Our later references and our repairs are placed in the commentary and its own bibliography, where the date and the responsibility for each statement remain visible.
+\end{dcomment}
+
+\begin{dcomment}{development}{p98:et des homomorphismes}{A complete comparison after one successor step}
+The chapter stops while Grothendieck is constructing a comparison between two presentations. The final Lemma~3 has no completed conclusion or proof, and we do not supply words to its unfinished sentence. His preceding proposal does, however, suggest a precise statement which can be proved under explicit presentability assumptions. The printed implication on page~97 repeats $b_\pi$; the surrounding reference to a larger cardinal indicates $b_{\pi'}$ as the intended target.
+
+\textbf{Successor comparison.}\ours
+Let $E$ carry a strict cardinal filtration and let $\pi\geq\pi_0$ be infinite. Put $\kappa=\pi^+$ and $\mu=\kappa^+$. Assume that objects of $\Filt^\pi(E)$ are $\kappa$-presentable and that objects of $\Filt^\kappa(E)$ are $\mu$-presentable. Let $M$ be a replete full subcategory satisfying $a_\pi$. Then $M$ satisfies $b_\kappa$, that is, $b_{\pi^+}$ in the manuscript's notation.
+
+We prove the statement rather than infer it from a general assertion that increasing a cardinal preserves every accessibility property. The literature checked includes SGA~4 I, 9.18, Grothendieck's later Chapter~XVIII, \S4.13 and Lemma~4.16.7.11, and \citet[\S8]{LiebermanRosickyVasey2020}. The argument below is a formulation for the particular continuous presentations used here; its use of alternating factorizations belongs to the standard comparison method for filtrations. We make no priority claim.
+
+\emph{Proof.} The canonical-slice argument above shows first that $M$ is closed under $\kappa$-directed colimits. Indeed every object of $M$ has a presentation by objects of $M^\pi$, these objects are $\kappa$-presentable, and a $\kappa$-directed diagram of such presentations can be combined into one $\kappa$-filtered diagram of their small terms. The closure half of $a_\pi$ then applies.
+
+We next obtain a more highly directed presentation of each $X\in M$, while keeping its terms in $M$. Write $X=\varinjlim_{j\in J}Y_j$ as in $a_\pi$. Any subset $S\subset J$ of cardinal at most $\kappa$ lies in a $\kappa$-directed subposet $K\subset J$ of size at most $\kappa$. To see this, first adjoin any element of the nonempty poset $J$ if $S$ is empty, then enumerate $S$ in length at most $\kappa$, repeating elements if necessary. At stage $\alpha<\kappa$, choose an upper bound in $J$ for the current enumerated element and all previously chosen bounds. There are at most $\pi$ of them. The increasing sequence of bounds, together with $S$, is $\kappa$-directed: any fewer than $\kappa$ of its elements is accounted for before some stage, since $\kappa$ is regular.
+
+Let $H$ be the poset of all these $\kappa$-directed subposets of $J$ of size at most $\kappa$. It is $\mu$-directed. The union of at most $\kappa$ of its members has size at most $\kappa$, and the construction just given places that union in another member of $H$. Put
+\[
+ Z_K=\varinjlim_{j\in K}Y_j\qquad(K\in H).
+\]
+The closure already proved gives $Z_K\in M$, and strictness of the filtration gives $Z_K\in\Filt^\kappa(E)$. Thus $Z_K$ is $\mu$-presentable by hypothesis. The union-of-subdiagrams argument gives $X\simeq\varinjlim_{K\in H}Z_K$.
+
+Now take a perfectly adapted presentation $X=\varinjlim_{i\in I}X_i$ at cardinal $\kappa$. Its index $I$ is $\mu$-directed and its objects are $\mu$-presentable. Fix $i_0\in I$. We will construct increasing sequences $(i_\alpha)_{\alpha<\kappa}$ in $I$ and $(K_\alpha)_{\alpha<\kappa}$ in $H$, together with maps over $X$
+\[
+ X_{i_\alpha}\xrightarrow{u_\alpha}Z_{K_\alpha}
+       \xrightarrow{v_\alpha}X_{i_{\alpha+1}},
+\]
+such that
+\[
+ v_\alpha u_\alpha=X(i_\alpha\leq i_{\alpha+1}),
+\]
+and, for $\alpha<\beta<\kappa$,
+\[
+ u_\beta X(i_{\alpha+1}\leq i_\beta)v_\alpha
+       =Z(K_\alpha\subset K_\beta).                 \tag{SC}
+\]
+The first equality makes a trip through the other presentation agree with a transition in the $X$-diagram; the second does the same for the $Z$-diagram. They will give inverse maps on colimits.
+
+Here are all the inductive choices. At a limit stage $\beta<\kappa$, choose $i_\beta$ above the earlier $i_\alpha$ and $i_{\alpha+1}$; at a successor it has already been chosen. Since $X_{i_\beta}$ is $\mu$-presentable, its map to $X=\varinjlim_H Z_K$ factors through some $Z_K$. Enlarge $K$ above all the previously chosen $K_\alpha$. For each $\alpha<\beta$, the two maps from $Z_{K_\alpha}$ to this stage occurring in (SC) agree after passage to $X$. Presentability of $Z_{K_\alpha}$ makes that equality hold at some later $H$-stage. There are fewer than $\kappa$, hence fewer than $\mu$, such equalities. The $\mu$-directedness of $H$ permits one enlargement making all of them hold. Call the resulting index $K_\beta$ and the factorization $u_\beta$.
+
+Next factor $Z_{K_\beta}\to X$ through an $X$-stage, using its $\mu$-presentability. Enlarge that stage above $i_\beta$. The composite with $u_\beta$ and the transition out of $X_{i_\beta}$ have equal images in $X$; presentability of $X_{i_\beta}$ allows a further enlargement on which they are equal. This gives $i_{\beta+1}$ and $v_\beta$. The same process starts at $\beta=0$, when there are no equations (SC) from earlier stages. Every choice takes place in a small diagram, and the regularity and directedness just used justify every limit stage.
+
+Equations (SC) imply that the $u_\alpha$ define a map between the two chain colimits: compose (SC) with $u_\alpha$ and use $v_\alpha u_\alpha=X(i_\alpha\leq i_{\alpha+1})$. They also imply that the $v_\alpha$, followed by the structural maps to the $X$-chain colimit, are compatible. The two resulting maps are inverse, by the same displayed equalities. Consequently
+\[
+ \varinjlim_{\alpha<\kappa}X_{i_\alpha}
+ \simeq\varinjlim_{\alpha<\kappa}Z_{K_\alpha}\in M.
+\]
+The membership assertion uses closure of $M$ under $\kappa$-directed colimits, since the regular ordinal $\kappa$ is a $\kappa$-directed poset.
+
+The perfectly adapted $X$-diagram has a supremum $i_* =\sup_{\alpha<\kappa}i_\alpha$ and is continuous there: the image of this chain is a directed subset of $I$ with at most $\kappa$ elements. Therefore $X_{i_*}\simeq\varinjlim_{\alpha<\kappa}X_{i_\alpha}$ belongs to $M$, and $i_*\geq i_0$. Thus $I_M$ is cofinal whenever $X\in M$. Conversely, if $I_M$ is cofinal then it is $\mu$-directed, hence $\kappa$-directed, and closure of $M$ gives $X=\varinjlim_{I_M}X_i\in M$. This proves $b_\kappa$.\hfill$\square$
+
+The cardinal shift has a definite function. It permits a comparison chain of length $\pi^+$ whose final colimit remains a single stage of the larger adapted presentation. At the original cardinal, that chain is too large for the continuity clause. The counterexample with successor and limit ordinals shows that this obstruction can be real. No continuum hypothesis entered the proof, but presentability at both filtration levels did; the filtration axioms alone do not provide it.
+\end{dcomment}
+
+\begin{dcomment}{later}{p98:et des homomorphismes}{Canonical slices, later accessibility, and weak equivalences}
+Grothendieck returned to these questions at much greater length in Chapter~XVIII. Definition~4.13.1 there asks that a full subcategory be replete, accessible, and accessibly included in the ambient accessible category. Lemma~4.16.7.11 tests membership by cofinality of the small canonical slice inside the ambient small-object slice. That is an intrinsic form of the generation condition, with presentability built into the indexing category. It does not assert that every continuous presentation already has cofinally many stages in the subcategory at the original rank. The two powerset examples above therefore leave the later criterion intact. The edition consulted is dated 17~December~2025; the cited lemma lies on manuscript pages~488--490 \citep{Grothendieck1990XVIII}.
+
+In present terminology, accessibility and accessible inclusion are distinct conditions, and a rank belongs to the statement. The definition and the description as a completion under directed colimits are given by \citet[Definition~2.1 and Theorem~2.26]{AdamekRosicky1994}. The earlier monograph of \citet{MakkaiPare1989} situates these constructions within categorical model theory. For the higher-categorical formulation, \citet[Proposition~5.4.2.2]{Lurie2009HTT} characterizes accessible $\infty$-categories by small generating subcategories of $\kappa$-compact objects for a suitable regular $\kappa$. Its nearby rank-enlargement results retain explicit cardinal conditions; a bare change from one regular cardinal to a larger one is not a general theorem.
+
+The modern theory of filtrations also distinguishes a directed presentation from a continuous chain. \citet[\S8, especially Lemma~8.4 and the following paragraph]{LiebermanRosickyVasey2020} discusses continuous filtrations and their agreement on a closed unbounded set of indices when the size has the appropriate regularity. This helps explain the example above: the successor-ordinal presentation of $\omega_1$ is not continuous at its countable limit stages. The comparison theorem for two smooth filtrations therefore cannot turn its stages into stages of the continuous limit-ordinal presentation. We checked that discussion and Theorem~8.8 in the authors' 5~June~2019 version; we do not identify its notion of filtration with Grothendieck's cardinal filtration of the whole category.
+
+For homotopical algebra, the relevant application is to a full subcategory of the arrow category. \citet[Proposition~2.2 in author version~2; Proposition~2.3 in the journal]{RaptisRosicky2015} gives a controlled accessibility rank for weak equivalences in a combinatorial model category after the replacement functors preserve the specified presentable objects. Their Theorem~4.2 supplies better bounds under additional hypotheses, and Corollary~5.1 proves finite accessibility for weak equivalences of simplicial sets. These are genuine refinements of the small-generation problem motivating this chapter. They do not show that weak equivalences in every combinatorial model category are finitely accessible, nor do they establish the source's universal-presentation condition for an arbitrary filtration. The present status of the local questions is thus precise: $b_\pi\Rightarrow a_\pi$ is proved in the manuscript; the three-way equivalence as stated is false; the unfinished comparison has the explicit conditional completion proved above.
+\end{dcomment}

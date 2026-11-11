@@ -1,0 +1,1561 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}}
+% macro conflict, first definition kept: \newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\uHom}{\underline{\operatorname{Hom}}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\bs}{\backslash}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\dbl}[2]{\mathrel{\overset{#1}{\underset{#2}{\rightrightarrows}}}}
+\newcommand{\defeq}{\overset{\text{déf}}{=}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bDelta}{\boldsymbol{\Delta}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\fP}{\mathfrak{P}}
+\newcommand{\sR}{{}^{s}\mathcal{R}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,rounded corners=2pt,inner sep=1.5pt](c){#1};}
+\newcommand{\Fl}{\mathrm{Fl}}
+\newcommand{\Pf}{\mathfrak{P}}
+\newcommand{\Is}{\mathrm{Is}}
+\newcommand{\Fib}{\mathrm{Fib}}
+\newcommand{\margmark}[1]{\marginpar{\footnotesize #1}}
+\newcommand{\PS}{\mathrm{PS}}
+\newcommand{\tl}[1]{\begin{tabular}{@{}l@{}}#1\end{tabular}}
+\newcommand{\tls}[1]{\text{\footnotesize\begin{tabular}{@{}l@{}}#1\end{tabular}}}
+\begin{document}
+% ---- from Der-ChII-234_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\msp{page 45}
+est plus naturel de prendre $M = e$ (ensemble ponctuel) et d'interpréter la flèche (3.2.3) comme
+\[
+\Hom(e_I, F) \longrightarrow \Hom(e_{I'}, u^*F)
+\tag*{(3.2.4)}
+\]
+et par adjonction de $u_!$, $u^*$ le deuxième membre s'interprète comme $\Hom(u_!(e_{I'}), F)$, et la flèche est déduite de
+\[
+u_!e_{I'} = u_!u^*(e_I) \xrightarrow{\text{adj.}} e_I
+\tag*{(3.2.5)}
+\]
+en prenant le Hom dans $F$. Donc dire que (3.2.4) est \texttt{[un]} isomorphisme pour tout $F$ signifie que (3.2.5) est \texttt{[un]} isomorphisme. Passant aux valeurs des deux membres en $i$, on trouve $\pi_0(i\bs I') \xrightarrow{\sim} 1$, i.e. que $i\bs I'$ est 0-connexe, q.e.d.
+
+\noindent\textbf{Définition 3.3.}
+\begin{itemize}[label={}]
+\item[a)] Quand les conditions équivalentes de 3.2 sont satisfaites, donc quand les $i\bs I'$ ($i \in \Ob I$) sont 0-connexes, on dit que $u : I' \longrightarrow I$ est un foncteur \textit{cofinal.} On dit que $u$ est \textit{co-cofinal} si $u^o : I'^o \longrightarrow I^o$ est cofinal, i.e. si les localisées $I'/i$ de $I'$ sur $I$ ($i \in \Ob I$) sont 0-connexes.
+\item[b)] Si $I'$ est une \textit{sous-catégorie} de $I$, on dit que $I'$ \textit{est cofinale dans} $I$ si le foncteur d'inclusion est cofinal, \textit{co-cofinale} si ce foncteur est co-cofinal.
+\end{itemize}
+
+\noindent\textbf{Corollaire 3.4.} (\footnote[55]{\textbf{NB} Pour un énoncé complémentaire de cofinalité, cf. XVIII prop. 4.9.6.3 (p. 224-225, 228-242). Il faudrait un énoncé qui coiffe les deux.})
+\begin{itemize}[label={}]
+\item[\textit{a)}] \textit{Pour que $u$ soit cofinal, il} faut \textit{que les catégories colocalisées $i\bs I'$ soient non-vides, i.e. qu'on ait}
+
+\msp{page 46}
+\begin{itemize}[label={}]
+\item[\textit{F 0)}] $\pi_0(f)$ \texttt{[plutôt $\pi_0(u)$]} \textit{est bijectif.}
+\item[\textit{F 1)}] \textit{Pour tout} $i \in \Ob I$, \texttt{[il]} \textit{existe} \texttt{[un]} $i' \in I'$ \textit{et une flèche} $i \longrightarrow u(i')$ \textit{dans} $I$.
+\end{itemize}
+(\footnote[56]{\textbf{NB} F 1 implique déjà \texttt{[la]} surjectivité de $\pi_0$, donc sa bijectivité si $I'$ est 0-connexe - dans ce cas F 0 résulte de F 1.}).
+\item[\textit{b)}] \textit{Si $I'$ est faiblement filtrante, pour que $u$ soit cofinale, il} suffit \textit{qu'elle satisfasse F 1, ainsi que la condition :}
+\begin{itemize}[label={}]
+\item[\textit{F 2)}] \textit{Pour toute double flèche} $i \dbl{\beta}{\gamma} u(i')$ \textit{(avec} $i \in \Ob I$, $i' \in \Ob I'$\textit{),} \texttt{[il]} \textit{existe une flèche} $i' \xrightarrow{\alpha'} j'$ \textit{dans} $I'$\textit{, de telle façon que} $u(\alpha')$ \textit{égalise} $(\beta, \gamma)$\textit{, i.e.} $u(\alpha')\beta = u(\alpha')\gamma$.
+\end{itemize}
+\textit{et ces conditions F 1, F 2 impliquent que les $i\bs I'$ sont faiblement filtrantes, et $I$ aussi} (\footnote[57]{Si $I'$ est localement faiblement filtrante (= préfiltrante), alors pour la cofinalité de $u$, il suffit qu'on ait F 0, F 1, F 2, et alors les $i\bs I'$ sont faiblement filtrantes, et $I$ est préfiltrante tout comme $I'$.}).
+
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\item[\textit{c)}] \textit{Si $I'$ est filtrante, alors $u$ est cofinal} si et seulement s'\textit{il satisfait les deux conditions F1, F2, ou encore si et seulement si les $i\bs I'$ sont} filtrantes \textit{(et non seulement} 0-\textit{connexes). Et cela implique que $I'$ est également filtrante} (\footnote[58]{Si $I'$ est localement filtrante, $u$ est cofinal si et seulement si elle satisfait F 0, F 1, F 2, i.e. si et seulement si les $i\bs I'$ sont filtrantes, et alors $I$ est localement filtrante.}).
+\item[\textit{d)}] \textit{Si $I$ est préfiltrante (= localement faiblement filtrante, i.e. PS 1), et $u$} pleinement fidèle, \textit{pour que $u$ soit cofinal, il} faut \textit{et il} suffit \textit{que $u$ satisfasse la condition F 1 plus haut. Et alors $I'$ est également préfiltrante, et les $i\bs I'$ sont faiblement filtrantes. Si de plus $I$ est filtrante, les $i\bs I'$ et $I'$ le sont également. (Comparer SGA 4, I 8.1.3.)}
+\end{itemize}
+
+\msp{page 47}
+\textsc{Démonstration.} a) F 1 est évident, car 0-connexe $\Longrightarrow$ non vide. F 0 car $W_0$-coasphérique $\Longrightarrow$ $W_0$-équivalence, i.e. $\pi_0(u)$ bijectif.
+
+Pour \textit{prouver} b), il suffit de prouver que F 1, F 2 (si $I'$ est faiblement filtrante) impliquent que les $i\bs I'$ sont faiblement filtrantes (a fortiori 0-connexes) et de plus que $I$ l'est également. On sait déjà qu'ils sont non vides par F 1, reste à voir que si $(i', \alpha)$, $(j', \beta)$ sont dans $i\bs I'$, alors ils sont `majorés' par un troisième objet de $i\bs I'$. Comme $I'$ est faiblement filtrante, on trouve
+\begin{tikzcd}[row sep=0pt, column sep=small, baseline=(k.base)]
+i' \arrow[dr, "r"] & \\
+& |[alias=k]| k' \\
+j' \arrow[ur, "s"'] &
+\end{tikzcd}, d'où $u(r)$, $u(s)$ dans $I$ (cf. diagramme)
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& i' \arrow[rr, "r"] \arrow[dd, dash] & & k' \arrow[r, dotted, "t"] \arrow[dd, dash] & l' \arrow[dd, dash] \\
+& & j' \arrow[ur, "s"] \arrow[dd, dash] & & \\
+& u(i') \arrow[rr, "u(r)"] & & u(k') \arrow[r, dotted, "u(t)"] & u(l') \\
+i \arrow[ur, "\alpha"] \arrow[rr, "\beta"'] & & u(j'), \arrow[ur, "u(s)"'] & &
+\end{tikzcd}
+\]
+appliquant F 2 à la double flèche $u(r)\alpha, u(s)\beta : i \rightrightarrows u(k')$, on trouve $k' \xrightarrow{t} l'$ (en pointillés sur \texttt{[le]} diagramme) telle que $(u(t)u(r))\alpha = (u(t)u(s))\beta$, soit $\gamma$, ce qui montre que l'objet $(l', \gamma : i \longrightarrow u(l'))$ majore $(i', \alpha)$ et $(j', \beta)$.
+
+La démonstration que si $I'$ est faiblement filtrante et $u$ satisfait F 1, alors $I$ est faiblement filtrante, est immédiate.
+
+\textit{Prouvons} c). Il reste à prouver que si $I'$ est \textit{filtrante} (non seulement faiblement filtrante), alors si $u$ \texttt{[est]} cofinal, alors F 2 est vérifiée, et de plus les $i\bs I'$ et $I$ sont filtrantes (pas seulement faiblement filtrantes). Mais notons tout de suite que $i\bs I' \longrightarrow I'$ est coétale, donc $I'$ filtrante, donc localement filtrante implique que $i\bs I'$ est aussi localement filtrante\,; comme par hypothèse les $i\bs I'$ sont 0-connexes, ils sont donc filtrantes. La condition F 2 sort facilement à présent :
+
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 48}
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+& i' \arrow[rr, "r"] \arrow[dd, dash] & & j' \arrow[r, dotted, "t"] \arrow[dd, dash] & k' \arrow[dd, dash] \\
+& & i' \arrow[ur, "s"] \arrow[dd, dash] & & \\
+& u(i') \arrow[rr, "u(r)"] & & u(j') \arrow[r, dotted, "u(t)"] & u(k') \\
+i \arrow[ur, "\alpha"] \arrow[rr, "\beta"'] & & u(i'). \arrow[ur, "u(s)"'] & &
+\end{tikzcd}
+\]
+Comme $i\bs I'$ est filtrante, donc faiblement filtrante (PS 1), on peut trouver $i' \dbl{r}{s} j'$ telles que
+\[
+u(r)\alpha = u(s)\beta,
+\]
+et comme $I'$ est filtrante, on peut trouver $t : j' \longrightarrow k'$ qui égalise la double flèche $(r, s)$ :
+\[
+tr = ts(\defeq \tau),
+\]
+alors
+\[
+\underbrace{u(t)u(r)}_{u(tr)}\alpha = \underbrace{u(t)u(s)}_{u(ts)}\beta \qquad\quad \text{i.e.} \qquad\quad u(\tau)\alpha = u(\tau)\beta,
+\]
+i.e. on a vérifié F 2.
+
+Reste à prouver que $I$ est filtrante (si $I'$ l'est et \texttt{[si]} $u : I' \longrightarrow I$ est cofinal). On sait déjà que $I$ est faiblement filtrante par b), reste à vérifier la condition de la double flèche
+\[
+i \dbl{\alpha}{\beta} j
+\]
+(PS 2). Soit $i'$ dans $I'$ et $j \longrightarrow u(i')$, et considérons
+\[
+i \dbl{\gamma\alpha}{\gamma\beta} u(i'),
+\]
+par hypothèse F 2 $\exists\, r : i' \longrightarrow j'$ dans $I'$ telle que
+\msp{page 49}
+$u(r)(\gamma\alpha) = u(r)(\gamma\beta)$, donc $u(r)\gamma$ égalise $(\alpha, \beta)$, q.e.d.
+
+La vérification de d) par AQT \texttt{[abréviation dont le sens échappe aux éditeurs]}.
+
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\section*{4\quad Foncteurs biasphériques}
+
+Soit encore
+\[
+u : I' \longrightarrow I
+\]
+une flèche de Cat, soit $\cM$ une catégorie, d'où
+\[
+u^* : \cM(I) \longrightarrow \cM(I');
+\tag*{(4.1)}
+\]
+nous cherchons des conditions sur $u$, $\cM$ pour que ce foncteur soit pleinement fidèle. Si le foncteur adjoint à gauche $u_!$ (resp. adjoint à droite $u_*$) existe, on sait qu'il revient au même de dire que le morphisme d'adjonction
+\[
+u_!u^*F \longrightarrow F
+\tag*{(4.2)}
+\]
+resp.
+\[
+u_*u^*F \longleftarrow F
+\tag*{(4.2 bis)}
+\]
+soit \texttt{[un]} isomorphisme pour tout $F$ dans $\cM(I)$. Disons alors que $u$ est $\cM$-connexe, ou $\cM$-biasphérique, cette terminologie sous-entendant que c'est là une propriété qui se réfère au dérivateur $\mathbf{D}_{\cM} = (S \longmapsto \cM(S))$ sur Cat défini par $\cM$. Notons que
+\[
+\begin{aligned}
+&\text{Si $u$ est $\cM$-connexe, alors il est aussi $\cM(S)$-connexe, pour tout $S$ dans Cat,}\\
+&\text{puisque $\cM(S)(I) \simeq \cM(I)(S) \defeq \uHom(S^o, \cM(I))$,}
+\end{aligned}
+\tag*{(4.3)}
+\]
+
+\msp{page 50}
+et
+\[
+\text{Si $\cM' \hookrightarrow \cM$ est pleinement fidèle, alors $\cM$-connexe implique $\cM'$-connexe,}
+\tag*{(4.4)}
+\]
+enfin, inversement,
+\[
+\begin{aligned}
+&\text{pour que $u$ soit $\cM$-connexe, il faut et il suffit que pour toute \textit{petite}}\\
+&\text{sous-catégorie pleine $\cM'$ de $\cM$, $u$ soit $\cM'$-connexe.}
+\end{aligned}
+\tag*{(4.5)}
+\]
+Comme toute petite $\cM'$ se plonge dans $\cM'^\wedge = \operatorname{Ens}(\cM')$, il résulte de (4.3), (4.4), (4.5) que
+\[
+\text{Si $u$ est Ens-connexe, il est $\cM$-connexe pour toute catégorie $\cM$,}
+\tag*{(4.6)}
+\]
+car c'est le cas si $\cM$ est petite par (4.3), donc pour tout $\cM$ par (4.5).
+
+Disons qu'un foncteur $u$ dans Cat est $\cM$-\textit{cofinal} ou $\cM$-coasphérique si l'homomorphisme fonctoriel
+\[
+\varprojlim_{I} F \longrightarrow \varprojlim_{I'} u^*(F)
+\tag*{(4.7)}
+\]
+(flèche dans $\uHom(\cM(I), \cM)$ si les $\varprojlim$ de types $I$, $I'$ existent dans $\cM$, sinon flèche dans $\uHom(\cM(I), \cM^\wedge)$) est un isomorphisme. En se ramenant au cas de petites catégories $\cM$, chacune plongée dans $\cM^\wedge$, on voit par le critère (4.2 bis) que
+\[
+\text{$u$ est $\cM$-connexe si pour tout $i \in \Ob I$,}
+\tag*{(4.8)}
+\]
+
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\msp{page 51}
+le foncteur induit $I'/i \longrightarrow I/i$ est $\cM$-cofinal. La réciproque n'est pas claire, car $u$ est $\cM$-connexe si et seulement si pour tout $i \in \Ob I$ et tout $\cM$-préfaisceau $F_i$ sur $I/i$ \textit{induit par un préfaisceau $F$ sur $I$,} l'homomorphisme $\varprojlim\limits_{I/i} F_i \longrightarrow \varprojlim\limits_{I'/i} (u/i)^*(F/i)$ est \texttt{[un]} isomorphisme. On ne peut donc affirmer d'emblée que cela implique itou pour \textit{tout} $F_i$ sur $I/i$, que si on sait que $(u/i)^* : \cM(I) \longrightarrow \cM(I/i)$ est essentiellement surjectif. Il en est ainsi pour tout $i$ quand $I$ est \textit{ordonné,} car alors $I/i \longrightarrow I$ est pleinement fidèle, donc $\cM(I/i) \longrightarrow \cM(I)$ \texttt{[est]} pleinement fidèle, donc $\cM(I) \longrightarrow \cM(I/i)$ \texttt{[est]} un foncteur de localisation, en particulier essentiellement surjectif.
+
+\msp{page 52}
+Mais quand $\cM = (\text{Ens})$, cette perplexité disparaît. On trouve la
+
+\noindent\textbf{Proposition 4.1.} \textit{Soit $u : I' \longrightarrow I$ une flèche dans} Cat. \textit{Conditions équivalentes :}
+\begin{itemize}[label={}]
+\item[\textit{a)}] \textit{Pour toute catégorie $\cM$, $u^*_{\cM} : \cM(I) \longrightarrow \cM(I')$ est pleinement fidèle (i.e. $u$ est $\cM$-connexe).}
+\item[\textit{d$'$)}] \textit{Pour toute catégorie $\cM$ où les limites inductives de type $I$, $I'$ existent, la flèche d'adjonction pour $F$ dans $\cM(I)$} % [sic] d') -> a'), the label of this item is referred to below as a') ("Dual de a')", "Comme a) a') a'')")
+\[
+u_!u^*F \xrightarrow{\sim} F
+\]
+\textit{est} \texttt{[un]} \textit{isomorphisme.}
+\item[\textit{a$''$)}] \textit{Dual de a$'$), avec} \texttt{[la]} \textit{flèche d'adjonction}
+\[
+u_*u^* \xleftarrow{\sim} F. % [sic] u_*u^* -> u_*u^*F, the object F is missing on the left side (compare a') and (4.2 bis))
+\]
+\item[\textit{b) b$'$) b$''$)}] \textit{Comme a) a$'$) a$''$), avec $\cM =$} (Ens).
+\item[\textit{c)}] \textit{Comme b$'$), avec $F$ représentable, i.e. de la forme $j \longmapsto$} $\Hom_I(j, i)$.
+\item[\textit{d)}] \textit{Pour tout $I$ dans $I$, $I'/i \longrightarrow I/i$ est cofinal.} % [sic] Pour tout I dans I -> Pour tout i dans I, the variable of the statement is i (compare d'))
+\item[\textit{d$'$)}] \textit{Pour tout $i$ dans $I$, $i\bs I' \longrightarrow i\bs I$ est cofinal.}
+\item[\textit{d$''$)}] \textit{Pour toute flèche $i_0 \xrightarrow{\alpha} i_1$ dans $I$, la catégorie} $i_0\bs \underset{\alpha}{I'}/i_1 \defeq I' \times_I \underbrace{i_0\bs \underset{\alpha}{I}/i_1}_{\substack{\text{catégorie biïnduite}\\ (i_0, \alpha)\bs(I/i_1) \simeq (i_0\bs I)/(i_1, \alpha)}}$ \qquad \textit{est}
+
+0-\textit{connexe.}
+\end{itemize}
+
+\msp{page 53}
+\textsc{Démonstration.} On sait déjà, par les préliminaires, l'équivalence de a, a$'$, a$''$, b, b$'$, b$''$, soit A cette condition - nous dirons que $u$ est $W_0$-\textit{connexe} ou $W_0$-\textit{biasphérique,} si ces conditions équivalentes sont satisfaites. On a de plus l'autodualité
+\[
+\text{$u$ est $W_0$-connexe si et seulement si $u^o$ l'est,}
+\tag*{(4.8)} % [sic] (4.8) -> another number, the label (4.8) is already used for a display on p. 32
+\]
+car on a évidemment
+\[
+\text{$u$ est $\cM$-connexe si et seulement si $u^o$ est $\cM^o$-connexe.}
+\tag*{(4.9)}
+\]
+
+% ---- from Der-ChII-234_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+Ceci montre l'équivalence de d, d$'$, qui se voit aussi par l'equivalence de chacune de ces deux conditions avec d$''$, par le critère de cofinalité du paragraphe précedent. Soit D cette condition sur $u$. On a par (4.8) D $\Longrightarrow$ A, donc % [sic] l'equivalence -> l'équivalence, accent missing; précedent -> précédent, accent missing
+\[
+\mathrm{D} \Longrightarrow \mathrm{A} \Longrightarrow \mathrm{c},
+\]
+il reste à prouver que c $\Longrightarrow$ D, plus précisément c $\Longrightarrow$ d$''$ et c$'$ $\Longrightarrow$ d$''$ \texttt{[c$'$?]}. Explicitons le morphisme d'adjonction (pour $i$ dans $I$)
+\[
+u_!\underbrace{u^*i} \longrightarrow i,
+\]
+i.e. pour $j$ dans $I$
+\[
+\underbrace{(u_!u^*i)(j)}_{\pi_0(j\backslash(I'/u^*(i)))} \longrightarrow i(j) = \Hom(j,i).
+\]
+
+\msp{page 54}Or $I'/u^*(i) \simeq I'/i$, donc on a la flèche
+\[
+(u_!u^*(i))(j) \simeq \pi_0(j\backslash(I'/i)) \longrightarrow \Hom_I(j,i). \tag*{(4.10)}
+\]
+Or on voit aussitôt que pour $\alpha : j \longrightarrow i$ dans $\Hom(j,i)$, la fibre de (4.10) en $u$ s'identifie à $\pi_0(j\backslash\underset{\alpha}{I'}/i\ )$, de façon plus précise, $j\backslash\underset{\alpha}{I'}/i$\ \ est la sous-catégorie ouverte et fermée de $J = j\backslash(I'/i)$ correspondant à la partie du $\pi_0(J)$ qui est au dessus de $\alpha$ dans (4.10). Cela achève la démonstration de 4.1.
+
+NB Une autre façon de prouver que c $\Longrightarrow$ A c'est de noter que les deux membres dans le morphisme d'adjonction $u_!u^*F \longrightarrow F$ dans $I^{\wedge}$ sont des foncteurs $I^{\wedge} \longrightarrow I^{\wedge}$ qui commutent aux $\varinjlim$ quelconques. Donc pour vérifier que c'est \texttt{[un]} isomorphisme, il suffit de le vérifier pour $F$ dans $I$, puisque $I$ engendre $I^{\wedge}$ par $\varinjlim$ . Par contre, un argument de ce type ne semble pas prouver que pour vérifier que l'on a un \textit{isomorphisme} $F \longrightarrow u_*u^*F$, il suffise de le faire pour $F$ représentable, i.e. de vérifier b$''$ pour $F$ représentable.
+
+Il resterait à voir si c$'$ $\Longrightarrow$ d$''$ \texttt{[c$'$?]}.
+
+\msp{page 55}Explicitons le morphisme d'adjonction
+\[
+i \longrightarrow u_*u^*i
+\]
+(pour $i \in \Ob I$) par ses valeurs sur $j$
+\[
+\underbrace{i(j)}_{\Hom(j,i)} \longrightarrow \Gamma(I'/j, u^*i). \tag*{$(\ast)$}
+\]
+Soit donc
+\[
+u_j : I'/j \longrightarrow I,
+\]
+% foot: Version 8 juillet 2001
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+on a
+\[
+\begin{aligned}
+\Gamma(I'/j, \underbrace{u^*(i)|I'/j}_{u_j^*(i)}) &\simeq \Hom(e_{I'/j}, u^*(i)) \\ % ?? uncertain: extent of the underbrace -- over "u^*(i)|I'/j" or including the closing parenthesis
+&\overset{\mathrm{adj}}{\simeq} \Hom(u_{j,!}e_{I'/j}, i),
+\end{aligned}
+\]
+et la flèche $(\ast)$, fonctorielle en $i$, est déduite d'une flèche
+\[
+u_{j,!}(e_{I'/j}) \longrightarrow j. \tag*{$(\ast\ast)$}
+\]
+On voit tout de suite, comme ci-dessus, que $(\ast\ast)$ est \texttt{[un]} isomorphisme si et seulement si pour tout $\alpha : k \longrightarrow j$, la catégorie $k\backslash\underset{\alpha}{I'}/j$ est 0-connexe, et si on l'exige pour tout $j$, $k$, $\alpha$, c'est la condition d$''$. Mais il n'est pas clair que pour qu'on ait $(\ast\ast)$ isomorphisme, il suffise que le Hom des deux membres à valeurs dans tout $i$ dans $I$ (et non tout $F$ dans $I^{\wedge}$) soit \texttt{[un]} isomorphisme. La difficulté provient du fait que $u_{j,!}(e_{I'/j})$ n'est pas forcément représentable, et qu'un $F$ quelconque dans $I^{\wedge}$ \msp{page 56}n'est pas forcément $\varprojlim$ de foncteurs représentables. Donc il est douteux que c$'$ \texttt{[c$'$?]} suffise à entraîner que $u$ est $W_0$-connexe.
+
+\textbf{Corollaire 4.2.} \textit{Pour que $u$ soit $W_0$-connexe, il} suffit \textit{qu'il soit une $W_0$-équivalence universelle, i.e. (cf. 3.1) que les fibres soient \textup{0}-connexes, et que pour toute flèche non identique dans $I$, définissant $\bDelta^1 \longrightarrow I$, $I' \times_I \bDelta^1$ soit \textup{0}-connexe.}
+
+4.3. Cette condition de $W_0$-équivalence universelle est cependant \textit{strictement} plus forte que la $W_0$-connexité, comme on le voit sur l'exemple où $u$ est une \textit{équivalence de catégories} non surjective sur les objets (p.ex. l'inclusion d'un sommet dans un groupoïde 1-connexe ayant plus d'un objet). Plus généralement, tout foncteur de localisation est $W_0$-connexe, alors que ses fibres ne sont pas forcément connexes, et a fortiori ce n'est pas une $W_0$-équivalence universelle.
+
+Cependant, si tout endomorphisme $p$ d'un $i$ dans $I$, tel que $p^2 = p$ (projecteur) est l'identité, et si \msp{page 57}$I' \longrightarrow I$ est `transportable', p.ex. si dans $I$ tout isomorphisme est une identité, alors $u$ $W_0$-connexe implique que les fibres de $u$ sont 0-connexes, comme on voit en exprimant d$''$ pour $\alpha$ flèche identique. Les conditions envisagées sur $I$ sont satisfaites si $I$ est ordonnée. Mais même si $I'$ et $I$ sont toutes deux ordonnées, $u$ peut être $W_0$-connexe, sans être une $W_0$-équivalence universelle. Voici un exemple avec $I = \bDelta^2$ :
+\[
+\begin{array}{r@{\;}l@{\quad}c}
+I' = & \left\{\begin{tikzcd}[ampersand replacement=\&]
+ \& 1' \arrow[r] \arrow[d] \& 2 \\
+0 \arrow[r] \& 1 \&
+\end{tikzcd}\right\} & \\[1ex]
+ & & \Big\downarrow \\[1ex]
+I = & \left\{\begin{tikzcd}[ampersand replacement=\&]
+0 \arrow[r] \& 1 \arrow[r] \& 2
+\end{tikzcd}\right\}. &
+\end{array}
+\]
+% foot: Version 8 juillet 2001
+
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+Les catégories bilocalisées de $I$ sont les trois sommets $\{0\}$, $\{1\}$, $\{2\}$, et les trois segments $[0,1]$, $[1,2]$ et $[0,2] = I$, les images inverses sont respectivement
+\[
+\bullet\ ,\quad
+\begin{tikzcd}[row sep=normal] {} \arrow[d] \\ {} \end{tikzcd}\ ,\quad
+\bullet\ ,\quad
+\begin{tikzcd}[row sep=normal] & {} \arrow[d] \\ {} \arrow[r] & {} \end{tikzcd}\ ,\quad
+\begin{tikzcd}[row sep=normal] {} \arrow[r] \arrow[d] & {} \\ {} & \end{tikzcd}\ ,\quad
+I'\quad ,
+\]
+elles sont toutes 0-connexes, i.e. $W_0$-asphériques, et même contractiles donc $W_\omega$-asphériques (donc $u$ est même $W_\omega$-connexe, i.e. $W_\omega$-biasphérique). Mais ce n'est pas une $W_0$-équivalence universelle, car l'image inverse de $I'$ par $\bDelta^1 \xrightarrow{\partial} \bDelta^2$, $\partial(0) = 0$, $\partial(1) = 2$, \msp{page 58}est la catégorie disconnexe $\varepsilon = \{\bullet\ \ \bullet\}$.
+
+J'avais espéré un moment que les foncteurs $W_0$-connexes $I' \xrightarrow{u} I$ seraient ceux qui se factorisent en $I' \xrightarrow{u_0} I'' \xrightarrow{v} I$, avec $u_0$ une équivalence, et $v$ une $W_0$-équivalence universelle. Mais l'exemple précédent le met en défaut, avec $u$ même $W_\omega$-connexe. En effet, $I''$ serait déduit d'un ensemble préordonné, et $v$ se factoriserait par l'ensemble ordonné correspondant, savoir $I'$, donc serait de la forme
+\[
+I'' \longrightarrow I' \xrightarrow{u} I,
+\]
+où $I'' \longrightarrow I'$ est un passage au quotient, et l'image inverse de $\bDelta^1 \xrightarrow{\partial} I$ serait encore disconnexe (un $\pi_0$ de cardinal 2). Donc c'est vraiment sans espoir.
+
+Cependant
+
+\textbf{Corollaire 4.3.} \textit{Supposons que $u$ soit $W_0$-lisse, ou $W_0$-propre, ou une $W_0$-fibration faible. Alors $u$ est $W_0$-connexe si et seulement si c'est une $W_0$-équivalence universelle, i.e. si et seulement si a) ses fibres sont \textup{0}-connexes et b) $I' \times_I \bDelta^1$} \texttt{[est]} \textit{\textup{0}-connexe pour tout $\bDelta^1 \longrightarrow I$ (correspondant à une flèche non identique).}
+
+\msp{page 59}Dans les trois cas on sait que $u$ est une $W_0$-équivalence universelle si et seulement si ses fibres sont $W_0$-connexes. Or la $W_0$-lissité implique que $\forall i \in \Ob I$, l'inclusion
+\[
+I'_i \longrightarrow i\backslash I'
+\]
+est une $W_0$-équivalence, d'autre part $i\backslash I' \longrightarrow i\backslash I$ étant $W_0$-asphérique, donc une $W_0$-équivalence par hypothèse, $i\backslash I'$ est 0-connexe, donc $I'_i$ aussi. Le cas $u$ $W_0$-propre est dual. Dans le cas \texttt{[où]} $u$ \texttt{[est]} une $W_0$-fibration faible, on sait encore que $I'_i \longrightarrow i\backslash I'$ est une $W_0$-équivalence, et on conclut comme dans le cas lisse (ou, au choix, via $I'_i \longrightarrow I'/i$).
+
+Mais l'idée me vient que les foncteurs $W_0$-connexes pourraient être exactement les foncteurs de localisation ? Il revient au même de dire qu'un foncteur $u : I' \longrightarrow I$ \textit{conservatif} (i.e. $u(\alpha)$ isomorphisme $\Longrightarrow$ $\alpha$ isomorphisme) qui est $W_0$-connexe, est une équivalence. Mais c'est faux, comme on voit en prenant $I = e$, $I'$ un groupoïde 0-connexe et non 1-connexe : $I' \longrightarrow e$ est $W_0$-connexe (et même une $W_0$-équivalence universelle), mais ce n'est pas une équivalence (et pas un foncteur de localisation).
+% foot: Version 8 juillet 2001
+
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{page 60}Je voudrais généraliser la notion de flèche $W_0$-biasphérique au cas d'un dérivateur $\bD$ quelconque.
+
+\textbf{Proposition 4.4.} \textit{Soit $\bD$ un dérivateur sur} Diag, \textit{et $u : I' \longrightarrow I$ une flèche dans} Diag. \textit{Supposons que $u_*$ et $u_!$ existent, et se calculent de façon standard, pour tout flèche $u$ dans} Diag. \textit{(En fait, il suffit que ce soit le cas pour $u$ et ses localisées $u/i : I'/i \longrightarrow I/i$, ou $u$ et ses colocalisées $i\backslash u : i\backslash I' \longrightarrow i\backslash I$.) Considérons les conditions :} % [sic] pour tout flèche -> pour toute flèche, gender agreement
+\begin{itemize}[leftmargin=4em]
+\item[\textit{a)}] $u^* : \bD(I) \longrightarrow \bD(I')$ \texttt{[est]} \textit{pleinement fidèle.}
+\item[\textit{a$'$)}] \textit{$\forall$ $F$ dans $\bD(I)$, la flèche}
+\[
+u_!u^*F \longrightarrow F
+\]
+\textit{est un isomorphisme.}
+\item[\textit{a$''$)}] \textit{$\forall$ $F$ dans $\bD(I)$, la flèche}
+\[
+u_*u^*F \longleftarrow F
+\]
+\textit{est un isomorphisme.}
+\item[\textit{b)}] \textit{$\forall$ $i$ dans $I$, la flèche $i\backslash I' \longrightarrow i\backslash I$ est $\bD$-asphérique.}
+\item[\textit{b$'$)}] \textit{$\forall$ $i$ dans $I$, la flèche $I'/i \longrightarrow I/i$ est $\bD$-coasphérique.}
+\item[\textit{b$''$)}] \textit{$\forall$ $\alpha : i_0 \longrightarrow i_1$ dans $I$, la catégorie $i_0\backslash\underset{\alpha}{I'}/i_1$ est $\bD$-asphérique.}
+\end{itemize}
+\textit{On a alors les implications}
+\[
+(b \Longleftrightarrow b' \Longleftrightarrow b'') \Longrightarrow (a \Longleftrightarrow a' \Longleftrightarrow a'').
+\]
+\textit{On a $a \Longrightarrow b$ (i.e. toutes les conditions licites envisagées sont équivalentes)} \msp{page 61}\textit{dans chacun des cas suivants.}
+\begin{itemize}[leftmargin=4em]
+\item[$1^o$] \textit{$I$ est préordonné.}
+\item[$2^o$] \textit{$\forall$ $i$ dans $I$, $\alpha_i^* : \bD(I) \longrightarrow \bD(I/i)$ est essentiellement surjectif.}
+\item[$3^o$] \textit{$\forall$ $i$ dans $I$, considérant $\alpha_i : I/i \longrightarrow I$, le foncteur $\alpha_{i,!} : \bD(I/i) \longrightarrow \bD(I)$ est conservatif.}
+\item[$4^o$] $\mathcal{D} = \mathrm{HOT}_{W_0} \approx \bD_{\mathrm{Ens}}$.
+\end{itemize}
+\textsc{Démonstration}. L'équivalence de a, a$'$, a$''$ est claire, soit $A$. De même l'equivalence de b, b$'$, b$''$, soit $B$. % [sic] l'equivalence -> l'équivalence, accent missing
+
+Prouvons
+\[
+B \Longrightarrow A
+\]
+en supposant p.ex. l'existence de $u_*$. On admet tacitement, avec l'existence de $u_*$ : $\bD(I') \longrightarrow \bD(I)$, le mode de calcul des fibres de $u_*(-)$. Donc $A$, via a$''$, équivaut à
+\[
+H^{\bullet}_{\bD}(I'/i, u^*F) \xleftarrow{\mathit{iso}} H^{\bullet}_{\bD}(I/i, F) \simeq F(i)
+\]
+% foot: Version 8 juillet 2001
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+pour tout $F$ dans $\bD(I)$, tout $i$ dans $I$.
+
+Soit
+\[
+\alpha_i : I/i \longrightarrow F, \qquad F_i = \alpha_i^*(F), % [sic] I/i \longrightarrow F -> I/i \longrightarrow I, alpha_i is defined as I/i -> I in 3^o
+\]
+on doit donc exprimer que pour tout $F_i$ provenant d'un $F$, on a
+\[
+H^{\bullet}_{\bD}(I/i, F_i) \xrightarrow{\mathrm{iso}} H^{\bullet}_{\bD}(I'/i, (u/i)^*(F_i)). \tag*{$(\ast)$}
+\]
+Or sous réserve d'existence de $(u/i)_!$, dire que $(\ast)$ est \texttt{[un]} isomorphisme pour \textit{tout} $F_i$ de $\bD(I/i)$, signifie que
+\[
+u/i : I'/i \longrightarrow I/i
+\]
+\msp{page 62}est $\bD$-coasphérique, d'où b$'$ $\Longrightarrow$ a$''$. Il est clair que l'implication inverse est valable si $\alpha_i^*$ est essentiellement surjectif, c'est le cas $2^o$. Or $2^o$ est satisfait si $I$ est préordonné, d'où le cas $1^o$. Le cas $4^o$ a déjà été traité (4.1). Il faut encore traiter le cas $3^o$, qui contient d'ailleurs le cas $2^o$, donc le cas $1^o$ (et aussi le cas $4^o$, cf. plus bas).
+
+Il faut exprimer l'isomorphie de la flèche $(\ast)$ pour $F_i$ de la forme $\alpha_i^*(F)$. Soit $\xi$ \texttt{[un]} objet de $\mathcal{A} = \mathcal{D}(e)$, il faut exprimer l'isomorphie de $\Hom(\xi, -)$ dans les deux membres de $(\ast)$, i.e. de
+\[
+\begin{aligned}
+\Hom(I/i, F_i) \quad &\longrightarrow \quad \Hom(\xi'_{I'/i}, (u/i)^*(F_i)) \\
+&\overset{\text{adj.}}{\simeq} \quad \Hom((u/i)_!(\xi'_{I'/i}), F_i),
+\end{aligned}
+\tag*{$(\ast\ast)$}
+\]
+\texttt{[plutôt} $\xi_{I'/i}$\texttt{]} flèche qui se déduit de
+\[
+(u/i)_!(u/i)^*(\xi_{I'/i}) \xrightarrow{\text{adj.}} \xi_{I'/i} \tag*{$(\ast\ast\ast)$}
+\]
+en prenant le Hom dans $F_i$. La condition $u/i$ coasphérique (i.e. b$'$) signifie que $(\ast\ast\ast)$ est un isomorphisme pour tout $\xi$ dans $\mathcal{A}$. \textit{Suffit}-il pour ceci que son Hom dans un $F_i$ soit bijectif, quand on restreint $F_i$ dans $\bD(I/i)$ à être dans l'image de $\bD(I)$ par $\alpha_i^*$ ? Or cette flèche $(\ast\ast)$, pour $F_i = \alpha_i^*F$, s'explicite par la formule d'adjonction relative \msp{page 63}au foncteur $\alpha_i$, comme
+\[
+\Hom(\alpha_{i,!}(\xi_{I/i}), F) \longrightarrow \Hom(\alpha_{i,!}(\ldots), F).
+\]
+Dire que c'est un isomorphisme pour tout $F$, signifie donc \textit{exactement} que la transformée de la flèche $(\ast\ast\ast)$ par $\alpha_!$ est un isomorphisme. Pour en conclure que $(\ast\ast\ast)$ elle-même est \texttt{[un]} isomorphisme, la condition naturelle à imposer est donc que $\alpha_{i,!} : \bD(I/i) \longrightarrow \bD(I)$ soit conservatif. C'est le cas $3^o$. Cela achève la démonstration de 4.4.
+
+4.5. Montrons que la condition $3^o$ sur $I$ n'est pas toujours satisfaite, dans le cas de $\bD = (\mathrm{HOT}_{W_0})^{\mathrm{opp}} \approx (\bD_{\mathrm{Ens}})^{\mathrm{opp}}$, bien que dans ce cas, il soit pourtant vrai que pour toute $I'$ sur
+% foot: Version 8 juillet 2001
+
+% ---- from Der-ChII-234_p041-045.tex
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+$I$ satisfaisant la condition a$''$ (autoduale), la condition b$'$ (elle aussi autoduale) est aussi satisfaite (par cas $4^o$ ci-dessus). Je dis donc qu'il existe $I$ et $i$ dans $I$, tels que
+\[
+\beta_{i,*} : (i\backslash I)^\wedge \longrightarrow I^\wedge
+\]
+ne soit pas conservatif. (\textbf{NB} Par contre $\alpha_{i,!} : (I/i)^\wedge \longrightarrow I^\wedge$ est toujours conservatif, ce qui redonne le cas $4^o$ comme cas particulier de $3^o$). Comme $\beta_i : i\backslash I \longrightarrow I$ est $W_0$-propre (et même $W_\omega$-propre !), $\beta_{i,*}$ `se calcule fibre par fibre', donc on a
+\msp{page 64}
+\[
+\beta_{i,*}(G)(j) \simeq \prod_{\alpha\in\mathrm{Hom}(i,j)} G(\alpha),
+\]
+la fibre en question en $j$ étant discrète. Prenons
+\[
+I = 0 \underset{\beta}{\overset{\alpha}{\rightrightarrows}} 1, \qquad\quad \text{avec } \alpha \neq \beta,
+\]
+alors $0\backslash I$ est $\Psi = {}$\begin{tikzcd}[row sep=0.1em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)]
+ & 1 \\
+0 \ar[ur, "\alpha'"] \ar[dr, "\beta'"'] & \\
+ & 1'
+\end{tikzcd}, et $\Psi^\wedge$ est la catégorie des diagrammes d'ensembles $G = {}$\begin{tikzcd}[row sep=0.1em, column sep=1.2em, baseline=(\tikzcdmatrixname-2-1.base)]
+ & G_1 \ar[dl, "\lambda"'] \\
+G_0 & \\
+ & G_{1'} \ar[ul, "\mu"]
+\end{tikzcd}. Le foncteur $\beta_*$ déduit de $\beta : i\backslash I \longrightarrow I$ transforme ce diagramme en
+\[
+G_1 \times G_{1'} \underset{\lambda\,\mathrm{pr}_2}{\overset{\lambda\,\mathrm{pr}_1}{\rightrightarrows}} G_0.
+\]
+\texttt{[plutôt} $\mu\,\mathrm{pr}_2$\texttt{]}. Si on se borne aux diagrammes $G$ pour lesquels $G_{1'} = \emptyset$, $\beta_*$ sur ceux-ci donne
+\[
+\emptyset \rightrightarrows G_0,
+\]
+donc la restriction de $\beta_*$ à cette sous-catégorie (équivalente à $(\boldsymbol{\Delta}^1)^\wedge$) n'est pas fidèle, ni conservative, ne tenant compte que de la composante $G_0$, et non pas de $G_1$.
+
+\msp{page 63bis}
+
+\textbf{Definition 4.6.} \textit{On dit que $u : I' \longrightarrow I$ dans} Diag \textit{est} $\D$-biasphérique \textit{si elle satisfait les conditions équivalentes b, b$'$, b$''$ de 4.4,} $\D$-connexe \textit{si elle satisfait la condition a, ou encore (sous réserve d'existence de $u_!$ resp. de $u_*$) les conditions équivalentes a$'$, a$''$.} % [sic] Definition -> Définition, accent missing in print
+
+Ainsi, $\D$-biasphérique implique $\D$-connexe, et la réciproque est vraie quand $I$ satisfait (par rapport à $\D$) la condition $3^o$ de 4.4 (donc aussi, si elle satisfait l'une des conditions plus faibles $2^o$, $1^o$), ou la condition duale de celle-ci (vu que les notions $\D$-biasphérique, $\D$-connexe sont autoduales). À cet égard, notons le
+
+\textbf{Corollaire 4.7.} \textit{Supposons que $\mathcal{A} = \D(e)$ satisfasse la condition suivante : le foncteur}
+\[
+\left\{
+\begin{array}{lcccl}
+\mathcal{A} & \times & \mathcal{A} & \longrightarrow & \mathcal{A} \\[1ex]
+(\xi & , & \eta) & \longrightarrow & \xi \amalg \eta
+\end{array}
+\right.
+\]
+\textit{est conservatif (resp. fidèle). Alors pour toute flèche étale $u : J \longrightarrow I$ dans} Diag \textit{(et en particulier pour $I/i \longrightarrow I$), le foncteur $u_! : \D(J) \longrightarrow \D(I)$ est conservatif (resp. fidèle)} (\footnote{\textbf{NB} Cette condition est satisfaite si $\forall\, \xi, \eta \in \mathcal{A}$ on a $\mathrm{Hom}(\xi,\eta) \neq \emptyset$, (car on se ramène à ceci : si $u_1$,
+% footnote continues at the foot of p. 40
+$u_2$ sont deux flèches dans Ens entre ensembles \textit{non vides,} et si $u_1 \times u_2$ est \texttt{[un]} isomorphisme, $u_1$, $u_2$ sont \texttt{[des]} isomorphismes). Cela s'applique en particulier si $\mathcal{A}$ admet un objet neutre, p.ex. si $\mathcal{A}$ est additive.}). \textit{Si cette condition, ou la condition duale,}
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{page 64bis}
+\textit{impliquant les produits $\xi\times\eta$ ($\xi$, $\eta$ dans $\mathcal{A}$), est satisfaite, alors pour toute flèche $u : I' \longrightarrow I$ dans} Diag, \textit{$u$ est $\D$-connexe si et seulement si $u$ est $\D$-biasphérique.}
+
+\textsc{Démonstration.} L'hypothèse de conservativité, ou de fidélité se transporte aux sommes indexées par un ensemble quelconque (sous réserve d'existence), comme on voit en écrivant $\coprod\limits_{\lambda} \xi_\lambda = \xi_{\lambda_0} \amalg \coprod\limits_{\lambda\neq\lambda_0} \xi_\lambda$. L'assertion faite sur $u_!$ résulte alors du calcul de $u_!$ fibre par fibre (qui est valable vu que $u$ est étale donc lisse), en tenant compte que les fibres sont discrètes.
+
+Je ne connais pas d'exemple d'un couple $(\D, u)$ d'un dérivateur $\D$ et d'une flèche $u$ dans Diag, pour lesquels $u$ soit $\D$-connexe sans être $\D$-asphérique. On a donné des conditions sur $\D$, qui assurent équivalence des deux notions. Si $\D$ est de la forme $\D_{\mathcal{M}}$, et si $\mathcal{M}$ satisfait la condition dite dans 4.7 ou sa duale, alors par 4.7 c'est OK. Donc un contrexemple avec un $\D_{\mathcal{M}}$ devrait en tenir compte. Je ne vais pas m'obstiner pour tirer au clair ce qui en est.
+
+\msp{page 65}
+
+\textbf{Corollaire 4.8.} \textit{Une flèche $u$ de} Diag \textit{qui est une $\D$-équivalence universelle est $\D$-biasphérique, et \textup{a fortiori} $\D$-connexe. Inversement, si $u$ est soit $\D$-lisse, soit $\D$-propre, soit une $\D$-fibration faible, et si $u$ est $\D$-biasphérique, c'est une $\D$-équivalence universelle.}
+
+La démonstration est celle du cas particulier 4.3. On a donc un diagramme d'implications :
+\[
+\begin{tikzcd}[column sep=small, row sep=large]
+\text{Cat-équivalence} \ar[dr, Rightarrow] & \D\text{-équivalence universelle } (W_{\mathrm{univ}}) \ar[d, Rightarrow, "{\text{\footnotesize\begin{tabular}{@{}l@{}}implication stricte ; équivalence\\ dans le cas où $u$ est soit $\mathbf{D}$-propre,\\ soit $\mathbf{D}$-lisse, soit une $\mathbf{D}$-fibration faible.\end{tabular}}}"] & \\
+ & \D\text{-biasphérique} \ar[dl, Rightarrow] \ar[d, Rightarrow, "{\text{\footnotesize\begin{tabular}{@{}l@{}}équivalence\\ dans tous les\\ cas connus\end{tabular}}}"] \ar[dr, Rightarrow] & \\
+\D\text{-asphérique} \ar[dr, Rightarrow] & \D\text{-connexe} \ar[d, Rightarrow] & \D\text{-coasphérique} \ar[dl, Rightarrow] \\
+ & \D\text{-équivalences } (W) &
+\end{tikzcd}
+\]
+(\footnote{\textbf{NB} Ces sept classes de morphismes dans Cat sont stables par composition sauf la notion de $\D$-connexité, toutes ces notions ne dépendent que de l'ensemble $W = W_{\D}$ des $\D$-équivalences.}). Rappelons que pour $u : I' \longrightarrow I$ donné
+\begin{enumerate}[leftmargin=*, labelindent=1.5em]
+\item[a)] $u$ est $\D$-asphérique si et seulement si $\forall\, F$ \textit{constant} dans $\D(I)$
+\[
+F \xrightarrow[\sim]{\text{adj.}} u_*u^*F \qquad\quad \text{est \texttt{[un]} isomorphisme.} \tag*{$(\ast)$}
+\]
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\item[b)] $u$ est $\D$-coasphérique si et seulement si $\forall\, F$ \textit{constant} dans $\D(I)$
+\[
+F \xleftarrow[\sim]{\text{adj.}} u_!u^*F \qquad\quad \text{est \texttt{[un]} isomorphisme.} \tag*{$(\ast\ast)$}
+\]
+\item[c)] $u$ est $\D$-connexe si et seulement si pour \textit{tout} $F$ dans $\D(I)$ (pas forcément constant, ni localement constant), $(\ast)$ est \texttt{[un]} isomorphisme, ou ce qui revient au même, pour tout $F$ $(\ast\ast)$ est \texttt{[un]} isomorphisme.
+\end{enumerate}
+
+\msp{page 66}
+
+Rappelons que la classe $W_{\mathrm{asph}}$ \texttt{[des]} flèches $W$-asphériques et celle, $\mathrm{Liss}_W$, des flèches $W$-lisses, se déterminent mutuellement, ainsi
+\[
+\left\{
+\begin{array}{lcl}
+(f : X \longrightarrow Y) \in W_{\mathrm{asph}} & \Longleftrightarrow & \forall\, (Y' \xrightarrow{\ u\ } Y) \in \mathrm{Liss}_W, \\
+ & & X' = X \times_Y Y' \longrightarrow X' \text{ est } \in W. % [sic] X' = X \times_Y Y' \longrightarrow X' -> X' = X \times_Y Y' \longrightarrow Y', the target must be Y' (compare (4.12))
+\\
+(f : Y' \longrightarrow Y) \in \mathrm{Liss}_W & \Longleftrightarrow & \text{Le foncteur } X \longmapsto X' = X \times_Y Y' \\
+ & & \text{de } \mathrm{Cat}/Y \text{ dans } \mathrm{Cat}/Y' \text{ transforme} \\
+ & & \text{flèches dans } W_{\mathrm{asph}} \text{ dans \texttt{[plutôt en]}} \\
+ & & \text{flèches dans } W_{\mathrm{asph}}.
+\end{array}
+\right.
+\tag*{(4.10)}
+\]
+
+Pour toute partie $A$ de Fl(Cat) stable par isomorphismes, on peut associer une partie $\mathbf{L}(A)$ de Fl(Cat), par la relation
+\[
+\begin{array}{rcl}
+(u : Y' \longrightarrow Y) \in \mathbf{L}(A) & \Longleftrightarrow & u^* : \mathrm{Cat}/Y \longrightarrow \mathrm{Cat}/Y' \\
+ & & \text{transforme flèches} \\
+ & & \in A \text{ en flèches } \in A.
+\end{array}
+\tag*{(4.11)}
+\]
+
+On voit que $\mathbf{L}(A)$ contient les isomorphismes, est stable par composition, et est stable aussi par changement de base (comme c'est le cas de $\mathrm{Liss}_W$). Inversement, à une partie $L$ de Fl(Cat), stable par isomorphismes, on associe une partie $\mathbf{A}_W(L)$ par
+\[
+\begin{array}{rcl}
+(f : X \longrightarrow Y) \in \mathbf{A}_W(L) & \Longleftrightarrow & \forall\, (Y' \longrightarrow Y) \text{ dans } L, \\
+ & & X' = X \times_Y Y' \longrightarrow Y' \\
+ & & \text{est dans } W.
+\end{array}
+\tag*{(4.12)}
+\]
+
+Si $L$ est stable par changement de base, alors $\mathbf{A}_W(L)$ est stable par composition. Il contient les isomorphismes (car $W$ les contient), est contenu dans $W$ si $L$ contient les identités. Mais
+\msp{page 67}
+aucune raison qu'il soit stable par changement de base quelconque (et en fait, $W_{\mathrm{asph}}$ ne l'est pas).
+
+(\footnote{Canulé \texttt{[jusqu'à la fin du} \S4\texttt{]}, cf. \S6.}). On a, pour un $A \subseteq W \subseteq \mathrm{Fl(Cat)}$ donné, stable par isomorphismes,
+\[
+A \subseteq \mathbf{A}_W(\mathbf{L}(A)) \overset{\text{déf}}{=} A^\natural \subseteq W, \qquad \text{\footnotesize\begin{tabular}{@{}l@{}}partie stable par composition,\\ contient \texttt{[les]} isomorphismes,\end{tabular}}
+\tag*{(4.13)}
+\]
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+et pour toute partie $L$ de Fl(Cat) qui est stable par changement de base, et par composition
+\[
+L \subseteq \mathbf{L}(\mathbf{A}_W(L)) \overset{\text{déf}}{=} L^\flat, \qquad \text{\footnotesize\begin{tabular}{@{}l@{}}partie de Fl\,Cat stable\\ par composition et par changement\\ de base, contenant les isomorphismes.\end{tabular}}
+\tag*{(4.14)}
+\]
+On a
+\[
+\left\{
+\begin{array}{lcl}
+A^{\natural\natural} & = & A^\natural, \quad \text{car } \mathbf{A}_W(L)^\natural = \mathbf{A}_W(L) \\[1ex]
+L^{\flat\flat} & = & L^\flat, \quad \text{car } \mathbf{L}(A)^\flat = \mathbf{L}(A).
+\end{array}
+\right.
+\]
+Exemples :
+\begin{enumerate}[leftmargin=*, labelindent=1em]
+\item[$1^o$)] $L = \text{Ét}$, $\mathbf{A}_W(L) = W_{\mathrm{asph}}$, $\mathbf{L}(\mathbf{A}_W(L)) = L^\flat = \mathrm{Liss}_W$.
+\item[$2^o$)] $L = \text{Coét}$, $\mathbf{A}_W(L) = W_{\mathrm{coas}}$, $\mathbf{L}(\mathbf{A}_W(L)) = L^\flat = \mathrm{Prop}_W$.
+\item[$3^o$)] $A = W$, $\mathbf{L}(A) = \mathrm{Fib}_W$, $A^\natural = W$.
+\item[$4^o$)] $L = \mathrm{Fl\,Cat}$, $\mathbf{A}_W(L) = W_{\mathrm{univ}}$, $L^\flat = L$.
+\end{enumerate}
+\msp{page 68 vide}
+
+\clearpage
+\printedpage{43}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{page 69}
+
+\section*{5\quad Dualité formelle}
+
+Soient $\mathcal{P}$, $\mathcal{Q}$ deux ensembles ordonnés. J'essaye de dégager une notion de `dualité' (formelle) reliant $\mathcal{P}$ et $\mathcal{Q}$. Ce sera une relation entre $\mathcal{P}$ et $\mathcal{Q}$
+\[
+\mathcal{R} \subseteq \mathcal{P} \times \mathcal{Q}
+\tag*{(5.1)}
+\]
+ayant les propriétés suivantes
+\begin{enumerate}[leftmargin=*, labelindent=0.5em]
+\item[(D)] Pour toute partie $A$ de $\mathcal{P}$, l'ensemble
+\end{enumerate}
+\[
+A^\cup \overset{\text{déf}}{=} \{ q \in \mathcal{Q} \mid (p,q) \in \mathcal{R} \text{ pour tout } p \in A,\ \text{ i.e. } A \times \{q\} \subseteq \mathbf{R} \} % [sic] \mathbf{R} -> \mathcal{R}, the relation is written \mathcal{R} everywhere else
+\]
+est une partie ouverte de $\mathcal{Q}$ ayant un plus grand élément $\beta(A) : A^\cup = \mathcal{Q}/\beta(A)$. Dualement, pour toute partie $B$ de $\mathcal{Q}$, l'ensemble
+\[
+B^\cap \overset{\text{déf}}{=} \{ p \in \mathcal{P} \mid (p,q) \in \mathcal{R} \text{ pour tout } q \in B,\ \text{ i.e. } \{p\} \times B \subseteq \mathcal{R} \}
+\]
+est une partie ouverte de $\mathcal{P}$ ayant un plus grand élément $\alpha(B)$, i.e. $B^\cap = \mathcal{P}/\alpha(B)$.
+
+Le plus souvent, $\mathcal{P}$ et $\mathcal{Q}$ seront stables par sup quelconques (donc aussi par inf quelconques). Dans ce cas, (D) équivaut, du côté des $A^\cup$ (pour $A \in \mathfrak{P}(\mathcal{P})$) à ceci :
+\begin{enumerate}[leftmargin=*, labelindent=0em]
+\item[(D$_0$)] Pour tout $p \in \mathcal{P}$, $\mathcal{R}(p) = \{ q \in Q \mid (p,q) \in \mathcal{R} \}$ est une partie ouverte \textit{filtrante} de $\mathcal{Q}$, ou ce qui revient au même, une partie non vide ($\Longleftrightarrow$ contenant le plus petit élément $\emptyset_{\mathcal{Q}}$ de $\mathcal{Q}$) stable par sup de deux éléments. De plus, $\mathcal{R}(p)$ est stable par sup filtrants, ou ce qui revient au même (étant lui-même filtrant), il contient un plus grand élément. Il revient % [sic] Q -> \mathcal{Q}, plain italic Q printed in "q \in Q" instead of the script \mathcal{Q}
+\msp{page 70}
+au même de dire que $\mathcal{R}(p)$ est un \textit{ouvert} de $\mathcal{Q}$ stable par sup quelconques (ce qui implique qu'il contient $\emptyset_{\mathcal{Q}}$). Dualement, pour tout $q \in \mathcal{Q}$, ${}^{s}\mathcal{R}(q) = \{ p \in \mathcal{P} \mid (p,q) \in \mathcal{R} \}$ est une partie \textit{ouverte} de $\mathcal{P}$, stable par sup quelconques, i.e. une partie ouverte ayant un plus grand élément. % ?? uncertain: small raised prefix before \mathcal{R}(q) -- s or t
+\end{enumerate}
+
+En d'autres termes, quand on postule la condition (D) pour $A$ resp. $B$ réduit à un élément, alors elle reste vérifiée pour toute partie. Cela provient des formules
+\[
+\left\{
+\begin{array}{lcl}
+(\bigcup_i A_i)^\cup & = & \bigcap_i A_i^\cup \\[1ex]
+(\bigcup_j B_j)^\cap & = & \bigcap_j B_j^\cap,
+\end{array}
+\right.
+\tag*{(5.2)}
+\]
+et du fait que l'intersection de parties ouvertes de la forme $\mathcal{P}/\alpha_i$ dans $\mathcal{P}$ est de la forme $\mathcal{P}/\alpha$, où $\alpha = \inf_i \alpha_i$, et de même dans $\mathcal{Q}$. Ainsi on trouve
+\[
+\left\{
+\begin{array}{lcl}
+\beta(\bigcup_i A_i) & = & \inf_i \beta(A_i) \\[1ex]
+\alpha(\bigcup_j B_j) & = & \inf_j \alpha(B_j).
+\end{array}
+\right.
+\tag*{(5.3)}
+\]
+
+% ---- from Der-ChII-234_p046-050.tex
+\printedpage{44}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+On posera, pour une partie $A$ de $\cP$ resp. $B$ de $\cQ$
+\[
+A^{\natural} = (A^{\cup})^{\cap}, \qquad B^{\flat} = (B^{\cap})^{\cup}
+\tag*{(5.4)}
+\]
+de sorte qu'on aura
+\[
+A \subseteq A^{\natural}, \qquad B \subseteq B^{\flat}
+\tag*{(5.5)}
+\]
+On dira que $A$ est $\cR$-\textit{clos} si $A = A^{\natural}$ (ou encore si $A$ est de la forme $B'^{\cap}$ pour $B' \subseteq \cQ$, cf. 5.6), que
+\msp{71}
+$B$ est $\cR$-\textit{clos} si $B = B^{\flat}$. On aura pour tout $A \subseteq \cP$, $B \subseteq \cQ$
+\[
+\left\{
+\begin{array}{rcll}
+(A^{\cup})^{\flat} & = & A^{\cup}, & \text{i.e. } A^{\cup} \text{ est } \cR\text{-clos,}\\[1ex]
+(B^{\cap})^{\natural} & = & B^{\cap}, & \text{i.e. } B^{\cap} \text{ est } \cR\text{-clos.}
+\end{array}
+\right.
+\tag*{(5.6)}
+\]
+En particulier
+\[
+(A^{\natural})^{\natural} = A^{\natural}, \qquad (B^{\flat})^{\flat} = B^{\flat},
+\tag*{(5.7)}
+\]
+i.e. la $\cR$-clôture $A^{\natural}$ de $A \subseteq \cP$ est $\cR$-clos, et de même la $\cR$-cloture $B^{\flat}$ de $B \subseteq \cQ$. % [sic] cloture -> clôture, accent circonflexe manquant (cf. « clôture » dans la même ligne)
+
+En fait, je m'aperçois que je suis en train de mélanger deux espèces de faits différents. Les relations (5.2), et (5.4) à (5.7), ne dépendent pas de la donné de relations d'ordre sur $\cP$, $\cQ$, ni d'axiomes reliant celles-ci à la relation donnée $\cR$, mais seulement de cette relation, laquelle n'a pas à être soumise à aucune condition. Notons que % [sic] la donné -> la donnée, accord manquant
+\[
+\emptyset^{\cup} = \cQ, \qquad \emptyset^{\cap} = \cP,
+\tag*{(5.8)}
+\]
+tandis que
+\[
+\emptyset^{\natural} = \cQ^{\cap}, \qquad \emptyset^{\flat} = \cP^{\cup}
+\tag*{(5.9)}
+\]
+sont respectivement la plus petite partie $\cR$-close de $\cP$ et de $\cQ$.
+
+L'application
+\[
+A \longmapsto A^{\natural}
+\tag*{(5.10)}
+\]
+est une application \textit{croissante} (et \textit{idempotente}) de $\fP(\cP)$ dans lui-même, ayant donc la propriété
+\msp{72}
+\[
+(\bigcup_i A_i)^{\natural} = (\bigcup_i A_i^{\natural})^{\natural}.
+\]
+
+\printedpage{45}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+Pour tout $A \subseteq \cP$, $A^{\natural}$ est la plus petite partie $\cR$-close de $\cP$ contenant $A$, et de même pour tout $B \subseteq \cQ$, $B^{\flat}$ est la plus petite partie $\cR$-close de $Q$ contentant $B$. On a de plus (c'était même à dire avant de dire que $A \longmapsto A^{\natural}$ est croissante) % [sic] de $Q$ -> de $\mathcal{Q}$, lettre droite au lieu de la lettre calligraphique ; [sic] contentant -> contenant, faute de frappe
+\[
+\left\{
+\begin{array}{rcl}
+A \subseteq A' & \Longrightarrow & A'^{\cup} \subseteq A^{\cup}\\[1ex]
+B \subseteq B' & \Longrightarrow & B'^{\cap} \subseteq B^{\cap},
+\end{array}
+\right.
+\tag*{(5.11)}
+\]
+i.e. les applications
+\[
+\begin{tikzcd}
+\fP(\cP) \arrow[r, shift left, "\beta"] & \fP(\cQ) \arrow[l, shift left, "\alpha"]
+\end{tikzcd}
+\qquad
+\begin{array}{l}
+A \longmapsto A^{\cup}\\
+B \longmapsto B^{\cap}
+\end{array}
+\tag*{(5.12)}
+\]
+sont décroissantes (ce qui implique que les deux composés $\alpha\beta = (A \longmapsto A^{\natural})$ et $\beta\alpha = (B \longmapsto B^{\flat})$ sont croissantes). Leurs restrictions aux sous-ensembles $\fP_{\cR}(\cP)$ et $\fP_{\sR}(\cQ)$ des parties $\cR$-closes de $\cP$ resp. de $\cQ$, sont, par définition de celles-ci comme
+\[
+\begin{array}{rcl}
+\fP_{\cR}(\cP) & = & \{A \subseteq \cP \mid A^{\natural} \ (\overset{\text{déf}}{=} \alpha\beta(A)) = A\}\\
+\fP_{\sR}(\cQ) & = & \{B \subseteq \cQ \mid B^{\flat} \ (\overset{\text{déf}}{=} \beta\alpha(B)) = B\},
+\end{array}
+\]
+inverse l'une de l'autre. On trouve ainsi
+
+\textbf{Proposition 5.1.} \textit{Soient $\cP$, $\cQ$ deux ensembles, $\cR \subseteq \cP \times \cQ$ une relation. Alors les applications $\alpha$, $\beta$ de (5.12) induisent des bijections inverses l'}
+\msp{73}
+\textit{une de l'autre, entre l'ensemble $\mathit{Cl}_{\cR}(\cP)$ des parties $\cR$-closes de $\cP$, et l'ensemble $\mathit{Cl}_{\sR}(\cQ)$ des parties ${}^{s}\cR$-closes (nous dirons $\cR$-closes par abus de langage) de $\cQ$. Ces bijections sont décroissantes, donc des antiisomorphismes pour les relations d'ordre naturelles (d'inclusion).}
+
+\textbf{Corollaire 5.2.} \textit{Soit $(A_i)_i$ une famille de parties $\cR$-closes de $\cP$. Alors $\bigcap A_i$ est une partie $\cR$-close de $\cP$, et}
+\[
+(\bigcap_i A_i)^{\cup} = \underbrace{(\bigcup_i A_i^{\cup})^{\flat}}_{\substack{\text{sup des}\\ \text{parties } \cR\text{-closes}\\ A_i^{\cup} \text{ de } \cQ}} \quad .
+\tag*{(5.2.1)}
+\]
+
+Mais la relation $\cR$ se `prolonge' en une relation $\bar{\cR}$ entre
+\[
+\bar{\cP} = \fP(\cP), \qquad \bar{\cQ} = \fP(\cQ)
+\tag*{(5.13)}
+\]
+par la prescription
+\[
+\underbrace{\bar{\cR}}_{\subseteq \bar{\cP} \times \bar{\cQ}} = \{(A,B) \in \bar{\cP} \times \bar{\cQ} \mid B \subseteq A^{\cup},\ \text{i.e. } A \subseteq B^{\cap},\ \text{i.e. } A \times B \subseteq \cR\}.
+\tag*{(5.14)}
+\]
+Les ensembles $\bar{\cP}$, $\bar{\cQ}$ sont stables par sup quelconques (réunion de parties de $\cP$ resp. $\cQ$), et la relation $\bar{\cR}$ sur ces ensembles ordonnés satisfait à la condition (D$_0$)
+\printedpage{46}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{74}
+ci-dessus (p. 69), de façon évidente : pour $A$ fixé, les $B$ tels que $(A,B) \in \bar{\cR}$ sont ceux qui sont contenus dans $A^{\cup}$, donc l'ensemble $\bar{\cR}(A)$ n'est autre que $\bar{\cQ}/A^{\cup}$, et dualement ${}^{s}\bar{\cR}(B)$ n'est autre que $\bar{\cP}/B^{\cap}$. Ainsi
+\[
+\beta(A) = A^{\cup}, \qquad \alpha(B) = B^{\cap}.
+\tag*{(5.14)} % [sic] (5.14) -> numéro distinct, numéro déjà employé pour la formule (5.14) de la page précédente
+\]
+Si j'ai songé à introduire l'axiome (D$_0$), pour un couple d'ensembles ordonnés quelconques, c'est à cause des cas où ceux-ci ne sont \textit{pas} de la forme $\fP(\cP)$, $\fP(\cQ)$, et (alors même qu'ils le seraient) où la relation de base n'est pas déduite comme ci-dessus d'une relation quelconque entre ensembles $\cP$, $\cQ$.
+
+Je reviens donc à l'axiomatique du début, avec $\cP$, $\cQ$ ordonnés, et $\cR$ satisfaisant (D). Dans tous les cas auxquels je peux songer, $\cP$ et $\cQ$ sont stables par sup quelconques, donc (D) équivaut à (D$_0$). Notons que l'application
+\[
+\cP \longrightarrow \fP(\cP), \qquad p \longmapsto \cP/p
+\]
+est injective, et de même pour $\cQ \longrightarrow \fP(\cQ)$. Ainsi, la connaisance de $A \longmapsto A^{\cup}$ équivaut à celle de % [sic] connaisance -> connaissance, faute d'orthographe
+\[
+\begin{array}{rcl}
+A & \longmapsto & \beta(A)\\[0.5ex]
+\beta : \fP(\cP) & \longrightarrow & \cQ,
+\end{array}
+\]
+et de même celle de $B \longmapsto B^{\cap}$ équivaut à
+\msp{75}
+celle de
+\[
+\alpha : \fP(\cQ) \longrightarrow \cP.
+\]
+En fait, il suffit de se donner
+\[
+\begin{array}{rcccl}
+\beta_0 : & \cP & \longrightarrow & \cQ & \qquad \text{applications}\\
+\alpha_0 : & \cQ & \longrightarrow & \cP & \qquad \textit{décroissantes}
+\end{array}
+\tag*{(5.15)}
+\]
+définies par
+\[
+\left\{
+\begin{array}{rcl}
+\beta_0(p) & = & \beta(\{p\})\\[1ex]
+\alpha_0(q) & = & \alpha(\{q\}),
+\end{array}
+\right.
+\]
+puisqu'on en déduit $\beta$, $\alpha$ par
+\[
+\left\{
+\begin{array}{rcl}
+\beta(A) & = & \inf\nolimits_{p \in A} \beta_0(p)\\[1ex]
+\alpha(B) & = & \inf\nolimits_{q \in B} \alpha_0(q).
+\end{array}
+\right.
+\tag*{(5.16)}
+\]
+La relation $\cR$ se déduit de la donnée de $\beta_0$, ou au choix de $\alpha_0$, par
+\[
+(p,q) \in \cR \iff q \leq \beta_0(p) \iff p \leq \alpha_0(q).
+\tag*{(5.17)}
+\]
+
+\printedpage{47}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+Cela implique donc que $\alpha_0$, $\beta_0$ se déterminent mutuellement, par les formules
+\[
+\left\{
+\begin{array}{rcl}
+\alpha_0(q) & = & \sup \underbrace{\{p \in \cP \mid q \leq \beta_0(p)\}}_{\{q\}^{\cap}}\\[3ex]
+\beta_0(p) & = & \sup \underbrace{\{q \in \cQ \mid p \leq \alpha_0(q)\}}_{\{p\}^{\cup}}.
+\end{array}
+\right.
+\tag*{(5.18)}
+\]
+Reste à se demander quelles sont les applications $\alpha_0 : \cP \longrightarrow \cQ$, ou $\beta_0 : \cQ \longrightarrow \cP$, qui correspondent à une \textit{`relation dualisante'} % [sic] \alpha_0 : \cP \to \cQ, \beta_0 : \cQ \to \cP -> \beta_0 : \cP \to \cQ, \alpha_0 : \cQ \to \cP, les rôles de \alpha_0 et \beta_0 sont échangés par rapport à (5.15)
+\msp{76}
+$\cR$ sur $\cP \times \cQ$. Voici les conditions sur $\beta_0 : \cP \longrightarrow \cQ$ :
+\begin{itemize}[leftmargin=4em, labelsep=0.8em]
+\item[\circled{a}] $\beta_0$ est \textit{décroissante},
+\end{itemize}
+ce qui implique que la relation
+\[
+\underbrace{\cR_{\beta_0}}_{\subseteq \cP \times \cQ} = \{(p,q) \in \cP \times \cQ \mid q \leq \beta_0(p)\}
+\]
+satisfait à la condition (D$_0$) du côté gauche, et il faut encore la vérifier du côté droit, i.e. regarder, pour $q$ fixé, l'ensemble
+\[
+\{q\}^{\cap} = \{p \in \cP \mid q \leq \beta_0(p)\}.
+\]
+Comme $\beta_0$ est décroissant, on voit que $p \in \{q\}^{\cap}$, et $p' \leq p \Longrightarrow p' \in \{q\}^{\cap}$, i.e. $\{q\}^{\cap}$ est \textit{ouvert.} On doit vérifier encore (supposant l'existence des sup quelconques dans $\cP$) que cet ensemble est stable par sup quelconques - il en résultera qu'il est de la forme $\cP/\alpha(q)$. Cela équivaut à la condition
+\begin{itemize}[leftmargin=4em, labelsep=0.8em]
+\item[\circled{b}] $\beta_0$ transforme sup quelconques dans $\cP$ en inf dans $\cQ$.
+\end{itemize}
+Si on regarde $\beta_0$ comme un foncteur contravariant $\cP^{o} \longrightarrow \cQ$, cela signifie qu'il commute aux limites projectives, ou encore qu'il a un adjoint à gauche $\cQ \longrightarrow \cP^{o}$, lequel commute aux limites inductives, et correspond
+\msp{77}
+à l'application décroissante $\alpha_0 : \cQ \longrightarrow \cP$, transformant sup en inf.
+
+Ici il est commode de considérer $\natural$ et $\flat$ comme des opérations sur $\cP$ resp. $\cQ$, par
+\[
+p^{\natural} = \alpha_0\beta_0(p), \qquad q^{\flat} = \beta_0\alpha_0(q).
+\tag*{(5.19)}
+\]
+La relation entre ces endomorphismes, et l'opération de même nom sur $\fP(\cP)$, $\fP(\cQ)$, est donnée par
+\[
+\left\{
+\begin{array}{rcl}
+p^{\natural} & = & \text{Plus grand élément de } \{p\}^{\natural}\\[1ex]
+A^{\natural} & = & \sup\nolimits_{p \in A} p^{\natural},
+\end{array}
+\right.
+\tag*{(5.20)}
+\]
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+et symétriquement du côté de $\cQ$.
+
+On dit que $p$ est $\cR$-\textit{clos,} ou $\beta_0$-clos, ou $\alpha_0$-clos, si $p = p^{\natural}$, et de même $q \in \cQ$ est dit $\cR$-\textit{clos} etc. si $q = q^{\flat}$. Les applications
+\[
+\left\{
+\begin{array}{ccccccc}
+p & \longmapsto & p^{\natural} & : & \cP & \longrightarrow & \cP\\[1ex]
+q & \longmapsto & q^{\flat} & : & \cQ & \longrightarrow & \cQ
+\end{array}
+\right.
+\tag*{(5.21)}
+\]
+sont \textit{croissantes} et \textit{idempotentes.} On peut caractériser $p^{\natural}$ comme le plus petit élément clos de $\cP$ majorant $p$, et de même pour $q^{\flat}$. On trouve alors, par (5.19), que $\alpha_0$ et $\beta_0$ induisent des bijections inverses l'une de l'autre,
+\msp{78}
+entre l'ensemble des éléments clos de $\cP$, et l'ensemble des éléments clos de $\cQ$
+\[
+\begin{tikzcd}
+\cP^{\natural} \arrow[r, shift left, "\bar{\beta}_0"] \arrow[r, phantom, "\scriptstyle\sim"] & \cQ^{\flat}. \arrow[l, shift left, "\bar{\alpha}_0"]
+\end{tikzcd}
+\tag*{(5.22)}
+\]
+Mais en pratique, les applications $\alpha_0$, $\beta_0$ ne sont pas obtenues directement, mais on dispose de la relation $\cR$, satisfaisant la condition (D$_0$), dont on déduit $\alpha_0$, $\beta_0$. Dans tous les cas auxquels je pense ici, ou bien $\cP$, $\cQ$ sont de la forme $\fP(P_0)$, $\fP(Q_0)$, et $\cR$ se déduit d'une relation $R_0 \subseteq P_0 \times Q_0$ comme ci-dessus (de loin le plus fréquent, il me semble), ou bien $\cP$ et $\cQ$ apparaissent comme sous-ensembles convenables d'ensembles $\fP(P_0)$, $\fP(Q_0)$, munis de l'ordre induit, et la relation $\cR$ sur $\cP \times \cQ$ s'obtient d'une façon plus complexe.
+
+\noindent\textbf{Exemples.}
+\begin{enumerate}[label={\arabic*)}]
+\item Relations d'\textit{orthogonalité} entre parties de deux modules sur un anneau, muni d'un accouplement de dualité. Dans le cas des \texttt{[espaces]} vectoriels de dimension finie et d'une vraie dualité, les parties closes sont les sous-espaces vectoriels, dans le cas infini, ce sont les sous-espaces vectoriels fermés pour la `topologie faible' définie par l'accouplement.
+\item Relations d'\textit{orthogonalité} entre parties de deux groupes topologiques commutatifs localement compacts duales l'une de l'autre, au sens de Pontrjagin.
+\msp{79}
+
+Les parties closes sont les sous-groupes fermés.
+\item Pour deux espaces vectoriels `en dualité' sur un corps valué complet, tel $\mathbf{R}$ où $\mathbf{C}$, la relation % [sic] où -> ou, accent grave fautif
+\[
+|\langle x, x' \rangle| \leq 1.
+\]
+Dans le cas réel ou complexe, les parties closes sont les parties convexes cerclées [\,?] faiblement fermées.
+\item Pour les espaces vectoriels réels, la relation de semi-polarité
+\[
+\langle x, x' \rangle \geq -1.
+\]
+Les parties closes sont les parties convexes faiblement fermées contenant l'origine.
+\end{enumerate}
+
+% ---- from Der-ChII-234_p051-055.tex
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+
+\begin{itemize}[leftmargin=2.5em]
+\item[5)] Soit $K$ un corps (pour simplifier), $L$ une extension galoisienne de groupe $G$. Relation entre $L$ et $G$
+\[
+\gamma\cdot x=x,\qquad \text{i.e. } x\in L^{\gamma}.
+\]
+Les parties closes de $L$ sont les sous-extensions, les parties closes de $G$ les sous-groupes de $G$.
+\end{itemize}
+
+Il y a des analogues divers dans des cas inséparables (à coups de $p$-algèbres de Lie par exemple), et des énoncés de descente en tous genres.
+
+\msp{page 80}Tous ces exemples sont de 1\textsuperscript{ère} espèce, les ensembles ordonnés qui interviennent sont de la forme $\Pf(P_0)$, $\Pf(Q_0)$, et la relation entre eux est déduite d'une relation $R_0$ entre $P_0$ et $Q_0$. Voici maintenant des exemples plus complexes.
+
+\begin{itemize}[leftmargin=2.5em]
+\item[6)] Soit $\mathcal{M}$ une catégorie (‘grosse’, le plus souvent \dots). On prend
+\[
+\mathcal{P}=\mathcal{Q}=\Pf(\Fl(\mathcal{M})).
+\]
+La relation $\mathcal{R}\subseteq\mathcal{P}\times\mathcal{Q}$ est la relation de Quillen, que j'écris, pour $\Phi,\Psi\in\Pf$
+\[
+\Psi\subseteq\Phi_{*},
+\]
+ou encore de façon équivalente
+\[
+\Phi\subseteq\Psi^{*},
+\]
+($\Psi$ a la LLP \texttt{[left lifting property]} pour $\Psi$, $\Phi$ la RLP \texttt{[right lifting property]} pour $\Psi$). Donc les applications $\alpha_0$, $\beta_0$ sont données par % [sic] Psi a la LLP pour Psi -> Psi a la LLP pour Phi, the relation is between Psi and Phi (cf. "Phi la RLP pour Psi")
+\[
+\beta_0(\Phi)=\Phi_{*},\qquad \alpha_0(\Psi)=\Psi^{*}.
+\]
+L'idée ici ne viendrait à personne d'introduire $\Pf(\mathcal{P})$, $\Pf(\mathcal{Q})$ - c'est déjà assez gros comme ça ! La notation pour $\Phi^{\natural}$ est ici $\tilde{\Phi}$, pour $\Psi^{\flat}$ c'est $\bar{\Psi}$. Les parties closes sont celles que j'appelle Q-closes à gauche et à droite.
+
+La relation $\mathcal{R}$, que j'écris
+\[
+\Phi\longleftrightarrow\Psi,
+\]
+\msp{page 81}n'est pas déduite d'une relation entre flèches de $\mathcal{M}$, i.e. d'une partie de $\Fl(\mathcal{M})\times\Fl(\mathcal{M})$, mais est de nature plus complexe. Pour la décrire, il faut introduire l'ensemble $\mathcal{D}$ des diagrammes carrés commutatifs (traits pleins) de la forme
+\[
+\begin{tikzcd}
+A \arrow[r] \arrow[d, "i"] & X \arrow[d, "p"] \\
+B \arrow[r] \arrow[ur, dotted, "f"] & Y
+\end{tikzcd}
+\tag*{$(*)$}
+\]
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+(qu'on peut interpréter comme $\Fl(\underline{\Fl}(\mathcal{M}))$, ensemble des flèches dans $\underline{\Fl}(\mathcal{M})$). On a une partie $\mathcal{D}_0$ de $\mathcal{D}$, formée des diagrammes pour lesquels \texttt{[il]} existe \texttt{[un]} $f$ avec deux triangles commutatifs (c'est donc l'image de $\underbrace{\Fl_3(\mathcal{M})}_{\mathrm{Hom}(\boldsymbol{\Delta}^3,\mathcal{M})}$ dans $\mathrm{Hom}(\boldsymbol{\Delta}^1\times\boldsymbol{\Delta}^1,\mathcal{M})$, transposée de $\boldsymbol{\Delta}^1\times\boldsymbol{\Delta}^1\longrightarrow\boldsymbol{\Delta}^3$ donné par $(0,0)\longmapsto 0$, $(0,1)\longmapsto 1$, $(1,0)\longmapsto 2$, $(1,1)\longmapsto 3$), et une application
+\[
+\mathcal{D}_0\subseteq\mathcal{D}\xrightarrow{\ \varphi\ }\Fl(\mathcal{M})\times\Fl(\mathcal{M}),
+\]
+associant à $(*)$ le couple $(i,j)$ \texttt{[plutôt} $(i,p)$\texttt{]} (source et but de $(*)$, considéré comme flèche dans $\underline{\Fl}(\mathcal{M})$ de $i$ dans $p$). La relation $\mathcal{R}$ est alors déduite de $\varphi$, $\mathcal{D}_0$ par la condition
+\msp{page 82}
+\[
+\Phi\longleftrightarrow\Psi\qquad\Longleftrightarrow\qquad\varphi^{-1}(\Phi\times\Psi)\subseteq\mathcal{D}_0.
+\]
+Mais à vrai dire, je m'aperçois que c'est quand-même déduit d'une relation entre éléments de $\Fl(\mathcal{M})$, et cette relation entre $i : A\longrightarrow B$ et $p : X\longrightarrow Y$ peut s'écrire ainsi :
+\begin{itemize}[leftmargin=3em]
+\item[$(**)$] pour toutes flèches $A\longrightarrow X$, $B\longrightarrow Y$ rendant commutatif le diagramme $(*)$, la flèche $\varphi$ pointillée dans $(*)$ existe. % [sic] la flèche $\varphi$ -> la flèche $f$, the dotted arrow in $(*)$ is labelled $f$
+\end{itemize}
+\end{itemize}
+
+Cela me fait penser que si on a une relation $\mathcal{R}$ entre $\Pf(P)$ et $\Pf(Q)$, satisfaisant $(\mathrm{D}_0)$, donc décrite par une application décroissante
+\[
+\Pf(P)\longrightarrow\Pf(Q)
+\]
+transformant sup en inf, la donné d'une telle application équivaut à celle d'une application quelconque % [sic] la donné -> la donnée, feminine noun
+\[
+P\longrightarrow\Pf(Q),
+\]
+ou ce qui revient au même, d'une relation $\mathcal{R}$ sur $P\times Q$. Donc cette structure doit être regardée comme ‘de première espèce’. La situation change à partir du moment où pour décrire la relation $\mathcal{R}$ avec les propriétés voulues, on se trouve contraint de remplacer $\Pf(P)$, $\Pf(Q)$ par des sous-ensembles convenables - quand on ne regarde que certaines parties de $P$, $Q$. C'est ce qu'on
+\msp{page 83}va faire au § suivant. Le cas que je vais y traiter est le seul de son espèce que j'ai rencontré - un cas de ‘dualité formelle’ qui s'introduit de façon naturelle, et qui ne soit ‘de 1\textsuperscript{ère} espèce’.
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\section*{6\quad Transporteurs, noyaux, stabiliseurs relatifs à $W$}
+
+Soit $\mathcal{M}$ une catégorie, munie d'une partie
+\[
+W\subseteq\Fl(\mathcal{M}).
+\tag*{(6.1)}
+\]
+Je pense au cas d'un localiseur, mais n'introduirai d'hypothèse sur $W$ qu'au besoin. Pour simplifier, je suppose $\mathcal{M}$ stable par produits fibrés.
+
+Je pose
+\[
+\left\{
+\begin{array}{rcl}
+\mbox{(\footnotemark)}\mathcal{P} & = & \Pf(W)=\{A\in\Pf(\Fl(\mathcal{M}))\mid A\subseteq W\}\\[1ex]
+\mathcal{Q} & = & \{L\in\Pf(\Fl(\mathcal{M}))\mid\
+\parbox[c]{17em}{$L$ \textit{stable} par changement de\\
+base (par qui je sous-entends aussi,\\
+stable par isomorphie)\\
+et par composition. $\}$.}
+\end{array}
+\right.
+\tag*{(6.2)}
+\]
+\footnotetext{cf. rectification p. 86.}
+J'introduis une relation
+\[
+\mathcal{R}\subseteq\mathcal{P}\times\mathcal{Q}
+\]
+de la façon suivante. Pour $A\in\mathcal{P}$, $L\in\mathcal{Q}$, on pose
+\[
+(A,L)\in\mathcal{R}\iff
+\begin{array}[t]{l}
+\text{Pour tout diagramme cartésien}\\
+\begin{tikzcd}[ampersand replacement=\&]
+X \arrow[d, "f"] \& X' \arrow[l] \arrow[d, "f'"] \\
+Y \& Y' \arrow[l, "p"]
+\end{tikzcd}\\
+\text{avec $f\in A$, $p\in L$, on a $f'\in W$}\\
+\text{(i.e. $A$ est stable par changement de base par $p\in L$).}
+\end{array}
+\tag*{(6.3)}
+\]
+
+\msp{page 84}Quand j'ordonne $\mathcal{P},\mathcal{Q}\subseteq\Pf(\Fl(\mathcal{M}))$ par la relation d'ordre induite par l'inclusion de parties de $\Fl(\mathcal{M})$, on trouve des sous-ensembles ordonnés de $\Pf(\Fl(\mathcal{M}))$, stables par réunions quelconques, et aussi par intersections quelconques, avec la seul réserve que dans le cas de $\mathcal{P}$, la famille d'indices doit être $\neq\emptyset$ (puisqu'alors on trouve comme intersection $\Fl(\mathcal{M})$ tout entier, qui n'est pas en général contenu dans $W$). % [sic] la seul réserve -> la seule réserve, feminine agreement
+
+On va vérifier la condition $(\mathrm{D}_0)$ de la page 69, pour $\mathcal{R}$ et les relations d'ordre. Il y a deux vérifications à faire.
+
+1$^{o}$) \texttt{[où est ‘2$^{o}$’ ?]} Donnons nous $A\in\mathcal{P}$, i.e. $A\subseteq W$, et considérons l'ensemble $\mathcal{R}(A)$ des $L\in\mathcal{Q}$ tels que l'on ait $(A,L)\in\mathcal{R}$. Il est clair que c'est un ouvert (et de même, que ${}^{s}\mathcal{R}(L)$ est un ouvert de $\mathcal{Q}$ pour tout $L$ dans $\mathcal{Q}$) - i.e. $L\in\mathcal{R}(A)$, $L'\subseteq L$ implique % ?? uncertain: left superscript before R(L) (also on p. 53) -- italic s or upright s % [sic] ouvert de $\mathcal{Q}$ -> ouvert de $\mathcal{P}$, cf. "l'ouvert ${}^{s}\mathcal{R}(L)$ de $\mathcal{P}$" p. 53
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+$L'\in\mathcal{R}(A)$. Reste à trouver un plus grand élément de $\mathcal{R}(A)$. Notons que si $L\in\mathcal{R}(A)$, alors pour tout $p\in L$, $p : Y'\longrightarrow Y$, le changement de base
+\[
+p^{*} : \mathrm{Cat}/Y\longrightarrow\mathrm{Cat}/Y' : X\longmapsto X\times_{Y}Y'
+\]
+doit transformer flèches $f\in A$ en flèches $g\in W$, comme il résulte du fait que $L$ est stable par changement de base.
+\[
+\begin{tikzcd}
+X_1 \arrow[d, "f"'] & X'_1 \arrow[l, "q_1"'] \arrow[d, "g"] \\
+X_2 \arrow[d] & X'_2 \arrow[l, "q_2"'] \arrow[d] \\
+Y & Y'. \arrow[l, "p"']
+\end{tikzcd}
+\]
+Donc $L\subseteq\mathbf{L}_W(A)$, où on pose
+\msp{page 85}
+\[
+\begin{aligned}
+\mathbf{L}_W(A)=\{(p : Y'\longrightarrow Y)\in\Fl(\mathcal{M})\quad\mid\quad & p^{*} : \mathrm{Cat}/Y\longrightarrow\mathrm{Cat}/Y'\ \text{transforme}\\
+& \text{flèches de $A$ en flèches \textit{de} $W$.}\}
+\end{aligned}
+\]
+(\footnote{NB le dire plutôt en termes de diagrammes cartésiens, vu qu'on n'a pas fait d'hypothèse de stabilité de $W$ par isomorphismes.}).
+\[
+\begin{tikzcd}
+X_1 \arrow[d, "f"'] \arrow[dr, phantom, "\text{cart.}"] & X'_1 \arrow[l] \arrow[d, "f'"] \\
+X_2 \arrow[d] \arrow[dr, phantom, "\text{cart.}"] & X'_2 \arrow[l] \arrow[d] \\
+Y & Y' \arrow[l, "p"']
+\end{tikzcd}
+\]
+\[
+f\in A\implies f'\in W.
+\]
+Il est clair d'autre part que cette partie de $\Fl(\mathcal{M})$ est stable par changement de base, donc $\mathbf{L}_W(A)\in\mathcal{Q}$, et que $(A,\mathbf{L}_W(A))\in\mathcal{R}$. Donc $\mathbf{L}_W(A)$ est un plus grand élément de $\mathcal{R}(A)$, donc on trouve
+\[
+\mathcal{R}=\{(A,L)\in\mathcal{P}\times\mathcal{Q}\mid L\subseteq\mathbf{L}_W(A)\}.
+\tag*{(6.5)}
+\]
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 8 juillet 2001
+\[
+\begin{tikzcd}
+X_1 \arrow[d, "f"'] \arrow[dr, phantom, "\text{cart.}"] & X'_1 \arrow[l, "q_1"'] \arrow[d, "f'"] \\
+X_2 \arrow[d] \arrow[dr, phantom, "\text{cart.}"] & X'_2 \arrow[l, "q_2"'] \arrow[d] \\
+Y_1 \arrow[d] \arrow[dr, phantom, "\text{cart.}"] & Y'_1 \arrow[l, "p_1"'] \arrow[d] \\
+Y & Y'. \arrow[l, "p"']
+\end{tikzcd}
+\]
+Inversement, partons de $L\in\mathcal{Q}$, et montrons que l'ouvert ${}^{s}\mathcal{R}(L)$ de $\mathcal{P}$ a un plus grand élément. Pour ceci, posons
+\[
+\begin{aligned}
+\mathbf{A}_W(L)=\{(f : X\longrightarrow Y)\in W\subseteq\Fl(\mathcal{M})\quad\mid\quad\forall\qquad
+&\begin{tikzcd}[ampersand replacement=\&]
+X \arrow[d, "f"'] \arrow[dr, phantom, "\textit{cart.}"] \& X' \arrow[l, "q"'] \arrow[d, "f'"] \\
+Y \& Y', \arrow[l, "p"]
+\end{tikzcd}\\
+&\text{avec $p\in L$, on a $f'\in W$}\}.
+\end{aligned}
+\tag*{(6.6)}
+\]
+(NB Quand $L$ contient les identités, comme c'est le cas notamment s'il est de la forme $\mathbf{L}_W(A)$ - alors il contient les isomorphismes, du moins si $A$ les contient - alors $\mathbf{A}_W(L)$ est l'ensemble de $f\in\Fl(\mathcal{M})$ satisfaisant la condition énoncée après $|$, sans avoir à spécifier $f\in W$.) On a $\mathbf{A}_W(L)\in\mathcal{P}$, et on vérifie que $(\mathbf{A}_W(L),L)\in\mathcal{R}$ (en utilisant la stabilité de $L$ par composition), enfin il est clair que $(A,L)\in\mathcal{R}$ implique $A\subseteq\mathbf{A}_W(L)$ (en utilisant $A\subseteq W$), donc $\mathbf{A}_W(L)$ est un plus grand élément de ${}^{s}\mathcal{R}(L)$.
+
+\msp{page 86}Notons que si $W$ \textit{est stable par composition} (ce que nous allons supposer désormais), il en est de même de $\mathbf{A}_W(L)$ (ce qui utilise encore le fait que $L$ soit stable par changement de base). De plus, si $W$ \textit{contient les isomorphismes} (ce que nous supposerons également), $\mathbf{A}_W(L)$ les contient aussi. Quant à $\mathbf{L}_W(A)$, il contient les isomorphismes \textit{pourvu que} $A$ soit stable par isomorphismes ; quand $A$ est stable par composition et contient les isomorphismes, cette condition sera automatiquement satisfaite. Nous tenons à cette condition, c'est pourquoi du côté de $A$, dans la définition de $\mathcal{P}$, je vais introduire cette condition supplémentaire que $A$ soit \textit{stable par isomorphismes.} Donc je pose, en corrigeant (6.2),
+\[
+\left\{
+\begin{array}{rcl}
+\mathcal{P} & = & \{A\in\Pf(\Fl(\mathcal{M}))\quad\mid\quad\mathrm{Is}(\mathcal{M})\subseteq A\subseteq W,\quad A\text{ stable par composition}\}\\[1ex]
+\mathcal{Q} & = & \{L\in\Pf(\Fl(\mathcal{M}))\quad\mid\quad\mathrm{Is}(\mathcal{M})\subseteq L,\quad L\text{ stable par changement de base}\}.
+\end{array}
+\right.
+\tag*{(6.7)}
+\]
+
+% ---- from Der-ChII-234_p056-060.tex
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+On est bien sûr intéressé surtout aux éléments clos de $\mathcal{P}$, $\mathcal{Q}$, i.e. les parties $A$, $L$ de $\Fl(\mathcal{M})$, contenant les isomorphismes, stables par composition (et $L$ stable aussi par changement de base, $A \subseteq W$) telles que l'on ait
+\[
+A = \mathbf{A}_W(L), \qquad L = \mathbf{L}(A) \tag*{(6.8)}
+\]
+\texttt{[plutôt }$\mathbf{L}_W(A)$\texttt{]}.
+
+\msp{page 87}
+
+Je garderai les notations $\natural$, $\flat$ du paragraphe précédent. Quels sont les deux couples extrêmes ?
+
+Partant de $A_0 = \Is(\mathcal{M})$ (plus petit des éléments de $\mathcal{P}$), on trouve $\mathbf{L}_W(A_0) = \Fl(\mathcal{M})$ (plus grand élément de $\mathcal{Q}$), et $A_0^{\natural} = \mathbf{A}_W(\Fl(\mathcal{M})) = W_{\mathrm{univ}}$, ensemble des flèches qui sont dans $W$ et le restent par tout changement de base :
+\[
+A_0^{\natural} = W_{\mathrm{univ}}, \qquad \beta_0(A_0) \overset{\text{déf}}{=} \mathbf{L}_W(A_0) = \Fl(\mathcal{M}), \qquad \text{\scriptsize où $A_0 = \Is(\mathcal{M})$ plus petit élément de $\mathcal{P}$.} \tag*{(6.9)}
+\]
+Inversement, partons de $L_0 = \Is(\mathcal{M})$, le plus petit élément de $\mathcal{Q}$. On a $\mathbf{A}_W(L_0) = W$ ($W$ étant stable par composition et contenant les isomorphismes), et $L_0^{\flat} = \mathbf{L}_W(W) = \Fib_W$, les $W$-fibrations :
+\[
+L_0^{\flat} = \Fib_W, \qquad \alpha_0(L_0) = W, \qquad \text{\scriptsize où $L_0 = \Is(\mathcal{M})$, plus petit élément de $\mathcal{Q}$.} \tag*{(6.10)}
+\]
+Donc les parties $\mathcal{R}$-closes à gauche de $\Fl(\mathcal{M})$ se promènent entre $W_{\mathrm{univ}}$ et $W$, les parties $\mathcal{R}$-closes à droite entre $\Fib_W$ et $\Fl(\mathcal{M})$.
+
+\textbf{Proposition 6.1.} \textit{Soient $A \in \mathcal{P}$, $L \in \mathcal{Q}$ tels que $A = \alpha_0(L)$, $L = \beta_0(A)$ (i.e. $A = \mathbf{A}_W(L)$, $L = \mathbf{L}_W(A)$). Pour que $L$ soit stable par composition, il faut et il suffit que $A$ soit stable par changement de base par les flèches $f \in L$. (Plus généralement, si $L \in \mathcal{Q}$ est un élément quelconque de $\mathcal{Q}$, et si on suppose de} \msp{page 88} \textit{plus que $L$ est stable par composition, alors $A = \mathbf{A}_W(L)$ est stable par changement de base par $L$.)}
+
+Terminologie : pour $A \in \mathcal{P}$, i.e. $A$ une partie de $\Fl(\mathcal{M})$ contenue dans $W$ contenant les isomorphismes et stable par composition, $\mathbf{L}_W(A)$ s'appelle le \textit{transporteur de $A$ dans $W$}. (Il y a une notion duale de \textit{cotransporteur.}) C'est un élement de $\mathcal{Q}$, donc une partie de $\Fl(\mathcal{M})$ contenant les isomorphismes et stable par changement de base. D'autre part, pour $L$ dans $\mathcal{Q}$, les $f \in \mathbf{A}_W(L)$ s'appellent flèches \textit{$W$-$L$-asphériques,} ou les \textit{$W$-$L$-équivalences,} ou les \textit{$W$-équivalences $L$-universelles,} et $\mathbf{A}_W(L)$ s'appelle le \textit{$L$-noyau de $W$}. On pourrait le noter plus simplement $W_L$ (quand cette notation ne conflicte pas avec $W_S \subseteq \Fl(\mathcal{M}/S)$ pour $S \in \mathrm{Ob}\,\mathcal{M}$). C'est une partie de $W$ qui (comme $W$ lui-même) contient les isomorphismes et est stable par composition. % [sic] élement -> élément, missing accent
+
+Enfin, il y a lieu aussi d'introduire le \textit{stabiliseur} $\mathrm{Stab}(A)$, ou transporteur de $A$ dans $A$, qui ne dépend pas de la donné de $W$, mais seulement de la partie $A$ de $\Fl(\mathcal{M})$, contenant les isomorphismes et stable par composition. On pourrait aussi le noter $\Fib_A$, et appeler ses éléments des \textit{$A$-fibrations} ($A$ jouant à présent le rôle de $W$). On a $\mathrm{Stab}(A) \subseteq \mathbf{L}_W(A)$, et il semblerait qu'en % [sic] donné -> donnée, feminine noun
+% foot: Version 8 juillet 2001
+\printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{page 89}
+pratique, ce sont ces stabiliseurs, plus que les transporteurs $\mathbf{L}_W(A)$, qui sont importants (quand les deux ne coïncident pas). C'est ainsi que dans Cat, si $W$ est un localiseur fondamental, les morphismes $W$-lisses (resp. $W$-propres) $\mathrm{Liss}_W$ ($\mathrm{Prop}_W$), qui sont les stabiliseurs des ensembles $W_{\mathrm{as}}$ ($W_{\mathrm{coas}}$) des ensembles de morphismes $W$-asphériques (resp. $W$-coasphériques), jouant un rôle essentiel, alors que je ne sais pas caractériser de façon sensible les flèches des transporteurs $\mathbf{L}_W(W_{\mathrm{as}})$, $\mathbf{L}_W(W_{\mathrm{coas}})$, lesquels contiennent, en plus des morphismes $W$-lisses (resp. $W$-propres) les $W$-fibrations $\Fib_W$. Je ne sais pas comment caractériser une classe de morphismes qui apparaît aussi hétéroclite! De même, il y a lieu d'introduire et de caractériser le stabiliseur de $W_{\mathrm{bias}}$ (ensemble des flèches $W$-biasphériques), comme les morphismes `$W$-nets' $\mathrm{Net}_W$, par une description similaire à celle des $\mathrm{Liss}_W$, $\mathrm{Prop}_W$, utilisant les bilocalisés $\backslash\underset{u}{X}/$, $\backslash\underset{v}{Y}/$ , au lieu des localisés $X/x$, $Y/y$ ou des colocalisés $x\backslash X$, $y\backslash Y$. Il y a lieu enfin de déterminer le stabiliseur de l'ensemble Equ des Cat-équivalences (ce qui ne dépend pas de la donné d'un $W$ - mais on a $\mathrm{Equ} \subseteq \mathcal{P}(W)$ pour tout $W$ fondamental). % [sic] donné -> donnée, feminine noun
+% foot: Version 8 juillet 2001
+
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\msp{page 90}
+
+\section*{7\quad Morphismes cofiltrants et localement cofiltrants}
+
+Mais je ne veux pas m'attarder à présent sur ces développements, qui ne me paraissent pas urgents, et voudrais revenir aux questions liées à la notion de catégories filtrantes ou cofiltrantes.
+
+\textbf{Definition 7.1.} Soit $f : X \longrightarrow Y$ une flèche dans Cat. On dit que $f$ est \textit{cofiltrante} (resp. \textit{localement cofiltrante}, resp. \textit{faiblement cofiltrante} (\footnote[64]{J'ai modifié la terminologie : maintenant faiblement cofiltrant $=$ 0-connexe $+$ localement faiblement cofiltrant, \textit{stable par passage} à $X'$ sur $X$, $X'$ étale et $\infty$-connexe. Revoir la terminologie dans le cas faiblement cofiltrant, qui est une notion traîtresse, faute d'être stable par passage \texttt{[à]} un $X'$ étale sur $X$.}), resp. \textit{localement faiblement cofiltrante} ou encore \textit{précofiltrante}) si pour tout $y$ dans $Y$, la catégorie colocalisé $y\backslash X$ est cofiltrante (resp. \dots). (Dualement, on dit que $f$ est \textit{filtrante}, resp. \dots, si les catégories $X/y$ sont filtrantes, resp. \dots, i.e. si $f^o : X^o \longrightarrow Y^o$ est cofiltrante resp. \dots.) % [sic] Definition -> Définition, missing accent; colocalisé -> colocalisée, agreement with catégorie
+
+\textbf{Remarque 7.2.} Notions stables par changement de base coétale. Contient les isomorphismes et même les Cat-équivalences. Les morphismes \textit{étales} sont localement filtrants.
+
+\textbf{Proposition 7.3.} \textit{Soit $f : X \longrightarrow Y$ un morphisme cofiltrant (resp. localement cofiltrant, resp. faiblement cofiltrant, resp. précofiltrant), et supposons que $Y$ soit cofiltrant (resp. localement cofiltrant, resp. faiblement cofiltrant, resp. précofiltrant). Alors $X$ lui-même est cofiltrant (resp. \dots).}
+
+\textsc{Démonstration}. Il s'agit, dans les quatre cas envisagés, de vérifier pour $X$ la condition $\underbrace{\mathrm{PS}_g1' \;/\; \mathrm{PS}_g1}_{\text{deux derniers cas}} \;/\; \mathrm{PS}_g1' + \mathrm{PS}_g2 \;/\; \mathrm{PS}_g1 + \mathrm{PS}_g2$. Mais \msp{page 91} pour chacune des trois conditions $\mathrm{PS}_g1$, $\mathrm{PS}_g1'$, $\mathrm{PS}_g2$ séparément, on voit immédiatement que si elle est vérifiée pour $Y$ et pour les $y\backslash X$, elle l'est pour $X$, d'où la proposition.
+
+\textbf{Corollaire 7.3.} \textit{Les quatre notions envisagées dans (7.1) sont stables par composition.}
+
+\textsc{Démonstration} immédiate, en utilisant la remarque (7.2).
+\[
+\begin{tikzcd}
+X \arrow[d] & z\backslash X \arrow[l] \arrow[d] \\
+Y \arrow[d] & z\backslash Y \arrow[l] \arrow[d] \\
+Z & z\backslash Z. \arrow[l]
+\end{tikzcd}
+\]
+% foot: Version 8 juillet 2001
+
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\textbf{Remarque 7.4.}
+\begin{enumerate}
+\item[1)] Notons que la notion de morphisme cofiltrant ou faiblement cofiltrant n'est \textit{pas} stable par changement de base quelconque, ni même par une immersion ouverte. Exemple : $e \longrightarrow \boldsymbol{\Delta}^1$, appliquant $e$ en 1, est cofiltrant,
+\[
+\begin{tikzcd}
+ & e \arrow[d, mapsto] \\
+0 \arrow[r] & 1
+\end{tikzcd}
+\]
+mais sa fibre en 0 est vide, donc n'est ni cofiltrante, ni faiblement cofiltrante. Je n'ai pas vu d'exemple montrant que la notion de flèche \textit{localement} cofiltrante resp. précofiltrante n'est pas stable par changement de base, et ne voudrais pas m'y attarder, n'ayant pas besoin de connaître la réponse.
+\item[2)] Pour que $X$ soit cofiltrante (resp. \dots), il faut et il suffit que $X \longrightarrow e$ le soit. Ainsi la notion absolue est ramenée à une notion relative.
+\item[3)] Si $f : X \longrightarrow Y$ est cofiltrante, elle est \msp{page 92} $W$-coasphérique (donc $\in W$) pour tout $W$ satisfaisant l'axiome Loc (8) des limites inductives. En particulier, elle est $W_0$-asphérique, i.e. un foncteur cofiltrant (et même seulement faiblement cofiltrant) est \textit{cofinal.}
+\end{enumerate}
+La raison principale pour m'intéresser aux flèches cofiltrantes est contenue dans la
+
+\textbf{Proposition 7.4.} \textit{Soit $f : X \longrightarrow Y$ dans} Cat \textit{localement cofiltrant (resp. localement faiblement cofiltrant). Alors :}
+\begin{enumerate}
+\item[\textit{a)}] \textit{Pour tout $X'$ étale sur $X$, le composé $f' : X' \longrightarrow X \longrightarrow Y$ est localement cofiltrant (resp. \dots), et pour toute factorisation de $f'$ en $X' \xrightarrow{g'} Y' \longrightarrow Y$ avec $Y' \longrightarrow Y$ étale, $g'$ est localement cofiltrant (resp. \dots).}
+\item[\textit{b)}] \textit{$\forall\ x$ dans $X$, le morphisme sur les localisés}
+\[
+f/x : X/x \longrightarrow Y/x \qquad (y = f(x)) % [sic] Y/x -> Y/y, since y = f(x)
+\]
+\textit{est cofiltrant (resp. faiblement cofiltrant).}
+\item[\textit{c)}] \textit{Si $x$, $y$ comme dans b), et $U$ est un ouvert de $X/x$, désignant par $V$ l'ouvert de $Y/y$ engendré par l'image de $f/x$ (i.e. l'ouvert formé des $z$ dans $Y/y$ tels que $z\backslash(X/x)$ soit non vide), la flèche induite $q : U \longrightarrow V$} \texttt{[est]} \textit{cofiltrante (resp. faiblement cofiltrante), a fortiori cofinale (et même $W$-coasphérique, pour tout $W$ satisfaisant l'axiome des limites Loc (8))} (\footnote[65]{Il suffit ici qu'on soit dans l'hypothèse respée ($f$ \textit{faiblement} localement cofiltrant) sauf pour le NB ici \texttt{[`le NB ici' est `(et même ...Loc (8))']}. % [sic] respée -> intended word unclear (perhaps « respectée » or « resp. »), not a French word
+}). % ?? uncertain: letter of the induced arrow "q" -- q or g (g is used in g^* below)
+
+\msp{page 93}
+\textit{Donc pout tout} cofaisceau \textit{$G$ sur $V$, à valeurs dans une catégorie $\mathcal{M}$ avec $\varinjlim$ , on a} \texttt{[un]} \textit{isomorphisme} % [sic] pout -> pour, misprint
+\[
+\varinjlim_U g^*(G) \xrightarrow{\ \sim\ } \varinjlim_V G,
+\]
+% foot: Version 8 juillet 2001
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+\textit{et pour tout préfaisceau $F$ sur $V$, à valeurs dans une catégorie $\mathcal{M}$ avec $\varprojlim$ , on a} \texttt{[un]} \textit{isomorphisme}
+\[
+\varprojlim_U g^*(F) \xleftarrow{\ \sim\ } \varprojlim_V F.
+\]
+\end{enumerate}
+
+\textsc{Démonstration}. Je vais d'abord expliciter le
+
+\textbf{Lemme 7.5.} \textit{Soit $h : X' \longrightarrow X$ un morphisme étale dans} Cat. \textit{Alors $h$ est localement cofiltrant. De façon plus précise, pour tout $x$ dans $X$, on a}
+\[
+\pi_0(x\backslash X') \xrightarrow{\ \sim\ } \mathrm{Ob}\,X'_x,
+\]
+\textit{toute composante connexe de $x\backslash X'$ contient un élément et un seul de la catégorie discrète $X'_x \subseteq x\backslash X'$. Si $x'$ est dans $X'_x$ (i.e. $x'$ objet de $X'$ tel que $h(x') = x$), c'est un objet} initial \textit{de la composante connexe qui le contient. (Donc cette composante est cofiltrante.)}
+
+Ceci prouve (et au delà) la première assertion de 7.4, compte tenu de 7.3 (stabilité par composition), ou parce qu'une \msp{page 94} catégorie étale (en l'occurrence $y\backslash X'$) au dessus d'une catégorie localement cofiltrante (resp. localement faiblement cofiltrante) (en l'occurrence $y\backslash X$) est itou.
+\[
+\begin{tikzcd}[row sep=large]
+y\backslash X' \arrow[r] \arrow[d, "\text{ét.}"'] \arrow[dr, phantom, "\text{cart.}"] & X' \arrow[d, "\text{ét.}"] \\
+y\backslash X \arrow[r] \arrow[d] \arrow[dr, phantom, "\text{cart.}"] & X \arrow[d] \\
+y\backslash Y \arrow[r] & Y.
+\end{tikzcd}
+\]
+Pour la deuxième assertion dans a), on peut maintenant supposer $X' = X$. Il faut prouver que pour tout $y'$ dans $Y'$, $y'\backslash X \overset{\text{déf}}{=} X \times_{Y'} y'\backslash Y'$ est localement cofiltrante (resp. localement faiblement cofiltrante). Soit $y$ dans $Y$ l'image de $y'$, et considérons le diagramme de trois carrés cartésiens ci-contre.
+\[
+\begin{tikzcd}[row sep=large]
+y'\backslash X \arrow[r] \arrow[d, "\text{ét.}"] \arrow[dr, phantom, "\textit{cart.}"] & y\backslash X \arrow[r] \arrow[d, "\text{ét.}"] \arrow[dr, phantom, "\textit{cart.}"] & X \arrow[d, "\text{ét.}"] \\
+y'\backslash Y' \arrow[r] & y\backslash Y' \arrow[r] \arrow[d] \arrow[dr, phantom, "\textit{cart.}"] & Y' \arrow[d] \\
+ & y\backslash Y \arrow[r] & Y
+\end{tikzcd}
+\]
+Le Lemme 7.5 implique que $y'\backslash Y' \longrightarrow y\backslash Y'$ est l'inclusion dans $y\backslash Y'$ d'une composante connexe de $y\backslash Y'$, c'est donc une immersion ouverte. Donc $y'\backslash X \longrightarrow y\backslash X$ est une immersion
+% foot: Version 8 juillet 2001
+
+% ---- from Der-ChII-234_p061-065.tex
+%======================================================================
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+ouverte. Comme $y\backslash X$ est localement cofiltrant (resp. localement faiblement cofiltrant) par hypothèse, il en est donc de même de $y\backslash X$. Cela prouve d).
+
+Appliquant a) à la situation $X/x \longrightarrow Y/y$ dans b), on voit que les colocalisés $z\backslash(X/x)$ de
+\margmark{!} % margin: "!" with a triple vertical rule alongside the lines "X/x sur Y/y ... donc est 0-connexe."
+$X/x$ sur $Y/y$ ($z \in \Ob\,(Y/y)$) sont localement cofiltrants (resp. faiblement). Mais comme $X/x$ a un objet final au dessus de l'objet final de $Y/y$, il s'ensuit que $z\backslash(X/x)$ a un objet final, donc est $0$-\textit{connexe.}
+
+\msp{page 95}
+Donc ces catégories, étant localement cofiltrantes (resp. faiblement), sont en fait cofiltrantes (resp. faiblement cofiltrantes).
+
+Prouvons c). Notons que pour $z$ dans $V$, $z\backslash U$ s'identifie à l'image inverse, par $z\backslash(X/x) \longrightarrow X/x$, de l'ouvert $U$ de $X/x$, c'est donc un \textit{ouvert} de $z\backslash(X/x)$, non vide par construction de $V$. Mais un ouvert non vide d'une catégorie cofiltrante (resp. faiblement cofiltrante) est encore cofiltrant (resp. faiblement cofiltrant). Cela signifie que $g : U \longrightarrow V$ est cofiltrant (resp. faiblement cofiltrant), a fortiori cofinal (et $W$-coasphérique, pour tout $W$ satisfaisant Loc (8)). Cela achève la démonstration.
+
+\noindent\textbf{Remarque 7.5.}
+\begin{itemize}
+\item[1)] Le même argument que dans c) montre que si $f : X \longrightarrow Y$ est cofiltrant (resp. faiblement cofiltrant), alors pour tout ouvert $U$ dans $X$, si on désigne par $V$ l'ouvert de $Y$ engendré par $f(U)$, i.e. l'ouvert formé des $y$ dans $Y$ tels que $y\backslash X \neq \emptyset$, alors la flèche induite $g : U \longrightarrow V$ est cofiltrante (resp. faiblement cofiltrante), et a fortiori $g$ est cofinal (et plus généralement, si $f$ est cofiltrant, $g$ est $W$-coasphérique pour tout $W$ satisfaisant la condition Loc (8)).
+
+\msp{page 96}
+\item[2)] Un cas particulier intéressant de 7.4 est celui où on suppose que les $y\backslash X$ ($y \in \Ob\,Y$) sont sommes directes de catégories ayant chacune un \textit{objet initial.} Alors on voit que cette condition est stable par les opérations de 7.4 a) [\,?], et par conséquent, les colocalisés $z\backslash(X/x)$ des morphismes localisés en haut $X/x \longrightarrow Y/y$ sont des catégories à objet initial. Ceci implique alors qu'il en est de même des colocalisés $z\backslash U$ ($z \in \Ob\,V$) dans $g : U \longrightarrow V$. Il s'ensuit que $g$ est $W$-coasphérique pour \textit{tout} localiseur fondamental $W$ (sans avoir à se soucier de l'axiome des limites).
+
+La condition envisagée sur $f : X \longrightarrow Y$ est satisfaite notamment dans les deux cas suivants (qui me paraissent de loin les plus importants) : a) $f$ est étale et b) $X$ est discrète.
+\end{itemize}
+% foot: Version 8 juillet 2001
+
+%======================================================================
+\clearpage
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 97}
+
+\begin{center}
+{\small
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=large]
+\left\{\begin{tabular}{@{}c@{\ }l@{}}
+ & Top $X$\\
+ & localement totalement 0-connexe\\
+ & et 0-connexe\\
+$\Longleftrightarrow$ & totalement 0-connexe\\
+ & et localement irréductible\\
+$\Longleftrightarrow$ & $X$ \textit{cofiltrante,}\\
+ & i.e. $\PS^*1' + \PS^*2$\\
+$\Longleftrightarrow$ & $X$ 0-connexe\\
+ & $+ \PS^*1 + \PS^*2$\\
+$\Longleftrightarrow$ & $\left\{\begin{tabular}{@{}l@{}}
+$\forall\, x \in \Ob\,X$, $X/x$ et\\
+$X/x \times x$ sont irréductible,\\ % [sic] irréductible -> irréductibles, agreement with "sont"
+$X$ 0-connexe
+\end{tabular}\right.$\\
+$\Longleftrightarrow$ & $\left\{\begin{tabular}{@{}l@{}}
+$X$ 0-connexe,\\
+les $X/a \times_x b$ non vides\\
+(et même 0-connexes),\\
+les $X/a \times_{x\times x} b$ 0-connexes
+\end{tabular}\right.$
+\end{tabular}\right.
+\;
+\left[\begin{tabular}{@{}l@{}}
+stable par\\
+passage\\
+à $X' \longrightarrow X$\\
+étale sur $X$, si\\
+$X'$ 0-connexe,\\
+\textit{mais} si les\\
+$X/x$ sont cofiltrantes\\
+et $X$ 0-connexe,\\
+cela n'implique\\
+\textit{pas} $X$ cofiltrante\\
+Ex. $B_G$
+\end{tabular}\right]
+\arrow[rrrd, Rightarrow, "{\tl{stricte\\(ex. $\bullet\ \bullet$)}}"]
+\arrow[rrdd, Rightarrow, "{\tl{stricte\\(ex. $\boldsymbol{\Delta}$)}}"]
+\arrow[ddd, Rightarrow, "{\tl{stricte (ex.\\$B_G$)}}"']
+\& \& \& |[draw,rounded corners=6pt]| \varepsilon = \bullet\ \bullet \\
+\& \& \&
+\begin{tabular}{@{}l@{}}
+\begin{tabular}{@{}c@{\ }l@{}}
+ & Top $X$ localement\\
+ & totalement 0-connexe\\
+$\Longleftrightarrow$ & les composantes connexes de $X$\\
+ & sont cofiltrantes\\
+$\Longleftrightarrow$ & $\PS^*1 + \PS^*2$\\
+ & (X \textit{localement cofiltrante}) % [sic] X (upright roman) -> $X$ (italic), inconsistent with all other occurrences
+\end{tabular}\\[2ex]
+$\left[\begin{tabular}{@{}l@{}}
+Stable par passage à $X' \longrightarrow X$\\
+étale, mais si les $X'/x$\\
+y satisfont, pas forcément $X'$!
+\end{tabular}\right]$
+\end{tabular}
+\arrow[d, Rightarrow] \\
+\& \&
+\begin{tabular}{@{}l@{}}
+\begin{tabular}{@{}c@{\ }l@{}}
+ & Top $X$ totalement 0-connexe\\
+ & (on dit $X$ \textit{totalement} 0-\textit{connexe})\\
+$\Longleftrightarrow$ & $X^o \longrightarrow X^o \times X^o$ est cofinal\\
+ & \textit{et} $X \neq \emptyset$\\
+$\Longleftrightarrow$ & $\forall\, x, y \in \Ob\,X$, $x \times y$ 0-connexe de $X^\wedge$\\
+ & i.e. $X/x \times y$ 0-connexe\\
+ & \textit{et} $X \neq \emptyset$
+\end{tabular}\\[2ex]
+$\left[\begin{tabular}{@{}l@{}}
+NB n'est pas stable par passage aux $X/x$ (\footnotemark[66]), et si\\
+les $X/x$ sont totalement 0-connexes et $X \neq \emptyset$,\\
+il ne s'ensuit pas que\\
+$X$ le soit (\footnotemark[67]).
+\end{tabular}\right]$
+\end{tabular}
+\arrow[dddl, Rightarrow, "{\tl{stricte (ex. $B_G$, ou\\$0 \rightrightarrows 1$)}}"]
+\&
+\tl{Top $X$\\localement irréductible} \\
+\begin{tabular}{@{}c@{\ }l@{}}
+ & Top $X$ localement\\
+ & irréductible\\
+ & $+$ 0-connexe\\
+$\Longleftrightarrow$ & $X$ \textit{pseudofiltrante}\\
+ & $+$ 0-\textit{connexe,}\\
+ & i.e. $\PS^*1$\\
+ & $+$ 0-connexe
+\end{tabular}
+\arrow[ddr, Rightarrow, "{\tl{stricte\\(ex. $0 \rightrightarrows 1$)}}"']
+\&
+\left[\begin{tabular}{@{}l@{}}
+$\PS^*1$ ne dépend\\
+que des catégories\\
+induites $X/x$,\\
+donc stable par passage\\
+aux $X' \longrightarrow X$ étales,\\
+donc la condition\\
+$\PS^*1 +{}$0-connexe stable\\
+par passage aux\\
+revêtements\\
+$X' \longrightarrow X$ 0-\textit{connexes.}
+\end{tabular}\right]
+\& \& \\
+|[draw,rounded corners=6pt]| B_G \& \& \& \\
+\&
+\begin{tabular}{@{}c@{\ }l@{}}
+ & Top $X$ irréductible\\
+ & ($X$ \textit{irréductible})\\
+$\Longleftrightarrow$ & $\PS^*1'$
+\end{tabular}
+\& \& \\
+|[draw,rounded corners=6pt]| 0 \rightrightarrows 1
+\&
+\left[\begin{tabular}{@{}l@{}}
+ne dépend que \texttt{[de]} $\mathrm{Ord}\,X$ ou de $\mathrm{Esp}(X)$,\\
+signifie que $\mathrm{Ord}\,X$ cofiltrant,\\
+ou $\mathrm{Esp}(X)$ irréductible.\\
+N'est pas stable par passage à\\
+$X' \longrightarrow X$ étale 0-connexe,\\
+p.ex. par passage à un $X/x$,\\
+p.ex. $X = (0 \rightrightarrows 1)$ est irréductible,\\
+mais $X/1 = \left(\begin{tabular}{@{}l@{}}$\cdot$\\ $\;\searrow$\\ $\qquad\cdot$\\ $\;\nearrow$\\ $\cdot$\end{tabular}\right)$ ne l'est\\
+pas.
+\end{tabular}\right]
+\& \& \\
+\end{tikzcd}
+}
+\end{center}
+% footnote marks (66), (67) are set inside the diagram; texts below
+\footnotetext[66]{\textbf{Ex.} \circled{$\boldsymbol{\Delta}$}.}
+\footnotetext[67]{\textbf{Ex.} $B_G$.}
+% foot: Version 8 juillet 2001
+
+%======================================================================
+\clearpage
+\printedpage{61}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+\msp{page 98}
+
+\begin{center}
+{\small
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=large]
+\& \tl{Top $X$ localement totalement 0-connexe\\$+$ 0-connexe\\($X$ \textit{cofiltrante})}
+\arrow[ddl, Rightarrow] \arrow[ddr, Rightarrow] \arrow[rrd, Rightarrow]
+\& \& \\
+\& \& \& |[draw,rounded corners=6pt]| \varepsilon = \bullet\ \bullet \\
+\tl{Top $X$ localement irréductible\\$+$ 0-connexe\\($X$ \textit{pseudofiltrante} et 0-\textit{connexe})\\$\PS^*1 +{}$ 0-connexe}
+\arrow[ddr, Rightarrow]
+\& \&
+\tl{Top $X$ totalement 0-connexe\\($X$ \textit{totalement} 0-\textit{connexe})\\$X^o \longrightarrow X^o \times X^o$ cofinal}
+\arrow[ddl, Rightarrow]
+\&
+\tl{Top $X$ localement totalement\\0-connexe\\($X$ \textit{localement cofiltrante})\\$\PS^*1 + \PS^*2$}
+\arrow[dd, Rightarrow] \\
+|[draw,rounded corners=6pt]| B_G \& \& |[draw,circle,inner sep=1pt]| \boldsymbol{\Delta} \& \\
+\& \tl{Top $X$ irréductible\\($X$ \textit{irréductible})\\$\PS^*1'$}
+\& \&
+\tl{Top $X$ localement irréductible\\($X$ \textit{pseudo-cofiltrante} [\,?])\\$\PS^*1$} \\
+\& |[draw,rounded corners=6pt]| 0 \rightrightarrows 1 \& \&
+|[draw,rounded corners=12pt]| \begin{tabular}{@{}c@{}}$B_G \amalg e$\\avec $G \neq 1$\end{tabular} \\
+\end{tikzcd}
+}
+\end{center}
+
+\begin{center}
+{\small
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=large]
+\text{(\footnotemark[68]).}
+\& \tl{$X$ \textit{cofiltrante}\\$\PS^*1' + \PS^*2$\\$= \PS^*1 + \PS^*2 +{}$ 0-connexe}
+\arrow[ddl, Rightarrow] \arrow[ddr, Rightarrow] \arrow[rrd, Rightarrow]
+\& \& \\
+\& \& \& |[draw,rounded corners=6pt]| \bullet\ \bullet \\
+\tl{$X$ \textit{pseudo-cofiltrante} et 0-\textit{connexe}\\($\PS^*1 +{}$ 0-connexe)}
+\arrow[ddr, Rightarrow] \arrow[ddrrr, Rightarrow]
+\& \&
+\tl{$X$ \textit{totalement} 0-\textit{connexe}\\($X^o \longrightarrow X^o \times X^o$ cofinal)}
+\arrow[ddl, Rightarrow]
+\&
+\tl{$X$ \textit{localement cofiltrante}\\$\PS^*1 + \PS^*2$}
+\arrow[dd, Rightarrow] \\
+|[draw,rounded corners=6pt]| B_G \& \& |[draw,circle,inner sep=1pt]| \boldsymbol{\Delta} \& \\
+\& \tl{$X$ \textit{irréductible}\\$\PS^*1'$}
+\& \&
+\tl{$X$ \textit{pseudo-cofiltrante}\\$\PS^*1$} \\
+\& |[draw,rounded corners=6pt]| \bullet \rightrightarrows \bullet \& \&
+|[draw,rounded corners=6pt]| B_G \amalg e \\
+\end{tikzcd}
+}
+\end{center}
+\footnotetext[68]{\textbf{NB} Les cinq catégories typiques $B_G$ ($G \neq 1$), $\boldsymbol{\Delta}$, $0 \rightrightarrows 1$, $\varepsilon = \bullet\ \bullet$, $B_G \amalg e$ ($G \neq 1$) sont telles qu'elles appartiennent à la classe envisagée $C$ d'objets de Cat, mais à aucune des cinq autres classes sauf celles qui sont reliées à $C$ par $C \Longrightarrow C'$ sur le diagramme d'implications (ou par une implication composée).}
+% foot: Version 8 juillet 2001
+
+%======================================================================
+\clearpage
+\printedpage{62}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+\noindent\begin{tabular}{@{}p{2.8cm}@{}p{11.5cm}@{}}
+$\bullet \rightrightarrows \bullet$ & n'est ni pseudo-cofiltrante, ni totalement 0-connexe.\\[1ex]
+$B_G$ & n'est ni localement cofiltrante, ni totalement 0-connexe.\\[1ex]
+$\boldsymbol{\Delta}$ & n'est pas pseudo-filtrante.\\[1ex]
+$B_G \amalg e$ & n'est pas localement cofiltante, car $B_G$ ne l'est pas, ni appartient à une des 4 classes d'objets connexes.\\[1ex] % [sic] cofiltante -> cofiltrante, letter r missing
+Itou pour & $\varepsilon = \bullet\ \bullet$
+\end{tabular}
+
+\msp{page 99}
+
+\begin{center}
+{\small
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=large]
+\& \tl{$X$ \textit{cofiltrante}\\($\PS^*1' + \PS^*2$\\$\Longleftrightarrow \PS^*1 + \PS^*2$\\$+$ 0-connexe)}
+\arrow[ddl, Rightarrow, "{\tls{$\PS^*1'$\\($\Longrightarrow$ 0-connexe)}}"]
+\arrow[dd, Rightarrow, "{\tls{$\PS^*1$\\(les $x\backslash X$ satisfont\\$\PS^*1'$)}}"]
+\arrow[dr, Rightarrow]
+\& \\
+% layout: the two small labels stand between the arrows; attribution to the arrows as in this layout
+\& \& |[draw,rounded corners=6pt]| \varepsilon = \bullet\ \bullet \\
+\tl{$X$ totalement 0-connexe\\($X^o \longrightarrow X^o \times X^o$ cofinal)}
+\arrow[ddd, Rightarrow]
+\&
+\tl{$X$ \textit{pseudo-cofiltrante}\\0-connexe\\($\PS^*1 +{}$ 0-connexe)\\(manque $\PS^*2$)}
+\arrow[dddl, Rightarrow] \arrow[dddr, Rightarrow]
+\&
+\tl{$X$ \textit{localement cofiltrante}\\(composantes connexes filtrantes)\\($\PS^*1 + \PS^*2$)}
+\arrow[ddd, Rightarrow] \\
+|[draw,circle,inner sep=1pt]| \boldsymbol{\Delta} \& |[draw,rounded corners=6pt]| B_G \& \\
+\& G \neq \{1\} \& \\
+\tl{$X$ irréductible\\($\PS^*1'$)}
+\& \&
+\tl{$X$ \textit{pseudo-cofiltrante}\\ou encore \textit{localement irréductible}\\(composantes connexes\\pseudo-filtrantes)\\($\PS^*1$)} \\
+|[draw,rounded corners=6pt]| \bullet \rightrightarrows \bullet \& \& |[draw,rounded corners=6pt]| B_G \amalg e \\
+\& \& G \neq \{1\} \\
+\end{tikzcd}
+}
+\end{center}
+
+et dualement on a
+
+\begin{center}
+{\small
+\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=huge]
+\& \text{$X$ filtrante}
+\arrow[dl, Rightarrow] \arrow[d, Rightarrow] \arrow[dr, Rightarrow]
+\& \\
+\text{$X^o$ totalement 0-connexe}
+\arrow[d, Rightarrow]
+\&
+\tl{$X$ pseudo-filtrante\\0-connexe}
+\arrow[dl, Rightarrow] \arrow[dr, Rightarrow]
+\&
+\text{$X$ localement filtrante}
+\arrow[d, Rightarrow] \\
+\text{$X$ coirréductible} \& \& \text{$X$ pseudo-cofiltrante} \\
+\end{tikzcd}
+}
+\end{center}
+% foot: Version 8 juillet 2001
+
+%======================================================================
+\clearpage
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. II, Édition des Universités de Montpellier II et Paris VII
+
+donc on a une terminologie directe sauf pour `$X^o$ totalement 0-connexe' - je n'ose dire `$X$ totalement co-connexe'!!
+% foot: Version 8 juillet 2001
+\end{document}

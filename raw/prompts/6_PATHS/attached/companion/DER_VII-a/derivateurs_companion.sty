@@ -1,0 +1,34 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/09]
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage{hyperref}
+\RequirePackage{etoolbox}
+\AtBeginEnvironment{thebibliography}{\selectlanguage{english}\raggedright}
+\definecolor{dcbar}{gray}{0.55}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+\def\dc@page#1:#2\@nil{#1}
+\newcommand{\dcanchor}[1]{\dc@page#1:\@nil}
+\newenvironment{dcomment}[3]{%
+  \par\medskip
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \selectlanguage{english}\small\noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[ms.~\dcanchor{#2}]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}

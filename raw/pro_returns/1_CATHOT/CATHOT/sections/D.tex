@@ -1,0 +1,100 @@
+\partsection{D}{Bounded tests and ind-representations}
+
+\begin{claim}{D.1}{Proved}{Exact bounded representability}
+Let $Y$ be a $\U$-small Kan complex and let $\lambda\in\U$ be an infinite cardinal with $|Y|\leq\lambda$, where size counts simplices in all degrees. There is a $\U$-small category $K_\lambda(Y)$ and a natural transformation
+\[
+ \theta_{X,\lambda}:\pi_0\Fun(X,K_\lambda(Y))\longrightarrow[NX,Y]
+ \qquad (X\in\Cat_\U)
+\]
+which is bijective whenever $|\Mor X|\leq\lambda$. One can take $|\Mor K_\lambda(Y)|\leq2^\lambda$. Consequently, for every infinite $\kappa\in\U$, the functor in Part D(i), on categories with fewer than $\kappa$ arrows, is represented by a small category after allowing the representing category to exceed the test bound.
+\end{claim}
+\begin{proof}
+Take all contractible simplicial sets $S$ having at most $\lambda$ simplices, encoded with each set $S_n$ a subset of a fixed set of size $\lambda$, together with a simplicial map $a:S\to Y$. Let $K_\lambda(Y)$ have these pairs as objects and all simplicial maps over $Y$ as arrows. The collection of structures, maps, and subsets has size at most $2^\lambda$. Relabeling a simplicial set produces an isomorphic object; thus this choice of codes loses no object of the required size. Here ``contractible'' means weakly equivalent to the point, so in particular nonempty. If $Y$ is empty the resulting category is empty, as it must be.
+
+A functor $F:X\to K_\lambda(Y)$ is exactly an objectwise contractible diagram $A:X\to\mathbf{sSet}$ equipped with $a:A\to Y_X$, the constant diagram at $Y$. Its augmentation $A\to *_X$ is an objectwise weak equivalence. In the projective model category of $X$-diagrams it therefore defines the morphism
+\[
+ *_X\xleftarrow{\simeq}A\xrightarrow{a}Y_X
+ \quad\text{in }\Ho(\mathbf{sSet}^X).
+\]
+Every natural transformation over $Y$ between such diagrams is objectwise a weak equivalence, by two-out-of-three. It gives the same morphism. This constructs the comparison $\theta$ after identifying this Hom-set with $[NX,Y]$. That identification follows directly from the projectively cofibrant resolution
+\[
+ Q_X(x)=N(X/x),\qquad Q_X\longrightarrow *_X.
+\]
+Each value is contractible, with terminal object $\id_x$. Filtering by nondegenerate chains exhibits $Q_X$ as built by attaching the projective cells $X(z,-)\times\partial\Delta^n\to X(z,-)\times\Delta^n$. Its ordinary colimit is $NX$, so the simplicial mapping object from $Q_X$ to $Y_X$ is $Y^{NX}$. The latter is Kan. This proves the identification, and also its naturality under restriction along $u:X'\to X$: restriction preserves objectwise weak equivalences, and the natural comparison $Q_{X'}\to u^*Q_X$ is compatible with $Nu$.
+
+Suppose now $|\Mor X|\leq\lambda$. The resolution $Q_X$ has at most $\lambda$ simplices at each object, and the entire diagram has size at most $\lambda$. Every representative $g:NX\to Y$ yields $Q_X\to Y_X$, hence a functor into $K_\lambda(Y)$ after objectwise relabeling. This proves surjectivity.
+
+For injectivity, start with $A\to Y_X$ as above and factor it projectively as a trivial cofibration $A\to A^f$ followed by a fibration $A^f\to Y_X$. The small-object construction uses maps from finite horns tensored with covariant representables. At each countable stage there are at most $\lambda$ lifting problems, and each attaching cell has at most $\lambda$ simplices in the whole diagram. Hence $A^f$ can be chosen with values of size at most $\lambda$. Since $Y$ is Kan, $A^f\to *_X$ is a projective trivial fibration. Cofibrancy of $Q_X$ gives a lift $Q_X\to A^f$ over the terminal diagram $*_X$. Its composite with $A^f\to Y_X$ defines $g:Q_X\to Y_X$; no lift over a preassigned $g$ is required. Thus the original functor is joined, inside $\Fun(X,K_\lambda(Y))$, to the functor supplied by $g$ by the zigzag $A\to A^f\leftarrow Q_X$.
+
+If two resulting maps $g_0,g_1$ represent the same derived morphism, the Kan function complex gives a simplicial homotopy $Q_X\times\Delta^1\to Y_X$ between them (or a finite chain of edges, which gives the same conclusion). Its values are contractible and of size at most $\lambda$. The two endpoint inclusions give a zigzag of natural transformations over $Y$. Consequently the original functors lie in the same component. This proves injectivity with the actual finite-zigzag equivalence relation. All relabelings used above are objectwise isomorphisms and hence give natural isomorphisms of the relabeled diagrams. They do not require any unproved strictification.
+\end{proof}
+
+\begin{claim}{D.2}{Proved}{Finite targets are not enough in the test examples}
+On the full category of finite categories, neither $X\mapsto[BX,S^2]$ nor $X\mapsto[BX,K(C_2,2)]$ has a finite representing category in $\Cathot$. Both have small, generally infinite, representing categories by D.1. For $K(C_2,2)$ and an uncountable limit cardinal $\kappa$, a representative for all tests with fewer than $\kappa$ arrows cannot itself have fewer than $\kappa$ arrows.
+\end{claim}
+\begin{proof}
+If $K$ is finite, $\Fun(P,K)$ is finite for each finite $P$. Take a finite face poset $P$ of a triangulated two-sphere. The set $[BP,S^2]=\Z$ is infinite, giving the first obstruction. For the second, choose $n\geq8$ with $|A_n|>|\Mor K|$. Simplicity of $A_n$ makes every functor $BA_n\to K$ trivial on its arrows. Thus $\Fun(BA_n,K)\cong K$, while evaluation at the point would require $\pi_0K$ to be a singleton. The Schur multiplier computation used in Part B gives $H^2(A_n;C_2)=C_2$. This is a contradiction on a finite test category. For a limit $\kappa$ and an infinite candidate size $\mu<\kappa$, choose $\mu<\lambda<\kappa$. The finitary alternating group on $\lambda$ letters has $\lambda$ elements and gives the same contradiction by Part B. A finite candidate is already excluded by the preceding finite-group argument. No successor-cardinal lower bound beyond what this argument proves is being asserted.
+\end{proof}
+
+\begin{claim}{D.3}{Proved}{Finite categories always give a filtered ind-representation}
+Let $\mathcal C_f$ be a skeleton of finite categories in $\Cathot$, with all functors modulo natural-transformation zigzags as morphisms. For every $\U$-small homotopy type $Y$, put $F_Y(C)=[BC,Y]$. The category of elements $\mathcal E_Y$ of $F_Y|_{\mathcal C_f}$ is a small filtered category, and
+\[
+ F_Y|_{\mathcal C_f}\cong
+ \colim_{(C,c)\in\mathcal E_Y}\Hom_{\Cathot}(-,C)|_{\mathcal C_f}.
+\]
+Thus Part D(ii) has an affirmative answer for filtered ind-representability by finite categories. The assertion does not require that a finite category have homotopy-finite nerve.
+\end{claim}
+\begin{proof}
+An object is a pair $(C,c)$ with $c:BC\to Y$ a morphism of $\Hot$; an arrow $(C,c)\to(D,d)$ is a class $u:C\to D$ in $\Cathot$ with $c=d\,Bu$. The object $(\varnothing,!)$ proves nonemptiness, including $Y=\varnothing$. Coproducts of finite categories give a common successor to any two objects because maps out of the disjoint union are pairs of maps.
+
+Let $u,v:(A,a)\rightrightarrows(B,b)$ be parallel arrows. Choose representative functors. Form the finite Grothendieck construction $C$ of the diagram with two objects and two arrows $A\rightrightarrows B$. Explicitly its objects are the disjoint union of those of $A$ and $B$. Its internal arrows are those of $A$ and $B$; an arrow from an $A$-object $a_0$ to a $B$-object $b_0$ consists of a tag $t\in\{u,v\}$ and an arrow $t(a_0)\to b_0$ of $B$. There are no arrows in the other direction. Precomposition uses $t$ on arrows of $A$, and postcomposition is composition in $B$. The two tagged identity arrows give natural transformations from the inclusion of $A$ to the two composites $wu,wv$, where $w:B\to C$ is the inclusion. Hence $wu=wv$ in $\Cathot$.
+
+By the homotopy-colimit theorem \citep[Theorem~26.8 and Corollary~26.9]{ChacholskiScherer2001}, $BC$ is naturally weakly equivalent to the double mapping cylinder of $Bu,Bv$, hence to their homotopy coequalizer, compatibly with the copy of $BB$. Since $bBu=bBv$ in $\Hot$, choose an actual homotopy between representatives of these composites into a fibrant space representing $Y$. It extends $b$ over that homotopy coequalizer and yields $c:BC\to Y$ with $cBw=b$. Thus $(B,b)\to(C,c)$ equalizes the pair in $\mathcal E_Y$. This proves filteredness. The definition is independent of the chosen representatives, since the equalization needed is an equality in $\Cathot$.
+
+For completeness, the displayed colimit sends $f:X\to C$ at $(C,c)$ to $cBf$. It is surjective because an element $x\in F_Y(X)$ is the image of $\id_X$ at $(X,x)$. If two representatives have equal image $x$, the arrows from $(X,x)$ to their indexing objects identify both with this same identity representative in the colimit. This is exactly the presheaf category-of-elements proof of density. Smallness follows from the countable skeleton of finite composition tables and the small sets $[BC,Y]$.
+\end{proof}
+
+\begin{claim}{D.4}{Proved}{The exact sequential criterion}
+For $Y\in\Hot_\U$, the restriction $F_Y|_{\mathcal C_f}$ is a colimit of a sequence of representables by finite categories if and only if $[BC,Y]$ is countable for every finite category $C$. Such a sequence may be represented by actual functors of finite categories. Its colimit $K$ in $\Cat$ is a countable locally finite category and represents $F_Y$ on finite tests. Conversely, every countable locally finite representing category supplies such a sequence. Here a category is locally finite when each finitely generated subcategory has finitely many arrows.
+\end{claim}
+\begin{proof}
+Each $\Hom_{\Cathot}(C,K_n)$ is finite when both categories are finite. A sequential colimit of these sets is countable. Conversely, the hypothesis makes $\mathcal E_Y$ countable: it has countably many objects and each of its Hom-sets is finite. Every countable filtered category admits a cofinal sequence. One constructs it by enumerating its objects and arrows, successively choosing common successors for the next object and equalizing the next finite set of parallel arrows; a diagonal enumeration ensures that each comma category is nonempty and connected. Applying this to D.3 gives the required sequence in $\Cathot$. Choosing representative functors on adjacent arrows defines an actual sequence in $\Cat$, since the ordered indexing category has no relations other than those imposed by composition.
+
+A finite category is finitely presentable as a category: its finitely many objects and arrows, together with its finite composition and identity equations, give a finite presentation. It follows, by the same finite-data argument also for components of natural transformations, that
+\[
+ \Fun(C,\colim_nK_n)\cong\colim_n\Fun(C,K_n),\qquad
+ \pi_0\Fun(C,\colim_nK_n)=\colim_n\pi_0\Fun(C,K_n).
+\]
+The second equality needs only that each zigzag is finite. The colimit is countable. Any finite generating family of arrows lifts to one finite stage. Move to a further common stage where every equality among the finitely many endpoint objects that holds in the colimit already holds. Every composable word in the chosen arrows then lifts to a composable word in that finite category. Its image is consequently contained in the image of a finite arrow set, so the generated subcategory is finite. This endpoint-equality step is necessary when transition functors identify objects. Hence the colimit is locally finite. Conversely, enumerate a countable locally finite category's arrows and take the finite subcategories they generate successively. Their union is the given category, and the same argument proves the representation. Full inclusions of finite stages are not required for this assertion.
+\end{proof}
+
+\begin{claim}{D.5}{Proved}{The Eilenberg--Mac Lane sequential example}
+For $Y=K(C_2,2)$, the restriction to finite categories is ind-representable by a sequence of finite categories and representable by a countable locally finite category, although it is not representable on all $\Cathot_\U$ by any $\U$-small category.
+\end{claim}
+\begin{proof}
+For finite $C$, the normalized degree-two cochain group of $NC$ with $C_2$ coefficients is finite: there are finitely many strings of two nonidentity arrows. Its subquotient $H^2(BC;C_2)$ is therefore finite. D.4 applies. The final assertion is Part B. The two statements have different ranges of the test variable $X$, so there is no contradiction.
+\end{proof}
+
+\begin{claim}{D.6}{Open}{The sequential two-sphere test}
+The remaining exact question in Part D(ii) for $Y=S^2$ is whether $[BC,S^2]$ is countable for every finite category $C$. By D.4 this is equivalent to sequential ind-representability by finite categories; it is also equivalent to representability on finite tests by a countable locally finite category. General filtered ind-representability and ordinary small representability on these tests are already proved in D.3 and D.1. No assertion of sequential representability for $S^2$ is certified here.
+\end{claim}
+The nerve of a finite category can have infinitely many nondegenerate simplices, so finite-source compactness does not prove the required countability. Finite group categories are not an obstruction: the Sullivan theorem \citep[Theorem~A]{Miller1984} makes maps from their classifying spaces to $S^2$ constant up to unpointed homotopy. The finite monoids with homology in infinitely many degrees discussed in the research report do not by that information alone provide uncountably many maps to $S^2$. These are the two attempted reductions, and neither decides the stated question. This is an unresolved item of this audit, not a claim that the literature contains no answer.
+
+\begin{claim}{D.7}{Proved}{The unbounded cardinal-indexed representation}
+There is a compatible choice of the categories $K_\lambda(Y)$ for $\lambda\geq\max(\aleph_0,|Y|)$ and inclusion functors for increasing $\lambda$, such that, in the larger universe $\V$,
+\[
+ [B-,Y]\cong\colim_{\lambda\in\operatorname{Card}(\U),\ \lambda\geq\max(\aleph_0,|Y|)}
+ \Hom_{\Cathot_\U}(-,K_\lambda(Y)).
+\]
+The indexing poset is filtered, $\V$-small, and unbounded in the $\U$-cardinals. Alternatively $F_Y$ is a $\V$-small filtered colimit over its category of elements on all $\Cathot_\U$.
+\end{claim}
+\begin{proof}
+Use the subset encodings of D.1 on nested cardinal ordinals. The categories are then full subcategories of one another. The maps $\theta$ arise from the same roofs of diagrams and are compatible with the inclusions. For each fixed $\U$-small $X$, they are bijective from every stage $\lambda\geq|\Mor X|$ onward. This proves the displayed isomorphism pointwise and naturally. The index is a set in $\V$, but has no $\U$-small cofinal subset. The proof of D.3 applies verbatim with arbitrary $\U$-small categories because the two constructions used there, finite coproduct and the displayed finite-shape Grothendieck construction, preserve $\U$-smallness. Its whole category of elements is $\V$-small.
+\end{proof}
+
+\begin{claim}{D.8}{Proved}{Why the larger index is necessary}
+If $Y$ has a component with a nonzero homotopy group in degree at least two, $F_Y$ on all $\Cathot_\U$ is not a $\U$-small colimit of representables, even without requiring the colimit to be filtered. If $Y$ is a 1-type it is representable by its fundamental groupoid. Thus, for the global functor, enlarging the index universe in D.7 is essential exactly outside the 1-types.
+\end{claim}
+\begin{proof}
+Suppose $F_Y=\colim_{i\in I}h_{K_i}$ with $I\in\U$. Choose a $\U$-cardinal $\mu$ bounding the arrow sets of all $K_i$ simultaneously. Part B constructs a $\U$-small group $G$ with no nontrivial homomorphism into a group of cardinal at most $\mu$ and with an essential map $BG\to Y$. Every functor $BG\to K_i$ is therefore trivial on arrows; evaluation at the unique object is an actual isomorphism $\Fun(BG,K_i)\cong K_i$, natural in $K_i$. It identifies the map induced by $BG\to e$ with the identity on $\pi_0K_i$. Taking any colimit gives a bijection $F_Y(e)\to F_Y(BG)$. Its image consists precisely of the homotopy classes of constant maps, contradicting the constructed essential map. The 1-type assertion is Part C. The argument includes disconnected $Y$ because the essential map is chosen in one specified component.
+\end{proof}

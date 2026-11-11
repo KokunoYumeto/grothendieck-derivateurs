@@ -1,0 +1,1351 @@
+% macro conflict, first definition kept: \newcommand{\Ob}{\mathrm{Ob}\,}
+% macro conflict, first definition kept: \newcommand{\card}{\operatorname{card}}
+% macro conflict, first definition kept: \newcommand{\Ob}{\operatorname{Ob}}
+% macro conflict, first definition kept: \newcommand{\Fl}{\mathrm{Fl}}
+% macro conflict, first definition kept: \newcommand{\Fl}{\mathrm{Fl}}
+\documentclass[11pt]{article}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+\newcommand{\printedpage}[1]{\marginpar{\footnotesize p.~#1}}
+\newcommand{\msp}[1]{\marginpar{\footnotesize [#1]}}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]\node[draw,circle,inner sep=1pt](c){#1};}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5\baselineskip}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\HO}{\mathrm{HO}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\rf}{\mathrm{f}}
+\newcommand{\rc}{\mathrm{c}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Fl}{\mathrm{Fl}\,}
+\newcommand{\Filt}{\mathrm{Filt}}
+\newcommand{\card}{\mathrm{card}\,}
+\newcommand{\barlongleftrightarrow}{\mathrel{\text{\ooalign{$\longleftrightarrow$\cr\hidewidth$\mid$\hidewidth\cr}}}}
+\newcommand{\idx}[2]{\noindent #1\dotfill #2\par}
+\newcommand{\entry}[2]{\noindent #1\dotfill\ #2\par}
+\newcommand{\Mo}{\mathcal{M}}
+\newcommand{\Mzg}{$\mathbf{M}'_{\mathbf{0}}\mathbf{(g)}$}
+\newcommand{\Mzd}{$\mathbf{M}'_{\mathbf{0}}\mathbf{(d)}$}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\begin{document}
+% ---- from Der-ChXIII-25-01-04_p031-035.tex
+\printedpage{29}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+(On applique \texttt{[le]} corollaire 1 (p. 47) à $\tilde{\alpha} : \boldsymbol{\Delta}_1 \longrightarrow I$.)
+
+\textbf{Proposition 3.} (\footnote[28]{Comparer avec le lemme p. 63 et sa démonstration (plus exactement, le corollaire du lemme).}) \textit{Soit $X$ dans $\mathcal{M}(\boldsymbol{\Delta}_1)$, $X = (X_0 \xleftarrow{\alpha} X_1)$. Alors $X$ est dans $\mathcal{M}(\boldsymbol{\Delta}_1)_{\mathrm{f}}$ si et seulement si $X_0$, $X_1$} \texttt{[sont]} \textit{dans $\mathcal{M}_{\mathrm{f}}$ et $\alpha \in F$.}
+
+\textbf{Corollaire 2.} \textit{Soit $I' \overset{u}{\hookrightarrow} I$} \texttt{[une]} immersion ouverte. \textit{Alors pour $X \in \operatorname{Ob}\mathcal{M}(I)_{\mathrm{f}}$, $\varprojlim\limits_{I} X(i) \longrightarrow \varprojlim\limits_{I'} X(i)$ est dans $F$.}
+
+\section*{5\quad Catégories de modèles quillénisables}
+
+Je reviens au cas général d'une catégorie de modèles $(\mathcal{M},W)$.
+
+% marginal vertical bar printed beside the following Définition 1
+\textbf{Définition 1.} On dit que $(\mathcal{M},W)$ est \textit{quillénisable} s'il existe une structure de Quillen faible \textit{exacte} $(C,TC,F,TF)$ pour $\mathcal{M}$.
+
+C'est là une condition autoduale, mais que je ne sais vérifier en pratique que moyennant l'exactitude soit à gauche, soit à droite -- donc par une condition plus forte qui détruit la symétrie. C'est pour la sauvegarder dans la mesure du possible que j'introduis la définition précédente, ainsi que la
+
+\textbf{Définition 2.} Soit, en plus de $(\mathcal{M},W)$, Diag $\subset$ Cat une sous-catégorie pleine de Cat. On dit que
+\msp{page 51}$W$ est \textit{quillénisable sur} Diag, si pour tout $I$ dans Diag, $(\mathcal{M}(I),W(I))$ est quillénisable.
+
+En pratique, j'utiliserai cette définition dans le cas où Diag $=$ Cat, ou alors, qu'il satisfasse au moins les propriétés de stabilité utiles pour le domaine d'un dérivateur : stable par $\varprojlim$ finies, par sommes finies -- eventuellement par $\varinjlim$ finies, etc (\footnote[29]{Je supposerai que Diag contient tout au moins les catégories provenant d'ensembles ordonnés finis.}). % [sic] eventuellement -> éventuellement, missing accent
+
+\textbf{Exemple 1 :} Celui des paragraphes 3, 4, où on a dégagé des conditions sur $(\mathcal{M},W)$, avec $\mathcal{M}$ une ``grosse'' catégorie et $\mathcal{M}$ accessible, pour que $W$ soit quillénisable sur Cat tout entier. C'est le cas qui me paraît à présent le plus intéressant.
+
+\textbf{Exemple 2 :} Soient $\mathcal{A}$ une catégorie abélienne, et $\mathcal{M} = K^{\bullet}(A)$ la catégorie des complexes de cochaînes à valeurs dans $\mathcal{A}$, $W = W_{\mathcal{A}}$ l'ensemble des quasi-isomorphismes, donc % [sic] K^\bullet(A) -> K^\bullet(\mathcal{A}), plain italic A where calligraphic A is used everywhere else
+\[ \mathcal{M}W^{-1} \;=\; K^{\bullet}(\mathcal{A})W_{\mathcal{A}}^{-1} \;\simeq\; D^{\bullet}(\mathcal{A}), \qquad \text{catégorie dérivée de $\mathcal{A}$.} \]
+On définit aussi $\mathcal{M}^{+}$, $\mathcal{M}^{-}$, $\mathcal{M}^{\mathrm{b}}$, avec les localiseurs induits $W_{\mathcal{A}}^{+}$, $W_{\mathcal{A}}^{-}$, $W_{\mathcal{A}}^{\mathrm{b}}$, et les catégories de fractions $D^{+}(\mathcal{A})$, $D^{-}(\mathcal{A})$, $D^{\mathrm{b}}(\mathcal{A})$. Ou
+\msp{page 52}encore, pour $I$ dans Cat,
+\[ \mathcal{M}(I) \;=\; K^{\bullet}(\mathcal{A}(I)) \]
+% foot: Version 25 janvier 2004
+\printedpage{30}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\[ W(I) \;=\; \underbrace{W_{\mathcal{A}(I)}}_{\text{quasi-isomorphismes}} \;\subset\; \mathrm{Fl}(K^{\bullet}(\mathcal{A}(I))), \]
+et de même pour $\mathcal{M}^{\alpha}(I)$, $W^{\alpha}(I)$ $(\alpha \in \{+,-,\mathrm{b}\})$, du moins \textit{si $I$ est finie.} Il y a aussi les sous-catégories $K^{\geq 0}(\mathcal{A})$ et $K^{\leq 0}(\mathcal{A})$ des complexes de cochaînes resp. de chaînes au sens strict (avec $K^{i} = 0$ si $i \geq 0$, resp. si $i \leq 0$ \texttt{[plutôt si $i < 0$, resp. si $i > 0$]}). On aura pour $I$ quelconque
+\[ \left\{ \begin{aligned} K^{\geq 0}(\mathcal{A})(I) &\;\simeq\; K^{\geq 0}(\mathcal{A}(I)) \\ W_{\mathcal{A}}^{\geq 0}(I) &\;=\; W_{\mathcal{A}(I)}^{\geq 0}, \end{aligned} \right. \]
+et de même pour $K^{\leq 0}$, $W^{\leq 0}$.
+
+D'après \textsc{Quillen} page 1.2, $(K^{+}(\mathcal{A}),W_{\mathcal{A}}^{+})$ est quillénisable si $\mathcal{A}$ a assez d'injectifs, $(K^{-}(\mathcal{A}),W_{\mathcal{A}}^{-})$ l'est si $\mathcal{A}$ a assez de projectifs. Il ne dit rien pour $(K^{\bullet}(\mathcal{A}),W_{\mathcal{A}})$ sans plus -- pourtant on fait de l'algèbre cohomologique avec $D^{\bullet}(\mathcal{A})$ sans plus, et même sans faire d'hypothèse d'existence d'injectifs ou de projectifs. J'ai un peu oublié ce que \textsc{Verdier} a fait à ce sujet -- je devrais quand même regarder sa thèse (!), ou bien l'exposé de \textsc{Hartshorne}.
+
+\msp{page 53}Toujours est-il qu'on a là des exemples de type tout différent de ceux envisagés dans 1°. Ainsi, il n'y a pas à supposer que $\mathcal{M}$ soit stable par petites $\varinjlim$ -- $\mathcal{M}$ peut même être une petite catégorie, elle l'est si et seulement si $\mathcal{A}$ elle même l'est. Si $\mathcal{A}$ est stable par (petites) $\varinjlim$ filtrantes, et est accessible (p. ex. a une petite famille génératrice, et les $\varinjlim$ filtrantes sont exactes), alors $K^{\bullet}(\mathcal{A})$ etc. (\footnote[30]{!!}) ont les mêmes propriétés, et $(K^{+}(\mathcal{A}),W_{\mathcal{A}}^{+})$ est quillénisable sur Cat tout entier (\footnote[31]{attention, $K^{+}(\mathcal{A})$ n'est \textit{pas} stable par $\varinjlim$ filtrantes infinies -- donc on ne peut appliquer le tapis des paragraphes 2, 3 directement à $K^{+}$.}). (C'est le cas où on sait que $\mathcal{A}$ a assez d'injectifs, et l'algèbre cohomologique se fait surtout à coups de résolutions injectives \dots) Dans ce cas on sait que les % [sic] elle même -> elle-même, missing hyphen
+\[ u_{*} \;:\; D^{+}(I',\mathcal{A}) \longrightarrow D^{+}(I,\mathcal{A}) \]
+existent comme adjoints à droite des
+\[ u^{*} \;:\; D^{+}(I,\mathcal{A}) \longrightarrow D^{+}(I',\mathcal{A}), \]
+mais je ne suis plus trop sûr si on sait définir $u_{*}$ aussi sur $D(I',\mathcal{A})$ tout entier, et je doute que $u_{!}$ existe sans hypothèse sur $u$ (genre : dimension cohomologique finie). Sans doute on doit toujours avoir
+\[ u_{!} \;:\; D^{-}(I',\mathcal{A}) \longrightarrow D^{-}(I,\mathcal{A}), \]
+\msp{page 54}adjoint à gauche de
+\[ u^{*} \;:\; D^{-}(I,\mathcal{A}) \longrightarrow D^{-}(I',\mathcal{A}). \]
+% foot: Version 25 janvier 2004
+
+\printedpage{31}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+Mais je ne sais plus trop s'il faut s'attendre à pouvoir définir $u_{!}$ sur $D(I',\mathcal{A})$ tout entier, en dehors d'hypothèses genre dimension cohomologique finie. La triste vérité, c'est que j'ai $\pm$ oublié la théorie des foncteurs dérivés ! (Il faudrait que je demande encore à \textsc{Jean Malgoire} de m'envoyer des textes canoniques.)
+
+\textbf{Scholie.} Si $(\mathcal{M},W)$ est quillénisable sur Diag $\subset$ Cat (et même sans qu'il soit quillénisable), il définit un prédérivateur $\mathbf{D}_{\mathcal{M},W}$ sur Diag. On posera parfois
+\[ \mathrm{HO}_{\mathcal{M},W}(I) \;\text{ ou }\; \mathrm{HO}_{W}(I) \;=\; \mathbf{D}_{\mathcal{M},W}(I). \]
+L'hypothèse quillénisable implique, sur chacune de ces catégories homotopiques, la structure (relativement faible) ``triangulée'', provenant des suites \textit{exactes} de suspension et de cosuspension (\footnote[32]{Dans le cas où $\mathcal{M}$ est ponctuée par \texttt{[un]} objet neutre. Sinon, il y a la structure associée aux carrés cartésiens et cocartésiens. Il serait assez intéressant d'axiomatiser une telle espèce de structure.}). (Le caractère quillénisable assure l'exactitude de ces suites \dots) Les foncteurs $u^{*} : \mathrm{HO}_{W}(I) \longrightarrow \mathrm{HO}_{W}(I')$
+\msp{page 55}sont ``homotopiquement exacts'' dans le sens des ces structures ``triangulées'' (non commutatives), \textit{i.e.} transforment suites exactes de suspension resp. de cosuspension en itou. % [sic] des ces -> de ces, grammar
+
+Quels sont les axiomes des dérivateurs qui sont vérifiés sous la seule hypothèse quillénisable ? \textbf{Der} 1 \texttt{[voir chapitre I, p. 43]} l'est sans hypothèse aucune sur la catégorie de modèles $(\mathcal{M},W)$ :
+\[ \mathrm{HO}_{W}(\coprod_{\alpha} I_{\alpha}) \;\simeq\; \prod_{\alpha} \mathrm{HO}_{W}(I_{\alpha}) \]
+pour une famille \textit{finie} d'objets $I_{\alpha}$ dans Diag. L'axiome de localisation \textbf{Der} 2 \texttt{[voir chapitre I, p. 43]} l'est sous l'hypothèse que $W$ soit \textit{fortement saturé,} et quillénisable. On utilise le fait que toute flèche de $\mathrm{HO}_{W}(I)$ provient, à isomorphisme près, d'une flèche dans $\mathcal{M}(I)$. (C'était là un des points qui restait en suspens dans VI, dans la théorie de $\mathrm{HOT}_{W}$, $W \subset \mathrm{Fl}(\mathrm{Cat})$ un localiseur fondamental \dots)
+
+L'axiome \textbf{Der} 3, nouvelle mouture \texttt{[voir chapitre I, pp. 111-112]}, implique un localiseur fondamental $\mathbf{W} \subset \mathrm{Fl}(\mathrm{Cat})$ (pas forcément $\mathbf{W}_{\infty}$) (\footnote[33]{Il est naturel ici de supposer que $\mathbf{W}$ satisfait à tous les ``bons axiomes'' sur les localiseurs fondamentaux W (1, 2, 3, 4, 5, 6, 7) \texttt{[voir chapitre XII]}.}). La forme la plus forte serait celle-ci : si
+\[ u \;:\; I' \longrightarrow I \]
+\msp{page 56}est dans $\mathbf{W}$, on veut que le foncteur $u^{*}$ induise une \textit{équivalence}
+\[ u_{\mathrm{lc}}^{*} \;:\; \mathrm{HO}_{W}^{\mathrm{lc}}(I) \xrightarrow{\;\sim\;} \mathrm{HO}_{W}^{\mathrm{lc}}(I'). \]
+Mais je doute qu'on soit armé pour vérifier un axiome aussi fort, sans avoir au moins une théorie des opérations $u_{!}$ ou $u_{*}$. On pourrait à tout hasard poser cet axiome en prenant $\mathbf{W} = \mathbf{W}_{\alpha} \overset{\text{déf}}{=}$ le plus petit localiseur fondamental satisfaisant W (1 à 7) (le plus grand de
+% foot: Version 25 janvier 2004
+\printedpage{32}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+ces localiseurs étant $\mathbf{W}_{\infty}$). Pour l'instant, la façon de vérifier cet axiome (en termes de la donnée $(\mathcal{M},W)$) est pour moi un mystère $\pm$ total. (Mais je sais le vérifier pour $\mathrm{HOT}_{W}$, quand $W \subset \mathrm{Fl}(\mathrm{Cat})$ satisfait W (1, 2, 3, 4, 5, \dots).)
+
+Je vais m'en occuper, une fois que j'aurai une maîtrise raisonnable sur le formalisme de $u_{*}$, $u_{!}$ relatif aux $u : I' \longrightarrow I$ dans Diag. L'hypothèse quillénisable seule semble trop grossière pour assurer l'existence de $u_{!}$ ou de $u_{\star}$ dans des cas intéressants. % [sic] u_\star -> u_*, star symbol where u_* is used elsewhere
+
+\noindent\msp{page 57}
+
+\section*{6\quad Catégorie de modèles quillénisables, et foncteurs $u_{!}$, $u_{*}$}
+
+\textbf{Définition 1 :}
+
+\begin{itemize}[leftmargin=2.5em]
+\item[\circled{a}] On dit que $(\mathcal{M},W)$ est \textit{quillénisable uniformément à gauche} sur Diag, si on peut trouver une structure de Quillen faible $(C,TC,F,TF)$ pour $\mathcal{M}$ qui soit \textit{close,} et qui de plus ait la propriété suivante : pour $I$ dans Cat, soient $C(I)$, $TC(I) \subset \mathrm{Fl}(\mathcal{M}(I))$ définis par
+\[ \begin{aligned} &(u : X \longrightarrow Y) \in C(I) \text{ (resp. } TC(I)) \text{ si et seulement si } \ \forall\, s \in \operatorname{Ob} I, \\ &u_{s} : X_{s} \longrightarrow Y_{s} \text{ est dans } C(I) \text{ (resp. } TC(I)). \end{aligned} \]
+Soit de plus
+\[ F(I) \;=\; TC(I)_{*}, \qquad TF(I) \;=\; C(I)_{*}. \]
+La condition envisagée, c'est que pour tout $I$ \textit{dans} Diag, $(C(I),TC(I),F(I),TF(I))$ est une structure de Quillen faible \textit{close exacte} pour $W(I)$ (\footnote[34]{$(C,TC,F,TF)$ est appelé alors une \textit{quillénisation uniforme à gauche} de $(\mathcal{M},W)$ sur Diag.}).
+
+\item[\circled{b}] On dit que $(\mathcal{M},W)$ est \textit{quillénisable sur Diag uniformément et exactement} \texttt{[à]} \textit{gauche}, si on a de plus $TC = C \cap W$, \textit{i.e.} si $(C,TC,F,TF)$ est exacte à gauche, donc défini par $C$ seul, via
+\[ TC = C \cap W, \qquad F = (TC)_{*}, \qquad TF = C_{*} \qquad \text{(\footnotemark[35])} \]
+\footnotetext[35]{On dit que $(C,\ldots)$, ou simplement $C$, définit une \textit{quillénisation uniforme et exacte à gauche} de $(\mathcal{M},W)$ sur Diag.}
+\end{itemize}
+
+On a vu au paragraphe 3 que si $\mathcal{M}$ est stable par petites $\varinjlim$ et accessible, et $W$ stable par petites $\varinjlim$ filtrantes, enfin si
+% foot: Version 25 janvier 2004
+\printedpage{33}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 58}$W$ admet une structure de Quillen faible $(C,TC,F,TF)$ qui soit close et exacte à gauche -- alors les conditions de la définition 1 sont satisfaites.
+
+D'autre part, notons que la proposition 1 page 45 et ses corollaires, y inclus la proposition 3 (page 50) et ses corollaires, sont valables dès lors que les quillénisations des $(\mathcal{M}(I),W(I))$ envisagés sont définies ``uniformément à gauche'' par une quillénisation uniforme à gauche (pas nécessairement exacte à gauche) de $(\mathcal{M},W)$ sur Diag.
+
+La quillénisation uniforme gauche nous servira à établir l'existence des images directes homotopiques $u_{*}$, pour certains $u$. La quillénisation uniforme droite, dualement, aura comme conséquence principale l'existence des $u_{!}$ homotopiques pour certains $u : I' \longrightarrow I$ dans Diag.
+
+Je vais résumer ce que j'ai pu établir jusqu'à présent dans ce sens, dans le
+
+\msp{page 59}\textbf{Théorème-scholie :} \textit{Soit $(C,TC,F,TF)$ une quillénisation uniforme gauche de $W$ sur} Diag $\subset$ Cat.
+
+\begin{itemize}[leftmargin=3em]
+\item[1)] \textit{Soit $u : I' \longrightarrow I$ une flèche dans} Diag. \textit{On suppose} Diag \textit{accordé à $\mathcal{M}$ de façon que pour $u$, flèche dans} Diag, \textit{les $\varprojlim$ dans $\mathcal{M}$ (de type $I'/i$) requises pour assurer l'existence de}
+\[ u_{*} \;:\; \mathcal{M}(I') \longrightarrow \mathcal{M}(I) \]
+\textit{existent dans $\mathcal{M}$. (C'est O.K. si $I$, $I'$} \texttt{[sont]} \textit{finies, $\mathcal{M}$ étant supposée stable par $\varinjlim$ finies de toutes façons.) On sait} (prop. 1, page 45) \textit{que $u_{*}$ induit}
+\[ u_{*}^{\mathrm{f}} \;:\; \mathcal{M}(I')_{\mathrm{f}} \longrightarrow \mathcal{M}(I)_{\mathrm{f}}\,. \tag*{$(*)$} \]
+\textit{On dit que $u$ est} admissible (à gauche) pour la quillénisation uniforme gauche donnée de $W$ sur Diag, \textit{si $u_{*}^{\mathrm{f}}$ est compatible avec les localiseurs $W(I')_{\mathrm{f}}$, $W(I)_{\mathrm{f}}$,} i.e. \textit{si $f' : X' \longrightarrow Y'$ dans $\mathcal{M}(I')$, $X'$, $Y'$ fibrants, $f' \in W(I')$ implique $u_{*}(f') \in W(I)$. On dit que $Z$ dans} Diag \textit{est} admissible (pour la quillénisation uniforme gauche donnée de $W$ sur Diag \dots) \textit{si le foncteur $Z \longrightarrow e$ est admissible. Ceci posé :}
+\begin{itemize}[leftmargin=2.5em]
+\item[a)] \textit{Pour que $u$ soit admissible, il suffit que les $I'/s$ pour $s \in \operatorname{Ob} I$, le soient. NB il y a une réciproque, quand $I$ est ordonné, donc les $I'/s \longrightarrow I'$ des immersions ouvertes.}
+\item[b)] \msp{page 60}\textit{Tout ensemble ordonné fini est admissible. Plus généralement (sauf erreur) tout ensemble ordonné $I$ tel que l'espace topologique associé à $I^{\circ}$ soit noethérien (}i.e. \textit{toute suite croissante d'ouverts de $I^{\circ}$ est stationnaire, ou encore toute suite croissante de fermées de $I$ est stationnaire), et si de plus toute partie fermée irréductible de $I^{\circ}$ admet un point générique,} i.e. \textit{$I^{\circ}$ est (non seulement un espace noethérien, mais aussi) un espace topologique} sobre. \textit{(Pour $I$, cela signifie que toute partie ouverte filtrante croissante de $I$ admet un plus grand élément.)} % [sic] fermées -> fermés, agreement with masculine (ouverts / fermés)
+\end{itemize}
+\end{itemize}
+% foot: Version 25 janvier 2004
+
+% ---- from Der-ChXIII-25-01-04_p036-040.tex
+\printedpage{34}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}[leftmargin=3em]
+\item[c)] \textit{En particulier, si $I'$, $I$ sont des ensembles ordonnés finis, alors tout $u : I' \longrightarrow I$ est admissible. Il en est de même, plus généralement, si $I$, $I'$ sont des ensembles ordonnés et $I'^{\circ}$ est un espace noethérien sobre.}
+\end{itemize}
+
+\begin{itemize}[leftmargin=2em]
+\item[2)] \textit{Supposons $u : I' \longrightarrow I$ admissible. Considérons}
+\[
+u_*^W \ : \ \underbrace{\cM(I')_{\rf}W(I')_{\rf}^{-1}}_{\simeq\, \HO_W(I')} \ \longrightarrow \ \underbrace{\cM(I)_{\rf}W(I)_{\rf}^{-1}}_{\HO_W(I)},
+\]
+\textit{induit par $u_*$. Ce foncteur est adjoint à droite de $u_W^* : \HO_W(I) \longrightarrow \HO_W(I')$.}
+
+\msp{page 61}
+\textit{De plus, l'homomorphisme canonique (pour $s \in \Ob I$, $X' \in \Ob \HO_W(I')$)}
+\[
+u_*^W(X')(s) \ \simeq \ p_{s\,*}(X'|I'/s) \ \overset{\text{déf}}{=} \ \underset{I'/s}{\underleftarrow{\mathrm{holim}}}{}_W(X'|I'/s)
+\]
+\textit{(où $p_s : I'/s \longrightarrow e$) est un isomorphisme, si on suppose que les $I'/s$ sont admissibles (on dira alors que $u$ est} strictement \textit{admissible).}
+\end{itemize}
+
+\textbf{Corollaire.} \textit{Sur le domaine formé des ensembles ordonnés finis, le prédérivateur} $\HO_W$ \textit{satisfait (en plus des axiomes} \textbf{Der}~1, \textbf{Der}~2\textit{) aux axiomes} \textbf{Der}~4 \textit{et} \textbf{Der}~5 \textit{(existence des images directes $u_*$, adjoints à droite des foncteurs $u^*$, et calcul standard des fibres d'une image directe).}
+
+\textsc{Démonstration} du théorème-scholie.
+
+$1^\circ$) \textit{a}) est immédiat. Pour \textit{b}), on procède par récurrence sur le cardinal $n$ de l'ensemble ordonné fini $I$, les cas $n \in \{0,1\}$ étant triviaux. Supposons donc $n \geq 2$, et le théorème prouvé pour les $n' < n$. Je distingue deux cas : si $I$ admet un plus grand élément $a$, alors, désignant par $\alpha : e \longrightarrow I$ le foncteur de valeur $a$, par $p : I \longrightarrow e$ la projection, on sait que l'on a
+\[
+p_* \ \simeq \ \alpha^*, \qquad \textit{i.e.} \ \varprojlim_{I} X_i \simeq X_a,
+\]
+d'où le fait que sur $\cM(I)$ tout entier
+\msp{page 62}
+(pas seulement sur $\cM(I)_{\rf}$), $p_*$ est compatible aux localiseurs $W(I)$, $W$.
+
+Si $I$ n'a pas de plus grand élément, alors l'ensemble $M$ des ses éléments maximaux est de cardinal $\geq 2$, on peut donc l'écrire $M = M_1 \amalg M_2$, et on aura % [sic] des ses -> de ses, typographical slip
+\[
+I \ = \ I_1 \cup I_2, \qquad \text{où } I_1 = I/M_1,\ I_2 = I/M_2
+\]
+sont deux ouverts de $I$, différents de $I$, donc de cardinaux $n_1$, $n_2 \ < \ n$. Considérons aussi $I_0 = I_1 \cap I_2$, c'est un ouvert de cardinal $< n$. Le diagramme
+\[
+\begin{tikzcd}[row sep=small]
+ & I_1 \arrow[dr, dotted] & \\
+I_0 \arrow[ur] \arrow[dr] & & I = I_1 \cup I_2 \\
+ & I_2 \arrow[ur, dotted] &
+\end{tikzcd}
+\]
+% foot: Version 25 janvier 2004
+\printedpage{35}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+correspond à une flèche
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & & & 1 & \\
+u \ : \ I \arrow[r] & \Psi = 0 \arrow[urr, start anchor=east, end anchor=south west] \arrow[drr, start anchor=east, end anchor=north west] & & & , \\
+ & & & 2 &
+\end{tikzcd}
+\]
+avec
+\[
+I_1 \ = \ I/1, \qquad I_2 \ = \ I/2, \qquad I_0 \ = \ I/0.
+\]
+L'hypothèse de récurrence et \textit{a}) impliquent que $u$ est admissible. Comme un composé de foncteurs admissibles est admissible (tautologiquement, via $(vu)_* \simeq v_*u_*$), on est réduit finalement au
+\msp{page 63}
+
+\textbf{Lemme.} \textit{La catégorie} \begin{tikzcd}[row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+ & 1 \\
+\Psi = 0 \arrow[ur] \arrow[dr] & \\
+ & 2
+\end{tikzcd} \quad \textit{est admissible.}
+
+Ceci va résulter du
+
+\textbf{Corollaire} (\footnote[36]{\textbf{NB} Il y a une variante évidente, caractérisant les $X$ tels que $X \longrightarrow e$ soit dans $TF(\Psi)$ comme ceux pour lesquels $X_0$, $X_1$, $X_2$ sont fibrants \textit{triviaux,} et $\alpha_1$, $\alpha_2 \in TF$.}). \textit{Soit} \begin{tikzcd}[row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+ & X_1 \arrow[dl, "\alpha_1"'] \\
+X_\bullet = X_0 & \\
+ & X_2 \arrow[ul, "\alpha_2"]
+\end{tikzcd} \quad \textit{dans $\cM(\Psi)$. Pour que $X_\bullet$ soit fibrant, il faut et il suffit que l'on ait}
+
+\begin{itemize}[leftmargin=3em]
+\item[a)] \textit{$X_0$, $X_1$, $X_2$ sont fibrants, et}
+\item[b)] \textit{$\alpha_1$, $\alpha_2 \in F$.}
+\end{itemize}
+
+La nécessité de \textit{a}) est cas particulier du corollaire 2, page 48, celle de \textit{b}) est cas particulier du corollaire 1 page 50. Pour la suffisance (dont on n'aura pas besoin pour le théorème), on sait montrer que dans le diagramme commutatif à traits pleins
+\[
+% ?? uncertain: the short vertical strokes under A_0 and A_2 -- read as the upper parts of the vertical arrows A_0 -> X_0 and A_2 -> X_2, interrupted by B_1 and B_0; reproduced here as printed (stroke, then arrow from below B_1, B_0)
+\begin{tikzcd}
+A_1 \arrow[r] \arrow[dr, "TC"] \arrow[dd] & A_0 \arrow[dr, "TC"] \arrow[d, dash] & A_2 \arrow[l] \arrow[dr, "TC"] \arrow[d, dash] & \\
+ & B_1 \arrow[r] \arrow[dl, dotted, "h_1"'] \arrow[d] & B_0 \arrow[dl, dotted, "h_0"'] \arrow[d] & B_2 \arrow[l] \arrow[dl, dotted, "h_2"'] \\
+X_1 \arrow[r, "\alpha_1"'] & X_0 & X_2 \ , \arrow[l, "\alpha_2"] &
+\end{tikzcd}
+\]
+avec trois flèches marquées $TC$, on peut trouver $h_1$, $h_0$, $h_2$ laissant le diagramme commutatif (trois triangles et deux carrés commutatifs à respecter). Pour ceci, on commence par choisir $h_0$ de façon à rendre le triangle vertical médian commutatif -- c'est possible car $X_0$ est fibrant, $A_0 \longrightarrow B_0$ dans $TC$.
+
+% foot: Version 25 janvier 2004
+\printedpage{36}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 64}
+
+Ensuite, on voit séparément pour $h_1$, $h_2$, qu'on peut les trouver en satisfaisant chacune aux deux contraintes de commutativité (1 triangle vertical et un carré penché). Pour $h_1$ p.~ex. l'existence se voit sur le diagramme carré auxiliaire (traits pleins)
+\[
+\begin{tikzcd}
+A_1 \arrow[r, "TC"] \arrow[dd] & B_1 \arrow[dd] \arrow[ddl, dotted, "h_1"'] \arrow[dr, dotted, "\alpha_1^B"] & \\
+ & & B_0 \arrow[dl, dotted, "h_0"] \\
+X_1 \arrow[r, "F", "\alpha_1^X"'] & X_0 \ \ . &
+\end{tikzcd}
+\]
+
+\textbf{NB} C'est la démonstration de la proposition 3, page 50.
+
+Le corollaire (partie “il faut”) étant vu, le lemme en résulte, car on sait que si on a un homomorphisme $f$ de carrés cartésiens $X$, $Y$
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+ & X_1 \arrow[dl, "p_1^X"'] \arrow[dd, "f_1"'] & & X_3 \arrow[ll] \arrow[dl] \arrow[dd, "f_3"] \\
+X_0 \arrow[dd, "f_0"'] & & X_2 \arrow[ll, crossing over, "p_2^X"'] & \\
+ & Y_1 \arrow[dl, "p_1^Y"'] & & Y_3 \arrow[ll] \arrow[dl] \\
+Y_0 & & Y_2 \ \ , \arrow[ll, "p_2^Y"'] \arrow[from=uu, crossing over, "f_2"] &
+\end{tikzcd}
+\]
+avec
+\[
+p_1^X,\ p_2^X,\ p_1^Y,\ p_2^Y \ \ \text{fibrants \texttt{[appartenant à} $F$\texttt{]} (il suffit même $p_1^X$ et $p_1^Y$ fibrant),}
+\]
+et
+\[
+f_0,\ f_1,\ f_2 \ \in \ W,
+\]
+alors $f_3 \in W$. (Ça a été vu dans la théorie des produits fibrés $W$-homotopiques \texttt{[voir chapitre XII, p. 253]}, et la vérification
+\msp{page 65}
+directe est immédiate.) De l'hypothèse initiale pertinente que \begin{tikzcd}[row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+ & X_1 \arrow[dl] \\
+X_0 & \\
+ & X_2 \arrow[ul]
+\end{tikzcd} et \begin{tikzcd}[row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+ & Y_1 \arrow[dl] \\
+Y_0 & \\
+ & Y_2 \arrow[ul]
+\end{tikzcd}
+sont fibrants, on n'a besoin d'utiliser qu'un petit bout, p.~ex. que $p_1^X$ et $p_1^Y$ sont fibrants, qui assure que les deux carrés $X$, $Y$ sont $W$-homotopiquement cartésiens, ce qui suffit à impliquer alors que $f_0$, $f_1$, $f_2 \in W \Longrightarrow f_3 \in W$.
+
+Je vais essayer de généraliser ce raisonnement, pour traiter le cas d'un ensemble ordonné $I$ qui peut être infini, mais tel que $I^\circ$ soit noethérien et sobre, donc toute suite croissante de parties fermées de $I$, et toute suite décroissante de parties ouvertes, est stationnaire, et de plus toute partie ouverte filtrante croissante a un plus grand élément.
+
+% foot: Version 25 janvier 2004
+\printedpage{37}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+% margin: a vertical bar is printed in the left margin beside the lines "prouver ceci : (*) Si I est tel que ... alors I aussi."
+On veut prouver que $I$ est admissible, et par “récurrence noethérienne” on est ramené à prouver ceci : $(*)$ Si $I$ est tel que pour tout ouvert $I' \subset I$, avec $I' \neq I$, $I'$ soit admissible, alors $I$ aussi.
+
+$(*)$ admis, prouvons que $I = I_0$ est admissible.
+
+\msp{page 66}
+S'il ne l'était, par $(*)$ il existerait $I_1 \subset I_0$, $I_1 \neq I_0$, tel que $I_1$ non admissible. De même, il y aurait $I_2 \subset I_1$, $I_2 \neq I_1$, non admissible etc. -- on aurait construit une suite strictement décroissante d'ouverts $I_n$ de $I$, contrairement au caractère noethérien de $I^\circ$.
+
+Prouvons $(*)$, et distinguons encore deux cas.
+
+\textit{a}) $I^\circ$ est irréductible, donc admet un point générique, \textit{i.e.} un plus petit élément, \textit{i.e.} $I$ admet un plus grand élément. Ce cas a déjà été traité tantôt -- toute catégorie avec objet final est admissible.
+
+\textit{b}) $I^\circ$ est réductible, donc réunion de deux fermés $I_1^\circ$, $I_2^\circ$ distincts de $I^\circ$, donc $I$ est réunion de deux ouverts $I_1$, $I_2$ distincts de $I$. Alors par l'hypothèse dans $(*)$, $I_1$, $I_2$ et $I_0 = I_1 \cap I_2$ sont admissibles. On termine alors comme tantôt, étant ramené à l'admissibilité de \begin{tikzcd}[row sep=small, column sep=small, baseline=(\tikzcdmatrixname-2-1.base)]
+ & 1 & \\
+\Psi = 0 \arrow[ur] \arrow[dr] & & ! \\
+ & 2 &
+\end{tikzcd}
+
+\msp{page 67}
+Prouvons la partie \textit{c}) du théorème-scholie, partie $1^\circ$). Cela résulte de \textit{a}), une fois vu que pour $s \in I$, $I'/s$ satisfait aux mêmes hypothèses que $I'$. Or $I$ étant ordonné, $I/s$ est une sous-catégorie ouverte de $I$, donc $I'/s$ une sous-catégorie ouverte de $I'$, dont $(I'/s)^\circ$ un sous-ensemble ordonné fermé de $I'^{\circ}$. Ce dernier étant noethérien et sobre, il en est de même de tout fermé, d'où la conclusion.
+
+Prouvons la partie $2^\circ$) du théorème-scholie. Considérons
+\[
+\begin{tikzcd}[row sep=large]
+\cM(I')_{\rc} \arrow[r, hook, dotted] & \cM(I') & \cM(I')_{\rf} \arrow[l, hook', dotted] \arrow[d, "u_*^{\rf}"'] \\
+\cM(I)_{\rc} \arrow[r, hook, dotted] \arrow[u, "u_{\rc}^*"] & \cM(I) \arrow[u, "u^*"] & \cM(I)_{\rf} \ , \arrow[l, hook', dotted]
+\end{tikzcd}
+\]
+où $u^*$ et a fortiori $u_{\rc}^*$ sont compatibles avec $W(I)$, $W(I')$, et par hypothèse $u_*$ est compatible avec $W(I')_{\rf}$, $W(I)_{\rf}$. En passant aux catégories de fractions, on trouve
+
+% foot: Version 25 janvier 2004
+\printedpage{38}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 68}
+\[
+\begin{tikzcd}[row sep=large]
+\cM(I')_{\rc}W(I')_{\rc}^{-1} \arrow[r, dotted, "\sim"] & \HO_W(I') & \cM(I')_{\rf} \arrow[l, dotted, "\sim"'] \arrow[d, "u_*^W"'] \\
+\cM(I)_{\rc}W(I)_{\rc}^{-1} \arrow[r, dotted, "\sim"] \arrow[u, "u_W^*"] & \HO_W(I) & \cM(I)_{\rf} \arrow[l, dotted, "\sim"']
+\end{tikzcd}
+\]
+\texttt{[plutôt} $\cM(I')_{\rf}W(I')_{\rf}^{-1}$ \texttt{(resp.} $\cM(I)_{\rf}W(I)_{\rf}^{-1}$\texttt{) au lieu de} $\cM(I')_{\rf}$ \texttt{(resp.} $\cM(I)_{\rf}$\texttt{)]} et on veut montrer que $u_W^*$ et $u_*^W$ sont adjoints, de façon précise trouver un isomorphisme bifonctoriel, pour $F$ \textit{dans} $\cM(I)_{\rc}$ et $G'$ \textit{dans} $\cM(I')_{\rf}$
+\[
+\Hom_W(u^*F, G') \xrightarrow{\ \sim\ } \Hom_W(F, u_*G') \tag*{$(*)$}
+\]
+(où $\Hom_W$ désigne le Hom dans $\HO_W(I')$ resp. $\HO_W(I)$). Comme $F$ est dans $\cM(I)_{\rc}$, $u^*F$ est dans $\cM(I')_{\rc}$, et comme $G'$ est dans $\cM(I')_{\rf}$, $u_*G'$ est dans $\cM(I)_{\rf}$. Il s'ensuit que les deux membres de $(*)$ sont des quotients des deux membres dans la bijection canonique
+\[
+\Hom_{\cM(I')}(u^*F, G') \xrightarrow[\ \sim\ ]{\alpha} \Hom_{\cM(I)}(F, u_*G'). \tag*{$(**)$}
+\]
+Il faut simplement montrer que cette dernière transforme la relation d'équivalence pertinente $R'$ du premier membre,
+\msp{page 69}
+en celle $R$ du second.
+
+Je dis que l'on a de toute façon
+\[
+R \ \leq \ \alpha(R')
+\]
+\textit{sans} hypothèse d'admissibilité sur $u$, \textit{i.e.} que la bijection invese de $(**)$ donne par passage aux quotients un homomorphisme % [sic] invese -> inverse, missing letter
+\[
+\Hom_W(u^*F, G') \longleftarrow \Hom_W(F, u_*G'), \tag*{$(***)$}
+\]
+forcément surjectif, et de plus fonctoriel en $F$ \texttt{[,} $G'$ \texttt{barré]}, variables dans $\HO_W(I)$ et $\HO_W(I')$ respectivement. En effet, on définit la flèche $(*$ bis$)$ \texttt{[plutôt} $(***)$\texttt{]} comme composé
+\[
+\begin{tikzcd}[column sep=large]
+\Hom_W(F, u_*G') \arrow[r, "\underbrace{\hspace{2.6cm}}_{\text{\footnotesize\begin{tabular}{@{}c@{}}car $u^*$ est\\ compatible avec\\ $W(I)$, $W(I')$ sur\\ $\cM(I)$ tout entier,\\ et on interprète\\ les deux membres\\ comme des Hom\\ dans $\cM(I)W(I)^{-1}$\\ et $\cM(I')W(I')^{-1}$.\end{tabular}}}"'] & \Hom_W(u^*F, u^*u_*G') \arrow[dr, "\text{\footnotesize\begin{tabular}{@{}l@{}}composition\\ avec l'homomorphisme\\ d'adjonction $u^*u_*G' \longrightarrow G'$\end{tabular}}"] & \\
+ & & \Hom_W(u^*F, G').
+\end{tikzcd}
+\]
+% foot: Version 25 janvier 2004
+
+% ---- from Der-ChXIII-25-01-04_p041-045.tex
+\printedpage{39}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+Cela implique donc que le foncteur sur $\HO_W(I)$ $F \longmapsto \Hom_{\HO_{W}(I')}(u^*F,G')$ est, sinon représentable, du moins quotient terme à terme du foncteur représenté par $u_*G'$ (\footnote[37]{Mais il n'est pas clair, sans hypothèse supplémentaire sur la situation, que ce foncteur représentable puisse être choisi en dépendance fonctorielle de $G'$, envisagé dans $\HO_W(I')$.}).
+
+\msp{page 70}
+
+Mais supposons maintenant que $u$ soit admissible. Alors je vais définir la flèche en sens initial $(*)$ (p. 68) de la façon suivante : Je choisis une flèche
+\[
+i' \ : \ u^*F \longrightarrow F' \qquad \text{avec } i' \in TC \subset C \cap W,\ F' \in \Ob \M(I')_{\rf}
+\]
+(donc en fait $F' \in \Ob \M(I')_{\mathrm{cf}}$, car $u^*F$ est cofibrant), et par adjonction la flèche $i'$ correspond à
+\[
+i \ : \ F \longrightarrow u_*F'.
+\]
+Je considère le diagramme (commutatif!)
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+\Hom(F',G') \arrow[r, "\alpha"] \arrow[d, "{\scriptstyle \lambda:f'\,\longmapsto\, f'\circ i'}"] & \Hom(u_*F',u_*G') \arrow[d, "{\scriptstyle \mu:f\,\longmapsto\, f\circ i}"] \\
+\Hom(u^*F,G') \arrow[r, "\text{adj.}"] & \Hom(F,u_*G')\ .
+\end{tikzcd}
+\]
+
+On note que l'on a encore $F'$ cofibrant (car $u^*F$ l'est et $i' \in TC \subset C$), donc $\Hom_W(F',G')$ est un quotient de $\Hom(F',G')$, et $\lambda$ induit un isomorphisme
+\[
+\Hom_W(F',G') \xrightarrow{\ \sim\ } \Hom_W(u^*F',G') % [sic] u^*F' -> u^*F, the target of lambda is Hom(u^*F,G')
+\]
+(car $i' \in TC \subset W$). Comme $F'$, $G' \in \Ob \M(I')_{\rf}$ et que $u_*^{\rf}$ est compatible avec $W(I')_{\rf}$, $W(I)_{\rf}$, il s'ensuit que la flèche horizontale $\alpha$
+\msp{page 71}
+est compatible avec les relations d'équivalence définies par
+\[
+\Hom(F',G') \longrightarrow \Hom_{W(I')}(F',G') \quad \text{resp.} \ \ \Hom(u_*F',u_*G') \longrightarrow \Hom_{W(I)}(u_*F',u_*G')\ .
+\]
+Et il en est de même de la flèche $\mu : f \longmapsto f \circ i$, trivialement. Donc la flèche d'adjonction $\Hom(u^*F,G') \longrightarrow \Hom(F,u_*G')$ est compatible avec les relations $R$, $R'$, ce qui achève de prouver que $(**)$, page 68, induit une bijection $(*)$, page 68.
+
+Ceci montre donc
+
+\begin{enumerate}
+\item[1°)] que pour un objet fixé $G'$ dans $\HO_W(I')$ (qu'on peut toujours supposer, à isomorphisme près, provenir de $\M(I')_{\rf}$), le foncteur
+\[
+F \ \longmapsto\ \Hom_{\HO_{W}(I')}(u^*_W F,G')
+\]
+est représentable -- \textit{i.e.} le foncteur $u^*_W$ admet un adjoint à gauche, et
+\item[2°)] que cet adjoint à gauche se calcule comme $u_*(G')$ (quand l'argument $G'$ est pris fibrant) -- vu que l'homomorphisme $({*}{*}{*})$, page 69, est \textit{fonctoriel en $F$}. (A posteriori il s'ensuit qu'il est aussi fonctoriel en $G'$ \dots)
+\end{enumerate}
+
+\printedpage{40}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 72}
+
+Le dernier énoncé dans 2° du théorème-scholie résulte du calcul de $u_*^W$, compte tenu que $I'/s \longrightarrow I'$ est un isomorphisme local, donc le foncteur image inverse envoie
+\[
+\M(I')_{\rf} \longrightarrow \M(I'/s)_{\rf},
+\]
+donc si $G'$ est dans $\M(I')_{\rf}$,
+\[
+u_*(G')(s) \ \simeq\ p_{s\,*}(G'|I'/s)
+\]
+est un calcul de $p^W_{s\,*}(G'|I'/s)$.
+
+Cela achève la démonstration du théorème-scholie sur les images directes.
+
+\textbf{Commentaires.}
+
+1) Ce théorème me paraît loin d'être satisfaisant, c'est un pis-aller. J'avais espéré, avec les hypothèses du paragraphe 3, qu'on aurait l'existence des $u_*^W$ pour \textit{toute} flèche $u : I' \longrightarrow I$ dans Cat. Je doute à présent que ce soit le cas, mais n'ai pas encore réussi de faire un contre-exemple. Les cas test les plus importants pour la question d'admissibilité d'une catégorie $I$ me paraissent les suivants :
+
+\begin{enumerate}
+\item[\textit{a})] $I$ catégorie discrète infinie (disons dénombrable). La question revient ici à celle-ci : soient $f_i : X_i \longrightarrow Y_i$ dans $W$, avec $X_i$, $Y_i$ fibrants, \textit{i.e.} dans $F$ \texttt{[\textit{i.e.}} $X_i \longrightarrow e$\texttt{,} $Y_i \longrightarrow e$ \texttt{dans} $F$\texttt{]}. Alors $f = \prod f_i : \prod X_i \longrightarrow \prod Y_i$ est-il dans $W$ ?
+
+\msp{page 73}
+
+\item[\textit{b})] I catégorie % [sic] I (upright roman) -> $I$, italic everywhere else for the category
+\[
+0 \longrightarrow 1 \longrightarrow 2 \longrightarrow 3 \longrightarrow \cdots,
+\]
+\textit{i.e.} la catégorie ordonnée associée à l'ensemble ordonné $\mathbf{N}$, pour la relation d'ordre ordinaire $m \leq n$. Donc $\M(I)$ est formée des systèmes \textit{projectifs} dans $\M$, indexés par $\mathbf{N}$. On prouve facilement (en procédant comme dans le corollaire du lemme p. 63) que $\M(I)_{\rf}$ est formée des systèmes projectifs
+\[
+X_0 \longleftarrow X_1 \longleftarrow X_2 \longleftarrow \cdots \longleftarrow X_n \xleftarrow{\ p_n\ } X_{n+1} \longleftarrow \cdots
+\]
+tels que les $X_i$ soient dans $\M_{\rf}$, et les $p_n$ dans $F$. La question est donc : si $X_\bullet$, $Y_\bullet$ sont fibrants et $f_\bullet : X_\bullet \longrightarrow Y_\bullet$ est telle que $f_i \in W$ pour $i \in \mathbf{N}$, alors a-t-on $\varprojlim f_i : X_\infty \longrightarrow Y_\infty$ dans $W$ ?
+
+Si la reponse est affirmative pour $\mathbf{N}$ (pour un $W$ et une quillénisation donnée), elle % [sic] reponse -> réponse, accent missing
+l'est aussi pour toute catégorie discrète dénombrable, comme on le voit aussitôt. Mais je ne vois pas comment déduire même \textit{a}) des axiomes, disons pour un triplet de Quillen clos (closed model category) tel que $\M$ soit de plus stable par $\varinjlim$ filtrantes, que celles-ci soient exactes, et qu'il y ait
+\printedpage{41}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 74}
+un petit ensemble de générateurs dans $\M$ (donc $\M$ est accessible), que $W$ soit stable par $\varinjlim$ filtrantes. Je devrais demander à \textsc{Thomason} s'il connait un contre-exemple. % [sic] connait -> connaît, circumflex missing
+
+\item[\textit{c})] Les deux exemples précédents étaient des catégories ordonnées. Comme exemple typique de catégorie non-ordonnée, où je ne vois pas ce qui se passe, je signale $I = B_G$, $G$ un groupe (donc un seul objet, avec un groupe d'automorphismes $G$). Aussi le cas de $\boldsymbol{\Delta}[1] = \{\boldsymbol{\Delta}_0, \boldsymbol{\Delta}_1\}$ (sous-catégorie pleine de $\boldsymbol{\Delta}$) n'est pas clair pour moi.
+\end{enumerate}
+
+2) On aimerait pouvoir traiter de façon duale l'existence des $u_!^W$, à défaut de mieux. Dans l'hypothèse de départ du paragraphe 4 sur $(\M,W)$, cela amène donc à changer de tactique. Cette fois, on devra supposer l'existence d'une quillénisation close \textit{exacte à droite} pour $W$ (ce qui est plus exigeant, semble-t-il, qu'une telle structure exacte à gauche, dans le cas envisagé), donc
+\[
+TF \ = \ F \cap C,
+\]
+\msp{page 75}
+et de plus encore $C$, $TC$ tels qu'on ait
+\[
+C \ = \ \widetilde{C_0}, \qquad TC \ = \ \widetilde{TC_0}
+\]
+avec $C_0$, $TC_0$ petits (\footnote[38]{On dit alors que $C$, $TC$ (en tant que parties closes à droite \texttt{[plutôt à gauche]}) sont “accessibles”.}). On posera maintenant
+\[
+\begin{aligned}
+F(I) \ &= \ \{f \in \Fl \M(I) \ \mid \ f_s \in F \quad\ \ \forall\, s \in \Ob I\}\\
+TF(I) \ &= \ \{f \in \Fl \M(I) \ \mid \ f_s \in TF \ \ \forall\, s \in \Ob I\},
+\end{aligned}
+\]
+puis
+\[
+\begin{aligned}
+C(I) \ &= \ TF(I)^*\\
+TC(I) \ &= \ F(I)^*\ .
+\end{aligned}
+\]
+L'espoir (que je devrai vérifier ultérieurement), c'est qu'on obtient ainsi une quillénisation uniforme à droite de $W$, sur Cat tout entier. Le seul problème, c'est la validité des axiomes de factorisation de $f \in \Fl \M(I)$ en $f = pi$, avec $i \in TC$, $f \in F$, et aussi avec $i \in C$, $f \in TF$. % [sic] f \in F, f \in TF -> p \in F, p \in TF, the factorisation is f = pi
+J'ai bon espoir que c'est vrai -- cela se réduit essentiellement à voir que $(C(I),TF(I))$ et $(TC(I),F(I))$, soit $(\Phi(I),\Psi(I))$, satisfont en plus de $\Phi(I) = \Psi(I)^*$, à $\Psi(I) = \Phi(I)_*$ (\textit{i.e.} $\Psi(I)$ est clos à droite), et que $\Phi(I)$ est accessible (tout comme $\Phi = \Phi(e)$). Si ça marche, on aura donc l'existence
+\printedpage{42}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 76}
+de $u_!$ pour $u$ un foncteur entre catégories ordonnées finies, et sous des conditions légèrement plus générales. (P. ex. $u : I' \longrightarrow I$ avec $I$ ordonnée, $I'$ ordonnée et à espace sous-jacent noethérien et sobre.) Peut-être que cette fois, l'hypothèse que $W$ est stable par $\varinjlim$ filtrantes va quand même servir! Ainsi, le cas des catégories discrètes, et des catégories filtrantes à gauche comme $\mathbf{N}^\circ$, ne va plus poser de problèmes à cause de cela. Il y a donc de l'espoir! Tout ensemble ordonné qui est $\varinjlim$ filtrante de sous-ensembles ordonnés \textit{fermés} noethériens et sobres, est alors $W$-admissible à droite. Mais qu'en est-il de catégories de type $\Gamma = B_G$ p. ex. ? ? ?
+
+\msp{page 77}
+
+\section*{7\quad Filtrations cardinales et parties accessibles d'une grosse catégorie}
+
+Je me réfère à la théorie des foncteurs et catégories accessibles de SGA 4, I, §9 (p. 138-178). Je me donne une grosse catégorie (toujours une $\mathfrak{U}$-catégorie) $E$ avec une \textit{filtration cardinale} (croissante)
+\[
+\Bigl(\Filt^{\pi}(E)\Bigr)_{\pi \geq \pi_0}, \qquad \pi_0 \text{ un cardinal infini fixé,}
+\]
+par les sous-catégories strictement pleines $\Filt^{\pi}(E)$. On a \texttt{[SGA 4, I, 9.12]}
+
+\begin{enumerate}
+\item[\textit{a})] $\Filt^{\pi}(E)$ essentiellement petite, \textit{i.e.} équivalente à une petite catégorie (\textit{i.e.} à une catégorie appartenant à $\mathfrak{U}$).
+\item[\textit{b})] $E$ satisfait $L_{\pi_0}$ (\textit{i.e.} $E$ est stable par $\varinjlim$ de type $I$, quand $I$ est un ensemble ordonné grand devant $\pi_0$), et $\Filt^{\pi}(E)$ est stable par les limites inductives filtrantes indexées par $I$ grand devant $\pi_0$, et tel que $\card I \leq \pi$.
+\item[\textit{c})] Pour tout $\pi \geq \pi_0$, et pour tout $X \in \Ob E$, on a
+\[
+X \ \simeq\ \varinjlim_{i \in I} X_i,
+\]
+où les $X_i$ \texttt{[sont]} dans $\Filt^{\pi}(E)$, et où $I$ est un ensemble ordonné grand devant $\pi$. De plus, si $X \in \Ob \Filt^{\pi'}(E)$, avec $\pi' > \pi$, on peut prendre $I$ tel que $\card I \leq \pi'^{\pi}$ (donc si $\pi' = 2^{c'}$ avec $c' \geq \pi$, d'où $(\pi')^{\pi} = (2^{c'})^{\pi} = 2^{c'\pi} = 2^{c'} = \pi'$, on aura $\card I \leq \pi'$). (\textbf{NB} Si on admet l'hypothèse du continu généralisée, on aura toujours $\pi'^{\pi} = \pi'$, donc $\card I \leq \pi'$.) (\footnote[39]{NB \textit{b}) et \textit{c}) impliquent que $E = \bigcup_{\pi \geq \pi_0} \Filt^{\pi}(E)$.})
+\end{enumerate}
+
+\printedpage{43}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 78 barrée}
+
+\msp{page 79}
+
+Considérons la représentation de \textit{c}),
+\[
+X \ = \ \varinjlim_{I} X_i \qquad\qquad
+\left\{
+\begin{aligned}
+& X_i \in \Filt^{\pi},\\
+& I \text{ grand devant } \pi.
+\end{aligned}
+\right.
+\]
+Soit
+\[
+\tilde{I} \ = \ \{I' \subset I \mid \card I' \leq \pi,\ \ I' \text{ grand devant } \pi_0\},
+\]
+muni de la relation d'ordre d'inclusion. Pour
+\[
+I' \ \in\ \tilde{I}, \qquad \text{soit}\ \ X_{I'} = \varinjlim_{I'} X_i\ ,
+\]
+cette limite existe par $L_{\pi_0}$ (hypothèse \textit{b}), elle est dans $\Filt^{\pi}$ par \textit{b}), donc on a un système inductif
+\[
+(X_{I'})_{I' \in \tilde{I}}, \qquad X_{I'} \in \Filt^{\pi},
+\]
+avec
+\[
+\card \tilde{I} \ \leq\ (\card I)^{\pi},
+\]
+et si $X \in \Filt^{\pi'}$ $(\pi' > \pi)$, prenant
+\[
+\card I \ \leq\ \pi'^{\pi},
+\]
+on aura $\card \tilde{I} \leq (\pi'^{\pi})^{\pi} = \pi'^{\pi^2} = \pi'^{\pi}$, donc
+\[
+\card \tilde{I} \ \leq\ \pi'^{\pi}.
+\]
+Je dis que $\tilde{I}$ est lui aussi \textit{grand devant $\pi$,} tout comme $I$. En effet,
+\msp{page 80}
+soit
+\[
+(I_\alpha)_{\alpha \in A}, \qquad I_\alpha \in \tilde{I}, \qquad \card A \ \leq\ \pi,
+\]
+prouvons qu'il existe $I' \in \tilde{I}$ qui majore les $I_\alpha$, \textit{i.e.} qui contient $I'_0 = \bigcup_{\alpha \in A} I_\alpha$. On aura $\card I'_0 \leq \pi^2 = \pi$ (car $\card A \leq \pi$ et $\card I_\alpha \leq \pi$ pour tout $\alpha$), et il suffit de voir ceci :
+
+\texttt{[En fait, l'assertion est évidente : comme} $\card I'_0 \leq \pi$\texttt{, et comme} $I$ \texttt{est grand devant} $\pi$\texttt{,} $I'_0$ \texttt{admet un majorant} $i'_0$ \texttt{dans} $I$\texttt{, et on peut prendre} $I' = I'_0 \cup \{i'_0\}$\texttt{.]}
+
+\textbf{Lemme 1 :} \textit{Soient $\pi_0$, $\pi$ deux cardinaux, avec $\pi \geq \pi_0$, $I$ un ensemble ordonné grand devant $\pi$, et $I'_0$ une partie de $I$ de cardinal $\leq \pi$. Alors il existe une partie $I'$ de $I$ satisfaisant les conditions :} (\footnote[40]{Pourvu qu'on suppose $\pi > \pi_0$, et de plus $\pi^{\pi_0} = \pi$ (p. ex. $\pi = 2^c$ avec $c \geq \pi_0$).})
+
+\begin{enumerate}
+\item[a)] $I' \supset I'_0$.
+\item[b)] $\card I' \leq \pi$.
+\end{enumerate}
+
+% ---- from Der-ChXIII-25-01-04_p046-050.tex
+\printedpage{44}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}
+\item[c)] \textit{$I'$ grand devant $\pi_0$.}
+\end{itemize}
+
+\texttt{[Le lemme tel qu'il est énoncé est évident pour les mêmes raisons que ci-dessus (même sans l'hypothèse de la note de bas de page). La démonstration qui suit prouve en fait un résultat plus fin :}
+
+\texttt{\textsc{Lemme} 1$'$ : \textit{Soient $\pi_0$, $\pi$ deux cardinaux, avec $\pi_0<\pi$ et $\pi^{\pi_0}=\pi$, $I$ un ensemble ordonné grand devant $\pi_0$, et $I'_0$ une partie de $I$ de cardinal $\le\pi$. Alors il existe une partie $I'$ de $I$ satisfaisant les conditions :}}
+
+\begin{itemize}
+\item[\texttt{a)}] $I'\supset I'_0$\texttt{.}
+\item[\texttt{b)}] $\card I'\le\pi$\texttt{.}
+\item[\texttt{c)}] \texttt{\textit{$I'$ grand devant $\pi_0$. ]}}
+\end{itemize}
+
+On va essayer de construire $I'$ par récurrence transfinie, en définissant les $I'_\alpha\subset I$ ainsi :
+\[
+\begin{aligned}
+I'_0 &= I'_0\;, \\
+I'_\alpha &= \textstyle\bigcup_{\beta<\alpha} I'_\beta \quad \text{si $\alpha$ est un ordinal limite,} \\
+I'_{\alpha+1} &= \left\{\parbox{0.6\textwidth}{déduit de $I'_\alpha$ ainsi : pour toute partie $J$ de $I'_\alpha$ telle que $\card J\le\pi_0$, qui n'est pas majorée dans $I'_\alpha$, on choisit un majorant $i_J$ dans $I$ (\texttt{[qui]} existe, car $I$ \texttt{[est]} grand devant $\pi$, donc devant $\pi_0$) et $I'_{\alpha+1}$ s'obtient en adjoignant ces $i_J$ à $I'_\alpha$.}\right.
+\end{aligned}
+\]
+
+\msp{page 81}
+Soit alors $\alpha_0$ le premier ordinal qui soit de cardinal $>\pi_0$, et considérons
+\[
+I' \;=\; I'_{\alpha_0} \;=\; \bigcup\limits_{\substack{\alpha<\alpha_0\\ \textit{i.e.}\ \card\alpha\le\pi_0}} I'_\alpha .
+\]
+Alors $I'$ contient $I'_0$, il est grand devant $\pi_0$, mais quel est son cardinal ? Prouvons par récurrence transfinie que
+\[
+\card I'_\alpha \;\le\pi \qquad\quad \text{si } \alpha<\alpha_0,\ \ \textit{i.e.}\ \ \card\alpha\le\pi_0 .
+\]
+C'est O.K. pour $\alpha=0$ par hypothèse sur $I'_0$. Si c'est vrai pour $I'_\alpha$, est-ce vrai pour $I'_{\alpha+1}$ ? On adjoint à $I'_\alpha$ un ensemble d'éléments $i_J$ qui est de cardinal $\le\card\mathfrak{P}_{\le\pi_0}(I'_\alpha)$, donc de cardinal $\le\card(I'_\alpha)^{\pi_0}\le\pi^{\pi_0}$, et si on suppose
+\[
+\pi^{\pi_0} \;=\; \pi,
+\]
+on gagne. Supposons enfin que $\alpha$ soit un ordinal limite (de cardinal $\le\pi_0$). Donc on a
+\[
+I'_\alpha \;=\; \bigcup_{\beta<\alpha} I'_\beta ,
+\]
+donc
+\printedpage{45}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 82}
+\[
+\card I'_\alpha \;\le\; \underbrace{(\card\alpha)\pi}_{\le\pi\pi=\pi^2=\pi} \qquad\quad \text{puisque les } \card I'_\beta\le\pi,
+\]
+on gagne encore.
+
+On trouve enfin, par le même argument,
+\[
+\card I'_{\alpha_0} \;\le\; \underbrace{(\card\alpha_0)\pi\le\pi^2}_{\substack{\text{si }\card\alpha_0\le\pi,\\ \textit{i.e.}\text{ si }\pi_0<\pi}} = \pi,
+\]
+donc on gagne encore.
+
+Ainsi, on a trouvé un deuxième système inductif
+\[
+(X_{\tilde\imath})_{\tilde\imath\in\tilde I}
+\]
+du même type que le système initial, ayant comme limite inductive $X$ (qu'il ait même limite inductive est immédiat). Mais qu'a-t-on gagné ? Ceci : dans $\tilde I$ toute partie de cardinal $\le\pi$ et grande devant $\pi_0$ est non seulement \textit{majorée} dans $\tilde I$, mais même y admet une borne supérieure. Cela résulte du % margin: double vertical rule beside the four lines "inductive est immédiat" ... "supérieure. Cela résulte du"
+
+\msp{page 83}
+\textbf{Lemme 2 :} \textit{Soit $I$ grand devant $\pi>\pi_0$, avec $\pi^{\pi_0}=\pi$} \texttt{[il suffit $\pi\ge\pi_0$]} \textit{(cf. lemme 1). Soit $(I'_\alpha)_{\alpha\in A}$ un ensemble de parties de $I$ qui sont dans $\tilde I$,} i.e.
+
+\begin{itemize}
+\item[a)] \textit{de cardinal $\le\pi$, et}
+\item[b)] \textit{grandes devant $\pi_0$,}
+\end{itemize}
+
+\textit{et supposons que} $\card A\le\pi$ \textit{et que $A$, ordonné par inclusion, soit grand devant $\pi_0$. Alors $I'=\bigcup_{\alpha\in A} I'_\alpha$ est encore dans $\tilde I$,} i.e. \textit{$I'$ est de cardinal $\le\pi$ (car de cardinal $\le\pi^2=\pi$), et de plus, grande devant $\pi_0$.} (Vérification immédiate.)
+
+Ainsi, on a prouvé ceci :
+
+% margin: single vertical rule beside Proposition 1, from here to the end of the page
+\textbf{Proposition 1.} \textit{Soit $E$} \texttt{[une]} \textit{grosse catégorie, avec filtration cardinale} $(\Filt^\pi)_{\pi\ge\pi_0}$. \textit{Soit $\pi$ un cardinal avec}
+\[
+\pi>\pi_0, \qquad\quad \pi^{\pi_0}=\pi \qquad\quad \textit{(p. ex. $\pi=2^c$, avec $c\ge\pi_0$)} \quad \texttt{[}\pi\ge\pi_0\ \texttt{suffit].}
+\]
+\textit{Alors pour tout $X$ dans $E$, on peut trouver un système inductif $(X_i)_{i\in I}$, de limite $X$, avec}
+
+\begin{itemize}
+\item[a)] \[ \left\{ \begin{aligned} & X_i\in\Filt^\pi \ \ \textit{pour tout $i\in I$,} \\ & \ I \ \textit{grand devant $\pi$,} \end{aligned} \right. \]
+\end{itemize}
+
+\textit{satisfaisant aux conditions supplémentaires suivantes :}
+
+\begin{itemize}
+\item[b)] \textit{Toute partie $J$ de $I$ de cardinal $\le\pi$, et grande devant $\pi_0$, admet une borne supérieure $i_J$ dans $I$.}
+\item[c)] \textit{On a, sous ces conditions}
+\end{itemize}
+
+\printedpage{46}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 84}
+\[
+X_{i_J} \xleftarrow{\ \sim\ } \varinjlim_{i\in J} X_i .
+\]
+\textit{De plus, si $X\in\Filt^{\pi'}$ avec $\pi'>\pi$, on peut prendre $I$ de cardinal $\le\pi'^{\pi}$ (donc de cardinal $\le\pi'$ si $\pi'^{\pi}=\pi'$, p. ex. si $\pi'=2^{c'}$, avec $c'\ge\pi$).}
+
+\textbf{Définition.} On appelle un système inductif $(X_i)_{i\in I}$, satisfaisant les conditions \textit{a}), \textit{b}), \textit{c}) ci-dessus, un \textit{système inductif bien adapté} (à la filtration cardinale donnée, pour les cardinaux $\pi_0$, $\pi$ donnés), et la représentation correspondante
+\[
+X \xleftarrow{\ \sim\ } \varinjlim X_i
+\]
+une \textit{représentation bien adaptée} de $X$ en termes d'objets de $\Filt^\pi$.
+
+\textbf{NB} Quand $E$ est stable par petites $\varinjlim$ filtrantes, la situation se simplifie considérablement. On peut alors prendre
+\[
+\tilde I \;=\; \{I'\subset I \mid \card I'\le\pi,\ I' \text{ filtrant}\}
+\]
+(sans s'encombrer de la condition $I'$ grand devant $\pi_0$) et définir encore le système inductif $(X_{I'})_{I'\in\tilde I}$ par
+\[
+X_{I'} \;=\; \varinjlim_{i\in I'} X_i \;.
+\]
+On a encore
+\msp{page 85}
+\[
+\card\tilde I \;\le\; (\card I)^\pi \;\le\; \pi'^{\pi} \qquad\quad \text{si }\ \card I\le\pi'^{\pi}
+\]
+(notamment, si $X\in\Filt^{\pi'}$, et qu'on prenne $I$ comme indiqué dans la condition $c$ des filtrations cardinales). De plus, cette fois, le fait que $\tilde I$ soit grand devant $\pi$ est trivial, on a même mieux, à part que $I$ soit filtrante :
+
+\begin{itemize}
+\item[$(*)$] \textit{Toute} partie $(I'_\alpha)_{\alpha\in A}$ de $\tilde I$ filtrante et de cardinal $\le\pi$ admet une borne supérieure $\tilde\imath_A$,
+\end{itemize}
+
+savoir la réunion (qui est bien filtrante). De plus, le système inductif $(X_{\tilde\imath})_{\tilde\imath\in\tilde I}$ a la propriété plus forte que
+\[
+X_{\tilde\imath_A} \xleftarrow{\ \sim\ } \varprojlim_{\tilde\imath\in A} X_{\tilde\imath} \;. % [sic] \varprojlim (arrow under lim pointing left) -> \varinjlim, inductive limit of the inductive system X_ĩ over the filtrant part A
+\]
+Ainsi on a la
+
+\textbf{Proposition 1 bis.} \textit{Supposons $E$ stable par petites $\varinjlim$ filtrantes, et} $\Filt^\pi$ \textit{stable par celles-ci, où $\pi\ge\pi_0$ est donné. Alors pour tout $X$ dans $E$, on peut trouver un système inductif $(X_i)_{i\in I}$ de limite inductive $X$, avec}
+
+\begin{itemize}
+\item[a)] $X_i\in\Filt^\pi$ \textit{pour tout $i\in I$, $I$ ensemble ordonné grand devant $\pi$.}
+\item[b)] \textit{Toute partie $J$ de $I$ filtrante de cardinal $\le\pi$ admet une borne supérieure $i_J$ dans $I$.}
+\item[c)] \textit{Sous ces conditions}
+\end{itemize}
+
+\printedpage{47}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+\msp{page 86}
+\[
+X_{i_J} \;=\; \varinjlim_{i\in J} X_i \;.
+\]
+De tels systèmes inductifs seront dits \textit{“parfaitement adaptés”} (à la filtration cardinale donnée, pour le cardinal $\pi$ donné – $\pi_0$ n'y figure plus, si ce n'est comme début de la filtration cardinale sans plus).
+
+Comme pratiquement, on aura à manier surtout des $E$ stables par petites $\varinjlim$ filtrantes, et des filtrations cardinales stables en conséquence (renforcement de la condition \textit{b}) des filtrations cardinales), c'est le cas, et la notion de \textit{représentation parfaitement adaptée} de $X$ comme $\varinjlim\limits_{I} X_i$ ($X_i\in\Filt^\pi$), que je mettrai en avant. Le cas “général”, où on suppose seulement \texttt{[que]} $E$ satisfait $L_{\pi_0}$, est plus alambiqué et se traite moins joliment (\footnote[41]{On parlera de filtration cardinale \textit{stricte,} si les $\underline{\Filt}^\pi$ sont stables par $\varinjlim$ filtrantes de cardinal $\le\pi$ (et que ces limites filtrantes petites existent dans $E$).}).
+
+\textbf{Définition 2.} Soit $E$ munie d'une filtration cardinale stricte $(\underline{\Filt}^\pi)_{\pi\ge\pi_0}$. Soit $M$ une partie de $\Ob E$, $\underline{M}$ la sous-catégorie pleine de $E$ qu'elle définit, et soit $\pi$ un cardinal $\ge\pi_0$. On dit que $M$ est \textit{$\pi$-accessible,} où que $\underline{M}$ est \textit{$\pi$-accessible}, % [sic] où que -> ou que, disjunction "ou" not the relative "où"
+\msp{page 87}
+si les conditions suivantes sont satisfaites. Pour tout système inductif
+\[
+(X_i)_{i\in I}
+\]
+parfaitement adapté à la filtration cardinale pour $\pi$ (donc $I$ ensemble ordonné filtrant tel que toute partie filtrante $J$ de cardinal $\le\pi$ ait une borne supérieure $i_J$, et $X_{i_J}\xleftarrow{\ \sim\ }\varinjlim\limits_{j\in J} X_j$) ; soit $I_M$ l'ensemble des $i\in I$ tels que $X_i\in M$. Ceci posé, on veut ceci : pour que $X$ ($=\varinjlim X_i$) soit dans $M$, il faut et il suffit que $I_M$ soit cofinal dans $I$ (de sorte que $X$ apparaît comme $\varinjlim$ filtrante, avec ensemble d'indices $I_M$ grand devant $\pi$, d'éléments de $M\cap\underline{\Filt}^\pi\overset{\text{déf}}{=}M^\pi$).
+
+\msp{page 88}
+J'ai envie de reprendre la définition de la $\pi$-accessibilité de $M$, pour une filtration cardinale donnée, à coups de conditions équivalentes. Pour tout système inductif $(X_i)_{i\in I}$ dans $M$ \texttt{[plutôt dans $E$]}, je garde la notation
+\[
+I_M \;=\; \{i\in I \mid X_i\in M\}.
+\]
+Je pose, pour tout cardinal $\pi\ge\pi_0$,
+\[
+M^\pi \;=\; M\cap\Filt^\pi .
+\]
+
+\begin{itemize}
+\item[\circled{a$_\pi$}] $M$ est l'ensemble des objets de la forme
+\[
+\varinjlim_{i\in I} X_i \;,
+\]
+où les $X_i$ sont dans $M^\pi$, et $I$ est grand devant $\pi$.
+\end{itemize}
+
+\printedpage{48}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}
+\item[\circled{b$_\pi$}] Soit $(X_i)_{i\in I}$ un système inductif dans $M$ \texttt{[plutôt dans $E$]} parfaitement adapté à la filtration cardinale pour $\pi$, \textit{i.e.} $I$ filtrante et toute partie filtrante $J$ de $I$ de cardinal $\le\pi$ admet une borne supérieure $i_J$, et $X_{i_J}\xleftarrow{\ \sim\ }\varinjlim\limits_{J} X_i$, et enfin $X_i\in\Filt^\pi$ pour tout $i\in I$. Soit $X=\varinjlim X_i$. Pour que l'on ait $X\in M$, il faut et il suffit que $I_M$ soit cofinal dans $I$.
+\item[\circled{c$_\pi$}] $\underline{M}^\pi=\underline{M}\cap\underline{\Filt}^\pi$ est une sous-catégorie de $\underline{M}$ génératrice par épimorphismes stricts, $\underline{M}$ est stable par $\varinjlim$ grandes devant $\pi$, enfin pour tout $X\in M$, $\underline{M}^\pi/X$ est une catégorie filtrante.
+\end{itemize}
+
+\msp{page 89}
+Je présume que ces conditions sont équivalentes.
+
+$b_\pi\Longrightarrow a_\pi$. On suppose \textit{b}) vérifié, on veut prouver \textit{a}). D'abord que tout $X\in M$ est de la forme dite $\varinjlim\limits_{I} X_i$, avec les $X_i\in M^\pi$ et $I$ grand devant $\pi$. Par \texttt{[la]} proposition 1, on sait qu'on a une présentation parfaite adaptée pour $\pi$, $X=\varinjlim\limits_{i\in I} X_i$. Par \textit{b}) “il faut”, la partie $I_M$ de $I$ est cofinale dans $I$, donc comme $I$ est grand devant $\pi$, $I_M$ aussi, et on aura (posant $J=I_M$)
+\[
+X \;=\; \varinjlim_{i\in J} X_i, \qquad\quad X_i\in M^\pi,\ \ J \text{ grand devant } \pi,
+\]
+O.K. Inversement, prouvons que si $X$ se met sous la forme dite dans \textit{a}), il est dans $M$. Cela va résulter du
+
+\textbf{Lemme 1 :} \textit{Si la condition} b) (\textit{ou} a)) \textit{est satisfaite, $M$ est stable par limites inductives grandes devant $\pi$.}
+
+Il faut prouver que si
+\msp{page 90}
+\[
+X \;=\; \varinjlim_{i\in I} X_i \;,
+\]
+avec $I$ grand devant $\pi$, les $X_i$ dans $M$, alors $X\in M$. La condition \textit{b}) “il suffit” l'assure quand on suppose de plus les $X_i$ dans $\Filt^\pi$ (donc dans $M^\pi$), de sorte que l'on aura $I_M=I$, donc $I_M$ cofinal, donc $X\in M$ (\footnote[42]{Pas tout à fait – on y suppose plus, sur le système inductif. On ne peut se dispenser, même dans le cas $X_i\in M^\pi$ $\forall\, i\in I$, faire le raisonnement des pages suivantes.}). Si on ne suppose pas les $X_i$ dans $\Filt^\pi$, il faut travailler un peu plus.
+
+Passer tout de suite à la partie de la démonstration ci-dessous, page 96, qui prouve \textit{b}) $\Longrightarrow$ \textit{a}). Le reste de la démonstration va prouver le
+
+\textbf{Lemme 2.} \textit{Si tout élément de Filt$^\pi$ est $\pi$-accessible, alors} b$_\pi$) \textit{(et même} a$_\pi$\textit{) implique que $M$ est stable par $\varinjlim$ grandes devant $\pi$.}
+
+% ---- from Der-ChXIII-25-01-04_p051-055.tex
+\printedpage{49}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 91}Soit
+\[ \mathcal{C} \;=\; \underline{M}^\pi/\mathcal{X} \]
+la catégorie suivante. Ses objets sont les triples
+\[ (Z,i,\alpha) \quad \text{tels que} \quad Z\in M^\pi,\ i\in I,\ \alpha : Z\longrightarrow X_i \ , \]
+les flèches
+\[ (Z,i,\alpha) \;\longrightarrow\; (Z',i',\alpha') \]
+sont les couples $(u,\lambda)$ avec
+\[ u : Z\longrightarrow Z', \qquad \lambda : i\longrightarrow i', \qquad (\textit{i.e.}\ \text{on a } i\le i' \text{ et } \lambda \text{ est l'unique flèche de } i \text{ dans } i'), \]
+tels que le diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+Z \arrow[r,"\alpha"] \arrow[d,"u"'] & X_i \arrow[d,"\text{transition } \lambda_{i',i}"] \\
+Z' \arrow[r,"\alpha'"] & X_{i'}
+\end{tikzcd}
+\]
+commute. On peut donc définir $\mathcal{C}$ comme le produit fibré dans le carré cartésien
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+ & \mathcal{C} \arrow[r,"\text{cofibré}"] \arrow[d] \arrow[dl,dotted,"\mathcal{Z}"'] & I \arrow[d,"\mathcal{X} : X \longmapsto X_i"] \\ % [sic] X \longmapsto X_i -> i \longmapsto X_i, the functor \mathcal{X} goes from I, so the variable should be i
+\underline{M}^\pi & \underline{M}^\pi/E \arrow[l,dotted,"\text{source}"'] \arrow[r,"\text{but}","\text{cofibré}"'] & E.
+\end{tikzcd}
+\]
+La fibre $\mathcal{C}_i$ de $\mathcal{C}$ en $i\in I$ est $\mathrm{Filt}^\pi/X_i$ \texttt{[plutôt} $M^\pi/X_i$\texttt{]}. On a, comme \textit{b}) $\Longrightarrow$ première moitié de \textit{a}), que $\underline{M}^\pi$ est un
+\msp{page 92}système de générateurs stricts de $\underline{M}$ \texttt{[cela n'est pas clair sans autres hypothèses sur} $\underline{M}$\texttt{]}, et $X_i\in\operatorname{Ob}\underline{M}$ par hypothèse,
+\[ X_i \;=\; \varinjlim_{Z\in\operatorname{Ob}\underline{M}^\pi/X_i} Z \;=\; \varinjlim_{\mathcal{C}_i}\mathcal{Z}|\mathcal{C}_i, \]
+donc le système inductif donné $(X_i)_{i\in I}$ sur $I$ à valeurs dans $X$, se déduit du système inductif (non ordonné en général) sur $\mathcal{C}$, à valeurs dans $\underline{M}^\pi$, en ``intégrant sur les fibres'' de $\mathcal{C}\longrightarrow I$. D'ailleurs, comme $\underline{M}^\pi/E\longrightarrow E$ est cofibrée, donc propre, il en est de même de $\mathcal{C}\longrightarrow I$, donc les $\varinjlim$ de $\mathcal{Z}$ sur les fibres $\mathcal{C}_i$ ($=$ $\underline{M}^\pi/X_i$) forment bien un foncteur covariant $I\longrightarrow E$, dont la limite inductive est celle de $\mathcal{Z}$ (\footnote{\textbf{NB} Si on admet la validité de $a$), alors il en résulte déjà que $\varinjlim\limits_{i\in I} X_i \simeq \varinjlim\limits_{\alpha\in C} Z_\alpha$ est dans $M$. (Stabilité de $M$ par $\varinjlim$ grandes devant $\pi$).}).
+
+\printedpage{50}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 93}Soit, pour tout $i\in I$, $\tilde{\mathcal{C}}_i$ l'ensemble ordonné
+\[ \tilde{\mathcal{C}}_i = \{\text{sous-catégories } \mathcal{C}'_i \text{ de } \mathcal{C}_i = \underline{M}^\pi/X_i \mid \operatorname{card}\mathcal{Z}(\mathcal{C}'_i)\le\pi,\ \ \mathcal{C}'_i \text{ filtrante}\}. \]
+J'admets pour l'instant le
+
+\textbf{Lemme} (\footnote{Utilise l'hypothèse tacite que les éléments de $\mathrm{Filt}^\pi$ sont $\pi$-accessibles.}). \textit{Pour tout $X\in M$, la catégorie $\underline{M}^\pi/X$ est filtrante. (Sous l'hypothèse} b), \textit{ou que tout objet de $M$ est de la forme dite dans} a).\textit{)}
+
+Il en résulte, comme $X_i\in M$, que $\mathcal{C}_i$ est filtrante, donc la réunion des $\mathcal{C}'_i\in\tilde{\mathcal{C}}_i$ est $\mathcal{C}_i$ ; l'ensemble ordonné $\tilde{\mathcal{C}}_i$ est filtrant, et toute partie $(\mathcal{C}'_{i_\alpha})_{\alpha\in A}$ filtrante et de cardinal $\le\pi$ de $\tilde{\mathcal{C}}_i$ y admet une borne supérieure $\mathcal{C}'_{i_A}$, savoir la réunion des $\mathcal{C}'_{i_\alpha}$. $\tilde{\mathcal{C}}_i$ est donc un ensemble ordonné $\pi$-adapté.
+
+On peut considérer les ensembles ordonnés $\tilde{\mathcal{C}}_i$, pour $i\in I$ variable, comme les fibres d'une application croissante d'ensembles ordonnés
+\[ p \;:\; \tilde{\mathcal{C}} \;\longrightarrow\; \mathcal{C}, \]
+en écrivant
+\[ \left\{ \begin{array}{l}
+(\mathcal{C}'_i\subset\mathcal{C}_i) \;\le\; (\mathcal{C}'_j\subset\mathcal{C}_j) \\
+\text{si et seulement si } i\le j, \\
+\text{et le foncteur canonique de transition } \mathcal{C}_i\longrightarrow\mathcal{C}_j \text{ applique } \mathcal{C}'_i \text{ dans } \mathcal{C}'_j.
+\end{array}\right. \]
+On voit donc que $\tilde{\mathcal{C}}$ est lui aussi filtrant et grand devant $\pi$.
+
+\msp{page 94}On définit un système inductif sur $\tilde{\mathcal{C}}$, à valeurs dans $\underline{\mathrm{Filt}}^\pi$, en posant
+\[ Z_{\mathcal{C}'_i} \;=\; \varinjlim_{\alpha\,\in\,\mathcal{C}'_i\ (\subset\,\mathcal{C}_i\,=\,\underline{M}^\pi/X_i)} Z_\alpha \]
+(où un $\alpha\in\mathcal{C}_i$ est formé, je le rappelle, de $Z_\alpha\xrightarrow{u_\alpha}X_i$, avec $Z_\alpha\in M^\pi\subset\underline{\mathrm{Filt}}^\pi$). Ces $Z_{\mathcal{C}'_i}$ ne sont plus forcément dans $M^\pi$, mais seulement dans $\mathrm{Filt}^\pi$. (Alors à quoi ça a servi de définir les $\mathcal{C}_i$ eux-mêmes comme $\underline{M}^\pi/X_i$, au lieu de $\underline{\mathrm{Filt}}^\pi/X_i$ ?)
+
+Le système inductif
+\[ (Z_{\mathcal{C}'_i})_{\mathcal{C}'_i\in\tilde{\mathcal{C}}_i} \]
+est parfaitement bien adapté à la filtration cardinale pour le cardinal $\pi$, et il est immédiat que sa $\varinjlim$ est isomorphe à $\varinjlim\limits_{\alpha\in\operatorname{Ob}\mathcal{C}_i=\underline{M}^\pi/X_i} Z_\alpha = X_i\in M$ . Donc par \textit{b}), l'ensemble $\tilde{\mathcal{C}}_M$ des $\mathcal{C}'_i\in\tilde{\mathcal{C}}_i$ tels que $Z_{\mathcal{C}'_i}\in M$ (donc $Z_{\mathcal{C}'_i}\in M^\pi$) est cofinal dans $\tilde{\mathcal{C}}_i$. Il s'ensuit donc que l'ensemble $\tilde{\mathcal{C}}_M$ est lui aussi cofinal dans $\tilde{\mathcal{C}}$.
+
+\printedpage{51}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\msp{page 95}On vérifie aussi immédiatement que
+\[ \varinjlim_{\alpha\in\tilde{\mathcal{C}}} Z_\alpha \;=\; \varinjlim X_i \;=\; X, \]
+donc, $\tilde{\mathcal{C}}_M$ étant cofinal,
+\[ \varinjlim_{\alpha\in\tilde{\mathcal{C}}_M} Z_\alpha \;=\; X. \]
+Au total, on est arrivé à représenter $X$ sous la forme
+\[ X \;=\; \varinjlim_{\alpha\in A} X_\alpha, \]
+où cette fois les $X_\alpha$ sont \textit{dans} $M^\pi$ (pas seulement dans $M$), et $A$ est grand devant $\pi$. Mais on ne sait pas que toute partie filtrante $B$ de cardinal $\le\pi$ de $A$ admet une borne supérieure $\alpha_B$ dans $A$, et encore moins que $X_{\alpha_B} = \varinjlim\limits_{\alpha\in B} X_\alpha$ (\footnote{Si on suppose $(a_\pi)$, cet argument prouve du moins que $M$ est stable par $\varinjlim$ grandes devant $\pi$.}). Donc on ne peut encore appliquer directement \textit{b}). S'il ne s'agissait que de prouver la deuxième moitié de \textit{a}), où on suppose déjà les $X_i\in M^\pi$ et $I$ grand devant $\pi$, on n'a rien gagné du tout par nos labeurs !
+
+\msp{page 96}Mais revenons à ce cas
+\[ X \;=\; \varinjlim X_i \;\left|\; \begin{array}{l} X_i\in M^\pi \\[1.5ex] I \text{ grand devant } \pi, \end{array}\right. \]
+et introduisons à nouveau
+\[ \tilde{I} \;=\; \{I'\subset I \mid I' \text{ filtrant, de cardinal } \le\pi\}, \]
+donc cette fois $\tilde{I}$ est bien adapté à $\pi$ (filtrant, et toute partie filtrante de cardinal $\le\pi$ a une borne supérieure), et si on pose
+\[ X_{\tilde{\imath}} \;=\; \varinjlim_{i\in I'_{\tilde{\imath}}} X_i, \]
+on voit que le système inductif
+\[ (X_{\tilde{\imath}})_{\tilde{\imath}\in\tilde{I}} \]
+est parfaitement adapté à $\pi$ et la filtration cardinale. De plus, je dis que l'ensemble $\tilde{I}_M$ est \textit{cofinal} dans $\tilde{I}$. En effet, $\tilde{I}_M$ contient le sous-ensemble $\tilde{I}_0$ formé des $I'\in\tilde{I}$ qui ont un plus grand élément -- et $\tilde{I}_0$ est bien cofinal ! Maintenant, on peut appliquer
+\printedpage{52}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+\msp{page 97}le ``il suffit'' dans \textit{b}), qui conclue que $X = \varinjlim X_i\in M$, q.e.d. % [sic] conclue -> conclut, verb form (indicative of conclure)
+
+On a prouvé $b\Longrightarrow a$, sans utiliser l'hypothèse que tout objet de $\mathrm{Filt}^\pi$ est $\pi$-accessible. Mais on a utilisé cette hypothèse pour prouver que $b$ (ou $a$) implique que $M$ est stable par $\varinjlim$ grandes devant $\pi$ (lemme 2, p. 90).
+
+$a\overset{?}{\Longrightarrow} b$. Le ``il suffit'' dans \textit{b}) est conséquence immédiate de \textit{a}). Il reste à prouver que si, dans le système inductif $\pi$-adapté $(X_i)_{i\in I}$ de limite $X$, on a $X\in M$, alors $I_M$ est cofinal dans $I$. Mais par hypothèse \textit{a}), on aura $X = \varinjlim\limits_J Y_j$, avec $J$ grand devant $\pi$, les $Y_j$ dans $M^\pi$. Admettons que $\mathrm{Filt}^\pi\subset E_\pi$, \textit{i.e.} tout élément de $\mathrm{Filt}^\pi$, en particulier les $X_i$, sont $\pi$-accessibles.
+
+Je pense que je n'arriverai pas à prouver $a_\pi\Longrightarrow b_\pi$, mais seulement ceci : Si $\pi'$ est un cardinal $>\pi$ (disons le successeur de $\pi$ dans la suite ordinale des cardinaux), alors $a_\pi\Longrightarrow b_\pi$.
+
+\msp{page 98}Ceci va résulter du
+
+\textbf{Lemme 3.} \textit{Soient $X\simeq\varinjlim\limits_I X_i$, $X\simeq\varinjlim\limits_J Y_j$ deux représentations de $X$ sous forme des $\varinjlim$ filtrantes, avec $I$ grand devant $\pi'$, $J$ grand devant $\pi$, avec $\pi$, $\pi'$ deux cardinaux tels que $\pi'>\pi$. On suppose $(X_i)_{i\in I}$ $\pi'$-adapté,} i.e. \textit{pour toute partie filtrante $I'$ de $I$ de cardinal $\le\pi'$, $I'$ a une borne supérieure $i_{I'}$, et $X_{i_{I'}} = \varinjlim\limits_{i\in I'} X_i$. Alors pour tout $i\in I$, on peut trouver une partie $I'$ de $I$, contenant $i$,} grande devant $\pi$, \textit{de cardinal $\le\pi'$, et une partie $J'$ de $J$, enfin un isomorphisme $I'\xrightarrow[\sim]{\lambda}J'$ et une application strictement croissante $\mu : J'\longrightarrow I'$ et des homomorphismes} \texttt{[fin du chapitre]}
+
+\newpage
+\printedpage{53}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Index des notations}
+
+\idx{LLP, RLP}{1}
+\idx{$\Phi_*$, $\Psi^*$}{1}
+\idx{$\widetilde{\Phi}$, $\overline{\Psi}$}{1}
+\idx{$\Phi \longleftrightarrow \Psi$}{3}
+\idx{$\mathrm{Cof}_W$, $\mathrm{Fib}_W$}{8}
+\idx{$W^{\mathrm{univ}}$}{9}
+\idx{$W_{\mathrm{univ}}$}{10}
+\idx{$\underline{\mathrm{Fib}}_W S\subset\mathcal{M}/S$}{10}
+\idx{$W_S$}{10}
+\idx{$W_S^{\mathrm{u}}$}{10}
+\idx{$S\backslash\underline{\mathrm{Cof}}_W$}{10}
+\idx{$\Phi \barlongleftrightarrow \Psi$}{28}
+\idx{$\mathcal{M}_{\mathrm{cf}}$, $W_{\mathrm{cf}}$}{29}
+\idx{$\mathrm{Ho}_W$}{29}
+\idx{$\mathrm{Hom}_W$}{30}
+\idx{$\pi_{\mathrm{d}}$, $\pi$}{30}
+\idx{$\mathcal{M}_{\mathrm{c}}$}{30}
+\idx{$W_{\mathrm{c}}$}{31}
+\idx{$\pi_{\mathrm{g}}$}{31}
+\idx{$\mathcal{M}_{\mathrm{f}}$}{31}
+\idx{$f\sim g$}{32}
+\idx{$\Psi,\ \Phi,\ \mathcal{M}(\Psi),\ W(\Psi),\ \mathcal{M}(\Phi),\ W(\Phi)$}{33}
+\idx{$\mathcal{M}(I)$, $W(I)$}{34}
+\idx{$F(I),\ TF(I),\ C(I),\ TC(I)$}{35}
+\idx{$\alpha_s$}{35}
+\idx{$u^*$, $u_*$, $u_!$}{45}
+\idx{$u^*_W$, $u^W_*$, $u^W_!$}{49}
+\idx{$\mathrm{HO}_W(I)$}{49}
+\idx{Diag}{50}
+\idx{$\mathrm{HO}_{\mathcal{M},W}(I)$, $\mathbf{D}_{\mathcal{M},W}(I)$}{54}
+\idx{$\mathrm{HO}^{\mathrm{lc}}_W(I)$, $u^*_{\mathrm{lc}}$}{56}
+\idx{$u^{\mathrm{f}}_*$}{59}
+\idx{$u^*_{\mathrm{c}}$}{67}
+\idx{$\mathfrak{U}$}{77}
+\idx{$\mathrm{Filt}^\pi(E)$}{77}
+
+% ---- from Der-ChXIII-25-01-04_p056-060.tex
+\printedpage{54}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\entry{$L_\pi$}{77}
+\entry{$\tilde{I}$}{79}
+\entry{$\underline{M}$}{86}
+\entry{$I_M$}{87}
+\entry{$M^\pi$}{87}
+
+\clearpage
+
+\printedpage{55}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Index terminologique}
+
+\entry{accessible (partie close à gauche)}{75}
+\entry{admissible (à gauche)}{59}
+\entry{catégorie de modèles}{7}
+\entry{catégorie de Quillen close}{25}
+\entry{clos à gauche, à droite}{2}
+\entry{couple de Quillen}{5}
+\entry{faiblement saturée}{7}
+\entry{filtration cardinale}{77}
+\entry{filtration cardinale stricte}{86}
+\entry{flèche coüniversellement dans $W$}{9}
+\entry{flèche universellement dans $W$}{10}
+\entry{grand devant $\pi$}{77}
+\entry{objet chemin}{32}
+\entry{objet cylindre}{32}
+\entry{$\pi$-accessible (partie d'une catégorie munie d'une filtration cardinale stricte)}{86}
+\entry{pré-Q-catégorie de modèles à gauche, à droite}{12}
+\entry{pré-Quillen à gauche, à droite}{14}
+\entry{pré-quintuplet de Quillen clos}{21}
+\entry{propre}{8}
+\entry{propriété de factorisation de Quillen}{5}
+\entry{Q-catégorie de modèles}{8}
+\entry{Q-catégorie de modèles à droite}{21}
+\entry{Q-catégorie de modèles “close”}{16}
+\entry{Q-homotopie à gauche, à droite}{30}
+\entry{quillénisable}{50}
+\entry{quillénisable sur Diag}{51}
+\entry{quillénisable sur Diag uniformément et exactement à gauche}{57}
+\entry{quillénisable uniformément à gauche sur Diag}{57}
+\entry{quillénisation uniforme à droite sur Diag}{58}
+\entry{quillénisation uniforme à gauche sur Diag}{57}
+\entry{quillénisation uniforme et exacte à gauche sur Diag}{57}
+\entry{représentation bien adaptée}{84}
+\entry{représentation parfaitement adaptée}{86}
+\entry{strictement admissible}{61}
+\entry{structure de Quillen}{28}
+
+\clearpage
+
+\printedpage{56}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\entry{structure de Quillen exacte}{27}
+\entry{structure de Quillen exacte à gauche, à droite}{27}
+\entry{structure de Quillen faible}{27}
+\entry{structure de Quillen faible biexacte}{28}
+\entry{structure de Quillen faible close, close à gauche, à droite}{28}
+\entry{structure de Quillen parfaite}{28}
+\entry{système de Quillen clos}{26}
+\entry{système de Quillen faible}{26}
+\entry{système de Quillen faible exact à gauche, à droite}{26}
+\entry{système inductif bien adapté}{84}
+\entry{système inductif parfaitement adapté}{86}
+\entry{triple clos de Quillen}{25}
+\entry{triple de Quillen}{14}
+\entry{$W$-cofibration}{8}
+\entry{$W$-équivalence coüniverselle}{9}
+\entry{$W$-fibration}{8}
+
+\clearpage
+
+\printedpage{57}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Liste des axiomes}
+
+\noindent $\mathcal{M}$ catégorie
+
+\noindent $W \ \subset\ \Fl(\mathcal{M})$ , \qquad $C$, $F$, $TC$, $TF \ \subset\ \Fl(\mathcal{M})$
+
+\begin{description}[leftmargin=4.5em,labelwidth=4em]
+\item[M 0] La catégorie $\mathcal{M}$ admet des limites projectives finies et des limites inductives finies.
+
+\item[M 1] Les flèches appartenant à $C$ ont la propriété de relèvement à gauche relativement à celles appartenant à $TF$, et les flèches appartenant à $F$ ont la propriété de relèvement à droite relativement à celles appartenant à $TC$.
+
+\item[M 2] Toute flèche de $\mathcal{M}$ se décompose en une flèche de $C$ suivie d'une flèche de $TF$, et en une flèche de $TC$ suivie d'une flèche de $F$.
+
+\item[M 3] La partie $F$ de $\Fl(\mathcal{M})$ est stable par composition et changement de base, $C$ est stable par composition et cochangement de base, $F$ et $C$ contiennent les isomorphismes.
+
+\item[M 4] La partie $TF$ de $\Fl(\mathcal{M})$ est stable par composition et changement de base, $TC$ est stable par composition et cochangement de base, $TF$ et $TC$ contiennent les isomorphismes.
+
+\item[M 5] Si dans un triangle commutatif de $\mathcal{M}$ deux des trois flèches sont dans $W$, il en est de même de la troisième ; $W$ contient les isomorphismes.
+
+\item[M$'$] $TC \ \subset\ C \cap W$, $TF \ \subset\ F \cap W$.
+
+\item[M$''$] Les flèches appartenant à $C$ sont des $W$-cofibrations, et les flèches appartenant à $F$ sont des $W$-fibrations.
+
+\item[M$'_{\mathbf{0}}$(g)] $TC = C \cap W$.
+
+\item[M$'_{\mathbf{0}}$(d)] $TF = F \cap W$.
+
+\item[M 2\,bis] $W = TF \circ TC$.
+\end{description}
+
+\clearpage
+
+\printedpage{58}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Glossaire}
+
+\subsection*{Section 1}
+
+\begin{itemize}
+\item $\Phi \ \subset\ \Fl(\mathcal{M})$
+
+$\Phi$ est \textit{clos à gauche} : il existe \ $\Psi \ \subset\ \Fl(\mathcal{M})$ tel que $\Phi$ soit formé des flèches ayant la propriété de relèvement à gauche relativement aux flèches de $\Psi$.
+
+\item $\Psi \ \subset\ \Fl(\mathcal{M})$
+
+$\Psi$ est \textit{clos à droite} : il existe \ $\Phi \ \subset\ \Fl(\mathcal{M})$ tel que $\Psi$ soit formé des flèches ayant la propriété de relèvement à droite relativement aux flèches de $\Phi$.
+
+\item $\Phi$, $\Psi \ \subset\ \Fl(\mathcal{M})$
+
+$(\Phi, \Psi)$ a la \textit{propriété de factorisation de Quillen} :
+\begin{itemize}
+\item[a)] les flèches de $\Phi$ ont la propriété de relèvement à gauche relativement aux flèches de $\Psi$ ;
+\item[b)] toute flèche $f$ de $\mathcal{M}$ se factorise en
+\[
+f = pi \quad , \qquad i \in \Phi \ , \quad p \in \Psi \ .
+\]
+\end{itemize}
+
+\item $(\Phi, \Psi)$ \textit{couple de Quillen} :
+\begin{itemize}
+\item[a)] $(\Phi, \Psi)$ a la propriété de factorisation de Quillen ;
+\item[b)] $\Phi$ est clos à gauche et $\Psi$ clos à droite.
+\end{itemize}
+\end{itemize}
+
+\subsection*{Section 2}
+
+\begin{itemize}
+\item $W \ \subset\ \Fl(\mathcal{M})$
+
+\textit{$W$ faiblement saturé} :
+\begin{itemize}
+\item[a)] $W$ contient les isomorphismes ;
+\item[b)] si deux parmi les trois flèches d'un triangle commutatif sont dans $W$, la troisième aussi.
+\end{itemize}
+
+\item $W \ \subset\ \Fl(\mathcal{M})$
+
+Un morphisme $p : X \longrightarrow Y$ de $\mathcal{M}$ est une \textit{$W$-fibration} ($p \in \mathrm{Fib}_W$) si pour tout diagramme de carrés cartésiens
+\end{itemize}
+
+% ---- from Der-ChXIII-25-01-04_p061-065.tex
+\printedpage{59}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\[
+\begin{tikzcd}
+X \arrow[d, "p"'] & X' \arrow[l] \arrow[d] & X'' \arrow[l, "t"'] \arrow[d] \\
+Y & Y' \arrow[l] & Y'' \arrow[l, "s"]
+\end{tikzcd}
+\quad ,
+\]
+
+si $s \in W$, alors $t \in W$.
+
+\begin{itemize}
+\item[\textbullet] $W \ \subset\ \Fl(\Mo)$
+
+Un morphisme $i : A \longrightarrow B$ de $\Mo$ est une $W$-\textit{cofibration} ($i \in \mathrm{Cof}_W$) si pour tout diagramme de carrés cocartésiens
+\[
+\begin{tikzcd}
+A'' \arrow[d] & A' \arrow[l, "s"'] \arrow[d] & A \arrow[l] \arrow[d, "i"] \\
+B'' & B' \arrow[l, "t"] & B \arrow[l]
+\end{tikzcd}
+\quad ,
+\]
+si $s \in W$, alors $t \in W$.
+
+\item[\textbullet] $W \ \subset\ \Fl(\Mo)$
+
+Un morphisme $p : X \longrightarrow Y$ de $\Mo$ est \textit{universellement dans} $W$, ou une $W$-\textit{équivalence universelle} ($p \in W_{\mathrm{univ}}$) si pour tout carré cartésien
+\[
+\begin{tikzcd}
+X \arrow[d, "p"'] & X' \arrow[l] \arrow[d, "p'"] \\
+Y & Y' \arrow[l]
+\end{tikzcd}
+\quad ,
+\]
+la flèche $p'$ appartient à $W$.
+
+\item[\textbullet] $W \ \subset\ \Fl(\Mo)$
+
+Un morphisme $i : A \longrightarrow B$ de $\Mo$ est \textit{coüniversellement dans} $W$, ou une $W$-\textit{équivalence coüniverselle} ($i \in W^{\mathrm{univ}}$) si pour tout carré cocartésien
+\[
+\begin{tikzcd}
+A' \arrow[d, "i'"'] & A \arrow[l] \arrow[d, "i"] \\
+B' & B \arrow[l]
+\end{tikzcd}
+\quad ,
+\]
+la flèche $i'$ appartient à $W$.
+\end{itemize}
+% foot: Version 25 janvier 2004
+
+\printedpage{60}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}
+\item[\textbullet] \textit{Pré-Q-catégorie de modèles à gauche} (resp. \textit{à droite}) :
+
+$\Mo$ et $W$, $C$, $F$, $TC$, $TF$ $\subset$ $\Fl(\Mo)$ satisfaisant aux axiomes \textbf{M~0} à \textbf{M~5}, $\mathbf{M}'$, $\mathbf{M}''$ et \Mzg{} (resp. \Mzd).
+
+\item[\textbullet] \textit{Q-catégorie de modèles}, \textit{triple de Quillen} :
+
+catégorie de modèles au sens de Quillen.
+
+\item[\textbullet] \textit{Q-catégorie de modèles “close”}, \textit{triple clos de Quillen}, \textit{catégorie de Quillen close}, \textit{système de Quillen clos} :
+
+catégorie de modèles fermée au sens de Quillen.
+
+\item[\textbullet] \textit{Pré-Quillen à gauche} (resp. \textit{à droite}) :
+
+pré-Q-catégorie de modèles à gauche (resp. à droite).
+
+\item[\textbullet] \textit{Pré-quintuplet de Quillen clos} :
+
+$W$, $C$, $F$, $TC$, $TF$ $\subset$ $\Fl(\Mo)$ satisfaisant aux axiomes \textbf{M~0} à \textbf{M~5}, $\mathbf{M}'$, $\mathbf{M}''$, $C$, $TC$ étant clos à gauche et $F$, $TF$ clos à droite.
+
+\item[\textbullet] \textit{Système de Quillen faible} :
+
+$W$, $C$, $F$, $TC$, $TF$ $\subset$ $\Fl(\Mo)$ satisfaisant aux axiomes \textbf{M~0} à \textbf{M~5}, $\mathbf{M}'$, $\mathbf{M}''$.
+
+\item[\textbullet] \textit{Système de Quillen faible exact à gauche} (resp. \textit{à droite}) :
+
+$W$, $C$, $F$, $TC$, $TF$ $\subset$ $\Fl(\Mo)$ satisfaisant aux axiomes \textbf{M~0} à \textbf{M~5}, $\mathbf{M}'$, $\mathbf{M}''$ et \Mzg{} (resp. \Mzd).
+\end{itemize}
+
+\section*{Section 3}
+
+\begin{itemize}
+\item[\textbullet] $(\Mo,W)$ \textit{catégorie de modèles} :
+
+$\Mo$ catégorie satisfaisant à l'axiome \textbf{M~0} ;
+
+$W$ $\subset$ $\Fl(\Mo)$ faiblement saturé.
+
+\item[\textbullet] \textit{Structure de Quillen faible associée à la catégorie de modèles} $(\Mo,W)$ :
+
+quadruplet $(C,F,TC,TF)$ de parties de $\Fl(\Mo)$ satisfaisant aux axiomes \textbf{M~1} à \textbf{M~5}, $\mathbf{M}'$, $\mathbf{M}''$.
+
+\item[\textbullet] \textit{Structure de Quillen faible exacte} :
+
+structure de Quillen faible satisfaisant en outre à l'axiome \textbf{M~2\,bis}.
+
+\item[\textbullet] \textit{Structure de Quillen faible exacte à gauche} (resp. \textit{à droite}) :
+
+structure de Quillen faible satisfaisant en outre à l'axiome \Mzg{} (resp. \Mzd).
+\end{itemize}
+% foot: Version 25 janvier 2004
+
+\printedpage{61}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}
+\item[\textbullet] \textit{Structure de Quillen faible close à gauche} (resp. \textit{à droite}) :
+
+structure de Quillen faible $(C,F,TC,TF)$ telle que $C$, $TC$ (resp. $F$, $TF$) soient clos à gauche (resp. à droite).
+
+\item[\textbullet] \textit{Structure de Quillen faible close} :
+
+structure de Quillen faible à la fois close à gauche et à droite.
+
+\item[\textbullet] \textit{Structure de Quillen} :
+
+structure de Quillen faible “biexacte” :
+
+structure de Quillen faible à la fois exacte à gauche et à droite
+
+$=$ catégorie de modèles de Quillen propre.
+
+\item[\textbullet] \textit{Structure de Quillen parfaite} :
+
+structure de Quillen faible “biexacte” et close
+
+$=$ catégorie de modèles fermée de Quillen propre.
+\end{itemize}
+
+\section*{Section 5}
+
+\begin{itemize}
+\item[\textbullet] Catégorie de modèles $(\Mo,W)$ \textit{quillénisable} :
+
+il existe une structure de Quillen faible \textit{exacte} $(C,F,TC,TF)$ associée à $(\Mo,W)$.
+
+\item[\textbullet] $(\Mo,W)$ \textit{quillénisable sur} Diag $\subset$ Cat :
+
+pour tout $I$ dans Diag, la catégorie des modèles $(\Mo(I),\, W(I))$ est quillénisable.
+\end{itemize}
+
+\section*{Section 6}
+
+\begin{itemize}
+\item[\textbullet] Catégorie de modèles $(\Mo,W)$ \textit{quillénisable uniformément à gauche sur} Diag :
+
+il existe une structure de Quillen faible \textit{close} $(C,F,TC,TF)$ pour $(\Mo,\, W)$ telle que pour tout $I$ dans Diag, si l'on définit $C(I)$ et $TC(I)$ “argument par argument” (\footnote{Un morphisme de foncteurs $u : X \longrightarrow Y$ de $I^{\circ}$ vers $\Mo$ étant dans $C(I)$ (resp. $TC(I)$) si et seulement si pour tout objet $i$ de $I$, $u_i$ est dans $C$ (resp. $TC$).}), et $F(I)$ et $TF(I)$ par la propriété de relèvement à droite relativement à $TC(I)$ et $C(I)$ respectivement (\footnote{Un morphisme de $\Mo(I)$ étant dans $F(I)$ (resp. $TF(I)$) si et seulement si il a la propriété de relèvement à droite relativement aux flèches appartenant à $TC(I)$ (resp. $C(I)$).}), le quadruplet $(C(I),TC(I),F(I),TF(I))$ soit une structure de Quillen faible \textit{close exacte} pour $(\Mo(I),\, W(I))$. On dit alors que $(C,F,TC,TF)$ est une \textit{quillénisation uniforme à gauche} de $(\Mo,\, W)$ sur Diag).
+\end{itemize}
+% foot: Version 25 janvier 2004
+
+\printedpage{62}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+\begin{itemize}
+\item[\textbullet] Catégorie de modèles $(\Mo,W)$ \textit{quillénisable sur} Diag \textit{uniformément et exactement à gauche} :
+
+$(\Mo,W)$ admet une quillénisation uniforme à gauche sur Diag $(C,F,TC,TF)$ telle que $TC = C \cap W$ (autrement dit, telle que $(C,F,TC,TF)$ soit une strucure de Quillen faible \textit{exacte à gauche}). On dit alors que $(C,F,TC,TF)$ est une \textit{quillénisation uniforme et exacte à gauche} de $(\Mo,\, W)$ sur Diag. % [sic] strucure -> structure, letter t omitted
+\end{itemize}
+
+\section*{Section 7}
+
+\begin{itemize}
+\item[\textbullet] $I$ ensemble ordonné filtrant, \quad $\pi$ cardinal
+
+$I$ \textit{grand devant} $\pi$ :
+
+toute partie de $I$ de cardinal inférieur ou égal à $\pi$ admet un majorant dans $I$.
+
+\item[\textbullet] $E$ catégorie
+
+Une \textit{filtration cardinale} de $E$ est une filtration croissante
+\[
+\Big(\Filt^{\pi}(E)\Big)_{\pi\geq\pi_0} \qquad , \qquad\qquad \pi_0 \text{ un cardinal infini fixé,}
+\]
+de $E$ par des sous-catégories strictement pleines $\Filt^{\pi}(E)$, indexée par les cardinaux $\pi \geq \pi_0$ appartenant à un univers donné, et satisfaisant aux conditions suivantes :
+\begin{itemize}
+\item[\textit{a})] pour tout $\pi \geq \pi_0$, $\Filt^{\pi}(E)$ est équivalente à une petite catégorie ;
+\item[\textit{b})] la catégorie $E$ admet des limites inductives filtrantes indexées par des ensembles ordonnés $I$ grands devant $\pi_0$, et pour tout $\pi \geq \pi_0$, $\Filt^{\pi}(E)$ est stable par les dites limites si $\mathrm{card}\, I \leq \pi$ ;
+\item[\textit{c})] Pour tout $\pi \geq \pi_0$, et pour tout $X \in \mathrm{Ob}\, E$, il existe un isomorphisme
+\[
+X \ \simeq\ \varinjlim_{i\in I} X_i \ ,
+\]
+où $(X_i)_{i\in I}$ est un système inductif filtrant dans $E$, indexé par un ensemble ordonné $I$ grand devant $\pi$, et où les $X_i$ sont des objets de $\Filt^{\pi}(E)$. De plus, si $X \in \mathrm{Ob}\,\Filt^{\pi'}(E)$, $\pi' \geq \pi$, on peut prendre $I$ tel que $\mathrm{card}\, I \leq \pi'^{\pi}$.
+\end{itemize}
+
+\item[\textbullet] $E$ catégorie, \quad $(\Filt^{\pi}(E))_{\pi\geq\pi_0}$ filtration cardinale de $E$, \quad $\pi \geq \pi_0$ cardinal
+
+Un \textit{système inductif bien adapté} (à la filtration cardinale donnée, pour les cardinaux $\pi_0$, $\pi$ donnés) est un système inductif filtrant $(X_i)_{i\in I}$ satisfaisant aux conditions suivantes :
+\begin{itemize}
+\item[\textit{a})] $I$ est grand devant $\pi$, et pour tout $i \in I$, $X_i \in \Filt^{\pi}(E)$ ;
+\item[\textit{b})] Toute partie $J$ de $I$ de cardinal $\leq \pi$, et grande devant $\pi_0$, admet une borne supérieure $i_J$, et on a
+\[
+X_{i_J} \ \xleftarrow{\ \sim\ }\ \varinjlim_{i\in J} X_i \ .
+\]
+% foot: Version 25 janvier 2004
+\end{itemize}
+
+\printedpage{63}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+
+Si $X$ est un objet de $E$, une \textit{représentation bien adaptée} de $X$, en termes d'objets de $\Filt^{\pi}(E)$, est la donnée d'un système inductif bien adapté $(X_i)_{i\in I}$, à la filtration cardinale donnée, pour les cardinaux $\pi_0$, $\pi$, et d'un isomorphisme
+\[
+X \ \xleftarrow{\ \sim\ }\ \varinjlim_{i\in I} X_i \ .
+\]
+
+\item[\textbullet] $E$ catégorie admettant des petites limites inductives filtrantes
+
+Une \textit{filtration cardinale stricte} de $E$ est une filtration cardinale $(\Filt^{\pi}(E))_{\pi\geq\pi_0}$ telle que pour tout cardinal $\pi \geq \pi_0$, $\Filt^{\pi}(E)$ soit stable par limites inductives filtrantes.
+
+\item[\textbullet] $E$ catégorie admettant des petites limites inductives filtrantes
+
+$(\Filt^{\pi}(E))_{\pi\geq\pi_0}$ filtration cardinale stricte de $E$, \quad $\pi \geq \pi_0$ cardinal
+
+Un \textit{système inductif parfaitement adapté} (à la filtration cardinale donnée, pour le cardinal $\pi$) est un système inductif filtrant $(X_i)_{i\in I}$ satisfaisant aux conditions suivantes :
+\begin{itemize}
+\item[\textit{a})] $I$ est grand devant $\pi$, et pour tout $i \in I$, $X_i \in \Filt^{\pi}(E)$ ;
+\item[\textit{b})] Toute partie $J$ de $I$ filtrante de cardinal $\leq \pi$, admet une borne supérieure $i_J$, et on a
+\[
+X_{i_J} \ \xleftarrow{\ \sim\ }\ \varinjlim_{i\in J} X_i \ .
+\]
+\end{itemize}
+Si $X$ est un objet de $E$, une \textit{représentation parfaitement adaptée} de $X$, en termes d'objets de $\Filt^{\pi}(E)$, est la donnée d'un système inductif bien adapté $(X_i)_{i\in I}$, à la filtration cardinale donnée, pour le cardinal $\pi$, et d'un isomorphisme
+\[
+X \ \xleftarrow{\ \sim\ }\ \varinjlim_{i\in I} X_i \ .
+\]
+\end{itemize}
+% foot: Version 25 janvier 2004
+
+% ---- from Der-ChXIII-25-01-04_p066-066.tex
+\printedpage{64}
+% head: A. Grothendieck : Dérivateurs, Ch. XIII, Édition des Universités de Montpellier II et Paris VII
+% foot: Version 25 janvier 2004
+
+\section*{Références}
+
+\noindent H. J. Baues, ``Algebraic Homotopy'', Cambridge studies in advanced mathematics, vol. 15 (1989).
+
+\noindent R. Hartshorne, ``Residues and Duality'', Lecture Notes in Mathematics, vol. 20, Springer-Verlag (1966).
+
+\noindent D. G. Quillen, ``Homotopical Algebra'', Lecture Notes in Mathematics, vol. 43, Springer-Verlag (1967).
+
+\noindent R. W. Thomason, \textit{Cat as a Closed Model Category}, Cahiers de Topologie et Géométrie Différentielle, Vol. XXI-3, pp. 305-324 (1980).
+
+\noindent J.-L. Verdier, ``Des catégories dérivées des catégories abéliennes'', Astérisque, vol. 239 (1996).
+
+\noindent SGA 4, I, ``Théorie des Topos et Cohomologie Étale des Schémas'', Séminaire de Géométrie Algébrique du Bois-Marie, dirigé par M. Artin, A. Grothendieck, J.-L. Verdier, Lecture Notes in Mathematics, vol. 269, Springer-Verlag (1972).
+\end{document}

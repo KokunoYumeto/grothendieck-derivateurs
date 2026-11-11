@@ -1,0 +1,12 @@
+
+## TOTASPH reviewed; integration in progress (successor session, 11 November 2026)
+
+Done:
+- `2_TOTAL_ASPHERICITY\REVIEW_author.md`: all 107 statements. No statement labelled Proved or Refuted was found false; no gap found. Open: D.7 (total ⇒ exact colimits of abelian groups) and F.27 (is a totally `W_Z`-aspherical presheaf totally `W∞`-aspherical; equivalently do `W∞`-dwyérienne sieves compose). Own checks in `2_TOTAL_ASPHERICITY\checks\` (`fincat.py` and four `check_*.py` with `.out`): they reproduce every count of the answer. Opened: Cisinski 2006, 9.2.1, 9.2.15, 9.2.17; AKR 1981, A.4, A.5, C.1, C.2 (A.5 attributes the exactness example of the injective ordinals to Isbell–Mitchell); Cisinski 1999, Proposition 2; Cisinski 2004, 2.2.11; HORR generalized Theorem 1.5; Thomason 1980, Proposition 4.2.
+- A finding of the review that is not in the answer: B.11 is about diagrams of simplicial sets. For diagrams of categories with the colimit in `Cat`, total asphericity is not sufficient: over `Δ_inj`, `D([n])` = free commutative monoid on `[n]`; `colim_Cat D = N` (type `S¹`), while `H_k(hocolim) = colim Λ^k Z^{n+1} = Z` for all `k`. Unchecked by anyone else.
+- Prompt `6_PATHS` corrected for this (first item of "After TOTASPH"; CHANGES entry; zip rebuilt with the review and `sections\D.tex`; previous zip `6_PATHS_background_v4.zip`). Prompts 3, 4, 5, 7 unchanged: every TOTASPH statement they cite is proved. `2_TOTAL_ASPHERICITY\PROMPT_UPDATES.md` has the record.
+
+Integration into the companion (`checks\DER_<id>\`; originals of every file touched are in `integration_20261111\before\`):
+- Working files in `integration_20261111\`: `new_<chunk>.tex` (new commentary blocks, each preceded by a line `%%BLOCK after="<title of an existing block>"`), `apply_integration.py` (inserts the blocks, replaces outdated paragraphs, updates the claim rows, adds bibliography entries), `INTEGRATION_LOG.md` (what was changed, row by row).
+- Conventions used: `proof_status` becomes `false` for a claim the source asserts and that is refuted; for the source's questions and conjectures it stays and the answer goes in `repair`; `notes` names the Pro answer (GPT-6 Astra, ChatGPT Pro mode), its statement numbers, and the checker (Claude, Fable 5.2, with the review file). New blocks are `development` blocks with proofs, marked `\ours`; they do not name the Pro packages.
+- See `INTEGRATION_LOG.md` for where the work stopped.

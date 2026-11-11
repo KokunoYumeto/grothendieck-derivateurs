@@ -1,0 +1,697 @@
+\partsection{B}{Cardinal obstructions to representability}
+
+We write $\mathsf B G$ for the category with one object and endomorphism
+group $G$, with categorical composition given by group multiplication, and
+$BG=B(\mathsf B G)$ for its classifying space.  All groups constructed below
+are $\U$-small.  Our cardinal parameters are infinite cardinals in $\U$;
+there is no passage to a group outside the universe of the source category.
+For every $\U$-small set $S$, an infinite cardinal $\lambda$ in $\U$ with
+$\lambda>|S|$ exists: one may take the cardinal of a sufficiently large
+power set of $S\amalg\N$.  Free products, group presentations on such sets,
+quotients, finite products, and countable unions remain in $\U$.
+
+\begin{claim}{B.1}{Proved}{What a sufficiently large group sees in a small category}
+Let $K$ be a $\U$-small category and let $G$ be a $\U$-small group such that
+every group homomorphism $G\longrightarrow H$ is trivial whenever
+$|H|\leq |\Mor K|$.  The constant-functor map and evaluation map
+\[
+ \delta_K:K\longrightarrow\Fun(\mathsf B G,K),\qquad
+ \operatorname{ev}_*: \Fun(\mathsf B G,K)\longrightarrow K
+\]
+are mutually inverse isomorphisms of categories.  Consequently the map
+\[
+ p^*:\Hom_{\Cathot}(e,K)\longrightarrow
+       \Hom_{\Cathot}(\mathsf B G,K),\qquad p:\mathsf B G\longrightarrow e,
+\]
+is a bijection.  Both assertions are natural in $K$ among categories
+whose automorphism groups receive only trivial homomorphisms from $G$.
+\end{claim}
+\begin{proof}
+A functor $F:\mathsf B G\to K$ chooses an object $k=F(*)$ and a
+homomorphism $G\to\operatorname{Aut}_K(k)$.  Invertibility is preserved by
+every functor, even when $K$ has noninvertible endomorphisms or nontrivial
+idempotents.  Since
+$|\operatorname{Aut}_K(k)|\leq |\Mor K|$, this homomorphism is trivial.
+Thus $F=\delta_K(k)$ as an actual functor.  A natural transformation
+$\delta_K(k)\Rightarrow\delta_K(l)$ consists of one arrow $k\to l$ of
+$K$; its naturality equations are identities.  Evaluation therefore gives
+a bijection on objects and on every hom-set, and preserves composition.
+If $K$ is empty, both categories in the assertion are empty and the same
+conclusion holds.  Passing to components proves the last assertion.
+\end{proof}
+
+\begin{claim}{B.2}{Known}{The finite Schur-multiplier input}
+For a finite set $F$ with $|F|\geq8$,
+\[
+ H_1(\operatorname{Alt}(F);\Z)=0,
+ \qquad H_2(\operatorname{Alt}(F);\Z)\cong\Z/2.
+\]
+If $a,b,c,d$ are distinct elements of $F$, the commuting permutations
+$x=(ab)(cd)$ and $y=(ac)(bd)$ define a torus class
+\[
+ t_F=[x\mid y]-[y\mid x]\in H_2(\operatorname{Alt}(F);\Z)
+\]
+which generates this group.  In particular, inclusions between finite
+alternating groups on sets containing these four elements and having at
+least eight elements carry generator to generator.
+\end{claim}
+\begin{proof}[Source and the required transition-map check]
+The multiplier calculation is Schur's classical finite calculation.  We
+use the explicitly recorded formula and generator in
+\citet[Eq.~(35), Proposition~20, and Corollary~21]{BC_DominguezSegovia2021};
+the cited numbering is that of arXiv version~2, rather than the later
+journal version.  This is the one imported finite group calculation in
+the proof of Lead~1.  We do not infer a direct-limit calculation merely
+from the abstract isomorphism $H_2\cong\Z/2$: the cycle displayed above
+uses the same four permutations before and after any inclusion, and its
+image is the displayed nonzero generator.  This verifies the required
+transition maps.
+
+There is also a direct check of its nontriviality.  In the real Clifford
+algebra on orthonormal $e_a,e_b,e_c,e_d$, put
+\[
+ \widetilde x=\tfrac12(e_a-e_b)(e_c-e_d),\qquad
+ \widetilde y=\tfrac12(e_a-e_c)(e_b-e_d).
+\]
+These are spin lifts of $x$ and $y$.  They satisfy
+$\widetilde x^2=\widetilde y^2=-1$ and
+$\widetilde x\widetilde y=-\widetilde y\widetilde x$.
+Thus the central double cover evaluates nontrivially on the torus cycle.
+The exact rational Clifford-algebra verification is included in
+\texttt{code/bc\_checks.py}.  This check proves nontriviality; the assertion
+that the whole finite multiplier has order two is the cited classical
+input.
+\end{proof}
+
+\begin{claim}{B.3}{Proved}{Finitary alternating groups at every infinite cardinal}
+Let $\Omega$ be an infinite $\U$-small set and let
+$A_\Omega=\operatorname{Alt}_{\mathrm{fin}}(\Omega)$ be the group of even
+permutations with finite support.  Then
+\[
+ |A_\Omega|=|\Omega|,\qquad
+ A_\Omega\text{ is nonabelian simple},\qquad
+ H_1(A_\Omega;\Z)=0,\quad H_2(A_\Omega;\Z)=\Z/2.
+\]
+Every homomorphism from $A_\Omega$ to a group of cardinality strictly
+less than $|\Omega|$ is trivial.
+\end{claim}
+\begin{proof}
+There are $|\Omega|$ finite subsets of $\Omega$, and each supports finitely
+many permutations.  This gives the upper bound on the cardinality.  The
+3-cycles using two fixed elements and a varying third element give the
+opposite bound.
+
+Let $N$ be a nontrivial normal subgroup and choose $g\in N\setminus\{1\}$.
+Choose $a$ moved by $g$, put $b=g(a)$, and choose $c,d$ outside the support
+of $g$ and distinct from $a,b$.  With $\tau=(a\,c\,d)$, the commutator
+\[
+ g\tau g^{-1}\tau^{-1}=(b\,c\,d)(a\,d\,c)=(a\,b\,c)
+\]
+belongs to $N$.  Every 3-cycle is conjugate to this one by an even
+finitary permutation: a finite permutation carrying the ordered triple
+to the desired triple can have its parity adjusted on two fresh points.
+Every even finitary permutation is a product of 3-cycles, by decomposing
+it into an even number of transpositions and replacing pairs of
+transpositions by 3-cycles.  Hence $N=A_\Omega$.  Noncommuting 3-cycles
+show that the group is nonabelian.  Its commutator subgroup is therefore
+a nontrivial normal subgroup, so the group is perfect and $H_1=0$.
+
+Fix four elements $a,b,c,d$ of $\Omega$.  The finite subsets $F$ containing
+these elements and with $|F|\geq8$ form a filtered cofinal subsystem of
+the finite subsets of $\Omega$.  The normalized bar-chain complex of
+$A_\Omega$ is the filtered colimit of those of $\operatorname{Alt}(F)$:
+every finite tuple of permutations, and every finite chain, has support
+in one finite $F$.  Filtered colimits of abelian groups are exact, so
+\[
+ H_2(A_\Omega;\Z)
+   =\colim_F H_2(\operatorname{Alt}(F);\Z).
+\]
+By B.2 this is the constant system $\Z/2$ when its generators are chosen
+to be $t_F$.  It therefore has colimit $\Z/2$.  Finally, a nontrivial
+homomorphism from a simple group is injective.  Such an injection into a
+strictly smaller group is impossible.
+\end{proof}
+
+\begin{claim}{B.4}{Refuted}{The asserted right adjoint and the first proposed envelope}
+There is no $\U$-small category $K$ representing
+\[
+ X\longmapsto [BX,K(\Z/2,2)]
+ \quad\text{on }\Cathot^{\op}.
+\]
+Consequently $\varphi:\Cathot\to\Hot$ has no right adjoint, fully
+faithful or otherwise.  The assertion at V~ms.~37 and the unrestricted
+Thomason--Kan-envelope construction at V~ms.~42--43 are false.
+\end{claim}
+\begin{proof}
+Suppose there were natural bijections
+$\theta_X:\pi_0\Fun(X,K)\to[BX,K(\Z/2,2)]$ for all $\U$-small $X$.
+Taking $X=e$ shows that $\pi_0K$ is a singleton.  Choose an infinite
+$\U$-cardinal $\lambda>|\Mor K|$, a set $\Omega$ of cardinality
+$\lambda$, and $G=A_\Omega$.  By B.1 and B.3,
+$\pi_0\Fun(\mathsf B G,K)=\pi_0K$ is a singleton.  On the other hand,
+ordinary unpointed cohomological representability and the universal
+coefficient theorem give
+\[
+\begin{split}
+ [BG,K(\Z/2,2)]
+ &=H^2(BG;\Z/2)\\
+ &\cong\Hom_{\Z}(H_2(BG;\Z),\Z/2)
+ \cong\Z/2.
+\end{split}
+\]
+Here the omitted universal-coefficient term is
+$\operatorname{Ext}^1_{\Z}(H_1(BG;\Z),\Z/2)=0$, because $G$ is perfect.
+The two cohomology classes remain distinct as unpointed homotopy classes:
+the target is simply connected.  We have a contradiction.  If a right
+adjoint existed, its value at this homotopy type would be such a
+representing category, so no right adjoint exists.
+\end{proof}
+
+\begin{claim}{B.5}{Proved}{A simple overgroup with a prescribed infinite cardinality}
+Let $H$ be a $\U$-small group and let $\lambda$ be an infinite
+$\U$-cardinal with $|H|\leq\lambda$.  There is an injective homomorphism
+$H\hookrightarrow S$ into a nonabelian simple $\U$-small group $S$ with
+$|S|=\lambda$.
+\end{claim}
+\begin{proof}
+We give the construction to make its cardinal control explicit.  Start
+with $H_0=H*F_\lambda$, so $H\hookrightarrow H_0$ and $|H_0|=\lambda$.
+For an arbitrary group $L$ of cardinality $\lambda$, form
+\[
+ L'=L*F\{t_{g,h}:g\in L\setminus\{1\},\ h\in L\}.
+\]
+For each pair $(g,h)$ abbreviate $t=t_{g,h}$ and put
+\[
+ w_{g,h}=(gtg^{-1}t^{-1})(gt^2g^{-1}t^{-2}).
+\]
+Both $w_{g,h}$ and $w_{g,h}h$ have infinite order in the free factor
+$L*\langle t\rangle$ of $L'$.  The first word is cyclically reduced of
+syllable length eight.  For the second, cyclically moving its initial
+$g$ to the end gives a cyclically reduced word of length eight when
+$hg\ne1$.  When $hg=1$, a further cyclic reduction gives
+\[
+ g^{-1}t^{-1}gt^2g^{-1}t^{-1},
+\]
+which has syllable length six.  A cyclically reduced free-product word
+of length greater than one has infinite order, since its positive powers
+are reduced concatenations.
+
+We may therefore adjoin stable letters $s_{g,h}$ identifying the two
+infinite cyclic subgroups by
+\[
+ s_{g,h}^{-1}w_{g,h}s_{g,h}=w_{g,h}h.
+\]
+The simultaneous HNN embedding theorem ensures that $L'$ embeds in the
+resulting group $E(L)$; its precise form, allowing an arbitrary family
+of subgroup isomorphisms, is
+\citet[Theorem~II]{BC_HNN1949}.  Equivalently, the HNN normal form says
+that a nontrivial word in the base group remains nontrivial after these
+stable letters are adjoined.  This theorem is applicable because each
+specified map $w_{g,h}^r\mapsto(w_{g,h}h)^r$ is an isomorphism between
+infinite cyclic subgroups of the same base group $L'$.  There are
+$\lambda$ generators and relations, so $|E(L)|=\lambda$.
+
+In $E(L)$, the element $h=w_{g,h}^{-1}s_{g,h}^{-1}w_{g,h}s_{g,h}$ lies
+in the normal closure of $g$: each factor of $w_{g,h}$ already lies in
+that normal closure.  Iterate the injective construction
+$H_{r+1}=E(H_r)$, and set $S=\bigcup_{r<\omega}H_r$.  This union has
+cardinality $\lambda$.  For any $g\ne1$ and $h$ in $S$, one stage
+contains both, and the next stage puts $h$ in the normal closure of $g$.
+Every nontrivial normal subgroup of $S$ is consequently $S$.  The
+embedded free group $F_\lambda$ makes $S$ nonabelian.  This also proves
+that none of the inclusions has collapsed the original group $H$.
+\end{proof}
+
+\begin{claim}{B.6}{Proved}{An acyclic overgroup without a cardinal increase}
+For every infinite $\U$-small group $H$ there is an injective
+homomorphism $H\hookrightarrow M(H)$ with
+\[
+ |M(H)|=|H|,\qquad \widetilde H_i(BM(H);\Z)=0
+ \quad\text{for every }i\geq0.
+\]
+For a finite $H$, the same construction gives a countable overgroup.
+\end{claim}
+\begin{proof}
+We use the mitosis construction of
+\citet[Proposition~4.1, Theorem~4.2, and Lemma~5.4]{BC_BDH1980}.
+Its algebraic form also supplies a short verification of the size bound.
+Embed $H$ as the first factor of $H\times H$, and adjoin two HNN stable
+letters $d,s$ satisfying
+\[
+ d^{-1}(h,1)d=(h,h),\qquad s^{-1}(h,1)s=(1,h)
+ \quad(h\in H).
+\]
+Both identifications are isomorphisms between subgroups of $H\times H$.
+The base group embeds, and the resulting group $m(H)$ is generated by
+$H,d,s$, because the second factor is conjugate to the first.  In the
+notation $h^s=s^{-1}hs$ it satisfies
+\[
+ h^d=hh^s,\qquad [h',h^s]=1\quad(h,h'\in H).
+\]
+Put $M(H)=\bigcup_{r<\omega}m^r(H)$ using these injections.  Its
+cardinality is at most $\max(|H|,\aleph_0)$, and it contains $H$.
+
+For completeness, the homology-annihilation argument is as follows.
+Suppose $f:A\to B$ induces zero in field homology in positive degrees
+less than $n$, and $j:B\hookrightarrow m(B)$ is the mitosis inclusion.
+The homomorphism
+\[
+ k:B\times B\longrightarrow m(B),\qquad k(b,c)=b\,c^s
+\]
+is defined because the two displayed subgroups commute.  The two factor
+inclusions followed by $k$ are conjugate to $j$, and the diagonal
+followed by $k$ is also conjugate to $j$.  For $z\in H_n(A;k)$ the
+K\"unneth formula and the vanishing of the lower-degree maps give
+\[
+ (f\times f)_*\Delta_*(z)=f_*(z)\otimes1+1\otimes f_*(z).
+\]
+Applying $k_*$ and using invariance under inner automorphisms yields
+$(jf)_*(z)=2(jf)_*(z)$, hence $(jf)_*(z)=0$ over every field.  Induction
+shows that a composite of $n$ mitosis inclusions kills field homology
+through degree $n$.  Every bar cycle in $M(H)$ occurs at a finite
+stage, so all its positive field homology vanishes.  Rational vanishing
+makes each positive integral homology group torsion.  The universal
+coefficient sequence in the next degree, with coefficients $\F_p$,
+shows that it has no $p$-torsion for any prime $p$.  It is therefore zero.
+The group is nonempty, so its classifying space is connected as required.
+\end{proof}
+
+\begin{claim}{B.7}{Proved}{Acyclic simple overgroups of arbitrary size}
+For every group $H$ and every infinite $\U$-cardinal
+$\lambda\geq\max(|H|,\aleph_0)$ there is a monomorphism of groups
+$i:H\hookrightarrow A$ such that $A$ is nonabelian simple,
+$|A|=\lambda$, and $BA$ is integrally acyclic.
+\end{claim}
+\begin{proof}
+Start with $H_0=H*F_\lambda$.  Alternate B.5 and B.6 to obtain
+injective homomorphisms
+\[
+ H_0\hookrightarrow S_0\hookrightarrow M_0\hookrightarrow
+ S_1\hookrightarrow M_1\hookrightarrow\cdots,
+\]
+where every $S_r$ is simple, every $M_r$ is acyclic, and every term has
+cardinality $\lambda$.  Let $A$ be the union.  If a normal subgroup
+$N\lhd A$ contains $g\ne1$, then for any $a\in A$ a sufficiently late
+$S_r$ contains both $g$ and $a$.  The subgroup $N\cap S_r$ is normal in
+$S_r$ and nontrivial, hence contains $a$.  This proves simplicity.
+Every finite bar cycle lies in some $M_r$ and bounds there, so $A$ is
+acyclic.  Its cardinality is $\lambda$, and the inclusions give the
+asserted monomorphism from $H$.  The alternating-union observation is a
+formal combination of the two preceding constructions; no priority is
+claimed for it.
+\end{proof}
+
+\begin{claim}{B.8}{Proved}{Groups invisible to smaller groups and mapping to spheres}
+For every integer $n\geq2$ and every infinite $\U$-cardinal $\lambda$
+there is a $\U$-small group $G_{n,\lambda}$ and a pointed continuous map
+of CW models
+\[
+ q_{n,\lambda}:BG_{n,\lambda}\longrightarrow S^n
+\]
+such that $|G_{n,\lambda}|=\lambda$, the map $q_{n,\lambda}$ induces
+isomorphisms on integral homology in all degrees, and every homomorphism
+from $G_{n,\lambda}$ to a group of cardinality less than $\lambda$ is
+trivial.  The group $G_{n,\lambda}$ is perfect.  It is not asserted to be
+simple.
+\end{claim}
+\begin{proof}
+For a group $H$ with $|H|\leq\lambda$, choose the embedding
+$i:H\hookrightarrow A$ of B.7 and form the amalgamated free product
+\[
+ D_\lambda(H)=A*_{H}A.
+\]
+The maps from both factors $A$ to this amalgam are injective by the
+amalgamated-product normal form.  Thus $|D_\lambda(H)|=\lambda$.
+A homomorphism $D_\lambda(H)\to L$ with $|L|<\lambda$ restricts
+trivially to each factor, because each factor is simple of cardinality
+$\lambda$.  Since the two factors generate the amalgam, the homomorphism
+itself is trivial.
+
+The double mapping cylinder of
+$BA\leftarrow BH\rightarrow BA$, whose structure maps are $Bi$, is a
+classifying CW space for $D_\lambda(H)$.  To see the asphericity required
+here, the universal cover is the tree of spaces over the Bass--Serre
+tree of the amalgam, with contractible vertex and edge spaces.  A finite
+subtree gives a contractible union, by induction over its terminal
+vertices; every sphere and homotopy meets a finite subtree after cellular
+approximation.  The total cover is therefore weakly contractible.  The
+ordinary van Kampen theorem identifies the fundamental group with the
+specified amalgam.  This establishes the comparison with a classifying
+space without substituting a homotopy pushout for an ordinary pushout
+without justification.
+
+Collapse the two copies of $BA$ in this double mapping cylinder to the
+two suspension vertices.  We obtain a pointed map
+\[
+ r_H:B D_\lambda(H)\longrightarrow \Sigma BH.
+\]
+Here $\Sigma$ denotes the unreduced suspension of the connected CW
+space $BH$, with one suspension vertex chosen as basepoint; it agrees
+up to pointed homotopy with its reduced suspension after choosing the
+standard vertex of $BH$.  The Mayer--Vietoris sequence, compared with
+that for the suspension, proves that $r_H$ is an integral homology
+isomorphism, because both copies of $BA$ are acyclic.  In particular
+$H_1(D_\lambda(H);\Z)=0$.
+
+Start with $G_{1,\lambda}=\Z$ and a chosen pointed homotopy equivalence
+$q_{1,\lambda}:B\Z\to S^1$.  Inductively set
+\[
+ G_{n,\lambda}=D_\lambda(G_{n-1,\lambda}),\qquad
+ q_{n,\lambda}=(\Sigma q_{n-1,\lambda})r_{G_{n-1,\lambda}},
+\]
+using the usual pointed identification $\Sigma S^{n-1}\simeq S^n$.
+Suspension preserves integral homology isomorphisms, so induction proves
+the homology assertion.  Every group with $n\geq2$ is the specified
+double and therefore has all the remaining properties already checked.
+\end{proof}
+
+\begin{claim}{B.9}{Proved}{The target condition needed to use these homology equivalences}
+Let $u:A\to B$ be a pointed integral homology equivalence between
+connected CW spaces, and let $Z$ be a pointed simply connected CW space.
+Precomposition induces a weak equivalence of derived pointed mapping
+spaces
+\[
+ u^*:\Map_*(B,Z)\longrightarrow\Map_*(A,Z).
+\]
+In particular it induces a bijection $[B,Z]_*\to[A,Z]_*$.
+\end{claim}
+\begin{proof}
+For an abelian group $M$, the universal coefficient theorem gives an
+isomorphism $\widetilde H^j(B;M)\to\widetilde H^j(A;M)$ for every
+$j\geq0$.  The homotopy groups of
+$\Map_*(A,K(M,r))$, in every component, are
+$\widetilde H^{r-i}(A;M)$ for $0\leq i\leq r$, and vanish for $i>r$;
+the mapping space is an abelian group object.  Hence the assertion holds
+for every $K(M,r)$.
+
+For a simply connected $Z$, choose its Postnikov tower with
+$P_1Z=*$ and with $P_rZ$ the homotopy fibre of its $k$-invariant
+\[
+ P_{r-1}Z\longrightarrow K(\pi_rZ,r+1).
+\]
+All coefficient systems in this assertion are constant, precisely
+because $Z$ is simply connected.  Derived mapping spaces preserve
+homotopy limits in the target.  Induction on $r$, using the homotopy
+fibre descriptions, proves the assertion for every $P_rZ$.  Finally
+$Z\to\operatorname{holim}_rP_rZ$ is a weak equivalence: for each
+homotopy group the tower is eventually constant with the value of that
+homotopy group of $Z$.  Taking the homotopy limit of the already proved
+mapping-space equivalences gives the assertion for $Z$.  This last step
+is essential; we have proved equivalences of mapping spaces at all
+stages, rather than merely bijections of their component sets, so no
+uncontrolled inverse-limit or phantom-map inference occurs.  The result
+is the integral-homology locality of simply connected spaces; see
+\citet[Example~9.2]{BC_Lawson2019}.
+\end{proof}
+
+\begin{claim}{B.10}{Proved}{Essential maps from arbitrarily large groups for every higher type}
+Let $Y$ be a $\U$-small homotopy type with a point $y$ and a nonzero
+element $\alpha\in\pi_n(Y,y)$ for some $n\geq2$.  For every infinite
+$\U$-cardinal $\lambda$, the group $G_{n,\lambda}$ of B.8 has no
+nontrivial homomorphism to any group of cardinality less than $\lambda$
+and admits a map $BG_{n,\lambda}\to Y$ which is not freely homotopic to
+a constant map.  Thus this assertion holds for every homotopy type that
+is not a $1$-type, including every simply connected noncontractible
+homotopy type.
+\end{claim}
+\begin{proof}
+Choose a CW model for the component $Y_y$ and its pointed universal
+cover $p:\widetilde Y_y\to Y_y$.  The sphere map representing $\alpha$
+lifts uniquely as a pointed map
+$\widetilde\alpha:S^n\to\widetilde Y_y$, and its class is nonzero
+because a covering induces isomorphisms in homotopy degrees at least
+two.  By B.9 and B.8,
+$\widetilde\alpha q_{n,\lambda}:BG_{n,\lambda}\to\widetilde Y_y$
+is not pointed nullhomotopic.
+
+The composite $p\widetilde\alpha q_{n,\lambda}$ cannot be freely
+nullhomotopic in $Y$.  If a free nullhomotopy existed, its image would
+lie in $Y_y$ and its lift beginning at
+$\widetilde\alpha q_{n,\lambda}$ would end at a constant map in the
+cover.  The lifted homotopy exists by the covering homotopy property.
+Its terminal map is constant because its image lies in the discrete
+fibre over the endpoint and $BG_{n,\lambda}$ is connected.  In a
+simply connected target, a free nullhomotopy of a pointed map can be
+made pointed: the obstruction is the action of the target fundamental
+group, which is trivial.  We would obtain a pointed nullhomotopy,
+contrary to B.9.  This proves essentiality in the unpointed sense
+actually required.  The last sentence follows by choosing a nonzero
+higher homotopy group; a connected simply connected CW type with all
+homotopy groups zero is contractible by Whitehead's theorem.
+\end{proof}
+
+\begin{claim}{B.11}{Proved}{The full negative representability statement}
+For every $\U$-small homotopy type $Y$ which is not a $1$-type, the
+presheaf $X\mapsto[BX,Y]$ on $\Cathot$ is not representable by a
+$\U$-small category.  No connectedness assumption on $Y$ is needed.
+\end{claim}
+\begin{proof}
+Suppose that $K$ represents the presheaf, by natural bijections
+$\theta_X:\pi_0\Fun(X,K)\to[BX,Y]$.  Choose
+$\lambda>|\Mor K|$ in $\U$, and choose $n$ and the corresponding
+$G=G_{n,\lambda}$ from B.10.  Naturality for the unique functor
+$p:\mathsf B G\to e$ gives a commutative square
+\[
+\begin{array}{ccc}
+\pi_0K&\xrightarrow{\ p^*\ }&\pi_0\Fun(\mathsf B G,K)\\
+\theta_e\downarrow\phantom{\theta_e}&&\phantom{\theta_{\mathsf B G}}\downarrow\theta_{\mathsf B G}\\
+\pi_0Y&\xrightarrow{\ (Bp)^*\ }&[BG,Y].
+\end{array}
+\]
+The upper arrow is a bijection by B.1.  The lower arrow sends a component
+of $Y$ to its constant-map class.  It is not surjective by B.10.  This
+contradicts the vertical bijections.  This argument uses the specified
+constant-map function, rather than the cardinalities of the two sets;
+it therefore also applies when $Y$ has infinitely many components.
+\end{proof}
+
+\partsection{C}{Local categories and the groupoid reflection}
+
+For a category $X$, let $\Pi_1X=X[\Mor(X)^{-1}]$ denote the groupoid
+obtained by inverting all its arrows, and let
+$\eta_X:X\to\Pi_1X$ be the canonical functor.  Its objects are those
+of $X$; its arrows are finite composable words of arrows and formal
+inverses, modulo the identity, inverse, and composition relations.
+This construction is $\U$-small.  It is equivalent to the fundamental
+groupoid of $BX$ on the vertices of its nerve: the nerve's edges give
+the generating paths, its $2$-simplices impose the composition
+relations, and higher cells impose no further relations on the
+fundamental groupoid.  We allow the empty groupoid.
+
+\begin{claim}{C.1}{Proved}{Groupoids are local, with the canonical comparison}
+For every $\U$-small category $X$ and $\U$-small groupoid $G$, the
+canonical map
+\[
+ \pi_0\Fun(X,G)\longrightarrow[BX,BG]
+\]
+is a bijection, natural in both variables.  More precisely,
+\[
+ N\Fun(X,G)\cong\operatorname{Map}_{\mathrm{sSet}}(NX,NG)
+\]
+is an isomorphism of simplicial sets, and the right side is a derived
+mapping space.  Restriction along $\eta_X$ is an isomorphism of
+categories $\Fun(\Pi_1X,G)\to\Fun(X,G)$.
+\end{claim}
+\begin{proof}
+In degree $r$, the asserted simplicial isomorphism is the chain of
+canonical bijections
+\[
+\begin{split}
+N\Fun(X,G)_r
+ &=\Fun([r],\Fun(X,G))\\
+ &=\Fun(X\times[r],G)\\
+ &=\Hom_{\mathrm{sSet}}(NX\times\Delta[r],NG).
+\end{split}
+\]
+The last equality uses full faithfulness of the nerve and preservation
+of products.  These bijections commute with faces and degeneracies.
+The nerve of a groupoid is a Kan complex, and every simplicial set is
+cofibrant in the Kan--Quillen model structure.  Thus the displayed
+mapping space already computes derived maps of spaces, giving precisely
+the canonical map on components.  This proves localness, including for
+$X$ or $G$ empty.
+
+Every functor $X\to G$ extends uniquely over $\eta_X$, since its values
+on arrows are invertible.  A natural transformation between two such
+functors has invertible components.  Its naturality square for an arrow
+of $X$ also gives the naturality square for its formal inverse, by
+multiplying the square by the inverses.  Therefore transformations extend
+uniquely as well, and restriction is the asserted isomorphism of
+categories.  This last assertion concerns ordinary categories, before
+passing to components.
+\end{proof}
+
+\begin{claim}{C.2}{Proved}{Classification of all representable homotopy types}
+A $\U$-small homotopy type $Y$ has its presheaf
+$X\mapsto[BX,Y]$ represented on $\Cathot$ by a $\U$-small category if
+and only if $Y$ is a $1$-type.  If $Y$ is a $1$-type, a fundamental
+groupoid $G_Y$ represents it.  Every other representing category is
+isomorphic to $G_Y$ in $\Cathot$, and its classifying space is
+isomorphic to $Y$ in $\Hot$.  This is a complete affirmative answer to
+Lead~2's representability conjecture.
+\end{claim}
+\begin{proof}
+The negative direction is B.11.  If $Y$ is a $1$-type, choose its
+fundamental groupoid, with one representative object for each component
+and automorphism group $\pi_1(Y,y)$ there.  This is $\U$-small, and
+$BG_Y\simeq Y$: the comparison identifies components and fundamental
+groups, and both sides have zero higher homotopy groups.  C.1 gives
+the required natural bijections.
+
+If a category $K$ represents the same presheaf, the resulting natural
+isomorphism
+$\Hom_{\Cathot}(-,K)\cong\Hom_{\Cathot}(-,G_Y)$ is represented by an
+isomorphism $K\cong G_Y$ in $\Cathot$, by the ordinary Yoneda lemma.
+Applying $B$ gives an isomorphism in $\Hot$.  More precisely, if
+$\theta$ is the specified representing isomorphism, its universal
+element $\theta_K(\id_K):BK\to Y$ is this weak equivalence in
+$\Hot$, composed with the chosen identification $BG_Y\simeq Y$.
+Thus an unspecified abstract bijection has not been substituted for the
+canonical comparison.  When $Y$ is empty the representing category is
+the empty groupoid, and the same Yoneda argument applies.
+\end{proof}
+
+\begin{claim}{C.3}{Proved}{Classification of local categories}
+For a $\U$-small category $K$, the following conditions are equivalent:
+the canonical function $\pi_0\Fun(X,K)\to[BX,BK]$ is bijective for
+every $\U$-small $X$; the category $K$ is isomorphic in $\Cathot$ to a
+groupoid; and the canonical functor $\eta_K:K\to\Pi_1K$ is an
+isomorphism in $\Cathot$.  In particular every local $K$ has $BK$ a
+$1$-type.  Conversely, for a category with $BK$ a $1$-type, localness
+is equivalent to being isomorphic in $\Cathot$ to its groupoidification.
+The hypothesis that $BK$ is a $1$-type alone is insufficient.
+\end{claim}
+\begin{proof}
+If $K$ is local, it represents $X\mapsto[BX,BK]$.  C.2 implies that
+$BK$ is a $1$-type.  Hence $B\eta_K:BK\to B\Pi_1K$ is a weak
+equivalence: it always induces isomorphisms on components and
+fundamental groups, and in this case both source and target have no
+higher homotopy groups.
+
+Localness at the source $X=\Pi_1K$ produces a morphism
+$[j]:\Pi_1K\to K$ in $\Cathot$ whose realization represents
+$(B\eta_K)^{-1}$ in $\Hot$.  Localness of $K$ at $X=K$ then implies
+$[j][\eta_K]=\id_K$.  C.1, applied to the groupoid $\Pi_1K$, gives
+$[\eta_K][j]=\id_{\Pi_1K}$.  These are equalities in $\Cathot$;
+they do not assert actual equalities of functors or an equivalence of
+the underlying categories.
+
+The third condition implies the second.  To prove the converse, we
+observe that postcomposition by an isomorphism $K\to G$ in $\Cathot$
+induces bijections on all representable hom-sets, and realization of
+that isomorphism induces bijections $[BX,BK]\to[BX,BG]$.  The square
+formed by the two canonical comparisons commutes, and the comparison
+for $G$ is bijective by C.1.  Thus the comparison for $K$ is bijective.
+The failure of the weaker converse is exhibited in C.5 below.
+\end{proof}
+
+\begin{claim}{C.4}{Proved}{The reflector is fundamental groupoidification}
+Let $\mathcal L\subset\Cathot$ be the full subcategory of local
+objects.  It is reflective.  After identifying it with groupoids modulo
+natural isomorphism, its reflector is
+\[
+ \Pi_1:\Cathot\longrightarrow\operatorname{Ho}(\mathrm{Grpd}),
+ \qquad \Pi_1\dashv I,
+\]
+where $I$ is the full inclusion and the unit is $[\eta_X]$.
+This reflector inverts exactly those functors that induce a bijection
+on components and isomorphisms on fundamental groups at every
+basepoint.  Its unit is in $W_\infty$ precisely when $BX$ is a
+$1$-type.  In particular this reflection does not supply the nonexistent
+right adjoint to $\varphi:\Cathot\to\Hot$.
+\end{claim}
+\begin{proof}
+Applying $\Pi_1$ to a natural transformation produces a natural
+isomorphism.  It therefore descends to $\Cathot$.  C.1 gives natural
+bijections
+\[
+ \Hom_{\operatorname{Ho}(\mathrm{Grpd})}(\Pi_1X,G)
+   =\pi_0\Fun(\Pi_1X,G)
+   \cong\pi_0\Fun(X,G)
+   =\Hom_{\Cathot}(X,IG).
+\]
+This is the asserted adjunction, with the displayed unit.  C.3
+identifies its replete essential image with $\mathcal L$.
+A functor of groupoids is an equivalence exactly when it gives the
+specified bijection of components and isomorphisms of isotropy groups;
+thus the maps inverted are exactly the stated $1$-equivalences.
+For every $X$, the map $B\eta_X$ preserves components and fundamental
+groups and has a $1$-type as its target.  It is a weak equivalence if
+and only if all the higher homotopy groups of $BX$ vanish.
+
+Although every $W_\infty$-map is inverted by this reflector, many more
+maps are inverted.  For example a category with classifying space $S^2$
+maps to a contractible groupoidification.  The target $\mathcal L$
+therefore models $1$-truncation; it does not model the localization
+$\Hot$ at $W_\infty$.  This distinction is necessary when using the
+word ``reflective'' here.
+\end{proof}
+
+\begin{claim}{C.5}{Refuted}{Coreflectivity, and the weaker converse from the classifying space}
+The inclusion $I:\mathcal L\hookrightarrow\Cathot$ has no right
+adjoint.  Moreover, a category with contractible classifying space need
+not be local.
+\end{claim}
+\begin{proof}
+Let $F$ be the poset with object set $\N$, identity arrows, and exactly
+the following nonidentity arrows:
+\[
+ 2r\longrightarrow2r+1\quad(r\geq0),\qquad
+ 2r\longrightarrow2r-1\quad(r\geq1).
+\]
+There are no composable pairs of nonidentity arrows, so composition
+with identities specifies the entire category.  Its nerve has only
+vertices and these nondegenerate edges.  Its realization is the
+infinite ray, hence is contractible.
+
+Let $D$ be the discrete category with object set $\N$.  Define functors
+$f,g:D\to F$ by $f(r)=0$ and $g(r)=2r$.  A natural transformation
+between two functors $D\to F$ is an objectwise family of arrows.  Thus
+each one-step transformation, in either direction, changes each
+coordinate by at most one in the undirected path metric on $F$.
+A zigzag of length $m$ changes every coordinate by at most $m$.
+Since the distance from $f(r)$ to $g(r)$ is $2r$, no finite zigzag
+connects $f$ to $g$.  Hence
+\[
+ |\Hom_{\Cathot}(D,F)|>1,
+ \qquad |\Hom_{\Cathot}(e,F)|=1.
+\]
+In particular the canonical comparison to $[BD,BF]$, which is a
+singleton, is not injective, proving that $F$ is not local.  The
+finite truncations and their exact distances are checked by
+\texttt{code/bc\_checks.py}; the unbounded-coordinate argument proves
+the infinite assertion.
+
+Within $\mathcal L$, the object $D$ is the coproduct of countably many
+copies of $e$.  Indeed groupoids have this coproduct, and a family of
+componentwise natural isomorphisms can be assembled into a single
+natural isomorphism on a discrete union.  If $I$ had a right adjoint,
+then, being a left adjoint, it would preserve this coproduct.
+Equivalently its adjunction would force the canonical restriction map
+\[
+ \Hom_{\Cathot}(D,F)\longrightarrow
+     \prod_{r\in\N}\Hom_{\Cathot}(e,F)
+\]
+to be a bijection.  Its target is a singleton and its source has the
+two distinct elements just constructed.  This contradiction proves
+the failure of coreflectivity.  The use of an infinite source is part
+of the counterexample, not a suppressed finiteness assumption.
+\end{proof}
+
+\begin{claim}{C.6}{Refuted}{Thomason fibrancy is not the manuscript's localness}
+It is false that every Thomason-fibrant category is local in the sense
+of C.3.  There is no change of target by a $W_\infty$-equivalence that
+makes a homotopy type with nonzero higher homotopy groups into a local
+category.
+\end{claim}
+\begin{proof}
+Let $P$ be the face poset of the boundary of a tetrahedron, and choose
+a Thomason fibrant replacement $P\to RP$.  By the definition of
+fibrant replacement this is a specified $W_\infty$-map, and
+$B(RP)\simeq BP\simeq S^2$.  If $RP$ were local, C.3 would make this
+a $1$-type, a contradiction.  The same reasoning applies to any
+category whose nerve has a nonzero higher homotopy group and to any
+$W_\infty$-equivalent target.  Fibrancy can be used for derived
+mapping objects with the appropriate source and cylinder; it cannot
+produce the envelope asserted at V~ms.~37--43.
+\end{proof}

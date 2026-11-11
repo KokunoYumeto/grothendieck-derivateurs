@@ -1,0 +1,167 @@
+\section{An abstract theorem and its actual hypotheses}
+
+\begin{claim}{E.1}{Proved}{The formal slice construction}
+Let $\mathcal M$ be a $\mathbb U$-small category with pullbacks, let $W$ contain the isomorphisms and satisfy two-out-of-three, and let $\mathcal L$ contain the isomorphisms and be stable under composition and pullback. The same assertion holds for a larger category when all the localizations below exist in the chosen larger universe. For $S\in\mathcal M$, put
+\[
+ W_S^{\mathcal L}=\{u:X\to Y\text{ in }\mathcal M/S:
+ u\times_S T\in W\text{ for every }(T\to S)\in\mathcal L\}.
+\]
+This class contains isomorphisms, has two-out-of-three, and is contained in $W_S$, the class detected on total objects. If $W$ is closed under retracts, so is $W_S^{\mathcal L}$. Every postcomposition functor $\Sigma_f:\mathcal M/S\to\mathcal M/T$, for $f:S\to T$, preserves these classes. If $f\in\mathcal L$, strict pullback $f^{-1}:\mathcal M/T\to\mathcal M/S$ also preserves them and the ordinary adjunction $\Sigma_f\dashv f^{-1}$ descends to both the ordinary and enhanced localizations.
+\end{claim}
+\begin{proof}
+For each $\ell:U\to S$ in $\mathcal L$, pullback is a functor on slices. The inverse image under a functor of a class with two-out-of-three has two-out-of-three; intersections preserve this property. The identity test gives containment in $W_S$. Retracts are handled by the same argument. For $u\in W_S^{\mathcal L}$ and $\ell:U\to T$ in $\mathcal L$, the map testing $\Sigma_fu$ is canonically isomorphic to the pullback of $u$ along $S\times_TU\to S$. That last map is in $\mathcal L$. For $f\in\mathcal L$ and $v\in W_T^{\mathcal L}$, the test of $f^{-1}v$ along $U\to S$ is the test of $v$ along $U\to S\xrightarrow fT$, also in $\mathcal L$. Finally, the unit and counit of the slice adjunction are natural transformations between relative functors. Localization sends them to natural transformations satisfying the same triangle identities. This proves the descended adjunction, not merely the existence of two descended functors.
+\end{proof}
+
+
+\begin{claim}{E.2}{Refuted}{Arbitrary raw pullback does not follow}
+The hypotheses of E.1 do not imply that raw pullback preserves the fine classes for every $f$. In the presheaf fine theory of $\Cat/[1]$, the inclusion $u:e_1\to[1]$ over $[1]$ is a fine equivalence, whereas its pullback along $e_0\to[1]$ is $\varnothing\to e$, which is not. Consequently the inverse image on the fine localization, when it exists, cannot in general be computed by raw pullback.
+\end{claim}
+\begin{proof}
+The category $[1]$ has objects $0,1$, their identity arrows, and one further arrow $0\to1$. For $s=0$ and $s=1$, the comma category $s\backslash e_1$ is terminal, and $s\backslash[1]$ has an initial object. Thus $s\backslash u$ is a weak homotopy equivalence for both objects. The strict inverse image of $e_1$ at $0$ is empty and that of $[1]$ is terminal. Their nerves have different sets of components. The program \texttt{code/ef\_finite\_checks.py} verifies the complete finite category and comma data. In the notation of Part B, the presheaf class is $W^{\Prop}_S=W^{\mathrm{pre}}_S$; the dual covariant class is $W^{\Liss}_S=W^{\mathrm{co}}_S$. Thus this example also fixes which pole enters E.1.
+\end{proof}
+
+\begin{claim}{E.3}{Proved}{A recognition theorem giving all three Kan functors}
+Suppose that the enhanced localizations
+$\mathscr E(S)=(\mathcal M/S)[(W_S^{\mathcal L})^{-1}]_\infty$
+exist for bases $S$ in a category $\mathcal B$. Suppose we are given a functor $C:\mathcal B\to\Cat_\infty$ with small values and fully faithful functors $h_S:C(S)\to\mathscr E(S)$ satisfying the following precise presentation hypotheses. The category $\mathscr E(S)$ has all small colimits. Each functor $\Map(h_S(c),-):\mathscr E(S)\to\Spaces$ preserves all small colimits. These functors jointly detect equivalences. For each $f:S\to T$, postcomposition descends to a colimit-preserving functor $F_f:\mathscr E(S)\to\mathscr E(T)$ and there is a coherent equivalence $F_fh_S\simeq h_TC(f)$.
+
+Then the restricted Yoneda functors give equivalences
+\[
+ H_S:\mathscr E(S)\simeq\Fun(C(S)^{\op},\Spaces),\qquad
+ H_S(X)(c)=\Map(h_S(c),X).
+\]
+Under these equivalences, $F_f$ is left Kan extension along $C(f)^{\op}$; it has right adjoint $f^*$, given by restriction, and this restriction has right adjoint $f_*$. These are coherent functors of the base, hence yield the requested pseudofunctors on homotopy categories. The locally constant subcategory has both adjoints to its inclusion. None of the presentation hypotheses is claimed to follow from E.1 or from factorization through intrinsic fibrations.
+\end{claim}
+\begin{proof}
+Let $P(C)=\Fun(C^{\op},\Spaces)$. The colimit-preserving extension of $h_S$ along the Yoneda functor exists: explicitly, it sends a presheaf $F$ to the colimit of $h_S(c)$ indexed by the right fibration of elements of $F$. Denote it by $L_S:P(C(S))\to\mathscr E(S)$. The universal property of that colimit and the infinity-categorical Yoneda lemma give $L_S\dashv H_S$. By full faithfulness of $h_S$, the unit is an equivalence on representables. Both $L_S$ and $H_S$ preserve colimits by hypothesis; representables generate $P(C(S))$ under small colimits. The unit is therefore an equivalence everywhere. For $X\in\mathscr E(S)$, applying $H_S$ to the counit $L_SH_SX\to X$ gives an equivalence by the triangle identity. Joint detection by the mapping functors makes the counit an equivalence. This proves the recognition assertion, including essential surjectivity.
+
+The two colimit-preserving functors $H_TF_fL_S$ and $\Lan_{C(f)^{\op}}$ agree on every representable, by the specified equivalence $F_fh_S\simeq h_TC(f)$. The colimit presentation makes their extension and coherence unique. Restriction on functor categories has both Kan adjoints because spaces are complete and cocomplete. Adjunctions transport through $H_S,H_T$, and their composition constraints follow from uniqueness of adjoints.
+
+Write $q_S:C(S)\to BC(S)$ for groupoid completion. Its universal property identifies $q_S^*\Fun(BC(S)^{\op},\Spaces)$ with the full subcategory of presheaves carrying every arrow to an equivalence. Both Kan extensions along $q_S^{\op}$ exist. Full faithfulness of restriction gives a reflection and a coreflection. This also covers the empty base, since its functor category is terminal; disconnected bases and infinite families are included in the small-colimit hypothesis.
+\end{proof}
+
+\begin{claim}{E.4}{Proved}{Coefficient localization and exact squares}
+In E.3 one may replace the coefficient category of spaces by any presentable infinity-category $\mathcal V$, once the slice presentation with those coefficients has been verified. In particular, an accessible reflective localization $L:\Spaces\to\mathcal V$ gives the objectwise localization
+\[
+ \Fun(C(S)^{\op},\Spaces)\longrightarrow\Fun(C(S)^{\op},\mathcal V).
+\]
+Restriction still has both Kan adjoints, and the locally constant subcategory is reflective and coreflective. For a strictly commuting square of ordinary indexing categories, base change for these Kan functors follows whenever its relevant comma-category comparison is homotopy final for left Kan extension, or homotopy initial for right Kan extension. In particular the presheaf left base-change map is invertible if the vertical map is $W_\infty$-smooth or the horizontal map is $W_\infty$-proper; the right map is invertible with these two roles reversed.
+\end{claim}
+\begin{proof}
+The objectwise adjunction $L\dashv\iota$ gives a reflective localization of functor categories: its unit is an equivalence exactly on diagrams with local values. Limits in $\mathcal V$ are formed in the ambient category; colimits are obtained by applying $L$ to ambient colimits. Kan extension and restriction in $\mathcal V$ therefore exist for every small indexing functor. Groupoid completion has the same universal property for functors into any infinity-category, so the argument for locally constant objects is unchanged. For the base-change assertion, evaluate at an object of the lower-left indexing category. The pointwise Kan formulas express the mate as a colimit or limit comparison along an explicitly induced comma functor. The homotopy-final or homotopy-initial hypothesis is exactly the cofinality theorem for that comparison. The lifting-category proof, with the precise orientation of both maps, is given in F.2. It applies to every derivator and hence also to every such $\mathcal V$.
+\end{proof}
+
+\begin{claim}{E.5}{Proved}{Instances and the extra coarse comparison}
+For $W_\infty$, the presheaf fine localization of $\Cat/S$ satisfies E.3 with $C(S)=NS$ and $h_S(s)$ the point $e_s\to S$; the dual localization uses $NS^{\op}$. The contravariant and covariant simplicial model structures give the same instances over quasicategorical bases, with the proviso in Part B about raw strict slice tests over arbitrary simplicial sets. For finite Alexandrov posets with downsets open and unrestricted topological total spaces, the open-test localization is the covariant instance $C(P)=NP^{\op}$ proved in Part D. Discrete topological bases give the product of copies of spaces directly.
+
+The additional assertion that the coarse localization agrees with the locally constant part requires the coarse comparison
+\[
+ (\mathcal M/S)[W_S^{-1}]_\infty\simeq\Spaces_{/BC(S)}
+ \simeq\Fun(BC(S)^{\op},\Spaces)
+\]
+and compatibility of its localization functor with $\Lan_{q_S^{\op}}$. For $(\Cat,W_\infty)$ this comparison holds. It is not part of the abstract recognition hypotheses.
+\end{claim}
+\begin{proof}
+Part B constructs the enhanced equivalence using nerves and simplex categories, under which $e_s$ is the representable presheaf $t\mapsto\Hom_S(t,s)$. Evaluation at $s$ preserves all colimits and detects equivalences jointly in $s$; postcomposition carries a point to its image. These facts verify every presentation hypothesis of E.3. The proof for simplicial sets is the straightening comparison recorded there. The topological equivalence, including the topology on its realization functor and its unit and counit, is proved in D; for a discrete base it reduces to the homeomorphism $X\cong\coprod_{s\in S}X_s$.
+
+For the coarse comparison in $\Cat$, use the Thomason Quillen equivalence with spaces and its right proper slice comparison, or the functorial smooth-and-proper replacement of Part B. The latter replaces $X\to S$ by $E\to S$ through a total weak equivalence, with strict fibres the homotopy fibres of $BX\to BS$. These fibres form the corresponding locally constant diagram, by straightening over the space $BS$. The total space of a presheaf $F$ is its Grothendieck homotopy colimit, so the canonical functor from the fine theory to the coarse one is the left Kan extension of $F$ along $S\to BS$. Equivalently, it is characterized by the adjunction against every locally constant coefficient diagram. This verifies compatibility of the specified comparison, not only an abstract equivalence of categories. The reflector and coreflector for an arbitrary derivator are also the precisely stated content of \citet[Theorem 3.13]{EFCisinski2009}.
+\end{proof}
+
+\begin{claim}{E.6}{Refuted}{The coarse theory is not the locally constant fine theory for every localizer}
+Replacing $W_\infty$ by an arbitrary fundamental localizer in the coarse comparison of E.5 is false. Already for $W_0$, the component equivalences, and $S=BC_2$, the canonical coarse localization identifies two distinct locally constant objects of the fine theory.
+\end{claim}
+\begin{proof}
+Let $C_2=\{1,g\}$ with $g^2=1$, and regard $S$ as its one-object category. The functor $u:e\to S$ sends the sole identity to $1$ and is considered as a morphism from $e\to S$ to $\id_S$ in $\Cat/S$. Both total categories are connected, so $u\in W_0$. At the sole object $s$, the comma category $s\backslash e$ is the discrete set $C_2$: an arrow in it must map under $u$ to the identity, so distinct group elements cannot be connected. The category $s\backslash S$ is the translation groupoid, with exactly one arrow between any ordered pair of objects; it is contractible. The induced map is not a component equivalence. Both associated diagrams are locally constant because all arrows of $S$ are invertible. Thus the fine localization does not invert $u$, whereas the coarse one does. In the objectwise-localized description these are the regular $C_2$-set and the one-point $C_2$-set. The complete multiplication and comma calculations are included in \texttt{code/ef\_finite\_checks.py}.
+\end{proof}
+
+\begin{claim}{E.7}{Proved}{What enough intrinsic fibrations supplies}
+Let $\mathcal M$ have a terminal object and pullbacks, and let $W$ contain isomorphisms and satisfy two-out-of-three. Define $\Fib_W$ by universal preservation of $W$ under strict pullback. Assume that every morphism factors as a map in $W$ followed by a map in $\Fib_W$. Then every map in $W\cap\Fib_W$ remains in $W$ after arbitrary pullback. Consequently the full subcategory of objects whose terminal map lies in $\Fib_W$, with these weak equivalences and fibrations, is a category of fibrant objects and presents the same enhanced localization as $\mathcal M$. It supplies finite homotopy limits and the usual homotopy-fibre construction. This does not identify the fine slice theories, and does not imply E.3.
+\end{claim}
+\begin{proof}
+Let $p:T\to B$ lie in $W\cap\Fib_W$, and let $g:X\to B$ be arbitrary. Factor $g=qi$ with $i:X\to Z$ in $W$ and $q:Z\to B$ in $\Fib_W$. The map $p_Z:T\times_BZ\to Z$ is in $W$ because it is obtained by pulling back $p$ along $q$. It is also in $\Fib_W$, since that class is stable under pullback. The comparison $T\times_BX\to T\times_BZ$ lies in $W$, since it is the pullback of $i$ along $p_Z$. The equality of composites
+\[
+ i\,p_X=p_Z\,(T\times_B i)
+\]
+and two-out-of-three imply $p_X\in W$. This is the non-formal Brown axiom.
+
+Composition and pullback stability of $\Fib_W$ follow by iterating the defining test. If $X,Y$ have fibrant terminal maps, a factorization $X\to Z\to Y$ as above has $Z$ fibrant. A path object for a fibrant $X$ is obtained by factoring $X\to X\times X$; products and fibrant pullbacks exist by pullback stability. Factoring $X\to e$ supplies a weak-equivalence fibrant replacement for every object. The Brown localization theorem therefore identifies the localization of the fibrant subcategory with that of $\mathcal M$ and gives finite homotopy limits. In the infinity-categorical form, the finite inverse diagram comparison is \citet[Theorems 7.5.18 and 7.6.17]{BCCisinski2019}; the latter is stated for $I^{\op}$ with $I$ finite direct. No infinite diagram rectification is inferred. The counterexamples in E.2 and E.6 show why this construction alone does not supply the fine presentation or its locally constant interpretation.
+\end{proof}
+
+\begin{claim}{E.8}{Known}{The accessible localizers satisfying the intrinsic factorization axiom}
+For an accessible fundamental localizer $W$ of $\Cat$, factorization through $\Fib_W$ is equivalent to aspherical generation of $W$, to generation by a set of maps $A\to e$, and to right properness of the associated Thomason model structure. In the corresponding accessible localization of spaces it is precisely nullification. Thus truncation localizers satisfy this factorization axiom; the nonzero-spectrum homology localizers in Part B do not. The right class of the associated modality is not the class $\Fib_W$: every $X\to e$ belongs to $\Fib_W$, whereas a terminal map is in that right class only when its fibre is local.
+\end{claim}
+\begin{proof}
+The equivalence of aspherical generation, generation by a set of categories, and properness is \citet[Theorem 6.1.11]{BCCisinski2006}. The comparison with right properness of the Thomason model is his Theorem 5.2.15, and Example 6.1.14 makes every model fibration intrinsic in the proper case. Model factorization therefore gives the required factorization.
+
+For the converse, E.7 applies, and all terminal maps are intrinsic because fundamental localizers are stable under products. Let $W_{\mathrm{asph}}$ be the fundamental localizer generated by the maps $A\to e$ already in $W$. A trivial intrinsic fibration $p:T\to B$ is universally in $W$ by E.7. Pullback along $B/b\to B$ shows that $T/b$ is $W$-aspherical for each $b$. Hence $T/b\to e$ is one of the generators for $W_{\mathrm{asph}}$, and relative Theorem A gives $p\in W_{\mathrm{asph}}$. The Brown lemma applied to the identity functor, with target weak equivalences $W_{\mathrm{asph}}$, now gives $W\subseteq W_{\mathrm{asph}}$. The reverse inclusion is immediate. This direction needs no accessibility; accessibility enters when Theorem 6.1.11 turns it into set generation and model properness. Locality with respect to $A_i\to e$ means exactly that $Z\to\Map(BA_i,Z)$ is an equivalence, which is the definition of the corresponding nullification. We use no identification of the modality's right maps with intrinsic strict pullback maps. The product statement already separates them whenever a nonlocal object exists.
+\end{proof}
+
+\begin{claim}{E.9}{Proved}{What a path object must supply}
+Suppose $\mathcal M$ has finite limits, $W$ has two-out-of-three, and $\mathcal A=\Liss\cap\Prop$ is stable under pullback and composition and contains product projections. Suppose functorially for each $S$ there is a path object
+\[
+ S\xrightarrow{c_S}P(S)\xrightarrow{(s_S,t_S)}S\times S,
+ \qquad s_Sc_S=t_Sc_S=\id_S,
+\]
+whose endpoint map belongs to $\mathcal A$ and whose source evaluation $s_S$ is universally in $W$. Then every $f:X\to S$ factors functorially as
+\[
+ X\xrightarrow{i_f}X\times_{S,s_S}P(S)\xrightarrow{p_f}S
+\]
+with $i_f(x)=(x,c_Sf(x))$ in $W$ and $p_f=t_S\pr_2$ in $\mathcal A$. Merely requiring $c_S\in W$ and $(s_S,t_S)\in\mathcal A$ does not prove the required assertion about $i_f$; the transfer hypothesis must be supplied.
+\end{claim}
+\begin{proof}
+The projection $r_f:X\times_SP(S)\to X$ is a pullback of $s_S$, hence lies in $W$, and $r_fi_f=\id_X$. Two-out-of-three gives $i_f\in W$. The map $(r_f,p_f)$ to $X\times S$ is the pullback of $(s_S,t_S)$ along $f\times\id_S$, so belongs to $\mathcal A$. Composing with the product projection gives the assertion about $p_f$. All formulas respect strictly commuting squares, which gives the stated functoriality.
+
+In $\Cat$, the fence-path replacement of Part B supplies the conclusion by explicit contractions and lifting categories. In simplicial sets, functorially factor the diagonal in the Kan--Quillen structure as a weak equivalence followed by a Kan fibration. Kan fibrations and product projections lie in both simplicial poles; right properness and E.7 make $s_S$, which has the weak-equivalence section $c_S$, universally weak. Thus the displayed construction applies. In compactly generated spaces, the usual path space $P(S)=S^{[0,1]}$ has a Hurewicz-fibration endpoint map and a source evaluation with an explicit fibrewise contraction; it supplies intrinsic fibration replacement. This fact by itself does not identify Hurewicz fibrations with topological sheaf-proper or shape-submersive maps. The two latter classes belong to the additional sheaf theory of Part D.
+\end{proof}
+
+\begin{claim}{E.10}{Proved}{The groupoid test and the meaning of collapse}
+Let $S$ be a small groupoid and let $\mathcal M=\mathrm{Gpd}$ with categorical equivalences. For functors of groupoids over $S$, both comma-test classes agree with the total equivalences. Their enhanced localizations consequently agree with the coarse theory, which is the infinity-category of families of $1$-types over $NS$. Both variances are identified by inversion in $S$. This does not mean that every artificially chosen class $\mathcal L$ gives the coarse localization.
+\end{claim}
+\begin{proof}
+If $u:X\to Y$ is an equivalence of groupoids over $S$, the induced functor $s\backslash X\to s\backslash Y$ is fully faithful. Given $(y,\alpha:s\to p(y))$, choose $x$ and an isomorphism $\beta:u(x)\to y$. Then $(x,p(\beta)^{-1}\alpha)$ maps isomorphically to $(y,\alpha)$, proving essential surjectivity. Conversely, equivalence on these comma groupoids implies equivalence on total classifying spaces by their Grothendieck homotopy colimits, hence equivalence of groupoids because their nerves are $1$-types. Replacing every arrow of $S$ by its inverse identifies the two comma constructions. An isofibration replacement $X\to E\to S$, where $E$ has objects $(x,s,\alpha:p(x)\xrightarrow{\sim}s)$, is a total equivalence and has groupoid fibres. Straightening of this explicit groupoid fibration gives precisely families of groupoids, or $1$-types, over $NS$.
+
+For the last assertion let $S$ be the two-object groupoid with exactly one arrow between each ordered pair, and let $u:e_0\to S$ be its full inclusion, regarded over $S$. This is a categorical equivalence. Its pullback at object $1$ is $\varnothing\to e$. If $\mathcal L$ consists of all maps, this is not in $W_S^{\mathcal L}$. Fibre evaluation preserves that latter weak-equivalence class and separates the two objects after localization, so the distinction is genuine. The natural invariant comma theories collapse; arbitrary strict tests can retain presentation data. No assertion about weak globular infinity-groupoids or the unrefereed 2026 claim is needed.
+\end{proof}
+
+\input{sections/E_b062}
+
+\begin{claim}{E.13}{Refuted}{Ordinary homotopy categories do not supply coherent gluing}
+A gluing theorem for the enhanced fine theories cannot in general be replaced by the same pullback or lax-pullback construction on their homotopy categories. The comparison $\Ho\Fun([1],\mathcal V)\to\Fun([1],\Ho\mathcal V)$ need not be faithful, even for $\mathcal V=D(\mathbb Z)$.
+\end{claim}
+\begin{proof}
+Put $X=\mathbb Z[0]$ and $Y=\Sigma X$ in the stable infinity-category $D(\mathbb Z)$. Consider the coherent arrows $a=(X\to0)$ and $b=(0\to Y)$. Their mapping space in the coherent arrow category is the homotopy pullback
+\[
+ \Map(X,0)\times_{\Map(X,Y)}\Map(0,Y)
+ \simeq\Omega\Map(X,Y).
+\]
+Its set of components is $[\Sigma X,Y]\cong\mathbb Z$. In the arrow category of $\Ho D(\mathbb Z)$, both vertical components of a morphism $a\to b$ must be zero, so there is exactly one morphism. The comparison maps all these integer classes to that single morphism. Thus the homotopy category has forgotten precisely the coherent square data needed for the gluing statement. A derivator retains coherent diagram categories at additional shapes; E.3 instead uses an infinity-categorical enhancement. The finite inverse diagram consequence of E.7 is not an assertion that all strict diagrams of arbitrary small shape compute that enhancement.
+\end{proof}
+
+\begin{claim}{E.14}{Proved}{The precise modality and locally cartesian closed comparison}
+Let $L:\Spaces\to\mathcal V$ be an accessible reflective localization of spaces. The following conditions are equivalent: $L$ is a nullification; its local objects are closed under dependent sums over local bases, hence form a modality; the canonical map
+\[
+ L(X\times_Z A)\longrightarrow LX\times_Z A
+\]
+is an equivalence for every $X\to Z\leftarrow A$ with $A,Z$ local; and $\mathcal V$ is locally cartesian closed. Consequently these are additional equivalent conditions in E.8. The modality's left class consists of maps with $L$-contractible homotopy fibres and can be strictly smaller than the class inverted by $L$.
+\end{claim}
+\begin{proof}
+Suppose the generators are $K_i\to *$. For a family $Y\to Z$ whose base and fibres are local, the mapping-space fibration gives
+\[
+ \Map(K_i,Y)\simeq
+ \int_{f\in\Map(K_i,Z)}\Map_{/Z}(K_i,Y)
+ \simeq\int_{z\in Z}\Map(K_i,Y_z)
+ \simeq\int_{z\in Z}Y_z=Y.
+\]
+Here the middle equivalence is induced by the constant-map equivalence $Z\to\Map(K_i,Z)$; over the constant at $z$ the mapping space is $\Map(K_i,Y_z)$. All equivalences are inverse to constant maps, so $Y$ is local. The equivalence between this closure condition and the modality factorization system is \citet[Theorems 1.34 and 1.54]{EFRijkeShulmanSpitters2020}; the nullification statement is Theorem 2.19 there.
+
+Conversely suppose this is an accessible modality generated as a localization by $u_i:A_i\to B_i$. Take the set of homotopy fibres of the units of all $A_i,B_i$. They are $L$-contractible. Every local space is null for them. If $Y$ is null for them and $U\to LU$ is one of those units, its fibre diagram gives
+\[
+ \Map(U,Y)=\lim_{z\in LU}\Map(U_z,Y)
+ \simeq\lim_{z\in LU}Y=\Map(LU,Y).
+\]
+The limits are over the full homotopy type $LU$, with its coherent monodromy. Naturality of the units and invertibility of $Lu_i$ then imply $u_i$-locality of $Y$. This proves equality of the local objects, hence nullification; compare Lemma 2.20 of the same source.
+
+In a modality every unit has $L$-contractible fibres. Base change of $X\to LX$ along $LX\times_ZA\to LX$ retains that property and is inverted by $L$. Its target is local, since local objects are closed under limits. This proves the displayed locally cartesian identity. Conversely that identity applied to a point of $LX$ makes every unit fibre $L$-contractible. For a family over a local $Z$ with local fibres, the same identity identifies the fibres of its unit with the localizations of those fibres, hence makes its unit an equivalence. This recovers closure under dependent sums.
+
+The locally cartesian identity makes pullback along $A\to Z$ preserve colimits in the local slices: compute each colimit in spaces, apply $L$, and use universality of colimits in spaces. The adjoint functor theorem gives the dependent product, so $\mathcal V$ is locally cartesian closed. For the converse, every space $X\to Z$ is the colimit, indexed by the infinity-groupoid $X$, of its points $*\to Z$. These are local objects of the slice when $Z$ is local. Their colimit in $\mathcal V/Z$ is $LX\to Z$. If pullback to local $A\to Z$ has a right adjoint, it preserves this colimit; its values on the point diagram are the local fibres $A_x$. Their colimit in spaces is $X\times_ZA$. Localizing that colimit yields exactly the displayed identity. This last implication uses the fact that the ambient category is spaces, generated by its point in this manner; it is not asserted for an arbitrary ambient topos. For $L=\tau_{\leq0}$, a map between connected spaces is inverted by $L$, but may have disconnected homotopy fibres, for example $*\to BC_2$. Thus the modality's left class and the class inverted by $L$ are indeed different.
+\end{proof}
