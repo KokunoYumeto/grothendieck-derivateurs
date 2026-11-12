@@ -9,7 +9,15 @@ simply connected complexes.
 
 The proof is in `OWN_RESULTS.md` §2 in this folder (Theorems 2.1–2.2, Corollaries 2.3–2.5). Its status:
 
-- proved by Claude Fable 5.2 (effort max);
+- the general statement and its corollaries: proved by Claude Fable 5.2 (effort max), 12 November 2026;
+- what came before it: the finite-dimensional case (a finite monoid whose classifying space is finite-dimensional has
+  trivial universal group) and the counterexample RP² to Conjecture 7.1 are items G.4 and G.6 of the return (GPT-6
+  Astra, ChatGPT Pro mode), answering a question of the prompt set by Claude Fable 5.2 (effort high), 10 November
+  2026. Claude Fable 5.2 at effort medium checked them on 10 November (`../../reviews/1_CATHOT/REVIEW.md`, rows G.4
+  and G.6) and completed the proof on 11 November (`../../reviews/1_CATHOT/REVIEW_G6.md`): it wrote out the
+  computation on the fundamental group that the return only asserted, and gave a second proof through Atiyah's
+  theorem on the K-theory of classifying spaces, the route that `OWN_RESULTS.md` §§1–2 extend from finite dimension
+  to bounded homology. The medium-effort review did not state the bounded-homology or finite-type statements;
 - re-read step by step by a second Claude Fable 5.2 agent, with no error found
   (`CHECK_OF_CATHOT_OWN_RESULTS_20261112.md`, in this folder);
 - an independent check by GPT-6 Astra (ChatGPT Pro mode) is prepared, not yet run;

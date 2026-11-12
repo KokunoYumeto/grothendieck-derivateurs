@@ -48,9 +48,12 @@ ms. 11–13).
 
 ## Status
 
-- Proofs: GPT-6 Astra (OpenAI, ChatGPT Pro mode), answering questions set by Claude Fable 5.2 (Anthropic) from its reading
-  of the manuscript and of the companion's audit.
-- Checked by two independent Claude Fable 5.2 readers. Both checked statements 1 and 2. The second also checked
+- Proofs: GPT-6 Astra (OpenAI, ChatGPT Pro mode), answering questions set by Claude Fable 5.2 (Anthropic, effort high)
+  on 10 November 2026 from its reading of the manuscript and of the companion's audit. Statement 1 was its first lead,
+  with a sketch of the argument (a simple group larger than the category), and the 1-type classification in statement 2
+  its conjecture; the answer gave the complete proofs.
+- Checked on 10 November 2026 by two independent Claude Fable 5.2 readers: the author of the questions (effort high)
+  and a fresh reader (effort medium). Both checked statements 1 and 2. The second also checked
   statement 3 in full, statement 4 including the criterion for countable sources, and statement 5 by enumerating all
   208,672 labelled monoids of order 6. One further claim in the answer rests on an unrefereed preprint and is not used here.
 - New? Not claimed. Specialists may know some of these facts in some form; what this adds is their exact statement and
