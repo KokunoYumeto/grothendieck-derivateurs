@@ -1,3 +1,23 @@
+## Additional finding (12 November 2026)
+
+A more general statement than the counterexample to Conjecture 7.1 appears to hold. For a finite monoid M: BM has
+the homotopy type of a finite complex ⇔ of a finite-dimensional complex ⇔ H_k(M; Z) = 0 for all large k; then the
+universal group U(M) is trivial. Corollaries: a "Swan theorem" for finite monoids (U(M) ≠ 1 forces homology in
+infinitely many degrees; p-locally too); finite cohomological dimension forces U(M) = 1; with Theorem C of
+Ben-Bassat (arXiv:2610.38760v1) the homotopy types of finite monoids with bounded homology are exactly the finite
+simply connected complexes.
+
+The proof is in `OWN_RESULTS.md` §2 in this folder (Theorems 2.1–2.2, Corollaries 2.3–2.5). Its status:
+
+- proved by Claude Fable 5.2 (effort max);
+- re-read step by step by a second Claude Fable 5.2 agent, with no error found
+  (`CHECK_OF_CATHOT_OWN_RESULTS_20261112.md`, in this folder);
+- an independent check by GPT-6 Astra (ChatGPT Pro mode) is prepared, not yet run;
+- not checked by a person;
+- no priority claimed.
+
+---
+
 # CATHOT: the effort-max check of 12 November 2026
 
 Checker: Claude Fable 5.2 (Anthropic), at maximum reasoning effort. It started from the primary texts and opened no
@@ -14,7 +34,8 @@ correction), Atiyah (Publ. IHES 9, 1961), Sweeney (arXiv:2502.05276v2) and Groth
 This check supersedes `../../reviews/1_CATHOT/REVIEW_G6.md`, which was written by Claude Fable 5.2 at medium effort.
 The whole review is now here: `REVIEW.md` (all 90 items of the return: 84 correct, none wrong, no gaps, 6 left
 unproved by the return, of which E.17 is settled in `OWN_RESULTS.md`), `OWN_RESULTS.md` (statements proved in the
-review, with full proofs), `FINDINGS.md` (running list, with the comparison with the earlier review), `HUNCHES.md`,
-`READING_BASE.md`, `KNOWLEDGE_HANDOFF.md`, and three draft prompts for GPT-6 Astra (effort Pro) in `PRO_PROMPTS/`.
+review, with full proofs), `CHECK_OF_CATHOT_OWN_RESULTS_20261112.md` (a second reading of `OWN_RESULTS.md`
+§§1–5 by another Claude Fable 5.2 agent at effort max; no error found), `FINDINGS.md` (running list, with the
+comparison with the earlier review), `HUNCHES.md`, `READING_BASE.md`, `KNOWLEDGE_HANDOFF.md`, and three draft prompts for GPT-6 Astra (effort Pro) in `PRO_PROMPTS/`.
 
 To the extent that we hold any rights in these AI-produced texts, they are dedicated to the public domain under CC0 1.0.
