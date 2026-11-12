@@ -6,7 +6,7 @@ For a successor who continues the Pro-mode prompt work on Les Dérivateurs and L
 - `..\FABLE_PILOT_OVERVIEW_20261110.md` with its addendum: my reading of the 15 audited chunks of Les Dérivateurs and of the raw text of XII §8, XVI §§3, 5–7.
 - `..\pro_prompts_20261110\` : seven prompts, numbered in running order (1_CATHOT submitted and returned; 2_TOTAL_ASPHERICITY, 3_POLES, 4_GALOIS, 5_STRATA, 6_PATHS, 7_BISITE), each with PROMPT.md, BACKGROUND.md, and since 11 Nov a CHANGES_20261110.md where edited. `_COMMON_BLOCK.md` is the shared second half (conventions, rules of proof, deliverables).
 - `1_CATHOT\REVIEW_author.md` (this folder): verdicts on the returned answer; `checks_author\` my own homology check.
-- Longue Marche: `C:\Users\user\Documents\longue_marche_pro_pilot_20261104\pro_prompts_draft_20261111\` (OVERVIEW.md, README.md, LM4_FINITE_GROUP_ACTIONS–P168). Read `PLAN_RECORD.md` there before touching anything: never label a reading or a design "settled", never restate the 30 statements of its section 5 as the user's, no rights remarks.
+- Longue Marche: `user\Documents\longue_marche_pro_pilot_20261104\pro_prompts_draft_20261111\` (OVERVIEW.md, README.md, LM4_FINITE_GROUP_ACTIONS–P168). Read `PLAN_RECORD.md` there before touching anything: never label a reading or a design "settled", never restate the 30 statements of its section 5 as the user's, no rights remarks.
 
 ## What each Dérivateurs prompt is for
 1. CATHOT: no right adjoint to `Cat hot → Hot`; what categories modulo natural transformations represent; finite tests; small models. Returned; see the review.
@@ -58,7 +58,7 @@ Integration into the companion (`checks\DER_<id>\`; originals of every file touc
 State at the end of this session: review complete; prompt `6_PATHS` corrected; integration applied to the claim rows II-C-003, II-C-010, XIIb-a-B035, XIIba-C005, C035, C037, C038, C045, C047, C048, XIIbb-A001, V-I026, V-I054, V-I059, V-I060, V-I063, VIIc-C004, VIIc-C005, IX-037, with eight commentary blocks (one in II-a, five in XIIb-a, two in III-V). Left for a successor: rebuild the global reader and publish when the coordinator asks; revise the overviews of II-a, III-V, XIIb-a; have a second reader follow TOTASPH F.7 and the three reviewer's arguments listed in `INTEGRATION_LOG.md`; row XIIba-A-053 and row VIIb-C026 are untouched (prompts 3 and 6).
 
 ## Recent results (added 10 Nov 2026, late, by the coordinator)
-Read `C:\Users\user\Documents\recent_results_20261110\BRIEF_FOR_PROMPTS.md` (two pages; sections per workstream)
+Read `user\Documents\recent_results_20261110\BRIEF_FOR_PROMPTS.md` (two pages; sections per workstream)
 before framing or reviewing any prompt; details and sources in `RECENT_RESULTS.md` beside it. For Les Dérivateurs and
 Pursuing Stacks the relevant items are the claimed homotopy hypothesis (OpenAI family 312, restricted to coherators in
 the Ara-Henry convention; only Henry's pushout conjecture in Lean) and Thomason model structures on strict
@@ -119,8 +119,8 @@ NOT done: integration into the companion. The review ends with the list (22 item
 ## Folder convention for the prompt folders (user, 11 Nov 2026, about 10:35 UTC; replaces the `_work/` subfolder convention of 10:15 UTC)
 
 The user uploads every file of a prompt folder to ChatGPT, and no subfolder can be uploaded. So each prompt folder holds ONLY its upload files, `PROMPT.md` and `<name>_background.zip`, and never a subfolder. Everything else lives in a parallel work tree, by prompt name:
-- Dérivateurs: `C:/Users/user/Documents/derivateurs_companion_20261109/pro_prompts_20261110_work/<name>/` (BACKGROUND.md, CHANGES_*.md, MANIFEST.tsv, earlier prompts, earlier zips `_vN`); the series-level downloads are `pro_prompts_20261110_work/_downloads/`.
-- La Longue Marche: `C:/Users/user/Documents/longue_marche_pro_pilot_20261104/pro_prompts_draft_20261111_work/<name>/`. LM4 to LM8, not ready, are entirely there, PROMPT.md included: edit their PROMPT.md there. Their upload folders stay empty until a zip is built; then PROMPT.md and the zip are copied into the upload folder.
+- Dérivateurs: `user/Documents/derivateurs_companion_20261109/pro_prompts_20261110_work/<name>/` (BACKGROUND.md, CHANGES_*.md, MANIFEST.tsv, earlier prompts, earlier zips `_vN`); the series-level downloads are `pro_prompts_20261110_work/_downloads/`.
+- La Longue Marche: `user/Documents/longue_marche_pro_pilot_20261104/pro_prompts_draft_20261111_work/<name>/`. LM4 to LM8, not ready, are entirely there, PROMPT.md included: edit their PROMPT.md there. Their upload folders stay empty until a zip is built; then PROMPT.md and the zip are copied into the upload folder.
 - A rebuild writes the new zip and PROMPT.md into the upload folder and the previous zip to the work folder as `<name>_background_vN.zip` (for `7_BISITE` the next is `_v7`).
 The READMEs of the two stacks stay at the top of `pro_prompts_20261110/` and `pro_prompts_draft_20261111/`. Records written before 10:35 UTC say `_work/` for what is now the work tree.
 
@@ -188,6 +188,34 @@ At the coordinator's request: `pro_prompts_20261110/8_RESIDUE/` holds `PROMPT.md
 
 ## La Longue Marche: separate handoff (pointer added 11 November 2026, 23:50 UTC)
 
-The state of the Longue Marche prompts, the reviews of the LM3 and LM2 returns, what is established, the reviewer's own results and errors, and the open items are in `C:/Users/user/Documents/longue_marche_pro_pilot_20261104/pro_prompts_draft_20261111_work/KNOWLEDGE_HANDOFF_LM.md` (Claude, Fable 5.2).
+The state of the Longue Marche prompts, the reviews of the LM3 and LM2 returns, what is established, the reviewer's own results and errors, and the open items are in `user/Documents/longue_marche_pro_pilot_20261104/pro_prompts_draft_20261111_work/KNOWLEDGE_HANDOFF_LM.md` (Claude, Fable 5.2).
 
 Added 11 November 2026, 23:59 UTC: both theorems behind G.6 were read in their texts (Miller 1984: Theorem B, p. 40 = Theorem 10.1, pp. 84–85, is exactly the step; the return's citation is right; Atiyah 1961: (6.11) p. 45, (7.2) p. 46, §2 p. 28). arXiv has only v1 of 2610.38760. `1_CATHOT/REVIEW_G6.md` updated; `1_CATHOT/DRAFT_NOTE_TO_AUTHOR.md` is a draft for the user, not sent.
+
+## Update, 12 November 2026 (main session, from the PATHS intake by Claude Fable 5.2 at effort high)
+
+The section on PATHS above summarizes the void medium-effort review of 11 November. Out of date there: "The prompt's
+main question is still open (B.8)" and "which shapes compute colimits in Cat is open (A.8)". A.8 is answered by
+PRETOT F.6 (filtered components). B.8 has a proof by the intake itself (FINDINGS F2-F3 in
+pro_reviews_max_20261112\6_PATHS\: B Ch_Sigma(M;a,b) = Map_{L(M,Sigma)}(a,b) for every wide Sigma), unverified by
+anyone else. PRETOT F.16 is closed by PATHS C.P1-C.P3 (verified step by step).
+
+## After TOTEX: shape and the prompt TOTAL_EXACT_2 (successor expert, Claude Fable 5.2, effort max, 12 November 2026, 23:41 local, clock checked)
+
+Return TOTEX (GPT-6 Astra, ChatGPT Pro mode): `longue_marche_pro_pilot_20261104/answers/TOTEX_unzipped/`; review by Claude Opus 5.5 (effort max): `pro_reviews_max_20261112/TOTEX_REVIEW_OPUS/REVIEW.md` (58 statements, none wrong; total => exact not decided).
+
+Written by me:
+- `GLOBAL_SHAPE_AFTER_TOTEX_20261112.md` (2,928 characters): what TOTEX settles at II ms. 36-36ter and XII ms. 88-89, what remains, the order of pushes.
+- `pro_prompts_max_20261112_work/TOTAL_EXACT_2/PROMPT.md` (push template of `claude_tools/prompt_lessons_20261112/`; lint `--lint-math`: failing 0), `ZIP_LIST.md` (26 rows; all sources exist), `checks_framer/ty_check.py` with output. Not packaged, not sent. Deliverable prefix `TOTEX2`.
+
+In the prompt: R1-R11 (TOTEX results with status and the review's corrections), nine Leads, Parts A (main question; coefficients Q and F_p), B (triples), C (K* not total; tools), D (class diagram, manuscript statements, literature record).
+
+Mine, checked by nobody else (all are Leads of the prompt):
+- `Ty^op` is not total: the span `(+-+) <- (++) -> (+-+)` (embedding; both letters to the first +) has no completion, and that pair has no affine equalizer over any ring. `Ty(tau, rho)` = weakly increasing sign-preserving maps from the letters of rho to the letters of tau (enumerated for words of length <= 4). The candidate "Ty^op first" of GLOBAL_SHAPE_AFTER_PRETOT is closed.
+- For every category, a family a_0..a_k: p -> q has an affine equalizer iff Tor_1 vanishes on coker(P_q -> P_p^k, t -> (t(a_i - a_0))); the permutation module of the family is the cokernel of the transposed map. For pairs the two coincide.
+- If the class kappa of H1 is annihilated by one affine arrow, the triple has an equalizer; in a connected category with span completion a class is zero in a colimit iff u.kappa = sum (e_j - e'_j) k_j for parallel pairs e_j, e'_j.
+- Totality is a finite test: for every functor u from a finite poset D, D -> El_A(pi_0(u/-)) is null-homotopic.
+- Adjoining an object by a cocone over a diagram whose strict colimit of representables is its homotopy colimit kills no class above the dimension of the diagram. Quasi-filters have dimension 1: the reason to expect K* not total. The hypothesis fails when an arrow equalizes the pair (first case: the pair alpha_0, alpha_4k and v_1 in K_2).
+- A separator's failing family of least size has g a_i pairwise distinct for every g.
+
+Not done by me: the proofs of TOTEX Parts D-F were not read (statements only, through the review); the AKR scan was not opened; Oberst 1968, Gabriel-Ulmer 1971, Isbell 1968 and 1974 are still unopened by anyone; the hand computation for ordered graphs in approach C4 of the prompt (two induced increasing paths with 5 and 4 edges) is unchecked.

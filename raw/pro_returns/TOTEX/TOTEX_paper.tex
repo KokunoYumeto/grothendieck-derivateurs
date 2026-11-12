@@ -1,0 +1,1978 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=28mm]{geometry}
+\usepackage{microtype,booktabs,longtable,array,enumitem}
+\usepackage[round,authoryear]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Total asphericity and exact abelian colimits},pdfauthor={AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode)}}
+\setlength{\emergencystretch}{3em}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Grp}{\mathbf{Grp}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Fp}{\mathbb F_p}
+\newcommand{\Winfty}{W_\infty}
+\newcommand{\El}{\operatorname{El}}
+\newcommand{\Aff}{\operatorname{Aff}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\colim}{\operatorname*{colim}}
+\newcommand{\hocolim}{\operatorname*{hocolim}}
+\newcommand{\aug}{\operatorname{aug}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Lan}{\operatorname{Lan}}
+\newcommand{\Dinj}{\Delta_{\mathrm{inj}}}
+\newcommand{\Kar}{\operatorname{Kar}}
+\newcommand{\Tot}{\mathcal T}
+\newcommand{\Space}{\mathcal S}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\Fun}{\operatorname{Fun}}
+\renewcommand{\thesection}{\Alph{section}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{obstruction}[theorem]{Obstruction}
+\newtheorem{audit}[theorem]{Audit}
+\newtheorem{remark}[theorem]{Remark}
+\title{Total asphericity and exact abelian colimits\\\large Proof audit, obstruction calculations, and truncation tests}
+\author{AI-produced by GPT-6 Astra\\OpenAI, ChatGPT Pro mode}
+\date{12 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove that a sifted totally $W_\infty$-aspherical category is filtered, and classify every finite positive truncation-preserving shape by filteredness of its categorical universal covers. We compute relation-presentation homology, give three colored-word examples with a final-image exclusion, and describe the reflection into animated abelian groups. The implication from total asphericity to exact abelian colimits remains unresolved in this return. For the repaired Ad\'amek--Koubek--Reiterman construction, a nonzero second-homology class survives its entire second stage, but persistence in the infinite union is not established. No priority is claimed. An assertion is labelled open when the arguments and computations in this paper do not settle it; this label is not a claim that the published literature contains no solution.
+\end{abstract}
+\paragraph{Conventions.}
+All categories are small in a fixed universe. We put $BA=|NA|$ and use $\Winfty$ for functors inducing weak homotopy equivalences on classifying spaces. For $u:A\to B$, $b\backslash A$ has objects $(a,b\to u(a))$. A functor is final when every such comma category is nonempty and connected. For covariant $H:A\to\Set$, $\El_A(H)$ has objects $(a,h)$ and arrows $f:(a,h)\to(a',h')$ with $H(f)h=h'$. The manuscript's presheaf convention is explicitly reversed when translated into these covariant statements. A total category is nonempty and connected and every ordinary final image has weakly contractible classifying space. A full cosieve is closed under targets. We use no intermediate fundamental localizer: the localizer throughout is $\Winfty$, or integral homology solely as a detection criterion. The precise Theorem A form used is: if every $b\backslash A$ of $u:A\to B$ is weakly contractible, then $Bu:BA\to BB$ is a weak homotopy equivalence. We use this ordinary homotopy-final form, and no unlisted relative localizer axiom.
+\tableofcontents
+\section{Part A: the main implication and its audited premises}\label{sec:A}
+\begin{audit}[Proved: the precise use of R1]\label{A:R1}
+For a nonempty connected $A$, totality is equivalent to integral acyclicity of every component of every $\El_AH$, and also to weak contractibility of all those components. In this situation $L_i\colim_A\Z[H]=0$ for $i>0$, and the specified map $\hocolim_A X\to\colim_A X$ is a weak equivalence for every strict simplicial-set diagram $X$.
+\end{audit}
+\begin{proof}
+We checked TOTASPH C.3--C.5. For the passage from integral homology to homotopy, an action $T$ on a component $E\subset\El_AH$ is transported to the actual action $a\mapsto\coprod_{(a,h)\in E}T(a,h)$ on $A$; their element categories are isomorphic, so the hypothesis really applies to actions on $E$. A connected covering corresponding to a cyclic subgroup $C\leq\pi_1(BE)$ is such an action, obtained by transport in the groupoid completion. Its first homology is $C$, which must vanish. Hence $BE$ is simply connected and acyclic and is weakly contractible by Hurewicz. Conversely, the comma categories of a final $A\to B$ are the element categories of $a\mapsto B(b,u(a))$, so Theorem A gives the specified weak equivalence $BA\to BB$. Necessity uses the collage obtained by adjoining a source for each chosen connected action component: finality of the inclusion makes the collage contractible, and its relative homology is the shifted reduced homology of that component. Finally the integral bar complex of $\Z[H]$ is literally the nerve-chain complex of $\El_AH$. Applied in every simplicial degree, this action calculation identifies the replacement augmentation with a degreewise weak equivalence of bisimplicial sets; diagonal realization proves the last assertion. None of these arguments replaces $\Z[H]$ by an arbitrary abelian diagram.
+\end{proof}
+
+\begin{audit}[Known, with derivation: R2 and the affine criterion]\label{A:R2}
+For nonempty connected $A$, exactness of $\colim_A:\Ab^A\to\Ab$ is equivalent to filteredness of $\Aff_\Z(A)$ and implies totality. Given common successors, filteredness of $\Aff_\Z(A)$ is equivalent to simultaneous affine equalizers for every finite parallel family of ordinary arrows.
+\end{audit}
+\begin{proof}
+The first equivalence is exactly \citet[Theorem 1, pp.~994--995]{IsbellMitchell1973}, which we opened. Their affinization has the same objects as $A$ and arrows $\sum n_if_i$ with $\sum n_i=1$, with bilinear composition. For completeness, the reduction in their Lemma 1 is immediate in the direction used here: equalize the finite union of supports of two affine arrows, and their augmentation-one coefficients make their resulting images equal. Conversely filteredness equalizes a finite family successively. The underlying colimit of an abelian diagram is unchanged by extending it affinely, since $x-(\sum n_if_i)x=\sum n_i(x-f_ix)$; filteredness therefore proves sufficiency without any change of coefficient category. We also checked TOTASPH C.6: for $E=\El_AH$ the functor $\Sigma_H:\Ab^E\to\Ab^A$, $(\Sigma_HF)(a)=\bigoplus_{h\in H(a)}F(a,h)$, is exact and satisfies $\colim_EF\cong\colim_A\Sigma_HF$. Thus colimits on $E$ and its components are exact. Apply this to the constant diagram $\Z$ and then Audit~\ref{A:R1}. The necessary affine criterion is used as the opened theorem, not as an unsupported substitution of coefficients.
+\end{proof}
+
+\begin{audit}[Known, checked: R3 and the nonfiltered example]\label{A:R3}
+The category $\Dinj$ of nonempty finite ordinals and increasing injections has filtered integral affinization, is total, and is not filtered or sifted.
+\end{audit}
+\begin{proof}
+The exact example is already \citet[Theorem 3, pp.~995--996]{IsbellMitchell1973}. We separately checked the interpolation proof in TOTASPH C.8--C.10 and the supplied online exposition \citep{OpenMaths2026}. Its extension step uses the invertible integral coordinates $x_i=z_i-z_{i+1}$, $u=z_{n+1}$; compatible polynomial data modulo $(x_i)$ extend by the alternating sum of restrictions to nonempty coordinate intersections. The recursive boundary data $D_iC_{n,k}=C_{n-1,2k}\prod_{l\ne i}y_l^k$ agree on adjacent intersections because the two restrictions of $C_{n-1,2k}$ are identical there, and on nonadjacent intersections by its inductive normalized-face identity. Their value at the all-ones point is one. Encoding gaps of injections gives $P_{t\delta^i}=y_iD_iP_t$, so $t$ has augmentation one and equalizes all cofaces. The simplicial identities then inductively equalize every proper injection into $[n]$; the identity is its only endomorphism. These are precisely the steps needed to apply Audit~\ref{A:R2}. The accompanying rerun verifies the polynomial identities through $n=3$, independently decoding monomials into injections; the induction supplies the unbounded statement. For example at $[1]$ the combination $(1,2)-(0,2)+(0,1)$ of injections into $[2]$ equalizes the two points. Actual injections cannot equalize two distinct arrows, so filteredness fails. In the cospan category on two copies of $[0]$, the two distinguished points have the invariant comparison $<$, $=$, or $>$, and each class is connected. Thus the diagonal is not final and siftedness fails.
+\end{proof}
+
+\begin{audit}[Proved: the exact content of R4]\label{A:R4}
+A total category has common successors, every span completes to a commutative square, and every parallel pair admits an integral affine equalizer. Hence it is quasi-filtered in the sense used by Ad\'amek--Koubek--Reiterman.
+\end{audit}
+\begin{proof}
+We checked the common-successor argument in TOTASPH C.11: if two principal cosieves were disjoint, identifying the two values of the constant two-element action on their union produces a connected double of $BA$ with first homology $\Z$, contradicting Audit~\ref{A:R1}. For a span out of $p$, its two arrows are objects of $p/A=\El_AA(p,-)$; this category is connected, is total by the inherited-action isomorphism, and therefore has a common successor, which is the desired commutative square. For $a_0,a_1:p\to q$, linearize the set quotient $A(p,-)/(ca_0\sim ca_1)$ and put $K=\ker(P_q\xrightarrow{a_1-a_0}P_p)$, with $P_x=\Z[A(x,-)]$. The two short exact sequences of Part B give $H_1(\El H)=\Z/\aug(K)$. Its vanishing gives augmentation one as a finite sum of elements of $K$ at possibly different objects; moving their finite supports to a common successor gives a single affine equalizer. The equivalence of these two conditions with their quasi-filteredness is the opened Theorem [1] and discussion A.4 in \citet[pp.~369--370]{AdamekKoubekReiterman1981}. Part B checks the homology computation without assuming exactness.
+\end{proof}
+
+\begin{audit}[Proved: the exclusion in R5]\label{A:R5}
+If $A$ has a weakly terminal object, totality is equivalent to filteredness. In particular no monoid and no category with finitely many objects can separate totality from exact abelian colimits.
+\end{audit}
+\begin{proof}
+We checked TOTASPH C.12--C.13, including the signed-measure step. If $q$ is weakly terminal, affine equalizers can be transported back to $q$. For $M=\operatorname{End}_A(q)$ this gives a mass-one finite integral measure $tx$ invariant under right multiplication by any $a\in M$. Its support is a union of periodic orbits: every nonzero coefficient must have a predecessor in the support, and counting this finite support forces its restriction to be a permutation. The mass is an integral combination of orbit lengths. Choose a least attainable period in $Mx$; if a prime divides it, apply the same property in the smaller left ideal generated by a point of this period. A cycle of length prime to that prime then yields a strictly shorter period, a contradiction. Hence some $yx$ is fixed by right multiplication by $a$. Applying this twice equalizes any pair of elements of $M$, so $M$ is filtered. For an arbitrary pair in $A$, transport its affine equalizer to $q$ and use filteredness of $M$ to postcompose all finitely many coefficients to the same endomorphism; their sum is one, so an actual arrow equalizes the original pair. Common successors complete the filteredness axioms. Conversely filtered categories satisfy the action criterion. A finite nonempty set of objects with common successors has a weakly terminal object. The empty category is neither total nor filtered and is not a counterexample in this scope.
+\end{proof}
+
+\begin{audit}[Proved: what the additional PRETOT return does and does not change]\label{A:PRETOT}
+The checked finite presheaf example does not contradict R1--R5 and does not settle R6. PRETOT's componentwise correction to the categorical diagram-shape theorem applies to R8, and its siftedness argument settles Part D.2.
+\end{audit}
+\begin{proof}
+We reran the full finite construction and the independent integer certificate reader. They verify the ten-element monoid, the 52-element right act, the category comparisons, acyclic integral homology, a nontrivial image of its fundamental group in $A_5$, and equivariant integer matrices $S:\Z^{52}\to\Z^{180}$ and $R:\Z^{180}\to\Z^{52}$ with $RS=I$. Thus $\Z[H]$ is a summand of $(\Z M)^{18}$. The two-sided bar identifies the required restricted-action homology with $\Tor^{\Z M}_i(\Z[H],\Z[L])$, zero for all covariant set actions $L$, not merely for the enumerated finite tests. The comparison of its element category with the acyclic two-dimensional presentation complex has explicit natural transformations and comma contractions. This confirms precisely the presheaf theorem's universal hypothesis. The action condition tests only functors pulled back from $M$; R1 for a category tests every action on the category itself. The latter additional quantifier permits the cyclic-cover argument and is absent here. The element category has nontrivial fundamental group and therefore is not total. Accordingly R1 and R2 survive, R3 remains an independent exact category example, R4 and R5 are not weakened, and R6 receives no counterexample. The sieve separations of PRETOT B.2--B.4 concern this same restricted-action distinction; we use no implication from them to category exactness. The unrestricted-action and cosieve steps used here are independently proved in Part D. PRETOT's shape statements are checked in Propositions~\ref{D:R8-scope} and~\ref{D:RAAG}, and its sifted argument in Theorem~\ref{D:sifted-total}.
+\end{proof}
+
+\begin{obstruction}[Open: Part A and R6 in this return]\label{A:main-open}
+For a nonempty connected small $A$ satisfying Audit~\ref{A:R1}, we have neither proved nor refuted exactness of $\colim_A:\Ab^A\to\Ab$. Equivalently, given common successors, we have not established a simultaneous augmentation-one integral equalizer of every finite family $a_0,\ldots,a_k:p\to q$. The first unhandled cardinality of this finite family is three. It asks, with $K_i=\ker(P_q\xrightarrow{a_i-a_0}P_p)$, whether
+\[
+ \aug(K_1\cap K_2)=\Z.
+\]
+This is the precise unresolved implication in TOTASPH D.7; it is not labelled a literature-wide open problem.
+\end{obstruction}
+\begin{proof}[Verified scope of the obstruction]
+Pairs are covered by Audit~\ref{A:R4}; weakly terminal shapes by Audit~\ref{A:R5}; sifted total shapes by Theorem~\ref{D:sifted-total}; and $\Dinj$ by Audit~\ref{A:R3}. Any counterexample must therefore have infinitely many objects, no weakly terminal object, and fail siftedness. This strengthens the prompt's initial allowance that a counterexample might be sifted. Part B proves the relation-presentation homology and the Tor quotient controlling this intersection; it does not identify their two different kernels. Part C computes second homology at a certified first stage, proves its survival through the entire second stage, and checks selected later attachments. These results do not establish persistence through the infinite construction. The free-resolution and reflection attempts are recorded in Obstructions~\ref{main:stable-open} and~\ref{main:special-presheaves}. No search on finite shapes is used to argue for the main implication.
+\end{proof}
+\section{Part B: relation presentations and the triple obstruction}\label{sec:B}
+% TeX-ready material for Part B.  Macros used: \mathbb, \operatorname, \mathrm.
+\subsection{The triple calculation and the two distinct kernels}
+Let $A$ be a small category, let $p,q\in A$, and let
+$a_0,a_1,a_2:p\to q$ be morphisms.  All coefficient functors below are
+covariant.  Write $P_x=\mathbb Z[A(x,-)]$, let
+$\Delta\mathbb Z:A^{\mathrm{op}}\to\mathrm{Ab}$ be constant, and write
+$T_i(F)=\operatorname{Tor}^{\mathbb ZA}_i(\Delta\mathbb Z,F)
+=L_i\operatorname{colim}_A F$.
+We distinguish the covariant constant functor $\underline{\mathbb Z}_A:A\to\mathrm{Ab}$ from the right module $\Delta\mathbb Z$. The augmentation $\epsilon:P_q\to\underline{\mathbb Z}_A$ sends every basis morphism to $1$.  In the expression $\epsilon(K)$ for a subfunctor
+$K\subseteq P_q$ we mean the image of
+$\operatorname{colim}_A K\to\mathbb Z$; this convention matters when
+representatives at different objects must be combined.
+
+\begin{proposition}[Proved: the formulas in R7]\label{B:R7}
+Assume that every finite set of objects in the component of $q$ has a
+common successor.  Put
+\[
+\begin{gathered}
+ K_i(x)=\{t\in P_q(x):t(a_i-a_0)=0\}\quad(i=1,2),\\
+ L=K_1\cap K_2,\qquad S=K_1+K_2,\qquad C=P_q/S.
+\end{gathered}
+\]
+The triple has a simultaneous affine equalizer if and only if
+$\epsilon(L)=\mathbb Z$.  There is a canonical surjection
+\[
+ T_1(C)\longrightarrow
+ \frac{\epsilon(K_1)\cap\epsilon(K_2)}{\epsilon(L)}.
+\]
+Consequently, if both pairs $(a_0,a_i)$ admit affine equalizers, there is
+ a surjection $T_1(C)\twoheadrightarrow\mathbb Z/\epsilon(L)$.
+The latter hypothesis is necessary for this particular target: without
+it, the displayed intersection of augmentation ideals is the correct
+numerator.
+\end{proposition}
+\begin{proof}
+An affine equalizer is precisely an element $t\in L(r)$, for some
+$r\in A$, with $\epsilon(t)=1$.  Conversely, if $1$ is in the image of
+the indicated colimit map, it is a finite integral sum of augmentations
+of elements of various $L(r_j)$.  Choose a common successor $r$ and
+morphisms $r_j\to r$.  Their induced maps on $L$ preserve augmentation,
+so the same integral combination gives the required element of $L(r)$.
+
+Since $P_q$ is projective and $\operatorname{colim}P_q=\mathbb Z$, the
+sequence $0\to S\to P_q\to C\to0$ identifies $T_1(C)$ with
+$\ker(\operatorname{colim}S\to\mathbb Z)$.  Right exactness applied to
+$0\to L\xrightarrow{t\mapsto(t,-t)}K_1\oplus K_2\to S\to0$ says that
+every element of this kernel can be represented by $(u_1,u_2)$ with
+$u_i\in\operatorname{colim}K_i$ and
+$\epsilon(u_1)+\epsilon(u_2)=0$.  Send it to
+$\epsilon(u_1)\bmod\epsilon(L)$.  Changing the lift changes this integer
+by an element of $\epsilon(L)$, so the map is well-defined.  Its image
+lies in $\epsilon(K_1)\cap\epsilon(K_2)$, and every element of that
+intersection has lifts of opposite augmentations.  This proves
+surjectivity.
+\end{proof}
+
+\begin{proposition}[Proved: the three-arrow relation functor]\label{B:H3}
+Let $H_3:A\to\mathrm{Set}$ be the quotient of $A(p,-)$ by the equivalence
+relation generated by $ca_0\sim ca_1\sim ca_2$, for all objects $x$ and
+morphisms $c:q\to x$.  Put
+\[
+ d:P_q\oplus P_q\longrightarrow P_p,
+ \qquad d(t_1,t_2)=t_1(a_1-a_0)+t_2(a_2-a_0),\qquad K=\ker d.
+\]
+There are natural isomorphisms
+\begin{align*}
+ H_1(B\operatorname{El}_A(H_3);\mathbb Z)
+   &\cong\mathbb Z^2/\operatorname{im}
+       (\operatorname{colim}K\xrightarrow{\epsilon^2}\mathbb Z^2),\\
+ H_2(B\operatorname{El}_A(H_3);\mathbb Z)
+   &\cong\ker(\operatorname{colim}K\xrightarrow{\epsilon^2}\mathbb Z^2),\\
+ H_j(B\operatorname{El}_A(H_3);\mathbb Z)
+   &\cong T_{j-2}(K)\qquad(j\geq3).
+\end{align*}
+In particular, the two formulas anticipated in B.1 are correct.  The
+$K$ in these formulas is a kernel in $P_q^2$; it is not the intersection
+$K_1\cap K_2$ in $P_q$.
+\end{proposition}
+\begin{proof}
+Applying the free-abelian-group functor to the specified set quotient
+gives an exact sequence
+$P_q^2\xrightarrow{d}P_p\to\mathbb Z[H_3]\to0$:
+its kernel is generated by the elementary differences defining the
+equivalence relation.  Put $J=\operatorname{im}d$.  From
+$0\to J\to P_p\to\mathbb Z[H_3]\to0$ we obtain
+$T_1(\mathbb Z[H_3])=\ker(\operatorname{colim}J\to\mathbb Z)$ and
+$T_j(\mathbb Z[H_3])=T_{j-1}(J)$ for $j\geq2$.
+The map $\operatorname{colim}J\to\mathbb Z$ is zero: the surjection
+$\mathbb Z^2=\operatorname{colim}P_q^2\to\operatorname{colim}J$
+followed by this map is $\operatorname{colim}d=0$.  The sequence
+$0\to K\to P_q^2\to J\to0$ now gives the first two formulas and
+$T_{j-1}(J)=T_{j-2}(K)$ for $j\geq3$.
+Finally, the normalized simplicial replacement for $\mathbb Z[H_3]$
+is the integral nerve chain complex of $\operatorname{El}_A(H_3)$:
+a generator $(a_0\to\cdots\to a_n,h\in H_3(a_0))$ is exactly an
+$n$-simplex of that nerve.  This proves the asserted identification with
+homology, including its naturality.
+\end{proof}
+
+\begin{proposition}[Proved: the presentation-graph formula in R7]\label{B:presentation}
+Let $\Omega$ be a directed graph, let $p_v\in A$ for its vertices,
+and for every edge $e:v\to w$ choose an object $q_e$ and morphisms
+$\alpha_e:p_v\to q_e$ and $\beta_e:p_w\to q_e$.
+Present $H$ as the quotient of $\coprod_v A(p_v,-)$ by the relations
+$(v,c\alpha_e)\sim(w,c\beta_e)$, for $c:q_e\to x$.
+Let $P_0=\bigoplus_vP_{p_v}$, $P_1=\bigoplus_eP_{q_e}$,
+and let $d:P_1\to P_0$ send $c$ in summand $e$ to
+$(v,c\alpha_e)-(w,c\beta_e)$.  Put $K=\ker d$ and let
+$\partial_\Omega:\mathbb Z^{(E)}\to\mathbb Z^{(V)}$ send $e$ to $v-w$.
+Then
+\[
+ H_1(B\operatorname{El}_A H;\mathbb Z)
+  \cong\ker(\partial_\Omega)/
+       \operatorname{im}(\operatorname{colim}K\to\mathbb Z^{(E)}).
+\]
+Thus the cycles of the presentation graph are divided by the
+augmentations of the syzygies, exactly as claimed in R7.
+\end{proposition}
+\begin{proof}
+The free abelian presentation is $P_1\to P_0\to\mathbb Z[H]\to0$.
+Writing $J=\operatorname{im}d$, the two short exact sequences with
+$J$ give
+$\operatorname{colim}J=\mathbb Z^{(E)}/\operatorname{im}(\operatorname{colim}K)$
+and
+$T_1(\mathbb Z[H])=\ker(\operatorname{colim}J\to\mathbb Z^{(V)})$.
+The induced map before quotienting is precisely $\partial_\Omega$.
+This proves the formula.  Coproducts of the representables are
+projective, so the argument also permits arbitrary small presentations.
+\end{proof}
+
+\begin{proposition}[Proved: a finite relation graph]\label{B:finite-graph}
+Fix morphisms $a_v:p\to q$, indexed by the vertices of a finite graph
+$\Gamma$, choose an orientation of its edge set $E$, and impose the
+relations $ca_{s(e)}\sim ca_{t(e)}$ for $e\in E$ and $c:q\to x$.
+Let $H_\Gamma$ be the resulting quotient and set
+\[
+ d_\Gamma:P_q^{E}\to P_p,\qquad
+ (t_e)\longmapsto\sum_{e\in E}t_e(a_{t(e)}-a_{s(e)}),
+ \qquad K_\Gamma=\ker d_\Gamma.
+\]
+Then
+\begin{align*}
+ H_1(B\operatorname{El}H_\Gamma)
+ &=\operatorname{coker}(\operatorname{colim}K_\Gamma\to\mathbb Z^E),\\
+ H_2(B\operatorname{El}H_\Gamma)
+ &=\ker(\operatorname{colim}K_\Gamma\to\mathbb Z^E),\\
+ H_3(B\operatorname{El}H_\Gamma)&=T_1(K_\Gamma).
+\end{align*}
+All groups are integral.  The first vanishing says that the augmentations
+of relation syzygies span the relation lattice $\mathbb Z^E$; the second
+says that every zero-augmentation syzygy class vanishes in the colimit;
+the third says that the bar $1$-cycles with coefficients in the syzygy
+functor are boundaries.  These are progressively stronger coherence
+conditions, not three restatements of simultaneous affine equalization.
+\end{proposition}
+\begin{proof}
+The previous proof applies verbatim to $d_\Gamma$.  Graph cycles give
+pointwise syzygies: a signed cycle $z\in\mathbb Z^E$ gives
+$P_q\to K_\Gamma$, $t\mapsto(tz_e)_e$.  Hence one may replace
+$\Gamma$ by any spanning forest without changing $H_\Gamma$; with that
+replacement the redundant cycle relations have been removed explicitly.
+For the third interpretation, a $1$-chain is a finite sum of symbols
+$(f:x\to y,k\in K_\Gamma(x))$, with boundary
+$(y,K_\Gamma(f)k)-(x,k)$.  Its vanishing in $T_1(K_\Gamma)$ means it is a
+sum of boundaries of the corresponding symbols for composable pairs.
+\end{proof}
+
+\begin{proposition}[Proved: the $H_1$ assertion in R7]\label{B:H1}
+Suppose that $A$ has quasi-filtered components, in the equivalent
+form consisting of completion of every span to a commutative square
+and existence of an integral affine equalizer for every parallel pair.
+For every covariant $H:A\to\mathrm{Set}$, every component of
+$\operatorname{El}_A(H)$ has $H_1(-;\mathbb Z)=0$.
+\end{proposition}
+\begin{proof}
+Write $E=\operatorname{El}_A(H)$.  Squares in $A$ lift to squares in
+$E$ because their two composites have the same image of the initial
+element.  Thus each component of $E$ has common successors, by shortening
+finite zigzags using these squares.  Consider a parallel pair
+$a,b:(p,h)\rightrightarrows(q,k)$ in $E$.  Take an affine equalizer
+$t=\sum_c n_c c\in\mathbb Z[A(q,r)]$ in $A$.  Partition its terms by
+$z=H(c)k\in H(r)$, writing $t=\sum_z t_z$.  The equality $ta=tb$
+implies $t_za=t_zb$ separately for each $z$: equality between two basis
+composites $ca=c'b$ implies $H(c)k=H(c')k$.  The finitely many
+$(r,z)$ occurring in this partition have a common successor $(s,w)$
+in $E$.  Choose morphisms $g_z:(r,z)\to(s,w)$.  Then
+$\sum_zg_zt_z$ is an affine equalizer of $a,b$ in the integral
+linearization of $E$ and has augmentation one.
+
+It remains to show that these two properties kill $H_1$.  Every loop
+in $BE$ can be represented by a finite edge path.  We verify the fraction reduction by induction on the length of that path. Maintain a representative $x\to r\leftarrow y$ for the path from its initial vertex $x$ to its current vertex $y$. Appending a backward edge $z\to y$ composes the right leg. Appending a forward edge $y\to z$ uses a commutative square on the span $y\to r$, $y\to z$ and postcomposes the left leg. Each replacement is an edge-path homotopy given by nerve triangles. A closed path therefore becomes a parallel pair $a,b:x\to r$.  If
+$\sum_i n_i c_i$ is an affine equalizer, the nerve chain formula gives
+\[
+ \sum_i n_i\bigl(\partial[a,c_i]-\partial[b,c_i]\bigr)
+ = [a]-[b]-\sum_i n_i[c_i a]+\sum_i n_i[c_i b]=[a]-[b].
+\]
+Thus every loop class is an integral boundary.  This confirms the
+claimed implication from quasi-filteredness without replacing a
+permutation coefficient functor by an arbitrary abelian coefficient
+functor.
+\end{proof}
+
+\begin{corollary}[Proved: the first possible extra obstruction is in degree two]\label{B:simply-connected}
+Under the quasi-filtered hypothesis of Proposition~\ref{B:H1}, every component of every $\El_AH$ is simply connected. Consequently, beyond quasi-filteredness the first homological condition required by totality is vanishing of $H_2$ for all these components.
+\end{corollary}
+\begin{proof}
+Let $E$ be such a component. If $\pi_1(BE)$ contains a nonidentity element, its generated cyclic subgroup $C$ defines a connected covering of $BE$. That covering is the nerve of the category of elements of a bijective-transition action on $E$, using path transport in $\Pi E$. Flatten this action to an action on $A$ by the explicit dependent-sum construction in Audit~\ref{A:R1}. Proposition~\ref{B:H1} forces the cover's first homology to vanish, whereas it is the abelianization of $C$, namely the nonzero cyclic group $C$. This is impossible. This conclusion asserts the first necessary further degree; it does not assert that degree-two vanishing alone suffices for totality.
+\end{proof}
+
+\begin{obstruction}[Open: the precise remaining triple implication]\label{B:triple-open}
+Even after $H_j(B\operatorname{El}H)=0$ for every set-valued $H$ and every
+$j>0$, the computations above do not prove
+$\epsilon(K_1\cap K_2)=\mathbb Z$.  For $H_3$ they only give an
+isomorphism $\operatorname{colim}K\cong\mathbb Z^2$ and
+$T_i(K)=0$ for $i>0$.  The unproved bridge is a surjection from groups
+known to vanish by these permutation tests to
+$\mathbb Z/\epsilon(K_1\cap K_2)$, or an independent construction of an
+augmentation-one element of the intersection.  R7 provides the
+surjection from $T_1(P_q/(K_1+K_2))$, whose coefficient functor has not
+been shown to be a permutation functor or an acyclic object for
+$\operatorname{colim}_A$.  Applying totality to categories of elements
+supplies additional permutation tests but does not identify this
+coefficient functor.  The smallest unresolved instance is therefore
+three ordinary parallel arrows, not a longer finite family.
+
+\end{obstruction}
+\section{Part C: the Ad\'amek--Koubek--Reiterman construction}\label{sec:C}
+% Part C: audited source construction and finite certificates.
+\subsection{A source-level correction before the stage computation}
+We opened Ad\'amek--Koubek--Reiterman (1981), pp.~368--389, including
+Definitions A.2, the equivalence on p.~369, the correction A.4 on p.~370,
+Constructions B.5--B.6 on pp.~377--380, B.9 on pp.~383--384, and
+Construction C.1 and Theorem C.2 on pp.~384--388.  A.4 explicitly
+withdraws the earlier identification of the fixed-point condition with
+exact abelian colimits: pairs and arbitrary finite tuples have different
+roles.  Thus the earlier fixed-point characterization cannot be used as
+a proof of the main implication.
+
+There is also a literal defect in the displayed construction which
+matters to the proposed computation.  Write $\underline n=\{0,\ldots,n-1\}$.
+For $s=4k+1$, the maps in B.5 are
+\[
+ \beta_i^{n}(x)=
+ \begin{cases}
+ x+i,&i\leq2k, x+i\leq2k,\\
+ x+i+2k-n+1,&i\leq2k, x+i>2k,\\
+ x-i+6k-n+2,&i>2k, x-i+6k-n+2>2k,\\
+ x-i+4k,&i>2k, x-i+6k-n+2\leq2k.
+ \end{cases}
+\]
+These are injections $\underline n\to\underline s$.
+The target of B.6 must contain $\underline s\times I$ for
+$\beta_i^n\times\operatorname{id}_I$ to be typed; the printed final
+summand $(Y-Y_0)\times I$ does not supply that target.
+More substantively, the assertion on pp.~379--380 that property (11)
+survives arbitrary domain--range restriction is false as written.
+
+\begin{proposition}[Refuted and repaired: the restriction assertion in B.6]\label{C:source-defect}
+Let $f,g:\{*\}\to\{0,1\}$ send $*$ to $0,1$, respectively.
+Restrict $\beta_i^3$ to $\{0,1\}$, using any $k\geq3$.
+Then $\beta_{4k}^3(0)=\beta_0^3(0)=0$ and
+$\beta_{4k}^3(1)=\beta_0^3(1)=1$.
+Consequently the two adjacent image sets have intersection of cardinality
+two, whereas the image of either composite with $f$ or $g$ has
+cardinality one.  This contradicts property (11).
+
+A repair is to decompose the graph with edges $f(x)\to g(x)$ into its
+nontrivial directed paths, and use $\beta_i^{n_j}$ on a path with its
+actual number $n_j$ of vertices, with one common $k\geq\max_j n_j$.
+Fixed points remain common to all copies, and points outside the images
+of $f,g$ have separate copies for each $i$.  With
+$n\geq\max_j n_j$, the repaired maps satisfy (9), (10), and (11), with
+$n$ as the bound in (10).
+\end{proposition}
+\begin{proof}
+The counterexample is substitution in the displayed formula.
+For the repair, the path coordinates of an overlap
+$\beta_i^{n_j}(x)=\beta_\ell^{n_j}(y)$ have displacement determined by
+$i,\ell,k$ independently of $n_j$.  For $i<\ell$, the four possible
+values of $x-y$ are
+\[
+ \ell-i,\quad i-\ell,\quad 4k-i-\ell,
+ \quad 4k+1-i-\ell.
+\]
+The first value occurs when $i<\ell\leq2k$, and the second when
+$2k<i<\ell$.  In the remaining case $i\leq2k<\ell$, the third can occur
+only for $i\leq n_j-2$ and $\ell\geq4k-n_j+2$; the fourth can occur only
+for $i\geq2k-n_j+2$ and $\ell\leq2k+n_j-1$.
+These regions are disjoint even as $n_j$ varies, since
+$k\geq\max_j n_j$.  The displayed cases (c),(d) of the lemma on
+p.~378 print a plus sign before the second index; direct substitution
+requires the minus signs above.  The proof of case (c) itself prints
+$4k-(i+\ell)$, confirming that sign correction.
+This proves (9).  Here is an explicit interval verification of (10).
+For a path with $m=n_j\geq2$ vertices, put
+$I_t=\{i:t\in\beta_i^m(\underline m)\}$, for $0\leq t\leq4k$.
+Solving the four inequalities in the displayed formula gives
+\[
+\begin{array}{c|c}
+\text{range of }t&I_t\\\hline
+0\leq t\leq m-2&[4k-t,4k]\cup[0,t]\\
+m-1\leq t\leq2k&[t-m+1,t]\\
+2k+1\leq t\leq4k-m+1&[6k-m+2-t,6k+1-t]\\
+4k-m+2\leq t\leq4k&[t-2k,6k+1-t].
+\end{array}
+\]
+Each is a cyclic interval of indices, of cardinality at most $2m-2$
+(or cardinality $m$ in the two middle ranges, also at most $2m-2$).
+Suppose $r$ and $r+d$ belong to such an interval, where
+$1\leq d\leq s-2n$.  The counterclockwise arc between them has at least
+$2n$ edges, too many to fit in an interval with at most $2m-2\leq2n-2$
+vertices.  Hence the clockwise arc lies in the interval and contains
+$r+1$.  This proves the forward inclusion of (10); reversing the
+indices proves the backward inclusion.  The index set of a fixed point
+is all of $\mathbb Z/s$, and that of a private point is a singleton, so
+they satisfy the same assertion.  No restriction argument is needed.
+For consecutive indices the overlap displacement is $1$ in the first
+half, $-1$ in the second half, and $0$ at either junction.  More explicitly,
+the overlap is the image under $\beta_i^m$ of $\{1,\ldots,m-1\}$ for
+$i\leq2k$, and of $\{0,\ldots,m-2\}$ for $i>2k$ (with cyclic
+successor at $4k$).  Thus it is exactly the image of the $m-1$
+source vertices of the corresponding one of $f,g$.  All paths have the same
+neighbour pattern: with $f$ the lower coordinate and $g$ the higher,
+\[
+ \alpha_i g=\alpha_{i+1}f (i<2k),\qquad
+ \alpha_{2k}g=\alpha_{2k+1}g,\qquad
+ \alpha_i f=\alpha_{i+1}g (2k<i<4k),\qquad
+ \alpha_{4k}f=\alpha_0f.
+\]
+The signed count is $2k-(2k-1)=1$, so this is a quasi-filter in the
+precise sense of A.2.  Fixed points contribute the same set to both
+sides of (11), and private points contribute no intersection.  This
+proves (11).  The finite program checks all three properties for every
+quasi-filter used below, in addition to checking injectivity, composition
+closure, and all nerve boundary identities.
+\end{proof}
+
+The restriction error is not a refutation of Theorem C.2: the repaired
+construction supplies its required hypotheses.  It does mean that a
+literal implementation of the formulas followed by unverified use of
+(11) is invalid.  The numerical difference below is substantial.
+
+\subsection{Exact integral computations}
+We fix $K_0$ with objects $V=\{0\}$ and $W=\{0,1,2\}$, and its three
+nonidentity maps $v_i:V\to W$.  Our explicit $K_1$ adds a fresh
+quasi-filter target for each ordered parallel pair in $K_0$, including
+equal pairs, and a fresh disjoint-union target for each ordered pair of
+objects.  Thus there are eleven quasi-filter targets and four sum
+targets.  We use the repaired path construction with $s=45$, $k=11$,
+and global bound $n=3$.  This satisfies C.1 with
+$a_0=2$, $a_1=8/5$, since $s/(3n)=5=(1-a_1/a_0)^{-1}$.
+An infinite allowed decreasing sequence can be continued, for example,
+by $a_{m+1}=a_m(1-1/N_m)$ with $N_0=5$, $N_1=17$, and
+$N_m=2^{m+9}$ for $m\geq2$; its limit remains strictly above $3/2$.
+
+Every object is the explicitly tagged finite set in the program.
+The generating maps are the displayed functions and the two tagged
+summand inclusions.  The category is the subcategory of finite sets and
+injections which they generate: two arrows are equal exactly when their
+function tuples agree, and composition is composition of tuples.
+This completely specifies the category, including identities and all
+composition laws.  No unlisted quotient of arrows is imposed.
+
+\begin{proposition}[Proved and machine-checked: the first repaired stage]\label{C:first-stage}
+For $H=h_V/(cv_1\sim cv_2)$, the above $K_1$ has
+\[
+ H_j(B\operatorname{El}_{K_1}H;\mathbb Z)=
+ \begin{cases}\mathbb Z,&j=0,2,\\0,&j=1\text{ or }j\geq3.\end{cases}
+\]
+For $H_3=h_V/(cv_1\sim cv_2\sim cv_3)$ it has $H_0=\mathbb Z$,
+$H_1=0$, $H_2=\mathbb Z^4$, and no higher homology.
+\end{proposition}
+\begin{proof}
+For the first functor, the old category of elements has one circle,
+formed by $v_1,v_2$, and one additional leaf from $v_3$.
+For any newly added target $Z$, describe the attachment links by the
+graph with vertices $K_1(V,Z)$ and one edge for each
+$c\in K_1(W,Z)$ joining $cv_1$ to $cv_2$.
+Subdividing these edges and adding the $cv_3$ leaves gives precisely
+the old comma categories over the new elements of $H(Z)$.
+Their components are the components of this graph.
+For the quasi-filters of $(v_1,v_2)$ and $(v_2,v_1)$ the graph has
+exactly one circular component; its map to the old circle has degree
+$1$ or $-1$.  All other quasi-filter links and all sum links are forests.
+The attachment exact sequence therefore identifies $H_2$ with the
+kernel of a surjection $\mathbb Z^2\to\mathbb Z$ whose two coefficients
+are units.  This kernel is $\mathbb Z$, and $H_1=0$.
+All links are graphs, so no higher homology occurs.
+
+For $H_3$, replace each triple $(cv_1,cv_2,cv_3)$ by a three-legged star.
+Each of the six distinct ordered pairs contributes one circular link;
+equal pairs and sums contribute forests.  The map from these six
+circles to the two generators of the old $H_1$ is the incidence map
+of the six oriented edges on three vertices, after fixing one vertex
+as origin.  It is surjective with kernel free of rank four.
+
+The integer calculation independently constructs all elements,
+arrows, and nondegenerate nerve simplices.  The category has seventeen
+objects and $1263$ arrows including identities.  The nerve simplex
+counts for $H$ are $(428,1656,1230)$; for $H_3$ they are
+$(21,1246,1230)$.  Elementary chain contractions using unit entries
+reduce both integral complexes to zero-differential free complexes
+of the asserted ranks.  A nonunit residual would be reported rather
+than discarded.  The program also checks $d^2=0$ before reduction;
+the $H_3$ calculation was independently checked by sparse Gaussian
+elimination over $\mathbb F_{101}$.
+\end{proof}
+
+\begin{proposition}[Proved: the first class survives the entire second stage]\label{C:K2-injective}
+With the above choices at stage one, the map
+\[
+ H_2(B\operatorname{El}_{K_1}H;\mathbb Z)
+ \longrightarrow H_2(B\operatorname{El}_{K_2}H;\mathbb Z)
+\]
+is injective for every second stage formed from this repaired $K_1$
+by fresh quasi-filter targets as in Part B.9 and disjoint sums. In
+particular, it is injective for the repaired C.1 continuation.
+\end{proposition}
+\begin{proof}
+For each old object $T\in K_1$, let $D_T\subseteq K_1$ be the full
+subcategory on the objects $X$ for which $K_1(X,T)\ne\varnothing$.
+The first-stage proof shows
+$H_2(B\operatorname{El}_{D_T}(H|_{D_T});\mathbb Z)=0$ for every $T$:
+there is at most one first-stage maximal object in $D_T$; if its link
+contains a circle, that one circle maps with unit degree to the old
+circle.  Otherwise its links are forests.  The cases $T=V,W$ and the
+sum targets have zero $H_2$ by the same graph description.
+
+Consider a new quasi-filter target for $f,g:S\to T$ in $K_1$.
+Every arrow from an old object to this target factors through one of
+the maps $\alpha_i:T\to Z$.  Therefore each old comma link projects
+into $\operatorname{El}_{D_T}(H|_{D_T})$, and its map on $H_2$ into the
+old category of elements is zero.  For a new disjoint-union target
+$T_1\amalg T_2$, the quotient presentation gives
+$H(T_1\amalg T_2)=H(T_1)\amalg H(T_2)$.  An attachment link for one
+new element lies wholly over one summand, so its map likewise factors
+through a $D_{T_i}$.  Distinct new targets have no nonidentity arrows
+between them.  Thus the relative attachment exact sequence, with a
+direct sum over all their elements, has zero incoming map to the old
+$H_2$.  The desired injection follows.
+\end{proof}
+
+\begin{proposition}[Proved and machine-checked: selected later substages]\label{C:substages}
+Two selected attachments in the repaired construction preserve the first-stage $H_2$ class, with the integral and relative homology specified below. In the general Part B variant, an explicit second-stage attachment instead gives a surjection $\Z^3\to\Z^2$ on $H_2$ with kernel $\Z$. No calculation enumerates a full later stage.\end{proposition}
+\begin{proof}[Explicit constructions and integral certificates]
+One selected second-stage attachment was computed in full as an additional check.  Choose the lexicographically first two function
+tuples $W\to Q_{(v_1,v_2)}$ in the explicitly tagged model and add their
+repaired quasi-filter with $n=3$, $s=153$.  This is allowed with
+$a_2=128/85$, since $(1-a_2/a_1)^{-1}=17=153/9$.
+The resulting substage has eighteen objects, $21461$ arrows, and nerve
+simplex counts $(7161,35470,48966,20655)$.
+Its integral homology ranks are $(1,0,1,0)$, and its relative homology
+against $K_1$ vanishes in every degree.  This is a single substage of
+$K_2$, not the full $K_2$.
+
+A further critical substage was computed.  At stage two, add only the
+sum $Q_{(v_1,v_2)}\amalg Q_{(v_2,v_1)}$; at stage three, add a
+quasi-filter of the first $W$-map into each summand, with $n=3$, $s=297$.
+This is compatible with C.1 after choosing
+$a_2=(8/5)(64/65)$ and $a_3=a_2(32/33)$, both above $3/2$;
+these parameters describe a different allowed continuation from the
+selected $s=153$ substage.  The nineteen-object category has $81430$
+arrows and nerve simplex counts
+$(27250,162191,322323,267570,80190)$.
+Its integral homology ranks remain $(1,0,1,0,0)$, and the relative
+homology of the last attachment vanishes.  This verifies persistence
+for this one critical attachment only; it does not establish persistence
+through the full third stage.
+
+The common-$n$ calculation also supplies a computation for the more
+general construction of Part B. Its failure of (11) disqualifies its
+use in the intended C.1 argument, but not in B.9.
+Lemma B.7 (pp.~380--381) requires only the old bounded-chain property
+(4), the quasi-filter identities, property (9), and a fresh target;
+B.8 (p.~382) treats the disjoint sums, and B.9 (pp.~383--384)
+invokes precisely these hypotheses. The initial $K_0$ satisfies (4):
+every nonidentity partial bijection arising from a morphism chain
+factors through the singleton $V$, so its non-diagonal graph has at
+most one edge. The program verifies injectivity, the signed neighbour
+identities with total signed count one, and (9) for every common-$n$
+attachment. Each new target is fresh, its incoming arrows are exactly
+the composites $\alpha_i p$, and the old category remains full.
+Thus induction using B.7 and B.8 certifies these finite stages as
+valid Part B substages.
+
+For this general variant the computed first stage has $17$ objects,
+$1257$ arrows, nerve counts $(424,1650,1230)$, and $H_2=\Z^3$.
+The selected second-stage attachment gives $18$ objects, $21301$
+arrows, nerve counts $(7156,35309,48810,20655)$, $H_2=\Z^2$,
+and $H_3=\Z$. Its relative homology is $\Z^2$ in degree three
+and zero otherwise. Proposition~\ref{C:attachments} therefore makes
+the old-to-new $H_2$ map surjective with an infinite cyclic kernel.
+Persistence of every created degree-two class is thus false for the
+general Part B construction. The twelve first-stage and fourteen
+cumulative failures of (11) are retained in the output, so this
+calculation cannot be confused with a repaired C.1 certificate.
+The triple quotient on this general first stage has $H_2=\Z^{10}$.
+
+By contrast, Proposition~\ref{C:K2-injective} applies to arbitrary
+Part B second-stage quasi-filters over our repaired first stage:
+its proof uses only vanishing of $H_2$ on old down-sets,
+factorization through the old range, and separation of sum links.
+Those down-set hypotheses do not hold automatically for an arbitrary
+first stage. No statement about totality of an infinite general
+completion follows from these finite results.
+
+\end{proof}
+
+\subsection{What the cone argument proves and what remains undecided}
+\begin{proposition}[Known and verified: the cone-attachment sequence]\label{C:attachments}
+For a category obtained from an old category by adding new maximal objects, the category of elements of a set-valued functor is obtained on realization by attaching a cone on each old comma link $L_h$ over a new element $h$. The relevant part of its exact homology sequence is
+\[
+ \bigoplus_h H_2(L_h)\longrightarrow H_2(E_{\rm old})
+ \longrightarrow H_2(E_{\rm new})
+ \longrightarrow\bigoplus_h H_1(L_h)
+ \longrightarrow H_1(E_{\rm old}).
+\]
+\end{proposition}
+\begin{proof}
+Every nondegenerate nerve simplex is either old or ends at one new element. In the latter case its preceding chain, together with its last arrow, is a simplex of the old comma link. The boundary separates into the old face and the cone boundary. Thus the relative chain complex is the direct sum of the augmented link complexes shifted up one degree; the pair exact sequence gives the displayed maps. This also proves the geometric cone description by the simplicial mapping-cylinder realization.\end{proof}
+
+This confirms the valid part of R10: a circular link whose map to the
+old space is null in $H_1$ produces a degree-two class.  It also exposes
+the missing permanence assertion: later links may have nonzero $H_2$
+and may kill previously created classes.  The repaired first-stage
+class is proved to survive through the full second stage, but this
+argument has not established its survival at all subsequent stages.
+
+\begin{obstruction}[Open: persistence in the infinite construction]\label{C:open}
+The smallest undecided persistence question for these fixed choices is
+whether the generator of $H_2(B\operatorname{El}_{K_1}H)$ survives the
+map into $K_3$, and then into the increasing union.  At stage two a
+sum of the two distinct circular-link targets has an old down-set
+already containing both disks, so the zero-$H_2$ factorization used
+above no longer applies automatically.  More generally, exact
+non-totality requires a class which survives every finite stage:
+filtered unions commute with integral nerve homology, so
+\[
+ H_2(B\operatorname{El}_{K^*}H;\mathbb Z)
+   =\operatorname{colim}_m
+        H_2(B\operatorname{El}_{K_m}(H|_{K_m});\mathbb Z).
+\]
+A nonzero group at one or two finite stages is insufficient.
+The component checker exhausts all $1263$ arrows and $91783$ ordered parallel pairs of $K_1$: all induced $H$-maps are injective, and no induced pair graph on its $H$-components has a nontrivial directed cycle. These are finite observations, not an induction. In our fresh-target convention the full $K_2$ has $17+91783+17^2=92089$ objects, before counting its arrows and simplices. The full rank of $H_2$ at $K_2$ was not enumerated; the calculation and
+the injection theorem establish a nonzero subgroup from stage one.
+No universal acyclicity claim for $K^*$ is made.
+
+For the general Part B variant, the smallest uncomputed complete stage
+is the full second stage following the explicit common-$n$ first stage.
+To specify this instance, retain the computed $s=153$ attachment;
+for every remaining ordered parallel pair choose the least odd $n$
+at least three and at least the largest number of vertices in an
+active directed path, use the common-$n$ formula with $s=4n+1$,
+and add all ordered object sums. At subsequent stages repeat this
+least-$n$ rule and all ordered sums. Neither the full $H_2$ of the
+specified second stage nor the eventual homology of this B.9 completion
+has been computed. The observed death of one class decides neither
+universal acyclicity nor non-totality of that completion.
+\end{obstruction}
+
+
+\begin{proposition}[Proved: a minimal repair by number of added objects]
+\label{C:terminal-repair}
+For any small category $A$, adjoining one terminal object gives a full
+extension $A\hookrightarrow A^{\triangleright}$ which is filtered,
+totally $W_\infty$-aspherical, and has exact abelian colimits.
+Every finite parallel family in $A$ then has an ordinary, hence affine,
+simultaneous equalizer.  Among proper full extensions obtained by adding
+objects to $A$, one is the least positive possible number of new objects.
+This gives a complete acyclic modification of $K^*$, but does not retain
+its missing triple equalizer.
+\end{proposition}
+\begin{proof}
+Take the objects of $A^{\triangleright}$ to be those of $A$ and a new
+object $\infty$.  Keep every old hom-set, set
+$A^{\triangleright}(a,\infty)=\{u_a\}$ for each old $a$,
+$A^{\triangleright}(\infty,a)=\varnothing$, and
+$A^{\triangleright}(\infty,\infty)=\{1_\infty\}$.
+The old composition is unchanged and $u_b f=u_a$ for every old
+$f:a\to b$.  These rules define an associative composition and make
+$\infty$ terminal.  Every finite diagram has the cone to $\infty$,
+so the category is filtered.  For any $H:A^{\triangleright}\to\mathrm{Set}$,
+the component labelled by $h\in H(\infty)$ has terminal object
+$(\infty,h)$; every element $(a,x)$ has the unique arrow to
+$(\infty,H(u_a)x)$.  Thus all components of every category of elements
+are contractible.  Abelian colimit is evaluation at $\infty$, which is
+exact.  For $a_i:p\to q$, the singleton arrow $u_q:q\to\infty$
+satisfies $u_q a_i=u_p$ for every $i$.
+A proper full extension with no additional object has exactly the old
+hom-sets and is the same category, proving the stated minimality.
+There is no supplied ordering of all other possible ``modifications'',
+so no unrestricted minimality or preservation of the old obstruction is
+asserted.
+\end{proof}
+\section{Part D: truncation, stabilization, and closure operations}\label{sec:D}
+\subsection{D.1: the one-type audit and its corrected scope}
+\begin{proposition}[Refuted and repaired: the unrestricted statement of R8]\label{D:R8-scope}
+For an arbitrary small category $A$, the assertion that
+$\int_A D\to\colim_A^{\Cat}D$ is a weak equivalence for every
+$D:A\to\Cat$ is equivalent to componentwise filteredness, with the
+empty category allowed. For nonempty connected $A$, R8's four
+conditions are equivalent as stated.
+\end{proposition}
+\begin{proof}
+For a discrete two-object category, both sides of the comparison are
+$D_0\amalg D_1$ and the comparison is the identity; this category is
+not filtered. The empty category gives the same counterexample to
+nonemptiness. The first wrong step in the supplied note is the
+inference from $S=*$ that $A$ is nonempty and connected: the test
+only gives $BA\simeq\pi_0A$. Both constructions split over the
+connected components of $A$. The connected assertion follows from
+the next proposition. This confirms the correction in
+\texttt{PRETOT\_paper.tex}, Proposition~F.1.
+\end{proof}
+
+\begin{lemma}[Proved: inherited actions and common successors]\label{D:inherit-common}
+Suppose each component of each $\El_A S$, $S:A\to\Set$, is simply
+connected. The same property holds on every component $C$ of every
+$\El_A S$. Every nonempty connected such $C$ has common successors
+for pairs of objects.
+\end{lemma}
+\begin{proof}
+For $T:C\to\Set$, set
+$R(a)=\coprod_{s\in S(a),\ (a,s)\in C}T(a,s)$.
+For $f:a\to b$, the summand indexed by $s$ maps by $T(f)$ to the
+summand indexed by $S(f)s$. This is a functor and gives an actual
+isomorphism $\El_A R\cong\El_C T$.
+For common successors, let $p,q\in C$ have none. Their upward
+closures $U_p,U_q$ are disjoint nonempty connected full cosieves.
+Let $S:C\to\Set$ be the constant two-element action, with the two
+elements identified precisely on $U=U_p\amalg U_q$.
+The nerve of $\El_C S$ is the union of two copies of $NC$ along
+$NU$. Indeed a chain with its first object in a cosieve lies wholly
+in that cosieve; otherwise its chosen initial copy determines the
+whole lifted chain. The Mayer--Vietoris sequence, and $H_1(BC)=0$,
+give
+\[
+H_1(B\El_C S;\Z)\cong
+\ker\bigl(H_0(BU;\Z)\longrightarrow H_0(BC;\Z)^{\oplus2}\bigr)
+\cong\Z.
+\]
+The union is connected because $U$ is nonempty. This contradicts
+the assumed simple connectedness of its component.
+\end{proof}
+
+\begin{proposition}[Proved: every substantive step of the RAAG argument]\label{D:RAAG}
+Let $A$ be nonempty and connected. Then $A$ is filtered if and only
+if it is total and $\hocolim_A BM$ is a $1$-type for every
+$M:A\to\Grp$. It suffices to test the diagrams associated below
+to individual parallel pairs. These conditions are also equivalent
+to the comparison condition of Proposition~\ref{D:R8-scope}.
+\end{proposition}
+\begin{proof}
+Filtered colimits of sets commute with finite limits, so the nerve
+commutes with filtered colimits of categories. A finite collection
+of objects and arrows in an action category over a filtered category
+has a cocone in its component: choose a common stage, realize the
+finitely many equalities there, and post-equalize the finitely many
+parallel arrows. Thus those components are filtered and their
+nerves are contractible. Applying the simplicial replacement degree
+by degree shows that $\hocolim_A ND\to\colim_A ND$ is a weak
+equivalence. The Grothendieck-construction comparison gives the
+stated categorical comparison. Cegarra's opened Theorem~1 \citep{Cegarra2020} proves
+the cohomological strengthening of Thomason's comparison; its
+variance is changed by taking the opposite indexing convention.
+
+Conversely, testing discrete categories gives the action criterion.
+A connected colimit of one-object groups in $\Cat$ is the one-object
+group $\colim^{\Grp}_A M$: the presentation identifies their objects
+and retains inverses. Hence the comparison implies the $1$-type
+condition. For its converse, take $u,v:p\to q$ and put
+\[
+Q=A(q,-),\qquad P=A(p,-),\qquad
+E(x)=\{f:q\to x\mid fu=fv\}.
+\]
+At $x$, form the bipartite graph with color classes $Q(x),P(x)$ and
+edges $(f,fu),(f,fv)$, deleting duplicate edges. Its Artin group is
+\[
+M(x)=\langle Q(x)\amalg P(x)\mid[f,fu]=[f,fv]=1\rangle.
+\]
+Postcomposition maps vertices within their colors and edges to
+edges, and so defines $M:A\to\Grp$. Its edge functor is
+$Q\amalg_E Q$. The Salvetti complex has a circle per vertex and a
+torus per edge, and no higher clique cells. It is aspherical by the opened primary \citet[Theorem~3.1.1, Remark~3.1.2, and Lemma~3.1.3]{CharneyDavis1995Finite}: the vertex link is flag, so the cubical complex is nonpositively curved and its universal cover is contractible. Infinite graphs are directed unions of finite full
+subgraphs, and every sphere and its image involve a finite
+subcomplex, so the same conclusion holds for them. The cellular boundary maps vanish, as proved for this coordinate-subtorus complex in their Proposition~3.2.1. Orient a torus by its $Q$ circle followed by
+its $P$ circle. A transition maps it to its image torus with degree
+$+1$, even when two source edges have the same image. Therefore the
+following identifications are natural:
+\[
+H_0(BM)=\Z,\quad H_1(BM)=\Z[Q\amalg P],\quad
+H_2(BM)=\Z[Q\amalg_E Q],\quad H_j(BM)=0\ (j>2).
+\]
+The homology spectral sequence of the simplicial replacement is
+\[
+E^2_{r,s}=L_r\colim_A H_s(BM)\Longrightarrow
+H_{r+s}(X;\Z),\qquad X=\hocolim_A BM.
+\]
+The bar complex identifies $L_r\colim_A\Z[S]$ with
+$H_r(B\El_A S;\Z)$. Totality kills all columns $r>0$ here.
+Consequently $H_2(X)=\Z[\colim_A(Q\amalg_E Q)]$, which is
+$\Z$ if $E$ is nonempty and $\Z^2$ otherwise.
+For completeness, the fundamental groupoid of $X$ has the stage
+groups as generators and transport generators $t_f$, with relations
+$t_gt_f=t_{gf}$ and $t_fm=M(f)(m)t_f$. A maximal tree collapses the
+transport paths, and $\pi_1(BA)=0$ kills the remaining transport
+loops. Its presentation is therefore $\colim^{\Grp}_A M$. The
+representable generators reduce to two generators, and the image
+of $[\id_q,u]$ imposes their single commutator. Hence
+$\pi_1(X)=\Z^2$. If $X$ is a $1$-type, $H_2(X)=H_2(B\Z^2)=\Z$,
+so $E$ is nonempty. Every pair is equalized, and common successors
+follow from Lemma~\ref{D:inherit-common}. Thus $A$ is filtered.
+\end{proof}
+
+\subsection{D.2: sifted total categories and abelian tests}
+\begin{theorem}[Proved: sifted and total implies filtered]\label{D:sifted-total}
+Every small sifted totally $\Winfty$-aspherical category is filtered.
+In fact it suffices that all components of all its action categories
+are simply connected.
+\end{theorem}
+\begin{proof}
+For $p,q\in A$, siftedness means that
+$C_{p,q}=\El_A(A(p,-)\times A(q,-))$ is nonempty and connected.
+This is the final-diagonal criterion in the opened
+Ad\'amek--Rosick\'y--Vitale Remark~1.1(i) \citep{AdamekRosickyVitale2010}. The hypotheses descend
+to $C_{p,q}$ by Lemma~\ref{D:inherit-common}, which therefore has
+common successors. For $u,v:p\to q$, take the two objects
+$(q;u,\id_q)$ and $(q;v,\id_q)$. A common successor supplies
+$f,g:q\to r$ with $fu=gv$ and $f\id_q=g\id_q$. Thus $f=g$ and
+$fu=fv$. Siftedness already supplies common successors in $A$.
+This checks, with its actual comparison maps, the short argument
+in the supplied PRETOT Lemma~F.3.
+\end{proof}
+
+\begin{theorem}[Proved: abelian one-types suffice]\label{D:abelian-one}
+For a nonempty connected total $A$, if $\hocolim_A BM$ is a
+$1$-type for every $M:A\to\Ab$, then $A$ is filtered.
+More generally, the canonical comparisons
+$\hocolim_A BM\to B\colim_A^{\Ab}M$ are weak equivalences for
+all $M$ if and only if $A$ is filtered, with no initial hypothesis
+on $A$.
+\end{theorem}
+\begin{proof}
+In the more general assertion, the zero diagram gives $BA\simeq *$.
+If $p,q$ have no common successor, put
+$M(x)=\Z[A(p,x)]\oplus\Z[A(q,x)]$. At most one summand is
+nonzero at any stage. The fundamental-group presentation just given
+reduces to two generators with no mixed commutator, namely the
+free group on two generators. The target is $\Z^2$, a
+contradiction. Thus $A$ has common successors. Under the initial
+totality hypothesis, common successors instead follow from
+Lemma~\ref{D:inherit-common}. In either case, any two elements of
+the group colimit of an abelian diagram commute after mapping to
+a common successor. Thus the group colimit is the abelian colimit
+$G$, and the $1$-type hypothesis makes the canonical map to $BG$
+a weak equivalence.
+
+In the spectral sequence for $X=\hocolim_A BM$, the row $s=0$
+is $H_*(BA)$ and has no positive terms. Hence
+$E^\infty_{1,1}=L_1\colim_A M$. The edge map on second homology
+is the canonical map
+$\colim_A\Lambda^2 M\to\Lambda^2G$. It is surjective: any two
+representatives of an exterior product can be moved to a common
+successor. The assumed homology equivalence therefore makes the
+edge filtration equal all of $H_2(X)$, and its quotient
+$L_1\colim_A M$ vanishes. This holds for every $M$, proving
+exactness of abelian colimits. Exactness implies totality: direct
+sum over action fibres is an exact functor
+$\Sigma_S:\Ab^{\El_A S}\to\Ab^A$ and
+$\colim_{\El_A S}=\colim_A\Sigma_S$; deriving the constant
+coefficient gives acyclicity, and the cyclic-cover argument
+converts it to weak contractibility.
+
+Exactness now kills every positive column of the homology spectral
+sequence. Thus the canonical map
+$\colim_A\Lambda^2M\to\Lambda^2\colim_A M$ is an isomorphism.
+Apply this to $M\oplus M'$ and take its natural cross summand to
+obtain
+\[
+\colim_A(M\otimes M')\xrightarrow{\cong}
+(\colim_A M)\otimes(\colim_A M').
+\]
+For free abelian diagrams on representables, this is the free
+abelian map on the set of components of the cospan category to a
+singleton. It can be an isomorphism only if that set is a singleton.
+Thus $A$ is sifted, and Theorem~\ref{D:sifted-total} applies.
+Filteredness suffices by the nerve argument in
+Proposition~\ref{D:RAAG}. This confirms the abelian remark's
+spectral-sequence step, supplies its omitted common-successor
+argument, and settles its remaining implication.
+\end{proof}
+
+\subsection{D.3: every finite positive truncation level}
+\begin{lemma}[Proved: low homology of Eilenberg--MacLane spaces]\label{D:EM-low}
+For an abelian group $M$ and $n\geq2$, the space $K(M,n)$ is
+$(n-1)$-connected, $H_n(K(M,n);\Z)=M$, and
+$H_{n+1}(K(M,n);\Z)=0$. The pointed self-equivalence space of
+$K(M,n)$ is discrete up to homotopy, with components
+$\operatorname{Aut}(M)$.
+\end{lemma}
+\begin{proof}
+Choose a free presentation $0\to R\to P\to M\to0$, where the
+subgroup $R$ of the free abelian group $P$ is free. Attach
+$(n+1)$-cells to a wedge of $n$-spheres using the chosen basis of
+$R$. The resulting Moore space has $H_n=M$ and $H_{n+1}=0$,
+because its cellular differential $R\to P$ is injective. Kill its
+higher homotopy groups by cells of dimensions $n+2$ and higher;
+these do not create $(n+1)$st homology. This constructs $K(M,n)$
+with the stated homology. A component of its based mapping space
+has, for $i>0$, homotopy group
+$\widetilde H^{n-i}(K(M,n);M)$, interpreted as zero in negative
+degrees. These groups vanish by connectivity, including reduced
+cohomology in degree zero. Components of the full mapping space
+are $\operatorname{Hom}(M,M)$, and the self-equivalence components
+are exactly $\operatorname{Aut}(M)$.
+\end{proof}
+
+\begin{theorem}[Proved: a fixed positive Eilenberg--MacLane test]\label{D:fixed-n}
+Let $A$ be total and let $n\geq1$ be a fixed integer. If
+$\hocolim_A K(M(a),n)$ is $n$-truncated for every $M:A\to\Ab$,
+then $A$ is filtered. Conversely every filtered $A$ satisfies this
+condition for every $n$.
+\end{theorem}
+\begin{proof}
+The case $n=1$ is Theorem~\ref{D:abelian-one}. Let $n\geq2$.
+Put $X_M=\hocolim_A K(M,n)$. Since $BA$ is contractible,
+$X_M$ is $(n-1)$-connected; this also follows from the connectivity
+argument in the next lemma. The degree-$n$ homology edge map
+identifies $H_n(X_M)$ with $\colim_A M$. Thus the canonical map
+$X_M\to K(\colim_A M,n)$ is a weak equivalence under the assumed
+truncation. The reduced bar spectral sequence, using
+Lemma~\ref{D:EM-low}, gives
+$H_{n+1}(X_M)=L_1\colim_A M$. This is zero, proving exactness.
+
+Consequently, for every $j$, the canonical homology comparison is
+\[
+\colim_A H_j(K(M,n))\cong H_j(K(\colim_A M,n)).
+\] For two diagrams, use
+$K(M\oplus M',n)\simeq K(M,n)\times K(M',n)$. The integral
+K\"unneth theorem and $(n-1)$-connectivity give a natural direct
+sum decomposition in degree $2n$, with cross summand $M\otimes M'$.
+There is no Tor term in that degree, because its two positive
+indices would be at least $n$ and would have to sum to $2n-1$.
+Taking the cross summand of the canonical comparison proves the
+tensor comparison in Theorem~\ref{D:abelian-one}. Hence $A$ is
+sifted, and Theorem~\ref{D:sifted-total} gives filteredness.
+For the converse, filtered homotopy colimits are computed by
+filtered simplicial colimits, and homotopy groups commute with
+them: every sphere, homotopy, and horn uses only finitely many
+simplices. They therefore preserve $n$-types.
+\end{proof}
+
+\begin{lemma}[Proved: connectivity survives the colimit comparison]\label{D:connectivity}
+Let $f:X\to Y$ be a diagram of maps of spaces indexed by a small
+category. If every $f_a$ has $(n-1)$-connected homotopy fibres,
+then $\hocolim f$ has $(n-1)$-connected homotopy fibres.
+\end{lemma}
+\begin{proof}
+In the terminology of the opened HTT Definition~6.5.1.10, these
+are $n$-connective maps. We derive the assertion from HTT
+Corollary~6.5.1.14 \citep{Lurie2009HTT} rather than treating colimit preservation as
+implicit. Put $Y_\infty=\hocolim Y$. For an arbitrary
+$(n-1)$-truncated map $Z\to Y_\infty$, pull back to
+$Z_a\to Y_a$. Each is $(n-1)$-truncated. The corollary says
+that the mapping space of sections of $Z_a\to Y_a$ maps by an
+equivalence to the mapping space of lifts $X_a\to Z_a$ over
+$Y_a$. Take the homotopy limit of these equivalences. By the
+mapping-space universal property of the colimit, the result is
+exactly the corresponding equivalence between sections over
+$Y_\infty$ and lifts from $\hocolim X$. A second application of
+the same corollary proves the claim. This argument treats the maps
+and their bases simultaneously.
+\end{proof}
+
+\begin{lemma}[Proved: simply connected shapes at a positive level]\label{D:simply-connected-shape}
+Let $C$ be nonempty with simply connected $BC$. If homotopy
+colimits over $C$ preserve $n$-truncated spaces for one fixed finite
+$n\geq1$, then $C$ is filtered.
+\end{lemma}
+\begin{proof}
+For $n=1$, the constant point shows that $BC$ is a simply connected
+$1$-type, hence contractible. Suppose $p,q$ have no common
+successor and form the doubled action $S$ of
+Lemma~\ref{D:inherit-common}. Its element category is connected
+and has $H_1=\Z$. Put $M=\Z[S]$ and $X=\hocolim_C BM$.
+The fundamental group of $X$ is $\colim_C^{\Grp}\Z[S]$ because
+$BC$ is simply connected. The presentation has two global
+generators, one for each original copy, and their identification on
+the nonempty union of cosieves makes it the infinite cyclic group.
+Thus the assumed $1$-truncation would give $H_2(X)=0$. In its
+homology spectral sequence, however,
+\[
+E^2_{1,1}=L_1\colim_C\Z[S]=H_1(B\El_C S;\Z)=\Z.
+\]
+No outgoing differential has a nonnegative first index, and the
+only possible incoming differential starts in
+$E^2_{3,0}=H_3(BC)=0$. This nonzero term survives to $H_2(X)$,
+a contradiction. Hence $C$ has common successors. For any abelian
+diagram its group colimit is now abelian, so the $1$-truncation
+condition and the fundamental-group presentation make the
+canonical comparison to the abelian colimit a weak equivalence.
+Theorem~\ref{D:abelian-one} proves filteredness.
+
+Now let $n\geq2$. For any $M:C\to\Ab$, let
+\[
+p:X_M=\hocolim_C K(M,n)\longrightarrow BC
+\]
+be induced by the projections to a point, with section $s$ induced
+by the zero elements. Both $X_M$ and $BC$ are $n$-types by
+hypothesis. Lemma~\ref{D:connectivity} says that the homotopy
+fibres of $p$ are $(n-1)$-connected; being fibres of a map of
+$n$-types, they are also $n$-types. Thus they are $K(L,n)$ for
+some abelian group $L$. The section makes this a family of pointed
+Eilenberg--MacLane spaces. Lemma~\ref{D:EM-low} identifies its
+structure space as the discrete group $\operatorname{Aut}(L)$.
+Its classifying map consequently takes values in
+$B\operatorname{Aut}(L)$, a $1$-type, and is nullhomotopic on
+the simply connected base $BC$. Therefore there is a fibrewise
+weak equivalence of pairs
+\[
+(X_M,s(BC))\simeq(BC\times K(L,n),BC\times\{0\}).
+\]
+Here the image of the section can equivalently be interpreted by
+its mapping cylinder; no point-set cofibration assumption is used.
+The relative K\"unneth theorem gives
+$H_{n+1}(X_M,BC;\Z)=0$: the only possible cross term is
+$H_1(BC)\otimes L=0$, while
+$H_{n+1}(K(L,n))=0$ and $\operatorname{Tor}(H_0(BC),L)=0$.
+
+The reduced-chain simplicial replacement for this pair has
+spectral sequence
+\[
+E^2_{r,s}=L_r\colim_C\widetilde H_s(K(M,n);\Z)
+\Longrightarrow H_{r+s}(X_M,BC;\Z).
+\]
+The rows below $n$ vanish, row $n$ is $M$, and row $n+1$ is zero.
+In total degree $n+1$ the sole surviving term is therefore
+$L_1\colim_C M$. It vanishes for every $M$, proving exactness.
+As checked in Theorem~\ref{D:abelian-one}, exactness makes $C$
+total. Theorem~\ref{D:fixed-n} now proves that $C$ is filtered.
+\end{proof}
+
+\begin{theorem}[Proved: classification of every $\mathcal T_n$]\label{D:Tn-classification}
+Let $\mathcal T_n$ consist of small categories over which homotopy
+colimits preserve $n$-truncated spaces, including empty and
+nonconnected diagrams and indexing categories. Let
+$\ell:A\to\Pi A$ be groupoid completion. For $a\in A$, define
+\[
+C_a=\El_A\bigl(\Hom_{\Pi A}(a,\ell(-))\bigr).
+\]
+Then, for every finite $n\geq1$,
+\[
+A\in\mathcal T_n\quad\Longleftrightarrow\quad
+C_a\text{ is filtered for every }a\in A.
+\]
+Consequently $\mathcal T_1=\mathcal T_2=\cdots$. Also
+$\mathcal T_0$ is the class of categories whose nonempty components
+are total, and
+\[
+\mathcal T_0\cap\mathcal T_n
+=\{\text{componentwise filtered categories}\}\qquad(n\geq1).
+\]
+On nonempty connected categories this intersection is exactly the
+filtered class. Every nontrivial group, viewed as a one-object
+category, belongs to all positive classes and not to
+$\mathcal T_0$; the trivial group belongs to every class.
+\end{theorem}
+\begin{proof}
+The functor defining $C_a$ has bijective transition maps.
+Its nerve is the connected universal cover of the component of
+$BA$ containing $a$: lifting edge paths identifies the stabilizer
+of the lift $\id_a$ with the trivial subgroup of
+$\pi_1(BA,a)$. Thus $BC_a$ is simply connected.
+
+For any $S:A\to\Set$ and $Y:\El_A S\to\Space$, define
+$(\Sigma_S Y)(b)=\coprod_{t\in S(b)}Y(b,t)$, with the transition
+maps supplied by $Y$. The simplicial replacements are canonically
+isomorphic after identifying their summands, giving
+\[
+\hocolim_A\Sigma_S Y\simeq\hocolim_{\El_A S}Y.
+\]
+Coproducts of $n$-types are $n$-types. Hence membership in
+$\mathcal T_n$ descends to categories of elements and their
+components. If $A\in\mathcal T_n$, then every $C_a$ lies in
+$\mathcal T_n$ and Lemma~\ref{D:simply-connected-shape} makes
+it filtered.
+
+Conversely suppose every $C_a$ is filtered. Their contractible
+nerves show that every component of $BA$ is a $1$-type.
+For $X:A\to\Space$, the pullback of the universal covering
+$BC_a\to BA$ along the projection $\hocolim_A X\to BA$ is
+modeled by $\hocolim_{C_a}X\pi$, where $\pi:C_a\to A$ is the
+projection. One verifies this on the bar construction: over a
+chain $b_0\to\cdots\to b_r$, a lift is a choice of path class
+$a\to b_0$, uniquely determining the rest of the lifted chain.
+The realization is a covering, so it is also a homotopy pullback.
+When $X$ takes values in $n$-types, filteredness of $C_a$ makes
+every component of this cover an $n$-type. Coverings induce
+isomorphisms on homotopy groups in degrees at least two; thus
+$\hocolim_A X$ is an $n$-type for every $n\geq1$.
+
+For $n=0$, the homotopy colimit of a set-valued action is its
+category-of-elements space, so the asserted componentwise
+description is the action criterion. Under this property,
+$\Pi A$ is the codiscrete groupoid on each component, and $C_a$
+is isomorphic to that component. The intersection assertion
+follows. For a group $G$, $C_*$ has objects its elements and a
+unique arrow between each pair. It is filtered, while $BG$ is a
+$0$-type exactly when $G$ is trivial.
+\end{proof}
+
+\begin{remark}[Proved: finite data in the positive-level criterion]\label{D:Tn-finite-data}
+The last theorem is not merely a restatement in terms of arbitrary
+space-valued diagrams. For each component choose $a$. Objects of
+$C_a$ are pairs $(x,\gamma)$ with
+$\gamma\in\Hom_{\Pi A}(a,x)$; an arrow to $(y,\delta)$ is
+$f:x\to y$ satisfying $\ell(f)\gamma=\delta$. Filteredness
+requires common successors of pairs of such finite zigzag classes
+and actual post-equalizers of parallel arrows having the same
+image in $\Pi A$. These are explicit ordinary-category conditions.
+For example, for the additive monoid $\mathbb N$, $C_*$ is the
+ordered set $\mathbb Z$; hence this nonfiltered one-object category
+belongs to every positive $\mathcal T_n$. It is not total.
+\end{remark}
+
+\paragraph{Opened-source comparison for D.1--D.3.}
+The supplied Ad\'amek--Rosick\'y--Vitale article was opened in full.
+Its Remark~1.1 supplies the ordinary sifted diagonal criterion and
+its Theorem~2.1 concerns preservation of sifted colimits using
+filtered colimits and reflexive coequalizers; it does not state the
+shape classification above. The supplied HTT was opened at
+Proposition~5.3.3.3 (filtered colimits commute with finite limits
+of spaces), Lemma~5.5.8.11 (sifted colimits commute with finite
+products), and Corollary~6.5.1.14 (the connectivity test used here).
+None of those statements is the positive-truncation classification.
+The supplied Cegarra article was opened in full; Theorem~1 and
+Section~3 prove the Grothendieck homotopy-colimit comparison,
+not the classification. Charney's arXiv text was opened at
+Theorem~2.6 and Section~2.7 for the Salvetti facts. The
+Gabriel--Ulmer publisher record and table of contents were opened \citep{GabrielUlmer1971},
+but the book body was not accessible; we do not infer absence of
+the assertion from that record. Searches using ``homotopy colimits
+preserve truncated spaces'', ``colimits 1-types filtered'', and
+``universal cover filtered category'' did not locate the
+classification in an opened primary source. We claim no priority.
+
+% TeX-ready results for Parts D.4 and D.5. Parent may renumber and supply macros.
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority claim.
+
+\subsection{The stable coefficient problem}
+
+\begin{proposition}[Proved: the precise stable reformulation]\label{main:stable}
+Let $A$ be a small category, let $R$ be a commutative ring with identity, and
+let $M:A\to R\text{-}\mathrm{Mod}$ be covariant. There are canonical
+isomorphisms
+\[
+ \pi_i\!\left(\operatorname{hocolim}_{a\in A} HM(a)\right)
+ \cong L_i\operatorname{colim}_A M\qquad(i\geq0),
+\]
+and the negative homotopy groups vanish. Here the homotopy colimit may be
+formed in $HR$-module spectra or in spectra; its underlying spectrum is the
+same in either case. Consequently it is an Eilenberg--MacLane spectrum for
+every $M$ if and only if $\operatorname{colim}_A$ is exact on
+$(R\text{-}\mathrm{Mod})^A$. If integral abelian colimits over $A$ are exact,
+then this condition holds for every such $R$, in particular for
+$R=\mathbb Q$ and $R=\mathbb F_p$ for every prime $p$.
+\end{proposition}
+\begin{proof}
+The simplicial replacement of $M$ has group in degree $n$
+\[
+ B_n(A,M)=\bigoplus_{a_0\xrightarrow{f_1}a_1\to\cdots\xrightarrow{f_n}a_n}
+ M(a_0).
+\]
+For $n>0$, its first face uses $M(f_1):M(a_0)\to M(a_1)$,
+its interior faces compose adjacent arrows, and its last face drops the
+last arrow. Degeneracies insert identities. The alternating face map gives
+a chain differential. This augmented bar complex computes derived colimits:
+it is the usual two-sided bar complex for the constant right $RA$-module
+$\underline R$ and the left $RA$-module $M$. To check the assertion without
+a projectivity assumption on the $R$-modules $M(a)$, take a projective
+resolution in $(R\text{-}\mathrm{Mod})^A$ and use the associated double
+complex. In one order the objectwise resolution gives $B_\bullet(A,M)$.
+In the other order, each projective diagram is a retract of a sum of
+covariant representables, whose augmented bar complexes contract. Both
+filtrations are bounded in each total degree.
+
+Applying Eilenberg--MacLane spectra to the displayed simplicial
+replacement and realizing computes the homotopy colimit. The realization
+spectral sequence has $E^1_{n,q}=0$ unless $q=0$, and its remaining row is
+the displayed bar complex. Hence its homotopy groups are the stated derived
+colimits. The forgetful functor from $HR$-module spectra to spectra
+preserves colimits, so the two homotopy colimits agree after forgetting.
+A right-exact additive functor between these abelian categories is exact
+if and only if its first left derived functor vanishes on every object;
+exactness then kills all higher derived functors. Finally the underlying
+abelian group of an $R$-module colimit is its colimit in abelian groups,
+as is immediate from the common direct-sum and relation presentation.
+Thus exactness of integral colimits implies exactness for $R$-module
+diagrams.
+\end{proof}
+
+\begin{proposition}[Proved: coefficient classes actually tested by totality]\label{main:tested}
+Suppose that $A$ is totally $W_\infty$-aspherical. For every commutative ring
+$R$, every covariant $H:A\to\mathrm{Set}$, and every $i>0$,
+\[
+ L_i\operatorname{colim}_A R[H]=0.
+\]
+The same vanishing holds for direct sums, direct summands, and filtered
+colimits of such coefficient diagrams.
+\end{proposition}
+\begin{proof}
+The bar complex $B_\bullet(A,R[H])$ is canonically the chain complex of
+$N\operatorname{El}_A(H)$ with coefficients in $R$: a basis element is a
+string in $A$ together with its starting element of $H$. Each component
+is weakly contractible by the checked action criterion R1. This proves
+the first assertion. The bar construction is additive and commutes with
+all direct sums and filtered colimits of coefficient diagrams. Homology
+commutes with direct sums and filtered colimits in $R$-modules, and it
+preserves retract decompositions, proving the remaining assertions.
+\end{proof}
+
+\begin{proposition}[Proved: the affine criterion with specified coefficients]\label{main:ring-affine}
+Let $R$ be a nonzero commutative ring and let $A$ be a small category in
+which every finite set of objects has a common successor. The following
+are equivalent: colimits are exact on $(R\text{-}\mathrm{Mod})^A$;
+every finite family $a_0,\ldots,a_k:p\to q$ has an element
+$t\in R[A(q,r)]$ for some $r$, of coefficient sum $1$, with
+$ta_i=ta_0$ for every $i$; the category $\operatorname{Aff}_R(A)$ is
+filtered. Here its objects are those of $A$, its arrows are the finite
+$R$-linear arrow combinations of coefficient sum $1$, and composition
+is extended bilinearly.
+\end{proposition}
+\begin{proof}
+For necessity put $P_x=R[A(x,-)]$ and form the natural map
+$d:P_q\to P_p^{\oplus k}$, $d(t)=(t(a_i-a_0))_{i=1}^k$.
+The colimit of each representable module is canonically $R$ and every
+precomposition map between representables induces the identity of $R$.
+Thus $\operatorname{colim}_A d=0$. Exactness implies that
+$\operatorname{colim}_A\ker d\to R$ is surjective. A preimage of $1$
+is a finite sum of classes of elements of $\ker d$ at finitely many
+objects. Move all of them to a common successor and add them there;
+the result is the required $t$.
+
+The affine criterion implies filteredness of $\operatorname{Aff}_R(A)$:
+given parallel affine arrows $\alpha,\beta:p\to q$, collect the finite
+set of ordinary arrows in their supports and equalize that entire
+family by $t$. Since the coefficient sums of $\alpha,\beta$ are both
+$1$, $t\alpha=t\beta$. Common successors and nonemptiness are already
+part of the hypotheses. Conversely filteredness equalizes a finite
+family of ordinary arrows viewed as affine arrows.
+
+An $R$-module diagram $F$ extends to $\operatorname{Aff}_R(A)$ by
+$F(\sum_i r_i f_i)=\sum_i r_iF(f_i)$. This is a functor by
+bilinearity of composition. An $A$-cocone $\lambda_a:F(a)\to V$
+is automatically a cocone for this extension, since
+$\lambda_b\sum_i r_iF(f_i)=(\sum_i r_i)\lambda_a=\lambda_a$.
+Hence the two colimits agree by their actual universal cocones.
+The extension preserves short exact sequences objectwise, and
+filtered colimits of $R$-modules are exact. This proves sufficiency.
+\end{proof}
+
+\begin{proposition}[Proved: separate finite tests over $\mathbb Q$ and $\mathbb F_p$]\label{main:field-tests}
+Fix a finite parallel family $a_0,\ldots,a_k:p\to q$ in a small category $A$. A simultaneous rational affine equalizer exists if and only if, at some object $r$, an integral combination $t\in\mathbb Z[A(q,r)]$ satisfies all $t(a_i-a_0)=0$ and has nonzero augmentation. A simultaneous $\mathbb F_p$-affine equalizer exists if and only if such an integral combination at some $r$ satisfies
+\[
+ t(a_i-a_0)\in p\mathbb Z[A(p,r)]\quad(1\leq i\leq k),
+ \qquad \operatorname{aug}(t)\not\equiv0\pmod p.
+\]
+Thus these are different exact finite-support tests; the modular test concerns the kernel after reduction, not an unjustified reduction of the integral kernel.
+\end{proposition}
+\begin{proof}
+Clear the finitely many denominators of a rational affine equalizer; its resulting nonzero augmentation is that denominator. Conversely divide an integral simultaneous annihilator by its nonzero augmentation in $\mathbb Q$. For $\mathbb F_p$, lift its finitely many coefficients to integers; the equations then hold modulo $p$ and the augmentation is one modulo $p$. Conversely reduce the stated integral combination and multiply by the inverse of its nonzero augmentation in the field. Every map is between the displayed free modules at the single object $r$, so neither argument interchanges a colimit with a kernel.
+\end{proof}
+
+\begin{obstruction}[Open: integral and field coefficient implications]\label{main:stable-open}
+We do not prove or refute, for arbitrary totally aspherical $A$, exactness
+of colimits on all abelian-group diagrams, all $\mathbb Q$-vector-space
+diagrams, or all $\mathbb F_p$-vector-space diagrams. These are three
+separate unresolved implications in this return; Proposition~\ref{main:stable}
+settles them affirmatively for every $A$ already known to have exact
+integral colimits, including $\Delta_{\mathrm{inj}}$.
+
+For the integral implication the smallest unhandled affine test is a
+triple $a_0,a_1,a_2:p\to q$: writing
+$K_i=\ker(P_q\xrightarrow{a_i-a_0}P_p)$, it asks whether
+$\operatorname{aug}(K_1\cap K_2)=\mathbb Z$. Totality supplies each
+pairwise affine equalizer, but does not by the arguments here supply their
+simultaneous intersection. For each field variant, pairs are already supplied by reduction or extension of the integral pair equalizers. Its first unhandled case is likewise a triple, with the exact rational or modular equations in Proposition~\ref{main:field-tests}. For $\mathbb F_p$, the kernels must be formed over that field; they need not be tensor products of the integral kernels.
+
+The attempted free-resolution reduction has a precise missing step.
+A simplicial free-abelian resolution with terms $\mathbb Z[S_n]$ is
+acyclic objectwise, and totality controls its underlying simplicial-set
+colimit. The abelian colimit of a free term, however, is
+$\mathbb Z[\operatorname{colim}^{\mathrm{Set}}_A S_n]$, whereas the set
+colimit of its underlying group is
+$\operatorname{colim}^{\mathrm{Set}}_A U\mathbb Z[S_n]$.
+The canonical map from the latter set to the underlying set of the former
+need not be bijective. Its substitution into the argument is therefore
+not a proof. No finite-category or monoid search is claimed: R5 excludes
+those shapes as separators.
+\end{obstruction}
+
+\subsection{Reflection of presheaves into animated abelian groups}
+
+Let $\mathcal C$ be a skeleton of the category of finite-rank free abelian
+groups and homomorphisms. Write
+$\mathcal P(\mathcal C)=\operatorname{Fun}(\mathcal C^{\mathrm{op}},\mathcal S)$.
+Let $\mathcal P_\Sigma(\mathcal C)$ be its full subcategory on presheaves
+carrying finite direct sums in $\mathcal C$ to finite products of spaces,
+including the empty direct sum. The reflection is denoted
+$L:\mathcal P(\mathcal C)\to\mathcal P_\Sigma(\mathcal C)$.
+A strict product-preserving simplicial presheaf is exactly a simplicial
+abelian group, evaluated by $P\mapsto\operatorname{Hom}(P,-)$.
+The opened \citet[Theorems 1.3 and 6.4]{Badzioch2002} identify homotopy product-preserving
+presheaves with these strict models; Dold--Kan
+\citep[Theorem~1.2.3.7]{LurieHA2017} then identifies
+$\mathcal P_\Sigma(\mathcal C)$ with $D(\mathbb Z)_{\geq0}$.
+We use homological grading throughout, so $\pi_i$ corresponds to $H_i$.
+
+\begin{theorem}[Proved: the reflection formula requested in D.5]\label{main:reflection}
+Let $A$ be totally $W_\infty$-aspherical and $F:A\to\mathrm{Ab}$ be
+covariant. Define the set-valued presheaf
+\[
+ G_F(P)=\operatorname{colim}^{\mathrm{Set}}_{a\in A}
+       \operatorname{Hom}_{\mathrm{Ab}}(P,F(a)),\qquad P\in\mathcal C.
+\]
+Then, naturally in $F$,
+\[
+ LG_F\simeq \operatorname{colim}^{D(\mathbb Z)_{\geq0}}_{a\in A}F(a),
+ \qquad
+ \pi_i(LG_F)\cong L_i\operatorname{colim}_A F\quad(i\geq0).
+\]
+In particular $G_F(\mathbb Z^n)=\operatorname{colim}^{\mathrm{Set}}_A(UF)^n$
+with the variance specified in the question.
+\end{theorem}
+\begin{proof}
+For an abelian group $V$, put $jV(P)=\operatorname{Hom}(P,V)$, considered
+as a discrete-space-valued presheaf. This presheaf is product-preserving
+and represents $V[0]$ under the above equivalence. Colimits in
+$\mathcal P(\mathcal C)$ are pointwise, so the value at $P$ of
+$\operatorname{colim}^{\mathcal P(\mathcal C)}_A jF$ is
+\[
+ \operatorname{hocolim}_{a\in A}\operatorname{Hom}(P,F(a)).
+\]
+This is weakly equivalent, by the specified comparison map of R1 applied
+to the set functor $a\mapsto\operatorname{Hom}(P,F(a))$, to $G_F(P)$.
+The comparisons are natural in $P$ and $F$, giving an equivalence
+$\operatorname{colim}^{\mathcal P(\mathcal C)}_A jF\simeq G_F$.
+As a left adjoint, $L$ preserves colimits. Moreover $LjF(a)=jF(a)$.
+Applying $L$ therefore proves the first equivalence. The bar computation
+of Proposition~\ref{main:stable} proves the homotopy-group formula.
+\end{proof}
+
+\begin{proposition}[Proved: an intrinsic finite-chain criterion]\label{main:reflection-criterion}
+For any set-valued presheaf $G:\mathcal C^{\mathrm{op}}\to\mathrm{Set}$,
+let $E_G$ have objects $(P,x)$ with $x\in G(P)$ and arrows
+$f:(P,x)\to(Q,y)$ the homomorphisms $f:P\to Q$ satisfying
+$G(f)(y)=x$. Put $V_G(P,x)=P$. Define the explicit chain complex
+\[
+ C_n(G)=\bigoplus_{(P_0,x_0)\xrightarrow{f_1}\cdots
+                         \xrightarrow{f_n}(P_n,x_n)} P_0,
+\]
+with the usual alternating bar faces: the first face applies $f_1$ to
+the coefficient and all other faces compose or delete arrows. Then
+\[
+ \pi_i(LG)=H_i(C_\bullet(G)).
+\]
+Consequently $LG$ is discrete if and only if every finite-support
+positive-degree cycle in this displayed complex is the boundary of a
+finite-support chain. This criterion involves only the values of $G$,
+its restriction maps, and homomorphisms between finite free abelian
+groups; it contains no reference to the reflection $L$.
+\end{proposition}
+\begin{proof}
+Write $yP=\operatorname{Hom}_{\mathcal C}(-,P)$ for the representable.
+The canonical homotopy-colimit density map
+\[
+ \operatorname{hocolim}_{(P,x)\in E_G}yP\longrightarrow G
+\]
+is an equivalence in $\mathcal P(\mathcal C)$. Indeed, evaluating at
+$Q\in\mathcal C$ decomposes the source over $z\in G(Q)$. The category
+indexing the component of $z$ consists of factorizations
+$z=G(f)(x)$ with $f:Q\to P$ and has the initial object
+$(P,x,f)=(Q,z,\operatorname{id}_Q)$. Each such component is contractible.
+Every representable $yP$ is product-preserving and corresponds to $P[0]$.
+Applying $L$ to density gives
+$LG\simeq\operatorname{hocolim}_{E_G}V_G$ in $D(\mathbb Z)_{\geq0}$.
+The bar complex is precisely $C_\bullet(G)$. Elements of a direct sum
+have finite support, so the stated cycle-filling criterion is exactly
+vanishing of its positive homology groups.
+\end{proof}
+
+\begin{example}[Refuted: a set-valued presheaf need not reflect discretely]\label{main:sign}
+Let
+\[
+ G(P)=\operatorname{Hom}(P,\mathbb Z)/\{\pm1\},
+\]
+where $-1$ acts by postcomposition with $-\operatorname{id}_{\mathbb Z}$.
+This formula specifies the presheaf on every object and arrow. Then
+\[
+ \pi_{2j}(LG)\cong\mathbb Z/2\quad(j\geq0),\qquad
+ \pi_{2j+1}(LG)=0\quad(j\geq0).
+\]
+Thus even the quotient of one representable by this two-element
+automorphism action can have a nondiscrete reflection.
+\end{example}
+\begin{proof}
+Set $C_2=\{1,\sigma\}$. It acts on $y\mathbb Z$ by sign and trivially
+on the zero subpresheaf $y0$. At every finite free $P$ the action on
+$\operatorname{Hom}(P,\mathbb Z)\setminus\{0\}$ is free, because this
+hom group is torsion-free. Therefore the following square is a homotopy
+pushout, as can be checked pointwise:
+\[
+\begin{array}{ccc}
+ (y0)_{hC_2}&\longrightarrow&(y\mathbb Z)_{hC_2}\\
+ \downarrow&&\downarrow\\
+ y0&\longrightarrow&G.
+\end{array}
+\]
+On evaluation, the upper-right space is the disjoint union of $BC_2$
+(the zero orbit) and contractible components indexed by the nonzero
+sign orbits. The pushout replaces exactly the $BC_2$ component by one
+point, leaving the discrete sign-orbit set up to weak equivalence.
+This construction is natural in $P$.
+
+The reflection preserves the pushout and the homotopy-orbit colimits.
+Since $L(y0)=0$ and $L(y\mathbb Z)=\mathbb Z[0]$, it follows that
+\[
+ LG\simeq (\mathbb Z[0]_{\mathrm{sign}})_{hC_2}.
+\]
+The standard free two-periodic $\mathbb Z[C_2]$-resolution of the trivial
+right module has maps alternating $\sigma-1$ and $1+\sigma$.
+Its exactness follows directly in the basis $1,\sigma$:
+the kernel of multiplication by $\sigma-1$ is generated by $1+\sigma$,
+and the kernel of multiplication by $1+\sigma$ is generated by
+$\sigma-1$. Tensoring with the left sign module $\mathbb Z$ produces
+\[
+ \cdots\xrightarrow{-2}\mathbb Z\xrightarrow{0}\mathbb Z
+ \xrightarrow{-2}\mathbb Z\xrightarrow{0}\mathbb Z
+ \xrightarrow{-2}\mathbb Z,
+\]
+with the rightmost term in degree zero. Its homology is the displayed
+sequence. The attached program checks the resolution matrices, the sign
+action, and the homology through degree ten; the periodic argument
+proves all degrees.
+\end{proof}
+
+\begin{obstruction}[Open: the special presheaves $G_F$]\label{main:special-presheaves}
+Example~\ref{main:sign} refutes the unrestricted assertion that $LG$ is
+discrete for every set-valued $G$. It does not refute discreteness for
+$G=G_F$ with $A$ total. By Theorem~\ref{main:reflection}, that restricted
+assertion is exactly the integral main question. No presentation of the
+sign-orbit presheaf as such a $G_F$ over a total shape has been obtained.
+Its natural category of elements is not a candidate total shape:
+$(\mathbb Z,[\operatorname{id}])$ is weakly terminal and has parallel
+endomorphisms $\operatorname{id}$ and $-\operatorname{id}$ which cannot
+be equalized. An equalizing arrow would be a homomorphism
+$f:\mathbb Z\to Q$ with $f=-f$, hence $f=0$, whereas belonging to this
+category of elements requires a homomorphism $Q\to\mathbb Z$ whose
+composite with $f$ is $\pm\operatorname{id}$. This is impossible.
+Thus R5 explicitly rules out that natural presentation, and the smallest
+unhandled integral affine test remains the triple in
+Obstruction~\ref{main:stable-open}.
+\end{obstruction}
+
+\subsection{Audit of R9}
+\begin{proposition}[Proved: products, opfibrations, and element components]\label{D:R9}
+Total categories are closed under finite products, Grothendieck opfibrations with total fibres and total base, and passage to nonempty connected components of categories of elements. The same statements hold for exactness of abelian colimits. Final images preserve both properties as in Proposition~\ref{D:final-images}.
+\end{proposition}
+\begin{proof}
+For element components the totality assertion is the explicit inherited-action construction of Audit~\ref{A:R1}; for exactness it is the exact direct-sum functor $\Sigma_H$ of Audit~\ref{A:R2}, followed by extension by zero on other components. For products, iterated ordinary and homotopy colimits give
+\[
+ \hocolim_{A\times B}H\simeq
+ \hocolim_A\hocolim_BH(a,-)\simeq
+ \colim_A\colim_BH
+\]
+for every covariant set action $H:A\times B\to\Set$. These comparisons are induced by the bar augmentations, so they are natural in $a$ and compatible with the discrete target. This proves the action criterion; nonempty connectedness follows from that of the two factors. The empty product is the terminal category. On abelian diagrams the iterated colimit is a composition of exact functors.
+
+More generally let $p:E\to B$ be a Grothendieck opfibration. A choice of opcartesian lifts identifies it over $B$, up to equivalence, with a Grothendieck construction of a pseudofunctor $b\mapsto E_b$. For $H:E\to\Set$, the fibre inclusion $E_b\to E/b$ is final and homotopy final: an object $(e,p(e)\to b)$ has the specified opcartesian lift to a fibre object, initial among its maps into $E_b$. The comparison is natural up to the coherent isomorphisms of the chosen lifts. Thus homotopy left Kan extension along $p$ is computed by $b\mapsto\hocolim_{E_b}H|_{E_b}$, and ordinary left Kan extension by $b\mapsto\colim_{E_b}H|_{E_b}$. Totality of each fibre makes their comparison an equivalence to a set-valued functor. The base's action criterion and composition of left Kan extensions now give the action criterion for $E$. Its nonempty connectedness follows by lifting a zigzag in $B$ and joining choices within the connected fibres. For abelian diagrams the same ordinary fibre formula makes $p_!:\Ab^E\to\Ab^B$ exact objectwise, and $\colim_E=\colim_Bp_!$ proves exactness. This checks R9's preservation assertions with the specified comparison functors, without assuming any converse to R2.
+\end{proof}
+
+\subsection{Part D.6: closure operations}
+\begin{proposition}[Proved: final images preserve both properties]\label{D:final-images}
+Let $u:A\to B$ be an ordinary final functor. If $A$ is total, then $B$ is total. If $\colim_A:\Ab^A\to\Ab$ is exact, then $\colim_B:\Ab^B\to\Ab$ is exact.
+\end{proposition}
+\begin{proof}
+For a final $v:B\to C$, the composite $vu$ is final. To check composition, for $c\in C$ form the Grothendieck construction of the connected nonempty categories $b\backslash A$ over $c\backslash B$; its projection and its functor to $c\backslash A$ induce bijections on components, so the latter is nonempty and connected. Thus totality of $A$ gives contractibility of $BC$, for every such $v$, including $v=\id_B$. This proves totality of $B$. For an abelian diagram $F:B\to\Ab$, the canonical comparison $\colim_Au^*F\to\colim_BF$ is an isomorphism by ordinary finality. Restriction $u^*:\Ab^B\to\Ab^A$ is exact, because exactness is evaluated objectwise. The isomorphism therefore proves the exactness assertion without requiring $u$ to be homotopy final for arbitrary coefficients.
+\end{proof}
+
+\begin{proposition}[Proved: nonempty full cosieves]\label{D:cosieves}
+Let $V\subset A$ be a nonempty full cosieve. If $A$ is total, so is $V$. If abelian colimits over $A$ are exact, so are abelian colimits over $V$.
+\end{proposition}
+\begin{proof}
+For totality, common successors in $A$ make $V$ connected: a common successor of two objects of $V$ belongs to $V$. A functor $H:V\to\Set$ extends to $\widetilde H:A\to\Set$ by the empty set outside $V$. Arrows entering $V$ act by the unique map from the empty set, and no arrow leaves $V$. Consequently $\El_A(\widetilde H)=\El_V(H)$, as categories with specified arrows. The action criterion applies. This verifies the cosieve step in PRETOT, Proposition B.4, in the unrestricted category case.
+
+For exactness, the analogous extension $j_!: \Ab^V\to\Ab^A$ by zero is exact, and the cocone universal property gives $\colim_Aj_!F\cong\colim_VF$. Exactness follows by composition. An empty cosieve has exact abelian colimits, but it is neither total nor $\Aff_\Z$-filtered under the nonempty convention used for the two classes in Part D.6. Thus it supplies no separation of those classes; the equivalence between exactness and filtered affinization must remain componentwise when emptiness is allowed.
+\end{proof}
+
+\begin{proposition}[Proved: localization and idempotent completion]\label{D:localization-karoubi}
+For any set of arrows $S$ of $A$, ordinary localization $A\to A[S^{-1}]$ preserves totality and exactness of abelian colimits. Both properties are invariant under idempotent completion $A\to\Kar(A)$.
+\end{proposition}
+\begin{proof}
+The localization functor $\ell:A\to B=A[S^{-1}]$ is final. Indeed the object set may be taken unchanged, and $(b,\id_b)$ belongs to $b\backslash A$. Any object $(a,w:b\to a)$ is represented by a finite word in arrows of $A$ and formal inverses of arrows in $S$. Its partial words give a zigzag in $b\backslash A$: an ordinary letter gives a forward comma arrow and an inverse letter a backward comma arrow. This joins $(a,w)$ to $(b,\id_b)$. Relations between word representatives do not affect this existence argument. Proposition~\ref{D:final-images} proves both preservation claims.
+
+Recall that $\Kar(A)$ has objects $(a,e)$ with $e:a\to a$ idempotent, and arrows $f:(a,e)\to(b,d)$ the arrows $f:a\to b$ satisfying $f=df=fe$; its identity at $(a,e)$ is $e$. For $i:A\to\Kar(A)$, $i(a)=(a,\id_a)$, the comma category $(a,e)\backslash A$ contains $(a,e:(a,e)\to i(a))$. Every object $(b,f)$ receives the arrow $f:a\to b$ from this chosen object, naturally in $(b,f)$. These arrows define a natural transformation from the constant functor at the chosen object to the identity. Hence $i$ is homotopy final, in particular final, so both properties pass from $A$ to $\Kar(A)$.
+
+Conversely, every $H:A\to\Set$ extends to $\overline H:\Kar(A)\to\Set$ by
+\[
+ \overline H(a,e)=\{h\in H(a):H(e)h=h\},\qquad
+ \overline H(f)=H(f)|_{\overline H(a,e)}.
+\]
+There is a canonical isomorphism $\El_{\Kar(A)}\overline H\cong\Kar(\El_AH)$: an idempotent at $(a,h)$ is precisely an $e$ with $H(e)h=h$. The inclusion of any category in its idempotent completion is a homotopy equivalence on classifying spaces by the comma contraction just established and Theorem A. Thus totality of $\Kar(A)$ gives the action criterion for $A$, component by component. Their components agree, so nonempty connectedness also transfers.
+
+For abelian groups use $\overline F(a,e)=\im F(e)$. This defines the inverse of the restriction equivalence $\Ab^{\Kar(A)}\simeq\Ab^A$. It is exact: each idempotent splits its group into image and kernel, and a commuting short exact sequence splits into the corresponding two short exact sequences. Finality gives $\colim_AF\cong\colim_{\Kar(A)}\overline F$, proving reflection of exactness.
+\end{proof}
+
+\begin{proposition}[Proved: filtered colimits along final transition functors]\label{D:filtered-unions}
+Let $I$ be a nonempty filtered small category, let $A:I\to\Cat$ be a diagram all of whose transition functors are final, and put $C=\colim_I A_i$ in $\Cat$. Every structural functor $A_i\to C$ is final. Consequently, if one $A_i$ is total, then $C$ is total; if one $A_i$ has exact abelian colimits, so does $C$.
+\end{proposition}
+\begin{proof}
+A finite list of objects, arrows, and equations in a filtered colimit of categories is represented at some common stage, after choosing transitions from the finitely many stages involved. This follows directly by taking filtered colimits of object and arrow sets: source, target, identity and composition are finitary, and each equality in a filtered colimit of sets becomes an equality at a later stage.
+
+Fix $i$ and $c\in C$. Represent $c$ at $A_j$, choose a stage $A_k$ receiving $A_i,A_j$, and apply finality of $A_i\to A_k$ to the chosen representative of $c$. This gives an object of $c\backslash A_i$ in $C$. For two objects of that comma category, represent their two arrows at one later stage with a fixed transition from $A_i$; filteredness equalizes any competing transitions. At that stage the comma category for the final transition from $A_i$ is connected, so it supplies a finite connecting zigzag. Its image in $C$ connects the original two objects. Thus $A_i\to C$ is final. The last claims follow from Proposition~\ref{D:final-images}.
+\end{proof}
+
+\begin{corollary}[Proved: no separation by the four named operations]\label{D:operations-answer}
+Both classes in Part D.6 are preserved by nonempty full cosieves, ordinary localizations, idempotent completion, and filtered colimits of categories along final transitions. These operations therefore supply no difference in preservation behavior. This does not assert that the two classes are equal, nor that their reflection behavior agrees for arbitrary localizations or cosieves.
+\end{corollary}
+\section{Part E: example constructions and their exclusions}\label{sec:E}
+\subsection{Three completely specified families and the final-image exclusion}
+\begin{definition}[Proved: colored-word categories]\label{E:word-definition}
+For an integer $m\geq1$, let $W_m$ have as objects all finite words
+$w=(w_1,\ldots,w_l)$ in the alphabet $\{1,\ldots,m\}$, including
+the empty word. An arrow $a:w\to v$ is a strictly increasing
+function $a:\{1,\ldots,l\}\to\{1,\ldots,|v|\}$ satisfying
+$v_{a(i)}=w_i$. Composition is ordinary composition of functions,
+and identities are identity functions. These formulas define a
+small category, and every arrow is monic.
+\end{definition}
+\begin{proof}
+Composites are strictly increasing and preserve colors; function
+composition is associative. If $ab=ac$, the injectivity of $a$
+gives $b=c$, so every arrow is monic. The program
+\texttt{examples\_colored\_words.py} checks all identities and
+all composable triples in the full subcategories on words of
+length at most three for $m=2,3,4$. The formulas, not this bounded
+check, prove the assertion in all lengths.
+\end{proof}
+
+\begin{theorem}[Proved: exactness and totality of the colored-word families]\label{E:word-exact}
+For every finite $m\geq1$, $\Aff_{\Z}(W_m)$ is filtered.
+Consequently $W_m$ is total. It is not filtered and is not sifted.
+In particular $W_2,W_3,W_4$ provide three pairwise nonequivalent
+nonfiltered total categories with exact abelian colimits.
+\end{theorem}
+\begin{proof}
+Concatenation supplies a common successor of two words. Let $w$
+have length $l>0$. Use the normalized uncolored affine cone for
+$[l-1]$ supplied by the checked R3 argument, writing
+\[
+t=\sum_f n_f f\in\Z[\Dinj([l-1],[N-1])],\qquad
+\sum_fn_f=1.
+\]
+It satisfies $ta=tb$ for every pair of increasing injections with
+the same domain and codomain $[l-1]$. Take as target the word
+$R=(1,\ldots,m)^N$. For each $f$, define
+\[
+\widetilde f_w:w\longrightarrow R,\qquad
+\widetilde f_w(i)=m f(i-1)+w_i,
+\]
+using zero-based block indices and one-based positions in $R$.
+This is a strictly increasing color-preserving injection. Set
+$t_w=\sum_fn_f\widetilde f_w$. For a colored embedding
+$a:p\to w$, its composite has positions
+$m f(a(j)-1)+p_j$. Thus the signed combination $t_wa$ is obtained
+from the uncolored combination $ta$ by the same function replacing
+a block index $r$ in position $j$ by $mr+p_j$. If $a,b:p\to w$,
+the uncolored identity $ta=tb$ gives $t_wa=t_wb$. Moreover
+$\aug(t_w)=1$. For the empty word there is only one arrow to any
+target, so no equalizing condition is needed. This equalizes every
+finite family into $w$ simultaneously. The opened \citet[Lemma~1 and Theorem~1]{IsbellMitchell1973} identify this with filtered affinization and
+exact abelian colimits. The exactness-to-totality argument audited
+in Part~A then applies.
+
+For any color $c$, the two arrows $c\to cc$ are distinct and
+cannot be post-equalized because every arrow is monic. Hence
+$W_m$ is not filtered. More directly, its cospan category on the
+pair $(c,c)$ has exactly three components, according as the two
+selected positions compare by $<$, $=$, or $>$. Every transition
+preserves the comparison, and each of the three components has an
+initial cospan, on $cc$, $c$, or $cc$ respectively. Thus the
+diagonal is not final, so $W_m$ is not sifted.
+
+The empty word is initial. Its noninitial atoms, meaning the
+noninitial objects which receive no arrow from a different
+noninitial object, are precisely the $m$ one-letter words. Every
+endomorphism is an identity and isomorphic words are equal.
+Equivalences preserve the initial object and these atoms, so the
+categories for distinct $m$ are not equivalent. The accompanying
+program lifts the exact integral cone coefficients to every word
+of length at most four for $m=2,3,4$ and verifies all parallel
+same-subword composites; the unbounded proof is the displayed
+formula.
+\end{proof}
+
+\begin{proposition}[Proved: explicit one-type failures and maps toward $\Dinj$]\label{E:word-tests}
+For each $m\geq1$, the bipartite Artin-group diagram of
+Proposition~\ref{D:RAAG}, associated with the two arrows
+$c\to cc$, has
+\[
+\pi_1(\hocolim_{W_m}BM)=\Z^2,\qquad
+H_2(\hocolim_{W_m}BM;\Z)=\Z^2.
+\]
+Its homotopy colimit is therefore not $1$-truncated.
+There is no ordinary final functor $W_m\to\Dinj$. Also $W_m$
+is not equivalent to $\Dinj\times I$ for any filtered $I$.
+\end{proposition}
+\begin{proof}
+The diagram is given completely by the formulas of
+Proposition~\ref{D:RAAG}, with $p=c$, $q=cc$. Since no arrow
+equalizes the parallel pair, its equalizer action $E$ is empty.
+That proposition's natural homology and fundamental-group
+calculations give the displayed groups. A $K(\Z^2,1)$ has second
+homology $\Z$, proving the failure.
+
+Suppose $F:W_m\to\Dinj$ is final. Choose an element of the
+nonempty ordinal $F(\varnothing)$. The unique maps from the
+initial word give a natural distinguished element in each
+$F(w)$. Since every $F(a)$ is injective, both the distinguished
+singletons and their complements are subfunctors of the underlying
+set functor. The comma category $[0]\backslash F$ is precisely
+its category of elements. Finality requires it connected, and
+its distinguished subcategory is nonempty. Hence the complement
+is empty at every object: each $F(w)$ is a singleton. Then
+$[1]\backslash F$ is empty, contradicting finality.
+Finally, $W_m$ has an initial object, whereas $\Dinj\times I$
+has none. Indeed an initial pair would give a unique morphism
+from its ordinal coordinate to every ordinal, which is impossible
+in $\Dinj$. A filtered $I$ is nonempty, so the product is not
+empty either.
+\end{proof}
+
+\begin{lemma}[Known and proved here: least supports for ordered atoms]\label{E:ordered-supports}
+Put $G=\operatorname{Aut}(\mathbb Q,<)$. If an element of a
+$G$-set is fixed by the pointwise stabilizer $G_S$ of some finite
+$S\subset\mathbb Q$, then it has a least such finite support.
+Moreover, for finite $S,T\subset\mathbb Q$,
+\[
+\langle G_S,G_T\rangle=G_{S\cap T}.
+\]
+These conclusions also hold coordinatewise for any finite direct
+power $G^r$.
+\end{lemma}
+\begin{proof}
+The opened \citet[Theorem~9.3 and Corollary~9.5]{BojanczykKlinLasota2014} give the finite-support criterion and its ordered-atom instance. We check its hypothesis explicitly. Fix finite $E$ and distinct $c,d\notin E$. A point $e$ in the $G_E$-orbit of $c$ lies in the same complementary interval. If $d$ does not separate them, some element of $G_{E\cup\{d\}}$ sends $c$ to $e$. Otherwise, say $c<d\leq e$, choose $c<z<d$; first move $c$ to $z$ fixing $E,d$, then move $z$ to $e$ fixing $E,c$. Reverse the order for the other case. This verifies precisely Theorem~9.3's orbit condition. Its conclusion gives the displayed stabilizer identity; applying it to the stabilizer of a point makes supports closed under intersection and gives their least member. For $G^r$, stabilizers of support tuples are products. Generate their coordinate subgroups separately, apply the identity in each coordinate, and take the finite product. The same intersection argument gives least tuples.
+\end{proof}
+
+\begin{theorem}[Proved: the examples are not final images of semisimplicial products]\label{E:not-final-image}
+For every $m\geq2$, every finite integer $r\geq1$, and every
+small filtered category $I$, there is no ordinary final functor
+\[
+F:\Dinj^{\,r}\times I\longrightarrow W_m.
+\]
+In particular there is no final functor $\Dinj\to W_m$.
+\end{theorem}
+\begin{proof}
+Suppose such $F$ is given. Let $J$ be the filtered poset of
+nonempty finite subsets of $\mathbb Q$. An inclusion $S\subset T$
+induces the order embedding between their ordinal skeleta.
+Restrict $F$ along $J^r\times I\to\Dinj^r\times I$ and take
+its filtered colimit in colored linearly ordered sets; denote it
+by $L$. Every structure map is an order-preserving injection,
+so every stage embeds in $L$, and every finite subset of $L$
+lies in one stage. These assertions follow directly from the
+filtered set-colimit relation: any finite family has a common
+stage, and equality is witnessed after postcomposition. The
+category axioms for $I$ ensure that this applies even when it is
+not a poset.
+
+The group $G^r$, with $G=\operatorname{Aut}(\mathbb Q,<)$,
+acts on $L$ by replacing $(S_1,\ldots,S_r)$ with
+$(g_1S_1,\ldots,g_rS_r)$ and retaining the point in the same
+ordinal-skeleton value of $F$. This action is well defined,
+preserves order and colors, and every point has a finite support
+in each coordinate. Indeed its representing sets $S_1,\ldots,S_r$
+are such supports.
+For every finite colored word $w$, there is a canonical bijection
+\[
+\colim_{\Dinj^r\times I}\Hom_{W_m}(w,F(-))
+\ \cong\ G^r\backslash\operatorname{Emb}_{\rm col}(w,L).
+\]
+To check it, choose finite rational sets of the required
+cardinalities to embed any representing stage into $L$. A
+different choice differs by order automorphisms of $\mathbb Q$,
+so it gives the same orbit. A morphism in the indexing category
+can be realized as inclusion of suitably chosen finite rational
+sets, so equivalent representatives give the same orbit. Every
+embedding of the finite word $w$ into $L$ lifts to one stage,
+proving surjectivity. If two embeddings are related by an element
+of $G^r$, first apply that element to the representing finite
+sets. Their equal finite tuples in $L$ become equal at a common
+stage of the filtered category $J^r\times I$. This witnesses
+equality in the colimit on the left, proving injectivity.
+
+Finality says that the set on the left is a singleton for every
+$w$. Thus $G^r$ is transitive on the points of each color and on
+the increasing embeddings of each colored word. In particular,
+each color occurs at least twice, by using the word $cc$.
+Lemma~\ref{E:ordered-supports} supplies equivariant least-support
+tuples. On a fixed color orbit $L_c$, the cardinality vector of
+the support is constant, and it is nonzero: an empty tuple would
+make the point $G^r$-fixed, so transitivity would make that color
+orbit a singleton.
+
+Take two distinct colors $c,d$. If their support vectors overlap
+in a coordinate where both are positive, pairs in $L_c\times L_d$
+have at least three distinct $G^r$-orbits. To see this, choose
+supports in that coordinate which lie entirely before one another,
+entirely after one another, or intersect. Each choice is realizable
+by moving a point in its transitive color orbit, because every
+increasing bijection of finite rational sets extends to an
+order automorphism. Equivariance of least supports distinguishes
+the three orbits.
+If their nonzero support coordinates are disjoint, the product
+$L_c\times L_d$ instead has exactly one orbit. Automorphisms in
+the coordinates supporting $c$ can move any $c$-point to any other
+while fixing every $d$-point, and the complementary coordinates
+do the converse. Coordinates outside a point's support act
+trivially on it by definition. These observations prove
+transitivity of the product.
+
+Both cases contradict the order on $L$. Since colors differ,
+$L_c\times L_d$ splits into the disjoint sets $x<y$ and $y<x$.
+They are both nonempty and each is a single orbit, by the
+finality tests on the words $cd$ and $dc$. The product therefore
+has exactly two orbits. This contradiction proves the theorem.
+\end{proof}
+
+\begin{corollary}[Proved: three examples meeting all requirements of Part E]\label{E:three-examples}
+The categories $W_2,W_3,W_4$ are three pairwise nonequivalent
+nonfiltered totally $\Winfty$-aspherical categories. Each has
+filtered integral affinization, is not sifted, admits no ordinary
+final functor from or to $\Dinj$, and is not a final image of any
+finite product of $\Dinj$ with filtered factors. Their explicit
+Artin-group diagrams in Proposition~\ref{E:word-tests} have
+homotopy colimits which are not $1$-types.
+\end{corollary}
+\begin{proof}
+Combine Theorems~\ref{E:word-exact} and
+\ref{E:not-final-image} with Proposition~\ref{E:word-tests}.
+Finite products of filtered categories are filtered, so the
+exclusion with a single filtered factor covers finitely many such
+factors. A chain of final-image operations yields a final
+composite; products of final functors are final because their
+comma categories are products of nonempty connected categories.
+Consequently the same exclusion covers those finite iterations
+of products and final images. The category $W_1$ is deliberately
+not counted: the inclusion of nonempty words
+$\Dinj\to W_1$ is final.
+\end{proof}
+
+\paragraph{Finite checks and source scope.}
+The finite category checks for $m=2,3,4$ use respectively
+$15,40,85$ objects, $85,259,585$ arrows, and
+$585,1885,4369$ composable triples. The cone checks cover
+$30,120,340$ colored words of lengths one through four, with
+$340,1554,4680$ subword embeddings. Their integer coefficients
+and all typed composites pass exactly. The support-orbit program
+checks the independent finite combinatorics for support sizes up
+to four in up to three factors; its general proof is the
+one-or-at-least-three argument above. These computations do not
+replace the universal totality or final-image arguments.
+The ordered-support lemma is known, with the exact opened source
+identified above. The colored lifting and final-image exclusion
+were not found in the opened colimit papers or in searches for
+colored ordered injections, exact colimits, and ordered nominal
+supports; no priority is claimed.
+\section{Part F: manuscript and literature audit}\label{sec:F}
+\subsection{The manuscript questions and the corrected conclusions}
+\begin{proposition}[Refuted and repaired: II ms.\ 36--36ter]\label{F:manuscript}
+The implication from total $W_\infty$-asphericity to filteredness asked at II ms.\ 36 and conjectured at II ms.\ 36ter is false. On nonempty connected categories its following strengthened versions are true: totality together with siftedness implies filteredness; totality together with preservation of $n$-truncation on all abelian Eilenberg--MacLane diagrams, for any one fixed finite $n\geq1$, implies filteredness. The all-category comparison $\int_A D\to\colim_A^{\Cat}D$ for every $D$ characterizes componentwise filteredness, with the empty category included.
+\end{proposition}
+\begin{proof}
+We read the supplied transcription against its manuscript-page markers \citep{GrothendieckDerivateurs}. At II ms.\ 36ter the operative claim is precisely
+\[
+ X\text{ totalement }W_\infty\text{-asph\'erique}
+ \Longrightarrow X\text{ filtrante}.
+\]
+Audit~\ref{A:R3} refutes it using the already published exact category $\Dinj$: its affine cones prove exactness and totality, while injectivity prevents the equalization of its two point inclusions. Thus this is not a priority claim for a counterexample. The repaired statements are Theorems~\ref{D:sifted-total} and~\ref{D:fixed-n}, and Proposition~\ref{D:R8-scope}. The examples of Part E provide further counterexamples with the specified exclusions.
+
+There is a necessary type correction at II ms.\ 36. For $f:X\to Y$, the condition displayed as connectedness of $y\backslash Y$ must be connectedness of $y\backslash X$ (formed using $f$). The former always has the initial object $\id_y$ and cannot express finality of $f$. We use the latter, exactly as in the conventions on the first page. Proposition 2.19 on the same page is explicitly marked false by the supplied edition. Its proposed passage from a final diagonal to totality cannot be used: Theorem~\ref{D:sifted-total} says that adding genuine totality to that diagonal condition forces filteredness.
+
+At XII ms.\ 88--89, Definition 1 first quantifies over Kan extensions of a presheaf and then applies it to the terminal presheaf to define category totality. Under the variance reversal this is the totality used here. The displayed category $U'/t'\simeq U/H'$ at XII ms.\ 88 is ill-typed because $H'$ is a presheaf on $U'$; its right-hand side must be $U'/H'$. The lemma at XII ms.\ 112--113 expresses preservation under Kan extension. For category totality the final-image conclusion is proved directly in Proposition~\ref{D:final-images}; its proof needs only composition of final functors. In the adjoining-base-change formula at XII ms.\ 113 the pushout is $X'=U'\amalg_U X$, as already corrected in the transcription, not the self-referential $U'\amalg_U X'$.
+\end{proof}
+
+\begin{proposition}[Proved: the resulting separation diagram]\label{F:classes}
+For nonempty connected small categories, the results established or audited here give
+\begin{align*}
+\{\text{filtered}\}
+ &=\{\text{total and sifted}\}\\
+ &=\{\text{total and all abelian }K(-,n)\text{ tests pass}\},
+\end{align*}
+for any fixed finite $n\geq1$, and the inclusions
+\[
+ \{\text{filtered}\}\subsetneq
+ \{\Aff_\Z\text{ filtered}\}\subseteq
+ \{\text{total}\}\subseteq
+ \{\text{quasi-filtered}\}.
+\]
+The two latter inclusions are not separately decided in this paper. The outer classes $\{\Aff_\Z\text{ filtered}\}$ and $\{\text{quasi-filtered}\}$ differ by the opened AKR Theorem C.2. The exact position of its infinite example relative to totality is not determined by the finite-stage calculations.
+\end{proposition}
+\begin{proof}
+Filteredness implies totality, siftedness, and each truncation condition by the finite-data nerve argument. The converses are Theorems~\ref{D:sifted-total} and~\ref{D:fixed-n}. Audits~\ref{A:R2}--\ref{A:R4} prove the inclusions, and $\Dinj$ makes the first strict. In \citet[Construction C.1 and Theorem C.2]{AdamekKoubekReiterman1981}, every pair is supplied with a quasi-filter, whereas the three maps $v_1,v_2,v_3$ have no simultaneous integral affine equalizer. Lemma 1 of \citet{IsbellMitchell1973} then converts the latter statement to failure of exactness. Part C checks the concrete formula defects and supplies maps satisfying the construction's required conditions; its persistence obstruction is kept separate from this published nonexactness theorem. The assertions marked open are Obstructions~\ref{A:main-open}, \ref{B:triple-open}, and~\ref{C:open}.
+\end{proof}
+
+\subsection{Precisely what the opened literature supplies}
+\begin{audit}[Known, with checked scope: the historical colimit sources]\label{F:historical}
+Isbell--Mitchell's affine criterion and nonfiltered exact example are known results, not outcomes first asserted here. The older fixed-point criterion must not be substituted for exactness. None of the source passages identified below establishes the unresolved implication in Obstruction~\ref{A:main-open}.
+\end{audit}
+\begin{proof}
+We opened \citet{IsbellMitchell1973} in full. Theorem 1 is the componentwise affine criterion; Lemma 1 distinguishes finite ordinary families from pairs of affine arrows; Theorem 3 proves exactness of the face category. Their Theorem 2 and Corollary 1 give actual equalization of pairs $a,ae$ and the weakly-terminal conclusion under exactness. Our audited R5 instead obtains that conclusion from totality by the signed-measure argument, and never assumes the missing converse to R2.
+
+We opened \citet{AdamekReiterman1976} in full. Theorem I.2(a) identifies preservation of monomorphisms by set colimits with completion of spans; I.2(b) identifies preservation of equalizers with componentwise filteredness; I.2(c) identifies finite-limit preservation with nonempty filteredness. Its Theorem II.3 prints an equivalence between exact abelian colimits and the fixed-point property. The later \citet[Remark A.4, p.~370]{AdamekKoubekReiterman1981} expressly correct this: their Theorem [1] identifies the fixed-point property with quasi-filtered components, and Theorem C.2 separates that property from exactness. We therefore use their corrected pair criterion, not the earlier printed equivalence. Our Part B derives the relevant homology and intersection tests directly.
+
+We opened \citet[Section 2.3]{Husainov2002}. Theorem 2.5 restates the affine criterion; Theorem 2.7 records an additive-category characterization attributed to Oberst. Problem 2.5 still asks whether exactness equals the fixed-point property. The opened AKR C.2 already supplies a negative answer to that particular question. It does not answer totality versus exactness. We use this passage only for the literature audit, not as a substitute for the primary proofs. Its reference number for the Oberst attribution points to a different Oberst title in the bibliography, so we do not supply an unverified original theorem number.
+\end{proof}
+
+\begin{audit}[Proved: source attribution of the other established statements]\label{F:attribution}
+The known ingredients used in Parts B--E have the exact scope in the following table. Results not identified there as a cited theorem are proved in this paper; we did not locate their full statements in the opened passages. This records the search outcome and makes no assertion of priority or of exhaustive absence from the literature.
+\end{audit}
+\begin{proof}[Source comparison and derivations]
+\begin{longtable}{@{}p{0.23\textwidth}p{0.71\textwidth}@{}}
+\toprule
+Result here & Opened source and precise relationship\\
+\midrule\endhead
+Part B, relation kernels & The two short exact sequences explicitly displayed in Part B prove all three low-degree formulas. Husainov's Theorem 2.4 gives a related graph-flow description of $L_1$ for a presented indexing category, rather than this quotient-presentation kernel calculation. The distinction between $K\subset P_q^2$ and $K_1\cap K_2\subset P_q$ is retained.\\
+Part C, stage homology & AKR B.5--B.6 and C.1 specify the construction and its overlap conditions; C.2 proves nonexactness. They do not in those passages compute our category-of-elements second homology or prove its persistence. The computations and the full second-stage injection are established here.\\
+Propositions \ref{D:R8-scope}--\ref{D:RAAG} & The given one-type proof is audited here, including orientation naturality, transport generators, and the coefficient spectral sequence. The Salvetti facts have the primary source specified in its proof. Cegarra's Theorem 1 and Section 3 justify the Grothendieck-construction comparison, not the shape characterization.\\
+Theorem~\ref{D:sifted-total} & Ad\'amek--Rosick\'y--Vitale Remark 1.1(i) is the final-diagonal characterization. Applying it to inherited action categories gives the explicit equalization proof here. Their Theorem 2.1 concerns preservation of sifted colimits by functors, a different statement.\\
+Theorems~\ref{D:abelian-one}, \ref{D:fixed-n}, \ref{D:Tn-classification} & HTT Proposition 5.3.3.3 and Lemma 5.5.8.11 concern finite limits and finite products. Corollary 6.5.1.14 supplies the connective-map orthogonality used in Lemma~\ref{D:connectivity}. The universal-cover shape classification and the abelian test deductions are proved here, not asserted to be those HTT statements.\\
+Propositions \ref{main:stable}--\ref{main:field-tests} & The bar complex proves the stable formula and coefficient claims. The ring-affine criterion is proved by the explicit kernel of a map of representables and the affine-extension cocone calculation. Its integral instance agrees with Isbell--Mitchell Theorem 1 and Lemma 1.\\
+Theorem~\ref{main:reflection} and Proposition~\ref{main:reflection-criterion} & Badzioch Theorems 1.3 and 6.4 provide rigidification; Higher Algebra Theorem 1.2.3.7 provides Dold--Kan. The totality comparison, density calculation, and finite-chain criterion are then derived here. Example~\ref{main:sign} is computed directly by the sign resolution.\\
+Propositions \ref{D:R9}--\ref{D:filtered-unions} & The manuscript's XII ms.\ 112--113 lemma supplies the final-image motivation. The product, opfibration, element, cosieve, localization, completion, and filtered-colimit claims are checked here with their actual functors and universal maps.\\
+Part E & Isbell--Mitchell Theorem 3 supplies the uncolored affine-cone existence, checked by R3. Boja\'nczyk--Klin--Lasota Theorem 9.3 and Corollary 9.5 supply least ordered supports. The colored lift, group diagrams, and final-image exclusion are proved here; neither cited theorem states them.\\
+\bottomrule
+\end{longtable}
+The search terms included ``totalement asph\'erique exact'', ``exact colimits category elements acyclic'', ``quasi-filtered homology'', ``homotopy colimits preserve truncated spaces'', ``colimits 1-types filtered'', ``universal cover filtered category'', ``colored ordered injections colimits'', and the exact titles and authors of the requested sources. We opened the relevant primary texts where available and distinguish a publisher record from the body of a paper. The accompanying bibliography records this distinction entry by entry.
+\end{proof}
+
+\begin{obstruction}[Open: the exact remaining literature-access comparison]\label{F:source-access}
+We did not obtain the bodies of Oberst (1968), Isbell--Mitchell (1976), or Gabriel--Ulmer (1971). Consequently we do not decide whether an uninspected theorem in those works contains one of the additional full statements proved here. This is the remaining source-comparison part of F and D.1, rather than a mathematical assumption in any proof.
+\end{obstruction}
+\begin{proof}[Established record and smallest missing checks]
+For \citet{Oberst1968}, the publisher record verifies the title, volume 107, pages 87--115, and DOI, but presents subscription access in place of the body. For \citet{IsbellMitchell1976}, the primary AMS PDF request was denied and the opened record exposed only the abstract; no original theorem number from that article is claimed. For \citet{GabrielUlmer1971}, the publisher record and contents were available but the book body was not. The precise checks remaining are the original theorem statements and hypotheses concerning the additive flatness criterion in Oberst, the fixed-point implications in Isbell--Mitchell, and any truncation or categorical-comparison shape theorem in Gabriel--Ulmer. The established integral affine criterion and face-category example are already verified in the accessible 1973 paper. The supplied papers, direct proofs, and finite certificates suffice for every mathematical dependency in this return.
+\end{proof}
+\begin{thebibliography}{99}
+\bibitem[Ad\'amek et~al.(1981)]{AdamekKoubekReiterman1981}
+Ad\'amek, J., Koubek, V., \& Reiterman, J. (1981).
+Embeddings into categories with fixed points in representations.
+\emph{Czechoslovak Mathematical Journal, 31}(3), 368--389.
+\url{https://dml.cz/dmlcz/101753}
+\par\smallskip{\small Opened: supplied primary PDF; A.2, Theorem [1], A.4, B.5--B.9, C.1--C.2.}
+
+\bibitem[Ad\'amek and Reiterman(1976)]{AdamekReiterman1976}
+Ad\'amek, J., \& Reiterman, J. (1976).
+Exactness of the set-valued colim.
+\emph{Commentationes Mathematicae Universitatis Carolinae, 17}(1), 97--103.
+\url{https://dml.cz/dmlcz/105677}
+\par\smallskip{\small Opened: primary body; I.2 and II.3, with the latter's correction checked in AKR A.4.}
+
+\bibitem[Ad\'amek et~al.(2010)]{AdamekRosickyVitale2010}
+Ad\'amek, J., Rosick\'y, J., \& Vitale, E. M. (2010).
+What are sifted colimits?
+\emph{Theory and Applications of Categories, 23}(13), 251--260.
+\url{https://www.tac.mta.ca/tac/volumes/23/13/23-13abs.html}
+\par\smallskip{\small Opened: complete attached article; Remark 1.1 and Theorem 2.1.}
+
+\bibitem[Badzioch(2002)]{Badzioch2002}
+Badzioch, B. (2002). Algebraic theories in homotopy theory.
+\emph{Annals of Mathematics, 155}(3), 895--913.
+\url{https://arxiv.org/abs/math/0110101}
+\par\smallskip{\small Opened: author version 2, 22 November 2004; Theorems 1.3 and 6.4.}
+
+\bibitem[Boja\'nczyk et~al.(2014)]{BojanczykKlinLasota2014}
+Boja\'nczyk, M., Klin, B., \& Lasota, S. (2014).
+Automata theory in nominal sets.
+\emph{Logical Methods in Computer Science, 10}(3), Article 4, 1--44.
+\url{https://doi.org/10.2168/LMCS-10(3:4)2014}
+\par\smallskip{\small Opened: primary body; Theorem 9.3 and Corollary 9.5, with proofs.}
+
+\bibitem[Cegarra(2020)]{Cegarra2020}
+Cegarra, A. M. (2020).
+Cohomology of homotopy colimits of simplicial sets and small categories.
+\emph{Mathematics, 8}(6), Article 981.
+\url{https://doi.org/10.3390/math8060981}
+\par\smallskip{\small Opened: complete attached article; Theorem 1 and Section 3.}
+
+\bibitem[Charney(2007)]{Charney2007}
+Charney, R. (2007). An introduction to right-angled Artin groups.
+\emph{Geometriae Dedicata, 125}, 141--158.
+\url{https://doi.org/10.1007/s10711-007-9148-6}
+\par\smallskip{\small Opened: author arXiv exposition, Theorem 2.6 and Section 2.7; primary Salvetti statements verified separately below.}
+
+\bibitem[Charney and Davis(1995)]{CharneyDavis1995Finite}
+Charney, R., \& Davis, M. W. (1995).
+Finite $K(\pi,1)$'s for Artin groups.
+In F. Quinn (Ed.), \emph{Prospects in topology}
+(Annals of Mathematics Studies, Vol.~138, pp.~110--124).
+Princeton University Press.
+\url{https://people.math.osu.edu/davis.12/finitekpi1.pdf}
+\par\smallskip{\small Opened: author primary PDF; Theorem 3.1.1, Remark 3.1.2, Lemma 3.1.3, and Proposition 3.2.1 visually inspected.}
+
+\bibitem[Gabriel and Ulmer(1971)]{GabrielUlmer1971}
+Gabriel, P., \& Ulmer, F. (1971).
+\emph{Lokal pr\"asentierbare Kategorien}
+(Lecture Notes in Mathematics, Vol.~221). Springer.
+\url{https://doi.org/10.1007/BFb0059396}
+\par\smallskip{\small Not opened: book body; publisher record and contents only were accessible.}
+
+\bibitem[Grothendieck(2001)]{GrothendieckDerivateurs}
+Grothendieck, A. (2001). \emph{D\'erivateurs: Chapters II and XII}
+(K\"unzer--Malgoire--Maltsiniotis edition).
+Supplied transcription corrected 11 November 2026.
+\par\smallskip{\small Opened: II ms.~36--36ter; XII ms.~88--89, 112--113. The year denotes the displayed edition, not the original manuscript date.}
+
+\bibitem[Husainov(2002)]{Husainov2002}
+Husainov, A. A. (2002).
+Homological dimension theory of small categories.
+\emph{Journal of Mathematical Sciences, 110}(1), 2273--2321.
+\url{https://doi.org/10.1023/A:1014945907335}
+\par\smallskip{\small Opened: author-uploaded full text; Theorems 2.4--2.7 and Problem 2.5. Used for the source audit.}
+
+\bibitem[Isbell and Mitchell(1973)]{IsbellMitchell1973}
+Isbell, J. R., \& Mitchell, B. (1973). Exact colimits.
+\emph{Bulletin of the American Mathematical Society, 79}(5), 994--996.
+\url{https://doi.org/10.1090/S0002-9904-1973-13296-3}
+\par\smallskip{\small Opened: complete supplied primary paper; Theorems 1--3, Lemma 1, and Corollary 1.}
+
+\bibitem[Isbell and Mitchell(1976)]{IsbellMitchell1976}
+Isbell, J. R., \& Mitchell, B. (1976).
+Exact colimits and fixed points.
+\emph{Transactions of the American Mathematical Society, 220}, 289--298.
+\url{https://doi.org/10.1090/S0002-9947-1976-0404377-3}
+\par\smallskip{\small Not opened: primary body; AMS request denied. Bibliographic record and abstract opened only.}
+
+\bibitem[Lurie(2009)]{Lurie2009HTT}
+Lurie, J. (2009). \emph{Higher topos theory}
+(Annals of Mathematics Studies, Vol.~170). Princeton University Press.
+\url{https://www.math.ias.edu/~lurie/papers/HTT.pdf}
+\par\smallskip{\small Opened: supplied electronic version dated 9 April 2017; 5.3.3.3, 5.5.8.11, 5.5.8.15, 6.5.1.10, and 6.5.1.14.}
+
+\bibitem[Lurie(2017)]{LurieHA2017}
+Lurie, J. (2017). \emph{Higher algebra} (18 September 2017 version).
+\url{https://www.math.ias.edu/~lurie/papers/HA.pdf}
+\par\smallskip{\small Opened: Theorem 1.2.3.7 and Proposition 1.3.3.14.}
+
+\bibitem[Oberst(1968)]{Oberst1968}
+Oberst, U. (1968).
+Homology of categories and exactness of direct limits.
+\emph{Mathematische Zeitschrift, 107}(2), 87--115.
+\url{https://doi.org/10.1007/BF01111023}
+\par\smallskip{\small Not opened: body requires subscription access; publisher metadata verified.}
+
+\bibitem[Open Maths(2026)]{OpenMaths2026}
+Open Maths. (2026). \emph{Derived colimits over a small category}.
+\url{https://openmaths.org/courses/cotangent-complexes-and-deformations-in-ringed-topoi/derived-colimits-over-a-small-category.html}
+\par\smallskip{\small Opened: online lesson checked against supplied TOTASPH C.9--C.10; date supplied in the prompt.}
+\end{thebibliography}
+\end{document}
