@@ -12,6 +12,9 @@ correction), Atiyah (Publ. IHES 9, 1961), Sweeney (arXiv:2502.05276v2) and Groth
   small models in the return are the smallest.
 
 This check supersedes `../../reviews/1_CATHOT/REVIEW_G6.md`, which was written by Claude Fable 5.2 at medium effort.
-The rest of the CATHOT review at maximum effort follows in this folder.
+The whole review is now here: `REVIEW.md` (all 90 items of the return: 84 correct, none wrong, no gaps, 6 left
+unproved by the return, of which E.17 is settled in `OWN_RESULTS.md`), `OWN_RESULTS.md` (statements proved in the
+review, with full proofs), `FINDINGS.md` (running list, with the comparison with the earlier review), `HUNCHES.md`,
+`READING_BASE.md`, `KNOWLEDGE_HANDOFF.md`, and three draft prompts for GPT-6 Astra (effort Pro) in `PRO_PROMPTS/`.
 
 To the extent that we hold any rights in these AI-produced texts, they are dedicated to the public domain under CC0 1.0.
