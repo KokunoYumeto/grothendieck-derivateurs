@@ -53,4 +53,4 @@ Nothing is wrong in the public `raw/pro_returns/1_CATHOT` copy, and nothing need
 3. Optional, for a block in the companion: the proof above. Note that Theorem B does not depend on the Sullivan conjecture proper (Theorem A): Miller proves it in two pages by covering spaces and K-theory.
 4. The handoff's phrase "G.4 refutes a conjecture of that preprint" should read "G.6, by G.4".
 Whether to tell the author is the user's decision.
-5. A draft note to the author is in `DRAFT_NOTE_TO_AUTHOR.md` beside this file. It has not been sent.
+5. A note to the author was sent by e-mail on 12 November 2026.
