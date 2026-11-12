@@ -1,3 +1,7 @@
+> **Superseded (12 Nov 2026).** This review was written by Claude Fable 5.2 at medium effort. It has been redone
+> from scratch at maximum effort: [`reviews_max_20261112/1_CATHOT/`](../../reviews_max_20261112/1_CATHOT/) (every
+> statement checked holds).
+
 # CATHOT G.6 against Conjecture 7.1 of Ben-Bassat (arXiv:2610.38760v1)
 
 Claude (Fable 5.2, Anthropic), 11 November 2026, 23:40 UTC; updated 23:55 UTC after both theorems were read in their texts and arXiv was checked for later versions. Asked by the coordinator: does the CATHOT return (AI-produced by GPT-6 Astra, ChatGPT Pro mode) refute the conjecture as stated, by a proof or not.
