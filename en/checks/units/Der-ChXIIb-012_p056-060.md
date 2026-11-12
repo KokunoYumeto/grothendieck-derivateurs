@@ -1,7 +1,7 @@
 # Der-ChXIIb-012_p056-060: PASS
 
 
-status completed; clean output (only the LaTeX): True; 13833 characters (French 14045)
+status completed; clean output (only the LaTeX): True; 13831 characters (French 14045)
 
 ## 1. Formulas, anchors, labels, macros
 formulas: French 191, English 191; identical 191, identical up to spacing 0, changed 0, missing 0, added 0

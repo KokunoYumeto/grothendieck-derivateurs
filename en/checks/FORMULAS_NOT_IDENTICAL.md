@@ -1,6 +1,6 @@
-# The 55 formulas that are not identical to the French
+# The 56 formulas that are not identical to the French
 
-The checks compare every formula of each English unit with the French unit: 46,017 of 46,072 are identical. These are the other 55, from `CHECKS.json` (all figures) and `units/<unit>.md` (per unit).
+The checks compare every formula of each English unit with the French unit: 46,016 of 46,072 are identical (or differ only in spacing). These are the other 56, from `CHECKS.json` (all figures) and `units/<unit>.md` (per unit).
 
 | Unit | What differs | Start of the French formula |
 |---|---|---|
@@ -37,11 +37,12 @@ The checks compare every formula of each English unit with the French unit: 46,0
 | Der-ChXV-05-11-10_p001-005 | only the wording of a text box differs (every math piece unchanged) | `\[ \left\{ \begin{array}{rcl} X_\alpha(f) & = & \varinjlim\limits_{\alpha'<\alpha} X_{\alpha'}(f). \\{}[3ex] i` |
 | Der-ChXV-05-11-10_p016-020 | only the wording of a text box differs (every math piece unchanged) | `\[ \parbox{0.72\linewidth}{$\forall\,i\in C_0$, désignant par $C_0(i)$ l'ensemble des $i'\in C_0$ telles que $` |
 | Der-ChXV-05-11-10_p016-020 | only the wording of a text box differs (every math piece unchanged) | `\[ \left\|\ \parbox{0.72\linewidth}{Les $\M^\pi=\uFilt^\pi$ sont stables par sommes amalgamées simples, et par ` |
-| Der-ChXV-05-11-10_p016-020 | a fragment cut by the checks' pairing of $ signs; checked by hand and waived | `$, à\\ isomorphisme près\end{tabular}}}\quad\cdot\quad\underbrace{s^{(r^{\pi_0})}}_{\text{·}` |
+| Der-ChXV-05-11-10_p016-020 | changed, waived: edition page 22: the inline formula with two tabulars under \underbrace is cut into fragments by the checks' pairing of $ signs; the tabular wording is translated ('à isomorphisme près' -> 'up to isomorphism'), every math piece unchanged (checked by hand) | `$, à\\ isomorphisme près\end{tabular}}}\quad\cdot\quad\underbrace{s^{(r^{\pi_0})}}_{\text{·}` |
 | Der-ChXV-05-11-10_p031-035 | only the wording of a text box differs (every math piece unchanged) | `\[ \parbox{0.72\textwidth}{Pour tout $X \in \Ob\cM$ et pour toute partie $J$ de $\Ss_{\pi}(X)$, telle que \beg` |
 | Der-ChXV-05-11-10_p031-035 | only the wording of a text box differs (every math piece unchanged) | `\[ M \quad = \quad \parbox[t]{0.6\textwidth}{ensemble des objets de $\cM$ isomorphes à un objet fixe $X_0 \in ` |
 | Der-ChXV-05-11-10_p046-050 | only the wording of a text box differs (every math piece unchanged) | `\[ \left\{ \begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}} \text{·} & \textit{·} (\textit{·} stable par $\var` |
 | Der-ChXV-05-11-10_p046-050 | only the wording of a text box differs (every math piece unchanged) | `\[ \left\{ \begin{array}{@{\quad}l@{\quad}p{0.6\textwidth}} \text{·} & \textit{·} \\{}[1.5ex] \text{·} & \text` |
+| Der-ChXIIc-30-03-03_p061-064 | changed, waived: the one changed formula is the LaTeX fix of 12 Nov (checks/FIXES.jsonl): the tikz-cd baseline named the empty cell (2,1), which has no node and stops the compilation, in the French book as well; it now names the cell of T_1 (2,2) in the same row; the printed diagram and its text are unchanged | `\begin{tikzcd}[ampersand replacement=\&, column sep=small, row sep=small, baseline=(\tikzcdmatrixname-2-1.base` |
 | Der-ChXV-05-11-10_p026-030 | only the wording of a text box differs (every math piece unchanged) | `\[ \left\{ \begin{tabular}{rp{0.6\textwidth}} \textit{·}) & Stable par cochangement de base, par composition, ` |
 | der-ch16_p036-040 | only the wording of a text box differs (every math piece unchanged) | `\[ \begin{tikzpicture}[baseline=(C.base),font=\small] \node[draw,circle,inner sep=1pt] (A) at (0,0) {$\mathrm ` |
 | der-ch17_p006-010 | the same formula, moved | `$C$` |

@@ -140,9 +140,10 @@ Source: `companion/`
 ## 3. The English translation
 
 [`en/`](en/README.md): the whole of *Les Dérivateurs* in English, AI-translated by GPT-6.1 Sol from the transcription
-(release v2026-11-11b), with the checks of every page against the French. PDF:
-**[LesDerivateurs_translation.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/download/en-2026-11-11/LesDerivateurs_translation.pdf)**
-(933 pages).
+(release v2026-11-11b), with the checks of every page against the French and a comparison of the whole for
+completeness. The book:
+**[LesDerivateurs_English.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/download/en-2026-11-12/LesDerivateurs_English.pdf)**
+(910 pages).
 
 ## Raw research outputs
 
@@ -187,8 +188,8 @@ own with `lualatex`.
   definitions and the changes of the checked texts that their tables do not list were compared with the edition's
   pages by Claude Opus 5.5 (Anthropic) (`transcription/DECISIONS.md`).
 - **English translation:** AI-translated by GPT-6.1 Sol (OpenAI API, reasoning effort max) from the transcription;
-  glossary by Claude Fable 5.2 and Claude Opus 5.5, prompt, checks, fixes and build by Claude Opus 5.5 (Anthropic)
-  (`en/README.md`).
+  glossary by Claude Fable 5.2 and Claude Opus 5.5, prompt, checks, fixes, the comparison for completeness and the
+  book by Claude Opus 5.5 (Anthropic) (`en/README.md`).
 - **Raw research outputs** (`raw/`): the answers AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); the reviews
   by Claude Fable 5.2 (Anthropic).
 
