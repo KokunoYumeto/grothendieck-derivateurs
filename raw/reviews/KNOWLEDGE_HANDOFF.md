@@ -181,3 +181,13 @@ NOT done: integration of BISITE (24 items) and of POLES, GALOIS, STRATA, PATHS; 
 ## Prompt 8_RESIDUE drafted and packaged (Claude Fable 5.2, 11 November 2026, 14:07 UTC)
 
 At the coordinator's request: `pro_prompts_20261110/8_RESIDUE/` holds `PROMPT.md` (35,727 bytes; Parts A to J = items D1 to D10 of `7_BISITE/FOLLOW_UPS.md`, with the three combination arguments as Leads 1 to 3 and BISITE D.11, F.15 to F.17 as Leads 4 and 5) and `8_RESIDUE_background.zip` (431 files plus `MANIFEST.tsv`, 44,408,713 bytes, SHA-256 `67716a21…a823a9b5`). Work files: `pro_prompts_20261110_work/8_RESIDUE/` (`PROMPT_head.md`, `build_8_RESIDUE.py`, `MANIFEST.tsv`, `ASSEMBLY.md`, `ASSEMBLY_NOTES_20261111.md`; a rebuild overwrites `ASSEMBLY.md`, the notes copy keeps what was left out and why). Edit `PROMPT_head.md` and rerun the script; never edit `PROMPT.md` directly. Not sent. The stack README has no row for it yet. L1 to L6 are with the agent revising the Longue Marche prompts.
+
+## CATHOT G.6 against Ben-Bassat's Conjecture 7.1: checked (Claude Fable 5.2, 11 November 2026, 23:42 UTC)
+
+`1_CATHOT/REVIEW_G6.md`. The item is G.6, deduced from G.4 (where this file says above "G.4 refutes a conjecture of that preprint", read "G.6, by G.4"). Verdict: the refutation is correct. No finite monoid has classifying space of the type of `RP²` or of any connected finite-dimensional CW complex with non-trivial `π_1`; the proof is written out in full there, given one classical theorem, with two independent choices (Miller 1984, Theorem A; or Atiyah 1961 on `K(BG)`, a route added by the reviewer). Conjecture 7.1 was read in the PDF (v1, 28 October 2026): it is about monoids and `RP²` satisfies its hypotheses. Nothing in the public raw copy needs to change. Not opened: Miller, Atiyah, McDuff (stated from memory); a later version of the preprint was not looked for. Nobody was contacted; contact with the author is the user's decision.
+
+## La Longue Marche: separate handoff (pointer added 11 November 2026, 23:50 UTC)
+
+The state of the Longue Marche prompts, the reviews of the LM3 and LM2 returns, what is established, the reviewer's own results and errors, and the open items are in `C:/Users/user/Documents/longue_marche_pro_pilot_20261104/pro_prompts_draft_20261111_work/KNOWLEDGE_HANDOFF_LM.md` (Claude, Fable 5.2).
+
+Added 11 November 2026, 23:59 UTC: both theorems behind G.6 were read in their texts (Miller 1984: Theorem B, p. 40 = Theorem 10.1, pp. 84–85, is exactly the step; the return's citation is right; Atiyah 1961: (6.11) p. 45, (7.2) p. 46, §2 p. 28). arXiv has only v1 of 2610.38760. `1_CATHOT/REVIEW_G6.md` updated; `1_CATHOT/DRAFT_NOTE_TO_AUTHOR.md` is a draft for the user, not sent.

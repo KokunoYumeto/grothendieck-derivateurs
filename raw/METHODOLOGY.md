@@ -73,6 +73,14 @@ integration in `reviews/integration_20261111/`.
   E.7–E.13, E.15, E.18, E.20–E.25 and F.7–F.13, and reproduced the minimal models by its own enumeration, including
   all 208,672 labelled monoids of order 6 (`reviews/1_CATHOT/checks/`). No statement labelled Proved or Refuted was found false. Open in the answer: D.6, E.6,
   E.17, E.26, E.27, G.17.
+- **Check of G.6:** a third review by Claude Fable 5.2, of item G.6 alone, 11 November 2026
+  ([reviews/1_CATHOT/REVIEW_G6.md](reviews/1_CATHOT/REVIEW_G6.md)). G.6 says that `RP²` is not the classifying space
+  of a finite monoid, against Conjecture 7.1 of Ben-Bassat, arXiv:2610.38760v1 (every connected finite CW complex with
+  finite fundamental group has the homotopy type of the classifying space of a finite monoid). The review writes out
+  the proof through G.4 and checks each step; it read the theorem the proof rests on, Miller's Theorem B (Ann. of Math.
+  120 (1984), p. 40), in the published text, and gives a second route through Atiyah (Publ. Math. IHES 9 (1961)).
+  Verdict: the refutation is correct, for the conjecture as stated in version 1 of the preprint, the only version on
+  arXiv on 11 November 2026.
 - **Path forward:** sections "After CATHOT" in prompts 2 to 6. After the second review: the question of
   rectifiability (prompt 6), a cardinal-controlled Kan–Thurston statement to which E.17 reduces (prompts 4 and 6), a
   caution on ind-objects (prompts 2, 5 and 6, and the Longue Marche prompts on the Teichmüller tower and on Galois

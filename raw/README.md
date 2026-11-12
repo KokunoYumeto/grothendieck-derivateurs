@@ -29,7 +29,7 @@ Dates are those on which the return was received (UTC).
 
 | Folder | What it is | Date | Reviewed |
 |---|---|---|---|
-| `pro_returns/1_CATHOT/` | Answer to prompt 1: what categories modulo natural transformations can represent | 10 Nov 2026 | yes, twice (`reviews/1_CATHOT/`) |
+| `pro_returns/1_CATHOT/` | Answer to prompt 1: what categories modulo natural transformations can represent | 10 Nov 2026 | yes, twice, and item G.6 a third time (`reviews/1_CATHOT/`) |
 | `pro_returns/2_TOTAL_ASPHERICITY/` | Answer to prompt 2: total asphericity, filtered categories, Dwyer-type immersions | 10 Nov 2026 | yes (`reviews/2_TOTAL_ASPHERICITY/`) |
 | `pro_returns/3_POLES/` | Answer to prompt 3: the fibration axiom and the cofibration axiom for fundamental localizers | 10 Nov 2026 | yes (`reviews/3_POLES/`) |
 | `pro_returns/4_GALOIS/` | Answer to prompt 4: locally constant coefficients and the localizer they define | 11 Nov 2026 | yes (`reviews/4_GALOIS/`) |
@@ -37,7 +37,7 @@ Dates are those on which the return was received (UTC).
 | `pro_returns/6_PATHS/` | Answer to prompt 6: path categories against the simplicial localization | 11 Nov 2026 | yes (`reviews/6_PATHS/`) |
 | `pro_returns/7_BISITE/` | Answer to prompt 7: the two fine localizations, smooth and proper maps, six operations | 11 Nov 2026 | yes (`reviews/7_BISITE/`) |
 | `pro_returns/8_RESIDUE/` | Answer to prompt 8: what the first seven answers left undecided | 11 Nov 2026 | not yet |
-| `reviews/<name>/` | The review of each answer: `REVIEW_author.md` (and for prompt 1 also `REVIEW.md`, an independent second review), the reviewer's programs, `PROMPT_UPDATES.md` (what the answer changed in the prompts not yet sent) and `fold_in/` (the inserted sections, with the prompts as they were before) | 10–11 Nov 2026 | — |
+| `reviews/<name>/` | The review of each answer: `REVIEW_author.md` (and for prompt 1 also `REVIEW.md`, an independent second review, and `REVIEW_G6.md`, a check of item G.6 against the conjecture it refutes; the draft note to the author that it mentions is not included), the reviewer's programs, `PROMPT_UPDATES.md` (what the answer changed in the prompts not yet sent) and `fold_in/` (the inserted sections, with the prompts as they were before) | 10–11 Nov 2026 | — |
 | `reviews/7_BISITE/` | Also `COMBINED_REVIEW.md` (the seven answers read together), `FOLLOW_UPS.md` (the open points written as new prompt parts) and `COMPANION_INTEGRATION.md` (what goes into the companion) | 11 Nov 2026 | — |
 | `reviews/KNOWLEDGE_HANDOFF.md` | The running record kept by the reviewing sessions, in the order the answers came in | 10–11 Nov 2026 | — |
 | `reviews/integration_20261111/` | Working files of the integration of the reviewed results into the critical companion: log, scripts, new commentary blocks, the files as they were before, build logs | 11 Nov 2026 | — |
