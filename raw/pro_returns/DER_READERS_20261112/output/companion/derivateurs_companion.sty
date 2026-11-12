@@ -1,0 +1,52 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/10]
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage{hyperref}
+\definecolor{dcbar}{gray}{0.55}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% the heading of a block shows the manuscript page N of its anchor p<N> or p<N>:<words>; the words may hold any TeX
+% (math, accents), so the anchor is read as plain characters and only the part before the first colon is printed
+\newcommand*{\dc@anchorpage}[1]{\expandafter\dc@anchorpage@i\detokenize{#1}:\dc@nil}
+\begingroup\catcode`\:=12
+\gdef\dc@anchorpage@i#1:#2\dc@nil{\dc@dropp#1\relax\dc@nil}
+\endgroup
+\def\dc@dropp#1#2\dc@nil{\if p#1#2\else#1#2\fi}
+% the commentary is English: it is set in English (hyphenation, punctuation) when babel provides the language
+\let\dc@langbegin\relax
+\let\dc@langend\relax
+\AtBeginDocument{\@ifundefined{captionsenglish}{}{%
+  \def\dc@langbegin{\begin{otherlanguage*}{english}}\def\dc@langend{\end{otherlanguage*}}}}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+\newenvironment{dcomment}[3]{%
+  \par\medskip\dc@langbegin
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \small\noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[ms.~\dc@anchorpage{#2}]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\dc@langend\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}
+% \dcfit{formula}: a display at its natural width, scaled down to the line width when it is wider
+\RequirePackage{graphicx}
+\newsavebox{\dcfitbox}
+\newcommand{\dcfit}[1]{%
+  \sbox{\dcfitbox}{$\displaystyle #1$}%
+  \ifdim\wd\dcfitbox>\linewidth\resizebox{\linewidth}{!}{\usebox{\dcfitbox}}\else\usebox{\dcfitbox}\fi}
+% a zigzag arrow for tikz-cd diagrams (\arrow[rr, zigzag]), when the text loads TikZ
+\AtBeginDocument{\@ifpackageloaded{tikz}{%
+  \usetikzlibrary{decorations.pathmorphing}%
+  \tikzset{zigzag/.style={decorate,decoration={zigzag,segment length=5pt,amplitude=.7pt},arrows=-}}}{}}

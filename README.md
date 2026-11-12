@@ -151,6 +151,10 @@ completeness. The book:
 Pro mode) to eight research prompts on open questions of the manuscript, their reviews by Claude Fable 5.2, the prompts
 with everything they attached, and [how this was done](raw/METHODOLOGY.md).
 
+Readers (French and English, each diplomatic, corrected with apparatus, and plain reading text) and the companion with
+an appendix of new results, built by GPT-6 Astra (ChatGPT Pro mode) on 12 Nov 2026, not yet reviewed:
+[`raw/pro_returns/DER_READERS_20261112/`](raw/pro_returns/DER_READERS_20261112/README.md).
+
 ## Building
 
 Both books need LuaLaTeX (TeX Live 2025 or later, with `fontspec`, `babel-french`, `tikz-cd`, `luacode`); the companion
