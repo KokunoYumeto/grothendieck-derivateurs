@@ -1,0 +1,148 @@
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority claim.
+\subsection{The exact component-injectivity threshold}
+
+The obstruction left by
+Corollary~\ref{C:equalizer-component-reduction} can be stated
+entirely in terms of the old component maps. In particular one
+must control long component paths as well as component cycles.
+
+\begin{proposition}[Proved: injectivity in a set necklace]
+\label{C:set-necklace-injectivity}
+Let $f,g:S\rightrightarrows T$ be injections of finite sets, and
+let $s=4k+1$, $k\geq1$. Form the set coequalizer of the cyclic
+diagram with $s$ copies of $T$ and neighboring legs
+\[
+ (\lambda_i,\mu_i)=
+ \begin{cases}
+ (g,f),&0\leq i<2k,\\
+ (g,g),&i=2k,\\
+ (f,g),&2k<i<4k,\\
+ (f,f),&i=4k.
+ \end{cases}
+\]
+Write $j_i:T\to Z$ for its copy maps. Then all the maps $j_i$
+are injective if and only if the partial relation
+$f(x)\mapsto g(x)$ has no nontrivial directed cycle and each
+nonconstant directed path has at most $2k+1$ vertices.
+\end{proposition}
+
+\begin{proof}
+Because $f,g$ are injections, their partial transition relation
+decomposes into fixed points, directed paths, and nontrivial
+directed cycles. Points outside both images are private. Every
+neighbor identification stays within one of these pieces, so
+different pieces can be treated separately. A fixed point is
+shared by all copies, while private points remain separate.
+
+On a path of $l$ vertices, number them $0,\ldots,l-1$ so that
+the source transitions are $t\mapsto t+1$ for
+$0\leq t\leq l-2$. Suppose $l\leq2k+1$. The same four-branch
+formula as in the repaired construction defines a cocone into
+$\{0,\ldots,4k\}$:
+\[
+ b_i(t)=
+ \begin{cases}
+ t+i,&i\leq2k,\ t+i\leq2k,\\
+ t+i+2k-l+1,&i\leq2k,\ t+i>2k,\\
+ t-i+6k-l+2,&i>2k,\ t-i+6k-l+2>2k,\\
+ t-i+4k,&i>2k,\ t-i+6k-l+2\leq2k.
+ \end{cases}
+\]
+The first-arm maps are increasing: the jump between their two
+branches is nonnegative in addition to the unit increase,
+because $2k-l+1\geq0$. The second-arm maps are also increasing
+in $t$: the change in their branch offsets is
+$2k-l+2\geq1$. The displayed values lie between $0$ and $4k$.
+Thus each $b_i$ is injective.
+
+For $i<2k$, the equality $b_i(t+1)=b_{i+1}(t)$ follows by
+substitution. At the upper junction,
+\[
+       b_{2k}(t+1)=t+4k-l+2=b_{2k+1}(t+1);
+\]
+the last value uses its upper branch since
+$4k-l+2\geq2k+1$. On the second arm,
+$b_i(t)=b_{i+1}(t+1)$. Finally
+$b_{4k}(t)=t=b_0(t)$ for $0\leq t\leq l-2$.
+These are all the required neighbor identities. Since the
+coequalizer has a cocone whose restriction to each copy is
+injective, its own copy maps cannot identify distinct points
+within a copy. Separate tags for the different path pieces,
+and the fixed and private pieces, prove sufficiency for the
+whole diagram. This argument only needs $l\leq2k+1$, which is
+weaker than the usual sufficient hypothesis $l\leq k$.
+
+For necessity, first suppose a path has at least $2k+2$ vertices.
+Start at position $2k+1$ in copy zero. Moving forward across the
+first $2k$ neighboring identifications decreases the position
+by one each time, reaching position $1$ in copy $2k$.
+The $g,g$ junction keeps position $1$. The following $2k-1$
+identifications increase the position by one each time, reaching
+position $2k$ in copy $4k$. The $f,f$ junction returns this to
+position $2k$ in copy zero. All used positions are permitted by
+the assumed path size. Hence the coequalizer identifies the two
+distinct points $2k+1$ and $2k$ of copy zero.
+
+On a directed cycle, the same circuit of identifications is
+always available, with positions interpreted modulo its length.
+The net change around the index necklace is minus one: the first
+arm contributes $-2k$, the second contributes $2k-1$, and the two
+junctions contribute zero. Every point of that cycle is thus
+identified with its predecessor in the same copy. A nontrivial
+cycle makes the copy map noninjective. This proves necessity.
+\end{proof}
+
+\begin{corollary}[Proved: the first possible component failure]
+\label{C:component-necklace-obligation}
+Assume every arrow of an old repaired C.1 stage is injective on
+$H(X)=\pi_0G_X$. For an attachment to $f,g:S\rightrightarrows T$
+with $s=4k+1$, every new generating map is injective on $H$ if
+and only if the partial relation
+\[
+                           H(f)(c)\mapsto H(g)(c)
+\]
+has no nontrivial directed cycle and every path has at most
+$2k+1$ vertices. Under these conditions every new arrow is
+injective on $H$.
+
+Consequently the first failure of component injectivity in a
+C.1 construction, if there is one, must occur at an attachment
+whose old component relation has a nontrivial cycle or a path
+with at least
+\[
+                        2k+2=\frac{s+3}{2}
+                                   \geq\frac{15n+3}{2}
+\]
+vertices. Theorem~\ref{C:universal-components} excludes both
+possibilities for the actual generated arrows: their component
+relations are acyclic and their path sizes are at most
+$L_U(f,g)+1\leq n+1\leq k$.
+\end{corollary}
+
+\begin{proof}
+The repaired graph attachment is the strict graph colimit of its
+necklace diagram: vertices have the set-coequalizer description,
+and $(c_m)$ routes the edge fibers through the same neighboring
+overlaps, as in Proposition~\ref{C:fixed-path-kernel}.
+Passing to graph components preserves this colimit. Thus
+$H(Z)$ is precisely the set necklace for $H(f),H(g)$, with the
+same $s$ and the same four kinds of neighboring legs. The old
+component maps are injections by hypothesis, so
+Proposition~\ref{C:set-necklace-injectivity} applies. Every
+new arrow factors through a generating copy, proving the
+assertion about all new arrows. Sum targets preserve component
+injectivity directly. Finally C.1 gives $s\geq15n$, as in
+Lemma~\ref{C:birth-cover-helly}.
+\end{proof}
+
+\paragraph{Verification and scope.}
+The retained program
+\texttt{akr\_component\_necklace\_threshold.py} constructs the
+set coequalizer directly by union--find for $k=1,2,3,5,11$ and
+path sizes from two through $4k+4$. In each case the first
+failure is exactly $2k+2$. This is an independent finite check
+of the threshold; the proof above is uniform in $k$ and does
+not rely on those tests. The proposition and its corollary
+isolate the exact set-level threshold. The separate simultaneous
+induction of Theorem~\ref{C:universal-components} supplies the
+all-stage bound on the actual component-transition relations.

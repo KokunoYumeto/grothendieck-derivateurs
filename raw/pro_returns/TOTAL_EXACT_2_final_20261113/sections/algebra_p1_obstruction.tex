@@ -1,0 +1,92 @@
+\begin{proposition}[Refuted: universal membership of the column module in the proposed resolving class]
+\label{A:P1-torsion}
+For a small category $A$, let $\mathcal R_A$ be the smallest class of
+covariant integral modules containing every $\mathbb Z[H]$, for
+$H:A\to\mathrm{Set}$, and closed under extensions, kernels of
+epimorphisms between members, arbitrary direct sums, direct summands,
+filtered colimits, and $F\mapsto F\otimes_{\mathbb Z}\mathbb Z[H]$.
+Every member of $\mathcal R_A$ is objectwise torsion-free.
+There is a finite filtered category $A$ and three parallel arrows
+$a_0,a_1,a_2:p\to q$ for which
+\[
+ Q_a=\operatorname{coker}\bigl(P_q\longrightarrow P_p^2,
+             \ t\longmapsto(t(a_1-a_0),t(a_2-a_0))\bigr)
+ \notin\mathcal R_A.
+\]
+Thus the first proposed target of approach P1 cannot work uniformly,
+even for filtered categories.  This does not refute P1's alternative
+of finding a different module with the same $T_1$, and it is not a
+separator between totality and exactness.
+\end{proposition}
+\begin{proof}
+Permutation modules are objectwise free.  Subgroups, extensions,
+direct sums and direct summands of torsion-free abelian groups are
+torsion-free.  A filtered colimit is torsion-free because an equation
+$n[x]=0$, $n\ne0$, holds at some later stage, where it implies that
+the representative itself is zero.  Tensoring with a free abelian
+group is a direct sum of copies.  All operations are evaluated
+objectwise, so the class of objectwise torsion-free modules contains
+$\mathcal R_A$.
+
+Here is the promised category completely.  Its objects are $p,q,x,t$.
+Besides identities, its arrows are
+\[
+ a_0,a_1,a_2:p\to q,\qquad
+ g_0,g_1,g_2,g_3:q\to x,\qquad
+ c_0,c_1,c_2:p\to x,
+\]
+and one arrow $u_y:y\to t$ for each $y=p,q,x$.  There are no other
+arrows.  Identities compose as identities, every composition ending
+at $t$ is the indicated unique arrow, and the other compositions are
+specified by
+\[
+\begin{array}{c|ccc}
+ &a_0&a_1&a_2\\\hline
+g_0&c_0&c_1&c_2\\
+g_1&c_0&c_2&c_1\\
+g_2&c_1&c_0&c_2\\
+g_3&c_1&c_2&c_0
+\end{array}
+\]
+Associativity holds: a composable triple of nonidentity arrows must
+follow $p\to q\to x\to t$, and both composites are $u_p$.
+All other associativity equations contain an identity.
+The object $t$ is terminal, so the category is nonempty, connected
+and filtered.  It is total directly: for any $H:A\to\mathrm{Set}$,
+the object $(a,h)$ of its category of elements maps to
+$(t,H(u_a)h)$.  Its connected component is exactly the fibre of this
+value in $H(t)$ and has that terminal object; the assertion is also
+valid if $H(t)$ is empty.
+
+At $x$, $P_q(x)=\mathbb Z^4$ on the $g_j$ and $P_p(x)=\mathbb Z^3$
+on the $c_i$.  The column map has its image in
+$\ker(\operatorname{aug}:\mathbb Z^3\to\mathbb Z)^2$, a rank-four
+direct summand of $\mathbb Z^6$.  With bases $c_1-c_0,c_2-c_0$ in
+both augmentation kernels, its matrix is
+\[
+ D=\begin{pmatrix}
+ 1&0&-1&-1\\
+ 0&1&0&1\\
+ 0&1&-1&-1\\
+ 1&0&1&0
+ \end{pmatrix}.
+\]
+Its determinant is $3$, and its upper-left $3\times3$ minor has
+determinant $-1$.  Hence its Smith invariant factors are
+$1,1,1,3$, and
+\[
+ Q_a(x)\cong\mathbb Z^2\oplus\mathbb Z/3.
+\]
+More explicitly, $v=(1,0,1,0)^{\mathrm t}$ represents a nonzero
+element of order $3$ in the reduced cokernel: one has
+$D(1,1,-1,-1)^{\mathrm t}=3v$, while the unique rational preimage
+of $v$ is $(1,1,-1,-1)^{\mathrm t}/3$, which is not integral.
+Thus $Q_a$ cannot belong to $\mathcal R_A$.
+The program \texttt{code/algebra\_column\_torsion.py} reconstructs
+the category, checks all $52$ composable pairs and $121$ composable
+triples, verifies the identities and terminal object, and recomputes
+the Smith form and this order-three certificate.  Its output is
+\texttt{code/algebra\_column\_torsion.out}.  The original colimit is
+evaluation at $t$, so $T_1(Q_a)=0$ in this example; no nonexactness is
+being inferred from its objectwise torsion.
+\end{proof}

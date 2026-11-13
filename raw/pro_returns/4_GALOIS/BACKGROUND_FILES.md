@@ -1,0 +1,113 @@
+# Files uploaded with the prompt: 4_GALOIS
+
+The prompt `PROMPT.md` in this folder was sent to GPT-6 Astra (ChatGPT Pro mode) together with the ZIP file below. This is the file list of the ZIP as it was uploaded. The ZIP is not republished here.
+
+## `4_GALOIS_background.zip`
+
+102 files, 52,663,592 bytes, SHA-256 `97251bbf6ded7f326e80c1d0984e18506f229c305e660cf31fb08f863ce1b1be`, built 10 Nov 2026, 23:03:50 UTC.
+
+```text
+       bytes  file
+       95272  grothendieck/DER_I-a/DER_I-a_text.tex
+      116260  grothendieck/DER_I-b/DER_I-b_text.tex
+       68526  grothendieck/DER_VIII-X/DER_VIII-X_text.tex
+       91254  grothendieck/DER_XIIc-a/DER_XIIc-a_text.tex
+       32977  grothendieck/DER_XIIapp/DER_XIIapp_text.tex
+      120124  grothendieck/DER_VI-a/DER_VI-a_text.tex
+      134503  grothendieck/DER_XI-XIIa/DER_XI-XIIa_text.tex
+      585779  grothendieck/DER_XI-XIIa/DER_XI-XIIa_pages.pdf
+      190957  grothendieck/DER_XVI/DER_XVI_text.tex
+      540437  grothendieck/DER_XVI/DER_XVI_pages.pdf
+       11446  companion/DER_I-a/DER_I-a_overview.tex
+       92592  companion/DER_I-a/DER_I-a_blocks.tex
+       68512  companion/DER_I-a/DER_I-a_claims.csv
+        6102  companion/DER_I-a/DER_I-a_references.bib
+        2803  companion/DER_I-a/derivateurs_companion.sty
+       11720  companion/DER_I-b/DER_I-b_overview.tex
+      113295  companion/DER_I-b/DER_I-b_blocks.tex
+       90659  companion/DER_I-b/DER_I-b_claims.csv
+        5575  companion/DER_I-b/DER_I-b_references.bib
+        2046  companion/DER_I-b/derivateurs_companion.sty
+       12412  companion/DER_VIII-X/DER_VIII-X_overview.tex
+       84129  companion/DER_VIII-X/DER_VIII-X_blocks.tex
+       69812  companion/DER_VIII-X/DER_VIII-X_claims.csv
+       13436  companion/DER_VIII-X/DER_VIII-X_references.bib
+        2005  companion/DER_VIII-X/derivateurs_companion.sty
+       11367  companion/DER_XIIc-a/DER_XIIc-a_overview.tex
+      103436  companion/DER_XIIc-a/DER_XIIc-a_blocks.tex
+       60308  companion/DER_XIIc-a/DER_XIIc-a_claims.csv
+       14052  companion/DER_XIIc-a/DER_XIIc-a_references.bib
+        1412  companion/DER_XIIc-a/derivateurs_companion.sty
+       11333  companion/DER_XIIapp/DER_XIIapp_overview.tex
+       66469  companion/DER_XIIapp/DER_XIIapp_blocks.tex
+       54670  companion/DER_XIIapp/DER_XIIapp_claims.csv
+       10528  companion/DER_XIIapp/DER_XIIapp_references.bib
+        2466  companion/DER_XIIapp/derivateurs_companion.sty
+       10775  companion/DER_VI-a/DER_VI-a_overview.tex
+      100309  companion/DER_VI-a/DER_VI-a_blocks.tex
+      165682  companion/DER_VI-a/DER_VI-a_claims.csv
+        4472  companion/DER_VI-a/DER_VI-a_references.bib
+        1412  companion/DER_VI-a/derivateurs_companion.sty
+       31097  companion/FABLE_PILOT_OVERVIEW_20261110.md
+      166047  papers/Cisinski_lcfunctors/lcmodcat3.pdf
+      594267  papers/Cisinski_puhot/puhot.pdf
+     3035025  papers/Cisinski_Ast308/smf_ast_308.pdf
+     2412997  papers/Cisinski2004_minimal/CTGDC_2004__45_2_109_0.pdf
+        6100  papers/0706.2874/nonels-locconst.bbl
+       91573  papers/0706.2874/nonels-locconst.tex
+      132629  papers/math_0407507/math_0407507.tex
+        8671  papers/1506.07155/master.tex
+       59338  papers/1506.07155/shape.tex
+        5072  papers/1506.07155/tikzlibrarydiagrams.code.tex
+      313662  papers/math_0012219/math_0012219.tex
+      159090  papers/math_0510247/math_0510247.tex
+      192219  papers/math_0108143/math_0108143.tex
+     4753810  papers/Lurie_HTT/HTT.pdf
+     6899809  papers/Lurie_HA/HA.pdf
+        2155  papers/math_0206203/frenchb.cfg
+       14384  papers/math_0206203/sga1-smf.ind
+       18193  papers/math_0206203/sga1-smf.sty
+        3312  papers/math_0206203/sga1-smf.tex
+     1094587  papers/math_0206203/smf_doc-math_3_01.tex
+       49605  papers/math_0206203/smfbook.cls
+        3929  papers/math_0206203/smfenum.sty
+        3076  papers/math_0206203/smfthm.sty
+      212886  papers/1112.3840/groth_derivators.tex
+       13244  papers/1112.3840/groth_derivators.bbl
+        4164  papers/1306.2072/stable.bbl
+       90688  papers/1306.2072/stable.tex
+       20286  papers/1402.6984/decls.tex
+       10021  papers/1402.6984/pictures.tex
+        8606  papers/1402.6984/tilting2.bbl
+      140526  papers/1402.6984/tilting2.tex
+      620842  papers/Maltsiniotis2005_AMBP/AMBP_2005__12_1_1_0.pdf
+     8121741  papers/Hatcher_AT/AT.pdf
+       33123  CATHOT_return/sections/BC.tex
+        7794  CATHOT_return/research/BC_report.md
+       11230  longue_marche/LM_P01_transcription.tex
+       11110  longue_marche/LM_P01_reading_apparatus.md
+       10828  longue_marche/LM_P02_transcription.tex
+        6985  longue_marche/LM_P02_notes.md
+       42372  CATHOT_review/REVIEW.md
+        4696  CATHOT_return/sections/E_ind.tex
+       35369  CATHOT_return/sections/E.tex
+        5444  CATHOT_return/research/E_ind_report.md
+    24755049  papers/HausmannHusemoller1979/ens-001_1979_25__36_d.pdf
+       22415  TOTASPH_return/sections/C.tex
+       20832  TOTASPH_return/sections/D.tex
+        6116  TOTASPH_return/sections/D_general.tex
+        6549  TOTASPH_return/sections/F_followup.tex
+       83485  TOTASPH_return/TOTASPH_results.csv
+      693748  papers/2309.05216/2309.05216v2.pdf
+     2547390  papers/2409.17489/2409.17489v3.pdf
+       10366  companion/DER_XI-XIIa/DER_XI-XIIa_overview.tex
+      122532  companion/DER_XI-XIIa/DER_XI-XIIa_blocks.tex
+       91501  companion/DER_XI-XIIa/DER_XI-XIIa_claims.csv
+       10263  companion/DER_XI-XIIa/DER_XI-XIIa_references.bib
+        1923  companion/DER_XI-XIIa/derivateurs_companion.sty
+       12959  companion/DER_XVI/DER_XVI_overview.tex
+      147463  companion/DER_XVI/DER_XVI_blocks.tex
+      102639  companion/DER_XVI/DER_XVI_claims.csv
+       19266  companion/DER_XVI/DER_XVI_references.bib
+        2803  companion/DER_XVI/derivateurs_companion.sty
+```

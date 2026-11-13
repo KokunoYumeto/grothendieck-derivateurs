@@ -1,0 +1,329 @@
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+% DRAFT FOR INDEPENDENT AUDIT: do not integrate as proved until reviewed.
+\subsection{A simultaneous induction on binary components}
+
+The proposed induction below separates two levels of structure.
+Statements about $H(X)=\pi_0G_X$ concern sets of graph components;
+every factorization asserted in the argument is nevertheless an
+actual factorization of arrows in the original concrete category.
+In particular, equality of component maps is never substituted for
+equality of arrows.
+
+For a pair of injections $f,g:S\rightrightarrows T$ whose partial
+point-transition relation has no nontrivial directed cycle, let
+$L_U(f,g)$ be the maximum number of vertices in a nonconstant
+directed path, or $1$ if there is no such path. Once the analogous
+component relation is known to be acyclic, define $L_H(f,g)$ in
+the same way. Actual distinct arrows have $L_U(f,g)\geq2$,
+because equal concrete functions are the same arrow.
+
+\begin{lemma}[Draft for audit: component intersections of size at least two]
+\label{C:component-two-intersection-draft}
+Consider a finite generated stage in which:
+\begin{enumerate}
+\item every arrow is injective on $H$;
+\item each source's generating cover at birth, interpreted on $H$,
+has the Helly property of Lemma~\ref{C:birth-cover-helly};
+\item the forbidden-pair routing assertion of
+Lemma~\ref{C:birth-forbidden-pair} holds for pairs of source
+\emph{components}, and yields factorizations of actual arrows.
+\end{enumerate}
+If $h:P\to X$, $g:Q\to X$ have at least two components in the
+intersection of their $H$-images, there are actual arrows
+$u:R\to P$, $v:R\to Q$ with
+\[
+ hu=gv,\qquad
+ H(hu)(H(R))=H(h)(H(P))\cap H(g)(H(Q)).
+ \tag{CI}\label{eq:component-intersection-span-draft}
+\]
+If $h$ does not factor through $g$, $R$ is strictly earlier than
+$P$ in its generation history, allowing the step $W\to V$ at
+stage zero.
+\end{lemma}
+
+\begin{proof}
+If $h$ factors through $g$, use that factorization. Otherwise
+the preimage under the injective map $H(h)$ of the displayed
+intersection contains no forbidden pair of source components:
+such a pair would factor the actual arrow $h$ through $g$.
+The component-cover Helly property puts this whole preimage in
+one incoming image $H(e)(H(E))$, where $e:E\to P$ is an actual
+generating arrow. Replacing $h$ by $he$ preserves the entire
+component-image intersection and descends to an older source.
+
+This descent cannot reach $V$, because its component set has one
+element whereas the retained intersection has at least two.
+At $W$, the two components are the binary edge component and its
+isolated third point. They are a forbidden pair for the singleton
+generating cover, so a retained two-component intersection would
+already force factorization. Therefore the descent must stop
+at an actual factorization through $g$. Composing its descent
+maps and its final factorization gives $u,v$ in
+\eqref{eq:component-intersection-span-draft}. If $h$ did not
+initially factor through $g$, at least one descent step was
+performed. Notice why the restriction to intersections of size
+at least two is essential: membership of one component in an
+image does not force equality of its chosen underlying points.
+\end{proof}
+
+\begin{lemma}[Draft for audit: component paths inflate by at most one]
+\label{C:component-path-inflation-draft}
+Under the three hypotheses of the preceding lemma, every actual
+parallel pair $f,g:S\rightrightarrows T$ has an acyclic component
+transition relation and
+\[
+                           L_H(f,g)\leq L_U(f,g)+1.
+ \tag{PB}\label{eq:component-path-bound-draft}
+\]
+Here the absence of nontrivial point-transition cycles for actual
+arrows is the established AKR property (4).
+\end{lemma}
+
+\begin{proof}
+Induct on the generation rank of the source $S$, with the claim
+simultaneously for all targets in the given stage. If $f=g$,
+the component relation is fixed and the assertion is immediate.
+Assume $f\ne g$, so $L_U(f,g)\geq2$.
+
+Put $I=H(f)(H(S))\cap H(g)(H(S))$. If $|I|\leq1$, a
+nontrivial directed cycle is impossible, since all its at least
+two vertices would lie in $I$. A nonconstant directed path of
+$r$ vertices has $r-2$ internal vertices in $I$, so $r\leq3$.
+This proves the claim in this case, including the source $V$.
+
+Suppose $|I|\geq2$. The actual arrow $f$ cannot factor through
+$g$: its factor would be an endomorphism of $S$, hence the
+identity, contradicting $f\ne g$. The preceding lemma gives
+actual arrows $u,v:R\rightrightarrows S$ with strictly earlier
+source $R$ and
+\[
+                    fu=gv,\qquad H(fu)(H(R))=I.
+ \tag{RS}\label{eq:component-reduced-span-draft}
+\]
+Injectivity of $H(f)$ and $H(g)$ then gives
+\[
+ H(u)(H(R))=H(f)^{-1}(I),\qquad
+ H(v)(H(R))=H(g)^{-1}(I).
+\]
+
+The reduced component transition relation is
+$H(v)(r)\mapsto H(u)(r)$. If the original component relation
+has a nonconstant path
+\[
+                   D_0\longrightarrow D_1\longrightarrow
+                          \cdots\longrightarrow D_{r-1},
+\]
+write its source components as $C_0,\ldots,C_{r-2}$, so that
+$H(f)(C_i)=D_i$ and $H(g)(C_i)=D_{i+1}$. Each internal match
+$H(g)(C_i)=H(f)(C_{i+1})$ lies in $I$.
+Equation~\eqref{eq:component-reduced-span-draft} and injectivity
+give an element of $H(R)$ whose $H(v)$-image is $C_i$ and whose
+$H(u)$-image is $C_{i+1}$. Thus
+\[
+                      C_0\longrightarrow\cdots
+                           \longrightarrow C_{r-2}
+\]
+is a path for the reduced pair $(v,u)$, with one fewer vertex.
+The same argument turns any nontrivial original component cycle
+into a reduced component cycle of the same length. All the
+$C_i$ are distinct in either construction, by injectivity of
+$H(f)$. The source induction rules out a reduced component cycle,
+so the original relation is acyclic.
+
+For comparison with the point-level path bound, any nonconstant
+point path $x_0\to\cdots\to x_{p-1}$ for $(v,u)$ satisfies
+$g(x_i)=f(x_{i+1})$ by $fu=gv$. It therefore extends to the
+point path
+\[
+       f(x_0)\longrightarrow f(x_1)\longrightarrow\cdots
+       \longrightarrow f(x_{p-1})\longrightarrow g(x_{p-1})
+\]
+for $(f,g)$. The first $p$ points are distinct because $f$ is
+injective. The last cannot equal an earlier one: a return before
+the last gives a nontrivial point-transition cycle, and equality
+to $f(x_{p-1})=g(x_{p-2})$ would contradict injectivity of $g$.
+Thus it has $p+1$ distinct vertices. It follows that
+\[
+                    L_U(v,u)\leq L_U(f,g)-1,
+\]
+also when the reduced pair has no nonconstant path, because its
+left side is then $1$ and $L_U(f,g)\geq2$.
+
+For an original component path with $r\geq3$, the reduced path
+is nonconstant, and source induction now gives
+\[
+ r-1\leq L_H(v,u)\leq L_U(v,u)+1\leq L_U(f,g).
+\]
+Hence $r\leq L_U(f,g)+1$. Paths with at most two vertices
+already satisfy the bound. This proves the induction.
+\end{proof}
+
+\begin{theorem}[Draft for audit: universal component injectivity]
+\label{C:universal-components-draft}
+Every arrow in every repaired AKR C.1 construction is injective
+on the component sets $H(X)=\pi_0G_X$. At every finite stage
+the component transition relation of every actual parallel pair
+is acyclic and satisfies
+$L_H(f,g)\leq L_U(f,g)+1$.
+\end{theorem}
+
+\begin{proof}
+We maintain simultaneously the three structural hypotheses of
+Lemma~\ref{C:component-two-intersection-draft}. Once these hold
+at a stage, Lemma~\ref{C:component-path-inflation-draft} supplies
+the path assertion for every parallel pair in that stage.
+
+At stage zero, $H(V)$ is a singleton and $H(W)$ consists of the
+binary edge component and the isolated third point. Every
+component map is injective. The singleton generating cover of
+$H(W)$ has the stated Helly property, and its sole distinct
+component pair cannot lie in the image of a proper incoming
+arrow. This proves the forbidden-pair routing base case.
+
+Assume the structural hypotheses at stage $m$, and consider one
+new quasi-filter target for an actual pair $f,g:S\rightrightarrows T$.
+Its specified point-path bound is $n$, so
+$L_U(f,g)\leq n$. The path lemma gives acyclic component paths
+of size at most $n+1$. The C.1 numerical inequalities imply
+\[
+       s=4k+1\geq15n,\qquad k\geq n+1.
+\]
+The second inequality follows, for every integer $n\geq1$, from
+$k\geq(15n-1)/4>n+1-1$ and integrality; in fact the numerical
+gap is larger than needed.
+
+The cell-fiber calculation in
+Proposition~\ref{C:fixed-path-kernel} gives the strict graph
+colimit here, not only a homological comparison. Every target
+vertex and edge is in a generating copy; its copy-index fiber
+is a connected path or circle; and every neighboring edge
+identification comes from an actual $W$-arrow into the overlap
+source, by $(c_m)$ and (11). Thus there are no additional
+vertex or edge identifications beyond the neighboring relations.
+Passing to graph components preserves this colimit, so the
+component set is the set necklace for $H(f),H(g)$.
+These old maps are injections. Their paths are acyclic and have
+at most $n+1\leq k$ vertices. The strict set-necklace result
+therefore identifies the new component set and its copy maps
+with the repaired actual-path-size beta construction on these
+component paths. In particular each new generating map is
+injective on $H$. All other new arrows are composites through
+one such copy, so they too are injective on $H$.
+
+On these component sets the usual repaired properties (10), (11)
+hold with the common bound $n+1$. Equivalently, their visibility
+sets are circular intervals or full circles, adjacent overlaps
+are the prescribed component-source images, and shortest-index
+arcs route intersections. The shortest-arc range is valid since
+$k\geq n+1$. Every proper component visibility set has at most
+\[
+                              2(n+1)-2=2n
+\]
+indices, including private singleton fibers. Since $s\geq15n>6n$,
+the short-arc Helly proof applies to this new component cover.
+
+The proof of Lemma~\ref{C:birth-forbidden-pair}, now with source
+components as its marked pair, extends the component forbidden-pair
+routing assertion to the new target. At each step it uses the
+old assertion to factor an \emph{actual} arrow through an old
+neighboring leg; the component maps are used only to locate the
+two components in that overlap. Thus no faithfulness of $H$ is
+being assumed. For the newly born source itself, its forbidden
+pairs cannot be contained in a proper incoming component image,
+which is the required new base case.
+
+A disjoint-sum target preserves component injectivity and has
+a disjoint component cover. Its Helly assertion is immediate,
+and any nonempty overlap of two proper component images lies in
+one summand, where the old routing assertion applies. Distinct
+new targets have no arrows between them, so these verifications
+apply to every new object independently. All three structural
+hypotheses therefore hold at stage $m+1$. Applying the path
+lemma there completes the simultaneous induction.
+\end{proof}
+
+\paragraph{Target choices and unused underlying points.}
+The repaired construction of the supplied Proposition C.1 uses
+the actual size of each directed point path, one common $k$,
+shared fixed points, and private copies of the remaining old
+points. The preceding proof allows all its admissible parameters,
+all path enumerations, and arbitrary relabelings of these targets.
+It also remains valid if a target is enlarged by unused underlying
+points, while retaining exactly the prescribed generating arrows.
+Here is the required verification for that optional enlargement.
+
+Call an underlying point \emph{represented} if it is the value of
+a $V$-arrow. Every generated arrow preserves and reflects this
+property. This holds initially, when all points are represented.
+Assume it for the old arrows. In a defining transition
+$f(x)\mapsto g(x)$, both endpoints are represented exactly when
+$x$ is represented. Consequently every entire point-transition
+path has a constant represented status. The repaired beta maps
+therefore never mix represented and unrepresented path pieces.
+Fixed pieces and private pieces have the same property, and a
+new point outside all generating images is unrepresented.
+This proves preservation and reflection for the new copy maps;
+the sum case and composition are immediate.
+
+Restriction to represented points consequently retains whole
+actual-size point paths, not truncated paths of the kind excluded
+by the repair. Its target points are covered by the generating
+copies and have the same visibility and neighboring-overlap
+formulas. The actual binary graph has exactly these represented
+vertices; its edge maps are still the actual $W$-arrows. Thus the
+strict graph-colimit argument and every component-cover argument
+above are unchanged.
+
+For the final fixed-subgraph step, apply the point birth-cover
+descent to fixed \emph{represented} points. These point sets are
+covered at birth, and the base factorization at $V$ is valid by
+the definition of representedness. Forbidden-pair routing still
+factors actual arrows. If two current composites are distinct,
+descend through an older generating copy containing all the
+fixed represented points; terminate when the actual composites
+agree, which must occur by the singleton $V$. This gives an
+actual arrow whose represented-point image is exactly the fixed
+vertex set. Its induced graph is the required fixed subgraph.
+The point-path bound $L_U$ in the simultaneous induction is still
+computed on the full underlying point sets, so distinct actual
+arrows still have $L_U\geq2$. Hence none of the argument assumes
+that restriction to represented points is faithful on arrows.
+
+\begin{corollary}[Draft for audit: universal survival in C.1]
+\label{C:universal-nontotal-draft}
+In every repaired C.1 construction, every attachment preserves
+the old colimit of the binary cycle functor $K$. The first-stage
+class $\kappa_+-\kappa_-$ consequently survives to a nonzero
+element of
+\[
+ H_2\!\left(B\operatorname{El}_{K^*}
+    \bigl(h_V/(cv_1\sim cv_2)\bigr);\mathbb Z\right).
+\]
+Thus every such repaired C.1 category is not total.
+\end{corollary}
+
+\begin{proof}
+The pointwise equalizer of any defining pair is empty or the
+image of an actual old arrow, by
+Proposition~\ref{C:point-equalizer-image}. Its graph is the
+induced image of that source graph. Universal component
+injectivity therefore makes the fixed subgraph connected in
+each old source component that it meets. The exact fixed-path
+kernel is zero. Sum attachments have zero kernel as well.
+There are no arrows between distinct targets added at one stage,
+so their cycle-colimit kernels combine as the sum of these zero
+kernels.
+
+At stage one, for arbitrary admissible first-stage lengths, the
+only nonzero cycle groups are the independent cyclic groups
+of the two protected targets. Choosing generators of edge
+augmentation one gives the augmentation map
+$\mathbb Z^2\to\mathbb Z$, $(a,b)\mapsto a+b$. Its kernel is
+generated by $\kappa_+-\kappa_-$. All finite-stage transition
+maps on this binary second homology are injective by the preceding
+paragraph. Every finite nerve chain in the countable union
+occurs in one finite stage, so filtered unions preserve this
+nonzero class. The binary category of elements therefore has
+nonzero second integral homology and cannot have contractible
+components.
+\end{proof}
