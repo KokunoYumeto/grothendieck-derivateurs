@@ -232,3 +232,45 @@ opened only after my REVIEW.md was complete.
   companion rows to change is a work list I did not make (it is outside my task).
 - **Where it was too weak.** It reports "proved" for the central items on the strength of B and D alone and
   lists the rest as unverified; nothing in it is wrong.
+
+## Return 4 (GALOIS): findings so far (Parts A and B reviewed; Parts C–G not yet read)
+
+Verdicts so far: 22 rows of 74 (A.1–A.8, B.1–B.14): 20 correct, 2 unproved (B.13, B.14: the return's own open
+questions). Review: `..\4_GALOIS\REVIEW.md`. No comparison with the earlier review yet (my review is not complete).
+
+- **F4-1 (return, checked).** `W^1` (full faithfulness on locally constant coefficients) is not a localizer: it
+  fails two out of three (A.5: `e → BC_2 → e`). I had this before reading (`work\checks_4\own_thoughts_before_reading.md`).
+  The GALOIS prompt's Lead 1 is false for `W^1`.
+- **F4-2 (return, checked; against my expectation).** The relative Theorem A holds for `W^lc_D` for every derivator
+  with Der 1–4, no enhancement (B.3). One input not yet opened by me: Cisinski 2009, *Locally constant functors*,
+  Th. 3.6/3.13 for an arbitrary subcategory.
+- **F4-3 (return, checked, with my own direct argument for non-properness).** The two localizers of a derivator sit
+  at opposite poles (B.6, B.7): `W^lc_D` never has the reverse cofibration axiom; the constant `k`-homology
+  localizer has it and has none of Loc (7 a, b, c, F); `W^lc_{D(k)}` has Loc (7 F) iff no prime is invertible in `k`
+  iff it is `W∞`. My test for non-properness: a `W`-equivalence between spaces that are null for all `W`-aspherical
+  spaces (`K(Z, 2) → K(Z[S⁻¹], 2)`, `K(Z, 2) → K(∏ Z_p, 2)`).
+- **F4-4 (mine).** Criterion: an accessible fundamental localizer is proper (= Loc (7 F), F3-2) iff the homotopy
+  fibres of all localization maps `X → L_W X` are `W`-aspherical. For `W^lc` of `E`-local spectra, `L X = B L_E ΩX`
+  on simply connected `X`; so it is proper iff for every connected loop space `Z`, `π_1 Z → π_1 L_E Z` is onto and
+  the fibre of `Z → L_E Z` is `E_*`-acyclic. Granted Bousfield's theorem that `K(n)_*`-equivalences are
+  isomorphisms on `H_1(−; Z/p)` (from memory, not opened), `W^lc` of `K(n)`-local spectra is not proper: the
+  instance `E = K(1)` that B.14 leaves unevaluated. `E = KU` stays open.
+- **F4-5 (return B.10–B.12, checked; connection between returns 1 and 4 and the CATHOT expert).** The
+  cardinal-controlled Kan–Thurston theorem and "small ind-objects of `Cat hot` see at most 1-types" are proved in
+  GALOIS by a construction different from the CATHOT expert's (`..\1_CATHOT\OWN_RESULTS.md`, 3.1–3.2), which I
+  also read (`CHECK_OF_CATHOT_OWN_RESULTS_20261112.md`). Two proofs by two systems. This is the project's envelope
+  finding (V ms. 37, 46) in its ind-form.
+- **F4-6 (mine; a result, `RESULT_FILTERED_BY_ONE_TYPES.md`; found on 12 Nov while revising the prompts).**
+  **A small category is filtered iff colimits over it of sets and of groupoids are homotopy colimits**;
+  equivalently iff `∫_A D → colim^{Cat}_A D` is in `W∞` for every `D: A → Cat`. Proof: totality gives common
+  successors and makes the Bousfield–Kan spectral sequence collapse on permutation coefficients; for a parallel
+  pair `u, v` the right-angled Artin groups of the bipartite graphs `f — fu`, `f — fv` have `π_1(hocolim) = Z²`
+  and `H_2(hocolim) = Z[* ⊔_{colim E} *]`, `E` the functor of equalizing arrows; 1-truncatedness forces
+  `E ≠ ∅`. What it settles: the question of F2-13 and of Part F of the draft PRESHEAF_TOTALITY; the true form of
+  Grothendieck's conjecture at II ms. 36ter (false for set-valued diagrams: `Δ_inj`; true when `Cat`-valued
+  diagrams are allowed); it bears on VII §10. New as far as I know; no literature search; unchecked. Framing:
+  "totalement asphérique" is the 0-truncated half of filteredness, and the 1-truncated half is what `Δ_inj` lacks.
+  Abelian remark: 1-truncatedness for diagrams of abelian groups already gives exact abelian colimits and
+  siftedness.
+- **F4-7 (prompt, judged).** The GALOIS prompt says an acyclic group gives `BA → e ∈ W_D ∖ W^1`; for a map to the
+  point `W_D` and `W^1` agree (A.3), so that sentence is wrong. (To be completed when the review is.)

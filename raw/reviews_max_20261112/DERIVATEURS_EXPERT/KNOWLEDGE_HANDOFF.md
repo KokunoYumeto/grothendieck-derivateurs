@@ -7,6 +7,49 @@ A compaction summary is not evidence: re-check against these files.
 
 ## State (run `date` before writing a time)
 
+- **12 Nov 2026, 22:05 local (clock checked): CONSULT ON PRETOT ANSWERED (coordinator message 11, verbatim in
+  TASK.md).** PRETOT = the return of GPT-6 Astra (ChatGPT Pro mode) to my prompt PRESHEAF_TOTALITY, reviewed by
+  Claude Opus 5.5 (effort max) in ../PRETOT_REVIEW_OPUS/ (I read only its REVIEW.md sections 1-2, 10-11 and
+  FINDINGS.md). My answer: ../../GLOBAL_SHAPE_AFTER_PRETOT_20261112.md (398 words).
+  WHAT CHANGED FOR MY FILES: (1) RESULT_FILTERED_BY_ONE_TYPES.md carries a correction block: the theorem holds for
+  non-empty connected A; in general condition 2 means every component filtered (my step (2 => 3) took the
+  colimit of the constant diagram to be a point). (2) Hunch H7 (sifted + total => filtered) is PROVED (PRETOT
+  F.3; abelian form F.6). (3) Hunch H3 (integral totality of a presheaf forces simple connectivity) is REFUTED
+  (PRETOT A.5: pi_1 = SL(2,5)); HUNCHES.md still shows H3 and H7 as open: UPDATE THEM when work resumes.
+  (4) H1 (total => exact) is the open inclusion; candidate Ty^op (review FINDINGS F12).
+  The prompts now live in pro_prompts_max_20261112 (per the review); the coordinator edited INDLOCAL,
+  REVERSIBLE_LOCALIZERS, FINMON after my revision. Return 4 (GALOIS) is still at 22 rows of 74; resume point
+  unchanged (sections/C.tex).
+
+- **12 Nov 2026, 16:47 local (clock checked): COORDINATOR MESSAGE 10 IS DONE.** The seven unsent prompts
+  (PRO_PROMPTS/TOTAL_EXACT, PRESHEAF_TOTALITY, REVERSIBLE_LOCALIZERS; ../1_CATHOT/PRO_PROMPTS/FINMON, INDLOCAL,
+  S2COUNT; ../1_CATHOT/PRO_PROMPT_EMAIL_CLAIMS.md = copy of FINMON) are revised: each has a section "Results this
+  prompt builds on" with status, asks that start from the results, a backup PROMPT_before_results_20261112.md and
+  a ZIP_LIST.tsv (18, 32, 33, 45, 32, 22 and 45 rows; all 227 paths exist; generator work/make_zip_lists.py).
+  PRO_PROMPTS/CHANGES_20261112.md (copy in ../1_CATHOT/PRO_PROMPTS/) says per prompt what changed.
+  NEW FILES OF MINE: RESULT_FILTERED_BY_ONE_TYPES.md (NEW THEOREM, unchecked: A filtered iff colimits over A of
+  sets and of groupoids are homotopy colimits iff the Grothendieck construction of every Cat-valued diagram maps
+  by a weak equivalence to the colimit in Cat; the true form of II ms. 36ter); CHECK_OF_CATHOT_OWN_RESULTS_20261112.md
+  (my reading of ../1_CATHOT/OWN_RESULTS.md sections 1-5: no error; its 3.1-3.2 = GALOIS B.10-B.12).
+  FINDINGS.md has F4-1..F4-7; HUNCHES.md has H7-H10 and a status list.
+  RETURN 4 (GALOIS) IS UNFINISHED: 22 rows of 74 written (A.1-A.8, B.1-B.14). RESUME at
+  pro_returns_20261110/4_GALOIS/GALOIS/sections/C.tex (then D, E, F, G, report, research, code), then the steps
+  listed in the older entry below (zip_4, Cisinski 2009, Kaledin, Di Vittorio, Summary, comparison, READING_BASE
+  section 3). Returns 5-8, COMBINED_REVIEW.md and FOLLOW_UPS.md are NOT STARTED.
+
+- **12 Nov 2026, 16:23 local (clock checked): INTERRUPTED BY TWO COORDINATOR MESSAGES (verbatim in TASK.md, messages 9 and 10).**
+  State of return 4 (GALOIS) at the interruption: ../4_GALOIS/REVIEW.md has 22 rows of 74: A.1-A.8 and B.1-B.14
+  (Part B is COMPLETE; B.13, B.14 unproved, the rest correct; row B.7 was rewritten in full after reading
+  B_loc67.tex to its end; B_KT.tex read in full). NOT YET READ: sections C.tex, D.tex, E.tex, F.tex, G.tex,
+  the report, research files, code; the GALOIS zip is not unzipped; Cisinski 2009 Th. 3.6/3.13 not yet opened
+  (input of B.3); Kaledin and Di Vittorio not read. No Summary, no comparison, no findings F4-* yet.
+  New item of mine in row B.14: W^lc of K(n)-local spectra is not proper (map K(Z,2) -> K(Z_p,2)), granted
+  Bousfield 1999 (K(n)_*-equivalences are isomorphisms on H_1(-;Z/p)), quoted from memory, NOT opened.
+  Message 10 (later one) asks: put the new results into the seven unsent prompts (3 mine, 4 of the CATHOT
+  expert), with PROMPT_before_results_20261112.md copies, ZIP_LIST.tsv, and PRO_PROMPTS/CHANGES_20261112.md.
+  Message 9 (earlier one) asks for a short final message (hunches ranked, what to look for in returns 5-8,
+  hunches not yet in prompts). RESUME return 4 at sections/C.tex after that task, if context allows.
+
 - **12 Nov 2026, 14:42 local (clock checked): RETURN 3 (POLES) REVIEW.md IS COMPLETE** (`.._POLES\REVIEW.md`,
   56 KB): all 104 rows have a verdict and an argument (102 correct, 2 unproved = A.16 and F.14; 0 wrong, 0 gap;
   checked by script against the CSV ids), plus Summary, "Additions by the reviewer" (R1-R4), "The prompt, judged",
@@ -38,7 +81,7 @@ A compaction summary is not evidence: re-check against these files.
   B.10-B.12 (KT_mu and CATHOT E.17), D.3-D.5, D.12 (counterexamples), E.2-E.4, E.8-E.10, F.1-F.3.
   REVIEW PROGRESS for return 4 (15:03, clock checked 15:01): ../4_GALOIS/REVIEW.md has the header, Part A
   (A.1-A.8) and the first table of Part B with rows B.1, B.2, B.5, B.8, B.9, B.10 (all correct). sections/B.tex
-  is read. NEXT, in this order: B_general.tex (B.3: relative Theorem A for an ARBITRARY derivator; scrutinize,
+  and B_general.tex are read; row B.3 written (correct; its one unverified input is Cisinski 2009 Th. 3.6 for a subcategory R: OPEN THAT PAPER in work/zip_4 and confirm). Row B.4 (B_accessibility.tex) also written. Row B.6 written too (B_loc67.tex read to line 230; B_loc67.tex read to line 559 and row B.7 written at 15:04 (CONTINUE AT LINE 559 of B_loc67.tex: end of the positive-characteristic case and the W^1 statements of B.7; amend row B.7 if needed; then B_KT.tex for B.11-B.14; then C, D, E, F, G). 19 rows of 74 are written so far: A.1-A.8, B.1-B.10 except none missing (B.1-B.10 all present). NEXT, in this order: (B.3, B.4 done;
   I expected an enhancement to be needed), B_accessibility.tex (B.4), B_loc67.tex (B.6, B.7), B_KT.tex
   (B.11-B.14); append their rows to the same Part B table (start a new table "Part B, continued"); then C, D,
   E, F, G. After all rows: script check that all 74 ids have a row; Summary; additions; prompt judgement;

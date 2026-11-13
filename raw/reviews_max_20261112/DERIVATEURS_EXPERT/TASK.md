@@ -70,3 +70,59 @@ In `pro_reviews_max_20261112\<n>\`: REVIEW.md for n = 2..8.
 In `DERIVATEURS_EXPERT\`: GROTHENDIECK_NOTES.md, READING_BASE.md, KNOWLEDGE_HANDOFF.md, COMBINED_REVIEW.md,
 FOLLOW_UPS.md (every item mathematics to do, push standard), FINDINGS.md (running; plus per return "Compared with
 the earlier review", written only after my own REVIEW.md of that return), HUNCHES.md, PRO_PROMPTS\<short-name>\PROMPT.md.
+
+## Coordinator message 9 (arrived during the GALOIS review, before message 10; logged 12 Nov 2026, 16:23 local, clock checked)
+
+"Your context is nearly full, so this is your last contribution and it must be short. Do not open or read any file. From what you already know of Grothendieck's text and returns 2–4, write in your final message, in at most 1,500 words: the mathematics still to be done that you see (hunches with one line of reason each, ranked), what in returns 5–8 you expect a successor to look for first, and which of your hunches are not yet in your two prompts. Nothing else.
+
+Address this before completing your current task."
+
+Status: superseded in part by message 10, which arrived after it and after a context compaction (the context was no longer nearly full) and which tells me to reread my files. Its content (ranked hunches, what to look for in returns 5–8, hunches not yet in prompts) goes into the final message, kept short.
+
+## Coordinator message 10 (arrived after message 9; logged 12 Nov 2026, 16:23 local)
+
+"Task from the coordinator (Claude Opus 5.5, effort max), approved by the user: place the new results into the unsent prompts so that every prompt builds on them. First: your memory of your reading is a compaction summary written by a weaker model (probably right in substance, not exact); trust your files over it and reread what you need: your DERIVATEURS_EXPERT\FINDINGS.md, HUNCHES.md, RESULT_REVERSIBLE_NOT_STABLE.md, GROTHENDIECK_NOTES.md, the three REVIEW.md files, and the CATHOT expert's files in ..\1_CATHOT\ (OWN_RESULTS.md, FINDINGS.md, HUNCHES.md, G6_VERDICT.md, EMAIL_CLAIMS_CHECK.md), plus derivateurs_companion_20261109\NEW_RESULTS.md.
+Targets (all unsent): ..\DERIVATEURS_EXPERT\PRO_PROMPTS\{TOTAL_EXACT,PRESHEAF_TOTALITY,REVERSIBLE_LOCALIZERS}\PROMPT.md and ..\1_CATHOT\PRO_PROMPTS\{FINMON,INDLOCAL,S2COUNT}\PROMPT.md and ..\1_CATHOT\PRO_PROMPT_EMAIL_CLAIMS.md. For each: copy it first to PROMPT_before_results_20261112.md; then wherever a result proved by you, by the CATHOT expert or in a checked return bears on the prompt, add it to the prompt's background (what is proved, where the proof is, its status: proved by whom at what effort, checked or not) and rewrite the affected asks so that they start from it (check it, then push past it; never ask Pro to re-prove it as if open); keep the push standard (per item: what counts as done, what is unacceptable, when finished). Next to each PROMPT.md write ZIP_LIST.tsv (one row per file for the background zip: full path, why it is needed), including the proofs it now builds on. Then write PRO_PROMPTS\CHANGES_20261112.md: per prompt, what it now builds on and what changed. Do not create new prompts (the coordinator writes the three new ones for H2, H5, H6) and do not build zips.
+Sub-agents allowed: 0. Compute bound: stop before 400,000 tokens of context. Final message: per prompt, the results added and the zip-list length.
+
+Address this before completing your current task."
+
+Note: this message lifts, for this task, two limits of the original brief: it tells me to read the CATHOT expert's files and to write in `..\1_CATHOT\` (the four CATHOT prompt files, their backup copies and ZIP_LIST.tsv files only).
+
+## Coordinator message 11 (logged 12 Nov 2026, 22:05 local, clock checked)
+
+"CONSULT: how should the Dérivateurs companion change now that PRETOT is reviewed? The user asks that you, as the field expert, check this once the inputs are checked. Keep it bounded.
+
+Review: Claude Opus 5.5, effort max. Read only these two files, about 15k tokens, both in C:\Users\user\Documents\derivateurs_companion_20261109\pro_reviews_max_20261112\PRETOT_REVIEW_OPUS\:
+- REVIEW.md, sections 1-2 and 10-11;
+- FINDINGS.md.
+
+What the review found:
+- 54 statements, none wrong. G.3 has a gap; 5 are known; C.4, E.9, F.10 and F.16 are open.
+- A.5 was recomputed: π₁ = 2I ≅ SL(2,5), so total W_Z ≠ total W∞ for presheaves.
+- Classifications A.2, A.10, A.11, A.6.
+- F.3 + F.6: a sifted totally aspherical category is filtered, and abelian diagrams detect it, so Δ° is not totally aspherical. This refutes II Prop. 2.19 Cor. directly.
+- F12: Ty^op is a candidate for a category that is totally aspherical but not filtered.
+- PATHS (unreviewed) claims F.16.
+- Not credited by the return: G.1 = POLES G.19; G.2 = footnote 7 and your F-G4.
+
+Applied today to the unsent prompts:
+- INDLOCAL: R5 corrected to componentwise filtered; C3 gets F.12-F.16.
+- REVERSIBLE_LOCALIZERS: a new R12.
+- FINMON: R7 recount and a D2 test case.
+
+Each of these now carries PRETOT + review as <KEY>_new_results.zip. S2COUNT is unchanged.
+
+Answer in at most 400 words, written to C:\Users\user\Documents\derivateurs_companion_20261109\GLOBAL_SHAPE_AFTER_PRETOT_20261112.md:
+1. What changes in the companion's shape: which drafts or sections to rewrite, and which of your results are now confirmed or superseded.
+2. The next pushes, in order.
+3. Anything in the unsent prompts (INDLOCAL, REVERSIBLE_LOCALIZERS, FINMON, S2COUNT) that still points the wrong way.
+
+Do no new mathematics and no other reading. Reply with the gist.
+
+Address this before completing your current task."
+
+Status: DONE at 22:05. Read: the two files named, nothing else. Written: `..\..\GLOBAL_SHAPE_AFTER_PRETOT_20261112.md`
+(398 words) and a correction block at the top of `RESULT_FILTERED_BY_ONE_TYPES.md` (the theorem needs "non-empty
+connected"; in general "every component filtered": PRETOT F.1). PRETOT is the return to my prompt
+PRESHEAF_TOTALITY; it proves my hunch H7 (F.3, F.6) and refutes my hunch H3 (A.5).

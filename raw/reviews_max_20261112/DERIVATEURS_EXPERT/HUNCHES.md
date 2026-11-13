@@ -150,3 +150,53 @@ holds when `π_1` acts nilpotently on each `ℋ_q` and fails for the permutation
 immediate from the spectral sequence of `E ×_B Y → Y`; necessity of (ii) is the question (the spectral sequence
 could have cancelling differentials). If true, `Fib_{W_Z}` has an intrinsic description and the failure of
 (7 F) is explained: an acyclic total space over `S¹` needs the non-nilpotent system `Z[t, t^{-1}]`.
+
+## H7. Sifted and totally aspherical implies filtered (added 12 Nov, 16:45)
+
+**Origin.** `RESULT_FILTERED_BY_ONE_TYPES.md`: filtered = total + homotopy colimits of `BM(a)`, `M: A → Grp`, are
+1-truncated. With abelian `M` only, the same argument gives: exact abelian colimits and sifted.
+**Hunch.** A sifted totally `W∞`-aspherical category is filtered; so abelian test diagrams suffice.
+**Reasons.** Siftedness gives commutation with finite products of sets, totality gives affine equalizers of
+parallel pairs; an affine equalizer `Σ n_i c_i` of `u, v` is a finite pattern of equalities `c_i u = c_j v`,
+`c_i u = c_j u`, and connectedness of the categories of cospans should let one merge the `c_i` step by step.
+**Against.** I could not carry out the merging; `Δ_inj` is no test (it is not sifted).
+**Smallest undecided instance.** A category with finite coproducts and no weakly terminal object.
+Prompts: TOTAL_EXACT Part D.2, PRESHEAF_TOTALITY Part F.2.
+
+## H8. `W^lc_D` is proper only when it is a truncation-type localizer (added 12 Nov)
+
+**Origin.** GALOIS B.7, B.14; my criterion (FINDINGS F4-4).
+**Hunch.** For `D` the derivator of `E`-local spectra or of `D(k)`: `W^lc_D` has Loc (7 F) iff `W^lc_D = W∞`.
+**Reasons.** True for all `D(k)` (B.7) and, granted Bousfield, false-proper for `K(n)`; the localization is
+`X ↦ B L_E ΩX`, and `L_E` restricted to connected loop spaces contains a completion (`Z → Z_p` on `π_1`) or a
+rationalization whenever it is not the identity, which is never a nullification.
+**Smallest undecided instance.** `E = KU`: is the fibre of `ΩS³ → L_{KU} ΩS³` `KU_*`-acyclic?
+Prompt: REVERSIBLE_LOCALIZERS Part E.4 (the `KU` case only).
+
+## H9. Accessibility of `W^lc_D` for an arbitrary derivator is not decided by the derivator axioms (added 12 Nov)
+
+**Origin.** GALOIS B.13. **Reasons.** A product of a class of derivators is a derivator with values in `CAT_V`,
+and its `W^lc` is the intersection; Casacuberta–Scevenels–Smith tie localization with respect to a proper class
+of maps to large cardinals; under Vopěnka the answer is yes (Cisinski 4.2.17). **Against.** The coefficient
+theories at hand (`D(k)`, `L_E Sp`) give only a set of localizers (Ohkawa), so no counterexample is in sight.
+No prompt yet.
+
+## H10. Positive-degree cohomology of a finite monoid with trivial universal group is nilpotent (added 12 Nov)
+
+**Origin.** The CATHOT expert's results (finite monoids with bounded homology are the finite simply connected
+complexes) and its open question whether `K(Z, 2)` is `BM` for a finite `M`.
+**Hunch.** If `M` is a finite monoid with `U(M) = 1`, every class of positive degree in `H*(M; F_p)` is
+nilpotent; more generally a class is nilpotent iff its restrictions to the subgroups of the groups `eMe` are.
+This would exclude `K(Z, 2)` and `K(Z/2, 2)`.
+**Reasons.** Quillen's theorem for groups; all computed examples (Theorem C models are finite complexes; in
+Sweeney's Example 5.2 the cup products computed by the CATHOT expert vanish).
+**Against.** For `U(M) = 1` the maps `BG → BM`, `G ⊂ eMe`, are null on `π_1` but I have no proof that they are
+null-homotopic or nilpotent in cohomology when `BM` is infinite-dimensional.
+Prompt: FINMON Part A3 (i).
+
+## Status of the earlier hunches after 12 Nov, 16:45
+
+H1 (total = exact): open; now framed by filtered ⊊ `Aff_Z`-filtered ⊂ total (TOTAL_EXACT). H2 (connectivity
+profile for intermediate localizers): no prompt of mine; not examined further. H3: PRESHEAF_TOTALITY Part A.
+H4: REVERSIBLE_LOCALIZERS Parts B–D. H5 (simple homotopy types in Cat): no prompt of mine. H6: REVERSIBLE_LOCALIZERS
+Part E.1–E.2.
