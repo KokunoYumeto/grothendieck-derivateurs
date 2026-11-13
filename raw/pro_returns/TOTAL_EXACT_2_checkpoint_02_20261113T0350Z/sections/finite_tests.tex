@@ -1,0 +1,284 @@
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority claim.
+% This section uses only standard theorem/proof environments and explicit operators.
+\subsection{Finite tests for totality: Lead 6}
+
+\begin{lemma}[Known, with the reduction proved: finite-poset representatives]\label{FT:sphere-representatives}
+Let $C$ be a small category and let $n\geq1$. Every free homotopy class of
+maps $S^n\to |NC|$ has a representative $|Nv|:|ND|\to |NC|$, after a
+homeomorphism $|ND|\cong S^n$, where $D$ is the poset of nonempty faces of
+a finite triangulation of $S^n$ and $v:D\to C$ is a functor.
+\end{lemma}
+\begin{proof}
+We recall the simplicial approximation argument, including the change of
+domain that is needed here. Choose a finite ordered simplicial complex $K$
+triangulating $S^n$. The natural weak equivalence
+$NC\longrightarrow\operatorname{Ex}^{\infty}NC$ has Kan target.
+Consequently a homotopy class $|K|\to|NC|$ is represented by a simplicial
+map $f:K\to\operatorname{Ex}^{\infty}NC$. Since $K$ has finitely many
+nondegenerate simplices, $f$ factors through
+$\operatorname{Ex}^rNC$ for some finite $r$. The subdivision--extension
+adjunction gives a simplicial map
+$g:\operatorname{Sd}^rK\to NC$. Under realization the adjunction compares
+$|g|$ with the original class by the last-vertex maps
+$\operatorname{Sd}^rK\to K$; their realizations are homotopic to the
+subdivision homeomorphisms. We may increase $r$ to ensure $r\geq1$.
+Now $\operatorname{Sd}^rK$ is the nerve of the poset $D$ of nonempty faces
+of the finite complex $\operatorname{Sd}^{r-1}K$. The nerve is fully
+faithful on categories: the images of vertices and edges of $g$ specify
+objects and arrows, and its two-simplices impose precisely the composition
+equalities. Thus $g=Nv$ for a unique functor $v:D\to C$.
+The facts about $\operatorname{Ex}^{\infty}$ and last vertices used in
+this argument are \cite[Theorem~I.11.4, Section~III.4, and
+Theorem~III.4.8]{GoerssJardine2009}; they concern arbitrary simplicial sets
+and do not require $NC$ to be a simplicial complex.
+\end{proof}
+
+\begin{theorem}[Proved: Lead 6]\label{FT:finite-test}
+Let $A$ be a small nonempty connected category. For a functor
+$u:D\to A$, define the covariant $A$-set
+\[
+ H_u(a)=\pi_0(u\downarrow a),\qquad
+ H_u(b)([d,f])=[d,bf]
+\]
+for $b:a\to a'$. Here $(d,f)$ has $f:u(d)\to a$, and an arrow
+$(d,f)\to(d',f')$ is $\delta:d\to d'$ with $f'u(\delta)=f$.
+Define a functor
+\[
+ j_u:D\longrightarrow\operatorname{El}_A(H_u),\qquad
+ d\longmapsto(u(d),[d,1_{u(d)}]),
+\]
+whose value on an arrow is its image under $u$. The following conditions
+are equivalent:
+\begin{enumerate}
+\item Every component of every $\operatorname{El}_A(H)$, for every
+covariant $H:A\to\mathsf{Set}$, is weakly contractible.
+\item For every finite poset $D$ and every $u:D\to A$, $Bj_u$ is
+null-homotopic on every connected component of $BD$.
+\item The same conclusion holds when $D$ is the face poset of a finite
+triangulation of $S^n$, for every integer $n\geq1$.
+\end{enumerate}
+In particular the tests in (3) suffice; no bound on the dimension of the
+spheres is being imposed.
+\end{theorem}
+\begin{proof}
+The arrow $u(\delta):u(d)\to u(d')$ defines an arrow in the displayed
+category of elements because $(d,u(\delta))$ and $(d',1)$ are joined by
+$\delta$ in $u\downarrow u(d')$. This proves that $j_u$ is well-defined.
+
+The essential factorization is strict, not merely a homotopy
+factorization. Let $H:A\to\mathsf{Set}$ and let
+$v:D\to\operatorname{El}_A(H)$ be a functor. Write
+$v(d)=(u(d),h_d)$, where $u=\pi v$ and
+$\pi:\operatorname{El}_A(H)\to A$ is the projection. Define
+\[
+ \eta_v:H_u\longrightarrow H,\qquad
+ (\eta_v)_a([d,f])=H(f)(h_d).
+\]
+If $f'u(\delta)=f$, then
+$H(f)(h_d)=H(f')H(u(\delta))(h_d)=H(f')(h_{d'})$, so this formula is
+constant on components of $u\downarrow a$. It is natural in $a$ because
+$H(b)H(f)(h_d)=H(bf)(h_d)$. It therefore induces a functor over $A$,
+\[
+ E_v:\operatorname{El}_A(H_u)\longrightarrow
+       \operatorname{El}_A(H),\qquad
+ (a,\xi)\longmapsto(a,(\eta_v)_a(\xi)),
+\]
+which is the identity on underlying arrows of $A$. Direct substitution
+shows $E_vj_u=v$ as functors.
+
+Assume (1). Each component of the target of $Bj_u$ is a weakly
+contractible CW complex and hence contractible by Whitehead's theorem.
+The continuous image of a component of $BD$ lies in one such component,
+so the restricted map is null-homotopic. This proves (2), and (2)
+implies (3).
+
+Assume (3), fix $H$ and a component $C$ of $\operatorname{El}_A(H)$,
+and consider any map $f:S^n\to BC$, $n\geq1$. By
+Lemma~\ref{FT:sphere-representatives}, after identifying the source with
+$BD$ its free homotopy class is represented by $Bv$, for a functor
+$v:D\to C$. The preceding factorization gives $Bv=BE_v\,Bj_{\pi v}$.
+Condition (3) makes this composite null-homotopic. Thus every unbased
+sphere map into the connected space $BC$ is null. This implies the
+vanishing of every based homotopy group: for $n=1$ a free null-homotopy
+makes a loop conjugate to the identity and hence trivial; for $n>1$ the
+change of basepoint acts by automorphisms and fixes the zero class.
+Therefore $BC$ is weakly contractible. The case $H=\varnothing$ has no
+components and imposes no extra condition. Empty or disconnected $D$
+causes no difficulty in (2), which is expressly componentwise.
+\end{proof}
+
+\subsection{The opposite interval-type category: Lead 8}
+
+\begin{proposition}[Proved: precise variance and a homological obstruction]\label{FT:ty}
+Let $\mathsf{Ty}$ be the category in PRETOT Definition E.1: its objects
+are finite words $\tau$ in $+,-$, including the empty word, and a morphism
+$\tau\to\rho$ is an endpoint-preserving functor
+$I_\tau\to I_\rho$ whose function on vertices is nondecreasing. Here
+$I_\tau$ is the free category on the oriented line prescribed by $\tau$.
+Then $\mathsf{Ty}^{\mathrm{op}}$ is isomorphic to the category of these
+words and nondecreasing sign-preserving maps of their letter sets.
+
+Put $p=(++)$, $q=(+-+)$, and use one-based letter indices. The arrows
+\[
+ e=(1,3),\quad c=(1,1):p\rightrightarrows q
+\]
+have no completion to a commutative square. For every nonzero unital
+commutative ring $R$ they have no affine equalizer in
+$\operatorname{Aff}_R(\mathsf{Ty}^{\mathrm{op}})$.
+In fact, for the covariant set quotient
+\[
+ H=\mathsf{Ty}^{\mathrm{op}}(p,-)/(ge\sim gc)
+\]
+we have
+$H_1(B\operatorname{El}_{\mathsf{Ty}^{\mathrm{op}}}(H);\mathbb Z)
+\cong\mathbb Z$. Thus $\mathsf{Ty}^{\mathrm{op}}$ is neither total nor
+exact. The phrase ``over any ring'' in Lead 8 must exclude the zero ring;
+with that qualification the lead is true.
+\end{proposition}
+\begin{proof}
+For $\tau$ of length $n$ and $\rho$ of length $m$, write a type map on
+vertices as
+$\phi:\{0,\ldots,n\}\to\{0,\ldots,m\}$, with
+$\phi(0)=0$, $\phi(n)=m$ and $\phi(i-1)\leq\phi(i)$. The functor
+condition says exactly that every letter of $\rho$ in the interval
+$(\phi(i-1),\phi(i)]$ has the sign of the $i$th letter of $\tau$;
+a collapsed interval imposes no condition. Define
+\[
+ f_\phi:\{1,\ldots,m\}\longrightarrow\{1,\ldots,n\},\qquad
+ f_\phi(j)=\text{the unique }i\text{ with }\phi(i-1)<j\leq\phi(i).
+\]
+This is nondecreasing and sign-preserving. Conversely such a map $f$
+defines
+$\phi_f(i)=|\{j:f(j)\leq i\}|$. These two formulas are inverse.
+They also cover the empty words: the map from a nonempty letter set to
+an empty one does not exist, while the map from an empty letter set is
+unique. If $\psi:I_\rho\to I_\sigma$ is another type map, the defining
+interval inequalities give
+$f_{\psi\phi}=f_\phi f_\psi$. Therefore these bijections form the
+asserted isomorphism of categories with the opposite variance.
+
+Let $g:q\to\sigma$ be any arrow in the opposite category. Since
+adjacent letters of $q$ have opposite signs, sign preservation and
+nondecreasingness imply
+$g(1)<g(2)<g(3)$. Hence $ge$ is injective on the two letters of $p$,
+whereas $hc$ is constant for every $h:q\to\sigma$. Thus $ge=hc$ is
+impossible, proving failure of condition I.
+
+For each $\sigma$ define an $R$-linear functional
+\[
+ \lambda_\sigma:R[\mathsf{Ty}^{\mathrm{op}}(p,\sigma)]\to R
+\]
+by giving a basis arrow value $1$ if it is injective and $0$ if it is
+constant. These are the only possibilities for a map out of $p$.
+For every $g:q\to\sigma$ we have
+$\lambda_\sigma(ge-gc)=1$. Consequently for every finite linear
+combination $t\in R[\mathsf{Ty}^{\mathrm{op}}(q,\sigma)]$,
+\[
+ \lambda_\sigma(t(e-c))=\operatorname{aug}(t).
+\]
+If $te=tc$, its augmentation is zero. It cannot also be $1$ unless
+$R$ is the zero ring. This is an exact integral dual certificate,
+valid for all targets and hence for all nonzero coefficient rings.
+
+For the stronger homological claim, work over $\mathbb Z$ and put
+$P_x=\mathbb Z[\mathsf{Ty}^{\mathrm{op}}(x,-)]$,
+$d:P_q\to P_p$, $d(t)=t(e-c)$, $K=\ker d$, and $J=\operatorname{im}d$.
+The objectwise free-group functor preserves the defining set
+coequalizer, so $\operatorname{coker}d=\mathbb Z[H]$. Representables
+are projective and their colimits are canonically $\mathbb Z$ by
+augmentation. The functional identity shows that the map
+$\operatorname{colim}K\to\operatorname{colim}P_q=\mathbb Z$ is zero,
+even when its input is a finite sum of elements represented at different
+objects. The exact sequence
+$K\to P_q\to J\to0$ therefore gives
+$\operatorname{colim}J\cong\mathbb Z$. The map
+$\operatorname{colim}J\to\operatorname{colim}P_p$ is zero because the
+augmentation of every $t(e-c)$ is zero. The derived-colimit exact
+sequence of $0\to J\to P_p\to\mathbb Z[H]\to0$ now gives
+\[
+ L_1\operatorname{colim}\mathbb Z[H]
+ \cong\operatorname{colim}J\cong\mathbb Z.
+\]
+The bar complex for the permutation diagram $\mathbb Z[H]$ is exactly
+the integral nerve chain complex of its category of elements, proving
+the claim. This explicitly witnesses failure of both totality and
+exactness and does not infer an infinite conclusion from finite tests.
+
+The program \texttt{code/finite\_ty\_verify.py} independently checks the
+two descriptions on all $961$ ordered pairs of words of length at most
+four, the contravariant composition bijection on $2731$ composable pairs
+of type maps for words of length at most three, and the integral dual
+certificate on all $7937$ arrows from $q$ to the $1023$ words of length
+at most nine. These computations audit the formulas; the preceding
+proof applies without a length bound.
+\end{proof}
+
+\subsection{Constraints on a minimal separator: Lead 9}
+
+\begin{proposition}[Proved: Lead 9]\label{FT:minimal-family}
+Suppose $A$ is a small total category that is not exact, and let
+$a_0,\ldots,a_k:p\to q$ be a family without an integral affine equalizer.
+Assume $k$ is least among all such families in $A$. Then:
+\begin{enumerate}
+\item $A(q,p)=\varnothing$.
+\item The finite cardinalities $|A(p,x)|$ have no uniform finite bound;
+in symbols, $\sup_x|A(p,x)|=\infty$ in the sense of unboundedness in the
+natural numbers, allowing infinite values.
+\item The full cosieve
+$V_p=\{x\in A:A(p,x)\ne\varnothing\}$ is again a separator, with the
+same exhibited family. Its object $p$ is weakly initial, and the minimal
+integer $k$ remains the same after restriction.
+\item For every arrow $g:q\to x$, the arrows
+$ga_0,\ldots,ga_k:p\to x$ are pairwise distinct.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Totality gives conditions I and IV. We use precisely the two exclusions
+proved in the opened source \cite[Corollary~4.3 and Proposition~4.5]{IsbellMitchell1976}.
+Corollary~4.3 first simultaneously equalizes a finite collection of
+endomorphisms with the identity, by applying the fixed-point theorem to
+endomorphisms of a representable act. If $b:q\to p$ existed, apply it to
+$ba_0,\ldots,ba_k,1_p$. It gives an ordinary arrow $u:p\to r$ with
+$uba_i=u$ for every $i$. The ordinary arrow $ub:q\to r$ would already
+be an affine equalizer, proving (1).
+
+For (2), the representable $A$-set $A(p,-)$ is connected because its
+category of elements has the initial object $(p,1_p)$. If its values had
+a uniform finite bound, Proposition~4.5 would imply condition II for this
+act. That proposition forms the congruence identifying two elements
+whenever an ordinary arrow equalizes them; condition I makes this a
+congruence. All arrows act injectively on its quotient. At an object
+where the finite cardinality is maximal, the maps to subsequent objects
+are bijections, and the necklace form of IV forces the quotient to have
+one element there. The conclusion is exactly ordinary equalizability
+of every pair in the original representable. Apply it successively to
+the finitely many images of $a_0,\ldots,a_k$; composing the resulting
+ordinary arrows gives an ordinary simultaneous equalizer, a
+contradiction. This verifies that the cited result applies to the one
+representable involved here, rather than requiring a bound on every
+hom-set of $A$.
+
+For (3), $V_p$ is nonempty and is closed under targets. It is connected:
+condition I applied to a span $p\to x$, $p\to y$ gives a common target
+inside $V_p$. A covariant set-valued functor on $V_p$ extends to $A$ by
+the empty set off $V_p$; arrows entering $V_p$ have the unique map from
+an empty set, and no arrow leaves it. Its category of elements is
+literally unchanged. Hence totality of $A$ proves totality of $V_p$.
+Any affine equalizer of the displayed family in $V_p$ would also be one
+in $A$, so $V_p$ is not exact. Conversely, if a family of arrows in
+$V_p$ has an affine equalizer in $A$, every target occurring in its
+finite support is in $V_p$, because it receives an arrow from its source
+in the cosieve. Thus it is already an affine equalizer in $V_p$.
+All smaller families therefore remain equalizable. Every object of
+$V_p$ receives a map from $p$, which is exactly weak initiality.
+This is the full proof of the cosieve step used from TOTEX D.23.
+
+For (4), suppose $ga_i=ga_j$ for some $i\ne j$. The displayed family at
+$x$ then has at most $k$ distinct arrows. By the global minimality of
+$k$ there is an affine $t:x\to y$ equalizing all its distinct members.
+The composite $tg\in\mathbb Z[A(q,y)]$ has augmentation one, because
+$g$ is an ordinary arrow, and satisfies $(tg)a_i=(tg)a_0$ for every
+$i$. This contradicts the choice of the original family. This argument
+uses minimality among all objects and families of $A$, as stipulated in
+the lead; minimality merely within a fixed target would not suffice.
+\end{proof}

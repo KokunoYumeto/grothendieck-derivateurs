@@ -1,0 +1,99 @@
+\begin{proposition}[Refuted: every admissible-length ordered necklace is orderable]
+\label{C:ordered-necklace-short-warning}
+The sufficiently-large-$k$ hypothesis in
+Proposition~\ref{C:ordered-necklace} cannot be replaced, for arbitrary
+increasing maps of finite linear orders, by the condition that $k$
+bounds the sizes of their nontrivial point paths. The failure can
+occur at $n=3$, $s=45$, $k=11$, satisfying the numerical C.1 condition
+for $a_0=2$, $a_1=8/5$.
+The pair below is not asserted to occur among the actual generated
+arrows of C.1, so this does not refute the universal statement of
+Part C.1 or the selected construction already proved.
+\end{proposition}
+
+\begin{proof}
+For any integer $k\geq2$, put
+\[
+ d=2k,\qquad s=2d+1=4k+1,\qquad M=d(d+1).
+\]
+Give the finite sets
+\[
+ S=\{0,\ldots,M\},\qquad T=\{0,\ldots,2M+s\}
+\]
+their natural linear orders, and define
+\[
+ f,g:S\rightrightarrows T,
+ \qquad f(r)=2r,\quad g(r)=2r+s.
+\]
+Both are increasing injections. Their images are disjoint, since
+$s$ is odd, and their nontrivial point relation consists entirely
+of two-vertex paths. Thus the repaired target with this $k$ and
+actual path size two is defined and satisfies the usual neighboring
+identities.
+
+Write those identities as
+$\alpha_i\lambda_i=\alpha_{i+1}\mu_i$, with cyclic indices and
+\[
+ (\lambda_i,\mu_i)=
+ \begin{cases}
+ (g,f),&0\leq i<d,\\
+ (g,g),&i=d,\\
+ (f,g),&d<i<2d,\\
+ (f,f),&i=2d.
+ \end{cases}
+\]
+We give an explicit cycle of forced strict inequalities in the
+repaired target. Begin with $r_{-1}=M$ and define
+\[
+ r_i=
+ \begin{cases}
+ r_{i-1}-d,&0\leq i\leq d,\\
+ r_{i-1}+d+1,&d<i\leq2d.
+ \end{cases}
+\]
+All these indices lie in $S$: the first part decreases from $M-d$
+to zero, and the second increases from $d+1$ to $M$.
+In particular $r_{2d}=r_{-1}$, so this is a cyclic list.
+
+For $0\leq i\leq d$, the incoming and outgoing old points in copy
+$i$ are $f(r_{i-1})$ and $g(r_i)$, and
+\[
+ g(r_i)=2(r_{i-1}-d)+(2d+1)=f(r_{i-1})+1.
+\]
+For $d<i\leq2d$, they are $g(r_{i-1})$ and $f(r_i)$, and
+\[
+ f(r_i)=2(r_{i-1}+d+1)=g(r_{i-1})+1.
+\]
+Thus in every copy the incoming point is strictly smaller than the
+outgoing point, in fact immediately precedes it in $T$. Equivalently,
+\[
+ \mu_{i-1}(r_{i-1})<\lambda_i(r_i)
+ \qquad(0\leq i<s),
+\]
+where the lower junction uses $\mu_{2d}=f$.
+If every $\alpha_i$ preserved the old linear order, these inequalities
+and the neighboring equalities would give
+\[
+ \alpha_0\mu_{s-1}(r_{s-1})
+ <\alpha_0\lambda_0(r_0)
+ =\alpha_1\mu_0(r_0)
+ <\cdots
+ <\alpha_{s-1}\lambda_{s-1}(r_{s-1})
+ =\alpha_0\mu_{s-1}(r_{s-1}).
+\]
+This is impossible in a linear order. No order on this repaired
+target therefore makes all its copy maps increasing.
+
+Taking $k=11$, $n=3$ gives $d=22$, $M=506$, and $s=45$.
+The source has $507$ points, the old target has $1058$ points,
+and the repaired target has $24795$ points. Its forced precedence
+cycle has $45$ edges. The standalone program
+\texttt{akr\_ordering\_counterexample.py} constructs the repaired
+maps, verifies the source path sizes and all neighboring identities,
+and checks each consecutive-point comparison and equality in that
+cycle. The output and JSON certificate give all $45$ comparisons.
+Since $45/(3\cdot3)=5=(1-(8/5)/2)^{-1}$, these are numerically
+admissible C.1 parameters for a first-step ratio, though no realization
+of this particular source pair in the prescribed construction is
+claimed.
+\end{proof}

@@ -1,0 +1,89 @@
+\begin{lemma}[Proved: exact fixed subsets of the repaired copy maps]
+\label{C:beta-fixed-subsets}
+Consider a repaired attachment for injections $f,g:S\rightrightarrows T$
+between finite sets. Assume that the partial relation
+$f(x)\mapsto g(x)$ has no nontrivial directed cycles.
+Let $F=\{f(x):f(x)=g(x)\}$ and write the nonconstant directed paths of
+the partial relation $f(x)\mapsto g(x)$ as
+\[
+ p_{\nu,0}\longrightarrow\cdots\longrightarrow p_{\nu,l_\nu-1}.
+\]
+Here $l_\nu$ is the number of vertices of the path, not its number of
+edges. Put $L=\max_\nu l_\nu$, or $L=1$ when there are no such paths.
+For $s=4k+1$ and $k\geq n\geq L$, let
+$\alpha_0,\ldots,\alpha_{4k}:T\to Z$ be the repaired copy maps.
+For $0\leq i<j\leq4k$, their set of fixed source vertices is exactly:
+\begin{enumerate}
+\item if $(i,j)=(r,4k-r)$ with $0\leq r\leq L-2$, it is
+\[
+ F\ \cup\ \{p_{\nu,t}:0\leq t\leq l_\nu-r-2\};
+\]
+\item if $(i,j)=(2k-r,2k+1+r)$ with $0\leq r\leq L-2$, it is
+\[
+ F\ \cup\ \{p_{\nu,t}:r+1\leq t\leq l_\nu-1\};
+\]
+\item for all other pairs it is $F$.
+\end{enumerate}
+An empty index range contributes no points. Thus at most $2L-1$
+distinct fixed subsets have to be tested, independently of $s$.
+\end{lemma}
+\begin{proof}
+Fixed points in $F$ are shared by every copy; private points are shared
+by no two distinct copies. On a path of length $l$, write $t$ for its
+zero-based position. Its repaired coordinate is
+\[
+ \beta_i(t)=
+ \begin{cases}
+ t+i,&i\leq2k,\ t+i\leq2k,\\
+ t+i+2k-l+1,&i\leq2k,\ t+i>2k,\\
+ t-i+6k-l+2,&i>2k,\ t-i+6k-l+2>2k,\\
+ t-i+4k,&i>2k,\ t-i+6k-l+2\leq2k.
+ \end{cases}
+\]
+For fixed $t$, this expression is strictly increasing on the first
+arm and strictly decreasing on the second arm: within each branch its
+step is respectively $1$ or $-1$, and at a branch transition the jump
+has the same sign because $l\leq k$. Thus an equality between distinct
+copies must use $i\leq2k<j$.
+
+If both values lie in the lower branch, equality says $i+j=4k$.
+Writing $i=r$, the branch inequalities reduce exactly to
+$t\leq l-r-2$. If both lie in the upper branch, equality says
+$i+j=4k+1$. Writing $i=2k-r$, the inequalities reduce to $t\geq r+1$.
+For the first-lower/second-upper case, equality would give
+$i+j=6k-l+2$; the lower inequality forces
+$j\geq t+4k-l+2$, contrary to the upper inequality. For the
+first-upper/second-lower case, equality would give
+$i+j=2k+l-1$, whereas the lower inequality implies
+$j\geq t+4k-l+2$, impossible since $l\leq k$.
+These calculations give precisely the two displayed families, path by
+path. Different paths have different tags in the repaired target.
+Only $l\leq k$ was used, so the calculation applies to every admissible
+common bound $n$ and every actual path size $l\leq n\leq k$; no
+restriction to the tested size-three examples is involved.
+\end{proof}
+
+\begin{corollary}[Proved: the small-overlap case is harmless]
+\label{C:beta-small-overlap}
+Assume that $f$ and $g$ induce injections on binary graph components
+and that their underlying point images meet in at most one point.
+Then every equalizer subgraph of a pair of copy maps
+$\alpha_i,\alpha_j:T\to Z$ is connected in each component of $G_T$.
+Thus the fixed-path criterion applies to a subsequent attachment for
+any such copy pair, even when $K(T)/F(T)$ is nonzero.
+\end{corollary}
+\begin{proof}
+An internal vertex of a nonconstant point path belongs to
+$f(S)\cap g(S)$. Hence every path has length at most three, at most
+one has length three, and a fixed point cannot coexist with a
+length-three path. In Lemma~\ref{C:beta-fixed-subsets}, the first
+prefix and suffix are respectively $f(S)$ and $g(S)$, including the
+fixed points. All remaining subsets have at most one point.
+The image of each source graph component is connected, and injection
+on components prevents two distinct source components from lying
+in one ambient component. This proves the claim for the two full
+images; the singleton and empty cases are immediate. The equalizer
+graph is induced on its fixed vertices by the established AKR
+two-point routing property, as in
+Proposition~\ref{C:fixed-path-kernel}.
+\end{proof}

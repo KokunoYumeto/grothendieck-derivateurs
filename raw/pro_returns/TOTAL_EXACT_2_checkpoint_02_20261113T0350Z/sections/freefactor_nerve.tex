@@ -1,0 +1,68 @@
+\begin{proposition}[Proved: a free-factor nerve-colimit obstruction]\label{C:freefactor-nerve}
+There is a diagram of finitely generated free groups, with every
+transition a free-factor inclusion and with free group colimit, whose
+ordinary simplicial-set colimit of nerves has second integral homology
+$\mathbb Z$.
+\end{proposition}
+\begin{proof}
+Use the category consisting of a parallel pair $f,g:0\rightrightarrows1$
+and the diagram
+\[
+ G_0=F(a,c),\qquad G_1=F(a,c,b),\qquad
+ f=(a,c),\quad g=(ab,cb^2).
+\]
+The automorphism $a\mapsto ab$, $c\mapsto cb^2$, $b\mapsto b$
+has inverse $a\mapsto ab^{-1}$, $c\mapsto cb^{-2}$, $b\mapsto b$.
+Thus both maps have free-factor image.
+
+We claim that their image subgroups intersect only in the identity.
+For a nonempty reduced word $w$ in $a,c$, consider $g(w)$ in the free
+product $F(a,c)*F(b)$. A negative first letter gives a nonzero initial
+$b$-block, and a positive last letter gives a nonzero terminal $b$-block.
+In the remaining case, $w$ starts positively and ends negatively, so it
+has a positive-to-negative transition. At such a transition the two
+underlying generators differ, since $w$ is reduced. Its $b$-exponents
+are therefore $1-2$ or $2-1$, both nonzero. These are the only places
+where $b$-blocks from distinct letters can merge. No intervening
+$a,c$ block reduces to the identity: it is a subword of the original
+reduced word. Hence at least one nonzero $b$-block survives, and
+$g(w)\notin F(a,c)$. This proves the claim for arbitrary word length.
+
+Consequently $BG_0\vee BG_0\to BG_1$, induced by $f,g$, is a
+simplicial monomorphism. Indeed its two images intersect in each nerve
+degree only in the all-identity simplex. The ordinary coequalizer $Y$
+of $Bf,Bg$ is the pushout of this monomorphism along the fold
+$BG_0\vee BG_0\to BG_0$. This is a homotopy pushout: realizations of
+simplicial monomorphisms are inclusions of CW subcomplexes, or one may
+factor the fold through its mapping cylinder before pushing out.
+
+Free groups have classifying spaces homotopy equivalent to graphs.
+The Mayer--Vietoris sequence therefore gives
+\[
+ H_2(Y;\mathbb Z)\cong
+ \ker(f_{\mathrm{ab}}-g_{\mathrm{ab}}:\mathbb Z^2\to\mathbb Z^3)
+ =\mathbb Z(2a-c),
+\]
+since $(f_{\mathrm{ab}}-g_{\mathrm{ab}})(a)=-b$ and its value on $c$
+is $-2b$. On the other hand,
+\[
+ \colim G=\langle a,c,b\mid a=ab,\ c=cb^2\rangle\cong F(a,c).
+\]
+The first relation kills $b$, and the second is redundant. Thus the
+comparison $Y\to B(\colim G)$ cannot be a weak equivalence.
+\end{proof}
+
+\paragraph{Scope of the obstruction.}
+The parallel-pair indexing category is not quasi-filtered and is not
+total. This example does not refute totality-to-exactness or establish
+anything about the totality of AKR. It rules out deriving asphericity
+of an ordinary nerve colimit solely from free values, free-factor
+transitions and a free group colimit.
+
+The program \texttt{finite\_freefactor\_nerve.py} checks the Nielsen
+inverses, exact word identities certifying the group quotient, and the
+integer Mayer--Vietoris matrix. The latter has a unit $3\times3$ minor,
+all $4\times4$ minors zero, and primitive kernel generator
+$(2,-1,-2,1)$. Its additional check of all $39{,}364$ reduced nonempty
+words of length at most nine is supplementary; the proof above is
+unbounded.
