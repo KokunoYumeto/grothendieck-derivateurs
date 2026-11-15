@@ -28,6 +28,63 @@ French. We did not decipher the manuscript; they did. Their notes, prefaces, pos
 writing and are not reproduced here; read them in their edition. What their notes point out, and our attempts to answer
 the questions they raise, will be listed in our own words in `EDITORS_INSIGHTS_AND_OUR_ANSWERS.md`.
 
+## How this was made: AI's failure modes, and what we do about them
+
+Everything here was produced by AI. Transcribing a typeset edition and translating it fail in known ways, and a reader
+is right to expect them. The method is built against each of them, and we report what the checks measured.
+
+**How each layer was made**
+- **Transcription:** Claude Opus 5.5 at effort high (Anthropic Message Batches API), from images of the edition's
+  pages, not from its PDF text: one request per five pages (243 requests, one per file of `transcription/`), each page
+  sent whole and as three overlapping strips at 300 dpi. Each five-page file is a complete LaTeX document and is
+  compiled on its own.
+- **Check of the transcription:** each of the 32 parts of the companion was checked against the edition's pages by
+  GPT-6 Astra (ChatGPT Pro mode), which returned the corrected text with a table of corrections
+  (`companion/checks/DER_<part>/DER_<part>_corrections.csv`). Claude Opus 5.5 at effort max then decided every change
+  the returned texts made but the tables did not list, each against the edition's page (`transcription/DECISIONS.md`).
+- **Companion:** the commentary, the register of claims and the bibliography are by GPT-6 Astra (ChatGPT Pro mode).
+- **English:** GPT-6.1 Sol at reasoning effort max (OpenAI API, Flex), five pages per request, with a glossary of
+  Grothendieck's terms (171 entries); every answer was checked by scripts against its French, then the whole was
+  compared with the French paragraph by paragraph and sentence by sentence (`en/README.md`).
+
+**The failure modes, and what we do about each**
+- **A plausible word in place of the printed one.** The transcription prompt asks for the printed text and a `% ??`
+  comment wherever a reading is in doubt. The check by GPT-6 Astra (ChatGPT Pro mode) found 134 transcription errors
+  in the 1,171 pages (about one in nine pages) and resolved 122 doubtful readings; all are corrected and listed in the
+  parts' tables. 20 `% ??` marks remain in the source, each a place to read against the edition.
+- **Dropped symbols, lines or diagram arrows.** Each page is sent whole and in three overlapping strips, so that no
+  line falls between two images; the check compares every page of the text with the edition's page, formulas and
+  diagrams included. In the English, scripts compared every formula with the French: 46,016 of the 46,072 are
+  identical, and the other 56 are listed with the reason in `en/checks/FORMULAS_NOT_IDENTICAL.md` (47 differ only in
+  a translated word inside the formula).
+- **Silent corrections of the edition.** A model tends to correct what looks like a slip. Our rule is the opposite:
+  slips of the edition are kept as printed and flagged `% [sic]` in the source (895 flags); the companion's tables
+  list 1,878 such slips, kept. The checking model's own changes were not taken on trust: of the 435 changes its
+  returned texts made without listing them, Claude Opus 5.5 at effort max kept 69 that match the edition and 130
+  layout-only repairs, undid 9 that were wrong and 227 layout additions, and overruled five of the listed corrections
+  against the edition's pages (`transcription/DECISIONS.md`). The editors' own corrections, which stood in their
+  notes, are not applied: the text is as the edition prints it.
+- **Notation drifting between packages.** Each five-page file carries the macro definitions of its own pages, so a
+  sign is defined where it is used; ten corrections of macro definitions were checked against the pages and eight
+  applied. In the English, formulas are copied character for character from the French, and the glossary fixes one
+  English term for each of Grothendieck's terms: 9,752 of 9,759 page entries carry the glossary's English, and the
+  other 7 are checked misfires of the script, each waived with its reason.
+- **A translation that smooths or "improves" the mathematics.** The prompt asks for Grothendieck's own register and
+  forbids any change to formulas; the formula check above enforces it, and the page anchors, labels and footnote marks
+  are checked to stand as in the French. What scripts cannot judge is the English prose itself: it has not had a second
+  reading as a whole.
+- **Dropped sentences.** The whole translation was compared with the French for anything missing, cut short or left in
+  French: the 7,267 paragraphs and 884 footnotes have their English one for one (14,698 French sentences, 14,736
+  English), and each of the 145 places the comparison flagged was read against the French; none is a missing passage.
+  The comparison was tested by deleting text from the English at random: it found all 197 deleted sentences and 249
+  of 411 deleted clauses, so a short clause dropped from a long sentence can escape it.
+- **Work lost or cut short.** Every request, answer and fix is kept: the prompts as sent (`en/prompt/`), the answers
+  (`en/runs/out/`), the 41 fixes with their reasons (`en/checks/FIXES.jsonl`), and each part's returned text before
+  the decisions (`companion/checks/DER_<part>/DER_<part>_text_pro.tex`).
+
+The edition's pages are public on the editors' site, so every reading here can be checked against them. Corrections are
+welcome as GitHub issues.
+
 ## 1. The LaTeX transcription (complete)
 
 A LaTeX transcription of Grothendieck's text in the whole edition: every page of the nineteen chapters (Chapter XII
