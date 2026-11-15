@@ -1,0 +1,114 @@
+\section{The literal axioms: absolute localization is weaker}
+\providecommand{\Tor}{\operatorname{Tor}}
+\providecommand{\Wt}{{W^{\dagger}}}
+\providecommand{\PiOne}{\Pi_1}
+
+\begin{claim}{F.1}{Refuted}{Absolute Theorem A does not imply relative Theorem A, even with Loc (8) and (9)}
+There is a strongly saturated class $\Wt$ of small-category functors satisfying XVI Loc (2), (3), (8), and (9), but satisfying neither Loc (3 bis) nor Loc ($6'$ a). A finite counterexample to relative Theorem A has a three-object indexing poset and a map from a $77$-object poset to a $53$-object poset. For a base with a terminal object, in particular $[1]$, relative Theorem A is tautological.
+\end{claim}
+\begin{proof}
+For an abelian group $A$, write $\Tor(A)$ for its torsion subgroup. Define $\Wt$ to consist of the functors $u:X\to Y$ satisfying the following four requirements: $\PiOne(Bu)$ is an equivalence of fundamental groupoids; $H_n(Bu;\ZZ)$ is an isomorphism for every $n\geq3$; $H_2(Bu;\QQ)$ is an isomorphism; and $\Tor H_2(Bu;\ZZ)$ is an isomorphism. No local coefficient systems occur in this definition.
+
+Each requirement is the inverse image of a class of isomorphisms, or of equivalences of groupoids. Consequently $\Wt$ satisfies two out of three, the rule involving $uv$ and $vu$, and retract closure. It is strongly saturated as well: each of the indicated functors factors through $\Cat[\Wt^{-1}]$, so any arrow invertible there passes every test. It contains $W_\infty$.
+
+We first identify its aspherical objects. If $X\to e$ belongs to $\Wt$, then $BX$ is nonempty, connected, and simply connected. Its homology vanishes above degree two. The group $A=H_2(BX;\ZZ)$ has $A\otimes\QQ=0$ and $\Tor(A)=0$. The first equality says that every element of $A$ is torsion, and the second therefore implies $A=0$. Thus $BX$ is simply connected and acyclic. A first nonzero homotopy group would contradict the Hurewicz theorem, and hence $BX$ is weakly contractible. The converse is immediate. In particular a category with a terminal object is $\Wt$-aspherical. If $u:X\to Y$ has all comma categories $X/y$ $\Wt$-aspherical, they are weakly contractible, so Quillen's Theorem A puts $u$ in $W_\infty\subseteq\Wt$. This is exactly the absolute Loc (3), with the required variance. The theorem used is \cite[\S1, Theorem A]{FGHQuillen1973}: contractibility of all the indicated comma-category classifying spaces implies that the specified map $BX\to BY$ is a homotopy equivalence. Its opposite-category form gives the same assertion for the other comma convention.
+
+Here are completely specified finite witnesses. Let $C_m$ be the polygonal simplicial circle with vertices $0,\ldots,m-1$ and edges $\{i,i+1\}$, indices modulo $m$, and let $L_m=C_m*\{a_m,b_m\}$, where the last two vertices span no edge. This is the simplicial suspension of a polygon, and its realization is $S^2$. The simplicial map
+\[
+ h:L_8\longrightarrow L_4,
+ \qquad i\longmapsto i\bmod4,
+ \quad a_8\longmapsto a_4,
+ \quad b_8\longmapsto b_4
+\]
+has degree two. Indeed, the oriented integral fundamental chain is
+\[
+ z_m=\sum_{i=0}^{m-1}\bigl([a_m,i,i+1]-[b_m,i,i+1]\bigr),
+ \qquad h_*z_8=2z_4.
+\]
+Let $P$ and $Q$ be the posets of nonempty faces of $L_8$ and $L_4$, ordered by inclusion, and let $f:P\to Q$ send a face to its image under $h$. Their nerves are the barycentric subdivisions of the displayed spheres; $P$ has $50$ elements and $Q$ has $26$. The functor $f$ belongs to $\Wt$, since its only nonzero positive homology map is multiplication by two on $H_2=\ZZ$, which is a rational isomorphism, and both torsion groups are zero.
+
+Let $J$ have three objects $0,1,2$ and just the nonidentity arrows $0\to1$ and $0\to2$. Consider the diagrams
+\[
+ D=(Q\xleftarrow{f}P\longrightarrow e),
+ \qquad E=(Q\xleftarrow{\id}Q\longrightarrow e)
+\]
+and the natural transformation with components $(f,\id_Q,\id_e)$ in the order $(0,1,2)$. The induced functor
+\[
+ v:\int_J D\longrightarrow\int_J E
+\]
+is a functor over $J$. Explicitly, $\int_JD$ has disjoint $P$ and $Q$ layers and a point $t$; besides the original orders it has $p\leq q$ exactly when $f(p)\leq q$, and $p\leq t$ for every $p$. There are no comparisons between $Q$ and $t$. The target has the same description with $P=Q$ and $f=\id_Q$. These prescriptions define all arrows and compositions, since the categories are posets.
+
+For each $j\in J$, evaluation
+\[
+ (\int_JD)/j\longrightarrow D(j),
+ \qquad (i,x,\alpha:i\to j)\longmapsto D(\alpha)x
+\]
+is left adjoint to $x\mapsto(j,x,\id_j)$, with identity counit. The evaluation squares commute with $v$. Hence $v/j$ is in $\Wt$ for all $j$, because its component comparison is $f$, $\id_Q$, or $\id_e$. On the other hand, the two full sieve pieces $P\cup Q$ and $P\cup\{t\}$ identify $B\int_JD$ with the homotopy cofibre of $Bf$, and $B\int_JE$ with the homotopy cofibre of an identity. Their reduced cellular homology is respectively $\ZZ/2$ in degree two and zero in every degree. Thus $v$ fails the torsion-$H_2$ test. Relative Theorem A is false for $\Wt$.
+
+The same source collage refutes Loc ($6'$ a). In its sieve-cover square the top inclusion $P\to P\cup Q$ is in $\Wt$, because $P\cup Q$ retracts onto $Q$ by a left adjoint and its composite is $f$. The parallel inclusion $P\cup\{t\}\to\int_JD$ has contractible source and target with $H_2=\ZZ/2$, and is not in $\Wt$.
+
+The program \texttt{code/FGH\_literal\_axioms.py} constructs the two simplicial complexes, all face-poset orders, the two collage orders, and every functor just specified. It checks reflexivity, antisymmetry, transitivity, functoriality, the sieve cover, the evaluation adjunctions and their commutative squares, and the integral equality $h_*z_8=2z_4$. It finds $521$ arrows in the $77$-object source and $321$ in the $53$-object target, including identities. The integral cofiber calculation is the two-term cellular differential $\ZZ\xrightarrow{2}\ZZ$ in degrees three and two; it is not inferred from a rational rank computation.
+
+For completeness we verify both extra size axioms. Nerves commute with filtered colimits, since an $n$-simplex is a finite composable string of arrows. Fundamental groupoids commute with filtered colimits: paths and the elementary relations between paths are finite data. Integral and rational homology commute with filtered colimits of simplicial sets, by exactness of filtered colimits of abelian groups. Finally, $\Tor$ commutes with filtered colimits. If a representative $a$ is torsion in the colimit, some equation $na=0$, $n\geq1$, already holds at a later stage, and equality of two torsion representatives is likewise witnessed at a later stage. Thus every test defining $\Wt$ commutes with filtered colimits, and filtered colimits of equivalences of groupoids are equivalences. This proves Loc (8).
+
+We give the bounded-subcategory argument for Loc (9), rather than treating it as a formal consequence of the word ``accessible''. Fix $u:X\to Y$ in $\Wt$ and countable subcategories $X_0\subseteq X$, $Y_0\subseteq Y$ with $uX_0\subseteq Y_0$. A countable enlargement can supply all witnesses to the following countable collection of requests: paths witnessing essential surjectivity of the fundamental groupoid; lifts of its arrows and witnesses to their equality; fillings of integral cycles in degrees at least three; rational cycle lifts and fillings in degree two; and lifts and fillings of torsion classes in degree two. Every request is a finite chain, a finite zigzag, or a finite homotopy of zigzags, together with an integer denominator or a torsion equation. Because $u$ passes the relevant global test, the requested witness exists in $X$ or $Y$ and uses only finitely many arrows. Adjoin all these arrows and close under identities and composition; the enlargement remains countable. Iterate the construction countably many times. Every finite request in the union occurs at a finite stage and is answered at a later stage, so the restricted union functor belongs to $\Wt$. In the torsion-surjectivity request we also adjoin a finite chain witnessing that the chosen source class is torsion; this point prevents replacement of torsion by rational homology.
+
+The countable $\Wt$-subarrows of $u$ therefore form a filtered cofinal family of countable subarrows, and their colimit is $u$. There is a small set of isomorphism representatives of all functors between countable categories. Consequently $\Wt$ is the filtered-colimit envelope of its members in this set. Together with Loc (8), this is precisely XVI Proposition 5.3.1 and Corollary 5.3.2's formulation of Loc (9), with the countable bound. In fact the same saturation of a countable family gives an $\aleph_1$-filtered presentation.
+
+Finally, if the base $S$ has terminal object $s$, then $S/s\cong S$ over $S$. Hence $X/s\cong X$, $Y/s\cong Y$, and $v/s\cong v$. The hypothesis at $s$ already asserts the conclusion. The suggested base $[1]$ cannot witness failure.
+\end{proof}
+
+\begin{claim}{F.1.1}{Proved}{Forward gluing and filtered colimits recover relative Theorem A}
+Let $W$ satisfy the literal XVI Loc (1), (2), and (3). If $W$ also satisfies Loc ($6'$ a) and Loc (8), then it is a fundamental localizer: in particular it satisfies relative Theorem A, Loc (3 bis). Loc (9) is unnecessary for this implication. Thus the assertion discussed in XVI manuscript page 118, footnote 56, holds under weaker size hypotheses than those stated there.
+\end{claim}
+\begin{proof}
+By \citet[Theorem 6.1.18]{FGHCisinski2006}, $W$ contains $W_\infty$. We verify the simplicial-localizer axioms directly, thereby avoiding an implicit use of relative Theorem A in a homotopy-colimit argument.
+
+Write $i_\Delta X=\Delta/X$ for the category of simplices of a simplicial set $X$, and set
+\[
+ \mathcal V=\{f:X\longrightarrow Y:i_\Delta f\in W\}.
+\]
+The class $\mathcal V$ has two out of three and contains all weak homotopy equivalences, because the natural comparison $B(\Delta/X)\simeq |X|$ identifies the weak homotopy type of a category of simplices. In particular $\mathcal V$ contains all maps having the right lifting property against all monomorphisms.
+
+We next prove that a monomorphism in $\mathcal V$ remains in $\mathcal V$ after every pushout. Let $X\hookrightarrow Y$ be such a monomorphism, let $X\to Z$ be arbitrary, and put $T=Y\amalg_X Z$. Apply the double-collage construction to the span of categories
+\[
+ B\xleftarrow{f}A\xrightarrow{g}C,
+ \qquad A=\Delta/X,\quad B=\Delta/Y,\quad C=\Delta/Z.
+\]
+Thus $M_f$ has the disjoint $A$ and $B$ layers, with arrows $a\to b$ equal to $B(fa,b)$ and no arrows in the other direction; define $M_g$ in the same way. Their union $P=M_f\amalg_A M_g$ has no arrows between the $B$ and $C$ layers. The two pieces are full sieves covering $P$. The retractions $M_f\to B$ and $M_g\to C$ are left adjoints and hence belong to $W_\infty$. Since $f\in W$, two out of three gives $A\to M_f\in W$. Loc ($6'$ a) now gives $M_g\to P\in W$, and consequently $C\to P\in W$.
+
+Every chain in $P$ lies in one of its two sieve pieces, so
+\[
+ NP=NM_f\amalg_{NA}NM_g.
+\]
+This is a homotopy pushout after realization: both attaching maps are inclusions of simplicial subsets. The collage retractions identify its homotopy type with the homotopy pushout of $BB\leftarrow BA\to BC$. The compatible functors from the three layers to $\Delta/T$ give a canonical functor $P\to\Delta/T$. It is a weak homotopy equivalence, since the original simplicial pushout $Y\amalg_X Z$ is a homotopy pushout when $X\to Y$ is a monomorphism. Composing $C\to P$ with this weak equivalence proves $\Delta/Z\to\Delta/T\in W$, as required.
+
+The functor $i_\Delta$ commutes with filtered colimits. Its objects are simplices and its arrows are simplicial operators satisfying one equality, so both objects and arrows, and their defining relations, are finite data in such a colimit. Loc (8) therefore makes $\mathcal V$ closed under filtered colimits of arrows. It follows that its monomorphisms are closed under every small transfinite composition. More explicitly, at a successor stage use composition and at a limit ordinal $\lambda$ apply filtered-colimit closure to the arrows $X_0\to X_\beta$, $\beta<\lambda$. Transfinite induction supplies all these arrows before the limit step.
+
+We have checked exactly the three axioms of a $\Delta$-localizer in \citet[Definition 1.4.1]{FGHCisinski2006}: two out of three, inclusion of trivial fibrations, and closure of the monomorphisms in the class under pushouts and transfinite compositions. Every $\Delta$-localizer is regular by that source's Proposition 3.4.25. All its representables are weakly contractible, so it is a test localizer. Theorem 4.2.15 and Remark 4.2.16 therefore associate to $\mathcal V$ the fundamental localizer $N^{-1}\mathcal V$ on categories. These results do not assume accessibility.
+
+Finally $N^{-1}\mathcal V=W$. For every category $A$ the natural last-vertex functor $\Delta/NA\to A$ is a weak homotopy equivalence. Its naturality square for $u:A\to B$, together with $W_\infty\subseteq W$ and two out of three, gives
+\[
+ u\in W\quad\Longleftrightarrow\quad
+ i_\Delta Nu\in W\quad\Longleftrightarrow\quad Nu\in\mathcal V.
+\]
+Hence $W$ itself is the fundamental localizer just obtained. This proves relative Theorem A without any invocation of Loc (9), a model structure for $W$, or an unproved gluing theorem for $W$-equivalences.
+\end{proof}
+
+\begin{claim}{F.2}{Proved}{The reverse single-square axiom alone forces integral homology equivalences}
+Let $W$ satisfy the literal XVI Loc (1), (2), and (3). If it satisfies Loc ($6'$ b), then $W_\ZZ\subseteq W$. In particular the same conclusion holds under the cube axiom Loc (6 b), including for nonconnected sources. Neither relative Theorem A nor forward gluing is needed.
+\end{claim}
+\begin{proof}
+Cisinski's Theorem 6.1.18 \cite{FGHCisinski2006} says exactly that the weak homotopy equivalences form the least class satisfying the weak-fundamental-localizer axioms, namely the indicated saturation, terminal-object, and absolute-Theorem-A axioms. Thus $W_\infty\subseteq W$ under the present assumptions. The proof of that theorem uses its Proposition 6.1.16 and the contractibility of horns; it does not insert relative Theorem A into the hypotheses.
+
+For a functor $g:A\to B$ use the collage $M_g=A\amalg B$ with mixed arrows $a\to b$ given by $B(g(a),b)$ and with no arrows from $B$ to $A$. Its retraction $r:M_g\to B$ is left adjoint to the inclusion of $B$, and $ri=g$ for the inclusion $i:A\to M_g$. Adjoin a point $t$ receiving one arrow from every object of $A$, with no arrows between $B$ and $t$, and denote the result by $K(g)$. The full subcategories $M_g$ and $A^{\triangleright}=A\cup\{t\}$ are sieves covering $K(g)$, with intersection $A$. On nerves their union is literal: every chain lies in the sieve containing its final object. Their realizations form a homotopy-pushout square, since the two inclusions of the intersection are CW-subcomplex inclusions. The specified retraction $BM_g\to BB$ and contraction $BA^{\triangleright}\to*$ identify $BK(g)$ with the homotopy cofibre $C(Bg)$. This checks the part of POLES B.3 used here without invoking its additional assertion about $W$-maps of cofibres.
+
+Suppose $K(g)\to e$ is in $W$. Then $A^{\triangleright}\to K(g)$ is in $W$ by two out of three, because the cone category has a terminal object. Applying Loc ($6'$ b) to the displayed sieve cover gives $A\to M_g$ in $W$, and composition with $r\in W_\infty$ gives $g\in W$. We have proved only the implication we need:
+\[
+ K(g)\text{ is }W\text{-aspherical}\quad\Longrightarrow\quad g\in W.
+\]
+
+Now let $g$ be an integral homology isomorphism. If $A$ is empty, $H_0(BB;\ZZ)=0$ forces $B$ empty too, so there is nothing to prove. Otherwise $H_0(Bg)$ being invertible implies that the actual function $\pi_0(BA)\to\pi_0(BB)$ is bijective: it induces the stated isomorphism between free abelian groups on those sets. This argument applies to arbitrary infinite sets of components. The cofibre $C=BK(g)$ is connected, because every component of $BB$ meets $BA$ and hence is joined to the cone point. The augmented mapping-cone homology sequence gives $\widetilde H_*(C;\ZZ)=0$. The unreduced suspension of this connected CW complex is simply connected by van Kampen and acyclic by the suspension homology sequence, hence weakly contractible by Hurewicz. It follows that $K(K(g)\to e)\to e$ is in $W_\infty$. Apply the one-way criterion first to $K(g)\to e$ and then to $g$. This proves the assertion using Loc ($6'$ b) alone.
+
+The manuscript's degenerate cube proves Loc (6 b)$\Rightarrow$Loc ($6'$ b), so this also checks R8. Alternatively its two-cone argument can be made insensitive to disconnectedness as follows. For a nonempty homology equivalence $Bg$, the double suspension $\Sigma^2Bg$ is a homology equivalence between simply connected CW complexes, hence is a weak equivalence. Apply the reverse cube to the map of two-cone covers of $\Sigma Bg$, and then to the covers of $Bg$. At each application the two cone maps have contractible source and target and so are in $W_\infty$; the union map has already been shown to be in $W$. These two applications give $g\in W$. This avoids silently applying the simply connected Whitehead theorem to a suspension of a disconnected space.
+\end{proof}
