@@ -229,7 +229,23 @@ into the next round of work, with credit to you.
 
 ## Rights
 
-The rights in the original work belong to its author or the author's representatives or heirs. Where we hold rights, in the AI-produced transcription, translation, corrections and typesetting, they are dedicated to the public domain under CC0 1.0. This edition is published for educational, non-profit purposes, and we claim no rights we do not hold. If you hold rights in this work and object to its publication here, please open a GitHub issue and we will take it down.
+The rights in Grothendieck's text belong to his heirs. This edition is published for educational, non-profit purposes,
+and we claim no rights we do not hold. If you hold rights in this work and object to its publication here, please open
+a GitHub issue and we will take it down.
+
+Our French transcription follows the electronic edition of *Les Dérivateurs* by M. Künzer, J. Malgoire and
+G. Maltsiniotis, and our English translation was made from it. We based our work on their edition because it is careful
+and accurate: a spot check of four pages against the manuscript scans of the Montpellier archive, by Claude Opus 5.5 at
+effort high, found it a faithful edition of the final text of the manuscript. A faithful transcription reproduces the
+author's text, and the rights in that text are the author's heirs'. What is the editors' own work, their notes,
+prefaces and postface, is not reproduced here; it can be read in their edition. Like theirs, our edition is meant to
+make Grothendieck's manuscript available and readable to those who study his mathematics; ours adds an English
+translation. If the editors nonetheless want us to stop basing our text on theirs, we will, and replace it with a
+transcription made from the manuscript scans alone.
+
+Where we hold rights, in the AI-produced transcription, translation, corrections and typesetting, they are dedicated to
+the public domain under CC0 1.0. The dedication covers our own contributions only: it does not affect the rights in
+Grothendieck's text and gives no permission to use it.
 
 **Prompts and method.** The prompts, templates, scripts and working method published here are dedicated to the public domain under CC0 1.0. If you want to do similar work, use them freely; we claim no rights in them.
 
