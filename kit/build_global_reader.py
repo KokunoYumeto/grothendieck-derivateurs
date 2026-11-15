@@ -987,6 +987,25 @@ def merge_bibs(chunk_bibs):
 PREAMBLE_MACROS = r"""
 \frenchsetup{AutoSpacePunctuation=false}
 \setlength{\emergencystretch}{2em}
+\usepackage{adjustbox}
+% (15 Nov 2026) diagrams wider than the line or taller than the page are scaled down to fit
+\AddToHook{env/tikzcd/before}{\begin{adjustbox}{max width=\linewidth,max totalheight=\textheight}}
+\AddToHook{env/tikzcd/after}{\end{adjustbox}}
+% (15 Nov 2026) a display wider than the line or taller than the page is scaled down to fit; its \tag stays outside the
+% scaling. The display is set in a box first (\[ ... \] as defined here), then in equation*.
+\makeatletter
+\newsavebox\DERdispbox
+\newif\ifDERtagged
+\DeclareRobustCommand{\[}{\begingroup\global\DERtaggedfalse\gdef\DERtagbody{}%
+  \let\tag\DERtag\let\split\aligned\let\endsplit\endaligned\global\setbox\DERdispbox\hbox\bgroup$\displaystyle}
+\DeclareRobustCommand{\]}{$\egroup\endgroup\DERshowdisplay}
+\def\DERtag{\@ifstar{\DERtagstore{*}}{\DERtagstore{}}}
+\def\DERtagstore#1#2{\global\DERtaggedtrue\gdef\DERtagbody{\tag#1{#2}}}
+\def\DERshowdisplay{\begin{equation*}%
+  \adjustbox{max width=\dimexpr\linewidth-\ifDERtagged 5em\else 0pt\fi\relax,max totalheight=0.85\textheight}{\usebox\DERdispbox}%
+  \DERtagbody\end{equation*}}
+\makeatother
+\setlength{\emergencystretch}{6em}\tolerance=2000
 \hypersetup{pdftitle={Les Dérivateurs: an integrated reader, with commentary},pdfauthor={Alexander Grothendieck},
   colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdfdisplaydoctitle=true}
 \makeatletter

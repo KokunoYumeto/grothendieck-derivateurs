@@ -78,6 +78,21 @@ PREAMBLE = r"""\documentclass[11pt,oneside]{article}
 \hypersetup{pdftitle={Les Dérivateurs: LaTeX transcription of the edition by Künzer, Malgoire and Maltsiniotis},
   pdfauthor={Alexandre Grothendieck},colorlinks=true,linkcolor=black,urlcolor=blue!45!black,pdfdisplaydoctitle=true}
 \setlength{\emergencystretch}{2em}
+% (15 Nov 2026) a display wider than the line or taller than the page is scaled down to fit; its \tag stays outside the
+% scaling. The display is set in a box first (\[ ... \] as defined here), then in equation*.
+\makeatletter
+\newsavebox\DERdispbox
+\newif\ifDERtagged
+\DeclareRobustCommand{\[}{\begingroup\global\DERtaggedfalse\gdef\DERtagbody{}%
+  \let\tag\DERtag\let\split\aligned\let\endsplit\endaligned\global\setbox\DERdispbox\hbox\bgroup$\displaystyle}
+\DeclareRobustCommand{\]}{$\egroup\endgroup\DERshowdisplay}
+\def\DERtag{\@ifstar{\DERtagstore{*}}{\DERtagstore{}}}
+\def\DERtagstore#1#2{\global\DERtaggedtrue\gdef\DERtagbody{\tag#1{#2}}}
+\def\DERshowdisplay{\begin{equation*}%
+  \adjustbox{max width=\dimexpr\linewidth-\ifDERtagged 5em\else 0pt\fi\relax,max totalheight=0.85\textheight}{\usebox\DERdispbox}%
+  \DERtagbody\end{equation*}}
+\makeatother
+\setlength{\emergencystretch}{6em}\tolerance=2000
 \makeatletter
 \newcommand{\derleqno}{\tagsleft@true}
 \renewcommand*{\@pnumwidth}{2.4em}

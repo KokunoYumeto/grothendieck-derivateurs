@@ -27,6 +27,25 @@
 \DeclareFontShape{TU}{lmr}{bx}{sc}{<->ssub*lmr/bx/n}{}
 \frenchsetup{AutoSpacePunctuation=false}
 \setlength{\emergencystretch}{2em}
+\usepackage{adjustbox}
+% (15 Nov 2026) diagrams wider than the line or taller than the page are scaled down to fit
+\AddToHook{env/tikzcd/before}{\begin{adjustbox}{max width=\linewidth,max totalheight=\textheight}}
+\AddToHook{env/tikzcd/after}{\end{adjustbox}}
+% (15 Nov 2026) a display wider than the line or taller than the page is scaled down to fit; its \tag stays outside the
+% scaling. The display is set in a box first (\[ ... \] as defined here), then in equation*.
+\makeatletter
+\newsavebox\DERdispbox
+\newif\ifDERtagged
+\DeclareRobustCommand{\[}{\begingroup\global\DERtaggedfalse\gdef\DERtagbody{}%
+  \let\tag\DERtag\let\split\aligned\let\endsplit\endaligned\global\setbox\DERdispbox\hbox\bgroup$\displaystyle}
+\DeclareRobustCommand{\]}{$\egroup\endgroup\DERshowdisplay}
+\def\DERtag{\@ifstar{\DERtagstore{*}}{\DERtagstore{}}}
+\def\DERtagstore#1#2{\global\DERtaggedtrue\gdef\DERtagbody{\tag#1{#2}}}
+\def\DERshowdisplay{\begin{equation*}%
+  \adjustbox{max width=\dimexpr\linewidth-\ifDERtagged 5em\else 0pt\fi\relax,max totalheight=0.85\textheight}{\usebox\DERdispbox}%
+  \DERtagbody\end{equation*}}
+\makeatother
+\setlength{\emergencystretch}{6em}\tolerance=2000
 \hypersetup{pdftitle={Les Dérivateurs: an integrated reader, with commentary},pdfauthor={Alexander Grothendieck},
   colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdfdisplaydoctitle=true}
 \makeatletter
@@ -1423,7 +1442,7 @@ I-a & 8 & 29 & 5 & 42 \\
 I-b & 3 & 69 & 3 & 75 \\
 II-a & 11 & 65 & 1 & 77 \\
 II-b & 3 & 73 & 4 & 80 \\
-III-V & 14 & 114 & 6 & 134 \\
+III-V & 14 & 113 & 6 & 134 \\
 VI-a & 11 & 43 & 5 & 59 \\
 VI-b & 2 & 67 & 3 & 72 \\
 VI-c & 1 & 43 & 3 & 47 \\
@@ -1452,7 +1471,7 @@ XVIII-d & 0 & 121 & 2 & 123 \\
 XVIII-e & 1 & 129 & 5 & 135 \\
 XIX & 6 & 36 & 10 & 52 \\
 \midrule
-total & 134 & 1879 & 122 & 2135 \\
+total & 134 & 1878 & 122 & 2135 \\
 \bottomrule
 \end{tabular}
 \end{center}
