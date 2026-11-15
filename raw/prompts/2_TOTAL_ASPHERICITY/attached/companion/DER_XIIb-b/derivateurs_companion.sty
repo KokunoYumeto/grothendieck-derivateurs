@@ -1,0 +1,54 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/09]
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage{hyperref}
+\RequirePackage{needspace}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black,
+ pdftitle={Les Derivateurs: XII.5, manuscript pages 115--169},
+ pdfauthor={Commentary: GPT-6 Astra (OpenAI, ChatGPT Pro mode)}}
+\definecolor{dcbar}{gray}{0.55}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+% Display the page label, not the exact-match anchor text, in the running block heading.
+\def\dcpageof p#1:#2\dcend{#1}
+\newenvironment{dcomment}[3]{%
+  \par\medskip\Needspace{5\baselineskip}\selectlanguage{english}%
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \small\noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[ms.~\dcpageof#2:\dcend]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}
+\AddToHook{begindocument/end}{%
+ \begingroup\selectlanguage{english}\thispagestyle{empty}
+ \vspace*{16mm}
+ {\Large Alexander Grothendieck\par}\medskip
+ {\huge\bfseries Les Dérivateurs\par}\bigskip
+ {\Large Chapter XII, section 5\par}
+ {\large Part 2: manuscript pages 115--169\par}
+ \vspace{15mm}
+ {\LARGE\bfseries Audit and commentary\par}
+ \vspace{8mm}
+ {\large Commentary produced by GPT-6 Astra\par}
+ {\large OpenAI, ChatGPT Pro mode\par}
+ \vfill
+ \noindent This reader inserts English commentary into the supplied French transcription. The authoritative edition was deciphered and transcribed by M. Künzer, J. Malgoire, and G. Maltsiniotis. Printed source slips remain in the text; the correction register distinguishes them from transcription repairs.\par\medskip
+ \noindent Source coverage: 37 attached PDF leaves; edition printed pages 78--114; manuscript pages 115--169, with the opening continuation from page 114. Margin labels refer to the source; footer page numbers refer to this assembled reader.\par\medskip
+ \noindent The six companion files include the complete audit and verification report. Results marked \ours\ are the commentators' explicitly proved developments, without a claim of priority. This credit describes the present work and does not certify any subsequent editorial step.\par
+ \vspace{6mm}\noindent 10 November 2026\par
+ \clearpage\endgroup}

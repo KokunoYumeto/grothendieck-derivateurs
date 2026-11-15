@@ -1,0 +1,851 @@
+\section{Stable pointed rational curves}
+\label{sec:F}
+
+Throughout this section the ground field is $\mathbb C$, the markings are
+individually labelled, and $n\geq3$.  We write $X_n=\overline M_{0,n}(\mathbb
+C)$ and $U_n=M_{0,n}(\mathbb C)$.  A stratum means a stratum for the stable
+labelled dual tree, not a stratum in a chosen triangulation.  We distinguish
+the exit category $C_n$ from the entrance category $T_{0,n}=C_n^{\op}$.
+Thus arrows of $C_n$ smooth nodes, whereas arrows of $T_{0,n}$ specialize
+curves.  All groups below are discrete groups.
+
+\subsection{The four-pointed case}
+
+\begin{statement}{F.1}{Known}{The four-pointed moduli space}
+The cross ratio identifies $X_4$ with $\mathbb P^1(\mathbb C)$ and $U_4$
+with $\mathbb P^1(\mathbb C)\setminus\{0,1,\infty\}$.  The other three
+strata are points, indexed by the partitions $12|34$, $13|24$, and $14|23$.
+Writing $G_4=\langle a,b\rangle$ for the free group of rank two, we can
+choose positive peripheral elements
+\[
+ m_0=a,\qquad m_1=b,\qquad m_\infty=(ab)^{-1}.
+\]
+Each peripheral homomorphism $\mathbb Z\longrightarrow G_4$, $1\mapsto
+m_i$, is injective.
+\end{statement}
+\begin{proof}
+An ordered triple of distinct points of $\mathbb P^1$ has a unique
+projective transformation to $0,1,\infty$; the fourth point is the cross
+ratio.  Stable reduction at the three excluded values gives exactly the
+three two-component curves with two markings on each component.  This
+also identifies the compactification; see \citet[Catalogue, Facts 1--2,
+pp.~551--552]{FKeel1992}.  Removing disjoint small discs around the three
+points leaves a pair of pants, which retracts to a wedge of two circles.
+The boundary relation, with connecting paths fixed, is
+$m_0m_1m_\infty=1$.  Each displayed word is nontrivial in a free group,
+which is torsion-free, proving injectivity.
+\end{proof}
+
+\begin{statement}{F.2}{Proved}{All the arrows of $C_4$}
+A skeleton of $C_4$ has objects $u,p_0,p_1,p_\infty$, automorphism groups
+$\Aut(u)=G_4$ and $\Aut(p_i)=1$, and the only noninvertible hom-sets are
+\[
+ \Hom_{C_4}(p_i,u)=G_4/\langle m_i\rangle.
+\]
+The quotient consists of left cosets $g\langle m_i\rangle$, formed by
+the right action of $\langle m_i\rangle$.  Postcomposition is the left
+$G_4$-action, $h\circ[g]=[hg]$.  There are no arrows between distinct
+$p_i$, nor from $u$ to a $p_i$.  The opposite of this specified category
+is $T_{0,4}$.
+\end{statement}
+\begin{proof}
+The endomorphism space at $u$ is the loop space of the aspherical
+three-punctured sphere, hence is equivalent to the discrete group $G_4$.
+The endomorphism space at a point stratum is contractible.  The exit
+mapping space from $p_i$ to $u$ is the homotopy fibre over $u$ of the
+punctured-disc link $S^1\longrightarrow U_4$; radial reparametrization
+identifies the usual homotopy-link model with this fibre.  Its components
+are the cosets of the image of $\pi_1(S^1)$, and each component is
+contractible: the long exact sequence of the homotopy fibre and the
+injectivity in F.1 give vanishing of all positive homotopy groups.
+Transporting the endpoint around $h\in G_4$ gives the displayed left
+action.  The frontier order forbids all remaining noninvertible arrows.
+Alternatively the identification with the exit infinity-category follows
+by restricting the transporter construction in F.7.  These calculations
+specify every hom-space and composition, so they identify the entire
+infinity-category, rather than merely its homotopy category.
+\end{proof}
+
+\begin{statement}{F.3}{Refuted}{Aspherical strata alone do not imply an
+ordinary exit category}
+The assertion that every conically stratified space with aspherical
+strata has an ordinary exit infinity-category is false.
+\end{statement}
+\begin{proof}
+Stratify $S^2$ by a point $p$ and its complement $\mathbb R^2$.  Both
+strata are contractible.  The exit mapping space from $p$ to an interior
+point is the homotopy fibre of the link map
+$S^1\longrightarrow\mathbb R^2$, hence is $S^1$, and is not discrete.
+An ordinary category has discrete mapping spaces.  The nonzero first
+homology of the link is also checked from a three-edge simplicial circle
+in \texttt{code/F\_checks.py}.  Thus F.2 and F.7 require information about
+links and their maps, in addition to asphericity of strata.
+\end{proof}
+
+\subsection{The five-pointed case}
+
+\begin{statement}{F.4}{Proved}{The strata and groups for five markings}
+There are twenty-six strata in $X_5$: one open stratum $u$, ten
+one-dimensional strata $d_I$ indexed by two-element subsets
+$I\subset\{1,2,3,4,5\}$, and fifteen point strata $q_{I,J}$ indexed by
+unordered pairs of disjoint two-element subsets.  Here $d_I$ represents
+the split $I|I^c$, and $q_{I,J}$ has end components carrying $I$ and $J$,
+with the remaining marking on the middle component.  Each $d_I$ is a
+three-punctured sphere.  The groups of the corresponding exit objects are
+\[
+ \Aut(u)=G_5=\pi_1\{(x,y)\in(\mathbb C\setminus\{0,1\})^2:x\ne y\},
+ \quad \Aut(d_I)=H_I\cong F_2,\quad\Aut(q_{I,J})=1.
+\]
+An entirely group-theoretic specification of the first group is
+\[
+ G_5=\ker(B_4\longrightarrow\mathfrak S_4)
+       /\langle(\sigma_1\sigma_2\sigma_3)^4\rangle,
+\]
+where $B_4=\langle\sigma_1,\sigma_2,\sigma_3\mid
+\sigma_i\sigma_{i+1}\sigma_i=\sigma_{i+1}\sigma_i\sigma_{i+1},\,
+\sigma_1\sigma_3=\sigma_3\sigma_1\rangle$ and the map sends
+$\sigma_i$ to $(i,i+1)$.
+\end{statement}
+\begin{proof}
+A stable five-leaf tree has zero, one, or two internal edges.  A single
+edge gives a $2|3$ partition, hence ten possibilities.  A trivalent tree
+has two disjoint cherries, hence
+$\binom52\binom32/2=15$ possibilities.  Gluing the normalized components
+identifies the open one-edge stratum with $M_{0,3}\times M_{0,4}$ and
+the two-edge stratum with $M_{0,3}^3$.  No automorphism of a labelled
+stable genus-zero curve survives, since it fixes three special points on
+each normalized component.  Normalizing the first three markings to
+$0,1,\infty$ gives the displayed configuration space.  Alternatively,
+fix the fifth marking at infinity.  The configuration space of the other
+four points in $\mathbb C$, divided by the free affine action, gives
+$U_5$.  The affine group is homotopy equivalent to a circle, whose loop
+rotates all four points once and represents the central full twist in
+$P_4=\ker(B_4\to\mathfrak S_4)$.  Normalization of two of the four
+points trivializes the affine bundle, so its homotopy sequence gives
+exactly the quotient displayed above.  The asphericity proof in F.6
+identifies these fundamental groups with the full homotopy types of the
+strata.  The finite enumeration is independently reproduced in
+\texttt{code/F\_checks.py}.
+\end{proof}
+
+\begin{statement}{F.5}{Known}{A complete specification of $C_5$}
+Fix an oriented five-marked sphere $S$.  Let $G=G_5$ act on isotopy
+classes of essential multicurves, by orientation-preserving
+homeomorphisms fixing every marking.  Choose one multicurve $\sigma_s$
+for every stratum $s$ of F.4: $\sigma_u=\varnothing$,
+$\sigma_{d_I}=\{c_I\}$, and
+$\sigma_q=\{c_{q,I},c_{q,J}\}$.  Put
+$\Delta_s=\langle t_c:c\in\sigma_s\rangle\subset G$, where $t_c$ is a
+positive Dehn twist.  Then every hom-set is specified by
+\[
+ \Hom_{C_5}(s,t)=
+ \{g\in G:g\sigma_s\supseteq\sigma_t\}/\Delta_s,
+ \qquad [h]\circ[g]=[hg].                         \tag{F.1}
+\]
+In particular
+\[
+ \Hom(d_I,u)=G/\langle t_{c_I}\rangle,
+ \qquad \Hom(q,u)=G/\Delta_q,
+ \qquad \Delta_q\cong\mathbb Z^2.
+\]
+If $I$ is one of the two cherries of $q$, then
+\[
+ \Hom(q,d_I)\cong H_I/\langle m_{q,I}\rangle,
+                                                        \tag{F.2}
+\]
+where the three $m_{q,I}$, as $q$ ranges over the three points in
+$\overline d_I$, are the three peripheral elements of
+$H_I\cong\langle a_I,b_I\rangle$, namely $a_I,b_I,(a_Ib_I)^{-1}$
+after choices of connecting paths.  These hom-sets are empty for all
+other pairs of distinct strata.  Formula (F.1) identifies this ordinary
+category with the exit infinity-category of $X_5$.
+\end{statement}
+\begin{proof}
+The identification with exit paths is the case $(g,n)=(0,5)$ of
+\citet[Construction 3.18 and Corollary 6.6]{FJansen2023}.  We verify all
+the displayed algebraic data.  Cutting $S$ along a multicurve gives the
+exact sequence
+\[
+ 1\longrightarrow\Delta_s\longrightarrow
+ \operatorname{Stab}_G(\sigma_s)\longrightarrow
+ \prod_v\pi_1(M_{0,\operatorname{val}(v)})\longrightarrow1.       \tag{F.3}
+\]
+Indeed a homeomorphism of the cut, punctured components lifts across the
+annuli; the ambiguity consists precisely of twists of those annuli.
+Distinct disjoint essential curves have independent twists, as can be
+checked by arcs transverse to one curve and disjoint from all the others.
+In genus zero with fixed leaf labels the dual tree has no automorphisms,
+so there is no additional quotient or permutation group.  Equation
+(F.3) gives $\operatorname{Stab}(c_I)/\langle t_{c_I}\rangle=H_I$ and
+$\operatorname{Stab}(\sigma_q)=\Delta_q$.
+
+For a fixed incident pair $(q,I)$ choose
+$r_{q,I}\in G$ carrying $c_{q,I}$ to $c_I$.  Every transporter from $q$
+to $d_I$ is then $k r_{q,I}$ with
+$k\in\operatorname{Stab}(c_I)$.  The conjugate
+$r_{q,I}\Delta_qr_{q,I}^{-1}$ is generated by $t_{c_I}$ and the twist
+about the remaining curve in the four-pointed component.  Modulo
+$\langle t_{c_I}\rangle$ the latter is its peripheral element
+$m_{q,I}$.  This proves (F.2), including the left action of $H_I$.
+The split labels show that no other transporters exist.  Finally the
+composition in (F.1) is well-defined: replacing $g$ by $g\delta$, with
+$\delta\in\Delta_s$, changes the product on the right by
+$\delta$; replacing $h$ by $h\epsilon$, with
+$\epsilon\in\Delta_t$, changes $hg$ by right multiplication by
+$g^{-1}\epsilon g\in\Delta_s$, because
+$g\sigma_s\supseteq\sigma_t$.  Associativity is inherited from $G$.
+This also checks every bimodule action in the specification.
+\end{proof}
+
+\begin{statement}{F.6}{Proved}{Composition through the one-dimensional
+strata, and the asphericity of every genus-zero stratum}
+In the coordinates of F.5 the remaining composition is
+\[
+ \bigl(G/\langle t_{c_I}\rangle\bigr)
+ \times\bigl(H_I/\langle m_{q,I}\rangle\bigr)
+ \longrightarrow G/\Delta_q,
+ \quad ([g],[h])\longmapsto[g\widetilde h r_{q,I}],              \tag{F.4}
+\]
+where $\widetilde h\in\operatorname{Stab}(c_I)$ lifts $h$.
+Together with multiplication and the bimodule actions, this gives all
+compositions in $C_5$.  More generally the stratum of a stable labelled
+tree $\tau$ is exactly
+\[
+ U_\tau\cong\prod_{v\in V(\tau)} M_{0,\operatorname{val}(v)}(\mathbb C),
+                                                               \tag{F.5}
+\]
+and each factor is aspherical.
+\end{statement}
+\begin{proof}
+Changing the lift $\widetilde h$ by a power of $t_{c_I}$ changes its
+product with $r_{q,I}$ by an element of $\Delta_q$; changing $h$ by a
+power of $m_{q,I}$ does the same by the second generator of
+$r_{q,I}\Delta_qr_{q,I}^{-1}$.  Changing $g$ by a power of
+$t_{c_I}$ is harmless for the same reason.  Thus (F.4) is independent of
+representatives and is precisely (F.1).  A nonidentity composable chain
+between distinct strata has length at most two, so nothing remains to
+specify.  Different routes through $d_I$ and $d_J$ agree exactly when
+their products determine the same coset $g\Delta_q$.  We have not
+silently chosen simultaneous representatives $c_I$ for which all
+compatible pairs are disjoint; the transporters $r_{q,I}$ retain the
+necessary change-of-marking information.
+
+For (F.5), normalize the curve and label the inverse images of nodes by
+the half-edges of $\tau$.  This defines a map from the stratum to the
+displayed product.  Gluing the two labelled points of each edge gives
+its inverse.  A leaf-fixing automorphism of a stable tree fixes every
+vertex: each vertex is the median of three leaves in distinct incident
+branches.  Hence the inverse constructions introduce no finite quotient.
+This proves the product assertion, including the absence of stack
+isotropy.  It is also the genus-zero specialization of the gluing
+description in \citet[Catalogue, Fact 2]{FKeel1992}.
+
+The normalization of three markings identifies $M_{0,k}$ with the
+ordered configuration space of $k-3$ points in
+$\mathbb C\setminus\{0,1\}$.  Forgetting the last point is a locally
+trivial bundle with fibre a finitely punctured plane; the bundle is
+\citet[Theorem 3]{FFadellNeuwirth1962}.  For completeness, disjoint small
+discs about a configuration and isotopies supported in these discs give
+local trivializations by moving the punctures.  The punctured plane
+retracts to a graph, and its universal cover is a tree.  Induction on
+$k$, starting from $M_{0,3}=*$, and the homotopy exact sequence of this
+bundle show that $\pi_i(M_{0,k})=0$ for $i\geq2$.  Products preserve this
+property.  Thus the asphericity assertion includes $k=3$ and every
+stable tree, without invoking compactified moduli asphericity.
+\end{proof}
+
+\subsection{The category for arbitrary numbers of markings}
+
+\begin{statement}{F.7}{Known}{The ordinary exit category and the
+Charney--Lee model}
+Let $S_{0,n}$ be an oriented $n$-punctured sphere and
+$\Gamma_n=\pi_0\operatorname{Homeo}^+(S^2;1,\ldots,n)$, with markings
+fixed pointwise.  Let $\mathcal C_n$ be the set of isotopy classes of
+finite essential multicurves, including the empty one.  Define a small
+ordinary category $C_n$ by
+\[
+ \operatorname{Ob}(C_n)=\mathcal C_n,\qquad
+ \Hom_{C_n}(\sigma,\tau)
+ =\{g\in\Gamma_n:g\sigma\supseteq\tau\}/\Delta_\sigma,\qquad
+ [h]\circ[g]=[hg].                                      \tag{F.6}
+\]
+The quotient is by the right action of $\Delta_\sigma$, so its elements
+are left cosets $g\Delta_\sigma$.
+Then $NC_n\simeq\Exit(X_n)$ as infinity-categories over the poset of
+dual trees.  The category is EI and its automorphism group at $\sigma$
+is $\prod_v\Gamma_{\operatorname{val}(v)}$.  Isomorphism classes of
+objects are stable labelled dual trees.  The category
+$T_{0,n}=C_n^{\op}$ is equivalent to the original Charney--Lee category
+of stable labelled topological curves and isotopy classes of
+degenerations.
+\end{statement}
+\begin{proof}
+The exit equivalence is \citet[Corollary 6.6]{FJansen2023}; the
+identification with the original Charney--Lee category is that paper's
+Proposition 3.23.  These results establish an equivalence of
+infinity-categories, not merely a weak equivalence of classifying
+spaces.  Their hypotheses apply because $X_n$ is the analytification of
+the stable-curve moduli stack, and in labelled genus zero every
+stabilizer of an algebraic curve is trivial.  The boundary is a simple
+normal-crossings divisor by \citet[Catalogue, Fact 1]{FKeel1992}.
+The definition and the typing of composition have been verified in
+F.5; that proof uses no restriction to five markings.  If
+$g\sigma\supseteq\sigma$, equality follows from finiteness and equal
+cardinality; consequently every endomorphism is invertible.  Equation
+(F.3) proves the asserted automorphism group in every valence.
+Smoothing annuli identifies the orbits of multicurves with labelled
+stable trees, and the converse follows by gluing homeomorphisms of
+the normalized components across annuli.  This proves the remaining
+algebraic assertions.  A skeleton is finite on objects but generally
+infinite on arrows.  We retain the nonskeletal model (F.6) when making
+claims about strict pullbacks of functors.
+\end{proof}
+
+\begin{statement}{F.8}{Proved}{Coefficients and the necessary opposite}
+For a compactly generated presentable infinity-category $\cC$ there
+is an equivalence
+\[
+ \Sh_{\rm cbl}(X_n;\cC)\simeq
+ \Fun(C_n,\cC)=\Fun(T_{0,n}^{\op},\cC).              \tag{F.7}
+\]
+In particular $\HOT(T_{0,n})\simeq\Ho\Sh_{\rm cbl}(X_n;\Spaces)$.
+If $\D=\D_{\cC}$ is the presheaf-variance derivator of such a
+$\cC$, the same assertion holds at every diagram shape.  For a bare
+derivator, $\D(T_{0,n})$ and its shifted values define a theory of
+categorical constructible coefficients; no equivalence with a separately
+defined category of topological $\D$-valued sheaves follows from Der
+1--4 alone.
+\end{statement}
+\begin{proof}
+Equation (F.7) is the coefficient conclusion of
+\citet[Theorem 6.7]{FJansen2023}.  Apply it also to the diagram
+coefficient category $\Fun(I^{\op},\cC)$, or use the exponential law,
+to obtain the assertion at shape $I$.  Taking homotopy categories gives
+the displayed derivator statements.  The last sentence separates a
+definition from a theorem: an abstract derivator supplies the categories
+$\D(A)$ and homotopy Kan extensions, but does not supply sheaves on the
+topological site of $X_n$.  Nor does the cited coefficient theorem
+assert its conclusion for every presentable $\cC$ without an additional
+coefficient hypothesis.  Finally, the prompt's literal combination
+``$T_{0,n}=\Exit(X_n)$'' and
+``$\HOT(T_{0,n})=$ constructible sheaves'', with the fixed presheaf
+variance, requires an opposite.  Our notation makes that correction
+explicit rather than changing the direction of exits.
+\end{proof}
+
+\subsection{Clutching, forgetting markings, and base change}
+
+\begin{statement}{F.9}{Proved}{The actual functor that forgets a marking}
+Filling the puncture $n+1$ induces a homomorphism
+$\phi:\Gamma_{n+1}\to\Gamma_n$ and a function
+$q:\mathcal C_{n+1}\to\mathcal C_n$ which discards newly peripheral
+curves and replaces newly isotopic curves by a single isotopy class.
+The assignments
+\[
+ Q:C_{n+1}\longrightarrow C_n,
+ \quad\sigma\longmapsto q\sigma,\quad[g]\longmapsto[\phi(g)]
+                                                               \tag{F.8}
+\]
+define a strict functor.  Its opposite
+$F:T_{0,n+1}\to T_{0,n}$ represents the geometric morphism
+$f:X_{n+1}\to X_n$ which forgets the last marking and stabilizes.
+Repeated forgetting and relabelling are compatible with composition;
+on chosen skeletons the compatibility is by specified natural
+isomorphisms arising from the chosen markings.
+\end{statement}
+\begin{proof}
+The operation on curves is independent of isotopy, preserves inclusion,
+and is equivariant for $\phi$.  A twist becomes the twist about the
+image essential curve or the identity if the image is peripheral.
+Thus $\phi(\Delta_\sigma)\subseteq\Delta_{q\sigma}$ and the coset map
+is well-defined.  If $g\sigma\supseteq\tau$, then
+$\phi(g)q\sigma\supseteq q\tau$, which checks the source and target
+of every arrow.  The formula respects multiplication, identities, and
+composition.  Deleting two punctures successively and reducing the
+curve systems gives the same set of surviving essential isotopy classes
+as deleting both at once, so the functors on the fixed marked-surface
+models compose strictly.
+
+For a permutation of the labels choose an orientation-preserving
+homeomorphism $r$ inducing it.  Relabelling acts on $C_n$ by
+$\sigma\mapsto r\sigma$ and $[g]\mapsto[rgr^{-1}]$.
+If another lift is $r'=ar$ with $a\in\Gamma_n$, the arrows
+$[a]:r\sigma\to r'\sigma$ are a natural isomorphism: both composites
+in its naturality square are represented by $a r g r^{-1}$.
+For two permutations compare their product lift with the chosen lift
+of the product by this same formula.  Associativity of multiplication
+gives the coherence identity.  Thus no splitting of the full mapping
+class group onto the permutation group is assumed.  Filling a relabelled
+puncture commutes with these assignments because filling is equivariant
+on curve classes and homeomorphisms.
+
+A pinching map of marked surfaces commutes with filling a puncture
+followed by contraction of its unstable component: on the complement
+of the pinched annuli this is the same continuous map; on an unstable
+sphere it is the canonical collapse.  Twisting a pinched annulus is
+precisely the equivalence already divided out in (F.6).  Therefore the
+induced functor on degeneration categories is (F.8) with its direction
+reversed.  Equivalently, the maps on strata and on the normal annuli
+give (F.8) under exit paths.  This supplies the comparison with the
+geometric map, not just an abstract functor with the correct object map.
+\end{proof}
+
+\begin{statement}{F.10}{Proved}{Properness of the specified forgetful
+functor}
+For the full multicurve models (F.6), the entrance functor
+$F:T_{0,n+1}\to T_{0,n}$ is $W_\infty$-proper in Grothendieck's sense.
+Thus its right-Kan base-change transformation is invertible for every
+strict base-change square and every derivator in the conventions of
+this paper.  The assertion also holds for repeated forgetting of
+markings.  It is an assertion about these specified functors, not about
+arbitrary replacements by equivalent skeletal categories.
+\end{statement}
+\begin{proof}
+We use the outgoing-arrow lifting criterion of Part D, or its
+incoming-arrow dual on exit categories.  Fix $\sigma\in\mathcal C_{n+1}$,
+put $\tau=q\sigma$, and fix an arrow $\beta:\eta\to\tau$ of $C_n$.
+The relevant category has objects arrows
+$a:\rho\to\sigma$ in $C_{n+1}$ with $q\rho=\eta$ and
+$Q(a)=\beta$; its morphisms are triangles commuting over $\eta$.
+If $\beta=[b]$, choose $\gamma\in\Gamma_{n+1}$ with
+$\phi(\gamma)=b$.  The assignments
+$(\rho,[g])\mapsto(\rho,[\gamma^{-1}g])$ and the identity on
+triangle morphisms give an isomorphism to the lifting category with
+target $\gamma^{-1}\sigma$ and base arrow
+$[1]:\eta\to b^{-1}\tau$; the inverse multiplies by $\gamma$.
+Thus, after this specified comparison, we can write the test as
+$\beta=[1]:\eta\to\tau$ with $\eta\supseteq\tau$.
+Surjectivity is the Birman exact sequence
+\[
+ 1\longrightarrow\pi_1(S_{0,n})\longrightarrow\Gamma_{n+1}
+ \xrightarrow{\phi}\Gamma_n\longrightarrow1;                 \tag{F.9}
+\]
+for $n=3$ it is also immediate from F.1.  For $n\geq4$ we use
+\citet[\S2.1]{FKentLeiningerSchleimer2009}.
+
+An object is now $(\rho,[g])$ with
+$g\rho\supseteq\sigma$ and $\phi(g)\in\Delta_\eta$.
+The arrow $[g]:\rho\to g\rho$ is an isomorphism over $\eta$ and
+identifies this object with $(g\rho,[1])$.  The full subcategory of
+objects $(\rho,[1])$ is exactly the poset
+\[
+ P(\eta;\sigma)=
+ \{\rho\in\mathcal C_{n+1}:\rho\supseteq\sigma, q\rho=\eta\},
+ \quad \rho\leq\rho'\ \Longleftrightarrow\ \rho\supseteq\rho'. \tag{F.10}
+\]
+Indeed a triangle between two such objects is represented by $h$ with
+$[h]=[1]\in\Hom(\rho,\sigma)$, hence $h\in\Delta_\rho$.
+It therefore exists precisely when $\rho\supseteq\rho'$ and is then
+unique.  This proves an equivalence of categories with (F.10), including
+its arrows, rather than only a bijection on connected components.
+
+We prove that (F.10) has contractible nerve.  First suppose
+$\sigma=\varnothing$.  Realize $\eta$ by disjoint geodesics in a
+complete hyperbolic metric on the $n$-punctured sphere.  In its universal
+disc their preimages are disjoint proper lines.  The graph dual to
+these lines is a tree: it is connected, and every line separates the
+disc, so the corresponding edge separates the graph.  The vertices
+are components of the complement, and the edges are the lifted lines.
+The deck group $K=\pi_1(S_{0,n})$ acts with vertex stabilizers
+$\pi_1(V)$ for the components $V$ of $S_{0,n}\setminus\eta$ and edge
+stabilizers the cyclic subgroups generated by the curves of $\eta$.
+
+Point-pushing identifies lifts of $\eta$ having the same number of
+curves with the vertices of this tree.  In detail, moving the forgotten
+puncture into a component $V$ gives a lift; two moves give the same
+isotopy class exactly when their difference is a loop in $V$, so these
+lifts are the cosets $K/\pi_1(V)$.  A lift with one extra curve whose
+two images are isotopic places the forgotten puncture between two
+parallel curves.  Such lifts are the cosets of the corresponding edge
+subgroup and are incident to the two lifts obtained by deleting one of
+the parallel curves.  This is precisely the barycentric incidence
+description of the dual tree.  This description is also the content
+of \citet[Theorem 7.1]{FKentLeiningerSchleimer2009}; their Lemma 2.1
+checks that at most one duplication occurs.
+
+There is one additional possibility because (F.10) allows curves that
+become peripheral: a disc contains the forgotten puncture and exactly
+one retained puncture.  Such a lift adds one peripheral leaf to the
+regular lift in the adjacent component.  Its stabilizer under
+point-pushing is the cyclic group of that puncture.  It has a unique
+proper face still mapping to $\eta$, obtained by deleting this extra
+curve.  There cannot be two such peripheral curves, nor a peripheral
+curve and a duplicated pair, because only one puncture is filled.
+Thus the nerve is a subdivided tree with leaves attached.  It is
+contractible.  When $\eta=\varnothing$ there is a central vertex
+$\varnothing$ and only these leaves, so the same conclusion holds
+without using a nonempty curve complex.
+
+For general $\sigma$, cut the pointed sphere along $\sigma$ before
+filling the puncture.  Every component except the one containing the
+forgotten puncture has a unique lift of each prescribed further
+refinement in $\eta\setminus\tau$: isotopy classes there are unchanged
+by filling a puncture on another component.  If the distinguished
+component remains stable after filling, the remaining choices are
+exactly the preceding tree-and-leaves calculation on that component,
+whose other special points are treated as punctures.  If it becomes
+unstable, it had exactly three special points before filling.  They
+are either the forgotten marking, a retained marking, and a node, or
+the forgotten marking and two nodes.  In the first case it is a fixed
+peripheral leaf; in the second it is a fixed inserted edge.  Preserving
+$\sigma$ fixes this placement, and the additional curves of $\eta$
+lift uniquely in the other components.  In either case (F.10) is a
+singleton.  These cases exhaust the possibilities.  We have proved
+contractibility of every required lifting category, and hence
+properness.  Proper functors are closed under composition, which proves
+the final assertion.
+\end{proof}
+
+\begin{statement}{F.11}{Refuted}{Forgetting a marking need not be smooth}
+The proper entrance functor $T_{0,5}\to T_{0,4}$ is not
+$W_\infty$-smooth.  The first stable forgetful map
+$T_{0,4}\to T_{0,3}=e$ is both proper and smooth, so five markings are
+the smallest instance of this failure in the genus-zero forgetful
+sequence.
+\end{statement}
+\begin{proof}
+Take the upstairs point stratum $x=q_{12,34}$, with marking $5$ on the
+middle three-pointed component.  Its two curves $c_1,c_2$ become the
+same essential curve $c$ after forgetting $5$.  Write
+$\Delta_x=\langle t_1,t_2\rangle\cong\mathbb Z^2$ and
+$\phi(t_1)=\phi(t_2)=t_c$.  In exit variance consider the arrow
+$[1]:q x=\{c\}\to\varnothing$.  Its outgoing lifting category is the
+test for smoothness in entrance variance.
+
+The target of any such lift has empty image under $q$.  It is therefore
+either the empty curve system or a single curve enclosing $5$ and one
+retained marking.  The latter cannot be a subset of any translate of
+$\sigma_x$: its split label is different from both $12|345$ and
+$34|125$, and pure mapping classes preserve split labels.  Hence the
+only possible target is the open object.  Put
+$K=\ker(\phi)$.  Objects of the lifting category are
+$\{g\Delta_x:\phi(g)\in\langle t_c\rangle\}$, and arrows between
+them are postcomposition by elements of $K$.  Because
+$\phi(\Delta_x)=\langle t_c\rangle$, this is the transitive action
+groupoid of $K$ on $K/(K\cap\Delta_x)$.  Its stabilizer is
+\[
+ K\cap\Delta_x=\langle t_1t_2^{-1}\rangle\cong\mathbb Z.
+\]
+The lifting category therefore has classifying space $B\mathbb Z$,
+not a contractible space.  This verifies every hypothesis and the
+failure of the smoothness criterion.  Independence of $t_1,t_2$
+follows from their disjoint essential supports as in F.5; in particular
+the stabilizer is not killed by the quotient defining the arrows.
+The check of the exponent map $(r,s)\mapsto r+s$ is included in the
+code, although the counterexample category itself is infinite.  A
+functor to the terminal category passes both lifting tests because its
+tests are ordinary slices with an initial or terminal object.  This
+settles the minimality assertion within the sequence.
+\end{proof}
+
+\begin{statement}{F.12}{Proved}{Clutching as a closed categorical
+embedding}
+Let $L=A\amalg B$ be a partition with $|A|,|B|\geq2$.  Clutching the
+extra marked points gives an isomorphism
+\[
+ \overline M_{0,A\cup\{*\}}\times
+ \overline M_{0,B\cup\{*\}}\xrightarrow{\sim}D_{A|B}\subset X_{|L|}
+                                                               \tag{F.11}
+\]
+onto the closed boundary divisor.  In entrance variance the induced
+functor can be represented by the fully faithful cosieve on the
+objects whose dual trees contain the split $A|B$.  It is therefore
+$W_\infty$-proper.  On exit categories the corresponding inclusion is
+a fully faithful sieve.  The product description and this inclusion
+are compatible with clutching more than one node.  The inclusion of
+the fixed-curve product model into the full multicurve model is not
+itself $W_\infty$-proper; the proper representative is its replete
+enlargement just specified.
+\end{statement}
+\begin{proof}
+Normalization at the distinguished node inverts (F.11); fixed labels
+distinguish the two branches, including when their cardinalities are
+equal.  This is \citet[Catalogue, Fact 2]{FKeel1992}.
+Choose a fixed curve $c$ separating $A$ from $B$, and first use only
+multicurves containing $c$.  An arrow between two such objects is
+represented by a mapping class preserving $c$: in the image of the
+source multicurve there is exactly one curve with the labelled split
+$A|B$, so it must be the fixed target curve.  The stabilizer of $c$
+modulo its twist is the product of the mapping class groups of the
+two punctured components.  This proves the product identification of
+categories and their full faithfulness.
+
+For the actual cosieve take the full replete subcategory of all
+multicurves containing some curve with split $A|B$.  It is equivalent
+to the fixed-$c$ product just described, and it is a sieve in exit
+variance since refinement retains the split.  Its opposite is the
+required literal cosieve.  This distinction matters: the inclusion
+of the fixed-$c$ subcategory alone is not replete in the nonskeletal
+model.  In fact choose a pure mapping class taking $c$ to a distinct
+curve $c'$; such a class exists by twisting about an essential curve
+intersecting $c$, since both sides of $c$ contain at least two markings.
+The entrance isomorphism $\{c\}\to\{c'\}$ has no lift under the
+fixed-$c$ inclusion: its target object $\{c'\}$ is not in that
+inclusion's literal image.  Its outgoing-arrow lifting category is
+empty, proving the claimed failure of strict properness for that
+particular representative.  Repeating the normalization argument at
+several disjoint nodes gives the stated compatibility.  The properness
+of the replete full cosieve follows from the lifting criterion of Part D.
+\end{proof}
+
+\begin{statement}{F.13}{Proved}{Strict categorical fibres and geometric
+fibres of forgetting}
+For the full model (F.8), the strict fibre $F^{-1}(\tau)$ is equivalent
+to the entrance category of the stable $n$-pointed curve represented by
+$\tau$, stratified by its smooth component complements, its marked
+points, and its nodes.  This is the topological fibre of
+$X_{n+1}\to X_n$.  In particular the fibre of $X_5\to X_4$ is $S^2$
+over $U_4$ and $S^2\vee S^2$ over any point stratum; the map is not a
+topological fibre bundle and is not a submersion of the underlying
+smooth manifolds.
+\end{statement}
+\begin{proof}
+An object upstairs that stabilizes to a fixed nodal curve places the
+extra point either on the smooth locus of a component, at a retained
+marking by adding a three-pointed bubble, or at a node by inserting a
+three-pointed bridge.  These are exactly the strata of that curve.
+In the strict categorical fibre, two placements of the same type
+are isomorphic by point-pushing.  At a smooth-component placement the
+automorphism group is the kernel of forgetting in its component
+mapping class group, namely the fundamental group of that component
+with its special points removed, by (F.9).  At a bubble or bridge the
+automorphism group is trivial.  The incidence bimodule at each adjacent
+marked point or node is the set of left cosets of the corresponding
+peripheral cyclic subgroup in that component group, by the same
+annular calculation as F.2.  There are no chains through three
+different strata.  This identifies every hom-set, action, and
+composition with the entrance category of the curve, and proves the
+claimed categorical equivalence.
+
+The geometric assertion about the fibre is the universal-curve
+interpretation of forgetting and stabilizing; it is also described in
+\citet[Introduction, pp.~546--548]{FKeel1992}.  A smooth four-pointed
+curve is one projective line.  A boundary four-pointed curve is two
+projective lines meeting in one point.  Their second integral homology
+has rank one and two respectively.  Fibres of a topological fibre
+bundle over a connected base are homeomorphic and have equal
+homology.  A proper smooth submersion would be a fibre bundle, and
+in this instance the singular fibre also directly excludes a
+submersion.  This geometric argument is independent of, and weaker
+than, the categorical obstruction in F.11.
+\end{proof}
+
+\begin{statement}{F.14}{Proved}{The coefficient functors and their
+base-change properties}
+For a compactly generated presentable coefficient infinity-category,
+pullback along clutching or forgetting corresponds under (F.7) to
+restriction along the entrance functors above.  Their ordinary
+topological direct images preserve constructibility and correspond
+to right Kan extension.  For every derivator, the specified proper
+categorical models satisfy right-Kan base change for all strict
+category pullbacks.  Geometric proper base change holds for the
+analytic maps and their pullbacks among locally compact Hausdorff
+spaces.  The two assertions agree
+whenever the strict pullback category is identified with the entrance
+category of the geometric pullback, in particular for the point
+fibres in F.13 and for the closed-boundary squares in F.12.  There is
+no smooth-base-change assertion for forgetting: F.11 refutes that
+hypothesis already at five markings.
+\end{statement}
+\begin{proof}
+The geometric maps preserve strata and send exit paths to exit paths,
+so the pullback assertion follows from exodromy and F.9--F.12.  For a
+closed inclusion, direct image is extension from the closed subset,
+and its values and gluing maps are the corresponding right Kan
+extension; the local open--closed calculation is the one in Part D.
+Forgetting is a proper algebraic morphism.  Its restriction over a
+fixed target stratum is locally topologically trivial as a family of
+stratified nodal curves: choose disjoint coordinate discs around the
+labelled special points on each normalized component, move the
+points by isotopies in these discs, and glue the fixed node pairs.
+Shrink to a contractible coordinate ball $B$ in the target stratum,
+and write its stratified trivialization as $B\times C$, with $C$ the
+stratified nodal fibre.  By the definition of exit simplices, the exit
+category of this product is
+$\Pi_\infty(B)\times\Exit(C)\simeq\Exit(C)$.  Applying coefficient
+exodromy to the product shows that the constructible sheaf on it is
+pulled back from $C$, up to an equivalence compatible with restriction
+to each fibre.  This proves the required locally constant transport;
+local triviality of the underlying spaces alone would not supply that
+conclusion for arbitrary sheaves.  Compactness of the fibre and proper
+base change identify
+the stalk of the direct image with sections on this fibre.  They
+therefore make the direct image locally constant on the target
+stratum.  This proves preservation of constructibility.
+
+Since both inverse image and direct image preserve the respective
+constructible subcategories, their adjunction restricts to those
+subcategories.  Under (F.7), inverse image is restriction.  Uniqueness
+of its right adjoint therefore identifies the restricted direct image
+with right Kan extension, including its unit and counit.  In addition,
+F.10 computes right Kan extension at $\tau$ as the homotopy limit over
+the strict fibre, and F.13 identifies that limit with sections of the
+restriction to the geometric fibre.  These are the specified fibrewise
+base-change comparisons.
+For spaces, geometric proper base change is
+\citet[Corollary 7.3.1.18]{FLurieHTT2009}; testing with compact generators
+extends it to the indicated coefficient categories, because mapping
+out of a compact generator commutes with the filtered stalk colimit
+and with the limits in the direct image.  The categorical assertion
+uses only the properness theorem of Part D and hence applies also to
+bare derivators.  For a square obtained by pulling back a replete
+boundary inclusion, the strict pullback is the full subcategory on
+objects whose image lies in that boundary.  Its geometric counterpart
+is the closed union of strata with exactly this condition.  The exit
+category of a closed union of strata is the full subcategory on those
+strata: along an exit simplex all strata precede its last stratum, and
+closedness retains all these predecessors.  This proves the asserted
+comparison for boundary squares.  Nothing in this argument identifies an arbitrary
+strict category pullback with a geometric pullback.  That comparison
+is extra data, and its verified instances were specified in the
+statement.  Likewise the left adjoint of constructible pullback is a
+left Kan extension; it should not be confused with the topological
+exceptional direct image, whose adjunction is with exceptional
+inverse image.
+\end{proof}
+
+\begin{statement}{F.15}{Proved}{The explicit map from five to four
+markings}
+Forget marking $5$.  The open object maps to the open object.
+A divisor object $d_I$ maps to the open object when $5\in I$ and to
+the boundary partition $I|\{1,2,3,4\}\setminus I$ otherwise.
+Every $q_{I,J}$ maps to the partition defined by its surviving
+essential split; if $5$ is the middle marking then both splits
+survive as the same partition.  On all hom-sets the map is the coset
+map $[g]\mapsto[\phi(g)]$ of F.9.  In particular a twist about a
+curve enclosing $5$ and one retained mark maps to $1$, and all other
+single-curve twists map to the twist about their image split.
+\end{statement}
+\begin{proof}
+Deleting $5$ makes the side $\{5,i\}$ unstable and removes its edge.
+Every other divisor split remains stable.  For a two-cherry tree,
+deleting an endpoint marking contracts its unstable endpoint
+component and leaves the other split; deleting the middle marking
+contracts that component and identifies its two incident edges.
+These are all the cases.  Annular twists give the arrow formulas,
+which are independent of chosen representatives by F.9.  Over each
+boundary partition there are two divisor strata and five point
+strata, and over the open stratum there are the open stratum and
+four divisor strata.  The program enumerates these fibres and all
+incidence relations, and checks that the object map is monotone.
+The twenty-six-object description, the explicitly defined group
+$G_5$, the coset bimodules (F.1)--(F.2), and the multiplication (F.4)
+thus give a complete specification of $T_{0,5}\to T_{0,4}$ after
+opposites and choices of skeleton markings.
+\end{proof}
+
+\subsection{What the Teichm\"uller tower comparison says}
+
+\begin{statement}{F.16}{Known}{The relevant definitions in Grothendieck's
+texts}
+In \emph{La Longue Marche}, \S19, the notation is
+$A_g=\Aut(X_g)$ for the topological homeomorphism group of a compact
+orientable genus-$g$ surface,
+$A_{g,\nu}=\{u:u(S_{g,\nu})=S_{g,\nu}\}$,
+$A_{g,\nu}^{!}=\{u:u|_{S_{g,\nu}}=\id\}$, and
+\[
+ \Gamma_{g,\nu}=\pi_0 A_{g,\nu},\qquad
+ \Gamma_{g,\nu}^{!}=\pi_0 A_{g,\nu}^{!}.               \tag{F.12}
+\]
+Our $\Gamma_n$ is the orientation-preserving subgroup of
+$\Gamma_{0,n}^{!}$, not the full group allowing permutations or
+orientation reversal.  The modular topos $M_{g,\nu}$ of \S26 is the
+modular topos of smooth curves of type $(g,\nu)$; its complex
+topological fundamental group is the corresponding oriented
+Teichm\"uller group.  It is not the constructible-sheaf category of
+the compactification.  The operation called ``bouchage de trous'' in
+\S27 induces the forgetful operation of F.9 on the open stratum.
+\end{statement}
+\begin{proof}
+The definitions (F.12) are the literal equations (3)--(11) in the
+attached \S19 transcription, manuscript p.~102, scans 204--205.
+The superscript $!$ imposes fixed labels; orientation preservation is
+an additional restriction, not part of the symbol $A_g$ in those
+equations.  This resolves the potential mismatch between analytic
+moduli with labelled markings and the whole homeomorphism group.
+The supplied P034 extract starts with the continuation of \S26;
+for its preceding definition we opened the Grothendieck Circle
+transcription, Part Ib, \S26, equations (19)--(25), printed pp.~5--6.
+There $M_{g,\nu,\mathbb C}$ is identified through its Teichm\"uller
+universal cover, and equation (24) is the universal-curve fundamental
+group extension.  The topological restriction of that extension is
+(F.9) with the same label and orientation restrictions.  At \S27,
+manuscript pp.~172--173, scans 340--342, filling the punctures in
+$I\setminus I'$ is explicitly the operation considered.  On the
+surface fundamental group it kills the normal closure of those
+peripheral loops, by van Kampen.  On homeomorphism components it is
+the homomorphism $\phi$ of F.9.  This proves the asserted
+compatibility while making no assertion about the arithmetic
+extensions discussed on the surrounding pages
+\citep[\S\S19,26--27]{FGrothendieckLM1981}.
+\end{proof}
+
+\begin{statement}{F.17}{Proved}{The precise comparison with the Lego
+groupoid}
+The full subgroupoid of $T_{0,n}$ on the open stratum is equivalent
+to $B\Gamma_n$.  More generally its maximal subgroupoid is
+\[
+ \coprod_{\tau} B\!\left(\prod_v\Gamma_{\operatorname{val}(v)}\right).
+                                                               \tag{F.13}
+\]
+The usual topological Teichm\"uller groupoid of $U_n$ is equivalent
+to the first of these groupoids.  The equivariant path groupoid formed
+from the marking complex of the Lego--Teichm\"uller game and its mapping
+class group action presents this groupoid after imposing the same label
+and orientation conventions and capping marked boundary circles to
+punctures.  The nonequivariant path groupoid of that complex is
+contractible.  Neither construction identifies the whole degeneration
+category $T_{0,n}$ with a groupoid.
+\end{statement}
+\begin{proof}
+The first two assertions are (F.3) and (F.6): an isomorphism cannot
+change the number or labelled configuration of nodes.  For the
+opposite category we identify the opposite of each automorphism group
+with that group by inversion.  Since $U_n$
+is connected and aspherical, its fundamental groupoid is equivalent
+to its one-object groupoid $B\Gamma_n$, with the equivalence depending
+on a basepoint and connecting paths.  Grothendieck's
+\emph{Esquisse}, \S2, explicitly treats the system of open moduli
+spaces linked by filling and gluing, and advocates several basepoints
+for its fundamental groupoids; see the attached edition,
+pp.~9--11 \citep{FGrothendieckEsquisse1984}.
+
+For a genus-zero extended surface $\Sigma$ with $n\geq3$ marked
+boundary circles, let $\mathcal L(\Sigma)$ be the
+two-complex of markings and elementary moves of
+\citet[Main Theorem 4.9]{FBakalovKirillov2000}.  That theorem states
+that it is connected and simply connected.  Form the groupoid with
+objects its markings and morphisms $M\to M'$ the pairs $(g,[p])$
+consisting of a mapping class $g$ and a path $p:gM\to M'$ modulo
+homotopy relative to endpoints.  For $q:hM'\to M''$, composition is
+$(h,[q])\circ(g,[p])=(hg,[q*(hp)])$, where $hp$ is the translate of
+$p$ and the concatenation first traverses $hp$ and then $q$.
+Simple connectedness makes the path class unique whenever its endpoints
+are fixed.  Consequently the functor sending $(g,[p])$ to $g$ is an
+equivalence to the mapping class group's one-object groupoid.  Without
+the group action there is exactly one path class between any pair of
+markings, so the path groupoid is equivalent to the terminal category.
+This distinction is consistent with
+\citet[Remark 4.3]{FBakalovKirillov2000}: an elementary marking move
+is not itself a homeomorphism of surfaces.
+Passing from marked boundary circles to labelled punctures kills the
+boundary twists:
+extension over the punctured discs gives a surjection, and the
+kernel consists exactly of annular twists, by the same cutting
+argument as (F.3).  Restricting to fixed labels gives $B\Gamma_n$.
+This proves the asserted relation to the Lego presentation.
+
+For $n\geq4$, $T_{0,n}$ has noninvertible degeneration arrows, for
+example $u\to p_0$ in $T_{0,4}$.  Such an arrow cannot become
+invertible under an equivalence of categories.  Thus the whole
+category is not a groupoid.  Its infinity-groupoid completion has
+the homotopy type of $X_n$, by F.7 and the groupoid-completion
+property of exit paths.  Already $X_4\simeq S^2$ differs from
+$U_4\simeq BF_2$.  Ordinary groupoid completion would lose even the
+second homotopy group of $S^2$.  Hence neither completion should be
+silently substituted for the open Teichm\"uller groupoid.
+The input for the separate profinite package is the specified
+category (F.6), its opposite convention, the functors F.9 and F.12,
+and the properness and nonsmoothness in F.10--F.14.  No profinite
+completion or arithmetic action is asserted here.
+\end{proof}

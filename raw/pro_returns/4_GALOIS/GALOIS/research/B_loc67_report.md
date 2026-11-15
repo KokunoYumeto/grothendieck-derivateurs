@@ -1,0 +1,31 @@
+# Loc(6b,c), Loc(7a,b,c,F): exact audit
+
+The standalone LaTeX component is `sections/B_loc67.tex`. It uses the reserved identifiers B.6 and B.7 and reuses the already verified bibliography keys `Cisinski2006`, `Quillen1973`, and `Rezk1998Sharp`; there are no bibliography additions.
+
+## Results
+
+* **B.6 — Refuted:** Both reverse Mayer--Vietoris axioms fail for Wlc of every nontrivial derivator, including HOT. They hold for the terminal coefficient theory. The failure of 6c is checked directly using the cube `(A,A,Cw,Cw) -> (A,Cv,Cw,Sigma A)`; no speculative 6c-to-6b implication is used. For constant spectrum-homology localizers, all three implications hold by exact triangles.
+* **B.6 — Proved intermediate-class classification:** W1 fails 6b for every nontrivial derivator. It fails 6c exactly when D(e) is nonthin. The nonthin 6c example uses a proper nontrivial acyclic subgroup H of an acyclic simple group G, the categorical mapping cylinder BH -> BG, and the cone on BH. For thin coefficients, the derivator is represented by its complete preorder and W1 is exactly surjectivity on components; direct component analysis proves 6c.
+* **B.7 — Proved:** For a nontrivial fundamental localizer, 7a, 7b, and 7c each force the minimal localizer. The precise checked theorem is Cisinski 6.4.22, with no accessibility assumption; 6.4.23 handles the gross exception. The proof spells out how the manuscript's Grothendieck-fibration formulation implies Cisinski's comma-category formulation.
+* **B.7 — Proved:** For an accessible fundamental localizer, 7F is equivalent to properness. The new implication 7F -> W=Wasph is proved by a pullback lemma and factorization of the graph of an arbitrary W-equivalence. The converse follows from the proper Thomason model structure. This is stronger than merely pointing to model fibrations: the class in 7F is the manuscript's universal W-preserving class.
+* **B.7 — Proved:** For every nonzero unital ring k, 7F for Wlc_D(k) holds exactly when all rational primes are nonunits in k, which is exactly when Wlc_D(k)=Winfty. The proof covers noncommutative rings as their homology test is arithmetic on the underlying abelian group. In characteristic zero it reduces to R=Z[S^-1]; in positive characteristic it uses the finite set of primes dividing the characteristic.
+* **B.7 — Proved/Known:** Every nonzero constant Hk localizer is nonproper and fails 7F. Its characteristic-zero integral case is Cisinski 9.4.7; all other cases have explicit Eilenberg--Mac Lane witnesses with local targets and nonsurjective pi1. It also fails 7a--c because it strictly contains Winfty.
+* **B.7 — Proved intermediate-class refinements:** Literal 7c holds for W1 of every derivator, by the locally constant Kan adjunction, evaluation of its unit, and B.3. Under enhancement, 7a and the factorization assertion in 7F hold. Literal 7b fails for every listed nontrivial finite truncation, stable, or thin theory, via the section [1] -> Groth(Z -> e). This section refutes 7b, not 7c. For space coefficients W1=Winfty and all the axioms hold. The factorization assertion does not repair the missing two-out-of-three needed for the Brown-category formulation.
+
+## Delicate hypotheses explicitly checked
+
+The targets of all nonproperness witnesses are local for the stated homology class and hence for the smaller Wlc class. This is necessary in Cisinski Lemma 9.4.5. For finite characteristic, K(Z_p,n) is expressed as the homotopy limit of K(Z/p^r,n); cohomological Bockstein induction proves locality, and surjectivity of the inverse system kills the derived limit. For the fibre M/Z, unique p-divisibility is checked directly, and its mod-p acyclicity is proved by finitely generated abelian subgroups and their p-root enlargements. Merely asserting that the group is p-divisible would not have sufficed without the absence of p-torsion.
+
+The finite B.6 example has a complete executable category specification in `code/B_verify_reverse_excision.py`, with exhaustive arrows, compositions, associative triples, functor and sieve checks, and rational chain homology. The nonthin example uses the explicit small acyclic group construction of B.10, and specifies the whole double-cone composition law in the text.
+
+## Remaining exact question
+
+For an arbitrary spectrum E beyond the cases computed here, the remaining 7F question is whether `Wlc_L_E Sp = (Wlc_L_E Sp)_asph`. B.4 proves accessibility, so this criterion is equivalent to properness, with no hidden additional hypothesis. The text does not claim a universal positive or negative answer for all E. For a completely arbitrary derivator, accessibility remains an independent issue; the proof of 7F -> aspherical generation does not need accessibility.
+
+For an arbitrary unenhanced Der1--4 derivator, the following two W1 questions remain unproved here: (a) does every Grothendieck fibration whose transport functors are 1-complete preserve all 1-complete maps under every strict categorical pullback, namely literal Loc7a? (b) does every small-category functor factor as a 1-complete map followed by such a universally W1-preserving map, namely the factorization assertion of Loc7F? The proof of (a) gives a cohomological-equivalence output, and the upgrade to full faithfulness uses the enhanced equality C.2. The proof of (b) uses homotopy-pullback stability of W1, also supplied by C.2's enhanced fibre criterion. B.3's general relative Theorem A alone does not provide either missing step. Literal 7c is proved without enhancement and is not part of this residual question.
+
+## Literal manuscript wording
+
+XVI Loc(6b) asks whether f1,f2,f3 in W force f0; Loc(6c) asks whether f0,f3 force f1,f2. Unqualified Loc(6) means 6a plus 6b. XVI ms38--39 defines 7a--c using Grothendieck fibrations with W-equivalent transport; 7F uses the distinct universal strict-pullback-preserving class Fib_W. The text's word “cofibrations” in the 7F paragraph is a typo in an assertion about a category of fibrant objects.
+
+XVI ms75 Loc(9) says that W is an accessible part of the arrow category of Cat. With Loc(8), section5.3 expresses this as a filtered-colimit envelope of a small bounded-cardinality family. This is independent of the additional aspherical-generation requirement in Cisinski 6.1.11.

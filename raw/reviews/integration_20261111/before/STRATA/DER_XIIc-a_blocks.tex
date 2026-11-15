@@ -1,0 +1,839 @@
+% Commentary and mathematical audit by GPT-6 Astra (OpenAI, ChatGPT Pro mode).
+
+\begin{dcomment}{exposition}{p171}{What the first two tests measure}
+Grothendieck is trying to recognize finite homotopy information without leaving the category of small categories. The two initial cases explain why locally constant coefficients, rather than arbitrary presheaves, are the appropriate witnesses. Write $BX=|NX|$ for the classifying space of $X$. A locally constant set-valued presheaf is a functor on the fundamental groupoid $\Pi(BX)$, with the variance reversed if one retains the presheaf convention. In this block all changes of variance are absorbed by inversion in the groupoid. The word ``constant'' on p.~171 means globally constant, whereas ``locally constant'' permits monodromy. For a disconnected category these are substantially different conditions.
+
+For a set $A$, a section of the constant presheaf $A_X$ chooses one element of $A$ on each connected component. Thus $H^0(X,A_X)=\operatorname{Map}(\pi_0X,A)$. A natural transformation $A_X\to B_X$ similarly chooses one map $A\to B$ per component. These formulas prove all three tests for $W_0$. In the converse direction, if precomposition with $\pi_0f$ is bijective for every target set, Yoneda gives that $\pi_0f$ is a bijection. The empty category is included: the map from a two-element set to its set of sections on the empty category cannot be bijective.
+
+There is a useful elementary explanation of the apparently weak condition b$'$) for $W_1$. After using constant sets to identify components, work with connected $X,Y$ and put $\alpha:H=\pi_1(X,x)\to G=\pi_1(Y,f(x))$. Sections of the local system corresponding to a $G$-set $A$ are $A^G$, and sections after pullback are $A^H$. Their equality for every $A$ forces $\alpha$ to be surjective. Indeed, let $K=\alpha(H)$ and take the transitive $G$-set $G/K$. The coset $K$ is fixed by $H$; if every $H$-fixed element is $G$-fixed, then $K=G$. Constant nonabelian $H^1$ has the familiar description
+\[
+ H^1(X,L_X)=\operatorname{Hom}(H,L)/L,
+\]
+where $L$ acts by conjugation. Surjectivity for $L=H$ says that the class of the identity of $H$ is represented by $\rho\alpha$ for some $\rho:G\to H$. Conjugating $\rho$ makes $\rho\alpha=1_H$, so $\alpha$ is injective as well. If there are several components, choose the identity representation on the chosen component and trivial representations on the others. This proves b$'$)$\Rightarrow$a), including the componentwise assertion.
+
+An equivalence of fundamental groupoids conversely identifies every category of local systems, its global sections, and its torsors. This proves a)$\Rightarrow$b), c). To see directly that c) also forces the groupoid equivalence, full faithfulness recovers global sections as maps from the terminal object and hence forces $\alpha$ to be surjective by the same coset argument; essential surjectivity makes the regular $H$-set the restriction of a $G$-set, so $\ker\alpha$ acts trivially on a faithful $H$-set and is trivial. The torsor interpretation is the first step of the comparison between cohomology and homotopy types recalled in \citet[Preface, pp.~vii--viii]{Lurie2009HTT}. Nothing here requires a choice of a universal covering category: the fundamental groupoid already contains precisely the needed information.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p172}{Loops, finite types, and the scope of the proposed theorem}
+The iterated path construction is being asked to do two jobs. First it supplies the groups $\pi_i(X,x)$ intrinsically in $\Cat$; subsequently it must show that these groups are the usual homotopy invariants of $BX$. The later identification of the minimal fundamental localizer with ordinary weak homotopy equivalences removes the distinction between $W_\omega$ and $W_\infty$ in the modern interpretation; see \citet[Theorem~2.2.11]{Cisinski2004Minimal}. It should not be used to erase Grothendieck's effort to obtain the result from the categorical path construction itself.
+
+Theorem~1 contains three separate assertions. The equivalence a)$\Leftrightarrow$a$'$) is the basepoint transport statement established below. The implication a)$\Rightarrow$b) is correct, and the argument on pp.~180--185 supplies its proof after the twisted-coefficient evaluation map is made explicit. The converse b)$\Rightarrow$a) is false in general. The first failure, however, is in degree $3$, not in degree $2$ as footnote~112 suggests. The degree-two case survives even with nontrivial fundamental group. We prove this distinction below, because it materially changes the interpretation of the ensuing ``rectification''.
+
+It is also necessary to distinguish an equivalence of $n$-types from a map with $n$-connected homotopy fibres. For the former, $\pi_0f$ is bijective and $\pi_if$ is an isomorphism for $1\leq i\leq n$. For the latter one needs, in addition, surjectivity on $\pi_{n+1}$. Grothendieck identifies this additional condition correctly on p.~179, but calls the fibre condition the ``good localizer'' on p.~187. That last sentence cannot stand as a definition of a class of weak equivalences: the fibre condition fails the two-out-of-three axiom. The distinction does disappear for a map to a point, which explains why the argument of Theorem~2 is unaffected.
+\end{dcomment}
+
+\begin{dcomment}{development}{p175}{Making pointed transport explicit}
+Grothendieck needs to transport a marked object along an arrow even when the underlying transition functor does not preserve that object strictly. The discrepancy is useful data: the arrow supplied by the section tells us exactly which change of basepoint to make. The following construction fills in the indicated verification using only arrow categories and localization. We checked the natural-homotopy and adjunction lemmas in \citet[\S1.1, especially Proposition~1.1.9 and Corollary~1.1.10]{Cisinski2004Minimal}; we did not locate a discussion of this particular pointed comma-category formula in the consulted sources. The result is an elementary completion of the manuscript's construction, with no assertion of priority.
+
+\textbf{Pointed transport lemma.}\ours\ Suppose $W$ contains every functor admitting a left or a right adjoint and satisfies two-out-of-three. In the localization of pointed categories at functors whose underlying functors lie in $W$, an arrow $a:d\to e$ of a category $D$ defines a canonical isomorphism
+\[
+ t_a:(D,d)\longrightarrow(D,e).
+\]
+It is natural in functors $D\to D'$, satisfies $t_{1_d}=1$, and satisfies $t_{ba}=t_bt_a$ for composable arrows $a,b$.
+
+\textit{Proof.} Regard $a$ as the marked object of $D^{[1]}$. The two evaluation functors give a pointed span
+\[
+ (D,d)\xleftarrow{\ e_0\ }(D^{[1]},a)
+ \xrightarrow{\ e_1\ }(D,e).
+\]
+The constant-diagram functor is left adjoint to $e_0$ and right adjoint to $e_1$, so both evaluations belong to $W$. Define $t_a=[e_1][e_0]^{-1}$. For the identity arrow the constant-diagram functor is a pointed common section, proving the unit assertion. For a composable pair, mark $D^{[2]}$ by the diagram $d\xrightarrow a e\xrightarrow b h$. Evaluation at every vertex belongs to $W$. For the endpoints this again follows from adjunctions. For the middle vertex use the natural transformation $e_0\Rightarrow e_1$ and the following elementary consequence of the assumptions: naturally related functors belong to $W$ simultaneously. Indeed, represent a natural transformation by $H:A\times[1]\to B$. The projection $A\times[1]\to A$ has an adjoint and lies in $W$; each endpoint section lies in $W$ by two-out-of-three. Thus $H i_0\in W$ if and only if $H\in W$, if and only if $H i_1\in W$. Restriction to the three edges commutes with vertex evaluation and is therefore in $W$ by two-out-of-three. On this common pointed source,
+\[
+ [e_2][e_0]^{-1}
+ =\bigl([e_2][e_1]^{-1}\bigr)
+  \bigl([e_1][e_0]^{-1}\bigr).
+\]
+This is the composition assertion. Applying a functor to arrow diagrams commutes strictly with all evaluations and restrictions, proving naturality.\hfill$\square$
+
+Now let $q:E\to X$ be the fibration under discussion, with section $\sigma$. For $u:x\to x'$ write $u_*:E/x\to E/x'$ for postcomposition. Its marked source maps to $u_*\sigma(x)$, and the section gives an arrow
+\[
+ a_u:u_*\sigma(x)\longrightarrow\sigma(x')
+\]
+in $E/x'$. Define the pointed transition to be $t_{a_u}[u_*]$. For $v:x'\to x''$, the equality $a_{vu}=a_v\,v_*(a_u)$, naturality of $t$, and the composition formula prove the functor law. When the comma transitions belong to $W$, these maps are isomorphisms and the functor factors through $\Pi X$. The pointed inclusions $E_x\to E/x$ identify it with the family of strict fibres whenever those inclusions belong to $W$. Applied to the loop fibration, this gives the local systems of higher homotopy groups and proves the equivalence of the one-basepoint and every-basepoint formulations. It gives ordinary transport in the pointed homotopy category; a coherent family of pointed spaces contains further information, which is not claimed to follow from this ordinary functor alone.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p178}{The first genuine failure and the role of loop multiplication}
+The withdrawn induction fails because ordinary cohomology in degree $n$ need not see all of $\pi_n$ when lower homotopy is already present. A concrete example makes the failure exact. Take
+\[
+ f:S^2=\mathbf{CP}^{1}\longrightarrow\mathbf{CP}^{\infty}=K(\mathbf Z,2).
+\]
+Both spaces are simply connected. Their integral cellular chain complexes have $\mathbf Z$ in degree $0$ and degree $2$, and no groups in degrees $1$ and $3$; $\mathbf{CP}^{\infty}$ has additional even-dimensional cells starting in degree $4$. Thus for every abelian group $M$, the map induces isomorphisms on $H^i(-;M)$ for $0\leq i\leq3$: the nonzero groups in this range are $H^0=M$ and $H^2=M$. Nonabelian $H^1$ is trivial on both spaces and every local system is constant. Yet
+\[
+ \pi_3(S^2)=\mathbf Z\longrightarrow
+ \pi_3(K(\mathbf Z,2))=0
+\]
+is not an isomorphism. The source group is detected by the Hopf fibration, and the target calculation follows from $S^1\to S^\infty\to\mathbf{CP}^{\infty}$; both computations appear in \citet[Examples~4.50--4.51]{Hatcher2002}. This disproves Theorem~1 and the lemma on p.~177 for $n=3$, even with simply connected source and target. Applying the category-of-simplices construction to singular simplicial models gives an actual functor of small categories with the same failure; the nerve/category-of-simplices equivalence is recorded in \citet[Lemma~2.1.15]{Cisinski2004Minimal}.
+
+The proposed passage from the unit component of a loop space to all components is nevertheless sound. If $M$ is a topological monoid with $\pi_0M$ a group, multiplication by any $m\in M$ is a homotopy equivalence. Choose $m'$ representing its inverse component. Paths from $mm'$ and $m'm$ to the unit show that multiplication by $m'$ is a homotopy inverse, using associativity. A homomorphism of such monoids commutes with these translations. Hence its effect on homotopy groups in every component is determined by its effect at the unit, together with the bijection on components. Realization of a monoidal category has this property when its monoid of components is a group, as it is for Grothendieck's loop category. The monoidal argument repairs the specific verification requested at the top of p.~178; it does not repair the false cohomological converse used by the abandoned induction.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p179}{Three conditions and the extra degree}
+The corrected theorem separates fibre connectivity, homotopy isomorphisms, and cohomological isomorphisms. This separation is the main conceptual gain of the first section. In condition $c_n$ the printed text has omitted the range of $i$; the intended range is $0\leq i\leq n$, as both proof and notation require. We use singular local coefficients on classifying spaces, or on CW replacements when discussing spaces. A statement about arbitrary topological spaces with their ordinary sheaf cohomology would require additional hypotheses and is not supplied by the argument here.
+
+For a homotopy fibre $Z$ over $y=f(x)$, the exact homotopy sequence gives
+\[
+ \pi_{n+1}(X,x)\longrightarrow\pi_{n+1}(Y,y)
+ \longrightarrow\pi_n(Z,z)\longrightarrow
+ \pi_n(X,x)\longrightarrow\pi_n(Y,y).
+\]
+Together with the preceding terms, this proves
+\[
+ a_n\quad\Longleftrightarrow\quad
+ b_n\ \text{and}\ 
+ \pi_{n+1}(X,x)\twoheadrightarrow\pi_{n+1}(Y,y)
+\]
+for one basepoint in every component, with nonempty connected fibres understood. In contemporary terminology $a_n$ says that $f$ is $(n+1)$-connected when a $k$-connected map is defined to have $(k-1)$-connected fibres. Authors also use a convention shifted by one; specifying the fibres avoids that ambiguity.
+
+The map $*\to K(A,n+1)$, for $A\ne0$, satisfies $b_n$ but not $a_n$, since its homotopy fibre is $K(A,n)$. At the other end, $S^n\to *$ has $(n-1)$-connected fibre, but fails $c_n$: with $M=\mathbf Z$, its degree-$n$ cohomology map is $0\to\mathbf Z$. These examples prove strictness of the first and last arrows in the chain. The middle arrow is strict for $n=3$ by the preceding example, but it is an equivalence for $n=2$. Thus the conjecture that \emph{each} implication is strict for every $n\geq2$ is false. This does not affect the implication chain itself.
+
+The lower boundary in the fibre statement matters. A bijection on components and isomorphisms on $\pi_i$ through degree $n$ yield only $(n-1)$-connected fibres; the remaining group $\pi_nZ$ can be the quotient of $\pi_{n+1}Y$ by the image of $\pi_{n+1}X$. It is precisely this group that enters the next low-degree exact sequence. The proof succeeds by showing that its restriction map from the cohomology of $X$ is zero, rather than by claiming that the group itself vanishes.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p181}{The exact sequence behind the cohomological implication}
+The use of a path replacement now lets Grothendieck import the classical fibration argument into his categorical model. Assume $b_n$, reduce to a connected component, and replace $f$ by a fibration with fibre $Z$. Then $Z$ is $(n-1)$-connected, and the homotopy sequence also says that $\pi_nZ\to\pi_nX$ is zero. For an abelian local system $F$ on $Y$ with fibre $M$ at $y$, the restriction $F|_Z$ is constant. The cohomological Serre--Leray spectral sequence has
+\[
+ E_2^{p,q}=H^p(Y;\mathcal H^q(Z;M))
+ \quad\Longrightarrow\quad H^{p+q}(X;f^*F).
+\]
+Here $\mathcal H^q(Z;M)$ includes both the transport of the fibre and that of $M$; replacing it by an untwisted constant group would lose the content of the argument. The historical spectral sequence is \citet[Chapter~II, \S8, Proposition~6]{Serre1951}; for the indexing and filtration in the untwisted presentation see \citet[Theorem~1.14]{HatcherSS2004}.
+
+Since $H^q(Z;M)=0$ for $0<q<n$, the only contributions in total degrees at most $n$ are the bottom row and $E_2^{0,n}$. No differential reaches the bottom row before $d_{n+1}$ from $(0,n)$ to $(n+1,0)$. Reading the filtration therefore gives the natural exact sequence
+\[
+\begin{split}
+0\longrightarrow H^n(Y;F)&\longrightarrow H^n(X;f^*F)
+ \xrightarrow{\alpha}\operatorname{Hom}_{\mathbf Z[\pi]}
+       (\pi_nZ,M)\\
+ &\longrightarrow H^{n+1}(Y;F)
+ \longrightarrow H^{n+1}(X;f^*F),
+\end{split}
+\]
+where $\pi=\pi_1Y=\pi_1X$. Only exactness through the penultimate group is needed. The identification of $E_2^{0,n}$ uses the natural Hurewicz isomorphism $\pi_nZ\cong H_nZ$ and the universal coefficient theorem, followed by taking monodromy invariants. The fibre is simply connected, so no ambiguity from inner automorphisms survives in its degree-$n$ group. The map $\alpha$ is restriction to a fibre, viewed as an invariant homomorphism.
+
+There is an efficient chain-level way to finish the twisted case. If $T$ is connected with fundamental group $\pi$, a local system $G$ with fibre $M$ is represented by a left $R=\mathbf Z[\pi]$-module. A cocycle representing $c\in H^n(T;G)$ is an $R$-linear map
+\[
+ z:C_n(\widetilde T)\longrightarrow M,
+ \qquad z\partial=0.
+\]
+Evaluation on cycles gives a homomorphism $H_n(\widetilde T)\to M$; changing $z$ by a coboundary has zero effect on cycles. Composing with the equivariant Hurewicz homomorphism produces
+\[
+ \varepsilon_G:H^n(T;G)\longrightarrow
+ \operatorname{Hom}_R(\pi_n(T,t),M),\qquad n\geq2.
+\]
+This is the desired spherical evaluation. Its additivity follows from the homomorphism property of Hurewicz, or from the pinch map of the sphere; its equivariance follows directly from $R$-linearity. Naturality follows by lifting a pointed map to universal covers and applying the chain map. The local-coefficient chain model is described in \citet[\S3H, pp.~327--334]{Hatcher2002}; the verification above supplies the particular application the manuscript leaves open.
+
+For $j:Z\to X$, choose the lift $Z\to\widetilde X$ corresponding to the marked point. Because $Z$ is simply connected and $(n-1)$-connected, naturality of evaluation and Hurewicz identify $\alpha$ with
+\[
+ H^n(X;f^*F)\xrightarrow{\varepsilon_{f^*F}}
+ \operatorname{Hom}_R(\pi_nX,M)
+ \xrightarrow{j^*}\operatorname{Hom}_R(\pi_nZ,M).
+\]
+The last map is zero because $j_*:\pi_nZ\to\pi_nX$ is zero. Hence $\alpha=0$, and exactness proves that $H^n(Y;F)\to H^n(X;f^*F)$ is an isomorphism. In lower degrees it is already an isomorphism by the zero rows of the spectral sequence. Degrees $0$ and nonabelian $1$ are controlled by the fundamental groupoid. This completes $b_n\Rightarrow c_n$ for all the coefficients actually stated, without an assumption of simple connectivity.
+\end{dcomment}
+
+\begin{dcomment}{development}{p183}{Completing the universal-cover comparison}
+Grothendieck briefly abandons the universal-cover method because he does not see how its comparison of $E_2$ rows controls later pages. The method can be completed directly at the level of complexes. It is useful to record the argument, since the needed range is finite and one should not invoke an unrestricted comparison theorem without checking its boundary. We use the ordinary truncation of complexes and the local-coefficient complex in \citet[\S3H]{Hatcher2002}. We did not find this particular completion of p.~183 in the consulted literature; its ingredients are standard homological algebra.
+
+\textbf{Finite-range descent lemma.}\ours\ Let $\pi$ be a group and let $u:C\to D$ be a map of nonnegative cochain complexes of $\mathbf Z[\pi]$-modules which induces isomorphisms on cohomology in degrees $0\leq q\leq n$. Then
+\[
+ H^k(R\Gamma(\pi,C))\longrightarrow
+ H^k(R\Gamma(\pi,D))
+\]
+is an isomorphism for $0\leq k\leq n$.
+
+\textit{Proof.} The smart truncation $\tau_{\leq n}C$ agrees with $C$ below $n$, has $\ker(d:C^n\to C^{n+1})$ in degree $n$, and is zero above $n$. The natural inclusion fits into the truncation triangle
+\[
+ \tau_{\leq n}C\longrightarrow C\longrightarrow\tau_{\geq n+1}C.
+\]
+Derived invariants carry a complex whose cohomology vanishes below $n+1$ to one with the same lower bound. Indeed, choose an injective resolution starting in degree $n+1$, or inspect the first-quadrant spectral sequence with terms $H^p(\pi,H^q(-))$: all its potentially nonzero terms have $p\geq0$ and $q\geq n+1$. Applying $R\Gamma$ to the triangle and taking its long exact cohomology sequence shows that
+\[
+ H^k(R\Gamma(\pi,\tau_{\leq n}C))
+ \xrightarrow{\sim}H^k(R\Gamma(\pi,C)),\qquad k\leq n,
+\]
+because the adjacent terms of degrees $k-1$ and $k$ for $\tau_{\geq n+1}C$ both vanish. The same holds for $D$. Finally $\tau_{\leq n}u$ is a quasi-isomorphism, and derived invariants preserve quasi-isomorphisms. The two truncation comparisons prove the assertion.\hfill$\square$
+
+Apply the lemma to the equivariant cochain complexes of the universal covers with constant fibre $M$ and its given $\pi$-action. Derived invariants compute the cohomology with the corresponding local coefficients on the quotient: one may use a free resolution of $\mathbf Z$ over $\mathbf Z[\pi]$ and the usual total double complex. Indeed, each group of covering chains is free over $\mathbf Z[\pi]$, so each cochain term is a product of coinduced modules and is acyclic for the invariants functor. Its ordinary invariant complex is the local-coefficient cochain complex. The simply connected case of $b_n\Rightarrow c_n$ gives the required cohomology isomorphisms of the cover complexes through degree $n$, and the lemma gives the desired twisted comparison on $X$ and $Y$. Thus the alternative proposed on p.~182 does work. The spherical-evaluation proof remains closer to the geometric reason the edge map vanishes.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p185}{Recovering the first missing homotopy group}
+For the converse direction Grothendieck changes the use of the spectral sequence: instead of annihilating the edge map, he chooses coefficients in which the first possible fibre group can test itself. This is why all local systems must be admitted. A single constant coefficient group need not detect a nontrivial module with monodromy.
+
+Assume $c_n$. The degree-$0$ and degree-$1$ conditions give $\pi_0X=\pi_0Y$ and identify $\pi_1X$ with $\pi_1Y=\pi$. Induction gives that the homotopy fibre $Z$ is $(n-2)$-connected. For $n\geq3$ its first possible nonzero group $A=\pi_{n-1}Z$ is abelian and Hurewicz identifies it with $H_{n-1}Z$. For $n=2$ one must first justify the same assertion differently: exactness gives a surjection $\pi_2Y\twoheadrightarrow\pi_1Z$, since $\pi_1X\to\pi_1Y$ is an isomorphism. Thus $\pi_1Z$ is abelian, and its abelianization map to $H_1Z$ is already an isomorphism. In both cases transport makes $A$ a $\pi$-module; the possible ambiguity in degree one is inner conjugation in an abelian group and therefore vanishes.
+
+For the local system determined by a $\pi$-module $M$, the first nonzero fibre row gives
+\[
+\begin{split}
+0\longrightarrow H^{n-1}(Y;M)&\longrightarrow H^{n-1}(X;f^*M)
+ \longrightarrow\operatorname{Hom}_{\mathbf Z[\pi]}(A,M)\\
+ &\longrightarrow H^n(Y;M)\longrightarrow H^n(X;f^*M).
+\end{split}
+\]
+For $n=2$, the degree-one groups in this display use abelian coefficients, a case included in $c_n$. The first comparison is surjective and the last is injective. Exactness therefore forces $\operatorname{Hom}_{\mathbf Z[\pi]}(A,M)=0$. Every $\pi$-module occurs as a coefficient system on $Y$, so take $M=A$. The identity of $A$ must vanish, and hence $A=0$. This proves $c_n\Rightarrow a_{n-1}$, with the endpoint case checked rather than hidden under an appeal to Hurewicz.
+
+This proof uses less than full $c_n$ at its final step: after the lower-degree induction, surjectivity in degree $n-1$ and injectivity in degree $n$ suffice. The full hypothesis is a convenient uniform formulation, not an optimal list of separate tests. The source has found the correct mechanism; the qualifications about coefficients and the degree-one fibre group complete its sketch.
+\end{dcomment}
+
+\begin{dcomment}{development}{p187}{Degree two and the localizer correction}
+Two brief remarks in the manuscript deserve a more precise disposition. The suggestion of a degree-two counterexample is stronger than the examples support, and the choice of the fibre condition as the localizer confuses a useful generating class with its saturation. Both can be settled without changing the successful implication arguments.
+
+\textbf{The degree-two converse.}\ours\ For maps of classifying spaces, the condition $c_2$ implies $b_2$. Consequently $b_2$ and $c_2$ are equivalent without a simple-connectivity hypothesis.
+
+\textit{Proof.} The degree-one argument already identifies fundamental groupoids, so work on one component and write $R=\mathbf Z[\pi]$. Let
+\[
+ I=\operatorname{Hom}_{\mathbf Z}(R,\mathbf Q/\mathbf Z),
+ \qquad (r\varphi)(s)=\varphi(sr).
+\]
+This is a left $R$-module and hence a permitted local system on $Y$. Evaluation at $1\in R$ gives a natural adjunction isomorphism
+\[
+ \operatorname{Hom}_R(C_*(\widetilde Y),I)
+ \cong\operatorname{Hom}_{\mathbf Z}
+                  (C_*(\widetilde Y),\mathbf Q/\mathbf Z),
+\]
+and likewise for $X$. Its inverse sends a homomorphism $\lambda$ to the map $c\mapsto(r\mapsto\lambda(rc))$. Since $\mathbf Q/\mathbf Z$ is injective as an abelian group, evaluation on homology gives
+\[
+ H^2(Y;I)\cong
+ \operatorname{Hom}_{\mathbf Z}(H_2\widetilde Y,\mathbf Q/\mathbf Z).
+\]
+The isomorphism is natural in the lifted map $\widetilde f$. Hypothesis $c_2$ therefore says that the dual of $H_2(\widetilde f)$ is an isomorphism. Dualization into $\mathbf Q/\mathbf Z$ is exact and detects nonzero abelian groups: a nonzero element generates a cyclic subgroup with a nonzero homomorphism to $\mathbf Q/\mathbf Z$, and injectivity extends this homomorphism to the whole group. Applying this observation to kernel and cokernel shows that $H_2(\widetilde f)$ itself is an isomorphism. The universal covers are simply connected, so the natural Hurewicz isomorphisms $\pi_2\widetilde X\cong H_2\widetilde X$ and $\pi_2\widetilde Y\cong H_2\widetilde Y$ prove that $\pi_2f$ is an isomorphism.\hfill$\square$
+
+The algebraic ingredients are the standard injective-cogenerator argument, checked in \citet[Tags 01D8 and 08WE]{StacksInjective2026}, together with \citet[Theorem~4.32]{Hatcher2002}. We did not find a source addressing footnote~112 specifically; this is our application of those familiar tools to its question. It is not a new form of the Hurewicz theorem. The same argument shows that the degree-$j$ part of $c_n$ detects the map on $H_j$ of universal covers. For $j=2$ these homology groups are exactly $\pi_2$; for $j=3$ the Hopf class in the earlier example explains why the conclusion changes.
+
+Now consider the last sentence of p.~187. If $A\ne0$, the maps
+\[
+ *\xrightarrow{s}K(A,n+1)\xrightarrow{r}*
+\]
+satisfy $rs=1$. The fibre of $r$ is $n$-connected and the fibre of $rs$ is contractible, but the fibre of $s$ is $K(A,n)$, which is not $n$-connected. Thus the class defined by $a_n$ fails two-out-of-three. The class defined by $b_n$, equivalently the maps made into equivalences by $n$th Postnikov truncation, is the correct weak-equivalence class for $n$-types. The modern truncation adjunction is given in \citet[Proposition~5.5.6.18]{Lurie2009HTT}.
+
+There is a charitable precise reading of Grothendieck's intuition.
+
+\textbf{Saturation of the fibre class.}\ours\ In spaces, $a_n$ \emph{generates} the same localization as $b_n$.
+
+\textit{Proof.} Every Postnikov map $X\to P_nX$ has $n$-connected fibres: it is an isomorphism on $\pi_i$ through $n$, and the target has zero $\pi_{n+1}$. Given a $b_n$-map $f:X\to Y$, its natural square with $P_nf:P_nX\to P_nY$ has vertical maps in $a_n$, and its lower map is a weak homotopy equivalence, hence also lies in $a_n$. Two-out-of-three puts $f$ in the saturation of $a_n$. Conversely, $b_n$ is saturated and contains $a_n$. This proves the equality.\hfill$\square$
+
+The proof is a direct application of the standard truncation adjunction just cited; the formulation addresses the specific localizer sentence, without a priority claim. It leaves the literal definition on p.~187 marked as false. For $X\to *$, the two conditions agree already before saturation, so the next theorem needs no change of indexing.
+
+\textbf{Strictness of $b_n\Rightarrow c_n$ for every $n\geq3$.}\ours\ The inclusion $i:S^2\vee S^{n-1}\to S^2\times S^{n-1}$ satisfies $c_n$ and not $b_n$, for every $n\geq3$.
+
+\textit{Proof.} Both spaces are simply connected, so only constant coefficients $M$ occur. The product is the wedge with one cell of dimension $n+1$ attached. Hence $H^j(i;M)$ is an isomorphism for $j<n$ and injective for $j=n$. The relative group $H^{n+1}(S^2\times S^{n-1},S^2\vee S^{n-1};M)\cong M$ maps isomorphically to $H^{n+1}(S^2\times S^{n-1};M)$, so the connecting map out of $H^n(S^2\vee S^{n-1};M)$ vanishes and $H^n(i;M)$ is surjective. This is $c_n$. If $\pi_n(i)$ were injective, the attaching map of the top cell would be null-homotopic in the wedge and the identity of the wedge would extend to a retraction $r$ of the product. Then $r^*$ would be a ring homomorphism with $i^*r^*=\id$; since $i^*$ is an isomorphism in degrees $2$ and $n-1$, $r^*$ would send the generators $a,b$ of the cohomology of the wedge in these degrees, for which $ab=0$, to classes whose product generates $H^{n+1}(S^2\times S^{n-1};\mathbf Z)$. So $\pi_n(i)$ is not injective and $\tau_{\leq n}i$ is not an equivalence.\hfill$\square$
+
+This extends the example $S^2\to K(\mathbf Z,2)$, which gives strictness at $n=3$ only; at $n=2$ the two conditions coincide, as shown above.
+
+The three classes have a meaning in terms of coefficients. For the derivator of $n$-truncated homotopy types the constant-coefficient equivalences are the maps satisfying $b_n$; the functors whose restriction is fully faithful on locally constant coefficients are those satisfying $a_n$; and those whose restriction is an equivalence there satisfy $b_{n+1}$ (table in the commentary on Chapter~X, ms.~5). So $b_{n+1}\Rightarrow a_n\Rightarrow b_n$ is an instance of the general chain of the commentary on Chapter~I, ms.~100, and the failure of two-out-of-three for $a_n$ is the failure for the 1-complete class there: only the two outer classes are localizers.
+\end{dcomment}
+
+\begin{dcomment}{context}{p188}{Why the path fibration is the right final test}
+Grothendieck now asks the categorical path construction to reproduce an argument whose classical power came from the contractible total space of based paths. Serre's thesis developed precisely this exchange between the homology of a space, that of its loop space, and their homotopy groups; see \citet[Chapter~IV, \S5, Proposition~7]{Serre1951}. The point of repeating the argument in $\Cat$ is not a new calculation of the groups. It is to show that the categorical paths already carry enough geometry to recognize the ordinary weak homotopy type, before appealing to a comparison with topological paths.
+
+For $E=\Ch(X;x,-)\to X$, the total category is $W_\infty$-aspherical and the fibre is $Z=\Omega(X,x)$. Under the induction hypothesis, both base and fibre have long vanishing ranges. The spectral sequence then has only its bottom row and one possible first fibre row. The vanishing of the total cohomology forces those two rows to communicate by transgression. This is the reason the proof over a point is sharper than the preceding relative theorem: there is no independent cohomology of a nontrivial target that can absorb the first obstruction.
+
+The condition in degree zero should be read literally for every group. Taking a nontrivial group $G$, the diagonal map $G\to G^{\pi_0X}$ is bijective only when $\pi_0X$ has one element. It excludes the empty category as well. Once $X$ is connected, the condition $H^1(X,G_X)=*$ for every group $G$ forces $\pi_1X=1$: choose $G=\pi_1X$ and the conjugacy class of its identity representation. This is why abelian coefficients alone would not prove the initial case; a perfect nontrivial fundamental group could otherwise survive.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p190}{The loop criterion, including its degree-two endpoint}
+Theorem~2 is proved by the displayed induction, with one small verification at its lower endpoint. Suppose first that $X$ is $n$-connected. Then $Z=\Omega X$ is $(n-1)$-connected, so the induction hypothesis annihilates $H^q(Z;M)$ for $1\leq q<n$. In the path-fibration spectral sequence this gives an injection
+\[
+ H^n(X;M)\hookrightarrow H^n(E;M)=0.
+\]
+The lower-degree groups have already vanished, and the degree-zero and torsor conditions follow from connectedness and simple connectivity. This proves the forward implication exactly in the form stated.
+
+Conversely, assume the cohomological conditions through degree $n$. The induction hypothesis makes $X$ $(n-1)$-connected and $Z$ $(n-2)$-connected. For $n\geq2$, $X$ is simply connected, so the fibre-cohomology local systems on $X$ are constant. The low-degree exact sequence for $E\to X$ gives
+\[
+ H^0(X;\mathcal H^{n-1}(Z;M))=0,
+ \qquad\text{hence}\qquad H^{n-1}(Z;M)=0
+\]
+for every abelian $M$. If $n\geq3$, $Z$ is simply connected. Its nonabelian degree-one conditions and all its lower abelian cohomology conditions are already satisfied; the induction hypothesis applied to $Z$ therefore gives $\pi_{n-1}Z=0$.
+
+For $n=2$, one cannot immediately apply that same sentence: $Z$ is only known to be connected, and the displayed computation gives vanishing of $H^1(Z;M)$ only for abelian groups $M$. The loop multiplication supplies the missing information. The two compositions of loops in the connected loop space, concatenation of based loops and the multiplication induced from the loop-space multiplication, have the same unit and satisfy the interchange law. The Eckmann--Hilton argument makes $\pi_1Z$ abelian. Thus
+\[
+ H^1(Z;M)=\operatorname{Hom}(\pi_1Z,M),
+\]
+and choosing $M=\pi_1Z$ forces $\pi_1Z=0$. Equivalently, this is the familiar fact that $\pi_1\Omega X=\pi_2X$ is abelian. It closes the induction without requiring an additional theorem about nonabelian cohomology of $Z$.
+
+The corollary follows by allowing every finite $n$. Connectedness of $X$ together with connectedness of every iterated loop category says that all homotopy groups of $BX$ vanish. Since a realization of a nerve has CW type, Whitehead's theorem makes $BX$ weakly equivalent, indeed homotopy equivalent, to a point; see \citet[Theorem~4.5]{Hatcher2002}. Here ``aspherical'' means weakly contractible, not merely the modern usage $\pi_i=0$ for $i>1$. For example $B\mathbf Z\simeq S^1$ has no higher homotopy groups, but its first loop category has components indexed by $\mathbf Z$, so it fails this criterion immediately.
+
+The later minimal-localizer theorem identifies this test with Grothendieck's original axiomatic weak equivalences. Its local characterization also makes the loop method visible in the final proof: \citet[Theorem~2.3.6, especially 2.3.6.3--2.3.6.4]{Cisinski2004Minimal} passes from a weakly aspherical object to its loops and then uses vanishing of homotopy groups. Thus the categorical construction has reached its intended target. The distinction between different choices of categorical paths has become a question of canonical comparison, which is exactly the subject of the following pages.
+\end{dcomment}
+
+\begin{dcomment}{context}{p191}{From a model for paths to an intrinsic operation}
+The question of canonicity belongs to Grothendieck's original reason for introducing derivators. In \emph{Pursuing Stacks}, \S69, he recalls the inadequacy of a single derived category for some of the diagrammatic constructions arising from the SGA~5 trace formalism. He proposes retaining derived categories for all diagram shapes, with their variance in the indexing category. The two three-object shapes for spans and cospans already encode homotopy fibres and cofibres \citep[\S69, printed pp.~1--3]{Grothendieck1983}. The move on these pages, from a particular category of paths to a property of localized slices, is a local instance of that larger programme.
+
+The letter to Thomason of 2 April 1991 makes the distinction especially explicit. Its first numbered discussion treats $W$ as the essential homotopical datum and fibrations or cofibrations as additional means of proving existence and calculating operations; it then describes the intrinsic class of pullback-preserving $W$-fibrations \citep[point~1, pp.~3--4]{Grothendieck1991Letter}. This is a retrospective clarification of the position being explored here, not evidence that every provisional axiom of the present pages has already been checked. In particular, the retract qualification discussed below remains necessary under the literal two-out-of-three assumptions. The calculation of paths serves the intrinsic operation by providing enough useful representatives on which the operation becomes ordinary pullback.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p192}{A replacement must remember its comparison map}
+Grothendieck now asks what the lengthy construction of paths has bought him beyond a convenient calculation. The preceding connectivity criterion identifies its homotopical effect; it does not yet identify the construction independently of its presentation. The change of viewpoint is to regard a path category as a factorization of a structural map. A factorization of the diagonal gives paths, and a factorization of a point inclusion gives based paths. Once the second factor has the required base-change property, its ordinary fibres can serve as homotopy fibres. The same question can therefore be asked without mentioning intervals or zigzags.
+
+For a fixed base put $\mathcal A=\Cat/S$, and let $\mathcal F\subseteq\mathcal A$ be the full subcategory of the permitted fibrations over $S$. The data are a functor $C:\mathcal A\to\mathcal F$ and a natural transformation $i:\id_{\mathcal A}\to jC$, where $j$ is inclusion and every $i_X$ belongs to $W_S$. The transformation is part of the data. An arbitrary choice of an equivalent object for every $X$ would neither provide the arrows $C(f)$ nor specify which comparison is to be called canonical. Naturality supplies both controls at once. Indeed,
+\[
+ C(f)i_X=i_Yf
+\]
+and two-out-of-three show that $f\in W_S$ if and only if $C(f)\in W_S$. Thus the homotopicality of $C$ is a consequence of its coaugmentation, not an extra axiom.
+
+There are two levels of functoriality in the text. A replacement on $\mathcal A$ controls variation of the object over one base. A replacement on the arrow category also controls maps between bases, although it need not commute with ordinary pullbacks. The latter distinction matters: a functorial factorization of arrows does not, merely by being functorial, identify $C(X\times_S T)$ with $C(X)\times_S T$. Derived base change will be obtained from a localization argument. It is not asserted to be an identity between these raw constructions.
+
+This is the same elementary geometry that underlies Brown's mapping-path factorization. In a category of fibrant objects, a factorization of the diagonal of $Y$ yields a factorization of $f:X\to Y$ by pulling that path object back along $f$. Brown requires no functorial choice of path objects for this argument \citep[Part I, \S1, pp.~420--422]{Brown1973}. Grothendieck deliberately asks for a more explicit choice here so that comparison maps can be written in the original category. The two approaches answer different parts of the same problem: existence of the derived construction and a convenient formula for computing it.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p196}{Two replacements and one normalized comparison}
+The composite replacement is a useful device because it compares two constructions without asking either to map directly to the other. Write the two coaugmentations as $i:\id\to C$ and $i':\id\to C'$. For every $X$ the diagram gives
+\[
+ C(X)\xrightarrow{C(i'_X)}CC'(X)
+       \xleftarrow{i_{C'(X)}}C'(X).
+\]
+Both arrows are weak equivalences: the first because $C$ preserves $W_S$, and the second because it is a component of $i$. Their passage to fibrewise equivalences uses the additional fibre axiom invoked in the text. This last step must be retained. A weak equivalence of total objects over a base need not induce weak equivalences of their ordinary fibres when the objects have not been suitably replaced.
+
+There is already a precise answer to the question about the order $CC'$ versus $C'C$. Let $q:\mathcal A\to\mathcal A[W_S^{-1}]$ be localization. The required comparison between the two localized endofunctors is
+\[
+ \theta_{C,C'}(X)=q(i'_X)q(i_X)^{-1}.
+\]
+It is the unique comparison compatible with the specified maps from $q(X)$. Naturality of $i$, applied to $i'_X$, gives
+\[
+ C(i'_X)i_X=i_{C'(X)}i'_X.
+\]
+After localization this proves
+\[
+ q(i_{C'(X)})^{-1}q(C(i'_X))
+       =q(i'_X)q(i_X)^{-1}.
+\]
+The common-refinement construction therefore gives exactly the normalized comparison. Reversing the order of the replacements gives the same answer. For three replacements the cocycle identity is literal:
+\[
+ \theta_{C',C''}\theta_{C,C'}=\theta_{C,C''}.
+\]
+The apparent ambiguity disappears as soon as compatibility with the coaugmentations is made explicit.
+
+When this calculation is transported to the category of fibres, one uses the full faithfulness of the localization comparison proved below. In that category the formula is not an instruction to apply an ordinary fibre functor to $i_X$: its source $X$ need not be fibrant. Instead, it characterizes the comparison after passing through the equivalence of localized categories. This is the categorical content of the word ``canonical'' here. It does not say that the underlying functors admit no other automorphisms after their specified comparison maps have been forgotten.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p200}{The category of choices is contractible}
+Grothendieck's category $\mathcal C$ packages the compatibility just used. Its arrows are natural transformations of replacement functors that commute with their coaugmentations. Every such arrow is pointwise in $W_S$, by two-out-of-three. Hence any construction which sends these weak equivalences to isomorphisms factors through $\Pi\mathcal C$. The remaining question is whether this groupoid has exactly one arrow between any two objects. The natural common refinements give more: provided a replacement exists, the nerve of $\mathcal C$ is contractible.
+
+Here is a direct proof. Fix $(R,r)\in\mathcal C$ and define
+\[
+ T(C,i)=\bigl(CR,(Cr)i\bigr).
+\]
+The displayed unit is also $(iR)r$, by naturality of $i$. The composite $CR$ takes values in $\mathcal F$, and its coaugmentation is a weak equivalence. Thus $T$ is an endofunctor of $\mathcal C$. On an arrow $u:C\to D$ put $T(u)=uR$. There are natural transformations
+\[
+ \id_{\mathcal C}\xrightarrow{\alpha}T
+       \xleftarrow{\beta}\operatorname{const}_{(R,r)},
+ \qquad \alpha_C=Cr,\quad\beta_C=iR.
+\]
+Both are arrows under the identity functor because $(Cr)i=(iR)r$. To check their naturality, use, respectively, naturality of $u$ at $r_X$ and the equation $ui=j$ for a map $(C,i)\to(D,j)$. These are equalities before localization.
+
+A natural transformation $F\to G$ gives a functor $\mathcal D\times[1]\to\mathcal E$, hence a homotopy between the maps of nerves induced by $F$ and $G$; this is the elementary nerve calculation used in \citet[\S1, Proposition~2]{Quillen1973}. The two transformations above consequently homotope the identity of $|N\mathcal C|$ to a constant map. With the usual change of universe if necessary, $|N\mathcal C|$ is contractible. In particular, $\Pi\mathcal C$ is equivalent to the terminal groupoid. Any two zigzags of comparisons between the same replacements induce the same isomorphism in a target in which all arrows of $\mathcal C$ become invertible.
+
+This argument also locates the imprecision in the word \emph{filtrante} on the next page. A common target for two objects is only one of the conditions for a filtered category; parallel arrows must also become equal after postcomposition. The common-refinement square does not establish that second condition. Nor do the natural maps into a binary product, even with all the displayed coherence, establish it in general. For example, the category of nonempty finite ordered sets and order-preserving injections has ordered concatenation and natural inclusions from both factors. It is not filtered: the two injections from a singleton into a two-element ordered set remain distinct after every injection. Nevertheless its nerve is contractible by the same argument. This example refutes the inference being used, not a separately proved assertion that this particular $\mathcal C$ fails to be filtered. Contractibility supplies precisely the canonicity needed here, so no strict equalization claim is required.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p203}{Insertion of units accounts for all six equalities}
+The associativity discussion is an effort to make the comparison procedure usable without remembering a particular sequence of refinements. It can be completed inside the ordinary monoidal category of endofunctors. An object of the coslice $\id_{\mathcal A}\backslash\operatorname{Fun}(\mathcal A,\mathcal A)$ is a pointed endofunctor $(C,i)$. Set
+\[
+ (C,i)*(D,j)=(CD,(Cj)i)=(CD,(iD)j).
+\]
+The equality is naturality of $i$. Horizontal composition of natural transformations makes this a bifunctor. Its associativity is strict when functor composition is taken strictly, and its unit is $(\id,\id)$. That unit is also initial in the coslice: the unique arrow to $(C,i)$ is $i$ itself. Although the unit need not lie in the replacement subcategory, its arrows supply $\alpha$ and $\beta$ there.
+
+For an ordered list $(C_1,i_1),\ldots,(C_n,i_n)$ and a subset $J\subseteq\{1,\ldots,n\}$, insert an identity endofunctor in every position not in $J$. The map from this partial composite to $C_1\cdots C_n$ is the horizontal composite of the identity transformations in the retained positions and the transformations $i_k:\id\to C_k$ in the omitted positions. This gives a specified map for every inclusion of ordered subsets. Its compatibility with a second insertion follows from the interchange law for horizontal and vertical composition of natural transformations. In components that law is just the naturality square which permits two adjacent insertions to change order. Any two orders of insertion differ by adjacent interchanges, so they give the same map. This proves the three binary-to-ternary and the three unary-to-ternary equalities requested in the manuscript, and proves the general ordered-subword assertion at the same time.
+
+The concern raised using $B_G$ has a valid lesson but needs a restriction on $G$. The one-object category with automorphism group $G$ is a strict monoidal category of this form only when $G$ is abelian. Indeed, the tensor product and composition share the same unit and obey interchange, so
+\[
+ a\otimes b=(a\circ1)\otimes(1\circ b)
+ =(a\otimes1)\circ(1\otimes b)=a\circ b;
+\]
+interchanging the two factorizations gives $a\circ b=b\circ a$. Conversely, an abelian group defines such a strict monoidal category by using its group operation for tensor product. Taking $G=\mathbf Z$ therefore gives a valid example with nontrivial fundamental group. What contracts the replacement category is the natural pair of maps into $C*R$, not monoidality alone. The source's broad assertion about an arbitrary group is left as printed and is registered separately from the repaired example.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p205}{Why the inclusion becomes an equivalence}
+Grothendieck's second answer to the canonicity problem identifies the category being computed. We give the localization argument explicitly, since its hypotheses explain both its strength and its limits. Let $(\mathcal A,W)$ be a category with weak equivalences satisfying two-out-of-three, let $j:\mathcal F\hookrightarrow\mathcal A$ be full, and suppose $C:\mathcal A\to\mathcal F$ is equipped with $i:\id_{\mathcal A}\to jC$ whose components lie in $W$. Give $\mathcal F$ the induced weak equivalences. Then
+\[
+ \overline j:\mathcal F[W^{-1}]\longrightarrow\mathcal A[W^{-1}]
+\]
+is an equivalence. Indeed, naturality and two-out-of-three show that $C$ preserves weak equivalences, so it induces $\overline C$. The transformation $i$ induces an isomorphism $\id\simeq\overline j\,\overline C$. Its restriction to $\mathcal F$ has all its components in $\mathcal F$, because that subcategory is full, and gives $\id\simeq\overline C\,\overline j$. These two natural isomorphisms prove the assertion. This is the same replacement mechanism used earlier in the commentary, notably on Chapter~VI, manuscript p.~112; here it proves an equivalence with the entire localized slice.
+
+For the particular functor $(**)$ the weak equivalences on $\Fib_W S$ have been written $W_S^{\mathrm f}$ rather than as the induced $W_S$. One therefore also uses their agreement on this subcategory: the fibre axiom supplies the implication from total to fibrewise equivalence, while the converse is the relevant local-to-global property. Nonemptiness of $\mathcal C$ alone, without this compatibility of weak-equivalence classes, is not the whole statement. Once the compatibility is available, the preceding proof applies exactly as written.
+
+The printed sentence on manuscript p.~205 calls $(*)$ an equivalence. The equivalence proved by the argument is $(**)$; $(*)$ starts in the unlocalized category and includes a localization functor. This is an edition-level slip, not a defect in the replacement argument. For example, even over the terminal base, localization identifies distinct natural-homotopic maps of categories, so the original localization functor cannot generally be fully faithful.
+
+There is also a precise uniqueness statement for the inverse. If $J:\mathcal B\to\mathcal H$ is an equivalence, and $P,P':\mathcal H\to\mathcal B$ are supplied with counits $\epsilon:JP\xrightarrow{\sim}\id$ and $\epsilon':JP'\xrightarrow{\sim}\id$, full faithfulness of $J$ gives a unique natural isomorphism $\vartheta:P\to P'$ satisfying
+\[
+ \epsilon'\,J\vartheta=\epsilon.
+\]
+Its image under $J$ is $(\epsilon')^{-1}\epsilon$, which proves existence, uniqueness, naturality, and the cocycle law. Thus the intrinsic object is the inverse equipped with its comparison to the given equivalence. A formula using paths is one realization of that object. In the more general setting of derivable categories, \citet[Proposition~1.8]{Cisinski2010} obtains the analogous equivalence between a category and its fibrant subcategory even when the chosen replacements are organized by a cleavage rather than by a strict functor into the original category.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p206}{A homotopy fibre which an ordinary kernel misses}
+The replacement construction is already visible in elementary homological algebra, where its comparison maps and the information lost by taking a raw fibre can both be written down. This gives a different example from the groupoid calculations in the commentary on earlier chapters. Let $C,D$ be cochain complexes of abelian groups, with differential of degree $1$, and let $f:C\to D$ be a cochain map. Take $W$ to be the quasi-isomorphisms. Degreewise surjections preserve quasi-isomorphisms under pullback: pulling such a surjection $E\to D$ back along a map $A\to B$ over $D$ gives a map between the short exact sequences with common kernel $\ker(E\to D)$ and quotient map $A\to B$. The long exact cohomology sequences prove the assertion. Thus these surjections belong to the class of $W$-fibrations used below.
+
+Define a complex
+\[
+ E(f)^n=C^n\oplus D^{n-1}\oplus D^n,
+ \qquad
+ d(c,h,y)=(d_Cc,\ y-f(c)-d_Dh,\ d_Dy).
+\]
+The equation $d^2=0$ follows from $d_Df=fd_C$. The maps
+\[
+ j(c)=(c,0,f(c)),\qquad p(c,h,y)=y,\qquad r(c,h,y)=c
+\]
+are cochain maps, $pj=f$, and $rj=\id_C$. The degree $-1$ map
+\[
+ H(c,h,y)=(0,0,h)
+\]
+satisfies $dH+Hd=\id_{E(f)}-jr$. Consequently $j$ is a cochain-homotopy equivalence, in particular a quasi-isomorphism, while $p$ is degreewise surjective. We have obtained the required factorization $C\xrightarrow{j}E(f)\xrightarrow{p}D$ with its comparison map explicit.
+
+The strict fibre of $p$ over the zero map $0\to D$ is
+\[
+ F(f)^n=C^n\oplus D^{n-1},\qquad
+ d(c,h)=(d_Cc,-f(c)-d_Dh).
+\]
+With the convention $\operatorname{Cone}(f)^n=D^n\oplus C^{n+1}$ and differential $(y,c)\mapsto(d_Dy+f(c),-d_Cc)$, this is canonically isomorphic to $\operatorname{Cone}(f)[-1]$ after reordering the summands. The sign is forced by the shift; it is not an additional convention about homotopy fibres. The short exact sequence $0\to D[-1]\to F(f)\to C\to0$ gives the familiar exact sequence relating the cohomology of the fibre, $C$, and $D$.
+
+For a concrete calculation, let $C=D=\mathbf Z[0]$ and let $f$ be multiplication by an integer $m\geq2$. The ordinary kernel is zero. The homotopy fibre is the two-term cochain complex
+\[
+ \mathbf Z\xrightarrow{-m}\mathbf Z
+\]
+in degrees $0$ and $1$. It has $H^0=0$ and $H^1=\mathbf Z/m\mathbf Z$. The replacement has retained the failure of surjectivity which the ordinary kernel discards. This example is classical: Brown lists complexes in an abelian category, with quasi-isomorphisms and surjections, among his categories of fibrant objects \citep[Part I, \S1, Example~3, p.~421]{Brown1973}. The calculation explains why Grothendieck insists on replacing the structural map before taking its fibre.
+\end{dcomment}
+
+\begin{dcomment}{later}{p208}{The intrinsic fibrations are sharp maps}
+The purpose of the new definition is to extract from $(\mathcal M,W)$ the largest class of maps along which ordinary pullback is homotopical. For $f:X\to Y$ the correctly typed condition is
+\[
+ f^*:(\mathcal M/Y,W_Y)\longrightarrow(\mathcal M/X,W_X).
+\]
+The edition reverses $W_X$ and $W_Y$ in the sentence following the displayed pullback functor; the direction of that functor fixes the intended reading. Unpacked, the definition says that whenever $a:A\to B$ is in $W$ and is a map over $Y$, the map
+\[
+ X\times_Y A\longrightarrow X\times_Y B
+\]
+is again in $W$. The quantification over all objects over $Y$ is essential. Testing only pullbacks of weak equivalences whose target is exactly $Y$ would omit part of the requirement.
+
+In a model category, this is precisely the condition called \emph{sharp} by \citet[\S2]{Rezk1998Sharp}. His Proposition~2.2 says that all model fibrations are sharp exactly when the model category is right proper. His Proposition~2.7 further identifies sharp maps, in a right proper model category, with those maps all of whose ordinary pullback squares are homotopy cartesian. These hypotheses distinguish three statements which can otherwise look indistinguishable: a map can be a fibration for a chosen model structure, preserve weak equivalences by pullback, or compute all homotopy pullbacks strictly. The first is extra structure, the second depends only on $(\mathcal M,W)$, and the equivalence with the third needs the stated properness hypothesis. Rezk attributes the sharp-map idea to Hopkins; we are comparing equivalent conditions, not asserting a historical line of transmission from this manuscript.
+
+The basic stability properties require little machinery. If $f:X\to Y$ and $g:Y\to Z$ preserve weak equivalences by pullback, so does $gf$, because $(gf)^*$ is canonically $f^*g^*$. To see stability under a pullback $f':X\times_Y T\to T$, regard a weak equivalence over $T$ also as a map over $Y$; its pullback by $f'$ is the same underlying map as its pullback by $f$. Isomorphisms plainly have the property. The statement about retracts in footnote~120 is different: it needs retract closure of $W$. Under that hypothesis, pulling back a retract diagram makes the map to be tested a retract of a map in $W$, proving the result. Under only the weak saturation explicitly listed in footnote~119, the retract assertion fails, as the following finite example shows.
+\end{dcomment}
+
+\begin{dcomment}{development}{p209}{The retract condition needs a hypothesis}
+The minimal axioms are being separated here so that the fibre theory will apply beyond familiar model categories. A small counterexample helps to keep that economy honest. We use the usual meaning of a direct factor of a morphism, namely a retract in the arrow category. The observation below addresses only the retract clause of footnote~120; composition, pullback, and isomorphism stability remain valid under the assumptions stated in the text.
+
+\noindent\textbf{Finite-set counterexample to the retract clause.}\ours\ 
+Let $\mathcal M$ be the category of finite sets, and let $W$ consist of all maps $A\to B$ for which $|A|\equiv|B|\pmod2$. Then $\mathcal M$ has pullbacks and $W$ contains all isomorphisms and satisfies two-out-of-three. Nevertheless the class $\mathrm{Fib}_W$ defined on manuscript p.~208 is not closed under retracts.
+
+\emph{Proof.} The axioms for $W$ follow by applying equality in $\mathbf Z/2\mathbf Z$ to the cardinalities of the three objects in a composable pair. Set $S=\{0,1\}$. Let $E$ have one element over $0$ and three over $1$, and write $p:E\to S$ for its structural map. For every finite set $T\to S$,
+\[
+ |E\times_S T|=|T_0|+3|T_1|\equiv|T|\pmod2.
+\]
+Thus if $A\to B$ over $S$ belongs to $W$, its pullback along $p$ also belongs to $W$. This proves $p\in\mathrm{Fib}_W$.
+
+Let $E'$ have one element over $0$ and two over $1$, and let $p':E'\to S$. Include $E'$ into $E$ by choosing two of the three elements over $1$. Define a retraction $E\to E'$ which is the identity on the chosen elements and sends the remaining element to either of the two elements over $1$. Together with the identity of $S$, these maps exhibit $p'$ as a retract of $p$ in the arrow category. But the map $\varnothing\to S$, considered as a map from the empty object to the identity object of $\mathcal M/S$, lies in $W$, since both cardinalities are even. Its pullback along $p'$ is $\varnothing\to E'$, whose target has cardinality $3$. This map is not in $W$. Hence $p'\notin\mathrm{Fib}_W$.\hfill$\square$
+
+This counterexample also makes clear what repairs the statement. One may assume $W$ is retract closed, as in a model category; strong saturation is more than sufficient. Alternatively, one can omit the retract clause, which is not needed for the formal base-change construction on the following pages. We checked the axioms in Brown's Part~I, Cisinski's \S1, and Rezk's sharp-map discussion; those sources do not provide this particular example. The argument is supplied here as a local clarification of the manuscript, without a claim of priority.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p211}{Two localizations with different immediate advantages}
+Grothendieck keeps two constructions in view because each makes one half of the desired theory immediate. Write
+\[
+ \mathcal H_S=(\mathcal M/S)[W_S^{-1}],\qquad
+ \mathcal L_S=(\mathrm{Fib}_W S)[(W_S^{\mathrm u})^{-1}].
+\]
+The first accepts every object over $S$. Its ordinary inverse-image functor is initially available only for a base map in $\mathrm{Fib}_W$. The second accepts only objects whose structural map is a $W$-fibration, but its inverse images exist for every base map. The universal quantifier defining $W_S^{\mathrm u}$ is precisely what makes this second assertion formal.
+
+For $f:T\to S$, ordinary pullback sends $\mathrm{Fib}_W S$ into $\mathrm{Fib}_W T$, as just proved. If $u\in W_S^{\mathrm u}$ and $g:U\to T$, the iterated pullback $g^*f^*u$ is isomorphic to $(fg)^*u$, hence belongs to $W$. Therefore $f^*u\in W_T^{\mathrm u}$. The universal property of localization supplies a functor
+\[
+ P_f:\mathcal L_S\longrightarrow\mathcal L_T.
+\]
+The canonical isomorphisms between iterated ordinary pullbacks survive localization and give $P_gP_f\simeq P_{fg}$. Their associativity follows from the universal property of the pullback: both routes identify an iterated pullback with the same object, carrying the same projections. Thus the result is naturally a pseudofunctor, or equivalently a fibred category. No strictly functorial global choice of pullbacks is needed.
+
+One can also see exactly what must be checked to define the fibre at a generalized point. Fix $X\to S$ in $\mathrm{Fib}_W S$. Sending $T\to S$ to the absolute homotopy type of $X\times_S T$ is a covariant functor on $\mathcal M/S$; a map $T'\to T$ induces the corresponding map between total pullbacks. If that map of generalized points is in $W_S$, its image is in $W$ by the defining property of $X\to S$. The functor consequently inverts weak equivalences between generalized points. This assertion is compatible with replacing $X$ by a morphism in $W_S^{\mathrm u}$, since evaluation at every $T$ then gives a weak equivalence. It therefore makes sense for all $\xi\in\mathcal L_S$, not only for a chosen representative.
+
+This explains the two separate roles of the subcategory and the localizer. Restricting to $\mathrm{Fib}_W S$ controls variation of the generalized point by a weak equivalence. Restricting the arrows to $W_S^{\mathrm u}$ controls variation of the representative by a weak equivalence after any base change. Omitting either condition loses one of these immediate guarantees. The manuscript's remark that the unrestricted universal localization is too large is a methodological judgment; it is not a theorem saying that every such localization is mathematically useless. What has been proved is the precise pair of invariance properties above.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p215}{Transporting base change and separating the two axioms}
+The comparison axiom now combines the two advantages. Let
+\[
+ J_S:\mathcal L_S\longrightarrow\mathcal H_S
+\]
+be induced by inclusion. Axiom~a says that $J_S$ is an equivalence. Choose an inverse $R_S$ together with the unit and counit of an adjoint equivalence. For an arbitrary $f:T\to S$, define derived inverse image by
+\[
+ f^!_W=J_TP_fR_S:\mathcal H_S\longrightarrow\mathcal H_T.
+\]
+This is the operation denoted $f^*_W$ in the manuscript; the temporary exclamation mark here only distinguishes it from raw pullback. For composable $U\xrightarrow{g}T\xrightarrow{f}S$, the comparison
+\[
+ J_UP_gR_TJ_TP_fR_S\xrightarrow{\sim}
+ J_UP_gP_fR_S\xrightarrow{\sim}J_UP_{fg}R_S
+\]
+uses $R_TJ_T\simeq\id$ and the ordinary pullback comparison. The triangle identities of the chosen adjoint equivalences and the associativity of pullback give the unit and pentagon identities. Equivalently, these identities can be checked after the fully faithful equivalences $J_S$, where they reduce to those same identities. A different choice of inverses gives the unique normalized comparison described above, so the resulting fibred theory is independent of that choice up to the corresponding coherent equivalence.
+
+Axiom~a also has a useful immediate consequence which is weaker than axiom~b. If $u$ between $W$-fibrant objects belongs to $W_S$, then $J_S$ sends its image in $\mathcal L_S$ to an isomorphism. An equivalence reflects isomorphisms, so $u$ belongs to the strong saturation of $W_S^{\mathrm u}$ on $\mathrm{Fib}_W S$. Since $W_S^{\mathrm u}\subseteq W_S$, the two classes have the same strong saturation there. This is exactly the intermediate observation in the text. It does not, under bare two-out-of-three, identify the two original classes of arrows.
+
+There is a clean case in which axiom~b follows. Suppose $W$ itself is strongly saturated: a morphism belongs to $W$ exactly when it is inverted by $\mathcal M\to\mathcal M[W^{-1}]$. Then $W_S^{\mathrm u}$ is strongly saturated in $\mathrm{Fib}_W S$. Indeed, if $u$ becomes invertible after localization at $W_S^{\mathrm u}$, every evaluation functor
+\[
+ X\longmapsto X\times_ST\longmapsto
+ \mathcal M[W^{-1}]
+\]
+for $T\to S$ sends $u$ to an isomorphism. Strong saturation gives $u_T\in W$ for every $T$, which is the definition of $u\in W_S^{\mathrm u}$. Thus axiom~a implies axiom~b under this extra hypothesis. Without it, the statement in the manuscript should retain its saturation formulation; the author's expectation that the two axioms will usually be verified together is not a formal converse.
+
+The construction gives a derived base-change theory, but it does not by itself assert all the axioms of a derivator on arbitrary diagram categories. Those require further control of diagrams, pointwise detection, and homotopy Kan extensions. The distinction preserves the considerable content of the comparison axiom without crediting it with statements that are proved elsewhere.
+\end{dcomment}
+
+\begin{dcomment}{later}{p216}{What the weaker model formalisms establish}
+The new axioms are close to Brown's economy of assumptions, but they organize it differently. Brown begins with specified fibrations and weak equivalences on a category whose objects are fibrant, and assumes the path-object and pullback axioms needed for a calculus of homotopy. Here the fibrations are extracted from $W$ itself by asking for homotopical base change; the existence of enough suitable representatives is imposed afterwards. One should therefore compare the actual hypotheses before using a theorem about one formalism in the other.
+
+Cisinski's derivable categories give a precise later setting for this programme. Definition~1.1 separates weak equivalences, fibrations, and factorization toward fibrant objects. Proposition~1.8 proves that restricting to fibrant objects does not change the homotopy category. Theorem~2.21 then constructs a weak left derivator on finite direct categories, with the additional diagram axiom stated there \citep{Cisinski2010}. This is a useful progression for reading the present section: comparison of a single localization comes first; coherent diagram calculus requires further work. None of these results says that an arbitrary category equipped only with a two-out-of-three class automatically has homotopy fibres.
+
+For ordinary spaces or simplicial sets with weak homotopy equivalences, a right proper model presentation supplies a familiar way to meet the requirements. Model fibrations are sharp, and ordinary pullback of a sharp map computes homotopy pullback. Weak equivalences between such representatives remain weak equivalences after derived base change. These are the roles of properness and replacement in the usual theory, rather than unexplained special properties of a path formula. In the generality of the manuscript, the corresponding assertions are the explicit axioms a and b, unless a chosen factorization theorem proves them.
+
+The fibrewise ordinary diagram $s\mapsto\mathrm{hot}_W(X_s)$ still forgets coherence. In manuscript p.~200 the functor through $\Pi S^\circ$ is being used for the locally constant subcategory: the missing superscript $\mathrm{lc}$ on the displayed $\mathrm{HOT}_W(S)$ should be understood in that context. It is not a factorization of every varying relative type through the fundamental groupoid. The commentary on earlier chapters already treats the difference between an ordinary diagram in a homotopy category and a coherent family (notably on Chapter~VI, manuscript pp.~7 and 74). The equivalence of localized slice categories here concerns the coherent family; evaluation in ordinary homotopy types is one invariant of it.
+\end{dcomment}
+
+\begin{dcomment}{status}{p218}{Intermediate categories and the extra information in a replacement}
+The last question of this section asks for more than essential surjectivity. It asks whether one may admit any collection of additional representatives without changing the localized category. A functorial replacement proves exactly this strengthened assertion, and it is useful to isolate the short proof. Let $\mathcal F_0\subseteq\mathcal A$ be full, and suppose a coaugmented replacement $C:\mathcal A\to\mathcal F_0$, $i:\id\to C$, has components in $W$. For every full intermediate category
+\[
+ \mathcal F_0\subseteq\mathcal E\subseteq\mathcal A,
+\]
+restricting $C$ and $i$ to $\mathcal E$ gives a replacement into $\mathcal F_0$. The localization proof on p.~205 then applies both to $\mathcal F_0\subseteq\mathcal E$ and to $\mathcal F_0\subseteq\mathcal A$. Consequently
+\[
+ \mathcal F_0[W^{-1}]\xrightarrow{\sim}
+ \mathcal E[W^{-1}]\xrightarrow{\sim}
+ \mathcal A[W^{-1}].
+\]
+Fullness ensures that the components of the restricted coaugmentation really are arrows of $\mathcal E$; no closure of $\mathcal E$ under limits or factorizations is needed. When $\mathcal F_0=\mathrm{Fib}_W S$ and axiom~b identifies the weak-equivalence classes, this is axiom~c in the text. If the replacement lands in a smaller full category of perfect objects, the stronger assertion preceding c follows as well.
+
+The point is that a replacement supplies comparisons inside every such intermediate category. An abstract equivalence after localization has forgotten where its representing zigzags live. One therefore cannot justify c merely by factoring an equivalence of categories through the intermediate localization: a composite of two functors can be an equivalence without either factor being an equivalence. The source recognizes precisely this issue when it distinguishes axioms a and b from its question about c.
+
+Our conclusion about the source's unanswered implication is deliberately narrower than a general claim of openness. The implication from the bare axioms a and b to c is not proved in these pages, and the literature checked here does not settle that exact formulation. The argument above establishes c under the explicit functorial-replacement hypothesis already available in the categorical construction. Grothendieck returns to the issue at manuscript p.~240 and following in this same chapter, with factorization hypotheses and a qualification on p.~241 that every object should be $W$-fibrant over the terminal object; that later discussion is commented with those pages. Brown's and Cisinski's theorems provide other sufficient structures, not a proof that the extra structure follows from a and b alone. Thus the practical expectation on p.~218 has a complete proof in the replacement setting, while its unrestricted logical formulation is kept separate.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p219}{What the finer relative theory remembers}
+Grothendieck now wants a family to retain the direction in which its fibres vary. The preceding fibre theory has deliberately made transport invertible. A general coefficient system on a category need not have this property: a specialization can create a component, identify two components, or alter a higher homotopy group. Localizing the total category over the base at all total-space equivalences loses such information. The additional class $W^0_S$ is introduced to preserve it.
+
+There are consequently two distinct localizations to keep in view. The category $(\Cat/S)[W_S^{-1}]$ describes a homotopy type equipped with a map to the homotopy type of $S$. In the ordinary homotopy theory, its derived fibres form a locally constant coherent family over $|NS|$. A directional diagram, by contrast, is a functor from $NS$, or from $NS^{\mathrm{op}}$ according to the chosen variance, to spaces. Its transition maps need not be equivalences. It is the localization of the whole diagram category at objectwise equivalences that records this datum; a diagram in the ordinary category of homotopy types need not retain its coherence. The distinction is the one already made in the commentary on Chapter VI, pp.~64--74, and not a new objection to the fibre construction.
+
+The notation $W^{\mathrm g}_S$ has a concrete test inherited from Chapter VI, manuscript p.~41: a map $u:X\to Y$ over $S$ belongs to this class precisely when
+\[
+ X/s\longrightarrow Y/s\quad\hbox{belongs to }W
+ \qquad(s\in\Ob S).
+\]
+Here $X/s=X\times_S(S/s)$. Replacing these over-categories by the under-categories $s\backslash X$ gives $W^{\mathrm d}_S$. Taking opposite categories exchanges the two tests, together with the base $S$ and its opposite. It does not give an equivalence between the two theories over a fixed, unmodified $S$. The phrase that neither choice is canonically imposed should be read as a statement about the absence of a preferred orientation in the specified data, not as a theorem that no invariant construction of any kind is possible \citep[Chapter VI, manuscript pp.~41--42]{Grothendieck1990VI}.
+
+The axioms on $\mathcal L$ make the test intrinsic to a chosen class of base changes. Since $\id_S$ is an admissible test, membership in $W^{\mathcal L}_S$ implies membership in $W_S$. Testing against every base change is stronger, giving $W^{\mathrm u}_S\subseteq W^{\mathcal L}_S$. All three agree on the good locally constant representatives by the preceding fibre axiom. Their agreement there says nothing about their agreement on the whole slice: the whole purpose of the finer theory is to retain objects outside that subcategory.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p221}{An endomorphism which becomes invertible only after changing the fibre}
+A single irreversible transition already explains why the new theory is needed. Consider the category $B\mathbf N$ with one object and endomorphism monoid $(\mathbf N,+)$. Let a covariant diagram of spaces assign a circle to its object and the degree-two map $d:S^1\to S^1$ to its generating endomorphism. This diagram cannot be locally constant: multiplication by $2$ on $\pi_1(S^1)=\mathbf Z$ is not invertible. Objectwise weak equivalences of diagrams preserve this obstruction.
+
+Its homotopy colimit is the mapping torus
+\[
+ T_d=(S^1\times[0,1])/((z,1)\sim(d(z),0)).
+\]
+One can obtain this model directly from the bar construction for the free monoid on one generator: the higher simplices express compositions of that generator, and collapse onto the mapping-cylinder description. Van Kampen, using the circle in the fibre and the loop round the parameter as generators, gives
+\[
+ \pi_1(T_d)=\langle a,t\mid tat^{-1}=a^2\rangle.
+\]
+The direction chosen for $t$ fixes the displayed convention. This group is nonabelian: the transformations $a(x)=x+1$ and $t(x)=2x$ of the real line satisfy the relation and do not commute. The cellular chain calculation for a mapping torus is the cone of $1-d_*$ on the chains of the fibre. On $H_1(S^1)$ this is multiplication by $-1$, and on $H_0(S^1)$ it is zero. The resulting exact sequence yields
+\[
+ H_0(T_d;\mathbf Z)=\mathbf Z,\qquad
+ H_1(T_d;\mathbf Z)=\mathbf Z,\qquad H_q(T_d;\mathbf Z)=0\quad(q\geq2).
+\]
+Thus the total space has the homology of the base circle although it retains a substantial nonabelian fundamental group.
+
+Now regard the projection $T_d\to S^1$ solely as a map of homotopy types. Its homotopy fibre is the infinite cyclic cover of the mapping torus. Cutting that cover at the integral parameter values exhibits it as the telescope of successive degree-two maps. Its fundamental group is therefore
+\[
+ \mathop{\mathrm{colim}}(\mathbf Z\xrightarrow{2}\mathbf Z\xrightarrow{2}\cdots)
+       =\mathbf Z[1/2],
+\]
+and its higher homotopy groups vanish: every map from a sphere has compact image in a finite portion of the telescope, which retracts onto a circle. Transport around the base now acts invertibly, by multiplication by $2$ or its inverse according to orientation. The passage to locally constant relative homotopy types has changed the fibre from $K(\mathbf Z,1)$ to $K(\mathbf Z[1/2],1)$.
+
+This example can be made entirely categorical. Use the one-object groupoid $B\mathbf Z$ and the functor induced by $m\mapsto2m$, then form its Grothendieck construction over $B\mathbf N$. Its nerve has the indicated homotopy-colimit type by the homotopy-colimit theorem \citep[Theorem 1.2]{Thomason1979}; the precise statement and natural comparison are reproduced by \citet[\S2.3, Theorem 2.6]{Rubin2020Elmendorf}. The example extends the earlier walking-arrow tests: it shows, through an explicit group calculation, the information that is lost when all transport is forced to be invertible.
+\end{dcomment}
+
+\begin{dcomment}{development}{p222}{The maximal class of harmless base changes}
+Grothendieck strengthens his first definition of $\mathcal L^\wedge$ because a useful class of changes of base must remain useful after it is pulled back. The strengthened definition does more than supply that stability. It identifies a largest class of tests which leaves the relative weak equivalences unchanged.
+
+\textbf{Proposition (universal saturation of the tests).}\ours\
+Let $\mathcal M$ have pullbacks, let $W$ be a class invariant under isomorphisms of arrows, and let $\mathcal L$ contain all isomorphisms and be closed under composition and pullback. Write $E_S=W^{\mathcal L}_S$. Define $\widehat{\mathcal L}$ to contain $f:S'\to S$ when, for every $T\to S$, pullback along $f_T:S'\times_ST\to T$ sends $E_T$ into $E_{S'\times_ST}$. Then $\widehat{\mathcal L}$ contains $\mathcal L$, is closed under composition and pullback, and
+\[
+ W^{\widehat{\mathcal L}}_S=E_S,\qquad
+ \widehat{\widehat{\mathcal L}}=\widehat{\mathcal L}.
+\]
+Moreover, if $\mathcal K$ has the same closure properties and $W^{\mathcal K}_S=E_S$ for every $S$, then $\mathcal K\subseteq\widehat{\mathcal L}$.
+
+\textit{Proof.} First take $f$ in $\mathcal L$ and $u$ in $E_T$. To test $f_T^*u$ at $g:R\to S'\times_ST$ in $\mathcal L$, pull back $u$ along the composite $f_Tg$. Both factors belong to $\mathcal L$, so that composite is an admissible test and its pullback of $u$ belongs to $W$. Thus $\mathcal L\subseteq\widehat{\mathcal L}$.
+
+For the pullback of a member $f$ of $\widehat{\mathcal L}$, every subsequent test is already among the base changes in its definition. This proves pullback stability. For composable members $f:S'\to S$ and $g:S''\to S'$, each base change of $fg$ factors as the corresponding base change of $f$ followed by one of $g$. Their pullback functors preserve the respective $E$ classes in succession. This proves composition stability; identities satisfy the same condition immediately.
+
+Since $\mathcal L\subseteq\widehat{\mathcal L}$, testing against $\widehat{\mathcal L}$ can only shrink the resulting class, so $W^{\widehat{\mathcal L}}_S\subseteq E_S$. Conversely, for $u\in E_S$ and $f:S'\to S$ in $\widehat{\mathcal L}$, the defining condition with $T=S$ gives $f^*u\in E_{S'}\subseteq W_{S'}$. Hence $u$ passes every $\widehat{\mathcal L}$ test. This proves equality. Repeating the construction consequently uses exactly the same family $E_S$, so gives exactly the same class $\widehat{\mathcal L}$.
+
+Finally, take $f\in\mathcal K$ and any $T\to S$. If $u\in E_T=W^{\mathcal K}_T$, its pullback along $f_T$ passes every $\mathcal K$ test because such a test followed by $f_T$ is again in $\mathcal K$. The pulled-back map therefore belongs to $W^{\mathcal K}_{S'\times_ST}=E_{S'\times_ST}$. This is precisely $f\in\widehat{\mathcal L}$.\hfill$\square$
+
+The proof does not use a model structure, a factorization axiom, or even two-out-of-three for $W$. Invariance under arrow isomorphisms only ensures independence of the choices of pullbacks and their canonical associativity isomorphisms. If $W$ is weakly saturated, each $E_S$ is weakly saturated because it is an intersection of inverse images of $W$ under functors. We give the maximality and idempotence explicitly as a development of the source's sorite; we did not locate this exact formulation in the checked accounts of smooth functors and derived base change. The label makes no claim of priority. The variance of the first displayed $f$ on manuscript p.~222 is reversed in the edition; the strengthened definition, and the argument above, use $f:S'\to S$.
+\end{dcomment}
+
+\begin{dcomment}{later}{p223}{The saturation question has an affirmative answer in Cat}
+The question in parentheses on p.~222 can be answered using the later characterization of smooth functors. With Grothendieck's localizer $W^{\mathrm g}_S$ and the universal definition of $\mathcal L^\wedge$, one has
+\[
+ \mathcal L^\wedge=\mathrm{Liss}_W.
+\]
+This is an implication of an established theorem, not a new smoothness criterion claimed by the commentators. A functor is $W$-smooth exactly when all its base changes preserve $W$-aspherical functors \citep[Theorem 1.2(c)]{Maltsiniotis2005Asphericite}.
+
+Here is the precise translation. A functor $v:A\to T$, regarded as a morphism from $A/T$ to the terminal object $T/T$ of the slice, belongs to $W^{\mathrm g}_T$ exactly when $A/t\to T/t$ belongs to $W$ for every $t$. Since $T/t$ has a terminal object, this says exactly that every $A/t$ is $W$-aspherical. Thus it says that $v$ is a $W$-aspherical functor. If $f:S'\to S$ belongs to $\mathcal L^\wedge$, apply the preservation condition after every $T\to S$ to these particular arrows $v:A\to T$. Their pullbacks are again $W$-aspherical. The cited characterization implies that $f$ is $W$-smooth. The opposite inclusion is the smooth base-change property used in the source. This proves the equality, including its universal quantifier.
+
+There is an editorial distinction on this page that should not obscure the argument. The sentence introducing the full subcategory $\underline{\mathrm{Prop}}_W S$ repeats ``Liss'' where its role requires ``Prop''. The underbrace subsequently prints $\mathrm{HOT}^{0}_W(S)$, with a zero, although the theory throughout the paragraph is $\mathrm{HOT}^{\circ}_W(S)$. Both readings are retained and recorded; neither denotes a third relative theory.
+\end{dcomment}
+
+\begin{dcomment}{context}{p225}{Smoothness and properness depend on a coefficient theory}
+Grothendieck's proposed pair of classes is meant to encode two ways in which a square admits base change. The geometric names come from proper and smooth base-change theorems in étale cohomology, but their categorical definitions concern the invertibility of specific comparison transformations. This is why exchanging the two classes in the text also exchanges the direction of the relative theory. The comparison with geometry is a source of the formalism; it does not identify a categorical proper functor with a proper continuous map.
+
+Once a coherent indexed category $\mathscr E:S\mapsto\mathscr E(S)$ is given, an adjunction $f_!\dashv f^*$ produces a base-change mate for each pullback square, and an adjunction $f^*\dashv f_*$ produces its other version. Requiring the relevant mate to be invertible after all further base changes defines a stable class. Thus a meaningful duality has three pieces of data: the coefficient theory, its two adjunctions where they exist, and the chosen variance. Merely knowing which arrows of an ambient category are weak equivalences does not supply all these pieces.
+
+A modern formulation makes precisely this dependence explicit. \citet[Definition 9 and Proposition 10]{AnelWeinberger2024} associate smooth and proper classes to an indexed category over a base with finite limits; these are the largest classes along which the corresponding indexed sums and products exist with stable Beck--Chevalley compatibility. Their examples in Sections~3.2--3.3 include categorical and topological versions. This gives a general setting for the complementarity sought here. It is not a proof that every proposed $(\mathcal M,W,\mathcal L)$ satisfies the localization equivalences of p.~226.
+
+The involution on simplicial sets mentioned by Grothendieck is entirely concrete. Reverse the order on each finite ordinal: for $\alpha:[m]\to[n]$, set $\alpha^{\mathrm{rev}}(i)=n-\alpha(m-i)$. These maps define an involutive automorphism of $\Delta$, hence, by precomposition, an involution $K\mapsto K^{\mathrm{op}}$ of simplicial sets. The identity $N(C^{\mathrm{op}})=(NC)^{\mathrm{op}}$ is immediate from a string of composable arrows. The corresponding assertion for a general presheaf category requires an appropriate duality of its indexing category; none is part of the present hypotheses. Consequently the speculation about all presheaf categories should remain a programme with specified additional structure, rather than an unqualified theorem or a single well-posed open conjecture.
+\end{dcomment}
+
+\begin{dcomment}{development}{p226}{Postcomposition already gives a direct image}
+Grothendieck postpones the direct images because the hard part of his construction has been the inverse image. One part of his expectation follows from the elementary structure of the test classes alone. It is useful to isolate it before bringing in a theory of derived adjunctions.
+
+\textbf{Proposition (descent of postcomposition).}\ours\
+Under the hypotheses of the universal-saturation proposition, every $f:S'\to S$ induces a functor
+\[
+ f_\#: (\mathcal M/S')[ (W^{\mathcal L}_{S'})^{-1}]
+       \longrightarrow(\mathcal M/S)[(W^{\mathcal L}_S)^{-1}]
+\]
+by postcomposition with $f$. These functors compose canonically. If $f$ belongs to $\widehat{\mathcal L}$, ordinary pullback also descends, and the ordinary adjunction $f_\#\dashv f^*$ descends with its unit and counit.
+
+\textit{Proof.} Take $u:X\to Y$ over $S'$ in $W^{\mathcal L}_{S'}$. For a test $T\to S$ in $\mathcal L$, its pullback $T'=S'\times_ST\to S'$ again belongs to $\mathcal L$. The underlying arrow obtained by pulling back $f_\#u$ to $T$ is canonically the underlying arrow obtained by pulling back $u$ to $T'$. It belongs to $W$. Thus postcomposition sends the required weak equivalences to weak equivalences and factors through localization. The equalities of ordinary postcomposition give the composition isomorphisms, with their associativity.
+
+When $f\in\widehat{\mathcal L}$, its pullback functor is homotopical by definition. Both functors in the ordinary slice adjunction therefore descend. A natural transformation between relative functors descends as well: its naturality equation for an inverted arrow remains valid after that arrow is inverted. Apply this observation to the unit and counit. Their two triangle identities are equalities before localization and remain equalities afterwards, proving the adjunction.\hfill$\square$
+
+This argument establishes the direct-image functor for every $f$, without a functorial replacement. It does not by itself establish an adjunction to an inverse image obtained indirectly from proper or smooth representatives when raw $f^*$ is not homotopical. In that case one must compare the replacement with the ordinary slice adjunction. The source's proposed axioms are designed to make this possible; equality of the three localizers on a full subcategory alone is not the comparison. The earlier Chapter VI commentary, at manuscript pp.~137--145, supplies that comparison in its categorical setting. The proposition above records the additional generality that follows directly from the present definition, without claiming a new priority for descent of adjunctions.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p227}{Why a longer categorical interval is needed}
+The passage from fibres to cofibres begins with a manageable class of maps along which strict gluing has the correct homotopical effect. For an inclusion $A\hookrightarrow B$, the Dwyer condition provides exactly such control. In its original form it says that $A$ is a full sieve, and that its inclusion in the cosieve $Z\subseteq B$ generated by $A$ has a right adjoint $r:Z\to A$ restricting to the identity of $A$. The counit $ir\to\id_Z$ is a categorical deformation of the neighbourhood $Z$ onto $A$. This accounts for the usefulness of Dwyer maps in gluing \citep[Definition 4.1 and Proposition 4.3]{Thomason1980}.
+
+For $I=\Phi_n$, the endpoints $0$ and $2n$ form a sieve. Their generated cosieve consists of the four vertices $0,1,2n-1,2n$ when $n\geq2$. It is the disjoint union of two arrows, $0\to1$ and $2n\to2n-1$. Send the first arrow to the endpoint $0$ and the second to $2n$. This is the required right adjoint. For $n=1$, the generated cosieve is the whole cospan $0\to1\leftarrow2$. A right adjoint to the inclusion of the two endpoints would have to assign to $1$ an endpoint receiving all arrows from either endpoint, which is impossible. The lower bound $n\geq2$ therefore has an exact purpose: the two deformation neighbourhoods must not meet.
+
+Taking a product with $X$ preserves the sieve and cosieve conditions and the adjunction, now with right adjoint $\id_X\times r$. The nerve of $\Phi_n$ realizes to a subdivided interval, so $X\times I\to X$ is an ordinary weak equivalence. The stronger description as $W_\omega$-perfect records the corresponding universal statement in the categorical theory. Thus the factorization of the codiagonal has both the disjoint endpoint inclusion needed for the mapping cylinder and the weakly contractible cylinder direction needed for its retraction.
+
+The more general fibred base change asserted in the source has a similarly explicit proof. Pull a Dwyer inclusion $A\hookrightarrow B$ back along a Grothendieck fibration $E\to B$. Over its generated cosieve $Z$, lift each counit arrow $r(b)\to b$ cartesianly to an arrow $r'(e)\to e$. Choose identity lifts over $A$. The cartesian universal property defines $r'$ on morphisms, with functoriality following from uniqueness. For an object $a'$ over $A$, an arrow $a'\to e$ factors uniquely through that cartesian lift: its image in $B$ first factors uniquely through the counit by the original adjunction. Hence $r'$ is right adjoint to the pulled-back inclusion. Moreover every object over $Z$ receives such a lifted arrow from an object over $A$, so the pulled-back cosieve is exactly the generated one. This proves the asserted stability and explains why an arbitrary base change, without a lifting condition, was not claimed.
+
+The terminology must remain precise. Grothendieck's $W$-cofibration is a map whose cobase changes preserve the relevant $W$-equivalences. It is a homotopical gluing condition, not the definition by a lifting property in Thomason's model structure. Dwyer maps supply examples; one should not identify the two classes. Nor should one assert that every Thomason cofibration is a Dwyer map: \citet[pp.~227--231]{Cisinski1999Dwyer} gave a counterexample to closure of the original Dwyer maps under retracts and repaired the properness argument. That correction leaves the explicit mapping-cylinder construction below intact.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p228:assurent que ça existe, avec}{An interval with room at both ends}
+Grothendieck wants to replace every map by an inclusion along which gluing respects the chosen weak equivalences. This will make a homotopy cofibre accessible to the same relative methods that have already produced homotopy fibres. The interval is therefore being chosen for a relative property of its two endpoints. Its contractibility supplies only the other half of the construction.
+
+We recall precisely the relevant meaning of cofibration. A map $i:A\to B$ is a $W$-cofibration when the pushout functor
+\[
+ A\backslash\mathcal M\longrightarrow B\backslash\mathcal M,
+ \qquad (A\to T)\longmapsto(B\to B\amalg_A T),
+\]
+preserves morphisms belonging to $W$. This is the definition on manuscript pp.~109--110 \citep[Definition~2(c)]{Grothendieck1990XII}. It includes every subsequent change of the object under $A$. Associativity of pushouts immediately makes this class stable under pushout and composition. A Quillen cofibration is defined by a lifting property; the relation between the two notions requires a properness or gluing theorem. In the present argument, the required gluing property is part of the definition of $\operatorname{Cof}_W$.
+
+The geometry of a Dwyer map provides a tractable supply of such inclusions. Write an open immersion as a full sieve $A\subseteq B$: an arrow of $B$ whose target belongs to $A$ has its source in $A$. It is Dwyer when the inclusion of $A$ into its generated cosieve $Z_BA$ has a right adjoint $r$ with $r|_A=1_A$. The counit gives arrows $r(b)\to b$, coherently in $b$. Thus objects immediately outside $A$ have canonical points of attachment in $A$; this is the categorical structure used when the inclusion is pushed out \citep[Definition~4.1]{Thomason1980}.
+
+For the fence $I=\Phi_n$, the cosieve generated by its endpoints is
+\[
+ \{0\longrightarrow1\}\ \amalg\
+ \{2n\longrightarrow2n-1\},\qquad n\geq2.
+\]
+The right adjoint sends the first component to $0$ and the second to $2n$. The unit is the identity, and the two displayed arrows give its counit. Taking its product with $X$ gives the required adjoint for $X\amalg X\subseteq X\times I$. The same argument also explains the lower bound on $n$. For $n=1$, the vertex $1$ receives arrows from both $0$ and $2$. If a right adjoint existed, its value at $1$ would have to represent the functor on the discrete two-point category which takes both objects to a singleton. Neither object represents that functor. The two endpoint neighbourhoods need a vertex between them before the Dwyer condition can hold.
+
+The notation $W_\omega$ belongs to the earlier construction of a minimal localizer from saturation, the relative Theorem~A condition, and the terminal-object axiom \citep[manuscript p.~14]{Grothendieck1990XIIa}. The elementary contraction of this finite fence already belongs to that small class. One can remove the outermost endpoint, then its newly terminal neighbour, and repeat; each removal is witnessed by an adjunction between the remaining posets. Products preserve these adjunctions. Consequently $X\times I\to X$ is a homotopy equivalence for every $X$, and remains one after an arbitrary change of its base $X$.
+\end{dcomment}
+
+\begin{dcomment}{development}{p228}{Conservative gluing is an additional hypothesis}
+The continued footnote~124 is stronger than the gluing theorem usually used in homotopy theory. It prints two biconditionals for a Dwyer pushout. Its stated hypotheses include the conservative axioms W(7 bis), and for the second assertion W(7), inherited from earlier pages \citep[Chapter XII, manuscript pp.~76--78]{Grothendieck1990XII}. The conditional assertion should not be silently replaced by a theorem about $W_\infty$. In fact the reverse implications fail in the ordinary homotopy theory, even for finite posets and an open cover.
+
+\textbf{Example (a conservative converse fails).}\ours\
+There is a pushout square of finite posets
+\[
+\begin{tikzcd}
+ A \arrow[r,hook,"i"] \arrow[d,hook,"p"'] & B \arrow[d,hook,"q"]\\
+ C \arrow[r,hook,"i'"'] & D
+\end{tikzcd}
+\]
+in which $i$ and $p$ are Dwyer maps, $i'$ and $q$ belong to $W_\infty$, and neither $i$ nor $p$ belongs to $W_\infty$.
+
+\textit{Construction and proof.} Start with a connected finite acyclic complex $K$ with nontrivial fundamental group. For completeness, the presentation complex with two generators and two relations
+\[
+ \langle a,b\mid a^5b^{-3},\ b^3(ab)^{-2}\rangle
+\]
+has cellular boundary matrix $\left(\begin{smallmatrix}5&-2\\-3&1\end{smallmatrix}\right)$, of determinant $-1$, so its reduced integral homology vanishes. Sending $a$ to $(12345)$ and $b$ to $(253)$ defines a nontrivial homomorphism of its fundamental group to $A_5$: $a^5=b^3=(ab)^2=1$, since $ab=(12)(45)$. Hence it is not contractible. This is the acyclic complex of \citet[Example 2.38]{Hatcher2002}. Choose a finite simplicial model of the same homotopy type. Such a model can be obtained by replacing the two attaching maps by simplicial maps between subdivided finite graphs and using their finite triangulated mapping cylinders before adjoining the two discs.
+
+Let $P(L)$ be the poset of nonempty simplices of a finite simplicial complex $L$, ordered by inclusion. Set
+\[
+ A=P(K),\quad B=P(C_+K),\quad C=P(C_-K),\quad D=P(\Sigma K).
+\]
+The two cones are subcomplexes of the suspension and meet in $K$. Their face posets are sieves, their union is $D$, and there are no arrows between the two complements. Their ordinary pushout is therefore $D$. For $A\hookrightarrow B$, the cosieve generated by $A$ consists of all simplices except the one-vertex apex simplex. On this cosieve, deleting the apex defines a right adjoint to the inclusion of $A$: a simplex of $K$ is a face of $\sigma$ if and only if it is a face of $\sigma$ with the apex removed. This verifies the Dwyer condition. The proof for $A\hookrightarrow C$ is identical.
+
+The realization of $NP(L)$ is the barycentric subdivision of $L$. Both $B$ and $C$ are therefore contractible. The suspension of a connected space is simply connected, and its reduced homology is the shifted reduced homology of the space. Thus $\Sigma K$ is simply connected and acyclic. If it had a first nonzero homotopy group, the Hurewicz theorem would identify that group with a nonzero homology group. It has none, and Whitehead's theorem makes $\Sigma K$ contractible. Consequently $i'$ and $q$ are weak equivalences, whereas $i$ and $p$ cannot be, because $|NA|$ has nontrivial $\pi_1$.\hfill$\square$
+
+This application of a classical acyclic example is included to expose the strength of the assumed axiom, not as a claim of novelty. We checked the original Dwyer pushout theorem, its retract correction, and the later categorical refinement; they assert preservation, not these converse implications. The earlier W(7 bis), formulated for a union of open sieves, already fails on the displayed union. The claim in Chapter XII, manuscript p.~78, that $W_\infty$ satisfies the stronger W(7), cannot supply it. The present proof of the mapping cylinder and Proposition~16 uses only the forward gluing implications, which are valid for $W_\infty$. Keeping this distinction allows the construction to survive with its natural hypotheses.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p230:donc aussi la rétraction}{A cylinder and a circle in finite categories}
+The mapping cylinder puts the preceding two properties to work simultaneously. Its construction is worth following through a small example, because the example also shows what a homotopy cofibre retains that a strict categorical quotient can lose. First write its two structural maps without the changing names in the display:
+\[
+ Z(f)=(X\times I)\amalg_{X\times\{0\}}Y,
+ \qquad s_f:Y\longrightarrow Z(f),
+ \qquad p_f:Z(f)\longrightarrow Y.
+\]
+The map $p_f$ is induced by $f\operatorname{pr}_1$ on $X\times I$ and by $1_Y$ on $Y$. Hence $p_fs_f=1_Y$, while the free endpoint defines $i_f:X\to Z(f)$ with $p_fi_f=f$. These equations also show that the construction is functorial in a commutative square of functors: the two maps on the pieces agree on the identified endpoint and therefore induce a unique map on their pushout.
+
+To see that the free endpoint is still a Dwyer inclusion, separate both endpoints before making the attachment. The pushout of $X\amalg X\hookrightarrow X\times I$ along $f\amalg1_X$ is
+\[
+ j:Y\amalg X\longrightarrow Z(f).
+\]
+The desired inclusion is $j$ composed with the $X$-summand inclusion. Both are Dwyer maps. The printed sentence has $Y\to Y\amalg X$ in this position; its preceding formula and its source $X$ specify the intended summand. The other endpoint inclusion $X\to X\times I$ is a weak equivalence, and its pushout $s_f$ is one by the forward gluing property. Two-out-of-three applied to $p_fs_f=1_Y$ proves $p_f\in W$. No fibration property of $p_f$ is required for this finite construction.
+
+Now take $X=\{a,b\}$ discrete, $Y=\{y\}$, and let $f$ be the unique functor. Choose $I=\Phi_2$. The category $Z(f)$ has the nine objects
+\[
+ y,\quad a_1,a_2,a_3,a_4,\quad b_1,b_2,b_3,b_4.
+\]
+Its nonidentity arrows are exactly, for $x=a,b$,
+\[
+ y\longrightarrow x_1\longleftarrow x_2
+       \longrightarrow x_3\longleftarrow x_4.
+\]
+There are no composable pairs of nonidentity arrows. Thus its nerve has precisely these vertices and eight nondegenerate edges, and no higher nondegenerate simplices. Its realization is a tree with two arms. The contraction to $y$ verifies directly that $p_f$ is a weak homotopy equivalence. The free endpoints $a_4,b_4$ form a Dwyer subcategory: their generated cosieve consists of the two separate arrows $a_4\to a_3$ and $b_4\to b_3$.
+
+We may consequently form the homotopy cofibre by the strict pushout
+\[
+ C(f)=Z(f)\amalg_{\{a_4,b_4\}}\{t\}.
+\]
+It has eight objects and eight nonidentity arrows. Its nerve is the graph obtained from the tree by identifying its two free endpoints. This graph is an eight-edge circle. In particular,
+\[
+ H_1(NC(f);\mathbb Z)=\mathbb Z,
+ \qquad \pi_1(NC(f),t)\cong\mathbb Z.
+\]
+The direct pushout $\{y\}\amalg_{\{a,b\}}\{t\}$ in $\mathrm{Cat}$ is instead the terminal category: both maps identify the two objects at once. The cylinder has retained the two paths by which the gluing takes place. This is the finite categorical model of the familiar homotopy pushout $*\amalg^h_{S^0}*\simeq S^1$, and it is the reason the question on p.~232 requires a proof.
+\end{dcomment}
+
+\begin{dcomment}{later}{p230:donc aussi la rétraction}{What the appeal to Thomason supplies}
+Grothendieck's appeal to Thomason supplies a stronger factorization in the ordinary spatial case. The cellular construction in the proof of the model-category theorem factors a functor as a Dwyer inclusion followed by a trivial fibration for the Thomason model structure \citep[proof of CM5 and Theorem~4.9]{Thomason1980}. The cylinder just constructed gives a finite and transparent substitute for the weaker factorization needed here.
+
+A later correction matters when using that historical reference. \citet{Cisinski1999Dwyer} exhibited a retract of a Dwyer map which is a Thomason cofibration but is not itself Dwyer, and repaired the properness argument. Thomason's assertion that all cofibrations are Dwyer therefore cannot be used to justify the first paragraph. The particular cellular factorization survives, as do the pushout and composition properties used in this passage. Grothendieck's explicit cylinder is also independent of closure under retracts. The distinction protects exactly the argument being made, without changing its conclusion.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p230}{The mapping cylinder, with the two endpoints distinguished}
+The construction now turns the endpoint geometry into a factorization of an arbitrary functor. Let $a_0,a_1:X\to X\times I$ denote the two endpoint inclusions and form
+\[
+ Z(f)=Y\amalg_{X,a_0}(X\times I).
+\]
+Write $k:Y\to Z(f)$ and $f':X\times I\to Z(f)$ for the coprojections. The maps $f\,\mathrm{pr}_X$ and $\id_Y$ agree on the identified copy of $X$, hence induce a unique $p_f:Z(f)\to Y$. Put $i_f=f'a_1$. Then $p_fi_f=f$ and $p_fk=\id_Y$. The displayed $\alpha$ in the source is this same $p_f$; the projection used to define it is followed by $f$ on the cylinder summand.
+
+The endpoint $a_0$ is a Dwyer map and a weak equivalence. Its pushout $k$ is consequently a weak equivalence by the forward gluing property. Two-out-of-three applied to $p_fk=\id_Y$ gives $p_f\in W$. To prove the other assertion, use both endpoints at once. The map
+\[
+ j:Y\amalg X\longrightarrow Z(f)
+\]
+is the pushout of $a_0\amalg a_1:X\amalg X\to X\times I$ along $f\amalg\id_X$, hence is Dwyer. The inclusion of the second summand $X\hookrightarrow Y\amalg X$ is Dwyer, and its composite with $j$ is $i_f$. Closure under composition proves the required assertion. The edition says $Y\to Y\amalg X$ in this sentence; the formula immediately preceding it requires the second summand $X$.
+
+The construction is functorial in $f$. A commutative square $bf=f'a$ gives maps $b$ on the $Y$ summand and $a\times\id_I$ on the cylinder summand, compatible on the attaching copy of $X$. The universal property gives the induced map of mapping cylinders, and uniqueness proves compatibility with composition and identities. This supplies an actual replacement functor on the arrow category, not merely objectwise existence of a factorization. Nothing in this argument says that the displayed $p_f$ is a Thomason fibration; the source only claims $p_f\in W$ for this explicit factorization. The stronger model-category factorization mentioned earlier is a different choice.
+
+A small computation shows what the construction buys. Let $X$ be the discrete two-object category and let $f:X\to e$ be the unique functor. With $I=\Phi_2$, $Z(f)$ is made of two four-edge intervals sharing their attached endpoint $y$. Form the further pushout $e\amalg_X Z(f)$, identifying their two free endpoints to a second point $z$. The resulting poset has eight vertices: $y,z$, and three interior vertices on each arm. Every nonidentity arrow runs from an even vertex to an adjacent odd vertex, so there are no nondegenerate simplices of its nerve in dimensions above one. Its realization is the graph of two four-edge paths from $y$ to $z$, hence a circle. Its cellular differential has rank seven, giving $H_1=\mathbf Z$ and $H_q=0$ for $q>1$; a spanning tree leaves one generator of $\pi_1$. This is the homotopy cofiber of the collapse $S^0\to *$, obtained by an ordinary categorical pushout only after the mapping-cylinder replacement.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p232:Ici, c'est un argument formel, valable}{Weak equivalences between objects under a fixed base}
+Proposition~16 provides the independence of replacement that a relative homotopy construction needs. A map under $S$ can be a weak equivalence while its image after a badly behaved attachment is not. The proposition locates a class of objects under $S$ for which every attachment behaves correctly: both structure maps from $S$ must be $W$-cofibrations. It does not require the map between those objects to be a cofibration.
+
+The argument can be expressed in any category with the pushouts in question. Let $a:S\to X$ and $b:S\to Y$ be $W$-cofibrations, and let $f:X\to Y$ satisfy $fa=b$ and $f\in W$. To change $S$ into an arbitrary $T$, factor the change of base as
+\[
+ S\xrightarrow{k}T_0\xrightarrow{q}T,
+ \qquad k\in\operatorname{Cof}_W,\quad q\in W.
+\]
+Set $X_0=X\amalg_ST_0$, $Y_0=Y\amalg_ST_0$, and set $X_T=X\amalg_ST$, $Y_T=Y\amalg_ST$. The map $f_0:X_0\to Y_0$ is in $W$ because $k$ is a $W$-cofibration and it pushes out the map $f$ in $S\backslash\mathcal M$. On the other hand, $T_0\to X_0$ and $T_0\to Y_0$ are pushouts of $a$ and $b$, so they are $W$-cofibrations. Pushing out $q$ along them gives weak equivalences
+\[
+ u:X_0\longrightarrow X_T,
+ \qquad v:Y_0\longrightarrow Y_T.
+\]
+The equality $f_Tu=vf_0$ now proves $f_T\in W$ by two-out-of-three. These are three separate applications of the cofibration condition, each with its own fixed base. They account for every marked $W$ in the displayed proof.
+
+There is a useful immediate consequence. If $a:S\to X$ is both a $W$-cofibration and a weak equivalence, apply the proposition to the two objects $1_S:S\to S$ and $a:S\to X$ of $S\backslash\mathcal M$. Every pushout of $a$ belongs to $W$. Thus, once these factorizations exist, a trivial $W$-cofibration is exactly a couniversal weak equivalence. This is the abstract version of the special Dwyer fact used to construct the cylinder. The order of proof is sound: the special Dwyer statement constructs enough cofibrations first, and Proposition~16 then gives the general statement.
+
+The dual formulation on p.~232 is obtained by taking opposite categories throughout. A weak equivalence between two $W$-fibrations over $S$ survives every pullback along $T\to S$. The symmetry is a symmetry of the relative arguments. It does not assert that every object of a slice or coslice is already suitable for calculating a derived change of base.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p232}{Why Proposition 16 is a formal gluing lemma}
+Grothendieck needs weak equivalences between objects under $S$ to survive an arbitrary change of the attaching object. The hypothesis that both objects are $W$-cofibrant under $S$ is exactly what controls the two comparisons introduced by a factorization of that change. It cannot be replaced by a statement about the underlying objects alone.
+
+Assume an ambient category has pushouts, a weakly saturated class $W$, and a class of $W$-cofibrations stable under pushout, with the property that pushout along such a map preserves $W$-equivalences. Suppose every map factors as a $W$-cofibration followed by a member of $W$. Let $S\to X$ and $S\to Y$ be $W$-cofibrations, and let $f:X\to Y$ be a $W$-equivalence under $S$. Factor the chosen $S\to S'$ as
+\[
+ S\xrightarrow{i}S_0'\xrightarrow{j}S',\qquad i\in\mathrm{Cof}_W,\quad j\in W.
+\]
+Put $X_0'=X\amalg_SS_0'$ and $Y_0'=Y\amalg_SS_0'$. The map $X\to X_0'$ is a pushout of $i$, hence a $W$-cofibration. Pushing out $f$ along this map gives $f_0':X_0'\to Y_0'$ in $W$; its target is $Y\amalg_X X_0'\cong Y\amalg_SS_0'$. The maps $S_0'\to X_0'$ and $S_0'\to Y_0'$ are pushouts of the two original cofibrations. Pushing out $j$ along them gives weak equivalences $v_X:X_0'\to X'$ and $v_Y:Y_0'\to Y'$. In the square
+\[
+ f'v_X=v_Yf_0',
+\]
+the right-hand composite belongs to $W$, and $v_X$ belongs to $W$. Two-out-of-three proves $f'\in W$.
+
+This is the whole argument. It uses neither a lifting axiom nor the conservative converses of footnote~124. It also identifies the dual hypotheses precisely: pullbacks, fibrations whose pullback functors preserve weak equivalences, stability under pullback, and a factorization as a weak equivalence followed by a fibration. Under those hypotheses a weak equivalence between fibrations over the same base is universally a weak equivalence over that base. Thus the parallel with the preceding fibre theory is mathematical, not just terminological.
+
+The small slips in the final prose are harmless once the diagram is read: the comparison is $Y_0'\to Y'$, not $Y_0'\to Y$, and the subsequent cobase-change arrow is $S\to S'$, not $S'\to S$. Both are printed slips and remain in the source text. They are not gaps in Proposition~16.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p233:Il faut donc vérifier :}{Comparing the two meanings of homotopy pushout}
+Grothendieck now asks whether the replacement method agrees with the earlier construction special to small categories. The earlier definition starts with a span $X_1\leftarrow X_0\to X_2$, integrates that diagram into a category $\mathcal X$, and calls a cocone to $Y$ homotopy cocartesian when its comparison $\mathcal X\to Y$ belongs to $W$. The new method starts with an ordinary pushout and asks whether a $W$-cofibration makes that pushout homotopically correct. The two descriptions have different starting data; their agreement is the content of the corollary on p.~239, and later of Proposition~20.
+
+The proof has three stages, and keeping their dependence visible avoids a misleading impression of circularity. A pushout along a Dwyer inclusion is first reduced to a pushout whose two incoming maps are Dwyer inclusions, followed by a square with two opposite sides in $W$. In the first square, both categories embed as open subcategories of their union, so the earlier open-cover calculation applies. In the second, the definition of $W$-cofibration supplies the second weak equivalence. The only remaining operation is composition of homotopy-cocartesian squares.
+
+That composition rule is then proved independently, by replacing the comparison maps with inclusions between categories of elements. Its proof uses restrictions of a single diagram over a six-object poset and a union of closed subcategories. It therefore does not presuppose that all Dwyer pushouts have already been identified as homotopy pushouts. Finally, an arbitrary $W$-cofibration is handled by factoring the other incoming map through a Dwyer inclusion and a weak equivalence. The two resulting squares fall under the established cases.
+
+The assertion about two opposite weak equivalences has an especially short explanation. In the source's notation, if $i_2:X_0\to X_2$ is in $W$, the other leg $j_1:X_1\to\mathcal X$ of the integrated span is in $W$. The cocone satisfies $\varphi j_1=f_1$. If $f_1$ also belongs to $W$, two-out-of-three gives $\varphi\in W$. This argument concerns the actual coherent square, including its commutativity. It will reappear in the general formalism as the rule that a homotopy pushout of an equivalence is an equivalence.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p234}{Completing the pasting step}
+At the end of manuscript page~234, the proof that a pushout along a $W$-cofibration is $W$-cocartesian still invokes the composition of homotopy pushout squares. This is the deferred item~c), not a defect in item~b), whose proof has just been given. The composition statement is a standard consequence of coherent homotopy colimits; in derivator language it is the composition part of \citet[Proposition 3.13, published version]{Groth2013}. We spell out the argument to make clear which compatibility is required.
+
+Consider a coherent commutative diagram
+\[
+\begin{tikzcd}
+ A\arrow[r]\arrow[d]&B\arrow[d]\\
+ C\arrow[r]\arrow[d]&D\arrow[d]\\
+ E\arrow[r]&F .
+\end{tikzcd}
+\]
+Suppose each small square is a homotopy pushout. Its two universal properties give
+\[
+ D\simeq B\amalg_A^{h}C,\qquad
+ F\simeq D\amalg_C^{h}E.
+\]
+For any test object $T$, write $M_U=\operatorname{Map}(U,T)$. These mapping spaces are derived mapping spaces, so that homotopy colimits become homotopy limits. Then
+\[
+\begin{aligned}
+ \operatorname{Map}(F,T)
+ &\simeq (M_B\times^h_{M_A}M_C)\times^h_{M_C}M_E\\
+ &\simeq M_B\times^h_{M_A}M_E.
+\end{aligned}
+\]
+The second equivalence is the associative law for homotopy pullbacks: both sides are limits of the same diagram after eliminating the repeated $M_C$. The natural equivalences identify the maps to $M_B$ and $M_E$ and their common homotopy over $M_A$. The mapping-space universal property therefore identifies $F$ with $B\amalg_A^h E$, including its cocone. This proves that the outside rectangle is a homotopy pushout.
+
+For Grothendieck's $W$-cocartesian comparison, we give the categorical calculation explicitly. Suppose $W$ is a fundamental localizer. First, integrating an objectwise $W$-equivalence $\theta:H\to H'$ of covariant diagrams on $J$ gives a $W$-equivalence. Indeed, the over-category $(\int_J H)/j$ of the projection to $J$ has an evaluation functor
+\[
+ (i,x,\alpha:i\to j)\longmapsto H(\alpha)x.
+\]
+It is left adjoint to $y\mapsto(j,y,\id_j)$, with identity counit. Its nerve is therefore a homotopy equivalence. The analogous evaluation for $H'$ commutes with $\theta$; two-out-of-three shows that the induced maps of over-categories belong to $W$. The relative Theorem A gives $\int\theta\in W$. Here and below an ordinary weak equivalence belongs to $W$ by \citet[Theorem 2.2.11]{Cisinski2004Minimal}.
+
+Write $H_1=\int(B\leftarrow A\to C)$ and $H_2=\int(D\leftarrow C\to E)$. The two small squares being $W$-cocartesian means that their canonical maps $H_1\to D$ and $H_2\to F$ lie in $W$. Objectwise invariance now shows that
+\[
+ H_{12}=\int(H_1\leftarrow C\to E)\longrightarrow H_2\longrightarrow F
+\]
+belongs to $W$. To compare this iterated integral with the outside span, introduce the five-object poset $K$ whose only nonidentity arrows are
+\[
+ a\to b,\quad a\to c_1,\quad c_0\to c_1,\quad c_0\to e.
+\]
+Assign $A,B,C,C,E$ to $a,b,c_1,c_0,e$, with the identity on the arrow between the two copies of $C$. Flattening the two Grothendieck constructions identifies its integral with $H_{12}$: the outer copy of $C$ is $c_0$, and the copy inside $H_1$ is $c_1$.
+
+Let $K'$ have objects $a,b,c,e$ and arrows generated by $a\to b$ and $a\to c\to e$. The functor $r:K\to K'$ identifies $c_0,c_1$ with $c$. Let $G:K'\to\Cat$ be the original diagram $A\to B$, $A\to C\to E$. Thus the flattened diagram is $r^*G$. Let $L\subset K'$ be the full subcategory on $a,b,e$; its integral is the outside-span integral $H_0=\int(B\leftarrow A\to E)$.
+
+Both $r$ and $L\hookrightarrow K'$ are homotopy final. This can be checked without an abstract pasting theorem. For $r$, the comma category $a/r$ is the tree-shaped poset $K$; $c/r$ is the cospan $c_1\leftarrow c_0\to e$; and $b/r,e/r$ are singletons. All have contractible nerves. For the inclusion of $L$, the comma categories at $a,b,c,e$ are respectively a span with initial object $a$, a singleton, the singleton $e$, and a singleton. Homotopy cofinality for homotopy colimits, together with the nerve comparison for integration \citep[Theorem 1.2]{Thomason1979}, therefore gives ordinary weak equivalences
+\[
+ H_{12}\longrightarrow \int_{K'}G\longleftarrow H_0.
+\]
+All these functors respect the cocone to $F$. Since $H_{12}\to F$ lies in $W$, two-out-of-three first gives $\int_{K'}G\to F$ in $W$ and then $H_0\to F$ in $W$. This proves the required pasting statement for every fundamental localizer. It supplies the comparison and its compatibility with the cocone, rather than merely an equality of unstructured homotopy types.
+
+Item~b) has an equally transparent interpretation. If $A\to C$ is a weak equivalence, then $B\to B\amalg_A^hC$ is a weak equivalence. If also $B\to D$ is a weak equivalence, the comparison from that homotopy pushout to $D$ is one by two-out-of-three. The final integral diagram in the source is a categorical model for exactly this proof. For a general $W$, use the objectwise invariance of integration just proved instead of appealing to ordinary spaces.
+
+These two facts complete the reduction. Factor the cobase-change map through a Dwyer inclusion followed by a weak equivalence. The first pushout is $W$-cocartesian by the Dwyer gluing theorem, and the second has the two opposite weak equivalences supplied by the $W$-cofibration hypothesis. Item~b) handles the second square; pasting handles their composite. This proof establishes the intended statement without adding a converse detection axiom for individual edges.
+\end{dcomment}
+
+\begin{dcomment}{later}{p234}{What survives beyond homotopy types}
+The Dwyer condition ultimately controls more than the weak homotopy type of the nerve. \citet[Theorems 1.5 and 1.6; arXiv version 3]{HackneyOzornovaRiehlRovelli2024} prove that pushouts along Dwyer maps are preserved when ordinary categories are viewed as $(\infty,1)$-categories. Equivalently, the comparison from the pushout of nerves to the nerve of the ordinary pushout is a categorical equivalence, a stronger assertion than Thomason's weak homotopy equivalence. Their formulation also covers suitable generalized Dwyer maps.
+
+This later theorem concerns the fidelity of the gluing construction. It supplies no converse of the kind excluded by the acyclic example above. It is compatible with Grothendieck's strategy of finding strict representatives on which homotopy operations become ordinary operations, while explaining why the coherence of the original diagram must be retained. In the pointed derivator formulation, a cofiber is correspondingly functorial on the category of coherent arrows, rather than determined by an arrow in the ordinary homotopy category alone \citep[Definition 3.18]{Groth2013}.
+\end{dcomment}

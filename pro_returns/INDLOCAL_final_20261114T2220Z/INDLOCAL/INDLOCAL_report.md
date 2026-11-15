@@ -1,0 +1,241 @@
+INCOMPLETE
+
+# INDLOCAL research record
+
+Work started 14 November 2026 at 18:21 UTC. This is the final research record for this run. Each proved statement has an explicit argument and typed comparison maps in the paper. The complete task remains unsettled; the sole requested item still unresolved is the exact dimension-two frontier in A3(iii).
+
+The work is AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority is claimed. The attached AI-produced returns are treated as proofs to check. No statement is accepted on the authority of a return or its review.
+
+## Requested task register
+
+| Task | Current state | Proof or active obstruction |
+|---|---|---|
+| A1 | Proved | A.1--A.3: simultaneous cone construction, injectivity, local coefficients, quotient and perfect kernel |
+| A2 | Proved with the cardinal estimate supplied | A.4: each lifting, amalgam, homology and limit step; explicit size control |
+| A3(i) | Proved | A.8--A.9: functorial construction, replacement for general simplicial maps and proved limits |
+| A3(ii) | Proved | A.6--A.7: the kernel can be simple; its homology is forced by the universal cover |
+| A3(iii) | Unrestricted dimension-two existence REFUTED; exact frontier still UNDECIDED | A.14--A.16 prove dimension preservation for every d >= 3 and every cardinal mu. Dimensions <=1 use identities; A.10 settles dimension two for finite mu. A.19--A.20 exclude W=S2 for every mu >= continuum and give the exact threshold mu<lambda for W=vee_lambda S2 when infinite lambda^aleph0=lambda. The interval aleph0 <= mu < continuum remains undecided for S2, starting at mu=aleph0 and allowing an uncountable G. |
+| A4 | Proved | A.2: full derived mapping-space comparison onto the components killing the kernel, including disconnected targets |
+| B1 | Proved | B.1 checks both written R3 proofs and their specified unit |
+| B2 | Proved | B.2: arbitrary small colimits of groupoid representables |
+| B3 | Proved | B.3--B.4 and B.6: truncation, integral homology, and exact algebraic orthogonality for every larger localizer |
+| B4 | Proved | B.7--B.8: sharp uniform threshold mu^+ < kappa; full classification of bounded invariant restrictions |
+| B5 | Proved | B.5: enlarged-universe invariant ind-objects equal Ind_V(Hot_U) |
+| C1 | Proved | C.20--C.22: both D.K5 proofs and exact universal sequence criterion |
+| C2 | Proved | C.13--C.17: exact stage criterion, comparison square, suspension and crown examples; finite computations passed |
+| C3 | Proved | C.22--C.28: sentence-level replacements, shape audit, R5 proof and complete chain-complex example |
+| C4.1 | Proved | C.1--C.4: clamping, strict action, coherent descent, both finality comparisons and composition identity |
+| C4.2 | Proved, correcting the premise | One-sign padding and composition remain valid; comparison to the full localization has the exact restrictions stated in C_paths.tex |
+| C4.3 | Proved | R7 local-representable proof, both signs, canonical maps, hammock comparison and isomorphism closure |
+| C4.4 | Proved | Naturality in both endpoints, concatenation, the specified Q, literature comparison and finite (+,-,+) checks |
+| D, strict retraction | Refuted by a complete counterexample | The countable rigid fibrant-poset construction and its explicit collage in Part D give a Thomason trivial cofibration i:A->B with A fibrant and [p][i]=id in Cat_hot, but no strict retraction in the prescribed Cat_hot class. D.1 proves that a strict retraction in the prescribed ordinary homotopy class always exists. |
+| D, lengthened-fence HEP | Refuted by a complete counterexample | The cofibrant and fibrant, weakly contractible poset F of Part D has isolated identity in Fun(F,F). The cofibration {a}->F and an arrow a->z prohibit any finite-fence extension of id_F. D.10--D.14 give the proved positive cases, including the requested single one-cell attachment and every finite cofibration. |
+| E, strict 2-categories | Proved, correcting the proposed answer | E.1--E.6: explicit finite B^2 C2 counterexample; ordinary groupoids give the exact invariant class |
+| E, all strict n-categories | Proved | E.2--E.6, for the explicitly fixed normal Gray lax/pseudo convention. Independent audit completed, including the typed Gray cylinder and transformation group. |
+
+## Main findings
+
+1. The first R3 proof extends to arbitrary small colimits because the Kan--Thurston comparison is bijective before taking a colimit. Filteredness enters only the second proof's preservation of injections.
+2. Among presentations with stages of at most mu arrows, invariance on tests with fewer than kappa arrows forces a global ind-groupoid precisely when mu^+ < kappa. The element-category construction proves sharpness, including kappa = mu^+.
+3. One-sign blocks compute ordinary arrows (positive) or reversed marked arrows (negative). Their padding maps are isomorphisms in Cat_hot. The crown calculation concerns the comparison with the full localization.
+4. Strict higher-category morphisms have a much more restrictive representability result than the proposed n-groupoid answer: the exact class is ordinary groupoids. The finite strict two-groupoid B^2 C2 already gives a complete counterexample to the proposed two-type criterion.
+5. A three-object relative category gives a mapping space BC2 and a globally invariant constant-endpoint presheaf. Thus the fundamental groups of invariant mapping spaces can be nontrivial.
+6. The map from transformation homotopy classes into ordinary homotopy classes fails to be injective even when source and target are cofibrant, fibrant and weakly contractible. Part D constructs such a countable poset with isolated identity and converts it, by explicit functors, into the requested strict-retraction counterexample.
+7. Arbitrary cardinal bounds are compatible with dimension preservation in every dimension at least three. A.14 rechecks the surface blocks of Bartholdi--Mikhailov; A.15 constructs arbitrarily large simple acyclic groups with three-dimensional classifying models; A.16 proves the equivariant relative construction with all local coefficients. Thus the suggested dimension-only bound on mu is false even for the fixed target S3.
+8. A.19 proves a residual-cardinality bound for every group with an actual two-dimensional classifying space: each nonidentity element survives in a quotient of size at most nu^aleph0, where nu=max(aleph0, generator cardinal of H1, rank H2). A.20 applies it to refute a dimension-two R2 resolution of S2 at every bound at least the continuum. For a wedge of lambda two-spheres with infinite lambda^aleph0=lambda, the exact existence threshold is mu<lambda.
+9. A.26 proves that every transfinite tower of finite nonsingular relative blocks is residually of the size of its initial coefficient group (with aleph0 as a lower bound). The proof closes the finite coefficient dependencies of a detecting word, reorders the resulting countable set of blocks first, and gives an actual detecting homomorphism. This extends the earlier one-variable obstruction without assuming that a countable invertible boundary matrix decomposes into finite blocks.
+10. A.27 gives countable systems with identity exponent matrix that have no solution in a specified nontrivial countable mixed-identity-free group, torsion-free group with two conjugacy classes, or nonabelian uniformly simple group. The attached presentations give actual aspherical two-dimensional homology extensions; their original coefficient groups embed and normally generate the extensions. The coefficient map may be defined on a subgroup only.
+11. A.28 assembles these blocks into an actual two-dimensional acyclic resolution of S2 with at most continuum many cells. Its group has no nontrivial quotient in those three countable target classes, no nontrivial image in a torsion or locally linear group, and solves every one-variable unimodular equation. Every nontrivial countable image would have an infinite simple quotient satisfying a mixed identity, failing every finite uniform simplicity bound, containing an element of infinite order, failing local linearity, and solving every one-variable unimodular equation. The existence or impossibility of the further-restricted remaining quotient is unresolved.
+12. A.29 gives an explicit unsolvable unimodular equation from a finite algebraic cover of the complement of the identity in a nonabelian simple group. It then proves directly, using a recursively constructed weighted metric, that every surviving countable simple quotient from A.28 admits a nondiscrete Hausdorff metrizable group topology. The finite constraints, positive separation bounds, and continuity inequalities are supplied in full. No conclusion about completeness or countable equation systems is inferred from that topology alone.
+13. A.30 constructs an explicit unsolvable countable identity-matrix system for every countable nonabelian simple group admitting a nondiscrete bi-invariant metric. Small conjugacy-invariant commutator ranges and the first-changing-edge argument preserve a nonconstant finite word image while excluding one enumerated element at each step. Finite tree prefixes eliminate directly to the coefficient space wedged with frontier circles. Rerunning A.28 with this fourth class gives a new actual two-dimensional resolution of S2 with all the preceding exclusions and this additional one. Every surviving countable simple quotient therefore admits the topology of A.29, while every positive definite conjugation-invariant length on it is discrete. The missing implication between these exact conditions remains undecided.
+14. A.31 extends the same diagonal construction by replacing its metric hypothesis with an exact conjugacy-word-length condition. Write rho_b(d) for the minimum number of conjugates of b or b^-1 multiplying to d. The construction excludes every countable simple target for which rho_b(d) is unbounded as b varies, for every fixed nonidentity d. In the resulting fresh resolution G^alg, every surviving simple countable quotient has N_E(g)=sup_{b!=1}rho_b(g) finite at each g but unbounded on the group. The proof explicitly controls the change of a word with L variable occurrences by 2L conjugates, preserves two root values at the first changing edge, and repeats the actual binary-tree geometry. Root and C independently checked the complete proof. The exact comparison rho_d(g)<=N_E(g)<=N_E(d)rho_d(g) also excludes every countable nonabelian simple target with finite diameter in one fixed conjugacy word norm. No implication from unimodular closure to boundedness of N_E is asserted.
+
+## Computations
+
+- code/e_strict_two_groupoid.py: all 8 associativity and 16 interchange checks passed; unique strict functor from BC2; two normalized 2-cocycles and one coboundary.
+- code/cpaths_checks.py: finite vertex/letter correspondences, compositions, clamping categories, R8 certificate arrows, crown markings and (+,-,+) padding squares checked; detailed counts in its output.
+- code/a_finite_checks.py and code/d_finite_checks.py: current finite checks and outputs included.
+
+## Open work and approaches tried
+
+### Dimension two: the remaining cardinal interval
+
+This is the only requested item still undecided as an exact frontier. Unrestricted dimension preservation in dimension two is now refuted: A.20 gives the fixed counterexample W=S2 at every mu at least the continuum. A.10 proves the dimension-two construction for every finite mu. For this fixed target the remaining interval is aleph0 <= mu < continuum, with the first undecided instance mu=aleph0 and an uncountable source group permitted. The counterexample is complete, but it does not settle that remaining exact relation.
+
+The new obstruction A.19 starts with a small aspherical subcomplex Y of an actual two-dimensional BG, containing a chosen nontrivial element and inducing ordinary homology isomorphisms. Its relative cellular boundary is an actual isomorphism between free abelian groups. Closing under full relator supports and the inverse boundary supports decomposes the relative presentation into countable blocks. The finite nonsingular-system theorem of OpenAI (5 October 2026, unrefereed) constructs a small coefficient group E solving every finite nonsingular system. The explicit reduced power E^N/E^(N) then solves every countable independent-row system: at coordinate n solve the first n equations, so each equation holds eventually. Compatible presentation maps give the detecting quotient of size at most nu^aleph0. The source theorem's complete 16-page proof was read independently by all four agents; the incidence, trace-length and planar-band arguments were checked. The companion Lean verification covers an earlier one-relator theorem, not this complete multi-equation result. The detailed source audits are in research/D_nonsingular_audit.md and research/Cpaths_nonsingular_audit.md.
+
+A.20 combines this bound with A.13 to give an exact threshold for every W=vee_lambda S2 with infinite lambda^aleph0=lambda: existence holds precisely for mu<lambda. This supplies exact instances beyond the fixed finite-rank target without claiming that the remaining interval for S2 is settled.
+
+The surface-block construction supplies dimension at most max(dim W,3) for every cardinal bound. Its equivariant proof retains H2 of the universal cover, including torsion, as an actual direct summand and removes the extra free summand without creating H3. Thus every target dimension at least three is settled without a cardinal restriction.
+
+The failed dimension-two routes now have explicit obstructions. A strongly connected high-chromatic graph of Higman power relations forces small homomorphisms to vanish, but repeated incoming relations leave degree-two homology. A.17 proves that retaining exactly one predecessor per generator gives countable retracts detecting every nonidentity element. A.18 proves that every transfinite tower of layered unimodular one-generator/one-relator extensions maps nontrivially to one fixed countable group. A perfect locally free group cannot have a finite normal generating set, by the complete formal-series argument in research/D_normal_frattini.md; thus a locally free normal-Frattini cover of a nonabelian simple group is excluded.
+
+A single positive-genus surface block killing an old H2 class creates new H2: its H1 kernel has rank at least the genus, by the symplectic cup-product pairing. The finite replacement construction has a two-dimensional model, but its infinite sequence has only a proved three-dimensional telescope model. Free products of countable acyclic groups retain factor quotients. Universal central extensions do not supply the required geometric-dimension bound. A.21 proves that reverse commutator towers, despite giving actual two-dimensional homology extensions, all map to a fixed countable torsion-free two-conjugacy-class group. A.23 proves the exact congruence extension property for every two-dimensional homology-equivalence inclusion: every quotient of the coefficient group injects into the corresponding pushout. In particular a simple final group requires each nontrivial homology core to be simple already. A.24 proves that a reduced power of the particular two-conjugacy-class target has minimum nontrivial quotient cardinality exactly the continuum, so it cannot be compressed to a countable detecting quotient. Its explicit Z^m subgroups rule out finite geometric dimension, so it is not a dimension-two construction. A.25 constructs a fixed countable coefficient-preserving target for every homology-equivalence presentation whose relators use at most two new variables, each with nonzero exponent sum. Its graph argument covers arbitrary valence and rules out the anchored Camm word pattern under the actual small-homology dimension-two hypotheses. General countable nonlinear systems and Camm-style balanced amalgams with large free vertex groups were investigated without a complete construction or detecting theorem. The unproved steps remain explicit unresolved obstructions.
+
+The finite-block obstruction is now strengthened in A.26. Every finite nonsingular-block tower admits a fixed small coefficient-preserving target, and closing the coefficient dependencies of an arbitrary nonidentity word gives a countable reorderable sub-tower that detects that word. The full countable relative-matrix case remains beyond that argument.
+
+A.27 and A.28 give progress in the opposite direction. For each target in the three stated countable classes, A.27 constructs a countable identity-matrix system with no solution in that target. In the chain construction the root value e_k freezes the kth equation; the earlier nested word is arranged to disagree with e_k. Mixed-identity freeness or the exact two-conjugacy-class commutator fibers justify that choice. In the uniformly simple construction a finite-branching tree supplies the needed surjective commutator word. Elimination in every finite prefix leaves a one-variable unimodular relative presentation, so Forester--Rourke supplies the actual aspherical two-dimensional model. No finite-prefix group-injectivity assumption is silently used when passing to the CW union.
+
+A.28 lists all maps onto these targets from all countable subgroups at the beginning of each pass. It attaches their blocks through omega1 passes, with at most continuum many cells, and captures every final countable quotient by regularity of omega1. The subgroup formulation is essential: a listed map need not extend to the whole intermediate group. The same passes solve every one-variable unimodular equation. Explicit Higman-generator arguments exclude all torsion and locally linear images, and normal generation propagates those exclusions to the final group. Finite normal generation ensures that every remaining nontrivial countable image has an infinite countable simple quotient with the restrictions listed in finding 11.
+
+The exact next obstruction is extending the diagonal construction to those remaining simple groups. Simplicity supplies finite products of conjugates with lengths depending on the target element and the chosen normal generator. It has not supplied the finite arity needed uniformly across future root values in A.27's tree. A finite computation in A5 also refutes the unrestricted claim that every nested commutator map with nonidentity coefficients is nonconstant; the ranks and coefficients are recorded in code/a_nested_commutator_checks.json. The transcript of further topology and equation attempts remains in research/ and is not promoted to a theorem without its missing implication.
+
+The A.30 metric construction supplies a further main-case advance. For b nonidentity, the symmetric normal set S_b={v[b,u]v^-1} generates the simple target and has invariant length at most twice the length of b. Its Cartesian power gives a finite path between any two tuples. At the first edge changing an earlier root-word value, smallness keeps the whole substituted image away from the next excluded element while retaining two different values. Repeating gives the countable binary-tree system. Each relation has its own parent variable with exponent one and its children with exponent zero. Every finite prefix eliminates in increasing depth order, relative to the original classifying space. These are actual maps and actual two-dimensional extensions, with no additional torsion-free or Forester--Rourke assumption for this block. Root and two independent agents checked the entire proof.
+
+The alternative published Shelah presentation was also tested directly. Its relation cells with identity coefficient have zero cellular boundary modulo two, and the published cardinal construction uses such cells at kappa many distinct outer stages. They give kappa independent second-homology classes in the direct presentation two-complex. This rules out using that specified complex for S2. It does not determine the homology of the abstract group or rule out another two-dimensional model. The exact cellular calculation and the stage maps to Z/40 are recorded in research/D_Shelah_cellular_obstruction.md.
+
+A.31 strengthens the remaining-target reduction without choosing a topology. For a root word R with L variable occurrences, replacing its inputs u by su with s in S_b changes R by a product of at most 2L conjugates of b or b^-1. Thus rho_b(ec^-1)>2L excludes e while the first-changing-edge argument preserves nonconstancy. The new resolution G^alg retains every earlier image restriction. Failure of this exclusion condition supplies one nonidentity d with a finite uniform-in-b bound; finite normal-generation expressions in d make N_E finite everywhere. The previously excluded uniformly simple class makes this norm unbounded on every remaining simple countable quotient. This is the exact current algebraic obstruction.
+
+The fully equation-compact detector route also has a complete obstruction, recorded in research/D_countable_equation_compact.md. Every homomorphism from the Higman group to a countable group solving all finitely solvable countable systems is trivial. The proof reduces countable systems to arbitrary systems, proves a descending-chain condition for definable subgroups, constructs a rational affine subgroup from an infinite-order doubling pair, and writes the explicit finitely solvable affine system with too many distinct required values. The original Mycielski--Ryll-Nardzewski proof and its erratum were opened. The equations defining centralizers and the affine contradiction have zero exponent rows; no conversion into an invertible relative cellular matrix has been obtained.
+
+The stable elementary group over a division ring with infinite central subfield is excluded directly by the mixed-identity-free calculation in research/D_skew_linear_MIF.md. A generic central change of basis and a diagonal Laurent substitution give a nonzero leading coefficient for every nontrivial one-variable mixed word. This concerns the full stable elementary group. No extension to arbitrary subgroups or to the division ring's unit group is inferred.
+
+### Strict retraction and fence extension: completed
+
+Start from a point and, at every finite stage, attach a fresh copy of every generating Thomason horn along every map into that stage. The union F is a countable, cofibrant and fibrant, weakly contractible poset. Every principal lower set is finite, and no point has a greatest strict predecessor. For every strict pair x<z, a fresh one-horn supplies y>=x such that y and z have no common upper bound; later Dwyer inclusions preserve this incompatibility. A map g<=id would move a minimal point and create a greatest strict predecessor. A map g>=id moving x to z would make g(y) a common upper bound. Thus id is isolated under natural transformations, proving that no finite fence can extend the prescribed move of the original point a along a->z.
+
+Adjoin an object c below precisely the upper set of z, with reflector q(c)=z and q|F=id. This collage A is fibrant by the explicit horn-lifting construction. Glue a second copy of F to A by c=a. The resulting inclusion i:A->B is a Thomason trivial cofibration. The map p restricts to the identity on the second F and sends c to a on A; the two transformations through the reflector give [p][i]=id_A. A strict retraction in [p] would produce an endofunctor of F homotopic to id that moves a to z, contradicting isolation. Two independent audits checked the horn pushouts, noninjective attaching maps, lower sets, branching, and the collage maps.
+
+The positive statements are retained: the model-category path-object proof gives a strict retraction in the same ordinary homotopy class; finite cofibrations and finite-stage bounded-dimensional cell constructions have the full prescribed fence extension property. D.9 supplies the eight-step triangle table, D.11 the 4(n+1)-step relative comparison, and D.12 the explicit extension bounds. An earlier missing common facet in the relative cylinder was corrected and the proof independently rechecked. The final counterexample requires an infinite construction and rules out every finite padding length.
+
+## Checkpoint and typesetting record
+
+Checkpoint 01 records the completed Part B and Part E proofs together with every deliverable and authored work record written so far. A PDF was not included in checkpoint 01: that initial LuaLaTeX build was still being repaired. Checkpoint 02 records completion of Part C and the subsequent proved retraction cases, including a checked PDF. The local Type1-font bootstrap is documented and reproducible in code/build_pdf.py. Checkpoint 02 has 59 pages. The final LuaLaTeX log has 0 overfull horizontal boxes and 0 overfull vertical boxes (before visual review: 0 and 0; after review: 0 and 0), no undefined references or citations, and no LaTeX warnings. Pages 1, 3, 7, 12, 18, 24, 30, 36, 42, 48, 54 and 59 were rendered and visually inspected. No clipping, overlapping text, missing glyphs or protruding displays were observed. The PDF hash and the exact visual-review record are in logs/PDF_QA_PASSED.json in that checkpoint.
+
+Checkpoint 03 records completion of Part D and the dimension-three advance A.14--A.16. It contains 80 registered statements and a 69-page PDF. Before visual review there were 0 overfull horizontal boxes and 0 overfull vertical boxes; after review the counts remain 0 and 0. A fourth LuaLaTeX pass cleared the cross-reference rerun warning. The final log has no LaTeX warnings and no undefined references or citations. Pages 1, 4, 9, 12, 14, 15, 16, 17, 22, 29, 36, 43, 50, 58, 59, 60, 61, 62, 63, 66 and 69 were rendered and visually inspected, including every new dimension and retraction proof page. No clipping, overlapping text, missing glyphs or protruding displays were observed. The hash and page list are recorded in logs/PDF_QA_PASSED.json.
+
+Checkpoint 04 records the residual-cardinality obstruction A.19, the exact family A.20, and the construction obstructions A.17--A.18 and A.21--A.25. It contains 89 registered statements and an 83-page PDF. All three final LuaLaTeX passes completed; the final log has 0 overfull horizontal boxes, 0 overfull vertical boxes, no warnings and no undefined references or citations. The before/after overflow counts are 0/0 in both directions. Pages 1, 4, 10, 14, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 36, 42, 50, 57, 62, 65, 71, 76, 80, 82, 83 were rendered and visually inspected. The initial 84-page candidate left two bibliography lines on its last page; the bibliography typography was adjusted and the changed pages rerendered. No clipping, overlap, missing glyphs or protruding displays were observed. The PDF hash and page list are in logs/PDF_QA_PASSED.json. The generated stale bibliography and missing Euler font-map entry were repaired during preflight; their failed logs remain as records and are superseded by the clean final build.
+
+The stable results-row ID A3(iii)-unrestricted is retained from checkpoint 03. Its updated statement records that A.20 refutes unrestricted dimension-two existence while the interval aleph0 <= mu < continuum for S2 remains undecided. No prior statement has been dropped.
+
+Checkpoint 05 records A.26--A.29, especially the actual two-dimensional construction excluding the three stated countable quotient classes. It contains 93 registered statements and a 93-page PDF. The three final LuaLaTeX passes completed with 0 overfull horizontal boxes, 0 overfull vertical boxes, no warnings, and no unresolved references or citations. Before and after visual review, both overflow counts were 0. An initial A.27 display used an alignment environment with too few columns; that syntax error was repaired, and its failed preflight log is retained separately. Pages 1, 4, 10, 14, 18, 22, 26, 30--43, 49, 55, 61, 67, 73, 79, 85, 90, 92 and 93 were rendered and visually inspected: 31 pages, including every new proof page. No clipping, overlap, missing glyphs or protruding displays were observed. The PDF hash and exact page list are in logs/PDF_QA_PASSED.json.
+
+Attached source files, extracts of those files, and downloaded third-party source reproductions are excluded. They are reference inputs, not authored deliverables. Authored research notes, all current sections, computations, outputs, build logs and the results table are retained. No authored mathematical passage from an earlier checkpoint has been omitted. The corrected current source supersedes earlier working wording; earlier build-pass logs are superseded by the clean three-pass LuaLaTeX logs. The checkpoint archives retain their original contents.
+
+In checkpoint 03 the four-pass logs supersede the earlier three-pass logs. The earlier PDF, results table, bibliography, report, snapshot and PDF-QA record are superseded by their updated versions with the same filenames. The checkpoint-02 renderings logs/rendered/page_03.png, page_07.png, page_18.png, page_24.png, page_30.png, page_42.png, page_48.png and page_54.png are superseded by the newly rendered page sample; their page numbers described the former 59-page layout. No authored proof, research note, computation or program from checkpoints 01 or 02 is omitted. The exact path comparison is retained in logs/checkpoint_contents_diff.json.
+
+The first three-hour progress reassessment was performed at 2026-11-14T21:23:47.252642+00:00. Decision: continue. A.27--A.28 advance the actual dimension-two construction, and a new binary-tree argument now handles countable nonabelian simple targets with a nondiscrete bi-invariant metric; its independent audits are underway. The implication from the topology of A.29 to that metric hypothesis has not been proved. Current work is directed at that remaining general-target step and at the exact homology of the alternative uncountable presentation. The next reassessment is due around 22:21 UTC; peripheral elaboration alone will trigger an incomplete final package. The structured record is logs/progress_assessment_01.json.
+
+## Independent audit and source-access record
+
+Part E and the sharp cardinal and bounded-restriction results B.7--B.8 received independent proof audits. The audit confirmed the transformation group law, localization comparisons, equality case of the cardinal threshold, and the relative homotopy-coequalizer map. C.17 gives the specified finite-image/all-functions comparison, so the all-test Hom comparison is not silently assumed.
+
+Independent checks of A.21 confirmed the finite-prefix cell cancellations, actual two-dimensional union, and the recursive solution with constant-map resets. Root also checked the formal-series proof A.22, the quotient and base-change maps A.23, and the support-ideal and ultrapower proof A.24.
+
+A.25 was checked independently by all four agents: the graph classification, rational functional excluding ungrounded trees, finite nonsingular cycle equations, arbitrary-valence recursion, and the countable-core consequence all pass.
+
+A.26 was independently checked for the coefficient-dependency closure, reordering, target cardinality, and detecting map. A.27 was independently checked for both diagonal constructions, the exact exponent matrices, subgroup coefficient lifts, normal generation, and finite-prefix geometry. A.28 was independently checked for enumeration cardinalities, omega1 capture, the specified map to S2, one-variable equation closure and quotient permanence, and the complete torsion and linear-image calculations. No correction remains outstanding in those proofs.
+
+A.29 was independently checked twice: the normal-closure argument supplies the conjugated commutators in the finite-cover construction; the recursively listed constraints are finite; the weighted length separates every nonidentity element; and the displayed conjugation estimates prove the continuity of multiplication and inversion. Its proof does not depend on an unexamined Markov or KOO theorem.
+
+The full independent audits of A.19 confirmed its small core, exact cellular matrix, countable support closures, reduced-power solution, and compatible transfinite homomorphisms. A.20 uses that actual detecting map to contradict the requested kernel condition.
+
+The original Kan--Thurston 1976 and Maunder 1981 papers remain marked unverified: public publisher and historical PDF links failed or exposed only metadata. No theorem in this manuscript depends on their unexamined text. The primary Baumslag--Dyer--Heller, Hausmann--Husemoller and Leary proofs used in Part A were opened and checked.
+
+Checkpoint 04 path supersession: logs/latex_pass_4.out; logs/rendered/contact_1.png; logs/rendered/contact_2.png; logs/rendered/contact_3.png; logs/rendered/contact_4.png; logs/rendered/page_09.png; logs/rendered/page_12.png; logs/rendered/page_15.png; logs/rendered/page_16.png; logs/rendered/page_17.png; logs/rendered/page_43.png; logs/rendered/page_58.png; logs/rendered/page_59.png; logs/rendered/page_60.png; logs/rendered/page_61.png; logs/rendered/page_63.png; logs/rendered/page_66.png; logs/rendered/page_69.png. These are prior rendering/build records with their replacement and reason listed in logs/checkpoint_contents_diff.json. No authored mathematical passage was removed.
+
+Checkpoint 05 path supersession: logs/rendered/contact_01.png; logs/rendered/contact_02.png; logs/rendered/contact_03.png; logs/rendered/contact_04.png; logs/rendered/contact_05.png; logs/rendered/contact_bibliography.png; logs/rendered/page_19.png; logs/rendered/page_20.png; logs/rendered/page_21.png; logs/rendered/page_23.png; logs/rendered/page_24.png; logs/rendered/page_25.png; logs/rendered/page_27.png; logs/rendered/page_28.png; logs/rendered/page_29.png; logs/rendered/page_50.png; logs/rendered/page_57.png; logs/rendered/page_62.png; logs/rendered/page_65.png; logs/rendered/page_71.png; logs/rendered/page_76.png; logs/rendered/page_80.png; logs/rendered/page_82.png; logs/rendered/page_83.png; logs/rendered/page_84.png. These files depict the earlier 83-page layout and are replaced by the 93-page sample in logs/checkpoint_05_render_record.json. All mathematical sources, authored notes, programs and historical preflight failure logs are retained. The preceding checkpoint diff is preserved as logs/checkpoint_04_contents_diff.json.
+
+
+Checkpoint 06 records the complete audited A.30 metric-tree construction and the explicit rerun with four target classes. It contains 94 registered statements and a 97-page PDF. One horizontal box in the initial A.30.1 display protruded 34.15504pt; splitting the length axioms into two lines reduced the final count to 0. The vertical overflow count was 0 before and after. The three final LuaLaTeX passes have no warnings or undefined references/citations. Pages 1, 4, 10, 18, 26, 34, 41–46, 52, 60, 68, 76, 84, 92, 96 and 97 were rendered and visually inspected, including every new proof page and the repaired display. No clipping, overlap, missing glyphs or protruding displays were observed. The exact hash and review record are in logs/PDF_QA_PASSED.json. The earlier checkpoint 05 QA record is preserved as logs/checkpoint_05_pdf_qa.json. Current-page renders and the 97-page paper supersede corresponding 93-page render/PDF versions; the earlier immutable checkpoint retains those exact bytes. All authored mathematical passages and work notes are retained.
+
+
+Checkpoint 07 records the complete audited conjugacy-word-length diagonal A.31, including rho_d(g)<=N_E(g)<=N_E(d)rho_d(g), and all current detector and finite-root-projection notes. It contains 95 registered statements and a 101-page PDF. All three final LuaLaTeX passes have 0 overfull horizontal boxes, 0 overfull vertical boxes, no warnings, and no undefined references or citations. The before/after overflow counts for this revision are 0/0. Pages 1, 3, 10, 18, 26, 34, 42, 45–50, 56, 64, 72, 80, 88, 96, 100 and 101 were rendered and visually inspected: 21 pages, including every A.31 proof page. No clipping, overlap, missing glyphs or protruding displays were observed. The prior QA record is retained as logs/checkpoint_06_pdf_qa.json.
+
+Two downloaded third-party source reproductions entered checkpoint 06: research/D_MixedLF2026.pdf and research/D_MixedLF2026.txt. They are excluded from checkpoint 07 and the final current tree because they are reference inputs, not authored work. Their exact source citation and the mathematical audit remain in research/D_skew_unitary_MIF.md and the other research notes. The final history manifest will list these two omissions explicitly; all authored checkpoint contents, including superseded mathematical wording, are retained.
+
+
+## Final progress reassessment and exact unresolved step
+
+The second progress reassessment was performed at 2026-11-14T22:20:19.460194+00:00, around the
+scheduled four-hour point. Decision: stop the present research and deliver
+an INCOMPLETE package. The structured record is
+`logs/progress_assessment_02.json`. A.31 is the last substantive advance on
+the general dimension-two construction. Subsequent work completed several
+audits, the equation-compact detector obstruction, the whole stable
+hyperbolic-unitary exclusion, and the finite-root-projection lemma. These
+checks have sharpened the remaining obstruction without producing a block
+or detecting quotient for the general remaining case. The user's hourly
+progress rule takes precedence here over pursuing further untried leads.
+This decision does not turn the unresolved item into a completed one.
+
+The current reset obstruction is stated precisely in
+`research/A_finite_root_projection.md`. For a parameterized equation with
+x-exponent +1 or -1 over a simple unimodularly closed group, a finite set of
+possible root values contains a universal root. The complete proof uses
+exponent-zero interpolation and writes the substitution homomorphism.
+Finite N_E supplies a reset width preserving any prescribed finite list of
+failing evaluations. No uniform width preserving a failing evaluation at
+every candidate root has been obtained. A universal root introduced by one
+reset remains a root under every later substitution. This observation
+therefore supplies no new general-target block.
+
+The exact unfinished instance is: construct or rule out an acyclic map
+BG -> S² from an actual two-dimensional classifying space such that every
+homomorphism from G to a countable group is trivial, allowing G to be
+uncountable. The broader requested exact frontier for arbitrary
+two-dimensional targets remains unfinished. For the fixed S² target,
+finite mu is proved possible, mu at least the continuum is proved
+impossible, and aleph0 <= mu < continuum is unresolved.
+
+The next substantive step would have to address this instance: extend the
+actual two-dimensional diagonal construction to all the remaining simple
+countable target groups, or prove a countable detecting-quotient theorem
+for every actual two-dimensional small-homology classifying space. Neither
+assertion is made in this return. The precise residual norm and missing
+witness bound are recorded in `research/Cpaths_Afrontier_status.md`.
+
+The final stable-unitary calculation is retained in
+`research/D_skew_unitary_MIF.md`. Over a division ring with nontrivial
+involution, an infinite fixed central field and characteristic different
+from two, it explicitly detects every nontrivial one-variable mixed word
+with coefficients in the stable hyperbolic unitary group at an elementary
+unitary element. Root and C checked its elementary isometries, root
+factorizations and ordered Laurent coefficient. This excludes that whole
+proposed target; it gives no conclusion about arbitrary subgroups and
+supplies no missing general-target step.
+
+## Final package and preservation of checkpoint contents
+
+The final paper is the same reviewed 101-page PDF as checkpoint 07. Its
+three LuaLaTeX passes have no overfull horizontal or vertical boxes,
+undefined references or citations, or LaTeX warnings. All 21 rendered pages
+listed in the current QA record were visually reviewed, including every
+A.31 page and samples throughout Parts B--E and the bibliography. The
+initial A.30 horizontal overflow of 34.15504pt was repaired before
+checkpoint 06; its before/after counts are one/zero, with zero vertical
+overflows. The final revision's own before/after counts are zero/zero in
+both directions.
+
+`INDLOCAL_results.csv` contains 95 stable rows: 83 proved statements,
+4 refuted statements with proved replacements, 6 refuted statements,
+1 verified derivation, and the single unresolved A3(iii) frontier row.
+Every one of the 40 bibliography entries records its verified or unverified
+status. The original Kan--Thurston and Maunder primary texts remain
+unverified; their unexamined arguments are not dependencies of the proved
+claims. A.19's finite nonsingular-system input remains explicitly identified
+as an OpenAI 2026 unrefereed preprint, whose complete proof was examined;
+no formal verification of its multi-equation theorem is claimed.
+
+All authored contents of checkpoints 01--07 are preserved byte for byte.
+`history/checkpoint_members.json` maps each historical path and SHA-256 to
+an identical current file or a content-addressed historical object. This
+retains superseded proofs, wording, reports, results tables, PDFs, review
+images, scripts and logs without duplicating identical bytes. The current
+paper and register state the conclusions at the end of this run. The
+verification and restoration commands are in `README.md` and
+`history/README.md`; the verification record is
+`logs/final_history_verification.json`.
+
+The only omitted checkpoint members are the two downloaded third-party
+source reproductions from checkpoint 06:
+
+- `research/D_MixedLF2026.pdf`;
+- `research/D_MixedLF2026.txt`.
+
+They are reference inputs, not authored deliverables. Their source citation,
+checked scope and mathematical audit remain in the authored notes,
+particularly `research/D_skew_unitary_MIF.md`. The history manifest lists
+both original paths, their hashes, and this reason. No authored proof,
+research note, program, computation, build record or mathematical passage
+is omitted. The seven earlier checkpoint ZIPs remain unchanged.

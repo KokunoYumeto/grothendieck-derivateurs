@@ -1,0 +1,298 @@
+\section{The six-operations shape of a derivator}
+
+\begin{claim}{F.1}{Known}{The operations supplied by Der 1--4}
+Let $\D$ be a derivator on all $\mathbb U$-small categories, with presheaf variance, satisfying Der 1--4: coproducts of indexing categories give products, evaluations jointly detect isomorphisms, restriction has both Kan adjoints, and the pointwise comma formulas hold. Then every $f:X\to Y$ has
+\[
+ f_!\dashv f^*\dashv f_*:\D(X)\rightleftarrows\D(Y),
+\]
+where the display denotes the three functors with their usual alternating directions. For $A\in\D(X)$ and $y\in Y$ the formulas are
+\[
+ (f_!A)_y\cong\colim_{(y\backslash X)^{\op}} A,
+ \qquad
+ (f_*A)_y\cong\lim_{(X/y)^{\op}} A.
+\]
+The diagram under each limit is restriction along the forgetful functor to $X$, interpreted as a coherent diagram in the derivator. Comma squares are homotopy exact. Exact squares are closed under horizontal and vertical pasting, with the direction of their two-cell fixed. Strongness, pointedness and stability are not needed for these statements.
+\end{claim}
+The adjoint and pointwise assertions are the axioms, with variance converted from \citet[Definition 1.5 and Section 1.2]{EFGroth2013}. Pasting is the mate calculus: substituting the unit--counit formula for each mate and cancelling the two adjacent unit--counit pairs by the triangle identities gives the mate of the pasted two-cell. The universal criterion for exactness is \citet[Theorem 3.16]{EFGPS2014a}; its equivalent factorization-category test is also developed in \citet[Section 2]{EFMaltsiniotis2012}. These are statements about the canonical comparisons, not about an unspecified isomorphism of their source and target.
+
+\begin{claim}{F.2}{Proved}{The two strict base-change theorems and their converses}
+Consider a strict pullback square
+\[
+\begin{tikzcd}
+X'\ar[r,"g'"]\ar[d,"f'"']&X\ar[d,"f"]\\
+Y'\ar[r,"g"']&Y.
+\end{tikzcd}
+\]
+The canonical maps, with source category $\D(X)$ and target category $\D(Y')$, are
+\[
+ f'_!g'^*\longrightarrow g^*f_!,\qquad
+ g^*f_*\longrightarrow f'_*g'^*.
+\]
+The first is invertible if $f$ is $W_\infty$-smooth or $g$ is $W_\infty$-proper. The second is invertible if $f$ is $W_\infty$-proper or $g$ is $W_\infty$-smooth. Conversely, $f$ is proper if its right comparison is invertible for every such square with space-valued presheaves and all coefficients; the dual assertion characterizes smoothness by universal left base change.
+\end{claim}
+\begin{proof}
+For proper $f$, the inclusion $X_y\to X/y$ is homotopy final. Its opposite is homotopy initial, so the pointwise right Kan formula in F.1 becomes
+\[
+ (f_*A)_y\cong\lim_{X_y^{\op}}A|_{X_y}.
+\]
+The analogous inclusion $X_y\to y\backslash X$ for smooth $f$ is homotopy initial; its opposite is homotopy final, giving the left fibre formula. These cofinality statements hold in every derivator by \citet[Theorems 3.8 and 3.16]{EFGPS2014a}. The base-changed functor has the same property, and $(X')_{y'}$ is canonically isomorphic, as a category over $X$, to $X_{g(y')}$. The comparisons on these identical fibre diagrams are exactly the pointwise Beck--Chevalley maps. Der 2 gives their invertibility. Taking adjoint mates in the transposed square proves the alternative hypotheses on $g$.
+
+For the converse, take $Y'=e$, selecting $y\in Y$, and write $i:X_y\to X$ for $g'$. The left adjoint mate of the right comparison is
+\[
+ i_!p_y^*\longrightarrow f^*y_!: \D(e)\longrightarrow\D(X),
+ \qquad p_y:X_y\to e.
+\]
+Evaluate this mate on the terminal space and at $x\in X$. Its target is the discrete space $\Hom_Y(f(x),y)$. Its source is the classifying space of $x\backslash X_y$, which is the disjoint union, indexed by $\alpha:f(x)\to y$, of the outgoing lifting categories
+\[
+ L^+_f(x,\alpha)=\{v:x\to z\mid f(z)=y,\ f(v)=\alpha\}.
+\]
+A morphism $v\to v'$ is a $w:z\to z'$ with $f(w)=\id_y$ and $wv=v'$. The mate collapses each such summand to its index. Its invertibility forces every summand to have weakly contractible nerve, including the nonemptiness requirement. That is the properness criterion. The argument for smoothness is obtained by opposition, with incoming lifts. The terminal-space test occurs on this \emph{left mate}; a right Kan comparison evaluated only on the terminal presheaf is automatically invertible for every square and would detect nothing. This clarifies, and agrees with, the actual proof of STRATA D.4.
+\end{proof}
+
+\begin{claim}{F.3}{Refuted}{Unrestricted pullback base change}
+The left or right Kan half is not a formalism satisfying its corresponding base-change identity for all strict pullback squares of $\Cat$. Failure already occurs for endpoint inclusions into $[1]$, with discrete finite coefficients. It also occurs with stable coefficients.
+\end{claim}
+\begin{proof}
+For the left comparison take $f:e_1\to[1]$ and $g:e_0\to[1]$. The pullback is empty. If $A$ is a two-point space on $e_1$, then $(f_!A)_0=A$, while left Kan extension from the empty pullback has initial value. The comparison is $\varnothing\to A$. For the right comparison interchange $0$ and $1$. Then $(f_*A)_1=A$ and right Kan extension from the empty pullback is terminal, giving $A\to *$. In a nonzero stable derivator replace $A$ by a nonzero object and the initial and terminal values by zero. Neither comparison is invertible. The program \texttt{code/ef\_finite\_checks.py} enumerates the indexing categories, their complete composition tables, and the cardinalities of these comparisons.
+\end{proof}
+
+\begin{claim}{F.4}{Proved}{The projection formula on the smooth half}
+Let $\D$ be a symmetric monoidal derivator whose external tensor preserves homotopy colimits separately, in the sense of \citet[Definitions 3.23 and 3.25]{EFGPS2014b}. If $f:X\to Y$ is $W_\infty$-smooth, then for $A\in\D(X)$ and $B\in\D(Y)$ the canonical projection map
+\[
+ f_!(A\otimes f^*B)\longrightarrow f_!A\otimes B
+\]
+is invertible. More generally this map is invertible for an arbitrary $f$ when $B$ is locally constant. The external formula
+\[
+ (f\times\id_Z)_!(A\boxtimes C)\cong f_!A\boxtimes C
+\]
+holds for every $f$, every small $Z$, and every $C\in\D(Z)$.
+\end{claim}
+\begin{proof}
+For smooth $f$, evaluate at $y$. F.2 computes both sides by the coherent diagram on $X_y^{\op}$. The restriction of $f^*B$ to this fibre is the constant diagram of value $B_y$. Hence the comparison is
+\[
+ \colim_{X_y^{\op}}(A|_{X_y}\otimes B_y)
+ \longrightarrow
+ \bigl(\colim_{X_y^{\op}}A|_{X_y}\bigr)\otimes B_y,
+\]
+which is invertible by separate cocontinuity. Der 2 proves the result. For a locally constant $B$, the natural transformation on $y\backslash X$ induced by the arrows $y\to f(x)$ identifies the restriction of $f^*B$ with the constant coefficient $B_y$, since its components are invertible. The same argument uses the full comma formula instead of the fibre formula. This proves the larger coefficientwise assertion. The external formula is exactly separate cocontinuity of the external tensor, and uses no assertion that the internal tensor of two variable diagrams commutes with arbitrary Kan extension.
+\end{proof}
+
+\begin{claim}{F.5}{Refuted}{Monoidality alone does not give an internal projection formula for all maps}
+Even for space-valued or stable presheaves the projection formula of F.4 fails for a general functor. Thus the unqualified monoidality assertion in Lead 3 needs its map or coefficient hypothesis.
+\end{claim}
+\begin{proof}
+Take $f:e_1\to[1]$, and let $A=*$ and $B=(B_1\to B_0)=(\varnothing\to *)$ be a presheaf of spaces. At $0$ the two sides of the projection map are respectively $\varnothing$ and $*$. In spectra, or in $D(k)$ for a nonzero ring $k$, use $A=\one$ and $B=(0\to\one)$; the comparison at $0$ is $0\to\one$. All arrows, values, and composites are specified, and the set-valued version is checked in the finite program. The separate-colimit hypothesis in the definition of a monoidal derivator concerns the external tensor. It does not identify $B_1$ with $B_0$ in this example.
+\end{proof}
+
+\begin{claim}{F.6}{Proved}{The right projection formula and its precise restrictions}
+For any functor $f$ and any dualizable object $B$ of the monoidal category $\D(Y)$, the right projection comparison
+\[
+ f_*A\otimes B\longrightarrow f_*(A\otimes f^*B)
+\]
+is invertible. For proper $f$ it is also invertible whenever tensoring with $B_y$ preserves the homotopy limits indexed by $X_y^{\op}$, for every $y$. In a stable monoidal derivator this includes homotopy-finite fibres, for arbitrary $B$. Without such restrictions the right projection formula is false, even for a proper and smooth projection.
+\end{claim}
+\begin{proof}
+If $B$ has a dual $B^\vee$, tensoring with $B$ has both adjoints given by tensoring with $B^\vee$. Apply the adjunction $f^*\dashv f_*$ and the strong monoidality of $f^*$ to obtain, naturally in $M\in\D(Y)$,
+\begin{align*}
+ \Hom(M,f_*A\otimes B)
+ &\cong\Hom(M\otimes B^\vee,f_*A)\\
+ &\cong\Hom(f^*M\otimes f^*B^\vee,A)\\
+ &\cong\Hom(f^*M,A\otimes f^*B)\\
+ &\cong\Hom(M,f_*(A\otimes f^*B)).
+\end{align*}
+These adjunctions identify the resulting isomorphism with the projection comparison. For proper $f$, use the fibre-limit formula in F.2. Separate cocontinuity makes tensor exact in a stable derivator; it therefore preserves homotopy-finite limits, giving the stated finite case.
+
+For failure without the restrictions, let $f:\{0,1\}\to e$, take terminal coefficients on both points, and take $B$ to be a two-point space. The comparison is the diagonal $B\to B\times B$, with cardinalities $2$ and $4$. Product projections are proper and smooth; the finite computation verifies this obstruction. In a stable example with infinitely many points, tensor does not in general preserve the relevant products. No dual assertion about monoidal derivators may therefore be obtained merely by reversing every arrow.
+\end{proof}
+
+\begin{claim}{F.7}{Proved}{Exchange formulas obtained by taking mates}
+Suppose $\D$ is closed symmetric monoidal. For every $f:X\to Y$ there is a canonical isomorphism
+\[
+ f_*\underline{\Hom}_X(f^*B,A)
+ \cong\underline{\Hom}_Y(B,f_*A).
+\]
+For smooth $f$, put $f^!=f^*$ as the right adjoint of $f_!$. The projection formula then gives
+\begin{align*}
+ f_*\underline{\Hom}_X(A,f^!B)&\cong
+ \underline{\Hom}_Y(f_!A,B),\\
+ f^!\underline{\Hom}_Y(B,C)&\cong
+ \underline{\Hom}_X(f^*B,f^!C).
+\end{align*}
+The right adjoint mate of the left base-change isomorphism in F.2 is
+\[
+ f^*g_*\cong g'_*f'^*.
+\]
+All these isomorphisms have the coherence inherited from their specified adjunctions.
+\end{claim}
+\begin{proof}
+For the first formula, test against $M\in\D(Y)$ and successively use $f^*\dashv f_*$, closedness, and $f^*(M\otimes B)\cong f^*M\otimes f^*B$. The resulting represented functor is $\Hom(M,\underline{\Hom}_Y(B,f_*A))$. For the second formula, the same calculation reduces the comparison to
+$f_!(A\otimes f^*M)\cong f_!A\otimes M$, which is F.4. For the third, test against $N\in\D(X)$, use $f_!\dashv f^!$, and apply the projection formula to $N\otimes f^*B$. These Yoneda calculations identify the canonical mates rather than arbitrary isomorphisms. Finally the right adjoints of $f'_!g'^*$ and $g^*f_!$ are respectively $g'_*f'^*$ and $f^*g_*$. Taking the mate reverses the displayed arrow. Triangle identities ensure that iterated mates agree with horizontal and vertical composition; this is also the calculation underlying F.1.
+\end{proof}
+
+\begin{claim}{F.8}{Proved}{Why the adjunction directions reverse}
+Define the opposite derivator by $\D^\vee(S)=\D(S^{\op})^{\op}$. Then
+\[
+ f_!^{\D^\vee}=((f^{\op})_*^{\D})^{\op},\qquad
+ f_*^{\D^\vee}=((f^{\op})_!^{\D})^{\op}.
+\]
+Opposition of indexing categories exchanges incoming and outgoing lifting categories, hence exchanges smooth and proper maps. The reversal of the adjunction arrows additionally uses opposition of the coefficient categories. Base opposition alone supplies a comparison of the two fine theories over opposite bases; it is not a duality of coefficients over a fixed base. Nor need $\D^\vee$ be monoidal with a separately cocontinuous tensor.
+\end{claim}
+\begin{proof}
+An adjunction $L\dashv R$ is, by definition, a natural bijection of the relevant Hom sets; reversing both categories changes it into $R^{\op}\dashv L^{\op}$. Apply this to $(f^{\op})_!\dashv(f^{\op})^*\dashv(f^{\op})_*$. An arrow $f(x)\to y$ becomes $y\to f(x)$, and the category of its outgoing lifts becomes the opposite of the incoming lifting category. Weak contractibility is unchanged by opposition. This proves the exchange of the two exactness tests and explains the opposite adjunction directions at VI ms.~84. Separate cocontinuity becomes a limit-preservation requirement after opposition; it is not automatic. This last point is explicitly recorded in \citet[Example 3.28]{EFGPS2014b}. The failures in F.6 and Part G exhibit what cannot be inferred from this formal duality.
+\end{proof}
+
+\begin{claim}{F.9}{Known}{Open--closed extensions and stable recollement}
+Let $j:A\hookrightarrow X$ be a sieve and $i:B\hookrightarrow X$ its complementary cosieve. For a pointed derivator there are adjunctions
+\[
+ j^?\dashv j_!\dashv j^*\dashv j_* ,\qquad
+ i_!\dashv i^*\dashv i_*\dashv i^! .
+\]
+All four Kan extensions are fully faithful; $j_!$ and $i_*$ are extension by zero. In a stable derivator there are coherent fibre--cofibre sequences
+\[
+ j_!j^*A\longrightarrow A\longrightarrow i_*i^*A,
+ \qquad
+ i_*i^!A\longrightarrow A\longrightarrow j_*j^*A.
+\]
+Strongness is not needed for these coherent constructions. A triangulated recollement on the ordinary values follows when the stable derivator is strong.
+\end{claim}
+These statements, in the opposite diagram convention, are \citet[Lemma 3.7, Corollary 3.8, Theorem 4.16, and the recollement discussion in Section 4]{EFGroth2013}. To verify the hypotheses and variance directly, the outside comma categories for $j_!$ and $i_*$ are empty, so their values are respectively initial and terminal, which agree in a pointed derivator. Their restrictions to their source are the identity, because the inclusions are fully faithful. The adjoints outside the three Kan operations are obtained by the cylinder construction of the cited lemma; it applies after every shift. Taking the coherent cofibre of $j_!j^*A\to A$ is zero on $A$ and restricts to $i^*A$ on $B$. The essential-image characterization of $i_*$ identifies it with $i_*i^*A$. The dual argument gives the second sequence. The coherent construction uses Kan extensions on $X\times[1]^2$. Strongness enters only when arbitrary morphisms in $\D(X)$ are lifted to coherent arrows to define the triangulated structure.
+
+\begin{claim}{F.10}{Proved}{A correspondence formalism on the smooth class, with an enhancement}
+Let $\mathcal V$ be a $\mathbb V$-presentable closed symmetric monoidal infinity-category whose tensor preserves $\mathbb U$-small colimits separately. Regard the ordinary category $\Cat_{\mathbb U}$ as an infinity-category by its nerve, so its pullbacks are the strict categorical pullbacks. Put $E=\Liss_{W_\infty}$. There is a lax symmetric monoidal functor
+\[
+ \Corr(N\Cat_{\mathbb U})_{E,\mathrm{all}}
+ \longrightarrow\Cat_{\infty,\mathbb V},\qquad
+ S\longmapsto\Fun(NS^{\op},\mathcal V),
+\]
+sending a span $X\xleftarrow{a}M\xrightarrow{b}Y$, $b\in E$, to $b_!a^*$. It is a pre-six-functor formalism in \citet[Definitions A.5.1 and A.5.6]{EFMann2022} and a six-functor formalism in Definition A.5.7 there. The restriction to homotopy categories is the indicated half of the represented derivator. This assertion uses the given infinity-category, not merely its valuewise homotopy categories.
+\end{claim}
+\begin{proof}
+Identities, composites, and strict pullbacks of smooth functors are smooth, so $E$ is a geometric setup in the cited 2022 convention. Restriction of presheaves is a coherent contravariant functor on $N\Cat$. Its left Kan adjoints exist, and F.2 and F.4 apply before taking homotopy categories: the same comma inclusions are final infinity-functors and the same colimits compute the adjoints. For spans $X\xleftarrow{a}M\xrightarrow{b}Y$ and $Y\xleftarrow{c}N\xrightarrow{d}Z$, put $P=M\times_YN$, with projections $r:P\to M$ and $s:P\to N$. The composition comparison is the specified composite
+\[
+ d_!c^*b_!a^*\ \simeq\ d_!s_!r^*a^*
+ \ \simeq\ (ds)_!(ar)^*.
+\]
+The first equivalence is left base change for $b$; the second is the composition equivalence for left Kan extension. These maps define the composition on the span construction, including all higher simplices. More explicitly, for a finite string of spans take its iterated strict pullback. Every parenthesization is compared with the single left Kan extension from that pullback by the same adjunction universal property. The space of extensions with their units is contractible. The resulting comparisons agree on every face and degeneracy, because their adjuncts are the composite restriction identifications. This gives coherent composition, not only an associativity assertion in a homotopy category.
+
+The external tensor $A\boxtimes B$ supplies the lax monoidal map from the product of the two presheaf categories to presheaves on the product base. It commutes with restriction and the external left Kan operations, by separate cocontinuity; the preceding unit-based coherence argument applies to several inputs as well. This constructs the map of infinity-operads in the statement. Finally restriction has a right Kan adjoint, $b_!$ has right adjoint $b^*$, and the pointwise tensor on a presentable functor category is separately cocontinuous and therefore closed. These verify every additional adjoint in Definition A.5.7. The obstruction F.3 prevents extending this construction with the same Kan functors to $E=\mathrm{all}$.
+\end{proof}
+
+\begin{claim}{F.11}{Proved}{The terminology of the resulting operations}
+In F.10 every allowed map has $f^!=f^*$ and $f^!\one=\one$, compatibly with base change. Thus all these maps satisfy the cohomological smoothness formula with the trivial invertible twist; in the usual terminology for this identity they are cohomologically \emph{\'{e}tale}. This does not say that a Grothendieck-proper functor has $f_!=f_*$. Even a functor belonging to both Grothendieck classes need not have this ambidexterity. For a discrete bifibration with finite fibres, however, a stable coefficient category has the canonical ambidexterity $f_!\simeq f_*$.
+\end{claim}
+\begin{proof}
+The first identity is the defining Kan adjunction, and its base-change compatibility is the identity between the corresponding restrictions. The map $f^*B\otimes f^!\one\to f^!B$ is consequently the unit isomorphism. For failure of ambidexterity take $p:[1]\to e$. Every map to $e$ is smooth and proper: its relevant lifting category has an identity initial or terminal object. For a presheaf $A=(A_1\to A_0)$, however, $p_!A=A_0$ and $p_*A=A_1$. Choosing $A=(0\to\one)$ in a nonzero stable coefficient category separates these functors. In the finite discrete bifibration case F.2 gives the sum and product of the values on the same discrete fibre. The stable finite biproduct isomorphism is canonical and respects the bijections of fibres induced by transport, so it gives a natural isomorphism before and after every base change. This is a sufficient class of cohomologically proper maps for the Kan formalism. An arbitrary Grothendieck-proper map is instead characterized by the right base-change theorem; no identification of its two direct images follows.
+\end{proof}
+
+\begin{claim}{F.12}{Refuted}{The all-smooth class does not satisfy the later diagonal convention}
+The class $E=\Liss_{W_\infty}$ in F.10 is not closed under diagonals. Hence it is not a geometric setup under \citet[Definition 2.1.1 and Remark 2.1.2]{EFHeyerMann2024}, which add this requirement to the earlier convention. Restricting $E$ to discrete fibrations does satisfy the later convention and gives a six-functor formalism by the same construction. In that restriction the preceding cohomological \emph{\'{e}tale} description is unchanged.
+\end{claim}
+\begin{proof}
+The projection $[1]\to e$ is smooth, but its diagonal $\Delta:[1]\to[1]\times[1]$ is not. For $x=1$ and the arrow $(0,1)\to(1,1)=\Delta(x)$, an incoming lift would require an object mapping to $(0,1)$; there is none. This empty lifting category violates smoothness. The finite checker lists the objects, arrows and this missing lift. Discrete fibrations are closed under composition and pullback. Their diagonal is also a discrete fibration: a pair of arrows with the same image and common target has equal sources and equal arrows by uniqueness of a cartesian lift. Thus every incoming arrow to a diagonal object has a unique diagonal lift. Identity maps belong to this class. These facts verify the later geometric setup. F.10 restricts to it, and its adjoints remain the Kan adjoints. This comparison fixes the version of the definition; it does not identify strict pullbacks in $N\Cat$ with pullbacks in the infinity-category of all infinity-categories.
+\end{proof}
+
+\begin{claim}{F.13}{Known}{H\"ormann's diagram correspondences and the enhancement boundary}
+Fibered multiderivators encode the two halves and their exchange maps on the appropriate 2-multicategory of diagram correspondences. In \citet[Theorem 6.12]{EFHormann2017}, for pre-multiderivators $\mathbb E,\mathbb S$ satisfying Der 1--2, a strict morphism $\mathbb E\to\mathbb S$ is a left, respectively right, fibered multiderivator precisely when the induced map $\mathrm{Dia}^{\mathrm{cor}}(\mathbb E)\to\mathrm{Dia}^{\mathrm{cor}}(\mathbb S)$ is a 1-opfibration, respectively 1-fibration, of 2-multicategories. A closed monoidal derivator supplies the associated diagram-level six-operation structure. This does not turn all strict pullback squares of ordinary categories into exact squares and does not itself construct an infinity-categorical enhancement of an abstract derivator.
+\end{claim}
+The theorem is used with its diagram-correspondence base, whose 2-morphisms and fibre replacements retain the comma-category information. It is not a theorem about the unmodified span category of $\Cat$ with all strict pullbacks. Indeed any reading with that conclusion would imply the false comparison of F.3. The construction in F.10 has a different input: it starts with the enhanced coefficient category and restricts the class of spans so that strict base change is exact. Passing from it to its derivator loses higher mapping information; a reverse passage is not supplied by Der 1--4 or Der 5. E.13 gives a concrete obstruction to reconstructing even coherent arrows from the valuewise homotopy categories.
+
+\begin{claim}{F.14}{Proved}{Comparison with relative smoothness and properness}
+For the indexed enhanced category $S\mapsto\Fun(NS^{\op},\Spaces)$ on the ordinary category $\Cat$ with strict pullbacks, the smooth and proper calibrations of \citet[Definition 2.3.1]{EFAnelWeinberger2025} are exactly $\Liss_{W_\infty}$ and $\Prop_{W_\infty}$ in our convention. This is a statement about that indexed category and that base category; replacing its base by $\Cat_\infty$ changes the pullback test.
+\end{claim}
+\begin{proof}
+All restrictions have both adjoints. The definition in the cited source requires the corresponding Beck--Chevalley property after every base change. Smooth and proper functors retain their lifting conditions under base change, and F.2 proves the required invertibility. Conversely that definition in particular gives the comparison for every point of the base. The left-adjoint-mate computation in F.2 recovers contractibility of each lifting category, and therefore recovers exactly the two Grothendieck classes. The extra word ``stably'' in the relative definition is satisfied by their pullback stability. This proof provides the comparison for a specific indexed category; it does not use an assertion that all indexed categories on a given base have the same calibration.
+\end{proof}
+
+\begin{claim}{F.15}{Known}{The genus-zero category and its geometric coefficients}
+For $n\geq3$, let $\Gamma_n$ be the pure orientation-preserving mapping class group of the $n$-punctured sphere. Let $\mathcal C_n$ have as objects the isotopy classes of essential multicurves, including the empty multicurve, and put
+\[
+ \Hom_{\mathcal C_n}(\sigma,\tau)
+ =\{g\in\Gamma_n:g\sigma\supseteq\tau\}/\Delta_\sigma,
+ \qquad [h]\circ[g]=[hg],
+\]
+where $\Delta_\sigma$ is generated by the Dehn twists in the curves of $\sigma$ and acts on the right. Set $T_{0,n}=\mathcal C_n^{\op}$. The exit category of $\overline{\mathcal M}_{0,n}(\mathbb C)$ with its dual-tree stratification is $N\mathcal C_n$. For every compactly generated presentable infinity-category $\mathcal V$,
+\[
+ \Shv_{\mathrm{cbl}}(\overline{\mathcal M}_{0,n}(\mathbb C);\mathcal V)
+ \simeq\Fun(N\mathcal C_n,\mathcal V)
+ =\Fun(NT_{0,n}^{\op},\mathcal V).
+\]
+Forgetting the last mark induces $Q:\mathcal C_{n+1}\to\mathcal C_n$, $\sigma\mapsto q\sigma$, $[g]\mapsto[\phi(g)]$, and $F=Q^{\op}:T_{0,n+1}\to T_{0,n}$. Here $q$ erases curves which become peripheral and identifies repeated isotopy classes, and $\phi:\Gamma_{n+1}\twoheadrightarrow\Gamma_n$ is the forgetful homomorphism.
+\end{claim}
+The exit-category and coefficient assertions are \citet[Construction 3.18, Proposition 3.23, Corollary 6.6, and Theorem 6.7]{EFJansen2023}, applied to a smooth pointed sphere. We use the general stable-surface hypothesis $2g-2+n>0$; the second displayed inequality in the attached text of Theorem 6.7 has a sign slip and is not our hypothesis. For the explicit functor, a twist about a vanishing curve maps to the identity, and twists about curves with the same image map to the same twist. Hence $\phi(\Delta_\sigma)\subseteq\Delta_{q\sigma}$, which makes $Q$ independent of representatives and compatible with multiplication. The operation on a degeneration is forgetting its last mark and stabilizing; on an automorphism it is $\phi$. These are the generators in Construction 3.18, so this identifies $Q$ with the functor induced by the stratified geometric forgetful map. Genus-zero labelled stable curves have no automorphisms: every component has at least three special points, fixed individually by an automorphism. Thus these examples are spaces rather than stacky quotients.
+
+\begin{claim}{F.16}{Proved}{Forgetting a mark is proper and need not be smooth}
+For every $n\geq3$, $F:T_{0,n+1}\to T_{0,n}$ is $W_\infty$-proper. For $n=4$ it is not $W_\infty$-smooth: a specified lifting category is equivalent to $B\mathbb Z$.
+\end{claim}
+\begin{proof}
+We work first in exit variance. Fix an upstairs multicurve $\sigma$, set $\tau=q\sigma$, and fix $\beta:\eta\to\tau$ in $\mathcal C_n$. The incoming lifting category for $Q$ has objects $(\rho,\alpha:\rho\to\sigma)$ such that $q\rho=\eta$ and $Q\alpha=\beta$; morphisms are triangles over the identity of $\eta$. Represent $\beta$ by $b\in\Gamma_n$ and choose a lift $\widetilde b\in\Gamma_{n+1}$. Replacing $\rho$ by $\widetilde b\rho$ and the representative $g$ of $\alpha$ by $g\widetilde b^{-1}$ identifies this category with the one for $b\eta\supseteq\tau$ and $\beta=[1]$. The inverse uses $\widetilde b^{-1}$. We have used the surjectivity in the Birman exact sequence, valid also for the pure groups here; see \citet[Section 2]{EFKentLeiningerSchleimer2009}.
+
+In the case $\beta=[1]$, an object represented by $g:\rho\to\sigma$ is isomorphic in the lifting category to $(g\rho,[1])$: the isomorphism is $[g]$, which lies over the identity since $\phi(g)\in\Delta_\eta$. The full subcategory of these normalized objects is the poset
+\[
+ \mathcal P(\eta;\sigma)=\{\rho\supseteq\sigma:q\rho=\eta\},
+ \quad\text{ordered by reverse inclusion}.
+\]
+Indeed a triangle between identity arrows forces its representative $h$ to lie in $\Delta_\rho$; it is then the unique identity coset, and exists exactly if $\rho\supseteq\rho'$. This proves an equivalence of categories, not merely a bijection on components.
+
+We verify contractibility of this poset, including the cases affected by stabilization. First take $\sigma=\varnothing$. If $\eta$ is nonempty, choose disjoint geodesic representatives on the downstairs punctured sphere. Their inverse image in its universal disc is a locally finite family of disjoint separating lines. The graph whose vertices are complementary regions and whose edges are these lines is a tree: a line separates, so every edge separates, and any two regions are joined by the finite sequence crossed by a compact transverse path. A lift of $\eta$ with no repeated image records the region occupied by the extra puncture; a lift with one repeated image records the two curves bounding the annulus containing that puncture, and hence an edge. Deleting either of the repeated curves records the two incident vertices. No second repeated image is possible, since the two disjoint annuli would both have to contain the sole extra puncture. This identifies the nonperipheral part of $\mathcal P$ with the face poset, in reverse order, of that tree. Equivalently this is the simplicial fibre calculation of \citet[Theorem 7.1]{EFKentLeiningerSchleimer2009}; the preceding description fixes which face poset is being used.
+
+A curve which disappears on forgetting encloses just the extra puncture and one retained puncture. At most one can occur in a disjoint multicurve. It cannot coexist with the repeated-image annulus, since the retained puncture is outside that annulus. Its deletion therefore attaches one leaf to the tree just described. All its occurrences give leaves, possibly infinitely many; contracting the added edges, or using the unique paths in the enlarged tree, preserves contractibility. For $\eta=\varnothing$ the empty multicurve itself is a terminal object of $\mathcal P$, and the same description consists of a central vertex and these leaves.
+
+For general $\sigma$, cut along its curves. Curves of $\eta\setminus q\sigma$ in every component not containing the extra puncture lift uniquely; there the forgetful operation is the identity, with boundary circles regarded as fixed punctures. In the component containing the extra puncture, if the remaining component is stable, the same tree-and-leaves argument applies to its required multicurve. The retained puncture in a peripheral leaf may also be a retained boundary circle: such a leaf is a duplicate of a curve already in $\sigma$. Boundary twists act trivially on curves disjoint from the boundary, so passing from boundary circles to punctures changes none of this poset. If that component becomes unstable, it was a pair of pants whose other two special points are either a retained mark and a boundary, or two boundaries. It admits no essential refinement. Keeping $\sigma$ fixes respectively the peripheral bubble or the bridge; all refinements in the other components remain unique. In this case the remaining poset is a singleton. These descriptions also cover an empty required refinement. Thus every incoming lifting category for $Q$ is weakly contractible. By opposition this proves properness of $F$.
+
+For nonsmoothness take $n=4$ and choose an upstairs maximally degenerate curve whose extra mark $5$ is on the middle component of a three-component chain. The two curves $c_1,c_2$ separate $12$ from $345$ and $34$ from $125$. Their images are the same downstairs curve $c$, separating $12$ from $34$. Put $\sigma=\{c_1,c_2\}$. We test outgoing lifts for $Q$ of $[1]:\{c\}\to\varnothing$. If $q\rho=\varnothing$ and $\sigma\to\rho$ is such a lift, then $\rho=\varnothing$: any nonempty such $\rho$ encloses $5$ and one retained mark, whereas neither curve in any pure mapping class translate of $\sigma$ has that partition. The lifting category is therefore the action groupoid of
+\[
+ K=\ker\phi\quad\text{on}\quad
+ \{g\Delta_\sigma:\phi(g)\in\langle t_c\rangle\}.
+\]
+We have $\Delta_\sigma=\langle t_{c_1},t_{c_2}\rangle\cong\mathbb Z^2$ and $\phi(t_{c_1})=\phi(t_{c_2})=t_c$. Independence of twists follows by choosing a transverse arc to each disjoint annulus and observing its winding number. The action is transitive because the image of $\Delta_\sigma$ is all of $\langle t_c\rangle$, and the stabilizer of its identity coset is
+\[
+ K\cap\Delta_\sigma
+ =\ker(\mathbb Z^2\xrightarrow{(a,b)\mapsto a+b}\mathbb Z)
+ =\langle t_{c_1}t_{c_2}^{-1}\rangle\cong\mathbb Z.
+\]
+Choosing one object in a transitive action groupoid gives a fully faithful, essentially surjective functor from its stabilizer group. Consequently this lifting category is equivalent to $B\mathbb Z$, whose nerve has nonzero $H_1$. It is not weakly contractible. This is the incoming test for $F$, so $F$ is not smooth. The arithmetic in the last display is checked by the finite-support integer calculation in the supplementary code; the category itself is infinite, and no finite category is claimed here.
+\end{proof}
+
+\begin{claim}{F.17}{Proved}{Geometric direct image and the boundary squares in this example}
+In the coefficient equivalence of F.15, the categorical right Kan functor $F_*$ is the ordinary topological direct image of constructible sheaves for
+$\overline{\mathcal M}_{0,n+1}(\mathbb C)\to\overline{\mathcal M}_{0,n}(\mathbb C)$.
+Categorical right base change agrees with topological proper base change for point fibres and for the squares obtained by a closed boundary inclusion. A boundary is represented by the replete full cosieve in the entrance category whose multicurves contain a curve with the specified label partition. The left Kan half supplies no universal smooth base-change statement for this forgetful functor.
+\end{claim}
+\begin{proof}
+The geometric forgetful map is the universal stable curve, hence is proper; the contraction and stabilization description is recalled in \citet[pp.~546--548]{EFKeel1992}. We check the extra issue that its direct image preserves the specified constructibility. Let $B$ be a sufficiently small contractible ball in a fixed dual-tree stratum of the base. Normalize its nodal curves. Each component is a sphere with finitely many labelled special points; over $B$ choose three to rigidify it and disjoint discs about all the others. Isotopies supported in these discs move the special points to their central positions. Gluing back the specified pairs gives a trivialization over $B$ by a fixed marked nodal sphere. The strata in the universal curve distinguish its smooth unmarked points, marked points, and nodes; the latter two are respectively the bubble and bridge cases of stabilization. The trivialization preserves all these strata.
+
+A constructible coefficient on this product is constant in the contractible $B$-direction: by exodromy, its diagram is indexed by the product of the fundamental infinity-groupoid of $B$ with the exit category of the fixed stratified fibre, and the first factor is contractible. Proper base change therefore makes every stalk of its direct image on $B$ the sections of the same fibre coefficient, with invertible transport. For the compactly generated coefficients in F.15 this base-change theorem follows from its space-valued version: write $\mathcal V\simeq\operatorname{Ind}(\mathcal V^\omega)$ and describe its sheaves as finite-limit-preserving functors from $(\mathcal V^\omega)^{\op}$ to space-valued sheaves. Inverse image and direct image give the same comparison at each compact test object, and both respect this finite-limit condition. This proves the required coefficient extension, not only its stable special case. It also proves constructibility on each base stratum. Inverse image already preserves constructibility, since the map sends each stratum into one base stratum. Its restriction corresponds to $F^*$ by the naturality verified in F.15. Both its restricted topological direct image and $F_*$ are right adjoint to this same functor between the full constructible categories. The contractible uniqueness of right adjoints identifies them, including their units and counits.
+
+For clarity we also identify the indexing category of an actual fibre; a mere equivalence of its total homotopy type would not suffice for the base-change assertion. Fix a stable labelled nodal curve downstairs, represented by $\tau$. In its inverse image an extra point may lie in a smooth unmarked component, at a retained marked point, or at a node. The last two give a bubble or a bridge. Their marked upstairs multicurves are precisely the $\sigma$ with $q\sigma=\tau$. A morphism which fixes the downstairs point has representative $g$ with $\phi(g)\in\Delta_\tau$, exactly the identity condition in the strict fibre of $Q$. Every smooth component minus its special points is a sphere minus at least three points, hence a $K(\pi,1)$ with free fundamental group. The link of a marked point is a circle, and a node has one circle on each branch. Each peripheral $\mathbb Z$ injects into the corresponding free group: choose a free basis of all but one puncture loops, in which the remaining loop is their nontrivial product. The homotopy fibres computing exit paths from a singular point into a smooth component are therefore discrete coset sets. There are no higher exit mapping homotopies, and the closed-point automorphisms are trivial. Point-pushing gives these same free groups in the strict categorical fibre; quotienting by the added twists gives precisely these peripheral cyclic cosets. Composition is multiplication of their representatives, as in F.15. These descriptions are exhaustive because the component containing the forgotten point is either retained, a bubble, or a bridge. Thus the exit category of the fibre is the opposite of the strict fibre of $F$. In particular, for $n=4$ the ordinary fibres have homotopy types $S^2$ over a smooth curve and $S^2\vee S^2$ over a boundary curve; this does not contradict categorical properness.
+
+For a fixed stable partition of the labels, degeneration can add curves and cannot remove the specified partition. In entrance variance its replete full subcategory is consequently a cosieve. Cutting along the unique curve of that partition identifies it with the product of the two smaller entrance categories: twists along the cut are divided out, and the remaining homeomorphisms are exactly those of its two labelled components. This is also the stratified category of the closed clutching boundary. The inverse-image boundary selects exactly the upstairs multicurves whose $q$-image has that partition. Hence the geometric boundary square induces the strict categorical pullback square. A subcategory requiring a single chosen isotopy representative, without taking its repletion, would not justify this assertion.
+
+The two comparisons in these point and boundary squares are mates of the same restriction identity under the identified adjunctions. They therefore agree as canonical maps, and both are invertible by properness. No such identification has been asserted for an arbitrary geometric pullback: one would first have to prove the corresponding exit-category pullback comparison. Finally F.16 and the converse in F.2 exclude universal left Kan base change for this map. This separates the topological exceptional direct image, which exists because the geometric map is proper, from categorical left Kan extension.
+\end{proof}
+
+\begin{claim}{F.18}{Open}{Indexing an abstract derivator by strict higher categories}
+For a specified extension of an ordinary derivator to strict $n$-categorical indexing shapes, $2\leq n\leq\omega$, with lax or colax comma objects and a chosen Street-nerve weak-equivalence class, does the corresponding universal smooth/proper lifting condition imply the two base-change isomorphisms of F.2, with coherent mates? We have not established this statement. Even $n=2$ requires an explicit higher Der~4 and an invariance theorem for the chosen lax comma construction; neither is part of an ordinary derivator on $\Cat$. The model-structure claim discussed in Part C supplies neither datum. No proof in Part F uses that unrefereed claim.
+\end{claim}
+The attempted reduction would replace a higher comma object by a category of simplices and then apply F.2. Its missing step is a comparison respecting both the proposed higher Kan adjunction and the canonical mate; equality of total classifying-space types does not provide it. This is the precise remaining higher-indexing question, not an extension claimed from an ordinary Theorem A.
+
+\begin{claim}{F.19}{Proved}{An exact proper class in the diagonally closed setup}
+In the discrete-fibration setup of F.12, take $\mathcal V=\Sp$ or $D(k)$ for a nonzero commutative ring $k$. For a discrete fibration $p:E\to S$, the following are equivalent: $p$ is cohomologically proper in \citet[Definition 4.6.1(b)]{EFHeyerMann2024}; after every strict base change its left and right presheaf Kan extensions are naturally equivalent; and $p$ is a discrete bifibration with finite fibres. Finiteness is pointwise and requires no uniform bound. For this class the canonical comparison $p_!\to p_*$ is the finite biproduct equivalence.
+\end{claim}
+\begin{proof}
+The cited definition requires a truncated map, cohomological primness, and properness of its diagonal, recursively. All maps in the nerve of an ordinary category are $0$-truncated, since their maps between representable mapping spaces are maps of sets. Lemma 4.6.3 of the cited source gives base-change stability; Lemma 4.6.4(ii) constructs the canonical comparison when the diagonal is proper and says that its equivalence is equivalent to properness. Thus properness implies the second condition. We do not assert existence of that canonical comparison for an arbitrary discrete fibration before its diagonal has been checked.
+
+Suppose the second condition holds. Pullback to a vertex gives a discrete set $I\to e$, whose Kan functors are direct sum and product. For infinite $I$, product does not preserve filtered colimits: for each finite $J\subset I$, take the diagram with value $M=\mathbb S$ or $k$ on $J$ and zero elsewhere. The filtered-colimit comparison is
+\[
+ \bigoplus_{i\in I}M\longrightarrow\prod_{i\in I}M,
+\]
+whose degree-zero homotopy map is the non-surjective inclusion of the direct sum into the product of copies of $\mathbb Z$ or $k$. The sum functor preserves those colimits. Hence the two functors cannot be naturally equivalent, and every fibre of $p$ is finite.
+
+Pull back next along an arbitrary arrow $\alpha:[1]\to S$. The resulting category has a finite set $A$ over $0$, a finite set $B$ over $1$, and exactly one arrow $r(b)\to b$ for each $b\in B$, for the reindexing function $r:B\to A$. For $a\in A$ take the presheaf $F$ with value $M$ at $a$, zero elsewhere, and all nonidentity maps zero. The smooth fibre formula and the actual right comma formula give
+\[
+ (p_!F)(1)=0,\qquad
+ (p_*F)(1)=\operatorname{fib}\bigl(M\xrightarrow{\mathrm{diag}}M^{r^{-1}(a)}\bigr).
+\]
+For $m=|r^{-1}(a)|$, the latter is $M$ if $m=0$, zero if $m=1$, and $(\Omega M)^{m-1}$ if $m\geq2$. Indeed subtracting the first coordinate from the others turns the diagonal into the first-coordinate inclusion; its cofiber is $M^{m-1}$, and its fibre is the loop of that cofiber. Taking the indicated nonzero $M$ forces $m=1$. Thus every reindexing function is bijective, exactly the additional discrete-opfibration condition.
+
+Conversely let $p$ be a finite discrete bifibration. Its diagonal is a discrete bifibration with empty or singleton fibres. The next diagonal is an isomorphism, so Lemma 4.6.4(ii), first applied to the diagonal, proves its properness: both direct images there are the identical extension by zero on a union of components. The canonical comparison for $p$ consequently exists. F.2 computes it by the direct sums and products on the same finite fibres. Unwinding the mate in Lemma 4.6.4(ii) gives the matrix with identity on each matching summand and zero on distinct summands. It is the biproduct isomorphism, compatible with every fibre-transport bijection. The same lemma now proves properness of $p$. Every strict base change remains a finite discrete bifibration. Empty fibres cause no exception, since the stable empty sum and empty product are both zero. The finite star calculations for $m=0,1,2$ are included in the supplementary checker.
+\end{proof}

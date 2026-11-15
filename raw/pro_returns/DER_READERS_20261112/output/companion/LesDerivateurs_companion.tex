@@ -1,0 +1,1469 @@
+\PassOptionsToPackage{hyperfootnotes=false,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=0}{hyperref}
+\documentclass[11pt,oneside]{book}
+\usepackage{fontspec}
+\usepackage[main=french,english,french]{babel}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage[a4paper,left=25mm,right=30mm,top=24mm,bottom=26mm,headheight=14pt,marginparwidth=21mm,marginparsep=4mm]{geometry}
+\usepackage{microtype}
+\usepackage{marginnote}
+\usepackage{xurl}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{adjustbox}
+\usepackage{marginfix}
+\usepackage{lmodern}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{derivateurs_companion}
+\usetikzlibrary{decorations.pathreplacing,babel,arrows.meta,decorations.pathmorphing}
+\DeclareFontShape{TU}{lmr}{bx}{sc}{<->ssub*lmr/bx/n}{}
+\frenchsetup{AutoSpacePunctuation=false}
+\setlength{\emergencystretch}{2em}
+\hypersetup{pdftitle={Les Dérivateurs: an integrated reader, with commentary},pdfauthor={Alexander Grothendieck},
+  colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!45!black,pdfdisplaydoctitle=true}
+\makeatletter
+% counters as in the chunks' own readers (article class): equations by chunk, with unique PDF anchors
+\newcounter{dgrchunk}
+\renewcommand{\theequation}{\arabic{equation}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theHequation}{\arabic{dgrchunk}.\arabic{equation}}
+\renewcommand{\theHsection}{\arabic{dgrchunk}.\arabic{section}}
+\renewcommand{\theHfigure}{\arabic{dgrchunk}.\arabic{figure}}
+\renewcommand{\theHtable}{\arabic{dgrchunk}.\arabic{table}}
+% running heads
+\def\ps@dgr{\let\@mkboth\@gobbletwo
+  \def\@oddhead{\footnotesize\scshape\rightmark\hfil\upshape\thepage}\let\@evenhead\@oddhead
+  \def\@oddfoot{}\let\@evenfoot\@oddfoot}
+\pagestyle{dgr}
+% the contents: wider boxes for the chapter numerals, the labels of the parts and three-digit page numbers
+\renewcommand*{\@pnumwidth}{2.2em}
+\renewcommand*{\@tocrmarg}{3.2em}
+\renewcommand*{\l@chapter}[2]{%
+  \ifnum\c@tocdepth>\m@ne
+    \addpenalty{-\@highpenalty}\vskip 1.0em \@plus\p@
+    \setlength\@tempdima{3.8em}%
+    \begingroup
+      \parindent\z@ \rightskip\@pnumwidth \parfillskip -\@pnumwidth
+      \leavevmode\bfseries \advance\leftskip\@tempdima \hskip -\leftskip
+      #1\nobreak\hfil\nobreak\hb@xt@\@pnumwidth{\hss #2\kern-\p@\kern\p@}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
+\renewcommand*{\l@section}{\@dottedtocline{1}{1.5em}{4.6em}}
+\renewcommand*{\l@subsection}{\@dottedtocline{2}{6.1em}{3.2em}}
+% a chapter, or a part of one, that this book does not contain: a line of the contents without page number
+\newcommand*{\dgrtocmissingchapter}[2]{%
+  \addpenalty{-\@highpenalty}\vskip 1.0em \@plus\p@
+  \begingroup\parindent\z@\leftskip 3.8em\rightskip\@tocrmarg plus 1fil\hskip-3.8em
+  \hb@xt@ 3.8em{\bfseries #1\hfil}\textit{#2}\enspace\textendash\enspace\textit{not included}\par\endgroup}
+\newcommand*{\dgrtocmissing}[2]{%
+  \begingroup\parindent\z@\leftskip 6.1em\rightskip\@tocrmarg plus 1fil\hskip-4.6em
+  \hb@xt@ 4.6em{#1\hfil}\textit{#2}\enspace\textendash\enspace\textit{not included}\par\endgroup}
+% a chapter of the work: #1 numeral (contents), #2 heading line, #3 title; without numeral the contents keep the
+% numeral's place empty, and the bookmark has no number
+\DeclareRobustCommand{\dgrnonumber}{\numberline{}}
+\pdfstringdefDisableCommands{\def\dgrnonumber{}}
+\newcommand{\dgrchapter}[3]{%
+  \clearpage\thispagestyle{plain}%
+  \phantomsection
+  \if\relax\detokenize{#1}\relax\addcontentsline{toc}{chapter}{\protect\dgrnonumber #3}%
+  \else\addcontentsline{toc}{chapter}{\protect\numberline{#1}#3}\fi
+  \markright{#2}%
+  \begingroup\centering
+    \vspace*{2\baselineskip}{\large\scshape #2\par}\bigskip{\LARGE\bfseries #3\par}\vspace{2\baselineskip}%
+  \endgroup}
+% a chunk (or its part in one chapter): #1 1 = on a new page, #2 label, #3 contents line, #4 heading, #5 running head
+\newcommand{\dgrpart}[5]{%
+  \ifnum#1=1 \clearpage\fi
+  \phantomsection\addcontentsline{toc}{section}{\protect\numberline{#2}#3}%
+  \markright{#5}%
+  \par\begingroup\centering\sffamily\small #4\par\endgroup
+  \smallskip\hrule\bigskip}
+\newcommand{\dgroverview}[2]{%
+  \clearpage
+  \phantomsection\addcontentsline{toc}{subsection}{Overview}%
+  \markright{#2}%
+  \section*{Overview \textperiodcentered\ #1}}
+\newcommand{\dgrblock}[2]{\pdfbookmark[2]{#2}{#1}}
+% a chunk: its group, language and counters
+\newcommand{\dgrchunkbegin}{\begingroup\stepcounter{dgrchunk}\selectlanguage{french}%
+  \setcounter{footnote}{0}\setcounter{equation}{0}\setcounter{section}{0}\setcounter{figure}{0}\setcounter{table}{0}}
+\newcommand{\dgrchunkend}{\par\endgroup}
+% the back matter
+\newcommand{\dgrbackchapter}[1]{\chapter*{#1}\phantomsection\addcontentsline{toc}{chapter}{#1}\markright{#1}}
+\renewcommand{\bibsection}{\dgrbackchapter{\bibname}}
+\newcommand{\dgrclaim}[4]{\par\noindent\hangindent=2.5em\hangafter=1
+  \textbf{ms.~#2}\enspace\textsc{#1}\enspace{\footnotesize #3}\enspace\textendash\enspace#4\par\smallskip}
+\makeatother
+\providecommand{\textquotesingle}{\textquoteright}
+% Fit only diagrams that exceed the available page box; preserve source tokens.
+\AddToHook{env/tikzcd/before}{\begin{adjustbox}{max width=\linewidth,max totalheight=\textheight}}
+\AddToHook{env/tikzcd/after}{\end{adjustbox}}
+\begin{document}
+\selectlanguage{english}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{0.24\textheight}
+{\Large Alexander Grothendieck\par}
+\vspace{2.2em}
+{\Huge\bfseries Les Dérivateurs\par}
+\vspace{2.2em}
+{\Large an integrated reader, with commentary\par}
+\vfill
+\end{titlepage}
+\setcounter{page}{2}
+\thispagestyle{empty}
+\noindent The text is Alexander Grothendieck's, from the edition of \emph{Les Dérivateurs} by M.~Künzer,
+J.~Malgoire and G.~Maltsiniotis (Universités de Montpellier~II et Paris~VII),
+\url{https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html}. The \LaTeX{} transcription of that
+edition is AI-transcribed (Claude Opus~5.5, Anthropic). The commentary, the register of claims and the corrections
+are AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude (Anthropic). Eight
+commentary blocks in parts II-a, III-V and XIIb-a, seven paragraphs of other blocks there, nineteen entries of the
+register of claims and three bibliography entries are AI-produced by Claude Fable~5.2 (Anthropic), from answers of
+GPT-6 Astra that it reviewed.
+
+\bigskip
+\noindent\textbf{Rights}
+
+\smallskip
+\noindent The rights in the original work belong to its author or the author's representatives or heirs. Where we
+hold rights, in the AI-produced transcription, translation, corrections and typesetting, they are dedicated to the
+public domain under CC0 1.0. This edition is published for educational, non-profit purposes, and we claim no rights we
+do not hold. If you hold rights in this work and object to its publication here, please open a GitHub issue and we will
+take it down.
+
+\smallskip
+\begin{otherlanguage}{french}
+\noindent Les droits sur l'œuvre originale appartiennent à son auteur, à ses représentants ou à ses ayants droit. Là
+où nous détenons des droits, sur la transcription, la traduction, les corrections et la composition produites par IA,
+ils sont dédiés au domaine public sous CC0 1.0. Cette édition est publiée à des fins pédagogiques et non lucratives, et
+nous ne revendiquons aucun droit que nous ne détenons pas. Si vous détenez des droits sur cette œuvre et vous opposez
+à sa publication ici, ouvrez une issue sur GitHub et nous la retirerons.
+\end{otherlanguage}
+\clearpage
+\tableofcontents
+\mainmatter
+\input{parts/DER_I-a}
+\input{parts/DER_I-b}
+\input{parts/DER_II-a}
+\input{parts/DER_II-b}
+\input{parts/DER_III-V}
+\input{parts/DER_VI-a}
+\input{parts/DER_VI-b}
+\input{parts/DER_VI-c}
+\input{parts/DER_VII-a}
+\input{parts/DER_VII-b}
+\input{parts/DER_VII-c}
+\input{parts/DER_VIII-X}
+\input{parts/DER_XI-XIIa}
+\input{parts/DER_XIIb-a}
+\input{parts/DER_XIIb-b}
+\input{parts/DER_XIIc-a}
+\input{parts/DER_XIIc-b}
+\input{parts/DER_XIIapp}
+\input{parts/DER_XIII-a}
+\input{parts/DER_XIII-b}
+\input{parts/DER_XIV}
+\input{parts/DER_XV-a}
+\input{parts/DER_XV-b}
+\input{parts/DER_XVI}
+\input{parts/DER_XVII-a}
+\input{parts/DER_XVII-b}
+\input{parts/DER_XVIII-a}
+\input{parts/DER_XVIII-b}
+\input{parts/DER_XVIII-c}
+\input{parts/DER_XVIII-d}
+\input{parts/DER_XVIII-e}
+\input{parts/DER_XIX}
+\backmatter
+\dgrbackchapter{Register of claims}
+The audit of each part records the definitions, axioms, propositions, claims, conjectures and questions of the text, each with the status the text gives it: proved, sketched, stated, assumed, conjectured, false (the assertion, or the inference as written, is false) or open. The table counts the entries of each part by status; the list after it gives every entry whose status is false, open or conjectured, with its manuscript page and its identifier in the audit.
+
+\begin{center}\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Part & proved & sketched & stated & assumed & conjectured & false & open & total \\
+\midrule
+I-a & 53 & 24 & 136 & 19 & 7 & 14 & 0 & 253 \\
+I-b & 72 & 37 & 101 & 22 & 9 & 12 & 0 & 253 \\
+II-a & 50 & 21 & 145 & 1 & 5 & 20 & 3 & 245 \\
+II-b & 67 & 45 & 108 & 4 & 0 & 21 & 9 & 254 \\
+III-V & 54 & 27 & 127 & 8 & 11 & 12 & 10 & 249 \\
+VI-a & 88 & 29 & 137 & 19 & 16 & 23 & 0 & 312 \\
+VI-b & 115 & 18 & 59 & 17 & 9 & 15 & 17 & 250 \\
+VI-c & 88 & 27 & 72 & 9 & 8 & 5 & 5 & 214 \\
+VII-a & 92 & 19 & 74 & 2 & 0 & 12 & 0 & 199 \\
+VII-b & 54 & 16 & 82 & 3 & 5 & 17 & 7 & 184 \\
+VII-c & 70 & 26 & 62 & 4 & 30 & 35 & 11 & 238 \\
+VIII-X & 11 & 19 & 104 & 5 & 24 & 12 & 10 & 185 \\
+XI-XIIa & 124 & 35 & 90 & 43 & 12 & 9 & 11 & 324 \\
+XIIb-a & 91 & 23 & 70 & 7 & 0 & 18 & 12 & 221 \\
+XIIb-b & 74 & 11 & 36 & 4 & 3 & 4 & 1 & 133 \\
+XIIc-a & 51 & 21 & 89 & 14 & 11 & 9 & 19 & 214 \\
+XIIc-b & 63 & 20 & 31 & 4 & 3 & 5 & 1 & 127 \\
+XIIapp & 11 & 31 & 73 & 4 & 4 & 17 & 5 & 145 \\
+XIII-a & 56 & 19 & 172 & 27 & 44 & 12 & 17 & 347 \\
+XIII-b & 33 & 13 & 63 & 17 & 5 & 11 & 9 & 151 \\
+XIV & 18 & 6 & 27 & 8 & 2 & 4 & 0 & 65 \\
+XV-a & 88 & 23 & 66 & 17 & 1 & 28 & 2 & 225 \\
+XV-b & 86 & 31 & 125 & 16 & 7 & 15 & 9 & 289 \\
+XVI & 79 & 35 & 137 & 31 & 17 & 10 & 28 & 337 \\
+XVII-a & 100 & 14 & 53 & 9 & 0 & 9 & 4 & 189 \\
+XVII-b & 110 & 9 & 42 & 7 & 2 & 6 & 4 & 180 \\
+XVIII-a & 141 & 33 & 95 & 0 & 6 & 41 & 2 & 318 \\
+XVIII-b & 144 & 28 & 97 & 0 & 8 & 19 & 13 & 309 \\
+XVIII-c & 112 & 37 & 51 & 3 & 4 & 15 & 2 & 224 \\
+XVIII-d & 100 & 46 & 50 & 5 & 5 & 16 & 1 & 223 \\
+XVIII-e & 98 & 26 & 52 & 7 & 6 & 20 & 13 & 222 \\
+XIX & 62 & 17 & 148 & 7 & 4 & 11 & 20 & 269 \\
+\midrule
+total & 2455 & 786 & 2774 & 343 & 268 & 477 & 245 & 7348 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{I-a \textperiodcentered\ Chapter I, part 1 of 2, manuscript pages 1--66}
+\pdfbookmark[1]{I-a}{dgrclaims.I-a}
+\begingroup\raggedright
+\input{parts/DER_I-a_defs}
+\dgrclaim{conjectured}{3}{I-a-E020}{For a monotone map of finite ordinals, restriction on A-valued presheaves has a second adjoint on each side when A is pointed and has finite limits and colimits.}
+\dgrclaim{false}{3}{I-a-E021}{All restriction functors associated with all maps between two fixed finite ordinals occur in the same successive adjunction chain.}
+\dgrclaim{conjectured}{3}{I-a-E022}{For [n] and [n+1], the face and degeneracy restrictions form a chain of 2n+3 terms, extendible by two terms at each end to 2n+7.}
+\dgrclaim{false}{4}{I-a-E024}{A category in which every arrow is monic and every isomorphism is an identity is a poset.}
+\dgrclaim{false}{15}{I-a-E066}{The abelianization morphism preserves all right Kan extensions.}
+\dgrclaim{false}{15}{I-a-E067}{A homotopy pullback of spaces along a fibration is sent by abelianization to a homotopy pullback.}
+\dgrclaim{false}{25}{I-a-M007}{The mixed interchange map might be invertible in additive derivators.}
+\dgrclaim{conjectured}{29}{I-a-M021}{There should be a stable or triangulated derivator theory in which left and right exact morphisms coincide.}
+\dgrclaim{false}{32}{I-a-M030}{The withdrawn Der5 asserts that a strict hot-equivalence has fully faithful restriction, equivalently $1\to f_*f^*$ is invertible.}
+\dgrclaim{false}{32}{I-a-M032}{The dual withdrawn Der5 asserts $f_!f^*\to1$ invertible for every costrict hot-equivalence.}
+\dgrclaim{false}{32}{I-a-M033}{The withdrawn argument would make $f_*$, respectively $f_!$, localization functors.}
+\dgrclaim{false}{47}{I-a-M060}{The same cohomology invariance would follow if instead all $(\alpha/x)$ were contractible.}
+\dgrclaim{false}{47}{I-a-M062}{The terminal-object condition above would substantially strengthen cohomological cofinality.}
+\dgrclaim{false}{47}{I-a-M064}{The condition $\alpha_!\varepsilon_{X'}\simeq\varepsilon_X$ follows from either orientation of cofinality.}
+\dgrclaim{false}{47–48}{I-a-M067}{Corollary2 repeats the claim that strict hot-equivalence implies $F\to f_*f^*F$ invertible for arbitrary $F$.}
+\dgrclaim{false}{48}{I-a-M071}{The preceding slice calculation proves the withdrawn full-faithfulness corollary by opposite cofinality.}
+\dgrclaim{false}{49}{I-a-L003}{The same sufficient base-change criterion holds with $h_{y'}$ homotopy aspherical (all $h_{y'}/(x,u)$ contractible).}
+\dgrclaim{conjectured}{58}{I-a-L035}{If right base change for a fixed f holds for every base change and every derivator, then f is proper.}
+\dgrclaim{conjectured}{58}{I-a-L036}{If base change along a fixed p commutes with right direct images for every f and every coefficient theory, then p is smooth.}
+\dgrclaim{conjectured}{58}{I-a-L037}{Testing HOTAB and HOT should suffice to detect the universal proper/smooth base-change properties.}
+\dgrclaim{conjectured}{59}{I-a-L039}{For f, the four conditions universal right base change, universal left-mate base change, coasphericity of X\_y->X/y, and contractibility of every fibre of x\textbackslash{}X->f(x)\textbackslash{}Y are equivalent.}
+\par\endgroup
+
+\section*{I-b \textperiodcentered\ Chapter I, part 2 of 2, manuscript pages 67--126}
+\pdfbookmark[1]{I-b}{dgrclaims.I-b}
+\begingroup\raggedright
+\input{parts/DER_I-b_defs}
+\dgrclaim{conjectured}{78}{I-b-A069}{The doubled-arrow construction probably does not give the desired counterexample to base-change stability.}
+\dgrclaim{false}{79}{I-b-B079-03}{Every universally cohomological D-fibration preserves all constant-coefficient D-equivalences under pullback.}
+\dgrclaim{false}{79}{I-b-B079-04}{Every universally homological D-fibration preserves all constant-coefficient D-equivalences under pullback.}
+\dgrclaim{false}{79}{I-b-B079-07}{The implication (b)\ensuremath{\Rightarrow}(a) nevertheless holds for all derivators D\_i of i-truncated homotopy types.}
+\dgrclaim{false}{81}{I-b-B081-04}{Universal cohomological/homological D-fibrations as subsequently redefined are closed under composition.}
+\dgrclaim{conjectured}{84}{I-b-B084-01}{For a universal D-equivalence f:X\ensuremath{\to}Y, restriction f\textasciicircum{}*:D(Y)\ensuremath{\to}D(X) is fully faithful.}
+\dgrclaim{false}{84}{I-b-B084-06}{For D-fibrations over S, a D-equivalence of total categories must be a D-equivalence on each fibre.}
+\dgrclaim{false}{84}{I-b-B084-07}{The converse of Proposition6(a) holds whenever S is D-contractible.}
+\dgrclaim{false}{87}{I-b-B087-05}{A bundle over the circle is determined up to unique isomorphism by a specified monodromy automorphism of its fibre.}
+\dgrclaim{false}{93}{I-b-B093-04}{Conditions(a)–(c) alone imply that the inclusion of a fibre of(E×Z)/G\ensuremath{\to}E/G is not a D-equivalence.}
+\dgrclaim{false}{93}{I-b-B093-05}{If additionally H*(Z;k)\textasciicircum{}G=k, then X=(E×Z)/G is D(k)-aspherical.}
+\dgrclaim{false}{95}{I-b-B095-01}{The orbit of the six-object poset has the displayed globular relations p1\textasciicircum{}-p0\textasciicircum{}-=p1\textasciicircum{}-p0\textasciicircum{}+ and p1\textasciicircum{}+p0\textasciicircum{}-=p1\textasciicircum{}+p0\textasciicircum{}+.}
+\dgrclaim{conjectured}{96}{I-b-B096-04}{Under Der3a\ensuremath{'}, the revised weakly-contractible-base test condition is equivalent to each of the universal one-sided fibration conditions.}
+\dgrclaim{false}{102}{Ib-C003}{If f is Hot-proper then both X\_y\ensuremath{\to}X/y and X/y\ensuremath{\to}X/y\ensuremath{'} are Hot-equivalences, universally.}
+\dgrclaim{conjectured}{107}{Ib-C021}{Footnote55: for HOT, cohomological equivalence, homological equivalence, and constant-coefficient equivalence coincide.}
+\dgrclaim{conjectured}{109–110}{Ib-C026}{Every Hot-equivalence induces an equivalence on locally constant HOT coefficients and hence preserves their cohomology and homology.}
+\dgrclaim{conjectured}{115}{Ib-C048}{For HOT all five equivalence notions coincide with nerve weak equivalence.}
+\dgrclaim{conjectured}{119}{Ib-C069}{For HOT, D-fibrations do preserve D-equivalences by pullback.}
+\dgrclaim{false}{122–123}{Ib-C082}{With compatible internal Homs, every unqualified D-equivalence is 1-complete.}
+\dgrclaim{conjectured}{125–126}{Ib-C092}{HOT satisfies c\ensuremath{''} and its equivalences are precisely nerve weak equivalences.}
+\dgrclaim{conjectured}{126}{Ib-C096}{There should be a single intrinsic HOT-fibration notion on all small categories; the homotopy derivator must be constructed to justify the coefficient route.}
+\par\endgroup
+
+\section*{II-a \textperiodcentered\ Chapter II, part 1 of 2, manuscript pages 1--53}
+\pdfbookmark[1]{II-a}{dgrclaims.II-a}
+\begingroup\raggedright
+\input{parts/DER_II-a_defs}
+\dgrclaim{conjectured}{3–4}{II-A-013}{For homotopical cofinality, replace the connectedness criterion on comma categories by weak contractibility of their nerves.}
+\dgrclaim{false}{5}{II-A-017}{The manuscript invokes Der5 to infer $F\to u_*u^*F$ invertible for all F from homotopy strictness, i.e. contractibility of each $u/c$.}
+\dgrclaim{false}{5}{II-A-018}{The dual asserted consequence is $u_!u^*F\to F$ invertible for all F when all $c/u$ are contractible.}
+\dgrclaim{open}{5}{II-A-019}{If each $c/u$ is weakly contractible, is $H^i(C,F)\to H^i(C\prime,u^*F)$ an isomorphism for every abelian presheaf F and every i?}
+\dgrclaim{conjectured}{7}{II-A-025}{For $K_u(c)=\pi_0(c/u)$ there is a natural isomorphism $\lim u^*F\cong\operatorname{Nat}(K_u,F)$.}
+\dgrclaim{conjectured}{7–8}{II-A-026}{$\mathbf R\Gamma(C\prime,u^*F)\simeq\mathbf R\operatorname{Hom}_{C;k}(\mathbf Lu_!k_{C\prime},F)$ in D(k).}
+\dgrclaim{conjectured}{8}{II-A-028}{For space-valued presheaves, $\mathbf R\Gamma(C\prime,u^*F)\simeq\mathbf R\Gamma(C,\underline{\operatorname{Hom}}(u_!1,F))$.}
+\dgrclaim{false}{9}{II-A-032}{The proposed unsectioned identity is $u_*u^*F\simeq\underline{\operatorname{Hom}}(u_!1,F)$.}
+\dgrclaim{false}{10}{II-A-034}{The proposed general formula is $u_*\underline{\operatorname{Hom}}(G\prime,u^*F)\simeq\underline{\operatorname{Hom}}(u_!G\prime,F)$.}
+\dgrclaim{open}{10}{II-A-036}{There is a canonical projection comparison from adjunction, whose invertibility is in question.}
+\dgrclaim{false}{12–13}{II-A-049}{The first list claims equivalence between local irreducibility of Top(X), local irreducibility of Esp(X), irreducibility of components, and irreducibility of all slices X/x.}
+\dgrclaim{false}{12–13}{II-A-051}{The second list a–e again includes weak cofiltering of connected components among conditions equivalent to local irreducibility of Top(X).}
+\dgrclaim{false}{13}{II-A-054}{The prose identifies local irreducibility of the presheaf topos with PS1 plus PS2, or componentwise cofiltering.}
+\dgrclaim{open}{15}{II-A-060}{Find a topos-theoretic condition equivalent to PS1+PS2 and ensuring every connected étale category has weakly contractible nerve.}
+\dgrclaim{false}{16}{II-A-066}{The NB claims PS1 is equivalent to componentwise weak cofiltering.}
+\dgrclaim{false}{18}{II-B-006}{Total 0-connectedness alone implies W\_infty-asphericity.}
+\dgrclaim{false}{19}{II-B-019}{The representable-base conditions (c,c-prime) imply the strong equivalent conditions (a,a-prime,b,d).}
+\dgrclaim{false}{21}{II-B-024}{For every pair of connected U,V over an arbitrary object W, U times\_W V is nonempty.}
+\dgrclaim{false}{24}{II-B-033}{Condition 2.6(c-prime) implies PS2.}
+\dgrclaim{false}{28}{II-B-045}{If all slices X/x are cofiltered, then X must be locally cofiltered.}
+\dgrclaim{conjectured}{36;36ter}{II-C-003}{Does T(A) imply that A is filtered?}
+\dgrclaim{false}{36}{II-C-006}{Proposition2.19: a nonempty category with cofinal diagonal satisfies T(A).}
+\dgrclaim{false}{36}{II-C-008}{A totally0-connected category has weakly contractible nerve.}
+\dgrclaim{false}{36}{II-C-009}{Corollary to2.19: Delta\textasciicircum{}op satisfies T despite not being filtered.}
+\dgrclaim{false}{36bis--36ter}{II-C-015}{In the proposed proof of2.20, a weak equivalence i:X\ensuremath{\to} E is used to infer that X/H is weakly contractible by a reference to ChapterXII.}
+\dgrclaim{false}{51}{II-C-074}{The source asserts that M-connectedness is equivalent to the slice-limit comparison for coefficients on I/i restricted from I.}
+\dgrclaim{false}{51}{II-C-076}{The converse to4.8 holds for ordered I without restrictions on M.}
+\dgrclaim{false}{52}{II-C-078}{Proposition4.1(d prime) as printed: all coslice functors i\textbackslash{}I prime\ensuremath{\to}i\textbackslash{}I are cofinal is equivalent to full faithful restriction.}
+\par\endgroup
+
+\section*{II-b \textperiodcentered\ Chapter II, part 2 of 2, manuscript pages 54--99}
+\pdfbookmark[1]{II-b}{dgrclaims.II-b}
+\begingroup\raggedright
+\input{parts/DER_II-b_defs}
+\dgrclaim{open}{45}{IIb-A004}{Find a common cofinality statement encompassing 3.4 and XVIII Proposition 4.9.6.3.}
+\dgrclaim{open}{51}{IIb-A026}{Does M-connectedness imply M-cofinality of all slice maps, when slice diagrams need not extend globally?}
+\dgrclaim{false}{52}{IIb-A031}{The printed condition that every i\ensuremath{\backslash} I\ensuremath{\prime}\ensuremath{\to} i\ensuremath{\backslash} I is cofinal is equivalent to full faithfulness of restriction.}
+\dgrclaim{open}{54-56}{IIb-A038}{Does invertibility of y\_i\ensuremath{\to} u\_*u\textasciicircum{}*y\_i for all representables imply W\_0-connectedness?}
+\dgrclaim{false}{59}{IIb-A052}{Are W\_0-connected functors precisely ordinary localization functors, equivalently are conservative W\_0-connected functors equivalences?}
+\dgrclaim{false}{63bis-64bis}{IIb-A069}{If binary coproduct on D(e) is faithful, left Kan extension along every discrete fibration is faithful.}
+\dgrclaim{open}{64bis}{IIb-A073}{Can a D-connected functor fail to be D-aspherical (the literal printed question)?}
+\dgrclaim{open}{64bis}{IIb-A074}{Can D-connectedness fail to imply D-biasphericity when both coproduct and product conservativity are absent?}
+\dgrclaim{false}{65}{IIb-A080}{D-connectedness is an exception to closure of the seven classes under composition.}
+\dgrclaim{false}{46}{IIb-A085}{Nonemptiness of every comma category i\ensuremath{\backslash} I\ensuremath{\prime} is equivalent to F0 together with F1.}
+\dgrclaim{false}{67}{IIb-B013}{For every base-change- and composition-stable L, N(S(N(L)))=N(L).}
+\dgrclaim{false}{67}{IIb-B015}{For every A contained in W, S(N(S(A)))=S(A).}
+\dgrclaim{false}{77}{IIb-B050}{The printed second line (5.20) states A\textasciicircum{}natural=sup\_\{p in A\} p\textasciicircum{}natural.}
+\dgrclaim{false}{79}{IIb-B057}{For a Galois extension L/K, the fixed-point polarity has intermediate fields as its closed subsets of L and all subgroups as its closed subsets of G.}
+\dgrclaim{false}{81}{IIb-B062}{The lifting relation on classes is not induced by a relation on individual arrows.}
+\dgrclaim{false}{81-82}{IIb-B064}{If phi records (left edge,right edge), the lifting condition for classes (Phi right,Psi left) is phi inverse(Phi times Psi) subset D0 as printed.}
+\dgrclaim{false}{83}{IIb-B071}{The condition in (6.3) is equivalent to saying A is stable under pullback along L.}
+\dgrclaim{false}{84}{IIb-B072}{With the initial definitions, P and Q are closed under arbitrary unions.}
+\dgrclaim{false}{85}{IIb-B078}{The pullback-stability of T\_W(A) proves T\_W(A) belongs to the Q defined in (6.2).}
+\dgrclaim{false}{86}{IIb-B088}{The prose before (6.8) identifies all closed pairs with pairs whose two members are composition-closed.}
+\dgrclaim{open}{89}{IIb-B100}{Find an effective intrinsic characterization of T\_W(W\_asph) and T\_W(W\_coas).}
+\dgrclaim{open}{89}{IIb-B101}{Define Net\_W=Stab(W\_bias) and seek a characterization using bilocal factorization categories.}
+\dgrclaim{open}{89}{IIb-B102}{Determine Stab(Equ), the stabilizer of categorical equivalences.}
+\dgrclaim{false}{89}{IIb-B103}{The printed final inclusion says Equ subset P(W) for a fundamental localizer W.}
+\dgrclaim{false}{90}{IIb-C009}{Remark 7.2, literally: every discrete fibration is locally filtered.}
+\dgrclaim{open}{91}{IIb-C019}{Remark 7.4(1): are locally cofiltered or precofiltered functors stable under arbitrary base change?}
+\dgrclaim{false}{92}{IIb-C022}{Remark 7.4(3), literal intermediate assertion: a cofiltered functor is W\_0-aspherical.}
+\dgrclaim{false}{92-95}{IIb-C027}{Proposition 7.4(c), literally: for any open U\ensuremath{\subset} X/x let V be the lower open generated by the image of all X/x; then U\ensuremath{\to} V is cofiltered (respectively weakly cofiltered).}
+\dgrclaim{false}{98-99}{IIb-C063}{The abbreviated total-connectedness criterion C\textasciicircum{}\{op\}\ensuremath{\to} C\textasciicircum{}\{op\}\ensuremath{\times} C\textasciicircum{}\{op\} final, without nonemptiness.}
+\dgrclaim{false}{99}{IIb-C065}{The parenthetical locally cofiltered = components filtered, and the label PS*1 = the x\ensuremath{\backslash} C satisfy PS*1\ensuremath{\prime}, in the first closing diagram.}
+\par\endgroup
+
+\section*{III-V \textperiodcentered\ Chapter III, manuscript pages 1--12; Chapter IV, manuscript pages 73--83; Chapter V, manuscript pages 1--52}
+\pdfbookmark[1]{III-V}{dgrclaims.III-V}
+\begingroup\raggedright
+\input{parts/DER_III-V_defs}
+\dgrclaim{open}{III:1}{III-002}{Seek a covariant tensor $\mathrm{Hot}\times\mathcal A\to\mathcal A$ and a contravariant-in-space cotensor $\mathrm{Hot}^{op}\times\mathcal A\to\mathcal A$.}
+\dgrclaim{conjectured}{III:1}{III-004}{For each space the two operations should extend from $\mathbf D(e)$ to morphisms $\mathbf D\to\mathbf D$.}
+\dgrclaim{open}{III:3}{III-010}{The comparison $\mathrm{Hot}_0\to\mathrm{Hot}$ may be fully faithful for a suitable domain of sufficiently small homotopy types.}
+\dgrclaim{conjectured}{III:4}{III-013}{A nerve weak equivalence $f:X'\to X$ is a $\mathbf D$-equivalence.}
+\dgrclaim{open}{III:4}{III-015}{An equivalence of categories in Diag is a $\mathbf D$-equivalence.}
+\dgrclaim{false}{III:5}{III-018}{Tensor and cotensor by the unpointed circle are suspension and based loops.}
+\dgrclaim{conjectured}{III:7}{III-026}{The functor $\operatorname{Hom}_{(-)}(M,N)$ appears representable by an object of $\mathrm{Hot}_0$, or at least by a space.}
+\dgrclaim{open}{III:8}{III-029}{For a Quillen model presentation, the external mapping space satisfies the representation formula (10).}
+\dgrclaim{false}{III:10}{III-034}{Equation (14) specializes (13) to a circle and identifies it with suspension–loop adjunction.}
+\dgrclaim{open}{III:11}{III-043}{Footnote 2 requests an explicit verification of the tensor-cotensor adjunction for complexes.}
+\dgrclaim{conjectured}{III:11}{III-044}{A candidate external Hom is the space underlying the nonpositive truncation of $\mathbf R\operatorname{Hom}_k(M,N)$.}
+\dgrclaim{open}{III:12}{III-045}{Footnote 3 asks whether $[\xi,H]\cong\operatorname{Hom}_{\mathrm{Hotab}}(\xi_{\mathrm{ab}},H)$.}
+\dgrclaim{conjectured}{III:12}{III-051}{The better external Hom might take values in $D^-(\mathbb Z)$, retaining more than its nonpositive truncation.}
+\dgrclaim{open}{IV:73}{IV-004}{Are coherent diagrams with isomorphic skeletons necessarily isomorphic?}
+\dgrclaim{open}{IV:78}{IV-018}{Seek canonical coherent lifts of the unit $G\to f_*f^*G$ and counit $f^*f_*F\to F$, and dually for $f_!\dashv f^*$.}
+\dgrclaim{conjectured}{IV:82}{IV-030}{The collage with its structural maps is characterized by the universal triple description, up to compatible canonical isomorphism.}
+\dgrclaim{open}{IV:82}{IV-034}{Seek $\mathbf D(K)\to\mathbf D(I\times[1])$ whose underlying arrow is u.}
+\dgrclaim{open}{IV:82}{IV-035}{Seek $\mathbf D(K)\to\mathbf D(J\times[1])$ whose underlying arrow is the adjoint v.}
+\dgrclaim{false}{V:8--9}{V-P035}{Raw concatenation has shape $\Phi_{m+n}$ whenever $m,n$ have the same parity.}
+\dgrclaim{false}{V:13}{V-P047}{Checking only simultaneous increments $(m,n)\mapsto(m+1,n+1)$ suffices for the proposed compatibility.}
+\dgrclaim{false}{V:15--16,24}{V-P052}{Fixed-endpoint path categories are full subcategories of the unqualified functor categories.}
+\dgrclaim{conjectured}{V:25--26}{V-P081}{A nonempty category of endpoint-preserving functors between generalized intervals is connected.}
+\dgrclaim{conjectured}{V:26}{V-P082}{The same nonempty endpoint-preserving functor category is contractible.}
+\dgrclaim{false}{V:37}{V-I026}{The localization $\varphi:\Cathot\to\Hot$ has a right adjoint $\psi$, called a Kan envelope.}
+\dgrclaim{conjectured}{V:46}{V-I057}{Essential constancy should almost never occur in practice.}
+\dgrclaim{false}{V:47}{V-I059}{If such an ind-map induces an isomorphism in Ind(Cathot), its union map is necessarily a weak equivalence.}
+\dgrclaim{false}{V:47}{V-I060}{A weak equivalence between the envelope unions is an isomorphism in Cathot.}
+\dgrclaim{conjectured}{V:49}{V-I064}{The required minimal lengths of stagewise homotopies may tend to infinity, obstructing a global categorical homotopy.}
+\dgrclaim{false}{V:49}{V-I065}{For a Thomason fibrant K\ensuremath{'}, are categorically homotopic functors X\ensuremath{\to}K\ensuremath{'} always connected by one natural transformation?}
+\dgrclaim{conjectured}{V:49-50}{V-I066}{Different reasonable theories of paths might yield canonically and transitively isomorphic unions in Cathot, as well as isomorphic ind-objects.}
+\dgrclaim{false}{V:52}{V-I071}{This restricted Yoneda functor is conservative.}
+\dgrclaim{false}{V:52}{V-I072}{Bijectivity on unbased homotopy classes from all spheres already detects weak equivalence.}
+\dgrclaim{false}{V:52}{V-I073}{Is the restricted Yoneda functor Hot\ensuremath{\to}Fun(Hot\_0\textasciicircum{}op,Ens) fully faithful?}
+\par\endgroup
+
+\section*{VI-a \textperiodcentered\ Chapter VI, part 1 of 3, manuscript pages 1--70}
+\pdfbookmark[1]{VI-a}{dgrclaims.VI-a}
+\begingroup\raggedright
+\input{parts/DER_VI-a_defs}
+\dgrclaim{false}{4, 8}{VIa-039}{The initial comparison theorem asserts that all functors of the thirteen-category diagram induce equivalences after the localizations specified on ms7, identifying strict-fibrewise diagram theory with coarse Cat/S theory.}
+\dgrclaim{conjectured}{5}{VIa-040}{The higher coherence discarded by ordinary localization should be recovered in relative internal Hom objects interpreted as \ensuremath{\infty}-groupoid stacks over S.}
+\dgrclaim{false}{6, 33}{VIa-048}{Read literally for arbitrary W\ensuremath{\supseteq}W\ensuremath{\infty}, the source identifies transitions being Hot-equivalences with transitions belonging to W (ms6), and identifies Hot\_W-valued local coefficients exactly with the index-0 split categories defined by W\ensuremath{\infty}-transitions (ms33).}
+\dgrclaim{conjectured}{14}{VIa-067}{Replacing \ensuremath{\Phi} and \ensuremath{\Psi} by \ensuremath{\Phi}\ensuremath{'}=\ensuremath{\alpha}\ensuremath{'}\ensuremath{\Phi}\ensuremath{_0} and \ensuremath{\Psi}\ensuremath{'}=\ensuremath{\beta}\ensuremath{'}\ensuremath{\Psi}\ensuremath{_0} is proposed as a way to make the initial localized equivalence argument work.}
+\dgrclaim{false}{14}{VIa-068}{For an arbitrary W satisfying the initially stated localizer assumptions, the source identifies total and strict-fibrewise W-equivalence on Parf(S), Fibhot(S), Fib\ensuremath{_0}(S) and Cofib\ensuremath{_0}(S).}
+\dgrclaim{false}{21}{VIa-097}{Footnote 13 literally states that if X is a homotopy fibration over S then \ensuremath{\Psi}(X) belongs to Fibsc\ensuremath{_0}(S).}
+\dgrclaim{conjectured}{22}{VIa-103}{Desired numbered assertion (2): for f:X\ensuremath{\to}Y over S with X,Y perfect, or merely homotopy fibrations, total f\ensuremath{\in}W should imply f\_s\ensuremath{\in}W for every s.}
+\dgrclaim{conjectured}{23, 45}{VIa-108}{The source conjectures on ms23 that perfect-base-change stability should hold for the finite homotopy-truncation localizers W\_i, and on ms45 asks whether they satisfy new L5, L6 and L6 bis.}
+\dgrclaim{false}{23}{VIa-111}{From a commutative square with vertical weak homotopy equivalences and lower horizontal map f\ensuremath{'} merely in W, the source concludes that the upper fibre map f\ensuremath{'}\_\{s\ensuremath{'}\} is also a weak homotopy equivalence.}
+\dgrclaim{false}{26}{VIa-123}{Every Grothendieck fibration over S is isomorphic over S to a split fibration, so Fibsc(S)\ensuremath{\to}Fib(S) is essentially surjective as an ordinary functor; dually for opfibrations.}
+\dgrclaim{false}{26}{VIa-124}{Restricting Fib(S) to Cartesian functors makes Fibsc(S)\ensuremath{\to}Fib(S) fully faithful and an equivalence of ordinary categories; the cocartesian dual assertion also holds.}
+\dgrclaim{conjectured}{26-27}{VIa-125}{After restricting morphisms from arbitrary functors over S to coherent splitting-preserving ones and simultaneously restricting weak equivalences from coarse to fibrewise ones, the resulting localized categories might still be equivalent.}
+\dgrclaim{false}{30-31}{VIa-135}{In the surrounding contravariant \ensuremath{\Phi} construction, its transport square is the printed covariant square with fibres X/s and X/t and transport u\_*:X\_s\ensuremath{\to}X\_t.}
+\dgrclaim{conjectured}{32-35}{VIa-141}{The nine nonsplit categories of the p8 diagram, with coarse W-equivalences, should model the full subcategory of locally constant objects of HOT\_W(S); passing from an arbitrary diagram to its total category and then C should give its locally constant replacement.}
+\dgrclaim{false}{33}{VIa-143}{The category Cofibsc(S) is the outer opposite category (Fibsc(S\textasciicircum{}op))\textasciicircum{}op.}
+\dgrclaim{conjectured}{33, 35, 37}{VIa-145}{The functors Fibsc\_0(S)\ensuremath{\to}Fib\_0(S) and Cofibsc\_0(S)\ensuremath{\to}Cofib\_0(S) should induce equivalences after localization, with quasi-inverses represented by \ensuremath{\Phi}\_0 and \ensuremath{\Psi}\_0, under the standing fibre/coarse identification hypothesis on internal objects.}
+\dgrclaim{conjectured}{33-35, 37}{VIa-146}{The inclusions Fibsc\_0(S)\ensuremath{\to}Fibsc(S) and Cofibsc\_0(S)\ensuremath{\to}Cofibsc(S), localized fibrewise, should be fully faithful, with essential images precisely the locally constant objects of the respective contravariant and covariant diagram homotopy categories.}
+\dgrclaim{false}{33-34}{VIa-147}{The fine covariant theory and its locally constant inclusion are to be written using (HOT\_W(S\textasciicircum{}op))\textasciicircum{}op, as printed in the p33–34 discussion.}
+\dgrclaim{conjectured}{34-35}{VIa-148}{After identifying the coarse localization with local systems, forgetting the strict diagram structure should induce retractions from HOT\_W(S) and HOT\_W(S\textasciicircum{}op) onto their locally constant full subcategories.}
+\dgrclaim{false}{38}{VIa-156}{The equation k\ensuremath{\psi}\ensuremath{\cong}id\_B implies that k is full on Hom\_A(a,a\ensuremath{'}) for arbitrary objects a,a\ensuremath{'} of A.}
+\dgrclaim{false}{38}{VIa-157}{Under k\ensuremath{\psi}\ensuremath{\cong}id\_B, failure of full faithfulness of \ensuremath{\psi} is equivalent to failure of faithfulness of k.}
+\dgrclaim{conjectured}{38}{VIa-160}{The essential image of \ensuremath{\bar{\ensuremath{\psi}}}\ensuremath{'} is expected to consist precisely of the locally constant objects of HOT\_W(S).}
+\dgrclaim{conjectured}{41}{VIa-173}{Left-fine W-equivalences should be preserved by smooth base change T\ensuremath{\to}S, extending their stability under discrete-fibration base change.}
+\dgrclaim{conjectured}{41}{VIa-174}{Right-fine W-equivalences should be preserved by proper base change T\ensuremath{\to}S.}
+\dgrclaim{false}{42, 44}{VIa-180}{Proposition 1(1), which compares X/s\ensuremath{\to}Y/s over an independent base S, is simply the original absolute axiom L4.}
+\dgrclaim{conjectured}{43}{VIa-186}{The integral-homology localizer is suspected also to fail the total-to-fibre implication for maps between homotopy fibrations.}
+\dgrclaim{false}{43, 45}{VIa-188}{L1, L3 quater, relative L4 bis, and the new L5 alone force W=W\ensuremath{\infty}, with no component-preservation hypothesis.}
+\dgrclaim{conjectured}{44}{VIa-191}{For the fundamental localizers under consideration, L6—or even the new L5 alone—should imply L6 bis.}
+\dgrclaim{false}{45}{VIa-200}{Saturation, the terminal-object axiom, relative L4 bis, and the new L5 alone imply W\ensuremath{\subseteq}W\ensuremath{\infty}, without any component condition.}
+\dgrclaim{false}{47}{VIa-208}{On Liss(S), Fib(S), and Fibsc(S), the coarse W-class equals the right-fine W-class; dually on Prop(S), Cofib(S), and Cofibsc(S), it equals the left-fine W-class.}
+\dgrclaim{conjectured}{49, 53-57}{VIa-213}{Does the coarse weak-equivalence class also give the asserted comparison for the split categories Fibsc(S) and Cofibsc(S), whose morphisms must preserve the chosen splitting?}
+\dgrclaim{false}{50}{VIa-218}{The common left-fine localization of Cat/S, Prop(S), Cofib(S), and Cofibsc(S) is isomorphic to HOT\_W(S\textasciicircum{}op)\textasciicircum{}op.}
+\dgrclaim{false}{51}{VIa-224}{The editorial replacement HOT\_W\textasciicircum{}o(S):=HOT\_W(S\textasciicircum{}op)\textasciicircum{}op is the correct target convention for the covariant comparison functor j.}
+\dgrclaim{conjectured}{51-52, 64-69}{VIa-226}{The canonical functors i:HOT\_W\textasciicircum{}lc(S)\ensuremath{\to}HOT\_W(S) and j:HOT\_W\textasciicircum{}lc(S)\ensuremath{\to}HOT\_W(S\textasciicircum{}op) should be fully faithful under the p45 package L1, L3 quater, L4 bis, L7 and the new L5.}
+\dgrclaim{false}{55}{VIa-238}{A Cartesian functor between split fibrations is therefore compatible with their specified splittings.}
+\dgrclaim{false}{55-57}{VIa-239}{The pullback retractions \ensuremath{\gamma}\_X:\ensuremath{\Phi}(X)\ensuremath{\to}X form a strictly natural transformation on the full category Fib(S), allowing every functor over S and imposing no Cartesian condition on the morphisms.}
+\dgrclaim{false}{56}{VIa-242}{For every X\ensuremath{\to}S and split fibration Y\ensuremath{\to}S, restriction along \ensuremath{\eta}\_X gives a bijection Hom\_cart/S(\ensuremath{\Phi}X,Y)\ensuremath{\cong}Hom\_S(X,UY), where the left-hand side includes all Cartesian functors.}
+\dgrclaim{false}{65-67}{VIa-267}{To make Cbar a right adjoint to \ensuremath{\rho}, the required adjunction arrows should have the initially drawn directions id\_coarse\ensuremath{\to}\ensuremath{\rho}Cbar and Cbar\ensuremath{\rho}\ensuremath{\to}id\_fine.}
+\dgrclaim{false}{65}{VIb-A006}{The attempted unit/counit directions before p.67 do not yet give $\rho\dashv\bar C$.}
+\par\endgroup
+
+\section*{VI-b \textperiodcentered\ Chapter VI, part 2 of 3, manuscript pages 71--145}
+\pdfbookmark[1]{VI-b}{dgrclaims.VI-b}
+\begingroup\raggedright
+\input{parts/DER_VI-b_defs}
+\dgrclaim{false}{71}{VIb-A027}{The editorial outer-opposite correction asserts $\HOT_W^o(S)\simeq(\HOT_W(S^{op}))^{op}$ while retaining the ordinary localization definitions.}
+\dgrclaim{false}{71}{VIb-A031}{Footnote46 conjectures that coarse and fibrewise localized theories differ whenever S is not equivalent to a discrete category.}
+\dgrclaim{false}{74}{VIb-A041}{The covariant underlying diagram for arbitrary X/S is printed as $s\mapsto\hot_W(s\backslash X)$.}
+\dgrclaim{open}{82}{VIb-A070}{Can the coarse comparison be obtained from a Quillen-type replacement without choosing a functorial factorization?}
+\dgrclaim{open}{82}{VIb-A071}{Can fine right and left relative equivalences in M/S be defined intrinsically from a general category of models (M,W)?}
+\dgrclaim{false}{82}{VIb-R001}{The prose identifies local-isomorphism tests with W\_S\textasciicircum{}d and co-local-isomorphism tests with W\_S\textasciicircum{}g.}
+\dgrclaim{conjectured}{83}{VIb-A073}{The suggested smooth and Zariski-like localizations should have the same relevant invariants, and dually proper and co-Zariski-like localizations should have the same cohomology.}
+\dgrclaim{false}{84}{VIb-A075}{The compatibility $i_{CX}=C(i_X)$ cannot be formal under the hypotheses already available.}
+\dgrclaim{open}{84}{VIb-A077}{Does $i_{CX}=C(i_X)$ hold after inverting universal weak equivalences over S?}
+\dgrclaim{open}{84}{VIb-A078}{Does duality reverse the order of the two adjunctions in this comparison?}
+\dgrclaim{open}{85}{VIb-A079}{A finer localizer on M/S contained in W\_S gives a localization from the fine quotient to the coarse quotient; constructing a section and adjunction requires suitable fibrant representatives.}
+\dgrclaim{open}{87}{VIb-A086}{To construct a quasi-inverse one seeks a functor gamma:M/S\ensuremath{\to}(Fib S)[W\_S\textasciicircum{}\{-1\}] sending X to C(X) and W\_S to isomorphisms.}
+\dgrclaim{conjectured}{94}{VIb-B015}{Replacing local-isomorphism tests by all smooth morphisms gives the same left relative localizer.}
+\dgrclaim{open}{94}{VIb-B017}{Is closure of the test class $\mathcal L$ under composition needed?}
+\dgrclaim{conjectured}{97–98}{VIb-B028}{The section i is expected to be fully faithful.}
+\dgrclaim{conjectured}{98}{VIb-B029}{The localization rho is expected to be left adjoint to i.}
+\dgrclaim{false}{105}{VIb-B049}{The source attributes $(x,c)\mapsto(x,1_{f(x)},c)$ to $i_{CX}$ and $(x,c)\mapsto(x,c,1_{\beta(c)})$ to $C(i_X)$, respectively.}
+\dgrclaim{false}{108}{VIb-B057}{Footnote59 asserts that the stability hypotheses on Fib are used only in II and only in case A/A-prime.}
+\dgrclaim{false}{115}{VIb-B085}{The editorial correction inserts an outer opposite in $\mathrm{HOT}_W^o(S)=\mathrm{HOT}_W(S^{op})^{op}$.}
+\dgrclaim{false}{120}{VIb-C009}{The path replacement $C_S(X)$ represents the same object of $\HOT_W(S)$ as arbitrary $X\to S$.}
+\dgrclaim{false}{120}{VIb-C011}{Corollary 2, second isomorphism: $f^*q_S(X)\cong q_{S^{\prime}}(C_S(X)\times_S S^{\prime})$ for arbitrary $X\to S$.}
+\dgrclaim{open}{120}{VIb-C012}{Which changes of base $f:S^{\prime}\to S$ allow strict pullback to calculate derived restriction on every $X\to S$?}
+\dgrclaim{conjectured}{122}{VIb-C016}{Proper $f:S^{\prime}\to S$ induces a strict pullback functor preserving $W_S^{\mathrm d}$.}
+\dgrclaim{conjectured}{122}{VIb-C017}{Smooth $f:S^{\prime}\to S$ induces a strict pullback functor preserving $W_S^{\mathrm g}$.}
+\dgrclaim{open}{123}{VIb-C019}{Is preservation of right-fine weak equivalences by pullback equivalent to $W$-properness of the base functor?}
+\dgrclaim{open}{124}{VIb-C024}{If an arrow of a chosen category over $S^{\prime}$ becomes invertible in its coarse localization, must it belong to $W_{S^{\prime}}$?}
+\dgrclaim{conjectured}{124}{VIb-C025}{For proper change of base, the same comparison criterion can be formulated on all of $\Cat/S$.}
+\dgrclaim{false}{126}{VIb-C028}{An arrow invertible after an arbitrary localization necessarily belonged to the original class of arrows being inverted.}
+\dgrclaim{open}{126}{VIb-C031}{Does a Hot-fibration which is not proper furnish a pullback that fails to preserve the right-fine class on all categories over the base?}
+\dgrclaim{open}{127}{VIb-C032}{Are there functors other than Hot-fibrations or W-fibrations for which restriction commutes with local-constant reflection?}
+\dgrclaim{conjectured}{128}{VIb-C035}{The varying-base assignment $S\mapsto\HOT_W^{\mathrm{lc}}(S)$ is not expected to be a derivator.}
+\dgrclaim{open}{128}{VIb-C036}{Do restriction functors between locally constant categories have left and right adjoints?}
+\dgrclaim{open}{130}{VIb-C042}{For an arbitrary relative category (M,W), are isomorphisms in localized diagram categories detected by evaluation?}
+\dgrclaim{open}{130–132}{VIb-C043}{Does $\HOT_W(\coprod_i S_i)\to\prod_i\HOT_W(S_i)$ remain an equivalence for arbitrary small index sets?}
+\dgrclaim{open}{131}{VIb-C045}{For arbitrary relative categories (F\_i,W\_i), is $(\prod_iF_i)[(\prod_iW_i)^{-1}]\to\prod_i(F_i[W_i^{-1}])$ an equivalence?}
+\dgrclaim{conjectured}{132}{VIb-C048}{Uniform short presentations of morphisms could prove the infinite coproduct axiom for HOT.}
+\dgrclaim{open}{137}{VIb-C061}{Does a Hot-fibration f ensure that direct image preserves locally constant types?}
+\dgrclaim{false}{142}{VIb-C070}{Pullback of the right-fine replacement map $i_X$ along arbitrary S-prime\ensuremath{\to}S is again right-fine.}
+\dgrclaim{false}{142–143}{VIb-C071}{The counit may always be defined by projection composed with the inverse of the base-changed replacement map.}
+\dgrclaim{false}{142}{VIc-A007}{Question: does the pullback i\_X times\_S id\_\{S\ensuremath{\prime}\}:X times\_S S\ensuremath{\prime} -> Phi\_S(X) times\_S S\ensuremath{\prime} necessarily belong to W\_S\textasciicircum{}d?}
+\dgrclaim{false}{142}{VIc-A008}{Proposed formula: beta\_X=pr\_1\textasciicircum{}X (i\_X times\_S id\_\{S\ensuremath{\prime}\})\textasciicircum{}\{-1\} defines the counit at every representative X over S.}
+\par\endgroup
+
+\section*{VI-c \textperiodcentered\ Chapter VI, part 3 of 3, manuscript pages 146--204}
+\pdfbookmark[1]{VI-c}{dgrclaims.VI-c}
+\begingroup\raggedright
+\input{parts/DER_VI-c_defs}
+\dgrclaim{false}{151}{VIc-A021}{Proposed product formula: f\_!f\textasciicircum{}*(xi)=[S\ensuremath{\prime}/S] times\_S xi for every base functor f and every coefficient xi.}
+\dgrclaim{false}{152}{VIc-A025}{False Corollary1: if only one of X,Y is smooth, then [X times\_S Y] is necessarily the product [X] times\_S [Y].}
+\dgrclaim{false}{152}{VIc-A026}{Every smooth X -> S induces by pullback a functor Cat/S -> Cat/X preserving all right-fine equivalences.}
+\dgrclaim{conjectured}{159}{VIc-A052}{The strengthened Der3b\ensuremath{\prime}\_2 says that every f in W induces an equivalence f\_0\textasciicircum{}*:HOT\_W\textasciicircum{}lc(S)->HOT\_W\textasciicircum{}lc(S\ensuremath{\prime}).}
+\dgrclaim{conjectured}{159}{VIc-A054}{Full faithfulness of f\_0\textasciicircum{}* is expected to follow from the enhanced cohomological equivalence condition by applying internal Hom and cohomological direct images.}
+\dgrclaim{conjectured}{159}{VIc-A055}{The construction of the right adjoints f\_* and of internal Hom is expected to proceed together.}
+\dgrclaim{conjectured}{163}{VIc-B011}{Properness should be equivalent to preservation of the right-fine localizers by pullback.}
+\dgrclaim{conjectured}{172–173}{VIc-B034}{There may exist substantial homotopy theories HOT\_W for classes W strictly smaller than W\ensuremath{\infty} while W(1,2,3) hold.}
+\dgrclaim{false}{180–181}{VIc-B065}{Intermediate full subcategories between Parf\_omega S and Fib\_W S might yield distinct fine localizations.}
+\dgrclaim{open}{184}{VIc-C010}{Does the old restricted W(4b\ensuremath{\prime}) alone force $\lambda:\mathrm{HOT}_W^{lc}(S)\to\mathrm{HOT}_W^{lc!}(S)$ to be an equivalence?}
+\dgrclaim{conjectured}{185}{VIc-C015}{The new Cartesian fibre-detection axiom should imply the strongest W(4a) preservation condition, at least for the strong saturation of W.}
+\dgrclaim{open}{186}{VIc-C019}{Do $\mathrm{Parf}_W S\hookrightarrow\mathrm{Liss}_{0,W}S$ and $\mathrm{Parf}_W S\hookrightarrow\mathrm{Prop}_{0,W}S$ induce equivalences after inverting fibrewise W-equivalences, without W(4b)?}
+\dgrclaim{open}{186}{VIc-C020}{The same fine-localization comparison is asked with $\mathrm{Parf}_\omega S$ in place of $\mathrm{Parf}_W S$.}
+\dgrclaim{open}{186}{VIc-C022}{Does $(\mathrm{Bifib}S)[(W_S^f)^{-1}]\to(\mathrm{Fib}_WS)[(W_S^f)^{-1}]$ become essentially surjective, or an equivalence, even assuming W(4a)?}
+\dgrclaim{open}{187}{VIc-C024}{Does Phi carry W-proper objects, or proper weakly W-fibred objects, to W-proper objects?}
+\dgrclaim{conjectured}{189}{VIc-C028}{If both arrows in the span are open embeddings, or both closed embeddings, is the total category W-equivalent to the ordinary amalgamated sum $X_a\amalg_{X_0}X_b$?}
+\dgrclaim{conjectured}{201}{VIc-C077}{If X is weakly W-fibred, then $[X\times_S Y]\to[X]\times_S[Y]$ should be invertible for every Y, without smoothness of Y.}
+\dgrclaim{false}{202}{VIc-C083}{The general product formula should fail if neither X is W-proper nor Y W-smooth, even when X is weakly W-fibred.}
+\par\endgroup
+
+\section*{VII-a \textperiodcentered\ Chapter VII, part 1 of 3, manuscript pages 1--57}
+\pdfbookmark[1]{VII-a}{dgrclaims.VII-a}
+\begingroup\raggedright
+\input{parts/DER_VII-a_defs}
+\dgrclaim{false}{4-5}{VIIa-A013}{As printed: composable chains correspond to full simplex subcategories, and maximal chains of length i correspond exactly to object-injective functors $\Delta_i\to I$.}
+\dgrclaim{false}{5}{VIIa-A018}{Proposition 1(b), literally: every endofunctor of an interval fixing both endpoints is the identity.}
+\dgrclaim{false}{10}{VIIa-A031}{Proposition 3 as printed: with $A=(I/s)\setminus\{s\}$ and $B=(s\backslash I)\setminus\{s\}$, s is critical iff $I\setminus\{s\}=A\amalg B$.}
+\dgrclaim{false}{11}{VIIa-A037}{Footnote 4, literally: every subcategory of I which is an interval is necessarily full.}
+\dgrclaim{false}{13}{VIIa-A046}{As printed, the length n of the path is $\operatorname{card} I$.}
+\dgrclaim{false}{33}{VIIa.B030}{A constant functor at every non-endpoint vertex of a target interval factors through exactly two critical intervals.}
+\dgrclaim{false}{34}{VIIa.B033}{For increasing f, the full subcategory on the image critical vertices equals the ambient integer interval [f(s\_0),f(s\_r)].}
+\dgrclaim{false}{36}{VIIa.B046}{The global source critical intervals contained in f\textasciicircum{}\{-1\}(J') are exactly all critical intervals of the preimage.}
+\dgrclaim{false}{42}{VIIa-C009}{Each target transition segment [i-1,i] equals the unique image block [t\_\{j-1\},t\_j] which crosses it.}
+\dgrclaim{false}{45}{VIIa-C017}{The object map is constant on every integer-connected component of the set of vertices incident to a collapsed source transition.}
+\dgrclaim{false}{47}{VIIa-C030}{The printed object-map table sends the third fibre block to l\_2 and its general block to l\_i.}
+\dgrclaim{false}{50}{VIIa-C036}{The same object concatenation extends to a bifunctor $\uTyp\times\uTyp\to\uTyp$, where Typ has all functors of interval categories.}
+\par\endgroup
+
+\section*{VII-b \textperiodcentered\ Chapter VII, part 2 of 3, manuscript pages 58--117}
+\pdfbookmark[1]{VII-b}{dgrclaims.VII-b}
+\begingroup\raggedright
+\input{parts/DER_VII-b_defs}
+\dgrclaim{false}{60}{VIIb-A032}{The parenthetical restriction of the possibility of assigning an X-morphism to a path to type $\Delta_+$ alone is too narrow.}
+\dgrclaim{false}{63}{VIIb-A040}{The displayed uncorrected map from a constant a-path to $(b\leftarrow a\to b)$ is a map in $\underline{Ch}_{-+}(b,b)$.}
+\dgrclaim{false}{69}{VIIb-A055}{An equality established only in the groupoid completion Pi(X) implies the needed equality in the relative localization Pi\_Sigma(X).}
+\dgrclaim{false}{76}{VIIb-B012}{For a word with r alternating runs beginning with sign epsilon, its last run has sign $(-1)^r\varepsilon$.}
+\dgrclaim{false}{77}{VIIb-B015}{The concatenated interval $I_{\tau\tau'}$ is the pushout of $I_\tau$ and $I_{\tau'}$ over their two-element endpoint category $\{0,1\}$.}
+\dgrclaim{open}{79--80}{VIIb-B019}{Does the fibrewise/cartesian construction extend to a functor on the total ordinary path categories?}
+\dgrclaim{false}{85}{VIIb-B034}{The collapsing remainder in the alpha-th source run has type $\Delta_{\varepsilon_\alpha}^{l_{\alpha-1}}$.}
+\dgrclaim{false}{86}{VIIb-B036}{The quickest map is a terminal object because it is numerically ahead of every other map.}
+\dgrclaim{conjectured}{86}{VIIb-B037}{The quickest map is the greatest admissible map for pointwise numerical order.}
+\dgrclaim{open}{86}{VIIb-B038}{Is every nonempty increasing endpoint-preserving interval mapping category contractible?}
+\dgrclaim{false}{93}{VIIb-B052}{Reversal gives an isomorphism $P(\tau,\tau')\to P((\tau')^o,\tau^o)$.}
+\dgrclaim{false}{90}{VIIb-B057}{Applying the endpoint-fixed induction to the subinterval $[1,n-1]\subseteq[0,n]$ reduces a map whose active edges have one sign and include the first and last edges to a map with only those two active edges.}
+\dgrclaim{false}{90}{VIIb-B058}{A first source run that is not a single edge has length2.}
+\dgrclaim{false}{102}{VIIb-C024}{The displayed transition $C_{t_n}\to C_{t_{n-1}}$ has the variance required by the sequential direct system.}
+\dgrclaim{open}{102–103}{VIIb-C026}{Compare the total category $C$, the various sequential colimits $C_\infty$, and the ind-object $H_C$, in Cat hot and in Hot; determine dependence on the chosen cofinal chain.}
+\dgrclaim{false}{103}{VIIb-C028}{The thin reflection of the slice satisfies $(T/t_0)_o=P/t_0=\{t:t\le t_0\}$.}
+\dgrclaim{false}{103}{VIIb-C029}{Under only the stated preorder filtration, passage from $T$ to $T/t_0$ automatically gives another filtered indexing preorder and leaves the same ind-object construction available.}
+\dgrclaim{conjectured}{103–104}{VIIb-C030}{If the total category were canonically recovered from the ind-object, restriction to a preorder-cofinal chain would preserve its homotopy type.}
+\dgrclaim{open}{104–105}{VIIb-C031}{For a left-cofinal base change $\alpha:T^{\prime}\to T$ preserving the indicated ind-diagram, is $C\times_TT^{\prime}\to C$ a Cat-hot isomorphism or at least a weak equivalence of nerves?}
+\dgrclaim{open}{107}{VIIb-C040}{Are the sets $\mathrm{Cat\,hot}(S,C)$ or $\mathrm{Hot}(S,C)$ naturally identified with $H(S)$ beyond S=e?}
+\dgrclaim{conjectured}{107}{VIIb-C041}{An isomorphism on the preceding component sets need not extend to higher homotopy groups or to a Hot equivalence of the compared objects.}
+\dgrclaim{conjectured}{112–113}{VIIb-C053}{For the motivating path fibration, Grothendieck suspects that $C_\infty\to C$ is generally not a Hot isomorphism.}
+\dgrclaim{false}{113}{VIIb-C054}{A loop-space multiplication cannot in general be represented by a strictly associative simplicial monoid, so such strict multiplication would obstruct the proposed comparison.}
+\dgrclaim{false}{115}{VIIb-C060}{For an arbitrary chosen cofinal sequence of types, concatenation has target stage n+m: $P_{t_n}(a,b)\times P_{t_m}(b,c)\to P_{t_{n+m}}(a,c)$.}
+\dgrclaim{open}{108–109}{VIIc-A003}{For T=N\textasciicircum{}op, does the canonical localization C\ensuremath{\to}colim\_n C\_n induce a weak equivalence?}
+\dgrclaim{open}{109}{VIIc-A006}{Is the canonical morphism C\_\ensuremath{\infty}\ensuremath{\to}C always an isomorphism in Hot?}
+\dgrclaim{conjectured}{112–113}{VIIc-A015}{The comparison C\_\ensuremath{\infty}\ensuremath{\to}Ch\_\ensuremath{\Sigma}(X;a,b) is conjectured not to be a weak equivalence in general.}
+\dgrclaim{false}{113}{VIIc-A016}{The based loop object \ensuremath{\Omega}(BX,a) cannot in general be modeled by a strictly associative simplicial monoid.}
+\dgrclaim{false}{114}{VIIc-A020}{The object of the finite-test presheaf category associated with C\_\ensuremath{\infty} equals the filtered colimit of the stage-representable presheaves.}
+\par\endgroup
+
+\section*{VII-c \textperiodcentered\ Chapter VII, part 3 of 3, manuscript pages 118--171}
+\pdfbookmark[1]{VII-c}{dgrclaims.VII-c}
+\begingroup\raggedright
+\input{parts/DER_VII-c_defs}
+\dgrclaim{false}{117–118}{VIIc-A029}{Every natural transformation between cofinal sequences induces a weak equivalence C\_\ensuremath{\infty}(t\ensuremath{'})\ensuremath{\to}C\_\ensuremath{\infty}(t) under the general section10 hypotheses.}
+\dgrclaim{open}{119}{VIIc-A034}{Does the induced Hot morphism depend only on the endpoints t,t\ensuremath{'} and not on the chosen natural transformation?}
+\dgrclaim{false}{119}{VIIc-A035}{On finite-test presheaves every comparison is the canonical identification with the presheaf associated to H\_T.}
+\dgrclaim{false}{120}{VIIc-A038}{The map colim\_n Hom\_Hot(\ensuremath{\xi},C\_n)\ensuremath{\to}Hom\_Hot(\ensuremath{\xi},C\_\ensuremath{\infty}) is bijective for every \ensuremath{\xi}\ensuremath{\in}Hot.}
+\dgrclaim{false}{121}{VIIc-A042}{Bijectivity on all unpointed finite homotopy test sets implies that a map is an isomorphism in Hot.}
+\dgrclaim{false}{121}{VIIc-A043}{Hom\_Hot(Y,\ensuremath{-}) commutes with filtered colimits whenever Y is a finite category.}
+\dgrclaim{open}{121,124}{VIIc-A046}{Are all comparison functors invertible already in Cat hot?}
+\dgrclaim{false}{123}{VIIc-A050}{The ind-identification implies that all induced comparison maps on C\_\ensuremath{\infty} are isomorphisms in Hot.}
+\dgrclaim{false}{123}{VIIc-A053}{The restriction H\_0 of H to the source’s finite-category test subcategory is represented by the presheaf h(C\_\ensuremath{\infty}).}
+\dgrclaim{open}{124–125}{VIIc-A056}{Does a binary path composition C\_\ensuremath{\infty}(a,b)×C\_\ensuremath{\infty}(b,c)\ensuremath{\to}C\_\ensuremath{\infty}(a,c) exist canonically in Hot?}
+\dgrclaim{false}{126}{VIIc-A063}{Two unrelated interval types can be compared by their categorical product \ensuremath{\tau}\_0×\ensuremath{\tau}\ensuremath{'}\_0 as another interval type.}
+\dgrclaim{open}{127}{VIIc-A065}{Is the constructed binary operation associative in Hot?}
+\dgrclaim{open}{127}{VIIc-A066}{Is Hot\ensuremath{\to}widehat(Hot\_0) faithful, or even fully faithful?}
+\dgrclaim{open}{127}{VIIc-A069}{Are the canonical maps H\ensuremath{\to}C\_\ensuremath{\infty} epimorphisms in Ind Hot, and do they remain so after products?}
+\dgrclaim{conjectured}{128}{VIIc-A072}{For a non-Kan simplicial set K, the strict endpoint fibres of K\textasciicircum{}\{\ensuremath{\Delta}\textasciicircum{}1\}\ensuremath{\to}K×K need not be the derived path spaces.}
+\dgrclaim{conjectured}{128}{VIIc-A073}{A correct simple path construction for finite simplicial sets would imply a finite computation of all their homotopy groups.}
+\dgrclaim{conjectured}{128}{VIIc-A074}{For \ensuremath{\Sigma}=Fl(X), a weak equivalence X\ensuremath{\to}Xbar should induce Ch\_\ensuremath{\infty}(X;a,b)\ensuremath{\simeq}Ch\_\ensuremath{\infty}(Xbar;a,b).}
+\dgrclaim{conjectured}{129}{VIIc-B002}{The external-Hom parameter functor F\_\{a,b\}(Y)=Hom\_\{D(Y)\}(a\_Y,b\_Y) should send nerve weak equivalences of Y to bijections.}
+\dgrclaim{false}{129}{VIIc-B005}{The source infers under its locality hypothesis that the finite-parameter evaluation of H(a,b) is [Y,Ch\_\{infty,Sigma\}(a,b)] in Hot, using finite-category compactness.}
+\dgrclaim{conjectured}{130}{VIIc-B006}{A nerve weak equivalence f:X\ensuremath{\to}Xprime should induce weak equivalences Ch\_infty(X;a,b)\ensuremath{\to}Ch\_infty(Xprime;fa,fb), with all arrows allowed.}
+\dgrclaim{false}{130}{VIIc-B009}{For Thomason-fibrant X, fixed-endpoint paths of type Delta\_+ might suffice to model Ch\_infty(X;a,b).}
+\dgrclaim{open}{130}{VIIc-B011}{Is Hot\ensuremath{\to}Hot\_0\textasciicircum{}wedge faithful, so that finite tests would prove associativity?}
+\dgrclaim{conjectured}{132}{VIIc-B018}{Noncontractible components of Omega(X,a) would make the invariance condition almost never hold.}
+\dgrclaim{false}{133}{VIIc-B022}{For a fixed finite circle category Y, degrees realized by functors Y\ensuremath{\to}Ch\_infty(X;a,a) are bounded by the number of its arrows, hence by four in the displayed example.}
+\dgrclaim{false}{133}{VIIc-B023}{Footnote28 proposes the sharper bound -2\ensuremath{\leq}degree\ensuremath{\leq}2 for the displayed four-arrow circle.}
+\dgrclaim{conjectured}{133}{VIIc-B024}{By enlarging alternating circle models Y\_n, one can realize degrees of arbitrarily large magnitude.}
+\dgrclaim{false}{134}{VIIc-B026}{The proposed bound on degrees proves that pi\_0 Fun(Y\_2,Omega)\ensuremath{\to}pi\_0 Fun(Y\_n,Omega) is not bijective.}
+\dgrclaim{conjectured}{134}{VIIc-B027}{The same finite-size obstruction should apply whenever higher homotopy groups of X provide infinitely many classes.}
+\dgrclaim{conjectured}{134}{VIIc-B028}{Products of alternating intervals with their boundary identified should provide categorical models of S\textasciicircum{}i.}
+\dgrclaim{false}{134}{VIIc-B029}{A fixed finite categorical sphere Y\_n should realize only a bounded subset of pi\_i Omega(X,a).}
+\dgrclaim{conjectured}{134–135}{VIIc-B030}{Every homotopy class should be represented after choosing a sufficiently large categorical sphere and a degree-one map to a smaller model.}
+\dgrclaim{false}{135}{VIIc-B034}{The absolute comparison already fails for Y=[1].}
+\dgrclaim{false}{136}{VIIc-B035}{For any category Y and Thomason-fibrant C, BFun(Y,C) represents RMap(BY,BC).}
+\dgrclaim{false}{136}{VIIc-B036}{If C is Thomason-fibrant then Fun(Y,C) is Thomason-fibrant for arbitrary Y.}
+\dgrclaim{false}{136}{VIIc-B037}{Footnote29 requires Thomason cofibrations to remain cofibrations after product with arbitrary Y.}
+\dgrclaim{false}{136}{VIIc-B038}{For fibrant C and arbitrary Z,Y, pi\_0 Fun(Z×Y,C) computes [B(Z×Y),BC].}
+\dgrclaim{conjectured}{136}{VIIc-B040}{Categorical path objects should have the correct homotopy type without first making X Thomason-fibrant.}
+\dgrclaim{false}{139}{VIIc-B050}{For every f, bar f in this factorization should be both fibrant and a weak equivalence.}
+\dgrclaim{false}{139}{VIIc-B051}{The map alpha should be a Thomason cofibration.}
+\dgrclaim{false}{139}{VIIc-B052}{The map bar f is expected to be fibrant in the model-category sense.}
+\dgrclaim{conjectured}{139}{VIIc-B053}{Item1: p:Ch\_infty(X)\ensuremath{\to}X×X should be smooth, proper and a HOT-fibration.}
+\dgrclaim{conjectured}{139}{VIIc-B055}{Item2 additionally asserts contractible fibres for sigma and beta, hence trivial HOT-fibrations.}
+\dgrclaim{conjectured}{139}{VIIc-B056}{Item3: bar f:C(f)\ensuremath{\to}X should be smooth, proper and a HOT-fibration for every f.}
+\dgrclaim{conjectured}{140–141}{VIIc-B062}{For a path c:a\ensuremath{\to}b, transport should give an isomorphism bar c:hot(C(f)\_a)\ensuremath{\to}hot(C(f)\_b).}
+\dgrclaim{conjectured}{140–141}{VIIc-B063}{Transport should be compatible with concatenation of base paths.}
+\dgrclaim{conjectured}{141}{VIIc-B066}{Transport should depend only on the homotopy class of c in the path category.}
+\dgrclaim{conjectured}{141}{VIIc-B067}{The fibre homotopy types and transport should define a functor Pi(X)\ensuremath{\to}Hot.}
+\dgrclaim{conjectured}{141}{VIIc-B068}{The monodromy construction should apply to every HOT-fibration, not just this mapping-path replacement.}
+\dgrclaim{conjectured}{141}{VIIc-B069}{For a D-fibration and coefficient A\ensuremath{\in}D(e), fibrewise D-homology and D-cohomology should give two Pi(X)-functors to D(e).}
+\dgrclaim{open}{141–142}{VIIc-B070}{Footnotes33–34 ask for the effect of transport on components of the fibres.}
+\dgrclaim{conjectured}{142}{VIIc-B072}{The nerve of Ch\_infty(X) over NX×NX should be weakly equivalent in the slice to a simplicial path object.}
+\dgrclaim{conjectured}{142}{VIIc-B073}{The fixed-endpoint categorical path categories should have canonically the same homotopy types as simplicial path spaces.}
+\dgrclaim{open}{142}{VIIc-B074}{Does a functorial classical simplicial path object exist for every simplicial set?}
+\dgrclaim{false}{145}{VIIc-B084}{The significant edge indices of the t\_n stage are [-2i+1,2i], with 4i edges, as printed.}
+\dgrclaim{false}{146}{VIIc-B088}{For even n, tau\_\{n,m\}=(+-)\textasciicircum{}\{(m-n)/2\} if m is even, and the printed (+-)\textasciicircum{}\{(m-n)/2-1\}+ if m is odd.}
+\dgrclaim{false}{147}{VIIc-B089}{For odd n, tau\_\{n,m\}=(-+)\textasciicircum{}\{(m-n)/2\} if m is odd, and the printed (-+)\textasciicircum{}\{(m-n)/2-1\}- if m is even.}
+\dgrclaim{false}{147}{VIIc-B090}{For n<m the initial sign is (-1)\textasciicircum{}n and the terminal sign is printed as (-1)\textasciicircum{}m.}
+\dgrclaim{open}{150}{VIIc-C004}{Is the restricted Yoneda functor $\mathrm{Hot}\to\mathrm{Hot}_0^{\wedge}$ faithful, so that equality of the two finite-test images implies $T^2=1$?}
+\dgrclaim{conjectured}{151}{VIIc-C016}{The finite-stage composition operations should make the comparison square commute on associated ind-objects.}
+\dgrclaim{false}{152}{VIIc-C017}{If the comma transport becomes an isomorphism in the unbased finite-test presheaf category, it must be an isomorphism in Hot.}
+\dgrclaim{conjectured}{153}{VIIc-C023}{The mapping-path projection $\bar f:C(f)\to X$ should be smooth, proper, and a homotopy fibration.}
+\dgrclaim{conjectured}{155}{VIIc-C031}{The finite-stage $v_*$ are compatible up to categorical homotopy and induce a morphism of ind-objects in Cat hot, then a map of finite-test presheaves.}
+\dgrclaim{conjectured}{155}{VIIc-C033}{The stagewise $v^*$ likewise induce an ind-morphism and hence a map on finite-test presheaves.}
+\dgrclaim{conjectured}{156}{VIIc-C034}{The two ind-morphisms $v_*,v^*$ are inverse, because the stagewise backtracking operations are homotopic to the identity.}
+\dgrclaim{conjectured}{156}{VIIc-C035}{The ind-object comparison square with the comma transport $\bar v$ commutes.}
+\dgrclaim{false}{156}{VIIc-C037}{Invertibility of $\bar v$ after restriction to finite unbased tests implies its invertibility in Hot.}
+\dgrclaim{open}{156}{VIIc-C038}{$\bar f$ is a trivial homotopy fibration if and only if f is a weak equivalence; a categorical long exact sequence seems necessary to prove it.}
+\dgrclaim{conjectured}{157}{VIIc-C039}{The canonical maps $\Ch_\infty(X)\to\Ch(X)$ and $\Ch_\infty(X;a,b)\to\Ch(X;a,b)$ in Hot are isomorphisms.}
+\dgrclaim{conjectured}{157}{VIIc-C040}{The total comparison is an isomorphism in the relative homotopy category over $X\times X$, giving the fixed-endpoint comparisons.}
+\dgrclaim{false}{157}{VIIc-C042}{$\Ch(X)\to X\times X$ is both smooth and proper.}
+\dgrclaim{false}{158}{VIIc-C045}{$\mathcal C_{\mathbf N^o}\to X\times X$ is smooth and proper.}
+\dgrclaim{false}{161}{VIIc-C058}{Smoothness of $\Ch(X^o)\to X^o\times X^o$ implies properness of $\Ch(X)\to X\times X$.}
+\dgrclaim{false}{166}{VIIc-C073}{The composite $j^{\prime} i^{\prime}:X\to\mathcal C_{\mathbf N^o}$ is aspherical.}
+\dgrclaim{false}{168}{VIIc-C078}{The padded formula $\varphi(c^{\prime},w^{\prime})=(\widetilde c^{\prime},\widetilde w^{\prime})$ defines a functor from the sequential lift category to the sequential fixed-endpoint slice.}
+\dgrclaim{false}{169}{VIIc-C081}{The proposed sequential endofunctor $\psi\varphi$ admits a natural transformation to the identity.}
+\dgrclaim{false}{169}{VIIc-C083}{Because the system of interval types is self-opposite, smoothness for X\textasciicircum{}o proves properness of $\mathcal C_{\mathbf N^o}(X)\to X\times X$.}
+\par\endgroup
+
+\section*{VIII-X \textperiodcentered\ Chapter VIII, manuscript pages 1--9; Chapter IX, manuscript pages 1--25; Chapter X, manuscript pages 1--5}
+\pdfbookmark[1]{VIII-X}{dgrclaims.VIII-X}
+\begingroup\raggedright
+\input{parts/DER_VIII-X_defs}
+\dgrclaim{conjectured}{VIII:4}{VIII-016}{For X\ensuremath{\to}S\ensuremath{\to}T and every groupoid fibration \ensuremath{\Gamma} on X, (fp)\_!\ensuremath{\Gamma}\ensuremath{\simeq}f\_!p\_!\ensuremath{\Gamma}, naturally and coherently.}
+\dgrclaim{conjectured}{VIII:7}{VIII-024}{For a cartesian square with invertible \ensuremath{\gamma}, the comparison f\ensuremath{'}\_!q*G\ensuremath{\to}p*f\_!G is an equivalence if f is 1-smooth or p is 1-proper.}
+\dgrclaim{false}{VIII:7}{VIII-029}{For i\ensuremath{\in}\{0,1,2\}, i-faithfulness of f* is equivalent to i-faithfulness of \ensuremath{\Gamma}(T,H)\ensuremath{\to}\ensuremath{\Gamma}(S,f*H) for every H, taking only G=e\_T.}
+\dgrclaim{conjectured}{VIII:8}{VIII-036}{If f is (-1)-proper and (-1)-aspherical, or (-1)-smooth and (-1)-coaspherical, then f* is 0-faithful.}
+\dgrclaim{conjectured}{VIII:8}{VIII-037}{If f is 0-proper and 0-aspherical, or 0-smooth and 0-coaspherical, then f* is 1-faithful.}
+\dgrclaim{conjectured}{VIII:8}{VIII-038}{If f is 1-proper and 1-aspherical, or 1-smooth and 1-coaspherical, then f* is 2-faithful.}
+\dgrclaim{conjectured}{VIII:8–9}{VIII-040}{Under either hypothesis of Theorem 3 with i=2, G on S is in the essential image of f* exactly when G restricted to each strict fibre S\_t is equivalent to a constant groupoid fibration.}
+\dgrclaim{false}{VIII:9}{VIII-041}{For 1-connected Z, a groupoid fibration on Z is constant up to fibred equivalence if and only if every transport functor is an equivalence.}
+\dgrclaim{false}{VIII:9}{VIII-043}{Under Theorem 3 with i=2, G descends along f if and only if every f-vertical arrow induces an equivalence on its fibres.}
+\dgrclaim{false}{IX:4}{IX-011}{Arbitrary arrows u:a-prime->a and v:b->b-prime induce an isomorphism of Hom objects.}
+\dgrclaim{false}{IX:4}{IX-013}{The displayed Ind Cat hot bifunctor has domain M\_Pi x M\_Pi.}
+\dgrclaim{open}{IX:9-10}{IX-R01}{For the full subcategory Hot\_0 of types of finite categories, is the restricted Yoneda functor psi:Hot -> PSh(Hot\_0) fully faithful (and likewise Ind psi)?}
+\dgrclaim{open}{IX:13}{IX-037}{Ch composition is associative in Hot.}
+\dgrclaim{conjectured}{IX:14}{IX-040}{Quillen pi\_1(f,g) agrees with arrows between f and g in the fundamental groupoid of Ch\_infty(a,b).}
+\dgrclaim{conjectured}{IX:15}{IX-041}{The homotopy groupoid construction extends naturally from actual arrows to all stabilized zigzags.}
+\dgrclaim{open}{IX:15}{IX-044}{The path compositions should lift to pointed Hom objects with associative composition and units.}
+\dgrclaim{false}{IX:16}{IX-046}{There are canonical arrows in both directions between these zero representatives, identity at every vertex except degree zero.}
+\dgrclaim{conjectured}{IX:17}{IX-049}{The resulting exact path pairings are associative in the pointed homotopy category and perhaps in pointed Cat hot.}
+\dgrclaim{false}{IX:17}{IX-050}{Cartesian pointed spaces instantiate the earlier monoidal axiom with pi\_0=Hom(unit,-).}
+\dgrclaim{false}{IX:17}{IX-051}{Forgetting basepoints preserves the corrected monoidal product.}
+\dgrclaim{conjectured}{IX:17}{IX-052}{Pointed CH should exist in Ind Hot\_bullet and Ind Cat hot\_bullet.}
+\dgrclaim{false}{IX:18}{IX-054}{The displayed truncated path a->0<-b represents the desired distinguished element.}
+\dgrclaim{open}{IX:18}{IX-055}{The zero object should remain a zero object in M[W\textasciicircum{}\{-1\}].}
+\dgrclaim{open}{IX:18}{IX-056}{Find conditions under which localization preserves finite coproducts and finite products.}
+\dgrclaim{conjectured}{IX:18}{IX-059}{An additional five-lemma-type condition may be needed for the additive localization.}
+\dgrclaim{conjectured}{IX:19}{IX-061}{The external Hom of an additive relative category should lift to D\textasciicircum{}\{<=0\}(k-Mod).}
+\dgrclaim{conjectured}{IX:19}{IX-065}{Derived Hom objects should admit associative composition over derived tensor and units.}
+\dgrclaim{conjectured}{IX:21}{IX-070}{A full theory of strong derived k-bilinear Hom composition is expected.}
+\dgrclaim{false}{IX:21}{IX-071}{pi\_1(a,b) is written pi\_1(a,b;0\_a,0\_b).}
+\dgrclaim{conjectured}{IX:21}{IX-072}{Quillen pi\_1(a,b) is canonically pi\_1 of the pointed Ch\_infty(a,b).}
+\dgrclaim{conjectured}{IX:22}{IX-080}{The two formulations of test (b) are equivalent up to minor qualifications.}
+\dgrclaim{conjectured}{IX:22}{IX-081}{Tests (a) and (b) are a decisive criterion for a homotopy theory in M.}
+\dgrclaim{false}{IX:23}{IX-082}{The stated tests cannot hold for a finite M except in the trivial cases.}
+\dgrclaim{false}{IX:23}{IX-083}{If M is empty, its localization is equivalent to the point.}
+\dgrclaim{conjectured}{IX:23}{IX-084}{Test (c) asks for Homext(Sigma a,b)=Homext(a,Omega b)=Omega Homext(a,b) as pointed homotopy types.}
+\dgrclaim{conjectured}{IX:23}{IX-086}{External Hom preserves finite products in the second variable and sends finite coproducts in the first variable to products.}
+\dgrclaim{conjectured}{IX:23}{IX-087}{Omega should extend to a left exact endomorphism of the derivator, and Sigma dually.}
+\dgrclaim{conjectured}{IX:23}{IX-088}{Test (b) is necessary for the loop-space equivalences in test (c).}
+\dgrclaim{conjectured}{IX:24}{IX-090}{The essential condition on the path factorization is that p be a fibration in a suitable sense.}
+\dgrclaim{open}{IX:25}{IX-091}{A cofibration condition on i may be useful; fibrancy of S is queried.}
+\dgrclaim{open}{IX:25}{IX-093}{The constructed object should represent pi\_1 Ch\_infty(T,S) naturally in T after localization.}
+\dgrclaim{conjectured}{X:3}{X022}{The categorical assertions of Chapter I that use only weak equivalences and their formal properties should extend from W\_D to abstract localizers W.}
+\dgrclaim{open}{X:3}{X023}{Under suitable conditions on W, the pointwise localization A |-> Cat\textasciicircum{}\{A\textasciicircum{}op\}[(W\textasciicircum{}\{A\textasciicircum{}op\})\textasciicircum{}\{-1\}] should be a derivator.}
+\dgrclaim{open}{X:3}{X024}{One should be able to realize a given localizer W as W\_D for a derivator constructed from (Cat,W).}
+\dgrclaim{conjectured}{X:5}{X038}{The derivators useful in practice seem to satisfy La.}
+\dgrclaim{open}{X:5}{X042}{Do Lb and Lc hold for every W\_D under consideration, and what are their concrete conditions on W?}
+\par\endgroup
+
+\section*{XI-XIIa \textperiodcentered\ Chapter XI, manuscript pages 127--136; Chapter XII, sections 1--4, manuscript pages 1--58}
+\pdfbookmark[1]{XI-XIIa}{dgrclaims.XI-XIIa}
+\begingroup\raggedright
+\input{parts/DER_XI-XIIa_defs}
+\dgrclaim{false}{XI:129}{XI-017}{For an arbitrary locally constant nonabelian F, lifting \ensuremath{\eta}\ensuremath{\in}H0(Y,R\textasciicircum{}1f\_*F) is governed by a fixed-band obstruction in H2(Y,f\_*F), as written.}
+\dgrclaim{open}{XII:1}{XII-I-001}{Find intrinsic conditions on W implying W\ensuremath{\subseteq} W\_\ensuremath{\infty}, without defining those conditions through W\_\ensuremath{\infty}.}
+\dgrclaim{open}{XII:5}{XII-I-028}{Are Ch(X)\ensuremath{\to} X\ensuremath{\times} X and Ch\_\ensuremath{\infty}(X)\ensuremath{\to} X\ensuremath{\times} X W-fibrations for a general W?}
+\dgrclaim{open}{XII:5}{XII-I-032}{Does the left test alone imply preservation over W-aspherical bases without additional axioms?}
+\dgrclaim{open}{XII:13}{XII-I-057}{Do W(1)-W(5) already imply W=W\_\ensuremath{\infty}, or is an additional descent/limit axiom necessary?}
+\dgrclaim{conjectured}{XII:14}{XII-I-071}{Even the strongest W(4), with W(1)-W(3) and W(5), probably does not force W=W\_infty.}
+\dgrclaim{conjectured}{XII:15}{XII-I-076}{W(1)-W(6), using the weakest fibre axiom, imply W=W\_infty.}
+\dgrclaim{open}{XII:16}{XII-I-077}{Perhaps closure under retracts must be added to W(1) for the equality conjecture.}
+\dgrclaim{false}{XII:17}{XII-I-084}{The formula pi\_n(F)=coker(pi\_\{n+1\}(E)\ensuremath{\to} pi\_\{n+1\}(B)) is asserted without excluding n=0.}
+\dgrclaim{false}{XII:18,20}{XII-II-002}{W\_D\ensuremath{\supseteq}W\_infty and W(4b'') imply W\_D=W\_infty without another stated qualification; the analogous inference is repeated for W in the HOT\_W discussion.}
+\dgrclaim{false}{XII:19}{XII-II-005}{The left/right conditions are the same as the earlier D-cohomological/D-homological fibrations.}
+\dgrclaim{conjectured}{XII:19}{XII-II-007}{Every genuinely useful derivator/localizer should satisfy the indicated constancy condition.}
+\dgrclaim{open}{XII:20}{XII-II-023}{Did the preceding construction and properties of f\_! for HOT\_W actually use the working assumption W\_infty\ensuremath{\subseteq}W?}
+\dgrclaim{conjectured}{XII:26}{XII-III-A-024}{Aspherical functors should be preserved by smooth base change, and coaspherical functors by proper base change.}
+\dgrclaim{false}{XII:36}{XII-III-A-057}{It suffices, to define functorial covariant transport universally, to require only that the terminal-fibre inclusion in every pullback over [1] belongs to W.}
+\dgrclaim{false}{XII:36}{XII-III-A-058}{The analogous initial-fibre edge-only condition suffices to define universal contravariant transport.}
+\dgrclaim{conjectured}{XII:40}{XII-III-B-003}{Among the provisional fibration notions, only ultrafibrations appear likely to be stable under composition.}
+\dgrclaim{open}{XII:40}{XII-III-B-005}{Find minimal hypotheses on W making the stronger fibration variants equivalent.}
+\dgrclaim{open}{XII:40}{XII-III-B-006}{Does the interval endpoint condition a0 alone imply the remaining conditions for W\ensuremath{\infty}?}
+\dgrclaim{conjectured}{XII:40}{XII-III-B-008}{W-perfect\ensuremath{\Rightarrow}hot-strong W-fibration (circled implication).}
+\dgrclaim{conjectured}{XII:40}{XII-III-B-009}{Footnote 48: the hot-strong condition should be equivalent to both the left and right fibration conditions.}
+\dgrclaim{open}{XII:42}{XII-III-B-017}{If f is W-perfect and S categorically contractible, is X\_s\ensuremath{\to}X in W?}
+\dgrclaim{false}{XII:44}{XII-III-B-025}{The first displayed transport is F\ensuremath{\circ}f\ensuremath{\to}F\ensuremath{\circ}g for \ensuremath{\alpha}:f\ensuremath{\to}g.}
+\dgrclaim{false}{XII:45}{XII-III-B-026}{The classifying functor F itself is 'in W fibre by fibre'.}
+\dgrclaim{conjectured}{XII:46}{XII-III-B-032}{These results should use at most full W(2) rather than W(2 bis).}
+\dgrclaim{conjectured}{XII:48}{XII-III-B-040}{The stronger complement: pullback of an arbitrary categorical homotopy equivalence along the family is a W-map.}
+\dgrclaim{open}{XII:54}{XII-IV-011}{Does W(4c\ensuremath{'}) imply W(4c)?}
+\dgrclaim{open}{XII:54}{XII-IV-012}{Does W(4c) imply W(4b)?}
+\dgrclaim{conjectured}{XII:54}{XII-IV-014}{The weaker split test W(4b\ensuremath{'}) should suffice for the same conclusion.}
+\dgrclaim{conjectured}{XII:54}{XII-IV-015}{W(4b\ensuremath{''}), perhaps with W(6 bis), should likewise suffice.}
+\dgrclaim{conjectured}{XII:54}{XII-IV-017}{The equivalence should also include W(4b\ensuremath{'}) and W(4b\ensuremath{''}).}
+\dgrclaim{false}{XII:58}{XII-IV-030}{Proposition 3: under W(4a), a strict Cartesian map of split fibrations with W-fibrant fibre maps is W-fibrant.}
+\par\endgroup
+
+\section*{XIIb-a \textperiodcentered\ Chapter XII, section 5, part 1 of 2, manuscript pages 59--122}
+\pdfbookmark[1]{XIIb-a}{dgrclaims.XIIb-a}
+\begingroup\raggedright
+\input{parts/DER_XIIb-a_defs}
+\dgrclaim{false}{59}{XIIba-A-003}{With x<=y iff Hom\_X(x,y) is nonempty and opens the lower sets, the source asserts x<=y iff x belongs to the closure of \{y\}.}
+\dgrclaim{false}{61}{XIIba-A-012}{The induced triple represents on all triples Y=(Y,V,S) the functor Hom(V,U) x Hom(S,T), as asserted in displayed (*).}
+\dgrclaim{false}{61}{XIIba-A-013}{The displayed unqualified functor-category version (**) of the same representability is an isomorphism.}
+\dgrclaim{open}{76}{XIIba-A-053}{Does W(7bis) alone imply that W-asphericity of the intersection and union forces W-asphericity of both pieces?}
+\dgrclaim{false}{78}{XIIba-A-058}{The ordinary weak homotopy equivalences W\_infty satisfy the full axiom W(7).}
+\dgrclaim{false}{79-80}{XIIba-A-062}{Reverse excision is asserted to be a special property of HOT, while the dual derivator fails it.}
+\dgrclaim{open}{94–97}{XIIb-a-B035}{Does total W-asphericity of H imply total W-asphericity of U/H?}
+\dgrclaim{false}{97–100}{XIIb-a-B045}{Assuming W(7 bis), a union V=V\ensuremath{'}\ensuremath{\cup}V\ensuremath{''} of two sieves is claimed to be totally W-aspherical whenever V\ensuremath{'},V\ensuremath{''},V\ensuremath{'}\ensuremath{\cap}V\ensuremath{''} are totally W-aspherical, by preservation of the subobject square under f!.}
+\dgrclaim{false}{98–100}{XIIb-a-B047}{Under the standing W(7 bis) hypothesis, the assertion of Proposition 9(b) is repaired by categorical retractions V\ensuremath{'}\ensuremath{\to}V\ensuremath{'}\ensuremath{\cap}V\ensuremath{''} and V\ensuremath{''}\ensuremath{\to}V\ensuremath{'}\ensuremath{\cap}V\ensuremath{''}.}
+\dgrclaim{false}{98}{XIIb-a-B048}{Under the same gluing hypothesis, the analogous union assertion is true for a pushout square of subpresheaves in an arbitrary presheaf category merely because the three smaller objects are totally W-aspherical.}
+\dgrclaim{false}{98}{XIIb-a-B049}{Under the same hypotheses, one of the two categorical retractions already suffices to imply the asserted total-asphericity conclusion.}
+\dgrclaim{false}{99}{XIIb-a-B051}{The existence of those categorical retractions implies that f! sends the square of the associated subterminal presheaves to a square of monomorphisms.}
+\dgrclaim{false}{99}{XIIb-a-B052}{The same retractions imply f!(V\ensuremath{'}\ensuremath{\cap}V\ensuremath{''})=f!V\ensuremath{'}\ensuremath{\cap}f!V\ensuremath{''}.}
+\dgrclaim{false}{99–100}{XIIb-a-B053}{Consequently the four categories of elements of these Kan extensions form a Cartesian and cocartesian square of sieve inclusions.}
+\dgrclaim{false}{100}{XIIb-a-B054}{Assuming W(7 bis), the outgoing fork \ensuremath{\Psi}=(0\ensuremath{\to}a,0\ensuremath{\to}b) is totally W-aspherical.}
+\dgrclaim{false}{100}{XIIb-a-B055}{Assuming W(7 bis), every finite ordered category with an initial object is totally W-aspherical.}
+\dgrclaim{false}{100}{XIIb-a-B056}{A category is totally W-aspherical only if it has a final object.}
+\dgrclaim{open}{103}{XIIba-C005}{If $Y$ is $W_\infty$-aspherical, must $\underline{\mathrm{Ch}}(Y;y_0,-)$ be totally $W_\infty$-aspherical?}
+\dgrclaim{open}{104}{XIIba-C009}{Can one similarly find a sieve pushout with $p\in W$ but $q\notin W$?}
+\dgrclaim{open}{111}{XIIba-C035}{Must a sieve that is a W-cofibration, or even a couniversal W-equivalence, be W-dwyerienne?}
+\dgrclaim{open}{111}{XIIba-C036}{Must such a sieve even satisfy the original Dwyer right-adjoint condition?}
+\dgrclaim{false}{111}{XIIba-C037}{The source asserts the converse to the W-dwyerienne criterion when the complementary category T is terminal.}
+\dgrclaim{false}{111}{XIIba-C038}{Under the cited gluing framework, i and all its changes of complementary category $T_1\to T$ are W-cofibrations iff i is W-dwyerienne.}
+\dgrclaim{open}{111--112}{XIIba-C039}{Is there a useful Dwyer notion for arbitrary full inclusions which includes both the sieve and cosieve cases?}
+\dgrclaim{false}{112}{XIIba-C040}{The proof says that W-dwyerienne stability makes $i'$ W-aspherical and in W.}
+\dgrclaim{open}{113}{XIIba-C045}{Are W-dwyerienne and totally W-dwyerienne inclusions stable under composition?}
+\dgrclaim{open}{114}{XIIba-C047}{Are strictly W-aspherical functors and totally W-aspherical functors stable under composition?}
+\dgrclaim{open}{114}{XIIba-C048}{Seek a class of sieve W-cofibrations stable under the endpoint pushout product with $\{0,2n\}\to\Phi_n$, n>=2.}
+\dgrclaim{open}{119}{XIIba-C064}{Request: make the map $(\lambda_\alpha)_!$ in the preceding transition formula explicit.}
+\dgrclaim{open}{114 (continued before 115)}{XIIbb-A001}{Find a class of sieve inclusions that are W-cofibrations and is closed under the endpoint pushout-product U×Phi\_n union X×\{0,2n\} -> X×Phi\_n for every n>=2.}
+\par\endgroup
+
+\section*{XIIb-b \textperiodcentered\ Chapter XII, section 5, part 2 of 2, manuscript pages 123--169}
+\pdfbookmark[1]{XIIb-b}{dgrclaims.XIIb-b}
+\begingroup\raggedright
+\input{parts/DER_XIIb-b_defs}
+\dgrclaim{open}{136}{XIIb-b-B009}{Is phi\_Q in W equivalent to tilde(phi)\_Q in W, so that smooth and proper integrals define the same W-homotopy-cocartesian squares?}
+\dgrclaim{false}{139}{XIIb-b-B014}{The indexing category Gamma is the ordered square [1]x[1] with an initial object adjoined.}
+\dgrclaim{conjectured}{143}{XIIb-b-B025}{The canonical isomorphisms among the four expanded diagrams should form a transitive system.}
+\dgrclaim{conjectured}{144}{XIIb-b-B029}{For arbitrary diagram shapes the four expanded comparisons have the same canonical-isomorphism relations as in Proposition 14.}
+\dgrclaim{conjectured}{145–146}{XIIb-b-B033}{Can phi\_\{Q\_0\}:int\_lis F->P fail to belong to W while there exists a strict cocone P->Y with composite phi\_Q in W?}
+\dgrclaim{false}{155}{XIIbb-C009}{The arrows x\_0\ensuremath{\to}\ensuremath{\alpha}\_i(x\_0) displayed in the source are the cartesian arrows in the smooth integral.}
+\dgrclaim{false}{156}{XIIbb-C013}{The displayed diamond A\_0(u)\ensuremath{\to}A\_1(u),A\_2(u)\ensuremath{\to}(E/x\_0)\_u is a commutative W-cocartesian square to which W(7 bis) can be applied directly.}
+\dgrclaim{false}{157}{XIIbb-C021}{For x in any of the three strata, local W-smoothness of \ensuremath{\varphi}\_Q is equivalent to local W-smoothness of f\_i without any additional hypotheses on the other strata.}
+\par\endgroup
+
+\section*{XIIc-a \textperiodcentered\ Chapter XII, section 6, part 1 of 2, manuscript pages 171--234}
+\pdfbookmark[1]{XIIc-a}{dgrclaims.XIIc-a}
+\begingroup\raggedright
+\input{parts/DER_XIIc-a_defs}
+\dgrclaim{open}{172}{A011}{Compare the homotopy-group theories defined using $\Ch$ and $\Ch_\infty$.}
+\dgrclaim{false}{172}{A012}{Theorem1: isomorphisms of homotopy groups through n, either at all basepoints or at one per component, are equivalent to isomorphisms of local-coefficient cohomology through n, with nonabelian H1.}
+\dgrclaim{false}{172}{A013}{Footnote112 suggests that the preceding converse already fails for n=2 unless source and target are simply connected.}
+\dgrclaim{open}{174}{A019}{Does a W-fibration E->X with a section canonically determine a functor X->Hot\_\{bullet,W\} sending all arrows to isomorphisms?}
+\dgrclaim{false}{176-177}{A022}{Under the lower-degree homotopy and cohomology comparison hypotheses, pi\_n(f) is an isomorphism iff H\textasciicircum{}n(f;F) is an isomorphism for all abelian local systems F.}
+\dgrclaim{open}{177-178}{A024}{For a homomorphism of the categorical loop monoids, a homotopy-group comparison at the units extends to every component.}
+\dgrclaim{false}{179}{A029}{Each arrow in the corrected implication chain is conjectured strict.}
+\dgrclaim{open}{183}{A042}{Does the comparison of the universal-cover E2 rows for q<=n suffice for the desired total-cohomology comparison through n?}
+\dgrclaim{false}{187}{A050}{The good fundamental localizer W\_n for n-types is defined by a\_n.}
+\dgrclaim{open}{179}{A062}{Footnote117 asks whether c\_n implies b\_n even for simply connected X,Y and conjectures counterexamples because only the Hurewicz composite from pi\_nZ is seen.}
+\dgrclaim{open}{194}{B006}{In what sense are fixed-base or varying-base functorial factorizations unique?}
+\dgrclaim{open}{196-197}{B011}{Is there a construction-independent canonical comparison \ensuremath{\varphi}\_C\ensuremath{\cong}\ensuremath{\varphi}\_C\ensuremath{'}, independent of using CC\ensuremath{'} or C\ensuremath{'}C?}
+\dgrclaim{false}{201}{B022}{The existence of these common targets, or of the natural binary comparison maps, proves C\_S is filtered.}
+\dgrclaim{conjectured}{202}{B024}{The three binary-to-ternary and three unary-to-ternary comparisons obtained by inserting coaugmentations agree.}
+\dgrclaim{conjectured}{202-203}{B025}{For any ordered partial product of a finite list of replacements there is a unique comparison to the full ordered product obtained by the permitted unit insertions and associativity maps.}
+\dgrclaim{open}{203}{B026}{Do these coherences imply that C\_S is 1-connected?}
+\dgrclaim{false}{204}{B028}{The one-object category B\_G of an arbitrary group G is a strict monoidal category of the indicated kind.}
+\dgrclaim{false}{205}{B032}{The functor labelled (*) is an equivalence.}
+\dgrclaim{false}{208}{B039}{Under only the assumptions of footnote 119, Fib\_W is stable under retracts in the arrow category.}
+\dgrclaim{open}{209}{B042}{Construct inverse images on Ho\_W\textasciicircum{}!(S) for arbitrary base maps, coherently in S.}
+\dgrclaim{conjectured}{216}{B056}{Axioms a and b will usually be satisfied and proved together.}
+\dgrclaim{conjectured}{216}{B058}{For Cat, W(4a) supplies the fibre-localization comparison; footnote 122 suggests W(4b) should suffice.}
+\dgrclaim{open}{217-218}{B062}{Do axioms a and b alone imply the intermediate-full-subcategory assertion c?}
+\dgrclaim{conjectured}{218}{B065}{In practical cases verification of a should also establish c.}
+\dgrclaim{conjectured}{219}{C004}{For the main models of ordinary homotopy types one expects a natural notion of local isomorphism.}
+\dgrclaim{conjectured}{221}{C012}{A satisfactory theory for varying S should have $f^*: \mathrm{Ho}^{\mathcal L}_W(S)\to\mathrm{Ho}^{\mathcal L}_W(S^{\prime})$ for every $f:S^{\prime}\to S$.}
+\dgrclaim{conjectured}{221}{C013}{The localization of $\mathrm{Fib}_W(S)$ should identify the locally constant full subcategory of the finer relative theory, and usually not all of it.}
+\dgrclaim{open}{222}{C017}{The provisional definition does not visibly imply stability under all pullbacks.}
+\dgrclaim{open}{222}{C023}{Is $\widehat{\mathcal L}=\mathrm{Liss}_W$?}
+\dgrclaim{open}{224-225}{C030}{Does a smooth/proper complementarity occur in general models of homotopy types?}
+\dgrclaim{conjectured}{225}{C032}{The smooth/proper duality may extend to all presheaf models and to topological spaces.}
+\dgrclaim{conjectured}{225-226}{C033}{Proposed data: classes Liss and Prop containing isomorphisms and stable under composition and pullback, perhaps with $\mathrm{Liss}\cap\mathrm{Prop}\subseteq\mathrm{Fib}_W$.}
+\dgrclaim{conjectured}{226}{C038}{Proposed axiom (c): the two dual adjunction properties from ChapterVI theorem-scholie2 should be added.}
+\dgrclaim{open}{226}{C039}{Can the hypotheses for those adjunction formulas be simplified?}
+\dgrclaim{open}{226-227}{C040}{Construct $f_!$ and $f_*$ for the locally constant, proper and smooth relative theories; $f_!\dashv f^*$ is expected to be comparatively direct.}
+\dgrclaim{open}{227}{C041}{Seek a cofiber theory dual to the homotopy-fibre theory for (Cat,W).}
+\dgrclaim{open}{232-233}{C057}{Does every ordinary pushout along a W-cofibration give a W-cocartesian square, in the earlier integration-based definition?}
+\dgrclaim{open}{228}{XIIcb-A001}{Every functor $f:X\to Y$ admits a factorization $X\xrightarrow{i_f}\widetilde Y\xrightarrow{p_f}Y$ with $i_f\in\operatorname{Cof}_W$ and $p_f\in W$.}
+\dgrclaim{open}{232–233}{XIIcb-A019}{Is every strict pushout along a $W$-cofibration $W$-cocartesian in the categorical-integral sense of XII, definition 3, ms.131?}
+\par\endgroup
+
+\section*{XIIc-b \textperiodcentered\ Chapter XII, section 6, part 2 of 2, manuscript pages 235--275}
+\pdfbookmark[1]{XIIc-b}{dgrclaims.XIIc-b}
+\begingroup\raggedright
+\input{parts/DER_XIIc-b_defs}
+\dgrclaim{conjectured}{236 footnote 127}{XIIcb-A029}{The composition-and-cancellation statement should hold in every model setting with sufficient cofibrations.}
+\dgrclaim{false}{238}{XIIcb-A038}{For $\{1,2,1^{\prime}\}\hookrightarrow V$, the slices at $0,0^{\prime}$ are annotated as $\Delta^1$ and $\Phi$.}
+\dgrclaim{conjectured}{240}{XIIcb-B004}{For the proposed fibre theory, it should suffice that every W-fibration admit arbitrary pullbacks, rather than that every pair of maps admit a pullback.}
+\dgrclaim{conjectured}{240}{XIIcb-B006}{The author suspects that the left factorization axiom gives the entire good relative fibre theory only if every X\ensuremath{\to} e is a W-fibration.}
+\dgrclaim{false}{269–270}{XIIcb-C020}{The reduction of all three cube implications to the case where Y is the terminal square uses only the direct, pushout-stability half of W(7 bis).}
+\dgrclaim{open}{272}{XIIcb-C028}{Does the factorization hypothesis alone suffice to construct the required theory when not every object is fibrant over the terminal object?}
+\dgrclaim{false}{273}{XIIcb-C035}{The conservative-pushout axiom is equivalent to the conjunction of Cons1 and literal cartesian Cons2.}
+\dgrclaim{false}{274}{XIIcb-C037}{Under only the theorem’s general cofiber/factorization hypotheses, a terminal object and closure of aspherical objects under retracts, f\_0,f\_3\ensuremath{\in} W imply f\_1,f\_2\ensuremath{\in} W for every map of W-cocartesian squares.}
+\dgrclaim{false}{274}{XIIcb-C038}{Corollary1: the universal map-of-squares implication f\_0,f\_3\ensuremath{\in} W\ensuremath{\Rightarrow}f\_1,f\_2\ensuremath{\in} W is equivalent to the object condition Z\_0,Z\_3 aspherical\ensuremath{\Rightarrow}Z\_1,Z\_2 aspherical, and to its special case Z\_0=e.}
+\par\endgroup
+
+\section*{XIIapp \textperiodcentered\ Chapter XII, appendix, manuscript pages 1--18}
+\pdfbookmark[1]{XIIapp}{dgrclaims.XIIapp}
+\begingroup\raggedright
+\input{parts/DER_XIIapp_defs}
+\dgrclaim{false}{1}{XIIapp-O002}{If b and c are weakly terminal and their categorical product b×c exists, BX is weakly contractible.}
+\dgrclaim{false}{3}{XIIapp-O015}{H\textasciicircum{}p(T,F)=0 for every abelian presheaf F and every p\ensuremath{\geq}2.}
+\dgrclaim{false}{3}{XIIapp-O017}{H\textasciicircum{}2(T,F)=coker(F(i\_1)-F(i\_2)), with H\textasciicircum{}1 evidently intended in the displayed two-term formula.}
+\dgrclaim{false}{4}{XIIapp-O021}{H\textasciicircum{}n(X\_G;M)\ensuremath{\simeq}H\textasciicircum{}1(T,R\textasciicircum{}\{n-1\}f\_*M)\ensuremath{\simeq}coker(H\textasciicircum{}\{n-1\}(G;M)\ensuremath{\to}H\textasciicircum{}\{n-1\}(G²;M)).}
+\dgrclaim{false}{4}{XIIapp-O025}{H²(BX\_G;M)\ensuremath{\simeq}Hom\_mon(G,M).}
+\dgrclaim{false}{4}{XIIapp-O026}{X\_G is 2-connected if and only if the universal abelian group of G is zero.}
+\dgrclaim{false}{4}{XIIapp-O027}{If G is a nonzero abelian group, then X\_G is not 2-connected.}
+\dgrclaim{open}{4}{XIIapp-O029}{If y\_b\ensuremath{\sqcup}\_\{y\_a\}y\_c=1\_X, must X at least be simply connected?}
+\dgrclaim{open}{5}{XIIapp-O030}{Are totally W\ensuremath{\infty}-aspherical categories precisely categories with a terminal object?}
+\dgrclaim{false}{6}{XIIapp-O035}{X\_G is simply connected, but not 2-connected whenever its universal abelian group is nontrivial.}
+\dgrclaim{false}{5}{XIIapp-R001}{Every totally W\ensuremath{\infty}-aspherical category, in the universal left-Kan-extension sense used here, has a terminal object.}
+\dgrclaim{conjectured}{5}{XIIapp-R002}{The suspected terminal-object characterization would mean that the existing notion of open Dwyer immersion cannot be substantially improved.}
+\dgrclaim{false}{9}{XIIapp-C007}{There is a retraction r:V\ensuremath{\to} D fixing D and sending b,c to a.}
+\dgrclaim{false}{9}{XIIapp-C008}{The alleged retraction gives a natural transformation ir\ensuremath{\Rightarrow} id\_V and a categorical homotopy equivalence D\ensuremath{\to} V.}
+\dgrclaim{false}{9}{XIIapp-C010}{BV has the homotopy type of S\textasciicircum{}1 and is not simply connected.}
+\dgrclaim{false}{10}{XIIapp-C018}{The singleton-pushout condition can hold while Z is not simply connected.}
+\dgrclaim{false}{11}{XIIapp-C029}{The inclusion Z\_0=(0\_0\ensuremath{\rightrightarrows} a\_0)\ensuremath{\to} Z is a homotopy equivalence by an evident retraction.}
+\dgrclaim{false}{15}{XIIapp-C062}{pi\_1(V\_0 prime) is isomorphic to Z.}
+\dgrclaim{false}{15}{XIIapp-C063}{V\_0 prime is non-W-aspherical whenever W is contained in W\_1, by its alleged nontrivial fundamental group.}
+\dgrclaim{open}{17}{XIIapp-G05}{The crossing arrows define a natural transformation $ip\Rightarrow jq$ and hence a homotopy-commutative square with vertices $E,A,B,X$; is it $W$-cocartesian?}
+\dgrclaim{open}{17}{XIIapp-G11}{Under $i\in W$ or $j\in W$ and W-asphericity of $X$, is the same square still W-cocartesian, in particular for $W=\mathbf W_\infty$?}
+\dgrclaim{false}{17}{XIIapp-G12}{For $W=\mathbf W_\infty$, under $i\in W$ (respectively $j\in W$) and W-asphericity of $X$, W-cocartesianness is equivalent to $q\in W$ (respectively $p\in W$).}
+\dgrclaim{open}{17}{XIIapp-G14}{If $A\simeq e$ and $X,B$ are W-aspherical, must the attaching comma category $a\backslash B$ be W-aspherical, equivalently must $j$ be W-coaspherical?}
+\dgrclaim{conjectured}{18}{XIIapp-G23}{The covering-descent argument should extend to higher homotopy degrees through n-gerbes.}
+\dgrclaim{conjectured}{18}{XIIapp-G26}{For every open--closed decomposition, $\varphi\in\mathbf W_\infty$.}
+\dgrclaim{conjectured}{18}{XIIapp-G27}{If $W\supseteq\mathbf W_\infty$ satisfies Loc $(6\mathrm a')$, then the open--closed square is W-cocartesian.}
+\par\endgroup
+
+\section*{XIII-a \textperiodcentered\ Chapter XIII, part 1 of 2, manuscript pages 1--60}
+\pdfbookmark[1]{XIII-a}{dgrclaims.XIII-a}
+\begingroup\raggedright
+\input{parts/DER_XIII-a_defs}
+\dgrclaim{conjectured}{6}{XIIIa-A025}{The small object construction should require only pushouts and filtered, or ordinal, colimits instead of full cocompleteness.}
+\dgrclaim{conjectured}{6–7}{XIIIa-A026}{There should be a notion of accessible arrow class \ensuremath{\Phi} implying existence of a set I\ensuremath{\subseteq}\ensuremath{\Phi} with \ensuremath{\Phi}\ensuremath{\subseteq}\{\}\textasciicircum{}\ensuremath{\square}(I\textasciicircum{}\ensuremath{\square}).}
+\dgrclaim{conjectured}{7}{XIIIa-A027}{The proposed accessible classes should be preserved by \ensuremath{\Phi}\ensuremath{\mapsto}\ensuremath{\Phi}\_* and \ensuremath{\Psi}\ensuremath{\mapsto}\ensuremath{\Psi}\textasciicircum{}*.}
+\dgrclaim{conjectured}{7}{XIIIa-A028}{If a left/right lifting closed pair is accessible in a sense supplying a set of left generators, it has Quillen factorization.}
+\dgrclaim{conjectured}{12}{XIIIa-A052}{The weak axioms M0–M4,M\ensuremath{\prime},M\ensuremath{\prime}\ensuremath{\prime} may be insufficient to obtain exact suspension and cosuspension sequences.}
+\dgrclaim{conjectured}{13}{XIIIa-A058}{The equality TC=C\ensuremath{\cap} W should imply the required exactness of W-cartesian squares and cosuspension sequences.}
+\dgrclaim{conjectured}{13}{XIIIa-A059}{The equality TF=F\ensuremath{\cap} W should imply the required exactness of W-cocartesian squares and suspension sequences.}
+\dgrclaim{conjectured}{14}{XIIIa-A061}{A relative category may admit distinct left and right pre-Q structures even when no full Quillen structure with those weak equivalences is available.}
+\dgrclaim{conjectured}{15}{XIIIa-A069}{Under accessibility of M, conditions (a),(a\ensuremath{\prime}),(a\ensuremath{\prime}\ensuremath{\prime}),(b),(b\ensuremath{\prime}) are proposed to be equivalent.}
+\dgrclaim{conjectured}{15}{XIIIa-A071}{Theorem-scholie(3): a closed right pre-Q structure exists iff (b\ensuremath{\prime}) holds and A\_W=(W\textasciicircum{}univ)\textasciicircum{}\ensuremath{\square}\ensuremath{\cap} W\_univ is right lifting closed.}
+\dgrclaim{conjectured}{16}{XIIIa-A072}{The preliminary hypotheses, accessibility of M, and the proposed equivalent recognition conditions are stable under (M,W)\ensuremath{\mapsto}(M\textasciicircum{}I,W\textasciicircum{}I) for every small diagram category I.}
+\dgrclaim{open}{16}{XIIIa-A073}{Is the extra right-closedness condition in item 3 stable under passage to diagram categories?}
+\dgrclaim{open}{16}{XIIIa-A074}{Do the conditions in item 2 imply the extra condition in item 3, making the two criteria equivalent?}
+\dgrclaim{conjectured}{16}{XIIIa-A078}{(a\ensuremath{\prime}) should imply (a), after requiring lifting closedness of the quadruple.}
+\dgrclaim{false}{17}{XIIIa-A080}{The closure properties proved in item 1 imply that Cof\_W and W\textasciicircum{}univ are left lifting closed.}
+\dgrclaim{conjectured}{19}{XIIIa-A085}{Filtered-colimit stability of W should make W accessible in a suitable sense, and then imply small generation of C\ensuremath{\cap} W when C is small-generated.}
+\dgrclaim{conjectured}{20}{XIIIa-A089}{Conjectural lemma(1), fibration version: if \ensuremath{\Phi} is left lifting closed and \ensuremath{\Phi}\textasciicircum{}\ensuremath{\square}\ensuremath{\subseteq} Fib\_W, there exists a set \ensuremath{\Phi}0\ensuremath{\subseteq}\ensuremath{\Phi} such that \ensuremath{\Phi}0\textasciicircum{}\ensuremath{\square}\ensuremath{\subseteq} Fib\_W.}
+\dgrclaim{conjectured}{20}{XIIIa-A090}{Conjectural lemma(1), weak-equivalence version intended: if \ensuremath{\Phi} is left lifting closed and \ensuremath{\Phi}\textasciicircum{}\ensuremath{\square}\ensuremath{\subseteq} W, there exists a set \ensuremath{\Phi}0\ensuremath{\subseteq}\ensuremath{\Phi} such that \ensuremath{\Phi}0\textasciicircum{}\ensuremath{\square}\ensuremath{\subseteq} W.}
+\dgrclaim{conjectured}{20}{XIIIa-A091}{Conjectural lemma(2): the intersection of two set-generated left lifting closed classes in a locally presentable category is again set-generated.}
+\dgrclaim{conjectured}{20}{XIIIa-A092}{An intrinsic class such as Fib\_W, defined from an accessible W, should itself be accessible and yield the compactness lemma.}
+\dgrclaim{false}{22}{XIIIa-B003}{Part 1 of the conjectural theorem implies that \ensuremath{\Cof}\_W and W\textasciicircum{}{\ensuremath{\univ}} are left lifting classes.}
+\dgrclaim{open}{25}{XIIIa-B016}{Does existence of some closed Quillen triple imply either the stronger closure conditions or the maximal compatibility A\_W=(\ensuremath{\Cof}\_W)\_*?}
+\dgrclaim{conjectured}{26}{XIIIa-B019}{Group I identifies weak Quillen existence, left exact weak Quillen existence, and the two orthogonality inclusions (*).}
+\dgrclaim{conjectured}{26}{XIIIa-B020}{Group II identifies right exact weak Quillen existence, condition (*) plus right closure of A\_W, closed Quillen existence, and the displayed maximal-TC construction.}
+\dgrclaim{false}{26}{XIIIa-B021}{With TC=W\textasciicircum{}{\ensuremath{\univ}}, F=TC\_*, TF=F\ensuremath{\cap} W\_{\ensuremath{\univ}}, define C=(TF)\_*.}
+\dgrclaim{conjectured}{26}{XIIIa-B022}{Group III identifies the maximal closed model candidate with (*) plus A\_W=(\ensuremath{\Cof}\_W)\_*.}
+\dgrclaim{open}{26}{XIIIa-B027}{Could the identity \ensuremath{\overline{W_{\univ}}}\ensuremath{\cap}\ensuremath{\Fib}\_W=W\_{\ensuremath{\univ}} imply III\ensuremath{\Leftrightarrow}IV?}
+\dgrclaim{false}{26}{XIIIa-B029}{The displayed intersection (W\textasciicircum{}{\ensuremath{\univ}})\_*\ensuremath{\cap}\ensuremath{\overline{W_{\univ}}} contains D\ensuremath{\to} e for discrete D without qualification.}
+\dgrclaim{false}{27}{XIIIa-B041}{If C,F,W are retract closed, left exactness is equivalent to right exactness for the original designated classes and forces all four classes closed.}
+\dgrclaim{false}{28}{XIIIa-B044}{The preceding saturation produces a structure de Quillen in the biexact sense introduced immediately afterwards.}
+\dgrclaim{conjectured}{30}{XIIIa-B060}{For arbitrary weak structures, right Q-homotopy is an equivalence relation whenever the target is fibrant, without exactness.}
+\dgrclaim{conjectured}{30}{XIIIa-B061}{On fibrant-cofibrant objects, the right and left homotopies coincide and are independent of the chosen cylinder, as suggested by Baues.}
+\dgrclaim{conjectured}{30–31}{XIIIa-B062}{Under left exactness, the fibrant-cofibrant quotient equivalent to Ho\_W embeds as a fully faithful right adjoint to localization of the right-homotopy quotient of cofibrant objects.}
+\dgrclaim{open}{32}{XIIIa-B067}{Does left exactness also suffice for exactness of W-homotopy-cocartesian squares?}
+\dgrclaim{false}{32}{XIIIa-B068}{Exactness alone may fail to imply either cartesian or cocartesian homotopy exactness.}
+\dgrclaim{conjectured}{33–34}{XIIIa-B069}{If exact weak structures exist on (M,W) and on (M(\ensuremath{\Psi}),W(\ensuremath{\Psi})) for the cospan indexing category, W-homotopy-cartesian squares are W-exact and give loop exact sequences.}
+\dgrclaim{conjectured}{33}{XIIIa-B071}{The dual exact-structure hypothesis for M(\ensuremath{\Phi}) gives cocartesian exactness and pointed suspension exact sequences.}
+\dgrclaim{conjectured}{34}{XIIIa-B072}{For simultaneous homotopical algebra in all M(I), it suffices to have an exact weak Quillen structure on each relative diagram category.}
+\dgrclaim{open}{37}{XIIIa-B086}{For any arbitrary arrow class \ensuremath{\Phi}, evaluation might send \ensuremath{\Phi}(I)\_* into \ensuremath{\Phi}\_*.}
+\dgrclaim{conjectured}{40}{XIIIa-B097}{The author expects filtered-colimit stability of W to be practically necessary for this strategy.}
+\dgrclaim{conjectured}{41}{XIIIa-C003}{Closure of W under all filtered colimits is proposed as the practical way to establish the required diagram factorizations.}
+\dgrclaim{conjectured}{42–43}{XIIIa-C011}{Condition a implies existence, for every small I, of a closed left-exact weak Quillen structure on Fun(I\textasciicircum{}op,M) with objectwise cofibrations.}
+\dgrclaim{conjectured}{42–43}{XIIIa-C012}{Condition a-prime implies existence of the prescribed injective structures for all small I.}
+\dgrclaim{conjectured}{42–43}{XIIIa-C013}{Condition a-double-prime implies existence of the prescribed closed left-exact weak structures for all small I.}
+\dgrclaim{conjectured}{42–43}{XIIIa-C014}{Condition b implies existence of the prescribed closed left-exact weak structures for all small I.}
+\dgrclaim{conjectured}{44}{XIIIa-C020}{The author expects a-double-prime to imply all other conditions of Theorem 2.}
+\dgrclaim{conjectured}{44}{XIIIa-C021}{The author expects the small-set condition a-double-prime to be the practical verification method, notably for M=Cat.}
+\dgrclaim{conjectured}{48}{XIIIa-C041}{The converse componentwise condition for injective fibrations need not hold.}
+\dgrclaim{conjectured}{48–49}{XIIIa-C044}{Restriction also preserves homotopy cartesian squares and cosuspension exact sequences.}
+\dgrclaim{false}{49}{XIIIa-C045}{The ordinary functor u\_* preserves arbitrary homotopy cartesian squares merely because it preserves F and TF.}
+\dgrclaim{conjectured}{49}{XIIIa-C046}{A right homotopy Kan extension generally does not preserve homotopy cocartesian squares.}
+\dgrclaim{false}{49}{XIIIa-C047}{The ordinary u\_! should preserve arbitrary homotopy cocartesian squares.}
+\dgrclaim{open}{50}{XIIIa-C049}{Do the preceding assumptions ensure the existence of homotopy adjoints u\_!\textasciicircum{}W and u\_*\textasciicircum{}W, even for finite posets?}
+\dgrclaim{open}{52}{XIIIa-C068}{What quillenization or derived-functor theory is available for unbounded complexes in a general abelian category?}
+\dgrclaim{false}{53}{XIIIa-C071}{The same filtered-colimit closure holds for Ch\textasciicircum{}+(A), Ch\textasciicircum{}-(A), and Ch\textasciicircum{}b(A).}
+\dgrclaim{open}{53}{XIIIa-C075}{Does the right derived Kan extension exist on the whole unbounded derived category?}
+\dgrclaim{conjectured}{53}{XIIIa-C076}{A left homotopy Kan extension need not preserve D\textasciicircum{}+ without a homological-dimension restriction.}
+\dgrclaim{conjectured}{53–54}{XIIIa-C077}{For Grothendieck A, a left derived Kan extension is expected on D\textasciicircum{}-(A(I-prime)) with values in D\textasciicircum{}-(A(I)).}
+\dgrclaim{open}{54}{XIIIa-C078}{Does left derived Kan extension exist on all of D(A(I-prime)) without finite cohomological dimension?}
+\dgrclaim{open}{55}{XIIIa-C083}{Which derivator axioms follow from quillenizability alone?}
+\dgrclaim{conjectured}{55–56}{XIIIa-C087}{The strong local-system axiom asks that u in the chosen fundamental localizer induce an equivalence on homotopy categories of locally constant diagrams.}
+\dgrclaim{conjectured}{56}{XIIIa-C092}{Quillenizability alone seems too weak to ensure interesting homotopy Kan extensions.}
+\dgrclaim{false}{59}{XIIIa-C101}{The parenthesis invokes finite colimits to justify the finite limits required by finite-index u\_*.}
+\dgrclaim{conjectured}{60}{XIIIa-C109}{A poset whose associated opposite Alexandrov space is noetherian and sober is admissible.}
+\dgrclaim{open}{52}{XIIIb-Q013}{What hypotheses suffice for quillenisability of unbounded complexes, and what can be done without enough injectives or projectives?}
+\dgrclaim{false}{53}{XIIIb-Q015}{If A is accessible and has filtered colimits, all the listed complex categories have the same closure properties.}
+\dgrclaim{open}{53–54}{XIIIb-Q019}{Does u\_* extend to a right adjoint on unbounded derived categories of diagrams?}
+\dgrclaim{conjectured}{53–54}{XIIIb-Q020}{For globally bounded-above diagrams of Grothendieck coefficients, one expects a left adjoint Lu\_! to restriction preserving upper bounds.}
+\dgrclaim{open}{54}{XIIIb-Q021}{Does a left adjoint to restriction exist on the entire unbounded derived diagram category without a finite cohomological-dimension hypothesis?}
+\dgrclaim{open}{54 footnote32}{XIIIb-Q024}{Can the square-based structure of an unpointed homotopy theory be axiomatized?}
+\dgrclaim{open}{55}{XIIIb-Q026}{Which derivator axioms follow from quillenisability alone?}
+\dgrclaim{conjectured}{55–56}{XIIIb-Q030}{A strongest proposed local-constancy axiom says that u in a chosen fundamental localizer induces HO\_W\textasciicircum{}lc(I)\ensuremath{\simeq}HO\_W\textasciicircum{}lc(I\ensuremath{'}).}
+\dgrclaim{open}{56}{XIIIb-Q032}{How can the local-constancy equivalence be verified directly from (M,W), before a theory of u\_! or u\_* has been built?}
+\par\endgroup
+
+\section*{XIII-b \textperiodcentered\ Chapter XIII, part 2 of 2, manuscript pages 61--98}
+\pdfbookmark[1]{XIII-b}{dgrclaims.XIII-b}
+\begingroup\raggedright
+\input{parts/DER_XIII-b_defs}
+\dgrclaim{open}{69 footnote37}{XIIIb-Q066}{Can the representing object of the preceding pointwise quotient be chosen functorially in localized G\ensuremath{'} without admissibility?}
+\dgrclaim{false}{71}{XIIIb-Q070}{Representability of F\ensuremath{\mapsto}Hom(HO(I\ensuremath{'}))(u*F,G\ensuremath{'}) gives a left adjoint of u*.}
+\dgrclaim{false}{71}{XIIIb-Q071}{The left adjoint just obtained is computed by u\_* on fibrant G\ensuremath{'}.}
+\dgrclaim{open}{72}{XIIIb-Q073}{Do all functors u admit homotopy right images under the earlier large-category hypotheses; can a counterexample be found?}
+\dgrclaim{open}{72–73}{XIIIb-Q074}{Is a small product of W-maps between fibrant objects again a W-map?}
+\dgrclaim{open}{73}{XIIIb-Q076}{Does inverse limit preserve levelwise W-maps between such fibrant towers?}
+\dgrclaim{open}{73–74}{XIIIb-Q078}{Can the product assertion fail even for a closed model category with the additional accessibility and filtered-colimit exactness hypotheses listed?}
+\dgrclaim{open}{74}{XIIIb-Q079}{Is the one-object category BG admissible for a group G?}
+\dgrclaim{open}{74}{XIIIb-Q080}{Is the full subcategory of \ensuremath{\Delta} on [0] and [1] admissible?}
+\dgrclaim{false}{74–75}{XIIIb-Q081}{For the dual construction assume a closed right-exact structure with TF=F\ensuremath{\cap}C.}
+\dgrclaim{conjectured}{75}{XIIIb-Q084}{These classes should define a uniform right quillenisability on all small categories.}
+\dgrclaim{conjectured}{76}{XIIIb-Q087}{If the projective construction succeeds, left homotopy Kan extensions exist for maps of finite posets and the indicated noetherian sober extensions.}
+\dgrclaim{conjectured}{76}{XIIIb-Q088}{Closure of W under filtered colimits should make discrete and left-filtered categories such as N\textasciicircum{}op admissible for left images.}
+\dgrclaim{conjectured}{76}{XIIIb-Q089}{A poset which is a filtered union of closed noetherian sober subposets should be right-admissible under the projected dual hypotheses.}
+\dgrclaim{open}{76}{XIIIb-Q090}{What happens to left admissibility for BG?}
+\dgrclaim{false}{77}{XIIIb-C07-007}{Under GCH, (pi')\textasciicircum{}pi=pi' for every pair of infinite cardinals pi'>pi.}
+\dgrclaim{false}{85}{XIIIb-C07-027}{The printed formula asserts Z\_sup A \ensuremath{\cong} lim\_A Z\_T for the covariant partial-colimit diagram.}
+\dgrclaim{false}{89}{XIIIb-C07-037}{The three conditions a\_pi, b\_pi, c\_pi are equivalent.}
+\dgrclaim{false}{90}{XIIIb-C07-040}{To deduce membership of an arbitrary pi\textasciicircum{}+-directed colimit of M\textasciicircum{}pi-objects, it is enough to apply b\_pi directly because I\_M=I.}
+\dgrclaim{false}{94}{XIIIb-C07-054}{For every C\_i' admitted by the printed image-size definition, Z\_\{C\_i'\}=colim\_\{C\_i'\} Z belongs to Filt\textasciicircum{}pi(E).}
+\dgrclaim{false}{94}{XIIIb-C07-055}{With the printed tilde C\_i, the diagram (Z\_\{C\_i'\}) is perfectly adapted at pi.}
+\dgrclaim{open}{97}{XIIIb-C07-068}{If X has both a perfectly adapted Filt\textasciicircum{}pi presentation and a pi\textasciicircum{}+-directed presentation by M\textasciicircum{}pi-objects, can one show its adapted M-stages cofinal?}
+\dgrclaim{conjectured}{97}{XIIIb-C07-069}{After replacing pi by a larger cardinal pi' (suggested pi'=pi\textasciicircum{}+), a\_pi should imply b\_\{pi'\}.}
+\dgrclaim{false}{86 (glossary discrepancy)}{XIIIb-G036}{The glossary states that a strict cardinal filtration has every stage \ensuremath{\mathrm{Filt}}\textasciicircum{}{\ensuremath{\pi}}(E) closed under all filtered colimits.}
+\dgrclaim{false}{86 (glossary discrepancy)}{XIIIb-G037}{The final glossary paragraph calls a perfectly adapted representation the colimit of a 'well adapted' system.}
+\par\endgroup
+
+\section*{XIV \textperiodcentered\ Chapter XIV, manuscript pages 1--8}
+\pdfbookmark[1]{XIV}{dgrclaims.XIV}
+\begingroup\raggedright
+\input{parts/DER_XIV_defs}
+\dgrclaim{conjectured}{4}{XIV.016}{The preceding stability axioms appear to exhaust the useful stability properties, so further such properties should be consequences.}
+\dgrclaim{false}{7}{XIV.030}{If the underlying category is additive, the h-cartesian and h-cocartesian classes should coincide.}
+\dgrclaim{conjectured}{8}{XIV.035}{In some sense the general case ought to reduce to the elementary ordinary-pullback case.}
+\dgrclaim{false}{8}{XIV.036}{The proposed second family of left quadrangulated examples is the localized category with the homotopy-image class of squares, for localizers admitting homotopy fibres.}
+\dgrclaim{false}{8}{XIV.037}{Proposition 1 is expected to hold under further hypotheses to be identified, including every presentation quillenizable on finite poset diagram shapes.}
+\dgrclaim{false}{8}{XIV.039}{Proposition 1, necessary direction: if $\mathrm{ho}_W(X)$ belongs to the designated h-cartesian class, the chosen strict square $X$ is $W$-cartesian.}
+\par\endgroup
+
+\section*{XV-a \textperiodcentered\ Chapter XV, part 1 of 2, manuscript pages 1--66}
+\pdfbookmark[1]{XV-a}{dgrclaims.XV-a}
+\begingroup\raggedright
+\input{parts/DER_XV-a_defs}
+\dgrclaim{false}{7–8}{XV-A-012}{If every domain of a generator is $\pi$-accessible and $I_\alpha=\{\beta<\alpha\}$ is grand devant $\pi$, the source asserts $p_\alpha(f)\in I^\perp$.}
+\dgrclaim{false}{9–10}{XV-A-024}{The proposed first stage should satisfy $i_1(f)\in C_0^{\prime\prime}$ for every arrow $f$, and the construction is asserted to do so.}
+\dgrclaim{false}{11}{XV-A-033}{If the domains of $I$ are accessible, choose a common $\pi$; the source claims $p_\alpha(f)\in I^\perp$ for every ordinal grand devant $\pi$.}
+\dgrclaim{false}{17}{XV3-006}{GCH implies pi\textasciicircum{}pi\_0=pi for every pi>pi\_0.}
+\dgrclaim{conjectured}{17}{XV3-008}{The endpoint filtration Fl\textasciicircum{}pi(M) should itself be a cardinal filtration of the arrow category.}
+\dgrclaim{false}{19}{XV3-015}{Proposition 3.1(2), (3.8): for r,s>=max(pi\_1,C\_1), A in Filt\textasciicircum{}r and X in Filt\textasciicircum{}s imply |Hom(A,X)|<=s\textasciicircum{}(r\textasciicircum{}pi\_0).}
+\dgrclaim{false}{19}{XV3-018}{GCH implies pi\textasciicircum{}pi\_prime=pi for infinite pi>pi\_prime>=1 and hence gives (3.7 bis)-(3.9 bis) for every r>pi\_0.}
+\dgrclaim{false}{20}{XV3-020}{The category of pairs (A,B subset A) gives equality in the arrow-isomorphism bound (3.7 bis) for the indicated filtration.}
+\dgrclaim{false}{20}{XV3-022}{|Hom(A\_i,X\_j)|<=C\_1 because C\_1 counts arrow-isomorphism classes at level pi\_1.}
+\dgrclaim{false}{21}{XV3-024}{For a fixed poset I of size at most mu=r\textasciicircum{}pi\_0, the choices of all objects A\_i up to isomorphism can be bounded by |I| times C\_0<=mu.}
+\dgrclaim{false}{21}{XV3-025}{For fixed objects A\_i, choices of all transition maps can be bounded by |I times I| times C\_0<=mu.}
+\dgrclaim{false}{21}{XV3-026}{A cocone from a fixed I-diagram to X has at most |I| times s\textasciicircum{}mu choices.}
+\dgrclaim{false}{23}{XV3-031}{Lemma 3.2 literally states r\textasciicircum{}rprime=2\textasciicircum{}rprime whenever rprime>=r, without an infinitude or lower-bound qualification.}
+\dgrclaim{false}{23}{XV3-032}{Corollary 1 claims |Hom(A,X)|<=2\textasciicircum{}(r\textasciicircum{}pi\_0) for A,X in Filt\textasciicircum{}pi and r>=max(pi\_1,C\_1).}
+\dgrclaim{false}{27}{XV3-048}{Theorem 2(1): p\_alpha(f) lies in Psi when alpha is large relative to r\textasciicircum{}pi\_0.}
+\dgrclaim{false}{27}{XV3-049}{The initial ordinal of any cardinal rprime>r\textasciicircum{}pi\_0 may be chosen to satisfy the large-cofinality condition.}
+\dgrclaim{false}{35}{XV4-025}{In the proof of Corollary2, $C\cap W\longleftrightarrow TC$.}
+\dgrclaim{false}{36}{XV4-030}{For two precouples with $TC\subset C\cap W$ and $TF\subset F\cap W$, the equalities $TC=C\cap W$, $TF=F\cap W$, $W=TF\circ TC$ and the assertion that $(W,C,F)$ is closed are all equivalent.}
+\dgrclaim{false}{40}{XV4-039}{Under only the hypotheses of Proposition4.4.2, Cof\_W cap W equals W\textasciicircum{}univ, the maps all of whose cobase changes belong to W.}
+\dgrclaim{false}{40}{XV4-041}{Under only the Proposition4.4.2 hypotheses, Cof\_W cap W is Q-stable on the left.}
+\dgrclaim{false}{40–41}{XV4-042}{Under the hypotheses of Corollary4.4.4, C=tilde(C0) equals Cof\_W.}
+\dgrclaim{false}{40–41}{XV4-043}{Under only the hypotheses of Corollary4.4.4, TC=C cap W equals C cap W\textasciicircum{}univ and is contained in W\textasciicircum{}univ.}
+\dgrclaim{false}{41}{XV4-045}{TC is Q-stable on the left under only Corollary4.4.4 hypotheses.}
+\dgrclaim{open}{43}{XV4-054}{Given suitable small C0 and accessible W, does there exist a small TC0\ensuremath{\subset}C cap W generating C cap W under left lifting closure?}
+\dgrclaim{false}{46}{XV5-015}{Footnote 17: $(d_2)$ should imply $(d_1)$.}
+\dgrclaim{false}{52}{XV5-033}{Proposition 5.6 as first stated: at a rank where bounded objects are $\pi$-accessible, condition (5.3) alone is equivalent to $b_\pi$.}
+\dgrclaim{false}{53}{XV5-036}{The proof applies (5.3) directly to the image J of the monomorphic stage indices in $\operatorname{Sub}_{\pi}(X)$.}
+\dgrclaim{false}{58}{XV5-042}{Printed condition (cprime): M is the smallest class closed under filtered colimits, with no stated requirement to contain M\_0.}
+\dgrclaim{open}{58–59}{XV5-045}{Footnote 22 asks whether (cprime) implies (c) without the special object-accessibility assumption on pi.}
+\dgrclaim{false}{62–63}{XV5-053}{The printed lemma and display assert that the unrestricted $\operatorname{Sub}_{\pi}(Y)$ maps canonically and cofinally into $M^\pi/Y$.}
+\dgrclaim{false}{64}{XV5-057}{The projection in Corollary 5.11 is described parenthetically as fibrant.}
+\par\endgroup
+
+\section*{XV-b \textperiodcentered\ Chapter XV, part 2 of 2, manuscript pages 57--137}
+\pdfbookmark[1]{XV-b}{dgrclaims.XV-b}
+\begingroup\raggedright
+\input{parts/DER_XV-b_defs}
+\dgrclaim{open}{58–59}{XVb-A009}{Without requiring every Filt\textasciicircum{}pi object to be pi-accessible, footnote22 asserts (a)\ensuremath{\Leftrightarrow}(b), (a)\ensuremath{\Rightarrow}(c\ensuremath{'}), (b)\ensuremath{\Rightarrow}(c), and tentatively (c\ensuremath{'})\ensuremath{\Rightarrow}(c).}
+\dgrclaim{false}{62–63}{XVb-A021}{As printed, all of Ss\_pi(Y) is a cofinal subcategory of M\textasciicircum{}pi/Y.}
+\dgrclaim{false}{72}{XVb-A041}{The individual good-index sets I\_\{M\_alpha\} are parenthetically asserted to be filtered without a cofinality hypothesis.}
+\dgrclaim{open}{75}{XVb-A049}{The exactness assumption(e) might be eliminated from the general machinery.}
+\dgrclaim{false}{76}{XVb-A056}{If C is an L-accessible class of monomorphisms containing all isomorphisms under(a)–(e), there is a small C\_0\ensuremath{\subset}C with C\ensuremath{\subset}tilde(C\_0).}
+\dgrclaim{false}{76–77}{XVb-A057}{For any pi witnessing C accessibility,6.1 further asserts C\ensuremath{\subset}tilde(C\textasciicircum{}pi), with C\textasciicircum{}pi=C\ensuremath{\cap}Fl\textasciicircum{}pi(M).}
+\dgrclaim{false}{77}{XVb-A059}{Under the proposed unconditional hypotheses of6.1,6.2 asserts C\_*=C\_\{0*\} and tilde(C)=tilde(C\_0) for a small generating C\_0.}
+\dgrclaim{false}{79}{XVb-A066}{For every nonisomorphism f:A\ensuremath{\to}B in C, there exists A\ensuremath{\subsetneq}A\_1\ensuremath{\subset}B with A\ensuremath{\to}A\_1\ensuremath{\in}tilde(C\textasciicircum{}pi) and A\_1\ensuremath{\to}B\ensuremath{\in}C.}
+\dgrclaim{open}{83}{XVb-A078}{The proof needs the comparison j:C\ensuremath{'}=A amalg\_\{A\ensuremath{'}\}B\ensuremath{'}\ensuremath{\to}B to lie in C, and does not even know that it is monic.}
+\dgrclaim{false}{83–84}{XVb-A080}{The diagram of C\_i and gamma\_i is called pi-adapted after checking continuity, without establishing that its objects lie in the bounded filtration stage.}
+\dgrclaim{false}{84}{XVb-A081}{Since colim gamma\_i is an isomorphism in C and C is pi-accessible, the indices with gamma\_i\ensuremath{\in}C are claimed cofinal.}
+\dgrclaim{false}{84}{XVb-A082}{The attempted proof concludes Lemma6.4 and Theorem6.1 by choosing an index with both alpha\_i\ensuremath{\in}C\textasciicircum{}pi and gamma\_i\ensuremath{\in}C.}
+\dgrclaim{open}{84–85}{XVb-B001}{The generation assertion of §6 may be false: an accessible or L-accessible class need not be the left Q-closure of a set.}
+\dgrclaim{conjectured}{85}{XVb-B002}{For a fundamental localizer W, the classes Cof\_W and W\textasciicircum{}\{univ\} in Cat should be accessible, in particular for W=W\_infty.}
+\dgrclaim{open}{85}{XVb-B003}{If C=tilde(C) is closed under filtered colimits and generated on the left by a set, and W is L-accessible, is C intersect W generated on the left by a set, even when C consists of monomorphisms?}
+\dgrclaim{false}{90}{XVb-B026}{For every monomorphism i:A->B, there is a generator i\_prime mapping to it whose pushout strictly enlarges A inside B.}
+\dgrclaim{false}{99}{XVb-B046}{In the cartesian square (7.4.3), if the left vertical f belongs to F and the bottom p belongs to W, then the top q belongs to W.}
+\dgrclaim{open}{102}{XVb-B056}{Effective unions of subobjects may fail in Cat.}
+\dgrclaim{open}{104}{XVb-B066}{Is the presheaf model structure necessarily also right proper?}
+\dgrclaim{false}{106}{XVb-B073}{Footnote38(d\_prime): j\_A sends every W-equivalence of categories to a universally W\_A-equivalent map of presheaves, and this is equivalent to the local test condition.}
+\dgrclaim{false}{112–114}{XVb-B089}{Lemma8.7: finite cocompleteness, two-out-of-three for W, composition/pushout stability of C, a fold factorization with left factor in C and right factor in W, and the stated coproduct inclusions suffice for mapping-cylinder factorizations C then W.}
+\dgrclaim{conjectured}{115}{XVb-B096}{If the connected-component axiom fails in the presence of the other listed axioms, perhaps W is the class of all functors.}
+\dgrclaim{conjectured}{116}{XVb-C010}{Loc(3bis) should suffice when tested only on split fibred categories and split cartesian morphisms, assuming Loc(1,2).}
+\dgrclaim{open}{121}{XVb-C033}{Can coproduct reflection f1\ensuremath{\sqcup}f2\ensuremath{\in}W\ensuremath{\Rightarrow}f1,f2\ensuremath{\in}W be proved with only the preceding basic assumptions?}
+\dgrclaim{open}{122}{XVb-C037}{Footnote 47: the converse, arbitrary coproduct preservation under only Loc(1,2,3,6c\ensuremath{'}), is not known to the author.}
+\dgrclaim{conjectured}{125}{XVb-C051}{Loc(8) and Loc(5bis) are conjectured independent under the basic localizer axioms.}
+\dgrclaim{conjectured}{125}{XVb-C052}{The author expects every localizer useful in practice to satisfy connectivity and decomposition, while these are not needed in preceding general developments.}
+\dgrclaim{conjectured}{125}{XVb-C053}{Connectivity may matter when recovering contractibility and asphericity structures from one another.}
+\dgrclaim{conjectured}{130}{XVb-C068}{The author expects connectivity to hold automatically for localizers that will be introduced.}
+\dgrclaim{false}{133 bis}{XVb-C084}{The editorial bracket says (c\ensuremath{'})\ensuremath{\Rightarrow}(c) is the trivial implication and the quotient argument below proves (c)\ensuremath{\Rightarrow}(c\ensuremath{'}).}
+\dgrclaim{false}{136}{XVb-C104}{10.1(3b) with current Loc(1ter,2,3,5b) read literally: every f\ensuremath{\in}W induces an equivalence on locally constant objects.}
+\par\endgroup
+
+\section*{XVI \textperiodcentered\ Chapter XVI, manuscript pages 1--124}
+\pdfbookmark[1]{XVI}{dgrclaims.XVI}
+\begingroup\raggedright
+\input{parts/DER_XVI_defs}
+\dgrclaim{false}{9}{XVI-A038}{With filtered-colimit stability, finite Loc (4a) is equivalent to full Loc (4).}
+\dgrclaim{false}{10-11}{XVI-A045}{Lemma2.5: product closure for an arbitrary subset W implies preservation of binary, finite, or arbitrary products by localization.}
+\dgrclaim{conjectured}{17'}{XVI-A089}{The same forward/reverse distinction holds for all finite n-equivalence classes W\_n.}
+\dgrclaim{open}{17',22-23,25}{XVI-A092}{Does (6-prime a) imply (6a), hence provide the desired intrinsic cofibration theory?}
+\dgrclaim{open}{23}{XVI-A112}{Does (6-prime a) alone make trivial Dwyer inclusions stable under every pushout?}
+\dgrclaim{open}{23-24}{XVI-A114}{Is a square W-homotopy cocartesian exactly when the integral of its span maps to its corner by a W-map?}
+\dgrclaim{open}{24}{XVI-A116}{Every presheaf monomorphism is in Cof\_WA under the stated excision hypotheses.}
+\dgrclaim{conjectured}{27}{XVI-A130}{Loc (6c) is probably satisfied only when W is retract closed.}
+\dgrclaim{conjectured}{29}{XVI-B013}{W-smooth maps and W-proper maps, hence W-perfect maps, should be closed under retracts.}
+\dgrclaim{open}{29}{XVI-B014}{Fibf\_W and F\_W need not be closed under composition; examples should be supplied.}
+\dgrclaim{conjectured}{37}{XVI-B026}{Loc(7), or even Loc(7b), probably does not imply Loc(6a) or Loc(6\ensuremath{'}a); possible left Kan extensions without left exactness are suggested.}
+\dgrclaim{false}{40}{XVI-B039}{B(F)\ensuremath{\Rightarrow}C(F) for arbitrary F\ensuremath{\subset}Fl(Cat).}
+\dgrclaim{false}{50}{XVI-B059}{A(Parf\_\{W0\}) is the assertion Parf\_\{W0\}\ensuremath{\subset}W.}
+\dgrclaim{open}{52–53}{XVI-B063}{Objectwise universally equivalent replacements alone may not suffice to transfer B from G to F.}
+\dgrclaim{false}{57}{XVI-B072}{For arbitrary weakly W-fibrant input, the infinite-path unit is universally a W0-equivalence whenever W0 satisfies Loc8bis.}
+\dgrclaim{open}{64–65}{XVI-B084}{Does D imply A without sequential-colimit stability, perhaps with the extra condition printed Loc3ter?}
+\dgrclaim{open}{65}{XVI-B085}{Does D\_W0 imply A under the printed assumption that W and W0 satisfy Loc8bis?}
+\dgrclaim{conjectured}{65}{XVI-B086}{The minimum weak fundamental localizer W\ensuremath{\omega} almost certainly fails Loc8 and even Loc8bis.}
+\dgrclaim{open}{65}{XVI-B087}{It is not clear whether W\ensuremath{\omega} satisfies F; if it fails F then it also fails D and D\ensuremath{\Rightarrow}A is vacuous there.}
+\dgrclaim{conjectured}{66}{XVI-B088}{Does F imply A under Loc1ter,3bis,8bis?}
+\dgrclaim{open}{66–67}{XVI-B089}{Does enough intrinsic W-cofibrations imply Loc6a?}
+\dgrclaim{open}{70}{XVI-B098}{Without Loc8bis it remains unclear whether the arrows in the eight-condition diagram are strict.}
+\dgrclaim{open}{70}{XVI-B099}{The truncation localizers bold W\_n should be tested for Loc7F.}
+\dgrclaim{conjectured}{28–29}{XVI-B100}{The W\ensuremath{\omega}-perfect maps and the locally constant W\ensuremath{\omega}-Grothendieck fibrations should play a role dual to Dwyer maps.}
+\dgrclaim{false}{73}{XVI-C005}{Neither W\_\ensuremath{\omega} nor Parf\_\{W\_\ensuremath{\omega}\} is closed under filtered colimits.}
+\dgrclaim{conjectured}{79}{XVI-C019}{All fundamental localizers used in contemporary examples appear to satisfy Loc(8) and Loc(9).}
+\dgrclaim{false}{79}{XVI-C021}{W\_\ensuremath{\infty} satisfies Loc(1 ter,2,3 bis,4,5,6,7,8,9).}
+\dgrclaim{conjectured}{85–86}{XVI-C034}{A future descent axiom Loc10 should characterize W\ensuremath{\infty} uniquely together with Loc5 and D\_\{W\_\ensuremath{\omega}\}.}
+\dgrclaim{conjectured}{86–87}{XVI-C036}{There exists a fundamental localizer strictly contained in W\ensuremath{\infty}; in particular W\ensuremath{\omega}\ensuremath{\neq}W\ensuremath{\infty}.}
+\dgrclaim{open}{87}{XVI-C037}{The smallest fundamental localizer satisfying D\_\{W\_\ensuremath{\omega}\} might be strictly smaller than W\ensuremath{\infty}.}
+\dgrclaim{false}{87–88}{XVI-C039}{The listed axioms define a localizer tilde W\ensuremath{\infty}\ensuremath{\subset}W\ensuremath{\infty}, which consequently satisfies Loc5.}
+\dgrclaim{conjectured}{87–88}{XVI-C040}{The proposed tilde W\ensuremath{\infty} is strictly smaller than W\ensuremath{\infty}.}
+\dgrclaim{conjectured}{88}{XVI-C042}{Hot\_\{tilde W\ensuremath{\infty}\} might model Whitehead simple homotopy types.}
+\dgrclaim{open}{88}{XVI-C043}{A Whitehead invariant might be defined on pointed Hot\_\{tilde W\ensuremath{\infty}\}, provisionally as an element of K(Z[\ensuremath{\pi}1]).}
+\dgrclaim{conjectured}{88–89}{XVI-C044}{Elementary Whitehead expansion/collapse of a finite simplicial complex should induce an isomorphism of its face-poset model in Hot\_\{tilde W\ensuremath{\infty}\}.}
+\dgrclaim{false}{88; fn43}{XVI-C045}{Barycentric subdivision leaves the strict categorical homotopy type of a finite face poset unchanged.}
+\dgrclaim{open}{91;124}{XVI-C048}{Whether n-equivalence localizers W\_n have enough intrinsic W\_n-fibrations is asked; knowing Loc7F alone supplies no canonical perfect-path calculation.}
+\dgrclaim{conjectured}{92–93}{XVI-C050}{Simplicial approximation suggests that homotopy-equivalent polyhedra have suitably subdivided models that are categorically homotopy equivalent.}
+\dgrclaim{open}{93–95}{XVI-C052}{Is the maximum map sd(I)\ensuremath{\to}I always a categorical homotopy equivalence?}
+\dgrclaim{conjectured}{96}{XVI-C055}{A fundamental localizer strictly below W\ensuremath{\infty} might retain simple homotopy types and support Whitehead and higher Whitehead invariants.}
+\dgrclaim{open}{96}{XVI-C056}{Before a finer localizer is constructed, determine whether the intended Whitehead invariant is invariant under categorical homotopy equivalence of finite poset models.}
+\dgrclaim{open}{97–98}{XVI-C057}{For which W are (Cat,W,Cof\_W) and (Cat,W,Fib\_W) Brown cofibration/fibration categories?}
+\dgrclaim{open}{97–98}{XVI-C058}{For which W and u do derived direct images u\_!,u\_* exist, with exact homotopy pushout/pullback squares?}
+\dgrclaim{open}{98}{XVI-C059}{Which derivator axioms does HOT\_W satisfy, on which diagram domain, and when is it a full derivator on all small categories?}
+\dgrclaim{open}{98}{XVI-C060}{When can W be the weak-equivalence class of a closed Quillen model structure on Cat, preferably a proper one?}
+\dgrclaim{open}{99–100}{XVI-C063}{The explicit integrated-span construction models W-homotopy pushouts; the author asks whether its identification needs Loc3bis.}
+\dgrclaim{conjectured}{100}{XVI-C065}{Loc3bis alone probably does not imply the source’s homotopy-pushout exactness axiom Der6*.}
+\dgrclaim{false}{102}{XVI-C068}{D\_\{W\_\ensuremath{\omega}\} implies W\ensuremath{\subset}W\ensuremath{\infty}.}
+\dgrclaim{open}{105–106}{XVI-C073}{Do Loc6a,Loc8,Loc9 imply enough intrinsic fibrations, Loc7F?}
+\dgrclaim{open}{106–107}{XVI-C074}{Can infinite paths in simplicial presheaves make localized right homotopy operations concrete without Loc7?}
+\dgrclaim{open}{121}{XVI-C097}{Does Loc6a,Loc8,Loc9 imply the coproduct decomposition axiom Loc4?}
+\dgrclaim{open}{122–123}{XVI-C100}{Let V be the least fundamental localizer satisfying6\ensuremath{'}a,8, with or without3bis. Is V accessible, and is V strictly contained in W\ensuremath{\infty}?}
+\dgrclaim{open}{123–124}{XVI-C102}{Does Thomason’s model structure extend to special localizers or to other broader fundamental localizers?}
+\dgrclaim{conjectured}{124}{XVI-C104}{For special localizers, Loc6a may admit a direct elementary proof without the full Thomason construction.}
+\dgrclaim{open}{124}{XVI-C105}{Do the suggested homological or cohomological equivalence localizers satisfy Loc7F?}
+\par\endgroup
+
+\section*{XVII-a \textperiodcentered\ Chapter XVII, part 1 of 2, manuscript pages 1--70}
+\pdfbookmark[1]{XVII-a}{dgrclaims.XVII-a}
+\begingroup\raggedright
+\input{parts/DER_XVII-a_defs}
+\dgrclaim{false}{3}{XVIIa-A011}{The printed reduction says alpha\_i\ensuremath{\in}TC is equivalent to alpha\_i\ensuremath{\in}C in the proof of the reverse implication.}
+\dgrclaim{false}{7}{XVIIa-A022}{Footnote 5 claims that cofibrancy of X and Y is unnecessary in Proposition 2 and both its corollaries, including all conclusions of Corollary 2.}
+\dgrclaim{false}{19}{XVIIa-A047}{The proof says that the case I'\_0\ensuremath{\neq}I is covered by induction on the size of I, with the alternative giving a terminal object i0.}
+\dgrclaim{open}{23}{XVIIa-A053}{Does u\ensuremath{\in}C\_I together with local finiteness imply u\_\{K,I/i\}\ensuremath{\in}C for every i and every lower ideal K\ensuremath{\subset}I/i?}
+\dgrclaim{false}{24}{XVIIa-A057}{The printed condition (I/i\ensuremath{\subset}P\ensuremath{\Rightarrow}i\ensuremath{\in}P) forces P=I for artinian I.}
+\dgrclaim{open}{27,38}{XVIIa-B008}{Question: can the artinian hypothesis be removed from Theorem 2.1(3), with $C_I$ understood in the strong sense?}
+\dgrclaim{false}{32}{XVIIa-B021}{The intermediate cube in the proof of Lemma 2.6 is totally cocartesian, if this is read as saying all six faces are pushouts.}
+\dgrclaim{false}{33–34}{XVIIa-B022}{Lemma 2.7 as printed: every increasing ordinal sequence of opens yields the relative map as a transfinite composite of successor relative maps, including an extra initial factor.}
+\dgrclaim{false}{55}{XVIIa-C021}{Footnote 17 asserts that the candidate in (3.3.1) exists even when I prime is an arbitrary small category, without distinguishing the finite and cocomplete branches.}
+\dgrclaim{open}{56--57}{XVIIa-C025}{Is the constructed candidate u\_!\textasciicircum{}W left adjoint to the localized restriction u\_W\textasciicircum{}*?}
+\dgrclaim{false}{58--59}{XVIIa-C028}{The preceding density and homotopicality hypotheses alone imply that the transported candidate L is left adjoint to the localized G.}
+\dgrclaim{false}{66}{XVIIa-C052}{The cofibrant-replacement Kan-extension candidate extends to arbitrary small targets under only the finite-colimit assumptions of the finite-source branch.}
+\dgrclaim{open}{67}{XVIIa-C054}{Does this candidate for arbitrary target admit the desired adjunction, given that C(u) may no longer be a poset and the established diagram cofibration structure is unavailable there?}
+\par\endgroup
+
+\section*{XVII-b \textperiodcentered\ Chapter XVII, part 2 of 2, manuscript pages 58--118}
+\pdfbookmark[1]{XVII-b}{dgrclaims.XVII-b}
+\begingroup\raggedright
+\input{parts/DER_XVII-b_defs}
+\dgrclaim{false}{64,69}{XVIIb-A065}{Theorem 3.7, formulated for covariant diagrams on artinian posets, immediately proves the corresponding restriction of the presheaf prederivator on the same artinian posets.}
+\dgrclaim{false}{66}{XVIIb-A017}{For arbitrary target category $I^{\prime}$ and artinian-poset source $I$, the displayed formula $(u_!X)(j)=\operatorname{colim}_{(u\downarrow j)}X$ still constructs a weak-equivalence-preserving functor on cofibrant diagrams without further hypotheses.}
+\dgrclaim{open}{67}{XVIIb-A019}{Without a suitable cofibration structure on diagrams over non-posets, the mapping-cylinder proof of Theorem 3.7 has not yet established the adjunction for arbitrary target shapes.}
+\dgrclaim{false}{68}{XVIIb-A021}{The inference attributed here to Anderson, from ordinary full faithfulness of restriction to full faithfulness of localized restriction without further control of derived unit/counit, is not a valid formal implication.}
+\dgrclaim{open}{70–71}{XVIIb-A026}{Find hypotheses on a strict cofibration category guaranteeing all small left homotopy Kan extensions and their pointwise formula.}
+\dgrclaim{open}{79}{XVIIb-A056}{Under suitable additional assumptions, seek $L(TC)\subset TC^{\prime}\subset\widetilde{L(TC)}$, or the stronger $\widetilde{C^{\prime}}\cap W^{\prime}\subset\widetilde{L(TC)}$.}
+\dgrclaim{open}{81}{XVIIb-B002}{Under what additional assumptions does $F'=(v^*)^{-1}(F)$ hold for the transferred cofibration structure?}
+\dgrclaim{false}{82}{XVIIb-B013}{Footnote 23 proposes the literal equality $v_!(TC(I_0))=TC(I)$ under stronger special-model hypotheses.}
+\dgrclaim{conjectured}{82}{XVIIb-B014}{Footnote 23 proposes $F(I)=(v^*)^{-1}F(I_0)$ under stronger special-model hypotheses.}
+\dgrclaim{conjectured}{97}{XVIIb-B055}{The informal expectation that special Quillen triples probably occur only when W is stable under all small filtered colimits.}
+\dgrclaim{false}{101}{XVIIb-C013}{As printed, $C(I)=C_I$ and $TC(I)=TC_I$ whenever $I$ is artinian, with $\mathcal M(I)=\operatorname{Fun}(I^{op},\mathcal M)$.}
+\dgrclaim{false}{116}{XVIIb-C044}{The proof of6.3 completes the equality assertion of6.1(d).}
+\par\endgroup
+
+\section*{XVIII-a \textperiodcentered\ Chapter XVIII, part 1 of 5, manuscript pages 50--138}
+\pdfbookmark[1]{XVIII-a}{dgrclaims.XVIII-a}
+\begingroup\raggedright
+\input{parts/DER_XVIII-a_defs}
+\dgrclaim{false}{53}{XVIII-A50-014}{The operation subsequently denoted $X\boxtimes Y$ was initially proposed as a bicategorical product of pseudo-topoi.}
+\dgrclaim{false}{60–61}{XVIII-A50-033}{Equation4.2.8 claims restriction $\operatorname{Cont}(S\text{-hat}^{op},N)\to[S^{op},N]$ is an equivalence for arbitrary N.}
+\dgrclaim{false}{61}{XVIII-A50-034}{The unrestricted functor category $[S\text{-hat}^{op},N]$ appearing twice on p61 is identified with the continuous-functor category.}
+\dgrclaim{open}{63}{XVIII-A50-037}{The remaining tensor problem is to construct a left adjoint to its fully faithful restricted-nerve embedding.}
+\dgrclaim{conjectured}{63}{XVIII-A50-038}{Lemma4.2.3: for arbitrary pseudo-topos M,N and s\ensuremath{\in}M,t\ensuremath{\in}N, evaluation F\ensuremath{\mapsto}F(s,t) on M\ensuremath{\boxtimes}N is representable by s\ensuremath{\boxtimes}t.}
+\dgrclaim{false}{64}{XVIII-A50-040}{Elementary tensors should decompose as products of two objects depending separately and cocontinuously on the factors.}
+\dgrclaim{open}{66}{XVIII-A66-003}{Does the tensor of arbitrary pseudo-topoi remain a pseudo-topos?}
+\dgrclaim{false}{66}{XVIII-A66-004}{Lemma 4.3.2: for complete $\mathcal E$, pointwise corepresentability of $\alpha:\mathcal E\to X^\wedge$ is sufficient for a left adjoint.}
+\dgrclaim{false}{66}{XVIII-A66-006}{The displayed evaluation $\xi\mapsto\operatorname{Hom}_{X^\wedge}(x,\alpha\xi)$ has domain $\mathcal E^\circ$.}
+\dgrclaim{false}{67}{XVIII-A67-004}{Lemma 4.3.3(b): the images under the reflector of a small dense family in $\mathcal F$ form a small dense family in $\mathcal F$.}
+\dgrclaim{false}{76}{XVIII-A76-003}{This proposed $I$ is grand devant $\pi$.}
+\dgrclaim{false}{76}{XVIII-A76-006}{“On a donc prouvé PTA\ensuremath{\Rightarrow}c.”}
+\dgrclaim{false}{78}{XVIII-A78-004}{It remains to prove that $\operatorname{Ind}_{\pi}C$ is closed under colimits in ordinary $\operatorname{Ind}C$.}
+\dgrclaim{false}{82}{XVIII-A82-001}{Proposition4.4.4: condition(b) implies condition(c).}
+\dgrclaim{false}{82}{XVIII-A82-008}{Alternative(e\ensuremath{\prime}): finality of one diagonal $J\to J^{A_0}$ with $|A_0|=\pi$ is sufficient without further hypotheses.}
+\dgrclaim{false}{82}{XVIII-A82-009}{The attempted F2 argument using three terminal subcategories proves finality without the added hypothesis.}
+\dgrclaim{false}{82}{XVIII-A82-010}{Corollary4.4.5: $F\in\operatorname{Ind}\prime_\pi C$ if and only if $C/F$ satisfies all four conditions of4.4.4.}
+\dgrclaim{false}{85}{XVIII-A85-002}{The index $I=\operatorname{Fun}(J,C)/\varphi$ is an ordered filtered set.}
+\dgrclaim{false}{88}{XVIII-A88-004}{The preceding lemma is equivalent to closure of the restricted ind-category under all pi\textasciicircum{}+-filtered colimits of its objects.}
+\dgrclaim{conjectured}{94}{XVIII-A91-011}{Question/negative expectation: even if $C$ has colimits of cardinal at most $\pi$, evaluation $C^J/\varphi\to C/\varphi(j)$ need not be final for $\varphi:J\to\operatorname{Ind}(C)$.}
+\dgrclaim{false}{102}{XVIII-A91-029}{Claim as written: unrestricted restriction $\operatorname{Fun}(M,E)\to\operatorname{Fun}(C,E)$ is fully faithful because C strictly generates M.}
+\dgrclaim{false}{106}{XVIII-A91-037}{Claim encoded in the diagram: restriction sends every filtered-colimit-preserving functor Ind(C)\ensuremath{\to}E to a functor Ind\_pi(C)\ensuremath{\to}E preserving all size\ensuremath{\leq}pi colimits.}
+\dgrclaim{false}{107}{XVIII-A91-042}{Proposition4.5.2 as first stated: conditions a,a\ensuremath{\prime},a\ensuremath{\prime}\ensuremath{\prime},b,c,c\ensuremath{\prime} are equivalent for every pi\ensuremath{\geq}pi1.}
+\dgrclaim{false}{108}{XVIII-A91-046}{Claim implicit in(4.5.2.2): presheaves F\ensuremath{\in}M that are pi-accessible in the ambient presheaf category are closed under all ambient colimits of size\ensuremath{\leq}pi.}
+\dgrclaim{false}{109}{XVIII-A91-049}{The proposed proof of c\ensuremath{\Rightarrow}a invokes SGA4 I9.16 after constructing the claimed cardinal filtration.}
+\dgrclaim{false}{109}{XVIII-A91-051}{Corollary4.5.3 as first stated: (Filt\textasciicircum{}pi)\_\{pi\ensuremath{\geq}pi1\} is a cardinal filtration of M.}
+\dgrclaim{false}{110}{XVIII-A91-054}{Corollary4.5.4 as first stated: Filt\textasciicircum{}pi is closed under every colimit in M indexed by a category with at most pi arrows.}
+\dgrclaim{false}{111}{XVIII-A91-057}{The earlier proof of4.3.6(b\ensuremath{\Rightarrow}c) is asserted to have already established this same pointwise filtration with the desired cardinal bounds.}
+\dgrclaim{false}{113}{XVIII-A91-062}{Lemma4.5.5 as first stated: whenever pi>pi0 and J is pi0\textasciicircum{}+-filtered, every set of at most pi arrows of J lies in a pi0\textasciicircum{}+-filtered subcategory with at most pi arrows.}
+\dgrclaim{false}{114}{XVIII-A91-064}{Claim as printed: closing a set \ensuremath{\Phi} of at most pi arrows under identities and finite compositions produces a subcategory with at most pi0 arrows, although pi>pi0.}
+\dgrclaim{false}{114}{XVIII-A91-066}{Claim as written: [S]\textasciicircum{}\{\ensuremath{\leq}pi0\} is the smallest pi0\textasciicircum{}+-directed subposet of P(S) containing all singleton subsets.}
+\dgrclaim{false}{115}{XVIII-A91-069}{The cardinality calculation for [S]\textasciicircum{}\{\ensuremath{\leq}pi0\} is taken to prove that a directed hull in P(S) must have size pi\textasciicircum{}\{pi0\}.}
+\dgrclaim{false}{115}{XVIII-A91-070}{The source concludes that its original equivalences can hold only for cardinals with pi\textasciicircum{}\{pi0\}=pi.}
+\dgrclaim{false}{117–118}{XVIII-A116-009}{The proof claims that a fixed Filt\textasciicircum{}pi is closed under all colimits large relative to pi0.}
+\dgrclaim{false}{120}{XVIII-A116-014}{The right adjoint to evaluation at c on covariant functors C\ensuremath{\to}E is claimed to have value E\textasciicircum{}\{Hom(c,d)\} at d.}
+\dgrclaim{false}{126–129}{XVIII-A116-031}{Proposition4.5.13(1): the six conditions a,a-prime,a-double-prime,b,b-prime,b-double-prime are equivalent.}
+\dgrclaim{false}{126}{XVIII-A116-036}{The definition of Filt-prime\textasciicircum{}pi via the supposed common condition P(pi) in4.5.13 is unambiguous.}
+\dgrclaim{conjectured}{127}{XVIII-A116-047}{Footnote50 suggests that condition C on M is equivalent to the analogous condition on C for filtered diagrams of at most pi arrows.}
+\dgrclaim{conjectured}{127–128}{XVIII-A116-049}{Outside A,B,C, the one-step colimit classes D\_pi may fail to form a cardinal filtration.}
+\dgrclaim{false}{133}{XVIII-A116-042}{The proof infers D\_pi=M\_pi from generation under pi\textasciicircum{}+-filtered colimits, solely by inclusion D\_pi\ensuremath{\subset}M\_pi and Lemma4.5.14.}
+\dgrclaim{false}{134}{XVIII-A116-058}{Lemma4.5.14,b\ensuremath{\Rightarrow}c: pi\textasciicircum{}+-filtered generation by a strictly full M0 implies M\_pi\ensuremath{\subset}M0.}
+\dgrclaim{false}{134}{XVIII-A116-059}{Lemma4.5.14 final assertion: under M0\ensuremath{\subset}M\_pi and strict generation by M\_pi, conditions a,b,b-prime,c are equivalent to M0=M\_pi.}
+\dgrclaim{conjectured}{134}{XVIII-A116-060}{Condition B implies condition C for the paratoposes under discussion.}
+\dgrclaim{conjectured}{134–135}{XVIII-A116-061}{Condition C does not imply condition B.}
+\dgrclaim{false}{135}{XVIII-A116-064}{If G0*G1\ensuremath{\to}G is surjective then (G0\ensuremath{\to}G,G1\ensuremath{\to}G) is a strict epimorphic family in groups and Cat.}
+\dgrclaim{false}{135}{XVIII-A116-065}{Footnote53 retains strict epimorphy for the special axes H\ensuremath{\to}H×H with H nontrivial.}
+\dgrclaim{false}{137}{XVIII-A116-069}{Corollary4.5.16: under C, an object covered by a universally epimorphic family of<=pi objects in D\_pi belongs to D\_pi.}
+\dgrclaim{false}{137}{XVIII-A116-070}{A universally epimorphic outer family composed with universal strict epimorphic inner families is universally strict epimorphic.}
+\dgrclaim{false}{138}{XVIII-A116-074}{The one-step class of arbitrary colimits of<=pi-arrow diagrams in C need not equal M\_pi.}
+\par\endgroup
+
+\section*{XVIII-b \textperiodcentered\ Chapter XVIII, part 2 of 5, manuscript pages 127--228}
+\pdfbookmark[1]{XVIII-b}{dgrclaims.XVIII-b}
+\begingroup\raggedright
+\input{parts/DER_XVIII-b_defs}
+\dgrclaim{conjectured}{127}{XVIIIb-A010}{The pullback-commutation hypothesis on M should be equivalent to its analogue on C for filtered colimits of cardinal at most pi.}
+\dgrclaim{conjectured}{127–128}{XVIIIb-A011}{Outside the three sufficient hypotheses the Filt-prime filtration may fail to be a cardinal filtration.}
+\dgrclaim{false}{133–134}{XVIIIb-A025}{Lemma4.5.14(b-prime) implies M\_pi is contained in M0.}
+\dgrclaim{false}{133–134}{XVIIIb-A026}{If M0 is contained in M\_pi and M\_pi is dense, all four conditions of4.5.14 are equivalent to M0=M\_pi.}
+\dgrclaim{conjectured}{134–135}{XVIIIb-A028}{Universal strict-epimorphism hypotheses B should imply filtered pullback exactness C, whereas C need not imply B.}
+\dgrclaim{false}{135}{XVIIIb-A031}{A surjection G0*G1\ensuremath{\to}G makes the two corresponding group maps a strict epimorphic family in Gr and Cat.}
+\dgrclaim{false}{135}{XVIIIb-A032}{The two coordinate inclusions H\ensuremath{\to}H×H form a strict epimorphic family, as claimed by the special-case exemption in footnote53.}
+\dgrclaim{false}{142}{XVIIIb-A051}{If card-red(C0)<=pi1, then that closure has skeletal morphism cardinal <=pi1\textasciicircum{}(pi0).}
+\dgrclaim{false}{143}{XVIIIb-A053}{That iterated closure has skeletal morphism cardinal <=pi1\textasciicircum{}(pi0).}
+\dgrclaim{false}{145–146}{XVIIIb-A058}{With pi1=card-red(S), one has card-red(M\_pi)<=pi1\textasciicircum{}pi for pi>=pi0.}
+\dgrclaim{false}{145}{XVIIIb-A059}{The equality pi1\textasciicircum{}pi=2\textasciicircum{}pi holds whenever pi>=pi0, as printed in the parenthesis of4.6.2.1.}
+\dgrclaim{false}{147}{XVIIIb-A063}{Full faithfulness of Ind\_pi0(C)\ensuremath{\to}M alone implies that every object of C is pi0-accessible in M.}
+\dgrclaim{open}{149–150}{XVIIIb-A076}{Do e\_pi0, or merely alpha(pi0) and beta(pi0), plus cocompleteness and a small strict generator imply a pi0-paratopos at the same cardinal?}
+\dgrclaim{false}{150}{XVIIIb-A079}{Being a paratopos is equivalent to being Ind-prime\_pi0(S) for some arbitrary small S, as written without a completeness condition.}
+\dgrclaim{conjectured}{154}{XVIIIb-A088}{Conjecture4.6.6(a): condition L plus a small strictly generating subcategory of accessible objects should imply a suitable Ind presentation/cardinal filtration.}
+\dgrclaim{conjectured}{155–156}{XVIIIb-A093}{If these closures form a cardinal filtration, they should equal M\_pi; their existence does not by itself make M\_pi/X filtered.}
+\dgrclaim{open}{159–160}{XVIIIb-A106}{Are there useful examples of(a)–(f) beyond topoi and abelian categories and their elementary combinations?}
+\dgrclaim{open}{160}{XVIIIb-A108}{Internal groups in groups are abelian groups; could analogous constructions M boxtimes M provide further paratopos examples?}
+\dgrclaim{false}{162–164}{XVIIIb-B014}{(a\ensuremath{\prime}\ensuremath{\prime}) implies (c\ensuremath{\prime}), without a size hypothesis on C.}
+\dgrclaim{false}{167}{XVIIIb-B029}{If $\pi=\pi_1=\pi_0$, then $\Filt^\pi=\Filt^{\prime\pi}$ is the subcategory of representables and agrees with $C^{\natural}$ only when C is Karoubian.}
+\dgrclaim{open}{175}{XVIIIb-B048}{Is $\Filt^\pi$ closed under retracts at $\pi^{\pi_0}=\pi$, equivalently can the missing (c)=> (b) be proved?}
+\dgrclaim{false}{177}{XVIIIb-B055}{The initial level need not be retract-closed; specifically $\Filt^{\prime\pi_0}=\Filt^{\pi_0}\simeq e$ for non-Karoubian C because every small highly filtered category is cofinal to e.}
+\dgrclaim{false}{178–179}{XVIIIb-B059}{If every slice $\mathcal F^\pi/F$ is $\pi^+$-filtered, the realization $\Ind_\pi(\mathcal F^\pi)\to\mathcal M$ is an equivalence.}
+\dgrclaim{conjectured}{181–182}{XVIIIb-B070}{Canonical generalized filtrations of Ind categories need not have every larger cardinal useful; some may be superfluous.}
+\dgrclaim{open}{184}{XVIIIb-B079}{Can both exponents $\pi^{\pi_0}$ in Lemma 4.7.19 be replaced by $\pi_0$?}
+\dgrclaim{open}{185}{XVIIIb-B082}{Are the sharper bounds $2^\pi$ and $(\pi')^\pi$ valid for the general intrinsic filtration of Lemma 4.7.19?}
+\dgrclaim{false}{180}{XVIIIb-B098}{The initial level $\mathcal F^{\pi_0}$ of any accessible generalized filtration is a generating subcategory of M.}
+\dgrclaim{open}{189}{XVIIIb-C008}{The condition that some family of arrows from C to every X is strict epimorphic may differ from the all-arrows density criterion.}
+\dgrclaim{false}{190-191}{XVIIIb-C010}{The feared failure of density under passage from C to a containing full subcategory C-prime would invalidate earlier arguments.}
+\dgrclaim{open}{199-200}{XVIIIb-C018}{Essential surjectivity of Ind\_\{pi0\}(S)->M does not follow merely by the asserted construction; saturating S under existing bounded colimits is proposed but not shown sufficient.}
+\dgrclaim{open}{202}{XVIIIb-C024}{4.8.6(1): find a category satisfying4.8.1(a) at pi0 but not the Ind-presentation condition at pi0.}
+\dgrclaim{open}{202}{XVIIIb-C026}{4.8.6(2): find serviceable additional assumptions making the dense-presentable-generator condition imply an Ind-presentation at the same rank.}
+\dgrclaim{open}{203}{XVIIIb-C027}{4.8.6(3): is Filt\textasciicircum{}pi in Ind\_\{pi0\}(C) closed under retracts for pi>pi0, at least when pi\textasciicircum{}pi0=pi?}
+\dgrclaim{open}{205}{XVIIIb-C032}{4.8.6(4): find nonuseful cardinals, preferably arbitrarily large ones, for one accessible category.}
+\dgrclaim{open}{205}{XVIIIb-C033}{4.8.6(4): find useful cardinals that fail quantitative regularity, preferably arbitrarily large ones.}
+\dgrclaim{false}{209}{XVIIIb-C046}{The displayed formula X=colim\_J x\_j=product\_\{Ob J\}x\_j computes the projective limit.}
+\dgrclaim{false}{210-211}{XVIIIb-C049}{4.8.11 first sentence: on an accessible finitely complete M, every accessible finite-limit-preserving functor M->Set is representable.}
+\dgrclaim{conjectured}{213}{XVIIIb-C056}{Footnote91 conjecture: if M and M-op are both accessible, then M is essentially small.}
+\dgrclaim{conjectured}{220}{XVIIIb-C071}{4.9.4(b): without the closure hypotheses the comparison can fail essential surjectivity even for J=B(Z/2).}
+\dgrclaim{false}{224}{XVIIIb-C082}{4.9.6.3(b-prime) as printed: connectedness and equalization of parallel pairs in I-prime alone imply condition(a).}
+\par\endgroup
+
+\section*{XVIII-c \textperiodcentered\ Chapter XVIII, part 3 of 5, manuscript pages 220--328}
+\pdfbookmark[1]{XVIII-c}{dgrclaims.XVIII-c}
+\begingroup\raggedright
+\input{parts/DER_XVIII-c_defs}
+\dgrclaim{conjectured}{220}{XVIIIc-A006}{Without an additional closure hypothesis on C, the comparison Ind\_pi([J,C])->[J,Ind\_pi C] need not be essentially surjective even for J=B(Z/2).}
+\dgrclaim{false}{224}{XVIIIc-A024}{The printed condition b-prime (I-prime connected and satisfying PF2, with no comma condition) is equivalent to a and b.}
+\dgrclaim{false}{244}{XVIIIc-B005}{Every section with values in D\_j is \ensuremath{\kappa}-presentable in \ensuremath{\Gamma}(N/J).}
+\dgrclaim{false}{248}{XVIIIc-B014}{Existence and preservation of colimits large before \ensuremath{\pi}\_0 of size\ensuremath{\leq}\ensuremath{\pi}\_0\ensuremath{'}, with \ensuremath{\pi}\_0\ensuremath{\leq}\ensuremath{\pi}<\ensuremath{\kappa} and \ensuremath{\pi}\_0\ensuremath{'}>\ensuremath{\pi}\_0, imply the stated ordinal hypothesis |\ensuremath{\delta}|\ensuremath{\leq}\ensuremath{\pi}.}
+\dgrclaim{false}{262}{XVIIIc-B030}{The local consecutive-stage condition (ii) implies the t\_\ensuremath{\beta}(a) define a morphism of ind-objects for arbitrary limit \ensuremath{\delta}.}
+\dgrclaim{conjectured}{266-267}{XVIIIc-B041}{Question 4.10.11(a): for a small-base fibration with accessible fibres and accessible inverse images, \ensuremath{\Gamma}(N/J) is accessible.}
+\dgrclaim{conjectured}{267}{XVIIIc-B042}{Question 4.10.11(b): the category of cartesian sections under the same hypotheses is accessible.}
+\dgrclaim{open}{267}{XVIIIc-B043}{Find a common formulation covering fibred and opfibred sections, and possibly more general functors to the base.}
+\dgrclaim{open}{272}{XVIIIc-B060}{Does 4.11.6 remain true without rigidity?}
+\dgrclaim{conjectured}{280}{XVIIIc-C008}{For M=N=Set, accessible functors have no common preservation cardinal.}
+\dgrclaim{false}{285}{XVIIIc-C015}{4.13.2(c): one may take pi0' minimal useful for S and for preservation by its inclusion, and pi1'=max(pi0',card\_red S\_\{pi0'\}), without bounding ambient ranks.}
+\dgrclaim{false}{288}{XVIIIc-C019}{4.13.4: the canonical functor Ind\_pi(A)\ensuremath{\to}M used in the classification is non-fully-faithful.}
+\dgrclaim{false}{291}{XVIIIc-C028}{Footnote123: the fixed-point formulation4.13.8 additionally requires pi to be a non-limit cardinal.}
+\dgrclaim{false}{292}{XVIIIc-C029}{The fixed-point equation pi\textasciicircum{}\{pi0'\}=pi entails pi\ensuremath{\geq}2\textasciicircum{}\{pi0\}>pi0'.}
+\dgrclaim{false}{293}{XVIIIc-C033}{The hypotheses of4.13.9 imply pi\textasciicircum{}\{pi0'\}=pi and hence global usefulness of pi for M.}
+\dgrclaim{false}{298}{XVIIIc-C039}{The initial ordinal of cardinal pi is rho\textasciicircum{}+-filtered for every rho<pi.}
+\dgrclaim{false}{300}{XVIIIc-C043}{The construction may satisfy both i0=i for arbitrary i and i\_alpha\ensuremath{\in}J\_\{phi(alpha)\} for every alpha without adjustment.}
+\dgrclaim{false}{308-309}{XVIIIc-C062}{4.13.15: under pi>pi0'\ensuremath{\geq}pi0 and pi\textasciicircum{}\{pi0\}=pi, conditions a,a',b,c,c' are equivalent.}
+\dgrclaim{false}{308}{XVIIIc-C068}{Footnote135: merely requiring usefulness of pi keeps a,a',b,c equivalent, without necessarily c'.}
+\dgrclaim{false}{314}{XVIIIc-C076}{The initial ordinal pi is sufficiently filtered for taking the final alternating-chain colimits under pi>pi0' alone.}
+\dgrclaim{false}{322-323}{XVIIIc-C079}{After the two successor factorization identities are imposed, naturality of u with the immediately preceding stage may still fail.}
+\par\endgroup
+
+\section*{XVIII-d \textperiodcentered\ Chapter XVIII, part 4 of 5, manuscript pages 316--429}
+\pdfbookmark[1]{XVIII-d}{dgrclaims.XVIII-d}
+\begingroup\raggedright
+\input{parts/DER_XVIII-d_defs}
+\dgrclaim{false}{336}{XVIII-d-A021}{The initial ordinal of cardinality $\pi$ is large before every cardinal $\pi^\prime<\pi$.}
+\dgrclaim{false}{345}{XVIII-d-A041}{In Proposition 4.13.24, the condition that $\Phi$ contain a nonzero limit ordinal can simply be omitted with no replacement.}
+\dgrclaim{false}{347–348}{XVIII-d-B006}{GCH makes $(\pi')^{\pi_0}=\pi'$ automatic for every infinite $\pi'>\pi_0$.}
+\dgrclaim{conjectured}{353–354}{XVIII-d-B020}{Question 4.13.33 conjectures that the replete full essential image of every accessible functor between accessible categories is accessible and accessibly embedded; equivalently the functor factors through such a full image.}
+\dgrclaim{conjectured}{354}{XVIII-d-B022}{If $\mathcal M$ is accessible with $\pi_0^+$-filtered colimits and $A$ is a small full subcategory, the smallest replete full subcategory containing $A$ and closed under those colimits is conjectured accessible and accessibly embedded.}
+\dgrclaim{conjectured}{355}{XVIII-d-B023}{The same small-envelope conjecture is made after additionally closing under a small family $\Phi$ of small colimit shapes which exist in $\mathcal M$.}
+\dgrclaim{conjectured}{370}{XVIII-d-B052}{Footnote 163 conjectures that the target completeness assumptions in Theorem 4.14.1 can be dropped; it points forward to 4.14.16 for removal of the limit-shape assumption.}
+\dgrclaim{false}{373}{XVIII-d-B057}{The ordinal of cardinal pi is pi0-plus-filtered merely because pi>pi0.}
+\dgrclaim{false}{379}{XVIII-d-C009}{Corollary 4.14.9 as printed: every small-limit-preserving functor between locally presentable categories has a left adjoint, and taking left adjoints gives an equivalence to the opposite category of cocontinuous functors.}
+\dgrclaim{false}{379}{XVIII-d-C011}{Lemma 4.14.10, left-adjoint half: a functor from a pseudo-topos (a cocomplete locally small category with a small family generating by strict epimorphisms) to a locally small category has a left adjoint if and only if it preserves all small limits.}
+\dgrclaim{false}{380}{XVIII-d-C013}{Corollary 4.14.11, covariant half: every small-limit-preserving $F:\mathcal M\to\mathbf{Set}$ on a locally presentable category is representable.}
+\dgrclaim{open}{387}{XVIII-d-C031}{Question 4.14.15: for every accessible $\mathcal N$, is the full category of epimorphisms accessible in $\mathcal N^{[1]}$?}
+\dgrclaim{conjectured}{388–390}{XVIII-d-C037}{Conjecture 4.14.16: one may remove the target existence assumptions in 4.14.1 and still obtain accessibility of the subcategory of diagrams that satisfy the prescribed universal cone conditions.}
+\dgrclaim{false}{391}{XVIII-d-C044}{Corollary 4.14.18(b), opfibration case: if pi\ensuremath{\geq}max(pi\_0,cardred C), a section whose values are pi\textasciicircum{}+-presentable is itself pi\textasciicircum{}+-presentable.}
+\dgrclaim{false}{392}{XVIII-d-C046}{Corollary 4.14.18(c): after choosing pi\_0 useful for the fibres and the section category, pi\_1=max(pi\_0,cardred C,cardred M\_pi\_0), and pi\ensuremath{\geq}pi\_1 with pi\textasciicircum{}\{pi\_0\}=pi, the pi-presentable sections are exactly the pointwise pi-presentable sections.}
+\dgrclaim{false}{395–396}{XVIII-d-C057}{Corollary 4.14.20(c): under the printed threshold and pi\textasciicircum{}\{pi\_0\}=pi, intrinsic presentables of the cartesian/cocartesian section category are exactly the ambient presentables in it, and exactly its pointwise presentable sections.}
+\dgrclaim{false}{411}{XVIII-d-D017}{As printed, the inclusion E\_1\ensuremath{\to}E in the opfibration has a right adjoint, and the inclusion E\_0\ensuremath{\to}E in the fibration has a left adjoint.}
+\dgrclaim{false}{420}{XVIII-d-D031}{Corollary 4.14.25(1), literally: E and E\_0 have \ensuremath{\pi}-large filtered colimits and E\_0\ensuremath{\to}E preserves them iff E\_0 has them and all H(\ensuremath{-},x\_1) preserve them contravariantly; it then asserts existence of the same colimits in E\_1.}
+\dgrclaim{false}{426–429}{XVIII-d-D049}{Under these bounds, if \ensuremath{\pi}\textasciicircum{}\{\ensuremath{\pi}\_0\}=\ensuremath{\pi}\ensuremath{\geq}\ensuremath{\pi}\_1, each \ensuremath{\pi}-presentable object of a fibre is \ensuremath{\pi}-presentable in E.}
+\dgrclaim{false}{426}{XVIII-d-D050}{As printed in 4.15.2(c), the subcategory E\_\ensuremath{\pi} itself satisfies L\_\{\ensuremath{\pi}\_1\}, hence L\_\ensuremath{\pi}.}
+\dgrclaim{false}{426}{XVIII-d-D051}{As printed in 4.15.2(c), Ind\_\ensuremath{\pi}(E\_\{s,\ensuremath{\pi}\})\ensuremath{\to}E is an equivalence for a single fixed fibre s.}
+\dgrclaim{false}{426}{XVIII-d-D052}{Corollary 4.15.2(d): under the same hypotheses E(\ensuremath{\pi})=E\_\ensuremath{\pi}, not just E(\ensuremath{\pi})\ensuremath{\subset}E\_\ensuremath{\pi}.}
+\par\endgroup
+
+\section*{XVIII-e \textperiodcentered\ Chapter XVIII, part 5 of 5, manuscript pages 419--19}
+\pdfbookmark[1]{XVIII-e}{dgrclaims.XVIII-e}
+\begingroup\raggedright
+\input{parts/DER_XVIII-e_defs}
+\dgrclaim{false}{420–421}{XVIIIe-A005}{4.14.25(1), literally: $\mathcal E$ and $\mathcal E_0$ admit $L_\pi$-colimits and $\mathcal E_0\to\mathcal E$ preserves them iff $\mathcal E_0$ admits them and each $H(-,x_1)$ takes them to limits.}
+\dgrclaim{false}{426,429–431}{XVIIIe-A023}{4.15.2(c), rank conclusion: under its printed hypotheses every fibrewise pi-presentable object is pi-presentable in the total category.}
+\dgrclaim{false}{426}{XVIIIe-A024}{The displayed functor Ind\_pi(E\_\{s,pi\})->E is an equivalence.}
+\dgrclaim{false}{426,431–432}{XVIIIe-A025}{4.15.2(d): E(pi)=E\_pi at the stated numerical rank.}
+\dgrclaim{false}{430}{XVIIIe-A032}{The inequalities pi>=pi1>=pi\_lambda imply that H\_lambda(-,y) is pi0-accessible.}
+\dgrclaim{open}{434}{XVIIIe-A042}{Find usable necessary and sufficient local conditions on f ensuring accessibility of every pullback over a small Karoubian category.}
+\dgrclaim{open}{434}{XVIIIe-A043}{It might suffice to test only Delta1 and the walking retract P; the author expresses doubt.}
+\dgrclaim{conjectured}{434}{XVIIIe-A044}{Testing Delta1 and the two three-object categories Q=(2->1->0 with the retract0<->1) and Q-prime=(2<-1<->0) should suffice.}
+\dgrclaim{open}{438}{XVIIIe-A054}{The analogous construction for a fibration is not supplied; the author suggests testing the walking retract P.}
+\dgrclaim{conjectured}{456–457}{XVIIIe-B029}{Key lemma4.15.8.1: for a left-cancellative monoid M with |M|\ensuremath{\leq}\ensuremath{\pi}\ensuremath{_0}, every \ensuremath{\pi}\ensuremath{_0}\ensuremath{^+}-directed diagram in BM has a tail whose transition elements are units.}
+\dgrclaim{false}{461–462}{XVIIIe-B040}{Condition(b) asserts literal identity of every sufficiently late transition in every diagram valued in a left-cancellative quotient of End\_C(x).}
+\dgrclaim{conjectured}{462}{XVIIIe-B042}{Condition(b\ensuremath{'}) excludes \ensuremath{\pi}\ensuremath{^+}-long diagrams in the relevant left-cancellative monoids with all strict transitions noninvertible.}
+\dgrclaim{false}{461–462}{XVIIIe-B043}{Theorem4.15.9 declares all of(a),(a\ensuremath{'}),(a\ensuremath{''}),(b),(b\ensuremath{'}) equivalent as printed.}
+\dgrclaim{conjectured}{461}{XVIIIe-B044}{Grothendieck conjectures that Ind\_\ensuremath{\pi} C is the idempotent completion whenever |C|\ensuremath{\leq}\ensuremath{\pi}.}
+\dgrclaim{false}{462–463}{XVIIIe-B045}{Corollary4.15.10 says all printed equivalent conditions hold when \ensuremath{\pi}>|C|.}
+\dgrclaim{open}{465-466}{XVIIIe-R005}{For every universe U there might be an infinite cardinal pi in U such that every ultrafilter on a U-small set selecting a cell of every partition into at most pi pieces is principal.}
+\dgrclaim{false}{466}{XVIIIe-R006}{Every suitably definable replete full subcategory of an accessible category closed under sufficiently filtered colimits is accessible and accessibly embedded.}
+\dgrclaim{false}{467-468}{XVIIIe-R008}{For fixed z, failure of Hom(x,z) to be nonempty should be witnessed by a uniformly bounded member of a suitable presentable-object presentation of x.}
+\dgrclaim{open}{467-468}{XVIIIe-R009}{For every infinite field k, one may take pi=|k| in the small-subalgebra obstruction criterion for absence of k-points.}
+\dgrclaim{open}{468-469}{XVIIIe-R010}{If f:M->N\textasciicircum{}op preserves sufficiently filtered colimits and T is accessible in N and stable under the corresponding cofiltered limits in N, is f\textasciicircum{}\{-1\}(T) accessible in M?}
+\dgrclaim{conjectured}{470}{XVIIIe-R014}{The full L\_pi-colimit closure S(pi) of the image of an accessible functor is accessible in M.}
+\dgrclaim{false}{470}{XVIIIe-R015}{The decreasing family S(pi) stabilizes for all sufficiently large pi.}
+\dgrclaim{false}{470}{XVIIIe-R017}{The same accessibility and eventual-stationarity claims should hold for the image of g\textasciicircum{}op:N\textasciicircum{}op->M when g:N->M\textasciicircum{}op preserves sufficiently filtered colimits.}
+\dgrclaim{false}{471}{XVIIIe-R019}{A full subcategory of a presheaf category closed under sufficiently filtered colimits automatically inherits a small dense subcategory of accessible objects.}
+\dgrclaim{open}{471}{XVIIIe-R020}{A category with a small dense family of presentable objects and sufficiently filtered colimits is accessible.}
+\dgrclaim{false}{472}{XVIIIe-R021}{If M and M\textasciicircum{}op are accessible, then M is essentially small.}
+\dgrclaim{open}{472}{XVIIIe-R022}{An accessible category with a small codense subcategory is essentially small.}
+\dgrclaim{open}{472}{XVIIIe-R023}{A locally small category with small dense and codense subcategories is essentially small.}
+\dgrclaim{false}{473}{XVIIIe-R025}{The subcategory of existing I-colimit cocones in an accessible M is accessible and accessibly embedded even if some I-diagrams have no colimit.}
+\dgrclaim{false}{475}{XVIIIe-R032}{Corollary4.16.6.2(b'): if C has no nonidentity idempotents, the Delta1-tests alone imply (a).}
+\dgrclaim{open}{476}{XVIIIe-R035}{Question4.16.6.4: do accessible fibres and transition functors of a fibration or opfibration imply accessibility after Q and Q' base change?}
+\dgrclaim{open}{476-476bis}{XVIIIe-R037}{If E is accessible over small Karoubian C, then for every accessible M and accessible M->C, the strict pullback E x\_C M and both projections are accessible.}
+\dgrclaim{open}{484-485}{XVIIIe-R047}{It is asked whether there is a U-ordinal-length family of fields with no morphisms from an earlier field to a later one.}
+\dgrclaim{false}{4}{XVIIIe-C011}{The printed identity in the inverse proof is ff\ensuremath{\prime}=f\ensuremath{\prime}=f=1.}
+\dgrclaim{false}{4}{XVIIIe-C013}{The last sentence asserts that k\_\ensuremath{\Phi} is a field quotient for every \ensuremath{\Phi}\ensuremath{\in}\ensuremath{\mathcal F}.}
+\dgrclaim{conjectured}{11}{XVIIIe-C030}{If \ensuremath{\pi} is the least cardinal in U belonging to no strictly smaller infinite universe, every \ensuremath{\pi}-ultrafilter on a U-small set is principal.}
+\dgrclaim{false}{14}{XVIIIe-C038}{The source defines both complementary classes S and S\ensuremath{\prime} by Hom(A,k)=\ensuremath{\varnothing}.}
+\dgrclaim{false}{15}{XVIIIe-C044}{Under the principal-ultrafilter hypothesis the source identifies k-points with coordinates satisfying \{xi\}=intersection(\ensuremath{\Phi}).}
+\dgrclaim{open}{19}{XVIIIe-C053}{Does the preceding small-subalgebra witness property hold simply at \ensuremath{\pi}\ensuremath{\ge}|k|? Does any such U-small bound exist?}
+\par\endgroup
+
+\section*{XIX \textperiodcentered\ Chapter XIX, manuscript pages 1--50}
+\pdfbookmark[1]{XIX}{dgrclaims.XIX}
+\begingroup\raggedright
+\input{parts/DER_XIX_defs}
+\dgrclaim{false}{1}{XIX-A007}{The strengthened equalities of (1.3) are claimed to be equivalent to adding separate double-orthogonal closedness of the corresponding classes to $\Phi\perp\Psi$.}
+\dgrclaim{open}{4–5}{XIX-A026}{Is $\operatorname{Retr}(\Phi'')$ stable under pushout and transfinite composition, and therefore equal to $\Phi'''$, without small generation?}
+\dgrclaim{false}{10}{XIX-A052}{If $\Psi=\Phi^\square$, then $\Psi(I_0)=\Phi(I_0)^\square$.}
+\dgrclaim{conjectured}{12}{XIX-A060}{Question-conjecture 1.11: if $(\Phi,\Psi)$ is special, is the injective pair $(\Phi(I),\Psi[I])$ special for every small $I$, perhaps after an additional cardinal-filtration hypothesis?}
+\dgrclaim{open}{12}{XIX-A061}{In 1.11, if $\Phi_0$ is a small generating family for $\Phi$, does the particular class $\Phi_0(I)$ generate $\Phi(I)$?}
+\dgrclaim{false}{12}{XIX-A062}{Proposition 1.12, formula (1.13.2), prints $u^*(\Phi(I'))\subseteq\Phi\langle I'\rangle\iff u_*\Psi(I)\subseteq\Psi(I')$.}
+\dgrclaim{false}{14}{XIX-A074}{The printed dual criterion in (2.5) uses a factorization $f=pi$ with $i\in W$ and $f\in C$.}
+\dgrclaim{false}{17}{XIX-A087}{The Case A proof says that $TC'\subseteq W'$ is equivalent to $R(TC')\subseteq W'$.}
+\dgrclaim{false}{10}{XIX-A090}{The equalities (1.15)--(1.16) identify $(v_!\Phi(I_0))^\square$ with $\Psi(I)$ and its left orthogonal with $\Phi\langle I\rangle$ under the sole displayed assumption $\Psi=\Phi^\square$.}
+\dgrclaim{false}{19}{XIX-B003}{The displayed equality in Theorem 2.3 identifies $C\langle I\rangle$ with ${}^{\square}F(I)$.}
+\dgrclaim{false}{23}{XIX-B021}{Decomposition holds for every prederivator of the form $\mathbf D_{\mathcal M,W}$, without hypotheses on the relative category.}
+\dgrclaim{open}{24}{XIX-B024}{For a merely special triple, the source has not established small generating sets or factorizations for the componentwise classes $C(I)$ and $TC(I)$.}
+\dgrclaim{conjectured}{25}{XIX-B035}{Condition (d) should be redundant, at least when epimorphisms are effective, after choosing suitable cardinals of the form $2^c$.}
+\dgrclaim{false}{30}{XIX-B062}{$v^*(TF[I])=v^*v_*(TF(I_0))$ as image classes of arrows.}
+\dgrclaim{open}{32}{XIX-B070}{Can special model structures outside the very special class define derivators on all small shapes?}
+\dgrclaim{open}{32}{XIX-B072}{The author expresses uncertainty about the all-shapes homotopy-Kan-extension theorem attributed to Anderson.}
+\dgrclaim{false}{35}{XIX-C023}{Every cofibration between cofibrant objects belongs to ambient Cof\_W by Brown's lemma.}
+\dgrclaim{false}{38}{XIX-C038}{Proposition3.5: if \ensuremath{\Phi}=\textasciicircum{}perp\ensuremath{\Psi} is Q-closed, then for noetherian I the Anderson class \ensuremath{\Phi}\_I equals \textasciicircum{}perp(\ensuremath{\Psi}(I)).}
+\dgrclaim{conjectured}{39}{XIX-C043}{For only transfinitely Q-saturated \ensuremath{\Phi}, conjecturally the transfinite Q-saturation of v!\ensuremath{\Phi}(I\_0) agrees with Anderson's noetherian extension.}
+\dgrclaim{open}{39}{XIX-C045}{The desired identity is C<I>\ensuremath{\cap}W(I)=(TC)<I>.}
+\dgrclaim{open}{40}{XIX-C048}{Question3.6 asks the identity for every small I, under small completeness of M and Q-closedness of C and TC.}
+\dgrclaim{open}{40}{XIX-C053}{It may suffice for Question3.6 that only (TC)<I>--F(I) factor.}
+\dgrclaim{open}{42}{XIX-C062}{Question3.9 requests a closed Quillen structure whose prederivator lacks some u!\textasciicircum{}W.}
+\dgrclaim{open}{42}{XIX-C063}{Question3.9 also requests such a structure lacking some u*\textasciicircum{}W.}
+\dgrclaim{conjectured}{42}{XIX-C064}{The author presumes testing u:I\ensuremath{\to}e should suffice for general Kan extensions.}
+\dgrclaim{open}{43}{XIX-C065}{The requested counterexample would be stronger with cocomplete accessible ambient M and L-accessible W.}
+\dgrclaim{open}{46–47}{XIX-C092}{A counterexample might have bicomplete M but H lack some small colimits.}
+\dgrclaim{open}{47}{XIX-C096}{Question3.13: can a locally U-small category have all U-small colimits but lack some U-small limits?}
+\dgrclaim{open}{48}{XIX-C099}{Question3.14: a cofibration category satisfying Cof\_4 should have u!\textasciicircum{}W for all small u.}
+\dgrclaim{open}{48}{XIX-C100}{The author requests a localizer on bicomplete M whose prederivator lacks some left or right Kan extension, perhaps with M small.}
+\dgrclaim{open}{48–49}{XIX-C101}{The author is less convinced such a counterexample exists when W is filtered-colimit stable and M has accessible objects and a cardinal filtration.}
+\dgrclaim{open}{49}{XIX-C102}{Question3.15 asks whether an L-accessible arrow class in the stated accessible complete ambient category has a small left Q-generating subset.}
+\dgrclaim{open}{49}{XIX-C103}{Question3.15 allows the extra assumption that \ensuremath{\Phi} is left Q-saturated: isomorphisms, cobase change, composition, and retracts.}
+\dgrclaim{open}{49–50}{XIX-C105}{The author requests any mutually Q-orthogonal closed pair that does not factor all arrows.}
+\dgrclaim{open}{49–50}{XIX-C106}{The same nonfactorization request with special ambient M is of particular interest.}
+\par\endgroup
+
+\dgrbackchapter{Transcription corrections}
+The corrections to the transcription, counted by kind for each part: readings of the transcription corrected against the edition (transcription), slips of the edition kept in the text with their intended reading recorded (edition slip kept), and doubtful readings settled against the edition (doubt resolved).
+
+\begin{center}\small
+\begin{tabular}{lrrrr}
+\toprule
+Part & transcription & edition slip kept & doubt resolved & total \\
+\midrule
+I-a & 8 & 29 & 5 & 42 \\
+I-b & 3 & 69 & 3 & 75 \\
+II-a & 11 & 65 & 1 & 77 \\
+II-b & 3 & 73 & 4 & 80 \\
+III-V & 14 & 114 & 6 & 134 \\
+VI-a & 11 & 43 & 5 & 59 \\
+VI-b & 2 & 67 & 3 & 72 \\
+VI-c & 1 & 43 & 3 & 47 \\
+VII-a & 19 & 81 & 2 & 102 \\
+VII-b & 6 & 53 & 0 & 59 \\
+VII-c & 3 & 45 & 7 & 55 \\
+VIII-X & 0 & 29 & 3 & 32 \\
+XI-XIIa & 1 & 72 & 6 & 79 \\
+XIIb-a & 0 & 48 & 2 & 50 \\
+XIIb-b & 1 & 27 & 2 & 30 \\
+XIIc-a & 2 & 41 & 4 & 47 \\
+XIIc-b & 3 & 38 & 0 & 41 \\
+XIIapp & 2 & 21 & 3 & 26 \\
+XIII-a & 0 & 33 & 2 & 35 \\
+XIII-b & 5 & 28 & 1 & 34 \\
+XIV & 0 & 2 & 1 & 3 \\
+XV-a & 2 & 37 & 5 & 44 \\
+XV-b & 4 & 42 & 2 & 48 \\
+XVI & 10 & 80 & 6 & 96 \\
+XVII-a & 1 & 71 & 4 & 76 \\
+XVII-b & 5 & 52 & 2 & 59 \\
+XVIII-a & 0 & 65 & 8 & 73 \\
+XVIII-b & 3 & 104 & 8 & 115 \\
+XVIII-c & 7 & 121 & 7 & 135 \\
+XVIII-d & 0 & 121 & 2 & 123 \\
+XVIII-e & 1 & 129 & 5 & 135 \\
+XIX & 6 & 36 & 10 & 52 \\
+\midrule
+total & 134 & 1879 & 122 & 2135 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\input{appendix_new_results}
+
+\nocite{*}
+\bibliographystyle{plainnat}
+\bibliography{LesDerivateurs_companion}
+\end{document}

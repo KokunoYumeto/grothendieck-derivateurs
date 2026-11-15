@@ -1,0 +1,114 @@
+# Further source checks on the remaining dimension-two interval
+
+AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), 14 November 2026. No priority is claimed. This record concerns the undecided interval in A3(iii); it asserts no resolution of that interval.
+
+## The exact countable-target gap
+
+A.19 constructs, for a countable coefficient group H, a countable group E containing H and solving every finite rationally independent exponent-row system. The fixed reduced power E^N/E^(N) then solves every countable such system. Its cardinality is at most the continuum. The question still being investigated is the existence of a fixed countable coefficient-preserving target for the countable relative systems arising from actual two-dimensional homology-equivalence inclusions. No such target for the full class has been constructed here. Conversely, no actual two-dimensional homology extension obstructing every countable target has been constructed.
+
+The exact additional condition in those relative systems is an isomorphism Z^(R) -> Z^(S), together with finite full attaching-word supports. The support includes occurrences whose total exponent is zero. Treating the nonzero exponent support as the full support would lose the nonlinear dependencies and invalidate the argument. A.25 treats the full-support-at-most-two case with nonzero occurring exponents. The functional commutator and Brunnian-telescope notes record further classes with actual countable maps.
+
+## The construction and its remaining target class, 21:05 UTC
+
+The small-target route now has the finite-block extension A.26. The full proof, including residual detection by reordering a countable dependency closure first, was independently read and checked by root and C. No decomposition of a general countable invertible cellular matrix into finite blocks has been inferred.
+
+In the other direction, A.27 provides actual countable identity-matrix systems obstructing each countable mixed-identity-free target, each torsion-free two-conjugacy-class target, and each nonabelian uniformly simple target. Root checked the chain diagonal, the tree diagonal, subgroup coefficient lifts, and the finite-prefix geometric argument. The coefficient group remains embedded and normally generates the extension. The finite-prefix inclusions need not themselves induce injective fundamental-group maps: every finite-prefix presentation is separately proved aspherical, and every finite witness occurs in one prefix. The actual CW union then gives the stated conclusion.
+
+A.28 uses all maps from countable subgroups, followed through omega1 many outer passes, to exclude all countable quotients in those classes at once. Root checked the continuum bound, regularity argument, literal extension of the map to S2, and normal generation. The final additions solve all one-variable unimodular equations and exclude all torsion and locally linear images by explicit Higman-generator calculations. A and D independently checked those additions as well.
+
+The remaining possible countable image has an infinite countable simple quotient because the source is finitely normally generated. It must have a mixed identity, fail every finite uniform simplicity bound, contain an infinite-order element, fail local linearity, and solve every one-variable unimodular equation. A.29 proves directly that this quotient must be topologizable: a finite algebraic cover of the complement of 1 gives an exponent-zero delta word v, for which v(x)x=1 is an unsolvable exponent-one equation. Finite avoidance then supplies a recursive weighted metric. Root and C checked every finite constraint, the positive separation bounds, and the conjugation estimates proving continuity.
+
+The topology gives no proved contradiction by itself. In particular a countable nondiscrete metric group need not be complete. Producing a countable system with the required exponent matrix and no solution is still the missing step. In the tree method, simplicity supplies finite normal words whose lengths depend on the element; a single finite arity for all future root values has not been proved. The A5 calculation in code/a_nested_commutator_checks.py also gives a complete finite counterexample to an unrestricted nested-commutator nonconstancy assertion.
+
+The telescope retraction and pivot-coloring notes were independently read and checked. The first supplies actual countable maps only in its specified Brunnian and incidence-controlled cases. The second constructs a countable coloring from an injective pivot choice and finite outgoing supports; its displayed two-variable relation proves that assigning a free generator to each color need not preserve the relations. Neither fact settles the remaining target class.
+
+## Additional primary-source checks
+
+Klyachko, Mikheenko and Olshanskii, *Solvability of unimodular equations in groups and Lie algebras*, arXiv:2608.28045v3 (24 October 2026), was opened at <https://borowiecki.dev/pdf/2608.28045>; the direct arXiv endpoints were disabled. Sections 2--4 were read. Section 2's cited KOO existence theorem is not an input to A.29, whose delta-word argument is proved directly. C observed that Section 4 Lemma 2 needs an additional commutator-subgroup restriction on its outer factor; its displayed proof uses that restriction. The relevant statement is not used in INDLOCAL. The exact check is retained with C's authored notes.
+
+The Klyachko 2005 one-relator simplicity argument is audited in A_simple_towers.md. The direct maps showing triviality of a unimodular one-pair extension in the surviving simple case are recorded there. No general countable-block consequence was inferred.
+
+The correction concerning Thompson V is documented in Cpaths_V_MIF_audit.md. Its primary Bleak--Elliott--Hyde proof was read by C, including the vigorous action and the mixed-word construction. V therefore supplies no remaining target outside A.28's mixed-identity-free class.
+
+Further searches used the phrases “countable nonabelian simple group equationally compact,” “Higman complete unimodular equations,” “nonsingular infinite systems countable perfect group,” and “simple groups mixed identities bounded simplicity.” The returned abelian, nilpotent, locally finite and ultraproduct results did not by themselves supply the required countable-system map. No universal absence-of-literature claim is made.
+
+## A matrix repair that gives solutions instead of an obstruction
+
+D checked the following proposed repair of a power recurrence. Let r be finite, let E be a group in which every finite system with a square integral unimodular exponent matrix has a solution, and let F_n:E^r -> E^r be word maps with exponent matrices A_n in GL_r(Z). Each F_n is surjective: a prescribed output is moved to the coefficient side of its r defining equations, without changing A_n. For a fixed coefficient vector a, consider F_0(v_0)=a and F_n(v_n)=v_{n-1} for n>=1. Choose v_0 using surjectivity and then v_n successively using the same property. This is an actual solution of the whole system in E.
+
+Its boundary on the free abelian direct sums is nevertheless an isomorphism. The nth block maps to A_n times the nth variable block minus the preceding block, with the coefficient block omitted at n=0. Surjectivity follows inductively: the nth variable block is a finite integral combination of the blocks numbered at most n. Injectivity follows by taking the largest nonzero block of a finite input and applying the invertibility of A_n. Thus this grounded recurrence achieves the desired integral matrix but loses the intended no-solution property. For r>1, the finite-system hypothesis in this calculation has not been deduced merely from the one-variable closure of A.28.
+
+## Finite interpolation and exact local embeddings
+
+Root read the complete finite-interpolation proof in A_finite_interpolation.md. The evaluation image contains the diagonal F and its conjugated diagonal; the pairwise Goursat calculation is explicit, and the subdirect-product induction proves surjectivity onto F^m. The ensuing two-value word gives an unsolvable unimodular equation whenever a word map has finite nonconstant image. It leaves open a singular word map with infinite image contained in a proper centralizer coset. The two A5 certificates, including pairwise distinct coefficients, rule out repairing that issue by repetition-free enumeration alone.
+
+Root also checked Cpaths_ALEF_obstruction.md in full. The chosen finite subset contains all relator prefixes and the prefixes of a detected nonidentity word. Every exact partial embedding therefore induces an actual homomorphism from the finitely presented Higman group, preserving the selected nonidentity. Its proved torsion and linear-image obstructions then propagate through the displayed normal-generation maps of A.10 and A.28. This excludes all LEF images and the two stated exact local-embedding classes, without an approximation-to-exactness inference.
+
+## Acyclic closure
+
+Takuya Sakasai, *Homology cylinders and acyclic closure of a free group*, Algebraic & Geometric Topology 6 (2006), 603–631, primary PDF <https://msp.org/agt/2006/6-2/agt-v6-n2-p05-p.pdf>, was opened and Section 4, especially Definition 4.1 and Propositions 4.6–4.8, was checked. An acyclic system there has finitely many variables and equations x_i=w_i, with every variable's exponent in every w_i equal to zero. Acyclically closed groups require a unique solution. The map from a group to its acyclic closure is the universal map to that class; the checked assertion does not supply an embedding of an arbitrary coefficient group. For a finitely presented perfect group H, the map 1->H is 2-connected in the homological sense: it is an H1 isomorphism and surjects on H2 only when H2(H)=0. In the acyclic case the closure comparison therefore identifies its closure with that of 1, so this route kills that nontrivial acyclic core. More generally no injectivity conclusion for the needed perfect core was obtained. The countability statement for finite presentations does not repair the coefficient map.
+
+## Universal spaces for the plus construction
+
+A. J. Berrick and Carles Casacuberta, *A universal space for plus-constructions*, primary author PDF <https://www.ub.edu/topologia/casacuberta/articles/berc2.pdf>, was opened and read through its examples and references. The universal group is assembled as a free product of countable locally free perfect groups, with an explicit version indexed by sequences of positive integers. The countable grope groups have actual two-dimensional telescope models; the wedge of those models gives a two-dimensional model for their free product. For each factor the map retaining that factor and sending all other factors to 1 is a group retraction. Consequently the displayed universal free product has nontrivial countable quotients. Its stated universal maps run from suitable countable perfect grope groups to prescribed perfect groups; these maps do not produce a no-countable-image source. The precise additional quotient/cover step remains unproved here.
+
+The author addendum to Dicks–Kropholler–Leary–Thomas is being used for the scope of arbitrary locally free groups: a two-dimensional model has not been inferred from local freeness alone. Actual telescope and wedge models are given whenever that dimension bound is used.
+
+## Singular equations and the Levin discussion
+
+Anton Klyachko and Andreas Thom, *New topological methods to solve equations over groups*, Algebraic & Geometric Topology 17 (2017), 331–353, primary publisher PDF <https://msp.org/agt/2017/17-1/agt-v17-n1-p10-s.pdf>, was opened. Definitions in Section 1.1 and Remark 1.3 were checked, including a visual reading of printed page 334 to recover the negation omitted by text extraction. Solvability of a word w over H is exactly injectivity of H into (H*F(X))/<<w>>; solvability in H is a retraction of this coefficient map. The historical Levin discussion concerns one-variable words over torsion-free groups outside the conjugates of coefficient words, including zero-exponent cases. This record does not assert a current general solution of that problem.
+
+For the present reverse-word approach, a missing value b of w(t) in a torsion-free existentially closed group Q means the equation w(t)=b has no solution in a torsion-free overgroup of Q: a solution in such an overgroup is a finite existential statement with coefficients in Q and would be realized in Q. Thus obtaining all required values would need a precise solvability argument for these particular singular equations. The checked 2026 finite nonsingular-system theorem assumes independent exponent rows; a one-variable equation of exponent zero has a zero row and does not satisfy that premise. No conversion preserving the coefficient group and the specified word map was obtained. Infinite fibers alone have not supplied compatible infinite inverse chains for general mixed-coefficient words.
+
+## Infinite systems in abelian and nilpotent groups
+
+Mikhail A. Mikheenko, *Infinite systems of equations in abelian and nilpotent groups*, arXiv:2410.20729v3 (1 July 2025), primary PDF <https://arxiv.org/pdf/2410.20729>, later Journal of Group Theory 29 (2026), 85–103, DOI 10.1515/jgth-2024-0210. The definitions, Lemma 1, the nilpotent proofs in Section 3, and the exact open questions in Section 4 were opened and checked.
+
+Lemma 1's actual map is A -> (A ⊕ Z^(X))/<m_i-a_i>. Independent rows make it injective. Divisibility of the abelian group A gives a retraction, whose values on the variables solve the system. The nilpotent extension solves first modulo the center, lifts the variable values, and then corrects the resulting central coefficients by the abelian argument. Divisibility of the center is proved by descending the upper central series using commutator identities. These are actual solutions of arbitrary independent-row systems in a divisible nilpotent group.
+
+They do not preserve the nontrivial perfect coefficient groups needed in the hardest case here. Explicitly, for a homomorphism f:H->N with H perfect and N nilpotent, I=f(H) is perfect. The derived series of I is therefore constant, while each of its terms lies in the corresponding derived subgroup of N. Nilpotence makes that derived series terminate, so I=1. Thus no nontrivial perfect H embeds in these targets.
+
+Mikheenko's use of 'unimodular' for an infinite system means independence modulo each prime for every finite subsystem. The relative matrices in A.19 satisfy the stronger specified condition of an isomorphism of free abelian groups. For an abelian coefficient group, that isomorphism already gives a unique solution by applying its inverse; the mixed-prime examples in Section 4 have no such asserted matrix isomorphism. Their non-solvability is therefore not a counterexample to the stronger relative-matrix question.
+
+## Two algebraic-compactness search hits
+
+Two primary papers with the same English title were opened to check their definitions. Ushakov, *Algebraically compact groups*, Mat. Zametki 24 (1978), 763–770, studies topological groups with the finite-intersection property for cosets of closed subgroups. Ershov, *Algebraically compact groups*, Algebra i Logika 17 (1978), 684–692, explicitly starts with abelian groups and pure embeddings. No coefficient-preserving countable target for the required nonabelian systems was derived from either paper. The actual nonabelian countable example and its exact limitation are proved in D_Higman_completion.md, without inferring a general classification from these search hits.
+
+## The metric tree, 21:36 UTC
+
+Root supplied and then read the complete proof now in sections/A_metric_diagonal.tex. A and C independently confirmed the small normal generating set, symmetry formula, global finite-word Lipschitz bound, first-changing-edge choice, nested-image exclusion, exact identity matrix and root-first finite-prefix collapses. All steps pass. The new four-class construction is explicitly rerun and named G^sharp; no extra property is silently attributed to the earlier A.28 group.
+
+The remaining possible countable simple target has a nondiscrete Hausdorff metrizable topology from A.29 but no nondiscrete positive definite conjugation-invariant length. The former proof bounds conjugation by a constant depending on the conjugator; A.30 needs exact invariance to control every value v[b,u]v^-1. Deleting the conjugator-dependent weights in A.29 changes its finite list of constraints to an infinite one. Finite avoidance supplies no proved choice for that changed list.
+
+Further searches on unimodular closure, mixed identities, invariant norms and nonabelian equation compactness have supplied no general bridge. In particular, finite interpolation proves nonconstant word maps have infinite image, but does not rule out an infinite image lying in a proper centralizer coset. The coefficient normal-word lengths supplied by simplicity depend on the requested output and the normal generator; no uniform finite arity for every later root value has been deduced. A.27 handles its verified uniform class, while A.30 handles the independent invariant-length class.
+
+The v3 introduction of Klyachko--Mikheenko--Olshanskii explicitly records Osin's finitely generated nonnilpotent unimodularly closed Golod--Shafarevich construction. Earlier secondary summaries still call that existence question open. Only the primary version is used to state its status. That example does not establish the properties needed for a surviving simple target here.
+
+The primary Fisher--Sanchez-Peralta article, Division rings for group algebras of virtually compact special groups and 3-manifold groups, J. Comb. Algebra 10 (2026), 153--193, DOI 10.4171/JCA/89, was opened at https://ems.press/content/serial-article-files/52395. Proposition 3.14 gives a division-ring embedding of the characteristic-zero Higman group algebra, using Corollary 3.11 and external Hughes-free embedding inputs. Those dependent inputs have not been fully audited here, and no INDLOCAL theorem relies on this source. The displayed map concerns a division ring, so the proved field-linear image calculation of A.28 has not been extended to it. No countable unimodular solver or countable-system retraction into such a group has been constructed.
+
+
+## Algebraic main-bridge advance A.31 (22:00 UTC)
+
+Root and C independently read the complete proof in sections/A_normal_width_diagonal.tex. It passes. The metric is replaced by the exact length condition that, for every d!=1, the lengths rho_b(d) are unbounded as b varies over nonidentity elements. Replacing L variable occurrences in R gives R(su)R(u)^-1 as a product of at most L conjugates of s_i or s_i^-1 and hence at most 2L conjugates of b or b^-1. Choosing rho_b(ec^-1)>2L makes the entire replacement range exclude e. The first-changing-edge path preserves two distinct values. Root-first finite-prefix eliminations give the same actual aspherical two-dimensional identity-boundary block.
+
+The new group is explicitly G^alg, constructed afresh with the enlarged target class. Every earlier A.28/A.30 property is retained. The remaining simple countable quotient has N_E(g)=sup_b rho_b(g) finite for every g and unbounded on E. A single d with a uniform-in-b bound gives pointwise finiteness by its finite normal-generation expressions. For any fixed d!=1, rho_d(g)<=N_E(g)<=N_E(d)rho_d(g). Thus boundedness of one conjugacy word norm together with this pointwise finiteness would give a uniform bound; no such boundedness has been deduced from unimodular closure. The direct proof is the substantive advance, and no novelty claim is made.
+
+## Closed attempted detector routes
+
+The complete stable elementary matrix calculation is now in research/D_skew_linear_MIF.md and has passed root and C audit. It excludes the whole stable elementary group over a division ring with infinite central subfield via A.27. Arbitrary subgroups and the division ring unit group are not covered by the displayed calculation.
+
+Root independently checked all steps of research/D_countable_equation_compact.md: the countable-to-arbitrary system recursion, centralizer descending-chain argument, divisible eigensubgroup, exact Q semidirect Z embedding, explicit affine-system evaluations and finite-order Higman calculation. Full countable equation compactness cannot supply a detector preserving the Higman core. This route uses zero exponent rows, and its conversion to the required direct-sum cellular isomorphism remains unproved.
+
+Further primary-source searches tested uncountable acyclic groups, simple groups of cohomological dimension two, small Schur multipliers, conjugacy word norms and mixed identities. The retrieved results did not supply the missing construction or a countable residual quotient. No general absence-of-literature claim is made.
+
+
+## Audit of stable hyperbolic unitary exclusion
+
+Root read the complete D_skew_unitary_MIF.md after the independent C audit. The nontrivial-involution diagonal detection, all S_v pairings and its additive law, the long-root correction, simultaneous polynomial specialization, both elementary torus factorizations, and the ordered leading Laurent coefficient check directly. This excludes the displayed whole stable unitary groups, with an elementary evaluating element; it supplies no conclusion about arbitrary subgroups. It does not remove the remaining finite-everywhere/unbounded N_E class.
+
+
+## Final finite-root projection audit and source check
+
+Root read A_finite_root_projection.md and its cited finite interpolation proof. The exponent-kernel evaluation map onto E^m follows by the explicit subdirect-product induction; substituting the exponent-zero interpolation words preserves the x-exponent of the parameterized equation. A finite solution projection therefore has a universal root. This does not bound or exclude the full projection: one reset may introduce a universal root, and further substitution preserves the resulting identity. The first missing statement remains a reset that preserves a failing evaluation for every candidate root, or an alternative aspherical block for the residual N_E class.
+
+At approximately 22:15 UTC, C reopened Klyachko--Mikheenko--Olshanskii, arXiv:2608.28045v3 (24 October 2026), including its introduction, Theorems 1 and 2 and the corollary. The closure-to-structure statements used there concern finitely generated solvable/linear groups and finite images. The targeted search supplied no theorem deriving mixed-identity-freeness or bounded conjugacy norms from unimodular closure in arbitrary countable simple groups. No such implication is used here.

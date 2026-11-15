@@ -1,0 +1,382 @@
+\subsection{Total categories, ordinary colimits, and the missing cofinality hypothesis}
+
+\begin{result}{A.1}{Proved}{The two Grothendieck constructions and their comparison maps}
+For a covariant diagram $D:A\to\mathrm{Cat}$, write
+$\int_A^{\mathrm{opf}}D$ for the category with objects $(a,x)$,
+$x\in D(a)$, and arrows
+\[
+ (a,x)\longrightarrow(b,y),\qquad
+ (u:a\to b,\;v:D(u)x\to y).
+\]
+The superscript means the opfibrational construction. Its canonical functor
+\[
+ q_D:\int_A^{\mathrm{opf}}D\longrightarrow
+                  \operatorname{colim}_{A}^{\mathrm{Cat}}D
+\]
+sends $(a,x)$ to its colimit image and $(u,v)$ to the image of $v$.
+For a strict contravariant diagram $F:T^{\mathrm{op}}\to\mathrm{Cat}$,
+write $\int_T^{\mathrm{fib}}F$ for the category whose arrows are
+$(u:t\to s,v:x\to F(u)y)$. These are the conventions at VII ms.~99--110.
+If $u:\mathbb N^{\mathrm{op}}\to T$ is a chosen sequence,
+$D=F u^{\mathrm{op}}:\mathbb N\to\mathrm{Cat}$ and
+$C_u=\int_{\mathbb N^{\mathrm{op}}}^{\mathrm{fib}}D$, there are specified
+functors
+\[
+ C_u\xrightarrow{p}\int_T^{\mathrm{fib}}F=C,
+ \qquad C_u\xrightarrow{q}\operatorname{colim}_{n}D(n)=C_\infty.
+\]
+There need not be a functor $C\to C_\infty$.
+\end{result}
+\begin{proof}
+The colimit identifies the two images of $x$ and $D(u)x$, so the formula
+for $q_D$ preserves identities and compositions. In the fibred case,
+an arrow $(n,x)\to(m,y)$ has $n\geq m$ and an arrow
+$x\to D(m\leq n)y$ in $D(n)$; its image is the corresponding arrow
+$[x]\to[y]$ in the colimit. The functor $p$ is identity on fibre data
+and applies $u$ to the base arrow. The formulas type every arrow in the
+display. The manuscript correctly uses precisely this span at ms.~108;
+inverting $q$ will give $C_\infty\to C$ in $\mathrm{Hot}$, rather than
+an otherwise unspecified map in the reverse direction.
+\end{proof}
+
+\begin{result}{A.2}{Proved}{Filtered category colimits}
+If $A$ is a small filtered category, then $q_D$ of A.1 belongs to
+$W_\infty$ for every $D:A\to\mathrm{Cat}$, with no injectivity,
+full-faithfulness, or fibrancy assumptions on its transition functors.
+In particular $q:C_u\to C_\infty$ is in $W_\infty$ for every sequence.
+The same universal assertion holds if each connected component of $A$
+is filtered, and also for the empty category.
+\end{result}
+\begin{proof}
+Fix an object $z$ of the category colimit. An object of $q_D/z$ is an
+object $x\in D(a)$ together with an arrow $[x]\to z$ in the colimit.
+Every finite list of objects, arrows, and equalities in a filtered
+category colimit is represented at a common stage. For completeness,
+construct a filtered category colimit by taking filtered colimits of
+the object and arrow sets. Source, target, identities, and composition
+descend because filtered colimits of sets commute with finite limits;
+an equality of two represented arrows holds at a further stage.
+The resulting category has the requisite universal property.
+
+The category $q_D/z$ is nonempty by representing $z$ at some stage.
+Given a finite diagram in $q_D/z$, choose a common stage $b$ representing
+its objects, all its arrows to $z$, and all its commuting triangles.
+Choose $z_b\in D(b)$ representing $z$. After passing to a further
+stage if necessary, the arrows to $z_b$ give a cocone from that finite
+diagram to $(b,z_b,\mathrm{id}_z)$ in $q_D/z$. Thus $q_D/z$ is filtered.
+Its nerve is weakly contractible: the image of any finite simplicial
+set in its nerve admits a cone after collecting its finite data, so
+each sphere map becomes nullhomotopic. Quillen's Theorem A
+\citep[Example 7.2.3.3, applied also to opposites]{ALurie2026} makes the
+specified $q_D$ a nerve weak equivalence.
+
+For the fibred sequence, take opposites. We have
+\[
+ C_u^{\mathrm{op}}=\int_{\mathbb N}^{\mathrm{opf}}D^{\mathrm{op}},
+ \qquad
+ (C_\infty)^{\mathrm{op}}
+       =\operatorname{colim}_{n}D(n)^{\mathrm{op}}.
+\]
+Opposition preserves colimits and the weak homotopy type of a nerve.
+The preceding argument therefore proves the second assertion. Both
+constructions and their comparison split as coproducts over the
+connected components of $A$. For $A=\varnothing$ both categories are
+empty and the comparison is the identity.
+\end{proof}
+
+\begin{result}{A.3}{Proved}{An exact base condition uniform in the fibration}
+Let $u:J\to T$ be a functor of small categories. The following
+conditions are equivalent: every category $u/t$, $t\in T$, has weakly
+contractible nerve; and, for every strict
+$F:T^{\mathrm{op}}\to\mathrm{Cat}$, the projection
+\[
+ p_F:\int_J^{\mathrm{fib}}F u^{\mathrm{op}}
+           \longrightarrow\int_T^{\mathrm{fib}}F
+\]
+belongs to $W_\infty$. In particular, for $J=\mathbb N^{\mathrm{op}}$,
+this homotopy-initiality condition gives the specified isomorphism
+$[p_F][q]^{-1}:C_\infty\to C$ in $\mathrm{Hot}$.
+It is sufficient for one particular $F$ that $B(u/t)$ be weakly
+contractible for every $t$ with $F(t)\ne\varnothing$.
+\end{result}
+\begin{proof}
+For $c=(t,z)$ in $\int_T^{\mathrm{fib}}F$, the category $p_F/c$
+maps to $u/t$ by forgetting its fibre data. Above $(j,\alpha:u(j)\to t)$
+the remaining data are an object of
+$F(u(j))/F(\alpha)z$. That category has terminal object
+$\mathrm{id}_{F(\alpha)z}$. There is also an explicit section of the
+forgetful functor, selecting this terminal object, and a natural
+transformation from the identity to the section after the projection.
+Explicitly, the given arrow $x\to F(\alpha)z$ supplies the
+component from $(j,x,\alpha,x\to F(\alpha)z)$ to the selected object.
+Thus $B(p_F/c)\simeq B(u/t)$ by actual functors and a natural
+transformation. Quillen's Theorem A proves sufficiency.
+
+For necessity, fix $t\in T$ and take the discrete-valued presheaf
+$F_t(s)=\operatorname{Hom}_T(s,t)$. Its fibred construction is $T/t$,
+with terminal object $(t,\mathrm{id}_t)$, and the pulled-back
+construction is $u/t$. The universal hypothesis on $p_{F_t}$ forces
+$B(u/t)$ to be weakly contractible. This proves the equivalence without
+assuming that parallel reindexing functors are homotopic. Necessity is
+claimed for the universal quantifier over all $F$, not for a particular
+fibration or for the restricted subclass satisfying VII's homotopy
+hypothesis.
+\end{proof}
+
+\begin{result}{A.4}{Refuted}{Preorder cofinality and parallel-map homotopies do not suffice}
+The hypotheses printed at VII ms.~99--101 do not imply that
+$C_u\to C$ or $C_\infty\to C$ is a weak equivalence. This remains false
+when $T$ has one object and the fibre category is terminal. Thus
+VIIb-C026 requires a condition such as A.3, or a proof specific to the
+path fibration, beyond cofinality in the associated preorder.
+\end{result}
+\begin{proof}
+Let $T=\mathbf B C_2$, the category with one object and endomorphisms
+$1,s$, $s^2=1$.
+Take $F$ constant at the terminal category and let
+$u:\mathbb N^{\mathrm{op}}\to T$ send every arrow to $1$.
+The preorder of $T$ is a singleton, the sequence is cofinal in it,
+and all reindexing functors on the terminal fibre coincide.
+Nevertheless $C=T$, $C_u=\mathbb N^{\mathrm{op}}$, and
+$C_\infty=e$. The last two nerves are contractible whereas
+$\pi_1(BT)=C_2$. The multiplication table and normalized chain
+differentials are independently checked in
+\texttt{code/a\_finite\_checks.py}; they give $H_1(BT;\mathbb Z)=\mathbb Z/2$.
+Grothendieck already identifies the one-object obstruction himself at
+VII ms.~109. It is not a correction to that page; it refutes the
+insufficient earlier general hypothesis.
+\end{proof}
+
+\begin{result}{A.5}{Refuted}{The totally aspherical shape does not control colimits in Cat}
+Let $A=\Delta_{\mathrm{inj}}$ have objects $[n]=\{0,\ldots,n\}$,
+$n\geq0$, and strictly increasing functions. Let $D([n])$ be the
+one-object category with endomorphism monoid $\mathbb N^{n+1}$.
+An injection sends its standard generators to the indicated standard
+generators. Then
+\[
+ \operatorname{colim}_{A}^{\mathrm{Cat}}D=\mathbf B\mathbb N,
+ \qquad
+ H_k\left(B\int_A^{\mathrm{opf}}D;\mathbb Z\right)=\mathbb Z
+       \quad(k\geq0).
+\]
+Here $\mathbf B\mathbb N$ denotes the one-object category; its
+classifying space has homotopy type $S^1$. Thus $q_D$ is not a weak
+equivalence, despite the total $W_\infty$-asphericity of $A$.
+\end{result}
+\begin{proof}
+The injections $[0]\to[n]$ identify all the standard generators in
+any cocone, and connectedness identifies all the single objects.
+A cocone into an arbitrary category is therefore exactly an object
+with one chosen endomorphism. This is the universal property of the
+one-object free monoid $\mathbb N$, proving the claimed category
+colimit, without using a colimit in commutative monoids instead.
+
+The homomorphism $\mathbb N^r\to\mathbb Z^r$ induces a weak
+equivalence on classifying spaces. One direct proof is the covering
+category with objects $\mathbb Z^r$ and a unique arrow $v\to w$ when
+$w-v\in\mathbb N^r$: its underlying poset is filtered, its nerve is
+contractible, and the free $\mathbb Z^r$-action has quotient nerve
+$B(\mathbf B\mathbb N^r)$. Consequently the integral homology of $BD([n])$ is
+$\Lambda^k\mathbb Z^{n+1}$. For $k\geq1$ the ordered wedge basis gives
+an isomorphism of covariant $\mathbb Z A$-modules
+\[
+ H_k(BD(-);\mathbb Z)
+   \cong\mathbb Z[\operatorname{Hom}_{A}([k-1],-)].
+\]
+These are projective representable modules, whose colimit is
+$\mathbb Z$ and whose higher derived colimits vanish. For $k=0$ the
+module is constant $\mathbb Z$. The functor $S([n])=[n+1]$ which
+adds a new last element admits natural transformations
+$\mathrm{id}_A\Rightarrow S\Leftarrow\operatorname{const}_{[0]}$,
+using respectively the original elements and the new last element.
+Therefore $BA$ is contractible and the higher derived colimits of
+this degree-zero module also vanish.
+
+Thomason's homotopy-colimit comparison, explicitly restated in
+\citet[Section~3.1, equation~(9)]{ACegarra2020}, identifies
+the total nerve with the homotopy colimit. The bar double complex
+gives the first-quadrant spectral sequence
+\[
+ E^2_{p,q}=L_p\operatorname{colim}_{A}H_q(BD(-);\mathbb Z)
+ \ \Longrightarrow\ H_{p+q}\left(B\int_A^{\mathrm{opf}}D;\mathbb Z\right).
+\]
+Every column except $p=0$ vanishes and $E^2_{0,q}=\mathbb Z$ for every
+$q\geq0$, so it has no differential or extension ambiguity. In
+particular the source of $Bq_D$ has $H_2=\mathbb Z$ and its target
+has $H_2=0$. This verifies the counterexample proposed after TOTASPH.
+It does not require the full exactness theorem for arbitrary
+abelian-group-valued diagrams. The accompanying program checks the
+ordered wedge/representable identification and the colimit relations
+through $[5]$; the proof above, rather than extrapolation from those
+finite checks, establishes the assertion in all degrees.
+
+We verify the total-asphericity premise in A.6 below, recording the
+argument rather than treating the earlier AI-produced answer as an
+authority.
+\end{proof}
+
+\begin{result}{A.6}{Proved}{Verification of the Delta-injective premise}
+The category $\Delta_{\mathrm{inj}}$ has exact colimits of
+abelian-group-valued diagrams and is totally $W_\infty$-aspherical,
+but is not filtered. These are the assertions of TOTASPH C.7--C.10
+used in A.5.
+\end{result}
+\begin{proof}
+We first check the finite algebraic construction which underlies the
+inherited proof. For every $n\geq0$ there is an integral combination
+$t$ of injections $[n]\to[M]$, of augmentation one, such that $th$
+is independent of the injection $h:[m]\to[n]$ for each fixed $m$.
+Here negative coefficients are allowed. To construct it, for each
+$k\geq1$ choose a homogeneous integral polynomial
+$C_{n,k}(z_0,\ldots,z_{n+1})$ having value one at all variables equal
+to one and such that $y_i^kD_iC_{n,k}$ is independent of $i$.
+The map $D_i$ identifies $z_i,z_{i+1}$ and relabels the remaining
+variables $y_0,\ldots,y_n$. Set $C_{0,k}=1$. Inductively put
+$Q=C_{n-1,2k}$ and prescribe
+\[
+ D_i C_{n,k}=Q\prod_{l\ne i}y_l^k.
+\]
+These prescriptions agree on pairwise intersections. For adjacent
+indices both products agree after the second identification; for
+nonadjacent indices the required identity is precisely
+$w_p^{2k}D_pQ=w_q^{2k}D_qQ$. To see that agreement is sufficient
+over the integers, change coordinates to
+$x_i=z_i-z_{i+1}$ and $u=z_{n+1}$. For compatible prescribed residues
+$F_i$ modulo $(x_i)$, let $\rho_S$ set $x_i=0$ for $i\in S$ and set
+\[
+ C=\sum_{\varnothing\ne S\subseteq\{0,\ldots,n\}}
+             (-1)^{|S|+1}\rho_S F_i\qquad(i\in S).
+\]
+Compatibility makes each term independent of $i\in S$; cancellation
+modulo $(x_j)$ leaves $F_j$. Homogeneity is preserved. The degree
+satisfies $d(n,k)=d(n-1,2k)+nk=k(2^{n+1}-n-2)$.
+
+An injection $g:[n]\to[M]$ corresponds to the monomial with exponents
+$g(0),g(1)-g(0)-1,\ldots,g(n)-g(n-1)-1,M-g(n)$, of total degree
+$M-n$. Precomposition with the coface omitting $i$ acts on this
+polynomial by $P\mapsto y_iD_iP$. Choose $P=C_{n,1}$ and
+$M=n+d(n,1)$. All $t\delta^i$ are equal. The coface identity
+$\delta^{b+1}\delta^a=\delta^a\delta^b$ then shows that this common
+value equalizes all injections into $[n-1]$, by downward induction;
+factoring a proper injection through a coface proves the assertion
+for every $h$. The augmentation is the evaluation at all variables
+equal to one, hence is one.
+
+Let $\operatorname{Aff}_{\mathbb Z}(A)$ have the objects of $A$ and
+augmentation-one finite integral arrow combinations as its arrows.
+Any two objects of $A$ have a common successor. The combination $t$
+just constructed equalizes any two parallel affine arrows, because
+both have coefficient sum one. Thus $\operatorname{Aff}_{\mathbb Z}(A)$
+is filtered. An abelian-group-valued functor on $A$ extends uniquely
+by linearity to this affine category. Cocones over the two diagrams
+are the same: respecting ordinary arrows implies respecting affine
+combinations of augmentation one. The colimits are therefore
+canonically the same. Since filtered colimits of abelian groups are
+exact, so are colimits over $A$.
+
+For a covariant $H:A\to\mathrm{Set}$ and a diagram $V$ of abelian
+groups on its category of elements, the assignment
+$(\Sigma_H V)(a)=\bigoplus_{x\in H(a)}V(a,x)$ is exact and has
+$\operatorname{colim}_A\Sigma_H V
+ =\operatorname{colim}_{\operatorname{El}_A H}V$ by the cocone
+universal property. Hence colimits on every connected component $E$
+of every such element category are exact, and the bar resolution
+gives $H_j(BE;\mathbb Z)=0$ for $j>0$. The same argument applies to
+categories of elements over $E$: their iterated element construction
+is an element construction over $A$. For a cyclic subgroup
+$L\leq\pi_1(BE)$, the associated covering is the element category
+of a locally constant set-valued functor on $E$. It has
+$H_1=L_{\mathrm{ab}}=L$ and must be acyclic. All cyclic subgroups
+are thus trivial. Each $BE$ is simply connected and integrally
+acyclic, hence weakly contractible by Hurewicz.
+
+If $f:A\to B$ is ordinary final, its comma category $b\backslash A$
+is a nonempty connected element category for every $b$, and therefore
+is weakly contractible. Quillen's Theorem A makes $Bf$ a weak
+equivalence. We already proved $BA$ contractible, so $BB$ is
+contractible. This is total asphericity in the final-image convention
+of the prompt. Finally, the two arrows $[0]\rightrightarrows[1]$
+cannot be equalized by postcomposition with an injection, proving
+nonfilteredness.
+\end{proof}
+
+\begin{result}{A.7}{Proved}{Bounds on the class of universally correct Cat-colimit shapes}
+Let $\mathcal C$ be the class of nonempty connected small categories
+$A$ for which $q_D\in W_\infty$ for every $D:A\to\mathrm{Cat}$.
+Then
+\[
+ \{\text{filtered categories}\}\ \subseteq\ \mathcal C
+ \ \subsetneq\ \{\text{totally }W_\infty\text{-aspherical categories}\}.
+\]
+The right inclusion is strict by A.5--A.6. For arbitrary, possibly
+disconnected $A$, the comparison property is componentwise and the
+empty shape satisfies it.
+\end{result}
+\begin{proof}
+The first inclusion is A.2. For the second, apply the comparison
+property to every discrete-valued diagram $H:A\to\mathrm{Set}$.
+Its Grothendieck construction is $\operatorname{El}_A H$ and its
+colimit is the discrete set $\operatorname{colim}_A H$. Every
+connected component of the element category must therefore be
+weakly contractible. In particular the constant singleton diagram
+makes $BA$ contractible. For an ordinary final $f:A\to B$, use
+$H_b(a)=\operatorname{Hom}_B(b,f(a))$ and Quillen's Theorem A exactly
+as at the end of A.6. Then $BB$ is contractible, which proves total
+asphericity. The componentwise and empty assertions follow from
+the coproduct decompositions in A.2.
+\end{proof}
+
+\begin{result}{A.8}{Open}{Exact classification of Cat-colimit shapes}
+We do not determine whether every member of $\mathcal C$ in A.7 is
+filtered. More generally, an intrinsic criterion for membership in
+$\mathcal C$, sharper than the proven bounds, is unresolved in this
+paper. The finite-object and weakly-terminal scopes reduce to
+filteredness by the independently checkable total-asphericity
+criterion TOTASPH C.13; we do not need that additional criterion in
+the preceding arguments. The first scope not decided by those
+results consists of infinite categories with no weakly terminal
+object. No smallest counterexample is asserted.
+\end{result}
+The simplicial-set criterion cannot prove the missing implication:
+the map it controls has target $\operatorname{colim}_A ND$, whereas
+the target needed here is $N\operatorname{colim}^{\mathrm{Cat}}_A D$.
+A.5 explicitly separates these targets. Nor does exactness of
+abelian-group colimits suffice, since A.6 verifies that property
+for the same counterexample. The searches and the exact status of
+the sources are recorded in the report.
+
+\begin{result}{A.9}{Proved}{A finite obstruction to replacing Hot by Cat hot}
+Let $P$ be the face poset of the boundary of a triangle, with three
+vertices and three edges, and let $\operatorname{sd}P$ be the poset
+of nonempty chains in $P$, ordered by inclusion. The last-element
+map $\ell:\operatorname{sd}P\to P$ is a weak equivalence and is not
+invertible in $\mathrm{Cat\,hot}$. There are exactly $456$ monotone
+maps $P\to\operatorname{sd}P$, and all induce degree zero on the
+circle.
+\end{result}
+\begin{proof}
+The objects of $P$ are the six faces
+\[
+ \{0\},\quad\{1\},\quad\{2\},\quad
+ \{0,1\},\quad\{1,2\},\quad\{0,2\}.
+\]
+Its arrows are their inclusions. The objects of $\operatorname{sd}P$
+are their nonempty chains, with inclusions as arrows. Compositions
+are the unique arrows given by inclusion.
+Their nerves are respectively cycles with six and twelve edges.
+The standard subdivision homeomorphism and the simplexwise linear
+homotopy to the last vertex show that $B\ell$ has degree one.
+Every monotone map in the reverse direction gives a simplicial map
+which sends each of the six source edges to one target edge or a
+vertex. The total winding has absolute value at most $6/12<1$;
+being integral, its degree is zero. It therefore cannot be a homotopy
+inverse even after passing to nerves. Each natural transformation
+induces a homotopy of nerves, and the same holds for any finite
+zigzag, so no inverse exists in $\mathrm{Cat\,hot}$.
+The program \texttt{code/a\_finite\_checks.py} verifies both partial
+orders, enumerates all vertex images and all compatible edge images,
+and computes every winding number. Its output is $456$ maps of
+degree zero and degree one for $\ell$. This verifies POLES D.6 and
+provides a finite warning for VIIc-A046 and V-I066; it does not by
+itself decide the particular path comparison $q_L$.
+\end{proof}

@@ -1,0 +1,529 @@
+\section{Finite bases: weights, duality, and the geometric comparison}
+
+Throughout this section the variance is fixed by
+$\mathbb D_{\mathcal C}(S)=\operatorname{Ho}\operatorname{Fun}(S^{\mathrm{op}},\mathcal C)$.
+Thus $p_*^S$ is a limit over $S^{\mathrm{op}}$ and $p_!^S$ is a
+colimit over $S^{\mathrm{op}}$. A homotopy finite category means a
+category equivalent to a finite skeletal category with no nonidentity
+endomorphisms. This is a condition on the indexing category, not merely
+on the weak homotopy type of its nerve. In particular a nontrivial
+finite group, regarded as a one-object category, is not homotopy finite.
+
+\begin{claim}{G.1}{Known}{The exact stability input and the available tensor action}
+In a stable derivator satisfying Der~1--4, homotopy finite limits
+commute with arbitrary homotopy colimits. Every such derivator has a
+canonical action by the derivator of spectra. Consequently a right
+homotopy finite right Kan extension can be expressed as a weighted
+homotopy colimit with a spectral profunctor as weight. No internal
+monoidal structure on the coefficient derivator and no strongness
+axiom are included in this assertion.
+\end{claim}
+\begin{proof}
+The commutation theorem is \citet[Theorem 2.14]{DGGrothShulman2017}.
+The spectral action is the consequence of
+\citet[Theorem A.11 and Appendix A.3]{DGCisinskiTabuada2011}:
+an object $X$ determines the cocontinuous morphism from spectra sending
+the sphere to $X$. Their Definition A.1 separates ``strong'' from
+``triangulated or stable''; Theorem A.11 is stated for any triangulated
+derivator. The resulting coherent action, not an arbitrary choice of
+tensor product, is the one used here. The weighted Kan-extension
+statement is precisely \citet[Theorem 4.11(iv)]{DGGrothShulman2017},
+applied to this module structure; their Construction 4.8 and Lemma 4.10
+give the coend and its Yoneda identity. Their convention is covariant
+diagrams, so it is applied to the opposite of the indexing functor
+when using the presheaf convention of this paper.
+\end{proof}
+
+\begin{claim}{G.2}{Proved}{The canonical dualizing weight and its exact variance}
+Let $S$ be homotopy finite. Write
+\[
+ R_s(t)=\Sigma^\infty_+\operatorname{Hom}_S(t,s),\qquad
+ w_S(s)=\lim_{t\in S^{\mathrm{op}}}R_s(t).
+\tag{G.2a}
+\]
+Then $w_S:S\to\mathrm{Sp}$ is a covariant spectral diagram, with
+finite-spectrum values, and for every stable derivator there is a
+canonical natural isomorphism
+\[
+ p_*^S F\simeq w_S\otimes_{[S]}F
+       =\int^{s\in S} w_S(s)\otimes F(s).
+\tag{G.2b}
+\]
+The integral denotes the derived coend, with its coherent spectral
+action. It is not an objectwise tensor followed by the ordinary
+colimit over $S^{\mathrm{op}}$.
+\end{claim}
+\begin{proof}
+The spectral Yoneda identity gives the coherent density expression
+\[
+ F(t)\simeq\int^{s\in S}R_s(t)\otimes F(s).
+\]
+Apply the homotopy limit over $t\in S^{\mathrm{op}}$. By G.1 this
+limit commutes with the homotopy colimits defining the coend. It also
+commutes with the tensor action in its spectral variable: the action
+preserves colimits, and a cocontinuous functor between stable
+derivators preserves finite homotopy limits. The result is (G.2b).
+This is also the terminal-target instance of the weight in
+Groth--Shulman's Theorem 4.11(iv), so the calculation is coherent in
+every external diagram variable, not just an objectwise calculation
+in the underlying category.
+
+Replace $S$ by a finite skeletal representative. Every hom-set is
+finite, so every $R_s(t)$ is a finite wedge of sphere spectra. A limit
+over this finite direct shape is a finite homotopy limit; finite
+spectra are closed under those limits. This proves finiteness of
+$w_S(s)$. Equivalent indexing categories give canonically equivalent
+weights after transport. For $S=\varnothing$, the coend and the limit
+are both the zero object in a stable category.
+\end{proof}
+
+\begin{claim}{G.3}{Refuted}{A pointwise dualizing-object twist already fails on one arrow}
+The assertion that every homotopy finite $S$ admits
+$\omega\in\operatorname{Fun}(S^{\mathrm{op}},\mathrm{Sp})$ with
+\[
+ p_*^SF\simeq p_!^S(\omega\otimes F)
+ \quad\hbox{for all }F
+\tag{G.3}
+\]
+where the tensor is pointwise, is false. It remains false for
+pointwise perfect complexes over a nonzero field.
+\end{claim}
+\begin{proof}
+Take $S=[1]=(0\to1)$. A presheaf is an arrow $F_1\to F_0$.
+The initial object of $S^{\mathrm{op}}$ is $1$, and its terminal
+object is $0$; therefore $p_*F=F_1$ and $p_!F=F_0$.
+Choose $F=(M\to0)$, with $M$ any nonzero finite spectrum, or the
+field concentrated in degree zero. The right side of (G.3) is
+$\omega_0\otimes0=0$, while the left side is $M$. This contradiction
+does not depend on the value, dualizability, or invertibility of
+$\omega$. In contrast, the actual weight in (G.2a) is
+$w_{[1]}=(0\to\mathbb S)$, a diagram on $S$, and its coend with
+$F$ is $F_1$. The endpoint and weight calculations are included in
+\texttt{code/dg\_finite\_checks.py}.
+\end{proof}
+
+\begin{claim}{G.4}{Proved}{Transitivity and base change belong to the kernels}
+For a functor $u:R\to S$ between homotopy finite categories, set
+\[
+ K_u(s,r)=(u_*R_r)(s),\qquad
+ K_u\in\operatorname{Fun}(S^{\mathrm{op}}\times R,\mathrm{Sp}).
+\]
+Then $u_*F\simeq K_u\otimes_{[R]}F$. For $v:S\to T$ there are
+canonical composition and transitivity identities
+\[
+ K_{vu}(t,r)\simeq\int^{s\in S}K_v(t,s)\wedge K_u(s,r),\qquad
+ w_R(r)\simeq\int^{s\in S}w_S(s)\wedge K_u(s,r).
+\tag{G.4}
+\]
+A homotopy exact square gives the corresponding base-change
+equivalence of these kernels and of their weighted functors. No
+claim that every cartesian square is homotopy exact is needed.
+\end{claim}
+\begin{proof}
+The comma categories computing $u_*$ are finite and have no
+nonidentity endomorphisms after replacing the indexing categories
+by finite skeletal representatives. Hence $u_*$ preserves homotopy
+colimits by G.1. Apply $u_*$ to the density expression for $F$ in
+G.2. This gives the first formula and proves its naturality.
+Apply the formula twice to $v_*u_*F$, and use Fubini for homotopy
+coends. The canonical isomorphism $(vu)_*\simeq v_*u_*$ identifies
+the resulting kernel, proving the first identity in (G.4).
+Set $T=e$ to obtain the second identity. Associativity of these
+isomorphisms is the associativity of Kan extension and of coends;
+therefore this is a coherent transitivity formula.
+
+For a square whose specified Beck--Chevalley mate is invertible,
+evaluate that mate on all the spectral representables $R_r$.
+This is the asserted kernel comparison. Conversely, when the
+functors concerned preserve colimits, their density expressions
+show that equivalence on these representables gives the equivalence
+on every diagram. Thus the compatibility is with the actual
+base-change mate and its pasted composites. This argument does not
+replace that mate by an unrelated isomorphism of functors.
+\end{proof}
+
+\begin{claim}{G.5}{Refuted}{The weight is not invariant under unrestricted restriction}
+The formula $i^*w_S\simeq w_R$ for every functor $i:R\to S$ is
+false, even for finite posets. Consequently no base-change statement
+for a ``dualizing object'' may be supplied by ordinary restriction
+without an additional hypothesis or an extraordinary pullback.
+\end{claim}
+\begin{proof}
+Let $i:e\to[1]$ select $0$. G.3 computes
+$i^*w_{[1]}=0$, whereas $w_e=\mathbb S$. The nonzero sphere cannot
+be equivalent to zero. The same example shows that the transform
+in G.9 below does not commute with this restriction: its value at
+$0$ is always zero, whereas the transform on $e$ is the identity.
+The kernel transitivity formula G.4 is the valid replacement.
+\end{proof}
+
+\begin{claim}{G.6}{Proved}{A coefficient duality on precisely specified finite objects}
+For every small $S$, pointwise Spanier--Whitehead duality gives
+\[
+ \operatorname{Fun}(S^{\mathrm{op}},\mathrm{Sp}^{\mathrm{fin}})^{\mathrm{op}}
+ \simeq\operatorname{Fun}(S,\mathrm{Sp}^{\mathrm{fin}}).
+\tag{G.6a}
+\]
+For a ring $A$, derived $A$-linear duality similarly gives
+\[
+ \operatorname{Fun}(S^{\mathrm{op}},\operatorname{Perf}(A))^{\mathrm{op}}
+ \simeq\operatorname{Fun}(S,\operatorname{Perf}(A^{\mathrm{op}})).
+\tag{G.6b}
+\]
+For homotopy finite $S$, all limits and colimits in these formulas
+remain perfect and
+$D(p_*^SF)\simeq p_!^{S^{\mathrm{op}}}(DF)$.
+This is a contravariant duality. In (G.6b) the coefficient ring can
+be kept unchanged when it is commutative.
+\end{claim}
+\begin{proof}
+For a finite spectrum $E$, the evaluation map
+$E\to\operatorname{Map}(\operatorname{Map}(E,\mathbb S),\mathbb S)$
+is an equivalence: it holds for the sphere and is preserved by finite
+cofibres, suspensions, and retracts. This proves the equivalence on
+finite spectra. Applying it to values and reversing structure maps
+gives (G.6a), including all coherences. For perfect $A$-modules the
+same proof starts from finite free modules and uses
+$\operatorname{RHom}_A(-,A)$; the dual is a module on the opposite
+side, which accounts for $A^{\mathrm{op}}$.
+
+A limit over a homotopy finite shape is constructed by finite
+homotopy limits, and finite spectra and perfect modules are closed
+under those operations. An equivalence to an opposite category
+exchanges their limits and colimits. Applying this to the diagram
+gives the last formula. No assertion is made that arbitrary
+spectra or arbitrary modules are reflexive under this duality.
+\end{proof}
+
+\begin{claim}{G.7}{Refuted}{Finite EI is not a coefficient-independent extension of homotopy finite}
+The weighted-colimit assertion for all stable coefficients does not
+extend from homotopy finite categories to all finite EI categories.
+For $S=BC_2$ and coefficients $k=\mathbb F_2$, the functor $p_*^S$
+does not preserve countable coproducts, and hence cannot be any
+fixed weighted homotopy colimit on all diagrams.
+\end{claim}
+\begin{proof}
+The category has one object and exactly the arrows $1,g$, with
+$g^2=1$. It is finite and every endomorphism is invertible. Write
+$A=k[C_2]=k[\epsilon]/(\epsilon^2)$, where $\epsilon=g-1$.
+The trivial module $k$ has the bounded-above projective resolution
+\[
+ \cdots\xrightarrow{\epsilon}A\xrightarrow{\epsilon}A
+ \xrightarrow{\epsilon}A\longrightarrow k\longrightarrow0,
+\]
+with $A$ in every degree $0,-1,-2,\ldots$. Exactness follows from
+$\ker(\epsilon:A\to A)=\epsilon A=\operatorname{im}(\epsilon)$
+and $\ker(A\to k)=\epsilon A$. A bounded-above complex of
+projectives computes derived Hom into any complex.
+
+Let $M_n=k[n]$ for $n\geq0$ in cohomological notation, with
+trivial action, and let $M=\bigoplus_{n\geq0}M_n$.
+In degree zero the Hom complex from the displayed resolution to
+$M$ is $\prod_{n\geq0}k$. Every differential is zero, since
+$\epsilon$ acts trivially on the target. Thus
+\[
+ H^0\operatorname{RHom}_A(k,M)=\prod_{n\geq0}k,
+ \qquad
+ \bigoplus_{n\geq0}H^0\operatorname{RHom}_A(k,M_n)
+       =\bigoplus_{n\geq0}k.
+\]
+The comparison is the usual inclusion of the direct sum into the
+product and omits the sequence $(1,1,\ldots)$. Since
+$p_*^S=\operatorname{RHom}_A(k,-)$, it fails to preserve this
+coproduct. A fixed weighted coend preserves all colimits in its
+input, so none can represent this functor. The multiplication table,
+associativity, and the resolution's differential matrices are checked
+in \texttt{code/dg\_finite\_checks.py}; the infinite product argument
+above, rather than a finite computation, proves the obstruction.
+\end{proof}
+
+\begin{claim}{G.8}{Proved}{A finite-group case with its necessary coefficient hypothesis}
+Let $G$ be a finite group and $k$ a commutative ring in which
+$|G|$ is invertible. For the derivator of $k$-modules and
+$S=BG$, the norm gives a natural equivalence $p_!^S\simeq p_*^S$
+on all unbounded complexes. In particular this finite EI case has
+ambidexterity, although G.7 rules out a uniform assertion without
+the coefficient hypothesis.
+\end{claim}
+\begin{proof}
+For any $k[G]$-module $M$, the map
+$[m]\mapsto\sum_{g\in G}gm$ from coinvariants to invariants
+has inverse $x\mapsto |G|^{-1}[x]$. The averaging idempotent
+$|G|^{-1}\sum_g g$ makes invariants an exact direct summand
+functor. The trivial $k[G]$-module is projective on either side,
+so coinvariants and invariants compute their derived functors
+degree by degree on all complexes. The displayed natural inverse
+therefore supplies the derived norm equivalence. This is a proved
+class of finite EI examples, not a classification of all finite EI
+categories or all coefficient systems.
+\end{proof}
+
+\begin{claim}{G.9}{Known}{The exact canonical equivalence criterion for finite posets}
+For a finite poset $P$ define the colimit-preserving transform
+\[
+ (V_PF)(s)=
+ \lim_{t\in P^{\mathrm{op}}}
+  \bigl(\Sigma^\infty_+\operatorname{Hom}_P(t,s)\otimes F(t)\bigr),
+ \qquad V_P:\mathbb D(P)\longrightarrow\mathbb D(P^{\mathrm{op}}).
+\tag{G.9a}
+\]
+There is always a canonical formula
+\[
+ p_*^P\simeq p_!^{P^{\mathrm{op}}}V_P.
+\tag{G.9b}
+\]
+For spectra the transform (G.9a) is an equivalence if and only if
+each strict upper interval $P_{>p}$ is Gorenstein* over $\mathbb Z$.
+Here a finite poset $L$ is Gorenstein* when every open interval in
+$L$ with a newly adjoined bottom and top has the integral homology
+of a sphere; the empty interval is allowed as the $(-1)$-sphere.
+When this condition holds, (G.9a) gives an equivalence for every
+stable derivator, and it restricts to pointwise finite spectra or
+perfect complexes. This is a condition on this canonical transform;
+it is not a classification of every possible equivalence between
+the two diagram categories.
+\end{claim}
+\begin{proof}
+Apply \citet[Theorem A and Proposition 5.12]{DGAoki2022} to
+$Q=P^{\mathrm{op}}$. His diagram category is
+$\operatorname{Fun}(Q,\mathrm{Sp})$, so his lower-interval
+condition becomes the upper-interval condition just stated.
+His Definition 3.9 and Proposition 3.11 give the precise
+Gorenstein* convention, including the empty case. This proves the
+if-and-only-if assertion with its exact variance.
+
+For completeness, formula (G.9b) itself follows without that
+condition. Commute the finite limit over $t$ with the colimit over
+$s$ in (G.9a). For fixed $t$, the covariant diagram
+$s\mapsto\operatorname{Hom}_P(t,s)$ has category of elements
+$t/P$, which has an initial object. Its homotopy colimit is
+contractible, so the colimit of its suspension spectra is the
+sphere. The result is $\lim_t F(t)$, as required.
+
+The extension of the equivalence to stable derivators can be made
+without an enhancement assumption on that derivator. By G.1 and
+the density argument of G.4, $V_P$ is tensoring with a spectral
+bimodule. An inverse to its colimit-preserving equivalence for
+spectral diagrams is also colimit preserving, and density represents
+that inverse by a spectral bimodule. The two composites are the
+identity bimodules: evaluate the two equivalences on representables.
+Tensoring these bimodule identities with any stable derivator
+proves the assertion. For a finite direct shape, an objectwise
+perfect diagram is compact, by its finite normalized bar resolution
+in representables, and every compact diagram is objectwise perfect.
+The equivalence preserves compact objects; hence so does its
+inverse. This proves the stated restriction to finite objects.
+\end{proof}
+
+\begin{claim}{G.10}{Proved}{Verification of the finite least-vertex geometric dictionary}
+Let $P$ be a finite poset and $Z=|NP|$. Label a point by the
+least vertex with positive barycentric coordinate. With downsets
+open on $P$, this is a continuous map $s:Z\to P$; its strata are
+contractible, the stratification is conical, and its exit-path
+infinity-category is $P^{\mathrm{op}}$. Consequently
+\[
+ \operatorname{Shv}_{P\text{-}\mathrm{cons}}(Z;\mathcal C)
+       \simeq\operatorname{Fun}(P^{\mathrm{op}},\mathcal C)
+\tag{G.10}
+\]
+for spaces, for every compactly assembled coefficient
+infinity-category, and for every stable presentable coefficient
+infinity-category. The inverse-image functor from sheaves on the
+finite downset Alexandrov space $P$ is the fully faithful functor
+onto the subcategory in (G.10).
+\end{claim}
+\begin{proof}
+For a downset $U$, the complement of $s^{-1}U$ is the closed
+subcomplex on $P\setminus U$: a chain has minimum outside $U$
+exactly when all its vertices lie outside $U$. This proves
+continuity. The stratum labelled $p$ consists of chains with
+minimum $p$ and positive coordinate at $p$; it is the open cone
+on $|N(P_{>p})|$ and is contractible.
+
+Here is an explicit local chart, which also checks the geometric
+hypothesis instead of assuming it from the attached STRATA package.
+The open star $t_p>0$ of a vertex $p$ has the homeomorphism
+\[
+ \{t_p>0\}\cong
+ C_\infty|N(P_{<p})|\ \times\ C_\infty|N(P_{>p})|.
+\tag{G.10a}
+\]
+The two radial coordinates are
+$\sum_{q<p}t_q/t_p$ and $\sum_{q>p}t_q/t_p$; the remaining
+coordinates are normalized on their respective chains. The inverse
+divides all coordinates by $1+a+b$. If a radial coordinate is zero,
+its normalized coordinates are collapsed to the cone vertex, so
+these formulas extend continuously there. The second factor is a
+factor inside the $p$-stratum. The first factor is the normal cone,
+whose nonvertex strata have their original minimum labels below
+$p$. Taking neighbourhoods in the second factor gives conical charts
+at every point of the $p$-stratum. These are finite polyhedral
+charts, hence locally singular and paracompact.
+
+Refine this stratification to the open-simplex stratification of the
+finite order complex. Its exit category is the face poset
+$\operatorname{Ch}(P)$ of nonempty chains, ordered by inclusion,
+by \citet[Theorem A.6.10]{DGLurieHA}. The coarsening map is
+$m:\operatorname{Ch}(P)\to P^{\mathrm{op}}$,
+$m(\sigma)=\min\sigma$. The coarsening theorem
+\citet[Theorem 3.3.5]{DGHPT2026} identifies the new exit category
+with the localization of $\operatorname{Ch}(P)$ at inclusions
+preserving the minimum. Its hypotheses hold for this finite
+conically stratified polyhedron, by
+\citet[Theorems A.6.4 and A.9.3]{DGLurieHA}.
+Finally $N\operatorname{Ch}(P)=\operatorname{Sd}(NP^{\mathrm{op}})$,
+and $Nm$ is the last-vertex map for $P^{\mathrm{op}}$.
+\citet[Proposition 6.3.6.2]{DGKerodonSubdivision} says exactly that
+this map is universally localizing at those edges. Thus the
+localized exit category is $P^{\mathrm{op}}$.
+
+Space-valued exodromy is now HA, Theorem A.9.3. The coefficient
+extension in the precise two classes stated above is
+\citet[Corollary 4.1.15]{DGHPT2026}; the finite indexing poset is
+noetherian, as required for its stable-coefficient case. Finally
+sheaves on a finite downset Alexandrov space are diagrams on
+$P^{\mathrm{op}}$, by finite gluing on principal opens, and the
+map on exits induced by $s$ is the just computed equivalence.
+Naturality of exodromy therefore identifies $s^*$ with (G.10).
+This verifies the specific dictionary needed here and does not
+assert its arbitrary-presentable-coefficient extension.
+\end{proof}
+
+\begin{claim}{G.11}{Refuted}{Minimum constructibility is not automatically preserved by Verdier duality}
+Even for $P=[1]$, usual contravariant Verdier duality on $|NP|$
+does not preserve the least-vertex constructible sheaves with
+perfect stalks. Also, the canonical covariant transform $V_P$ in
+G.9 is not an equivalence for this $P$.
+\end{claim}
+\begin{proof}
+The strata of $[0,1]$ are $[0,1)$ and $\{1\}$. The constant
+sheaf $k$ is constructible for this stratification. Its Verdier
+dual is the dualizing sheaf of the closed interval. At the endpoint
+$0$ the local costalk of $k$ is
+\[
+ \operatorname{fib}\bigl(R\Gamma([0,\epsilon);k)
+             \to R\Gamma((0,\epsilon);k)\bigr)=0.
+\]
+At an interior point the punctured interval has two components,
+and the corresponding restriction is the diagonal $k\to k\oplus k$.
+Its fibre is $k[-1]$. Dualizing these finite costalks shows that
+the stalk of the dualizing sheaf is zero at the endpoint and
+$k[1]$ at an interior point; the other endpoint is the same as
+$0$. Equivalently it is $j_!k_{(0,1)}[1]$.
+It is not locally constant on $[0,1)$, so the proposed preservation
+fails even for a finite, compact, contractible realization.
+The local relative-cochain ranks are checked in
+\texttt{code/dg\_finite\_checks.py}.
+
+Algebraically, for $F=(F_1\to F_0)$, (G.9a) gives
+$V_{[1]}F=(0\to F_1)$. The nonzero diagram $(0\to k)$ is sent
+to zero. This agrees with Aoki's obstruction: the strict upper
+interval of $0$ is a singleton, whose reduced homology is zero
+and is not the homology of any sphere. This refutes the claimed
+canonical identification on every homotopy finite base. It does
+not refute an equivalence obtained by other operations: $[1]$ is
+isomorphic to its opposite, and G.14 gives further such examples.
+\end{proof}
+
+\begin{claim}{G.12}{Known}{A correct geometric Verdier identification with a checked hypothesis}
+Suppose the finite poset $P$ satisfies the upper-interval criterion
+of G.9. For $Z=|NP|$ and its minimum map $s:Z\to P$, the
+spectral transform has the identification
+\[
+ V_P\simeq s_+\,\mathbb V_Z\,s^*.
+\tag{G.12}
+\]
+Here $\mathbb V_Z$ is Lurie's covariant sheaf--cosheaf duality and
+$s_+$ is cosheaf pushforward, with value on $U$ given by the value
+on $s^{-1}U$. The same identification holds for derived coefficients
+over a ring. Thus it includes an explicit pushforward of cosheaves;
+it does not require the ordinary sheaf-valued Verdier dual to stay
+constructible for the same minimum strata.
+
+A concrete class satisfying the criterion is
+$P=\operatorname{Face}(K)^{\mathrm{op}}$ for any finite simplicial
+complex $K$, with nonempty faces. In this case the minimum strata
+on the barycentric subdivision are precisely the open simplices of
+$K$, so the identification is the usual cellular geometric one.
+\end{claim}
+\begin{proof}
+Use \citet[Theorem D, or Theorem 6.13 with Remark 6.14]{DGAoki2022}
+with $Q=P^{\mathrm{op}}$. Its hypotheses are: $Q$ is Verdier,
+the source topos is proper and separated, and the spectral
+inverse-image functor is fully faithful. G.9 verifies the first;
+the compact Hausdorff finite polyhedron $Z$ verifies the second;
+G.10 verifies the third. Aoki uses the upsets-open convention
+on $Q$, which is the downsets-open convention on $P$. His
+identification is exactly (G.12), with these variances. The
+ring-coefficient assertion follows by tensoring the colimit-preserving
+spectral constructions with the module category; equivalently the
+same spectral kernels act on that stable coefficient category.
+
+For the stated simplicial example and a simplex $\sigma$, the
+strict upper interval at $\sigma$ in $P$ is the opposite of the
+proper nonempty face poset of $\sigma$. Its order complex is the
+barycentric subdivision of the boundary sphere of $\sigma$.
+All augmented open intervals are boundaries of simplex faces,
+so the precise Gorenstein* condition holds, including an empty
+interval at a vertex. The usual barycentric homeomorphism
+$|N\operatorname{Face}(K)|\cong|K|$ sends a point with maximal
+face $\sigma$ in its supporting chain to the relative interior
+of $\sigma$: its coefficient on the barycenter of $\sigma$ is
+positive, giving positive coordinate at every vertex of $\sigma$.
+Conversely every point of that relative interior has that maximal
+face in its supporting barycentric simplex. Minimum in the
+opposite face poset is this maximum, proving the asserted match
+of strata.
+\end{proof}
+
+\begin{claim}{G.13}{Refuted}{The weighted-limit argument does not persist unstably}
+There is no fixed-colimit-weight description of all finite limits
+of spaces. Consequently neither the stability argument of G.1
+nor its duality conclusions may be exported to unstable fine
+theories merely because the base is finite.
+\end{claim}
+\begin{proof}
+Let $S$ have two objects and only identity arrows. Its limit is
+the product. Put $F=(*,\varnothing)$ and
+$G=(\varnothing,*)$. Then
+\[
+ (\lim F)\amalg(\lim G)=\varnothing,
+ \qquad \lim(F\amalg G)=*.
+\]
+Thus this finite limit functor fails to preserve a binary
+coproduct. A weighted colimit with fixed weight preserves
+coproducts of the input, so it cannot be this functor. All four
+values are finite discrete spaces and their cardinalities are
+recorded by the finite-check program. Independently, D.3 gives
+a finite poset whose two unstable fine categories are not even
+equivalent. For a discrete finite base the two diagram categories
+do coincide by opposition, but their product and coproduct
+operations still differ as this example shows.
+\end{proof}
+
+\begin{claim}{G.14}{Known}{Tilting gives additional equivalences with different data}
+If $T$ is the path category of a finite oriented tree, then
+$\mathbb D(T)\simeq\mathbb D(T^{\mathrm{op}})$ for every stable
+derivator, pseudonaturally in exact morphisms of derivators.
+More generally any two orientations of the same finite tree
+are strongly stably equivalent. These are reflection-functor
+equivalences and are not the assertion that the transform
+$V_T$ in G.9 is always an equivalence.
+\end{claim}
+\begin{proof}
+This is \citet[Theorem 9.19 and Corollary 9.23]{DGGrothStovicek2016}.
+The supplied source \texttt{tilting2.tex} was checked at the
+reflection theorem and its tree corollary. A source reflection
+replaces the value there by the cofiber of the map to the finite
+biproduct of its outgoing neighbours; the inverse uses a fibre.
+The published proof constructs these as coherent finite Kan
+extensions and proves inverse equivalences. Successive source
+and sink reflections realize any reorientation of a tree,
+including complete reversal. Only finite limits and colimits
+occur, which explains the asserted compatibility with exact
+morphisms of stable derivators and, for spectra or rings,
+preservation of pointwise perfect diagrams. These operations
+depend on the chosen reflection sequence. In particular their
+existence does not supply a dimension, an orientation, or a
+pointwise dualizing-object formula such as the refuted (G.3).
+\end{proof}

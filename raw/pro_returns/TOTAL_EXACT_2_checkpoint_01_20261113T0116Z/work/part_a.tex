@@ -1,0 +1,57 @@
+\begin{definition}[Known: conventions]\label{A:conventions}
+For a small category $A$ we put $BA=|NA|$. For $H:A\to\Set$, the category $\El_AH$ has objects $(a,h)$ and arrows $f:(a,h)\to(b,k)$ satisfying $H(f)h=k$. We call $A$ total when it is nonempty and connected and every component of every $\El_AH$ is weakly contractible. We call $A$ exact when $\colim_A:\Ab^A\to\Ab$ is exact. We write $P_x=\Z[A(x,-)]$ and $T_i(M)=L_i\colim_A M$.
+\end{definition}
+\begin{unresolved}[Main question]\label{A:main}
+Does every total small category have exact abelian colimits? No proof or counterexample is asserted at this checkpoint.
+\end{unresolved}
+
+\begin{theorem}[Proved: detection by all prime fields]\label{A:fields}
+Let $A$ be any small category, possibly empty or disconnected. The following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $\colim_A:\Ab^A\to\Ab$ is exact.
+\item Colimits over $A$ are exact for $\Q$-vector-space diagrams and for $\mathbb F_p$-vector-space diagrams for every prime $p$.
+\end{enumerate}
+Consequently the conjunction of all coefficient implications requested in Part A.2 is equivalent to Part A.1. This is a statement about all primes together; it makes no assertion that finitely many field tests suffice.
+\end{theorem}
+\begin{proof}
+The underlying abelian group of a colimit of $R$-module diagrams is its abelian-group colimit, with its uniquely induced $R$-action. Indeed, the usual direct-sum presentation and its relation subgroup are $R$-linear. Thus (i) implies (ii).
+
+Assume (ii). For a covariant abelian diagram $M$, let $C_\bullet(A,M)$ be its bar complex, with
+\[
+C_n(A,M)=\bigoplus_{a_0\to\cdots\to a_n}M(a_0).
+\]
+The first face applies the transition map of $M$, the intermediate faces compose arrows, and the last face omits the last arrow; degeneracies insert identities. Its homology is $T_n(M)$. This statement applies even when the groups $M(a)$ are not projective: an objectwise projective resolution in $\Ab^A$, followed by the bar construction, gives a first-quadrant double complex; direct sums are exact in the resolution direction, and the augmented bar complex contracts on each representable projective in the other direction. The two filtrations give the asserted comparison.
+
+First suppose every $M(a)$ is torsionfree. The complex $C_\bullet=C_\bullet(A,M)$ consists of flat $\Z$-modules, and tensoring it with a field $k$ gives literally $C_\bullet(A,M\otimes_\Z k)$. By (ii), its positive homology vanishes for $k=\Q$ and for every $k=\mathbb F_p$. Flat base change to $\Q$ gives
+\[
+H_i(C_\bullet)\otimes\Q=0\qquad(i>0),
+\]
+so each $H_i(C_\bullet)$ is torsion. For a complex of flat $\Z$-modules the universal-coefficient sequence is
+\[
+0\longrightarrow H_j(C_\bullet)\otimes\mathbb F_p
+\longrightarrow H_j(C_\bullet\otimes\mathbb F_p)
+\longrightarrow \Tor^{\Z}_1(H_{j-1}(C_\bullet),\mathbb F_p)
+\longrightarrow0.
+\]
+For completeness, this follows by tensoring the cycle and boundary short exact sequences; their boundary groups are torsionfree subgroups of flat abelian groups and hence flat. Taking $j=i+1$ shows that $H_i(C_\bullet)[p]=0$ for every prime $p$. A nonzero torsion abelian group contains an element of prime order, so $H_i(C_\bullet)=0$. Thus every objectwise torsionfree diagram is colimit-acyclic.
+
+Next suppose $M$ is objectwise torsion. It decomposes naturally as the direct sum of its $p$-primary subfunctors. A $p$-primary diagram is the filtered union of the subfunctors $M[p^n]$. Each quotient $M[p^n]/M[p^{n-1}]$ is killed by $p$, and therefore is a diagram of $\mathbb F_p$-vector spaces. Its integral bar complex is the underlying abelian-group complex of its $\mathbb F_p$ bar complex, so (ii) makes it acyclic. Induction on $n$ using the long exact sequence of derived colimits proves acyclicity of $M[p^n]$. The bar complex and homology commute with direct sums and filtered colimits of abelian groups, proving acyclicity of $M$.
+
+For arbitrary $M$, its torsion subgroups form a subfunctor $M_{\mathrm{tor}}$. The quotient $M/M_{\mathrm{tor}}$ is objectwise torsionfree. Both ends of the short exact sequence
+\[
+0\longrightarrow M_{\mathrm{tor}}\longrightarrow M
+\longrightarrow M/M_{\mathrm{tor}}\longrightarrow0
+\]
+are acyclic by the preceding paragraphs, hence so is $M$. In particular $T_1(M)=0$ for every $M$. Since $\Ab^A$ has enough projectives and colimit is right exact, this is exactness of $\colim_A$. Empty and disconnected categories cause no exception in the argument.
+\end{proof}
+
+\begin{proposition}[Proved: the resolving closure and its tensor operation]\label{A:closure}
+For a total category $A$, let $\mathcal R_A$ be the smallest full class of objects of $\Ab^A$ containing all $\Z[H]$, $H:A\to\Set$, and closed under extensions, kernels of epimorphisms between its objects, direct sums, direct summands, and filtered colimits. Every object of $\mathcal R_A$ is colimit-acyclic. Moreover, for every $H:A\to\Set$, the functor $M\mapsto M\otimes_\Z\Z[H]$ preserves $\mathcal R_A$. Adding the tensor operation to the definition therefore does not enlarge this class.
+\end{proposition}
+\begin{proof}
+The bar complex of $\Z[H]$ is the integral nerve-chain complex of $\El_AH$, so totality proves the initial vanishing. Long exact sequences give the extension and kernel closures, and the bar complex gives the other three closures. For fixed $H$, pointwise tensoring with $\Z[H]$ is exact, preserves direct sums, retracts, and filtered colimits, and sends $\Z[G]$ to $\Z[G\times H]$. The class of all $M$ for which $M\otimes\Z[H]\in\mathcal R_A$ consequently contains the generators and has every closure used to define $\mathcal R_A$. Minimality gives the assertion. We have not asserted tensor stability for the larger class of all colimit-acyclic diagrams.
+\end{proof}
+
+\begin{remark}[Unresolved: the membership step]\label{A:membership}
+For an abelian diagram $M$, the augmentation ideal $I(M)=\ker(\Z[UM]\to\underline\Z)$ and all its tensor powers lie in $\mathcal R_A$. The natural epimorphism $I(M)\to M$, $[m]-[0]\mapsto m$, has kernel $I(M)^2$, where multiplication is in the group ring of the additive group $M(a)$ at each object. Although $I(M)^2$ is the image of $I(M)\otimes I(M)\to I(M)$, images are not among the proved closure operations. No acyclicity of that image, or membership of the column modules in $\mathcal R_A$, is inferred here.
+\end{remark}

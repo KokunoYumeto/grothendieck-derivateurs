@@ -1,0 +1,696 @@
+% Complete commentary; English; source errors remain in the diplomatic text.
+% Prepared by GPT-6 Astra (OpenAI, ChatGPT Pro mode). See report for project credit.
+
+\begin{dcomment}{context}{p1:effort conceptuel supplémentaire.}{The role of these elementary categories}
+Grothendieck is replacing an awkward construction of paths by a calculus of their shapes. The apparent retreat to finite ordered sets serves a precise purpose: composition, insertion of identities, and changes of parametrization should become operations on small indexing categories, before any category of coefficients is chosen. The reader should therefore distinguish the result sought here from the construction of a derivator. These pages supply one part of the categorical machinery with which localizations and their diagram categories can subsequently be studied.
+
+The motivation belongs to the programme described in \citet[\S69, pp.~1--3]{Grothendieck1983}. There the passage from a single derived category to the derived categories of all diagram shapes is explicitly connected with operations that the single triangulated category does not retain. The letter to Thomason makes the complementary point: the class of weak equivalences is the essential datum, while fibrations and cofibrations provide ways to carry out constructions \citep[\S1]{Grothendieck1991Letter}. Here the interval is deliberately independent of all of those extra structures. A later localization will specify which arrows may be traversed backwards and which transformations count as weak equivalences; none of that is contained in the bare word of signs.
+
+For the general diagram-category viewpoint we refer to the earlier companion, DER\_I-a, blocks ``From derived coefficients to diagram categories'' and ``What the whole diagram theory remembers''. The present chapter adds a concrete calculus for one family of indexing categories. Its assertions can largely be checked by following vertices and consecutive arrows. This elementary setting makes both the successes of the construction and the few overstatements unusually visible.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p1:effort conceptuel supplémentaire.}{A directed interval with two orders}
+Grothendieck wants a path to have a shape that can change without obscuring its endpoints. The first step is therefore to separate the geometry of the parameter interval from the direction in which its arrows happen to point. A word $\tau=(\tau_1,\ldots,\tau_n)$ in $\{+,-\}$ determines the directed graph on $0,\ldots,n$ with one edge between consecutive vertices, directed according to $\tau_i$. Its free category is $I_\tau$. Since the underlying undirected graph is a path, there is at most one directed route between two vertices. Thus the free category is already a poset category. This observation proves existence as well as uniqueness in the definition: choosing signs does not leave additional composition relations to specify.
+
+There are two orders in play. We shall call $0<\cdots<n$ the \emph{positional order}. The categorical order records reachability by directed edges. For $a<b$, a morphism $a\longrightarrow b$ exists precisely when every sign $\tau_{a+1},\ldots,\tau_b$ is $+$; a morphism $b\longrightarrow a$ exists precisely when all these signs are $-$. If both signs occur, the vertices are incomparable categorically. The positional order remains total in every case. When later pages require a functor to be increasing, they refer to the positional order, an extra condition that ordinary functoriality does not impose.
+
+A constant-sign run is exactly one of the structural chains of the text. Writing its successive lengths as $l_1,\ldots,l_r$, we have $n=l_1+\cdots+l_r$ and alternating signs from one run to the next. Hence the useful length $r$ counts changes of direction plus one, when $n>0$. The empty word has $n=r=0$ and no initial or final sign. This convention is necessary whenever a statement about a first edge, an initial direction, or $1\leq r$ occurs below.
+
+For example, the word $++--+$ gives
+\[
+0\longrightarrow1\longrightarrow2\longleftarrow3\longleftarrow4\longrightarrow5.
+\]
+Its structural intervals have vertex sets $\{0,1,2\}$, $\{2,3,4\}$ and $\{4,5\}$, and its critical vertices are $0,2,4,5$. There is a composite $0\to2$ and another $4\to2$, but no arrow in either direction between $1$ and $3$. The category does not contain a morphism obtained by moving right along the picture and then formally reversing an arrow. Such a passage is a \emph{zigzag}, which will be recorded by a functor from another interval.
+
+This supplies the small amount of combinatorics needed to read the chapter. The domain is a freely generated category; the ordering of its vertices remembers the traversal; and its critical vertices mark where composition must stop. In particular, reducing an interval will mean suppressing intermediate vertices of constant-sign runs, not identifying different objects by an equivalence of categories. Indeed, two finite poset categories are equivalent only when they are isomorphic. The reductions considered here preserve endpoints and compositional information in a different, expressly combinatorial sense.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p5:Le groupe des automorphismes de $I$ a au plus deux éléments.}{Intrinsic endpoints and the scope of rigidity}
+Grothendieck is recovering the traversal order from the category itself, once an endpoint has been chosen. This is what makes the later passage between arbitrary oriented intervals and standard sign words canonical. The recovery is valid for isomorphisms, but the edition states a stronger rigidity assertion that needs correction.
+
+The nonidentity indecomposable arrows of $I_\tau$ are exactly its transition arrows. An isomorphism preserves indecomposability, hence induces an automorphism of their underlying undirected path. Once the image of its first endpoint is fixed, its neighbour is fixed, then the next neighbour, and so on. An automorphism fixing both endpoints is consequently the identity; every other automorphism must be the reversal $i\mapsto n-i$. This proves the corollary without imposing a false condition on arbitrary endofunctors. The printed Proposition 1(b), checked in edition p.~3, says \emph{every functor}. It is false: the increasing self-map of $[2]$ with values $(0,0,2)$ defines a nonidentity functor fixing $0$ and $2$. Replacing ``functor'' by ``automorphism'' is the repair required by the argument. The reconstruction on manuscript p.~7 must also take slices in the remaining interval $I'$, at its current endpoint $s_i$, rather than in the original $I$.
+
+The slice criterion in Proposition 1(a) is correct. At an endpoint, one strict slice is empty and the other is a linearly ordered chain coming from the unique adjacent structural interval. At a noncritical interior vertex, there are arrows entering and leaving, so neither slice is punctual. At a critical interior vertex all incident arrows point inward, or all point outward. One slice is then punctual, while the other consists of two nonempty arms joined at their common extremum. Those arms are incomparable, so this slice cannot be a linearly ordered category. These three cases prove the criterion. The unfinished sentence trying to distinguish the \emph{source} from the \emph{target} has no intrinsic completion without a chosen orientation: an endpoint is intrinsic, whereas its designation as source is the additional structure.
+
+A related overstatement precedes the proposition. Every injective functor $[k]\to I$, $k\geq1$, is fully faithful and has its image in a unique structural interval. Indeed its image is a categorical chain, and all its vertices lie between its two extremes in one constant-sign run. But it can skip vertices and need not have maximal image. The functor $[1]\to[2]$ selecting $0,2$ already demonstrates both issues. Contiguous composable transition chains correspond to contiguous vertex intervals lying inside one structural run; \emph{maximal} chains correspond to the entire structural runs. Arbitrary injective $[k]\to I$ correspond instead to selections of $k+1$ distinct vertices in a structural run, listed in the categorical order. The useful geometric statements survive these distinctions, and we retain the edition's wording while making their exact scope explicit.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p9:avec l'orientation opposée.}{Reversal and categorical duality}
+The insistence on an orientation is needed because reversing a traversal and reversing every categorical arrow are different operations. In sign-word notation the distinction is completely explicit. If $\tau=(\tau_1,\ldots,\tau_n)$, write
+\[
+R\tau=(-\tau_n,\ldots,-\tau_1),\qquad
+D\tau=(-\tau_1,\ldots,-\tau_n).
+\]
+The standard model of the oppositely oriented interval is $I_{R\tau}$, and $i\mapsto n-i$ gives an isomorphism $I_\tau\to I_{R\tau}$. The opposite category with its original positional order is $I_{D\tau}$. Both operations are involutions and they commute; their composite simply reverses the word without changing its signs.
+
+The path-graph argument above now gives exact symmetry tests. A nontrivial interval has a nonidentity automorphism if and only if
+\[
+\tau_i=-\tau_{n+1-i}\quad(1\leq i\leq n).
+\]
+It is isomorphic to its opposite category if and only if
+\[
+\tau_i=\tau_{n+1-i}\quad(1\leq i\leq n).
+\]
+For the second assertion, an isomorphism to the opposite category cannot fix the positional orientation: fixing the vertices would require an edge to point both ways. It must therefore reverse the vertices, which gives precisely the displayed condition. Each possible isomorphism is unique. These two conditions cannot both hold for a nonempty word. Symmetry requires even length, because a middle edge in an odd-length word would have to equal its own negative.
+
+Thus $++$ is self-dual and has no nontrivial automorphism, whereas $+-$ is symmetric but not self-dual. The categories $0\to1\leftarrow2$ and $0\leftarrow1\to2$ are not isomorphic: the first has a terminal object and two minimal objects, while the second has an initial object and two maximal objects. For a reduced interval the signs alternate, so it is symmetric exactly when its length is even, and self-dual exactly when its positive length is odd. The singleton has one orientation and satisfies both sign-word identities vacuously. Its automorphism group is trivial, so the definition of symmetry by a nonidentity automorphism still excludes it. The edition's bracketed singleton exception concerns reversal of the coincident endpoints; it should not be read as creating a second orientation or a second automorphism.
+
+For paths, $R$ changes the ordered pair of endpoints while retaining the same underlying diagram after relabelling. Categorical duality instead gives
+\[
+\uHom(I,X)^{\mathrm{op}}\cong\uHom(I^{\mathrm{op}},X^{\mathrm{op}}).
+\]
+It reverses the direction of natural transformations as well. There is consequently no reason to identify paths in $X$ indexed by $I$ with paths in the same $X$ indexed by $I^{\mathrm{op}}$. This is the distinction that the examples of spans and cospans will make concrete.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p10:Pour que $s$ soit critique, il faut et il suffit}{Critical vertices and the missing complement}
+The critical vertices are intended to control exactly which vertices may be omitted without breaking a path. Proposition 3 addresses that mechanism, but its displayed decomposition and its explanatory footnote have different strengths. The footnote gives the correct local criterion; the displayed equality does not hold in general.
+
+Put $P_s=(I/s)\setminus\{s\}$ and $Q_s=(s\backslash I)\setminus\{s\}$. Since $I$ is a poset category, these are respectively the strict categorical predecessors and successors of $s$. If both are nonempty, any $p\in P_s$ and $q\in Q_s$ satisfy $p\to s\to q$, hence $p\to q$. There are therefore no arrows between $P_s$ and $Q_s$ if and only if one of them is empty. For a directed interval this says exactly that $s$ is a categorical source or sink, which is equivalent to being an endpoint or a change-of-direction vertex. Thus the footnote characterizes critical vertices correctly.
+
+However, the categories $P_s,Q_s$ need not contain all remaining vertices. In $0\to1\leftarrow2\to3$, take $s=0$. This is a critical endpoint, with $P_s=\varnothing$ and $Q_s=\{1\}$, whereas $I\setminus\{s\}$ still contains $2$ and $3$. The assertion
+\[
+I\setminus\{s\}=P_s\amalg Q_s
+\]
+is false here. The issue is not a transcription error: edition p.~6 prints the asserted equality. A precise local replacement is that the \emph{full subcategory on vertices comparable with $s$, after deleting $s$}, is $P_s\amalg Q_s$ precisely when $s$ is critical. This follows from the preceding argument and involves no unaccounted-for vertices.
+
+For the subsequent connectedness argument a different, geometric formulation is preferable. Let $0<s<n$. Then
+\[
+I\setminus\{s\}=I_{[0,s-1]}\amalg I_{[s+1,n]}
+\quad\Longleftrightarrow\quad s\text{ is critical}.
+\]
+Each term here is a full subcategory on a positional interval. If $s$ is critical, a directed route cannot pass across the change of sign at $s$, so there is no morphism between the two sides. Each side is connected through its consecutive transition arrows. If $s$ is not critical, the two arrows incident to $s$ compose, giving a surviving arrow between $s-1$ and $s+1$; this arrow joins the two sides after $s$ has been deleted. In that case the remaining full subcategory is connected. This proves the displayed equivalence and supplies the precise separation result used in Proposition 5.
+
+Endpoints remain critical but their deletion leaves just one side, so they are not cut vertices of the underlying categorical connectedness graph. Keeping this distinction avoids another possible overreading of the term ``critical''. The terminology is about the beginning, end, and changes of direction of a traversal. Only an internal critical vertex separates its two nonempty sides. No further homotopical theorem is needed for any of these conclusions.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p12:On l'appelle l'intervalle réduit associé}{Full subintervals and canonical reduction}
+The purpose of reduction is to compose everything that can be composed while retaining each turn and both endpoints. A proof of Propositions 5 and 6 can be given directly from the sign word, and it also clarifies which full subcategories are being considered.
+
+List a nonempty subset of vertices as $J=\{j_0<\cdots<j_m\}$. If some critical vertex $s$ strictly between $j_a$ and $j_{a+1}$ is missing, there is no arrow between any selected vertex to its left and any selected vertex to its right: every possible directed route would have to cross the turn at $s$. This separates the full subcategory on $J$ into nonempty pieces. Conversely, suppose that every critical vertex between $j_0$ and $j_m$ is selected. Then two consecutive selected vertices lie in one structural interval, so there is a unique arrow between them in the appropriate direction. These arrows form a directed path on the ordered set $J$. They generate its full subcategory, since any morphism between two selected vertices lies in a single structural interval and is the composite of the intervening arrows between selected vertices. Thus the full subcategory is itself an interval, with precisely the induced orientation claimed in Proposition 5.
+
+Applying this argument separately at each missing critical vertex shows that every connected component of an arbitrary full subcategory is an interval. A component need not be a contiguous subset of $\{0,\ldots,n\}$: in $[3]$, for instance, the full subcategory on $\{0,3\}$ is $[1]$. Its two vertices are categorically connected by a composite. The connectedness used here is therefore categorical connectedness, whereas the integer-connectedness of the beginning of the chapter was a condition on consecutive integer positions. Confusing them would invalidate the reduction construction.
+
+For fixed endpoints $i<j$, the criterion proves that the least full connected subcategory containing them has vertex set
+\[
+\{i,j\}\cup\{s\mid i<s<j,\ s\text{ critical in }I\}.
+\]
+Every full connected subcategory must contain these vertices, and the displayed subset itself satisfies the criterion. In such a subinterval, an internal selected vertex is critical precisely when it was critical in $I$: at an ambient turn the signs remain opposed; at an ambient noncritical vertex the arrows from the nearest selected neighbours still compose. This proves Proposition 6. Taking $i=0,j=n$ yields $I_{\red}$, whose length is the useful length $r$ of $I$.
+
+In the earlier example $++--+$, reduction retains $0,2,4,5$ and gives the word $+-+$. The full subcategory on $\{0,1,2,4,5\}$ is connected but not reduced, because the noncritical vertex $1$ remains. The full subcategory on $\{0,1,3,4,5\}$ is disconnected, because the critical vertex $2$ has been omitted. The two components have vertex sets $\{0,1\}$ and $\{3,4,5\}$. These are all statements about actual morphisms, not merely about a drawing with some vertices erased.
+
+The footnote after Proposition 5 goes further and asserts that every subcategory which is an interval is automatically full. That assertion is false without an orientation condition. Inside $[2]$, retain the objects $0,1,2$ and only the nonidentity arrows $0\to2$ and $1\to2$. This is a subcategory, since no pair of its nonidentity arrows composes, and it is an interval with traversal $0,2,1$. It is not full, because it omits $0\to1$. The counterexample does not affect the propositions, which expressly concern full subcategories. The embedding also fails to preserve the ambient positional order. Later arguments about increasing interval embeddings can establish fullness under their additional hypothesis; the unrestricted footnote cannot be used for that purpose.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p12:On l'appelle l'intervalle réduit associé}{The exact endpoint rigidity criterion}
+Reduction also identifies when the stronger rigidity statement of Proposition 1(b) becomes valid. The issue is whether a functor can compress one step and compensate elsewhere without losing the prescribed endpoints. Constant-sign runs permit this; a reduced interval does not.
+
+\textbf{Endpoint rigidity.} An interval $I$ has no nonidentity endofunctor fixing both endpoints if and only if it is reduced, with the singleton included as a reduced interval.
+
+To prove the forward implication by contraposition, suppose a run has length at least two. Choose a noncritical interior vertex $k$ and define a vertex map by $f(k)=k-1$, fixing every other vertex. The transition between $k-1$ and $k$ becomes an identity. The transition between $k$ and $k+1$ becomes the composite joining $k-1$ and $k+1$; this exists with the required direction because the two original signs agree. All other transitions retain their values. Freeness gives a functor, and it fixes the global endpoints while moving $k$.
+
+Conversely, suppose $I$ is reduced, of length $n>0$, and $f(0)=0$, $f(n)=n$. The only nonidentity arrows of $I$ join consecutive vertices. Therefore functoriality gives
+\[
+|f(i)-f(i-1)|\leq1\qquad(1\leq i\leq n).
+\]
+Since
+\[
+n=f(n)-f(0)=\sum_{i=1}^n\bigl(f(i)-f(i-1)\bigr)
+\]
+is a sum of $n$ integers each at most $1$, every summand is $1$. Thus $f(i)=i$ for all $i$, and thinness forces $f$ to be the identity on arrows as well. The singleton case is immediate.
+
+The reduced case is an elementary consequence of the known description of fence endomorphisms: the same nearest-neighbour inequality is condition (i) of \citet[Theorem~2.1]{FernandesKoppitzMusunthia2019}. We have supplied the converse and the short proof here to locate the exact hypothesis missing from the printed assertion; this is a completion of the local argument, not a priority claim. In particular, endpoint rigidity is stronger than the automorphism rigidity needed to define orientation. One can rigidify the traversal by choosing an endpoint for any interval, while arbitrary endofunctors can still compress its noncritical vertices.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p14}{A path is its diagram and all its commuting squares}
+Grothendieck now uses the freeness of an interval to make the path category entirely concrete. An object is an assignment of objects of $X$ to the vertices and arrows of $X$ to the transitions. All longer arrows are forced by composition, with no further relations to verify. A morphism of paths is a natural transformation, and naturality on the transitions implies naturality on every composite by successive substitution. The stated descriptions are therefore exact presentations of the functor category, rather than approximations which discard coherence data.
+
+There is a small numerical slip in the definition on manuscript p.~13: length is $n=|\Ob I|-1$, not $|\Ob I|$. The text immediately uses $n+1$ objects and $n$ transitions, which fixes the intended convention. An interval of length zero gives $\uHom(e,X)\cong X$; its path is an object of $X$, and its morphisms are all morphisms of $X$. The notation must therefore keep the category of paths distinct from its set of objects. In particular, a path of length zero does not produce a discrete category of objects.
+
+For $I=[1]$, a morphism from $u:a\to b$ to $u':a'\to b'$ is a pair $(v:a\to a',w:b\to b')$ satisfying $wu=u'v$. For the reversed traversal it is exactly the same commuting square, now with its ordered endpoints recorded as $(b,a)$ and $(b',a')$. For $[2]$, a diagram $a\xrightarrow{u}b\xrightarrow{v}c$ includes the forced composite $vu:a\to c$. Restriction along the endpoint inclusion $[1]\hookrightarrow[2]$ is consequently composition, not a choice of a new arrow. Restriction along the vertex map $(0,1,2)\mapsto(0,2,2)$ gives the path $a\xrightarrow{vu}c\xrightarrow{1_c}c$. These are the examples which the representability argument will classify uniformly.
+
+The entry for $\Phi_1$ uses indices $u_0,u_1$ instead of the chapter's usual $u_1,u_2$; the edition prints this local convention, and it does not change the diagram. The underlines distinguish the arrows in the parameter category from their images in $X$. The two doubtful underline readings in the supplied transcription are confirmed by the edition: on p.~10 the composite-chain labels are underlined, as are the labels of $\Phi_1,\Psi_1$ on p.~11.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p16:Les catégories $\Phi_1$, $\Psi_1$ sont opposées l'une de l'autre}{Spans, cospans, and a linear example}
+The two directions at a turn carry different information. A $\Phi_1$-path is a span $a\leftarrow m\to b$; a $\Psi_1$-path is a cospan $a\to m\leftarrow b$. Their shapes are opposite, but passing between them requires dualizing the target category as well. Even the numbers of objects of their path categories can differ.
+
+For a finite poset $X$, the number of spans is $\sum_{x\in X}|\!\uparrow x|^2$, because the middle vertex can be chosen as $x$ and its two targets independently in its upper set. The number of cospans is $\sum_{x\in X}|\!\downarrow x|^2$. Take $X$ to be the three-element poset $a<t$, $b<t$, with $a,b$ incomparable. Its upper-set sizes are $2,2,1$, giving $9$ spans; its lower-set sizes are $1,1,3$, giving $11$ cospans. Thus these two path categories are not isomorphic for this $X$. This verifies the text's ``in general'' without pretending that the absence of an isomorphism of shapes alone rules out accidental coincidences for every target. For example, a terminal target makes both categories terminal.
+
+For a more geometric use of the same distinction, take $X$ to be finite-dimensional vector spaces over a field $k$, and consider the cospan
+\[
+k\xrightarrow{u}k^2\xleftarrow{v}k,
+\]
+with both maps injective. If the image lines agree, choose a basis $e_1,e_2$ of $k^2$ with their common image $ke_1$, and rescale the two outer bases. The diagram becomes a direct sum of the diagram supported on all three vertices, with identity maps $k\to k\leftarrow k$, and the one-dimensional diagram supported only at the middle vertex. If the image lines are distinct, choose $e_1=u(1)$ and $e_2=v(1)$ as a basis. The diagram is then the direct sum of a diagram supported on vertices $0,1$ and a diagram supported on vertices $1,2$. The two possibilities are nonisomorphic because $\dim(\operatorname{im}u\cap\operatorname{im}v)$ is respectively $1$ and $0$.
+
+These are the first examples of interval decompositions of zigzag representations. For finite-dimensional diagrams on an arbitrarily oriented path, the indecomposable representations are precisely the representations which equal $k$ on one consecutive vertex interval, vanish outside it, and have identity maps wherever both endpoints are nonzero; see \citet[Theorem~2.5 and Section~4.1]{CarlssonDeSilva2010}. The indexing interval of the representation and a supported interval summand are different objects, but the same directed-path combinatorics makes both tractable. Our calculation only uses elementary linear algebra and illustrates the theorem in the smallest case where a turn matters.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p19}{Ordered endpoints are structure}
+The apparent embarrassment on these pages comes from two different identifications which should have different names. Once an orientation $\omega$ is chosen on a category $I$, the category of its diagrams comes with an endpoint functor
+\[
+e_\omega=(\operatorname{ev}_{s_\omega},\operatorname{ev}_{t_\omega})
+:\uHom(I,X)\longrightarrow X\times X.
+\]
+Changing $\omega$ to the opposite orientation while keeping the same underlying diagram leaves the functor category unchanged, but changes $e_\omega$ to its composite with the swap on $X\times X$. This is the path-reversal operation. If instead there is an isomorphism of \emph{oriented} intervals $\theta:(I,\omega)\to(I,\omega')$, precomposition with $\theta^{-1}$ gives an isomorphism of diagram categories which preserves the ordered endpoint pair. It changes the diagram as well as the parametrization. For a symmetric interval the two operations coexist, which explains why the bare functor category does not encode everything Grothendieck wants a path to remember.
+
+The discrete two-object category $\varepsilon$ packages the endpoints as a map $\varepsilon\to I$. For a positive-length interval this map is injective on objects, but it is usually not full: a directed chain may have an arrow between its endpoints. For the singleton interval the map identifies the two objects, so the word ``inclusion'' on manuscript p.~18 needs this degenerate exception. The induced evaluation is then the diagonal $X\to X\times X$. None of the endpoint constructions fails in length zero; only the informal description as an inclusion fails.
+
+Writing a type as a sign word removes choices of labels once and for all. An increasing bijection of finite totally ordered vertex sets is unique, so an oriented interval has a unique standard representative together with its oriented isomorphism. This does not say that $\uHom(I_\tau,X)$ has no automorphisms whatsoever. It says that there is no automorphism coming from an automorphism of the \emph{oriented indexing interval}. Symmetric words can still produce a reversal operation on paths, and target categories can have their own symmetries. The phrase ``totally pinned down'' should be read in this precise sense.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p23:plus précis que simplement un}{Representability removes the target category}
+Grothendieck's next move is to turn a potentially endless list of operations on diagrams into a single classification. Suppose that for every small category $X$ we are given a function
+\[
+L_X:\Cat(I_\tau,X)\longrightarrow\Cat(I_{\tau'},X)
+\]
+which commutes with postcomposition by every functor $X\to Y$. Fixing a universe, these are natural transformations between covariant representable set-valued functors on $\Cat$. Set
+\[
+\varphi=L_{I_\tau}(\operatorname{id}_{I_\tau}):I_{\tau'}\longrightarrow I_\tau.
+\]
+Apply the naturality condition to the functor $c:I_\tau\to X$ and to the identity diagram. It gives
+\[
+L_X(c)=c\varphi.
+\]
+This proves uniqueness of $\varphi$, and conversely every such $\varphi$ gives a natural family by precomposition. The contravariant direction in the indexing shapes is forced by the formula. This is the ordinary Yoneda lemma, not an additional axiom concerning paths; compare \citet[Theorem~2.2.4 and Corollary~2.2.8]{Riehl2016}.
+
+There is a canonical categorical enhancement. For a natural transformation $v:c\Rightarrow d$, put $(L_Xv)_j=v_{\varphi(j)}$. If $a:j\to k$ belongs to $I_{\tau'}$, naturality follows from the naturality of $v$ on $\varphi(a)$. Identity transformations and vertical composition are preserved component by component, so $L_X$ extends to a functor $\uHom(I_\tau,X)\to\uHom(I_{\tau'},X)$. No separate coherence choices are needed. Similarly a transformation $\eta:\varphi\Rightarrow\psi$ gives, by whiskering with $c$, a transformation $c\varphi\Rightarrow c\psi$ between the induced path operations.
+
+When the target is an interval, a natural transformation between two functors is unique if it exists: its component at each object lies in a hom-set containing at most one arrow. Existence requires the corresponding pointwise comparisons, and those comparisons automatically satisfy naturality because the target is thin. This is why many subsequent coherence verifications reduce to checking that the required arrows exist. The same conclusion must not be transferred to path categories in an arbitrary $X$, whose hom-sets need not be singletons.
+
+The classification also identifies the endpoint-preserving operations. Requiring $L_X(c)$ to have the same ordered endpoints as $c$, for every $X$ and every $c$, is equivalent to
+\[
+\varphi(0)=0,\qquad \varphi(n')=n.
+\]
+Necessity follows by taking $X=I_\tau$ and $c$ the identity; sufficiency follows by evaluation. This condition is separate from increasingness in the positional order. The examples of composing two arrows and inserting an identity satisfy both. Later pages will restrict the available maps between types in order that composition of variable-length paths behave strictly as intended.
+\end{dcomment}
+
+\begin{dcomment}{later}{p23:plus précis que simplement un}{When a few zigzag types suffice}
+Grothendieck's representability argument explains all natural changes of shape. Reducing homotopical calculations to a small family of shapes requires more: one must know that the permitted comparisons preserve the desired homotopy type. A precise later result makes this extra hypothesis explicit. For a relative category admitting a homotopical three-arrow calculus, Low and Mazel-Gee prove that a Reedy-fibrant replacement of its Rezk classification diagram is a Segal space. If weak equivalences satisfy two-out-of-three, completeness is equivalent to saturation \citep[Theorem~4.11]{LowMazelGee2015}. Model categories provide a principal case of this theorem \citep[Corollary~4.12]{LowMazelGee2015}.
+
+The relevance here is the order of the two steps. First the indexing calculus describes concatenation, insertion of identities, and composition of adjacent arrows. Then a calculus-of-fractions hypothesis ensures that chosen short diagrams suffice for homotopical purposes. These are different assertions, and the second does not follow merely from thinness of the interval shapes. The general localization comparison is discussed in the status block near the end of this package. At the present point, Grothendieck has established the formal language needed to state it; the decision on manuscript p.~24 is to construct variable-type categories before putting that language to use.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p24}{A category that remembers its parameter}
+Grothendieck now wants to compare paths whose shapes differ. Keeping a disjoint union of the categories $\uHom(I_\tau,X)$ would remember each shape but provide no passage between them. Identifying paths whenever one is obtained from another by a change of parameter would discard the comparison itself. The fibred category supplies the intermediate construction: a morphism records both a map of shapes and a natural transformation over that map. The choice of admissible shape maps will therefore control the entire calculus.
+
+We shall distinguish three stages which the manuscript deliberately leaves visible. Write $\mathcal T_{\rm all}$ for the category whose objects are sign words and whose morphisms are all functors between their interval categories; write $\mathcal T_{\partial}$ when these functors preserve the two designated endpoints; and write $\mathcal T$ when they also preserve the linear order of progression. Thus
+\[
+ \mathcal T\longrightarrow\mathcal T_{\partial}
+ \longrightarrow\mathcal T_{\rm all}\longrightarrow\Cat.
+\]
+The last functor is fully faithful on these chosen interval objects. The middle two functors are faithful, generally not full. The notation $\uTy$ successively denotes these three choices in the text; from section~5 onward it means $\mathcal T$. The later corrections to fullness are consequently changes in the definition, not failures of the Grothendieck construction.
+
+Here and below the word of length zero is denoted $1$ and has realization $I_1=\{0\}$. Its two designated endpoints coincide. The endpoint datum is therefore a map from the discrete category $\{0,1\}$, not always an embedding. In $\mathcal T_{\partial}$ and $\mathcal T$ there is a unique map $\tau\to1$, whereas a map $1\to\tau$ exists only when $\tau=1$. These small conventions are necessary for the unit of concatenation and for the constant paths that will accompany it.
+
+The monoid of objects is the free monoid on $+$ and $-$. A word such as $++--+$ is allowed. The phrase ``alternativement'' on manuscript page~25 must refer to letters taking one of two possible values, not to strictly alternating words: it is the decomposition into maximal constant-sign runs that alternates. Such a decomposition has five edges and three runs in this example. Keeping these two lengths distinct will make the numerical formulas below transparent.
+\end{dcomment}
+
+\begin{dcomment}{context}{p27}{The fibred construction and its variance}
+Grothendieck's appeal to the general theory of fibred categories is exact. The construction of a fibred category from a contravariant pseudofunctor is given in \citet[Expos\'e VI, \S8]{SGA1}; the strict functor case and its splitting are treated in \S9. In the present application the inverse-image functor is literally precomposition, so its associativity is an equality. This is why no choice of coherence isomorphisms has to be made here.
+
+For any one of the three base categories $\mathcal B$ just distinguished, an object of the total category is a pair $(\tau,c)$ with $c:I_\tau\to X$. A morphism
+\[
+ (\tau',c')\longrightarrow(\tau,c)
+\]
+consists of $\varphi:\tau'\to\tau$ in $\mathcal B$ and a natural transformation $v:c'\Rightarrow c\varphi$. Given a second morphism $(\varphi',v')$, its composite with $(\varphi,v)$ is
+\[
+ (\varphi\varphi',\ (v\varphi')\circ v').
+\]
+At an object $i$ this transformation is the composite
+$c''(i)\xrightarrow{v'_i}c'(\varphi'i)
+ \xrightarrow{v_{\varphi'i}}c(\varphi\varphi'i)$.
+Associativity follows componentwise from associativity in $X$; identity transformations over identity shape maps give the identities. This supplies the entire proof behind the manuscript's word ``\'evidente''.
+
+The chosen cartesian lift of $\varphi$ with codomain $(\tau,c)$ is
+\[
+ (\varphi,\mathrm{id}):(\tau',c\varphi)\longrightarrow(\tau,c).
+\]
+To verify its universal property, a map from $(\upsilon,d)$ over $\varphi\psi$ is precisely a transformation $d\Rightarrow c\varphi\psi$, and this same transformation gives its unique factorization over $\psi$ through the displayed lift. A general arrow $(\varphi,v)$ is cartesian exactly when $v$ is an isomorphism. Indeed it factors through the chosen lift by the vertical arrow $(\mathrm{id},v)$; two cartesian lifts with the same codomain and base arrow are uniquely vertically isomorphic. Conversely composing a cartesian arrow with a vertical isomorphism preserves the cartesian property. The splitting follows because the chosen lifts compose to the chosen lift of the composite.
+
+This description also explains functoriality in $X$ without a further construction. A functor $F:X\to Y$ sends $(\tau,c)$ to $(\tau,Fc)$ and $(\varphi,v)$ to $(\varphi,Fv)$, and preserves the chosen cartesian lifts. A natural transformation $F\Rightarrow G$ gives the corresponding vertical natural transformation between these total functors. If $X$ is large, one fixes a universe for the finite shape categories and a larger universe containing $X$; every category and functor used above then has its declared size. No claim that a large $X$ is small is required.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p29}{Why the endpoints must be fixed}
+The first correction to the category of types is forced by the intended source and target functors. Let $X=[1]$ with its unique nonidentity arrow $0\to1$, let $c:[1]\to X$ be the identity path, and let $c':\{0\}\to X$ take the value $1$. The functor $\varphi:\{0\}\to[1]$ selecting the terminal vertex gives $c'=c\varphi$, hence a morphism $(\varphi,\mathrm{id}):c'\to c$ in the category formed with arbitrary shape maps. A source functor extending endpoint evaluation would have to send this arrow to an arrow $1\to0$ in $X$. There is none. Thus the unrestricted total category does not support the proposed source functor, even in this smallest example.
+
+After imposing $\varphi(0)=0$ and $\varphi(n')=n$, the components $v_0$ and $v_{n'}$ do have the required targets. Their compatibility with composition is immediate from the component formula in the preceding block. The category obtained by this restriction is exactly the pullback of the larger fibred category along $\mathcal T_{\partial}\to\mathcal T_{\rm all}$, as written on manuscript page~30. With the concrete pair construction this can be taken as a strict equality of categories over the base.
+
+Endpoint preservation does not by itself impose monotonicity in the progression order. For example, the functor from the five-vertex interval of word $+-+-$ to the three-vertex interval $0\to1\leftarrow2$ with successive values
+\[
+  (0,1,0,1,2)
+\]
+fixes both endpoints. The first three transition arrows all map to $0\to1$, and the last maps to $2\to1$, with the directions required by the source word. Its vertex values nevertheless decrease between the second and third positions. This shows directly why the additional restriction on page~31 is a substantive choice. It excludes folds of a path parameter while retaining subdivisions and collapses.
+
+For this final choice the horizontal embedding into $\{0,1\}\backslash\Cat$ on manuscript page~31 ceases to be full. It was full at the endpoint-preserving stage. The statements on the two sides of the change of definition are compatible once the stages are distinguished.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p31:C'est cette hypothèse qui permet}{A morphism is a list of increments}
+Grothendieck's second restriction makes a change of parameter computable from its successive advances. Write
+\[
+ \tau=\varepsilon_1\cdots\varepsilon_n,\qquad
+ \tau'=\delta_1\cdots\delta_m,
+ \qquad\varepsilon_i,\delta_j\in\{+,-\}.
+\]
+A morphism of the final category $\mathcal T$ is a nondecreasing function
+$f:[0,n]\to[0,m]$ with $f(0)=0$, $f(n)=m$, subject to one local condition:
+\[
+ \delta_{f(i-1)+1}=\cdots=\delta_{f(i)}=\varepsilon_i
+ \quad\text{whenever }f(i)>f(i-1).                 \tag{B1}
+\]
+When $f(i)=f(i-1)$ the condition is empty. To prove the criterion, the $i$th generating arrow must map either to an identity or to the unique composite crossing the consecutive target edges between these two values. That composite exists with the required direction precisely when all these target edges have sign $\varepsilon_i$. Conversely, assign these arrows to the generators. Since the interval category is freely generated by its oriented line graph, this assignment extends to a unique functor. Thus (B1) is both necessary and sufficient.
+
+Set $a_i=f(i)-f(i-1)$. Then $a_i\geq0$, $\sum a_i=m$, and (B1) reads
+\[
+ \tau'=\varepsilon_1^{a_1}\varepsilon_2^{a_2}\cdots
+          \varepsilon_n^{a_n}.                    \tag{B2}
+\]
+An exponent zero deletes the corresponding source edge; a positive exponent replaces it by a string of edges of the same sign. This is an exact description of the allowed changes of parameter. The values of the functor are the partial sums
+$f(k)=a_1+\cdots+a_k$. For the empty source word, the only possibility is the empty target word. For an empty target, all increments vanish and the unique functor is the collapse to a point.
+
+The formula explains why the target's turning vertices cannot be jumped over. Every nonempty block in (B2) has constant sign, so a change of sign in $\tau'$ must occur at the boundary between two such blocks, hence at a value of $f$. More strongly, between source critical vertices the image lies in a single target run; consequently each target critical vertex is the image of a source critical vertex. The reverse inclusion is false: for $\tau=+-+$ and $\tau'=++$, the map with values $(0,1,1,2)$ sends both interior critical source vertices to the noncritical target vertex $1$. This is the example printed on manuscript page~35, now expressed in coordinates.
+
+The usefulness of monotonicity is already visible. Consecutive image blocks meet at one endpoint and have disjoint interiors. Numerical lengths may therefore be added without multiplicity. Without monotonicity the same target edge can be traversed several times, and the length identities used in the following corollaries need not hold.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p34:est l'image d'un sommet critique}{What a critical run controls}
+The purpose of Proposition~7 is to reduce arbitrary interval functors to maps between ordinary finite chains. A critical run is a maximal consecutive block of edges with one sign. Any two objects in such a run are categorically comparable, so their images under a functor remain comparable. In an interval category, two different vertices are comparable exactly when every edge between them has the same sign. Taking the first and last vertices of a set of at least two pairwise comparable vertices shows that the whole set lies in one critical run, and this run is unique. This proves the footnote's lemma and Proposition~7. A nonconstant map from one run is weakly increasing or decreasing in progression coordinates according as its source and target run signs agree or differ. If the whole functor preserves progression, only the first alternative remains.
+
+The qualification ``nonconstant'' matters. A constant map with value an internal turning vertex lies in exactly two critical runs. A constant map with value inside a run lies in exactly one, even when that value is not an endpoint of the entire interval. For instance the middle vertex of $0\to1\to2$ belongs to its single critical run. Thus the parenthesis on manuscript page~33 is too broad: ``not an endpoint'' should be replaced by ``an internal critical vertex''. The point interval has no nonempty critical run and must be treated separately. These are exceptions to that parenthetical count, not to the stated proposition, which assumes nonconstancy on the run.
+
+Next consider the successive images $t_i$ of the critical source vertices. Consecutive values are connected by a composite arrow, possibly an identity. The full subcategory on their distinct values is consequently connected and is an interval category. Its objects need not form a consecutive set of integers in the target. Already the map $[1]\to[2]$ selecting $0$ and $2$ has image $\{0,2\}$. The assertion on manuscript page~34 identifying this full image with $[t_0,t_r]$ therefore has to be read as a statement about its convex hull, or replaced by the assertion that its endpoints are $t_0,t_r$. Neither correction changes the claim about target critical vertices. To cross an internal turning vertex, a walk made of constant-sign segments must stop at that vertex: a single composable segment cannot cross it. This gives the claimed intermediate-value statement even when the map is not monotone.
+
+For a monotone endpoint-preserving map, fix a target critical run $J'$. The nonconstant source runs mapping into $J'$ traverse it in order; their image segments cover it, meet only at endpoints, and have positive integral lengths. Hence
+\[
+ \operatorname{length}(J')
+ =\sum_{K:\,f|_K\text{ nonconstant},\ f(K)\subseteq J'}
+       \bigl(f(\max K)-f(\min K)\bigr).           \tag{B3}
+\]
+This is the length formula in Corollary~2. The parenthesis identifying the intrinsic critical runs of $f^{-1}(J')$ with whole source critical runs contained there is slightly inaccurate: a boundary run may be truncated to a constant segment. Such extra runs contribute zero. For example, for $\tau=+++---$, $\tau'=+-$, and vertex values $(0,1,1,1,1,2,2)$, the inverse image of the negative target run is $[1,6]$; its positive run $[1,3]$ is only part of the original positive run $[0,3]$. Formula (B3) remains valid, and summing over the intrinsic runs of the inverse image gives the same value because the extra boundary term vanishes. It immediately gives
+$\#\{K\}\leq\operatorname{length}(J')$, with equality exactly when every summand is one. The arrow printed in place of this inequality in Corollary~3 is a typographical slip. If the target is reduced, every $J'$ has length one; exactly one nonconstant source run maps to it, and within that run exactly one source transition crosses the target edge. Corollaries~4 and~5 follow with no additional assumption.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p40:on a des bijections canoniques}{A reduced target selects a subsequence}
+Proposition~8 extracts the most economical part of the preceding argument. Let the target word $\delta_1\cdots\delta_m$ be reduced, so successive signs differ. By (B1), an increment $a_i$ cannot exceed one: two target edges in the same image block would have opposite signs. The nonzero increments therefore occur at indices
+\[
+ i_1<\cdots<i_m,\qquad \varepsilon_{i_j}=\delta_j.
+\]
+Conversely, any such subsequence defines
+\[
+ f(k)=\#\{j:i_j\leq k\},\qquad 0\leq k\leq n.
+\]
+Its successive increments are zero or one, the nonzero increment has the required sign, and its endpoints are $0,m$. This proves the bijection of Proposition~8, including the empty target, where the selected subsequence is empty and $f$ is constant.
+
+For example take $\tau=++--++$ and $\tau'=+-+$. A map is specified by one index from each of the three sets
+$\{1,2\}$, $\{3,4\}$, $\{5,6\}$. There are exactly eight maps. The selection $(2,3,6)$ gives the successive vertex values
+\[
+ (0,0,1,2,2,2,3).
+\]
+The source edges numbered $1,4,5$ collapse; edges $2,3,6$ supply the three target transitions. The choices are independent because their signs and their order already agree with the target. If the target is only $+$, any of the four positive source edges may be selected; if it is $-$, either of the two negative edges may be selected. This is the concrete meaning of the representability formulas
+\[
+ \operatorname{Tr}^{\pm}(\tau)
+ \cong\Hom_{\mathcal T}(\tau,\Delta^{\pm}).
+\]
+For a longer reduced target, such independent counting is not always possible, since the selected indices must remain in increasing order. For instance a target $-+-+$ admits no map from $++--++$: after selecting its first negative sign and the following positive sign, there is no later negative sign available.
+
+It is the reduced \emph{target} that forces every live source edge to cross just one target edge. A reduced source does not do so. The map $+\to++$ with vertex values $(0,2)$ is legitimate, and its unique source transition maps to a composite of length two. This distinction is needed when the manuscript subsequently extends $\operatorname{Tr}(f)^*$ from reduced to arbitrary targets.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p42}{Which source edge crosses a target edge}
+Grothendieck's contravariance becomes natural once we follow a target edge back to the unique source step that crosses it. For $f:\tau\to\tau'$ put
+\[
+ h_f(j)=\min\{i\in[1,n]:j\leq f(i)\},\qquad 1\leq j\leq m.
+                                                               \tag{B4}
+\]
+Endpoint preservation guarantees existence, and minimality gives
+$f(h_f(j)-1)<j\leq f(h_f(j))$. Thus the target edge numbered $j$ lies in exactly one source image block. Equation (B1) implies that its sign equals the sign of the source edge numbered $h_f(j)$. This is $\operatorname{Tr}(f)^*$.
+
+The equality $[i-1,i]=[t_{j-1},t_j]$ printed at the beginning of manuscript page~42 must consequently be an inclusion. A source edge may cross a target block of length greater than one. The next parenthesis also has to identify that block as $[t_{j-1},t_j]$, rather than $[j-1,j]$. Both slips are visible in the PDF. The corollary itself correctly says ``contienne'' and is unaffected.
+
+For a calculation exhibiting all the possibilities, let $\tau=++-+$, choose increments $(2,0,0,3)$, and obtain $\tau'=+++++$. The vertex values are $(0,2,2,2,5)$, and
+\[
+ h_f=(1,1,4,4,4):[1,5]\longrightarrow[1,4].
+\]
+Edges $2$ and $3$ of the source collapse; edges $1$ and $4$ respectively cross two and three target edges. Now let $g:\tau'\to++$ have vertex values $(0,0,1,1,2,2)$. Then $h_g=(2,4)$, the composite $gf$ has values $(0,1,1,1,2)$, and
+\[
+ h_{gf}=(1,4)=h_fh_g.
+\]
+The direction reversal in this equation is precisely the contravariance claimed in the text.
+
+The same equality has a short general proof. For any $i,j$, formula (B4) gives
+$h_f(j)\leq i$ if and only if $j\leq f(i)$. Applying this twice yields
+\[
+ h_fh_g(k)\leq i
+ \ \Longleftrightarrow\ h_g(k)\leq f(i)
+ \ \Longleftrightarrow\ k\leq gf(i)
+ \ \Longleftrightarrow\ h_{gf}(k)\leq i.
+\]
+Finite linear orders distinguish their elements by these lower cuts, so the two functions agree. This proves identity and composition compatibility and hence the naturality of the representability isomorphisms. The source and target of a transition \emph{interval} in this discussion are its left and right endpoints in the progression order; for a negative edge these are the reverse of its categorical arrow endpoints. The numerical argument uses the former convention.
+\end{dcomment}
+
+\begin{dcomment}{later}{p43:On va utiliser ces sorites pour donner}{The signed ordinal behind an interval}
+Grothendieck's transition-edge functor identifies his final category of types with a familiar indexing category in homotopy theory. Let $\Pi$ have as objects finite linearly ordered sets whose elements are labelled $+$ or $-$, including the empty set, and as morphisms weakly increasing label-preserving maps. On a skeleton its objects are sign words. This is exactly the category defined by \citet[\S4.1]{DwyerKan1980Calculating}. The construction above gives an isomorphism
+\[
+                \mathcal T^{\mathrm{op}}\cong\Pi.              \tag{B5}
+\]
+It is useful to prove that no information is lost in passing from vertices to transitions.
+
+Given a map of signed orders $h:[1,m]\to[1,n]$, define
+\[
+ f_h(i)=\#\{j\in[1,m]:h(j)\leq i\},\qquad 0\leq i\leq n.
+                                                               \tag{B6}
+\]
+These values are nondecreasing, with endpoints $0$ and $m$. The target edges between $f_h(i-1)$ and $f_h(i)$ are exactly the members of $h^{-1}(i)$, so their signs all equal $\varepsilon_i$. Criterion (B1) therefore gives a morphism $f_h$ of interval types. Equations (B4) and (B6) are inverse: the relation $h_f(j)\leq i\Longleftrightarrow j\leq f(i)$ proves one direction, and the fact that every lower fibre of a monotone $h$ is an initial segment proves the other. When $m=0$, formula (B6) is the constant zero function. When $n=0<m$, neither side has a morphism. Composition was checked immediately above, so this proves (B5), including the unit object.
+
+On the one-sign subcategory this is the usual duality between finite bounded linear orders with endpoint-preserving maps and finite ordinals with arbitrary monotone maps. An explicit account is given by \citet[\S2.7]{MakkaiZawadowski2001}; the inclusion of the empty ordinal and the one-point interval is also spelled out by \citet{Joyal2008}. The signs simply impose a colour-preservation condition. Dwyer and Kan use $\Pi$ to index nerves of fixed-shape zigzag categories; their convention in \S5.1 reads words in the reverse spatial order, which must be accounted for when matching individual words with Grothendieck's. The coincidence of indexing categories is exact, while the comparison of path categories also requires their endpoint and weak-equivalence restrictions.
+
+There is a useful ordinary categorical consequence. Every $f:\tau\to\tau'$ factors canonically as
+\[
+ \tau\xrightarrow{q}\sigma\xrightarrow{e}\tau',
+\]
+where $q$ collapses precisely the zero increments and $e$ maps the surviving edge of sign $\varepsilon_i$ across its block of $a_i>0$ target edges. The vertex map of $q$ is surjective; that of $e$ is injective. The image of $e$ contains every critical target vertex, hence its full subcategory is again an interval and $e$ is fully faithful. The intermediate type and the factorization are uniquely determined by $f$. In signed orders this is simply the ordinary surjection--injection factorization, with direction reversed. These factors are an epimorphism and a monomorphism in $\mathcal T$, respectively. Indeed $h_q$ is injective and therefore monic among signed orders, while $h_e$ is surjective and therefore epic; reversing arrows proves the assertion. The claims are categorical, but their proofs need no lifting property: cancellation follows from injectivity or surjectivity of the underlying functions. Notice that $q$ need not be full: collapsing the middle edge of $+-+$ gives $++$, which has a composite from its first vertex to its last, although the original interval has no such arrow.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p46}{The two normal forms for a type map}
+Grothendieck describes the same morphism first from its source edges and then from its target vertices. The first description is formula (B2): choose an arbitrary list of nonnegative weights $(a_1,\ldots,a_n)$. It determines both the target word and the unique functor with these increments. There is no relation among the weights. Consequently the objects of $\tau\backslash\mathcal T$ are exactly $\mathbf N^n$, as claimed on manuscript page~44.
+
+The description of the constant pieces on the next page needs one correction. They are the components of the graph whose edges are the \emph{collapsed} transition edges, with all source vertices retained. They are not the components, in the integer adjacency relation, of the union of the endpoints of those edges. To see the distinction, take the source $+++$ and the weights $(0,1,0)$. The vertex values are $(0,0,1,1)$. The collapsed edges have endpoints $\{0,1\}$ and $\{2,3\}$; their union is the consecutive set $[0,3]$, on which $f$ is not constant. The collapsed-edge graph, however, has the two required components. Formula $f(k)=\sum_{i\leq k}a_i$ avoids the ambiguity altogether.
+
+For the target description take
+\[
+ E'=\operatorname{im}(f)=\{0=t_0<t_1<\cdots<t_N=m\}.
+\]
+It contains the intrinsic critical vertices of the target. Each fibre $f^{-1}(t_i)$ is a nonempty consecutive source interval; let its sign word be $\tau_i$ and its length be $\lambda_i$. Between two successive fibres there is exactly one source transition, of the same sign $\varepsilon_i$ as the target block $[t_{i-1},t_i]$. Put $l_i=t_i-t_{i-1}>0$. We recover
+\[
+ \begin{aligned}
+ \tau&=\tau_0\varepsilon_1\tau_1\varepsilon_2\cdots
+              \varepsilon_N\tau_N,\\
+ \tau'&=\varepsilon_1^{l_1}\cdots\varepsilon_N^{l_N}.
+ \end{aligned}                                                   \tag{B7}
+\]
+Conversely, a subset $E'$ containing all target critical vertices and arbitrary words $\tau_i$ produces these two words and a unique functor: collapse the entire fibre word $\tau_i$ to $t_i$, and send the intervening single edge across the block of length $l_i$. That block has one sign because no critical vertex lies in its interior. This proves both existence and uniqueness in the target-based normal form.
+
+For $m>0$, the image $E'$ is indeed the set of endpoints of nondegenerate image arrows, as the manuscript says. The lemma requested in footnote~13 is slightly more general: for any nonconstant functor between interval categories, every vertex of its image is an endpoint of the image of a noncollapsed source transition, without monotonicity. To prove it, start at any source vertex and move along the underlying source line until meeting the nearest noncollapsed edge. All intervening edges collapse, so their incident vertices have the same image, which is an endpoint of this first noncollapsed edge. Such an edge exists because the functor is nonconstant and the source line is connected. The reverse inclusion is immediate. Monotonicity is needed later to make the fibres consecutive; it is unnecessary for this equality of image sets. For $m=0$ there are no such arrows, but the image is still $\{0\}$. Using $E'=\operatorname{im}(f)$ extends the definition uniformly; the $N=0$ convention on manuscript page~47 already supplies the intended case, in which $\tau_0$ is arbitrary and $f:\tau_0\to1$ is the unique collapse.
+
+The printed plateau values on edition page~31 must be cumulative sums. With
+\[
+ b_i=i+\sum_{j<i}\lambda_j,\qquad
+ L_i=\sum_{j=1}^{i}l_j,
+\]
+the correct complete formula is
+\[
+ f(k)=L_i\quad\text{for }b_i\leq k\leq b_i+\lambda_i,
+ \qquad 0\leq i\leq N,\quad L_0=0.                \tag{B8}
+\]
+The plateaux partition all source vertices. The arrow between plateau $i-1$ and plateau $i$ crosses exactly $l_i$ target edges. Thus the third printed value $l_2$ should be $l_1+l_2$, and the displayed general plateau with index $i+1$ must have value $l_1+\cdots+l_{i+1}$. These are errors in the edition, not in the transcription.
+
+For the example $(2,0,0,3)$ above, $E'=\{0,2,5\}$, the fibre words are $1,+-,1$, and the two connecting signs are both $+$. Formula (B7) gives $\tau=+\,(+-)\,+=++-+$ and $\tau'=+^2+^3$. Formula (B8) gives the plateaux $\{0\}$, $\{1,2,3\}$, $\{4\}$ with values $0,2,5$. The source-weight and target-fibre descriptions therefore recover one another literally.
+\end{dcomment}
+
+\begin{dcomment}{development}{p47}{The whole category over a fixed source}
+Grothendieck has described the objects of the two slice categories and postpones their morphisms. The signed-order description makes one of these categories particularly simple. We record the resulting calculation, since it turns the source-weight parametrization into an actual categorical normal form. The signed-order category is already present in \citet[\S4.1]{DwyerKan1980Calculating}; the uncoloured interval duality is discussed by \citet[\S2.7]{MakkaiZawadowski2001}. We did not find the following source-by-source product formula stated in those passages or in the material from SGA~1 reviewed here. It is an elementary consequence of their framework, and no claim of priority is intended.
+
+\textbf{Product description of a coslice.}\ours\par
+Let $\tau$ have $n$ transitions, and let $\mathcal O$ be the category of finite linearly ordered sets, including the empty set, with all monotone maps. There is a canonical isomorphism, after choosing the standard ordinals,
+\[
+                \tau\backslash\mathcal T
+                 \cong(\mathcal O^{\mathrm{op}})^n.             \tag{B9}
+\]
+It sends the object with weights $(a_1,\ldots,a_n)$ to the tuple of ordinals of cardinalities $a_i$.
+
+To prove it, let $f_a:\tau\to\tau_a$ and $f_b:\tau\to\tau_b$ be two objects. A morphism between them is a map $g:\tau_a\to\tau_b$ with $gf_a=f_b$. Under (B5) this is a monotone sign-preserving map
+\[
+ h_g:\operatorname{Tr}(\tau_b)\longrightarrow
+             \operatorname{Tr}(\tau_a),\qquad
+ h_{f_a}h_g=h_{f_b}.                              \tag{B10}
+\]
+The fibre of $h_{f_a}$ over the source transition $i$ is the consecutive target block of cardinality $a_i$; the corresponding fibre for $f_b$ has cardinality $b_i$. Equation (B10) says precisely that $h_g$ maps the $i$th $b$-block into the $i$th $a$-block. It therefore restricts to an arbitrary monotone function $[1,b_i]\to[1,a_i]$. There is no further sign constraint within such a block because both blocks have the single sign $\varepsilon_i$.
+
+Conversely, concatenate any such family of block maps. Their images occur in increasing block order, so their concatenation is monotone; it preserves signs and satisfies (B10). The two constructions are inverse, and composition restricts on each block to ordinary composition. This proves the isomorphism of categories. Empty blocks cause no exception: a nonempty $b_i$-block cannot map to an empty $a_i$-block; an empty $b_i$-block has its unique map to any $a_i$-block. If $n=0$, both sides of (B9) are the terminal category.
+
+The formula gives explicit hom-sets, not merely their nonemptiness. For $a>0$ the number of monotone functions from a $b$-element ordinal to an $a$-element ordinal is $\binom{a+b-1}{b}$: such a function is determined by the nonnegative cardinalities of its $a$ fibres, summing to $b$. For $a=b=0$ the number is one, and for $a=0<b$ it is zero. Multiplying these quantities over the source transitions computes every hom-set in the coslice. For example weights $a=(2,0,3)$ and $b=(1,0,2)$ give
+\[
+      2\cdot1\cdot\binom{4}{2}=12
+\]
+morphisms over the fixed source, regardless of its three signs. There is no morphism to weights $(1,1,2)$, since the middle source transition, already collapsed by $f_a$, cannot reappear after a further change of parameter. The terminal object is the zero-weight tuple, the collapse $\tau\to1$; the initial object is the unit-weight tuple, the identity of $\tau$.
+
+There is also a short general counting procedure for fixed source and target types. Let $D(i,j)$ count monotone sign-preserving functions from the first $j$ target transitions to the first $i$ source transitions. Set $D(i,0)=1$, $D(0,j)=0$ for $j>0$. Splitting according to whether the last target edge maps to $i$ gives
+\[
+ D(i,j)=D(i-1,j)+
+ \begin{cases}D(i,j-1),&\varepsilon_i=\delta_j,\\0,&\varepsilon_i\ne\delta_j.
+ \end{cases}                                                     \tag{B11}
+\]
+In the second case of the split, delete the last target element; the remaining map may still use the value $i$, which explains the index $D(i,j-1)$. Conversely append the value $i$ to reconstruct it. Thus $\#\Hom_{\mathcal T}(\tau,\tau')=D(n,m)$. This gives three maps from $+-+$ to $++$, with vertex values $(0,2,2,2)$, $(0,1,1,2)$, and $(0,0,0,2)$. The middle one is the critical-vertex example of the manuscript. The computation extends the subsequence count of Proposition~8 to all targets without changing the underlying categorical argument.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p48}{Gluing paths includes gluing their transformations}
+Grothendieck now asks the interval calculus to support the operation for which it was designed: placing one path after another. The common vertex is part of the data. Gluing there gives an equality of objects, and the corresponding construction on diagrams requires equality of the two components of a natural transformation at that vertex. This explains why the natural home of the formula is a pullback of categories, not merely a bijection between sets of paths.
+
+Write $I=I_\tau$, $J=I_{\tau'}$, and let their lengths be $n$ and $m$. Their concatenation has vertices $0,\ldots,n+m$, with the transitions of $I$ followed by those of $J$. To give a functor from this category to $X$ is to assign an object to every vertex and an arrow of the prescribed direction to every transition. The absence of relations other than composition implies that this assignment extends uniquely. Equivalently, one gives functors $c:I\to X$ and $c':J\to X$ satisfying $c(n)=c'(0)$. This proves the asserted pushout in $\Cat$.
+
+The same argument verifies the enriched assertion that the text uses. Suppose $C,D:I_{\tau\tau'}\to X$ correspond to pairs $(c,c')$ and $(d,d')$. A transformation $C\Rightarrow D$ restricts to transformations $\alpha:c\Rightarrow d$ and $\alpha':c'\Rightarrow d'$ with $\alpha_n=\alpha'_0$. Conversely, these transformations prescribe all components of a unique transformation $C\Rightarrow D$: naturality for transitions holds by hypothesis, and naturality for their composites follows by pasting. Thus restriction gives an isomorphism of categories
+\[
+ [I_{\tau\tau'},X]\ \cong\ [I_\tau,X]\times_X[I_{\tau'},X],
+\]
+where the maps to $X$ are evaluation at the last and first vertices. No invertibility of the matching component is required. Replacing this strict pullback by an isomorphism-comma category would describe a different gluing problem, in which the two vertex objects are connected by a chosen isomorphism.
+
+The fully faithful inclusions in the pushout can also be seen directly. An arrow of the concatenated interval whose endpoints belong to one factor is represented by a directed chain between those endpoints. Such a chain cannot leave that factor and return, because the underlying unoriented graph is a line. Its arrow set is therefore unchanged. This remains true when one factor has length zero: gluing the one-vertex interval simply gives the other factor.
+
+The notation for composition needs only one convention. If $c$ runs from $x$ to $y$ and $c'$ from $y$ to $z$, the type word is $\tau\tau'$, while the composite path is written $c'\circ c$. The word records the order of traversal. The categorical composition symbol records which map acts first. Keeping these two usages separate is what permits the subsequent substitution formulas to be read without reversing the blocks.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p50:et pas seulement `à isomorphisme près'.}{The endpoint condition is what makes concatenation functorial}
+The successive restrictions on interval maps now have a concrete payoff. If $f:I_\tau\to I_\upsilon$ and $g:I_{\tau'}\to I_{\upsilon'}$ preserve endpoints, their values at the glued vertex agree in $I_{\upsilon\upsilon'}$. The pushout therefore supplies $f*g$. With lengths $n=|\tau|$, $N=|\upsilon|$, the vertex function is
+\[
+ (f*g)(i)=
+ \begin{cases}
+ f(i),&0\leq i\leq n,\\
+ N+g(i-n),&n\leq i\leq n+|\tau'|.
+ \end{cases}
+\]
+The two values at $i=n$ are both $N$. This formula is nondecreasing if $f$ and $g$ are, and its restriction to every transition is already a functor. It proves both functoriality and the interchange equation in the text. Applying the formula to three consecutive blocks proves strict associativity; inserting a block of length zero proves the two strict unit laws. The absence of nonidentity isomorphisms in $\uTy$ is consistent with this conclusion, but the displayed construction supplies the actual equality on morphisms.
+
+The parenthetical assertion about $\underline{\mathrm{Typ}}$ needs a correction. On manuscript p.~30 that category was defined using \emph{all} functors between the standard intervals. Concatenation does not extend to those maps by the asserted pushout construction. For example, take two maps from the one-vertex interval to $I_{\Delta_+}$, both selecting vertex $0$. The source concatenation is still the one-vertex interval. In the target concatenation $I_{\Delta_+\Delta_+}$, the first selected vertex is $0$ and the second is $1$. No map out of the source can restrict to both choices. The edition really contains the parenthesis; it is not a transcription error. Replacing $\underline{\mathrm{Typ}}$ there by the category of endpoint-preserving interval functors repairs it. Nondecreasingness is not needed for this particular gluing argument, although it is essential for the normal forms that follow.
+
+For any category $A$, the resulting multiplication on $\Hom_{\Cat}(A,\uTy)$ is pointwise concatenation of functors, and precomposition preserves it. In particular, putting $A=[r]$ gives a monoid structure on $N_r\uTy$ compatible with every face and degeneracy map. Grothendieck's ``semi-simplicial'' object here includes degeneracies, so it is a simplicial monoid in current terminology.
+
+The forthcoming freeness assertion concerns these particular indexing categories $[r]$. It does not assert that every $\Hom_{\Cat}(A,\uTy)$ is a free monoid. For $A$ a discrete category on two objects one obtains $\mathrm{Ty}\times\mathrm{Ty}$; the elements $(\Delta_+,1)$ and $(1,\Delta_+)$ commute and are not positive powers of a common element. Hence this monoid is not free. The composable-chain shape of $[r]$ is doing real work.
+\end{dcomment}
+
+\begin{dcomment}{later}{p51:Quant aux homomorphismes source et but}{Two independent counital comonoids}
+Grothendieck's generators isolate two operations on a transition: duplicating it into a directed chain and deleting it. Their algebraic meaning is the standard universal property of the simplicial category. Mac Lane proves that the category of finite ordinals, including the empty ordinal, with ordinal sum is the free strict monoidal category containing a monoid; its opposite contains the universal counital comonoid \citep[Chapter VII, \S5, Proposition~1, pp.~175--176; \S6, p.~181]{MacLane1998}. The two signs in the present chapter give two independent copies of this structure. This is a familiar universal construction, rather than a separate homotopical hypothesis.
+
+Here is the precise identification in the notation of these pages. In $\uTy$, put
+\[
+ \delta_\varepsilon=\mathfrak f_{\varepsilon,2}:
+ \Delta_\varepsilon\longrightarrow\Delta_\varepsilon^2,
+ \qquad
+ q_\varepsilon=\mathfrak f_{\varepsilon,0}:
+ \Delta_\varepsilon\longrightarrow1.
+\]
+They satisfy
+\[
+ (\delta_\varepsilon*\mathrm{id})\delta_\varepsilon
+  =(\mathrm{id}*\delta_\varepsilon)\delta_\varepsilon,
+ \qquad
+ (q_\varepsilon*\mathrm{id})\delta_\varepsilon
+  =\mathrm{id}
+  =(\mathrm{id}*q_\varepsilon)\delta_\varepsilon.
+\]
+Indeed, both sides of the first equation are the unique endpoint-preserving map from a single transition to the three-transition interval of the same sign; the two other equations are the corresponding maps to a single transition. No relation interchanges $+$ and $-$, and there is no symmetry that interchanges consecutive factors.
+
+For completeness, the universal property can be proved directly from the weight description. Let $\mathcal C$ be a strict monoidal category, with tensor product $\otimes$ and unit $\mathbf1$, and choose counital comonoids $A_+$ and $A_-$ in it. Write
+\[
+ \delta_A^{(0)}=q_A,\qquad
+ \delta_A^{(1)}=\mathrm{id}_A,\qquad
+ \delta_A^{(k)}:A\longrightarrow A^{\otimes k}
+\]
+for iterated comultiplication. Coassociativity makes the choice of parenthesization immaterial. More precisely, repeated use of the coassociativity equation moves one binary branching past the adjacent branching, so induction on $k$ identifies every binary parenthesization with the right-associated one. Counitality removes a factor with zero outputs. Consequently, for all $l$ and all nonnegative $k_1,\ldots,k_l$,
+\[
+ (\delta_A^{(k_1)}\otimes\cdots\otimes\delta_A^{(k_l)})
+ \delta_A^{(l)}=\delta_A^{(k_1+\cdots+k_l)}.
+\]
+When $l=0$, both sides are $q_A$; the general case follows by splitting the list into its first entry and its remaining entries, applying the induction hypothesis, and using the two counit equations for empty parts. This is the comonoid form of the general associative law.
+
+Send the object word $\Delta_{\varepsilon_1}\cdots\Delta_{\varepsilon_n}$ to $A_{\varepsilon_1}\otimes\cdots\otimes A_{\varepsilon_n}$. Send a morphism with weights $(l_1,\ldots,l_n)$ to
+\[
+ \delta_{A_{\varepsilon_1}}^{(l_1)}\otimes\cdots\otimes
+ \delta_{A_{\varepsilon_n}}^{(l_n)}.
+\]
+The target is the tensor word prescribed by those weights. The preceding identity proves preservation of composition, including zero weights, and concatenation of lists proves strict monoidality. Conversely, any strict monoidal functor carrying the two generating comonoids to $A_+$ and $A_-$ must have these values: every object is a word and every morphism is the tensor product of its one-transition restrictions. This proves existence and uniqueness.
+
+Thus $\uTy$ is the free strict monoidal category on two specified counital comonoids. The distinction between tensor generation and categorical composition matters. The infinite family $\mathfrak f_{\varepsilon,l}$ freely generates the \emph{arrow monoid under concatenation}; only the four arrows $\delta_+,\delta_-,q_+,q_-$ are needed under tensor product \emph{and composition}, but they obey the comonoid equations. Calling the category itself a free category on the infinite family would discard these equations and would be incorrect.
+
+The exponent in $\Delta_\varepsilon^l$ therefore denotes tensor power. The edition's remark excluding Cartesian powers for $l\geq2$ is also correct. Under the signed-ordinal duality established above, a binary product would give a coproduct of two singleton ordinals of the same sign. The two universal inclusions would pick two points in a linear order. Mapping them respectively to $(0,1)$ and to $(1,0)$ in the two-element ordinal is impossible: the first prescription forces their order one way, the second forces the reverse. Higher powers fail by the same argument, fixing the remaining prescriptions. The empty tensor word is terminal in $\uTy$, so the zeroth Cartesian power does exist.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p53:On peut formuler la construction précédente}{Composition is substitution of consecutive blocks}
+The description of two composable maps is designed to make composition calculable without recovering all their vertex values. The first map assigns an output block to each source transition; the second assigns smaller output blocks to the transitions of those blocks. Composition replaces each source transition by the concatenation of its descendants. Addition appears because length forgets the internal cuts in that concatenation.
+
+Let $f$ have source word $\varepsilon_1\cdots\varepsilon_n$ and weights $l_1,\ldots,l_n$. Its target consists of $l_i$ copies of $\varepsilon_i$ in the $i$th block. Write the weights of $g$ on that block as
+\[
+ \pi_i=(k_{i,1},\ldots,k_{i,l_i}),
+ \qquad L_i=\sum_{j=1}^{l_i} k_{i,j}.
+\]
+Then $gf$ has weights $L_1,\ldots,L_n$. To verify this on vertices, set $a_i=\sum_{h\leq i}l_h$ and $b_j=\sum_{h\leq j}k_h$, where $(k_h)$ is the full, unblocked list of weights of $g$. The maps have values $f(i)=a_i$, $g(j)=b_j$, and
+\[
+ gf(i)-gf(i-1)=b_{a_i}-b_{a_{i-1}}
+ =\sum_{a_{i-1}<h\leq a_i}k_h=L_i.
+\]
+This also covers $l_i=0$: the interval of summation is empty and its sum is zero. A transition already deleted by $f$ cannot reappear under $g$.
+
+Every pair $(f,g)$ is the concatenation, in the order of the source transitions, of the pairs $\mathfrak f_{\varepsilon_i,l_i,\pi_i}$. The decomposition is unique because the source word fixes the number and signs of its factors, $f$ fixes their first-stage lengths, and the consecutive cuts at $a_i$ recover the restricted lists $\pi_i$ from $g$. A pair whose source has one transition cannot decompose as a product of two nonunit pairs. A pair with empty source is necessarily $1\to1\to1$, since no map from the empty type to a nonempty type preserves both endpoints. These observations prove the freeness of $N_2\uTy$ completely.
+
+With the usual nerve convention, $d_2(f,g)=f$, $d_1(f,g)=gf$, and $d_0(f,g)=g$. Thus on a generator
+\[
+ \begin{aligned}
+ d_2\mathfrak f_{\varepsilon,l,\pi}&=\mathfrak f_{\varepsilon,l},\\
+ d_1\mathfrak f_{\varepsilon,l,\pi}&=\mathfrak f_{\varepsilon,\sum_j\pi(j)},\\
+ d_0\mathfrak f_{\varepsilon,l,\pi}
+ &=\mathfrak f_{\varepsilon,\pi(1)}*\cdots*
+   \mathfrak f_{\varepsilon,\pi(l)}.
+ \end{aligned}
+\]
+The last expression is the empty product when $l=0$. In particular, a face need not carry a free generator to a free generator. The two degeneracies are $s_0(\mathfrak f_{\varepsilon,l})=\mathfrak f_{\varepsilon,1,(l)}$ and $s_1(\mathfrak f_{\varepsilon,l})=\mathfrak f_{\varepsilon,l,(1,\ldots,1)}$. These formulas clarify why insertion of an identity is different from the collapse-to-$1$ operation discussed on manuscript p.~51.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p54}{A composite with both deletion and subdivision}
+Grothendieck's zero weights make it possible to place deletion and subdivision inside one calculation. Consider the source word $\tau=+--+$, and choose the first-stage weights
+\[
+ l=(2,0,1,3).
+\]
+The map $f$ has target $\upsilon=++-+++$ and vertex values
+\[
+ (f(0),f(1),f(2),f(3),f(4))=(0,2,2,3,6).
+\]
+The first negative transition, which is the second transition of the word, has been deleted; the first positive transition has become two transitions, and the last has become three. These choices preserve the direction of each transition on which the map is nonconstant.
+
+On the six transitions of $\upsilon$, let $g$ have weights
+\[
+ k=(0,2,1,1,0,2).
+\]
+Its target is again $\omega=++-+++$, although $g$ is not the identity: its vertex values are
+\[
+ (g(0),\ldots,g(6))=(0,0,2,3,4,4,6).
+\]
+The four blocks belonging to the original source transitions are
+\[
+ \pi_1=(0,2),\qquad \pi_2=(),\qquad
+ \pi_3=(1),\qquad \pi_4=(1,0,2).
+\]
+Their totals are $(2,0,1,3)$, so $gf=f$, even though $g$ changes the internal subdivision of two of the image blocks. On vertices this is checked by evaluating $g$ at $0,2,2,3,6$, which gives $0,2,2,3,6$ again. On the nerve generator decomposition it says
+\[
+ (f,g)=
+ \mathfrak f_{+,2,(0,2)}*
+ \mathfrak f_{-,0,()}*
+ \mathfrak f_{-,1,(1)}*
+ \mathfrak f_{+,3,(1,0,2)}.
+\]
+Applying $d_1$ replaces the four lists by their sums. Applying $d_0$ expands them into six arrow generators; applying $d_2$ forgets the lists and keeps the first-stage lengths. The empty list contributes an indecomposable two-simplex whose last two vertices are both the empty type, while its $d_0$ face is the unit arrow. It must not be omitted from the original four-factor decomposition.
+
+This calculation gives a small check on cancellation statements as well. The equality $gf=f$ does not force $g=\mathrm{id}$: the map $f$ misses target vertices, and postcomposition can move those vertices without changing the composite. Freeness of the concatenation monoid concerns the horizontal list of factors. It supplies no cancellation theorem for arbitrary categorical composition.
+\end{dcomment}
+
+\begin{dcomment}{status}{p56:Heureusement, on n'a plus à prouver}{The localization test and its present form}
+Grothendieck is about to use the category of types for its intended purpose: constructing a category of fractions without losing control of composition. The statement at this point is a programme for the next section, rather than an unresolved existence question. Ordinary localization is already covered by the universal construction of Gabriel and Zisman; the point of a category of zigzags is to retain comparison diagrams before identifying their connected components \citep[I, \S1.1 and Lemma~1.2, pp.~6--7]{GabrielZisman1967}.
+
+There is an exact comparison with the homotopical literature. Dwyer and Kan's indexing category $\Pi$ is the category of finite linearly ordered signed sets and increasing sign-preserving maps \citep[\S4.1]{DwyerKan1980Calculating}. The duality proved in the block at ms.~p.~43 identifies it with $\uTy^{\mathrm{op}}$. Thus the resemblance is an identification of indexing categories, with a specified variance. Their hammock construction additionally requires the backward arrows and all vertical comparison arrows to lie in the chosen subcategory of weak equivalences; this extra relative structure cannot be omitted \citep[\S\S2.1, 5.1]{DwyerKan1980Calculating}.
+
+A recent formulation uses exactly the boundary-preserving zigzag category $\mathrm{Zig}_{\partial}$, which is $\uTy$ after marking the backward arrows. \citet[Definition~1.1 and Remark~1.3]{ArakawaCnossen2026} identify its opposite with $\Pi$. For a relative $\infty$-category $(\mathcal C,W)$ their Theorem~1.9 and Corollary~1.11 give
+\[
+ \operatorname{Map}_{\mathcal C[W^{-1}]}(x,y)
+ \simeq
+ \mathop{\operatorname{colim}}_{\tau\in\uTy^{\mathrm{op}}}
+       \left|\operatorname{Zig}_{\tau}(\mathcal C,W)_{x,y}\right|.
+\]
+Here the colimit is in spaces and $|{-}|$ is groupoid completion. The zigzag category consists of relative diagrams with pointwise $W$-transformations. More precisely, Definitions~1.5 and~1.7 use
+\[
+ \operatorname{Zig}_{\tau}(\mathcal C,W)_{x,y}
+ =\operatorname{Zig}_{\tau}(\mathcal C,W)
+       \mathbin{\times}_{W\times W}\{(x,y)\},
+\]
+where the pullback is taken in $\mathrm{Cat}_{\infty}$, before groupoid completion. The result is proved in that August~2026 preprint, whose status remains a preprint at the date of this commentary. It makes precise the additional homotopical passage beyond Grothendieck's strict category of paths.
+
+It would be incorrect to identify the total category $\uCh(X)$ on these pages directly with a mapping space or with $X[W^{-1}]$. It has paths of every pair of endpoints as objects, permits the ordinary natural transformations specified in \S4, and has not yet imposed any relative condition. To see the distinction without invoking homotopy theory, take the one-arrow category $0\to1$ and the subcategory consisting only of identities. The interval of type $-$ admits the diagram $1\leftarrow0$, viewed as a bare path from $1$ to $0$; localization at identities must not create a morphism from $1$ to $0$. The relative zigzag condition excludes this diagram because its backward arrow is not in $W$. Likewise, replacing all vertical arrows by arbitrary arrows changes the comparison category and has no automatic localization interpretation.
+
+The settled comparison therefore concerns shapes and their refinements. Shorter formulas using roofs or spans require a calculus of fractions and its own hypotheses. No conjecture about such a calculus is asserted on these pages, and the absence of its proof before the present cutoff is not a mathematical gap. The last display of the supplied transcription is itself mid-construction: the following edition page continues the description of the free generators in arbitrary nerve degree.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p56:Mais on a promis de déterminer}{The free generators in every nerve degree}
+Grothendieck is now repeating the two-stage argument through any finite number of stages. A useful way to keep track of it is to give every transition a parent in the preceding word. Its children are the consecutive transitions produced by that parent. The result is a plane forest with levels: the ordering of children records the order along the interval, and every descendant retains the sign of its root. A vertex may have no children, so a branch may end before the last level.
+
+For an $r$-simplex
+\[
+ \tau_0\xrightarrow{f_1}\tau_1\xrightarrow{f_2}\cdots
+ \xrightarrow{f_r}\tau_r,
+\]
+the roots are the transitions of $\tau_0$. The weight list for $f_1$ determines their ordered children; the list for $f_2$ determines the children of those children, and so forth. Conversely, read the vertices at each level from left to right and record their signs. The ordered numbers of children give the successive weight lists and hence recover the simplex. These two constructions are inverse, because a weight list determines consecutive blocks uniquely.
+
+Concatenation is concatenation of root forests. The decomposition of a forest into its individual rooted trees is unique. A forest with no roots has no vertices at any later level and gives the unit simplex; a forest with one root is indecomposable. Hence $N_r\uTy$ is the free monoid on the chains beginning at one signed transition. This proves the all-degree assertion, including $r=0$, where there is just a single root and its sign.
+
+For one root of sign $\varepsilon$, put $l_0=1$. A generator is specified by lengths $l_1,\ldots,l_r$ and lists
+\[
+ \pi_{i-1}:[1,l_{i-1}]\longrightarrow\mathbf N,
+ \qquad
+ \sum_{j=1}^{l_{i-1}}\pi_{i-1}(j)=l_i
+ \quad(1\leq i\leq r).
+\]
+The underbrace on manuscript p.~56 shifts both indices by one; the formula above is the intended one. Extending each list by zero gives functions on $\mathbf N^*$ satisfying
+\[
+ \operatorname{supp}\pi_0\subseteq\{1\},\qquad
+ \operatorname{supp}\pi_i\subseteq
+ [1,\operatorname{long}(\pi_{i-1})]
+ \quad(1\leq i\leq r-1).
+\]
+The lower bound in the boxed formula on manuscript p.~57 must therefore be $1$, not $0$, unless a separate value for $\pi_{-1}$ is introduced. For $r=0$ there are no $\pi_i$ and no support conditions. If some $l_i$ is zero, the next list has empty domain and all subsequent lengths are zero.
+
+The forest interpretation also specifies all simplicial operators. The face $d_0$ removes the roots and makes their children the new ordered roots, so one generator can become a product. For $0<i<r$, $d_i$ removes level $i$ and makes each vertex in level $i+1$ a child of its former grandparent, preserving their order. This is precisely the block-sum rule for composing $f_i$ and $f_{i+1}$. The last face discards the last level. The degeneracy $s_i$ inserts one child under every vertex of level $i$, corresponding to an identity weight list. These rules satisfy the simplicial identities because the forest construction is an isomorphism with the ordinary nerve, whose operators are restriction of functors along the order maps $[q]\to[r]$. This argument identifies the structure maps, rather than assuming that every face preserves a chosen basis.
+
+There is no homotopical obstruction hidden in the underlying space of types: $1$ is terminal, so $N\uTy$ is contractible. Explicitly, for a nondecreasing $t:[r]\to[1]$, keep $\tau_i$ at vertices with $t(i)=0$ and replace it by $1$ where $t(i)=1$. Use the original arrows, the unique arrow into $1$ at the changeover, and identities thereafter. This prescription commutes with every order map and gives a simplicial homotopy from the identity to the constant simplex at $1$. For fixed $t$ it preserves concatenation, since the unique collapse maps do. The rich normal forms describe the operations on paths, not additional homotopy groups of the space of types.
+
+The supplied transcription stops during manuscript p.~57. The immediately following page of the same edition continues the all-degree assertion and then allows an arbitrary set of signs. The cutoff is thus a boundary of this package, not an unresolved question in the manuscript.
+\end{dcomment}
+
+\begin{dcomment}{development}{p57}{Counting the stages of a path refinement}
+Grothendieck's lists retain information that their composite forgets: a transition can be subdivided many times and later disappear. A finite count therefore has to record intermediate lengths as well as the final length. We give that count as a small extension of the normal-form calculation. The combinatorial method is the classical sequence construction for plane trees \citep[\S\S I.2 and I.5]{FlajoletSedgewick2009}. We checked the universal monoid treatment of Mac Lane and the tree-counting treatment just cited, and searched for this multigrading of Grothendieck's type nerve; we could not find this particular formulation in the literature. The assertion below is an application of those elementary methods, with no claim of priority.
+
+\textbf{Proposition (multigraded generator count).}\ours\par
+For a fixed sign, let $a_r(l_1,\ldots,l_r)$ be the number of free generators of $N_r\uTy$ having lengths $l_0=1,l_1,\ldots,l_r$ at their successive stages. Put
+\[
+ c(p,q)=
+ \begin{cases}
+ \binom{p+q-1}{p-1},&p\geq1,\ q\geq0,\\
+ 1,&p=q=0,\\
+ 0,&p=0<q.
+ \end{cases}
+\]
+Then
+\[
+ a_r(l_1,\ldots,l_r)=\prod_{i=1}^r c(l_{i-1},l_i).
+\]
+If $A_0=1$ and
+\[
+ A_r(z_1,\ldots,z_r)=
+ \sum_{l_1,\ldots,l_r\geq0}
+ a_r(l_1,\ldots,l_r)z_1^{l_1}\cdots z_r^{l_r},
+\]
+these formal power series satisfy
+\[
+ A_r(z_1,\ldots,z_r)=
+ \frac{1}{1-z_1A_{r-1}(z_2,\ldots,z_r)}.
+\]
+The series for both signs is $2A_r$. The series for all $r$-simplices, with an additional variable $z_0$ counting the transitions in the initial word, is
+\[
+ B_r(z_0,\ldots,z_r)=\frac{1}{1-2z_0A_r(z_1,\ldots,z_r)}.
+\]
+
+\emph{Proof.} At stage $i$, a list of $l_{i-1}$ nonnegative integers with total $l_i$ is a weak composition of $l_i$. For $l_{i-1}>0$, placing $l_{i-1}-1$ dividers among $l_i$ indistinguishable units gives $c(l_{i-1},l_i)$ choices. An empty list has total zero, which gives the other two cases. Having fixed all lengths, these choices are independent at successive stages: they prescribe exactly the weight lists of the chain. Multiplication proves the coefficient formula.
+
+For the series identity, the root has an ordered list of children. Each child contributes one factor $z_1$ and an arbitrary rooted tree of the remaining $r-1$ levels, counted by $A_{r-1}(z_2,\ldots,z_r)$. The contributions of lists of lengths $0,1,2,\ldots$ form the geometric series in $z_1A_{r-1}$. Its constant term in $z_1$ is zero before taking powers, so the geometric sum is well-defined as a formal power series. Choosing the sign of the root doubles the series. Finally, every simplex is an ordered forest of such signed rooted trees; each root contributes $z_0$, giving the formula for $B_r$. Every coefficient is finite by the first formula and the finite number of distributions of the prescribed level sizes among the prescribed number of roots. This proves all assertions.
+
+For instance,
+\[
+ A_1(z_1)=\frac1{1-z_1},\qquad
+ A_2(z_1,z_2)=\frac{1-z_2}{1-z_1-z_2}.
+\]
+With one fixed sign and stage lengths $(l_1,l_2)=(2,3)$ there are four generators, having second lists $(0,3),(1,2),(2,1),(3,0)$. They all have the same composite $\mathfrak f_{\varepsilon,3}$. By contrast, fixing only final length zero leaves infinitely many generators in degree two: for every $l\geq0$, the chain $\Delta_\varepsilon\to\Delta_\varepsilon^l\to1$ is one. Recording the intermediate stage is therefore necessary, rather than a cosmetic refinement of the count.
+\end{dcomment}

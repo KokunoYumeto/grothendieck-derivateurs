@@ -1,0 +1,115 @@
+\begin{definition}[Known: finite-family Ramsey convention]\label{C:ramsey-definition}
+We say that a small category $A$ has the finite-family Ramsey property if,
+for every finite family $a_0,\ldots,a_k:p\to q$ and every integer $N\geq2$,
+there is an object $r$ such that every map
+$\chi:A(p,r)\to\{1,\ldots,N\}$ admits an arrow $b:q\to r$ with
+$\chi(ba_0)=\cdots=\chi(ba_k)$.
+The usual categorical Ramsey property makes all of $bA(p,q)$
+monochromatic and therefore implies this condition.
+\end{definition}
+
+\begin{theorem}[Proved: a Ramsey sufficient condition for integral exactness]
+\label{thm:ramsey-exact}
+Let $A$ be a small category in which every finite family of objects has a
+common successor. If $A$ has the finite-family Ramsey property, then $A$
+satisfies condition III over $\Z$. If $A$ also satisfies condition I, then
+$\colim_A:\Ab^A\to\Ab$ is exact.
+\end{theorem}
+\begin{proof}
+Fix $a_0,\ldots,a_k:p\to q$. For $k=0$ the identity of $q$ suffices,
+so we assume $k\geq1$. For every object $r$ we define a homomorphism
+of abelian groups
+\[
+D_r:\Z[A(q,r)]\longrightarrow\Z[A(p,r)]^k,
+\qquad D_r(t)=\bigl(t(a_i-a_0)\bigr)_{i=1}^k,
+\]
+and put $E=\sum_r\aug(\ker D_r)\subseteq\Z$.
+We first verify that $E=\Z$ if and only if this family has an integral
+affine equalizer. One direction is immediate. For the other, write
+$1=\sum_{j=1}^m\aug(t_j)$ with $t_j\in\ker D_{r_j}$, absorbing any
+integer multipliers into the $t_j$. Choose arrows $u_j:r_j\to s$ to a
+common successor. Then $t=\sum_j u_jt_j\in\ker D_s$ and $\aug(t)=1$.
+
+Suppose that there is no affine equalizer. We have $E=d\Z$ with either
+$d=0$ or $d\geq2$. Let $\mathbb T=\mathbb R/\mathbb Z$ with its
+translation-invariant circle metric. Choose $c=1/2\pmod\Z$ when $d=0$,
+and $c=1/d\pmod\Z$ when $d\geq2$. Thus $c\ne0$ and $ec=0$ for
+every $e\in E$. For every $r$ the formula
+\[
+\lambda_r(D_rt)=\aug(t)c
+\]
+defines a homomorphism $\lambda_r:\im D_r\to\mathbb T$: any two
+preimages differ by an element of $\ker D_r$, whose augmentation kills
+$c$.
+
+We extend $\lambda_r$ to a homomorphism
+$\widetilde\lambda_r:\Z[A(p,r)]^k\to\mathbb T$.
+Here we use divisibility of the circle group. For completeness, a
+homomorphism from a subgroup $B'$ of an abelian group $B$ to a divisible
+group extends across one additional element $b\in B$: if no positive
+multiple of $b$ lies in $B'$, choose its image arbitrarily; otherwise take
+the least positive $n$ with $nb\in B'$ and choose an image $x$ with
+$nx$ equal to the given image of $nb$. The extension to $B'+\Z b$ is
+then well-defined. Zorn's lemma gives an extension to $B$.
+
+Let $\phi_i^r:A(p,r)\to\mathbb T$ be the function obtained by restricting
+$\widetilde\lambda_r$ to basis elements in its $i$th summand. For every
+$b:q\to r$ we have
+\begin{equation}\label{eq:circle-certificate}
+\sum_{i=1}^k\left(\phi_i^r(ba_i)-\phi_i^r(ba_0)\right)=c.
+\end{equation}
+Put $\eta=\operatorname{dist}_{\mathbb T}(c,0)>0$ and choose
+$\delta>0$ with $k\delta<\eta$. Partition $\mathbb T^k$ into finitely
+many cells such that two points in one cell have distance less than
+$\delta$ in every coordinate; we may arrange that the number $N$ of
+cells is at least two. Choose $r$ from the finite-family Ramsey property
+for this $N$. Color $h:p\to r$ by the cell containing
+$(\phi_1^r(h),\ldots,\phi_k^r(h))$. There is $b:q\to r$ for which
+$ba_0,\ldots,ba_k$ have one color. Every summand on the left of
+\eqref{eq:circle-certificate} has circle distance less than $\delta$
+from zero. Their sum has distance less than $k\delta<\eta$, contradicting
+\eqref{eq:circle-certificate}. Therefore $E=\Z$, proving III.
+The last assertion follows from \citet[Proposition~3.3]{IsbellMitchell1976}.
+\end{proof}
+
+\begin{corollary}[Proved: the Ramsey candidates in route C4 are exact]
+\label{cor:ordered-graphs-exact}
+The categories of nonempty finite linearly ordered simple graphs and of
+nonempty finite linearly ordered triangle-free graphs, with order-preserving
+induced embeddings, are exact over $\Z$ and hence over every commutative
+ring. They are total and are not filtered. More generally, every nonempty
+rigid Ramsey amalgamation class of finite structures with the joint
+embedding property has exact abelian colimits.
+\end{corollary}
+\begin{proof}
+We take a small skeleton in each case. Joint embedding gives common
+successors, and amalgamation is condition I. The ordinary Ramsey property
+for ordered graphs is \citet[Corollary~4.3]{HubickaNesetril2019}; for ordered
+triangle-free graphs it is \citet[Theorem~15]{Hubicka2025}.
+These statements concern all finite colorings and order-preserving induced
+embeddings, exactly the morphisms used here. Because the structures are
+rigid, copies and embeddings have no automorphism ambiguity.
+Theorem~\ref{thm:ramsey-exact} applies.
+
+We verify the amalgamation hypothesis explicitly. For a span of finite
+ordered graphs, take the union over the common induced graph, put no new
+edges between the two new parts, and extend the two agreeing linear orders
+to a linear order of the union. This is an induced order-preserving amalgam.
+Every triangle in this union lies in one of the original graphs, so the
+construction also works in the triangle-free class. Disjoint ordered union
+gives joint embedding. Both categories fail ordinary filteredness: the two
+embeddings of a one-vertex graph into a fixed two-vertex graph remain
+distinct after every injective map. Integral affine equalizers give affine
+equalizers after every change of commutative coefficients. Totality follows
+from the exactness implication in R2. The same argument proves the stated
+general consequence for rigid Ramsey amalgamation classes.
+\end{proof}
+
+\begin{remark}[Unresolved: scope of the Ramsey argument]\label{C:ramsey-scope}
+We have not proved that totality implies the finite-family Ramsey property.
+Thus Theorem~\ref{thm:ramsey-exact} closes the named route C4 candidates,
+but does not settle the main implication for arbitrary total categories.
+We make no priority claim: searches for ``Ramsey exact colimits'',
+``Ramsey affinization'', ``Ramsey Isbell Mitchell'', and related phrases
+did not identify this implication, and Isbell's 1974 full text was not obtained.
+\end{remark}

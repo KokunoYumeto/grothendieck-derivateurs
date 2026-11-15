@@ -1,0 +1,56 @@
+% Les Dérivateurs companion: the commentary blocks set into Grothendieck's text (see FORMAT.md)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{derivateurs_companion}[2026/11/09]
+% Presentation-only adjustments for this bilingual reader.
+\providecommand\IfDocumentMetadataT[1]{}
+\RequirePackage[a4paper,inner=24mm,outer=33mm,top=23mm,bottom=25mm,marginparwidth=25mm,marginparsep=3mm]{geometry}
+\RequirePackage{microtype}
+\setlength{\emergencystretch}{2em}
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage[round]{natbib}
+\RequirePackage{hyperref}
+% The edition's typewriter passages are prose; allow their word spaces to
+% stretch and shrink while retaining the typewriter glyphs.
+\AtBeginDocument{\setmonofont{Latin Modern Mono}[WordSpace={1,1,1},
+ FontAdjustment={\fontdimen3\font=0.15em\relax\fontdimen4\font=0.1em\relax}]\nocite{*}}
+% Give the floating source-page labels an explicit full line box so adjacent
+% edition/manuscript labels cannot overprint one another.
+\newcommand{\dcprintedpage}[1]{\marginpar{\footnotesize\raggedright\strut ed.~#1\par}}
+\newcommand{\dcmsp}[1]{\marginpar{\footnotesize\raggedright\strut [#1]\par}}
+\AtBeginDocument{\let\printedpage\dcprintedpage\let\msp\dcmsp\setlength{\marginparpush}{9pt}}
+\hypersetup{pdftitle={Les Derivateurs, Chapter XIII-a: text, audit and commentary},
+ pdfauthor={Alexander Grothendieck (source); GPT-6 Astra (commentary and audit)},
+ colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+\newcounter{dcblock}
+\AtBeginDocument{\pdfbookmark[0]{Source and commentary}{companion-source}}
+\renewcommand{\bibsection}{\section*{\refname}\pdfbookmark[0]{References}{companion-references}}
+\renewcommand{\bibfont}{\small}
+\definecolor{dcbar}{gray}{0.55}
+\newcommand{\dckind}[1]{%
+  \ifx\relax#1\relax\else
+  \def\dcexposition{exposition}\def\dccontext{context}\def\dclater{later}%
+  \def\dcexamples{examples}\def\dcstatus{status}\def\dcdevelopment{development}%
+  \def\dcarg{#1}%
+  \ifx\dcarg\dcexposition Exposition\fi
+  \ifx\dcarg\dccontext Context\fi
+  \ifx\dcarg\dclater Later developments\fi
+  \ifx\dcarg\dcexamples Examples\fi
+  \ifx\dcarg\dcstatus Present state\fi
+  \ifx\dcarg\dcdevelopment Development (commentators')\fi
+  \fi}
+% \begin{dcomment}{kind}{anchor}{title}: the commentators' text, set off from Grothendieck's by a bar and a smaller face
+\newenvironment{dcomment}[3]{%
+  \par\medskip
+  \stepcounter{dcblock}\pdfbookmark[1]{#3}{commentary-\thedcblock}%
+  \renewcommand{\FrameCommand}{{\color{dcbar}\vrule width 2.5pt}\hspace{8pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \normalfont\small\selectlanguage{english}%
+  \noindent{\scshape Commentary \textperiodcentered{} \dckind{#1}}\hfill{\footnotesize[\dcshortanchor{#2}]}\par
+  \noindent\textbf{#3}\par\smallskip}
+ {\endMakeFramed\medskip}
+% \ours after the title of a result proved or constructed by the commentators (not a claim of priority)
+\newcommand{\ours}{\textsuperscript{\,[ours]}}
+% The full textual anchor is a machine locator, not a running page label.
+\def\dcshortanchor#1{\expandafter\dcanchorpage#1:\dcstop}
+\def\dcanchorpage#1:#2\dcstop{ms.~#1}

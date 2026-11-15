@@ -1,0 +1,106 @@
+# GALOIS: locally constant coefficients and the localizer they define
+
+Package 4 of 7 on Alexander Grothendieck, *Les Dérivateurs* (1990–91). File prefix for your deliverables: `GALOIS`.
+
+## What is to be settled
+
+In Chapter I (ms. 60–126) Grothendieck attaches to a derivator **D** several classes of functors `f: X → Y` between small categories:
+
+- **D**-equivalences: `f*` induces bijections `Hom_{D(Y)}(q*M, q*N) → Hom_{D(X)}(p*M, p*N)` for constant coefficients (ms. 60–66);
+- cohomological and homological **D**-equivalences: invariance of cohomology, respectively homology, with every locally constant coefficient (ms. 106, 113);
+- 1-complete **D**-equivalences: `f*` is fully faithful on the full subcategory `LC_D(Y) ⊂ D(Y)` of locally constant coefficients; 2-complete: `f*` induces an equivalence `LC_D(Y) → LC_D(X)`; `Z` is *complètement* **D**-*asphérique* when `Z → e` is 2-complete (ms. 99–100);
+- and the axioms Der 3 a′, b′, a″, b″, c″ relating them to weak equivalences of nerves (ms. 96–126).
+
+He needs these because his first statements about **D**-fibrations are false for constant-coefficient equivalences: the Klein bottle over the circle and `e → BC_2` with rational coefficients (ms. 87–92; audit rows I-b-B079-03, B079-04, B084-06, B084-07, Ib-C082). The chapter ends with the distinctions made but not organized, and Chapter X (ms. 1–5) then builds the localizer `W_D` from the constant-coefficient notion only. The companion records the later theorem that weak equivalences of nerves are 2-complete for every derivator (Cisinski, *Locally constant functors*, Theorem 1.3 and Corollary 3.8) and gives counterexamples to composition for two of the intermediate notions of fibration (I-b blocks at ms. 118 and 122).
+
+The object that the chapter points to and never names is the class `W_D^lc` of 2-complete **D**-equivalences, together with `W_D^1` (1-complete). This package develops it completely: it is a Galois theory of the indexing category relative to the coefficient theory.
+
+## Leads (unverified; prove or refute each)
+
+- **Lead 1.** `W∞ ⊂ W_D^lc ⊂ W_D^1 ⊂ W_D^{coh} ∩ W_D^{hom} ⊂ W_D`, and `W_D^lc` is a fundamental localizer. For **D** the derivator of a complete and cocomplete ∞-category `𝒟`, `LC_D(X) = Ho Fun(Π∞X, 𝒟)`, and at the ∞-categorical level `W_𝒟^lc` is the class of maps inverted by `X ↦ Fun(X, 𝒟)`, which is a constant-coefficient equivalence class for the coefficient "`𝒟`, one categorical level up".
+- **Lead 2 (values).** For **D** = sets: `W_D = W_0` (bijection on `π0`) and `W_D^lc = W_1` (equivalence of fundamental groupoids). For `(n−1)`-types: `W_D = W_{n−1}`, `W_D^lc = W_n`. For **D** = `HOT`: all classes equal `W∞`. For `D(Z)` and for spectra: `W_D^lc = W∞` (Whitehead: `π1` and integral homology of universal covers). For `D(Q)`: `W_D^lc` = isomorphism on `π0`, `π1` and on rational homology of universal covers, strictly between `W∞` and `W_{D(Q)}`.
+- **Lead 3.** The false statements of I ms. 79–84 become true when **D**-equivalences are replaced by 2-complete (or 1-complete) ones throughout; the examples of ms. 87–92 are exactly maps in `W_D ∖ W_D^lc`.
+- **Lead 4 (tower).** Iterating Lead 1 gives a decreasing sequence `W_D ⊃ W_D^{(1)} = W_D^lc ⊃ W_D^{(2)} ⊃ …` (local systems of **D**-linear categories, of **D**-linear 2-categories, …; compare the "n-gerbes" of the appendix to XII, ms. 18). For sets it is `W_0 ⊃ W_1 ⊃ W_2 ⊃ …` with intersection `W∞`.
+
+## After CATHOT (added 11 November 2026)
+
+Package CATHOT of this series has been answered (GPT-6 Astra, ChatGPT Pro mode); the parts of its answer named below are attached. Its statements are cited by their numbers. Those marked *checked* were followed step by step by the author of this prompt; the others are that answer's own claims and are to be treated like the leads: verify before use.
+
+- **The set-valued case of Lead 2 is done, in a sharper form.** CATHOT C.1–C.4 (*checked*): for a groupoid `G`, `π0 Fun(X, G) → [BX, BG]` is bijective for every small category `X`; a category `K` has this property exactly when it is isomorphic to a groupoid in the category of categories modulo zigzags of natural transformations; these categories form a reflective subcategory with reflector the fundamental groupoid `Π_1`, which inverts exactly the functors inducing bijections on `π_0` and isomorphisms on all `π_1`. This is `W^lc = W_1` for set-valued coefficients, with the reflector identified. Cite it in Parts C and F; do not re-prove it. C.2 and B.11 add the converse: nothing beyond 1-types is representable in that category, so the higher stages of the tower of Lead 4 cannot be obtained by staying with categories modulo natural transformations: they need the coefficients one categorical level up, as Lead 1 says.
+- **Ready examples for the strict inclusions of Part C.** CATHOT B.8 (*checked*): for every `n ≥ 2` there are groups `G_n` (of any prescribed infinite cardinality) with a map `BG_n → S^n` inducing isomorphisms on integral homology. This map is in `W_{D(Z)}` and in `W_{D(k)}` for every ring `k`, and is not in `W_1`, so not in `W_D^lc` for any **D** whose locally constant coefficients see `π_1`. B.6–B.7: acyclic groups `A`, for which `BA → e` is a constant-coefficient equivalence for every `D(k)` and for spectra, and is not 1-complete. Use them in Part C to separate `W_D` from `W_D^1` and `W_D^lc` without recourse to finite groups and characteristic conditions.
+
+### After the second review of CATHOT (added 11 November 2026)
+
+A second, independent reader (a separate Claude agent) has checked the CATHOT answer; its review is attached (`REVIEW.md`). Statements it followed step by step are called *confirmed* below.
+
+- CATHOT C.1–C.4 are *confirmed* by both readers.
+- **A statement to prove, for Part B or Part F: ind-objects of categories modulo natural transformations see exactly `W_1`.** CATHOT E.17 (open there): if `K = (K_i)` is a small filtered diagram of categories and `H_K(X) = colim_i π0 Fun(X, K_i)` sends weak equivalences of nerves to bijections, is `K` isomorphic, as an ind-object modulo natural transformations, to `(Π_1 K_i)`; equivalently, does `H_K` invert every `X → Π_1 X`. The second reader reduces it to a group-theoretic statement and asks that the reduction and the statement both be checked:
+
+  **(KT_μ)** For every connected CW complex `Y` and every cardinal `μ` there are a group `G` and an acyclic map `t: BG → Y` (so `G → π_1 Y` is onto with perfect kernel `P`) such that every homomorphism from `G` to a group of cardinality at most `μ` kills `P`.
+
+  From (KT_μ): with `μ` at least the size of every `K_i`, restriction along `⊔ BG_c → ⊔ Bπ_1(Y_c)` is an isomorphism of functor categories into each `K_i`; it factors through `H'(τ_1 Y) → H'(Y) → H'(⊔ BG_c)`, and the second map is injective because an acyclic map is an epimorphism in the unpointed homotopy category (its codiagonal from the homotopy pushout is acyclic and a `π_1`-isomorphism), so the first is bijective. (KT_μ) should follow from Maunder's proof of the Kan–Thurston theorem with the cone groups chosen acyclic and simple of cardinality above `μ` (CATHOT B.7); the injectivity step of Maunder's induction is unchecked. Prove (KT_μ), or find where it fails; then E.17.
+- Tool used there, to state and prove once: acyclic maps are epimorphisms in `Hot`. It also gives a quick proof that the groups of the previous section separate `W_D` from `W_D^lc`.
+
+### After TOTASPH (added 11 November 2026)
+
+Package TOTASPH of this series (total asphericity; XII §5) has been answered (GPT-6 Astra, ChatGPT Pro mode); the parts named below are attached under `TOTASPH_return/`. Its statements are cited by their numbers. At the time of writing they have been read by the author of this prompt in statement only, not checked: treat them like leads and verify what you use.
+
+- **For Parts B and C.** TOTASPH F.28 (from Cisinski 2006, Proposition 9.2.17): `W_n ⊂ W` iff `Δ/∂Δ^{n+2}` is `W`-aspherical, with no accessibility assumption. This gives a one-object test for `W_D^lc ⊃ W_n` and for the stages of the tower of Lead 4: compute the locally constant coefficients on a category of the type of `S^{n+1}`. D.10: an ordinary final functor is bijective on components and surjective on fundamental groups; D.11: a category is totally `W_1`-aspherical iff its classifying space is simply connected.
+- **A technique for the `D(Z)` case of Lead 2.** C.3–C.4: if every connected category of elements of every set-valued functor on a connected category `E` is integrally acyclic, then `BE` is weakly contractible, because the categories of elements include all coverings. This is the mechanism by which integral coefficients on all locally constant sets recover the homotopy type; use it, or its space-level form, for `W_{D(Z)}^lc = W∞`.
+- Nothing in the leads of this prompt is refuted or settled by TOTASPH.
+
+## Recent results (state: 10 Nov 2026)
+
+Two recent works bear on Parts E to G. Both are by human authors and are attached as PDFs. The author of this prompt read their introductions only: what follows is what those introductions say. Open the papers, and cite a statement only after checking it there.
+
+- **N. Di Vittorio, *Towards 2-derivators for formal ∞-category theory*, Adv. Math. 485 (2026) 110726 (arXiv:2309.05216v2).** Status: refereed, published. It gives axioms for a 2-derivator: the system of homotopy 2-categories of diagrams in an enriched model category or an (∞,2)-category, with values in the Gray-category of 2-categories and shapes that are simplicially enriched categories; the axioms are verified in several models and are stable under shift. What it changes: Part E asks for **D′** as "a derivator of **D**-linear or **D**-enriched categories". Such a **D′** remembers only isomorphism classes of functors between coefficient categories, while `W_D^lc` is defined by an equivalence of the categories `LC_D(X)` themselves; a 2-derivator keeps the Hom-categories. So the equality `W_D^lc = W_{D′}` of Part E has a 1-categorical and a 2-categorical form: state both, say which you prove, and say in Parts E and G whether **D** ↦ **D′** and the tower of Lead 4 are constructions of 2-derivators in his sense (which of his axioms hold; his shapes are not ours), or why his framework does not apply.
+- **D. Kaledin, *Enhancement for categories and homotopical algebra*, arXiv:2409.17489v3 (23 Feb 2026).** Status: preprint of about 600 pages, not known to us to be refereed. Claimed there: a homotopy type `X` is the same thing as an "enhanced groupoid", the family of ordinary groupoids `J ↦ Π_1 Map(NJ, X)` indexed by all partially ordered sets `J` and subject to explicit axioms (Section 6.1; the general representability theorem is Theorem 7.3.1.3). What it changes: for Part F there are two ways to recover `X` from 1-categorical data, raising the categorical level of the coefficients on a fixed `X` (Lead 4) and keeping groupoids while varying the shape `J` (his; CATHOT F.11 is of this second kind). State the exact relation between the two, and label the reconstruction "for spaces: `X`" Known or new only after comparing with his theorem.
+
+## Parts
+
+**A. Definitions and first properties.** For a derivator **D** on `Cat` (state the axioms you use; say separately what holds for a prederivator, for a derivator, for the derivator of an ∞-category): the full subcategory `LC_D(X)`; the classes above; their closure properties (two-out-of-three, retracts, opposites via the twisted arrow category, products). Prove the chain of inclusions in Lead 1, citing Cisinski for the first, and audit the proofs of I ms. 96–126 against it (the companion's rows are attached; correct them where needed).
+
+**B. `W_D^lc` and `W_D^1` as localizers.** Prove or refute that each is a fundamental localizer: the relative Theorem A axiom is the substantive point (descent of locally constant coefficients along `X = hocolim_s X/s`); say whether it holds at the level of the categories `D(X)` or only for ∞-categorical enhancements, with a counterexample if the 1-categorical statement fails. Decide accessibility. Decide which of Grothendieck's further axioms (Chapter XVI: Loc (4)–(9); the fibration axiom Loc (7) in particular) they satisfy, compared with `W_D`.
+
+**C. Computations (Lead 2).** Complete proofs for: sets; groupoids; `n`-types; spaces; `D(k)` for `k = Z`, `Q`, `F_p`, and a general ring; spectra; `K(n)`-local or `E`-local spectra as far as you can. In each case identify `W_D`, `W_D^{coh}`, `W_D^1`, `W_D^lc` by explicit conditions on homotopy and homology groups, and show which inclusions are strict by examples. For `D(k)` use the description of `Fun(X, D(k))` as modules over chains on the based loop space, stating exactly the theorem used and its hypotheses (connectedness, base points). Relate `W_{D(Q)}^lc` to rational homotopy theory of non-simply-connected spaces (Gómez-Tato–Halperin–Tanré) and to Toën's schematization, with precise statements.
+
+**D. Fibrations (Lead 3).** Rewrite the fibration theory of I ms. 76–126 with `W_D^lc` in place of `W_D`: for each of the audit rows marked false or conjectured in `DER_I-b_claims.csv` between ms. 76 and ms. 126, decide whether the statement with 2-complete (or 1-complete) equivalences is true, and prove or refute it. Explain the companion's two failures of composition (blocks at ms. 118 and ms. 122) in these terms, and give the notion of **D**-fibration that is stable under base change and composition and for which a total equivalence in `W_D^lc` is a fibrewise one. Compare with Chapter XI §1, "Hot-fibrations dans Cat" (audited since this prompt was written: its companion files are attached under `companion/DER_XI-XIIa/`).
+
+**E. Realization.** Is `W_D^lc` equal to `W_{D′}` for another derivator **D′**, built functorially from **D**? (For sets: groupoids. In general: a derivator of **D**-linear or **D**-enriched categories.) Construct **D′** under the hypotheses you need, or show what obstructs. Then Lead 4: define the tower, compute it for sets and for `D(Q)` at least at the second stage (do local systems of `Q`-linear categories on `K(Z/p, 2)` and on `K(Z, 2)` see the base?), and determine the intersection of the tower in the cases you can.
+
+**F. Reconstruction.** State and prove the Tannakian form: from `LC_D(X)` with its fibre functors at the points of `X`, what of `X` is recovered (for sets: `Π1 X`, Grothendieck's Galois theory of SGA 1; for `D(k)`: the `E_1`-algebras of chains on loop spaces; for spaces: `X`). Formulate the question "for which **D** is `W_D^lc = W∞`" and answer it for the cases of Part C. Relate to Hoyois, *Higher Galois theory*, and to the fundamental pro-∞-groupoid (shape) of the ∞-topos of local systems. The case of set-valued coefficients on a general topos is the theory of multi-Galois topoi of *La Longue Marche*, §§1–4 (transcription attached); a separate package (LM5_MULTI_GALOIS_TOPOI) works that theory out and will cite your general statements, so state the reconstruction theorem here in a form that specializes to a locally connected topos, and do not develop the 1-topos theory itself.
+
+**G. Chapter X revisited.** Chapter X ms. 1–5 and the companion's overview and blocks on those pages treat `D ↦ W_D`. Add `D ↦ W_D^lc`: functoriality in **D**, behaviour under morphisms of derivators, and the corrected version of his expectation (X ms. 5) that the useful derivators satisfy component detection.
+
+
+---
+
+CONVENTIONS (fix them on your first page and keep them)
+- `Cat`: small categories for a fixed universe. `BX = |NX|`. `W∞`: functors whose nerve is a weak homotopy equivalence. `Hot = Cat[W∞^{-1}]`. A *fundamental localizer* is a class `W` of functors satisfying Grothendieck's Loc (1)–(3) of Chapter XVI §1 (weak saturation; a category with a terminal object maps to the point by a map in `W`; the relative Theorem A axiom). State the exact form you use. `X` is `W`-aspherical when `X → e` is in `W`.
+- For `u: A → B` and `b` in `B`: `A/b` has objects `(a, u(a) → b)`, `b\A` has objects `(a, b → u(a))`. `u` is *final* (in the usual covariant sense) when every `b\A` is non-empty and connected. Grothendieck's "cofinal", "asphérique", "coasphérique", "propre", "lisse" must be translated with the variance of the page you are reading; the manuscript takes coefficients on `X` to be presheaves (`X^op → D(e)`), and the companion's blocks record the variance at each place. A sieve ("ouvert") is a full subcategory closed under sources of arrows; a cosieve ("fermé") under targets.
+- Manuscript locations are given as chapter and manuscript page ("XII ms. 76"). The attached `DER_<id>_text.tex` files mark them with `\msp{page N}`.
+
+WHAT IS ATTACHED
+A zip with (1) the LaTeX transcription of the relevant parts of Grothendieck's text (`DER_<id>_text.tex`; AI-made from the edition of Künzer, Malgoire and Maltsiniotis, good but not guaranteed: where a formula looks wrong, say so and reason from the mathematics); (2) for the parts already audited, the companion's files (`_overview.tex`, `_blocks.tex` commentary, `_claims.csv` audit; AI-produced by GPT-6 Astra, ChatGPT Pro mode, in earlier sessions; treat them as a colleague's draft, not as authority); (3) the LaTeX sources or PDFs of the background papers; (4) `FABLE_PILOT_OVERVIEW_20261110.md` and its addendum, where the leads below come from. `MANIFEST` lists every file with its origin.
+
+RULES OF PROOF (they bind every statement you deliver)
+1. State the actual claim with all its data: quantifiers, size and universe conditions, variance, which localizer, pointed or unpointed, which numbered axiom in which of its versions. Do not replace it by a convenient special case. If you prove a special case, name it as one and keep the general statement on your list as open.
+2. Type every map you introduce: source, target, the category in which it is a morphism, and each extra property you use (functor over the base, natural, in `W`, cartesian, compatible with which action). Compositions must type-check.
+3. Every reduction ("we may assume", "replace by", "it suffices") comes with its comparison map and a proof that the exact property needed transfers in the direction needed. Passing to a nerve, a localization, a fibre, a truncation, a cofinal subsystem or a homotopy category transfers nothing by itself.
+4. "Up to" names the ambiguity. Keep apart: equality; isomorphism in `Cat`; equivalence of categories; isomorphism in `Cat hot` (functors modulo zigzags of natural transformations); isomorphism in `Hot`; weak equivalence of a specified map. A bijection on components is not an equivalence. An abstract isomorphism is not the canonical map.
+5. Check the edge cases in scope: empty categories, several components, non-surjective maps on `π0`, categories with non-trivial idempotents or endomorphisms, infinite families.
+6. A counterexample is given completely (objects, arrows, composition, the verification of every hypothesis and of the failure) and, when finite, checked by a program whose code and output you attach. One verified counterexample refutes the statement: say "false". An invalid proof alone shows a gap, not falsity; keep the two apart.
+7. No authority. Grothendieck's assertions, the companion's, and the leads marked "Lead" below (inferences by Claude, Anthropic, made in one reading and not checked by anyone) are all to be proved or refuted. If a lead is wrong, say so plainly and show where.
+8. What you cannot settle stays on the page as an exact statement, with what you tried, the step that fails, and the smallest undecided instance. Never write it up as proved, and never drop it.
+9. Before calling anything new, search the literature and say what you searched. Cite exact theorem numbers. Never invent a reference; mark each entry of the bibliography `verified` (you opened it) or `unverified`.
+
+WHAT TO DELIVER
+One ZIP containing:
+- `<ID>_paper.tex` and its PDF (LuaLaTeX, compiles cleanly): the mathematics, in the order of the parts below, every statement numbered and labelled Proved / Refuted / Known (with citation) / Open, with complete proofs. English, first person plural, the register of a careful research paper; quote Grothendieck in French where his wording matters. No bullet lists where an argument belongs, no summaries of what you are about to do, no closing recapitulations.
+- `<ID>_results.csv`: one row per numbered statement: `id, statement, status, where_proved, depends_on, manuscript_rows_or_pages_settled, notes`.
+- `<ID>_references.bib`.
+- `<ID>_report.md`: what you read, what you computed, every correction to the leads, to the companion and to the transcription, and the list of what remains open.
+- `code/`: every program you ran, with its output.
+The work is AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); credit it so, attribute nothing to any person, and claim no priority: where a result is known, cite it; where you did not find it, say what you searched.
+
+This task is long by design. Work through all parts completely; do not stop at an outline, a sample or a plan, and do not ask whether to continue. Ignore any clock. Write the files from the start and extend them as you go, so that an interruption loses little.

@@ -1,0 +1,104 @@
+# Files uploaded with the prompt: TOTAL_EXACT_2
+
+The prompt `PROMPT.md` in this folder was sent to GPT-6 Astra (ChatGPT Pro mode) together with the ZIP file below. This is the file list of the ZIP as it was uploaded. The ZIP is not republished here.
+
+## `TOTAL_EXACT_2_background.zip`
+
+93 files, 4,224,063 bytes, SHA-256 `935716f80044b96c90dbd2b774d08b0c2c7d05c87fc675d7387f15bc6b5f8052`, built 12 Nov 2026, 23:08:55 UTC.
+
+```text
+       bytes  file
+      107827  DER_II-a.tex
+      105419  DER_VII-a.tex
+      103407  DER_XIIb-a.tex
+       15851  HUNCHES.md
+       26099  MANIFEST.tsv
+     2157618  papers/AdamekKoubekReiterman1981.pdf
+      272650  papers/IsbellMitchell1973.pdf
+      819903  papers/IsbellMitchell1976.pdf
+        5887  PRETOT/PRETOT_FINDINGS.md
+      194449  PRETOT/PRETOT_paper.tex
+       20559  PRETOT/PRETOT_results.csv
+       47131  PRETOT/PRETOT_REVIEW.md
+       14956  TOTAL_EXACT_PROMPT.md
+       22415  TOTASPH/TOTASPH_C.tex
+       20832  TOTASPH/TOTASPH_D.tex
+       83485  TOTASPH/TOTASPH_results.csv
+       45084  TOTASPH/TOTASPH_REVIEW.md
+         224  TOTEX_return/code/akr_component_checks.out
+        1443  TOTEX_return/code/akr_component_checks.py
+        4639  TOTEX_return/code/akr_REPRODUCE.md
+        5004  TOTEX_return/code/akr_stages.out
+       13956  TOTEX_return/code/akr_stages.py
+        7606  TOTEX_return/code/akr_stages_critical.out
+        8244  TOTEX_return/code/akr_stages_critical_output.json
+        8708  TOTEX_return/code/akr_stages_literal.out
+        9500  TOTEX_return/code/akr_stages_literal_output.json
+        5428  TOTEX_return/code/akr_stages_output.json
+        2706  TOTEX_return/code/akr_stages_triple.out
+        4292  TOTEX_return/code/akr_stages_triple_literal.out
+        4678  TOTEX_return/code/akr_stages_triple_literal_output.json
+        2940  TOTEX_return/code/akr_stages_triple_output.json
+        7793  TOTEX_return/code/basic_shape_checks.py
+        4730  TOTEX_return/code/build_pdf.py
+       17391  TOTEX_return/code/build_totex_results.mjs
+        5816  TOTEX_return/code/examples_affine_base.py
+        3521  TOTEX_return/code/examples_colored_words.out
+        4720  TOTEX_return/code/examples_colored_words.py
+        1004  TOTEX_return/code/examples_support_orbits.out
+        1998  TOTEX_return/code/examples_support_orbits.py
+        2062  TOTEX_return/code/main_sign_reflection_check.py
+        1629  TOTEX_return/code/outputs/basic_shape_checks.json
+         125  TOTEX_return/code/outputs/build_pdf.out
+         585  TOTEX_return/code/outputs/build_totex_results.out
+        8440  TOTEX_return/code/outputs/latex_final.out
+        4702  TOTEX_return/code/outputs/latex_format_bootstrap.out
+        8440  TOTEX_return/code/outputs/latex_pass_1.out
+        8440  TOTEX_return/code/outputs/latex_pass_2.out
+        8440  TOTEX_return/code/outputs/latex_pass_3.out
+        1005  TOTEX_return/code/outputs/main_sign_reflection_check.json
+        4432  TOTEX_return/code/outputs/package_audit.json
+         356  TOTEX_return/code/outputs/pdf_layout_audit.json
+        2089  TOTEX_return/code/outputs/semisimplicial_affine_checks.out
+       13948  TOTEX_return/code/outputs/totex_results_audit.json
+        2634  TOTEX_return/code/outputs/totex_results_inspect.ndjson
+       80927  TOTEX_return/code/outputs/totex_results_preview.png
+      150785  TOTEX_return/code/outputs/totex_results_source_records.json
+       48273  TOTEX_return/code/outputs/totex_results_values.json
+        3156  TOTEX_return/code/pretot_audit/audit_certificate.py
+       16562  TOTEX_return/code/pretot_audit/main_counterexample.py
+         414  TOTEX_return/code/pretot_audit/outputs/independent_certificate_audit.out
+        1576  TOTEX_return/code/pretot_audit/outputs/main_counterexample.out
+       13524  TOTEX_return/code/pretot_audit/outputs/main_counterexample_data.json
+       40619  TOTEX_return/code/pretot_audit/outputs/projectivity_certificate.json
+        2089  TOTEX_return/code/pretot_audit/outputs/semisimplicial_affine_checks.out
+        5816  TOTEX_return/code/pretot_audit/semisimplicial_affine_checks.py
+        3749  TOTEX_return/code/README.md
+        2539  TOTEX_return/code/render_pdf_qa.py
+         438  TOTEX_return/code/source_fetch.out
+         940  TOTEX_return/code/source_fetch.py
+        4402  TOTEX_return/code/totex_labels_cache.json
+       53287  TOTEX_return/code/totex_results_metadata.json
+        4658  TOTEX_return/code/totex_results_REPRODUCE.md
+       10411  TOTEX_return/code/verify_package.py
+      550880  TOTEX_return/TOTEX_paper.pdf
+      130397  TOTEX_return/TOTEX_paper.tex
+        7299  TOTEX_return/TOTEX_references.bib
+       26535  TOTEX_return/TOTEX_report.md
+       45776  TOTEX_return/TOTEX_results.csv
+       46104  TOTEX_REVIEW.md
+        1378  TOTEX_review_code/akr_downsets.py
+       10858  TOTEX_review_code/akr_indep.py
+        3552  TOTEX_review_code/akr_triple_equalizers.py
+        1115  TOTEX_review_code/out_downsets.txt
+         361  TOTEX_review_code/out_K1_literal.txt
+         349  TOTEX_review_code/out_K1_repaired.txt
+         638  TOTEX_review_code/out_K2_literal.txt
+         626  TOTEX_review_code/out_K2_repaired.txt
+         769  TOTEX_review_code/out_K3crit_repaired.txt
+        2341  TOTEX_review_code/out_triple_eq_literal_K2.txt
+        2342  TOTEX_review_code/out_triple_eq_repaired_K2.txt
+        2420  TOTEX_review_code/out_triple_eq_repaired_K3crit.txt
+         275  ty_check.out
+        3059  ty_check.py
+```

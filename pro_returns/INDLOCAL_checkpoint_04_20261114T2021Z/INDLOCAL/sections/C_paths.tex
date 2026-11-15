@@ -1,0 +1,822 @@
+\section{Path categories, specified comparisons, and one-sign blocks}
+\label{sec:paths}
+
+All categories and indexing categories in this section are $U$-small.
+The subcategory $\Sigma\subset M$ contains every object and is closed
+under composition; it need not contain every isomorphism of $M$.
+The nerve realization is $B$, and a weak equivalence means a member of
+$W_\infty$. Mapping spaces and their equivalences are unpointed; the
+empty path supplies a distinguished point when the endpoints coincide.
+
+\begin{claim}{C.1}{Proved}{The categories and their comparison maps}
+Let $\tau=\varepsilon_1\cdots\varepsilon_n$ be a finite sign word,
+including the empty word. Its interval $I_\tau$ is the free category
+on the oriented line with vertices $0,\ldots,n$. A type map is an
+endpoint-preserving functor with nondecreasing vertex function.
+Write $\mathrm{Ty}$ for their category. Put
+\[
+ F_\tau(a,b)=\operatorname{Fun}_\Sigma(I_\tau,M)_{a,b},
+ \qquad F_\tau^{\Sigma}(a,b)\subset F_\tau(a,b).
+\]
+Objects send backward edges into $\Sigma$. In $F_\tau$ the vertical
+components are arbitrary, with both endpoint components identities;
+in $F_\tau^\Sigma$ they all belong to $\Sigma$.
+The fibred Grothendieck constructions are denoted by
+$\operatorname{Ch}_\Sigma(M;a,b)$ and
+$\operatorname{Ch}_\Sigma^\Sigma(M;a,b)$. A morphism $(\tau,c)\to
+(\sigma,d)$ is a pair $(u,\eta)$ with
+$u:\tau\to\sigma$ and $\eta:c\Rightarrow d u$.
+The inclusion $J$ preserves literal concatenation and empty paths.
+\end{claim}
+\begin{proof}
+A backward edge under a type map traverses a sequence of backward edges,
+possibly of length zero. Thus pullback preserves the marking condition.
+Precomposition also preserves the endpoint condition and, for the
+restricted version, the condition on vertical components. For composable
+$(u,\eta)$ and $(v,\theta)$ the composite is
+$(vu,(\theta u)\eta)$; the equations for a category follow from those
+for natural transformations. Concatenation glues the final vertex of
+the first interval to the initial vertex of the second, and similarly
+glues functors and transformations. Its associativity and empty-word
+units are strict. These formulas also prove the asserted properties of
+$J$, without identifying different type maps.
+\end{proof}
+
+\begin{claim}{C.2}{Proved}{Step-by-step verification of PATHS C.P1}
+For $\tau,\sigma\in\mathrm{Ty}$ the poset
+$P(\tau,\sigma)$ of type maps, ordered by pointwise arrows in
+$I_\sigma$, is empty or has contractible nerve. These posets form the
+hom-categories of a strict monoidal $2$-category. There is a strict
+contravariant action
+\[
+ P(\tau,\sigma)\times F_\sigma(a,b)\longrightarrow F_\tau(a,b).
+\]
+\end{claim}
+\begin{proof}
+The interval is a poset, so pointwise transformations are unique when
+they exist. Induct on the number of constant-sign runs of $\sigma$.
+An empty target gives a terminal mapping poset. If $\sigma$ is nonempty
+and the mapping poset is nonempty, the source is nonempty. Write
+$[0,a]$ and $[0,b]$ for the first source and target runs.
+
+When their signs disagree, a map must be constant at zero on the first
+source run: moving from zero through a positive number of target
+edges would require the target's first sign. Deleting that source run,
+while retaining its last vertex, gives an isomorphism of mapping
+posets. Repeat until the signs agree; nonemptiness prevents exhaustion
+of the source before a nonempty target.
+
+When the first signs agree, put $h(j)=\max(j,b)$ and define
+$(Rf)(0)=0$, $(Rf)(i)=h(f(i))$ for $i>0$. Every edge affected by $h$
+lies in the first target run, where all arrows have a common direction.
+At the initial source edge the new image is the arrow across that run;
+on subsequent edges the image is either unchanged or lies in the same
+run. Thus $Rf$ is a type map. A map cannot pass the target's first
+turn within the source's first run, so that run has new values
+$(0,b,\ldots,b)$. The inequalities $f\leq Rf$ in the positive case,
+or $Rf\leq f$ in the negative case, are pointwise arrows and hence
+natural transformations. Applying $h$ to a pointwise arrow preserves
+it, so $R$ is a functor. It is idempotent and restricts to the identity
+on its image. The image is exactly the full subposet with that
+prescribed first run. Deleting both prescribed runs and subtracting
+$b$ from the remaining target coordinates identifies it with the
+mapping poset for a target having one fewer run. This proves the
+contraction by induction. No naturality of the chosen contraction in
+all source words is needed.
+
+Horizontal and vertical composition preserve numerical order and
+endpoint identities. Their interchange equation is the ordinary
+interchange equation for natural transformations. Blockwise gluing
+preserves these equations. Finally the action sends $(u,c)$ to $cu$;
+on arrows $(\alpha:u\Rightarrow v,\eta:c\Rightarrow d)$ it is
+\[
+ cu\xrightarrow{\eta u}du\xrightarrow{d\alpha}dv.
+\]
+Its endpoint components are identities. Its interior components may
+be arbitrary arrows of $M$. This explicitly identifies the point where
+the unrestricted vertical arrows are used. For example, with
+$M=[1]$, $\Sigma$ the identities and a forward interval, a nonidentity
+component $0\to1$ occurs. Explicitly take $\tau=++$, $\sigma=+$,
+let the two vertex maps have middle values $0$ and $1$, and pull
+back the path $0\to1$. Their comparison is
+$(0,0,1)\Rightarrow(0,1,1)$, with interior component $0\to1$.
+Thus the corresponding action does not restrict to $F^\Sigma$.
+\end{proof}
+
+\begin{claim}{C.3}{Proved}{Descent, finality, and PATHS C.P2--C.P3}
+Let $R$ be the reachability preorder of types. The diagram
+$\tau\mapsto BF_\tau(a,b)$ descends coherently along
+$p:\mathrm{Ty}^{\mathrm{op}}\to R^{\mathrm{op}}$.
+The functor $p$ is homotopy final. Every projective sequence
+$t:\mathbb N^{\mathrm{op}}\to\mathrm{Ty}$ such that each type
+receives a map from some $t_n$ is homotopy final after passage to
+$R$. For its actual Grothendieck construction $E_t$ and categorical
+colimit $C_\infty(t)$ both maps
+\[
+ C_\infty(t)\longleftarrow E_t\longrightarrow
+ \operatorname{Ch}_\Sigma(M;a,b)
+\]
+are weak equivalences. The resulting isomorphism $\beta_t$ in
+$\mathrm{Hot}$ is canonical, natural under strictly commuting maps
+of sequences, and transitive under the comparisons through $t*s$.
+\end{claim}
+\begin{proof}
+Apply nerves to the action in C.2. The simplicial category with
+hom-objects $NP(\tau,\sigma)$ maps to $R$, identically on objects
+and by weak equivalences on every hom-object, including empty ones.
+This is a Dwyer--Kan equivalence. In the projective model structures
+on simplicial-set-valued enriched diagrams, all these hom-objects
+are cofibrant. The change-of-enrichment theorem therefore makes
+restriction a Quillen equivalence. Applying its derived unit to
+an objectwise fibrant replacement of the enriched diagram gives a
+zigzag of objectwise weak equivalences between that diagram and the
+restriction of a diagram on $R^{\mathrm{op}}$. Restriction to the
+discrete hom-sets defining $\mathrm{Ty}$ gives the asserted coherent
+descent. This checks the hypotheses of the model-category argument
+in the intake, using \cite[Proposition A.3.3.8]{CpathsLurieHTT}.
+
+The coherent-nerve argument has the same comparison: replace every
+hom-object by $\operatorname{Sing}BP(\tau,\sigma)$ and every value
+by $\operatorname{Sing}BF_\tau$. Realization and singular complexes
+preserve finite products in these models. All hom-objects are now
+Kan; the functor to $R$ is a Dwyer--Kan equivalence and hence its
+coherent nerve is an equivalence. Restricting functors along an
+equivalence is an equivalence. This proves exactly the descent used
+in PATHS, without requiring a strict choice of contractions.
+
+For $\sigma\in R$, the comma category $(\sigma\downarrow p)$
+is the opposite of the full subcategory $\mathrm{Ty}_\sigma$
+on the types which admit some map to $\sigma$. There is no specified
+choice of such a map in this comma category. The functor
+$H(\tau)=\sigma*\tau$ has natural maps to $\tau$ and to the
+constant object $\sigma$, obtained by collapsing the other block.
+It stays in $\mathrm{Ty}_\sigma$, and contracts that category.
+For the sequence, the corresponding comma category is the nonempty
+upward-closed subposet of $\mathbb N$ consisting of $n$ with
+$t_n\to\sigma$. It has a least object. The comma criterion proves
+both finality statements.
+
+The fibred Grothendieck comparison identifies $BE_t$ and
+$B\operatorname{Ch}_\Sigma$ with the respective homotopy colimits
+on $\mathbb N$ and $\mathrm{Ty}^{\mathrm{op}}$. Its naturality
+retains the specified inclusion $E_t\to\operatorname{Ch}_\Sigma$.
+One may obtain this variance directly by taking opposite categories
+and using the covariant theorem; reversal of nerve simplices gives
+the natural identification of the two realizations. Descent and
+the two finality calculations identify both homotopy colimits with
+the colimit over $R^{\mathrm{op}}$. Thus the specified inclusion is
+a weak equivalence. The map $E_t\to C_\infty(t)$ is also one:
+the nerve commutes with filtered colimits of categories, since an
+$n$-simplex uses finitely many objects, arrows and equations, and
+filtered colimits of simplicial sets compute their homotopy colimits.
+The latter assertion follows by factoring to a projectively
+cofibrant diagram and observing, by finite simplicial sphere and
+homotopy representatives, that a filtered colimit preserves
+objectwise weak equivalences.
+
+For a strictly commuting $u:t\to s$, the cartesian arrows
+$(t_n,u_n^*c)\to(s_n,c)$ give a natural transformation in the total
+category. Consequently $\beta_t B(u^*)=\beta_s$. It follows that
+the actual induced functor $u^*$ is a weak equivalence. The
+concatenated sequence has block projections to both sequences and
+is cofinal. Its comparison is $\beta_t^{-1}\beta_s$; this formula
+proves independence and transitivity in $\mathrm{Hot}$.
+\end{proof}
+
+\begin{claim}{C.4}{Proved}{The actual padding and gluing operations}
+For a block $\tau_0$ containing both signs, the left, right and
+symmetric systems of VII ms.~125--126 have weakly equivalent
+colimits $L,R,P$. The actual constant-padding maps $q_L:L\to P$
+and $q_R:R\to P$ are weak equivalences. On each endpoint fibre,
+\[
+ \mu=B\kappa\bigl((Bq_L)^{-1}\times(Bq_R)^{-1}\bigr)
+\]
+is associative, unital, and independent of the block under the
+specified comparisons in $\mathrm{Hot}$.
+\end{claim}
+\begin{proof}
+The alternating-run lengths of $\tau_0^n$ tend to infinity.
+For each target word choose, in order, positions with the required
+signs in a sufficiently long power. This is a nondecreasing
+sign-preserving letter map from the target letters to the power's
+letters. The formula in C.11 turns it into a type map from the
+power to the target. Thus C.3 applies to all three systems.
+If $d$ is the block length, the transition vertex maps are,
+respectively, $i\mapsto\max(0,i-pd)$, $i\mapsto\min(i,nd)$,
+and $i\mapsto\min(2nd,\max(0,i-pd))$. The maps inducing $q_L$
+and $q_R$ at stage $n$ are $i\mapsto\min(i,nd)$ and
+$i\mapsto\max(0,i-nd)$ from $\tau_0^{2n}$ to $\tau_0^n$.
+Substitution verifies the two strictly commuting squares with
+transitions. C.3 therefore applies to these specified maps.
+
+Let $\gamma$ denote literal concatenation on the all-type spaces.
+On the common stage with two words $\tau_0^n$, both sides of
+\[
+ \beta_P B\kappa=\gamma(\beta_L\times\beta_R)
+\]
+send the pair to its literal concatenation of type $\tau_0^{2n}$.
+The transition pads the two outer ends, exactly as in the symmetric
+system. The diagonal $\mathbb N\to\mathbb N^2$ is final, and
+finite products of spaces commute with filtered colimits, so this
+stage calculation proves the equality of the specified maps.
+Together with $\beta_P Bq_L=\beta_L$ and
+$\beta_P Bq_R=\beta_R$ it gives
+\[
+ \beta_P\mu=\gamma(\beta_P\times\beta_P).
+\]
+The strict associativity and empty-path units for $\gamma$ prove
+the assertions. The same identity for any other mixed block proves
+independence. It is unnecessary to infer equality of maps in
+$\mathrm{Hot}$ from equality on a selected class of test objects.
+\end{proof}
+
+\begin{claim}{C.5}{Proved}{Exact one-sign answer at VII ms.~125--127}
+For every integer $d\geq1$, the left, right and symmetric colimits
+formed with the block $+^d$ are isomorphic in $\mathrm{Cat}_{\mathrm{hot}}$
+to $\operatorname{Hom}_M(a,b)_{\mathrm{disc}}$; those formed with
+$-^d$ are isomorphic there to
+$\operatorname{Hom}_\Sigma(b,a)_{\mathrm{disc}}$.
+Both actual padding maps are isomorphisms in
+$\mathrm{Cat}_{\mathrm{hot}}$. The operation induced by gluing is
+associative, unital, and independent of $d$ within either sign.
+It is ordinary composition in $M$ in the positive case and
+composition in $\Sigma^{\mathrm{op}}$ in the negative case.
+
+The comparison with the all-type localization mapping space, at
+every pair of endpoints, is an equivalence for positive blocks
+exactly when $\Sigma\subset\operatorname{Iso}(M)$, and for
+negative blocks exactly when $M=\Sigma$ is a groupoid.
+\end{claim}
+\begin{proof}
+For a positive path, compose all its arrows to obtain
+$f:a\to b$. A transformation fixing endpoints preserves $f$ by
+the successive commuting squares. For a negative path the same
+argument preserves the composite $w:b\to a$ in $\Sigma$.
+At a fixed nonzero length, the factorization category of $f$ has
+an initial object with its entire arrow at the last edge and a
+terminal object with its entire arrow at the first edge. The
+components of the unique comparison transformations are the prefix
+and suffix composites. For a negative word the initial object has
+its entire arrow at the first edge and the terminal object at the
+last edge. All of its comparison components even belong to $\Sigma$.
+This proves, in particular, the component and weak-homotopy claims
+at each finite stage.
+
+Here is the stronger assertion about the actual colimits. Identify
+the positive symmetric colimit with nondecreasing chains indexed by
+$\mathbb Z$, eventually equal to $a$ at the left and $b$ at the
+right. Multiples of $d$ are cofinal among finite support bounds,
+which gives this identification as an isomorphism of categories.
+Let $s(f)$ have its unique possibly nonidentity arrow at $0\to1$.
+For a path $c$ define $U(c)(j)=c(j)$ for $j\leq0$, and
+$U(c)(j)=b$ for $j\geq1$. At the new junction use the suffix
+composite $c(0)\to b$. Prefixes and suffixes give the natural zigzag
+\[
+ c\longrightarrow U(c)\longleftarrow s(f).
+\]
+Its endpoint components are identities. Every path transformation
+preserves the prefix and suffix composites by its commuting
+squares, proving naturality in $c$. Thus the effect map and $s$
+are inverse in $\mathrm{Cat}_{\mathrm{hot}}$. For a negative
+chain, with arrows $j+1\to j$, the same definition uses the suffix
+$b\to c(0)$ in $\Sigma$ and gives
+$c\leftarrow U(c)\to s(w)$. For the left half-chain the canonical
+single-arrow factorization at $-1,0$ is initial or terminal as
+appropriate; for the right half-chain use $0,1$. The prefix/suffix
+transformations again give the inverse in
+$\mathrm{Cat}_{\mathrm{hot}}$.
+
+Both padding maps preserve effect. Their source and target effect
+maps are isomorphisms in $\mathrm{Cat}_{\mathrm{hot}}$, so they
+are isomorphisms there too. Concatenation preserves effect and sends
+$(f:a\to b,g:b\to c)$ to $gf$, or
+$(w:b\to a,v:c\to b)$ to $wv$. This proves all composition and
+unit assertions, including compatibility for the actual maps.
+
+Neither sign has cofinal powers: no negative letter maps
+sign-preservingly into a positive word, and conversely. Under the
+comparison in C.8 the effect maps into the all-type space as
+$f\mapsto\ell(f)$ and $w\mapsto\ell(w)^{-1}$, where
+$\ell:M\to L(M,\Sigma)$ is localization. For a fixed $(a,b)$,
+the exact criterion is that the corresponding mapping space be
+homotopy discrete and this map of component sets be bijective.
+For all endpoints, the positive criterion says precisely that
+$NM\to L(M,\Sigma)$ is fully faithful; it is already essentially
+surjective. Thus it is an equivalence, and every marked arrow was
+already invertible in $M$. The converse is the localization
+universal property.
+
+For the negative criterion, the identity-on-objects functor
+$N\Sigma^{\mathrm{op}}\to L(M,\Sigma)$, given by inverse
+marked arrows, is an equivalence. Every arrow in its image is an
+equivalence, so every arrow of $\Sigma$ is invertible in $\Sigma$.
+Then $\Sigma$ is a subcategory of the isomorphisms of $M$ and
+$L(M,\Sigma)\simeq NM$. Full faithfulness says that inversion
+maps $\operatorname{Hom}_\Sigma(b,a)$ bijectively onto
+$\operatorname{Hom}_M(a,b)$. Its image is exactly
+$\operatorname{Hom}_\Sigma(a,b)$, so $M=\Sigma$, a groupoid.
+The converse follows by taking inverses in that groupoid.
+\end{proof}
+
+\begin{claim}{C.6}{Refuted, with replacement C.5}{The crown and the scope of the one-sign failure}
+For the four-object poset with nonidentity arrows
+$0\to1,0\to3,2\to1,2\to3$, mark all arrows and take $a=b=0$.
+Every nonempty one-sign fixed-type path category is a point, whereas
+the all-type mapping space has component set $\mathbb Z$.
+Thus one-sign blocks do not in general compute the all-type object
+or provide the comparison with a mixed block. They nevertheless
+have the padding and associative unital composition proved in C.5.
+\end{claim}
+\begin{proof}
+A chain in a poset beginning and ending at the same object is
+constant when all its arrows have one direction. There is exactly
+one such functor and its only transformation is the identity.
+The nerve of this crown is the four-cycle. Its covering poset is
+the integer fence with arrows from each even integer to its adjacent
+odd integers; reduction modulo four is a categorical covering.
+It realizes to the universal covering line. An all-type loop based
+at zero lifts uniquely beginning at zero, and its last vertex is
+$4k$, $k\in\mathbb Z$. The lift endpoint is invariant under
+endpoint-fixed ladders and type changes. Traversing the lifted
+line from zero to $4k$ supplies a loop for each $k$. Alternatively,
+C.7 identifies the all-type space with $\Omega S^1$, which has
+these components. The program \texttt{code/cpaths\_checks.py}
+checks the finite crown and the covering rule, as well as every
+one-sign path of lengths one through seven for all sixteen wide
+markings. The unbounded conclusion follows from the poset argument.
+This is the exact correction to an interpretation of intake F1
+which would make existence or associativity alone fail for a
+one-sign block.
+\end{proof}
+
+\begin{claim}{C.7}{Proved}{R7 F2, with both adjunctions checked}
+For every small $(M,\Sigma)$ as above and $a,b\in M$, there is an
+equivalence
+\[
+ B\operatorname{Ch}_\Sigma(M;a,b)\simeq
+ \operatorname{Map}_{L(M,\Sigma)}(a,b).
+\]
+For fixed $b$ it is an equivalence of presheaves under
+$h_b=\operatorname{Hom}_M(-,b)$, after the explicit presheaf
+replacement below. Each single-type map $h_b\to X_b^\tau$
+is already an equivalence after localization of presheaves at
+$\Sigma$.
+\end{claim}
+\begin{proof}
+Restriction along $\ell^{\mathrm{op}}$ identifies presheaves on
+$L=L(M,\Sigma)$ with presheaves on $M$ sending $\Sigma$ to
+equivalences. This follows directly by applying the localization
+universal property to $\mathcal S$ and taking opposites. Restriction
+is fully faithful and has left adjoint left Kan extension. Left Kan
+extension carries $h_b$ to the representable at $\ell b$, as can
+also be checked by Yoneda against every presheaf on $L$. Hence
+$R_b(a)=\operatorname{Map}_L(a,b)$ is characterized as the
+$\Sigma$-local presheaf under $h_b$ satisfying
+\[
+ \operatorname{Map}(R_b,Q)\xrightarrow{\sim}Q(b)
+ \quad\text{for every $\Sigma$-local $Q$.}
+\]
+
+Let $D_\tau$ be the category of $\tau$-paths ending at $b$, with
+free origin; transformations have last component $1_b$ and all
+other components arbitrary. The origin functor is
+$s_\tau:D_\tau\to M$. Its fibred all-type construction is
+$s:D\to M$. Define the strict presheaves
+\[
+ X_b^\tau(a)=B(a\downarrow s_\tau),\qquad
+ X_b(a)=B(a\downarrow s).
+\]
+Precomposition of $a\to s(c)$ defines their strict variance in $a$.
+The comma category is literally the fibred Grothendieck construction
+of the single-type comma categories, so the natural Grothendieck
+comparison gives
+$X_b\simeq\operatorname{colim}_{\mathrm{Ty}^{\mathrm{op}}}
+X_b^\tau$ in presheaves of spaces. For fixed $\tau$ the comma
+projection is the category of elements of $c\mapsto
+\operatorname{Hom}_M(a,s_\tau c)$. Its nerve is the usual bar
+construction for that homotopy colimit. Consequently
+\[
+ X_b^\tau\simeq\operatorname{colim}_{c\in D_\tau}h_{c_0},
+ \qquad
+ \operatorname{Map}(X_b^\tau,Q)
+ \simeq\lim_{D_\tau^{\mathrm{op}}}Q(c_0)=:A_\tau.
+\]
+All comparisons are natural in $a$, because precomposition commutes
+with every bar face and degeneracy. The empty type gives $X_b^\varnothing=h_b$.
+
+Define $i:\operatorname{Ch}_\Sigma(M;a,b)\to a\downarrow s$
+by $c\mapsto(c,1_a)$, and define $r$ by prepending the forward
+edge $f:a\to c_0$ to $(c,f)$. A comma morphism has the equation
+$\eta_0 f=f'$. On that morphism $r$ uses the type map with an
+extra initial edge and transformation $(1_a,\eta_0,\ldots,\eta_n)$;
+the displayed equation is its first square. Collapsing an initial
+identity gives $ri\Rightarrow1$. Collapsing the extra initial
+edge with components $(f,1,\ldots,1)$ gives $ir\Rightarrow1$
+in the comma category; its origin component satisfies
+$f1_a=f$. Thus $Bi$ and $Br$ are inverse equivalences. Under this
+identification, precomposition by $f$ is prepending its forward edge,
+with the comparison just written.
+
+For a marked $w:a'\to a$, forward prepending has inverse, up to
+the following natural transformations, given by backward prepending.
+The two composites contain the prefixes
+\[
+ a\xleftarrow{w}a'\xrightarrow{w}a,
+ \qquad
+ a'\xrightarrow{w}a\xleftarrow{w}a'.
+\]
+The first transforms to the constant triple at $a$, and the constant
+triple at $a'$ transforms to the second. In both cases the middle
+component is $w$ and the endpoints are identities. Each square is
+an identity equation with $w$, and these transformations are
+natural in the remaining path. Collapsing the constant edges gives
+the two inverse homotopies. Therefore $X_b$ is $\Sigma$-local.
+
+Now let $Q$ be $\Sigma$-local. Prepending an identity edge defines
+$\mathrm{pad}:D_{\tau'}\to D_{\varepsilon\tau'}$ and deleting
+the first vertex defines $\mathrm{trunc}$ in the reverse direction.
+For $\varepsilon=+$, a map from
+$(c_0\xrightarrow{f}c_1;c')$ to $\mathrm{pad}(d')$ is uniquely
+determined by a map $c'\to d'$: its first component must be
+$\eta_1 f$. Hence $\mathrm{trunc}\dashv\mathrm{pad}$.
+The functor $\mathrm{pad}^{\mathrm{op}}$ is a left adjoint and
+is initial for limits. Restriction therefore gives an equivalence
+$A_{+\tau'}\to A_{\tau'}$ for every $Q$. This also verifies the
+intake's opfibration calculation: its fibre is $M/c'_0$, and the
+opposite has initial object $1_{c'_0}$, whose value is $Q(c'_0)$.
+
+For $\varepsilon=-$, a map from $\mathrm{pad}(c')$ to
+$(d_0\xleftarrow{w}d_1;d')$ is uniquely determined by
+$\eta':c'\to d'$, with first component $w\eta_1$.
+Thus $\mathrm{pad}\dashv\mathrm{trunc}$, so
+$\mathrm{trunc}^{\mathrm{op}}$ is initial. The arrows $w$ give
+a natural equivalence from the coefficient diagram $Q(c_0)$ to
+$Q(c_1)=Q(s_{\tau'}\mathrm{trunc}(c))$, precisely because $Q$
+inverts $\Sigma$. After restriction along $\mathrm{pad}$ this
+equivalence is the identity. Therefore restriction
+$A_{-\tau'}\to A_{\tau'}$ is again an equivalence.
+
+Every unique type map $\tau\to\varnothing$ factors into these
+initial-edge collapses. The diagram $A:\mathrm{Ty}\to\mathcal S$
+thus has an objectwise equivalence to its constant value
+$A_\varnothing=Q(b)$. The equality of its composites with the
+terminal arrows shows, in particular, that it sends all type maps
+to equivalences. Since $\mathrm{Ty}$ has terminal empty type,
+$B\mathrm{Ty}$ is contractible. It follows that
+\[
+ \operatorname{Map}(X_b,Q)
+ \simeq\lim_{\mathrm{Ty}}A\simeq Q(b).
+\]
+This is the required localization property of $h_b\to X_b$.
+The same calculation at a single $\tau$ proves
+$\operatorname{Map}(X_b^\tau,Q)\simeq Q(b)$ and the claimed
+single-type local equivalence. It does not assert that a fixed
+$X_b^\tau$ itself inverts $\Sigma$.
+\end{proof}
+
+\begin{claim}{C.8}{Proved}{The specified map $Q$, both endpoint variables, and composition}
+The canonical map $Q_{a,b}$ of PATHS B.6 is the equivalence in C.7.
+These maps are natural in $a\in M^{\mathrm{op}}$ and $b\in M$,
+with coherent endpoint actions, and preserve composition, units,
+and all their coherences. They identify the operation of C.4 with
+composition in $L(M,\Sigma)$.
+\end{claim}
+\begin{proof}
+Let $p_\tau$ be the number of positive letters, and let
+$q_\tau:I_\tau\to[p_\tau]$ count the positive letters preceding
+a vertex. This localizes the interval at its negative edges:
+inverting those edges identifies each negative run to a vertex,
+leaving the free linear category on the positive edges. This is
+also a proof of the universal property in $\infty$-categories:
+in a functor to an $\infty$-category, the data of a finite string of
+equivalences with fixed value at one end have contractible space of
+choices; deleting each such string gives the stated equivalence
+of functor categories, including natural transformations.
+Thus, for $L=L(M,\Sigma)$, pullback is an equivalence
+\[
+ \operatorname{Fun}([p_\tau],L)\simeq
+ \operatorname{Fun}_\Sigma(I_\tau,L),
+\]
+where the right side is the full subcategory sending negative edges
+to equivalences. It commutes with evaluation at both endpoints.
+Take the $\infty$-categorical fibres over $(a,b)$. The endpoint
+arrow $[1]\to[p_\tau]$ then gives a functor from that fibre to
+$\operatorname{Map}_L(a,b)$, a space. The case $p_\tau=0$ uses
+the constant functor $[1]\to[0]$, and includes empty paths.
+
+Every type map $u$ gives a unique monotone $\overline u$ with
+$q_\sigma u=\overline u q_\tau$. Therefore these equivalences
+form an equivalence of entire diagrams on $\mathrm{Ty}^{\mathrm{op}}$.
+Invert this equivalence in that functor $\infty$-category, retaining
+its unit and counit; the space of such inverse data is contractible.
+The maps from $NF_\tau(a,b)$ to the relative-diagram fibres and
+then to $\operatorname{Map}_L(a,b)$ consequently form a coherent
+cocone. Taking groupoid completions and the colimit gives exactly
+$Q_{a,b}$, through the natural Grothendieck comparison.
+
+For a comma object $(c,f:a\to c_0)$ the same construction evaluates
+the path after $\ell(f)$. The comma equation makes this a map of
+strict presheaves of spaces $X_b\to R_b$, natural in $a$ and
+under $h_b$. By C.7 both its source and target are localizations of
+$h_b$. Maps between such localizations under $h_b$ form a
+contractible space and are equivalences. This proves that the
+specified cocone, rather than an unspecified isomorphism of
+homotopy types, is an equivalence.
+
+To check every composition coherence simultaneously, use a finite
+list of intervals with marked junctions. Localize each block as
+above and retain all the junction evaluations. The functor from
+the ordinal of junctions to the concatenated localized ordinal
+commutes with erasing junctions and with inserting an empty block.
+These are respectively the face and degeneracy operations.
+Inverting the single equivalence of diagrams on all such lists
+therefore gives a map of Segal objects in spaces. Its source in
+degree $n$ is
+\[
+ \coprod_{a_0,\ldots,a_n}\prod_{j=1}^{n}
+ B\operatorname{Ch}_\Sigma(M;a_{j-1},a_j),
+\]
+with faces given by literal concatenation and degeneracies by empty
+paths. Its target is the Segal object for $L$ with this chosen
+discrete object set: take the core of $\operatorname{Fun}([n],L)$
+and pull back its vertex evaluations along the set of the chosen
+objects. Degree one is the map $Q$. This construction verifies
+composition and all higher associativities and units at once.
+Prepending a forward edge gives the action of $M^{\mathrm{op}}$;
+appending one gives the action of $M$. Erasing the junction between
+two such edges gives their composite action, and inserting an
+empty block gives the unit coherence. The empty path at $b$
+evaluates to $1_b$. Finally the identity in C.4 transports this
+same composition to the padded systems.
+\end{proof}
+
+\begin{claim}{C.9}{Proved}{F3 and the restricted-vertical inclusion}
+For every wide $\Sigma$, the specified inclusion
+$J:\operatorname{Ch}_\Sigma^\Sigma(M;a,b)\to
+\operatorname{Ch}_\Sigma(M;a,b)$ is a weak equivalence.
+The identification with Dwyer--Kan hammock localization is natural
+in both endpoints, under the ordinary arrows and the empty paths,
+and compatible with concatenation.
+\end{claim}
+\begin{proof}
+Write $D_\tau=NF_\tau^\Sigma(a,b)$. A simplex of the restricted
+total category is a composable string
+$(\tau_0,c_0)\to\cdots\to(\tau_n,c_n)$. Pull every row back
+along the composite type map to $\tau_0$; the transformations form
+a width-$n$ hammock. Reducing identity columns and composing
+same-direction columns gives an $n$-simplex of
+$L^H(M,\Sigma)(a,b)$. The zeroth face changes the common first
+type, and the two choices agree by the defining colimit relation;
+the other faces compose or omit a row, and degeneracies insert an
+identity row. This is an actual simplicial map
+\[
+ \rho:N\operatorname{Ch}_\Sigma^\Sigma(M;a,b)
+ \longrightarrow\operatorname{colim}_{\mathrm{Ty}^{\mathrm{op}}}D_\tau
+ =L^H(M,\Sigma)(a,b).
+\]
+Pullback and reduction commute with concatenation, prepending,
+appending, and the empty path. In particular these assertions
+concern this map, with its structural map from $M$ retained.
+
+Here is the homotopy-colimit check for $\rho$. Give
+$\mathrm{Ty}$ degree equal to length, direct maps injective on
+vertices and inverse maps surjective on vertices. Factoring through
+the image on vertices is the unique Reedy factorization. In the
+opposite category the latching map for $D$ is the union of the
+subsets in which a nonempty prescribed set of horizontal edges is
+identity. Each is a simplicial subset, and intersections correspond
+to collapsing the union of the prescribed edges; hence the
+latching maps are monomorphisms. The diagram is Reedy cofibrant.
+The opposite Reedy category has fibrant constants: the category
+of proper injective endpoint-preserving type maps into a given
+interval is empty for a reduced interval, and otherwise has initial
+object the inclusion of the endpoints and turning vertices. Every
+such map contains those vertices, because a comparable pair cannot
+cross a missing turn. Thus its nerve is connected. The Reedy
+colimit is a left Quillen functor and its ordinary colimit computes
+the homotopy colimit. The natural Grothendieck comparison identifies
+the induced map with $\rho$, by its first-type formula. This
+proves $\rho$ is a weak equivalence and verifies the argument of
+Arakawa--Cnossen, Proposition~4.8 and Lemma~4.16
+\cite{CpathsArakawaCnossen} in the exact variance used here.
+
+For completeness the marking convention in that paper requires
+all equivalences. Put $\Sigma^+=\langle\Sigma,\operatorname{Iso}(M)\rangle$.
+The two markings have identical ordinary saturation, since every
+functor already preserves isomorphisms. Dwyer--Kan's closure lemma
+\cite[Lemma~5.1]{CpathsDKSimplicial}, together with the natural
+comparison in \cite[Proposition~2.2]{CpathsDKCalculating}, implies
+that $L^H(M,\Sigma)\to L^H(M,\Sigma^+)$ is an equivalence on
+mapping spaces. The intermediate comparison diagrams are natural
+in the marking, so this conclusion applies to the actual inclusion.
+Now Arakawa--Cnossen Theorem~4.7 and Corollary~1.11 apply to
+$\Sigma^+$ and identify its mapping spaces with those of
+$L(M,\Sigma^+)$. The latter is canonically $L(M,\Sigma)$:
+their universal properties select the same functors into every
+$\infty$-category. All maps preserve the structural functor from
+$M$ and concatenation. This supplies the exact unrestricted-wide
+scope required in F3.
+
+The two cocones $Q\,BJ$ and the canonical hammock comparison
+evaluate each restricted ladder by inverting its backward edges
+and composing its forward edges. They agree as cocones, including
+type changes, by the interval-localization construction of C.8.
+Thus $Q\,BJ$ is the specified equivalence represented by $\rho$.
+Since $Q$ is an equivalence, $BJ$ is an equivalence.
+
+This also supplies a rigorous presheaf replacement for the
+coherent restricted path action in F3. Take an enriched fibrant
+replacement of $L^H$ and its strict mapping-space presheaf on $M$
+using the structural functor $M\to L^H$. The map $\rho$ is an
+objectwise equivalence, commutes with prepending followed by
+reduction, and preserves the one-edge and empty representatives.
+The type-collapse maps between a concatenated pair of forward
+edges and its composite map to the identity after reduction;
+the same holds for identity insertion. On arbitrary finite lists
+of such edges these equalities hold simultaneously by composition
+of the type maps. They are exactly the composition and unit
+coherences of the action. Therefore this strict presheaf rectifies
+the action under $h_b$. The proof of $J$ above uses the specified
+cocone square and does not require silently treating the original
+total path assignment as a strict presheaf.
+\end{proof}
+
+\begin{claim}{C.10}{Proved}{Finite verification of the stated formulas}
+The attached independent program verifies the two descriptions of
+type maps on all $961$ pairs of words of length at most four, their
+contravariant composition on $2731$ composable pairs of maps with
+word lengths at most three, the run-clamping formulas on $1213$
+nonempty mapping posets, the one-sign crown calculation for $224$
+marking/length/sign choices, and $16$ strictly commuting padding
+squares for the block $(+,-,+)$. It also verifies the integral
+certificate used in C.11 on $7937$ arrows to $1023$ target words.
+\end{claim}
+\begin{proof}
+The program enumerates nondecreasing endpoint-preserving vertex
+functions and tests the image of every generating edge in the
+oriented target interval. Independently it enumerates nondecreasing
+sign-preserving letter maps. It compares the explicit bijections
+and checks composition as tuple composition. For the clamp it tests
+well-definedness, idempotence, the pointwise natural transformation,
+preservation of pointwise order, and the exact image identification
+with the smaller-run problem. For padding it substitutes the
+vertex functions of C.4 into both sides of each actual square.
+The output is \texttt{code/cpaths\_checks.out}; the source contains
+the bounds. These are finite audits of the formulas. The proofs in
+C.2--C.9 and C.11 supply their unbounded quantifiers.
+\end{proof}
+
+\begin{claim}{C.11}{Proved}{R8 with an explicit integral obstruction}
+The category $\mathrm{Ty}^{\mathrm{op}}$ is isomorphic to the
+category of finite sign words with nondecreasing sign-preserving
+letter maps. For $p=(++)$, $q=(+-+)$, the two arrows
+$e=(1,3),c=(1,1):p\rightrightarrows q$ have no completion to a
+commutative square. They have no affine equalizer over any nonzero
+unital ring. The covariant set-valued quotient
+\[
+ H=\mathrm{Ty}^{\mathrm{op}}(p,-)/(ge\sim gc)
+\]
+has $H_1(B\operatorname{El}(H);\mathbb Z)=\mathbb Z$.
+In particular the opposite type category is not totally
+$W_\infty$-aspherical, and categorical colimits over it do not
+compute homotopy colimits for every diagram, even for diagrams of
+sets.
+\end{claim}
+\begin{proof}
+For a vertex map $\phi:I_\tau\to I_\rho$, associate to the
+$j$th target letter the unique source letter $i$ such that
+$\phi(i-1)<j\leq\phi(i)$. This is sign-preserving and
+nondecreasing. Conversely a letter map $f$ gives
+$\phi_f(i)=|\{j:f(j)\leq i\}|$. These formulas are inverse,
+including for empty words, and their defining inequalities give
+$f_{\psi\phi}=f_\phi f_\psi$. They prove the claimed categorical
+isomorphism with its variance.
+
+For every $g:q\to\sigma$ the alternating signs imply
+$g(1)<g(2)<g(3)$. Thus $ge$ is injective on the two letters,
+whereas $hc$ is constant for every $h:q\to\sigma$. Equality is
+impossible, with no bound on $\sigma$.
+
+For a unital ring $R$, define a functional on the free $R$-module
+on maps $p\to\sigma$ by assigning value one to injective maps
+and zero to constant maps. Then
+\[
+ \lambda_\sigma\bigl(t(e-c)\bigr)=\operatorname{aug}(t)
+ \quad\text{for }t\in R[\mathrm{Ty}^{\mathrm{op}}(q,\sigma)].
+\]
+An equalizing affine combination would have both sides zero and
+augmentation one. This is impossible when $R$ is nonzero.
+
+Over $\mathbb Z$, put $P_x=\mathbb Z[\mathrm{Ty}^{\mathrm{op}}(x,-)]$
+and $d:P_q\to P_p$, $d(t)=t(e-c)$. Write $K=\ker d$ and
+$J_0=\operatorname{im}d$. Representable free abelian diagrams are
+projective and have colimit $\mathbb Z$ by augmentation.
+The functional formula makes the map
+$\operatorname{colim}K\to\operatorname{colim}P_q$ zero,
+so right exactness applied to $K\to P_q\to J_0\to0$ gives
+$\operatorname{colim}J_0=\mathbb Z$. Its map to
+$\operatorname{colim}P_p$ is zero, since every $t(e-c)$ has
+augmentation zero. Free abelian groups preserve the set coequalizer,
+so $\operatorname{coker}d=\mathbb Z[H]$. The derived-colimit
+sequence of $0\to J_0\to P_p\to\mathbb Z[H]\to0$ therefore
+gives $L_1\operatorname{colim}\mathbb Z[H]=\mathbb Z$.
+The bar resolution of the permutation diagram $\mathbb Z[H]$
+is the nerve-chain complex of its category of elements, proving
+the asserted homology. This directly verifies the stronger claim
+in TOTAL\_EXACT\_2, C.40, rather than relying only on the span
+criterion. The category of elements is the homotopy colimit of the
+set diagram, while its categorical colimit is discrete; their first
+homology differs.
+
+Here is also a direct check of total asphericity in its final-functor
+definition. Put $A=\mathrm{Ty}^{\mathrm{op}}$ and adjoin an object
+$*$ with $\operatorname{Hom}(*,a)=H(a)$, no arrows $a\to *$,
+and the compositions prescribed by $H$; call the resulting category
+$A_H$. The set $\operatorname{colim}H$ is a singleton: it is a
+quotient of the colimit of the representable $A(p,-)$, which is a
+singleton. Hence $\operatorname{El}(H)$ is nonempty and connected.
+The inclusion $A\to A_H$ is an ordinary final functor: its comma
+category at $*$ is $\operatorname{El}(H)$, and its comma category
+at an old object $a$ is $a\downarrow A$, with initial object $1_a$.
+The nerve of $A_H$ is obtained from $NA$ by adjoining the cone on
+$N\operatorname{El}(H)$ along the projection. Indeed a simplex
+not in $NA$ starts at $*$ and is exactly a chosen element followed
+by a simplex of $\operatorname{El}(H)$; this description respects
+all faces and degeneracies. Thus $BA_H$ is the homotopy cofiber of
+$B\operatorname{El}(H)\to BA$. The empty word is initial in $A$,
+so $BA$ is contractible, and the cofiber sequence gives
+$H_2(BA_H;\mathbb Z)=H_1(B\operatorname{El}(H);\mathbb Z)=\mathbb Z$.
+An ordinary final image of the contractible category $A$ has
+therefore failed to be weakly contractible. This proves the asserted
+failure of total asphericity directly and confirms the application
+of TOTASPH C.5 and C.11 used in R8.
+\end{proof}
+
+\begin{claim}{C.12}{Verified derivations}{Literature scope of the path comparison}
+The all-type equivalence of C.7--C.9 follows from the proofs above
+and the specified hammock comparison, with no calculus-of-fractions
+hypothesis. The primary sources opened for this section support the
+comparisons summarized below. No priority is claimed.
+\end{claim}
+\begin{proof}[Source-by-source derivation]
+Dwyer--Kan's \emph{Simplicial localizations} \cite{CpathsDKSimplicial} defines the standard
+localization for a wide subcategory in Definition~4.1; its
+Lemma~5.1 permits saturation, and \S5.5 identifies the
+invert-everything mapping spaces with loop spaces.
+\emph{Calculating simplicial localizations} \cite{CpathsDKCalculating}, Definition~2.1,
+requires vertical arrows in the marking; Proposition~2.2 compares
+that model with the standard one; Proposition~5.5 is the type-colimit
+formula used for $\rho$; Proposition~6.2 supplies the specified
+short-fraction comparisons under the stated homotopy calculus.
+Thus the map $J$ of C.9 is the precise additional comparison from
+these restricted ladders to the arbitrary-vertical model.
+\emph{Function complexes} \cite{CpathsDKFunction}, Propositions~4.4--4.5 and
+Corollary~4.7, identify the restricted hammock mapping spaces with
+resolution complexes and with a simplicial model category's mapping
+space at cofibrant--fibrant pairs. Composing those maps with the
+inverse of $BJ$ in $\mathrm{Hot}$ gives the corresponding
+arbitrary-vertical comparison under exactly those hypotheses.
+
+Low--Mazel-Gee, \emph{From fractions to complete Segal spaces} \cite{CpathsLowMazelGee},
+uses marked vertical arrows in its zigzag categories. Its
+three-arrow theorem and its Segal-space theorem apply under the
+homotopical three-arrow calculus; the complete-Segal conclusion
+also has the stated saturation condition. Composing its reduction
+map with C.9 gives its consequence for the present all-type model.
+Mazel-Gee, \emph{Hammocks and fractions in relative
+$\infty$-categories} \cite{CpathsMazelGee}, defines the enriched hammock construction
+with relative transformations and proves the short description
+under a homotopical three-arrow calculus. The general localization
+comparison used here is supplied in the opened Arakawa--Cnossen
+source: Definition~1.7, Theorem~1.9, Corollary~1.11,
+Theorem~4.7, Proposition~4.8, Lemma~4.16 and the
+Grothendieck-construction remark. Its marking convention is handled
+explicitly in C.9. These exact statements use restricted vertical
+arrows; C.9 gives the morphism transferring them to the specified
+unrestricted model.
+
+Cisinski, \emph{Higher categories and homotopical algebra} \cite{CpathsCisinski},
+Theorem~7.2.8, computes derived mapping spaces from a chosen
+calculus of fractions, and Remark~7.2.10 identifies the associated
+span realization. Carranza--Kapulkin--Lindsey \cite{CpathsCarranzaKapulkinLindsey}, Corollary~10.10,
+computes mapping spaces under their quasicategorical calculus of
+fractions and its stated marking hypotheses. Arakawa--Carranza--Kapulkin \cite{CpathsArakawaCarranzaKapulkin},
+Definition~2.1 and Theorem~2.2, formulates a resolution criterion:
+the indexing category is weakly contractible, the structure arrows
+become equivalences, and the colimit of representables is local.
+These give short or resolution-based models when their hypotheses
+are verified; the full path model is verified directly by C.7.
+
+The search also opened Guill\'en--Navarro--Pascual--Roig,
+\emph{A Cartan--Eilenberg approach to homotopical algebra},
+\S1.2 \cite{CpathsGuillenEtAl}. Its arbitrary-vertical ladders present the ordinary
+localization by a quotient of zigzags, which is the $\pi_0$
+consequence of C.7. The 2020 MathOverflow question and 2024 answer
+on arbitrary vertical arrows \cite{CpathsMathOverflow} were checked as a record of the
+question; no theorem in that discussion is used in the proof.
+The bibliography records both the supplied source versions and the
+web searches. The supplied Arakawa--Cnossen LaTeX was opened in
+full at all cited definitions and proofs; two web fetches of that
+preprint were disabled, so verification rests on that supplied
+source, not an inaccessible web body.
+\end{proof}

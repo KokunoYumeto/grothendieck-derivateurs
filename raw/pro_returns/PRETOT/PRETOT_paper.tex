@@ -1,0 +1,2556 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage[margin=27mm,headheight=15pt]{geometry}
+\usepackage{microtype,booktabs,longtable,array,enumitem}
+\usepackage[round,authoryear]{natbib}
+\usepackage{xcolor,hyperref,fancyhdr}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black,pdftitle={PRETOT: A finite counterexample to total presheaf recognition},pdfauthor={AI-produced by GPT-6 Astra, OpenAI}}
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{3pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small PRETOT}\fancyhead[R]{\small Total presheaves and Dwyer-type sieves}\fancyfoot[C]{\thepage}
+\renewcommand{\thesection}{\Alph{section}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{construction}[theorem]{Construction}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\sSet}{\mathbf{sSet}}
+\newcommand{\Top}{\mathbf{Top}}
+\newcommand{\Pos}{\mathbf{Pos}}
+\newcommand{\Gpd}{\mathbf{Gpd}}
+\newcommand{\Mon}{\mathbf{Mon}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Winfty}{W_\infty}
+\newcommand{\WZ}{W_{\mathbb Z}}
+\newcommand{\El}{\operatorname{El}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\colim}{\operatorname*{colim}}
+\newcommand{\hocolim}{\operatorname*{hocolim}}
+\newcommand{\Lan}{\operatorname{Lan}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\Aff}{\operatorname{Aff}}
+\newcommand{\Ch}{\operatorname{Ch}}
+\newcommand{\Fun}{\operatorname{Fun}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Cone}{\operatorname{Cone}}
+\newcommand{\Hot}{\mathbf{Hot}}
+\newcommand{\simeqwe}{\simeq}
+\title{Totally aspherical presheaves:\\a finite counterexample and its consequences}
+\author{AI-produced by GPT-6 Astra\\OpenAI, ChatGPT Pro mode}
+\date{12 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We refute the implication from total integral-homology asphericity of a presheaf to simple connectivity of its category of elements. A counterexample is a $52$-element right act over the $10$-element monoid of monotone self-maps of $\{0<1<2\}$. Its category of elements has $52$ objects and $520$ arrows. Its classifying space is integrally acyclic and has a nontrivial perfect fundamental group. The free abelian act is a direct summand of eighteen copies of the regular integral monoid module; explicit integer matrices certify this assertion. Projectivity verifies the defining condition for every target category and every change-of-base functor. The construction gives finite counterexamples to all five assertions of TOTASPH F.26, including composition of $\Winfty$-dwy\'erienne sieves and recognition of one-point couniversal equivalences. We also give a complete classification on poset bases and on the simplex category, check the proposed semisimplicial obstruction, repair the diagram-shape theorem by allowing disjoint unions of filtered categories, and record the precise limits of the additional manuscript investigations. We claim no priority.
+\end{abstract}
+\tableofcontents
+\bigskip
+\noindent\textbf{Conventions and proof scope.}
+We work in the category $\Cat$ of small categories for a fixed universe, with $BA=|NA|$ and $\Hot=\Cat[\Winfty^{-1}]$. Here $\Winfty$ consists of nerve weak homotopy equivalences, $W_n$ consists of maps inducing an isomorphism on $\pi_0$ and on all homotopy groups in degrees $1,\ldots,n$ at every basepoint, and $\WZ$ consists of integral homology equivalences. An acyclic space is nonempty, connected, and has zero reduced integral homology.
+
+We use fundamental localizers with the following precise axioms. LF1 is weak saturation: identities, two out of three, and the retract clause that $ri=\id$ and $ir\in W$ imply $r\in W$. LF2 asserts $A\to e\in W$ when $A$ has a terminal object. LF3 is relative Theorem A: in a commutative triangle $A\xrightarrow{u}B\to C$, if $A/c\to B/c$ belongs to $W$ for every $c$, then $u\in W$. No extra filtered-colimit axiom is included.
+
+For $u:A\to B$, the objects of $A/b$ are arrows $u(a)\to b$, and those of $b\backslash A$ are arrows $b\to u(a)$. The word final always has the usual covariant meaning: every $b\backslash A$ is nonempty and connected. A sieve is full and closed under sources; a cosieve is full and closed under targets. For $H:U^{\op}\to\Set$, $U/H$ has arrows $(u,h)\xrightarrow{a}(v,k)$ satisfying $H(a)k=h$. For $L:U\to\Set$, $\El_U(L)$ instead has arrows satisfying $L(a)h=k$.
+
+The functor $p_!$ is ordinary left Kan extension along $p^{\op}$. A presheaf $H$ is totally $W$-aspherical when $U'/p_!H\to e$ belongs to $W$ for every small $U'$ and every $p:U\to U'$. A category is total when its terminal presheaf is total. A functor $f:A\to B$ is strictly $W$-aspherical when $B(f(-),b)$ is a total presheaf for every $b$; it is totally $W$-aspherical when every $A/b$ is a total category. A sieve is $W$-dwy\'erienne, respectively totally $W$-dwy\'erienne, when its nonempty crossing weights, respectively their element categories, have these properties. Classical Dwyer sieves have a right adjoint on the cosieve they generate.
+
+The labels Proved, Refuted, Known, and Open distinguish conclusions from remaining questions. A ``machine check'' below means exact verification by the supplied programs, not a formal proof-assistant development. The universal quantifiers in the main counterexample are proved algebraically; they are not inferred from any finite test list. Manuscript references specify chapter and manuscript page, as marked in the supplied transcription. Opened references are marked in the bibliography. The supplied AI reports are audited inputs, not authorities.
+
+\section{The main presheaf question}
+
+% Begin sections/A_main.tex
+\subsection{An integral projectivity criterion}
+
+\begin{lemma}[Proved: the projective-weight criterion]\label{A:projective}
+Let $U$ be a small category and $H:U^{\op}\to\Set$. If the right $\Z U$-module $\Z[H]$ is projective and $U/H$ is nonempty and connected, then $H$ is totally $\WZ$-aspherical. The same conclusion holds with ``flat'' in place of ``projective.'' For any $L:U\to\Set$ there are natural isomorphisms
+\[
+ H_i\bigl(B\El_{U/H}(L\pi);\Z\bigr)
+ \cong \Tor_i^{\Z U}(\Z[H],\Z[L])\qquad(i\geq0),
+\]
+where $\pi:U/H\to U$ is the projection. In particular, projectivity verifies the restricted-action condition for all set-valued $L$ simultaneously.
+\end{lemma}
+\begin{proof}
+The right $\Z U$-module $\Z[H]$ assigns the free abelian group on $H(u)$ to $u$. The two-sided bar group in degree $q$ is
+\[
+ B_q(\Z[H],\Z U,\Z[L])=
+ \bigoplus_{u_0\to\cdots\to u_q}\Z[H(u_q)]\otimes_{\Z}\Z[L(u_0)].
+\]
+An element $h\in H(u_q)$ determines the $H$-coordinates of all preceding vertices, and $l\in L(u_0)$ determines the $L$-coordinates of all following vertices. Thus its preferred basis is precisely the set of $q$-simplices of $N\El_{U/H}(L\pi)$, compatibly with faces and degeneracies. To see that this bar computes $\Tor$, use the augmented right-module resolution whose terms are sums of modules $\Z U(-,u_0)\otimes\Z[H(u_q)]$ over chains $u_0\to\cdots\to u_q$. These modules are projective because the coefficient groups are free. Evaluating at an object supplies the usual extra degeneracy, so the augmentation is an exact projective resolution. Tensoring it with $\Z[L]$ gives the displayed bar. This proves the formula without a finiteness assumption.
+
+Projectivity, or flatness, makes the positive groups vanish. Integral homology of a disjoint union is a direct sum, so every connected component of the element category is acyclic. Taking $L=1$ also makes $U/H$ acyclic under the assumed nonempty connectedness.
+
+We explicitly check the R1 implication used here. For any $p:U\to U'$, the canonical functor $q:U/H\to U'/p_!H$ is the final part of the comprehensive factorization of $p\pi$. If $d=(u',c)$ is an object of its target, $d\backslash(U/H)$ is component $c$ of $\El_{U/H}(L_{u'}\pi)$ for $L_{u'}(u)=U'(u',p(u))$. These comma categories are acyclic by the preceding calculation. Homological Theorem A, obtained by comparing the two filtrations of the comma-category bisimplicial bar, makes $Bq$ an integral homology equivalence. Its source is acyclic, hence so is its target. This is precisely the quantified totality condition. The necessity direction of R1 follows by adjoining a source with crossing covariant functor $L$: the new element category attaches cones on the components of $\El_{U/H}(L\pi)$, and the relative integral homology is the direct sum of their reduced homologies shifted by one. This also confirms the source and variance of the restricted actions used throughout.
+\end{proof}
+
+\begin{theorem}[Proved: complete classification for simplicial presheaves]\label{A:simplicial}
+Let $K:\Delta^{\op}\to\Set$ be a small simplicial set. The following are equivalent: $K$ is totally $\WZ$-aspherical as a presheaf on $\Delta$; $|K|$ is acyclic; and $K$ is nonempty and connected and $\Z[K]$ is projective in $\Ab^{\Delta^{\op}}$. Moreover $K$ is totally $\Winfty$-aspherical as a presheaf on $\Delta$ if and only if $|K|$ is weakly contractible.
+\end{theorem}
+\begin{proof}
+The realization of the category of simplices $\Delta/K$ is weakly equivalent to $|K|$. One direct model is the simplicial replacement of the standard simplices indexed by $\Delta/K$: its map to $N(\Delta/K)$ is a weak equivalence because every standard simplex is contractible, and its augmentation to $K$ is the usual subdivision comparison. This also handles degenerate simplices and arbitrary, possibly infinite, $K$.
+
+Write $C=N(\Z[K])$ for the normalized chain complex. Its group $C_n$ is free on the nondegenerate $n$-simplices. Suppose $|K|$ is acyclic. Put $B_n=\im(d:C_{n+1}\to C_n)$. Every $B_n$ is free, being a subgroup of a free abelian group. The sequences
+\[
+ 0\to B_n\to C_n\to B_{n-1}\to0\quad(n>0),
+ \qquad 0\to B_0\to C_0\to\Z\to0
+\]
+split as sequences of abelian groups. Choosing splittings gives an isomorphism of chain complexes
+\[
+ C\cong S^0(\Z)\oplus\bigoplus_{n\geq1}D^n(B_{n-1}),
+\]
+where $D^n(P)$ has $P\xrightarrow{\id}P$ in degrees $n,n-1$ and $S^0(P)$ is concentrated in degree zero. This is an actual chain isomorphism, not merely a quasi-isomorphism. For free $P$, both displayed types are projective objects of $\Ch_{\geq0}(\Ab)$: maps from $D^n(P)$ are determined by a map $P\to C_n$, and maps from $S^0(P)$ by a map $P\to C_0$. These Hom functors preserve epimorphisms. Direct sums of projectives remain projective.
+
+Normalization is an equivalence of abelian categories by the Dold--Kan theorem, and thus preserves and reflects projective objects \citep[Theorem 8.4.1]{Weibel1994}; an opened full proof is also available as \citet[Theorem 14.24.3, Tag 019D]{StacksDK}. Therefore $\Z[K]$ is projective as an ordinary abelian presheaf on $\Delta$. Lemma~\ref{A:projective} proves total $\WZ$-asphericity. The converse is the identity test. Projectivity also forces the positive integral homology of $\Delta/K$ to vanish by taking $L=1$ in that lemma.
+
+For the last assertion, total $\Winfty$-asphericity necessarily makes $\Delta/K$ weakly contractible. Conversely, if $|K|$ is weakly contractible, the argument above gives every required restricted-action homology vanishing. For any $p$, the canonical final $q:\Delta/K\to U'/p_!K$ induces a surjection on fundamental groups. To check this familiar finality fact, choose an arrow from each target object into an image object and connect the different choices by zigzags in its comma category; commuting triangles express every target loop as the image of a source loop. Thus the target is simply connected as well as acyclic, and the homological Whitehead theorem makes it weakly contractible. This proves the assertion for every $p$.
+\end{proof}
+
+\subsection{A completely finite counterexample}
+
+\begin{construction}[Proved: the finite simplicial data]\label{A:data}
+Let $K^{\mathrm{ss}}$ be the following semisimplicial set. Its vertices are $v,c_0,c_1$. Put
+\[
+ w_0=aaaaaBBB,\qquad w_1=bbbBABA,\qquad n_0=8,\quad n_1=7,
+\]
+where capital letters denote inverses. Its edges are loops $a,b$ at $v$ and edges $r_{k,i}:c_k\to v$, with $i\in\Z/n_k$. Its triangles are $t_{k,i}$. For a positive letter $\ell$ in position $i$ of $w_k$, set
+\[
+ (d_0t_{k,i},d_1t_{k,i},d_2t_{k,i})=(\ell,r_{k,i+1},r_{k,i});
+\]
+for the letter $\ell^{-1}$, set this triple to $(\ell,r_{k,i},r_{k,i+1})$. The endpoint faces of $r_{k,i}$ are $(v,c_k)$, and those of $a,b$ are $(v,v)$. There are no simplices in degree greater than two.
+
+Let $K$ be its free degeneracy completion. Explicitly,
+\[
+ K_n=\coprod_{0\leq k\leq2}\coprod_{\rho:[n]\twoheadrightarrow[k]}K_k^{\mathrm{ss}}.
+\]
+The coproduct is empty for $k>n$. For $\alpha:[m]\to[n]$, factor $\rho\alpha=\beta\eta$ with $\eta$ surjective and $\beta$ injective; then $K(\alpha)(\rho,x)=(\eta,\beta^*x)$. This gives $|K_0|=3$, $|K_1|=20$, and $|K_2|=52$.
+
+Define the monoid
+\[
+ M=\End_\Delta([2])=\{(a_0,a_1,a_2):0\leq a_0\leq a_1\leq a_2\leq2\}
+\]
+with multiplication $gf=g\circ f$, identity $(0,1,2)$, and right act $H=K_2$, $h\cdot m=K(m)h$. These formulas specify all ten monoid elements and all $520$ action values.
+\end{construction}
+\begin{proof}
+The vertex faces of each triangle satisfy $d_i d_j=d_{j-1}d_i$ for $i<j$, including the negative-letter triangles; both last vertices are $v$. The unique epi-mono factorization in $\Delta$ proves the functor laws for the free degeneracy completion. The sizes follow from the three vertices, seventeen edges, fifteen triangles, and the two surjections $[2]\twoheadrightarrow[1]$. The monoid contains ten monotone maps, and contravariance gives $K(f)K(g)=K(gf)$, exactly the right-action law. The supplied program checks every functor law on $\Delta_{\leq2}$ and independently lists the multiplication and action tables.
+\end{proof}
+
+\begin{lemma}[Proved: the finite comparison maps]\label{A:comparisons}
+Let $A=\Delta_{\mathrm{inj}}/K^{\mathrm{ss}}$, $U=\Delta_{\leq2}$, and $E=U/(K|_U)$. There are specified weak equivalences
+\[
+ M/H\longrightarrow E\longrightarrow A.
+\]
+Their respective finite sizes are $(52,520)$, $(75,1177)$, and $(35,159)$, where each pair records objects and arrows. The second functor is a deformation retraction up to a specified natural transformation. The first is homotopy final.
+\end{lemma}
+\begin{proof}
+An object of $E$ is a simplex $(n;\rho,x)$, where $x$ is a nondegenerate simplex and $\rho:[n]\twoheadrightarrow[k]$. Send it to $x$ in $A$. An arrow $\alpha$ satisfies $\rho'\alpha=\beta\rho$ for a unique face injection $\beta$; send it to $\beta$. The factorization identity proves functoriality. Inclusion of the nondegenerate simplices is a section, and the surjections $\rho$ supply a natural transformation from $\id_E$ to the inclusion followed by this retraction. This is a homotopy equivalence on nerves. The arrows in $A$ retain distinct occurrences of a repeated face, so this argument does not incorrectly replace a semisimplicial complex by a face poset.
+
+The first functor includes the full subcategory of simplices in degree two. Every object $c=(n,x)$ of $E$ is a retract of such an object: choose $i_n:[n]\to[2]$, $i_n(j)=j$, and $r_n:[2]\to[n]$, $r_n(j)=\min(j,n)$, so $r_n i_n=\id$. Put $d=(2,K(r_n)x)$. The corresponding arrows $i:c\to d$, $r:d\to c$ satisfy $ri=\id_c$. In the comma category $c\backslash(M/H)$ choose $(d,i)$. For any $(d',f)$ the arrow $fr:d\to d'$ gives a morphism $(d,i)\to(d',f)$, naturally in $(d',f)$. Consequently the constant functor at $(d,i)$ has a natural transformation to the identity. Every such comma nerve is contractible, so Quillen's Theorem A proves the inclusion a weak equivalence. No categorical equivalence or identity-preserving retraction onto the single base object is asserted.
+
+The counts follow directly from the definitions. The category $U$ has $31$ arrows, with incoming column counts $3,9,19$ at $[0],[1],[2]$, so $E$ has $3\cdot3+9\cdot20+19\cdot52=1177$ arrows. The analogous count for $M/H$ is $10\cdot52=520$. The exact program checks all category axioms, $1177$ naturality equations for the second comparison, and all object retractions for the first.
+\end{proof}
+
+\begin{theorem}[Refuted: Part A, already over a finite monoid]\label{A:counterexample}
+The right $M$-act $H$ of Construction~\ref{A:data} is totally $\WZ$-aspherical, while $\pi_1(B(M/H))\ne1$. Thus total integral-homology asphericity does not imply total weak-homotopy asphericity. This is a counterexample with a ten-element monoid, and therefore also with a base having finitely many arrows. Its free abelian module is a direct summand
+\[
+ \Z[H]\ \mid\ (\Z M)^{18}.
+\]
+\end{theorem}
+\begin{proof}
+The realization of $K^{\mathrm{ss}}$ is the presentation complex
+\[
+ P=\langle a,b\mid a^5b^{-3},\ b^3(ab)^{-2}\rangle
+\]
+with each of its two attaching polygons coned from $c_k$. Reversing the last two vertices for a negative boundary letter gives exactly the face formulas above. The two-cell cellular differential is
+\[
+ \partial_2=\begin{pmatrix}5&-2\\-3&1\end{pmatrix},
+ \qquad\det\partial_2=-1.
+\]
+Hence this connected two-dimensional complex is acyclic. To prove its fundamental group nontrivial, send $a$ to $(1\ 4\ 3\ 2\ 5)$ and $b$ to $(1\ 2\ 3)$ in $A_5$, with right-to-left permutation composition. Both relators have identity image and $a$ has nonidentity image; in fact these permutations generate all $A_5$. This is the classical acyclic presentation complex of \citet[Example 2.38, p.~142]{Hatcher2002}; the calculation just given is the independent verification needed here. Barycentric subdivision identifies $BA$ with its semisimplicial realization. Lemma~\ref{A:comparisons} transfers these exact homology and fundamental-group conclusions to $M/H$.
+
+It remains to verify the universal presheaf hypothesis, which does not follow from acyclicity alone. The normalized complex of $\Z[K]$ has ranks $(3,17,15)$ and, by the splitting proof of Theorem~\ref{A:simplicial}, is isomorphic to
+\[
+ S^0(\Z)\oplus D^1(\Z)^2\oplus D^2(\Z)^{15}.
+\]
+For $n=1,2$, the disk $D^n(\Z)$ is a direct summand of $N\Z[\Delta[n]]$: inject its top generator as the top simplex and its lower generator as the boundary of that simplex; retract by taking the coefficient of the top simplex and the coefficient of the face opposite vertex zero. The latter coefficient is $1$ in the boundary. All other chain degrees map to zero. These are chain maps and their composite is the identity of the disk. For $n=0$, use $\Delta[0]$ itself. Applying the inverse Dold--Kan equivalence gives a retraction of $\Z[K]$ from
+\[
+ Q=\Z[\Delta[0]]\oplus\Z[\Delta[1]]^2\oplus\Z[\Delta[2]]^{15}.
+\]
+Restrict first to $U$ and then to its full subcategory $M$. The restricted representable $\Delta[n]$ at $[2]$ is $\Delta([2],[n])$. Postcomposition with $i_n$ embeds this right $M$-act into the regular act $M$, and postcomposition with $r_n$ retracts it. Thus each summand of $Q([2])$ is projective over $\Z M$, and $\Z[H]$ is a summand of $(\Z M)^{1+2+15}$.
+
+For reproducibility, \texttt{projectivity\_certificate.json} contains integer matrices $S:\Z^{52}\to\Z^{180}$ and $R:\Z^{180}\to\Z^{52}$. The exact program verifies $RS=I_{52}$ and $S A_m=B_mS$, $RB_m=A_mR$ for every $m\in M$, where $A_m$ is the action on $H$ and $B_m$ the action on eighteen regular copies. A separate reader verifies the certificate without importing its generator. Consequently the finite example's projectivity can also be checked without relying on a software implementation of Dold--Kan. Lemma~\ref{A:projective} now proves total $\WZ$-asphericity for every $p:M\to U'$. The nontrivial fundamental group already fails the identity test for total $\Winfty$-asphericity.
+\end{proof}
+
+\subsection{Positive cases, the enlargement obstruction, and the R6 check}
+
+\begin{theorem}[Proved: classification on arbitrary poset bases]\label{A:posets}
+For a small poset $U$, a presheaf $H:U^{\op}\to\Set$ is totally $\WZ$-aspherical if and only if it is subterminal and its support is a nonempty directed lower subset of $U$. These presheaves are totally $W$-aspherical for every fundamental localizer $W$. No finiteness assumption is required.
+\end{theorem}
+\begin{proof}
+Write $E=U/H$. Suppose $H$ is totally $\WZ$-aspherical and fix $u$ with $H(u)\ne\varnothing$. Let $V=\{v:u\leq v\}$, and define $L:U\to\Set$ to have two elements outside $V$ and one element on $V$, with the evident maps. Then $\El_E(L\pi)$ is two copies of $E$ glued along $E_V$. Its nerve is the corresponding pushout of subcomplexes: a chain cannot leave the cosieve $E_V$ after entering it. Moreover $E_V$ is the disjoint union, indexed by $H(u)$, of categories with initial object $(u,h)$; the unique arrow $u\leq v$ sends $(v,k)$ to the index $H(u\leq v)k$. Since $E$ is acyclic and $E_V$ nonempty, the glued space is connected, and Mayer--Vietoris gives
+\[
+ H_1\bigl(B\El_E(L\pi);\Z\bigr)
+ \cong\ker\bigl(\Z[H(u)]\xrightarrow{\epsilon}\Z\bigr).
+\]
+R1 makes this group zero, forcing $|H(u)|=1$. Thus $H$ is subterminal. Its support $S$ is a lower subset and $E\cong S$.
+
+If $a,b\in S$ had no common upper bound in $S$, the two nonempty cosieves $S\cap\uparrow a$ and $S\cap\uparrow b$ would be disjoint. Applying the same doubled-copy action, now with the union of these two cosieves, gives a nonzero first homology group. We may define this action directly on $U$ by collapsing the two copies on $\uparrow a\cup\uparrow b$; its restriction to $S$ is exactly the one just described. This contradicts R1. Hence $S$ is directed.
+
+Conversely, a nonempty directed poset is filtered. For every $p:U\to U'$, the canonical map $S\to U'/p_!H$ is final. Final images of filtered categories are filtered: a finite comma zigzag gives a common cocone, and the finitely many resulting parallel arrows can be equalized. Thus every target is filtered and has weakly contractible nerve. Since $\Winfty$ is contained in every fundamental localizer, the final assertion follows. We use precisely the minimality theorem \citep[Theorem~6.1.18]{Cisinski2006} for this last standard inclusion, not an additional colimit axiom.
+\end{proof}
+
+\begin{proposition}[Proved: the other positive assertions in R6]\label{A:R6positive}
+If the base is a group, total $\WZ$-asphericity implies that the presheaf is a free transitive right act. The implication from total $\WZ$- to total $\Winfty$-asphericity also holds for subterminal presheaves on arbitrary small bases. For every totally $\WZ$-aspherical $H$, the homomorphism $\pi_1(B(U/H))\to\pi_1(BU)$ is trivial.
+\end{proposition}
+\begin{proof}
+For a group $G$, connectedness makes $H$ a transitive act, with stabilizer $K$ and element category equivalent to $BK$. For each cyclic subgroup $C\leq K$, use the covariant left $G$-set $G/C$. The restricted-action component through the distinguished cosets has stabilizer $C$, so R1 makes $BC$ acyclic. Its first homology is $C$, forcing $C=1$. Every element of $K$ generates such a subgroup, hence $K=1$ and the act is representable.
+
+For subterminal $H$, put $V=U/H$, identified with the full supporting sieve. Every covariant functor $A:V\to\Set$ extends to $U$ by $\Lan_{V\hookrightarrow U}A$, whose restriction is naturally $A$ because the inclusion is fully faithful. Thus all covering actions on $V$ are genuinely obtained from allowed restricted actions. Applying the cyclic-cover argument to its fundamental group makes $BV$ simply connected. The identity test gives acyclicity, so $BV$ is weakly contractible; the restricted-action criterion gives total $\Winfty$-asphericity. This includes terminal presheaves.
+
+Finally let $\varphi:\pi_1(BE)\to G=\pi_1(BU)$ be the projection map on the relevant connected component, and let $g\in\im\varphi$. Use the covariant local system on $U$ with transitive $G$-set $G/\langle g\rangle$, empty on the other components. The relevant covering of $E$ has fundamental group $\varphi^{-1}\langle g\rangle$ and is acyclic by R1. Its surjection onto the abelian group $\langle g\rangle$ factors through zero first homology, so $g=1$. This verifies exactly the covering argument used in TOTASPH F.20 and the visibility clause of R6, with all actions defined on the base.
+\end{proof}
+
+\begin{proposition}[Refuted: cyclic-cover enlargement for the specified example]\label{A:enlargement}
+Take the finite $M,H$ of Theorem~\ref{A:counterexample}, and let $C$ be any nontrivial cyclic subgroup of $\pi_1(B(M/H))$; for example, use the subgroup generated by the presentation generator $a$. There is no pair $p:M\to U'$, $L':U'\to\Set$ for which a component of
+\[
+ \El_{U'/p_!H}(L'\pi')
+\]
+is a connected covering corresponding to $C$ of a category weakly equivalent to $M/H$. Here ``corresponding to $C$'' means that the covering has fundamental group $C$, not that its deck-transformation group is $C$.
+\end{proposition}
+\begin{proof}
+Total $\WZ$-asphericity is preserved by every left Kan extension, since $r_!p_!H\cong(rp)_!H$. Therefore R1 makes every displayed component acyclic. A connected covering corresponding to $C$ has first integral homology $C^{\mathrm{ab}}=C\ne0$. These conclusions are incompatible. Nontriviality of the example $\langle a\rangle$ follows from its nontrivial image in $A_5$. This is an impossibility proof for the proposed enlargement, not a failed attempt to extend an arbitrary covering action across $\pi$.
+\end{proof}
+
+\begin{proposition}[Proved: R6's semisimplicial obstruction, with corrected equivalence]\label{A:R6graph}
+For $K^{\mathrm{ss}}$ of Construction~\ref{A:data}, define $L:\Delta_{\mathrm{inj}}\to\Set$ by $L([0])=\{0\}$, $L([1])=\{0,1\}$ and $L([n])=\{*\}$ for $n\geq2$, using the vertex maps below degree two and the unique maps thereafter. Then
+\[
+ H_1\bigl(B\El_{\Delta_{\mathrm{inj}}/K^{\mathrm{ss}}}(L\pi);\Z\bigr)=\Z^{28}.
+\]
+Consequently $K^{\mathrm{ss}}$ is not totally $\WZ$-aspherical. Its free degeneracy completion $K$ is totally $\WZ$-aspherical on $\Delta$, so this change of indexing category is essential.
+\end{proposition}
+\begin{proof}
+The action category has one object for each vertex, two marked objects for each edge, and one object for each triangle, hence $52$ objects. Retain only its vertex and triangle objects. A marked edge has one selected endpoint, and we send the marked edge to that vertex. Each arrow from the marked edge to a triangle maps to the corresponding vertex occurrence in the triangle. The resulting functor is a retraction onto the vertex--triangle incidence category, and the arrows from the selected vertex to each marked edge give a natural transformation from inclusion followed by retraction to the identity. Thus this is a homotopy equivalence of categories. It is not an equivalence of categories: the removed edge objects are not isomorphic to their endpoints.
+
+The incidence graph has $3+15=18$ vertices and $3\cdot15=45$ edges, retaining repeated incidences. It is connected, and its cycle rank is $45-18+1=28$. Independently, the supplied exact calculation gives normalized nerve ranks $(52,169,90)$, with no degree-three chains, and Smith homology $(\Z,\Z^{28},0)$. The action $L$ cannot extend to $\Delta$ with these values: a surjection $[2]\to[1]$ composed with suitable vertex injections would force its singleton value to map to both distinct vertices of $L([1])$. The last assertion now follows from Theorem~\ref{A:simplicial}.
+\end{proof}
+
+% Additional finite-height classification and bounded enumeration are inserted below.
+
+% Begin sections/A_finite_height.tex
+\begin{theorem}[Proved: total presheaves on a category of finite height]\label{A:finite-height}
+Let $U$ be a small category admitting a function
+\[
+ d:\operatorname{Ob}(U)\longrightarrow\{0,1,\ldots,N\}
+\]
+which strictly increases on every nonidentity arrow. Let $H:U^{\mathrm{op}}\to\mathrm{Set}$ be a presheaf. Then the following conditions are equivalent: $H$ is totally $W_{\mathbb Z}$-aspherical; $H$ is totally $W_\infty$-aspherical; $H$ is representable. They are also equivalent to total $W_n$-asphericity for any fixed $n\geq2$. No finiteness assumption is made on the hom sets or on the values of $H$.
+\end{theorem}
+\begin{proof}
+Representables have all the stated totality properties: for every $p:U\to U'$, the Kan extension of $U(-,u)$ is $U'(-,p(u))$, whose element category has a terminal object. It therefore suffices to prove representability from either total homological asphericity or total $W_n$-asphericity with $n\geq2$. In both cases $U/H$ is nonempty and connected and the first integral homology of every restricted-action component vanishes, by the restricted-action criteria.
+
+Fix an object $u$. Define a covariant set-valued functor $L_u$ with values $\{*\}$ away from $u$ and $\{*,x\}$ at $u$. Every nonidentity arrow into $u$ selects $*$; every nonidentity arrow out of $u$ identifies the two elements. These prescriptions are functorial: a nonidentity composable chain cannot return to $u$, because degrees strictly increase. The linearized functor splits naturally as
+\[
+ \mathbb Z[L_u]\cong\mathbb Z\oplus S_u,
+\]
+where $S_u$ is $\mathbb Z$ at $u$, zero elsewhere, and is generated at $u$ by $x-*$. The two-sided bar complex for $(\mathbb Z[H],\mathbb Z[L_u])$ is the integral nerve-chain complex of $\operatorname{El}_{U/H}(L_u\pi)$. The degree-one vanishing and the displayed splitting imply
+\[
+ \operatorname{Tor}^{\mathbb ZU}_1(\mathbb Z[H],S_u)=0.
+\tag{$\ast$}
+\]
+Here right modules over the category $\mathbb ZU$ are contravariant abelian-group-valued functors; $S_u$ is a left module. For every right module $M$, the defining coend relations give the exact formula
+\[
+ M\otimes_{\mathbb ZU}S_u
+ =M(u)\bigg/\sum_{\substack{f:u\to v\\f\ne1_u}}\operatorname{im}\bigl(M(f):M(v)\to M(u)\bigr).
+\tag{$\ast\ast$}
+\]
+There is no relation contributed by arrows entering $u$, since their source value of $S_u$ is zero.
+
+Call $h\in H(u)$ primitive if it is not $H(f)(h')$ for a nonidentity arrow $f:u\to v$ and any $h'\in H(v)$. Let
+\[
+ P=\coprod_{(u,h)\text{ primitive}}U(-,u)
+ \longrightarrow H
+\]
+be the map carrying the identity in its $(u,h)$ summand to $h$. It is an epimorphism: repeatedly factoring a nonprimitive element increases degree, so after at most $N$ steps it comes from a primitive element. Linearization is therefore a short exact sequence
+\[
+ 0\longrightarrow J\longrightarrow\mathbb Z[P]\longrightarrow\mathbb Z[H]\longrightarrow0.
+\]
+The middle term is a coproduct of representable right modules and hence projective. Formula $(\ast\ast)$ identifies both $\mathbb Z[P]\otimes S_u$ and $\mathbb Z[H]\otimes S_u$ with the free abelian group on the primitive elements at $u$, and identifies their comparison with the identity on those basis elements. The long exact Tor sequence and $(\ast)$ give $J\otimes S_u=0$ for every $u$.
+
+If $J\ne0$, choose an object $u$ in its support of maximal degree. For every nonidentity $f:u\to v$ we then have $J(v)=0$, so $(\ast\ast)$ gives $J\otimes S_u=J(u)\ne0$, a contradiction. Hence $\mathbb Z[P]\to\mathbb Z[H]$ is an isomorphism. Since it is induced by a surjection of sets in each degree, that surjection is a bijection in each degree: two distinct basis elements with the same image would give a nonzero kernel element. Thus $P\cong H$ as presheaves. The category $U/P$ is the disjoint union of the slices $U/u$ indexed by the primitive generators. Each slice is nonempty and connected, so connectedness and nonemptiness of $U/H$ force exactly one summand. Therefore $H$ is representable.
+\end{proof}
+
+\begin{corollary}[Proved: finite-dimensional semi-simplicial classification]\label{A:finite-dimensional-semisimplicial}
+Let $K:\Delta_{\mathrm{inj}}^{\mathrm{op}}\to\mathrm{Set}$ be a semi-simplicial set with $K_m=\varnothing$ for all $m>N$. Then $K$ is totally $W_{\mathbb Z}$-aspherical if and only if it is a standard semi-simplex $\Delta_{\mathrm{inj}}(-,[r])$ for some $0\leq r\leq N$. The same classification holds for total $W_\infty$-asphericity and for total $W_n$-asphericity, $n\geq2$.
+\end{corollary}
+\begin{proof}
+Let $i:U=\Delta_{\mathrm{inj},\leq N}\hookrightarrow\Delta_{\mathrm{inj}}$ be the full inclusion. The category of elements of $K$ is identical to that of $i^*K$. Every covariant action $L:U\to\mathrm{Set}$ extends to $\operatorname{Lan}_iL$ on $\Delta_{\mathrm{inj}}$, and the unit $L\to i^*\operatorname{Lan}_iL$ is an isomorphism because $i$ is fully faithful. Consequently every restricted-action test on $U$ occurs, unchanged, among the tests for $K$. The relevant restricted-action criterion transfers totality to $i^*K$. The category $U$ has the finite height function $[m]\mapsto m$, so Theorem~\ref{A:finite-height} makes $i^*K$ representable by some $[r]$. Since no injection $[m]\to[r]$ exists for $m>N$, this isomorphism extends to the whole of $\Delta_{\mathrm{inj}}$. Conversely every representable is total under every Kan extension, as in the theorem.
+\end{proof}
+
+% End sections/A_finite_height.tex
+
+
+% Begin sections/A_semisimplicial_total.tex
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority claim.
+\subsection{A total semisimplicial base which is not filtered}
+
+\begin{proposition}[Proved: totality of the injective-ordinal category]
+\label{A:semisimplicial-total}
+Let $A=\Delta_{\mathrm{inj}}$ have the nonempty finite ordinals
+$[n]=\{0,\ldots,n\}$, $n\geq0$, as objects, strictly increasing
+functions as arrows, and ordinary function composition.  Its integral
+affine category is filtered, and
+$\colim_A:\Ab^A\to\Ab$ is exact.  Every connected component of
+$\El_A(L)$ is weakly contractible for every covariant
+$L:A\to\Set$.  Consequently $A$ is totally $\Winfty$-aspherical,
+although $A$ is not filtered.
+
+More explicitly, for every $n\geq0$ there is an augmentation-one
+integral combination
+\[
+ t_n\in\Z[A([n],[M_n])],\qquad M_n=2^{n+1}-2,
+\]
+such that $t_nh=t_nh'$ for every $m\geq0$ and every pair of
+injections $h,h':[m]\to[n]$.  All combinations have finite support,
+and all categories and diagrams are small in the fixed universe.
+\end{proposition}
+\begin{proof}
+\emph{Integral interpolation.}
+We first give the polynomial construction, including its extension
+step.  In $\Z[x_0,\ldots,x_n,u]$, suppose that homogeneous
+polynomials $G_0,\ldots,G_n$ of one degree satisfy
+$G_i-G_j\in(x_i,x_j)$.  Write $\rho_S$ for substitution of zero for
+the variables indexed by $S\subseteq\{0,\ldots,n\}$.
+For $S\ne\varnothing$, the polynomial
+$\Phi_S=\rho_S(G_i)$ is independent of the choice $i\in S$.
+Then
+\[
+ C=\sum_{\varnothing\ne S\subseteq\{0,\ldots,n\}}
+             (-1)^{|S|+1}\Phi_S
+ \quad\hbox{satisfies}\quad C-G_i\in(x_i).
+\]
+Indeed, after applying $\rho_i$, terms indexed by a nonempty
+$S$ not containing $i$ cancel the terms indexed by $S\cup\{i\}$;
+the remaining term is $\rho_i(G_i)$.  All substitutions preserve
+the degree and integral coefficients.
+
+\emph{Normalized gap polynomials.}
+For $n\geq0$ and $k\geq1$, let
+\[
+ D_i:\Z[z_0,\ldots,z_{n+1}]\longrightarrow
+          \Z[y_0,\ldots,y_n]\qquad(0\leq i\leq n)
+\]
+identify $z_i,z_{i+1}$ with $y_i$ and relabel the other variables
+in order.  We construct homogeneous $C_{n,k}$ such that
+\[
+ \begin{gathered}
+ C_{n,k}(1,\ldots,1)=1,\qquad
+ y_i^kD_i(C_{n,k})\ \hbox{is independent of }i,\\
+ \deg C_{n,k}=d(n,k):=k(2^{n+1}-n-2).
+ \end{gathered}
+\]
+Set $C_{0,k}=1$.  Inductively, express $Q=C_{n-1,2k}$ in
+$y_0,\ldots,y_n$, and prescribe
+\[
+ D_i(C_{n,k})=F_i,
+ \qquad F_i=Q\prod_{\substack{0\leq l\leq n\\l\ne i}}y_l^k.
+\]
+For $i<j$, the compatibility condition on the intersection of the
+two hyperplanes is
+$D_{j-1}(F_i)=D_i(F_j)$, with values in
+$\Z[w_0,\ldots,w_{n-1}]$.  If $j=i+1$, both images of $Q$ are
+$D_i(Q)$ and both other factors are $\prod_lw_l^k$.
+If $j\geq i+2$, put $p=i$, $q=j-1$.  The two sides are
+\[
+ w_q^{2k}D_q(Q)\prod_{l\ne p,q}w_l^k,
+ \qquad
+ w_p^{2k}D_p(Q)\prod_{l\ne p,q}w_l^k,
+\]
+which agree by the inductive property of $C_{n-1,2k}$.
+
+Choose homogeneous lifts of the $F_i$ to the $z$-polynomial ring;
+for example lift $y_l$ to $z_l$ for $l\leq i$ and to $z_{l+1}$
+for $l>i$.  Change coordinates by
+\[
+ x_i=z_i-z_{i+1}\quad(0\leq i\leq n),\qquad u=z_{n+1}.
+\]
+This change is invertible over $\Z$, since
+$z_j=u+\sum_{r=j}^{n}x_r$.  The pairwise compatibility just checked
+says that the corresponding lifts $G_i$ satisfy
+$G_i-G_j\in(x_i,x_j)$.  The interpolation formula therefore gives
+the required $C_{n,k}$ after changing back to $z$-coordinates.
+Its degree is
+\[
+ d(n,k)=d(n-1,2k)+nk=k(2^{n+1}-n-2).
+\]
+At the all-ones point it has the value of every $F_i$, namely $1$.
+Moreover its prescribed restrictions give the common expression
+$y_i^kD_i(C_{n,k})=Q\prod_l y_l^k$.  This proves the induction
+simultaneously for all positive $k$.
+
+For an injection $g:[n]\to[M]$, define its nonnegative gaps by
+\[
+ e_0=g(0),\qquad
+ e_i=g(i)-g(i-1)-1\ (1\leq i\leq n),\qquad
+ e_{n+1}=M-g(n).
+\]
+Their sum is $M-n$, and every nonnegative tuple with that sum
+comes from one injection: $g(i)=i+\sum_{j=0}^{i}e_j$.
+Thus $g\mapsto\prod_jz_j^{e_j}$ gives a bijection between
+injections and monomials of degree $M-n$, and extends to an
+isomorphism between the corresponding free abelian groups.
+Write $P_t$ for the polynomial corresponding to a combination $t$.
+If $\delta^i:[n-1]\to[n]$ omits $i$, deleting $g(i)$ merges
+the adjacent gaps and adds one for the deleted point.  Therefore
+\[
+ P_{t\delta^i}=y_iD_i(P_t).
+\]
+Take $P_{t_n}=C_{n,1}$ and
+$M=n+d(n,1)=2^{n+1}-2$.  The augmentation of $t_n$ is its
+polynomial's value at all ones, hence is $1$, and all
+$t_n\delta^i$ are equal.  For $n=0$ this is simply the identity
+of $[0]$.
+For example, $C_{1,1}=z_0-z_1+z_2$ gives
+$t_1=(1,2)-(0,2)+(0,1)$, where each ordered pair records the
+images of the two vertices in $[2]$; both cofaces of this
+combination are the vertex $1$.
+
+We check that coface equality implies the asserted equality for
+all parallel injections.  For any integral combination $t$ out of
+$[n]$ with common coface value $s=t\delta^i$, the cosimplicial
+identity, with its indicated domains, gives
+\[
+ s\delta^a=t\delta^{b+1}\delta^a
+          =t\delta^a\delta^b=s\delta^b
+ \qquad(0\leq a\leq b\leq n-1).
+\]
+Here the inner cofaces have domain $[n-2]$, when $n\geq2$.
+Induction on $n$ makes $s$ equal after every pair of parallel
+injections into $[n-1]$.  Every proper injection into $[n]$
+factors through a coface, so this proves the same assertion for
+$t$.  The bases $n=0,1$ cause no difficulty: the only injection
+$[0]\to[0]$ is the identity, and the proper injections into
+$[1]$ are its two cofaces.  There is only one injection
+$[n]\to[n]$ and none from a larger ordinal.  Thus all the stated
+quantifiers are covered.
+
+\emph{Affine filteredness and exactness.}
+For any small category $B$, define $\Aff_{\Z}(B)$ to have the
+objects of $B$ and arrows $a\to b$ the finite combinations
+$\alpha=\sum_f c_ff\in\Z[B(a,b)]$ with $\sum_fc_f=1$.
+Composition is bilinear extension of composition in $B$;
+augmentations multiply, and the original identities remain
+identities.  This is an ordinary small category.
+Any two objects of $A$ map to a common larger ordinal.  If
+$\alpha,\beta:[m]\to[n]$ are affine arrows, the equality of
+$t_nh$ for all ordinary injections $h:[m]\to[n]$ and the two
+augmentation-one conditions give $t_n\alpha=t_n\beta$.
+These are exactly the common-successor and parallel-equalizer
+conditions for filteredness of $\Aff_{\Z}(A)$.
+
+Every $F:A\to\Ab$ extends to
+$\overline F:\Aff_{\Z}(A)\to\Ab$ by
+\[
+ \overline F\Bigl(\sum_f c_ff\Bigr)=\sum_fc_fF(f).
+\]
+Bilinearity verifies functoriality.  Natural transformations
+extend with the same object components, so a pointwise short
+exact sequence extends to a pointwise short exact sequence.
+A family $\lambda_a:F(a)\to V$ is a cocone on $A$ if and only
+if it is a cocone on $\overline F$: for an affine arrow $a\to b$,
+\[
+ \lambda_b\overline F(\alpha)
+   =\sum_f c_f\lambda_bF(f)
+   =\Bigl(\sum_f c_f\Bigr)\lambda_a=\lambda_a.
+\]
+The converse restricts to the ordinary arrows.  Hence the
+identity maps on the values give the natural isomorphism
+\[
+ \colim_A F\ \cong\ \colim_{\Aff_{\Z}(A)}\overline F.
+\]
+Filtered colimits of abelian groups are exact, as can also be
+seen directly here.  Every element is represented at one object,
+and a represented element vanishes if and only if some outgoing
+arrow sends it to zero; both assertions follow by putting the
+finitely many objects and relations witnessing the assertion
+over a common cocone.  For a pointwise short exact sequence,
+an element which becomes zero in the quotient can therefore be
+moved to an object where it lies in the pointwise kernel, and
+then lifted from the subobject there.  A subobject element which
+becomes zero in the middle diagram is already zero after the
+same transition, by pointwise injectivity.  Surjectivity is
+checked by lifting an element at its representing object.
+This proves exactness of the filtered colimit, and hence of
+$\colim_A$, without invoking a converse affine-exactness theorem.
+
+\emph{Actions and sums over fibres.}
+We give the passage from exact colimits to weak contractibility
+with its full quantification.  Let $B$ be any small category
+whose abelian colimit functor is exact, let $L:B\to\Set$, and
+put $E=\El_B(L)$.  For $F:E\to\Ab$ set
+\[
+ (\Sigma_LF)(b)=\bigoplus_{l\in L(b)}F(b,l).
+\]
+An arrow $v:b\to b'$ sends the summand indexed by $l$ using
+$F$ of $(b,l)\to(b',L(v)l)$ into the summand indexed by $L(v)l$.
+This defines a functor, even if distinct summands have the same
+target index.  Direct sums of abelian groups are exact, so
+$\Sigma_L$ is exact.  Specifying a cocone gives the natural
+isomorphism
+\[
+ \colim_E F\ \cong\ \colim_B\Sigma_LF.
+\]
+Consequently $\colim_E$ is exact.  The same holds on each
+connected component of $E$, by extending diagrams by zero on
+the other components.  This argument applies to arbitrary
+small fibres, including empty ones, and it may be repeated on
+any such component with any further covariant set-valued action.
+
+If a nonempty connected category $E_0$ has exact abelian
+colimits, its integral homology vanishes in positive degrees.
+Indeed the covariant projective resolution of the constant
+diagram $\Z$ with terms
+\[
+ P_q=\bigoplus_{e_0\to\cdots\to e_q}
+                  \Z[E_0(e_q,-)]
+\]
+has the alternating face differential.  At an object $e$ its
+augmented chain complex is the nerve chain complex of $E_0/e$,
+which contracts by its terminal object $\id_e$.  Each summand
+is projective because homomorphisms from it are evaluation at
+$e_q$.  Taking the colimit sends this resolution to the
+unnormalized integral nerve chain complex of $E_0$; exactness
+therefore makes its positive homology zero.  Connectedness
+gives $H_0(BE_0;\Z)=\Z$.
+
+\emph{The cyclic-cover test.}
+Fix a connected component $E_0$ of $\El_A(L)$ and an object
+$e_*\in E_0$.  The preceding argument gives exact colimits on
+$E_0$, on every further category of elements over $E_0$, and on
+all their components.  Let
+$G=\operatorname{Aut}_{\Pi E_0}(e_*)=\pi_1(BE_0,e_*)$, where
+$\Pi E_0$ inverts every arrow.  The equality is the edge-path
+presentation of the nerve: arrows give generators and
+composition triangles give its relations.  For a subgroup
+$K\leq G$ define the covariant action
+\[
+ T_K(e)=\operatorname{Hom}_{\Pi E_0}(e_*,e)/K,
+\]
+where $K$ acts by precomposition and arrows of $E_0$ act by
+postcomposition.  Every transition is a bijection.  Thus
+$\El_{E_0}(T_K)\to E_0$ has unique lifts of arrows with either
+a prescribed source or a prescribed target.  Every edge path
+lifts uniquely.  Lifting a path representing a coset connects
+its object to the lift of $e_*$ represented by the identity,
+so this element category is connected.  A loop at $e_*$ lifts
+to a loop exactly when its class belongs to $K$, and the
+composition-triangle relations lift uniquely.  Its fundamental
+group is consequently $K$; this is also the usual categorical
+model of the covering corresponding to $K$.
+
+This covering category is integrally acyclic by the repeated
+sum-over-fibres argument, so $K_{\mathrm{ab}}=H_1=0$.
+Choose $K=\langle g\rangle$ for each $g\in G$.  Since a cyclic
+group equals its abelianization, every such $K$ is trivial,
+and hence $G=1$.  Thus $BE_0$ is simply connected and acyclic.
+A nerve realization is a CW complex.  If it had a nonzero
+homotopy group, its least positive nonzero degree would be at
+least two and the Hurewicz theorem would identify that group
+with nonzero homology, a contradiction.  It is therefore
+weakly contractible.  The covering, abelianization, and
+Hurewicz facts used in this argument are respectively
+\citet[Theorems 1.38, 2A.1, and 4.32]{Hatcher2002}.
+No covering action has been assumed to descend through a
+presheaf projection: we proved exactness on the intermediate
+component itself before applying its arbitrary actions.
+
+\emph{The universal Kan-extension condition.}
+The category $A$ is nonempty and connected, since its objects
+have common successors.  Applying what was just proved to
+$L=1$ makes $BA$ weakly contractible.  Let $p:A\to B$ be any
+functor to any small category, and put $D=B/p_!1_A$.
+Objectwise $(p_!1_A)(b)=\pi_0(b\backslash A)$, where this
+comma category uses $p$.  The canonical functor $j:A\to D$
+sends $a$ to $(p(a),[(a,\id_{p(a)})])$.  For $d=(b,c)\in D$,
+the category $d\backslash A$ for $j$ is exactly component $c$
+of $b\backslash A$ for $p$.  The latter is
+$\El_A(L_b)$ for the genuinely covariant action
+$L_b(a)=B(b,p(a))$.  Hence every $d\backslash A$ for $j$ is
+nonempty and weakly contractible.
+
+This makes the specified map $Bj:BA\to BD$ a weak equivalence
+by Quillen's Theorem A \citep[Section 1, Theorem A]{Quillen1973}.
+The relevant comparison can be seen directly from the
+bisimplicial set of strings
+\[
+ d_0\to\cdots\to d_r\to j(a_0),\qquad
+ a_0\to\cdots\to a_s.
+\]
+Over a fixed $A$-string the other simplicial direction is
+$N(D/j(a_0))$, contractible by its terminal object.  Over a
+fixed $D$-string it is $N(d_r\backslash A)$, contractible by
+the preceding paragraph.  Realizing in either order gives
+weak equivalences to $BA$ and $BD$, and the displayed arrow
+identifies this comparison with $Bj$.  Thus $BD$ is weakly
+contractible for every $B,p$, exactly total $\Winfty$-asphericity
+of the terminal presheaf on $A$.
+
+Finally, the two injections $a,b:[0]\to[1]$ with images $0$
+and $1$ cannot be equalized by postcomposition in $A$: every
+$c:[1]\to[n]$ is injective and satisfies $ca\ne cb$.
+Thus the original category is not filtered.
+\end{proof}
+
+The interpolation and gap construction are reproduced, with every
+step verified above, from the supplied TOTASPH C.8--C.10; the
+affine extension and comparison of colimits verify the sufficient
+direction used from its D.4.  We claim no priority for this example.
+The historical exact-colimit reference is
+\citet{IsbellMitchell1973}.  Its bibliographic metadata were
+checked, but its article body was unavailable in this run; no result
+from that unavailable body is needed for the proof.  The exact
+program \texttt{semisimplicial\_affine\_checks.py} constructs the
+integral polynomials for $0\leq n\leq3$, verifies their degrees
+and augmentations, and independently converts their monomials to
+injections to test every parallel pair into each such $[n]$.
+The unbounded assertion is proved by the induction, not by this
+finite computation.
+
+% End sections/A_semisimplicial_total.tex
+
+
+% Begin sections/A_search.tex
+\begin{proposition}[Proved: an exact finite-presentation test in unbounded semisimplicial dimension]\label{A:semisimplicial-tests}
+An arbitrary small semisimplicial set $K$ is totally $\WZ$-aspherical if and only if its element category is nonempty and connected and the following countable family of algebraic tests has vanishing homology in every positive degree. Choose finite lists of nonnegative integers $r_1,\ldots,r_p$ and $s_1,\ldots,s_q$, and two natural transformations
+\[
+ \coprod_{j=1}^{q}\Delta_{\mathrm{inj}}([s_j],-)
+ \rightrightarrows
+ \coprod_{i=1}^{p}\Delta_{\mathrm{inj}}([r_i],-).
+\]
+Each transformation is specified by a summand choice and an increasing injection $[r_i]\hookrightarrow[s_j]$ for each $j$. Let $L$ be their coequalizer in $\Set^{\Delta_{\mathrm{inj}}}$. Form the complex
+\[
+ C_a(K,L)=
+ \bigoplus_{n_0<\cdots<n_a}
+ \ \bigoplus_{[n_0]\hookrightarrow\cdots\hookrightarrow[n_a]}
+ \Z[K_{n_a}\times L([n_0])].
+\]
+The differential deletes a first vertex using $L$, composes adjacent injections at internal vertices, and deletes the last vertex using $K$, with alternating signs. These explicitly specified complexes must have $H_a=0$ for every $a>0$.
+\end{proposition}
+\begin{proof}
+The displayed complex is the normalized nerve-chain complex of the restricted-action category, because a nonidentity injection strictly increases dimension. Necessity follows from R1. Conversely every covariant set-valued functor on $\Delta_{\mathrm{inj}}$ is a filtered colimit of finitely presented such functors. We justify the precise presentations being used: take a generator at its degree for every element, impose relations identifying a generator's images under each arrow with the appropriate named element, and direct the finite subpresentations and their finite identifications. The resulting filtered colimit recovers the original functor at every degree. A finitely presented object admits exactly a finite-generators, finite-relations presentation by the covariant representables displayed above. All their indexing data range through countable sets.
+
+The nerve in each degree is a coproduct of terms $K_{n_a}\times L([n_0])$, so it commutes with filtered colimits in $L$. The corresponding free abelian chain complexes also commute with them, and filtered colimits of abelian groups are exact. Thus positive homology vanishes for arbitrary $L$ if it vanishes for the finitely presented tests. R1 now proves totality. For locally finite $K$, restricting further to strings with $n_a\leq N$ gives a finite chain complex with explicit integer matrices: finitely presented $L$ has finite values in each fixed simplex dimension. These are subcomplexes as $N$ increases, and their union is the displayed complex. Thus the full condition says that every cycle at one simplex-dimension cutoff bounds at some larger cutoff. A bound on homological degree alone does not make the matrices finite, and no fixed cutoff is asserted to suffice.
+\end{proof}
+
+This is an exact characterization in all dimensions by finite presentations, while Corollary~\ref{A:finite-dimensional-semisimplicial} supplies the sharper structural classification in bounded dimension. The unbounded case does not reduce to representability: Proposition~\ref{A:semisimplicial-total} gives a complete proof that the terminal semisimplicial presheaf has total, nonfiltered element category $\Delta_{\mathrm{inj}}$. No assertion here is inferred from actions that fail to factor through a presheaf projection.
+
+\begin{proposition}[Proved: exact bounded census and quotient-action checks]\label{A:census}
+The exhaustive searches in \texttt{bounded\_search.py} have the following bounds and conclusions. For every labelled monoid of order at most four, every right act on a set of cardinality at most three was enumerated. For every skeletal one-way category with at most seven arrows, counting identities, all presheaves with $|H(u)|\leq2$ and $\sum_u|H(u)|\leq4$ were enumerated. Here ``one-way'' means that the objects admit a linear ordering strictly increased by every nonidentity arrow. In both searches every connected element category with $H_1=0$ has an explicitly eliminated trivial fundamental-group presentation. Hence no acyclic, non-simply-connected candidate exists within these bounds.
+
+For the ten-element monoid of the actual counterexample, all $25$ quotients of the left regular act were enumerated and their induced tensor splittings verified. Each passes R1 in every homological degree, by the certified projective right module. This is an additional check; it is not the proof of the universal quantifier.
+\end{proposition}
+\begin{proof}
+For the monoid search, identity is fixed at element zero and every remaining multiplication-table entry is enumerated. The associativity equations are checked for every triple. For an act of size $q$, every assignment of one of the $q^q$ transformations to each nonidentity monoid element is enumerated; all action equations are imposed. No reduction by anti-isomorphism is made, since that would change right actions into left actions. The resulting counts are
+\[
+\begin{array}{r|r|r|r|r}
+ |M|&\text{labelled monoids}&\text{acts}&\text{connected}&H_1=0,\ \pi_1=1\\\hline
+ 1&1&3&1&1\\
+ 2&2&21&8&7\\
+ 3&11&249&143&125\\
+ 4&156&5872&3856&3148
+\end{array}
+\]
+For a one-way category, the program fixes a linear order of objects, enumerates multiplicities of arrows for every ordered pair, enumerates every possible composite with the required source and target, and imposes all associativity equations. Every category within the bound has such an ordered presentation. It then enumerates all functions for the prescribed presheaf values and imposes every contravariant functor law. Counts may repeat isomorphic categories with different object orders; they are not advertised as isomorphism-class counts.
+\[
+\begin{array}{r|r|r|r|r}
+ |\mathrm{Arr}(U)|&\text{ordered presentations}&\text{presheaves}&\text{connected}&H_1=0,\ \pi_1=1\\\hline
+ 1&1&2&1&1\\
+ 2&1&8&2&2\\
+ 3&2&32&6&6\\
+ 4&5&136&33&19\\
+ 5&13&567&170&59\\
+ 6&37&2349&804&206\\
+ 7&114&9796&3642&732
+\end{array}
+\]
+The fundamental-group calculation uses the full two-skeleton, not a homology cutoff: choose a spanning tree of the underlying graph, take the other nonidentity arrows as generators, and impose the relation for every composable pair. A generator occurring exactly once in a relator is eliminated by a reversible Tietze move; words are freely and cyclically reduced. If generators remain, Smith normal form computes the exact abelianization. In every zero-abelianization case within the stated bounds, the Tietze process has already removed all generators. Thus the absence of a perfect nontrivial group is certified, which excludes an acyclic counterexample regardless of higher nerve homology. No claim that a finite monoid has a finite-dimensional nerve is used.
+
+For the explicit ten-element example, enumerate all $115975$ set partitions of its underlying set and retain exactly those stable under every left multiplication. There are $25$, with quotient-size counts
+\[
+ (1:1),\ (2:1),\ (3:3),\ (4:7),\ (5:3),\ (6:3),\
+ (7:5),\ (8:1),\ (10:1).
+\]
+For each quotient $L$, the program computes the coend equivalence relation on $H\times L$, descends the saved integer map $S$ to the tensor product, and verifies its retraction using $R$. Since the original right-module splitting is equivariant, it certifies $\Tor_i^{\Z M}(\Z H,\Z L)=0$ for all $i>0$. The induced tensor maps and $RS=I$ are also checked directly. All data and outputs are supplied. These are all quotient-representable actions for this one-object base; finite collections of such tests alone are not asserted to establish totality.
+\end{proof}
+
+The supplied older census programs were inspected for conventions and their normalized boundary formula. Their saved monoid tables identify a monoid with its opposite, which is harmless for $BM$ but not for the right-presheaf search. Their reported homology stops at $H_3$; without an additional contraction argument this is not a certificate of full acyclicity for a category with endomorphisms. We therefore used the independent bounded search just described. We make no minimality claim for the ten-element counterexample beyond the explicit bounds actually exhausted, and no claim to have repeated the supplied order-six or seven-arrow arbitrary-category census.
+
+% End sections/A_search.tex
+
+
+% End sections/A_main.tex
+
+\section{Consequences for sieves and the five equivalent assertions}
+
+% Begin sections/B_consequences.tex
+\subsection{One finite construction for all five failures}
+
+Fix $M,H,E=M/H$ from Theorem~\ref{A:counterexample}. For a presheaf $J$ on a category $V$, write $V\cup_J\{t\}$ for the one-point collage: its old full subcategory is $V$, its new object has only an identity endomorphism, its arrows $v\to t$ are $J(v)$, and it has no arrows $t\to v$.
+
+\begin{lemma}[Proved: the initial-cone repair of a homological weight]\label{B:cone}
+Let $J:V^{\op}\to\Set$ be totally $\WZ$-aspherical. Adjoin an initial object $0$ to $V$, obtaining $B=V^{\triangleleft}$, and define $F(0)=\{*\}$, $F|_V=J$. Then $F$ is totally $\Winfty$-aspherical. If $V/J$ is not weakly contractible, restriction to the nonempty full cosieve $V\subset B$ loses total $\Winfty$-asphericity.
+\end{lemma}
+\begin{proof}
+The category $B/F$ is the initial cone on $V/J$, and hence contractible. Fix any $L:B\to\Set$ and put $D=\El_{V/J}((L|_V)\pi)$. Each component of $D$ is acyclic by R1. The action category over $B/F$ adjoins one source for each $a\in L(0)$. Its arrows into $D$ have crossing category exactly $V/J$, mapped by $(v,h)\mapsto(v,h,L(0\to v)a)$. The nerve is obtained by attaching these cones, or equivalently by the corresponding homotopy pushout. Its relative integral homology is
+\[
+ \bigoplus_{a\in L(0)}\widetilde H_{*-1}(B(V/J);\Z)=0.
+\]
+Each cone attaches within one component because $V/J$ is nonempty and connected. If $D$ is empty, $L(0)$ is empty as well. Thus every resulting component is acyclic. Since $B/F$ is contractible, the $\Winfty$ version of R1 proves totality. The final assertion fails the identity test on restriction. This independently confirms, in the direction now used, the cone construction in TOTASPH F.26.
+\end{proof}
+
+\begin{theorem}[Refuted: all five assertions of R5, by explicit finite examples]\label{B:five}
+Each of the five assertions in TOTASPH F.26 is false. More precisely:
+\begin{enumerate}[label=(\roman*)]
+\item The act $H$ over $M$ is totally $\WZ$-aspherical and is not totally $\Winfty$-aspherical.
+\item For $B=M^{\triangleleft}$ and $F$ of Lemma~\ref{B:cone}, the restriction of the totally $\Winfty$-aspherical $F$ to the full cosieve $M$ is $H$ and is not totally $\Winfty$-aspherical.
+\item The sieve $M\hookrightarrow M\cup_H\{t\}$ is a couniversal $\Winfty$-equivalence with one-point complement and is not $\Winfty$-dwy\'erienne. Its target has two objects and $63$ arrows.
+\item The sieve $B\hookrightarrow B\cup_F\{t\}$ is $\Winfty$-dwy\'erienne but is not discretely flat. Its target has three objects and $66$ arrows.
+\item There are composable finite $\Winfty$-dwy\'erienne sieves $M_0\hookrightarrow X\hookrightarrow Y$ whose composite is not $\Winfty$-dwy\'erienne. The first is classical Dwyer. The categories $X,Y$ have respectively three objects and $32$ arrows, and four objects and $138$ arrows.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The first two conclusions have already been proved with every universal quantifier verified. We give the remaining constructions and the needed checks, rather than infer their existence abstractly from the equivalence of the five assertions.
+
+For (iii), we check the exact one-point theorem R1/F.20 used here. After any $p:M\to C$, put $J=p_!H$ and $E_C=C/J$. The classifying-space inclusion is the canonical map
+\[
+ BC\longrightarrow BC\amalg^h_{BE_C}*.
+\]
+This is the one-point collage formula, obtained by separating nerve chains at their unique passage to the new object. The presheaf $J$ is still totally $\WZ$-aspherical, so $E_C$ is nonempty and acyclic; Proposition~\ref{A:R6positive} says its projection into $C$ induces the trivial map on fundamental groups. Van Kampen therefore makes the inclusion an isomorphism on fundamental groups. On universal covers it attaches a family of cones on copies of $BE_C$, indexed by the fundamental group of the relevant component of $C$. Its relative integral homology is the direct sum of copies of $\widetilde H_{*-1}(BE_C)$, hence zero. The homological Whitehead theorem on these simply connected covers proves the map a weak equivalence. Other components of $C$ are unchanged. This proves couniversality for every $p$. At the identity base, the crossing category is $E$, whose fundamental group is nontrivial, so the sieve is not dwy\'erienne. Its arrow count is $10+52+1=63$.
+
+For (iv), all old weights are representable and the only new weight is $F$, which is totally $\Winfty$-aspherical. Thus the sieve is dwy\'erienne. Let $L:B\to\Set$ be empty at $0$ and a singleton on $M$. Its restricted action category is exactly $E$. Define a covariant simplicial resolution by
+\[
+ PL(b)_n=\coprod_{b_0\to\cdots\to b_n\to b}L(b_0).
+\]
+The augmentation $PL\to L$ is an objectwise weak equivalence: each element's factorization category has terminal object $(b,l,\id_b)$. Co-Yoneda gives
+\[
+ F\otimes_B PL\cong NE,\qquad F\otimes_B L\cong\pi_0 E=\{*\}.
+\]
+Hence this weight does not preserve objectwise weak equivalences. To connect the computation directly to discrete flatness, adjoin a source $x$ to the discrete simplicial category $B$, with hom spaces $PL(b)$, respectively $L(b)$, from $x$ to $b$. The augmentation gives a Dwyer--Kan equivalence of these two simplicial collages. Pushing out the displayed sieve changes the hom space from $x$ to $t$ by $NE\to*$, which is not a weak equivalence. Thus it is not discretely flat in the precise sense of \citet[Definition 3.4]{HORR2024}. The base $B$ has $12$ arrows and $F$ has $53$ elements in total, giving $12+53+1=66$ arrows.
+
+For (v), form $X$ from $B$ and a disjoint lower copy $M_0$ of $M$. Set $X(m_0,m)=M$, with the left and right composition actions of $M$, and set $X(m_0,0)=\varnothing$. There are no arrows from $B$ into $M_0$. The cosieve generated by $M_0$ is $M\times[1]$, and forgetting the copy is a right adjoint to its lower inclusion. Thus $a:M_0\hookrightarrow X$ is classical Dwyer. Let $j:B\hookrightarrow X$ be the old full inclusion. The presheaf $G=j_!F$ has values $G(0)=\{*\}$ and $G(m)=G(m_0)=H$; its maps on $X(m_0,m)=M$ are the given right action. The co-Yoneda formula proves these statements. Every further Kan extension satisfies $p_!G\cong(pj)_!F$, so $G$ is totally $\Winfty$-aspherical. Put $Y=X\cup_G\{t\}$. The sieve $b:X\hookrightarrow Y$ is therefore $\Winfty$-dwy\'erienne. The composite $ba$ has weight $H$ at $t$ and thus fails the identity test. Its other nonempty weights are representable; the weight at $0$ is empty and is not tested. The counts are $|\mathrm{Arr}(X)|=12+10+10=32$ and $|\mathrm{Arr}(Y)|=32+(1+52+52)+1=138$. The supplied program verifies its full composition table, the sieve conditions, the right adjoint, and the crossing action.
+\end{proof}
+
+\subsection{Exact class comparisons after the negative answer}
+
+\begin{proposition}[Proved: exact weight descriptions and strict inclusions]\label{B:classes}
+For a sieve $i:U\hookrightarrow X$, put $H_t=X(-,t)|_U$, $E_t=U/H_t$, and $\pi_t:E_t\to U$. The following descriptions are exact.
+\begin{enumerate}[label=(\alph*)]
+\item $i$ is $\Winfty$-dwy\'erienne precisely when every nonempty $E_t$ is weakly contractible and every component of $\El_{E_t}(L\pi_t)$ is acyclic for every $L:U\to\Set$.
+\item $i$ is discretely flat precisely when every component of every $\El_{E_t}(L\pi_t)$ is weakly contractible. Neither connectedness nor nonemptiness of $E_t$ is required.
+\item Among discretely flat sieves, $i$ is $\Winfty$-dwy\'erienne precisely when each nonempty $E_t$ is connected.
+\item $i$ is totally $\Winfty$-dwy\'erienne precisely when every nonempty $E_t$ is connected and every component of $\El_{E_t}(A)$ is weakly contractible for every $A:E_t\to\Set$.
+\item If $X\setminus U\cong e$, couniversal $\Winfty$-equivalence is equivalent to total $\WZ$-asphericity of its one crossing weight; dwy\'erienness imposes in addition simple connectivity of $E$.
+\end{enumerate}
+Writing $\mathsf{Dw}$ for classical Dwyer sieves, $\mathsf{TD}$ for totally $\Winfty$-dwy\'erienne sieves, $\mathsf D$ for $\Winfty$-dwy\'erienne sieves, $\mathsf{DF}$ for discretely flat sieves, and $\mathsf{HC}$ for $\Winfty$-cofibration sieves, we have
+\[
+ \mathsf{Dw}\subsetneq\mathsf{TD}\subsetneq
+ (\mathsf D\cap\mathsf{DF}),\qquad
+ \mathsf D\nsubseteq\mathsf{DF},\qquad
+ \mathsf{DF}\nsubseteq\mathsf D,
+\]
+and both $\mathsf D$ and $\mathsf{DF}$ are proper subclasses of $\mathsf{HC}$. The latter class contains sieves in neither $\mathsf D$ nor $\mathsf{DF}$.
+\end{proposition}
+\begin{proof}
+Part (a) is the checked R1 criterion. For (b), the simplicial replacement $PL$ used in Theorem~\ref{B:five} shows necessity. For sufficiency, use the bisimplicial bar
+\[
+ B_{q,n}(H_t,U,Z)=\coprod_{u_0\to\cdots\to u_q}H_t(u_q)\times Z(u_0)_n.
+\]
+For each fixed $n$, its augmentation to $(H_t\otimes_U Z)_n$ is a weak equivalence by the assumed component condition. Diagonals preserve these equivalences. An objectwise weak equivalence $Z\to Z'$ also gives a degreewise weak equivalence of bars in the other direction, hence a weak equivalence of their diagonals. Two out of three proves the weight functor homotopical. In a simplicial pushout along a sieve the new hom spaces are exactly $H_t\otimes_U C(c,p(-))$; the source-collage argument in the preceding theorem proves necessity for all such weights. This independently confirms the precise portion of TOTASPH F.14--F.15 used here. Part (c) follows by taking $L=1$ and applying (a). For (d), totality of a category supplies all covariant actions, and cyclic covering actions force their acyclic components to be simply connected. The converse follows from the comma-category criterion. The one-point assertion was checked explicitly in the proof of (iii), including the converse from relative homology of the cofiber.
+
+A classical Dwyer sieve has representable crossing weights, whose element categories have terminal objects, proving the first inclusion. It is strict: over the two-element idempotent monoid $J=\{1,e\}$, the singleton right act has filtered element category $J$, but is not representable since the sole representable has two elements. Its one-point sieve is therefore total without a right adjoint.
+
+For the next strict inclusion, take the same $J$ and the three-element act $T=\{z,h_1,h_2\}$ with $T(e)$ constant at $z$. We check the step inherited from TOTASPH E.3 and F.16. This is the pushout of two regular acts along the split subact $\{e\}$. Under arbitrary left Kan extension, these become two representables glued along the image of a split idempotent. The latter element category is filtered: it has a weakly terminal idempotent object and postcomposition into that object equalizes every parallel pair. The nerve union is a homotopy pushout of two contractible spaces along a contractible space, hence contractible. Thus $T$ is total. Its simplicial weight functor is $Z\mapsto Z\amalg_{\im(e)}Z$, with $\im(e)$ a simplicial retract and monomorphism; it preserves objectwise weak equivalences by homotopy-pushout invariance. But the category $J/T$ has no common successor of $h_1,h_2$, so it is not total. The common-successor consequence of totality follows from the doubled-cosieve action used in Theorem~\ref{A:posets}; it applies to arbitrary categories as well.
+
+Theorem~\ref{B:five}(iv) shows $\mathsf D\nsubseteq\mathsf{DF}$. A sieve with discrete one-object source and a two-element crossing weight is discretely flat, since its tensor is a coproduct of two copies, but is not dwy\'erienne because its boundary is disconnected. This shows the reverse noninclusion. We verify the forward gluing implication $\mathsf D\subseteq\mathsf{HC}$. Put $T=X\setminus U$ and let $\overline U$ be the generated cosieve, with $\dot T=T\cap\overline U$. After a change of base $p:U\to C$, the two full cosieves $\overline C$ and $T$ cover $X_C=C\amalg_U X$ and intersect in the same $\dot T$. Indeed, the new weight at $t$ is $p_!H_t$, which is nonempty exactly when $H_t$ is nonempty. The functor $C\to\overline C$ is a weak equivalence by Theorem A: its slices over $C$ have terminal objects and its slices over $\dot T$ are the contractible categories $C/p_!H_t$. For a weak equivalence $C\to C'$ under $U$, two out of three therefore gives $\overline C\to\overline{C'}$ a weak equivalence. A nerve chain in a union of two cosieves stays in either cosieve containing its first object, so $NX_C=N\overline C\amalg_{N\dot T}NT$. The two nerve inclusions are monomorphisms, making this union a homotopy pushout. Invariance of that homotopy pushout proves $X_C\to X_{C'}$ a weak equivalence, as required. Discrete flatness gives the same conclusion by \citet[Theorems 1.5--1.6]{HORR2024}; the opened source explicitly gives the generalized discretely flat formulation. These are the R2/R7 inputs, in their forward-only form. Finally the one-point sieve in (iii) is couniversally a weak equivalence and hence is a $\Winfty$-cofibration by two out of three on its natural cobase-change maps. It is in neither $\mathsf D$ nor $\mathsf{DF}$: $L=1$ in (b) detects its noncontractible boundary. This proves all stated strictness assertions.
+\end{proof}
+
+% End sections/B_consequences.tex
+
+
+% Begin sections/B_R2_audit.tex
+\subsection{A self-contained audit of the composition statements}
+
+\begin{proposition}[Proved: the R2 composition assertions]\label{B:R2-audit}
+For every fundamental localizer $W$, totality of the category of elements $U/H$ implies totality of the presheaf $H$, and ordinary final images of total categories are total. Moreover:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $f:X\to Y$ is strictly $W$-aspherical, restriction $f^*$ preserves totally $W$-aspherical presheaves. In particular strictly $W$-aspherical functors compose.
+\item Totally $W$-aspherical functors compose. If $D:B\to\Cat$ is covariant and $B$ and every $D(b)$ are totally $W$-aspherical, then $\int_BD$ is totally $W$-aspherical.
+\item Every nonempty full cosieve of a totally $\Winfty$-aspherical category is totally $\Winfty$-aspherical. Consequently totally $\Winfty$-dwy\'erienne sieves compose.
+\end{enumerate}
+These statements do not assert composition of $\Winfty$-dwy\'erienne sieves without the additional word ``totally.''
+\end{proposition}
+\begin{proof}
+\textbf{Comprehensive factorization and the preliminary assertions.}
+For $a:A\to B$, put $P_a(b)=\pi_0(b\backslash A)$, contravariantly in $b$. The pointwise Kan formula gives $P_a\cong a_!1_A$. There is a factorization
+\[
+ A\xrightarrow{q_a}B/P_a\longrightarrow B,
+ \qquad x\longmapsto (ax,[x,\id_{ax}]).
+\]
+The second functor is a discrete fibration. For $(b,c)\in B/P_a$, its outgoing comma category under $q_a$ is exactly the connected component $c$ of $b\backslash A$, and is therefore nonempty and connected. Thus $q_a$ is ordinary final. Conversely $a$ is final exactly when $a_!1_A=1_B$. This proves that a category is total exactly when every target of a final functor from it is $W$-aspherical. If $a$ is final and $A$ is total, then for every $p:B\to C$,
+\[
+ p_!1_B\cong p_!a_!1_A\cong(pa)_!1_A;
+\]
+hence $B$ is total, not merely aspherical.
+
+For $E=U/H$ and its projection $\pi:E\to U$, the components of $u\backslash E$ are indexed by $h\in H(u)$; the corresponding component has initial object $((u,h),\id_u)$. Consequently $\pi_!1_E\cong H$, and $q_{p\pi}$ is the canonical final map
+\[
+ E\longrightarrow U'/p_!H,
+ \qquad (p\pi)_!1_E\cong p_!H.
+\]
+Totality of $E$ therefore implies totality of $H$. In particular a total functor is strict. Also $p_!$ preserves total presheaves, since $r_!p_!H\cong(rp)_!H$. Representables are total: $p_!U(-,u)\cong U'(-,p(u))$ and the latter element category has a terminal object. Thus a category with a terminal object is total for every $W$.
+
+\textbf{Strict composition.}
+Suppose $f:X\to Y$ is strict and $H:Y^{\op}\to\Set$ is total. Fix an arbitrary $p:X\to X'$, and put
+\[
+ Q_y=p_!Y(f(-),y),\qquad
+ K=\int^{y\in Y}Q_y\times H(y)\cong p_!f^*H.
+\]
+The last isomorphism follows from co-Yoneda and preservation of presheaf colimits by restriction and left Kan extension. Each $Q_y$ is total, and $Q$ is covariant in $y$. Form the collage $Z$ with full parts $X',Y$, crossing arrows $Z(x',y)=Q_y(x')$, and no arrows from $Y$ to $X'$. For $j:Y\hookrightarrow Z$ and $F=j_!H$, co-Yoneda gives $F|_Y=H$ and $F|_{X'}=K$. Totality of $H$ makes $Z/F$ $W$-aspherical.
+
+The full sieve $l:X'/K\hookrightarrow Z/F$ has a terminal-object slice over each object in $X'/K$. Its slice over $(y,h)$ is isomorphic to $X'/Q_y$: an object is an arrow $q:x'\to y$, with its source element forced to be $[q,h]\in K(x')$; a morphism $a:x'\to x''$ satisfies $Q_y(a)q''=q$. These are exactly the arrows in $X'/Q_y$. Every slice of $l$ is therefore $W$-aspherical. The target slices have terminal objects, so LF2, two out of three, and LF3 imply $l\in W$. Two out of three then makes $X'/K$ $W$-aspherical. Since $p$ was arbitrary, $f^*H$ is total. Applying this to $H=Z_0(g(-),z)$ proves strict composition for $g:Y\to Z_0$.
+
+\textbf{Total composition and Grothendieck constructions.}
+For total $f:X\to Y$ and $g:Y\to Z$, fix $z$ and consider
+\[
+ f_z:X/z\longrightarrow Y/z,
+ \qquad (x,\gamma:gf(x)\to z)\longmapsto(f(x),\gamma).
+\]
+For $(y,\beta)\in Y/z$, the slice $(X/z)/(y,\beta)$ is canonically $X/y$: the arrow $h:f(x)\to y$ forces $\gamma=\beta g(h)$, and an arrow $k:x\to x'$ satisfies precisely $h'f(k)=h$. Hence $f_z$ is total and therefore strict. The terminal presheaf on $Y/z$ is total. Part~(i) makes its restriction, the terminal presheaf on $X/z$, total. This proves composition without any additional hypothesis on $W$.
+
+Now let $E=\int_BD$, with projection $v:E\to B$. For $b\in B$, define
+\[
+ r_b:E/b\longrightarrow D(b),\quad
+ (b',x,\beta:b'\to b)\longmapsto D(\beta)x,
+ \qquad s_b(y)=(b,y,\id_b).
+\]
+A morphism $(b',x,\beta)\to s_b(y)$ is exactly an arrow $D(\beta)x\to y$, so $r_b\dashv s_b$. In particular $s_b$ is final: the unit is initial in every outgoing comma category. Its source $D(b)$ is total, so its target $E/b$ is total by the preliminary assertion. Thus $v$ is total. Composing it with the total functor $B\to e$ proves totality of $E$.
+
+\textbf{The unrestricted-action criterion and cosieves.}
+We supply the category argument needed for (iii), keeping it separate from restricted actions on a presheaf's element category. A category $A$ is totally $\Winfty$-aspherical if and only if it is nonempty and connected and every connected component of every $\El_A S$, $S:A\to\Set$, is weakly contractible.
+
+For necessity, $BA$ is contractible up to weak equivalence by the identity test. For a chosen $S$, adjoin to $A$ one source $o_C$ for each component $C$ of $\El_A S$, with arrows $o_C\to a$ the elements $s\in S(a)$ belonging to $C$. The inclusion of $A$ into this collage is final: its comma category at $o_C$ is $C$, and its other comma categories have initial objects. Totality makes the collage weakly contractible. Its classifying space is obtained from $BA$ by attaching, for each $C$, the mapping cone of $BC\to BA$. Indeed a new nondegenerate nerve simplex starts at precisely one $o_C$ and its remaining data form a simplex of $NC$. The relative homology sequence shows that every $C$ is integrally acyclic.
+
+This conclusion applies to all actions over $A$, including the following explicit ones. If $T:C\to\Set$ is an action on a component $C$ of $\El_A S$, set
+\[
+ \widetilde T(a)=
+ \coprod_{\substack{s\in S(a)\\(a,s)\in C}}T(a,s).
+\]
+The actual transition maps give $\El_A\widetilde T\cong\El_C T$. In particular a connected covering associated to a cyclic subgroup of $\pi_1(BC)$ is obtained by taking $T$ to be its path-transport action, whose maps are bijections. Its first homology is the abelianization of that subgroup. A nontrivial cyclic subgroup would contradict the acyclicity just proved. Hence $BC$ is simply connected and acyclic, and therefore weakly contractible. This uses actions on $A$ itself; it does not assume that an arbitrary covering action factors through a presheaf projection.
+
+Conversely, if the action condition holds and $a:A\to B$ is final, each $b\backslash A=\El_A(B(b,a(-)))$ is nonempty, connected and weakly contractible. The outgoing-comma form of Quillen's Theorem A makes $Ba$ a weak equivalence. The action $S=1$ makes $BA$ weakly contractible, so $BB$ is too. The final-image characterization proves totality.
+
+Such an $A$ has common successors. Otherwise the full cosieves $V_a,V_b$ generated by two objects with no common successor are disjoint. The action with two elements outside $V=V_a\amalg V_b$ and one element on $V$ has element category consisting of two copies of $A$ glued along $V$. Its nerve is the corresponding pushout: a chain stays in either copy containing its first object. The union is connected, and Mayer--Vietoris gives $H_1\cong\widetilde H_0(BV)\ne0$, contradicting the action criterion. Every nonempty full cosieve $V\subset A$ is consequently connected, since a common successor of two of its objects still lies in $V$. Each action $T:V\to\Set$ extends to $A$ by the empty set off $V$, and its category of elements is unchanged. The criterion proves totality of $V$.
+
+\textbf{Composition of total sieves.}
+Let $U\subset X\subset Y$ be totally $\Winfty$-dwy\'erienne, and fix $y$ with $U/y\ne\varnothing$. Then $X/y$ is total. Its full subcategory
+\[
+ S_y=\{(x,\beta:x\to y):U/x\ne\varnothing\}
+\]
+is a nonempty cosieve and hence total. The covariant diagram $(x,\beta)\mapsto U/x$ on $S_y$ has total values, so its Grothendieck construction $G_y$ is total by (ii). The composition functor and its section are
+\[
+ r:G_y\to U/y,\quad(x,\beta,u,\alpha:u\to x)\mapsto(u,\beta\alpha),
+ \qquad s(u,\gamma)=(u,\gamma,u,\id_u).
+\]
+Here $s$ lands in $S_y$ because $U/u$ contains $\id_u$. A morphism $s(u,\gamma)\to(x,\beta,u',\alpha)$ is uniquely determined by $k:u\to u'$ satisfying $\beta\alpha k=\gamma$: its $X$-component is forced to be $\alpha k$. Therefore $s\dashv r$, and $r$ is final. Its target $U/y$ is total. This is exactly the condition for the composite sieve; empty slices are not tested.
+\end{proof}
+
+% End sections/B_R2_audit.tex
+
+\section{Truncated localizers}
+
+% Begin sections/C_truncated.tex
+
+Throughout this section, $W_n$ means equivalence on $\pi_0$ and on all based homotopy groups in degrees $1,\ldots,n$. We distinguish totality of a presheaf from totality of its category of elements. This distinction is essential even when every category in the construction has finitely many arrows.
+
+\begin{proposition}[Proved: the truncated restricted-action criterion]\label{C:truncated-presheaf}
+Let $n\geq2$, let $H:U^{\mathrm{op}}\to\mathrm{Set}$ be a presheaf on a small category, and write $E=U/H$ and $\pi:E\to U$. Then $H$ is totally $W_n$-aspherical if and only if $BE$ is nonempty and $n$-connected and every connected component $D$ of every category
+\[
+ \operatorname{El}_E(L\pi),\qquad L:U\longrightarrow\mathrm{Set},
+\]
+satisfies $\widetilde H_q(BD;\mathbb Z)=0$ for $1\leq q\leq n-1$.
+\end{proposition}
+\begin{proof}
+The identity Kan-extension test gives the condition on $BE$. For any $L$, adjoin a source object to $U$ with outgoing hom functor $L$, and extend $H$ to the collage. The element category of the extension is obtained from $E$ by attaching one initial cone on each connected component $D$ of $\operatorname{El}_E(L\pi)$. The nerve calculation, by separating chains at their unique first new object, identifies its realization with the homotopy pushout of $BE\leftarrow\coprod_D BD\to\coprod_D *$. Its relative integral homology in degree $q+1$ is $\bigoplus_D\widetilde H_q(BD;\mathbb Z)$. Totality and the long exact sequence therefore give the asserted vanishing for $q<n$.
+
+Conversely, for any $p:U\to U'$, let $q:E\to E'=U'/p_!H$ be the canonical final functor. For $d=(u',c)$ in $E'$, the comma category $d\backslash E$ is precisely the component indexed by $c$ in the restricted action for $L_{u'}(u)=U'(u',p(u))$. All these comma categories are nonempty and have zero reduced integral homology in degrees $0,\ldots,n-1$; their ordinary $H_0$ is $\mathbb Z$. The standard bisimplicial comma resolution gives isomorphisms $H_j(BE)\to H_j(BE')$ for $j<n$ and an epimorphism for $j=n$: its vertical-homology rows $1,\ldots,n-1$ vanish, and its row zero is the nerve-chain complex of $E'$. In particular $BE'$ has zero reduced integral homology through degree $n$. Finality gives a surjection $\pi_1(BE)\to\pi_1(BE')$: choose outgoing-comma objects and join alternative choices by comma-category zigzags to lift every target edge loop. Thus $BE'$ is simply connected. The Hurewicz theorem in the first possible nonzero degree makes $BE'$ $n$-connected. This proves totality for every $p$, including arbitrary infinite targets. Empty action categories impose no condition.
+\end{proof}
+
+\begin{proposition}[Proved: one degree of cosieve inheritance and the exact missing group]\label{C:degree-loss}
+Let $n\geq2$, let $A$ be a totally $W_n$-aspherical small category, and let $V\subset A$ be a nonempty full cosieve. Then $V$ is totally $W_{n-1}$-aspherical. More precisely, every connected component of every covariant category of elements over $V$ is $(n-1)$-connected, and
+\[
+ V\text{ is totally }W_n\text{-aspherical}
+ \quad\Longleftrightarrow\quad H_n(BV;\mathbb Z)=0.
+\]
+If $A$ is a preorder, the stronger conclusion holds: $A$ and $V$ are filtered, so both are totally $W_\infty$-aspherical.
+\end{proposition}
+\begin{proof}
+We first confirm the category version of the truncated criterion used in TOTASPH D.12. Applying Proposition~\ref{C:truncated-presheaf} to $1_A$ gives $n$-connectedness of $BA$ and vanishing of the homology of each connected action component through degree $n-1$. Discrete opfibrations compose: for an action $K$ on a component of $\operatorname{El}_A L$, the functor $a\mapsto\coprod_{l\in L(a)}K(a,l)$, extended by the empty set on other components, realizes its category of elements as another action over $A$. In particular all connected cyclic-subgroup coverings of the component occur as such actions. Their first homology vanishes. A nontrivial cyclic subgroup has nonzero abelianization, so the fundamental group of the component must be trivial. Hurewicz now gives $(n-1)$-connectedness. Conversely these connectivity conditions imply the homological conditions of Proposition~\ref{C:truncated-presheaf}. Thus the cited category criterion is valid, with the crucial use of unrestricted actions made explicit.
+
+Every action on $V$ extends by the empty set to $A$, because $V$ is a cosieve. Its element category is unchanged, so each of its components is $(n-1)$-connected. To see that $V$ itself is connected, use the covariant action on $A$ taking two elements outside $V$ and identifying them inside $V$. Its element category is the double of $A$ along $V$. Since $BA$ is connected and $V$ is nonempty, the double is connected. Its first homology is zero by the action criterion, whereas Mayer--Vietoris identifies its first homology with $\widetilde H_0(BV;\mathbb Z)$ because $H_1(BA)=0$. Consequently $V$ is connected and therefore $(n-1)$-connected. The criterion with index $n-1$, or the elementary characterization of total $W_1$-asphericity when $n=2$, proves the first assertion. All the required action conditions for index $n$ already hold. Hence only $n$-connectedness of $BV$ remains, and the Hurewicz isomorphism $\pi_n(BV)\cong H_n(BV;\mathbb Z)$ proves the displayed equivalence.
+
+For completeness, the same doubling argument shows that any two objects of $A$ have a common successor. Otherwise their disjoint principal cosieves would give a connected double with a nonzero first homology class. In a preorder, nonemptiness and this common-successor condition are exactly filteredness. A nonempty cosieve of a filtered preorder is filtered because every common successor remains in the cosieve.
+\end{proof}
+
+\begin{theorem}[Refuted: composition of $W_n$-dwy\'erienne sieves for every $n\geq2$]\label{C:strict-composition-failure}
+Let $H:U^{\mathrm{op}}\to\mathrm{Set}$ be totally $W_{\mathbb Z}$-aspherical and suppose $\pi_1(B(U/H))\ne1$. There are composable sieves
+\[
+ U_0\xrightarrow{a}X\xrightarrow{b}Y
+\]
+such that $a$ is a classical Dwyer immersion, $b$ is $W_\infty$-dwy\'erienne, and $ba$ is not $W_n$-dwy\'erienne for any $n\geq1$, including $n=\infty$. In particular the finite counterexample of Part A gives a finite counterexample to every truncated strict-composition assertion in the prompt.
+\end{theorem}
+\begin{proof}
+Adjoin an initial object $0$ to $U$, writing $B=U^{\triangleleft}$, and extend $H$ to $F:B^{\mathrm{op}}\to\mathrm{Set}$ by $F(0)=\{*\}$. Its element category is $(U/H)^{\triangleleft}$ and hence contractible. We confirm the totality step in TOTASPH F.26. For every $L:B\to\mathrm{Set}$, the restricted-action category of $F$ is formed from $D=\operatorname{El}_{U/H}((L|_U)\pi)$ by adjoining one source for each element of $L(0)$. The crossing category of that source is exactly $U/H$, mapped into $D$ by $(u,h)\mapsto(u,h,L(0\to u)(l))$. The components of $D$ and the connected crossing categories are integrally acyclic. Attaching these cones preserves componentwise integral acyclicity and does not join distinct components. If $D$ is empty, $L(0)$ is empty as well. The restricted-action criterion, together with contractibility of $B/F$, proves that $F$ is totally $W_\infty$-aspherical.
+
+Form $X$ from the old copy of $B$ and a disjoint lower copy $U_0$ of $U$ by
+\[
+ X(u_0,b)=B(u,b),\qquad X(b,u_0)=\varnothing,
+\]
+with all other hom sets and all compositions inherited from $B$ and $U$. The cosieve generated by $U_0$ is $U\times[1]$; projection to its lower copy is right adjoint to the inclusion. Thus $a$ is classical Dwyer. Let $j:B\to X$ be the old inclusion and put $G=j_!F$. Transitivity of Kan extension makes $G$ totally $W_\infty$-aspherical. Co-Yoneda gives $G|_B=F$ and $G|_{U_0}=H$.
+
+Now form the one-object collage $Y=X\cup_G\{t\}$, whose new object has only its identity as endomorphism. The sieve $b:X\to Y$ is $W_\infty$-dwy\'erienne. The crossing presheaf of the composite at $t$ is exactly $H$. Its identity test has element category $U/H$ with nontrivial fundamental group. Hence $H$ is not totally $W_n$-aspherical for any $n\geq1$. This proves the failure. All the constructions preserve finiteness. For the example with $U$ the ten-element monoid and $|H|=52$, $X$ has three objects and $32$ arrows, and $Y$ has four objects and $138$ arrows. The program \texttt{code/check\_truncated\_composition.py} verifies all $2{,}131$ composable pairs and $28{,}204$ composable triples, both sieve inclusions, the first right adjoint, and the identification of the final crossing action with the original $H$.
+\end{proof}
+
+\begin{proposition}[Open, with exact obstruction: total truncated composition]\label{C:remaining-total}
+For totally $W_n$-aspherical categories, closure under nonempty full cosieves remains undecided without finiteness. The equivalent composition assertion for \emph{totally} $W_n$-dwy\'erienne sieves also remains undecided. By Proposition~\ref{C:degree-loss}, the exact remaining assertion is
+\[
+ \begin{gathered}
+ n\geq2,\quad A\text{ totally }W_n\text{-aspherical},\quad
+ \varnothing\ne V\subset A\text{ a full cosieve}\quad\Longrightarrow\quad
+ H_n(BV;\mathbb Z)=0.
+ \end{gathered}
+\]
+The first undecided cardinality and degree are a countable category with infinitely many objects and $n=2$. No preorder can witness a failure. No category with a weakly terminal object, in particular no category with finitely many objects, can witness one.
+\end{proposition}
+\begin{proof}[Verification of the reduction and record of the attack]
+We checked the reduction in TOTASPH F.9. If nonempty cosieves of total categories are total, then for $U\subset X\subset Y$ and $y\in Y$ with $U/y\ne\varnothing$, the full cosieve in $X/y$ on the objects receiving a map from $U$ is total. The diagram $(x\to y)\mapsto U/x$ has total values. Its Grothendieck construction is total by composition of total functors, and its composition functor to $U/y$ has an adjoint section, hence is final. Conversely, for a nonempty cosieve $V\subset A$, the lower-copy construction in the preceding proof gives a classical Dwyer sieve $V_0\to X$. The old inclusion $A\to X$ is final, since it is right adjoint to the copy-forgetting functor. Thus $X$ is total when $A$ is. The sieve $X\to X^{\triangleright}$ is totally dwy\'erienne, and its composite has boundary category $V$. This proves the claimed equivalence without assuming a finiteness bound. The strict-composition counterexample does not decide it: its second factor is not asserted to be totally dwy\'erienne.
+
+We also checked the finite/weakly-terminal argument of TOTASPH C.11--C.13 and D.13. The doubling obstruction gives common successors. The degree-one parallel-arrow action calculation gives augmentation-one integral equalizers of ordinary parallel arrows: its relation ideal contains $1$, and the finitely many targets of a relation witnessing this can all be postcomposed to one common successor. Thus for parallel arrows $a,b:p\to r$ there are an object $s$ and $t\in\mathbb Z[A(r,s)]$ with augmentation $1$ and $ta=tb$. This uses only vanishing of $H_1$ of all action components, which holds for every $n\geq2$.
+
+Suppose $q$ is weakly terminal and put $M=\operatorname{End}_A(q)$, with $yx$ denoting $y\circ x$. Given $x,a\in M$, postcompose an affine equalizer of $x,xa$ back to $q$. This gives $t\in\mathbb Z[M]$ of augmentation $1$ with $tx=txa$. Regard $v=tx$ as a finite-support integral signed measure of mass $1$ on $M$. Its support lies in $Mx$, and it is invariant under the map $r_a:m\mapsto ma$. If $F$ is the finite support, invariance gives each point of $F$ a predecessor in $F$. There are exactly $|F|$ possible predecessors, so $r_a$ permutes $F$. The support is therefore a union of finite cycles, the coefficient is constant on each cycle, and the mass is an integer linear combination of the cycle lengths. This conclusion does not assume that the coefficients are positive.
+
+There is consequently a point in $Mx$ of positive period under $r_a$. Let $d$ be the least positive period attained by any point of $Mx$. If $d>1$, choose a prime $\ell\mid d$ and a point $z\in Mx$ of period $d$. Apply the affine-equalizer hypothesis to $z,a$. The resulting invariant mass-one measure has support in $Mz$. At least one cycle in this support has length $s$ not divisible by $\ell$, since otherwise its total mass would be divisible by $\ell$. A point $w$ of that cycle satisfies $wa^s=w$. Since $w\in Mz$ and $za^d=z$, it also satisfies $wa^d=w$. Its least period divides $\gcd(d,s)<d$, contradicting the definition of $d$ because $Mz\subset Mx$. Hence $d=1$: for every $x,a$ there is $y$ with $yxa=yx$.
+
+For $a,b\in M$, first choose $y$ with $ya=y$ by taking $x=1$, and then choose $z$ with $zyb=zy$ by taking $x=y$. Thus $zya=zy=zyb$, proving that the one-object category $M$ is filtered. For arbitrary parallel arrows $a,b:p\to r$ in $A$, choose $d:r\to q$ and an affine equalizer $t=\sum_i n_i c_i\in\mathbb Z[M]$ of $da,db$, with $\sum_i n_i=1$. Filteredness of $M$ supplies $z$ with $zc_i=z$ for all the finitely many $c_i$: successively equalize each $c_i$ with the identity, preserving earlier equalities by left multiplication. It follows that
+\[
+ zda=\sum_i n_i zc_i da=\sum_i n_i zc_i db=zdb.
+\]
+Thus $zd$ is an actual equalizer of $a,b$. Together with nonemptiness and common successors, this proves that $A$ is filtered. Every nonempty cosieve of a filtered category is filtered: common successors and equalizing arrows remain in the cosieve. Such a cosieve is therefore totally $W_\infty$-aspherical. Finally, a nonempty category with finitely many objects and common successors has a weakly terminal object, by successively taking common successors of its objects. This establishes the stated finite and weakly-terminal exclusions, without any finiteness assumption on the arrow sets.
+
+As a concrete failed attempt at the first missing degree, take $A$ to be the poset of proper subsets of a four-element set, including the empty set, and let $V$ be its nonempty part. Then $BA$ is contractible and $BV\cong S^2$. It would give the desired obstruction if $A$ were total. It is not: the two-element action that identifies its elements precisely at two distinct maximal faces has an element category with integral homology $H_0=H_1=\mathbb Z$ and all other groups zero. The exact finite calculation in \texttt{code/check\_sieve\_examples.py} gives normalized simplex counts $(28,100,120,48)$ and only unit nonzero Smith invariants. This excludes the cone-on-a-sphere construction, and the preorder theorem excludes every directed-poset repair of it. The extension-by-empty argument gives all required action connectivity on $V$ but supplies no vanishing of $H_n(BV)$; the double along $V$ shifts that group to degree $n+1$, outside the tested range. This identifies the precise point where that attempted proof stops.
+\end{proof}
+
+
+% End sections/C_truncated.tex
+
+\section{A repaired endpoint operation}
+
+% Begin sections/D_repair.tex
+
+
+We use ``classical Dwyer immersion'' for the original right-adjoint definition. A sieve $i:A\hookrightarrow B$ is a homotopical cofibration if the pushout functor $A\backslash\mathrm{Cat}\to B\backslash\mathrm{Cat}$ preserves weak homotopy equivalences. This is exactly XII ms.~109--110, D\'efinition~2(c), rather than a choice of model-category cofibrations.
+
+\begin{proposition}[Proved: functorial Dwyer replacement with unchanged source]\label{D:dwyer-replacement}
+There is a functorial factorization, for every functor $f:A\to B$ of small categories,
+\[
+ A\xrightarrow{R(f)}Z(f)\xrightarrow{q(f)}B,
+ \qquad q(f)R(f)=f,
+\]
+where $R(f)$ is a classical Dwyer immersion and $q(f)\in W_\infty$. More precisely, $R(f)$ is a relative cell map for the twice-subdivided boundary generators, hence a cofibration in the Thomason model structure. The construction uses only countably many stages of small coproducts and categorical pushouts, and preserves the chosen small universe.
+\end{proposition}
+\begin{proof}
+Let $c$ denote the left adjoint of the nerve functor. For $m\geq0$ put
+\[
+ I_m:c\operatorname{Sd}^{2}\partial\Delta[m]\longrightarrow
+ c\operatorname{Sd}^{2}\Delta[m].
+\]
+Both categories are finite. They are face posets of the once-subdivided boundary and simplex. In the cosieve of simplices meeting the boundary, intersection with that subdivided boundary is a nonempty face and is right adjoint to its inclusion. Thus $I_m$ is a classical Dwyer immersion. This is the argument of \citet{Thomason1980}, Proposition~4.2; it uses the twice-subdivided generators, not the unmodified endpoint inclusion.
+
+Starting with $Z_0=A\to B$, at stage $k+1$ attach one copy of the target of $I_m$ for every commutative square from $I_m$ to $Z_k\to B$, along the indicated copy of its source. Let $Z(f)=\operatorname{colim}_{k<\omega}Z_k$. The indexing collections are sets because all categories are small. Tagging cells by their actual commutative squares makes this construction functorial in $f$. The finite source of every $I_m$ implies that $q(f)$ has the right lifting property against every $I_m$. Under $c\operatorname{Sd}^2\dashv\operatorname{Ex}^2N$, this says that $\operatorname{Ex}^2Nq(f)$ has the right lifting property against all boundary inclusions. It is therefore a trivial Kan fibration. The natural weak equivalence $K\to\operatorname{Ex}^2K$ and two-out-of-three give $Nq(f)$ a weak equivalence. This is the boundary version of the explicit factorization in \citet{Thomason1980}, pp.~319--320, preceding Theorem~4.9.
+
+We verify that the left factor remains classical Dwyer, avoiding Thomason's incorrect retract assertion. A classical Dwyer sieve has each nonempty crossing weight represented by its right-adjoint value. Cobase change along $A\to C$ replaces a represented weight $A(-,r(b))$ by $C(-,f(r(b)))$, so preserves the Dwyer condition. Coproducts preserve it componentwise. For a composite $A\subset B\subset C$, an object receiving a map from $A$ lies in the cosieve on which the right adjoint for $B\subset C$ is defined; that right-adjoint value itself receives a map from $A$. The composite of the two right adjoints represents the crossing weight from $A$. Finally, in a sequential union of full sieves, the crossing weight at an object already present at a finite stage never changes, and at that stage it is representable. Yoneda assembles these representing objects into a right adjoint on the generated cosieve. Consequently $R(f)$ is classical Dwyer. No closure under retracts is used.
+\end{proof}
+
+\begin{theorem}[Proved: the largest class for the repaired operation]\label{D:maximal-class}
+Fix $r\geq2$, set $I=\Phi_r$, and let $j:\{0,2r\}\to I$ be its endpoint inclusion. Define the modified endpoint operation on sieves by
+\[
+ \mathcal E_r(i)=R(i\mathbin{\square}j),\qquad
+ i\mathbin{\square}j:
+ (A\times I)\cup(B\times\{0,2r\})\longrightarrow B\times I.
+\]
+Let $\mathcal H$ be the class of sieves $i:A\hookrightarrow B$ for which, for every $p:A\to C$, the canonical map
+\[
+ NB\amalg_{NA}NC\longrightarrow N(B\amalg_A C)
+\tag{$\dagger$}
+\]
+is a weak homotopy equivalence. Then $\mathcal H$ is precisely the class of homotopical-cofibration sieves. It is stable under arbitrary cobase change and under every $\mathcal E_r$. It is the largest class of sieves with these two stability properties all of whose members are $W_\infty$-cofibrations.
+\end{theorem}
+\begin{proof}
+If $(\dagger)$ is a weak equivalence for every $C$, a weak equivalence $C\to C'$ under $A$ induces a weak equivalence of the simplicial pushouts, since $NA\to NB$ is a monomorphism. The two comparison maps in $(\dagger)$ and two-out-of-three give a weak equivalence $B\amalg_A C\to B\amalg_A C'$. Thus $i$ is a homotopical cofibration.
+
+Conversely assume that $i$ is a homotopical cofibration. Factor $p$ as $A\xrightarrow{k}C'\xrightarrow{q}C$ by Proposition~\ref{D:dwyer-replacement}. The Dwyer pushout theorem, \citet{Thomason1980}, Proposition~4.3, gives a weak equivalence $NB\amalg_{NA}NC'\to N(B\amalg_A C')$. Homotopical cofibrancy of $i$ makes $B\amalg_A C'\to B\amalg_A C$ a weak equivalence. The map of simplicial pushouts obtained from $Nq$ is a weak equivalence by left properness of simplicial sets, again using the monomorphism $NA\to NB$. The commuting comparison square now proves $(\dagger)$ for $C$. This establishes the claimed characterization.
+
+Cobase-change stability follows directly from the definition: the pushout functor for a cobase change is the restriction of the same pushout functor after composing the maps out of $A$. Every $\mathcal E_r(i)$ is classical Dwyer, by construction, hence belongs to $\mathcal H$ by Thomason's pushout theorem. This gives endpoint stability, in fact for an arbitrary input sieve. Finally any competing class in the statement consists of homotopical-cofibration sieves, hence is contained in $\mathcal H$. Thus the maximality is literal. It is relative to the specified replacement operation, not a claim that the unmodified operation has become permissible.
+\end{proof}
+
+\begin{proposition}[Proved: the preserved endpoint data and the applications present in the manuscript]\label{D:applications}
+The replacement in Theorem~\ref{D:maximal-class} leaves the source
+$Q=(A\times I)\cup(B\times\{0,2r\})$ unchanged and supplies a weak equivalence $Z(i\square j)\to B\times I$ under $Q$. It gives functorial cylinders and functorial homotopy pushouts in $\mathrm{Cat}$ with weak equivalences $W_\infty$. Classical Dwyer immersions suffice for these constructions and for the forward weak-equivalence invariance used in XII \S3. They do not by themselves form a Quillen cofibration class.
+\end{proposition}
+\begin{proof}
+The first assertion is the equality $q(f)R(f)=f$. Because the two defining subcategories of $Q$ are sieves, every chain in $Q$ lies entirely in one of them, according to its final object. Hence $NQ$ is exactly the simplicial union $(NA\times NI)\cup(NB\times N\{0,2r\})$. The replacement therefore preserves the actual endpoint diagram and its homotopy type as a map, through the specified weak equivalence of arrows $(\mathrm{id}_Q,q)$.
+
+Apply the modified endpoint operation $\mathcal E_r$ to $\varnothing\to B$. The map $\mathcal E_r(\varnothing\to B)$ is the Dwyer sieve $B\amalg B\to\operatorname{Cyl}(B)$, followed by the weak equivalence $\operatorname{Cyl}(B)\to B\times I\to B$. The projection $B\times I\to B$ is a weak equivalence because $BI$ is contractible. Thus the fold map has a functorial cylinder factorization, with the left map a Thomason boundary-cell cofibration as well as a homotopical cofibration.
+
+For a span $X_1\xleftarrow{\alpha_1}X_0\xrightarrow{\alpha_2}X_2$, factor $\alpha_1$ by Proposition~\ref{D:dwyer-replacement} as a boundary-cell Dwyer immersion $X_0\to Z$ followed by $Z\to X_1$ in $W_\infty$, and form $P=Z\amalg_{X_0}X_2$. Thomason's pushout comparison makes $BP$ the homotopy pushout of $BZ\leftarrow BX_0\to BX_2$, hence of the original span. This is functorial. Here we use the \emph{cofibred} Grothendieck construction over the outward fork $1\leftarrow0\to2$. The construction of the replaced span maps by a weak equivalence to that of the original span, by the objectwise-invariance bisimplicial resolution, and maps by a weak equivalence to $P$. XII ms.~121--132 instead uses the \emph{fibred} integration of the same diagram viewed as a contravariant functor on the inward fork $1\to0\leftarrow2$. The two integrations and their augmentations to a strict pushout give the same homotopy-pushout comparison; this is the comparison of XII Proposition~14, ms.~140--145, or follows by taking opposites in the Grothendieck homotopy-colimit theorem. Thus the specified integrated-span comparison is preserved after replacement.
+
+The forward assertions of XII Proposition~13, ms.~125--126, are $\alpha_1\in W\Rightarrow i_2\in W$ and $\alpha_2\in W\Rightarrow i_1\in W$. For $W=W_\infty$, if $\alpha_1$ is a weak equivalence, its homotopy pushout is weakly equivalent to $X_2$, and the specified inclusion $i_2$ is this equivalence; the other implication is symmetric. The objectwise invariance of two spans is the subsequent corollary, ms.~126--128, and follows from the comparison just proved. We do not assert the converse implications that the manuscript obtains under the stronger W(7 bis) or W(7) hypotheses.
+
+The other explicit application in the supplied continuation is the factorization/cofiber and cylinder discussion at XIII ms.~8--13 and 30--32: the class in M$''$ must consist of homotopical cofibrations, and the cylinder discussion requires cofibration--weak-equivalence factorizations. The boundary-cell factors constructed above are Thomason cofibrations, so the full Thomason model structure supplies their lifting properties and the required retract-closed cofibration class. This assertion concerns those boundary-cell factors, not all classical Dwyer maps: $\varnothing\to A$ is classical Dwyer for every small category $A$, whereas not every small category is Thomason-cofibrant. The finite retract example below gives a further reason why ``classical Dwyer maps'' alone cannot be substituted for the complete model cofibration class.
+\end{proof}
+
+\begin{proposition}[Refuted: classical Dwyer maps as the complete Quillen cofibration class]\label{D:retract}
+Classical Dwyer immersions are not closed under retracts in the arrow category. Consequently they cannot be exactly the cofibrations of a Quillen model structure. They are strictly smaller than the maximal class $\mathcal H$ of Theorem~\ref{D:maximal-class}.
+\end{proposition}
+\begin{proof}
+We give and check \citeauthor{Cisinski1999}'s (\citeyear{Cisinski1999}), pp.~228--229, example. Let $A$ have one object $a$ and endomorphisms $1,e$, with $e^2=e$. Let $C$ adjoin an object $b$ with only its identity as endomorphism and arrows $\beta,\gamma:a\to b$, subject to $\gamma e=\beta$ and $\beta e=\beta$. There are no arrows $b\to a$. The inclusion $A\to C$ has right adjoint taking both objects to $a$, with $r(\gamma)=1$ and $r(\beta)=r(e)=e$. Its counit at $b$ is $\gamma$. The hom-set bijection is explicit: composition with $\gamma$ sends $1,e$ to $\gamma,\beta$. Hence $A\to C$ is classical Dwyer.
+
+Let $B\subset C$ retain the two objects and only $\beta$ as an arrow $a\to b$. The functor $C\to B$ fixes all retained arrows and sends $\gamma$ to $\beta$. It is a retraction under $A$. The generated cosieve of $A$ in $B$ is all of $B$, but $B(a,b)$ has one element whereas $A(a,a)$ has two; its crossing presheaf is therefore not representable. Thus $A\to B$ is not Dwyer. Nevertheless it is a homotopical cofibration, since that property is closed under arrow-category retracts. The program \texttt{code/check\_sieve\_examples.py} verifies every composable triple, the retraction, the right-adjoint functor, its natural counit, and these hom-set cardinalities. This is the first erroneous step in Thomason's Lemma~5.3(3), not a failure of his boundary-cell construction or of the corrected model structure; Cisinski's Proposition~2 supplies the repair by retracts and pseudo-Dwyer maps.
+\end{proof}
+
+The sentence at XII ms.~114 says only ``pour des applications ult\'erieures'' before imposing the alternating endpoint condition. In the supplied XII \S3 and XIII ms.~1--98 we find no later invocation of that particular condition: the symbol $\Phi_n$ and the source--target endpoint formula do not recur there. The precise applications established above are the homotopy-pushout constructions in XII and the cofiber/cylinder requirements in XIII. There is no textual basis in the supplied passages for identifying a further, unspecified use and claiming it verified. For any use requiring the \emph{literal} categorical product target $B\times I$ with its unmodified source inclusion, the obstruction of TOTASPH F.23--F.24 remains decisive. Our replacement supplies a weakly equivalent target under the same source, which is the explicit change in the operation.
+
+% End sections/D_repair.tex
+
+\section{Path categories}
+
+% Begin sections/E_paths.tex
+% PRETOT Part E. Standard amsthm environments; macros used: \operatorname, \mathbb.
+% AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode). No priority claim.
+\label{sec:paths}
+
+\begin{definition}[Known: the precise category of paths]\label{E:path-definition}
+The category $\mathsf{Ty}$ has finite words $\tau$ in $+,-$ as objects.  A
+word of length $n$ defines the free category $I_\tau$ on the oriented line
+with vertices $0,\ldots,n$.  A morphism $\tau\to\rho$ is a functor
+$I_\tau\to I_\rho$ which preserves both endpoints and is nondecreasing
+for the numerical orders of the vertices.  For a small category $Y$ and
+$y_0\in Y$, write $P=P(Y,y_0)$ for the category with objects
+$(\tau,c)$, where $c:I_\tau\to Y$ and $c(0)=y_0$.  A morphism
+$(\tau,c)\to(\rho,d)$ is $(\phi,\eta)$ with
+$\phi:\tau\to\rho$ in $\mathsf{Ty}$ and
+$\eta:c\Rightarrow d\phi$ a natural transformation satisfying
+$\eta_0=\operatorname{id}_{y_0}$.  Composition is
+$(\psi,\theta)(\phi,\eta)=(\psi\phi,(\theta\phi)\eta)$.
+The functor $q:P\to Y$ sends a path to its endpoint and a morphism to its
+last component.  We write $o$ for the empty path at $y_0$.
+\end{definition}
+
+This is the definition in \citet[VII \S\S4--5]{GrothendieckDerivateurs}, after the successive restrictions:
+endpoint preservation at VII ms.~29 and numerical monotonicity at
+VII ms.~31--32.  It is a Grothendieck construction for the contravariant
+diagram of fixed-type path categories, not their ordinary colimit.  In
+particular there is no morphism from an empty type to a nonempty type.
+The distinction between the numerical order and the order defined by
+arrows of $I_\tau$ is essential throughout this section.
+
+\begin{lemma}[Proved: the two necessary totality tests used below]
+\label{E:necessary-tests}
+If a small category $A$ is totally $W_\infty$-aspherical, then its objects
+have common successors.  Moreover, for every parallel pair
+$a,b:p\rightrightarrows q$ there exist $r\in A$ and
+$t\in\mathbb Z[A(q,r)]$ such that the augmentation of $t$ is $1$ and
+$ta=tb$ in $\mathbb Z[A(p,r)]$.
+\end{lemma}
+\begin{proof}
+We verify the arguments used from TOTASPH B.4 and C.11.  Apply the
+restricted-action criterion to the terminal presheaf on $A$; here the
+restriction is the identity of $A$, so every covariant set-valued action
+is allowed.  In particular $BA$ is contractible and every component of
+every $B\operatorname{El}_A(L)$ is integrally acyclic.
+
+If $x,y$ have no common successor, their generated full cosieves
+$V_x,V_y$ are disjoint.  Take the quotient of the constant two-point
+action which identifies the two points exactly on $V_x\cup V_y$.
+Its element category is the double of $A$ along $V_x\amalg V_y$.
+Its nerve is the corresponding pushout along monomorphisms: a chain
+meeting a cosieve remains in it.  The double is connected, and
+Mayer--Vietoris gives a nonzero $H_1$, since both cosieves are nonempty
+and connected while $A$ is contractible.  This is a contradiction.
+
+For the parallel pair, let $P_s=\mathbb Z[A(s,-)]$ in
+$\mathsf{Ab}^{A}$ and $d:P_q\to P_p$ be $d(c)=ca-cb$.  Put
+$K=\ker d$ and $J=\operatorname{im}d$, and let $L$ be the pointwise
+quotient of $A(p,-)$ generated by $ca\sim cb$.  There are exact
+sequences
+\[
+0\longrightarrow J\longrightarrow P_p\longrightarrow\mathbb Z[L]
+\longrightarrow0,
+\qquad
+0\longrightarrow K\longrightarrow P_q\longrightarrow J
+\longrightarrow0.
+\]
+The $P_s$ are projective because maps out of $P_s$ are evaluation at
+$s$, and $\operatorname{colim}_A P_s=\mathbb Z$.  The map induced by
+$d$ on these colimits is zero.  The long exact sequence of derived
+colimits and right exactness therefore give
+\[
+H_1(B\operatorname{El}_A(L);\mathbb Z)
+ =L_1\operatorname{colim}_A\mathbb Z[L]
+ \cong\operatorname{coker}(\operatorname{colim}_A K\longrightarrow
+ \mathbb Z).
+\]
+The first equality follows directly from the bar complex: its basis
+consists of a chain in $A$ and an element of $L$ at the chain's initial
+object, exactly the nerve chains of $\operatorname{El}_A(L)$.
+That element category is nonempty and connected because every object
+receives an arrow from $(p,[\operatorname{id}_p])$.  Its $H_1$ vanishes.
+Consequently $1$ is an integral combination of augmentations of
+elements $t_i\in K(r_i)$.  There are only finitely many such $r_i$ in
+one expression for $1$.  Choose a common successor $r$ and postcompose
+the $t_i$ into $\mathbb Z[A(q,r)]$.  The same integral combination has
+augmentation $1$ and annihilates $a-b$, as required.  No action on a
+category of elements has been used without a specified factorization.
+\end{proof}
+
+\begin{proposition}[Proved: complete check and strengthening of R8]
+\label{E:R8}
+For every $y\in Y$ there is a natural bijection
+\[
+\pi_0(y\backslash P(Y,y_0))
+ \cong\operatorname{Hom}_{\Pi(Y)}(y_0,y),
+\qquad \Pi(Y)=Y[\operatorname{Mor}(Y)^{-1}].
+\]
+Thus $q$ is ordinary final if and only if $BY$ is connected and simply
+connected.  In this case total $W_\infty$-asphericity of $P(Y,y_0)$
+implies total $W_\infty$-asphericity of $Y$.
+\end{proposition}
+\begin{proof}
+For fixed endpoints $a,b$, evaluation of a path word in $\Pi(Y)$ gives
+\[
+\pi_0\operatorname{Ch}(Y;a,b)
+ \cong\operatorname{Hom}_{\Pi(Y)}(a,b).
+\]
+We check both directions rather than relying on a claim about homotopy
+fibres.  Naturality of a path morphism telescopes after all arrows have
+been inverted; fixed endpoint components are identities.  A type map
+replaces edges by identities or strings of consecutive equally oriented
+edges, and consequently preserves the evaluated word.  Every arrow of
+$\Pi(Y)$ is represented by a finite path.  Its defining word relations
+are all realized by zigzags of path morphisms.  Identity insertion uses
+an interval collapse.  Composition of equally directed edges uses the
+endpoint inclusion from a one-edge interval into the longer directed
+interval.  For $u:a\to b$, the path
+$a\xrightarrow{u}b\xleftarrow{u}a$ receives the natural
+transformation $(\operatorname{id},u,\operatorname{id})$ from the
+constant path at $a$ of the same type, and that constant path collapses
+to the empty path.  For $b\xleftarrow{u}a\xrightarrow{u}b$ the
+natural transformation goes to the constant path at $b$.  Concatenation
+with fixed paths on either side preserves all these morphisms.  This
+proves injectivity, surjectivity, and compatibility with concatenation.
+
+An object of $y\backslash P$ is $(c,\alpha)$ with
+$c:y_0\leadsto z$ and $\alpha:y\to z$.  Its invariant is
+$\alpha^{-1}[c]\in\Pi(Y)(y_0,y)$.  A morphism has endpoint
+$v:z\to z'$ with $v\alpha=\alpha'$, so this invariant is unchanged.
+Append the retrograde arrow $z\xleftarrow{\alpha}y$ to $c$, obtaining
+$c_\alpha$.  The type map which collapses that last edge, together with
+the natural transformation whose original components are identities
+and whose last component is $\alpha$, gives a morphism
+\[
+(c_\alpha,\operatorname{id}_y)\longrightarrow(c,\alpha)
+\quad\hbox{in }y\backslash P.
+\]
+The preceding fixed-endpoint computation now proves the displayed
+bijection.  The usual presentation of the fundamental groupoid of a
+nerve uses arrows for edges and composition triangles for relations;
+thus it is exactly $\Pi(Y)$.  This proves the finality criterion.
+
+Finally, a final functor $f:A\to B$ satisfies
+$f_!1_A\cong1_B$ in the presheaf variance used here: the value at $b$
+is $\pi_0(b\backslash A)$.  For every $g:B\to C$,
+$(gf)_!1_A\cong g_!1_B$ by composition of left Kan extensions.
+Totality of $A$ therefore implies totality of $B$.  Apply this to $q$.
+This confirms every step of TOTASPH G.3 and G.5 which R8 uses; neither
+perfectness nor a strict-fibre/homotopy-fibre comparison is needed.
+\end{proof}
+
+\begin{proposition}[Proved: the point case]
+\label{E:point}
+For $Y=e$, the category $P(e,*)$ is $\mathsf{Ty}$.  It is filtered,
+its integral affinization is filtered, and it is totally
+$W_\infty$-aspherical.
+\end{proposition}
+\begin{proof}
+The empty word is terminal: the unique map of every interval to a point
+is increasing and preserves both endpoints.  A category with a terminal
+object is filtered, because all objects and all parallel arrows map
+uniquely to that object.  In the integral affinization the arrows are
+finite integral combinations of augmentation $1$.  Since there is only
+one ordinary arrow into the empty word, there is also only one affine
+arrow into it.  Thus the affinization again has that terminal object.
+For totality, $1_{\mathsf{Ty}}$ is the representable at the empty word;
+every left Kan extension is a representable, whose element category
+has a terminal object.
+\end{proof}
+
+\begin{theorem}[Refuted: the converse to R8, with a two-object target]
+\label{E:converse}
+Let $Y=[1]=(0\to1)$ and $y_0=0$.  The category $Y$ is totally
+$W_\infty$-aspherical, while $P(Y,0)$ is not.  The failure is witnessed
+by a specified ordinary final functor from $P(Y,0)$ to a four-object
+category whose classifying space is $S^2$.
+\end{theorem}
+\begin{proof}
+The category $Y$ has terminal object $1$, so its totality follows from
+the representable argument above.  Write $P=P([1],0)$.  It is
+contractible: the functor replacing a path by the constant path at $0$
+of the same type has natural transformations to the identity, using
+the unique arrows out of the initial object $0$, and to the constant
+functor at the empty path, using the interval collapse.
+
+Let $F$ be the fork $a\leftarrow o\to b$.  Define $r:P\to F$ by
+sending the empty path to $a$, paths ending at $1$ to $b$, and all
+remaining paths to $o$.  A path morphism out of an empty path has empty
+target type; a path morphism from a path ending at $1$ again ends at
+$1$.  These facts prove that $r$ is a functor, with the unique possible
+arrow values in the poset $F$.
+The category $a\backslash P$ for $r$ is the singleton empty path;
+$b\backslash P$ is $\operatorname{Ch}([1];0,1)$, connected by the
+word calculation in Proposition~\ref{E:R8}; and
+$o\backslash P$ is $P$, which is connected.  Thus $r$ is final.
+
+Adjoin to $F$ an object $x$ and arrows $s,t:x\rightrightarrows o$,
+with relations $As=At$ and $Bs=Bt$, where $A:o\to a$ and $B:o\to b$.
+Together with identities and these two composite arrows, these are all
+arrows of a category $S$.  The inclusion $j:F\to S$ is final:
+$x\backslash F$ is the connected four-cycle poset, and the other
+coslices have initial objects.  The full subcategory on $x,o$ has
+classifying space a circle.  The full subcategories on $x,o,a$ and on
+$x,o,b$ are its cones, and every nerve simplex of $S$ lies in one of
+these cones.  Hence $BS$ is their union along that circle, namely
+$\Sigma S^1\cong S^2$.
+
+The composite $jr$ is final, so $(jr)_!1_P\cong1_S$, and the element
+category of this Kan extension is $S$.  This violates totality for
+the single specified outgoing functor $jr$.
+The program \texttt{path\_checks.py} verifies all axioms of $S$, the
+finality of $j$, its integral nerve homology, and the restriction of
+$r$ to the full subcategory of paths of length at most one.  The proof
+above verifies $r$ for paths of all lengths; the bounded computation is
+not used as a substitute for that proof.
+\end{proof}
+
+\begin{theorem}[Proved: classification of totally aspherical endpoint functors]
+\label{E:total-endpoint}
+For every small category $Y$ with specified $y_0$, the endpoint functor
+$q:P(Y,y_0)\to Y$ is totally $W_\infty$-aspherical in XII
+Definition~2 if and only if $Y$ is a connected thin groupoid, equivalently
+if and only if $Y$ is equivalent as a category to $e$.
+\end{theorem}
+\begin{proof}
+Suppose first that each $E_y=P/y$ is totally aspherical.  Two objects
+$(o,\alpha)$ and $(o,\beta)$ of $E_y$, where
+$\alpha,\beta:y_0\to y$, can have a common successor only if they are
+equal: any morphism out of an empty type again has empty type, and its
+path morphism is the identity.  Lemma~\ref{E:necessary-tests} therefore
+gives $|Y(y_0,y)|\leq1$.
+
+If $u:y_0\to z$, let $d$ be the one-edge direct path $u$.  In $E_z$
+the two objects $(o,u)$ and $(d,\operatorname{id}_z)$ must have a common
+successor.  It must be $(o,u)$ itself, so there is a morphism
+$(d,\operatorname{id}_z)\to(o,u)$.  Its last component $v:z\to y_0$
+satisfies $vu=\operatorname{id}_{y_0}$ by naturality on the path edge
+and $uv=\operatorname{id}_z$ by the comma-category equation.  Thus every
+arrow out of $y_0$ is invertible.
+
+Now let $v:z\to y_0$.  In $E_z$ put
+\[
+d=(y_0\xleftarrow{v}z,\operatorname{id}_z),\qquad
+c=(y_0\xleftarrow{v}z\xleftarrow{\operatorname{id}}z,
+\operatorname{id}_z).
+\]
+There are two morphisms $f,g:c\rightrightarrows d$.
+Their type maps are respectively $(0,1,1)$ and $(0,0,1)$; their
+natural transformations are respectively
+$(\operatorname{id},\operatorname{id},\operatorname{id})$ and
+$(\operatorname{id},v,\operatorname{id})$.
+By Lemma~\ref{E:necessary-tests} there are $e\in E_z$ and an
+augmentation-one integral combination of arrows $h:d\to e$ which
+equalizes $f,g$.
+
+If the type of $e$ has nonzero length $m$, every type map underlying
+$h$ sends the two vertices of $d$ to $0,m$.  Consequently every
+composite $hf$ sends the middle vertex of $c$ to $m$, whereas every
+composite $hg$ sends it to $0$.  The two collections of arrows
+$c\to e$ have disjoint supports in their free abelian group.  Their
+linear combinations cannot be equal with augmentation $1$ on each
+side.  Thus $e$ has empty type, say $e=(o,\beta)$ with
+$\beta:y_0\to z$.  Every arrow $d\to e$ has last component $v$, by
+naturality, and the comma equation is
+$\beta v=\operatorname{id}_z$.  The already proved assertion about
+outgoing arrows makes $\beta$ invertible, hence $v=\beta^{-1}$.
+
+For every $y$, nonemptiness of $E_y$ gives a path from $y_0$ to an
+object $z$ and an arrow $z\to y$, hence a path from $y_0$ to $y$.
+So $Y$ is connected.  Starting at $y_0$ and proceeding along any such
+zigzag, every next arrow is invertible: after identifying its preceding
+vertex with $y_0$ by the isomorphism already constructed, it becomes an
+incoming or an outgoing arrow at $y_0$.  All objects are therefore
+isomorphic to $y_0$, and all arrows are invertible.  The inequality
+$|Y(y_0,y)|\leq1$ then makes every hom set a singleton.
+
+Conversely, suppose $Y$ is a connected thin groupoid.  For each $y$
+there is one arrow $\alpha_y:y_0\to y$.  The object $(o,\alpha_y)$ is
+terminal in $P/y$: collapse each type to the empty word and use the
+unique arrows from its vertices to $y_0$.  These give the unique natural
+transformation, and its comma equation holds by uniqueness in $Y$.
+Every $P/y$ therefore has a terminal object and is totally aspherical.
+\end{proof}
+
+\begin{proposition}[Proved: strict endpoint functors in two classes]
+\label{E:strict-cases}
+If $q:P(Y,y_0)\to Y$ is strictly $W_\infty$-aspherical, then
+$|Y(y_0,y)|\leq1$ for every $y$.  If $Y$ is a preorder, or if $Y$ is a
+groupoid, strict $W_\infty$-asphericity of $q$ is equivalent to $Y$
+being a connected thin groupoid.  In particular, for a poset it is
+equivalent to $Y$ being the singleton poset.
+\end{proposition}
+\begin{proof}
+We first verify the nonempty-cosieve restriction of total homological
+presheaves used here.  If $H$ is totally $W_{\mathbb Z}$-aspherical on
+$U$, $E=U/H$, and $V\subset U$ is a full cosieve, take the covariant
+action with two elements outside $V$ and one element on $V$, with the
+evident transition maps.  Its pullback to $E$ has element category the
+double of $E$ along $E_V=V/(H|_V)$.  If $E_V$ is nonempty this double
+is connected.  The restricted-action criterion makes it integrally
+acyclic, as is $E$.  Mayer--Vietoris then makes $E_V$ nonempty,
+connected, and integrally acyclic.  This proves the instance of
+TOTASPH F.15 used here directly.
+
+Apply it to $U=P$, $H=q^*Y(-,y)$, and the full cosieve $V=\{o\}$.
+The resulting element category is the discrete set $Y(y_0,y)$.
+If nonempty it must be connected, proving the inequality.
+
+For a preorder every $q^*Y(-,y)$ is subterminal.  For a subterminal
+presheaf $H$, its element category $E$ is a full sieve in its base,
+and totality of $H$ implies totality of $E$: given $f:E\to C$, push
+out that sieve along $f$ to obtain $U\to U\amalg_E C$.  The inclusion
+of $C$ is again a full sieve and hence a discrete fibration.  The
+comprehensive factorization of $f$, followed by this inclusion, is the
+comprehensive factorization of the composite $E\to U\to U\amalg_E C$.
+Thus its element category is precisely that of the Kan extension
+required in the totality test for $H$.  All outgoing $f$ are covered.
+The reverse implication follows by composing the element projection
+with an arbitrary outgoing functor of the base.  Consequently strict
+and total asphericity of $q$ agree for preorders, and
+Theorem~\ref{E:total-endpoint} applies.
+
+For a groupoid, every path has a unique morphism to $o$: its components
+are the inverses of the transported path words.  An object
+$(c,\beta)\in P/y$ therefore maps to a unique $(o,\alpha)$, where
+$\alpha:y_0\to y$ is the evaluated composite.  Each component of
+$P/y$ has such a terminal object, and its components are indexed by
+$Y(y_0,y)$.  Strict asphericity includes the identity Kan-extension
+test, so it forces that indexing set to have exactly one element for
+every $y$, including objects in all components of $Y$.  This is the
+connected thin groupoid condition.  Sufficiency follows from
+Theorem~\ref{E:total-endpoint}.
+\end{proof}
+
+\begin{proposition}[Proved: a universal test on the first path truncation]
+\label{E:retraction-truncation}
+Let $R$ have objects $0,z$, arrows $u:0\to z$, $r:z\to0$,
+$ru=\operatorname{id}_0$, and $ur=e\ne\operatorname{id}_z$; its five
+arrows are $\operatorname{id}_0,u,r,e,\operatorname{id}_z$.  Let
+$P_{\leq1}$ be the full subcategory of $P(R,0)$ on paths of length at
+most one.  Its endpoint functor $q_1:P_{\leq1}\to R$ is strictly
+$W_\infty$-aspherical, although it is not totally
+$W_\infty$-aspherical.
+\end{proposition}
+\begin{proof}
+The five objects of $P_{\leq1}$ are the empty path $t$, the constant
+paths $a_+,a_-$ at $0$, and $d_+=(0\xrightarrow{u}z)$,
+$d_-=(0\xleftarrow{r}z)$.  Each same-sign branch is a copy of $R$;
+there is exactly one arrow from each branch object to $t$, and no
+arrows from $t$ to a branch or between different branches.  These
+assertions follow directly from the type maps of intervals of length
+at most one and the endpoint components of natural transformations.
+In particular $t$ is terminal.
+
+Write $h_a=P_{\leq1}(-,a)$.  Since $0$ is terminal in $R$,
+$q_1^*R(-,0)=h_t$.  The other weight has the following isomorphism of
+presheaves:
+\[
+q_1^*R(-,z)\cong
+ h_t\amalg_{h_{a_+}}h_{d_+}\amalg_{h_{a_-}}h_{d_-}.
+\]
+On the branch $a_\varepsilon,d_\varepsilon$ the cardinalities are
+$1,2$, and the distinguished copy coming from $h_t$ is given by the
+zero maps to $z$; on $t$ it is the singleton $\{u\}$.  These values
+and composition check the isomorphism and its naturality.  The map
+$h_{a_\varepsilon}\to h_{d_\varepsilon}$ is split by the arrow
+$r:d_\varepsilon\to a_\varepsilon$, because $ru=1$.
+
+For every functor $p:P_{\leq1}\to C$, left Kan extension preserves
+this pushout, each representable, and each specified splitting.  Thus
+each map $p_!h_{a_\varepsilon}\to p_!h_{d_\varepsilon}$ is a
+monomorphism.  For a fixed base $C$, the functor
+$F\mapsto N(C/F)$ preserves colimits of presheaves degree by degree:
+in degree $n$ it is the coproduct, over all chains
+$c_0\to\cdots\to c_n$, of the sets $F(c_n)$.  Each displayed
+attachment is consequently a homotopy pushout of nerves, since one
+leg is a monomorphism.  All three representable pieces and both
+representable intersections have contractible element categories.
+The successive pushouts are contractible.  This proves the universal
+Kan-extension condition, with no bound on $C$ or $p$.
+
+In $P_{\leq1}/z$, the objects $(d_+,1_z)$ and $(t,u)$ have no common
+successor: the latter has only its identity outgoing, while the former
+cannot map to it because $ur=e\ne1_z$.  Lemma~\ref{E:necessary-tests}
+therefore disproves totality.  The category axioms, all fifteen arrows,
+the presheaf identity and both splittings are verified by
+\texttt{path\_checks.py}.
+\end{proof}
+
+\begin{proposition}[Open: strict asphericity for the full endpoint functor]
+\label{E:strict-open}
+The general classification of those pointed small categories $(Y,y_0)$
+for which $P(Y,y_0)\to Y$ is strictly $W_\infty$-aspherical is not
+settled here.  A specific unresolved two-object, five-arrow instance is
+the full endpoint functor $P(R,0)\to R$ for the walking retraction of
+Proposition~\ref{E:retraction-truncation}.
+\end{proposition}
+
+The obstruction is exact.  In this instance $P(R,0)$ has terminal
+empty path because $0$ is terminal in $R$, so the weight at $0$ is
+already representable and total.  The remaining weight is
+$H(c)=R(q(c),z)$, taking one or two values according as $q(c)=0$ or
+$z$.  Its identity test is also settled:
+$P(R,0)/H=P(R,0)/z$ is contractible.  Replace $(\tau,c,\beta)$ by
+the constant path at $0$ of the same type, with endpoint arrow
+$u:0\to z$.  The unique arrows $0\to c(i)$ give a natural
+transformation from this replacement functor to the identity; its
+comma equation is $\beta\circ(0\to q(c))=u$, since $0$ is initial
+in $R$.  Collapsing the constant paths gives a natural transformation
+to the constant object $(o,u)$.  The unanswered assertion is
+therefore precisely whether, for every
+$L:P(R,0)\to\mathsf{Set}$, every component of
+$\operatorname{El}_{P(R,0)/H}(L\pi)$ is integrally acyclic.  The
+restricted-action criterion then gives total $W_\infty$-asphericity,
+using the established contractibility of $P(R,0)/H$.  The split-pushout proof above
+settles the complete all-target problem on the first truncation.
+It does not transfer along its inclusion into $P(R,0)$: no equality
+expressing the full weight as the corresponding left Kan extension
+has been proved, and new change-of-type maps occur at every length.
+This gives an explicit failed reduction and a small remaining instance,
+rather than asserting that the general strict problem follows from
+the total classification.
+
+The literature search opened Grothendieck's chapter and Shoikhet's
+\emph{On Evrard's homotopy fibrant replacement of a functor},
+\S2.1, Proposition~2.7 and Theorem~2.8 \citep{Shoikhet2016}.  The latter treats different
+Grothendieck constructions indexed by $\Delta_{\mathrm{inj}}$ and by
+$\mathbb N$, and proves a homotopy-fibration factorization.  It does
+not state the classification of XII Definition~2 for the exact
+$\mathsf{Ty}$-based endpoint functor used here.  We make no transfer
+from that replacement without a comparison proving the required
+universal Kan-extension property.
+
+% End sections/E_paths.tex
+
+\section{Category-valued diagrams}
+
+% Begin sections/F_diagrams.tex
+\subsection{The diagram theorem: correction and audit}
+
+For a covariant diagram $D:A\to\Cat$, we denote by
+\[
+ q_D:\int_A D\longrightarrow C_D:=\colim_A^{\Cat}D
+\]
+the canonical functor.  On objects it sends $(a,x)$ to the image of
+$x\in D(a)$, and on an arrow $(\alpha:a\to b,
+f:D(\alpha)x\to y)$ it sends $(\alpha,f)$ to the image of $f$.
+All categories and indexing sets belong to the fixed universe.  Write
+$\mathcal P_r(A)$ if every component of every covariant category of
+elements $\El_A S$, $S:A\to\Set$, has vanishing homotopy groups in
+degrees $1,\ldots,r$; write $\mathcal P_\infty(A)$ if these components
+are weakly contractible, and $\mathcal P_{\mathbb Z}(A)$ if they are
+integrally acyclic.  Empty categories of elements impose no condition.
+These are componentwise properties of $A$.  A nonempty connected
+category with $\mathcal P_\infty$ is a totally $\Winfty$-aspherical
+category, as verified below.  No assertion about arbitrary actions on
+a presheaf's category of elements is being made here.
+
+\begin{proposition}[Refuted and repaired: the missing connectedness in R9]
+\label{F:R9-correction}
+The equivalence between conditions (1) and (2) in
+\texttt{RESULT\_FILTERED\_BY\_ONE\_TYPES.md}, as stated for every small
+$A$, is false.  The exact correction to condition (1) is that every
+connected component of $A$ is filtered.  The empty category is allowed.
+If $A$ is stipulated nonempty and connected, the original equivalence
+and its right-angled Artin group test are valid.
+\end{proposition}
+\begin{proof}
+Take $A$ to be the discrete category on two objects.  For every diagram
+$(D_0,D_1)$, both $\int_A D$ and $\colim_A^{\Cat}D$ are the coproduct
+$D_0\amalg D_1$, and $q_D$ is its identity functor.  But the two objects
+of $A$ have no common successor, so $A$ is not filtered.  For $A=\varnothing$
+the comparison is likewise $\varnothing\to\varnothing$.
+The first incorrect step in the note is the inference in
+``(2 $\Rightarrow$ 3)'' that testing $S=*$ makes $A$ nonempty and
+connected.  It makes $A\to\pi_0A$ a weak equivalence, which only
+contracts each component.  Colimits in $\Cat$ and Grothendieck
+constructions split over the components of $A$, so it remains to prove
+the connected version.  This is done in
+Proposition~\ref{F:RAAG-audit}.  The discrete counterexample and the
+component calculation are recorded by \texttt{diagram\_tests.py}.
+\end{proof}
+
+\begin{lemma}[Proved: the action arguments used in the diagram audit]
+\label{F:action-calculus}
+The properties $\mathcal P_\infty$, $\mathcal P_{\mathbb Z}$, and
+$\mathcal P_1$ pass from $A$ to every component of every $\El_A S$.
+Moreover $\mathcal P_{\mathbb Z}(A)$ is equivalent to
+$\mathcal P_\infty(A)$.  Every connected nonempty category with
+$\mathcal P_1$ has common successors for pairs of objects.  Finally,
+if $\mathcal P_\infty(A)$ holds, then the canonical map
+\[
+ \operatorname{hocolim}_A X\longrightarrow\colim_A X
+\]
+is a weak equivalence for every diagram $X:A\to\mathbf{sSet}$, where
+the colimit on the right is formed in simplicial sets.
+\end{lemma}
+\begin{proof}
+Let $E$ be a component of $\El_A S$, and let $T:E\to\Set$.
+The elements of $S$ belonging to $E$ form a subfunctor $S_E$.
+The formula
+\[
+ L(a)=\coprod_{s\in S_E(a)}T(a,s)
+\]
+with the evident transition maps gives an actual isomorphism
+$\El_A L\cong\El_E T$.  This proves all three inheritance assertions.
+
+Suppose $E$ is connected and satisfies $\mathcal P_{\mathbb Z}$.
+For a subgroup $J$ of $\pi_1(BE,e)$, the action of the groupoid
+completion $\Pi E$ on the cosets of $J$, pulled back along
+$E\to\Pi E$, gives a connected categorical covering of $E$ with
+fundamental group $J$.  Its first integral homology is $J_{\mathrm{ab}}$.
+Taking $J$ to be each cyclic subgroup shows that $\pi_1(BE)$ is trivial.
+The constant singleton action makes $BE$ acyclic.  The Hurewicz theorem,
+applied to a first possible nonzero homotopy group of this CW complex,
+then makes $BE$ weakly contractible.  Apply inheritance to every
+component of every action category to obtain
+$\mathcal P_{\mathbb Z}\Rightarrow\mathcal P_\infty$; the converse
+is immediate.  Here the covering actions are actions on $E$ itself,
+and the displayed coproduct construction supplies their actions on
+$A$.  This is exactly the additional construction that is unavailable
+for a general restricted action along a fixed presheaf projection.
+
+For common successors, suppose that $a,b$ have none.  Their upward
+closures $U_a,U_b$ are disjoint nonempty cosieves.  Start with the
+constant two-element action and identify the two elements precisely
+on $U_a\cup U_b$.  Its category of elements is the double of $A$
+glued along $U_a\amalg U_b$.  On nerves this is a union along
+subcomplexes: a chain can enter a cosieve only once.  The two copies
+of $BA$ are connected with $H_1=0$, while $BU_a$ and $BU_b$ are
+connected.  The Mayer--Vietoris sequence shows that the connected
+double has an $H_1$ surjecting onto the nonzero kernel generated by
+$(1,-1)$ in
+$H_0(BU_a\amalg BU_b)\to H_0(BA)^{\oplus2}$.
+This contradicts $\mathcal P_1(A)$.
+
+For the final assertion, use the simplicial replacement of $X$.
+In each fixed simplicial degree $n$, its augmentation to the discrete
+set $\colim_A X_n$ is the nerve augmentation
+$N\El_A(X_n)\to\pi_0\El_A(X_n)$, a weak equivalence by hypothesis.
+The diagonal lemma for bisimplicial sets now gives the claimed
+comparison.  One proof of that lemma is to realize first in the
+replacement direction; degeneracies are inclusions of subcomplexes,
+so degreewise weak equivalences induce weak equivalences on the
+skeletal filtration and its union.  This also checks compatibility
+with the specified augmentation, not merely an abstract equivalence.
+\end{proof}
+
+For clarity about the identification with Grothendieck's terminology,
+if $A$ is connected and satisfies $\mathcal P_\infty$, a final functor
+$f:A\to B$ has each $b\backslash f=\El_A B(b,f-)$ nonempty,
+connected, and weakly contractible.  Quillen's Theorem A makes $f$ a
+weak equivalence, and $BA$ is contractible.  Conversely, adjoining
+to $A$ an object with incoming set-valued action yields the usual
+collage homotopy pushout; the reduced homology sequence and the
+cyclic-cover argument just given prove $\mathcal P_\infty$ from total
+asphericity.  This independently checks the use of TOTASPH C.5.
+Inheritance and the double construction independently check precisely
+the parts of TOTASPH C.3 and C.11 used below.
+
+\begin{lemma}[Proved: sifted total categories are filtered]
+\label{F:sifted-total}
+If $A$ is sifted and satisfies $\mathcal P_1(A)$, then $A$ is filtered.
+In particular every sifted totally $\Winfty$-aspherical category is
+filtered; the uncertainty in H7 and in the abelian-group remark of R9
+has a positive resolution.
+\end{lemma}
+\begin{proof}
+Siftedness says that $A$ is nonempty and that for every $p,q$ the
+category
+\[
+ C_{p,q}=\El_A\bigl(A(p,-)\times A(q,-)\bigr)
+\]
+is nonempty and connected.  It has $\mathcal P_1$ by
+Lemma~\ref{F:action-calculus}, and consequently has common successors.
+For $u,v:p\to q$, apply this to the two objects
+$(q;u,1_q)$ and $(q;v,1_q)$.  A common successor provides
+$f,g:q\to r$ with $fu=gv$ and $f1_q=g1_q$.
+Thus $f=g$ and $fu=fv$.  Siftedness already gives common successors
+for objects of $A$, so all the filteredness axioms hold.
+\end{proof}
+
+\begin{proposition}[Proved: the complete right-angled Artin group audit]
+\label{F:RAAG-audit}
+Let $A$ be nonempty and connected.  The following conditions are
+equivalent: $A$ is filtered; every $q_D$ is a weak equivalence;
+$A$ satisfies $\mathcal P_\infty$ and homotopy colimits over $A$ of
+all group-valued diagrams are $1$-types; $A$ satisfies
+$\mathcal P_\infty$ and this last assertion holds for the bipartite
+right-angled Artin group diagrams associated with parallel pairs.
+The edge-homology naturality, fundamental-group calculation, and
+spectral-sequence calculation in R9 are valid under this corrected
+connectedness hypothesis.
+\end{proposition}
+\begin{proof}
+Filtered colimits of categories are computed on objects and arrows,
+and commute with all the finite limits defining composable strings.
+Hence $N\colim_A D=\colim_A ND$.  The categories of elements of
+set-valued diagrams over a filtered category have filtered components:
+equality of two elements in the colimit is witnessed after a common
+postcomposition, and finitely many such witnesses can be combined by
+filteredness.  Their nerves are contractible, since each finite
+simplicial diagram has a cone.  Lemma~\ref{F:action-calculus} and the
+Grothendieck-construction homotopy-colimit equivalence prove the first
+implication.  The latter equivalence is the map of Thomason's
+Theorem 1.2, also proved, with stronger coefficient invariance, in
+\citet[Theorem 1 and Section 3]{Cegarra2020}; reversing the indexing
+variance gives the covariant convention used here.
+
+Testing discrete categories proves $\mathcal P_\infty$.  A connected
+colimit of one-object groups in $\Cat$ is the one-object group
+$G=\colim_A^{\mathbf{Grp}}M$: all objects are identified, and the
+presentation by generators and relations retains inverses.  Equivalently,
+the inclusions of groups into monoids and of groupoids into categories
+are left adjoints to units and to the core, respectively.  Thus a weak
+equivalence $q_M$ makes the homotopy colimit a $K(G,1)$.  Restricting
+the test diagrams is immediate.
+
+For the remaining implication, let $u,v:p\to q$ and put
+\[
+ Q=A(q,-),\qquad P=A(p,-),\qquad
+ E(x)=\{f:q\to x\mid fu=fv\}.
+\]
+For each $x$ take the graph with disjoint color classes $Q(x)$ and
+$P(x)$ and edges $\{f,fu\},\{f,fv\}$ for $f\in Q(x)$.
+Its edge set is naturally $Q\amalg_E Q$.  Postcomposition preserves
+the colors and takes edges to edges; it never collapses an edge to a
+vertex.  The associated Artin group diagram is
+\[
+ M(x)=\langle Q(x)\amalg P(x)\mid [f,fu]=[f,fv]=1\rangle.
+\]
+The Salvetti complex has one circle per vertex and one torus per edge;
+there are no higher cliques.  Its cellular differentials are zero,
+and it is a $K(M(x),1)$.  These standard facts are explicitly given in
+\citet[Theorem 2.6 and Section 2.7]{Charney2007}.  For an infinite
+graph, take the directed union over finite full subgraphs.  A sphere
+and a nullhomotopy concern only finitely many cells, so the finite
+asphericity assertion extends to the union.
+
+Orient each torus by its $Q$ generator followed by its $P$ generator.
+A transition functor sends this torus to the torus indexed by the
+image edge with degree $+1$.  Even when distinct edges become equal,
+each basis class has precisely that image.  Consequently the natural,
+not merely objectwise, homology identifications are
+\[
+ H_0(BM)=\mathbb Z,
+ \quad H_1(BM)=\mathbb Z[Q\amalg P],
+ \quad H_2(BM)=\mathbb Z[Q\amalg_E Q],
+ \quad H_j(BM)=0\quad(j\geq3).
+\]
+This settles the possible naturality error singled out in R9.
+
+For $X=\operatorname{hocolim}_A BM$, the double complex of normalized
+chains of the simplicial replacement gives the first-quadrant spectral
+sequence
+\[
+ E^2_{k,l}=L_k\colim_A H_l(BM)\Longrightarrow H_{k+l}(X;\mathbb Z).
+\]
+Its filtration is finite in each total degree, so no finiteness of
+$A$, its hom sets, or its groups is needed.  For every action $S$,
+the bar complex for $L_*\colim_A\mathbb Z[S]$ is exactly the chain
+complex of $N\El_A S$.  The action criterion therefore kills every
+positive column here.  It follows that
+\[
+ H_2(X;\mathbb Z)=\mathbb Z[\colim_A(Q\amalg_E Q)].
+\]
+The colimits of both representables $P,Q$ are singletons.  Since
+colimits preserve pushouts of sets, the displayed group is
+$\mathbb Z$ if $E$ is nonempty somewhere and $\mathbb Z^2$ otherwise.
+
+Finally, the fundamental groupoid of a group-diagram homotopy colimit
+has generators the groups $M(x)$ and transport arrows $t_\alpha$,
+with relations
+$t_\beta t_\alpha=t_{\beta\alpha}$ and
+$t_\alpha m=M(\alpha)(m)t_\alpha$.
+Collapse a maximal tree of $A$.  Since $BA$ is simply connected, the
+remaining transport loops are trivial; the presentation becomes the
+ordinary colimit-group presentation.  Here it has two generators,
+the images of $Q$ and $P$, and the single relation that they commute,
+already supplied by $[1_q,u]$.  Therefore $\pi_1(X)=\mathbb Z^2$.
+If $X$ is a $1$-type, it is $K(\mathbb Z^2,1)$, whose second homology
+is $\mathbb Z$.  Thus $E(x)$ cannot be empty for all $x$.
+Every parallel pair is post-equalized.  Common successors follow from
+Lemma~\ref{F:action-calculus}, proving filteredness and completing every
+step of the corrected R9 proof.
+\end{proof}
+
+\subsection{Smaller testing classes}
+
+\begin{theorem}[Proved: groupoids and the two poset conventions]
+\label{F:groupoid-poset-tests}
+For a small category $A$, each of the following is equivalent to
+every connected component of $A$ being filtered:
+the comparisons for all groupoid-valued diagrams, with colimit in
+groupoids; the comparisons for all poset-valued diagrams, with colimit
+in $\Cat$; the comparisons for all poset-valued diagrams, with colimit
+in posets.  Empty $A$ is permitted in all three assertions.
+\end{theorem}
+\begin{proof}
+All three properties split over components of $A$.  Filteredness is
+sufficient: filtered colimits of posets in $\Cat$ are again posets,
+because two parallel arrows and an order cycle are witnessed at one
+stage and are already equal there.  Filtered groupoid colimits are
+groupoids.  The nerve and homotopy-colimit argument above applies.
+For groupoids, discrete actions and the Artin group diagrams are
+allowed, so Proposition~\ref{F:RAAG-audit} proves necessity.
+
+For either poset convention, discrete posets first give
+$\mathcal P_\infty(A)$.  We work in a connected component.
+For colimits in posets, use the bipartite graph in the preceding
+proof as a height-one poset $D(x)$, with the $Q$ vertices below the
+$P$ vertices.  If $E$ is empty, the simplicial colimit of its nerves
+has two vertices and two parallel edges.  Its realization is a
+circle.  Indeed colimits of the two vertex functors are singletons,
+the edge colimit is $*\amalg *$, and there are no nondegenerate
+higher simplices.  By Lemma~\ref{F:action-calculus}, this is the
+homotopy type of $\int_A D$.  The poset colimit is $[1]$, because
+the two arrows impose the same single order relation.  The comparison
+cannot be a weak equivalence.  Thus every parallel pair is equalized;
+common successors have already been proved.
+
+For colimits in $\Cat$, fix objects $p,q$, and set
+$S=A(p,-)$, $T=A(q,-)$.  Let $D(x)$ be the ordinal sum of the
+discrete sets $S(x)$, $\{a,b\}$, and $T(x)$:
+\[
+                 S(x)<\{a,b\}<T(x).
+\]
+The two middle elements are incomparable.  The construction is
+functorial even when a transition identifies elements of $S$ or $T$.
+Put $J=\colim_A(S\times T)$; it is nonempty by common successors.
+The simplicial colimit $K=\colim_A ND$ has four vertices
+$s,a,b,t$, four short edges $sa,sb,at,bt$, a long edge $st$ for
+each $j\in J$, and two triangles for each such long edge.  The two
+triangles form a disk bounded by the common four-edge square.
+Thus $|K|$ is a union of $J$ disks along their common boundary,
+and
+\[
+ H_2(|K|;\mathbb Z)=\ker\bigl(\mathbb Z[J]\longrightarrow\mathbb Z\bigr).
+\]
+This description holds for arbitrary infinite $J$, since its cellular
+chains are direct sums with finite supports.  The strict categorical
+colimit is the diamond poset $s<a,b<t$: each nonempty representative
+of $S\times T$ equates the same two length-two composites, and there
+are no other generators or relations.  Its nerve is contractible.
+The assumed weak equivalence, together with
+Lemma~\ref{F:action-calculus}, forces $J$ to be a singleton.
+For all $p,q$ this is exactly siftedness of $A$.
+Lemma~\ref{F:sifted-total} proves filteredness.
+The cellular matrices for $|J|=1,\ldots,6$ and for the parallel-edge
+test are checked integrally by \texttt{diagram\_tests.py}.
+\end{proof}
+
+\begin{theorem}[Proved: abelian groups alone detect filteredness]
+\label{F:abelian-tests}
+For a small category $A$, the following are equivalent:
+$A$ is filtered; for every $M:A\to\Ab$ the canonical functor
+\[
+ \int_A M\longrightarrow \colim_A^{\Ab}M
+\]
+is a weak equivalence, where both the stage groups and the target
+group are regarded as one-object categories.  In particular the
+empty category and disconnected categories are excluded in this
+abelian-colimit convention.
+\end{theorem}
+\begin{proof}
+Filteredness is sufficient because filtered abelian colimits are
+computed on underlying sets and commute with finite products, so the
+nerve commutes with the colimit.  For necessity, the zero-group
+diagram gives $BA\simeq *$, including nonemptiness and connectedness.
+
+We first prove common successors without presupposing totality.
+If $p,q$ have no common successor, let
+\[
+ M(x)=\mathbb Z[A(p,x)]\oplus\mathbb Z[A(q,x)].
+\]
+At each $x$ at most one summand is nonzero.  The presentation of the
+fundamental group of the homotopy colimit, with $BA$ simply connected,
+is the ordinary colimit of these groups.  All generators belonging to
+$A(p,-)$ identify with the image of $1_p$, and similarly for $q$.
+No mixed commutator relation occurs at any stage.  The group is
+therefore the free group on two generators.  The abelian colimit is
+$\mathbb Z^2$, contradicting the claimed weak equivalence.  Hence
+objects have common successors.
+
+For an arbitrary abelian diagram $M$, this common-successor property
+makes its colimit in groups abelian: any two elements represented at
+possibly different stages commute after mapping to a common stage.
+It is consequently the abelian colimit $G$.
+Use the spectral sequence
+\[
+ E^2_{p,q}=L_p\colim_A H_q(M;\mathbb Z)\Longrightarrow
+ H_{p+q}(\operatorname{hocolim}_A BM;\mathbb Z).
+\]
+The row $q=0$ has no positive terms because $BA$ is contractible.
+Thus $E^\infty_{1,1}=L_1\colim_A M$ and $E^\infty_{2,0}=0$.
+The edge image $F_0H_2$ is the image of
+$\colim_A H_2(M)=\colim_A\Lambda^2 M$.
+Under the assumed comparison to $BG$, its composite is the usual map
+\[
+ \colim_A\Lambda^2M\longrightarrow\Lambda^2G.
+\]
+It is surjective: an exterior product of two representatives can be
+formed at a common successor, and exterior products generate.
+Since $H_2$ of the comparison is an isomorphism, $F_0H_2=H_2$.
+The remaining filtration quotient $E^\infty_{1,1}$ is therefore zero.
+This holds for every $M$, so the right-exact functor
+$\colim_A:\Ab^A\to\Ab$ is exact.
+
+We check the consequence of exactness instead of assuming it.
+For $S:A\to\Set$, direct sum over the fibers defines an exact functor
+\[
+ \Sigma_S:\Ab^{\El_A S}\to\Ab^A,
+ \qquad (\Sigma_S F)(a)=\bigoplus_{s\in S(a)}F(a,s).
+\]
+The cocone universal property gives
+$\colim_{\El_A S}F\cong\colim_A\Sigma_S F$.
+Thus colimits on every component of $\El_A S$ are exact.
+Their higher homology, obtained by deriving colimit of the constant
+$\mathbb Z$ diagram, vanishes.  Lemma~\ref{F:action-calculus} now
+gives $\mathcal P_\infty(A)$.  This verifies the exact step taken
+from TOTASPH C.6, without importing exactness as an unproved equivalent
+of totality.
+
+Exactness kills every positive column of the spectral sequence.
+Consequently the specified comparison gives a natural isomorphism
+\[
+ \colim_A\Lambda^2M\ \xrightarrow{\cong}\
+ \Lambda^2\colim_A M.
+\]
+Apply it to $M\oplus M'$, and use the natural decomposition
+$\Lambda^2(M\oplus M')=\Lambda^2M\oplus(M\otimes M')\oplus\Lambda^2M'$.
+Projection onto the cross summand yields
+\[
+ \colim_A(M\otimes M')\ \xrightarrow{\cong}\
+ (\colim_A M)\otimes(\colim_A M').
+\]
+For $M=\mathbb Z[S]$, $M'=\mathbb Z[T]$, this is the free abelian
+group map on
+$\colim_A(S\times T)\to(\colim_A S)\times(\colim_A T)$.
+A map of sets induces an isomorphism of free abelian groups only if
+it is bijective.  In particular, for the two representables at any
+$p,q$, the cospan category is connected and nonempty.  Hence $A$ is
+sifted.  Lemma~\ref{F:sifted-total} finishes the proof.
+This supplies both the omitted hypotheses and the final step of
+the abelian remark in R9.
+\end{proof}
+
+\begin{theorem}[Proved: terminal-object values, with colimit in categories]
+\label{F:terminal-tests}
+For a small category $A$, $q_D$ is a weak equivalence for every
+$D:A\to\Cat$ whose values have terminal objects, with arbitrary
+transition functors and colimit in $\Cat$, if and only if
+$\mathcal P_\infty(A)$ holds.  Equivalently every nonempty connected
+component of $A$ is totally $\Winfty$-aspherical.
+\end{theorem}
+\begin{proof}
+We first record that $q_D$ is always an ordinary final functor,
+for any category-valued diagram.  For a functor $V:C_D\to\Set$, both
+$\colim_{\int_A D}Vq_D$ and $\colim_{C_D}V$ are the quotient of
+the elements represented in the stages by the relations from stage
+arrows and transition identifications.  These generate the same
+relations, since $C_D$ is presented by those objects and arrows.
+The resulting canonical map is bijective.  Applying this to
+$V=C_D(c,-)$ proves that $c\backslash q_D$ is nonempty and connected.
+
+Choose terminal objects $t_a\in D(a)$.  For $c\in C_D$, the comma
+category $c\backslash q_D$ is the Grothendieck construction of
+the diagram $a\mapsto c\backslash D(a)$, where $D(a)\to C_D$ is
+the colimit cocone.  Each component of $c\backslash D(a)$ has a
+terminal object $(t_a,g)$, indexed by
+$g\in S_c(a):=C_D(c,t_a)$.  The functor to this discrete set sends
+$(x,h)$ to the composite $c\xrightarrow{h}x\to t_a$.
+For $\alpha:a\to b$, define $S_c(\alpha)$ using the unique arrow
+$D(\alpha)t_a\to t_b$.  Uniqueness of arrows into $t_b$ proves
+strict functoriality and naturality of the component functors.
+They are objectwise weak equivalences, giving
+\[
+ B(c\backslash q_D)\simeq B\El_A S_c.
+\]
+Ordinary finality makes the right side connected and nonempty;
+$\mathcal P_\infty(A)$ makes it contractible.  Quillen's Theorem A
+then proves the sufficiency assertion.
+
+For necessity, reduce to a nonempty connected component of $A$;
+other components can be assigned the constant terminal category.
+The constant terminal diagram first contracts $BA$.
+Let $f:A\to B$ be any ordinary final functor.  Put
+$D(a)=B/f(a)$, with transition maps given by postcomposition.
+Every $D(a)$ has a terminal object.  The natural functor
+\[
+ \colim_A^{\Cat}B/f(a)\longrightarrow B
+\]
+is an isomorphism.  To see this on objects, the representations of
+$b$ form the connected nonempty category $b\backslash f$.
+For an arrow $h:b\to c$, choose $k:c\to f(a)$; the pair
+$(kh,k)$ represents $h$ in $B/f(a)$, and any two choices become
+equal along a zigzag in $c\backslash f$.  This defines a unique
+inverse on arrows.  Composition is checked after choosing a
+representation of its final target, putting both factors in one
+slice.  The Grothendieck construction of $D$ has homotopy type $BA$,
+since its values are contractible.  The assumed comparison thus
+contracts $BB$.  This is the defining final-image condition for total
+asphericity, already identified with $\mathcal P_\infty$ above.
+\end{proof}
+
+\subsection{Truncated and homological localizers}
+
+\begin{theorem}[Proved: all-category tests for $W_n$ and $W_{\mathbb Z}$]
+\label{F:other-localizers}
+For a small $A$, the condition $q_D\in W$ for every
+$D:A\to\Cat$ has the following exact descriptions:
+\[
+\begin{array}{c|l}
+ W&\text{condition on }A\\\hline
+ W_0&\text{no condition}\\
+ W_1&\mathcal P_1(A)\\
+ W_n\ (2\leq n<\infty)&\text{each connected component is filtered}\\
+ W_{\mathbb Z}&\text{each connected component is filtered}.
+\end{array}
+\]
+The $W_1$ condition quantifies only over set-valued actions and says
+that all their components are simply connected; it is equivalent
+to the pseudo-colimit-to-strict-colimit comparison being an
+equivalence for all groupoid diagrams.  It permits the nonfiltered
+category $\Delta_{\mathrm{inj}}$.
+\end{theorem}
+\begin{proof}
+For $W_0$, both component sets are
+$\colim_A\pi_0D(a)$, by the elementary presentation of a colimit
+and of the Grothendieck construction.
+
+For $W_1$, necessity follows from discrete diagrams.  For sufficiency
+let $E=\El_A(\operatorname{Ob}D)$, regarded as the wide subcategory
+of $\int_A D$ containing its transport arrows
+$(\alpha,1): (a,x)\to(b,D\alpha x)$.
+Inverting arrows in $\int_A D$ gives a groupoid $G$.
+The groupoid completion of the strict colimit is the quotient of
+$G$ that identifies every transport arrow with an identity and its
+endpoints with one object.  This follows directly from the colimit
+presentation; groupoid completion preserves colimits.
+Under $\mathcal P_1(A)$, $\Pi E$ is the disjoint union of
+indiscrete groupoids.  Choose one representative in each component
+and the unique arrow in $\Pi E$ from that representative to each
+object.  Transporting an arrow of $G$ along these chosen arrows
+identifies the quotient with the full subgroupoid of $G$ on the
+representatives.  The latter inclusion is an equivalence.
+This proves the specified comparison is in $W_1$.
+
+Now suppose every $q_D$ belongs to $W_n$, $n\geq2$.
+Discrete diagrams give $\mathcal P_2(A)$, and we work in one
+nonempty connected component.  In particular $BA$ is $2$-connected
+and Lemma~\ref{F:action-calculus} gives common successors.
+Use exactly the Artin diagram of Proposition~\ref{F:RAAG-audit}.
+In total degree two its spectral sequence has zero terms
+$E^2_{1,1}$ and $E^2_{2,0}$, and the only possibly incoming
+differentials to $E^2_{0,2}$ are from $E^2_{2,1}$ and $E^3_{3,0}$.
+The former is
+$H_2(\El_A(Q\amalg P);\mathbb Z)=0$.
+The latter differential is zero even if $H_3(BA)$ is nonzero:
+the identity elements of the group diagram provide a section of
+$X\to BA$, so the entire base row is a permanent direct summand
+of the spectral sequence.  Therefore
+\[
+ H_2(X;\mathbb Z)=\mathbb Z[\colim_A(Q\amalg_E Q)].
+\]
+Its fundamental group is again $\mathbb Z^2$.
+A $2$-equivalence from $X$ to $K(\mathbb Z^2,1)$ induces an
+isomorphism on $H_2$; this also follows from the Hopf exact sequence,
+since its $\pi_2$ must vanish.  Thus $E$ is nonempty somewhere.
+Every parallel pair is equalized, and $A$ is filtered.
+The argument uses only degrees at most two and hence covers every
+$n\geq2$ without a cardinality restriction.
+
+For $W_{\mathbb Z}$, the set-valued tests give
+$\mathcal P_{\mathbb Z}(A)$, hence $\mathcal P_\infty(A)$ by
+Lemma~\ref{F:action-calculus}.  The same Artin comparison in
+degree two forces post-equalizers.  Conversely filtered components
+give actual weak equivalences by Proposition~\ref{F:RAAG-audit},
+which lie in all the displayed localizers.
+The example $\Delta_{\mathrm{inj}}$ satisfies
+$\mathcal P_\infty$ by Proposition~\ref{A:semisimplicial-total}, and therefore
+satisfies the $W_1$ criterion despite its unequalizable two maps
+$[0]\rightrightarrows[1]$.
+\end{proof}
+
+\subsection{Free monoids and the colimit convention}
+
+\begin{proposition}[Proved: the available free-monoid bounds]
+\label{F:free-monoid-bounds}
+Suppose colimits of free-monoid-valued diagrams are taken in all
+monoids.  Filtered $A$ suffice for every comparison to be a weak
+equivalence.  A necessary condition is that $A$ be nonempty,
+connected, and totally $\Winfty$-aspherical.  For the smaller class
+of diagrams obtained by applying the free-monoid functor to a
+set-valued diagram, this necessary condition is also sufficient.
+\end{proposition}
+\begin{proof}
+The filtered sufficiency is the nerve argument already given.
+For necessity test only $M(a)=F(S(a))$, with transition maps induced
+by maps of the bases.  The trivial free monoid, obtained from the
+empty action, makes $BA$ contractible and nonempty.
+The classifying space of a free monoid on $S$ has the natural
+graph model consisting of one vertex and one loop per element of
+$S$.  One verification is to map this graph to the nerve by the
+generator edges: the universal cover of the graph is a tree, and
+the positive-word category embeds in its free group with the same
+contractible covering; equivalently the standard free-monoid bar
+resolution has length one.  In particular $H_1=\mathbb Z[S]$ and
+$H_q=0$ for $q\geq2$, naturally for basis maps.
+The homotopy-colimit spectral sequence, with $BA$ contractible,
+then gives for $k\geq1$
+\[
+ H_{k+1}(\operatorname{hocolim}_A BF(S);\mathbb Z)
+   =H_k(\El_A S;\mathbb Z).
+\]
+The strict monoid colimit is $F(\colim_A S)$, since the free functor
+preserves colimits.  If its comparison is a weak equivalence, the
+left side vanishes for all $k\geq1$.  Every component of every
+$\El_A S$ is acyclic, and Lemma~\ref{F:action-calculus} gives
+$\mathcal P_\infty(A)$.
+Conversely, for basis maps the graph models form a strict diagram
+of one-dimensional simplicial sets whose colimit is the graph on
+$\colim_A S$.  The last assertion of
+Lemma~\ref{F:action-calculus} identifies its homotopy colimit with
+that graph.  The natural comparison to the free-monoid nerves
+identifies this weak equivalence with the required map.
+\end{proof}
+
+\begin{remark}[Open: arbitrary word substitutions in free-monoid diagrams]
+\label{F:free-monoid-open}
+For colimits in all monoids we do not settle whether every nonempty
+connected totally $\Winfty$-aspherical shape passes the tests with
+arbitrary homomorphisms between free monoids, or whether these tests
+force filteredness.  The precise remaining implication is
+\[
+ \bigl[q_M\in\Winfty\text{ for every }M:A\to\mathbf{FreeMon}
+       \text{ with colimit in }\mathbf{Mon}\bigr]
+ \quad\Longrightarrow\quad A\text{ filtered}.
+\]
+The first concrete unresolved shape in this investigation is the
+countable category $\Delta_{\mathrm{inj}}$ with arbitrary word
+substitution maps.  Basis maps on this shape have just been settled
+positively.  The two successful detectors above do not extend to
+this class: the Artin detector has commuting-generator relations at
+each stage and therefore is not free, while the height-two poset
+detector has two-object composition relations.  Replacing them by
+their free presentations changes the specified strict colimit and
+does not preserve the comparison.  This is the exact obstruction,
+not evidence that a free presentation is an admissible replacement.
+\end{remark}
+
+\begin{proposition}[Refuted: silently taking colimits in the free subcategory]
+\label{F:literal-free-colimit}
+If ``colimit of free monoids'' means a colimit in the full category
+of free monoids, even the filtered shape $\mathbb N$ need not give
+a weak comparison.  Thus that literal convention is different
+from Proposition~\ref{F:free-monoid-bounds}.  Likewise the full
+category of categories having a terminal object, with arbitrary
+functors, is not a cocomplete ambient category.
+\end{proposition}
+\begin{proof}
+Consider the sequence of free monoids on one generator
+\[
+ \mathbb N\xrightarrow{\times2}\mathbb N
+ \xrightarrow{\times2}\mathbb N\longrightarrow\cdots.
+\]
+A cocone to a free monoid consists of words $w_n$ with
+$w_n=w_{n+1}^2$.  Their lengths satisfy
+$|w_0|=2^n|w_n|$ for every $n$, so every word is empty.
+The trivial monoid therefore represents this cocone functor and
+is the colimit in free monoids.  The homotopy colimit of the
+classifying spaces is the telescope of circles under degree-two
+maps.  It is a $K(\mathbb Z[1/2],1)$, since homotopy groups commute
+with this filtered telescope.  Its map to the point is not a weak
+equivalence.  In all monoids the colimit is instead
+$\mathbb Z[1/2]_{\geq0}$, and the comparison is a weak equivalence.
+
+For the second assertion, an initial object in the full category
+of terminal-object categories would be nonempty.  It would have
+two distinct constant functors to $[1]$, contradicting initiality.
+Even the empty colimit is consequently absent there.  The exact
+terminal-value theorem above explicitly uses colimits in $\Cat$;
+it does not silently claim that a colimit exists in this smaller
+full subcategory.  A classification under an additional literal
+``existence in that subcategory for every diagram'' requirement
+is not established here.
+\end{proof}
+
+\paragraph{Literature check for F.1.}
+We searched the phrases ``homotopy colimits filtered groupoids'',
+``homotopy colimits preserve truncated'', ``totally aspherical
+filtered'', ``sifted aspherical category'', and variants involving
+colimits of posets.  We opened the complete text of
+\citet{Cegarra2020}, whose Theorem 1 supplies the Grothendieck
+construction comparison, and the complete preprint of
+\citet{Charney2007}, whose Theorem 2.6 and Section 2.7 supply the
+Salvetti facts.  Neither source states the filtered-shape
+classification proved here.  Thomason's 1979 publisher record was
+opened, but its article body was not accessible; its precise
+Theorem 1.2 is quoted and reproved by Cegarra.  The attempted direct
+opening of Isbell--Mitchell's 1973 article returned an access error;
+we do not claim to have opened that body in this run.  A recent
+MathOverflow question about shapes preserved by sets into spaces
+was also opened as a search lead; it explicitly formulates the
+set-action problem and does not supply R9.  These observations
+record what was checked and make no claim of priority or of an
+exhaustive absence from the literature.
+
+\subsection{The shapes actually used in VII}\label{sec:vii-shapes}
+
+\begin{proposition}[Proved: the opposite type category is not filtered]
+\label{F4:opposite-types}
+Although $\mathsf{Ty}=P(e,*)$ is filtered,
+$\mathsf{Ty}^{\mathrm{op}}$ is not filtered.  Its underlying preorder
+is directed; this is the strictly weaker condition used in
+VII ms.~100.
+\end{proposition}
+\begin{proof}
+For types $\tau,\rho$, their concatenation maps to each by collapsing
+the other factor.  Thus any two objects of
+$\mathsf{Ty}^{\mathrm{op}}$ have a common successor.  But in
+$\mathsf{Ty}$ consider $f,g:(+-+)\rightrightarrows(+)$ with vertex
+maps
+\[
+f=(0,0,0,1),\qquad g=(0,1,1,1).
+\]
+Both are increasing endpoint-preserving functors.  Every
+$h:\sigma\to(+-+)$ hits the two internal vertices $1,2$.
+Indeed its image is an interval connecting the endpoints; if it skipped
+either critical vertex, one source edge would have to map across a
+change of orientation, which is impossible for a functor from an
+oriented edge.  In particular $fh\ne gh$.  There is no equalizer by
+precomposition in $\mathsf{Ty}$, hence no equalizer by postcomposition
+for the opposite pair in $\mathsf{Ty}^{\mathrm{op}}$.
+The finite program checks the pair and all 209 precompositions from
+source words of length at most six.  The critical-vertex proof covers
+all source words.
+\end{proof}
+
+\begin{proposition}[Proved: the sequential colimit in VII ms.~102]
+\label{F4:sequential}
+Let $D:\mathbb N\to\mathsf{Cat}$ be a small sequential diagram,
+and let $C_{\mathbb N^{\mathrm{op}}}$ be its fibred Grothendieck
+construction over $\mathbb N^{\mathrm{op}}$.  The canonical functor
+\[
+C_{\mathbb N^{\mathrm{op}}}\longrightarrow
+\operatorname{colim}^{\mathsf{Cat}}_{n\in\mathbb N}D(n)
+\]
+is a weak equivalence.  This confirms the comparison accepted at
+VII ms.~109, independently of whether the full type category is
+cofiltered.
+\end{proposition}
+\begin{proof}
+An arrow of the fibred construction from $(m,x)$ to $(n,y)$, with
+$m\geq n$, is an arrow $x\to D(n\leq m)y$ in $D(m)$.  The functor
+in the statement sends it to its image in the strict colimit.  Its
+opposite is the usual comparison for the covariant Grothendieck
+construction of $D^{\mathrm{op}}:\mathbb N\to\mathsf{Cat}$.
+The shape $\mathbb N$ is filtered.  Nerves commute with its colimits,
+since an $n$-simplex and all its finitely many relations are witnessed
+at one stage, and an equality between two such finite diagrams holds
+at a later stage.  The canonical map from the homotopy colimit of
+those nerves to their colimit is a weak equivalence: maps and
+homotopies from finite simplicial spheres and disks are witnessed at
+a common later stage.  Applying the Grothendieck-construction
+comparison, or equivalently the filtered implication of the theorem
+checked in Part F, proves the claim.  Finally, passing to opposites
+preserves the assertion, since reversal of a nerve simplex induces
+the canonical homeomorphism $B(A^{\mathrm{op}})\cong BA$.
+\end{proof}
+
+\begin{proposition}[Refuted in general: replacement by a cofinal chain
+in the associated preorder]\label{F4:preorder-chain}
+The homotopy hypothesis of VII ms.~99, directedness of the associated
+preorder, and its countable cofinality do not imply that
+$C_{\mathbb N^{\mathrm{op}}}\to C$ is a weak equivalence.
+\end{proposition}
+\begin{proof}
+Take $T$ to be the one-object group $\mathbb Z/2$, and take the constant
+diagram with value $e$; its fibred construction is $C=T$.
+Every transition functor between the singleton fibres is the identity,
+so the homotopy hypothesis holds strictly.  The associated preorder
+is a singleton and is directed and countable.  Choose the constant
+chain with all transition arrows equal to the identity.  Its induced
+total category is $\mathbb N^{\mathrm{op}}$ and $C_\infty=e$.
+The functor $\mathbb N^{\mathrm{op}}\to T$ has contractible source,
+whereas $BT=B(\mathbb Z/2)$ has fundamental group $\mathbb Z/2$.
+This is exactly the obstruction Grothendieck identifies at ms.~109;
+it is not an error to be repaired in the sequential comparison.
+The finite base group is completely specified by $s^2=1$.
+Its full multiplication table and category axioms are checked in
+\texttt{path\_checks.py}; the nonidentity element gives the explicit
+nontrivial model of the nerve's presentation $\langle s\mid s^2=1\rangle$.
+\end{proof}
+
+\begin{proposition}[Proved: passage-by-passage audit of VII \S\S4--6
+and \S10]\label{F4:passages}
+The ordinary categorical colimits in the requested passages have the
+following shapes and meanings.
+\end{proposition}
+
+At VII ms.~26--28, the displayed contrafunctor
+$\mathsf{Ty}^{\mathrm{op}}\to\mathsf{Cat}$ is integrated to a split
+fibration.  No ordinary colimit of the fixed-type categories is taken.
+The formula for a morphism over $\phi:\tau'\to\tau$ is
+$c'\to c\phi$, exactly Definition~\ref{E:path-definition}.
+Replacing this integration by an unqualified strict colimit would
+change the construction.  The relevant covariant shape
+$\mathsf{Ty}^{\mathrm{op}}$ is not filtered by
+Proposition~\ref{F4:opposite-types}, so the theorem of Part F cannot
+justify that replacement for arbitrary diagrams.
+
+At VII ms.~32, the decomposition into critical subintervals is a finite
+iterated amalgamation along endpoint categories.  At ms.~48--49 it is
+written explicitly as
+$I_{\tau\rho}=I_\tau\amalg_e I_\rho$.  The pushout shape is the
+three-object span, which is not filtered.  The displayed assertion is
+nonetheless correct: a functor out of the concatenated free oriented
+line is exactly a pair of functors agreeing at the glued endpoint,
+and natural transformations also agree exactly there.  This proves
+the asserted pullback of path categories, including its arrow sets.
+It is also a homotopy pushout for these particular interval diagrams,
+because both intervals and the point are contractible, so their
+homotopy pushout is contractible, as is the concatenated interval.
+No assertion about all diagrams of that nonfiltered shape follows.
+At ms.~50--58 the operation is used for strict concatenation and for
+the free-monoid descriptions of the sets of nerve simplices.  These
+are algebraic constructions of finite strings, not new categorical
+colimits indexed by $\mathsf{Ty}$.
+
+At VII ms.~99--100, $H_C:T_{\mathrm{ord}}^{\mathrm{op}}\to
+\mathsf{Cat}\,\mathrm{hot}$ defines an ind-object because the
+associated preorder is directed in that variance.  A functor with
+values in the homotopy category is being used here; no strict
+$\mathsf{Cat}$-valued diagram on that preorder is asserted.
+At ms.~101--102 one selects actual transition arrows
+$t_{n+1}\to t_n$ and obtains an actual sequential diagram
+$C_{t_n}\to C_{t_{n+1}}$ in $\mathsf{Cat}$.  Its colimit
+$C_\infty=\operatorname{colim}_n C_{t_n}$ has filtered shape
+$\mathbb N$, so Proposition~\ref{F4:sequential} applies.
+The later displayed transition $C_{t_n}\to C_{t_{n-1}}$ on ms.~102
+has its direction reversed relative to the construction; the desired
+fully faithful transition is $C_{t_{n-1}}\to C_{t_n}$.
+
+At ms.~103--105, independence after changes of the associated
+preorder is valid for the ind-object with the specified homotopies.
+It does not by itself identify the underlying total category $C$ in
+$\mathsf{Hot}$.  The two arrows of the span at ms.~108 have different
+statuses: the right arrow to $C_\infty$ is a weak equivalence by
+Proposition~\ref{F4:sequential}; the left arrow to $C$ requires an
+additional argument and fails in the generality just refuted.
+At ms.~109--110 the manuscript expressly identifies this distinction.
+
+\begin{proposition}[Open: the remaining special path comparison]
+\label{F4:path-comparison-open}
+For the particular diagram $\operatorname{Ch}_\tau(Y;a,b)$ with all
+arrows allowed as retrograde edges, the general comparison
+$C_\infty\to\operatorname{Ch}(Y;a,b)$ in $\mathsf{Hot}$ for a
+preorder-cofinal sequence of types is not established here.  It is
+established when $Y$ is a groupoid, including $Y=e$, and when $Y=[1]$.
+\end{proposition}
+\begin{proof}[Proof of the cases asserted]
+For a groupoid $Y$, each fixed-type path category with fixed endpoints
+is a groupoid.  A natural transformation is determined uniquely by
+its component at the origin and the path arrows, and its final
+component is the identity precisely when the evaluated path words
+agree.  Thus each nonempty type has path category equivalent to the
+discrete set $Y(a,b)$; every arrow of that set is represented by a
+path of that type, using identities except for one suitably oriented
+edge.  Transition functors preserve the evaluated word.  A sequence
+cofinal in the type preorder is eventually nonempty, so the sequential
+comparison has exactly these contractible components.  For a fixed
+evaluated arrow $\alpha:a\to b$, the type projection from its full
+path component is fully faithful: for any specified type map, there
+is exactly one natural transformation with origin and endpoint
+identities.  It is essentially surjective onto $\mathsf{Ty}$ if $a=b$
+and $\alpha=\operatorname{id}_a$, and onto the full subcategory
+$\mathsf{Ty}_{>0}$ of nonempty words otherwise.  The former is
+contractible by its terminal empty word.  The latter is also
+contractible: concatenation $\tau\mapsto (+)\tau$ has natural
+transformations both to the identity, by collapsing the first
+factor, and to the constant word $(+)$, by collapsing the second
+factor.  The comparison preserves the evaluated arrow and therefore
+is a weak equivalence on every component.  If $Y(a,b)$ is empty both
+categories are empty, which is included.
+
+For $Y=[1]$ and endpoints $0,1$, a fixed-type path is a $0,1$ labeling
+of the vertices, subject to the edge inequalities and fixed endpoint
+labels.  It exists exactly when the word contains a $+$.
+The labeling which is $0$ until the last $+$ edge and $1$ thereafter
+is initial among these labelings, in their pointwise order.  Every
+labeling must be $1$ after that last $+$ because the remaining edges
+are all retrograde and the last label is $1$.  Pullback along a type
+map sends the chosen initial labeling to a labeling above the chosen
+initial labeling of the source.  These unique comparisons define a
+section of the type projection and a natural transformation from its
+composite to the identity.  Thus the full path category has the
+homotopy type of the full type subcategory consisting of words which
+contain a $+$.  This subcategory is contractible by the same
+concatenation $\tau\mapsto(+)\tau$ and the two collapse maps.
+A preorder-cofinal sequence is eventually in this subcategory, and
+its fixed-type path categories are contractible, so its sequential
+colimit is also contractible by Proposition~\ref{F4:sequential}.
+The comparison is therefore a weak equivalence.  For endpoints $1,0$
+one uses the first or last $-$ edge and the dual labeling argument.
+For equal endpoints, the constant $0$ labeling is initial when the
+endpoint is $0$, and the constant $1$ labeling is terminal when it is
+$1$.  All fixed-type path categories are then contractible, and the
+full type category is contractible.  This proves all four endpoint
+cases for $[1]$.
+\end{proof}
+
+For non-groupoids, the attempted reduction fails at exactly the step
+of replacing a preorder-cofinal chain by a homotopy-initial functor
+into $\mathsf{Ty}$.  Such a chain cannot be homotopy initial for all
+diagrams: ordinary initiality would already make
+$\mathsf{Ty}^{\mathrm{op}}$ a final image of a filtered category and
+hence filtered, contradicting Proposition~\ref{F4:opposite-types}.
+One must instead prove a comparison for the particular path diagram.
+The argument at VII ms.~112--113 based on nonexistence of associative
+models for loop spaces is explicitly withdrawn in its footnote~24;
+it supplies no counterexample.  A specific finite remaining test
+beyond these cases is the six-object sphere poset
+$Y=\{0^+,0^-,1^+,1^-,2^+,2^-\}$ with $i^\epsilon<j^\delta$ exactly
+when $i<j$, based at $0^+$, and a cofinal alternating sequence of
+types.  Its nerve is the join of three two-point sets and hence a
+two-sphere.  The obstruction has not been converted into either a
+counterexample or a complete comparison for that instance.  For
+proper choices of the permitted retrograde subcategory $\Sigma$, a
+separate comparison is likewise needed; the universal assertion over
+all such relative categories is not proved here.
+
+% End sections/F_diagrams.tex
+
+\section{Manuscript passages and settled scope}
+
+% Begin sections/G_manuscript.tex
+\subsection{The bridge between a sieve and its complement}
+
+\begin{theorem}[Proved: the bridge-category conjecture of XIIapp ms.~17--18]\label{G:bridge}
+Let $U\subseteq X$ be any full sieve in a small category, and let $T=X\setminus U$ be the full complementary cosieve. Let $E$ be the full subcategory of the arrow category $X^{[1]}$ on arrows with source in $U$ and target in $T$. Write $p:E\to U$ and $q:E\to T$ for source and target. The crossing arrows give a natural transformation $ip\Rightarrow jq$ in $\Fun(E,X)$. The specified comparison
+\[
+ \hocolim\bigl(BU\xleftarrow{Bp}BE\xrightarrow{Bq}BT\bigr)
+ \longrightarrow BX
+\]
+induced by this transformation is a weak homotopy equivalence. Equivalently, the canonical functor from the covariant Grothendieck construction of the span $U\leftarrow E\to T$ to $X$, taking an object of its middle copy to its source, belongs to $\Winfty$. Empty $U$, $T$, or $E$ are allowed.
+\end{theorem}
+\begin{proof}
+There is a unique functor $\chi:X\to[1]$ taking $U$ to $0$ and $T$ to $1$. A nerve chain can cross from $U$ to $T$ at most once. Define the bisimplicial set
+\[
+ Z_{a,b}=
+ \coprod_{\substack{u_0\to\cdots\to u_a\text{ in }U\\
+                         t_0\to\cdots\to t_b\text{ in }T}}
+ X(u_a,t_0),\qquad a,b\geq0.
+\]
+The last face in the $U$ direction precomposes the crossing arrow, and the first face in the $T$ direction postcomposes it. All other faces compose or delete arrows within the indicated chain; degeneracies insert identities. Thus both simplicial structures commute. There are compatible projections of its iterated realization $Q=\lVert Z\rVert$ to $BU$ and $BT$.
+
+Every mixed simplex of $NX$ has the form
+\[
+ u_0\to\cdots\to u_a\xrightarrow{h}t_0\to\cdots\to t_b.
+\]
+Its geometric simplex is the join $\Delta^a*\Delta^b$. At height $s\in(0,1)$ under $B\chi$, its section is $\Delta^a\times\Delta^b$, with barycentric weights multiplied by $1-s$ and $s$. The face and degeneracy identifications are exactly those defining $Z$. At $s=0$, the $T$ coordinates disappear by the projection to $BU$; at $s=1$, the $U$ coordinates disappear by the projection to $BT$. This gives, in compactly generated spaces, a homeomorphism
+\[
+ BX\cong BU\amalg_{Q\times\{0\}}
+ (Q\times[0,1])\amalg_{Q\times\{1\}}BT.
+\]
+One may verify the homeomorphism on each mixed simplex and then use the quotient topology of geometric realization; pure simplices give the two endpoints. The displayed double mapping cylinder is the homotopy pushout of its endpoint projections.
+
+For $t\in T$, put $H_t=X(-,t)|_U$. Postcomposition makes $t\mapsto U/H_t$ a covariant functor $T\to\Cat$. There is an actual isomorphism
+\[
+ E\cong\int_{t\in T}U/H_t:
+ \quad (u\xrightarrow h t)\longmapsto(t,(u,h)).
+\]
+A morphism on either side is precisely a pair $(a:u\to u',b:t\to t')$ with $bh=h'a$. The bisimplicial set $Z$ is the simplicial replacement in $T$ of the nerves $N(U/H_t)$. The Grothendieck-construction comparison, in the form of \citet[Theorem~1]{Cegarra2020}, therefore gives a weak equivalence
+\[
+ |\diag Z|\longrightarrow BE.
+\]
+Here $|\diag Z|$ is canonically homeomorphic to $Q$. Explicitly, on a diagonal $n$-simplex the map takes the two chains and $h:u_n\to t_0$ to the chain of crossing arrows
+\[
+ u_i\longrightarrow u_n\xrightarrow h t_0\longrightarrow t_i
+ \quad(0\leq i\leq n)
+\]
+and the evident commuting squares. Hence this comparison commutes strictly with the projections to $NU$ and $NT$.
+
+Homotopy pushouts are invariant under this weak equivalence of spans. It remains to check the specified map into $BX$: the homotopy induced by $ip\Rightarrow jq$ is the usual prism homotopy, while the double-mapping-cylinder description uses the join interpolation. After the displayed diagonal comparison, both homotopies lie in the same mixed simplex with vertices the given $u$ and $t$ chains. Straight-line interpolation of barycentric coordinates gives a homotopy between them relative to both endpoints, compatible with faces and degeneracies. Thus the resulting weak equivalence is homotopic to the comparison stated in the theorem. The Grothendieck model of the span gives the same comparison by its canonical homotopy-colimit theorem. If a piece is empty, these constructions become the corresponding disjoint union or identity, so the proof includes the edge cases.
+\end{proof}
+
+\subsection{The sphere calculation in the appendix}
+
+\begin{proposition}[Refuted and corrected: the fundamental-group parenthesis at XIIapp ms.~15]\label{G:appendix-correction}
+The category denoted $V'_0$ on XIIapp ms.~14--15 has classifying space homeomorphic to $S^2$, not fundamental group $\Z$. In the subsequent construction, $B\overline{V'}\simeq S^3$. Consequently that particular cobase-change calculation disproves the asserted cofibration property for $\Winfty$ and for $W_n$ with $n\geq3$; it does not disprove it for $W_1$ or $W_2$. The independent $S^2$ pushout-product obstruction R4 remains available for $W_2$.
+\end{proposition}
+\begin{proof}
+We give the entire finite category. Its objects are $x,o,a,b$. Besides identities, its arrows are $r,s:x\rightrightarrows o$, $A:o\to a$, $B:o\to b$, $c:x\to a$, and $d:x\to b$. Its nonidentity composition laws are
+\[
+ Ar=As=c,\qquad Br=Bs=d.
+\]
+The four nondegenerate triangles are the two triangles using $r$ and the two using $s$. For either choice the two triangles form a disk. Their common boundary consists of the four edges $c,A,B,d$, so the whole nerve realization is two disks glued along their boundary, hence $S^2$. Equivalently, its full normalized chain ranks are $(4,6,4)$, its homology is $(\Z,0,\Z)$, and a spanning tree $\{r,A,B\}$ leaves the presentation
+\[
+ \langle s,c,d\mid c=1,\ s=c,\ d=1,\ s=d\rangle=1.
+\]
+The finite program checks all category axioms and every integral boundary matrix, with no truncation beyond the actual nerve dimension.
+
+Let $V$ be the fork $o\to a,o\to b$. Its inclusion $p_0:V\to V'_0$ is final: the only nontrivial comma category, at $x$, is the connected square with the two arrows to $o$ and their common composites to $a,b$. Thus $p_{0!}1=1$. Adjoin a terminal object $e$ to $V'_0$ to obtain $V'$. The next Kan extension of this weight has value $1$ on $V'_0$ and value $\varnothing$ at $e$. Attaching the new terminal vertex of the original fork-square consequently gives $\overline{V'}$ by adjoining two distinct cone vertices $e,t$ to $V'_0$, with no arrow between them. Its nerve is the union of two cones on $NV'_0$, hence its classifying space is $\Sigma S^2\cong S^3$. This six-object, twenty-arrow category has full normalized chain ranks $(6,14,16,8)$ and integral homology $\Z$ in degrees $0,3$ only, as checked by \texttt{appendix\_gluing\_check.py}. The inclusion from the contractible $BV'$ is therefore a $W_2$-equivalence but not a $W_3$-equivalence. The variance and the actual pushout are those of the manuscript; no reverse Mayer--Vietoris implication has been used.
+\end{proof}
+
+\subsection{Exact manuscript passages}
+
+\begin{proposition}[Proved: the consequences for the passages requested in Part G]\label{G:passages}
+The following determinations concern the literal passages and variances of the supplied transcriptions. The references in the proof specify the precise result supporting each determination; claims left open are not counted as settled.
+\end{proposition}
+\begin{proof}
+At XII ms.~94, Proposition~8 says that totality of $U/H$ suffices for totality of $H$. This forward implication survives: the action test for a total category includes all the restricted actions $L\pi$. At ms.~94--97 the converse is asked, with the exact distinction between all functors out of $U/H$ and those factoring through $U$. It is false already over $J=\{1,e\}$: the three-element act in Proposition~\ref{B:classes} is totally $\Winfty$-aspherical, but its category of elements has two objects with no common successor and is not total. The stronger attempted recognition by total integral homology fails by Theorem~\ref{A:counterexample}. The sentence spanning ms.~96--97, ``je me vois mal construire un exemple'', therefore has an explicit finite answer. The subterminal case considered on ms.~95 remains positive by Proposition~\ref{A:R6positive}.
+
+At XII ms.~103, Proposition~10 uses simple connectivity of $Y$ to make the endpoint functor final. Proposition~\ref{E:R8} verifies its exact comma-component calculation. Its conclusion that totality of the path category forces totality of $Y$ is valid. This direct component argument does not establish the preceding general perfectness or strict-fibre/loop-space assertions; those are not used as premises here. The adjacent question whether asphericity of $Y$ makes the path category total, followed by ``J'en doute fort!'', has a negative answer with $Y=[1]$ and initial basepoint; Theorem~\ref{E:converse} supplies a final map from the path category to a category of type $S^2$.
+
+At XII ms.~111, Question~(a) asks whether a cofibration or even a couniversal equivalence sieve must be dwy\'erienne. Theorem~\ref{B:five}(iii) answers no with a one-point complement. The parenthetical assertion of a positive answer for such complements invokes the preceding stronger Mayer--Vietoris hypothesis; it cannot be carried over to $\Winfty$ with only the fundamental-localizer axioms. The two-object, sixty-three-arrow target gives the missing test under the present axioms. Proposition~\ref{B:classes} identifies exactly the extra simple-connectivity condition for a one-point complement.
+
+At XII ms.~113--114, the ``Commentaire de motivation'' doubts composition both for dwy\'erienne sieves and for totally dwy\'erienne sieves. For $\Winfty$, the former composition assertion is false by the explicit four-object construction in Theorem~\ref{B:five}(v). The latter assertion is true by Proposition~\ref{B:R2-audit}: all actions on a total category, including covering actions after the direct-sum construction, give contractible components. For $W_n$, $n\geq2$, the strict assertion is false by Theorem~\ref{C:strict-composition-failure}, while the total assertion retains exactly the obstruction of Proposition~\ref{C:remaining-total}. The separate doubt at ms.~114 about composition of strictly and totally aspherical \emph{functors} has a positive answer for every fundamental localizer, also proved in Proposition~\ref{B:R2-audit}; it must not be conflated with restriction of their weights to a smaller sieve.
+
+The requirement at XII ms.~114, item~(b), imposes stability under the unmodified endpoint pushout-product. R4 rules it out for any nontrivial class of $\Winfty$-cofibration sieves. Section~D specifies a different operation with unchanged source and a weakly equivalent target, and proves maximality of its class. It verifies the explicitly located forward gluing applications in XII \S3, ms.~121--132, and the cylinders and cofibres in XIII ms.~8--13 and 30--32. No claim is made to have identified the particular unnamed later application intended by ``pour des applications ult\'erieures''; that textual identification remains a limitation recorded in Proposition~\ref{D:applications}.
+
+At XIIapp ms.~13--16, the asserted noncofibration of the boundary square is valid for $\Winfty$, but the explanatory claim ``$\pi_1(V'_0)\simeq\mathbf Z$'' at ms.~15 is false. Proposition~\ref{G:appendix-correction} gives the corrected $S^2$ and $S^3$ calculations and their precise truncated scope. At ms.~17--18, the conjecture is explicitly that the bridge comparison ``$\varphi\in\mathbf W_\infty$''. Theorem~\ref{G:bridge} proves it for every small $X$ and full sieve, including empty and disconnected cases, with the specified canonical comparison.
+
+At VII \S10, ms.~99--103, the chosen sequence is an actual $\N$-indexed filtered diagram, so its strict sequential colimit has the asserted weak homotopy-colimit comparison. The transition direction in the display at ms.~102 must be $C_{t_{n-1}}\to C_{t_n}$. A cofinal sequence in the \emph{associated preorder} need not be homotopy final in the full category; Proposition~\ref{F4:preorder-chain} gives the finite group counterexample. Proposition~\ref{F4:passages} records separately every type or path construction in VII \S\S4--6 and \S10. The special full-path comparison remains at the exact obstruction in Proposition~\ref{F4:path-comparison-open}; it is not settled by filteredness of the chosen sequence alone.
+
+Finally, II ms.~36ter literally conjectures
+\[
+ X\text{ totalement }\Winfty\text{-asph\'erique}
+ \Longrightarrow X\text{ filtrante}.
+\]
+This is false for the countable category $\Delta_{\mathrm{inj}}$, whose verified affine-cone proof is given in Proposition~\ref{A:semisimplicial-total}. The true strengthened statement, established by Proposition~\ref{F:RAAG-audit}, is: for nonempty connected $X$, the canonical comparison $\int_X D\to\colim_X^{\Cat}D$ is a weak equivalence for every category-valued diagram if and only if $X$ is filtered. Without the nonempty connected hypothesis, the exact statement is componentwise filteredness. Terminal-object-valued diagrams give totality instead, as in Theorem~\ref{F:terminal-tests}, so these two hypotheses cannot be interchanged.
+\end{proof}
+
+\paragraph{Scope of the literature check.}
+The two searches ``category sieve complement homotopy pushout'' and ``collage classifying space homotopy pushout'' located the Dwyer-pushout literature and enriched collage constructions, but did not locate a source stating the bridge theorem in the exact form above. Its proof is included rather than inferred from that search outcome. The broader searches and sources for the main projectivity construction and the diagram theorem are recorded in \texttt{PRETOT\_report.md}. Absence from the sources opened here is not a priority claim. The manuscript quotations in this section come from the supplied transcriptions of \citet{GrothendieckDerivateurs}.
+
+% End sections/G_manuscript.tex
+
+
+% Begin sections/references_APA.tex
+\addcontentsline{toc}{section}{References and source verification}
+\begin{thebibliography}{99}
+\raggedright
+\bibitem[Cegarra(2020)]{Cegarra2020}
+Cegarra, A. M. (2020). Cohomology of homotopy colimits of simplicial sets and small categories. \emph{Mathematics, 8}(6), Article 981. \url{https://doi.org/10.3390/math8060981}
+\newline\textbf{Opened.} Complete primary article; Theorem 1 and Section 3. It supplies the Grothendieck-construction comparison, not the shape classification.
+
+\bibitem[Charney(2006)]{Charney2007}
+Charney, R. (2006). \emph{An introduction to right-angled Artin groups} [Preprint]. arXiv. \url{https://arxiv.org/abs/math/0610668}
+\newline\textbf{Opened.} Complete October 2006 preprint; Theorem 2.6 and Section 2.7. This is the version cited; the diagram-shape classification is not stated there.
+
+\bibitem[Cisinski(1999)]{Cisinski1999}
+Cisinski, D.-C. (1999). La classe des morphismes de Dwyer n'est pas stable par r\'etractes. \emph{Cahiers de topologie et g\'eom\'etrie diff\'erentielle cat\'egoriques, 40}(3), 227--231. \url{https://www.numdam.org/item/CTGDC_1999__40_3_227_0/}
+\newline\textbf{Opened.} Complete supplied primary PDF; finite example pp. 228--229 and Proposition 2 on p. 231.
+
+\bibitem[Cisinski(2006)]{Cisinski2006}
+Cisinski, D.-C. (2006). \emph{Les pr\'efaisceaux comme mod\`eles des types d'homotopie} (Ast\'erisque, No. 308). Soci\'et\'e math\'ematique de France. \url{https://www.numdam.org/item/AST_2006__308__R1_0/}
+\newline\textbf{Opened.} Relevant primary-text sections, especially Theorem 6.1.18 and Proposition 9.2.17, and publisher metadata; the full book was not read.
+
+\bibitem[Grothendieck(1990--1991)]{GrothendieckDerivateurs}
+Grothendieck, A. (1990--1991). \emph{Les d\'erivateurs} (M. K\"unzer, J. Malgoire, \& G. Maltsiniotis, Eds.) [Manuscript; electronic edition]. \url{https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html}
+\newline\textbf{Opened.} Supplied transcriptions of II, VII, XII, XIIapp, XIII at the passages cited, official edition page, and relevant chapter PDFs. Dates refer to the manuscript; electronic edition dates vary. Transcription errors are not treated as authorial assertions without checking the mathematics.
+
+\bibitem[Hackney et~al.(2024)]{HORR2024}
+Hackney, P., Ozornova, V., Riehl, E., \& Rovelli, M. (2024). Pushouts of Dwyer maps are $(\infty,1)$-categorical. \emph{Algebraic \& Geometric Topology, 24}, 2171--2183. \url{https://doi.org/10.2140/agt.2024.24.2171}
+\newline\textbf{Opened.} Complete supplied primary TeX, Definition 3.4, Theorems 1.5--1.6 and generalized discretely flat formulations; journal metadata independently checked.
+
+\bibitem[Hatcher(2002)]{Hatcher2002}
+Hatcher, A. (2002). \emph{Algebraic topology}. Cambridge University Press. \url{https://pi.math.cornell.edu/~hatcher/AT/AT.pdf}
+\newline\textbf{Opened.} Author-hosted book; especially Example 2.38, p. 142. The acyclic presentation calculation is independently checked in this paper.
+
+\bibitem[Isbell and Mitchell(1973)]{IsbellMitchell1973}
+Isbell, J. R., \& Mitchell, B. (1973). Exact colimits. \emph{Bulletin of the American Mathematical Society, 79}, 994--996.
+\newline\textbf{Not opened.} Primary-body requests returned access or fetch errors. This is a bibliographic search lead, not a proof source or an attribution of the precise theorem studied here.
+
+
+\bibitem[Quillen(1973)]{Quillen1973}
+Quillen, D. (1973). Higher algebraic $K$-theory: I. In H. Bass (Ed.), \emph{Higher $K$-theories} (Lecture Notes in Mathematics, Vol. 341, pp. 85--147). Springer. \url{https://doi.org/10.1007/BFb0067053}
+\newline\textbf{Opened.} Primary-paper scan, Section 1, Theorem A and its dual form; publisher metadata checked. The rest of the article was not read.
+
+\bibitem[Shoikhet(2016)]{Shoikhet2016}
+Shoikhet, B. (2016). On Evrard's homotopy fibrant replacement of a functor. \emph{Theory and Applications of Categories, 31}, 989--1015. \url{https://arxiv.org/abs/1412.0317}
+\newline\textbf{Opened.} Primary arXiv version 4, 7 November 2016; Sections 2.1--2.3, Proposition 2.7, Theorem 2.8. Its path constructions differ from the exact type category used here.
+
+\bibitem[The Stacks Project Authors(n.d.)]{StacksDK}
+The Stacks Project Authors. (n.d.). \emph{Dold--Kan} (Section 14.24, Tag 019D). Retrieved November 12, 2026, from \url{https://stacks.math.columbia.edu/tag/019D}
+\newline\textbf{Opened.} Complete proof of Theorem 14.24.3 and its immediate setup.
+
+\bibitem[Thomason(1979)]{Thomason1979}
+Thomason, R. W. (1979). Homotopy colimits in the category of small categories. \emph{Mathematical Proceedings of the Cambridge Philosophical Society, 85}(1), 91--109. \url{https://doi.org/10.1017/S0305004100055535}
+\newline\textbf{Not opened.} Article body inaccessible; publisher abstract and metadata opened. Its Theorem 1.2 is used through the fully opened treatment by Cegarra (2020).
+
+\bibitem[Thomason(1980)]{Thomason1980}
+Thomason, R. W. (1980). Cat as a closed model category. \emph{Cahiers de topologie et g\'eom\'etrie diff\'erentielle, 21}(3), 305--324. \url{https://www.numdam.org/item/CTGDC_1980__21_3_305_0/}
+\newline\textbf{Opened.} Complete supplied primary PDF; Propositions 4.2--4.4, pp. 319--320, Theorem 4.9. The false retract assertion in Lemma 5.3(3) is explicitly excluded.
+
+\bibitem[Weibel(1994)]{Weibel1994}
+Weibel, C. A. (1994). \emph{An introduction to homological algebra} (Cambridge Studies in Advanced Mathematics, Vol. 38). Cambridge University Press. \url{https://math.mit.edu/~hrm/palestine/weibel/08-simplicial_methods_in_homological_algebra.pdf}
+\newline\textbf{Opened.} Complete Chapter 8 excerpt, especially Theorem 8.4.1 and Section 8.4; the remainder of the book was not read.
+\end{thebibliography}
+
+% End sections/references_APA.tex
+
+\end{document}

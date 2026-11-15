@@ -1,0 +1,983 @@
+% English commentary; source statements and edition slips remain in the French text.
+
+\begin{dcomment}{exposition}{p1:Voici les faits principaux}{Variance and the two Kan extensions}
+The elementary presheaf calculation fixes the conventions for everything that follows. Throughout these pages an $I$-diagram has arrows in the direction of $I^{\mathrm{op}}$. Thus a diagram on $0\to1$ is an arrow $F_1\to F_0$. We retain this convention in the commentary. If $f:I\to J$, the adjunctions are
+\[
+ f_!\dashv f^*\dashv f_*.
+\]
+They are adjunctions of ordinary categories at this stage. Their pointwise formulas, whenever the indicated limits exist, are
+\[
+ (f_*F)_j=\lim_{(f/j)^{\mathrm{op}}}F\circ\operatorname{pr},
+ \qquad
+ (f_!F)_j=\operatorname*{colim}_{(j/f)^{\mathrm{op}}}F\circ\operatorname{pr}.
+\]
+Here $f/j$ has objects $(i,f(i)\to j)$, whereas $j/f$ has objects $(i,j\to f(i))$. The opposite signs are essential: forgetting one exchanges the two formulas. These are the usual pointwise Kan formulas applied to $f^{\mathrm{op}}$; see \citet[\S6.2]{Riehl2016}.
+
+For completeness, a map $G\to f_*F$ consists, at $j$, of a compatible family of maps $G_j\to F_i$, one for every $f(i)\to j$. A map $f^*G\to F$ supplies this family by composing $G_j\to G_{f(i)}\to F_i$. Conversely, the members indexed by identities recover the original map. The two constructions are inverse and natural. The left adjunction follows by reversing all arrows. This proves the existence assertion without any adjoint functor theorem; for finite categories the comma categories are finite, so finite limits or colimits suffice.
+
+The word ``immersion'' here denotes the inclusion of a full subcategory, with ``open'' meaning a sieve and ``closed'' a cosieve. A sieve is closed under taking the source of an arrow whose target belongs to it; a cosieve is closed under taking the target. In a poset these are, respectively, downward and upward closed subsets. This agrees with the conventions forced by the displayed examples. For a fully faithful $f$, the identity at $i$ is terminal in $f/f(i)$ and initial in $f(i)/f$. The formulas therefore give $f^*f_*F\cong F\cong f^*f_!F$. Both Kan extensions are fully faithful. Calling $f^*$ a localization expresses these adjunction identities, not a claim that restriction itself is fully faithful.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p1:et si $f$ est une immersion fermée}{Why the next adjoint can fail}
+The first counterexample is already a calculation with abelian groups. On the fork $0\to a,0\to b$, a presheaf is a cospan $A\to C\leftarrow B$, and its limit is $A\times_C B$. Consider the componentwise surjection of cospans
+\[
+ (\mathbb Z\xrightarrow{2}\mathbb Z\leftarrow0)
+ \longrightarrow
+ (\mathbb Z/2\xrightarrow{0}\mathbb Z/2\leftarrow0),
+\]
+whose nonzero components are reduction modulo $2$. The induced map on limits is $0\to\mathbb Z/2$, which is not surjective. A functor having a right adjoint is a left adjoint and hence preserves cokernels; in this abelian diagram category it would preserve epimorphisms. The limit functor therefore has no right adjoint. This verifies precisely the failure of $f^!$ asserted in (b).
+
+For the opposite fork the colimit is a pushout. The componentwise injection from the span $\mathbb Z\xrightarrow{2}\mathbb Z$, $\mathbb Z\to0$, to the analogous span with $\mathbb Q$ in place of $\mathbb Z$ induces $\mathbb Z/2\to0$ on pushouts. It fails to preserve a monomorphism and cannot be a right adjoint. Thus its left adjoint $f^?$ does not exist. These examples use neither an absence of ordinary limits nor a failure of abelian structure.
+
+The open-immersion example is the same obstruction localized at the new vertex $c$. For the inclusion of the fork into the diamond, $(f_*F)_c$ is the preceding pullback. Evaluation at $c$ preserves colimits, so a right adjoint to $f_*$ would force this pullback functor to preserve cokernels. The same surjection disproves that possibility. The dual argument treats a closed immersion and $f^?$. The point of the examples is that iterated adjunction is a property of a particular functor, not a consequence of the ambient categories having all limits and colimits.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p2:Dans le cas abélien, cela prend la forme}{Support, zero extension, and the exceptional inverse image}
+Let $U\subset S$ be a sieve and $Y=S\setminus U$ its complementary cosieve. A presheaf on $Y$ extends by the terminal object on $U$ under $i_*$. Indeed, $Y/u$ is empty for $u\in U$, whereas restriction to $Y$ recovers the original presheaf. Conversely, if $F|_U$ is terminal, the unit $F\to i_*i^*F$ is an isomorphism at every object. This proves the description of the essential image in (d). Dually, $j_!$ extends a presheaf on $U$ by the initial object on $Y$.
+
+Assume now that $A$ has a zero object and the required limits. Form
+\[
+ K=F\times_{j_*j^*F}0.
+\]
+Its restriction to $U$ is zero, so $K=i_*G$ for a unique $G$ up to the canonical equivalence above. For $H\in A(Y)$, the maps $i_*H\to j_*j^*F$ are in bijection with maps $j^*i_*H=0\to j^*F$, hence form a singleton. The universal property of the pullback gives
+\[
+ \operatorname{Hom}(H,G)\cong\operatorname{Hom}(i_*H,K)
+ \cong\operatorname{Hom}(i_*H,F).
+\]
+Thus $G=i^!F$, proving both the extra adjunction and square (2). This argument explains the editors' pointedness correction: a terminal object alone supplies no canonical map from it to $j_*j^*F$. For $A=\mathsf{Set}$ and $S=[1]$, the closed inclusion of $1$ has $i_*B=(B\to *)$. It does not preserve the initial object, so cannot have a right adjoint.
+
+The dual construction uses
+\[
+ Q=F\amalg_{i_!i^*F}0.
+\]
+Now $Q|_Y=0$, hence $Q=j_!j^?F$, and the same universal-property argument proves $j^?\dashv j_!$. The first square of (d) is bicartesian for a different, simpler reason: at each point it is a square with an identity on one side and a zero object on the other. Checking at points proves both universal properties. No stability hypothesis is needed for this particular square. In an abelian category its associated short exact sequence need not split as a sequence of diagrams, even though every component is split. For $S=[1]$ and $F=(\mathbb Z\xrightarrow{1}\mathbb Z)$, the sequence is
+\[
+ 0\longrightarrow(0\to\mathbb Z)\longrightarrow
+ (\mathbb Z\xrightarrow{1}\mathbb Z)\longrightarrow
+ (\mathbb Z\to0)\longrightarrow0.
+\]
+A splitting would require the identity map on the first copy of $\mathbb Z$ to have zero composite with the displayed identity arrow, which is impossible.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p3}{The simplex adjunctions, with their endpoints}
+Write $C_n=A^{[n]^{\mathrm{op}}}$, so its objects are strings $X_n\to\cdots\to X_0$. Let $\delta^k:[n]\to[n+1]$ omit $k$, and let $\sigma^k:[n+1]\to[n]$ identify $k$ and $k+1$. The inequalities in the finite ordinals give
+\[
+ \delta^{k+1}\dashv\sigma^k\dashv\delta^k.
+\]
+Applying contravariant presheaves reverses both arrows and natural transformations; consequently the restrictions form the adjunction chain
+\[
+ (\delta^{n+1})^*\dashv(\sigma^n)^*\dashv
+ (\delta^n)^*\dashv\cdots\dashv
+ (\sigma^0)^*\dashv(\delta^0)^*.
+\]
+One can also check each bijection of Hom sets by writing down the compatible component maps. There are $2n+3$ terms here.
+
+If $A$ is pointed with finite limits and colimits, two more terms occur at either end. On the left, let $L:C_n\to C_{n+1}$ prepend zero at the high end: $L(X)=(0\to X_n\to\cdots\to X_0)$. Then $L\dashv(\delta^{n+1})^*$. Define $Q:C_{n+1}\to C_n$ by
+\[
+ (QX)_r=X_r\amalg_{X_{n+1}}0\qquad(0\leq r\leq n).
+\]
+A map $X\to LY$ is exactly a compatible family $X_r\to Y_r$ killing $X_{n+1}$, so $Q\dashv L$. At the right end let $R(X)=(X_n\to\cdots\to X_0\to0)$. Then $(\delta^0)^*\dashv R$. Its right adjoint is the string $K(X)_r=X_{r+1}\times_{X_0}0$, since a map $RY\to X$ is exactly a family of maps to those fibers. The full chain has $2n+7$ terms, as suggested in the manuscript.
+
+For $n=0$ it is particularly transparent:
+\[
+ \operatorname{coker}\dashv(0\to-)\dashv
+ \operatorname{ev}_0\dashv\operatorname{const}\dashv
+ \operatorname{ev}_1\dashv(-\to0)\dashv\operatorname{ker}.
+\]
+Here kernel and cokernel mean fiber and cofiber over the zero object, so abelian structure is unnecessary. This also proves the first conjecture in (f): every monotone map of finite ordinals factors into elementary faces and degeneracies, each restriction occurring far enough inside one of these chains to have two adjoints on both sides. Composing the corresponding adjunctions supplies $f^?$ and $f^!$.
+
+The stronger statement about one common chain for \emph{all} maps between two fixed ordinals is false. Already for $[1]$ and itself, the identity restriction has only identity adjoints up to isomorphism, whereas the restriction along a constant map is not the identity on $C_1$, for example when $A=\mathsf{Ab}$. Between $[n]$ and $[n+1]$, the central chain displayed above contains exactly the injective faces and surjective degeneracies. Other monotone maps are composites, not additional entries in that chain. The editors' qualifications should therefore be retained; the nearby count is a correct statement about the specified chain, not a classification of every restriction functor.
+\end{dcomment}
+
+\begin{dcomment}{context}{p4:On se donne une sous-catégorie pleine}{From derived coefficients to diagram categories}
+The opening calculations make the geometric language of supports available before any homotopy theory is introduced. There is a documented reason for this starting point. In \emph{Pursuing Stacks}, \S69, Grothendieck traces his concern to the inadequacy of a single derived category for the trace and determinant formulas arising around SGA~5. The proposed replacement assigns a derived category to every diagram shape; filtered complexes and diagrams of triangles are instances of this larger construction. The demand that the same structure reappear at every shape already anticipates the shifted derivators of manuscript p.~18 \citep[\S69, pp.~1--3 of the edited extract]{Grothendieck1983}.
+
+His letter to Thomason of 2 April 1991 returns to the same question: which intrinsic structure survives passage from models to categories of coefficients? That letter explicitly connects the renewed work to the 1983 notes and discusses both derivators and the role of small categories as homotopy models \citep[pp.~2--4 of the edited letter]{Grothendieck1991Letter}. These are statements by Grothendieck about his program; they do not establish a retrospective priority claim for every later theorem. Heller's independently formulated homotopy theories already organized homotopy categories of diagrams, homotopy Kan extensions, and pointed operations in a related axiomatic framework \citep[Chs.~II--III]{Heller1988}.
+
+The terminology on the next pages must be read provisionally. The superscript $\circ$ on $\Dia$ reverses both functors and transformations. A transformation $\alpha:f\Rightarrow g$ induces $\alpha^*:g^*\Rightarrow f^*$ because a presheaf sends $\alpha_i:f(i)\to g(i)$ to $F(g(i))\to F(f(i))$. In modern notation the input 2-category would therefore be $\Dia^{\mathrm{coop}}$. A common modern convention uses covariant diagrams and writes $\mathscr D:\mathsf{Cat}^{\mathrm{op}}\to\mathsf{CAT}$, reversing functors but retaining the direction of 2-cells. The translation is $\mathscr D(I)=\DD(I^{\mathrm{op}})$. A left derivator in this manuscript has right Kan extensions; this is the terminology of left exactness, not that of a left adjoint. The preliminary labels $\mathrm{Der}_1$, $\mathrm{Der}_2$, and $\mathrm{Der}_3$ will also be reassigned when the systematic axioms begin.
+
+The small correction about posets is substantive but completely local. A category is a poset precisely when it is thin and skeletal: each Hom set has at most one member, and isomorphic objects are equal. Having only monomorphisms and no nonidentity isomorphisms does not imply thinness. The parallel-pair category printed in the editors' note is a counterexample, since every composable arrow that could test cancellation is an identity. No later construction depends on the incorrect characterization.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p7}{Coherent squares and what the axioms remember}
+The passage from a square in $\DD(I)$ to an object of $\DD(I\times[1]\times[1])$ is the first genuinely homotopical issue. The underlying-diagram functor discards part of the data. A commutative square in a homotopy category records equality of two homotopy classes; a coherent square also records the homotopy implementing that equality, together with whatever compatibility is required in a larger diagram. It is therefore the coherent object to which a homotopy pullback or pushout operation applies.
+
+Put $\square=[1]\times[1]$ and let $W$ be the full subcategory obtained by deleting $(1,1)$. For presheaves, $W^{\mathrm{op}}$ is a cospan. A coherent square $X\in\DD(I\times\square)$ is cartesian if it is in the essential image of right Kan extension along $I\times W\hookrightarrow I\times\square$. Equivalently, its unit comparison with that right Kan extension is an isomorphism. The opposite corner and left Kan extension define cocartesian squares. These definitions use the universal property of an adjoint inside the whole family of diagram categories, rather than an ordinary pullback in $\DD(I)$. In the represented derivator of a complete category they reduce to ordinary cartesian and cocartesian squares.
+
+The desire to lift diagrams does not say that every diagram in $\DD(I)$ has a preferred lift. A frequently imposed additional axiom, strongness, asks that the underlying arrow functor $\DD(I\times[1])\to\DD(I)^{[1]^{\mathrm{op}}}$ be full and essentially surjective. Even that says neither that the lift is unique nor that the functor is faithful. The special support squares have more structure: they arise from restrictions, adjunction units or counits, and zero extensions. Those operations give the coherent constructions that an arbitrary incoherent square lacks.
+
+In the modern full derivator axioms, pointedness can be required only at $\DD(e)$. It then propagates to all diagram categories, and the exceptional adjoints required here follow; this is proved in \citet[Proposition~3.2 and Corollary~3.8]{Groth2013}. Thus the manuscript's extra-adjoint requirement was a useful way to expose the intended geometry, but is not an additional independent condition on an already pointed derivator. This does not justify imposing exceptional adjoints on the unpointed derivator of spaces: the initial and terminal spaces differ. The qualification in footnote~2 is necessary.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p11}{Conservative is not faithful}
+The conservativity axiom detects whether a \emph{given coherent morphism} is invertible. It does not reconstruct that morphism from its components. A small derived example makes the distinction exact. In the abelian category of arrows $X_1\to X_0$, put
+\[
+ P=(\mathbb Z\to0),\qquad Q=(0\to\mathbb Z),\qquad
+ E=(\mathbb Z\xrightarrow{1}\mathbb Z).
+\]
+The nonsplit sequence
+\[
+ 0\longrightarrow Q\longrightarrow E\longrightarrow P\longrightarrow0
+\]
+defines a nonzero element of $\operatorname{Ext}^1(P,Q)$, and hence a nonzero morphism $P\to Q[1]$ in the derived category of arrows. Its two evaluated components are $\mathbb Z\to0[1]$ and $0\to\mathbb Z[1]$, both zero. This is the same nonsplitting calculated in the support example, now viewed as a morphism in a derived category. It exhibits exactly the information lost by
+\[
+ D(\mathsf{Ab}^{[1]^{\mathrm{op}}})
+ \longrightarrow D(\mathsf{Ab})^{[1]^{\mathrm{op}}}.
+\]
+There is no contradiction with conservativity. The nonzero extension class is not a morphism all of whose components are isomorphisms.
+
+The corollary for partial underlying diagrams is proved in the text, not left as a gap. If a coherent morphism over $I\times J$ becomes an isomorphism at every $j$ in $\DD(I)$, evaluating again at every $i$ gives an isomorphism at each $(i,j)$. The original conservativity axiom on $I\times J$ now applies. In particular, a shifted family retains the same test for invertibility. This short argument does not need strongness, full faithfulness, a model structure, or a choice of representatives.
+\end{dcomment}
+
+\begin{dcomment}{later}{p13:sa catégorie des coefficients fondamentaux}{Localizing diagrams and deriving their Kan extensions}
+For a relative category $(\mathcal M,W)$, objectwise weak equivalences are preserved by every restriction. Thus localization supplies the displayed prederivator, subject to the usual size convention ensuring that its Hom classes are sets. Naturality of the localized transformations follows from the universal property of localization. One may use a functorial localization construction to keep restriction strictly functorial. Arbitrary independent choices of localized categories instead give canonically equivalent data with coherence isomorphisms.
+
+The difficult assertion is the existence and pointwise behavior of the derived Kan extensions. Grothendieck attributes the model-category case to Thomason here, without specifying a publication. We have not identified a published Thomason theorem with exactly the generality of this attribution. A precise later source is \citet[Theorem~6.11]{Cisinski2003}: a Quillen model category admitting small limits gives a left derivator in the presheaf convention. Applying the result to the opposite model category gives the dual assertion when small colimits exist. The proof also establishes local smallness of the diagram localizations. This settles the mathematical existence question without requiring an ordinary Quillen model structure on every diagram category.
+
+For a combinatorial model category there is a familiar more direct route. The projective diagram model structure has objectwise fibrations and weak equivalences; the injective structure has objectwise cofibrations and weak equivalences. Their homotopy categories are the same localization, although their replacements differ. Projective replacements derive left Kan extension, while injective replacements derive right Kan extension. In general one cannot declare \emph{both} fibrations and cofibrations objectwise and expect the lifting axioms. The passage from models to presheaves is treated in a more flexible formalism by \citet[Theorem~6.22 and Corollary~6.24]{Cisinski2010}.
+
+For the indicated model of spaces, the exponential law gives
+\[
+ (\mathsf{sSet})^{I^{\mathrm{op}}}
+ \cong\mathsf{Set}^{\Delta^{\mathrm{op}}\times I^{\mathrm{op}}}
+ \cong(\mathsf{Set}^{I^{\mathrm{op}}})^{\Delta^{\mathrm{op}}}.
+\]
+The weak equivalences in this construction are evaluated at each $i$. They are not a newly imposed local weak-equivalence relation for an arbitrary Grothendieck topology. Also, ``semi-simplicial'' is historical terminology here: the displayed $\Delta$ includes degeneracies and gives what is now called a simplicial set. Replacing it silently by the category of injective order maps would change the model category under discussion.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p14:Sans doute on veut un peu plus}{Morphisms and their comparison maps}
+A morphism between the entire families of coefficient categories must respect restriction, including its dependence on natural transformations of indexing functors. The square (2) is the condition that is lost if one checks only the individual functors in square (1). In modern treatments one normally allows coherent invertible comparison maps
+\[
+ \gamma_f:f^*_{\DD'}u_J\xrightarrow{\sim}u_If^*_{\DD}
+\]
+rather than demanding strict equality. The coherence conditions concern identity functors, composites, and natural transformations. Modifications between such pseudonatural morphisms provide the 2-cells. A functor of relative categories preserving weak equivalences gives an example by applying it at every component and then localizing; no preservation of Kan extensions follows merely from this construction.
+
+Adjunction does give canonical comparison maps, with precisely the orientations on manuscript pp.~15--16. For the right Kan extension the map is the composite
+\[
+\begin{aligned}
+ u_Jf_*^{\DD}
+ &\longrightarrow f_*^{\DD'}f^{*}_{\DD'}u_Jf_*^{\DD}\\
+ &\xrightarrow{\ f_*^{\DD'}\gamma_f f_*^{\DD}\ }
+ f_*^{\DD'}u_If^{*}_{\DD}f_*^{\DD}
+ \longrightarrow f_*^{\DD'}u_I.
+\end{aligned}
+\]
+The outer arrows are the unit in $\DD'$ and the counit in $\DD$. The left Kan comparison $f_!^{\DD'}u_I\to u_Jf_!^{\DD}$ is the adjoint of
+\[
+ u_I\longrightarrow u_If^*_{\DD}f_!^{\DD}
+ \xrightarrow{\gamma_f^{-1}}f^*_{\DD'}u_Jf_!^{\DD}.
+\]
+An invertible restriction comparison need not have an invertible mate. Preservation of limits or colimits is the additional assertion that the corresponding mates are invertible. These definitions also explain which comparison is meant; an unspecified isomorphism of the two functors is not sufficient.
+
+In the manuscript, left and right exactness at this point mean preservation of all the relevant right and left Kan extensions. Modern ``exact morphism of stable derivators'' usually refers to finite homotopy limits and colimits. Stability makes the two finite notions coincide; it does not equate preservation of arbitrary products and coproducts. For example, derived tensor product with $\mathbb Q$ is exact on $D(\mathbb Z)$ and preserves coproducts. The map
+\[
+ \mathbb Q\otimes\prod_{n\geq1}\mathbb Z
+ \longrightarrow\prod_{n\geq1}\mathbb Q
+\]
+is not surjective: an element on the left has a common denominator, whereas $(1/n!)_{n\geq1}$ does not. The footnote about triangulated categories is correct in its finite setting and should not be promoted to an assertion about arbitrary Kan extensions. For model categories, a right Quillen adjoint yields a derived morphism preserving homotopy limits, with the dual statement for a left Quillen adjoint; \citet[Proposition~6.12 and its dual]{Cisinski2003} provide the relevant construction.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p15}{Abelianization preserves homotopy colimits}
+The model for $\mathsf{HOTAB}$ is simplicial abelian groups. Normalization identifies these with nonnegative chain complexes, or equivalently cochain complexes in nonpositive degrees; see \citet[Theorem~14.24.3, Tag~019D]{StacksDoldKan}. Its homotopy category is $D^{\leq0}(\mathsf{Ab})$. This is an additive, pointed theory, but it is not stable: suspension need not be invertible inside the connective category. Consequently one must not infer preservation of homotopy limits from an additive appearance.
+
+The morphism from spaces is induced by the degreewise free abelian group functor $\mathbb Z[-]$. It is left adjoint to the forgetful functor on simplicial objects. The latter preserves fibrations and trivial fibrations in the standard model structures, so this is a Quillen adjunction. Its derived left adjoint preserves homotopy colimits, including the homotopy pushouts in the last sentence of manuscript p.~15. That sentence therefore has a positive answer, although the preceding pullback assertion does not. Under normalization, this is the usual chain construction, with its coherent diagram version.
+
+A finite discrete counterexample makes the failure of the pullback assertion explicit. Let $X=Y'=\{0,1\}$ and $Y=*$, so $X'=X\times Y'$ has four points. All objects are Kan complexes and the maps to the point are fibrations. After abelianization the square has upper left and lower right terms $\mathbb Z^2$, lower left term $\mathbb Z$, and upper right term $\mathbb Z^4$. Each map $\mathbb Z^2\to\mathbb Z$ is augmentation. Since these maps are surjective, their ordinary pullback computes their homotopy pullback in simplicial abelian groups, and it is
+\[
+ \{(a_0,a_1,b_0,b_1)\in\mathbb Z^4:
+ a_0+a_1=b_0+b_1\}\cong\mathbb Z^3.
+\]
+The comparison from the chains of $X'$ sends the basis vector $e_{ij}$ to $(e_i,e_j)$. Its kernel is generated by
+\[
+ e_{00}-e_{01}-e_{10}+e_{11}.
+\]
+It is therefore not an isomorphism. This proves the correction in footnote~7 while keeping separate the valid colimit statement. Already the terminal-object test would rule out continuity, since $\mathbb Z[*]=\mathbb Z$ and the terminal simplicial abelian group is zero, but the displayed example addresses exactly the nonempty square that Grothendieck is discussing.
+\end{dcomment}
+
+\begin{dcomment}{later}{p17}{What the whole diagram theory remembers}
+A modern comparison makes precise the extra information carried by the variable $I$. For an $\infty$-category $\mathcal C$, define, in the convention of this manuscript,
+\[
+\DD_{\mathcal C}(I)=h\operatorname{Fun}(N(I)^{\mathrm{op}},\mathcal C).
+\]
+Here $N$ is the nerve and $h$ takes the homotopy category. One first forms coherent diagrams and then passes to homotopy; reversing these operations would give $\operatorname{Fun}(I^{\mathrm{op}},h\mathcal C)$, which is generally different. Restriction and its natural transformations supply the prederivator structure. If $\mathcal C$ has all small limits and colimits, its pointwise Kan extensions supply the two adjoints and the comma-square formula. \citet[\S5.3, especially Proposition~5.3.9 and Remark~5.3.10]{RiehlVerity2017} explain this passage using the homotopy $2$-category of an $\infty$-cosmos. Their convention uses covariant diagrams; replacing $I$ by $I^{\mathrm{op}}$ yields the formula above.
+
+The formula also clarifies the philosophical remark on manuscript page~18. Passing to $\DD(e)=h\mathcal C$ discards most of the indexing variable. Retaining the entire prederivator can retain much more. \citet[Theorem~19 and Corollary~20]{Arlin2020} proves a fully faithful embedding using strict transformations and the specified simplicial enrichment. With pseudonatural transformations, his Theorem~29 gives a bicategorically fully faithful embedding for \emph{small} quasicategories when the domain contains all small categories. The size hypothesis, the domain, and the kind of transformation belong to the theorem; none can be silently omitted. In the model-category setting, \citet[Theorems~3.3.2 and~3.4.4]{Renaudin2009} obtains the corresponding local equivalence, and then a biequivalence with derivators of small presentation, from left proper combinatorial model categories localized at Quillen equivalences, with adjunctions as morphisms.
+
+These results concern the entire diagram theory. They do not assert that every functor $h\mathcal C\to h\mathcal E$ admits a coherent lift, or that a lift is determined by its value at $e$. Nor does an objectwise description of a prederivator by localized diagram categories dispense with the proof of its Kan-extension axioms. The comparison is useful precisely because it keeps three questions separate: existence of coherent diagrams, existence of homotopy Kan extensions, and reconstruction of an enhanced category from all its diagram categories. Grothendieck's successive shifts $\DD_I$ belong to this richer level of information.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p18:soit pleinement fidèle}{A negative answer to the evaluation question}
+For unrestricted morphisms of derivators, the doubt about full faithfulness can be answered within the elementary examples already at hand. Let $A=[1]$ and let $\mathscr R(I)=\operatorname{Fun}(I^{\mathrm{op}},A)$. Since the two-element ordered set has all small meets and joins, this represented prederivator is a derivator: its Kan extensions are the ordinary pointwise ones. The represented construction is standard; compare \citet[Examples~1.2(1) and~1.6]{Groth2013}.
+
+For any prederivator $\mathscr E$ in our convention and any $X\in\mathscr E(A^{\mathrm{op}})$, define a morphism $U_X:\mathscr R\to\mathscr E$ as follows. An object $F\in\mathscr R(I)$ is a functor $F:I^{\mathrm{op}}\to A$, so $F^{\mathrm{op}}:I\to A^{\mathrm{op}}$, and we set
+\[
+ (U_X)_I(F)=(F^{\mathrm{op}})^*X.
+\]
+If $F\Rightarrow G$ is a natural transformation, taking opposites gives $G^{\mathrm{op}}\Rightarrow F^{\mathrm{op}}$; the reversal of 2-cells by $\mathscr E$ gives the required map $(U_X)_I(F)\to(U_X)_I(G)$. The composition and restriction laws follow directly from those of $\mathscr E$. A map $m:X\to Y$ likewise induces a modification $U_m:U_X\Rightarrow U_Y$ with component $(F^{\mathrm{op}})^*m$ at $F$.
+
+Now take $\mathscr E$ to be the unbounded derived derivator of abelian groups. Its category $\mathscr E(A^{\mathrm{op}})$ is the derived category of arrows $0\to1$. As in the preceding nonfaithfulness example, the extension
+\[
+ 0\to(0\to\mathbb Z)\to
+ (\mathbb Z\xrightarrow{1}\mathbb Z)\to(\mathbb Z\to0)\to0
+\]
+yields a nonzero map $m:(\mathbb Z\to0)\to(0\to\mathbb Z)[1]$ with both evaluated components zero. Therefore $(U_m)_e$ is the zero natural transformation between the base-category functors. Nevertheless $U_m$ itself is nonzero: at $I=A^{\mathrm{op}}$ and $F=\operatorname{id}_A$, its value is exactly $m$. Evaluation at $e$ is thus not faithful, and consequently not fully faithful.
+
+This settles the question for the usual category of all pseudonatural morphisms, and already for the strictly natural morphisms just constructed. It does not assert the same counterexample for a subcategory in which every morphism must preserve all left or right Kan extensions. The manuscript is still negotiating that convention. The proof identifies the precise obstruction in the unrestricted case: an entire coherent arrow can carry a morphism which vanishes at each of its two endpoints.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p19}{Duality and the change of coefficient category}
+The two opposites in $\DD^{\mathrm{op}}(I)=\DD(I^{\mathrm{op}})^{\mathrm{op}}$ have distinct roles. The first reverses the direction of the indexing arrows; the second reverses arrows between coefficient objects. Both are needed to obtain another prederivator with the same variance convention. In a model presentation this is the canonical identification
+\[
+ \operatorname{Fun}(I^{\mathrm{op}},\mathcal M^{\mathrm{op}})
+ \cong\operatorname{Fun}(I,\mathcal M)^{\mathrm{op}},
+\]
+followed by localization. Localization commutes with taking opposites by its universal property: a functor inverting the selected arrows on either side is exactly the opposite of such a functor on the other side. Thus the dual model statement is proved by the displayed argument. The incorrect indices in the definition of the dual action on Hom categories are already corrected by the editors.
+
+The shift $\DD_I(J)=\DD(I\times J)$ changes which objects count as coefficients. An entire coherent $I$-diagram now becomes a single coefficient, and a coherent $J$-diagram of such coefficients is an object over $I\times J$. At the level of a relative category this is the elementary exponential law
+\[
+ (\mathcal M^{I^{\mathrm{op}}})^{J^{\mathrm{op}}}
+ \cong\mathcal M^{(I\times J)^{\mathrm{op}}},
+\]
+with exactly the same objectwise weak equivalences. This is why the shift is intrinsic to the proposed language: it permits an argument about one coefficient to be reapplied to a family with parameters.
+
+The preliminary stability checks on p.~19 are valid for the axioms already written. Products preserve sieves and cosieves. Adjoints to $(\operatorname{id}_I\times f)^*$ are supplied by the corresponding adjoints in $\DD$, and the conservativity argument uses evaluation at each $(i,j)$. The full pointwise Kan-extension axiom still needs a separate verification. In the completed theory this is the shift theorem, \citet[Theorem~1.25]{Groth2013}; it is not an unproved additional assumption about an arbitrary family.
+
+Likewise the candidate components $(f\times\operatorname{id}_J)_!$ and $(f\times\operatorname{id}_J)_*$ on p.~20 do not constitute a morphism of derivators merely by being written down. One must show that their comparison maps for changes of $J$ are invertible and satisfy coherence. The product base-change squares supply this, and the coherence follows from the calculus of mates. Restriction is strictly natural before choices of identifications, whereas adjoint extensions are naturally pseudonatural. The following pages are devoted to precisely these exchange maps. It is appropriate to call the present construction a sketch awaiting those checks, not an error in the definition of the shift.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p23}{Three different interchange questions}
+The extra variable in a shifted derivator is a parameter. An object of
+$\mathbb D(I\times J)$ is therefore a coherent $I$-family of coherent
+$J$-diagrams; it is not, in general, merely a functor from $I^{\circ}$ to
+$\mathbb D(J)$. Keeping the two variables coherent makes the question on these
+pages well posed. There are three operations to compare: restriction in one
+variable with a Kan extension in the other; two right, or two left, Kan
+extensions; and a right Kan extension with a left Kan extension. Only the last
+comparison introduces a new exactness condition.
+
+Here is the pointwise mechanism for the first comparison. For a projection
+in the $J$-direction, the slice occurring in its right Kan formula at
+$(i,j')$ has the form
+\[
+ (I/i)\times(g/j').
+\]
+The first factor has terminal object $(i,1_i)$. Since our diagrams are
+contravariant, taking cohomology in that factor amounts to evaluating at
+this terminal object. Consequently the value is the right Kan formula in
+the $J$-variable applied to the $i$-th fibre. The same calculation with $i$
+replaced by $f(i)$ gives the restriction comparison. Der~2 promotes these
+pointwise isomorphisms to an isomorphism of coherent diagrams. The dual
+argument treats left Kan extensions. This is the content of
+\citet[Proposition~2.5]{Groth2013}, in the convention of covariant diagrams.
+
+For the second comparison, no pointwise calculation is necessary.
+Restriction around the product square agrees in either order. The two
+composites of right adjoints are therefore right adjoint to the same
+functor, and uniqueness of an adjoint gives their canonical isomorphism.
+The left-adjoint assertion is identical. These are the derivator forms of
+Fubini's rule for limits and for colimits.
+
+For the mixed comparison there is still a canonical map, in the direction
+\[
+ G'_!F_*\longrightarrow F'_*G_!,
+\]
+but no formal argument makes it invertible. Its construction uses a unit,
+the already established restriction comparison, and an adjunction. The
+asymmetry of its direction is meaningful: it is the familiar comparison
+from a colimit of limits to a limit of colimits. The source's provisional
+word \emph{exact} means preservation of all the Kan extensions available
+in the chosen domain. This is stronger than the finite exactness used in
+modern treatments of stable derivators. The distinction is needed before
+reading the subsequent appeal to triangulated categories.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p25}{The empty shape and finite products}
+The simplest test for a claim about preservation of all homotopy colimits
+is the empty diagram. If $i:Y\hookrightarrow X$ is a proper closed
+inclusion of index categories, then in the represented derivator of sets
+$i_*$ extends a presheaf by the terminal set outside $Y$. Thus
+$(i_*\varnothing_Y)_x=\{*\}$ for $x\notin Y$, whereas
+$(\varnothing_X)_x=\varnothing$. A right adjoint can preserve every limit
+and still fail this first colimit test.
+
+The finite-product proposition uses a different feature of derivators:
+discrete coherent diagrams carry no hidden coherence. For a finite set
+$S$, Der~1 identifies
+\[
+ \mathbb D(I\times S)\simeq\prod_{s\in S}\mathbb D(I).
+\]
+Restriction along $\pi:I\times S\to I$ becomes the diagonal. Its right
+adjoint $\pi_*$ is therefore the ordinary product in the category
+$\mathbb D(I)$: for $(F_s)$ and $E$ the adjunction reads
+\[
+ \operatorname{Hom}(E,\pi_*(F_s))
+ \cong\prod_{s\in S}\operatorname{Hom}(E,F_s).
+\]
+This proves the assertion including $S=\varnothing$, when the right-hand
+set is a singleton. The left-adjoint calculation gives coproducts. A
+morphism preserving the corresponding Kan extensions preserves these
+ordinary products or coproducts because it identifies their representing
+adjunctions. This argument explains exactly why the empty-diagram test is
+available. The phrase ``adjoint \`a gauche'' at the beginning of manuscript
+page~26 is an edition-preserved slip: for products it must be a right
+adjoint, as the same paragraph subsequently says.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p27}{What represented prederivators remember}
+For a category $\mathcal M$, the assignment
+$\mathbb D_{\mathcal M}(I)=\operatorname{Fun}(I^{\circ},\mathcal M)$ is
+always a prederivator. The existence of the limits or colimits demanded by
+the diagram domain is needed before calling it a derivator. Its shift is
+represented by another ordinary category because currying gives
+\[
+ \operatorname{Fun}((I\times J)^{\circ},\mathcal M)
+ \cong\operatorname{Fun}(J^{\circ},
+             \operatorname{Fun}(I^{\circ},\mathcal M)).
+\]
+Both sides carry the same objects, maps and composition laws after
+currying; the identification commutes with restriction in $J$ and hence
+identifies the prederivators, rather than only their separate values.
+
+The fully faithful assertion about categories and represented
+prederivators can also be made explicit. A functor
+$u:\mathcal M\to\mathcal M'$ acts by postcomposition at every shape.
+Conversely, let $\Phi:\mathbb D_{\mathcal M}\to\mathbb D_{\mathcal M'}$
+be a pseudonatural morphism and put $u=\Phi_e$. Its pseudonaturality at
+$i:e\to I$ identifies the $i$-th value of $\Phi_I(F)$ with $u(F_i)$.
+For an arrow $i\to j$, the corresponding natural transformation between
+these point functors makes these identifications commute with the
+presheaf arrow $F_j\to F_i$. They therefore form a natural isomorphism
+$\Phi_I(F)\cong uF$. Naturality in $F$ and in changes of shape follows
+from the coherence conditions for $\Phi$. A modification between two
+such morphisms is determined, by the same evaluation argument, by its
+component at $e$, and every natural transformation $u\Rightarrow v$
+extends by postcomposition. This proves the asserted equivalence of
+hom-categories. With strict morphisms one uses strict naturality instead.
+
+There is a useful qualification to the next assertion. Preservation of
+\emph{all relevant} limits by $u$ implies preservation of right Kan
+extensions because these are calculated pointwise by those limits. The
+converse follows by taking Kan extensions to the point. If the domain
+contains infinite categories, ordinary finite left exactness of $u$ is
+not enough. The same qualification applies dually to colimits. Thus the
+represented example detects a genuine obstruction to the manuscript's
+strong exactness condition; it does not show that homotopical exactness
+has failed to remember an elementary property of $\mathcal M$.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p29}{The pullback obstruction, and the finite stable repair}
+The abelian counterexample can be made numerical. Let the coefficient
+category be abelian groups and choose
+\[
+ F_a=F_0=\mathbb Z,\qquad F_b=0,\qquad
+ \alpha=1_{\mathbb Z},\quad\beta=0.
+\]
+Then $K(F)=\mathbb Z\times_{\mathbb Z}0=0$. Replace the central value
+$F_0$ by zero to obtain $F'$. The map $F\to F'$ is an epimorphism at
+each object of the indexing cospan, but $K(F')=\mathbb Z$, and the
+induced map of missing corners is $0\to\mathbb Z$. Hence the right Kan
+extension fails to preserve epimorphisms and cannot be right exact even
+in the ordinary finite abelian sense. Every group and every map in this
+example is visible in the original three-object shape.
+
+The ensuing ``Perplexit\'e'' points toward stability, with a necessary
+change in the meaning of exactness. A pointed derivator is stable when
+its coherent cartesian and cocartesian squares coincide. Between stable
+derivators a morphism preserving zero objects and cartesian squares
+therefore preserves cocartesian squares as well, and conversely. This
+settles the finite version of the question; see
+\citet[Definition~3.15 and Corollary~4.17]{Groth2013}. Additivity alone
+cannot imply stability. In a represented pointed derivator the pushout
+of $0\leftarrow A\to0$ is always zero, so its suspension functor is
+zero. If that derivator were stable, suspension would be an equivalence,
+forcing every object to be zero.
+
+Even stability does not make arbitrary limits commute with arbitrary
+colimits. Work in the derivator of complexes over a nonzero field $k$,
+and regard vector spaces as complexes in degree zero. On the discrete
+shape $\mathbb N\times\mathbb N$ put
+\[
+ X_{nm}=\begin{cases}k,&n=m,\\0,&n\ne m.\end{cases}
+\]
+Products and coproducts of vector spaces are exact, so here their derived
+values are their ordinary values. The mixed comparison is
+\[
+ \bigoplus_m\prod_nX_{nm}=k^{(\mathbb N)}
+ \longrightarrow
+ \prod_n\bigoplus_mX_{nm}=k^{\mathbb N}.
+\]
+It is the inclusion of finitely supported sequences; the sequence
+$(1,1,1,\ldots)$ is absent from its image. This disproves the unrestricted
+interpretation of the anticipated stable exactness theorem.
+
+The precise positive result is stronger than merely commuting a finite
+product with a finite sum: in a stable derivator homotopy finite limits
+commute with arbitrary homotopy colimits, and dually. A homotopy finite
+category is equivalent to a finite skeletal category with no
+nonidentity endomorphisms; finiteness of the underlying set of arrows
+alone is insufficient. The equivalence of this commutation property
+with stability is proved in
+\citet[Theorem~2.14]{GrothShulman2017}. It identifies the exact boundary
+between the true stable intuition and the stronger interchange asked
+for on these pages.
+\end{dcomment}
+
+\begin{dcomment}{context}{p31}{The base-change map as a mate}
+The requested general adjunction calculation belongs to the calculus of
+mates. Its two-categorical setting was already available in
+\citet{KellyStreet1974}; a derivator-oriented account is
+\citet[Appendix~A]{GrothPontoShulman2014}. Here we spell out the map in
+the manuscript's variance, since reversing a single arrow changes the
+statement.
+
+Suppose $\gamma:fq\Rightarrow pf'$ is given. Contravariance on
+2-cells gives
+$\gamma^*:f'^*p^*\Rightarrow q^*f^*$. Write $\eta'$ for the unit of
+$f'^*\dashv f'_*$ and $\varepsilon$ for the counit of
+$f^*\dashv f_*$. The canonical transformation is the composite
+\[
+\begin{aligned}
+ p^*f_*&\xrightarrow{\eta'\,p^*f_*}
+       f'_*f'^*p^*f_*\\
+ &\xrightarrow{f'_*\gamma^*f_*}f'_*q^*f^*f_*
+   \xrightarrow{f'_*q^*\varepsilon}f'_*q^* .
+\end{aligned}
+\]
+In particular, this construction needs only the adjoints $f_*$ and
+$f'_*$; adjoints to $p^*$ and $q^*$ are convenient for the alternative
+calculation, but are not part of its minimal input.
+
+The equality of the two calculations is an equality of natural
+transformations. Under the adjunction bijection
+\[
+ \operatorname{Nat}(p^*f_*,f'_*q^*)
+ \cong\operatorname{Nat}(f'^*p^*f_*,q^*)
+\]
+the displayed composite is sent to
+$q^*\varepsilon\circ(\gamma^*f_*)$, by the triangular identity for
+$f'^*\dashv f'_*$. In the alternative construction, transpose first
+across $p^*\dashv p_*$; replace $(pf')_*$ and $(fq)_*$ by the
+composites of right adjoints; then transpose back across
+$f'^*\dashv f'_*$. Naturality of the units moves them past
+$\gamma^*$, and the unit--counit pair for $q^*\dashv q_*$ cancels by
+its triangular identity. The resulting transformation is exactly
+$q^*\varepsilon\circ(\gamma^*f_*)$. Since the adjunction bijection is
+injective, the original two transformations agree.
+
+A strictly commuting square supplies $\gamma=1$, but does not supply
+invertibility of its mate. The role of Der~4 is to assert invertibility
+for the particular comma squares that compute fibres. More general
+base-change theorems will require conditions on the square. The words
+``adjoints \`a gauche'' on this page are another source slip: the
+functors bearing a subscript $*$ in this calculation are right adjoints.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p32}{The cancelled axiom and the walking arrow}
+The cancellation is mathematically necessary and should remain visible.
+Let $Y=[1]=(0\to1)$ and let $f:e\to Y$ select $0$. Each slice $f/y$
+has one object and one arrow, so $f$ satisfies the stated strict
+hot-equivalence condition. In the represented derivator of abelian
+groups a coefficient on $Y$ is a map $F_1\to F_0$. The restriction
+$f^*$ remembers $F_0$, and its right adjoint sends $A$ to the constant
+map $A\xrightarrow{1}A$. Consequently the unit is
+\[
+ (F_1\longrightarrow F_0)\longrightarrow
+ (F_0\xrightarrow{1}F_0),
+\]
+whose component at $1$ is the original structure map. With
+$F_1=0$ and $F_0=\mathbb Z$ it is not invertible. Contractibility of
+the slice controls a constant coefficient system on that slice; it
+does not turn the restriction of an arbitrary $F$ into such a system.
+
+The failure can also be read directly as failure of full faithfulness.
+The distinct endomorphisms of the diagram
+$\mathbb Z\to0$ obtained from the identity and zero on $\mathbb Z$
+have the same restriction to the object $0$. Thus $f^*$ is not faithful.
+The dual example, using the final endpoint and left Kan extension,
+disproves the dual part of the cancelled axiom.
+
+There is a valid constant-coefficient conclusion. If
+$F=p_Y^*M$, the pointwise right Kan formula gives
+\[
+ (f_*f^*p_Y^*M)_y
+ \simeq\Gamma_{\mathbb D}(f/y,p_{f/y}^*M).
+\]
+Under the valid contractibility theorem the right-hand side is $M$, and
+the isomorphism is precisely the component of the unit. Der~2 then
+shows that the unit on $p_Y^*M$ is an isomorphism. This is the repair
+anticipated in footnote~10. Full faithfulness of restriction on all
+coherent diagrams is a stronger condition, usually called a
+homotopical epimorphism. It must not be substituted for either
+orientation of cofinality without an additional argument.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p41}{Restarting the axioms without changing variance}
+The return to definitions is a revision of the theory, not an additional
+list to be imposed on top of the cancelled axioms. We keep
+$\mathbb D(I)$ for contravariant coherent diagrams. In fully explicit
+modern notation its source is $\Dia^{\mathrm{coop}}$, with both
+1-cells and 2-cells reversed. Equivalently one can work with the
+covariant-diagram convention by setting
+$\mathbb D_{\mathrm{cov}}(A)=\mathbb D(A^{\circ})$. This translation
+explains why modern formulas often use the opposite comma category;
+compare \citet[Warning~2.2]{GrothPontoShulman2014}.
+
+The diagram domain is part of the hypotheses. The operations used below
+require products, coproducts, opposites, and the relevant comma
+categories. The stated finite-limit and complement closures do not
+explicitly include all these operations. Taking all small categories
+in a fixed universe makes the present formulas unambiguous; when using
+a smaller domain, one must require the corresponding closure conditions
+before writing the dual prederivator or the pointwise Kan formulas.
+No assertion about a shape outside the domain follows formally from an
+axiom restricted to that domain.
+
+For a relative category $(\mathcal M,\Sigma)$ the diagram localization
+exists as a prederivator once the chosen universes allow the required
+localizations. Saturating the weak equivalences does not by itself
+prove the derivator axioms. On the other hand, the shift identity does
+not demand a new homotopical theorem. The exponential law identifies
+$\mathcal M^{(I\times J)^{\circ}}$ with
+$(\mathcal M^{I^{\circ}})^{J^{\circ}}$, and identifies the two
+classes of pointwise weak equivalences before localization. Localizing
+therefore gives the claimed equivalence of shifted prederivators.
+Functoriality in relative functors and in natural transformations is
+descended through the same universal property. This is a useful place
+to separate what follows from localization alone from the homotopy Kan
+extension properties that require additional assumptions.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p43}{What the localization axioms do and do not say}
+Der~1 decomposes coefficients over disconnected indexing categories.
+By induction on the number of summands, its binary and empty cases give
+the displayed assertion for every finite family. It survives a shift
+because $I\times(J\amalg K)$ is canonically
+$(I\times J)\amalg(I\times K)$ and $I\times\varnothing=\varnothing$.
+It survives duality because taking opposites commutes with products of
+categories and with the corresponding indexing coproducts.
+
+Der~2 is a detection statement for morphisms already present in
+$\mathbb D(I)$. If such a morphism becomes invertible at every object
+of $I$, it was invertible. This gives neither a lifting of every
+incoherent diagram nor a lifting of every map between incoherent
+diagrams. The later strongness axiom addresses a different issue and
+must not be read into this one. To check Der~2 after shifting by $J$,
+apply it first to the $J$-valued fibres and then to the pairs of
+objects of $I\times J$. The converse direction follows because every
+functor preserves isomorphisms. Duality preserves the same criterion.
+
+The next axiom names $f_*F$ relative cohomology. Its transitivity is an
+adjunction calculation: both $g_*f_*$ and $(gf)_*$ are right adjoint
+to $f^*g^*=(gf)^*$. This gives a specified canonical comparison,
+compatible with further composition. The existence of finite products
+again follows by applying this axiom to finite discrete projections.
+A right adjoint $f_*$ preserves them automatically. Preservation by
+restriction $f^*$ in a one-sided derivator uses the independent-variable
+base-change assertion discussed at manuscript page~23; the final
+pointwise axiom supplies the missing justification. The corresponding
+homological statements follow by duality.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p45}{Extension by an empty fibre}
+The proposed additional axiom $\mathrm{Der}\,4_0$ is a consequence of
+the pointwise Kan formula. This is a useful calculation because it
+distinguishes the special behaviour of an immersion from the false
+full-faithfulness statement for arbitrary cofinal functors.
+
+In the manuscript's convention a closed full inclusion
+$i:Y\hookrightarrow X$ is a cosieve: an arrow whose source lies in
+$Y$ has target in $Y$. For $y\in Y$, the comma category
+$(i/i(y))$ has terminal object $(y,1)$. Since the diagram is
+contravariant, its cohomology is the value at that terminal object.
+Thus $(i_*E)_{i(y)}\cong E_y$, and these are the components of the
+counit $i^*i_*E\to E$. Der~2 makes the counit invertible, proving
+full faithfulness of $i_*$.
+
+For $x\notin Y$, the comma category $(i/x)$ is empty: an arrow
+$i(y)\to x$ would contradict the cosieve condition. Hence
+$(i_*E)_x$ is terminal, the right Kan extension over an empty category.
+Conversely let $F\in\mathbb D(X)$ have terminal fibres on the
+complement. In the unit $F\to i_*i^*F$, the components on $Y$ are
+isomorphisms by the preceding calculation, and the components off $Y$
+are maps between terminal objects. Der~2 makes the whole unit
+invertible, so $F$ belongs to the essential image. This proves both
+assertions of $\mathrm{Der}\,4_0(g)$.
+
+For an open inclusion $j:U\hookrightarrow X$, which is a sieve, the
+left Kan formula uses $(x/j)$. Outside $U$ this is empty, and inside
+$U$ its initial object becomes terminal after taking the opposite
+indexing category for the colimit. Therefore $j_!$ is fully faithful
+and extends by initial objects. This proves the dual assertion.
+The calculation is recorded in modern covariant notation in
+\citet[Proposition~1.23]{Groth2013}. Only the empty and pointwise
+Kan formulas are doing work here; no separate extension-by-zero axiom
+is needed. Pointedness later identifies the terminal and initial
+extensions with extension by the same zero object.
+\end{dcomment}
+
+\begin{dcomment}{status}{p47}{Cofinality retains an orientation}
+The valid cohomological cofinality condition is contractibility of
+$(x/\alpha)$, whose objects are arrows $x\to\alpha(x')$.
+For contravariant coefficients it preserves the homotopy limit.
+Contractibility of $(\alpha/x)$ is the opposite condition and
+preserves the homotopy colimit. These conditions become equivalent for
+a map to the point, but not for a general map. The cofinality theorem
+is part of the established derivator calculus; in covariant notation
+see \citet[Corollary~3.13 and Remark~3.14]{GrothPontoShulman2014}.
+The theorem's derivation for all small categories does not remove the
+need to check domain hypotheses in a restricted theory.
+
+The walking-arrow example in the commentary at manuscript page~32
+settles the crossed-out sentence. For the inclusion of $0$ in
+$Y=[1]$, every $(\alpha/y)$ is a point, but
+$\Gamma(Y,F)=F_1$ while $\Gamma(e,\alpha^*F)=F_0$.
+The comparison is the given structure map $F_1\to F_0$, which may be
+$0\to\mathbb Z$. Homotopy invariance with arbitrary varying
+coefficients cannot ignore its direction.
+
+The proposed condition involving the terminal object of $\mathsf{HOT}$
+can be calculated completely. In the homotopy theory of presheaves of
+spaces, the pointwise left Kan formula yields
+\[
+ (\alpha_!\varepsilon_{X'})_x
+ \simeq\operatorname*{hocolim}_{(x/\alpha)^{\circ}}*
+ \simeq B(x/\alpha).
+\]
+For the second identification, the simplicial replacement of the
+constant point has one simplex for each composable string of arrows
+in the indexing category; its realization is the nerve realization.
+Passing to the opposite category reverses these strings and gives the
+same homotopy type. The counit in the remark has component the
+augmentation $B(x/\alpha)\to *$. Der~2 therefore identifies its
+invertibility with weak contractibility of every $(x/\alpha)$.
+Thus this condition is a reformulation of the valid cohomological
+cofinality hypothesis, not a substantial strengthening of it.
+
+It also refutes the assertion that either orientation suffices. For
+the same initial-endpoint inclusion, $(1/\alpha)$ is empty, so the
+component of $\alpha_!\varepsilon$ at $1$ is the empty space and its
+map to the point is not a weak equivalence. The opposite-endpoint
+inclusion supplies the dual discrepancy. The remark's prediction
+that the condition is not self-dual is correct, while its claimed
+implication from both cofinality conditions is false.
+
+The constant-coefficient corollary has no such problem. If
+$p:X\to e$ and $NX$ is weakly contractible, the valid cohomological
+cofinality theorem applied to $M$ gives
+$M\cong p_*p^*M$. This is exactly the unit, rather than an
+unspecified isomorphism. What fails in the following cancelled
+corollary is the replacement of a genuinely varying restriction of
+$F$ by a constant coefficient system on a contractible slice.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p48}{Locating the failed inference in the surviving proof}
+Most of the surviving proof is correct. The category $Y/y_0$ has
+terminal object $(y_0,1)$, and cohomology of a contravariant diagram
+therefore evaluates to $F_{y_0}$. The inclusion of that terminal
+object is cohomologically cofinal: its comma category over an object
+is the one-element set consisting of the unique map to the terminal
+object. More generally, for $z\in Z$ the comma category
+$(x/\{z\})$ is the discrete set $Z(x,z)$. Its nerve is contractible
+exactly when that set has one element. Hence the singleton inclusion
+is cohomologically cofinal precisely when $z$ is terminal; the dual
+assertion characterizes initial objects.
+
+The displayed slice identification is also exact. An object of
+$(X/y_0)/(y_1,u)$ consists of $x\in X$, a map
+$v:f(x)\to y_0$, and a map $w:f(x)\to y_1$ with $uw=v$.
+Forgetting $v$, which is determined by $w$, identifies this category
+with $X/y_1$, on morphisms as well as objects. This proves the
+\emph{homological} cofinality of $X/y_0\to Y/y_0$ under the stated
+hypothesis. It does not prove cohomological cofinality. The final
+sentence invokes exactly the opposite-orientation clause that was
+crossed out on manuscript page~47. No additional fault in the slice
+calculation is needed to account for the failure. The author and
+editors explicitly mark the false premise; a modern repair retains
+the calculation and changes the coefficient hypothesis or the
+cofinality hypothesis, as in the preceding commentary.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p49}{The factorization category controls base change}
+The base-change criterion is a statement about the square, including its specified natural transformation. It does not assert that every cartesian square is exact, and it does not require the square to be cartesian. To see what it tests, fix $y'\in Y'$, put $y=p(y')$, and write
+\[
+ h_{y'}:X'/y'\longrightarrow X/y,
+ \qquad (x',v:f'(x')\to y')\longmapsto
+ (q(x'),p(v)\gamma_{x'}).
+\]
+The pointwise formula for right Kan extension identifies the value of the Beck--Chevalley map at $y'$ with restriction of cohomology along $h_{y'}$. Since the coefficients are contravariant, the appropriate cofinality test uses arrows \emph{from} an object of $X/y$ \emph{to} the image of $h_{y'}$. This is precisely the orientation retained in footnote~19. The discarded orientation is the mistake already isolated in the commentary at manuscript p.~32, ``The cancelled axiom and the walking arrow.''
+
+For clarity, the category attached to $x\in X$ and $\alpha:f(x)\to p(y')$ has objects
+\[
+ (x',u:x\to q(x'),v:f'(x')\to y'),
+ \qquad p(v)\gamma_{x'}f(u)=\alpha.
+\]
+A morphism to $(x'',u',v')$ is an arrow $t:x'\to x''$ such that $q(t)u=u'$ and $v'f'(t)=v$. Thus this is the comma category $(x,\alpha)\backslash h_{y'}$, with all compatibility conditions retained. Weak contractibility of every such category implies that restriction along $h_{y'}$ preserves homotopy limits of the contravariant diagrams in question. Applying this at every $y'$, and then using \textbf{Der 2}, proves the criterion. The words ``dans $Y'$'' before the displayed square are a slip in the edition: the square is in $Y$.
+
+The resulting invariant is now called a \emph{homotopy exact square}. In modern covariant notation its factorization categories are those of \citet[Definition~3.7 and Theorem~3.8]{GrothPontoShulman2014}; passage to opposite indexing categories recovers exactly the arrows above. Their Theorem~3.16 also gives the converse when exactness is required for every derivator. The useful content of this later formulation is that the elementary categories of factorizations, rather than any particular presentation by model categories, determine the universal base-change property.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p50}{Fully faithful direct image and extension by a terminal object}
+There are two separate assertions behind the next localization calculation. First, a fully faithful inclusion retains all coefficients on its image. If $f:X\to Y$ is fully faithful, the map
+\[
+ X/x\longrightarrow X/f(x),\qquad
+ (x',a:x'\to x)\longmapsto(x',f(a)),
+\]
+is an isomorphism of categories. The right member here is the comma category formed with $f$. Fullness and faithfulness give, respectively, existence and uniqueness of the inverse on objects and arrows. Since $X/x$ has terminal object $(x,1_x)$, the pointwise formula gives
+\[
+ (f^*f_*F)_x\simeq\Gamma_{\mathbb D}(X/x,F)\simeq F_x.
+\]
+The map so obtained is the counit, not merely an unspecified isomorphism between its source and target. Conservativity therefore proves that $f_*$ is fully faithful.
+
+Second, for a cosieve $i:Y\hookrightarrow X$, right extension in the presheaf convention fills the complementary sieve $U$ with terminal objects. If $u\in U$, there can be no arrow from an object of $Y$ to $u$, so $Y/u$ is empty. The pointwise formula consequently makes $(i_*F)_u$ terminal. Conversely, let $E\in\mathbb D(X)$ be terminal on $U$. On $Y$, the unit $E\to i_*i^*E$ is invertible by the first assertion. On $U$, it is a map between terminal objects and is again invertible. The two parts cover all objects of $X$, so \textbf{Der 2} finishes the proof. This argument uses no zero object. In a pointed theory the terminal values happen also to be initial, which explains the later terminology ``extension by zero.''
+
+These computations also explain why the argument survives the loss of ordinary diagrammatic information. We do not recover an arbitrary coherent diagram from a list of its values. We construct a specific morphism, the unit or counit, and show that this morphism is invertible at every object. That is exactly what conservativity permits. The corresponding modern statement is \citet[Proposition~1.23]{Groth2013}, with sieve and cosieve interchanged when changing the variance convention.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p52}{Properness as a condition on all lifts}
+The geometric terminology begins with a computational requirement. A right direct image over $y$ is initially computed on the comma category $X/y$. To compute it on the strict fibre $X_y$ instead, the inclusion $X_y\to X/y$ must be cofinal in the orientation appropriate to contravariant coefficients. Properness asserts this simultaneously for every $y$.
+
+There is a concrete way to express the requirement without derived functors. For $x\in X$ and $\alpha:f(x)\to y$, let $L_f(x,\alpha)$ be the category whose objects are arrows
+\[
+ v:x\longrightarrow x_1,\qquad f(v)=\alpha,
+\]
+and whose morphisms from $v$ to $v'$ are arrows $t:x_1\to x_1'$ with $tv=v'$ and $f(t)=1_y$. This is a category of lifts of one fixed base arrow, with a fixed source upstairs. There is a canonical isomorphism
+\[
+ L_f(x,\alpha)\cong (x,\alpha)\backslash X_y.
+\]
+Indeed, a morphism $(x,\alpha)\to(x_1,1_y)$ in $X/y$ is exactly such a lift $v$, and a morphism between two of them is exactly the triangle defining $t$. Thus $f$ is proper precisely when every $L_f(x,\alpha)$ has weakly contractible nerve. In particular, a lift must exist, all choices must be connected, and their higher homotopy must vanish. Mere existence of lifts is insufficient.
+
+For smoothness one fixes the \emph{target} upstairs instead. Given $x\in X$ and $\beta:y\to f(x)$, the incoming lift category consists of $v:x_0\to x$ over $\beta$ and triangles over $1_y$. Smoothness says that these categories are weakly contractible. The first display on manuscript p.~54 should consequently have target $y\backslash X$, not $y\backslash Y$; the latter is what the edition actually prints. The error is typographical, since the succeeding characterization by fibres of $X/x\to Y/f(x)$ has the correct meaning. In the modern literature this elementary equivalence is stated in \citet[Definition~3.2.1 and Proposition~3.2.3]{Maltsiniotis2020}; \citet[Theorem~1.2]{Maltsiniotis2005Asphericite} gives its formulation by base change.
+
+The stability under strict pullback can now be proved without any cohomology. In a pullback $X'=X\times_Y Y'$, choose $x'=(x,y')$ and an arrow $\alpha':y'\to z'$ in $Y'$. A lift of $\alpha'$ out of $x'$ is exactly a lift of $p(\alpha')$ out of $x$, its second component already being prescribed. The same correspondence identifies every morphism between lifts. The lift categories are therefore isomorphic. Reversing all arrows proves the smooth case.
+
+Several small consequences deserve to be read literally. A cosieve inclusion is proper because every allowed outgoing arrow has one lift; a sieve inclusion is smooth by the dual argument. If $f$ is proper, nonemptiness of $L_f(x,\alpha)$ shows that every arrow out of an object of its image is itself in the image. Thus the strict image is a full cosieve. Finally, $X\to e$ is both proper and smooth: the lift categories are $x\backslash X$ and $X/x$, which have initial and terminal objects. Product projections inherit both properties by strict pullback.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p54}{Why an equivalence can fail properness}
+Let $J$ be the groupoid with two objects $0,1$ and exactly one morphism between each ordered pair, and let $i:e\to J$ select $0$. The functor $i$ is fully faithful and essentially surjective, hence an equivalence. Nevertheless, for the unique isomorphism $\alpha:0\to1$, the outgoing lift category $L_i(*,\alpha)$ is empty. There is no object of the strict domain lying over $1$. The incoming lift category for the inverse isomorphism is empty for the same reason, so $i$ is neither proper nor smooth.
+
+This failure is visible directly in base change. Pull $i$ back along $j:e\to J$ selecting $1$. The strict pullback is empty. For an ordinary set $M$, or a space $M$, the right Kan extension $i_*M$ has value $M$ at $1$: the comma category $e/1$ has a single object. The right direct image from the empty pullback is terminal. Hence the comparison at $1$ is
+\[
+ M\longrightarrow *,
+\]
+which fails to be invertible, for example when $M$ is a discrete two-point space. This example verifies the caution in footnote~23 and shows exactly where the strictness matters. Replacing the strict pullback by an equivalence-invariant pullback would change the problem under discussion.
+
+For an equivalence $f:X\to Y$, the preceding argument gives a more precise criterion: $f$ is proper if and only if it is surjective on objects, and the same criterion characterizes smoothness. Necessity follows because every object of $Y$ is isomorphic to one in the image and properness supplies a lift of that isomorphism. For sufficiency, fix $\alpha:f(x)\to y$ and choose $x_1$ with $f(x_1)=y$. Full faithfulness gives a unique lift $x\to x_1$ of $\alpha$. Any two lift objects have a unique morphism between them over $1_y$, again by full faithfulness. Their lift category is therefore nonempty and equivalent to a point. The incoming version is identical. This is the criterion recorded in \citet[Remark~3.2.5]{Maltsiniotis2020}.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p55}{Contractible fibres and the missing steps in composition}
+The assertion about contractible fibres does not need a separate theorem detecting weak equivalences by abelian and nonabelian cohomology. Suppose first that $f$ is proper and every $X_y$ is weakly contractible. By definition $X_y\to X/y$ is coaspherical, hence a weak equivalence on nerves by Quillen's Theorem~A. Therefore every $X/y$ is weakly contractible. A second application of Theorem~A, now to $f$, proves that $Nf$ is a weak equivalence. Opposite categories give the smooth case. This is a completion of the proof sketched here, using \citet[\S1, Theorem~A]{Quillen1973}, rather than a correction of the theorem.
+
+The same argument proves the stronger assertion on manuscript p.~56. Base change along $Y/y\to Y$ and $y\backslash Y\to Y$ preserves properness or smoothness and preserves the contractibility of strict fibres. Each base has contractible nerve, since it has a terminal or an initial object. The total categories are $X/y$ and $y\backslash X$, respectively, and the fibre theorem makes each of them contractible. Thus $f$ is both aspherical and coaspherical.
+
+Here is also a full proof of the composition assertion. Let $f:X\to Y$ and $g:Y\to Z$ be proper, fix $x\in X$, and fix $\alpha:gf(x)\to z$. There is a functor
+\[
+ L_{gf}(x,\alpha)\longrightarrow L_g(f(x),\alpha),
+ \qquad (v:x\to x_1)\longmapsto f(v).
+\]
+The undercategory functor $x\backslash X\to f(x)\backslash Y$ is proper: after fixing an object $v:x\to x_1$, its outgoing lift categories identify with the corresponding outgoing lift categories of $f$ at $x_1$. Its strict fibres are contractible by the definition of properness of $f$. The displayed functor is its strict pullback along $L_g(f(x),\alpha)\to f(x)\backslash Y$. It is consequently proper with contractible fibres, so the preceding theorem makes it a weak equivalence. Its target is contractible because $g$ is proper. Its source is therefore contractible, and this is the required condition for $gf$. Duality proves composition for smooth functors. The argument is the elementary mechanism behind \citet[Propositions~3.2.6 and~3.2.10]{Maltsiniotis2020}.
+
+There is no cancellation theorem with the other two positions in a composite. The functors $[1]\to e$ and $e\to e$ are proper, but their factor $e\to[1]$ selecting $0$ is not: the arrow $0\to1$ has no lift. The statement about sections in the text has precisely this content. It should not be read as a defect of the proof of composition.
+\end{dcomment}
+
+\begin{dcomment}{status}{p58}{The converse, and why spaces suffice}
+The conjectural converse is proved in the subsequent theory. Its exact scope is universal base change: for a fixed $f:X\to Y$, one considers every strict pullback square and every coefficient in the indicated derivator. The class of homotopy exact squares is already detected by the derivator of spaces; \citet[Theorem~3.16]{GrothPontoShulman2014} equate this test with exactness for all derivators and with weak contractibility of the factorization categories. Thus the proposed pair $\mathsf{HOTAB}$ and $\mathsf{HOT}$ can be reduced to $\mathsf{HOT}$ alone. The proper/smooth theory is developed systematically by \citet[\S3.2]{Maltsiniotis2020}. We spell out the small tests that detect the two converse assertions, because they explain why the conjecture has the stated strength.
+
+Fix $y\in Y$ and form the fibre square, with $j:X_y\to X$ and $s:X_y\to e$. In the derivator of spaces its right comparison
+\[
+ y^*f_*\longrightarrow s_*j^*
+\]
+is invertible if and only if its left-adjoint mate
+\[
+ j_!s^*\longrightarrow f^*y_!
+\]
+is invertible. This is taking the adjoint of a transformation between right adjoints, so invertibility is preserved in both directions. Apply the left mate to the terminal space $*$. At $x\in X$ its target is the discrete space $\operatorname{Hom}_Y(f(x),y)$, because $y_!*$ is the representable presheaf $\operatorname{Hom}_Y(-,y)$. Its source is
+\[
+ (j_!*)_x\simeq
+ \coprod_{\alpha:f(x)\to y}|N L_f(x,\alpha)|.
+\]
+Indeed, the left pointwise formula is the homotopy colimit of the point over $x\backslash X_y$ (with the opposite convention making no difference to its realization), and this category is the disjoint union of the lift categories indexed by $\alpha$. The mate collapses each summand to its indexing point. It is an equivalence precisely when every summand is weakly contractible. This proves properness from universal right base change, and even shows that the fibre squares alone suffice for this converse.
+
+For the smooth converse, fix $p:Y'\to Y$ and assume that base change along $p$ commutes with every right direct image in the derivator of spaces. Choose $f:e\to Y$ selecting any $y_0$, and evaluate at $y'\in Y'$. For every space $M$, the comparison becomes
+\[
+ \operatorname{Map}(S,M)\longrightarrow
+ \operatorname{Map}(|N(Y'_{y_0}/y')|,M),
+ \qquad S=\operatorname{Hom}_Y(y_0,p(y')),
+\]
+where $S$ is discrete. The map underlying this comparison sends an arrow $z\to y'$ with $p(z)=y_0$ to its image in $Y$. If the displayed map is an equivalence for every $M$, Yoneda in the homotopy category of spaces says that this underlying map to $S$ is an equivalence. Its fibre over $\beta:y_0\to p(y')$ is the nerve of the incoming lift category at $y'$. All these categories are therefore weakly contractible, which is smoothness.
+
+The converse statements thus require no conjectural detection principle left over from these pages. There is, however, a notational qualification in the printed paragraph: a comparison involving $f_*$ requires right Kan extensions, which the manuscript calls a derivator ``\`a gauche.'' The subsequent sentence concerning $f_!$ requires left Kan extensions. Where the edition switches these adjectives, the adjunctions identify the intended assertion without ambiguity. Passing to the left-adjoint mate also explains condition~(b) on manuscript p.~59: for a pullback square, properness of the right vertical functor controls
+\[
+ q_!f'^*\longrightarrow f^*p_!,
+\]
+just as it controls $p^*f_*\to f'_*q^*$. These are two adjoint forms of one exactness statement.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p59}{Independent changes of the two variables}
+The product square illustrates exactness that does not arise from properness of either original functor. Its proof is worth expanding because it also checks the correction in brackets on manuscript p.~60. Fix
+\[
+ x_0=(i_0,j'_0),\quad y'_0=(i'_0,j_0),\quad
+ \alpha=(u'_0:f(i_0)\to i'_0,\ v'_0:j'_0\to g(j_0)).
+\]
+An object of the factorization category is specified by $i\in I$, $j\in J$ and arrows
+\[
+ a:i_0\to i,\quad r:f(i)\to i'_0,\quad
+ b:j'_0\to g(j),\quad s:j\to j_0
+\]
+with $r f(a)=u'_0$ and $g(s)b=v'_0$. The first equation and the second are independent. The same separation holds for morphisms, giving the isomorphism
+\[
+ K\cong
+ (i_0,u'_0)\backslash(I/i'_0)
+ \ \times\ 
+ (j'_0\backslash J)/(j_0,v'_0).
+\]
+The first factor has initial object $((i_0,u'_0),1)$; the second has terminal object $((j_0,v'_0),1)$. Their nerves are therefore contractible, as is the product. This proves the desired base-change isomorphism. The product need not itself have an initial object, which is why the second part of the edition's bracketed correction is necessary as well as the corrected formula.
+
+The result says that a homotopy Kan extension in one variable can be performed while retaining the other variable as a parameter. Restriction in that other variable commutes with the extension. It is one reason that shifted derivators $\mathbb D^J(I)=\mathbb D(I\times J)$ provide an efficient language for parametrized constructions. It does not say that an arbitrary homotopy limit commutes with an arbitrary homotopy colimit. The latter exchange is the stronger question raised earlier in the chapter and requires additional hypotheses.
+\end{dcomment}
+
+\begin{dcomment}{development}{p60}{A cone construction exposing the homotopy obstruction}
+The lifting criterion allows an entire space of obstructions to be placed into a functor over the walking arrow. The criterion itself is established mathematics. We did not find the following explicit organization, including its universal ordinary base-change test, in the passages checked in \citet[\S1 and \S4]{Maltsiniotis2005Asphericite} and \citet[\S3]{GrothPontoShulman2014}. We record the construction and its proof as a development of the present discussion, without a claim of priority.
+
+\textbf{Proposition (the cone test).}\ours
+All categories are small relative to the fixed indexing universe, and completeness below refers to its small limits. Let $K$ be a small category and let $X=K^{\triangleleft}$ be obtained by freely adjoining an initial object $o$. Define
+\[
+ f:X\longrightarrow[1],\qquad f(o)=0,\quad f(k)=1\quad(k\in K).
+\]
+Then $f$ is smooth and a weak equivalence on nerves. It is proper if and only if $NK$ is weakly contractible. If $K$ is nonempty and connected, every strict base-change square for $f$ satisfies right Beck--Chevalley for ordinary diagrams in every complete category. If in addition $NK$ is not weakly contractible, the fibre square at $1$ fails right Beck--Chevalley for the derivator of spaces.
+
+\emph{Proof.} For an incoming arrow into $o$, the only relevant base arrow is $1_0$, and its lift category is a point. For a target $k\in K$ and base arrow $0\to1$, the unique lift is $o\to k$, so again the lift category is a point. For base arrow $1_1$, the incoming lift category is $K/k$, with terminal object $1_k$. This proves smoothness. Both $X$ and $[1]$ have initial objects; their nerves are contractible, and every functor between them is a weak equivalence on nerves.
+
+The outgoing lift categories are equally explicit. At $o$ over $1_0$ the lift category is a point; at $k\in K$ over $1_1$ it is $k\backslash K$, with initial object $1_k$. The remaining lift category, at $o$ over $0\to1$, is exactly $K$. Thus properness is equivalent to weak contractibility of $NK$.
+
+For the assertion about ordinary base change, let $p:Y'\to[1]$ be arbitrary and let $X'=X\times_{[1]}Y'$. Fix $y'\in Y'$ and consider
+\[
+ h:X'/y'\longrightarrow X/p(y').
+\]
+If $p(y')=0$, its target is the one-object category consisting of $o$, and its source is $Y'/y'$, since every arrow into $y'$ must lie over $1_0$. The source has a terminal object. If $p(y')=1$, identify $X/1$ with $X$. For $k\in K$ there is an isomorphism
+\[
+ k\backslash h\cong(k\backslash K)\times(Y'_1/y'),
+\]
+where $Y'_1$ is the full subcategory of objects sent to $1$. Both factors are nonempty and connected: the first has an initial object, the second a terminal object. For the remaining object $o$, the comma category $o\backslash h$ is $X'/y'$ itself. It contains the full subcategory $K\times\{y'\}$, which is connected. Every object $(a,z\to y')$ maps to this subcategory: if $a\in K$, use $(a,y')$; if $a=o$, choose any $k\in K$ and use $o\to k$. Hence $o\backslash h$ is nonempty and connected as well.
+
+For completeness, this connectedness criterion preserves ordinary limits of contravariant diagrams for the following direct reason. Given a cone with vertex $T$ over $Fh$, define its component at $a$ by choosing $(b,a\to h(b))$ in $a\backslash h$ and composing $T\to F(h(b))\to F(a)$. Morphisms in the comma category give equal composites, and connectedness makes the choice irrelevant. Applying this to an arrow $a\to a'$ proves compatibility of the constructed components. It is the unique cone over $F$ inducing the given cone. Thus restriction induces a bijection on cones with every vertex $T$, proving the limit comparison isomorphism and consequently ordinary right base change.
+
+Finally take $p:e\to[1]$ to select $1$. For a constant space coefficient $M$, the comparison is
+\[
+ M\simeq\operatorname{Map}(|NX|,M)
+ \longrightarrow\operatorname{Map}(|NK|,M).
+\]
+If this were an equivalence for every $M$, the map $|NK|\to *$ would be an isomorphism in the homotopy category by Yoneda, contradicting the hypothesis. This proves the last assertion.\hfill$\square$
+
+A finite example makes the failure explicit. Take $K$ to have four objects $a_0,a_1,b_0,b_1$, with the four nonidentity arrows $a_i\to b_j$ and no others. Its nerve has four vertices, four edges, and no nondegenerate higher simplices; its realization is a circle. The category $X$ has five objects. All the ordinary base-change comparisons in the proposition are invertible. In the derivator of spaces, take $M=S^1$. The comparison for the fibre at $1$ is
+\[
+ S^1\longrightarrow\operatorname{Map}(S^1,S^1),
+\]
+sending a point to the constant map. The source has one connected component, whereas the target has components indexed by the integer degree. The map lands in degree zero and is not surjective on components. Here the distinction between connected lift categories and contractible lift categories accounts for the entire obstruction.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p61}{Equivalence measured by constant coefficients}
+The definition of $\mathbb D$-equivalence deliberately retains less information than an equivalence $\mathbb D(Y)\simeq\mathbb D(X)$. It compares only the full subcategories formed by constant coefficients, while retaining every morphism between them in the coherent diagram categories. Such morphisms can contain cohomological information not visible in the values of the constant diagrams themselves.
+
+Write $p:X\to e$ and $q:Y\to e$, with $p=qf$. If the required right adjoints exist, adjunction gives
+\[
+ \operatorname{Hom}_{\mathbb D(Y)}(q^*M,q^*N)
+ \cong\operatorname{Hom}_{\mathbb D(e)}(M,q_*q^*N).
+\]
+The analogous formula for $X$ identifies the restriction map with the map represented by $q_*q^*N\to p_*p^*N$. It is bijective for every $M$ exactly when this representing map is invertible. This is ordinary Yoneda in $\mathbb D(e)$; it does not require an enrichment. With left adjoints one instead writes
+\[
+ \operatorname{Hom}_{\mathbb D(Y)}(q^*M,q^*N)
+ \cong\operatorname{Hom}_{\mathbb D(e)}(q_!q^*M,N)
+\]
+and uses contravariant Yoneda while varying $N$. This proves both characterizations on manuscript p.~62, including the weaker existence hypothesis that only the representing objects for constant coefficients are needed.
+
+The elementary formal properties also hold already for prederivators. A natural transformation $f\Rightarrow g$ induces the identity on the restrictions of constant coefficients, because its composite with $Y\to e$ is the identity transformation. The maps on their Hom sets therefore agree; a zigzag of transformations has the same consequence. For composable functors, the maps on these sets compose. Two-out-of-three for bijections proves two-out-of-three for $\mathbb D$-equivalences. Taking the terminal category as target then gives the characterization of $\mathbb D$-contractibility by full faithfulness of the constant-diagram functor.
+
+For $\mathbb D=\mathsf{HOT}$ the representing objects have familiar meanings:
+\[
+ H^*_{\mathsf{HOT}}(X,M)\simeq
+ \operatorname{Map}(|NX|,M),
+ \qquad
+ H_*^{\mathsf{HOT}}(X,M)\simeq |NX|\times M.
+\]
+The first expression is the derived \emph{mapping space}, considered as an object of the homotopy category. It is not the ordinary Hom set of that category: taking only its connected components would lose higher information. This is the intended reading of the printed $\operatorname{Hom}_{\mathcal A}$ in the example. The second formula follows because the homotopy colimit of a constant space is its tensor with the classifying space of the indexing category. These two constructions are adjoint: products with $|NX|$ are left adjoint to mapping spaces out of $|NX|$. Setting $M=*$ in the homological formula proves that a $\mathsf{HOT}$-equivalence is precisely a weak equivalence of nerves; the converse follows by taking products with arbitrary $M$. The coefficient-sensitive definition thus recovers the ordinary homotopy type for this particular derivator, without asserting that every coefficient theory detects the same class of functors.
+\end{dcomment}
+
+\begin{dcomment}{examples}{p62}{How much constant coefficients can detect}
+The definition of $\DD$-equivalence invites a small calculation which makes the dependence on the coefficient theory completely explicit. This calculation concerns represented \emph{prederivators}; no existence of Kan extensions is required. We use $\pi_0I$ for the set of equivalence classes of objects under zigzags of arrows, equivalently the connected components of $NI$.
+
+\textbf{Proposition (coefficient sensitivity of a represented theory).}
+Let $A$ be a locally small category and let $\DD_A(I)=\operatorname{Fun}(I^{\mathrm{op}},A)$. For a functor $f:X\to Y$, precisely the following alternatives occur.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If some set $\operatorname{Hom}_A(M,N)$ contains two different elements, then $f$ is a $\DD_A$-equivalence if and only if $\pi_0f:\pi_0X\to\pi_0Y$ is a bijection.
+\item If every hom-set has at most one element and at least one hom-set is empty, then $f$ is a $\DD_A$-equivalence if and only if $X$ is empty exactly when $Y$ is empty.
+\item If $A$ is empty, or if every hom-set of the nonempty category $A$ is a singleton, then every functor is a $\DD_A$-equivalence. In the latter case $A$ is equivalent to the terminal category.
+\end{enumerate}
+
+\emph{Proof.} A natural transformation between constant $A$-valued diagrams with values $M$ and $N$ consists of arrows $a_i:M\to N$. Naturality along any arrow of $I$ says that the two corresponding arrows $a_i$ are equal. Thus, canonically,
+\[
+\operatorname{Hom}_{\DD_A(I)}(M_I,N_I)
+ \cong \operatorname{Hom}_A(M,N)^{\pi_0I}.
+\]
+Restriction along $f$ is precomposition with $u=\pi_0f$. If $u$ is a bijection, all these restriction maps are bijections. Conversely, suppose a hom-set $H$ contains distinct elements $a,b$. If $u$ is not surjective, choose a component of $Y$ outside its image. The constant $a$-valued function on $\pi_0Y$ and the function which takes value $b$ only at that component have the same restriction. If $u$ is not injective, choose different components $x_1,x_2$ with the same image. The function on $\pi_0X$ taking value $b$ at $x_2$ and $a$ elsewhere cannot be a restriction. Hence bijectivity on $H$-valued functions forces $u$ to be a bijection, proving~(i).
+
+For~(ii), every hom-set is either a singleton or the empty set. Singleton-valued functions never impose a condition. For an empty hom-set, its power by a set $S$ is a singleton when $S$ is empty and is empty otherwise. Therefore the induced map is bijective exactly when $\pi_0X$ and $\pi_0Y$ have the same emptiness status. The hypothesis that an empty hom-set exists makes this condition necessary. For~(iii), there are either no pairs $(M,N)$ to test, or each tested set of transformations is a singleton. Finally, if all hom-sets in a nonempty $A$ are singletons, the unique arrows between any two objects are inverse, since the only endomorphism is the identity. This proves the stated equivalence with the terminal category.\hfill$\square$
+
+For $A=\mathsf{Set}$, or $A=\mathsf{Ab}$, alternative~(i) applies. For the two-element ordered category $0<1$, alternative~(ii) applies: all functors between nonempty indexing categories are equivalences for this coefficient test. More strikingly, if $G$ is a nontrivial group, the functor $BG\to e$ is a $\DD_A$-equivalence for \emph{every} represented prederivator. Both categories have one connected component, so the displayed formula proves the assertion without assumptions on $A$. To see directly why spaces distinguish it, write $B=|N(BG)|$ and take the constant coefficients $M=*$ and $N=B$. The tested map identifies with
+\[
+ [*,B]\longrightarrow[B,B].
+\]
+Its image consists of the homotopy class of constant maps. The identity of $B$ is not in this image: it induces the identity on the nontrivial fundamental group $G$, whereas a constant map induces the trivial homomorphism. The identification follows from the constant-coefficient homotopy-limit formula $\operatorname{holim}_{(BG)^{\mathrm{op}}} B\simeq\operatorname{Map}(B,B)$ explained in the preceding source discussion. Thus this functor is not a $\mathsf{HOT}$-equivalence, and constant coefficients in an ordinary functor category and constant coefficients in the localized theory of spaces have quite different detecting power.
+
+The hom-set calculation is the elementary naturality condition for constant functors; compare \citet[\S\S1.4 and~1.7]{Riehl2016}. The connected-component test in the first case is standard. We have written out the thin and empty cases as well, so that no nondegeneracy assumption on the coefficient category is hidden. This is an elementary worked consequence of naturality, not an additional axiom on a derivator.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p64}{Local isomorphisms and local constancy}
+A local isomorphism in this text is a discrete fibration of categories. Indeed, the requirement that $Z/z\to Y/g(z)$ be an isomorphism says that every arrow $y_0\to g(z)$ has exactly one lift with target $z$. Conversely, unique lifts give the required inverse on slice categories, including their morphisms. A category of elements of a presheaf has this property: lifting an arrow into an element means taking its restriction. The projection $Y/y\to Y$ is the representable case.
+
+This description supplies a small omitted step in the implication (c)$\Rightarrow$(a). The text mentions stability under open immersions, while (a) quantifies over all local isomorphisms. If $g:Y'\to Y$ is a discrete fibration and $X'=X\times_Y Y'$, then for every $y'\in Y'$ there is a canonical isomorphism
+\[
+ X'/y'\cong X/g(y').
+\]
+To recover the left-hand object from $(x,\alpha:f(x)\to g(y'))$, lift $\alpha$ uniquely with target $y'$. Its source $y'_0$ satisfies $g(y'_0)=f(x)$ and gives the required pair $(x,y'_0)$. Unique lifting also identifies all arrows. Hence condition (c) is stable under every base change in (a), not merely the sieve inclusions mentioned in the proof. The remainder of the argument is complete: the unit on a constant coefficient, evaluated at $y$, is
+\[
+ M\longrightarrow\Gamma_{\mathbb D}(X/y,M),
+\]
+which is invertible by $\mathbb D$-contractibility, and \textbf{Der 2} makes the unit invertible globally.
+
+The locally constant strengthening in footnote~25 has a similarly short proof. Let $F\in\mathbb D(Y)$ have invertible structure maps. On $Y/y$, the natural transformation from the projection to the constant functor at $y$ induces, in the presheaf convention, a morphism from the constant coefficient with value $F_y$ to the restriction of $F$. Every component is invertible. By \textbf{Der 2} this is an isomorphism of coherent coefficients. Its pullback to $X/y$ is therefore constant as well, so the preceding argument applies. Conversely, a statement for every locally constant coefficient includes every constant coefficient. This proves the equivalence claimed in the footnote, rather than requiring local constancy to be an additional axiom.
+
+In Proposition~$2'$ the displayed condition (c) must read $y\backslash X$, as duality and condition (b) require. The edition prints $y\backslash Y$. Read literally, that condition holds automatically because $y\backslash Y$ has an initial object, and cannot characterize $f$. For example, $\emptyset\to e$ fails to be an equivalence for the derivator represented by sets although the printed (c) holds. The following sentence about the contractibility of $y\backslash Y$ is correct: that is the \emph{base} category used to pass between (b) and the repaired (c).
+
+The closure assertions on manuscript p.~65 now have transparent proofs. Pullback preserves discrete fibrations. After a local base change over $Z$, a composite of strict $\mathbb D$-equivalences remains a composite of $\mathbb D$-equivalences. The same argument and two-out-of-three prove cancellation when $f$ and $gf$ are strict. For a categorical equivalence $f$, the pullback along a discrete fibration is again an equivalence: full faithfulness follows by uniquely lifting the arrow upstairs through $f$, and essential surjectivity follows by lifting an isomorphism with prescribed target through the discrete fibration. Any prederivator preserves categorical equivalences. The assertion about equivalences therefore needs no stronger hypothesis at this point.
+\end{dcomment}
+
+\begin{dcomment}{exposition}{p66}{Cofinality and the final Yoneda argument}
+The final proposition explains why coasphericity controls arbitrary coefficients although $\mathbb D$-equivalence was defined using constant ones. Its proof varies the \emph{target} coefficient while keeping the source constant. That change in the Yoneda argument is what strengthens the conclusion.
+
+There is one existence qualification. A derivator ``\`a droite'' in the terminology of these pages supplies $f_!$, not the absolute right Kan extensions used to define $H^*_{\mathbb D}$. The cohomological statement consequently also requires the existence of $p_*$ and $q_*$, where $p:X\to e$ and $q:Y\to e$. Without them the Hom-set formulation in the proof remains meaningful and gives the correct one-sided statement. We prove that formulation first.
+
+Suppose left Kan extensions and their pointwise formulas exist. For $M\in\mathbb D(e)$, abbreviate $p^*M$ and $q^*M$ to $M_X$ and $M_Y$. Adjunction identifies the map
+\[
+ \operatorname{Hom}_{\mathbb D(Y)}(M_Y,F)
+ \longrightarrow
+ \operatorname{Hom}_{\mathbb D(X)}(M_X,f^*F)
+\]
+with precomposition by the counit
+\[
+ \varepsilon_M:f_!M_X\longrightarrow M_Y.
+\]
+For fixed $M$, this is a bijection for every $F$ if and only if $\varepsilon_M$ is invertible, by Yoneda in $\mathbb D(Y)$. By conservativity and the left pointwise formula, that happens for every $M$ if and only if
+\[
+ H_*^{\mathbb D}(y\backslash X,M)\longrightarrow M
+\]
+is invertible for every $y$ and $M$. By the definition and characterization of $\mathbb D$-contractibility, this is precisely the requirement that every $y\backslash X$ be $\mathbb D$-contractible. Thus the forward implication and the converse in the Hom-set statement are both proved using only the left Kan extensions.
+
+Now assume in addition that $p_*$ and $q_*$ exist. Adjunction identifies the same Hom comparison with
+\[
+ \operatorname{Hom}_{\mathbb D(e)}(M,q_*F)
+ \longrightarrow
+ \operatorname{Hom}_{\mathbb D(e)}(M,p_*f^*F).
+\]
+Varying $M$ and applying Yoneda once more makes its bijectivity equivalent to invertibility of $q_*F\to p_*f^*F$. This proves the cohomological statement exactly as intended, with its existence hypothesis made explicit. No additional repair of the algebraic proof is needed. In modern terminology this is the cofinality criterion for the relevant homotopy limits, with the comma orientation dictated throughout by the presheaf convention.
+\end{dcomment}

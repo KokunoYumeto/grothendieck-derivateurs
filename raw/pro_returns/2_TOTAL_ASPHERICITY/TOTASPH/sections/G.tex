@@ -1,0 +1,98 @@
+\subsection{The exact path category and its endpoint functor}
+
+\begin{definition}[Known: the path category used in Chapter VII]\label{G:definition}
+Let $Y$ be a small category and $y_0$ an object of $Y$. A type $\tau$ is a finite word in the signs $+$ and $-$. Its interval $I_\tau$ has objects $0,\ldots,n$, where $n$ is the length of $\tau$, and is the free category on the oriented line whose $i$th edge has the indicated sign. A morphism of types is an endpoint-preserving functor $\varphi:I_\tau\to I_\rho$ whose object function is nondecreasing in the numerical ordering of the vertices. This numerical ordering is distinct from the ordering defined by the arrows of the interval.
+
+An object of $P(Y,y_0)=\operatorname{Ch}(Y;y_0,-)$ is a pair $(\tau,c)$ with $c:I_\tau\to Y$ and $c(0)=y_0$. A morphism
+\[
+ (\tau,c)\longrightarrow(\rho,d)
+\]
+is a pair $(\varphi,\eta)$ consisting of such a type morphism and a natural transformation $\eta:c\Rightarrow d\varphi$ whose component at $0$ is $\mathrm{id}_{y_0}$. The composite of $(\varphi,\eta)$ and $(\psi,\theta)$ is $(\psi\varphi,(\theta\varphi)\eta)$. The endpoint functor
+\[
+ q:P(Y,y_0)\longrightarrow Y
+\]
+sends $(\tau,c)$ to $c(n)$ and $(\varphi,\eta)$ to $\eta_n$. The category $\operatorname{Ch}(Y;a,b)$ has fixed source $a$, fixed endpoint $b$, and requires the natural-transformation components at both endpoints to be identities.
+\end{definition}
+
+These are the corrected definitions of Chapter VII, ms.~25--31, with the increasing interval morphisms used in \S\S5--7 \citep{GrothendieckDerivateursVII}. The initially printed use of all interval functors is explicitly corrected there. In particular, all the interval collapses and endpoint inclusions below are permitted morphisms in the actual category, rather than replacements in a homotopy category.
+
+\begin{proposition}[Proved: components of fixed-end path categories]\label{G:components}
+For any small category $Y$ and objects $a,b$, evaluation of an edge word in the groupoid completion $\Pi(Y)=Y[\operatorname{Mor}(Y)^{-1}]$ induces a bijection
+\[
+ \pi_0\operatorname{Ch}(Y;a,b)
+ \ \xrightarrow{\ \cong\ }\ \operatorname{Hom}_{\Pi(Y)}(a,b).
+\]
+The bijection is compatible with concatenation. It is the component-level assertion proved in Chapter VII, \S7, ms.~59--78; we give the verification needed here.
+\end{proposition}
+
+\begin{proof}
+For a path $c$, multiply its direct edges and the formal inverses of its retrograde edges, in their traversal order. If $\eta:c\Rightarrow d\varphi$ is a path morphism with fixed endpoints, the commutative squares expressing naturality telescope after all arrows have been inverted. The endpoint components are identities, so $c$ and $d\varphi$ have the same value. The functor $\varphi$ preserves the endpoints and the numerical ordering; each edge in its source is sent either to an identity or to a string of consecutive equally directed edges. Thus $d\varphi$ and $d$ have the same value as well. This proves that evaluation is constant on components.
+
+Every arrow in the groupoid completion is represented by a finite word of arrows and inverse arrows, so evaluation is surjective. For injectivity, recall the explicit presentation of the groupoid completion: words are identified by insertion or removal of identity arrows, composition or subdivision of adjacent equally directed arrows, and cancellation of an arrow next to its inverse. Each of these relations is realized by a zigzag in the fixed-end path category. Identity insertion is the pullback along an interval collapse. Composition of two direct arrows is the pullback along the increasing map from the one-edge direct interval to the two-edge direct interval that selects the endpoints; the analogous map works for two retrograde arrows. For $u:a\to b$, the two-edge path $a\xrightarrow{u}b\xleftarrow{u}a$ receives a natural transformation from the constant path at $a$ of the same type, with components $(\mathrm{id}_a,u,\mathrm{id}_a)$. The latter constant path maps to the length-zero path by the collapse to the point. For $b\xleftarrow{u}a\xrightarrow{u}b$, the natural transformation has the opposite direction, to the constant path at $b$, with components $(\mathrm{id}_b,u,\mathrm{id}_b)$. Concatenating any of these diagrams with fixed paths on either side preserves its endpoints and defines a diagram in $\operatorname{Ch}(Y;a,b)$. Thus every defining relation of the groupoid completion preserves components, proving injectivity and compatibility with concatenation.
+\end{proof}
+
+\begin{proposition}[Proved: ordinary finality of the endpoint functor]\label{G:finality}
+If $BY$ is connected and simply connected, then $q:P(Y,y_0)\to Y$ is ordinary final. More precisely, every object of $y\backslash P(Y,y_0)$ is joined by a single arrow to an object of the fixed-end fibre $\operatorname{Ch}(Y;y_0,y)$, and that fibre is nonempty and connected.
+\end{proposition}
+
+\begin{proof}
+The groupoid completion $\Pi(Y)$ is the fundamental groupoid of $BY$ on the vertices of the nerve. This can be read directly from the CW structure of $NY$: its edges are arrows of $Y$, its two-simplices impose the composition relations, and higher simplices do not affect the fundamental groupoid. Hence the hypothesis and Proposition~\ref{G:components} make $\operatorname{Ch}(Y;y_0,y)$ nonempty and connected for every $y$.
+
+An arbitrary object of $y\backslash P(Y,y_0)$ consists of a path $c:I_\tau\to Y$ ending at $z$, together with an arrow $\alpha:y\to z$. Append this arrow in the retrograde direction, obtaining a path
+\[
+ c_\alpha:I_{\tau-}\longrightarrow Y,
+ \qquad y_0\leadsto z\xleftarrow{\alpha}y.
+\]
+Let $\varphi:I_{\tau-}\to I_\tau$ be the identity on the original interval and collapse the last edge onto its terminal vertex. It is nondecreasing and endpoint preserving. There is a natural transformation $c_\alpha\Rightarrow c\varphi$ whose original components are identities and whose new final component is $\alpha$. Naturality on the appended retrograde edge is precisely $\alpha=\alpha$. This defines a path morphism $c_\alpha\to c$ with endpoint $\alpha$, and therefore an arrow
+\[
+ (c_\alpha,\mathrm{id}_y)\longrightarrow(c,\alpha)
+ \quad\text{in }y\backslash P(Y,y_0).
+\]
+The fixed-end fibre maps into this comma category by $d\mapsto(d,\mathrm{id}_y)$. Its nonemptiness and connectedness, and the displayed arrow for every other object, prove the required nonemptiness and connectedness of the comma category. We have not used a comparison of strict fibres with homotopy fibres, or an assertion of perfectness.
+\end{proof}
+
+\begin{proposition}[Proved: a contraction for an initial origin]\label{G:contraction}
+If $y_0$ is initial in $Y$, then the identity endofunctor of $P(Y,y_0)$ is joined to a constant functor by a two-step zigzag of natural transformations. In particular $BP(Y,y_0)$ is contractible.
+\end{proposition}
+
+\begin{proof}
+Define $R:P(Y,y_0)\to P(Y,y_0)$ by replacing each path by the constant path at $y_0$ of the same type, and retaining its interval map on morphisms. The unique arrows $y_0\to c(i)$ give a natural transformation $R\Rightarrow\mathrm{Id}_{P(Y,y_0)}$. Their component at the origin is the identity. Initiality makes every square required for naturality commute, including squares involving a change of type. The interval collapse $I_\tau\to I_{\varnothing}$ gives another natural transformation $R\Rightarrow\mathrm{const}_{(\varnothing,y_0)}$. Realizing the nerve of these natural transformations contracts the identity map to a constant map.
+\end{proof}
+
+\begin{theorem}[Refuted: row XIIba-C005]\label{G:counterexample}
+There is a finite weakly contractible category $Y$ with a specified object $y_0$ for which $P(Y,y_0)$ is not totally $W_\infty$-aspherical. The same example is not totally $W_R$-aspherical for any nonzero commutative coefficient ring $R$, and is not totally $W_n$-aspherical for any integer $n\geq2$.
+\end{theorem}
+
+\begin{proof}
+Let $Y=\Psi$ have objects $z,a,b$, identities, and the two nonidentity arrows $r:z\to a$ and $s:z\to b$. Take $y_0=z$. Since $z$ is initial, $BY$ is contractible, and Proposition~\ref{G:contraction} also proves that $BP(Y,z)$ is contractible. Construct a finite category $C$ by adjoining an object $x$ and arrows $\alpha,\beta:x\rightrightarrows z$, with the relations
+\[
+ r\alpha=r\beta=:\gamma:x\longrightarrow a,
+ \qquad s\alpha=s\beta=: \delta:x\longrightarrow b.
+\]
+There are no additional nonidentity arrows. Composition consists of these four displayed composites and composition with identities; hence the specification gives the whole category.
+
+The full inclusion $j:Y\hookrightarrow C$ is ordinary final. For $c\in Y$, $c\backslash Y$ has the initial object $(c,\mathrm{id}_c)$. For $c=x$, the comma category has four objects $(z,\alpha),(z,\beta),(a,\gamma),(b,\delta)$ and precisely four nonidentity arrows, one from each of the first two objects to each of the last two. It is nonempty and connected. Its nerve is a four-edge circle, so it is deliberately not homotopy final.
+
+Let $K$ be the full subcategory of $C$ on $x,z$. Its nerve is the graph with two parallel edges, so $BK\cong S^1$. The full subcategories $C_a$ on $x,z,a$ and $C_b$ on $x,z,b$ are respectively obtained from $K$ by adjoining a terminal object. Their nerves are the two cones on $NK$. Every nondegenerate simplex of $NC$ belongs to one of these cones, and their intersection is $NK$. Consequently
+\[
+ BC\cong\Sigma BK\cong S^2.
+\]
+By Proposition~\ref{G:finality}, $q:P(Y,z)\to Y$ is ordinary final. Ordinary final functors compose, so $jq:P(Y,z)\to C$ is ordinary final. In the presheaf variance fixed in this paper, this says
+\[
+ (jq)_!1_{P(Y,z)}=1_C,
+ \qquad C/(jq)_!1_{P(Y,z)}\cong C.
+\]
+The specified outgoing functor $jq$ therefore violates the defining test of total $W_\infty$-asphericity, since $BC\cong S^2$. It also violates total $W_R$-asphericity because $H_2(BC;R)=R\ne0$, and total $W_n$-asphericity for $n\geq2$ because $\pi_2(BC)=\mathbb Z$.
+
+The finite input categories, all their compositions, the comma-category connectedness, and the integral homology of $NC$ are checked in \texttt{code/ag\_finite\_examples.py}; its complete output is included. The path category itself is countably infinite, and the proof of finality above applies to paths of arbitrary finite length, not a bounded truncation.
+\end{proof}
+
+\begin{proposition}[Proved: a direct failure of filteredness]\label{G:notfiltered}
+For the same $Y=\Psi$ and $y_0=z$, the category $P(Y,z)$ is not filtered.
+\end{proposition}
+
+\begin{proof}
+The one-edge paths $r:z\to a$ and $s:z\to b$ are objects of $P(Y,z)$. If they admitted a common successor $d$ in that category, applying the endpoint functor would give arrows $a\to q(d)$ and $b\to q(d)$ in $Y$. No object of $Y$ receives arrows from both $a$ and $b$. This is already a failure of the common-successor axiom, independently of any conjectured characterization of total asphericity.
+\end{proof}
+
+The conclusion answers the manuscript's sentence ``J'en doute fort!'' at XII ms.~103 in the negative. It uses the exact path category of VII, not an equivalent contractible replacement. The earlier companion left C005 unresolved because Proposition~10 itself detects only noncontractibility of $Y$. The additional outgoing final functor $Y\to C$ detects the failure when $BY$ is contractible.

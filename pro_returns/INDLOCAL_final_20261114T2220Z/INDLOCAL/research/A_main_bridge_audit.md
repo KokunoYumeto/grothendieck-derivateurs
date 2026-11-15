@@ -1,0 +1,75 @@
+# Main countable-target bridge: audit and exact remaining step
+
+Author: Part A collaborator. Updated 2026-11-14 22:16 UTC.
+
+This note concerns the remaining fixed-target case W=S² with a countable quotient bound. The unrestricted dimension-preservation assertion has already been refuted in A.20. The results below do not settle the remaining interval ℵ₀≤μ<2^{ℵ₀}.
+
+## 1. Independent audit of A.30
+
+I checked the construction in `sections/A_metric_diagonal.tex` independently, including its actual CW model. The proof passes.
+
+Write `[b,u]=b u b⁻¹ u⁻¹` and `T_b(u,v)=v[b,u]v⁻¹`. For a positive definite conjugation-invariant subadditive symmetric length ℓ on a nonabelian simple group E, the set
+
+    S_b={T_b(u,v):u,v∈E}
+
+contains 1, is invariant under conjugation, and is symmetric by
+
+    [b,u]⁻¹=u[b,u⁻¹]u⁻¹.
+
+For b≠1 it generates E: its generated subgroup is normal and nontrivial, since the center of E is trivial. Every s∈S_b has ℓ(s)≤2ℓ(b).
+
+For a nonconstant finite word R on Eᵐ, its displayed number L of variable occurrences gives a global Lipschitz bound for the maximum product metric. Choose c=R(a) different from the next excluded value e. A nonidentity b with 2Lℓ(b)<d(c,e) exists by nondiscreteness. Since S_bᵐ generates Eᵐ, a finite path from a to a tuple with another R-value has a first changing step u→su. Both R(u)=c and R(su) occur in R(S_bᵐu); the entire latter image lies at distance less than d(c,e) from c. Thus this image is nonconstant and avoids e. Substituting independent pairs into every leaf gives exactly that image, so successive images are nested and retain all earlier exclusions.
+
+The countable binary-tree equations have relative exponent matrix the identity: the parent occurs with exponent one and both children with exponent zero. At finite depth, remove the root generator and its defining relator first, then the generators at each successive depth. At each removal that generator occurs in no other remaining relator. The resulting homotopy equivalence fixes B and the frontier loops and identifies the prefix with B wedged with those loops. Consequently every prefix is aspherical and contains H as a free factor. Compact sphere and disk images prove asphericity and coefficient injection for the actual increasing CW union. Killing H makes every right side equal to 1, so H normally generates the final group. No torsion-freeness or relative one-relator theorem is used in this part.
+
+## 2. What the one-variable equation argument already proves
+
+`A_finite_interpolation.md` proves that, in a nonabelian simple group, exponent-zero one-variable words interpolate arbitrary values at any specified finite set of distinct points. The proof uses the two explicit subgroups of Fᵐ obtained by evaluating constants and conjugates of constants, followed by the checked subdirect-product argument.
+
+Together with unimodular closure, this proves that a nonconstant one-variable word map cannot have finite image. It does not prove that every formally nontrivial word has a nontrivial evaluation: a mixed identity is a constant word map, and a nonconstant singular word map can still have infinite image in a proper centralizer coset. No conversion of either possibility into an unsolvable unimodular equation has been obtained.
+
+## 3. Exact unproved step in the current diagonal route
+
+The metric construction uses uniform control of the entire set S_b, including all conjugates of all commutators [b,u]. A.29 supplies a nondiscrete Hausdorff metrizable group topology, but its quantitative estimate for conjugation depends on the conjugating element. It therefore does not provide the uniform bound needed in the preceding construction.
+
+The attempted extension to a general surviving simple target has not supplied a replacement for this step: after a finite root word has been chosen, no argument is yet available that substitutes zero-exponent words for its leaves while simultaneously keeping its image nonconstant and deleting one prescribed target value. The earlier root-dependent reset construction also still needs a nonconstancy argument for its finite compositions in the remaining target class.
+
+No implication from simple unimodular closure to mixed-identity-freeness, no implication from A.29 to a nondiscrete invariant length, and no residual-countability theorem for arbitrary actual two-dimensional small-homology classifying spaces is asserted.
+
+### 3.1. Subsequent algebraic advance
+
+A.31 now proves a replacement for the small-length step under the exact algebraic requirement that every d≠1 has unbounded conjugacy word length as the nonidentity normal generator b varies. Its proof is in `sections/A_normal_width_diagonal.tex` and has passed independent full audits by C and root. The telescoping factor order is R(su)R(u)⁻¹, so the excluded element is ec⁻¹ when R(u)=c.
+
+Failure of this algebraic requirement is no longer an unspecified norm issue. It yields the finite function N(g)=sup_b ρ_b(g) on every group element. The surviving simple quotients must have this integer-valued invariant norm unbounded globally, because globally bounded N is exactly uniform simplicity. They retain unimodular closure, the Higman image restrictions, a mixed identity and the topologizability conclusion of A.29. The remaining unproved main step is to exclude that combination by an actual two-dimensional block or prove a residual-countability theorem that applies to every actual two-dimensional small-homology resolution. No such exclusion is claimed here.
+
+The integrated A.31 also gives, for every fixed d!=1, the exact comparison
+rho_d(g) <= N(g) <= N(d)rho_d(g). Consequently every fixed conjugacy word
+norm has unbounded diameter in a remaining quotient. The lower bound is
+the definition of the supremum. For the upper bound, replace every signed
+conjugate of d in a shortest rho_d-expression by at most N(d) signed
+conjugates of an arbitrary b!=1 and take the supremum over b.
+
+### 3.2. Final finite-root projection calculation
+
+The full proof in `A_finite_root_projection.md` has passed C's independent
+audit. For any finite word f(x;z_1,...,z_m) of x-exponent +/-1 over a
+nonabelian simple unimodularly closed group, a finite set of possible root
+values forces at least one universal root c satisfying f(c;z)=1 for every
+auxiliary tuple. The explicit exponent-zero interpolation substitution
+otherwise constructs a one-variable unimodular equation without a root.
+
+This does not provide the missing reset construction. A finite width can
+preserve any prescribed finite list of failing evaluations. No argument
+has supplied a width preserving one failing evaluation at every candidate
+root. A universal root once created persists under every subsequent
+substitution by literal composition. No removal of that obstruction, no
+general countable-target block, and no general residual-countability
+theorem has been proved in this last attempt.
+
+## 4. Primary-source verification used to delimit the equation argument
+
+Opened the full primary author PDF of Anton A. Klyachko, Mikhail A. Mikheenko and Alexander Yu. Olshanskii, *Solvability of unimodular equations in groups and Lie algebras*, arXiv:2608.28045v3, 24 October 2026:
+
+- https://borowiecki.dev/pdf/2608.28045 — web reference `turn485view0`.
+
+The finite-group argument in §3 constructs a noninjective unimodular word map using a normal-closure expression. Its passage to a nonsurjective map uses finiteness of the group. That passage has not been imported into the infinite-simple case. The paper's introduction explicitly records finitely generated nonnilpotent unimodularly closed Golod–Shafarevich quotients, so no assertion that all finitely generated unimodularly closed groups are nilpotent has been used.

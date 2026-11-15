@@ -1,0 +1,178 @@
+\subsection{Homology localizers and their exact action criterion}
+
+\begin{proposition}[Proved: the homology localizer]\label{D:homology-localizer}
+For every nonzero commutative ring $R$ with identity, let $W_R$ be the functors whose nerves induce isomorphisms on $H_j(-;R)$ for every $j\geq0$. Then $W_R$ is a fundamental localizer with the precise relative Theorem~A axiom fixed in Part~A.
+\end{proposition}
+\begin{proof}
+Identities, two-out-of-three, and closure under retracts follow from the corresponding properties of isomorphisms of $R$-modules. A category with a terminal object has a contractible nerve and therefore maps to the point by a member of $W_R$.
+
+For the relative axiom, consider functors $u:A\to B$, $v:B\to C$, and $f=vu:A\to C$, and assume that $A/c\to B/c$ belongs to $W_R$ for every $c\in C$. Use the bisimplicial set
+\[
+ S_A(p,q)=\{a_0\to\cdots\to a_q,\quad
+                  f(a_q)\to c_0\to\cdots\to c_p\}.
+\]
+The last $A$-face composes the last arrow of the $A$-chain with the displayed arrow to $c_0$; the first $C$-face composes that displayed arrow with $c_0\to c_1$. The other faces and degeneracies have the evident nerve formulas. These formulas commute and define the indicated bisimplicial set. Define $S_B$ similarly using $v$. The functor $u$ induces a bisimplicial map $S_A\to S_B$ by applying $u$ to the $A$-chain and leaving the $C$-chain unchanged.
+
+For a fixed $A$-chain, the $p$-direction is the nerve of $f(a_q)\backslash C$, which has initial object $\id_{f(a_q)}$. Thus projection onto the $A$-chain induces a homology isomorphism from the total normalized chains of $S_A$ to $C_*(NA;R)$. This follows by taking homology in the $p$-direction: only its degree-zero row remains. The same argument applies to $S_B$ and $B$.
+
+For a fixed $C$-chain, the $q$-direction is the nerve of $A/c_0$. Indeed, its last arrow to $c_0$ determines the arrows from all preceding objects by composition. The analogous direction of $S_B$ is $B/c_0$. The hypothesis therefore makes $S_A\to S_B$ an isomorphism after taking homology in the $q$-direction, hence on the homology of the total complexes. Both spectral sequences are first-quadrant and converge degreewise. The two projections commute with the specified map $Nu$, so $Bu$ induces the resulting homology isomorphism. Hence $u\in W_R$.
+\end{proof}
+
+\begin{theorem}[Proved: total $R$-asphericity]\label{D:R-action}
+A small category $A$ is totally $W_R$-aspherical if and only if it is nonempty and connected and satisfies $\mathcal P_R(A)$ of Definition~\ref{C:action-definition}. In particular
+\[
+ \{A:A\text{ is totally }W_{\mathbb Z}\text{-aspherical}\}
+ =\{A:A\text{ is totally }\Winfty\text{-aspherical}\}.
+\]
+\end{theorem}
+\begin{proof}
+If $A$ is total, its identity functor first gives $R$-acyclicity. Since $R\ne0$, the induced map $R[\pi_0(A)]\to R$ is an isomorphism only when $A$ is nonempty and connected. Apply the collage construction to each component subfunctor of an arbitrary $H:A\to\Set$. The reduced Mayer--Vietoris sequence gives acyclicity of that component, exactly as in Theorem~\ref{C:classification}, with $R$ replacing $\mathbb Z$.
+
+Conversely, for a final functor $f:A\to B$, every $b\backslash A$ is a connected category of elements and is therefore $R$-acyclic. Lemma~\ref{C:homology-A} makes $Bf$ an $R$-homology isomorphism. The constant singleton functor gives $R$-acyclicity of $A$, so $B$ is $R$-acyclic. The comprehensive-factorization characterization proves totality. The last equality was proved in Theorem~\ref{C:classification}; the use of integral coefficients there is essential in detecting nontrivial cyclic groups.
+\end{proof}
+
+\subsection{The exact-colimit condition, including its necessary quantifiers}
+
+\begin{definition}[Proved: affine linearization]\label{D:aff-definition}
+For a small category $A$ and a nonzero commutative ring $R$, define $\operatorname{Aff}_R(A)$ to have the objects of $A$ and the morphisms
+\[
+ \operatorname{Aff}_R(A)(a,b)=
+ \left\{\sum_{f\in A(a,b)}r_ff\in R[A(a,b)]:
+       \text{finite support},\ \sum_fr_f=1_R\right\}.
+\]
+Composition is the bilinear extension of composition in $A$; augmentations multiply, so composition preserves augmentation $1$. Each identity is the original identity with coefficient $1_R$. This is an ordinary small category, generally not an additive category. Its connected components are those of $A$.
+\end{definition}
+
+\begin{theorem}[Proved: the affine exact-colimit criterion]\label{D:affine-exactness}
+For every small category $A$, including the empty category, and every nonzero commutative ring $R$, the following conditions are equivalent:
+\begin{enumerate}
+\item $\colim_A:(R\text{-}\mathrm{Mod})^A\to R\text{-}\mathrm{Mod}$ is exact.
+\item Every connected component of $\operatorname{Aff}_R(A)$ is filtered.
+\end{enumerate}
+In explicit terms, condition (2) requires common successors within each component and an augmentation-one affine equalizer for every pair of parallel \emph{affine} arrows. It is not merely the condition in Lead~2 for one pair of original arrows. For $R=\mathbb Z$ this is the Isbell--Mitchell affine criterion \citep{IsbellMitchell1973Exact,IsbellMitchell1976Fixed}; a related finite-family formulation is verified in \citet[Section~1, unnumbered theorem]{Isbell1968Exact}. We supply the proof rather than relying on an unavailable theorem number from the original AMS papers.
+\end{theorem}
+\begin{proof}
+Every functor $F:A\to R\text{-}\mathrm{Mod}$ extends to a functor $\bar F:\operatorname{Aff}_R(A)\to R\text{-}\mathrm{Mod}$ by
+$\bar F(\sum r_ff)=\sum r_fF(f)$. This is functorial because $R$ is commutative and the maps are $R$-linear. Natural transformations extend in the same way, and pointwise exact sequences remain pointwise exact. A cocone $F\to\underline V$ respects every original arrow if and only if it respects every affine arrow: the latter follows from $\sum r_f=1_R$. Hence the identity on the individual values induces a canonical natural isomorphism
+\[
+ \colim_A F\cong\colim_{\operatorname{Aff}_R(A)}\bar F.
+\]
+Filtered colimits of modules and direct sums of modules are exact. Condition (2), followed by taking the direct sum over components, therefore implies (1).
+
+Assume (1). We may work in one connected component of $A$, since extension by zero shows that its colimit functor is exact. For an object $a$, let $U_a$ be the set of objects receiving an arrow from $a$, and let $R_a\subseteq\underline R$ be the subfunctor taking value $R$ on $U_a$ and zero elsewhere. It is a subfunctor because $U_a$ is a cosieve. Its colimit is $R$, and the inclusion induces the identity map to $\colim_A\underline R=R$: the full subcategory $U_a$ is nonempty and connected, and all its coefficient maps are identities. Exact additive functors preserve finite limits, hence intersections of subobjects. Therefore
+\[
+ \colim_A(R_a\cap R_b)
+ \cong(\colim_A R_a)\cap(\colim_A R_b)=R.
+\]
+Since $R\ne0$, the intersection functor cannot be zero, so $a,b$ have a common successor. Iteration supplies a common successor for any finite family of objects in this component.
+
+Let $\alpha,\beta:p\to q$ be parallel affine arrows and write $\delta=\alpha-\beta\in R[A(p,q)]$, whose augmentation is zero. Let $P=R[A(p,-)]$ and let $I\subseteq P$ be the subfunctor generated, as a module-valued functor, by $\delta\in P(q)$. Thus $I(r)$ consists of finite linear combinations of $c\delta$ with $c:q\to r$. Exactness makes $\colim I\to\colim P=R$ injective. Its image is zero, because $\delta$ has augmentation zero and generates $I$. Hence $\colim I=0$.
+
+We use the explicit direct-sum presentation of a colimit. The element $\delta$ in the summand $I(q)$ is consequently a finite sum
+\[
+ \delta=\sum_{j=1}^N
+   \bigl(I(v_j)x_j-x_j\bigr)
+ \quad\text{in }\bigoplus_{r\in A}I(r),
+\]
+where $v_j:s_j\to t_j$, $x_j\in I(s_j)$, and signs and scalar coefficients have been absorbed into the $x_j$. Choose a common successor $s$ of $q$ and all the $s_j,t_j$, and arrows $d_r:r\to s$ for these finitely many objects. Applying the direct-sum homomorphism whose $r$-component is $I(d_r)$ gives
+\[
+ d_q\delta=\sum_j(d_{t_j}v_j-d_{s_j})x_j.
+\]
+Write $x_j=\sum_l r_{jl}c_{jl}\delta$ with $c_{jl}:q\to s_j$. Then
+\[
+ t=d_q-\sum_{j,l}r_{jl}(d_{t_j}v_j-d_{s_j})c_{jl}
+       \in R[A(q,s)]
+\]
+has augmentation $1_R$ and satisfies $t\delta=0$. Thus $t\alpha=t\beta$ in $\operatorname{Aff}_R(A)$. Combined with common successors, this is filteredness. If $A$ is empty, both conditions are vacuously satisfied: its colimit functor has the zero module as its only value.
+\end{proof}
+
+\begin{corollary}[Proved: exact module colimits imply total homology asphericity]\label{D:exact-R-sufficient}
+If $A$ is nonempty and connected and $\colim_A:(R\text{-}\mathrm{Mod})^A\to R\text{-}\mathrm{Mod}$ is exact, then $A$ is totally $W_R$-aspherical. For $R=\mathbb Z$ the conclusion strengthens to total $\Winfty$-asphericity.
+\end{corollary}
+\begin{proof}
+The direct-sum functor $\Sigma_H$ in Proposition~\ref{C:exact-sufficient} is exact for modules over $R$ as well. It makes the colimit functor on each component of each $\operatorname{El}_A(H)$ exact. Applying it to the bar resolution of the constant $R$-module proves $\mathcal P_R(A)$. Theorem~\ref{D:R-action} applies. The integral strengthening is Theorem~\ref{C:classification}.
+\end{proof}
+
+\begin{example}[Refuted: the literal homology half of Lead 4]\label{D:disconnected-counterexample}
+Let $D$ have two objects $0,1$ and only their identity arrows. Its colimit functor on abelian groups is $(M_0,M_1)\mapsto M_0\oplus M_1$, which is exact. Nevertheless $D$ is not totally $W_{\mathbb Z}$-aspherical: the identity is final and $H_0(BD;\mathbb Z)=\mathbb Z^2\ne\mathbb Z$. The empty category provides another counterexample, with exact zero colimit. Thus the literal equivalence stated in Lead~4 is false; nonemptiness and connectedness cannot be suppressed. The finite category and its composition law are checked in \texttt{cd\_finite\_checks.py}.
+\end{example}
+
+\begin{remark}[Open: the corrected connected converse]\label{D:exact-converse-open}
+The remaining implication is the precise statement
+\[
+ \left.
+ \begin{array}{c}
+ A\text{ small, nonempty, connected},\\
+ A\text{ totally }\Winfty\text{-aspherical}
+ \end{array}\right\}
+ \quad\Longrightarrow\quad
+ \colim_A:\Ab^A\to\Ab\text{ exact}.
+\]
+Equivalently, by Theorems~\ref{C:classification} and \ref{D:affine-exactness}, does $\mathcal P_\infty(A)$ force $\operatorname{Aff}_{\mathbb Z}(A)$ to be filtered? We have not proved this implication or produced a counterexample. This is an unresolved implication of the present work, not an assertion of a currently open problem in the literature. The attempted reduction through the acyclicity of $\mathbb Z[H]$ fails because these diagrams are not generally projective and their acyclicity does not supply acyclicity of arbitrary module diagrams. Lead~2 supplies affine equalizers of original parallel arrows, but exactness requires equalizers of all affine pairs. The proof in Lemma~\ref{C:monoid-lemma} bridges this gap for monoids and, by Theorem~\ref{C:weak-terminal}, for categories with a weakly terminal object. It also holds for $\Delta_{\mathrm{inj}}$ by its explicit affine cones. The first size not covered by the finite-object theorem is the case of countably infinitely many objects with no weakly terminal object; no particular smallest counterexample is claimed.
+
+For general nonzero $R$, the corresponding unproved necessity is $\mathcal P_R(A)$, with $A$ connected and nonempty, implying filteredness of $\operatorname{Aff}_R(A)$. Neither assertion is replaced here by its sufficient direction.
+\end{remark}
+
+\subsection{Groups separate integral and other homology localizers}
+
+\begin{proposition}[Proved: a subgroup criterion for groups]\label{D:group-criterion}
+Let $G$ be a small group, regarded as a one-object category. It is totally $W_R$-aspherical if and only if every subgroup $K\leq G$ is $R$-acyclic. If $G$ is finite, this is equivalent to $|G|\in R^\times$. In particular a nontrivial finite group is totally $W_{\mathbb Q}$-aspherical but is not totally $\Winfty$-aspherical.
+\end{proposition}
+\begin{proof}
+A covariant set-valued functor on $G$ is a left $G$-set. Its connected categories of elements are its transitive action groupoids. Choosing one object in a transitive orbit identifies its automorphism group with the corresponding stabilizer $K$, and its inclusion is an equivalence of categories. Every subgroup is realized by the coset action $G/K$. The first equivalence is therefore exactly Theorem~\ref{D:R-action}.
+
+If $G$ is finite and $|G|$ is invertible, the element $e=|G|^{-1}\sum_{g\in G}g\in R[G]$ splits the augmentation as a homomorphism of right $R[G]$-modules: $eg=e$ and the augmentation of $e$ is $1$. Thus the trivial module $R$ is a direct summand of the free module $R[G]$. Tensoring with it, which computes coinvariants and hence $\colim_G$, is exact. Corollary~\ref{D:exact-R-sufficient} proves totality.
+
+Conversely, if a prime $p$ divides $|G|$, Cauchy's theorem supplies a subgroup $C_p$. The standard periodic resolution of $C_p$ gives
+$H_1(BC_p;R)=R/pR$. Totality forces this group to vanish, so $p$ is a unit in $R$. Every prime factor of $|G|$ is therefore a unit, and so is $|G|$. A nontrivial group has nontrivial fundamental group in its classifying space, which excludes total $\Winfty$-asphericity already for the identity final image. The order-two multiplication table and its periodic integral and rational chain complexes are checked in \texttt{cd\_finite\_checks.py}.
+\end{proof}
+
+\subsection{Truncated homotopy localizers}
+
+\begin{definition}[Proved: truncation convention]\label{D:n-convention}
+For an integer $n\geq0$, $W_n$ denotes functors inducing bijections on connected components and isomorphisms on all based homotopy groups in degrees $1,\ldots,n$, at every basepoint. Thus $W_0$ tests only components. A category is $W_n$-aspherical precisely when its classifying space is nonempty and $n$-connected. These are fundamental localizers: weak saturation and the terminal-object axiom are immediate, and the relative axiom follows by applying $n$-truncation to the two bisimplicial comparisons used in Proposition~\ref{D:homology-localizer}. The functor to $n$-types is left adjoint to inclusion \citep[Proposition~5.5.6.18]{Lurie2009HTT} and consequently preserves homotopy colimits in the category of $n$-types, so an objectwise $W_n$-equivalence induces a $W_n$-equivalence on those comparisons.
+\end{definition}
+
+\begin{lemma}[Proved: final functors and fundamental groups]\label{D:final-pi1}
+An ordinary final functor $f:A\to B$ induces a bijection on components and, on each component with a chosen object $a_0$, an epimorphism
+\[
+ \pi_1(BA,a_0)\longrightarrow\pi_1(BB,f(a_0)).
+\]
+\end{lemma}
+\begin{proof}
+The assertion about components follows by applying finality to the colimit of the constant singleton functor. For each object $b$ in the chosen component, choose an object $(a_b,\beta_b:b\to f(a_b))$ of $b\backslash A$. At $b=f(a_0)$ choose $(a_0,\id)$. For an arrow $h:b\to c$, the two objects $(a_b,\beta_b)$ and $(a_c,\beta_ch)$ of $b\backslash A$ are joined by a zigzag because that comma category is connected. Its projection is a path from $a_b$ to $a_c$ in the groupoid completion of $A$, and its image under $f$ is the path obtained from $h$ by conjugating its endpoints with $\beta_b$ and $\beta_c$. Concatenating these paths along any based edge loop of $NB$ gives a based edge loop of $NA$ with the same image in $\pi_1(BB)$. The nerve's triangular relations are respected because each comma-category equality is an equality of composites in $B$. This proves surjectivity.
+\end{proof}
+
+\begin{theorem}[Proved: the cases $W_0$ and $W_1$]\label{D:zero-one}
+A small category is totally $W_0$-aspherical if and only if it is nonempty and connected. It is totally $W_1$-aspherical if and only if its classifying space is nonempty and simply connected.
+\end{theorem}
+\begin{proof}
+The identity final functor proves necessity in both cases. Lemma~\ref{D:final-pi1} proves sufficiency: a bijection on components preserves the unique component, and an epimorphic image of the trivial fundamental group is trivial.
+\end{proof}
+
+\begin{theorem}[Proved: the cases $W_n$, $n\geq2$]\label{D:truncated-classification}
+For $n\geq2$, a small category $A$ is totally $W_n$-aspherical if and only if $BA$ is $n$-connected and every connected component of every $\operatorname{El}_A(H)$, for covariant $H:A\to\Set$, is $(n-1)$-connected.
+\end{theorem}
+\begin{proof}
+Assume totality. The identity final image makes $BA$ $n$-connected. For a connected component of an element category, the collage gives, by reduced Mayer--Vietoris and $n$-connectedness of both $BA$ and its final image, vanishing of integral reduced homology in degrees $0,\ldots,n-1$. This truncated homological condition is inherited by categories of elements, by the explicit construction in Lemma~\ref{C:inherit-elements}. In particular it holds for every connected cyclic-subgroup covering of any such component. Since $n-1\geq1$, the argument in Lemma~\ref{C:cyclic-covers} proves that the component is simply connected. The Hurewicz theorem now makes it $(n-1)$-connected.
+
+Conversely, if $f:A\to B$ is final, its comma categories are $(n-1)$-connected by the stated action condition. Lemma~\ref{C:homology-A}, with $d=n$, makes $H_j(Bf;\mathbb Z)$ an isomorphism for $j<n$ and an epimorphism for $j=n$. Thus $BB$ has zero reduced homology through degree $n$. It is connected and simply connected by Lemma~\ref{D:final-pi1}. Applying Hurewicz in the first possible nonzero degree shows that $BB$ is $n$-connected. This is the required totality.
+\end{proof}
+
+\begin{corollary}[Proved: truncated totality with a weakly terminal object]\label{D:truncated-finite}
+For every $n\geq2$, a small category with a weakly terminal object is totally $W_n$-aspherical if and only if it is filtered. The same equivalence holds for every category with finitely many objects, including the empty category by separate inspection. It fails for $n=1$: the contractible nonfiltered right-zero monoid of Part~B is totally $W_1$-aspherical.
+\end{corollary}
+\begin{proof}
+For $n\geq2$, Theorem~\ref{D:truncated-classification} makes every connected category of elements simply connected, so its first integral homology is zero. The proof of common successors in Lemma~\ref{C:directed-affine} needs only connectedness and vanishing first homology of $BA$ and of the doubled category of elements, not full contractibility. Proposition~\ref{B:lead2} therefore gives the same affine equalizers as before. The entire proof of Theorem~\ref{C:weak-terminal} now applies unchanged to these specified inputs. Filteredness implies total $\Winfty$-asphericity and therefore total $W_n$-asphericity. The final assertion follows from Theorem~\ref{D:zero-one} and the explicit example in Part~B.
+\end{proof}
+
+\begin{proposition}[Proved: dependence on the localizer and on the category]\label{D:general-localizer}
+If $W\subseteq V$ are fundamental localizers, every totally $W$-aspherical category is totally $V$-aspherical. In particular every totally $\Winfty$-aspherical category is totally $W$-aspherical for every fundamental localizer satisfying exactly the axioms fixed in Part~A. Total $\Winfty$-asphericity is not invariant under a weak homotopy equivalence of categories.
+\end{proposition}
+\begin{proof}
+Every tested category of elements whose map to the point lies in $W$ also has that map in $V$. The special case follows from the minimality theorem $\Winfty\subseteq W$ cited with its exact hypotheses in Part~A. For the last assertion, the nonfiltered three-element right-zero monoid of Part~B has contractible classifying space but is not total, whereas the point is filtered and total. The specified functor from that monoid to the point is a weak homotopy equivalence. This also places the same obstruction recorded by the companion at XII ms.~120: totality depends on ordinary final images and on set-valued actions, not only on the classifying-space homotopy type.
+\end{proof}
+
+\begin{remark}[Proved: the zero coefficient ring]\label{D:zero-ring}
+If the zero ring is allowed, every homology group with its coefficients is zero, so $W_R$ is the class of all functors and every small category, including the empty category, is totally $W_R$-aspherical. Its module category is the zero category, and every colimit functor is exact. The nonzero hypothesis in the preceding affine and connectedness criteria is therefore necessary. The ring-theoretic statements above have been stated for commutative unital rings; no unannounced extension of their affine-linearization proof to noncommutative coefficients is being used.
+\end{remark}
