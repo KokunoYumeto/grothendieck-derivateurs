@@ -219,7 +219,7 @@ completeness; the editors' writing is taken out of it as out of the French (`en/
 ## Raw research outputs
 
 [`raw/`](raw/README.md) holds raw research outputs, not edited for publication: the answers of GPT-6 Astra (ChatGPT
-Pro mode) to eight research prompts on open questions of the manuscript, their reviews by Claude Fable 5.2 (effort not recorded), the prompts
+Pro mode) to eight research prompts on open questions of the manuscript, their reviews by Claude Fable 5.2 (Anthropic; the reviews of 10–11 Nov 2026 at effort high or medium, those from 12 Nov at effort max), the prompts
 with everything they attached, and [how this was done](raw/METHODOLOGY.md).
 
 Readers (French and English, each diplomatic, corrected with apparatus, and plain reading text) and the companion with
@@ -268,21 +268,21 @@ into the next round of work, with credit to you.
   Montpellier II et Paris VII), <https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html>, in the
   versions listed above. The deciphering of the manuscript and its edition are theirs. Their notes, prefaces,
   afterword, table of contents and page furniture are their own writing and are not reproduced here.
-- **Transcription:** AI-transcribed (Claude Opus 5.5 (effort not recorded), Anthropic).
+- **Transcription:** AI-transcribed by Claude Opus 5.5 at effort high (Anthropic, Message Batches API).
 - **Companion:** commentary AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode), checked and integrated by Claude
   Opus 5.5 (Anthropic). The register of claims and the corrections are produced the same way.
 - **Commentary from reviewed answers:** eight commentary blocks in parts II-a, III-V and XIIb-a, seven paragraphs of
   other blocks there, nineteen rows of the register of claims (II-a, III-V, VII-c, VIII-X, XIIb-a) and three
-  bibliography entries are AI-produced by Claude Fable 5.2 (Anthropic, effort not recorded), from answers of GPT-6 Astra (OpenAI, ChatGPT
+  bibliography entries are AI-produced by Claude Fable 5.2 (Anthropic; the reviews of 10–11 Nov 2026 at effort high or medium, those from 12 Nov at effort max), from answers of GPT-6 Astra (OpenAI, ChatGPT
   Pro mode) that it reviewed; each of these rows names the answer and the reviewer.
 - **Corrections in the transcription:** the corrections of the companion (above); the corrections of macro
   definitions and the changes of the checked texts that their tables do not list were compared with the edition's
-  pages by Claude Opus 5.5 (Anthropic, effort not recorded) (`transcription/DECISIONS.md`).
+  pages by Claude Opus 5.5 at effort max (Anthropic) (`transcription/DECISIONS.md`).
 - **English translation:** AI-translated by GPT-6.1 Sol (OpenAI API, reasoning effort max) from the transcription;
-  glossary by Claude Fable 5.2 (effort not recorded) and Claude Opus 5.5 (effort not recorded), prompt, checks, fixes, the comparison for completeness and the
-  book by Claude Opus 5.5 (Anthropic, effort not recorded) (`en/README.md`).
+  glossary by Claude Fable 5.2 at effort medium and Claude Opus 5.5 at effort max, prompt, checks, fixes, the comparison for completeness and the
+  book by Claude Opus 5.5 at effort max (Anthropic) (`en/README.md`).
 - **Raw research outputs** (`raw/`): the answers AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); the reviews
-  by Claude Fable 5.2 (Anthropic, effort not recorded).
+  by Claude Fable 5.2 (Anthropic; the reviews of 10–11 Nov 2026 at effort high or medium, those from 12 Nov at effort max).
 
 ## Rights
 
