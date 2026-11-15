@@ -1,5 +1,9 @@
 # *Les Dérivateurs* in English
 
+*Les Dérivateurs* was deciphered and transcribed by M. Künzer, J. Malgoire and G. Maltsiniotis, who published it as an
+electronic edition: <https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html>. This translation was
+made from their French; we did not decipher the manuscript, they did.
+
 Alexander Grothendieck, *Les Dérivateurs* (1990–1991), **AI-translated** into English by GPT-6.1 Sol (OpenAI API,
 reasoning effort max) from our French LaTeX transcription in this repository (`transcription/`), which is
 **AI-transcribed** by Claude Opus 5.5 from Grothendieck's text as read in the edition of M. Künzer, J. Malgoire and

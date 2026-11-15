@@ -19,6 +19,15 @@ this repository, in French and in English. Read them in the edition. Where a not
 corrects a slip, the text here is the text as the edition prints it, without the note. (Until 15 November 2026 this
 repository reproduced those notes; that version and its history have been replaced by this one.)
 
+## Whose work this is
+
+*Les Dérivateurs* was deciphered and transcribed by M. Künzer, J. Malgoire and G. Maltsiniotis, who published it as an
+electronic edition: <https://webusers.imj-prg.fr/~georges.maltsiniotis/groth/Derivateurs.html>. Their edition is the
+basis of everything here: our LaTeX follows their text page by page, and our English translation was made from their
+French. We did not decipher the manuscript; they did. Their notes, prefaces, postface and page furniture are their own
+writing and are not reproduced here; read them in their edition. What their notes point out, and our attempts to answer
+the questions they raise, will be listed in our own words in `EDITORS_INSIGHTS_AND_OUR_ANSWERS.md`.
+
 ## 1. The LaTeX transcription (complete)
 
 A LaTeX transcription of Grothendieck's text in the whole edition: every page of the nineteen chapters (Chapter XII
