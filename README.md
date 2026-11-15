@@ -114,7 +114,7 @@ The companion sets the corrected text of the pages it covers. These corrections 
 `corrections.csv`, and the transcription in `transcription/` carries them too (section 1).
 
 - PDF: **[LesDerivateurs_companion.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/latest/download/LesDerivateurs_companion.pdf)**
-  (1,867 pages: the text and commentary, the register of claims, the corrections, the bibliography)
+  (1,865 pages: the text and commentary, the register of claims, the corrections, the bibliography)
 
 The companion has all 32 of its parts. It covers:
 
@@ -157,7 +157,7 @@ Source: `companion/`
 effort max) from the transcription, with the checks of every page against the French and a comparison of the whole for
 completeness; the editors' writing is taken out of it as out of the French (`en/README.md`). The book:
 **[LesDerivateurs_English.pdf](https://github.com/KokunoYumeto/grothendieck-derivateurs/releases/latest/download/LesDerivateurs_English.pdf)**
-(896 pages).
+(894 pages).
 
 ## Raw research outputs
 
