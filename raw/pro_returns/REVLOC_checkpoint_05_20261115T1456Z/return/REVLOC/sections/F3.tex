@@ -1,0 +1,511 @@
+\subsection{Strict higher dimensions and the audit of 317}
+\label{sec:F3}
+\providecommand{\sSet}{\mathrm{sSet}}
+\providecommand{\nCat}{n\mathrm{Cat}}
+\providecommand{\Sd}{\mathrm{Sd}}
+\providecommand{\Ex}{\mathrm{Ex}}
+We write $\mathcal M_n$ for the structure asserted in 317,
+$L_n=c_n\Sd^2$, $R_n=\Ex^2N_n$, and $B_nX=|N_nX|$.
+Here $n=\infty$ means strict globular $\omega$-categories. The symbols
+$W_n$ in this subsection mean the weak equivalences of $\mathcal M_n$;
+they do not mean the truncation localizers also denoted by $W_n$ in
+the historical discussion.
+
+\begin{claim}{F.3a}{Proved}{Audit of the higher Thomason transfer in 317}
+The arguments in the supplied source of 317 establish the proper
+combinatorial structure and the Quillen equivalence
+$L_n\dashv R_n$ that are used below. The following audit records the
+interfaces on which the transfer depends. It concerns the supplied
+mathematical proof; no Lean file was supplied or checked.
+\end{claim}
+\begin{proof}
+The strict reflection $\tau_{\leq n}$ identifies parallel $n$-cells
+which bound $(n+1)$-cells and then imposes the resulting congruence.
+This is the left adjoint to inclusion of strict $n$-categories in
+strict $\omega$-categories. In particular it is a reflection, not
+the operation of forgetting cells above dimension $n$.
+Section~2 of 317 applies the directed-chain construction to
+strong Steiner complexes. The exact external results needed here
+are Steiner's Theorem~5.11, giving the equivalence on complexes with
+loop-free unital bases, and Theorem~6.1, giving the atomic
+presentation, together with Ara--Maltsiniotis Theorem~A.15 and
+A.16: the Gray tensor extends the tensor on strong Steiner complexes,
+preserves all small colimits in each variable, and has the two
+internal homs. These statements were opened in
+\cite{I_Steiner2004,I_AraMaltsiniotis2020}. The same appendix,
+Proposition~A.29, says that an internal hom into an $n$-category is
+an $n$-category. Thus the reflected cylinder bijection used in 317
+has the required codomain in every finite dimension; it is not an
+assumption that $n\mathrm{Cat}$ is closed under the unreflected
+Gray tensor.
+
+For completeness we checked the two chain calculations that turn
+this machinery into relative homotopies. The positive
+Alexander--Whitney diagonal on an ordered simplex is natural for
+all order maps, including degeneracies; composing with a map to
+the interval gives the simplicial homotopy induced by a right Gray
+cylinder. For the relative prism, if $f\leq g$ agree on a sieve
+$A\subset E$ and $g$ is constant outside $A$, the cross term on
+a basis simplex is
+\[
+ h[w_0,\ldots,w_p]
+   =[f(w_0),\ldots,f(w_p),g(w_p)].
+\]
+Repeated entries are interpreted as zero. On the part lying in $A$
+this is zero in positive degree and the interval factor is sent
+through its augmentation. On the remaining part, canceling the
+alternating faces gives
+$dh=hd+(-1)^p(G-F)$, with $F,G$ the endpoint chain maps.
+This is exactly the signed tensor differential. The remaining
+penultimate-face terms coincide because $g$ is constant on the
+new part and $A$ is a sieve. Consequently the cylinder is stationary
+on the entire higher subcategory $U_n(A)$, as required for gluing
+along an arbitrary attaching functor. This checks Section~3,
+including its stationarity condition, rather than only the effect
+on vertices.
+
+In Section~4 the slice functors taking the zero and one fibres of
+an $n$-category over $[1]$ preserve colimits: their right adjoints
+adjoin respectively a terminal object over one and an initial
+object over zero. The object functor likewise preserves colimits,
+using the chaotic category as its right adjoint. The initial and
+final vertex segments of an oriental are full; this follows from
+the endpoints of its atomic generators and the retractions clamping
+vertices to the segment. These facts compute the labelled pieces
+of a pushout even when its attaching functor identifies objects.
+For a cover by full sieves, an oriental simplex lies in the member
+containing its last vertex, since every vertex has an arrow to that
+vertex. The dual statement uses the first vertex for cosieves.
+Thus Street nerves of these covers are actual simplicial unions
+along monomorphisms. This verifies the gluing hypothesis used in
+the next two sections.
+
+For Section~5, let $A\subset E$ be a sieve with right adjoint
+$r:E\to A$. If $E-A$ has greatest element $x$, the maps equal to
+the identity on $A$ and constant respectively at $x$ and $r(x)$
+on the new part give the relative zigzag
+$\id_E\leq g\geq k$. The prism just checked remains stationary
+after pushing out against any $U_n(A)\to X$, and gives the
+retraction homotopy proving couniversality. For a finite new part,
+deleting two distinct maximal new elements gives the two full
+pieces needed for induction and simplicial gluing. For an infinite
+new part, finite subsets closed under $ir$ form a filtered family;
+the attached category $X$ is retained in every member. Nerves
+preserve these filtered colimits because each oriental is finitely
+presented. The same induction, starting with a greatest element,
+proves the unit $NP\to N_n c_nNP$ for every poset $P$.
+
+Section~6 applies this to the flag posets of subdivided boundaries
+and horns. Their inclusions are sieves, and on the cosieve generated
+by an old flag the largest old subflag is the stated right adjoint.
+First attaching this cosieve gives the couniversal weak equivalence.
+The remaining pieces form full cosieve covers, so their nerves
+give the monomorphic gluing square. It follows both that a pushed-out
+subdivided horn is a weak equivalence and that a boundary attachment
+preserves a weak equivalence between the objects to which it is
+attached. These are the two different assertions used for transfer
+and for left properness.
+
+The presentability appendix treats strict categories as models of a
+finitary essentially algebraic theory. Its presentation construction
+simultaneously imposes equations and creates compositions whenever
+the equations make their boundaries match. Thus it avoids the
+incorrect procedure of merely quotienting a previously constructed
+free category. All formation rules have finitely many premises,
+also in the countable-sorted $\omega$-case. Finite presentations
+therefore give a small dense set of finitely presentable objects,
+and filtered colimits are computed cellwise. This supplies the
+smallness and filtered-colimit assertions used in Section~7.
+
+Finally $L_nI$-injectives and $L_nJ$-injectives are respectively
+$R_n^{-1}(\mathrm{TrivFib})$ and $R_n^{-1}(\mathrm{Fib})$ by
+adjunction. Relative $L_nJ$-cell maps are weak equivalences by the
+horn assertion and filtered-colimit closure. The small-object
+factorizations and the usual arrow-retract argument consequently
+give both weak factorization systems. Right properness follows
+because $R_n$ preserves pullbacks and detects weak equivalences,
+and simplicial sets are right proper. Left properness follows by
+the boundary-attachment assertion, transfinite composition and
+retracts. The unit after $\Sd^2$ is proved by boundary induction,
+using the already checked poset unit on each cell; composing with
+the subdivision comparison gives the derived adjunction unit.
+Since $R_n$ detects weak equivalences, this proves the Quillen
+equivalence. These are the contents of 317, Sections~2--7 and
+Appendix~A, used here. At $n=1$ the model structure and properness
+also agree with Thomason's Theorem~4.9 and Corollary~5.5
+\cite{I_Thomason1980}.
+\end{proof}
+
+\begin{claim}{F.3b}{Proved}{The correspondence for set-generated localizations}
+Restriction along $\Cat\subset n\mathrm{Cat}$ gives an
+inclusion-preserving bijection between the weak-equivalence classes
+of left Bousfield localizations of $\mathcal M_n$ at small sets of
+maps and the accessible fundamental localizers of $\Cat$.
+For an accessible fundamental localizer $W$, the inverse is
+\[
+ W^{(n)}=\{f:i_\Delta N_n(f)\in W\},                 \tag{F.3.1}
+\]
+where $i_\Delta K=\Delta/K$ is the category of simplices.
+Equivalently $B_n(f)$ belongs to the spatial localization
+corresponding to $W$. The same assertion holds if ``at small sets''
+is replaced by ``combinatorial''.
+\end{claim}
+\begin{proof}
+We use two precise existence statements. Cisinski's
+Theorem~4.2.15 identifies fundamental localizers modelled by a test
+category with its test localizers and preserves accessibility.
+For the test category $\Delta$, its inverse is $i_\Delta^{-1}$;
+the ordinary nerve gives the forward class on $\Cat$, by
+Remark~4.2.16 and the test-functor statement used there.
+Theorem~1.4.3 identifies accessible simplicial localizers with the
+cofibrantly generated model structures having monomorphisms as
+cofibrations. Thus accessible fundamental localizers correspond
+exactly to set-generated localizations of spaces. We use this
+specific form of \cite{I_Cisinski2006}.
+
+Barwick's Theorem~4.7 states that a left proper combinatorial model
+category localized at a small set of homotopy classes has a left
+proper combinatorial model structure, with the original
+cofibrations, the fibrant local objects as fibrant objects, and the
+local equivalences as weak equivalences \cite{I_Barwick2010}.
+The theorem uses derived mapping spaces and does not require the
+original model category to be simplicial. It applies to $\mathcal M_n$
+by F.3a.
+
+Let $S$ be a small set of simplicial maps generating the spatial
+localization associated to $W$. Every simplicial set is cofibrant,
+so the derived images of its maps under $L_n$ are represented by
+the actual maps $L_nS$. For a fibrant $Z$ in $\mathcal M_n$,
+the derived mapping adjunction gives
+\[
+ \Map^h_{\mathcal M_n}(L_nK,Z)
+       \simeq\Map^h_{\sSet}(K,R_nZ).
+\]
+It follows, for each map in $S$ and each such $Z$, that $Z$ is
+$L_nS$-local exactly when $R_nZ$ is $S$-local. The Quillen
+equivalence in F.3a is essentially surjective on fibrant homotopy
+types. Thus testing a map of $\mathcal M_n$ against every local
+object is exactly testing its image in spaces against every
+$S$-local object. This proves formula (F.3.1) and its existence.
+
+Conversely, a set of maps in $\mathcal M_n$ represents a small
+set of maps in spaces under the same equivalence. The mapping-space
+argument in the opposite direction proves that its local-equivalence
+class is the inverse image of that spatial class. On an ordinary
+category, $N_n$ is exactly the ordinary nerve. The natural
+last-vertex comparison $i_\Delta NA\to A$ is a weak equivalence;
+its compatibility with functors shows that the restriction in
+(F.3.1) is exactly $W$. In particular no choices of replacements
+change this class. This proves surjectivity and injectivity.
+
+For the last assertion, a combinatorial localization has a small
+set $J'$ of generating trivial cofibrations. Its fibrant objects
+are precisely the original fibrant objects local with respect to
+$J'$: one direction follows from the lifting property, and the
+other from the characterization of local equivalences by derived
+mapping spaces and the two weak factorization systems. Equivalently,
+apply the standard generating-trivial-cofibration proof of
+\cite[Proposition~A.3.7.4]{I_LurieHTT}, after replacing the derived
+mapping spaces by cosimplicial resolutions. This proof uses no
+simplicial enrichment of $\mathcal M_n$. Hence this localization
+has the same weak equivalences as localization at $J'$.
+\end{proof}
+
+\begin{claim}{F.3c}{Refuted as an unrestricted ZFC assertion}{A nonaccessible model localization}
+Suppose the indexing universe $\mathcal U$ contains no measurable
+cardinal. In every strict dimension $1\leq n\leq\infty$, there
+is a left Bousfield localization of $\mathcal M_n$ whose
+weak-equivalence class restricts to a nonaccessible fundamental
+localizer of $\Cat$. Thus the unrestricted wording in Part F.3,
+which does not require the localized model structure to be
+combinatorial, has a counterexample in this ZFC-compatible setting.
+Under Vop\v{e}nka's principle for the relevant $\mathcal U$-classes,
+the unrestricted correspondence is a bijection. The unconditional
+size-correct correspondence is F.3b.
+\end{claim}
+\begin{proof}
+Put $A_\lambda=\ZZ^\lambda/\ZZ^{<\lambda}$ for infinite
+$\mathcal U$-small cardinals $\lambda$, where $\ZZ^{<\lambda}$
+consists of the vectors whose support has cardinality less than
+$\lambda$, and let $\mathcal A$
+be their class. A group is reduced when it admits no nontrivial
+homomorphism from any $A_\lambda$. Reduced groups are closed
+under subgroups, products and extensions. For the extension
+assertion, a map $A_\lambda\to G$ into an extension of two
+reduced groups first has trivial image in its quotient and then
+trivial image in its kernel.
+
+For a $\mathcal U$-small group $G$ let
+\[
+ R(G)=\bigcap\{\ker(a):a:G\to H,\ H\text{ reduced}\},
+ \qquad P G=G/R(G).
+\]
+This construction is small: it suffices to use quotient images
+of $G$, and their normal kernels form a subset of its power set.
+The diagonal embedding into the product of these reduced quotients
+shows that $PG$ is reduced. Every map from $G$ to a reduced group
+factors uniquely through $PG$, giving a functorial reflector.
+It applies to groupoids by quotienting each isotropy group by its
+characteristic radical; conjugation carries these radicals to
+one another, so the arrow torsors and composition descend.
+
+We need the following additional fact to produce an actual model
+structure, rather than merely a homotopy reflector:
+\[
+                 R(R(G))=R(G).                              \tag{F.3.3}
+\]
+Indeed $R(R(G))$ is characteristic in the normal subgroup $R(G)$,
+and hence normal in $G$. The quotient $G/R(R(G))$ is an extension
+of the reduced groups $P(R(G))$ and $PG$, so is reduced. The
+universal property of $R(G)$ forces $R(G)\subseteq R(R(G))$.
+The reverse inclusion is immediate. Thus $P(R(G))=1$.
+
+Let $\Pi^{(n)}_1X$ be the fundamental groupoid obtained by
+reflecting a strict $n$-category to an ordinary category and
+inverting all arrows, and regard
+\[
+                   Q_nX=P\Pi^{(n)}_1X
+\]
+as a strict $n$-category concentrated in invertible dimensions zero
+and one. There is a natural strict functor $X\to Q_nX$.
+The zero, one and two simplices of the Street nerve give exactly
+the same presentation of the fundamental groupoid: its edges are
+the $1$-cells, and a triangular $2$-simplex imposes the relation
+between its two composite boundary paths. Consequently
+\[
+ \Pi_1(B_nX)\simeq\Pi^{(n)}_1X,
+ \qquad B_nQ_nX\simeq N P\Pi_1(B_nX).
+\]
+The functor $Q_n$ preserves $W_n$, and its unit is idempotent
+up to the canonical isomorphism. Its local homotopy types are
+precisely the $1$-types with reduced fundamental groups.
+
+We apply the following exact form of the Bousfield--Friedlander
+criterion, Stanculescu's Theorem~1.1 \cite{I_Stanculescu2008}.
+For a model category and a coaugmented endofunctor $Q$, assume
+that $Q$ preserves weak equivalences, that $Q\eta_X$ is a weak
+equivalence and $\eta_{QX}$ is monic in the homotopy category,
+and that $Q$-equivalences are preserved by pullback along original
+fibrations between original fibrant $Q$-local objects. Then there
+is a left Bousfield model localization with the original
+cofibrations and the $Q$-equivalences as weak equivalences.
+No small generating family is assumed. We opened the corrected
+primary version, including its factorization proof.
+
+The first two hypotheses were just verified. For the third,
+an original fibration between fibrant objects has strict pullbacks
+which $R_n=\Ex^2N_n$ identifies with homotopy pullbacks of
+spaces. It therefore suffices to check the asserted property for
+a homotopy pullback of a $Q$-equivalence $X\to B$ along
+$E\to B$, where $E,B$ are local $1$-types. Work on one component
+of $E$. The map on fundamental groups $g:G\to H$ induced by
+$X\to B$ is a surjection with kernel $R(G)$: since $H$ is
+reduced it factors as $G\to PG\xrightarrow{\sim}H$.
+Surjectivity makes the homotopy pullback connected over this
+component. Since $\pi_2B=0$, its fundamental group is
+\[
+             G\times_H K\longrightarrow K,
+             \qquad K=\pi_1E.
+\]
+This projection is surjective with kernel $R(G)$. Every map
+from this pullback group to a reduced group kills its kernel,
+by (F.3.3), and hence factors uniquely through $K$. Since $K$
+is reduced, applying $P$ to the projection is an isomorphism.
+The same argument on each component proves the required
+$Q$-equivalence. The criterion now constructs the promised
+model localization of $\mathcal M_n$. In particular its existence
+does not rely on an unproved transfer of a proper-class reflector
+to a model structure.
+
+It remains to verify that the restriction $W_Q$ to $\Cat$ is
+a fundamental localizer and is nonaccessible. Mapping into all
+reduced groupoids detects $P\Pi_1$-equivalences, by the reflector
+universal property and Yoneda for groupoids. These are exactly
+the derived mapping-space tests against the local $1$-types.
+For any fixed target space such tests define a fundamental
+localizer: the two elementary axioms are immediate, and relative
+Theorem A follows from
+$BA\simeq\hocolim_{s\in S}B(A/s)$ and the corresponding
+formula for $B$, since mapping into the fixed target turns this
+homotopy colimit into a homotopy limit. Intersecting these classes
+over the local targets proves that $W_Q$ is fundamental.
+
+Proposition~6.2 of Casacuberta--Scevenels--Smith states that the
+absence of measurable cardinals is equivalent to $\ZZ$ being
+$\mathcal A$-reduced \cite{I_CSS2005}. The statement relativizes
+to $\mathcal U$: a nonzero map $A_\lambda\to\ZZ$ would produce
+a measurable cardinal at most $\lambda$. Therefore every
+$W_Q$-map induces isomorphisms on integral cohomology in degrees
+zero and one. Degree zero follows from the bijection of
+components; degree one follows, on each component, from
+$\Hom(PG,\ZZ)=\Hom(G,\ZZ)$.
+
+Suppose a $\mathcal U$-small set $S$ generated $W_Q$. Choose
+an uncountable regular $\kappa\in\mathcal U$ larger than the
+total number of simplices in the sources and targets of $NS$.
+The functor $T_\kappa(B)=B^\kappa/B^{<\kappa}$ on abelian
+groups is exact: both products and the union of the bounded-support
+subproducts preserve short exact sequences, and the quotient
+does so by the snake lemma. If a free chain complex $C_*$ has
+fewer than $\kappa$ basis elements in total, the interchange of
+its two coordinate sets gives
+\[
+ \Hom(C_*,A_\kappa)
+       \cong T_\kappa\Hom(C_*,\ZZ).
+\]
+For the kernel assertion here, the union of the supports of
+fewer than $\kappa$ basis values still has size less than
+$\kappa$; this is exactly where regularity is used. Thus
+$H^j(C_*;A_\kappa)\cong T_\kappa H^j(C_*;\ZZ)$.
+Applying this in degrees zero and one to $NS$ shows that
+$Z=K(A_\kappa,1)$ is $S$-local. Indeed its mapping spaces have
+components $H^1(-;A_\kappa)$, fundamental groups
+$H^0(-;A_\kappa)$, and no higher groups; all their components
+are translates.
+
+The fixed-target test against $Z$ is a fundamental localizer
+containing $S$, so it must contain $W_Q$. But the one-object
+groupoid $A_\kappa\to *$ belongs to $W_Q$, because
+$P A_\kappa=1$. Its mapping-space test against $Z$ fails:
+the identity of $K(A_\kappa,1)$ and the constant map induce
+different maps on $\pi_1$, since $A_\kappa\ne0$. This
+contradiction proves nonaccessibility. It also gives a direct
+bounded proof of the required form of the obstruction in
+\cite[Theorems~6.3--6.4]{I_CSS2005}.
+
+Finally an arbitrary model localization has its original-fibrant
+local objects as a full homotopy subcategory, and its weak
+equivalences are detected by derived mapping spaces into them.
+This follows using the same cofibrant replacements and original
+cosimplicial resolutions: the cofibrations and trivial fibrations
+have not changed, and an original resolution remains a resolution
+in the localized structure. After the equivalence with spaces in
+F.3a, restriction to $\Cat$ is therefore a fundamental localizer
+by the preceding relative-Theorem-A argument. Under the class
+form of Vop\v{e}nka used in Part H, Cisinski's Scholie~4.2.17
+makes it accessible. F.3b then supplies its set-generated higher
+model, and the mapping-space tests make the weak-equivalence
+classes equal. This proves the positive assertion under that
+principle. The two additional set-theoretic hypotheses are being
+distinguished explicitly; automatic accessibility in ZFC has not
+been inserted into the statement of 317.
+\end{proof}
+
+\begin{claim}{F.3d}{Proved}{Reversibility and spectral classes transport exactly}
+A full sieve of a strict $n$-category is the full subcategory on a
+set of objects closed under taking the source of a $1$-cell whose
+target is in that set. A two-sieve Mayer--Vietoris square consists
+of a cover $X_3=X_1\cup X_2$ of this kind and $X_0=X_1\cap X_2$.
+For a map of two such squares, higher Loc~$(6\,b)$ is the assertion
+\[
+ f_1,f_2,f_3\in W^{(n)}\quad\Longrightarrow\quad f_0\in W^{(n)}.
+\]
+For the localizers in F.3b this holds exactly when $W$ satisfies
+ordinary Loc~$(6\,b)$. For a localizing subcategory $\mathcal L$
+of spectra put
+\[
+ R_n(\mathcal L)=
+ \{f:\Sigma^\infty C(B_nf)\in\mathcal L\}.           \tag{F.3.2}
+\]
+Then $W^{(n)}=R_n(\mathcal L)$ if and only if
+$W=R(\mathcal L)$. Therefore the accessible classification question,
+including the negative answer of Part B, has the same answer in
+every strict dimension.
+\end{claim}
+\begin{proof}
+The last-vertex argument in the audit shows that applying $N_n$
+to a two-sieve cover gives a union of simplicial subsets.
+Applying $i_\Delta$ gives a cover by full ordinary sieves: every
+face or degeneracy of a simplex lying in one member still lies in
+that member. Thus a higher Mayer--Vietoris cube becomes an ordinary
+Mayer--Vietoris cube, with its four comparison functors exactly
+$i_\Delta N_nf_i$. Formula (F.3.1) proves the implication from
+ordinary Loc~$(6\,b)$ to the higher version. Conversely ordinary
+categories and their full sieves are special cases of the higher
+ones, so restriction proves the reverse implication. This argument
+also proves the correspondence for the forward gluing axiom and
+for the reverse single-square axiom, without mistaking an arbitrary
+algebraic pushout for a homotopy pushout.
+
+The category-of-simplices comparison gives a natural weak
+equivalence $B(i_\Delta N_nX)\simeq B_nX$. It is natural in the
+specified map $f$, hence induces an equivalence of its homotopy
+cofibers, including the convention for empty sources. Formula
+(F.3.2) is consequently exactly the inverse-nerve class of
+$R(\mathcal L)$. Restriction gives necessity, and (F.3.1) gives
+sufficiency. In particular applying F.3b to the accessible
+counterexample of Part B produces the corresponding counterexample
+in every dimension. No assertion that arbitrary $R_n(\mathcal L)$
+is set-generated is needed for this equivalence.
+\end{proof}
+
+\begin{claim}{F.3e}{Proved}{What properness gives for the fibration axioms}
+For every $1\leq n\leq\infty$, right properness in 317 implies
+Loc~$(7\,F)$ for $W_n$, with strict pullbacks and with
+\[
+ \Fib_{W_n}=
+ \{p:\text{every base change along }p\text{ preserves }W_n\}.
+\]
+For $n=1$, $W_1=W_\infty$ also satisfies Grothendieck's stronger
+Loc~$(7)$ and Loc~$(7\,D)$. Their proof uses the simplex test for
+the ordinary nerve, in addition to properness. In higher dimensions,
+the direct conclusion of the proper model structure is the same
+Loc~$(7\,F)$; 317 supplies no higher definition of the Cat-fibration
+or perfect-functor classes occurring in the literal other two axioms.
+\end{claim}
+\begin{proof}
+Every model fibration lies in $\Fib_{W_n}$ by right properness.
+Factor any strict $n$-functor as a model trivial cofibration
+followed by a model fibration. This gives a $W_n$-map followed
+by a member of $\Fib_{W_n}$, the existence assertion in
+Loc~$(7\,F)$. Composition and strict base change preserve this
+class by its definition. Every map $X\to *$ is in it, because
+the Street nerve preserves products and products with a fixed
+simplicial set preserve weak equivalences. Isomorphisms are in it;
+pullbacks of its maps and of its weak equivalences exist and have
+the required properties. Finally factoring the diagonal provides
+the path-object axiom. These verifications give the stated Brown
+category of fibrations, including the terminal and empty cases.
+
+For ordinary categories, let $p:E\to B$ satisfy Grothendieck's
+weak-fibration test (Ff), XVI ms.~27: pullback preserves weak
+equivalences between categorically contractible bases. Every
+ordinal category $[m]$ is contractible. Hence, for every simplex
+$[n]\to B$ and order map $[m]\to[n]$, (Ff) gives a weak
+equivalence
+\[
+ E\times_B[m]\longrightarrow E\times_B[n].
+\]
+Since $N[m]=\Delta[m]$ and $N$ preserves pullbacks, these are
+exactly the simplex pullback tests in Rezk's Theorem~4.1(4),
+specialized to the topos of sets \cite{I_Rezk1998}. That theorem
+makes $Np$ sharp, which by definition means that all its base
+changes preserve weak equivalences. Taking nerves again shows
+$p\in\Fib_{W_\infty}$. Thus
+$\mathrm{Fib}^{\mathrm{weak}}_{W_\infty}\subseteq
+\Fib_{W_\infty}$, the strongest weak-fibration formulation of
+Loc~$(7)$ at XVI ms.~32. The Cat-fibrations with homotopically
+constant transports and the perfect functors are subclasses of
+this weak-fibration class, so the displayed inclusion gives
+Loc~$(7)$ in its Cat-fibration formulation and Loc~$(7\,D)$.
+For the former subclass one can check (Ff) directly by the
+Grothendieck construction of the fibre diagram; for the latter
+it is the smooth-and-proper base-change test in the definition of
+perfect functors. Thus no claim that an arbitrary model fibration
+is a Grothendieck Cat-fibration is being made.
+
+For $n>1$, an oriental is not the ordinal category $[m]$, and
+$N_n\mathcal O_m$ is not $\Delta[m]$. Thus repeating the preceding
+proof with orientals would replace the actual simplex pullbacks
+by different ones and would require a new comparison theorem.
+Moreover the manuscript's classes $\Catfib^W$ and $\Parf_W$
+are classes of ordinary functors, not definitions on strict
+$n$-functors. If they are transported by the ordinary category-of-
+simplices construction, the corresponding nerve-based statements
+follow from the preceding paragraph by definition; that does not
+identify an intrinsic higher Cat-fibration class. The exact
+dimension-independent implication of 317 itself is therefore the
+proved Loc~$(7\,F)$. Left properness gives pushout invariance
+along model cofibrations, and supplies no additional assertion
+about those stronger fibration classes.
+\end{proof}

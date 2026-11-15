@@ -1,0 +1,931 @@
+\section{The intrinsic fibrations of integral homology}
+
+\begin{claim}{E.1}{Refuted}{The proposed comma-category criterion}
+The equivalence in Part E.1 is false. In fact, its stated sufficient
+conditions do not imply membership in $\Fib_{\WZ}$, even for a map
+between finite posets with contractible fibers and comma categories.
+\end{claim}
+\begin{proof}
+Let $B=[2]$, and let $E$ have four objects $a,b,d,c$ and precisely
+the nonidentity arrows
+\[
+                         a\longrightarrow b\longleftarrow d
+                           \longrightarrow c.
+\]
+Define $p(a)=0$, $p(b)=p(d)=1$, and $p(c)=2$. The strict fibers are
+$\{a\}$, the interval $d\to b$, and $\{c\}$. The comma categories
+$E/0,E/1,E/2$ are respectively $\{a\}$, the span $a\to b\leftarrow d$,
+and $E$. Their nerves are trees. Every map in condition (i) is therefore
+an integral homology isomorphism. The systems in condition (ii) are
+$\mathcal H_0=\mathbb Z$ and $\mathcal H_q=0$ for $q>0$, so (ii)
+holds for every integral homology equivalence by its very definition.
+
+Let $v:[1]\to[2]$ select the arrow $0\to2$, and let
+$u:[0]\to[1]$ select its initial object. The functor $u$ is a weak
+homotopy equivalence over $B$. Its pullback along $p$ is
+\[
+                          \{a\}\longrightarrow\{a,c\},
+\]
+where the target is discrete. This map is not an isomorphism on $H_0$.
+The file \texttt{code/EH5\_fence\_counterexample.py} specifies all objects,
+arrows, and compositions, checks functoriality and the comma categories,
+and computes integral homology using integer Smith normal forms.
+Its output gives fiber and comma Betti numbers $(1,0,\ldots)$ and
+pullback Betti numbers $(2,0)$. Thus the gap precedes the question
+about necessity of (ii): the strict-pullback spectral sequence asserted
+in the prompt is not justified by its condition (i).
+\end{proof}
+
+\begin{definition}[Hypercentral coefficient modules]
+For a left $\mathbb ZG$-module $M$, define invariant submodules
+transfinitely by
+\[
+ \begin{split}
+ Z_0M&=0,\\
+ Z_{\alpha+1}M&=\{m\in M:(g-1)m\in Z_\alpha M
+                                      \text{ for every }g\in G\},\\
+ Z_\lambda M&=\bigcup_{\alpha<\lambda}Z_\alpha M
+                                      \qquad(\lambda\text{ a limit}).
+ \end{split}
+\]
+We call $M$ hypercentral if this filtration exhausts $M$.
+The filtration stabilizes by an ordinal of cardinality at most
+$|M|^+$, so no proper-class iteration is involved.
+\end{definition}
+
+\begin{claim}{E.2}{Proved}{An exact characterization of the coefficient systems}
+Let $B$ be a space of CW type, and let $M$ be a local system of abelian
+groups on $B$. The following conditions are equivalent:
+\begin{enumerate}
+\item For every integral homology equivalence $u:Y'\to Y$ over $B$,
+the map $H_*(Y';u^*M)\to H_*(Y;M)$ is an isomorphism.
+\item For every component and basepoint $b\in B$, the
+$\mathbb Z\pi_1(B,b)$-module $M_b$ is hypercentral.
+\end{enumerate}
+If $\pi_1(B,b)$ is finitely generated, condition (2) is equivalent to
+the assertion that for every $m\in M_b$ there is a finite $r$ with
+$I^rm=0$, where $I$ is the augmentation ideal. A uniform bound $r$
+on all elements is unnecessary. This answers both specified first
+cases $B=S^1$ and $B=S^1\vee S^1$.
+\end{claim}
+\begin{proof}
+The submodules $Z_\alpha M_b$ define local subsystems on each component;
+each successive quotient has trivial monodromy. An integral homology
+equivalence induces an isomorphism with every constant abelian
+coefficient group, by the integral universal coefficient exact
+sequence. The long exact homology sequences of a short exact sequence
+of local systems show that the property in (1) is closed under
+extensions. Singular chains with local coefficients commute with
+filtered unions of coefficient modules. Transfinite induction,
+using this observation at every limit ordinal, proves (2)$\Rightarrow$(1).
+Restriction along $Y\to B$ does not affect the argument: the displayed
+filtration still has trivial successive quotients after restriction.
+
+For the converse, put $G=\pi_1(B,b)$ and let $Z_\infty M_b$ be the
+stable value of the filtration. If $m_0\notin Z_\infty M_b$, stability
+implies that some $g_1\in G$ has
+$(g_1-1)m_0\notin Z_\infty M_b$. Recursively choose $g_i$ so that
+\[
+             m_i=(g_i-1)m_{i-1}\notin Z_\infty M_b.
+             \tag{E.2.1}
+\]
+All $m_i$ are nonzero. Let $T$ be a countable rose, with one loop for
+each $g_i$, mapped to $B$ by those loops. Put $V=T\vee S^2$.
+The universal-cover cellular chain group of $V$ relative to $T$ is a
+free rank-one group-ring module in degree two. For each $i$, choose
+a map $h_i:V\to V$ fixing $T$, whose action on this relative module
+is multiplication by $g_i-1$. Such a map is obtained by pinching the
+2-sphere into two spheres, transporting the first around the indicated
+loop, and mapping the second with degree $-1$. Equivalently,
+$\pi_2(T\vee S^2)$ is the free group-ring module on the attached sphere,
+so the element $g_i-1$ supplies the specified attaching map.
+
+The projections $V\to T$ and their composites with $h_i$ are homotopic
+relative to $T$, because $T$ is aspherical. Choose these homotopies and
+form the mapping telescope $Y=\operatorname{Tel}(h_1,h_2,\ldots)$,
+with its resulting map to $T$ and hence to $B$. The inclusion of the
+first copy of $T$ gives a map $u:T\to Y$ over $B$. Relative integral
+homology of the telescope is the direct limit of $\mathbb Z$ in
+degree two under the zero maps, and is therefore zero. Hence $u$ is
+an integral homology equivalence.
+
+With the pulled-back system $M$, however, cellular relative chains
+give
+\[
+ H_j(Y,T;M)=
+ \begin{cases}
+ \colim\bigl(M_b\xrightarrow{g_1-1}M_b
+                 \xrightarrow{g_2-1}M_b\longrightarrow\cdots\bigr),&j=2,\\
+ 0,&j\ne2.
+ \end{cases}                                                    \tag{E.2.2}
+\]
+This follows also from the ordinary mapping-telescope chain complex:
+the map $1-\mathrm{shift}$ on the direct sum of the relative chain
+groups is injective, and its cokernel is the displayed direct limit.
+The class of $m_0$ in this limit is nonzero by (E.2.1). This
+contradicts (1), proving hypercentrality. The construction stays in
+the fixed universe and uses a countable CW test, regardless of the
+cardinality of $G$ or $M_b$.
+
+Suppose now that $G$ has a finite generating set. If every
+$(g-1)m$ lies in $Z_\omega M_b$, it suffices to check the finitely many
+generators. Their values lie in a common $Z_rM_b$, and the identities
+for a product or inverse show the same for every $g\in G$.
+Thus $m\in Z_{r+1}M_b$. Consequently $Z_\omega M_b$ is already stable,
+and $Z_rM_b=\{m:I^rm=0\}$. This proves the last assertion.
+
+For an explicit failure of uniform nilpotence over the circle, put
+\[
+ M=\bigoplus_{r\ge1}\mathbb Z[t,t^{-1}]/(t-1)^r.
+                                                               \tag{E.2.3}
+\]
+Every element belongs to finitely many summands and is killed by
+some power of $t-1$, whereas no one power kills all summands.
+Pull this system back along the map $S^1\vee S^1\to S^1$ that
+collapses the second circle for the second requested first case.
+\end{proof}
+
+\begin{claim}{E.3}{Proved}{The homology spectral sequence under the correct hypothesis}
+For a functor $p:E\to B$, assume that for every $n\ge0$, every
+$\sigma:[n]\to B$, and every vertex $i\in[n]$, the strict-fiber
+inclusion
+\[
+             E_{\sigma(i)}\longrightarrow E\times_B[n]
+                                                               \tag{E.3.1}
+\]
+is an integral homology equivalence. Then its fiber homology groups
+form local systems $M_q$ on $BB$. For every simplicial set $K\to NB$
+there is a natural strongly convergent first-quadrant spectral sequence
+\[
+       E^2_{s,q}=H_s(|K|;M_q)\ \Longrightarrow\
+                H_{s+q}(|NE\times_{NB}K|;\mathbb Z).
+                                                               \tag{E.3.2}
+\]
+There is also the relative sequence for a map $K'\to K$ over $NB$,
+with relative homology on both sides. The local system $M_q$ is the
+homology of the homotopy fibers of $Bp$ and is canonically identified
+with $b\mapsto H_q(E/b)$.
+\end{claim}
+\begin{proof}
+For a simplex $\sigma:\Delta[n]\to K$, put
+$P_\sigma=NE\times_{NB}\Delta[n]$. Its chain complex is a covariant
+diagram on the simplex category $\Delta/K$. The hypothesis implies
+that every map in this diagram induces a homology isomorphism:
+compare a vertex of the source simplex with its image vertex in the
+target simplex, and apply two out of three to (E.3.1). Hence its
+degree-$q$ homology is a local system on $\Delta/K$ and on $|K|$.
+
+The augmentation from the homotopy colimit of the $P_\sigma$ to
+$NE\times_{NB}K$ is a weak equivalence. One direct verification uses
+the bisimplicial replacement: over a fixed simplex $x$ of the target,
+the category of factorizations of its image through simplices of $K$
+has the identity factorization as an initial object. Every augmented
+row is consequently a contractible resolution of the indicated
+simplex. Taking diagonals proves the assertion. The normalized chains
+of this replacement form a first-quadrant double complex. Filtering
+by the simplex-category degree gives (E.3.2); the homology of its
+horizontal complex is precisely homology with the displayed local
+system. Taking mapping cones gives the relative version. There are
+only finitely many terms on each total-degree diagonal, which proves
+strong convergence without any finite-type assumption.
+
+In particular, strict pullback along a weak equivalence of simplicial
+sets over $NB$ is an integral homology equivalence, because weak
+equivalences preserve homology with every local system. To identify
+the fibers, replace $NB$ by a Kan complex $S$ through a weak equivalence,
+and pull its path fibration ending at $b$ back to $NB$. The resulting
+space $C_b\to NB$ is weakly contractible, and
+$NE\times_{NB}C_b$ models the homotopy fiber of $Bp$. The map from the
+vertex $b$ to $C_b$ is a weak equivalence over $NB$, so the preceding
+observation identifies the homology of the strict and homotopy fibers.
+Pullback along the contractible simplex resolution of $B/b$, or
+equivalently the same spectral sequence over $N(B/b)$, identifies
+this group with $H_q(E/b)$. The construction is natural under an arrow
+$b\to b'$ and gives the stated monodromy identification. Finally compare
+$NE\to NB$ with an ordinary Kan-fibration replacement over a Kan
+replacement of $NB$. On every vertex fiber the comparison is the
+homology isomorphism just established. Comparing (E.3.2) with the
+ordinary fibration spectral sequence therefore proves that the
+strict-to-derived pullback comparison is a homology equivalence for
+every base $K\to NB$. Applying the same comparison to mapping cones
+proves the relative assertion, with its specified maps.
+\end{proof}
+
+\begin{claim}{E.4}{Proved}{An exact intrinsic description of $\Fib_{\WZ}$}
+A functor $p:E\to B$ belongs to $\Fib_{\WZ}$ if and only if
+(E.3.1) holds and every local system
+$M_q(b)=H_q(E_b;\mathbb Z)$ furnished by E.3 is hypercentral.
+Thus the characterization uses all finite-simplex pullbacks and
+an explicit transfinite module filtration; it does not quantify
+over integral homology equivalences of bases.
+\end{claim}
+\begin{proof}
+If $p$ is intrinsic, pull back the weak equivalence
+$[0]\xrightarrow{i}[n]$ over each $\sigma$ to obtain (E.3.1).
+We explain why its intrinsic property then also applies to
+simplicial homology equivalences over $NB$. For $K\to NB$ the
+last-vertex functor $\Delta/K\to B$ has nerve a simplicial set
+weakly equivalent to $K$ over $NB$. The comparison is the natural
+last-vertex map. Its strict pullback along $NE\to NB$ is a homology
+equivalence by E.3. If $u:K'\to K$ is a homology equivalence, the
+functor $\Delta/u$ belongs to $\WZ$. The intrinsic hypothesis and
+these two comparisons imply that its simplicial pullback along
+$NE\to NB$ is a homology equivalence as well.
+
+Suppose that some $M_q$ is not hypercentral. Choose the telescope
+$u:T\to Y$ of E.2 for that module. It can be represented over $NB$:
+choose a simplicial model over a Kan replacement $S$ of $NB$, replace
+its map by a Kan fibration, and pull back along $NB\to S$. Right
+properness of the ordinary Kan model gives weak equivalences of
+these models to the original spaces, compatibly with $u$.
+Consequently the preceding paragraph applies. In the relative
+spectral sequence (E.3.2), formula (E.2.2), now for every $M_j$,
+puts the entire second page in column $s=2$. There are no possible
+nonzero differentials. Therefore
+\[
+ H_{q+2}(E\times_B^hY,E\times_B^hT;\mathbb Z)
+   \cong\colim\bigl(M_q\xrightarrow{g_1-1}M_q
+                          \xrightarrow{g_2-1}\cdots\bigr)\ne0,
+                                                               \tag{E.4.1}
+\]
+where the notation denotes the pullback models just specified;
+the strict models have the same homology by E.3.
+This contradicts preservation of $u$. Thus every $M_q$ is
+hypercentral. This one-column test is the step that prevents
+spectral-sequence differentials from concealing a failure in an
+individual fiber homology group.
+
+Conversely, assume (E.3.1) and hypercentrality. For any functor
+$u:Y'\to Y$ over $B$ in $\WZ$, E.2 makes the maps of second pages
+in (E.3.2) isomorphisms. Strong convergence and the comparison
+theorem give an integral homology equivalence
+$E\times_BY'\to E\times_BY$. This is exactly the defining
+condition for $\Fib_{\WZ}$.
+The argument includes empty fibers and disconnected bases; all
+coefficient modules are then interpreted componentwise, and the
+zero module is hypercentral.
+\end{proof}
+
+\begin{claim}{E.5}{Proved}{The trefoil obstruction R4$'$}
+If $BB\simeq S^1$, the basepoint map $*\to B$ has no factorization
+as an integral homology equivalence followed by an intrinsic
+$W_{\mathbb Z}$-fibration. The same assertion holds for homology
+with coefficients in any field. In particular the trefoil
+obstruction R4$'$ is valid.
+\end{claim}
+\begin{proof}
+Suppose such a factorization has total space $E$, so that $BE$
+is acyclic and connected. The finite-simplex consequence of
+intrinsic preservation gives the homology spectral sequence
+of E.3, also over a field. Let $k$ denote $\mathbb Z$ or a
+field, and put $S=\pi_0F$, where $F$ is the homotopy fiber.
+Then $H_0(F;k)=k[S]$ is a permutation module for
+$\pi_1B=\langle t\rangle$. The edge terms over the circle give
+\[
+ H_0(E;k)=k[S]_{t},\qquad
+ H_1(E;k)\twoheadrightarrow k[S]^{t}.                    \tag{E.5.1}
+\]
+The first equality makes the action on $S$ transitive. The
+second makes its invariant submodule zero. A finite orbit
+has the nonzero invariant sum of its basis vectors, over any
+of these coefficient rings. Thus $S$ is an infinite orbit,
+and $k[S]\cong k[t,t^{-1}]$ with its regular action.
+
+Let $T$ be the trefoil exterior and $a:T\to S^1$ its
+abelianization map. The complement has integral homology
+that of a circle, for example by Alexander duality, so $a$
+is a homology equivalence. Its group has the Wirtinger
+presentation
+\[
+ \pi_1T=\langle x,y\mid xyxy^{-1}x^{-1}y^{-1}\rangle,
+ \qquad a_*(x)=a_*(y)=t.
+\]
+For clarity the required Alexander module is computed here,
+rather than inferred merely from an Alexander polynomial.
+The infinite cyclic covering cellular complex through
+dimension two has
+\[
+ d_1=(t-1,\ t-1),\qquad
+ d_2=\binom{1-t+t^2}{-(1-t+t^2)}.
+\]
+Since $t-1$ is not a zero divisor, $\ker d_1$ is generated
+by $(1,-1)$. Consequently
+\[
+ H_1(T;k[t,t^{-1}])
+       \cong k[t,t^{-1}]/(t^2-t+1)\ne0.                 \tag{E.5.2}
+\]
+The two Fox derivatives follow by differentiating the six
+letters of the relator; they are also checked in
+\texttt{code/EH5\_trefoil.py}. The polynomial has nonzero
+leading and constant coefficients in every field, so it is
+never a Laurent unit. The standard three-crossing Wirtinger
+calculation and its Alexander matrix are independently
+displayed in \citet[Example 2.35]{EH5KnotNotes2018}.
+Only the group presentation is needed for this $H_1$
+calculation; no asphericity theorem for knot complements
+is being assumed.
+
+After pulling $E\to S^1$ back along $a$, the term
+$E^2_{1,0}$ of its spectral sequence is (E.5.2).
+No differential enters or leaves this term in a
+first-quadrant homology spectral sequence. Thus the
+new total space has nonzero $H_1$, whereas $E$ has zero
+$H_1$. This contradicts intrinsic preservation of $a$.
+Categories of simplices and E.3 supply the same contradiction
+for strict categorical pullbacks.
+
+There is also a shorter integral check from E.4:
+the regular module $\mathbb Z[t,t^{-1}]$ has no nonzero
+invariant elements, hence its transfinite central filtration
+is zero. It cannot be one of the fiber modules of an
+intrinsic $W_{\mathbb Z}$-fibration.
+\end{proof}
+
+\begin{claim}{E.6}{Proved}{The localization-unit criterion R10(a)}
+Let $W$ be an accessible fundamental localizer, and let
+$\eta_X:X\to LX$ be its localization unit on spaces.
+Then $W$ is proper if and only if every homotopy fiber
+of every $\eta_X$ is $W$-aspherical.
+\end{claim}
+\begin{proof}
+For an accessible proper localizer, Cisinski's
+\citet[Theorem 6.1.11]{EH5Cisinski2006} identifies $W$
+with the localizer generated by its aspherical objects.
+The associated localization is therefore nullification.
+Its local spaces are closed under dependent sums over
+a local base: apply $\Map(A,-)$ to such a sum for each
+nullifying object $A$, and use
+$\Map(A,Z)\simeq Z$ first on the base and then on
+every fiber. Thus the units of the associated modality
+have $W$-aspherical homotopy fibers. Equivalently, in
+the right proper localized simplicial model, pull a
+localization unit back along the path fibration of
+its local target. That is a localized fibration,
+because it is an ordinary fibration between local
+spaces. Right properness identifies its total space,
+the unit fiber, with a point in $W$.
+
+Conversely let $P$ be the localization generated by all
+$W$-aspherical objects. It exists and is accessible
+by \citet[Proposition 6.1.8]{EH5Cisinski2006}.
+Suppose every unit fiber is $W$-aspherical, hence
+$P$-aspherical. For a $P$-local space $Z$, write the
+domain of a unit as the homotopy colimit of its
+fiber diagram over its full target space. Then
+\[
+ \Map(X,Z)
+   \simeq\holim_{y\in LX}\Map(\fib_y\eta_X,Z)
+   \simeq\holim_{y\in LX}Z
+   \simeq\Map(LX,Z).                                    \tag{E.6.1}
+\]
+The middle equivalence is natural in paths and
+higher coherences of $LX$; it is not a product
+over the set of points. Thus every unit is a
+$P$-equivalence. Naturality of units and two out
+of three imply $W\subseteq P$, while $P\subseteq W$
+by definition. Hence $W=P$, and Theorem 6.1.11
+gives properness. This checks the entire
+localization-fiber assertion used in R10(a).
+\end{proof}
+
+\begin{claim}{E.7}{Proved}{The Morava locally constant localizer is not proper}
+For every prime $p$ and every finite height $n\geq1$, the
+locally constant localizer of $\operatorname{Mod}_{K(n)}$
+is not proper. The witness
+\[
+ j:K(\mathbb Z,2)\longrightarrow K(\mathbb Z_p,2)          \tag{E.7.1}
+\]
+in R10(c) is valid, where $\mathbb Z_p$ is the group
+of $p$-adic integers regarded discretely.
+\end{claim}
+\begin{proof}
+We use the checked loop criterion: the localizer consists
+of maps bijective on components whose loop maps are
+$K(n)$-homology equivalences. We first justify the
+local target $K(\mathbb Z_p,1)$ without an invalid
+inference from mod-$p$ first homology alone.
+In \citet[Lemma 7.5]{EH5Bousfield2001}, the localization of
+$K(A,m)$ is the modified Postnikov section
+$\widehat P^{n+1}_{\tau}(K(A,m)^{\wedge}_p)$.
+For $A=\mathbb Z_p$ and $m=1$, this is $K(\mathbb Z_p,1)$
+itself: its derived $p$-completion is itself, as follows from
+$\mathbb Z_p=\lim_r\mathbb Z_p/p^r$ and the surjectivity of
+the reduction maps, and the modified section changes no
+group in degree one when $n\geq1$.
+Thus $K(\mathbb Z_p,1)$ is $K(n)$-local.
+This also repairs the argument from memory in R10(c).
+Theorem 1.4 of \citet{EH5BousfieldKn} does establish that a
+$K(n)$-equivalence preserves $H_i(-;\mathbb F_p)$ for $i\leq n$,
+but that assertion alone does not prove locality with
+$\mathbb Z_p$ coefficients. Lemma 7.5 supplies the exact stronger
+input required here.
+
+Here is an explicit check of (E.7.1) on loops.
+For a torsion-free abelian group $A$,
+$H_*(BA;\mathbb Z)=\bigwedge^*A$: express $A$ as
+the filtered union of its finitely generated free
+subgroups and commute group homology with that union.
+The exterior powers are torsion-free. Thus
+\[
+ H_*(BA;\mathbb F_p)=
+             \bigwedge\nolimits_{\mathbb F_p}^*(A/pA).
+\]
+Since $\mathbb Z/p\cong\mathbb Z_p/p\mathbb Z_p$,
+the loop of $j$ is a mod-$p$ homology equivalence.
+It is a $K(n)$-equivalence by
+\citet[Lemma 10.6]{EH5Bousfield1997}, with
+$R_{K(n)}=\mathbb F_p$. Therefore $j\in W^{\mathrm{lc}}_{K(n)}$.
+
+If $A$ is aspherical for this localizer, then
+$A$ is simply connected and $\Omega A$ is
+$K(n)$-acyclic. Since $K(\mathbb Z_p,1)$ is
+$K(n)$-local,
+\[
+ \Hom(\pi_2A,\mathbb Z_p)=0.
+\]
+The inclusion $\mathbb Z\hookrightarrow\mathbb Z_p$
+also gives $\Hom(\pi_2A,\mathbb Z)=0$. Hurewicz,
+the universal coefficient theorem, and simple
+connectivity now show that the pointed mapping
+spaces from $A$ to both targets in (E.7.1) are
+contractible. Hence both targets are local for
+the nullification generated by the
+$W^{\mathrm{lc}}_{K(n)}$-aspherical spaces.
+If the localizer were proper, E.6 would identify
+it with that nullification. Its equivalence
+$j$ between two local spaces would have to be
+a weak equivalence. It is not, since
+$\pi_2j$ is the proper inclusion
+$\mathbb Z\hookrightarrow\mathbb Z_p$.
+\end{proof}
+
+\paragraph{A fixed catalogue for the factorization question.}
+Here $L=L_{HZ}$ and $\eta_T:T\to LT$ denotes its unit.
+Work first with a simplicial map $f:K\to B$, where $B$ is Kan,
+and put
+\[
+                 \lambda=\max(\aleph_0,|K|,|B|).
+\]
+The size of a simplicial set means the cardinality of all its
+simplices. Fix a set $\mathcal C_\lambda(B)=\{p_i:V_i\to B\}_{i\in I}$
+of representatives of the following explicitly specified maps:
+\begin{enumerate}
+\item $|V_i|\leq\lambda$, and every finite Kan horn lifting problem
+for $p_i$ has a solution;
+\item for every vertex $b$ and every $q\geq0$, the monodromy module
+$H_q((V_i)_b;\mathbb Z)$ satisfies
+\[
+ Z_{\lambda^+}H_q((V_i)_b;\mathbb Z)=H_q((V_i)_b;\mathbb Z).
+                                                               \tag{E.8.1}
+\]
+\end{enumerate}
+There are at most $2^\lambda$ isomorphism types of such maps.
+Condition (E.8.1) is a bounded transfinite calculation: every module
+in question has cardinality at most $\lambda$, so its upper central
+filtration stabilizes before $\lambda^+$. Thus this definition of
+the catalogue uses only horn lifting, ordinary fiber homology,
+and the filtration of E.2. It makes no reference to an unknown
+factorization or to $\Fib_{\WZ}$.
+
+For each catalogue entry form
+\[
+ P_i=B\times^h_{LB}LV_i,\qquad
+ c_i:V_i\longrightarrow P_i,\qquad
+ \mathcal A_i(f)=
+ \operatorname{Eq}_{/LB}\bigl((LK,Lf),(LV_i,Lp_i)\bigr).
+                                                               \tag{E.8.2}
+\]
+Here $\operatorname{Eq}_{/LB}$ is the space of homotopy equivalences
+over $LB$, including the specified homotopy over that base.
+For $\alpha\in\mathcal A_i(f)$ the unit and this specified homotopy
+give a canonical map $a_{i,\alpha}:K\to P_i$.
+
+The following description uses only fibers of localization units.
+For $z\in LT$ write $U_T(z)=\operatorname{hofib}_z(\eta_T)$.
+A point $x\in K$ specifies
+\[
+ z_x=\alpha\eta_K(x),\qquad
+ b_x=f(x),\qquad
+ \gamma_x:\eta_B(b_x)\simeq Lp_i(z_x).
+\]
+The map $p_i$ induces
+$U_{V_i}(z_x)\to U_B(Lp_i(z_x))$. Define
+\[
+ D_{i,\alpha}(x)=
+ \operatorname{hofib}_{(b_x,\gamma_x)}
+ \left(U_{V_i}(z_x)\longrightarrow U_B(Lp_i(z_x))\right).
+                                                               \tag{E.8.3}
+\]
+These spaces, with their transports and higher coherences, form a
+family on the fundamental infinity-groupoid of $K$. In particular,
+the homotopy limit below retains the specified coherences; replacing
+it by a condition on the individual fibers would change the test.
+
+\begin{claim}{E.8}{Proved}{A bounded localization-unit-fiber test for all maps}
+The map $f:K\to B$ factors as an integral homology equivalence
+followed by a map preserving all integral homology equivalences
+under homotopy base change if and only if
+\[
+ \text{for some }i\in I\text{ and }\alpha\in\mathcal A_i(f),
+       \qquad \holim_{x\in K}D_{i,\alpha}(x)\ne\varnothing .
+                                                               \tag{E.8.4}
+\]
+This is a set-sized test: the catalogue is fixed by $B$ and
+$\lambda$, independently of $f$, and its membership conditions are
+the two displayed conditions above. All remaining obstructions in
+(E.8.4) concern maps between the localization-unit fibers in
+(E.8.3).
+
+For an arbitrary functor $f:X\to Y$, apply the test to
+$NX\to NY\to\operatorname{Ex}^{\infty}NY$ and to
+$\lambda=\max(\aleph_0,|NX|,|NY|)$. Then (E.8.4) is equivalent
+to the existence of an actual strict factorization
+\[
+                X\xrightarrow{u}E\xrightarrow{p}Y,
+                  \qquad u\in\WZ,\quad p\in\Fib_{\WZ}.
+                                                               \tag{E.8.5}
+\]
+Thus the answer includes all functors, without a fibration or
+Grothendieck-construction hypothesis on the given map.
+\end{claim}
+\begin{proof}
+We first prove the size assertion which makes this criterion
+bounded. Suppose $K\to V\xrightarrow{p}B$ is a homotopy
+factorization of the required kind. Replace $p$ by an ordinary Kan
+fibration and represent the first map strictly over $B$. The
+Kan-fibration version of E.4, with the same Serre spectral
+sequence and telescope proof, says that every
+$H_q(V_b;\mathbb Z)$ is hypercentral. Start with the simplicial
+subset $V_0\subset V$ generated by the image of $K$. Inductively
+construct $V_n\subset V_{n+1}$ by making these three choices in $V$:
+\begin{enumerate}
+\item For every horn in $V_n$ over a simplex of $B$, include the
+simplices of one filler supplied by $p$.
+\item For every integral simplicial cycle in $V_n$ which bounds
+in $V$, include the finite support of one chain bounding it.
+\item For every vertex $b$ of $B$ and every integral simplicial
+cycle in $(V_n)_b$ which bounds in $V_b$, include the finite support
+of one chain bounding it inside $V_b$.
+\end{enumerate}
+Take the simplicial closure of all these choices at each stage.
+There are at most $\lambda$ choices: horns have finitely many
+nondegenerate simplices, integral chains have finite support and
+integer coefficients, there are countably many degrees, and
+$|B_0|\leq\lambda$. Consequently $|V_n|\leq\lambda$ for every $n$.
+
+Put $V_\infty=\bigcup_nV_n$. Every finite horn occurs at a finite
+stage, so $V_\infty\to B$ is Kan. The second and third clauses
+give injections
+\[
+ H_*(V_\infty;\mathbb Z)\hookrightarrow H_*(V;\mathbb Z),
+ \qquad
+ H_*((V_\infty)_b;\mathbb Z)\hookrightarrow H_*(V_b;\mathbb Z).
+                                                               \tag{E.8.6}
+\]
+Indeed a cycle is supported at one finite stage, and a boundary
+in the indicated ambient complex acquires a chosen bounding
+chain at the next stage. The total injection is also onto:
+every class of $H_*(V)$ comes from $H_*(K)$, and $K\to V$
+already factors through $V_\infty$. Thus $K\to V_\infty$ is an
+integral homology equivalence. The second injection is a map of
+monodromy modules, since both maps to $B$ are Kan fibrations.
+A submodule of a hypercentral module is hypercentral: transfinite
+induction gives $Z_\beta N=N\cap Z_\beta M$ for $N\subset M$.
+Therefore every fiber homology module of $V_\infty$ is
+hypercentral. No surjectivity on fiber homology is needed.
+We have produced a member of the catalogue through which the
+desired factorization passes.
+
+For completeness, an upper central filtration on a set of at
+most $\lambda$ elements cannot have a strict successor increase
+at every stage below $\lambda^+$. At its first stationary stage
+it remains stationary. Hence hypercentrality is exactly
+(E.8.1). Labeling the simplices of a set of size at most
+$\lambda$ in each degree gives at most $2^\lambda$ choices of
+simplicial operators and maps to $B$. This proves all catalogue
+bounds, inside the fixed universe.
+
+We next identify the stated obstruction. In any homotopy
+commutative square
+\[
+ \begin{array}{ccc}
+ V_i&\xrightarrow{\eta_{V_i}}&LV_i\\
+ \big\downarrow p_i&&\big\downarrow Lp_i\\
+ B&\xrightarrow{\eta_B}&LB
+ \end{array}
+\]
+the homotopy fiber of
+$c_i:V_i\to B\times^h_{LB}LV_i$ at $(b,z,\gamma)$ is
+\[
+ \operatorname{hofib}_{(b,\gamma)}
+       \bigl(U_{V_i}(z)\to U_B(Lp_i(z))\bigr).
+\]
+This follows directly by writing a homotopy fiber as a point
+together with a path to its prescribed image: both sides specify
+a point of $V_i$, a path of its localization to $z$, and a
+compatible path of its image in $B$ to $b$.
+Consequently $D_{i,\alpha}$ is the fiber family of
+\[
+                K\times^h_{P_i}V_i\longrightarrow K,
+                                                               \tag{E.8.7}
+\]
+and its homotopy limit is precisely the space of homotopy sections
+of (E.8.7).
+
+This is also a concrete obstruction test on the cells of $|K|$.
+Choose points in the spaces (E.8.3) over the vertices, then
+compatible paths over edges. At an $n$-cell, trivialize the
+pulled-back family over its contractible characteristic disk.
+For $n\geq2$ the boundary lift specifies a class in
+$\pi_{n-1}$ of the corresponding space (E.8.3); it must be zero,
+and one then chooses a nullhomotopy. For edges the two endpoint
+points must lie in the same component after transport.
+The choices must extend each other through all skeleta.
+Compatible choices produce a section by the CW weak topology,
+and a section supplies them. This formulation includes the
+inverse-limit compatibility in (E.8.4); nonemptiness of each
+separate finite-stage problem would not suffice.
+
+If the original factorization exists, the size argument replaces
+it by $K\xrightarrow{u}V_i\xrightarrow{p_i}B$ with
+$H_*(u)$ an isomorphism. The map $\alpha=Lu$ is a homotopy
+equivalence over $LB$. Naturality of the unit makes $u$ a lift
+of $a_{i,\alpha}$ through $c_i$, hence a section of (E.8.7).
+This proves necessity.
+
+Conversely, a section of (E.8.7) is a map $u:K\to V_i$ over $B$
+together with
+$\eta_{V_i}u\simeq\alpha\eta_K$. It may be represented strictly
+over $B$, because $K$ is cofibrant and $p_i$ is Kan.
+Localizing this identity gives $Lu\simeq\alpha$ under the
+canonical unit equivalences. Thus $u$ is an integral homology
+equivalence. The defining condition (E.8.1) and the
+Kan-fibration version of E.4 imply the required preservation
+property for $p_i$. This proves sufficiency for spaces.
+
+We finally verify the assertion about strict functors. The
+functorial Kan replacement $\operatorname{Ex}^{\infty}NY$ has
+at most $\lambda$ simplices: each finite subdivision of a
+simplex is finite, and there are countably many iterations.
+An intrinsic factorization of the functor gives a homotopy
+factorization over this Kan replacement by E.3--E.4, so the
+necessity already proved applies.
+
+In the other direction, pull the simplicial factorization back
+along $NY\to B=\operatorname{Ex}^{\infty}NY$. Since $V_i\to B$
+is Kan, ordinary right properness shows that
+\[
+                 V'=NY\times_BV_i\longrightarrow V_i
+\]
+is a weak equivalence. We obtain a strict simplicial diagram
+$NX\to V'\to NY$, with first map an integral homology
+equivalence and second map having the required homotopy
+preservation property. To realize the original source $X$
+itself, use the ordinary proper Thomason model structure,
+as established with its natural unit and counit equivalences
+in \cite[Theorem~5.2.12]{EH5Cisinski2006}. Applying
+$c\operatorname{Sd}^2\operatorname{Ex}^2$ gives a strict diagram
+\[
+ QX\longrightarrow C\longrightarrow Y,\qquad
+ QX=c\operatorname{Sd}^2\operatorname{Ex}^2NX,\quad
+ C=c\operatorname{Sd}^2\operatorname{Ex}^2V'.
+\]
+The counit $q:QX\to X$ is a weak equivalence, and naturality
+makes the composite to $Y$ equal to $fq$. The natural
+equivalences in that theorem identify the displayed diagram
+with $NX\to V'\to NY$ in homotopy.
+
+Factor $QX\to C$, in the slice over $Y$, as an ordinary
+Thomason cofibration $QX\to C_0$ followed by an ordinary trivial
+fibration $C_0\to C$. Form
+$D=X\amalg_{QX}C_0$ in that slice. Left properness makes
+$C_0\to D$ a weak equivalence. By two out of three in homology,
+the induced map $X\to D$ is an integral homology equivalence,
+and $D\to Y$ has the same derived fibers and monodromy as
+$V'\to NY$. Replace $D\to Y$ by an ordinary Thomason
+fibration $D'\to Y$ through a weak equivalence $D\to D'$.
+Right properness makes every vertex-to-simplex pullback map
+for $D'\to Y$ a weak equivalence. Its derived fiber homology
+is hypercentral, so E.4 gives $D'\to Y\in\Fib_{\WZ}$.
+The strict factorization $X\to D'\to Y$ proves (E.8.5).
+This argument uses actual slice diagrams throughout.
+\end{proof}
+
+\begin{claim}{E.8.1}{Proved}{The boundary cases for the factorization problem}
+For connected CW spaces the following assertions hold.
+Every map to a connected space $Y$ admits a factorization as an
+integral homology equivalence followed by a homotopy map with the
+intrinsic preservation property if and only if $H_1(Y;\mathbb Z)=0$.
+In particular the basepoint map $*\to Y$ admits such a factorization
+if and only if $H_1Y=0$.
+If both $X$ and $Y$ are $HZ$-local, then $f:X\to Y$ admits such a
+factorization if and only if its homotopy fibers have hypercentral
+homology as $\pi_1Y$-modules.
+For any factorable map, $H_1f$ is surjective. The converse fails:
+the retraction $S^1\vee S^1\to S^1$ is not factorable.
+\end{claim}
+\begin{proof}
+A hypercentral integral permutation module $\mathbb Z[S]$ has
+trivial action on $S$. Indeed restrict to the cyclic subgroup
+generated by any $g$. Hypercentrality restricts, and E.2 says that
+$(g-1)$ acts locally nilpotently. If $gs\ne s$, the elements
+$(g-1)^n[s]$ are nonzero for every $n$: for an infinite orbit this
+follows by their distinct extreme basis vectors, and for a finite
+orbit by tensoring with $\mathbb C$ and diagonalizing its cyclic
+permutation, which has a nontrivial root-of-unity eigenvalue.
+Thus $gs=s$ for every $g,s$.
+
+For a connected total space $E$ over connected $Y$, the action on
+$\pi_0F$ is transitive, with stabilizer the image of
+$\pi_1E\to\pi_1Y$. E.4 therefore makes the fiber connected and
+this fundamental-group map surjective. In a factorization
+$X\xrightarrow{u}E\to Y$ with $u$ a homology equivalence,
+$H_1u$ is an isomorphism, proving surjectivity of $H_1f$.
+The basepoint case gives the necessary condition $H_1Y=0$.
+
+Suppose conversely that $H_1Y=0$. Attach 2-cells to $Y$ along a
+set of generating loops, obtaining a simply connected space $Y_2$.
+The relative group $H_2(Y_2,Y)$ is free on those cells. Since
+$H_1Y=0$, the map $H_2Y_2\to H_2(Y_2,Y)$ is onto. By Hurewicz
+choose based 2-spheres representing lifts of its basis, and attach
+3-cells along them. The resulting $j:Y\to Y^+$ has simply
+connected target, and its relative cellular complex is the identity
+map between the free groups in degrees three and two. Hence $j$
+is an integral homology equivalence.
+Every simply connected space is $HZ$-local: the groups
+$K(A,n)$ are local by the universal coefficient theorem, the
+Postnikov tower of a simply connected space is built from them
+by homotopy fibers, and local spaces are closed under homotopy
+limits. Thus $j$ is an $HZ$-localization unit.
+Its homotopy fibers are acyclic. To verify this directly, use the
+Serre spectral sequence over the simply connected base $Y^+$.
+If $q>0$ were the least degree with nonzero reduced fiber homology,
+then the term $E^2_{0,q}$ could only be hit by a transgression
+from the base row. Every base-row class survives because
+$H_*Y\to H_*Y^+$ is onto in every degree. Thus $E^2_{0,q}$
+would give a nonzero kernel of $H_qY\to H_qY^+$, a contradiction.
+The fiber is connected by the homotopy exact sequence.
+
+For any $f:X\to Y$, form the canonical homotopy pullback
+\[
+                  E=Y\times^h_{Y^+}L_{HZ}X,
+                                                               \tag{E.8.8}
+\]
+using the localized map $L_{HZ}X\to Y^+$. The projection
+$E\to L_{HZ}X$ has the acyclic fibers just proved, so is a
+homology equivalence by the Serre spectral sequence. The
+canonical $X\to E$ is consequently a homology equivalence
+by two out of three. The other projection $E\to Y$ is a
+pullback of a fibration over the simply connected space $Y^+$.
+Its fiber homology has trivial monodromy, and E.4 gives the
+intrinsic preservation property. This also handles disconnected
+$X$, componentwise; an empty source uses the empty total space.
+
+Now assume that both endpoints of $f$ are $HZ$-local, and let
+$X\xrightarrow{u}E\xrightarrow{p}Y$ be a requested factorization.
+The restriction map
+\[
+              \Map_Y(E,X)\longrightarrow\Map_Y(X,X),
+\]
+where these are derived mapping spaces in the slice over $Y$,
+is an equivalence. It is the map of homotopy fibers of the two
+restriction maps with targets $X$ and $Y$, both equivalences
+because these targets are local and $u$ is a homology equivalence.
+Thus the identity of $X$ extends to $r:E\to X$ over $Y$, with
+$ru\simeq\operatorname{id}_X$ over $Y$. The map $f$ is a
+homotopy retract of $p$ in the slice. Preservation of homology
+equivalences under homotopy base change is closed under such
+retracts, so E.4 applies to $f$. The converse is its ordinary
+fibration replacement.
+
+Finally suppose the projection $X=S^1\vee S^1\to S^1$ had a
+factorization, with fiber $F$ and total space $E$. The fiber is
+connected by the first paragraph. Over the circle the Serre
+spectral sequence has only columns zero and one, so
+$H_2E=0$ implies $H_1(F)^{t}=0$. A nonzero hypercentral module
+has a nonzero invariant element, by taking the first nonzero
+stage of its central filtration. Hence $H_1F=0$. The degree-one
+sequence then gives $H_1E\cong\mathbb Z$, contradicting
+$H_1E\cong H_1X\cong\mathbb Z^2$.
+\end{proof}
+
+\begin{claim}{E.9}{Proved}{The locally constant $KU$ localizer is not proper}
+Let $W^{\mathrm{lc}}_{KU}$ be the localizer of locally constant
+objects valued in $KU$-local spectra. This accessible fundamental
+localizer is not proper. An explicit witness to the unit-fiber
+criterion E.6 is the localization unit of
+\[
+                    X=(Q S^5)_{(p)}
+                                                               \tag{E.9.1}
+\]
+for any odd prime $p$. Its homotopy fiber $F$ is simply connected
+and has $\pi_2F\cong\mathbb Q/\mathbb Z_{(p)}$, so $F$ is not
+$W^{\mathrm{lc}}_{KU}$-aspherical.
+\end{claim}
+\begin{proof}
+Write $L_1$ for localization at the height-one Johnson--Wilson
+spectrum $E(1)$, on spaces or spectra as indicated.
+It has the same equivalences as $KU_{(p)}$ because
+\[
+                KU_{(p)}\simeq
+                 \bigvee_{i=0}^{p-2}\Sigma^{2i}E(1).
+                                                               \tag{E.9.2}
+\]
+This is the Adams splitting, in the precise form recorded in
+\citet[Introduction, displayed splitting]{EH5BakerRichter2005};
+smashing the displayed finite wedge with a cofiber proves the
+assertion about equivalences.
+
+We record the exact infinite-loop-space localization theorem used.
+For a spectrum $V$, let $Z=\Omega^\infty_0V$ and
+$Z'=\Omega^\infty_0L_1V$, where the subscript selects the
+basepoint component. For a nilpotent space $T$, its modified
+Postnikov section $P^2_{\tau}T$ has
+\[
+ \pi_1P^2_{\tau}T=\pi_1T,\qquad
+ \pi_2P^2_{\tau}T=\pi_2T/\operatorname{tors}(\pi_2T),\qquad
+ \pi_iP^2_{\tau}T=0\quad(i>2).
+\]
+The height-one case of
+\citet[Theorem 8.1 and definition in Section 7]{EH5Bousfield2001}
+is the natural equivalence
+\[
+ L_1 Z\simeq
+      Z'\times^h_{P^2_{\tau}Z'}P^2_{\tau}(Z_{(p)}).
+                                                               \tag{E.9.3}
+\]
+At height one this is an equivalence in every degree, not just
+above a range. This last clause is explicit in the cited theorem.
+
+Take $V=\Sigma^4\mathbb S_{(p)}$. Then
+$Z=(QS^4)_{(p)}$ is 3-connected, so $P^2_{\tau}Z=*$.
+The paragraph preceding Corollary 4.5 in
+\citet{EH5Bousfield1979} identifies
+$L_1\mathbb S_{(p)}\simeq(L_{KU}\mathbb S)_{(p)}$;
+its Corollary 4.5 then gives, for odd $p$,
+\[
+ \pi_{-3}L_1\mathbb S_{(p)}=0,
+ \qquad
+ \pi_{-2}L_1\mathbb S_{(p)}
+                  =\mathbb Q/\mathbb Z_{(p)}=:C_{p^\infty}.
+                                                               \tag{E.9.4}
+\]
+Consequently $\pi_1Z'=0$ and $\pi_2Z'=C_{p^\infty}$.
+The latter group is torsion, so $P^2_{\tau}Z'=*$ also.
+Equation (E.9.3) therefore identifies $L_1Z$ with $Z'$,
+and in particular
+\[
+             \pi_1L_1Z=0,\qquad
+             \pi_2L_1Z=C_{p^\infty}.                    \tag{E.9.5}
+\]
+
+For completeness this is also the $KU$-localization of $Z$,
+not merely its $p$-local variant. The target $L_1Z$ is
+$KU$-local since every $KU$-equivalence is a
+$KU_{(p)}$-equivalence. The source and target are $p$-local
+nilpotent spaces. For a prime $q\ne p$ they are mod-$q$
+acyclic: their reduced homology groups are $\mathbb Z_{(p)}$-modules,
+so multiplication by $q$ is invertible. Lemma 10.6 of
+\citet{EH5Bousfield1997} then makes them $KU/q$-acyclic.
+Their map is a rational and a $KU/p$ equivalence because it is a
+$KU_{(p)}$-equivalence. The arithmetic detection statement in
+\citet[Theorem 10.1]{EH5Bousfield1997} makes it a $KU$-equivalence.
+Thus (E.9.5) computes $L_{KU}Z$.
+
+Choose a map $f$ presenting $KU$-homology localization.
+On connected spaces, the checked loop criterion identifies
+$W^{\mathrm{lc}}_{KU}$ with $\Sigma f$-equivalences:
+\citet[Theorem 5.2]{EH5Bousfield1997} identifies the specified
+unit after looping as
+\[
+ \Omega X\longrightarrow\Omega L_{\Sigma f}X
+            \simeq L_f\Omega X.
+                                                               \tag{E.9.6}
+\]
+Here $\Omega X\simeq Z$. The map induces an isomorphism on
+components and, by (E.9.5), both loop spaces are simply connected.
+Hence $X$, $L_{\Sigma f}X$, and the homotopy fiber $F$ of their
+unit are simply connected. The homotopy exact sequence, using
+$\pi_2\Omega X=0$, now gives
+\[
+             \pi_2F=\pi_1\Omega F
+                      \cong C_{p^\infty}.              \tag{E.9.7}
+\]
+The space $K(C_{p^\infty},1)$ is $L_1$-local by
+\citet[Theorem 7.4]{EH5Bousfield2001}: for a connected
+Postnikov $H$-space that theorem preserves the $p$-localized
+homotopy group in degree one, removes torsion only in degree two,
+and rationalizes degrees above two. It is consequently $KU$-local
+as well. The nonzero identity homomorphism
+$\pi_1\Omega F\to C_{p^\infty}$ represents a nonconstant component
+of $\Map_*(\Omega F,K(C_{p^\infty},1))$.
+Thus $\Omega F$ is not $KU$-acyclic. The loop criterion says
+exactly that $F$ is not $W^{\mathrm{lc}}_{KU}$-aspherical.
+Applying E.6 proves nonproperness.
+
+All spaces in (E.9.1)--(E.9.7) admit small simplicial models.
+Passing to their categories of simplices therefore supplies the
+same localization-unit obstruction for fundamental localizers on
+$\Cat$; the conclusion does not rest on a finite-dimensional or
+finite-type approximation.
+\end{proof}
