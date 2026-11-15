@@ -243,9 +243,7 @@ make Grothendieck's manuscript available and readable to those who study his mat
 translation. If the editors nonetheless want us to stop basing our text on theirs, we will, and replace it with a
 transcription made from the manuscript scans alone.
 
-Where we hold rights, in the AI-produced transcription, translation, corrections and typesetting, they are dedicated to
-the public domain under CC0 1.0. The dedication covers our own contributions only: it does not affect the rights in
-Grothendieck's text and gives no permission to use it.
+Our transcription, translation, corrections and typesetting were produced by AI. They have no human author and, in our understanding, are not protected by copyright; where any right of ours exists nonetheless, it is dedicated to the public domain under CC0 1.0. All of this work reproduces or translates Grothendieck's text, whose rights belong to his heirs, so nothing here licenses or authorizes any reproduction, translation or other use of his work.
 
 **Prompts and method.** The prompts, templates, scripts and working method published here are dedicated to the public domain under CC0 1.0. If you want to do similar work, use them freely; we claim no rights in them.
 

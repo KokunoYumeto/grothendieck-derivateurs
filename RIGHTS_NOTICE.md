@@ -14,9 +14,7 @@ make Grothendieck's manuscript available and readable to those who study his mat
 translation. If the editors nonetheless want us to stop basing our text on theirs, we will, and replace it with a
 transcription made from the manuscript scans alone.
 
-Where we hold rights, in the AI-produced transcription, translation, corrections and typesetting, they are dedicated to
-the public domain under CC0 1.0. The dedication covers our own contributions only: it does not affect the rights in
-Grothendieck's text and gives no permission to use it.
+Our transcription, translation, corrections and typesetting were produced by AI. They have no human author and, in our understanding, are not protected by copyright; where any right of ours exists nonetheless, it is dedicated to the public domain under CC0 1.0. All of this work reproduces or translates Grothendieck's text, whose rights belong to his heirs, so nothing here licenses or authorizes any reproduction, translation or other use of his work.
 
 ---
 
@@ -35,6 +33,4 @@ Grothendieck accessible et lisible pour ceux qui étudient ses mathématiques ; 
 Si les éditeurs souhaitent néanmoins que nous cessions de fonder notre texte sur le leur, nous le ferons, et nous le
 remplacerons par une transcription faite à partir des seuls scans du manuscrit.
 
-Là où nous détenons des droits, sur la transcription, la traduction, les corrections et la composition produites par IA,
-ils sont dédiés au domaine public sous CC0 1.0. Cette dédicace ne couvre que nos propres contributions : elle n'affecte
-pas les droits sur le texte de Grothendieck et ne donne aucune permission de l'utiliser.
+Notre transcription, notre traduction, nos corrections et notre composition ont été produites par IA. Elles n'ont pas d'auteur humain et, selon notre compréhension, ne sont pas protégées par le droit d'auteur ; là où un droit nous appartiendrait malgré tout, il est versé au domaine public sous CC0 1.0. Tout ce travail reproduit ou traduit le texte de Grothendieck, dont les droits appartiennent à ses ayants droit : rien ici n'accorde de licence ni n'autorise une reproduction, une traduction ou un autre usage de son œuvre.
