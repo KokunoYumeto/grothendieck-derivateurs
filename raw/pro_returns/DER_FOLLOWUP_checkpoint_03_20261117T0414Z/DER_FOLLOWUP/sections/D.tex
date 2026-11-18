@@ -1,0 +1,563 @@
+\section{Free monoids and free groups as test diagrams}
+\label{sec:D}
+
+All monoid colimits in this section are taken in the category of all
+monoids, with unit-preserving homomorphisms. We write
+$T_i^A=L_i\colim_A:\Ab^A\to\Ab$.
+
+\begin{claim}{D.1}{Proved}{The homology and fundamental group in Lead 3}
+\label{D:homology}
+Let $A$ be a nonempty connected total small category, and let
+$M:A\to\mathrm{FreeMon}$ be any functor, allowing arbitrary word
+substitutions. Put $G(a)=M(a)^{\mathrm{gp}}$ and
+$\Gamma=\colim_A^{\mathrm{Grp}}G$. For every integer $k\geq0$
+there are natural isomorphisms
+\[
+ H_{k+1}\left(B\int_A M;\Z\right)\cong T_k^A(M_{\mathrm{ab}}),
+ \qquad \pi_1\left(B\int_A M\right)\cong\Gamma.
+ \tag{D.1.1}
+\]
+The fundamental-group isomorphism is the one induced by the
+canonical functor $\int_A M\to\mathbf B\Gamma$, after choosing
+its sole target object as basepoint and any source object. The
+same assertions hold for a diagram of free groups.
+\end{claim}
+\begin{proof}
+For a free monoid $F(S)$ the canonical map to its free group
+$F^{\mathrm{gp}}(S)$ induces a weak equivalence of classifying
+spaces. The universal covering category has objects the reduced
+free-group words and arrows right multiplication by positive words.
+Its generator graph is the free-group Cayley tree. Composition
+triangles collapse each positive word to its generator path, so
+its realization has the type of that tree and is contractible.
+This verifies PRETOT F.9's free-monoid input for the specified
+map; naturality for arbitrary homomorphisms follows from
+naturality of group completion, without choosing compatible graph
+bases. The same result is stated and proved in Lenz,
+Proposition~4.4.1 and Corollary~4.4.6 \cite{CDLenz2011}.
+Thus the natural homology functors are $H_0(BM)=\Z$,
+$H_1(BM)=M_{\mathrm{ab}}$, and $H_q(BM)=0$ for $q\geq2$.
+
+The bisimplicial bar model of the Grothendieck construction gives
+\[
+ E^2_{p,q}=T_p^A\bigl(H_q(BM;\Z)\bigr)
+       \Longrightarrow H_{p+q}\left(B\int_A M;\Z\right).
+\]
+Since $A$ is total, its constant singleton action makes $BA$
+weakly contractible, so $T_p^A(\Z)=0$ for $p>0$.
+Only the row $q=1$ and the term $(0,0)$ remain. Every total degree
+has a finite filtration and one possible nonzero graded term,
+proving the homology formula even when $A$ and all free bases are
+infinite.
+
+For the fundamental group, the groupoid completion of $\int_A M$
+has generators the groups $G(a)$ and one transport arrow for
+each arrow of $A$. Its relations are the composition relations
+of $A$ and conjugation by transport according to $G$.
+Choose a maximal tree in the connected underlying graph of $A$.
+After contracting that tree, all remaining transport loops vanish
+because $BA$ is simply connected. The remaining presentation is
+exactly the colimit presentation of the groups $G(a)$. The
+canonical functor in the statement sends every transport arrow
+to the identity and every $M(a)$-element to its colimit image,
+so this calculation identifies its induced map, not merely an
+abstractly isomorphic group.
+\end{proof}
+
+\begin{claim}{D.2}{Proved}{Exact indices and free-group diagrams}
+\label{D:exact}
+If $A$ is nonempty connected and exact, every diagram
+$M:A\to\mathrm{FreeMon}$ satisfies
+\[
+ B\int_A M\simeq K(\Gamma,1).
+\]
+Consequently, for $C=\colim_A^{\mathrm{Mon}}M$,
+\[
+ q_M\in W_\infty
+ \quad\Longleftrightarrow\quad
+ BC\longrightarrow B(C^{\mathrm{gp}})\text{ is a weak equivalence}.
+ \tag{D.2.1}
+\]
+Every diagram of free groups over such an $A$, with colimit in
+groups, passes the comparison test. In particular free-group
+diagrams do not characterize filteredness: the exact nonfiltered
+category $\Delta_{\mathrm{inj}}$ passes all of them.
+\end{claim}
+\begin{proof}
+We check the exactness-to-totality input in R6 at the step needed.
+For an $A$-set $S$, direct sum over its fibers is an exact functor
+$\Sigma_S:\Ab^{\El_A S}\to\Ab^A$, and
+$\colim_{\El_A S}=\colim_A\Sigma_S$ by the cocone universal
+property. Thus every connected action component has exact abelian
+colimits and is acyclic. Applying this again to covering actions
+associated with cyclic subgroups shows that its fundamental group
+is trivial; a nontrivial cyclic subgroup would have nonzero
+abelianization. Hurewicz then makes every component weakly
+contractible. This is the action criterion for totality, so D.1
+applies.
+
+Let $X=B\int_A M$ and use D.1's canonical $X\to B\Gamma$.
+Pull the universal covering $E\Gamma\to B\Gamma$ back to $X$.
+The resulting cover $\widetilde X$ is connected and simply
+connected because the map induces an isomorphism on $\pi_1$.
+At the bar-model level it is the homotopy colimit over $A$ of
+the corresponding $\Gamma$-coverings $X_a$ of $BM(a)$:
+in each simplex the initial lift is a $\Gamma$-label, and all
+faces and transition maps carry this label by the stipulated
+monoid homomorphism. Each $X_a$ is a possibly disconnected
+cover of a graph up to weak equivalence, hence
+$H_q(X_a;\Z)=0$ for $q\geq2$.
+The homology spectral sequence for these coverings has
+$E^2_{p,q}=T_p^A H_q(X_a;\Z)$; exactness kills every $p>0$.
+It follows that $H_j(\widetilde X;\Z)=0$ for $j\geq2$.
+Its $H_1$ also vanishes by simple connectivity, so
+$\widetilde X$ is weakly contractible. This proves the first
+assertion without any injectivity assumption on the transition
+maps or on $G(a)\to\Gamma$.
+
+Group completion is left adjoint to inclusion of groups into
+monoids, and therefore $C^{\mathrm{gp}}=\Gamma$.
+The composite $X\xrightarrow{Bq_M}BC\to B\Gamma$ is the
+canonical weak equivalence just proved. Two out of three gives
+(D.2.1). For free-group diagrams the target itself is $B\Gamma$.
+The known exactness of $\Delta_{\mathrm{inj}}$ is
+Isbell--Mitchell, Theorem~3 \cite{IsbellMitchell1973}, as verified
+in the supplied TOTEX E.2; its two point inclusions cannot be
+post-equalized by an injection, so it is not filtered.
+\end{proof}
+
+\begin{claim}{D.3}{Proved}{The interval example in Lead 3}
+\label{D:interval}
+For $[n]=\{0,\ldots,n\}$ let $M([n])$ be the free monoid
+on the consecutive edges of
+$\{-\infty\}< [n] <\{+\infty\}$. An increasing injection,
+extended by the two endpoints, sends each generator to the
+ordered product of the intervening edges. This is a functor
+$\Delta_{\mathrm{inj}}\to\mathrm{FreeMon}$, and its colimit is
+\[
+ C=\langle x,y,z\mid xy=x,\ y^2=y,\ yz=z\rangle.
+ \tag{D.3.1}
+\]
+Its group completion is the free group $F(x,z)$ and
+$H_2(BC;\Z)=0$. Thus this example does not separate the comparison
+in degree two. The stronger theorem D.6 below gives
+$BC\simeq K(F(x,z),1)$ and proves that its entire comparison passes.
+\end{claim}
+\begin{proof}
+Subdividing an interval and then subdividing its pieces gives
+exactly the same ordered word as the composite injection; this
+proves functoriality. Every first edge is the image of the first
+edge at $[0]$, using the injection selecting the first vertex.
+Every last edge is similarly represented at $[0]$. Every interior
+edge is the image of the sole interior edge at $[1]$, using its
+two endpoints. Thus $x,y,z$ generate the colimit. The two maps
+$[0]\to[1]$ give $x=xy$ and $z=yz$; the injection
+$[1]\to[2]$ skipping the middle point gives $y=y^2$.
+Conversely the word assigned to any first, interior, or last
+edge is respectively $xy^a$, $y^{a+1}$, or $y^az$ for some
+$a\geq0$, and reduces to $x,y,z$ using these three relations.
+They therefore define a cocone to (D.3.1). The two resulting
+maps are inverse on every original generator, proving the
+presentation, with no unverified absence-of-further-relations step.
+
+In the group completion the first relation gives $y=1$; the
+other two then impose no relation on $x,z$.
+For monoid homology orient the three rules as
+$xy\to x$, $yy\to y$, $yz\to z$. Each decreases length.
+Their only overlapping critical words are
+$xyy,yyy,yyz,xyz$; both reductions have the same normal form
+in each case. Disjoint reductions commute. Induction on word
+length therefore gives convergence. The coherent completion
+by these four critical confluences supplies a free resolution
+through degree three, by the proof of Squier's theorem in
+\cite[Theorem~7.3.5 and Proposition~9.3.2]{CDPolygraphs2025}.
+For completeness the low-degree exactness used here follows
+by choosing the leftmost normalizing path: induction compares
+any competing first reduction with it by one critical or
+commuting square, then treats the shorter resulting words.
+This contracts the associated relation module and its module
+of identities among relations, precisely the first three stages
+of that resolution.
+
+After tensoring with the trivial module $\Z$, let
+$r_1,r_2,r_3$ denote the three rules. Each has boundary $y$.
+The four confluence boundaries are
+\[
+ r_1-r_2,\quad 0,\quad r_2-r_3,\quad r_1-r_3.
+\]
+They generate the entire kernel of
+$\Z^3\to\Z\{x,y,z\}$, $(a,b,c)\mapsto(a+b+c)y$.
+Thus $H_2(BC)=0$ and $H_1(BC)=\Z^2$.
+The program \texttt{CD\_finite\_checks.py} checks all critical
+pairs, the cocone on every injection through $[5]$, and the
+integral matrices; a unit minor verifies that the image lattice
+is primitive. Convergence and the universal-property proof above
+supply the statements for all lengths and all simplex dimensions.
+\end{proof}
+
+\begin{claim}{D.4}{Proved}{The free-group obstruction over the total category $\mathcal C_\delta$}
+\label{D:predimension}
+Let $A=\mathcal C_\delta$ be the category in R17. Let $V$ be
+the one-point object and $W$ the ordered three-point one-edge
+object, with point maps $v_i:V\to W$. The presentations
+\[
+ G(X)=\left\langle u_x,v_x\ (x:V\to X)\ \middle|\
+ u_{ev_2}u_{ev_1}^{-1}v_{ev_3}v_{ev_1}^{-1}=1
+ \ (e:W\to X)\right\rangle
+ \tag{D.4.1}
+\]
+define a functor $G:A\to\mathrm{Grp}$ by postcomposition of
+the indices. Every value is a finitely generated free group;
+every transition is a free-factor inclusion. Its abelianization
+is $Q=\operatorname{coker}(P_W\to P_V^2)$ with
+\[
+ D[e]=([ev_2]-[ev_1],\ [ev_3]-[ev_1]),
+ \qquad T_1^A(Q)=\Z.
+\]
+Furthermore
+\[
+ \colim_A^{\mathrm{Grp}}G=F(u,v),\qquad
+ H_2\left(B\int_A G;\Z\right)=\Z.
+\]
+The specified comparison to the group colimit is therefore not
+a weak equivalence.
+\end{claim}
+\begin{proof}
+All arrows of $A$ are increasing induced embeddings with strictly
+closed image. An arrow sends every actual point and actual edge
+embedding to another, and sends every displayed relator to the
+corresponding relator. This proves functoriality of the actual
+presentations.
+
+Consider any nonempty family of $r$ remaining relators at $X$.
+Its $W$-arrows have distinct hyperedge images, since an increasing
+embedding of $W$ is determined by its image. If their union has
+$v$ vertices, positivity gives $2v>3r$. The total number of
+incidences is $3r$, so some vertex has degree exactly one in
+this family. If it occupies position $1$, $2$, or $3$ in its
+unique edge, select respectively $u_{ev_1}$, $u_{ev_2}$, or
+$v_{ev_3}$. That generator occurs exactly once, with exponent
+$\pm1$, in the unique relator, and in no other remaining relator.
+Tietze elimination removes it and that relator while leaving
+all other relators unchanged. Induction removes every relator,
+leaving a finite free presentation.
+
+For an arrow $Y\to X$, identify $Y$ with its closed induced
+image. An actual point or edge embedding of $X$ supported in
+$Y$ is an actual embedding in $Y$, by restriction of closedness;
+the converse is transitivity. For any nonempty family of $r$
+new edges let $U$ be $Y$ together with their vertices.
+Strict closedness gives
+\[
+ 2|U\setminus Y|>
+ 3|E_X(U)\setminus E_X(Y)|\geq3r.
+\]
+Some new vertex therefore occurs in just one of these edges.
+The preceding elimination can always use a generator outside
+$Y$. It never removes or changes an old relator. After all new
+relations have been eliminated, the presentation is the old
+presentation at $Y$ with freely adjoined generators. This proves
+that the specified map, not just an abstract map between free
+groups of the right ranks, is a free-factor inclusion.
+
+Abelianizing (D.4.1) gives exactly $Q$. The same private-vertex
+argument makes $D:P_W\to P_V^2$ injective: a nonzero finite
+linear combination of columns has a coordinate supported in
+one edge only and hence cannot vanish. Thus
+$0\to P_W\to P_V^2\to Q\to0$ is a projective resolution.
+The colimits of both representables are $\Z$ and the colimit
+map $\Z\to\Z^2$ is zero. The derived-colimit exact sequence
+gives $T_1Q=\Z$, with generator the class corresponding to
+$1\in\colim P_W=\Z$.
+
+The two sets of generators in (D.4.1) are representable actions.
+Each has singleton colimit. Since the free-group functor preserves
+colimits, the group colimit has two generators $u,v$; every
+relator becomes $uu^{-1}vv^{-1}=1$. Hence the canonical colimit
+is $F(u,v)$. Applying D.1 to the known total category $A$ gives
+$H_2(B\int_A G)=T_1Q=\Z$, while $BF(u,v)$ is a graph and
+has $H_2=0$.
+
+We verified the totality input of TOTAL\_EXACT\_2 A.30--A.34
+in the attached stabilizer and action-reduction proofs. The
+alternating amalgam identifies only neighboring $B$- and $C$-copies;
+nonfixed vertices have visibility at most three. Cutting a
+seam loses at most $2\max(|B|,|C|)$ in predimension, whereas
+covering all seams contributes at least the number of seams
+divided by three. Choosing sufficiently many seams proves
+closedness of all copies. The displayed interpolation preserves
+the order and agrees on $B\cap C$, yielding the algebraic identity
+$\langle G_B,G_C\rangle=G_{B\cap C}$. Minimal finite supports
+and rigidity of finite linear orders then identify each open
+subgroup with $G_F$.
+For arbitrary actions, quotienting pairs eventually made equal
+is functorial by condition I and gives injective transitions.
+Both comparison commas in the proof are nonempty cosieves of
+slices, contracted by functorial ordered free amalgamation with
+a fixed slice object. Saturation by the directed union over
+finite closed substructures then identifies each orbit action
+with a representable $A(F,-)$, or the constant singleton if
+$F$ is empty. These steps apply to all actions; no finite-action
+or injective-action restriction remains. This confirms exactly
+the totality hypothesis needed for the final use of D.1.
+The independent program \texttt{CD\_freefactor\_checks.py}
+checks all 172 positive ordered hypergraphs through five vertices,
+all 775 closed-subobject embeddings, and every actual-edge family
+in each; its 496 nonempty relative families all have a new private
+vertex. Every relation matrix also has full row rank. These bounded
+checks supplement the general counting and elimination proof.
+\end{proof}
+
+\begin{claim}{D.5}{Proved}{What the earlier free-factor examples do and do not change}
+\label{D:scope}
+The free-group construction of TOTAL\_EXACT\_2 C.8 over $K^*$,
+and its finite free-factor example C.9, do not refute D.2.
+The former refutes an extension of D.2 from exact to arbitrary
+quasi-filtered indices. D.4 refutes that extension even for
+total indices. The latter refutes deducing asphericity of a
+simplicial nerve colimit solely from free values, free-factor
+maps, and a free group colimit.
+\end{claim}
+\begin{proof}
+We read the proof of C.8 in \texttt{akr\_links.tex}. Its absolute
+and relative private-vertex eliminations are exactly the typed
+group-presentation argument above; its derived-colimit calculation
+is $T_1Q=\Z$. In particular that index cannot be exact, so it
+does not satisfy D.2's hypothesis.
+
+For C.9 the index is the parallel-pair category
+$0\rightrightarrows1$. Its maps are
+\[
+ F(a,c)\rightrightarrows F(a,c,b),\qquad
+ f(a)=a,\ f(c)=c,\quad g(a)=ab,\ g(c)=cb^2.
+\]
+The second is the restriction of the automorphism fixing $b$
+and sending $a\mapsto ab$, $c\mapsto cb^2$; its inverse uses
+$b^{-1},b^{-2}$. The two image subgroups intersect trivially:
+in a nonempty reduced word, a negative first letter leaves a
+nonzero initial $b$-block and a positive last letter leaves a
+nonzero final one. In the remaining case a positive-to-negative
+transition involves distinct generators, leaving exponent
+$1-2$ or $2-1$. Intervening $a,c$-blocks cannot cancel because
+the original word is reduced. Thus the nerve images intersect
+only in their vertex, and the coequalizer is a homotopy pushout
+of their wedge inclusion. Mayer--Vietoris gives
+\[
+ H_2\bigl(\operatorname{coeq}(Nf,Ng);\Z\bigr)
+ =\ker\bigl(\Z^2\xrightarrow{(-1,-2)}\Z\bigr)
+ =\Z(2,-1).
+\]
+The group-colimit relation $a=ab$ kills $b$ and makes the
+second relation redundant, so that colimit is $F(a,c)$.
+The index itself has $H_1=\Z$ and is not total or exact.
+This checks the precise scope of both earlier results.
+The same independent program verifies the two Nielsen inverses on
+each signed basis element, the primitive integral kernel just
+displayed, and the group-colimit elimination. It also checks the
+surviving-$b$ assertion on all 39,364 nonempty reduced words through
+length nine. The reduced-word argument above proves that assertion
+without a length bound.
+\end{proof}
+
+\begin{claim}{D.6}{Proved}{Every exact index passes every free-monoid diagram}
+\label{D:exact-monoids}
+Let $A$ be a nonempty connected small category for which
+$\colim_A:\Ab^A\to\Ab$ is exact. For every diagram
+$M:A\to\mathrm{FreeMon}$, allowing all monoid homomorphisms,
+the canonical comparison
+\[
+ q_M:\int_A M\longrightarrow
+ \mathbf B\!\left(\colim_A^{\mathrm{Mon}}M\right)
+\]
+is homotopy final: its unique target comma category is weakly
+contractible. In particular $q_M\in W_\infty$, and every such
+monoid colimit has aspherical classifying space.
+\end{claim}
+\begin{proof}
+Write $C=\colim_A^{\mathrm{Mon}}M$ and
+$j_a:M(a)\to C$ for its cocone. Define a diagram $D:A\to\Cat$
+whose object set is the same set $C$ at every stage. Its arrows
+in stage $a$ are
+\[
+ \Hom_{D(a)}(c,c')=
+ \{m\in M(a):j_a(m)c=c'\}.
+ \tag{D.6.1}
+\]
+Composition is monoid multiplication. A transition $f:a\to b$
+is the identity on objects and sends the arrow $m$ to $M(f)m$.
+These formulas identify the comma category
+$*\backslash q_M$ with $\int_A D$ exactly, not just up to
+homotopy.
+
+There are three points to check.
+
+\emph{First, each $D(a)$ is a free category on a directed graph.}
+Choose a free basis $S_a$ of $M(a)$. The graph has vertices $C$
+and, for each $c\in C$ and $s\in S_a$, one edge
+$c\to j_a(s)c$. A word in $S_a$ specifies its unique directed
+path starting at $c$, and equality of words is precisely equality
+of the resulting arrows in (D.6.1). Thus this graph freely
+presents $D(a)$. No compatible choice of bases is needed:
+transition functors may send an edge to an arbitrary finite
+path, including a constant path. For completeness the required homology assertion has a short
+resolution proof. If $F$ is the free category on a graph with
+vertices $V$ and edges $e:v\to w$, put
+$P_v=\Z[F(v,-)]$. Then
+\[
+ 0\longrightarrow\bigoplus_{e:v\to w}P_w
+ \xrightarrow{\partial}\bigoplus_{v\in V}P_v
+ \longrightarrow\underline\Z\longrightarrow0,
+ \quad \partial(p,e)=[pe]-[p],
+\]
+is exact. At an object $x$, its augmented basis graph is the
+rooted tree of all finite paths ending at $x$: removing the first
+edge gives the unique predecessor of each nonempty path. Thus
+it is a projective resolution of length one, for arbitrary
+infinite graphs as well. Consequently
+\[
+ H_q(BD(a);\Z)=0\qquad(q\geq2).
+ \tag{D.6.2}
+\]
+
+\emph{Second, the strict categorical colimit is the regular
+translation category of $C$.} More precisely,
+\[
+ \colim_A^{\Cat}D\cong D_C,
+ \qquad
+ \Hom_{D_C}(c,c')=\{u\in C:uc=c'\}.
+ \tag{D.6.3}
+\]
+Here is a presentation proof, which checks the possible
+nonfiltered-colimit issue. Present $C$ by the disjoint union of
+the bases $S_a$, with the substitution relations
+$s=M(f)(s)$ for all $f:a\to b$ and $s\in S_a$.
+Present the categorical colimit by the graph edges $(c,s)$
+above, imposing the same substitutions as path relations
+\emph{at every initial vertex $c\in C$}. All transition
+functors fix objects, and $A$ is connected, so its object set
+is exactly $C$. Given a word and an initial $c$, all intermediate
+vertices of its path are forced by multiplication in $C$.
+Every defining monoid relation can be used in any word context
+at any such initial vertex, because the two substituted words
+have the same product in $C$ and hence the same endpoint.
+It follows in both directions that morphisms in the categorical
+presentation are precisely elements $u\in C$ with $uc=c'$.
+This proves (D.6.3); it does not assert that arbitrary categorical
+colimits commute with nerves. The category $D_C$ has initial
+object $1_C$, since the unique arrow $1_C\to c$ is labelled $c$.
+
+\emph{Third, the homotopy colimit is simply connected.}
+We spell out the fixed-object argument. For any diagram
+$E:A\to\Cat$ with common object set $S$ and identity object
+maps, the groupoid completion of $\int_A E$ has the arrows of
+all $E(a)$ and, for each $f:a\to b$ and $s\in S$, a transport
+arrow $t_{f,s}:(a,s)\to(b,s)$. The relations are composition
+within the $E(a)$, composition of transports, and the
+naturality squares for their arrows. Exactness implies totality
+by the argument in D.2; hence $BA$ is nonempty and weakly
+contractible. The groupoid completion $\Pi A$ is therefore
+connected and thin. Choose an object $a_0\in A$. For each $s$,
+conjugate every arrow to the objects $(a_0,s)$ along the unique
+transport classes in $\Pi A$. Composition makes these choices
+coherent, and all transport arrows become identities. The
+remaining presentation consists exactly of the arrows and
+relations of $\colim_A E$, with all arrows inverted. Thus
+\[
+ \Pi\!\left(\int_A E\right)
+ \simeq\Pi\!\left(\colim_A^{\Cat}E\right).
+ \tag{D.6.4}
+\]
+Apply this to $E=D$. By (D.6.3) its right side is the terminal
+groupoid, so $B\int_A D$ is nonempty, connected and simply
+connected.
+
+Finally the homology spectral sequence for the Grothendieck
+construction gives
+\[
+ E^2_{p,q}=T_p^A H_q(BD(a);\Z)
+ \Longrightarrow H_{p+q}\!\left(B\int_A D;\Z\right).
+\]
+Exactness kills every term with $p>0$, and (D.6.2) kills every
+term with $q\geq2$. Consequently the target has zero homology
+in degrees at least two. Its $H_1$ vanishes by the just-proved
+simple connectivity. The Hurewicz theorem, applied successively
+to the CW realization of its nerve, makes it weakly contractible.
+Quillen's Theorem~A now proves the assertion about $q_M$.
+Combining with D.2 proves the final asphericity assertion for
+$BC$.
+\end{proof}
+
+\begin{claim}{D.7}{Refuted}{Free monoid diagrams do not detect filteredness}
+\label{D:not-filtered}
+The implication asked in Part D.1 is false. The category
+$\Delta_{\mathrm{inj}}$ is a nonempty connected nonfiltered
+counterexample, and every diagram
+$M:\Delta_{\mathrm{inj}}\to\mathrm{FreeMon}$ passes the specified
+comparison with colimit in all monoids. In particular the
+assertion in Part D.3 is true: every such monoid colimit has
+aspherical classifying space. The same conclusion holds for
+all the exact coloured-word categories $W_m$ in R6.
+\end{claim}
+\begin{proof}
+We check R6 at the concrete step required. The normalized
+integer cone in TOTASPH C.9 supplies, for every $[n]$, an
+augmentation-one combination $t:[n]\to[N]$ for which $th$ is
+independent of an injection $h:[k]\to[n]$. Its polynomial
+verification uses gap monomials and the identity
+$P_{t\delta^i}=y_iD_i(P_t)$; the coordinate-hyperplane
+inclusion--exclusion construction makes all these expressions
+equal and preserves value one at the all-ones point. Equalizing
+cofaces implies equalizing all injections by their factorization
+and the coface identities. Thus the affine category is filtered;
+Isbell--Mitchell, Theorem~1, gives exactness. Their original
+Theorem~3, read in the attached 1973 paper, states precisely this
+filtered-affinization result, with its signed binary-tree cones.
+For $W_m$, TOTEX E.2 lifts each $f:[l-1]\to[N-1]$ to the
+colour-preserving map $i\mapsto mf(i-1)+w_i$ into
+$(1,\ldots,m)^N$. For a coloured embedding $a:p\to w$, the
+composite is $j\mapsto mf(a(j)-1)+p_j$, so the same affine
+identities survive the lift. This verifies exactness of every
+$W_m$ used here. Apply D.6. The two
+point inclusions $[0]\rightrightarrows[1]$ cannot be equalized
+by an increasing injection, proving nonfilteredness directly.
+This counterexample is uniform over all free bases and all
+word substitutions; it is not restricted to basis maps or to
+the interval example.
+\end{proof}
+
+\paragraph{The positive-monoid issue for $\mathcal C_\delta$.}
+D.4 answers Part D.4 by its expressly permitted alternative:
+it gives a diagram of free groups with colimit in groups for
+which the comparison fails. The group presentations (D.4.1)
+include inverse letters. Abstract freeness and free-factor
+inclusions do not specify compatible positive bases, and
+forgetting the group structure gives monoids with nontrivial
+units, not free monoids. Therefore D.4 does not by itself
+give a diagram in $\mathrm{FreeMon}$. For a single relator one
+can set $a=u_2u_1^{-1}=v_1v_3^{-1}$ and choose positive
+expressions $u_2=au_1$, $v_1=av_3$. Across overlapping
+hyperedges these choices impose simultaneous prefix equations;
+the relative private-vertex argument does not prove their
+compatibility. No assertion is made here that
+$\mathcal C_\delta$ passes or fails all free-monoid tests.
+The exact-category counterexample D.7 refutes the general
+implication in Part D.1. The prompt also expressly asks for
+the particular $\mathcal C_\delta$ case; that requested subcase
+remains open in this return and is not discharged by D.7.
+
+
+\paragraph{Literature boundary.}
+Fiedorowicz's Proposition~4.4 \cite{CDFiedorowicz1984} gives
+another test for the conclusion about a monoid $C$: its
+universal group-cover is the two-sided bar, so asphericity is
+equivalent to vanishing of
+$\Tor_i^{\Z C}(\Z,\Z[C^{\mathrm{gp}}])$ for $i>0$.
+We read that proof. D.6 instead proves contractibility of the
+comparison comma directly and therefore does not need an
+amalgamation theorem or a flatness assertion for inclusions of
+monoids. In particular it does not use the Lemma~5.2(a) of that
+paper refuted by the attached Gray--Steinberg source. Searches
+for exact colimits, free monoids, free categories, and
+semicosimplicial monoids located no exact statement of D.6;
+the source log records the opened texts and the unavailable
+McDuff original. No claim of priority is made.

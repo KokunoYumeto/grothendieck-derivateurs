@@ -1,0 +1,10 @@
+kpse.set_program_name("lualatex")
+local path = os.getenv("TEXMFCACHE")
+print("cache-env", path)
+print("cache-kpse", kpse.expand_var("$TEXMFCACHE"))
+print("cache-attributes", lfs.attributes(path,"mode"), lfs.attributes(path,"permissions"))
+print("cache-writable-test", lfs.iswritablefile and lfs.iswritablefile(path))
+print("cache-readable-test", lfs.isreadablefile and lfs.isreadablefile(path))
+local f, e = io.open(path .. "/cache_probe.tmp", "w")
+print("io-test", f, e)
+if f then f:write("probe\n"); f:close(); os.remove(path .. "/cache_probe.tmp") end

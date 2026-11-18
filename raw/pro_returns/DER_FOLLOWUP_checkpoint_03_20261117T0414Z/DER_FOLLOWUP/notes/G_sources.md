@@ -1,0 +1,31 @@
+# Part G: source and search ledger
+
+## Opened attached sources
+- REVLOC/sections/F12.tex: F.1, F.1.1, F.2 read in full. F.1 four tests and countable-witness proof checked; finite examples independently reconstructed. F.1.1 checked by opening its Cisinski theorem chain.
+- R20_expert_XV_XVI.md: read in full.
+- chapters_XV_XVI/DER_XVI.tex: manuscript 1–16, especially Loc(1) a/b/c, Loc(2), absolute Loc(3), relative Loc(3 bis), 2.3–2.5; the size-axiom passages and passages of manuscript 99–118 concerning HOT, gluing and filtered-colimit axioms. This is a selective read, not a claim to have followed every argument on pages 99–118.
+- chapters_XV_XVI/DER_XV-b.tex: manuscript 116–137, particularly axiom renumbering, 9.11–9.13 and 10.1.
+
+## Opened primary web sources
+- Denis-Charles Cisinski, Les préfaisceaux comme modèles des types d’homotopie, Astérisque 308 (2006), https://cisinski.app.uni-regensburg.de/ast.pdf. Opened PDF, then checked Definition 1.4.1 (exact three presheaf-localizer axioms); Definition 1.4.12 (weak saturation); Theorem 6.1.18 and its proof through 6.1.18.1–5 (least weak basic localizer); Proposition 3.4.25 (every simplicial localizer regular); Proposition 4.2.4 (full fundamental localizers strongly saturated); Definition 4.2.11, Theorem 4.2.15 and Remark 4.2.16 (test-localizer correspondence). Bibliographic landing page also opened at https://numdam.org/item/AST_2006__308__R1_0/. Web refs turn3view2, turn7view0–2, turn13view1, turn19view0–2, turn38view0, turn40view1, turn41view0. G.9 uses the theorem's relation V=iΔ^{-1}W' followed by last-vertex squares, avoiding any confusion between ordinary nerve and iΔ's right adjoint.
+- Georges Maltsiniotis, La théorie de l'homotopie de Grothendieck, provisional March 2020 version, https://webusers.imj-prg.fr/~georges.maltsiniotis/ps/prstnewprov2020.pdf. Opened Section 3.1 through Theorem 3.1.7, including Proposition 3.1.2 (cross-adjunction), Theorem 3.1.4 (diagram/slice localization comparison under weak axioms), Lemma 3.1.5 (composition over bases uses relative axiom), and Theorem 3.1.7 (left Kan adjunction). The source explicitly strengthens the localizer hypothesis immediately before Lemma 3.1.5. Refs turn24view0, turn30view0, turn31view0–2, turn32view0–1, turn38view1, turn39view3.
+- Daniel Quillen, Higher algebraic K-theory I (1973), https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/Quillen-Higher-I.pdf. Opened Section 1: Proposition 2 and corollaries on adjoints, Proposition 3 on filtered colimits, Theorem A and its dual comma orientation. Ref turn44view0. Theorem A applies directly because the aspherical categories in G.1 and G.4 are exactly weakly contractible; both comma orientations are explicitly present in the source.
+- Mathlib documentation, CategoryTheory.Localization.FiniteProducts, https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Localization/FiniteProducts.html: opened, theorem preservesProductsOfShape has [Finite J]; records the finite theorem but does not settle infinite products. Ref turn1view0.
+- Chencheng Zhang, Gabriel--Zisman Localizations, Products, Coproducts, and Product Categories, arXiv:2609.18617 (2026): primary abstract retrieved (turn1academia6 / turn20academia24); full text NOT OBTAINED. Direct arXiv abs, HTML, PDF, export.arxiv PDF and ar5iv attempts were disabled or inaccessible. No numbered theorem or proof in this paper was read; no theorem-level attribution made. Independent proof supplied in numbered claim G.12 (prompt item G.4).
+- Denis-Charles Cisinski, primary MathOverflow answer to “Example of a weak basic localizer which is not a basic localizer”, https://mathoverflow.net/questions/348949/example-of-a-weak-basic-localizer-which-is-not-a-basic-localizer/348953. Answer opened, posted 22 December 2019, updated 26 December 2019; ref turn24search1. Historical search context only, not a proof source for any present claim.
+
+## Searches
+G.1/G.2: “weak fundamental localizer products”; “weak basic localizer products”; “localisateur fondamental faible connexité”; “localisateur fondamental faible adjoint”; “Cisinski les préfaisceaux types homotopie 6.1.18 localisateur fondamental faible”.
+G.4: “localization category infinite products stable weak equivalences counterexample”; exact title “Gabriel--Zisman Localizations, Products, Coproducts, and Product Categories”; “2609.18617 Example 4.1” restricted to arxiv.org; “Chencheng Zhang Localizations pdf”; “localization infinite products calculus of fractions counterexample”.
+
+Additional primary-source queries: “Example of a weak basic localizer which is not a basic localizer”; “Maltsiniotis théorie homotopie Grothendieck 3.1.7”; “Quillen Higher algebraic K theory I 1973 Theorem A pdf”. The G.1/G.2/G.4 headings in this search ledger denote prompt items, not the later claim numbers.
+
+## Independent computations
+- `code/G_finite_witnesses.py` and `code/outputs/G_finite_witnesses.json`: all assertions passed; complete finite orders, functors, adjunctions, sieve covers, integral sphere degrees, product cycle, and circle wedge homology matrix.
+- `code/G_zigzag_bound.py` and `code/outputs/G_zigzag_bound.json`: all assertions passed; labels through 30, distances 0 through 30, and 29,660 tuple morphisms checked. The countably infinite counterexample is proved by a uniform bound in the text, not by this finite experiment.
+
+No priority claim is made for the arguments or examples in this part.
+
+## Build-runtime sources (not mathematical evidence)
+
+The incomplete system TeX installation was supplemented in the workspace with the CTAN archives `luaotfload.zip`, `lualibs.zip`, `lualibs.tds.zip`, and `lua-uni-algos.zip`. Their exact download URLs, byte lengths, and SHA-256 digests are recorded in `build/tex_runtime/archives.json` and enforced by `code/G_setup_tex.py`. Archive licenses are retained. The official CTAN page https://ctan.org/pkg/lua-uni-algos was opened to verify the Unicode-module dependency (web ref turn74view0). A guessed `install/macros/luatex/generic/lua-uni-algos.tds.zip` URL returned 404; the package's documented ordinary zip succeeded. None of these runtime sources supports a mathematical claim.

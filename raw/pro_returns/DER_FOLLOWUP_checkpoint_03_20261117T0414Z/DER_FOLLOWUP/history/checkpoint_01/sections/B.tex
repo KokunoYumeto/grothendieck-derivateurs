@@ -1,0 +1,588 @@
+\section{Fibred categories over interval types}
+\label{sec:B}
+
+We use $C=\Ty^{\op}$. Its objects are finite words in $+,-$, including
+the empty word; its arrows are nondecreasing, sign-preserving maps of
+letter sets. Write $P=R^{\op}$ for its reachability preorder and
+$p:C\to P$ for the projection. The run number $\nu(w)$ is the number
+of maximal constant-sign runs, with $\nu(\emptyset)=0$. An arrow
+$w\to v$ implies $\nu(w)\leq\nu(v)$. For equal positive run numbers
+it also forces equality of the first signs. Conversely these conditions
+are sufficient, with either first sign allowed when the inequality is
+strict. Thus reduction of a nonempty word to its alternating run word
+describes its class in $P$, without asserting that run reduction is a
+functor on $C$.
+
+\begin{claim}{B.1}{Known}{Audits of R12 and the two INDLOCAL comparisons}
+\label{B:audits}
+R12, INDLOCAL C.21 and INDLOCAL C.23 have the stated variance and
+their conclusions used below hold. In particular $C$ is neither
+total nor exact, and a projective type sequence is cofinal exactly
+when its run numbers are unbounded. The comparison
+$E_t\to C_\infty(t)$ is always a weak equivalence. The other leg
+is not a weak equivalence uniformly for all diagrams.
+\end{claim}
+\begin{proof}
+For R12, put $a=++$, $b=+-+$ and use the maps
+$e,c:a\rightrightarrows b$ with letter maps $(1,3)$ and $(1,1)$.
+Every sign-preserving map out of $b$ is injective on its three
+letters. Thus every $ge$ is injective and every $hc$ is constant;
+no equality $ge=hc$ is possible. On the free module on $C(a,w)$,
+the functional taking value one on injective maps and zero on
+constant maps satisfies
+$\lambda(t(e-c))=\operatorname{aug}(t)$.
+This rules out an affine equalizer over every nonzero ring.
+
+We spell out the compressed homological step of TOTAL\_EXACT\_2
+C.40, label \texttt{FT:ty}, whose proof we read in full. Let
+$P_x=\Z[C(x,-)]$, let $d:P_b\to P_a$ send $g$ to $ge-gc$,
+and put $K=\ker d$, $J=\im d$. Every element of $K(w)$ has
+augmentation zero. Hence the map
+$\colim K\to\colim P_b=\Z$ is zero: a colimit element is a
+finite sum of classes represented at possibly different objects,
+and each summand has zero augmentation. Right exactness applied
+to $K\to P_b\to J\to0$ gives $\colim J=\Z$. Its map into
+$\colim P_a=\Z$ is zero, because every $ge-gc$ has augmentation
+zero. The derived sequence for
+$0\to J\to P_a\to\Z[C(a,-)/(ge\sim gc)]\to0$
+therefore gives $T_1=\Z$. The permutation-module bar is exactly
+the nerve chains of the element category. This verifies the
+integral $H_1$ assertion and finds no error in the return.
+
+In INDLOCAL C.21 the run numbers along a projective sequence are
+nondecreasing. Unbounded alternating strings contain every finite
+sign word as a weakly increasing sign-preserving letter map.
+Conversely maps from all alternating words force unbounded run
+number. For a bounded sequence the eventual run word is fixed,
+and the contractible hom-posets of types identify its path fibres
+with that fixed run word modulo natural transformations. These are
+the precise steps retained here; we do not reopen its path-diagram
+classification.
+
+For C.23, with $u:J\to T$ and $F:T^{\op}\to\Cat$, the comma of
+the induced total-category functor over $(t,z)$ retracts onto
+$u/t$. Over $(j,\alpha:u(j)\to t)$ its fibre is the slice at
+$F(\alpha)z$, with terminal arrow $\id$. Selecting those arrows
+is a natural section, and the given slice arrows contract the
+fibres. Thus contractible $u/t$ suffice by Theorem A; the discrete
+representable $T(-,t)$ proves necessity. For a sequence, the nerve
+of a filtered categorical colimit is its filtered simplicial
+colimit, and a filtered homotopy colimit maps weakly equivalently
+to that colimit. This proves the first comparison leg, with its
+actual map, as in PATHS A.2. The representable of $+$ gives a
+contractible all-type total and a sequential discrete colimit
+with several elements, so the second leg fails in general.
+\end{proof}
+
+\begin{claim}{B.2}{Proved}{Every bounded reachability interval is contractible}
+\label{B:interval}
+For any types $r\leq s$ in $R$, the full subcategory of $\Ty$
+on $\{\tau:r\leq\tau\leq s\}$ is weakly contractible.
+\end{claim}
+\begin{proof}
+Pass to the opposite category, so the interval is $s\leq w\leq r$
+in $P$. If $s$ is empty, the interval has initial object the empty
+word. Otherwise let $k=\nu(s)>0$ and $l=\nu(r)\geq k$, and replace
+only their reachability labels by the alternating run words.
+
+Let $K$ be the nerve of the indiscrete groupoid on two objects
+labelled $+,-$. The nonempty-word part of $C$ is exactly
+$\Delta/K$: a word lists the vertices of a simplex, and its
+monotone sign-preserving maps are precisely simplex maps. Let
+$A_r\subset K$ be the image of the alternating $(l-1)$-simplex
+whose word is $r$. Its simplices are exactly the words $w\leq r$.
+If $k=l$, let $L$ be its boundary subcomplex, consisting of all
+lower-dimensional nondegenerate simplices. If $k<l$, let $L$ be
+the image of the alternating $(k-1)$-simplex with first sign
+opposite to that of $s$. In either case, the simplices of $A_r$
+outside $L$ are exactly those with $s\leq w\leq r$.
+
+We establish below two precise geometric facts: the image of an
+alternating $d$-simplex of $K$ realizes as a closed $d$-ball with
+all lower simplices in its boundary; and the category of simplices
+of a simplicial set $A$ outside a simplicial subset $L$ has the
+weak type of $|A|\setminus|L|$. Consequently our interval has the
+weak type of a closed ball with a closed subset of its boundary
+removed. Straight-line contraction to an interior point contracts
+that complement. This also covers $k=l$, where the complement is
+the open top cell, and $k=l=1$, where it is a point.
+
+\input{sections/B_interval_proof.tex}
+\end{proof}
+
+\begin{claim}{B.3}{Proved}{The three local coherence conditions are equivalent}
+\label{B:coherence}
+For every strict $F:C\to\Cat$, with the conventions of the
+question,
+\[
+                 (2F)\quad\Longleftrightarrow\quad
+                 (\mathrm{DESC})\quad\Longleftrightarrow\quad
+                 (\mathrm{LOC}).
+\]
+The equivalence includes the allowed zigzags in $(2F)$; it does
+not require a chosen strict action on the given representative $F$.
+\end{claim}
+\begin{proof}
+We check the ingredient retained from PATHS C.P1. For two types,
+the poset of endpoint-fixed monotone interval functors is empty or
+contractible. In the nonempty case remove an initial source run
+of the wrong sign; every type map is constant there. For matching
+initial signs, move every noninitial image vertex up to the last
+vertex of the first target run when necessary. All moved vertices
+lie on that same run, so this is an endofunctor with a natural
+transformation to or from the identity according to the sign.
+Its image has the first run prescribed. Delete the two prescribed
+runs and induct. This proves the claimed contraction with its
+directions checked. Composition makes these posets the strict
+2-category $\TTy$.
+
+A strict action on $\TTy^{\op}$ therefore gives, after applying
+classifying spaces, an enriched diagram whose indexing
+hom-spaces are empty or contractible. The projection of this
+enriched category to $P$ is the identity on objects and an
+equivalence on every hom-space; it is a Dwyer--Kan equivalence.
+Restriction along it is an equivalence on homotopy-coherent
+space-valued diagrams. Thus $(2F)$ implies $(\mathrm{DESC})$.
+Objectwise weak-equivalence zigzags preserve this conclusion.
+This is the precise coherent descent in PATHS C.P2, rather than
+an inference from equality of maps in an ordinary homotopy category.
+
+For $r\in C$, put $C_{\leq r}=\{w:p(w)\leq p(r)\}$.
+The homotopy left Kan extension of $BF$ along $p$ has value
+\[
+       (p_!BF)(r)=\hocolim_{C_{\leq r}}BF.
+\]
+The inclusion of the fibre in $(\mathrm{LOC})$ is its unit, under
+the natural Grothendieck-construction comparison. If $BF=p^*G$
+coherently, the functor $C_{\leq r}\to P_{\leq r}$ is homotopy
+final: its comma at $s\leq r$ is precisely the interval of B.2.
+Hence this homotopy colimit is $G(r)$, since $r$ is terminal in
+$P_{\leq r}$. The unit is a weak equivalence. This proves
+$(\mathrm{DESC})\Rightarrow(\mathrm{LOC})$.
+
+For the converse we supply an explicit strictification. Use
+covariant Grothendieck constructions and define strict diagrams
+\[
+ G(r)=\int_{C_{\leq r}}^{\rm co}F\quad(r\in P),\qquad
+ H(r)=\int_{C/r}^{\rm co}F\circ\mathrm{source}\quad(r\in C).
+\]
+Maps of $G$ are inclusions of full indexing subcategories;
+maps of $H$ postcompose the displayed arrow into $r$.
+There are strict natural functors
+\[
+ F\ \xleftarrow{q}\ H\ \xrightarrow{k}\ p^*G.
+\]
+At $r$, $q$ sends $(w,\alpha:w\to r,x)$ to $F(\alpha)x$;
+$k$ forgets $\alpha$. The section $x\mapsto(r,\id,x)$ is
+right adjoint to $q$, as the arrow $(\alpha,\id)$ supplies
+the adjunction unit. Thus $q_r$ and its section are weak
+equivalences. The composite of that section with $k_r$ is the
+fibre inclusion into $G(r)$, a weak equivalence by $(\mathrm{LOC})$.
+Consequently $k_r$ is a weak equivalence as well. The covariant
+and fibred versions used here have the same natural homotopy
+colimit model; applying opposites to the fibres and to the total
+construction checks the variance. Finally $p^*G$ extends strictly
+to $\TTy^{\op}$ by sending every 2-cell to an identity. The
+displayed zigzag proves $(2F)$ exactly in its stipulated sense.
+\end{proof}
+
+\subsection{An intrinsic criterion without quantifying over sequences}
+
+Let $\Omega$ be the category of countable linearly ordered sets
+labelled by $+,-$ which contain alternating finite subsets of
+arbitrarily large size. Its maps are all nondecreasing
+sign-preserving functions. We work with a set of concrete countable
+models closed under finite subsets and tagged ordered sums; this
+makes all indexing categories small. Fix
+$J=(\mathbb N,+,-,+,-,\ldots)\in\Omega$.
+For a countable labelled order $L$ define the category
+\[
+ F^\omega(L)=\colim_{S\subset L\text{ finite}}F(S),
+ \tag{B.4.1}
+\]
+where finite $S$ is given its induced order and signs and identified
+with its unique standard word. For a monotone sign-preserving map
+$f:L\to L'$, send the $S$-stage through the actual finite map
+$S\to f(S)$ and then into the colimit. This specifies a functor,
+including maps which identify equal-sign letters.
+
+\begin{claim}{B.4}{Proved}{Complete classification of the comparison property}
+\label{B:classification}
+A strict diagram $F:\Ty^{\op}\to\Cat$ satisfies $(\mathcal D)$
+if and only if $F^\omega$ takes every map in $\Omega$ to a weak
+equivalence. Equivalently, for every $L\in\Omega$, both specified
+inclusions in
+\[
+ F^\omega(L)\longrightarrow F^\omega(L+J)
+                 \longleftarrow F^\omega(J)
+ \tag{B.4.2}
+\]
+are weak equivalences. Here $+$ is ordered concatenation, and
+the arrows are induced by its two canonical inclusions.
+Thus (B.4.2) is a necessary and sufficient condition on $F$ alone,
+with no choice of transition maps or cofinal sequence in its statement.
+\end{claim}
+\begin{proof}
+First, every projective type sequence, viewed covariantly in $C$,
+has a filtered colimit $L$ in countable labelled linear orders.
+Its order is well defined on the equivalence classes: a finite
+list of representatives can be compared at a common stage, and
+distinct limiting classes remain distinct. Signs are unchanged
+by all transition maps. Each alternating finite subset of a stage
+remains distinct in the limit, so cofinality is equivalent to
+$L\in\Omega$. Conversely enumerate any $L\in\Omega$ and take
+the increasing sequence of its finite subsets. Their induced
+words form a cofinal sequence with colimit $L$.
+
+Every finite map into a filtered colimit of such orders factors
+at a stage, and an equality of two finite maps holds at a later
+stage. This follows by putting their finitely many representatives
+and finitely many equality conditions at one common stage.
+Consequently the left Kan extension (B.4.1) gives a canonical
+isomorphism of categories
+\[
+       \colim_n F(t_n)\ \cong\ F^\omega(L).
+\]
+The assertion remains valid for noninjective transitions.
+
+Let $\widehat C$ be the category of all finite or countable labelled
+linear orders in our chosen set of models. The category of finite
+subsets of $L$ is homotopy final in $C/L$: over a finite map
+$a\to L$, its comma is the filtered poset of finite subsets
+containing its image, with that image as initial object. Hence
+$BF^\omega$ is also the homotopy left Kan extension of $BF$
+from $C$ to $\widehat C$. Filtered categorical colimits and their
+homotopy colimits agree here by B.1.
+
+The inclusion $\Omega\to\widehat C$ is homotopy final. In the
+comma over $L$, apply $T(A,f)=(A+J,\iota_A f)$. There are natural
+arrows from the identity and from the constant object
+$(L+J,\iota_L)$ to $T$, the latter induced by $f+\id_J$.
+These contract the comma. The same sum operation, with the
+inclusions of $L$ and $J$, contracts $B\Omega$ itself. Fubini
+for homotopy left Kan extensions and finality now give a natural
+weak equivalence
+\[
+ \hocolim_C BF\ \simeq\ \hocolim_{L\in\Omega}BF^\omega(L).
+ \tag{B.4.3}
+\]
+Its comparison at a particular $L$ is the canonical roof of
+the question, using any finite-subset sequence for $L$. For an
+arbitrary sequence with limit $L$, the finite-factorization
+argument above identifies its roof with the same comparison.
+This identification is natural in every map of labelled orders.
+
+If $(\mathcal D)$ holds, these comparisons are all equivalences;
+naturality and two out of three make every $F^\omega(f)$ an
+equivalence. Conversely, a diagram of spaces sending every arrow
+of $\Omega$ to an equivalence factors through its groupoid
+completion. Since $B\Omega$ is contractible, each value maps
+equivalently to its homotopy colimit. Equation (B.4.3) proves
+$(\mathcal D)$, including its actual canonical comparison.
+
+The all-arrows condition clearly implies (B.4.2). Conversely,
+the functor $T(L)=L+J$ has natural transformations
+$\id_\Omega\to T\leftarrow\mathrm{const}_J$.
+If both components in (B.4.2) are weak equivalences, naturality
+first makes $F^\omega(Tf)$ and then $F^\omega(f)$ a weak
+equivalence for every $f$. This proves the claimed equivalent
+test and both directions of the classification.
+\end{proof}
+
+\begin{claim}{B.5}{Proved}{The precise sequential form of Lead 5(b)}
+\label{B:infinity}
+The map $BE_t\to B\int_{\Ty}F$ is, naturally in the homotopy
+category of arrows, the sequential homotopy colimit of the units
+\[
+ BF(t_n)\longrightarrow B\int_{t_n\uparrow}F.
+\]
+In particular $(\mathrm{LOC})\Rightarrow(\mathcal D)$.
+Deleting any fixed bounded set of run numbers does not change
+the homotopy-colimit comparisons for any $F$.
+\end{claim}
+\begin{proof}
+The full subcategories $t_n\uparrow$ of $\Ty$ increase with $n$
+and their union is $\Ty$. Their fibred total categories increase
+as full subcategories and exhaust $\int F$, including all arrows
+and every finite nerve simplex. Thus their sequential homotopy
+colimit maps weakly equivalently to the total category. The unit
+maps form the natural homotopy-coherent unit of the homotopy left
+Kan extension in B.3. Their coherence is also the explicit
+cartesian arrow for a transition of types. Taking the homotopy
+colimit of this unit gives precisely the comparison, by the
+natural Grothendieck-construction theorem. This is an equivalence
+of specified arrows in spaces; it is not an assertion that the
+two displayed diagrams of categories commute strictly before
+those cartesian transformations are included.
+
+For the last assertion let $C_{>m}$ be the full subcategory of
+words with more than $m$ runs. For $a\in C$ choose a fixed
+alternating buffer $b$ with more than $m+1$ runs. In
+$a\backslash C_{>m}$, the endofunctor $(w,f)\mapsto(w+b,\iota f)$
+receives natural arrows from the identity and from the constant
+$(a+b,\iota_a)$, using $f+\id_b$. All words involved remain
+in $C_{>m}$. The comma is contractible, so that full inclusion
+is homotopy final for every diagram. Every cofinal sequence also
+eventually lies there. This proves the asserted invariance at
+infinity without imposing a condition on low fibres.
+\end{proof}
+
+\begin{claim}{B.6}{Refuted}{The comparison property need not imply local coherence}
+\label{B:DnotLOC}
+There is an explicit presheaf of sets satisfying $(\mathcal D)$
+but failing all three conditions in B.3.
+\end{claim}
+\begin{proof}
+Put $a=++$ and define the covariant set diagram on $C$
+\[
+ S(w)=
+ \begin{cases}C(a,w),&\nu(w)\leq1,\\ \{*\},&\nu(w)>1.
+ \end{cases}
+\]
+On the lower region use postcomposition, on the upper region use
+the identity of a singleton, and across the boundary use the
+unique map. There are no arrows from the upper region to the
+lower, so this defines all maps and satisfies composition.
+By B.5 its total homotopy colimit is the contractible nerve of
+$C_{>1}$; that category is contracted by $w\mapsto w+b$ with
+the two block inclusions. Every cofinal sequence is eventually
+the singleton diagram, so $(\mathcal D)$ holds. At $a$, however,
+$S(a)$ has three elements. The downset $C_{\leq a}$ consists
+of the empty word and the nonempty positive words; its element
+category for $C(a,-)$ has initial object $(a,\id_a)$.
+The local comparison is therefore a three-point space mapping
+to a contractible space and fails on components. B.3 gives the
+other two failures. The empty and all-negative lower fibres
+are empty exactly as the representable formula specifies.
+\end{proof}
+
+\begin{claim}{B.7}{Refuted}{One cofinal sequence does not suffice}
+\label{B:D1notD}
+There is a finitely presented set diagram $S:C\to\Set$ with
+contractible all-type total category such that its comparison
+is a weak equivalence along a dense cofinal sequence and fails
+on components along the alternating sequence $J$.
+Consequently $(\mathcal D_1)$ does not imply $(\mathcal D)$,
+even for presheaves of sets.
+\end{claim}
+\begin{proof}
+Take $a=+-$ and $b=+-+-$, and let $i:a\to b$ select the first
+and last letters. Put $R=C(a,-)$ and let $T\subset R$ be the
+image of $C(b,-)\to C(a,-)$ induced by $i$. Thus an element of
+$R(w)$ is a marked pair $p<q$ with signs $+,-$; it belongs to
+$T(w)$ precisely when there are $p<x<y<q$ with signs $-,+$.
+All four images are distinct by sign preservation and monotonicity.
+Set
+\[
+                 S=R\amalg_T1_C.
+ \tag{B.7.1}
+\]
+This is the pointed quotient collapsing all pairs in $T(w)$
+to the added basepoint. It is also the pushout of
+$C(b,-)\to C(a,-)$ and $C(b,-)\to C(\emptyset,-)$, so is
+finitely presented. These formulas specify every transition map.
+
+We prove $B\El_C T$ contractible. First retain only its
+injective underlying arrows, obtaining $E_{\rm inj}$. Its
+objects are finite signed orders with marked endpoints $p,q$
+and at least one extra $-,+$ pair between them. Amalgamate a
+variable such object with the fixed marked word $b$, identifying
+the two marked endpoints. In each of the three gaps cut out
+by those endpoints, put variable-side points before fixed-side
+points. On an injective arrow fixing the endpoints use that
+arrow on the variable side and the identity on $b$. No outside
+point can enter a marked endpoint under such an injection.
+This gives an endofunctor with natural arrows from the identity
+and from the constant $b$. Thus $BE_{\rm inj}$ is contractible.
+
+The inclusion $j:E_{\rm inj}\to\El_C T$ is a weak equivalence.
+Fix a target marked word $w$. An object of $j/w$ is a monotone
+sign-preserving map $g:v\to w$ preserving the marked endpoints;
+its arrows are injections over $w$. Amalgamate $v$ with a fixed
+copy of $w$ over those endpoints and map the union to $w$ by
+$g$ and the identity. Order the union first by its image letter
+in $w$. In a nonmarked image fibre put all variable-side points
+before the fixed point. In either marked fibre put the variable
+points preceding its marked point first, then the identified
+marked point, then the remaining variable points. This order
+extends both source orders and preserves signs. An injection
+over $w$ preserves each image fibre and each side of a marked
+point, so the construction is functorial on $j/w$. It receives
+natural injections from the variable object and from $(w,\id)$.
+It stays in $T$ because it contains the fixed $w$. Hence every
+such comma is contractible, and Theorem A proves the assertion.
+
+The objectwise pushout square (B.7.1) is a homotopy pushout of
+spaces, since $T(w)\to R(w)$ is injective. Homotopy colimits
+preserve this square. The three homotopy colimits for $T,R,1_C$
+are contractible: the first was just proved, the second is the
+representable element category with initial object $(a,\id)$,
+and the third is $BC$, with initial empty word. Consequently
+$\hocolim_C S$ is contractible.
+
+For the good sequence take the dyadic rationals with their usual
+order. Give a reduced dyadic rational sign $+$ or $-$ according
+as its denominator exponent is even or odd; integers have sign
+$+$. Each sign class is dense. Enumerate the set and take the
+induced finite-subset sequence. Its run numbers are unbounded.
+Between every $+$ point $p$ and $-$ point $q>p$ lie a $-$ point
+and then a $+$ point. Hence every element of $R(L)$ belongs
+to $T(L)$, and $S^\omega(L)=\{*\}$. The comparison between
+this singleton and the contractible total is a weak equivalence.
+
+For the bad sequence use the initial finite subsets of $J$.
+Its limit has
+\[
+ S^\omega(J)=\{*\}\amalg
+       \{(2m,2m+1):m\in\mathbb N\}.
+\]
+Indeed a $+$--$-$ pair at distance at least three has the
+intermediate $-,+$ witness, while an adjacent pair never does.
+Thus the comparison fails on components. The program
+\texttt{code/B\_type\_checks.py} independently checks the
+finite presentation, functor laws, the two amalgam ordering
+rules, and the adjacent-pair invariant. The proofs above, rather
+than a finite bound, establish the two infinite-sequence claims.
+\end{proof}
+
+\begin{claim}{B.8}{Proved}{All implications and the exact answer for sets}
+\label{B:table}
+For arbitrary category-valued diagrams, and also within
+presheaves of sets, the full implication diagram is
+\[
+ (2F)\ \Longleftrightarrow\ (\mathrm{DESC})
+ \ \Longleftrightarrow\ (\mathrm{LOC})
+ \ \Longrightarrow\ (\mathcal D)
+ \ \Longrightarrow\ (\mathcal D_1),
+\]
+and neither final implication reverses. Every implication
+between two of the five conditions follows exactly by
+transitivity from this display.
+
+For a set diagram $S$, the first three conditions are equivalent
+to $S$ factoring through $P$, up to its unique transported natural
+isomorphism. The diagrams for which $\Ty/S$ has weakly
+contractible components indexed by $\colim_n S(t_n)$ for every
+cofinal sequence are exactly those for which the two set maps
+in (B.4.2) are bijective for every $L\in\Omega$.
+\end{claim}
+\begin{proof}
+B.3 and B.5 prove the positive implications. B.6 refutes each
+reverse implication from $(\mathcal D)$ to a condition in the
+first equivalence class. B.7 refutes $(\mathcal D_1)$ implying
+any stronger condition. Both examples are set diagrams, so
+the same failures hold in that subcategory.
+
+For discrete values, a natural transformation along a 2-cell
+forces equality of its two maps. Connectedness of every
+nonempty type hom-poset therefore forces all parallel maps
+to have the same effect. This is precisely factorization
+through $P$. Alternatively take components of a coherent
+descent equivalence; a coherent diagram of discrete spaces is
+an ordinary set diagram, and its equivalences are bijections.
+Conversely such a factorization gives a strict action with
+all 2-cells identities.
+
+For the last assertion apply B.4 to discrete categories. The
+filtered categorical colimit is discrete, so a weak equivalence
+is exactly a bijection. If its criterion holds, the extension
+to $\Omega$ is a constant diagram of sets up to a natural
+isomorphism, since $B\Omega$ is contractible and all transition
+maps are bijective. Equation (B.4.3) identifies the total with
+that discrete set, canonically on components. Conversely the
+specified component and contractibility assertion says exactly
+that every comparison from its discrete sequential colimit is
+a weak equivalence, so B.4 gives the criterion. This proof
+includes empty presheaves, where all the spaces are empty.
+\end{proof}
+
+\begin{claim}{B.9}{Proved}{The comparison as strict 2-categorical weak equivalences}
+\label{B:two-category}
+Let $F:\TTy^{\op}\to\Cat$ be a strict 2-functor. Regard
+ordinary categories as locally discrete strict 2-categories,
+and write $\mathcal E_F$ for its fibred 2-Grothendieck construction.
+For every cofinal sequence $t$, both arrows in the specified roof
+\[
+       C_\infty(t)\ \longleftarrow E_t
+                         \longrightarrow\mathcal E_F
+\]
+are weak equivalences in the Thomason structure used in 317.
+The comparison $\int_{\Ty}F\to\mathcal E_F$, identity on
+objects and 1-arrows, is likewise a strict 2-functor and a weak
+equivalence. These statements are invariant under the
+objectwise weak-equivalence replacements allowed in $(2F)$.
+\end{claim}
+\begin{proof}
+The 2-construction has objects $(\tau,x)$, 1-arrows
+$(\phi,f):(\tau,x)\to(\sigma,y)$ with
+$f:x\to F(\phi)y$, and a 2-arrow induced by
+$\alpha:\phi\Rightarrow\psi$ precisely when
+$F(\alpha)_y f=g$. Composition and the interchange law are
+those of the strict 2-action. Thus the two stated functors
+are defined on all cells.
+
+The enriched homotopy-colimit theorem
+\cite[Theorem 5.1 in the opened preprint]{BCegarraHeredia2015}
+identifies its classifying
+space with the enriched bar of $BF$. Under the equivalence of
+enriched indexing categories with $P$ used in B.3, this bar is
+the homotopy colimit of its descended diagram on $P$. The
+ordinary bar is the restriction along $C\to P$. This functor
+is homotopy final: over a fixed type, concatenating it with a
+variable predecessor gives a contraction by the two block
+projections in $\Ty$, or their inclusions in $C$. The sequence
+is homotopy final over $P$ because its comma at each type is
+a nonempty final segment of $\mathbb N$. Therefore the actual
+ordinary-to-enriched comparison and the sequence comparison
+are weak equivalences. Naturality of the bar construction
+identifies these as the displayed functors, not abstract
+isomorphisms of their homotopy types. The other roof leg is B.1.
+
+For the precise 2-categorical convention we checked 317,
+Section 7, equation \texttt{eq:model-classes}: its weak
+equivalences are exactly those detected by the Street nerve.
+On ordinary categories that nerve is the ordinary nerve, as
+verified directly in its foundations section. In dimension two,
+the model structure and this class are also the established
+Thomason structure of Ara--Maltsiniotis,
+\cite[Theorem 6.27]{BAraMaltsiniotis2014}.
+The enriched-bar/Grothendieck comparison used here is
+Cegarra--Heredia's homotopy-colimit theorem; its comparison of
+the double nerve and the 2-categorical nerve gives the same
+weak equivalences. Only this dimension-two specialization of
+317 is needed, so no claim about a supplied Lean certificate
+or about higher-dimensional transfer is being used without
+verification. Objectwise equivalences induce equivalences
+of both bars, proving the final invariance assertion.
+\end{proof}
+
+\begin{claim}{B.10}{Proved}{The answer to VII ms. 99--115}
+\label{B:manuscript}
+At VII ms. 103(b), the sequential model computes the all-type
+fibred homotopy type for every cofinal sequence exactly for the
+diagrams of B.4. For coherent type actions, the answer is always
+positive; that sufficient class is strictly smaller than the
+complete class. A positive answer for one cofinal sequence does
+not imply a positive answer for every one.
+\end{claim}
+\begin{proof}
+The equivalence is B.4, the sufficient coherent class is B.3,
+and strictness and dependence on the sequence are B.6 and B.7.
+The canonical roof, rather than an unspecified functor from the
+strict colimit to the total category, is the isomorphism in
+$\Hot$ asserted here. The representable of $+$ gives the
+failure of a uniform all-diagram assertion; the one-object-group
+example at ms. 109 is already correctly rejected by the comma
+criterion in INDLOCAL C.23. At ms. 109--110 and 112--114,
+cofinality of the reachability preorder alone therefore remains
+insufficient. The phrase \emph{en g\'en\'eral pas} at ms. 112
+is correct, while the full path diagrams are positive because
+their strict 2-action supplies B.3. Their one-sign and bounded-run
+exceptions are exactly those already classified in INDLOCAL
+C.21, as audited in B.1, and are not being claimed cofinal here.
+Finally B.2 supplies the interval contractibility omitted from
+Lead 5(c), and B.5 supplies the precise sequential homotopy-colimit
+meaning of Lead 5(b). This verifies Lead 5(a)--(c), while
+refuting the stronger suggestion that $(\mathcal D)$ holds
+only for diagrams admitting the coherent type action.
+\end{proof}
