@@ -1,0 +1,195 @@
+\subsection{Rational exactness of independently ordered binary vector spaces}
+
+The rational entry for the ordered-vector example can be decided without
+assuming a Ramsey theorem for two orders on vector spaces with arbitrary
+linear embeddings.  We use a different category in which the embeddings
+preserve a distinguished basis, and then transfer finite affine equalizers.
+
+\begin{lemma}[Proved: Ramsey property with a distinguished ordered basis]
+\label{A:ordered-basis-ramsey}
+Let $\mathcal C$ have as objects finite positive-dimensional
+$\mathbf F_2$-vector spaces $W$, a distinguished linearly ordered basis
+$E_W$, and an independent linear order on $W\setminus\{0\}$.
+Its arrows are injective linear maps taking basis elements to basis
+elements and preserving both orders.  Then $\mathcal C$ is Ramsey,
+has finite hom-sets and common successors, and is exact over every ring.
+\end{lemma}
+\begin{proof}
+An object is equivalently a finite linearly ordered set $E$ with an
+independent linear order on its nonempty subsets: a subset represents
+the sum of its basis elements.  Fix objects $A,B$. If $A$ does not
+embed into $B$, the Ramsey assertion is vacuous; otherwise
+$|E_A|\leq |E_B|$. Put $b=|E_B|$.
+For a nonempty subset $S=\{s_1<\cdots<s_k\}$ of size at most $b$, encode
+$S$ by the $b$-tuple
+\[
+ \tau_b(S)=(s_1,\ldots,s_k,
+                 \underbrace{s_k,\ldots,s_k}_{b-k\text{ entries}}).
+\]
+The distinct entries recover $S$, so this encoding is injective and
+commutes with increasing injections.  On $E_A$ and $E_B$ put the
+$b$-ary relation consisting of all such tuples.  Order that relation by
+the given order on nonempty subsets, and retain the basis order as the
+vertex order.
+
+Hubi\v cka--Ne\v set\v ril's theorem on totally ordered structures
+\cite[Theorem~4.46, arXiv v4]{DHubickaNesetril2019} gives a finite
+Ramsey target $C_0$ for these two encodings.  Here ``totally ordered''
+means that the vertices and the tuples of the relation carry independent
+linear orders, both preserved by embeddings.  The quoted theorem applies
+to one relation of arbitrary finite arity, including repeated entries.
+
+In $C_0$, delete relation tuples that are not of the canonical form
+$\tau_b(S)$, and add every missing canonical tuple.  Retain the order
+on the remaining old relation tuples and extend it to the added tuples
+arbitrarily.  This operation preserves every encoded copy of $B$:
+on its vertex set all canonical tuples were already present and no
+noncanonical tuple was present, because its map into $C_0$ was an
+embedding.  Its two orders are unchanged.  Moreover every encoded
+$A$-copy inside such a $B$-copy was already an $A$-copy in $C_0$.
+Thus a coloring after completion restricts to the old $A$-copies, and
+a monochromatic $B$ supplied by $C_0$ remains monochromatic afterward.
+
+Finally give the nonempty subsets of the target basis of size greater
+than $b$ arbitrary positions extending the order already defined on
+the smaller subsets.  The resulting full powerset order gives an object
+of $\mathcal C$ with the required Ramsey property.
+There are finitely many basis injections between two objects.
+Common successors are obtained by taking disjoint bases, merging each
+of the two old orders, and placing the new mixed subset sums arbitrarily.
+The Ramsey exactness theorem therefore gives exactness over every ring.
+\end{proof}
+
+\begin{lemma}[Proved: finite averaging through an exact category]
+\label{A:exact-cover-averaging}
+Let $u:\mathcal C\to\mathcal A$ be a functor, where $\mathcal C$ is
+nonempty, has common successors, and is exact over a commutative ring $R$.
+For $Y\in\mathcal A$ define
+\[
+ X_Y(C)=R[\mathcal A(Y,uC)].
+\]
+For a finite family $a_0,\ldots,a_k:P\to Q$, suppose there is
+$\mu\in\operatorname{colim}_{\mathcal C}X_Q$ of augmentation one
+whose images under every precomposition map
+$a_i^*:\operatorname{colim}X_Q\to\operatorname{colim}X_P$ agree.
+Then the family has an affine equalizer over $R$ in $\mathcal A$.
+\end{lemma}
+\begin{proof}
+Let $D:X_Q\to X_P^k$ have components $a_i^*-a_0^*$.
+Exactness of the colimit gives a surjection
+\[
+ \operatorname{colim}_{\mathcal C}\ker D
+       \longrightarrow
+ \ker\bigl(\operatorname{colim}_{\mathcal C}D\bigr).
+\]
+Lift $\mu$ to the left side.  A colimit element uses only finitely
+many objectwise representatives.  Send their objects to one common
+successor $C$ and add their images.  This yields
+$t\in\ker D(C)\subseteq R[\mathcal A(Q,uC)]$ representing $\mu$.
+Augmentation is natural, so $\operatorname{aug}t=1$.
+The equality $D(C)t=0$ is precisely the desired affine equality.
+\end{proof}
+
+\begin{theorem}[Proved: rational exactness of the ordered-vector example]
+\label{A:ordered-vector-rational-exactness}
+Let $\mathcal A$ be the category of finite nonzero
+$\mathbf F_2$-vector spaces with an arbitrary linear order on their
+nonzero vectors and all order-preserving linear embeddings.
+Then $\mathcal A$ is exact over $\Q$.
+Consequently the example of
+Theorem~\ref{A:ordered-vector-counterexample} is total, amenable, and
+rationally exact, while it is not exact over $\mathbf F_2$ or over $\Z$.
+\end{theorem}
+\begin{proof}
+Use the category $\mathcal C$ of
+Lemma~\ref{A:ordered-basis-ramsey}, and let $u$ forget its distinguished
+ordered basis.  First identify the components of the category of
+elements of $C\mapsto\mathcal A(P,uC)$.
+For an embedding $h:P\to uC$, let $U_h$ be the span of precisely those
+distinguished basis vectors which occur with coefficient one in some
+vector of $h(P)$.  Give $U_h$ the two induced orders.  Its isomorphism
+type together with the marked map $h:P\to U_h$ is unchanged by arrows
+of that category of elements.  Conversely $U_h\to C$ itself is such
+an arrow.  Two marked closures of the same type therefore lie in the
+same component, by their isomorphism and the two inclusions.  Thus
+\[
+ \operatorname{colim}_{\mathcal C}X_P
+   =\Q[\{\text{isomorphism types of marked ordered basis closures of }P\}].
+ \tag{BV.1}
+\]
+This uses only that the free-module functor preserves colimits.
+
+Fix an arbitrary finite family $a_i:P\to Q$, and put
+$p=\dim P$, $q=\dim Q$.  Let $Q^\vee$ be the binary linear dual and
+form the binary simplex-code embedding
+\[
+ W=\mathbf F_2^{\,Q^\vee\setminus\{0\}},\qquad
+ j:Q\longrightarrow W,\qquad
+ j(v)=(\ell(v))_{\ell\in Q^\vee\setminus\{0\}}.
+ \tag{BV.2}
+\]
+Its distinguished basis is the set of coordinate vectors, indexed by
+the nonzero functionals $\ell$.  The map $j$ is injective because
+linear functionals separate vectors.
+
+Choose the basis order uniformly from all its possible orders.
+Independently, order all vectors of
+$W\setminus j(Q)$ uniformly, put that entire block before
+$j(Q)\setminus\{0\}$, and put the latter block in the prescribed
+order of $Q$.  Here and below the zero vector is omitted from all
+orders.  Every such pair of choices gives an object $W_\omega$ of
+$\mathcal C$ and an embedding $j:Q\to uW_\omega$.
+There are finitely many choices; their uniform rational average defines
+\[
+ \mu=\frac{1}{|\Omega|}\sum_{\omega\in\Omega}[j:Q\to uW_\omega]
+       \in\operatorname{colim}_{\mathcal C}X_Q,
+ \qquad\operatorname{aug}\mu=1.
+ \tag{BV.3}
+\]
+
+The basis closure $U_i$ of $ja_i(P)$ has coordinate set
+\[
+ E_i=\{\ell\in Q^\vee:\ell a_i\ne0\}.
+\]
+Every nonzero functional on $P$ occurs exactly $2^{q-p}$ times
+among the restrictions $\ell a_i$, $\ell\in E_i$.  Consequently,
+for any $i,j$ there is a coordinate bijection $E_i\to E_j$
+intertwining the two marked embeddings of $P$.
+We also have the exact intersection identity
+\[
+ U_i\cap j(Q)=ja_i(P).
+ \tag{BV.4}
+\]
+Indeed, a vector $j(v)$ belongs to $U_i$ precisely when every
+functional vanishing on $a_i(P)$ also vanishes on $v$; finite-dimensional
+linear duality says exactly that $v\in a_i(P)$.
+
+It follows from (BV.4) that the reference order induced on $U_i$
+has all its vectors outside $ja_i(P)$ first, uniformly ordered,
+followed by $ja_i(P)$ in the order of $P$.  The induced basis order
+is independently uniform.  Restriction of a uniform order on a finite
+set is uniform on each fixed subset; all fibres of the restriction
+map have the same size.  The coordinate bijection just described
+therefore shows that the marked ordered basis-closure type of $ja_i$
+has exactly the same distribution for every $i$.  By (BV.1),
+the images $a_i^*\mu$ all agree.
+
+Lemma~\ref{A:exact-cover-averaging} now gives a rational affine
+equalizer of the arbitrary family $a_i$.  Since $\mathcal A$ has
+common successors, the all-family affine criterion proves rational
+exactness.  The remaining properties in the statement were proved
+for this same category in the earlier structural, amenability, and
+parity results; no claim of integral exactness is made.
+\end{proof}
+
+\paragraph{Scope and source audit.}
+The Ramsey input is Theorem~4.46 in the opened arXiv v4 of
+\cite{DHubickaNesetril2019}, dated 3 September 2019:
+the definitions are on printed page 75 and the theorem and complete
+incidence-closure proof on printed page 76.  The padded-tuple
+completion above verifies the passage to powerset orders explicitly.
+The finite averaging proof uses an auxiliary exact category and
+finite supports; it does not assert that its basis expansion is
+precompact or invoke a general theorem about free order expansions
+of vector spaces.  The universal implications in A.3(iii) and the
+total-category version of C.4 remain undecided by this result.

@@ -1,0 +1,135 @@
+\subsection{Fixed finite edge covers do not yield all-prime exactness}
+
+\begin{proposition}[Proved: a persistent obstruction for edge covers]
+\label{C4:voltage-cover-exclusion}
+Let $I$ be a nonempty finite ordered set and let $\sigma,\tau$
+be permutations of $I$. For $A\in\Cdelta$, define
+$F_{I,\sigma,\tau}(A)$ on the lexicographically ordered set
+$A\times I$ by replacing each increasing edge $a<b<c$ by
+\[
+ \bigl\{(a,i),(b,\sigma(i)),(c,\tau(i))\bigr\},\qquad i\in I.
+ \tag{COV.1}
+\]
+On arrows put $F(f)(v,i)=(f(v),i)$. This is a strong
+endofunctor of $\Cdelta$.
+
+There is one fixed three-arrow family in $\Cdelta$ whose
+image under every such functor, and under every finite
+composition of such functors, has no affine equalizer over
+any nonzero unital ring. Consequently a filtered colimit of
+copies of $\Cdelta$ with these transition functors remains
+nonexact over every nonzero unital ring, although it is total.
+\end{proposition}
+\begin{proof}
+For $U\subseteq F(A)$ write
+$m_v=|U\cap(\{v\}\times I)|$ and
+$A_t=\{v:m_v\geq t\}$. Above an old edge $a<b<c$, at
+most $\min(m_a,m_b,m_c)$ lifted edges lie in $U$, since
+all three fiber maps in (COV.1) are injective. Therefore
+\[
+ \delta(U)\geq \sum_{t=1}^{|I|}\delta(A_t).
+ \tag{COV.2}
+\]
+This proves positivity for every nonempty $U$. If
+$B\leq A$ and $U$ properly contains $F(B)$, every $A_t$
+contains $B$ and at least one properly contains it.
+Strict strongness gives
+$\delta(U)>|I|\delta(B)=\delta(F(B))$.
+Thus $F(B)\leq F(A)$. Inducedness and functoriality follow
+directly from the definition.
+
+The persistent family uses the nine-vertex object $W_*$
+with order
+\[
+ a_0<a_1<a_2<b_0<b_1<b_2<c_0<c_1<c_2
+\]
+and five edges
+\[
+ a_0b_0c_0,\quad a_0b_1c_1,\quad a_0b_2c_2,
+ \quad a_1b_0c_1,\quad a_2b_1c_2.
+ \tag{COV.3}
+\]
+It has $\delta(W_*)=3$. It is linear, and the minimum
+numbers of vertices used by $1,2,3,4,5$ of its edges are,
+respectively, $3,5,6,8,9$. Hence every subset with at least
+two vertices has predimension at least three. All nine
+singletons are strong, and no other proper nonempty subset
+is strong. The exact certificate
+\texttt{code/C4\_voltage\_cover\_certificate.py}
+checks all $512$ subsets and these edge-union bounds.
+
+Let $a_0,a_1,a_2:V\to W_*$ denote the three singleton
+arrows with the indicated images. Their marginal-difference
+map is injective over every coefficient ring. Indeed, for
+a finite collection of $r$ distinct strong copies of $W_*$
+in a target, intersections of copies are strong in each
+copy and so have at most one vertex. Their five-edge sets
+are therefore pairwise disjoint. If $v$ is the number of
+vertices appearing in the three selected positions, the
+whole union has at most $v+6r$ vertices and at least $5r$
+edges. Positivity gives
+\[
+ 0<\delta(\text{union})\leq 2v-3r.
+ \tag{COV.4}
+\]
+If every selected vertex belonged to at least two selected
+triples, then $2v\leq3r$, a contradiction. Thus some selected
+vertex belongs to exactly one copy. Its coefficient in at
+least one of the two marginal differences is $1$ or $-1$.
+Applying this argument to the nonzero support of a kernel
+element forces a nonzero coefficient to vanish. This proves
+injectivity over arbitrary nonzero rings, and excludes an
+affine equalizer.
+
+Fix $i\in I$. There is an increasing induced section
+$s:W_*\to F(W_*)$ given by
+\[
+ s(a_j)=(a_j,i),\qquad s(b_j)=(b_j,\sigma(i)),
+ \qquad s(c_j)=(c_j,\tau(i)).
+ \tag{COV.5}
+\]
+It preserves all five edges and introduces none. It is
+strong: for a subset $U$ properly containing its image,
+one has $A_1=W_*$ and some nonempty $A_t$ with $t\geq2$.
+Equation (COV.2) and positivity imply
+$\delta(U)>\delta(W_*)$.
+The singleton section $t:V\to F(V)$ choosing the index
+$i$ is strong for the same reason. These sections obey
+\[
+ F(a_j)t=s a_j\qquad(j=0,1,2).
+ \tag{COV.6}
+\]
+An affine equalizer of the three $F(a_j)$ could therefore
+be composed on the right with $t$ and restricted through
+$s$, producing an affine equalizer of the original three
+arrows with unchanged augmentation. This is impossible
+over every nonzero ring.
+
+Composing two covers replaces the ordered fiber by the
+lexicographically ordered product and the two permutations
+by their componentwise products. Thus every finite
+composition has the same form and the same obstruction.
+In a filtered colimit of categories, any finite affine
+witness, including its finitely many equality checks,
+occurs at some finite stage. Applying this to the image
+of (COV.3)'s family contradicts the obstruction just proved.
+
+For completeness, filtered colimits preserve totality:
+restrict a set action on the colimit category to all stages.
+A finite simplicial sphere in a connected component of its
+category of elements, together with finitely many paths
+connecting its vertices, lifts to a common stage. That
+stage's action component is contractible, so the sphere
+has a nullhomotopy there and hence in the colimit.
+The same finite-diagram argument handles components and
+$\pi_1$. Since each stage $\Cdelta$ is total, the claimed
+filtered colimit is total.
+\end{proof}
+
+\paragraph{Scope.}
+The conclusion covers arbitrary finite fiber sizes and
+arbitrary fixed permutations in (COV.1), not only cyclic
+prime fibers. It does not cover arbitrary endofunctors,
+templates that replace edges by larger internal gadgets,
+or a modification in which the transition is not such a
+finite cover. The total all-prime implication remains open.

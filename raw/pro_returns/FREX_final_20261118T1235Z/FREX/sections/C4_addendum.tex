@@ -1,0 +1,552 @@
+\subsection{An exceptional-prime finite pattern}
+\begin{proposition}[Proved: modular affine solvability need not lift at one target]
+\label{C4:exception}
+There is a finite category with three objects, finite hom-sets and common
+successors, and a triple of parallel arrows with an affine equalizer over
+$\mathbb F_2$ but none over $\mathbb Q$. This assertion concerns the
+specified family, not exactness of the category over $\mathbb F_2$.
+\end{proposition}
+\begin{proof}
+Let the objects be $p,q,r$. In addition to identities, let the arrows
+be $a_0,a_1,a_2:p\to q$, $b_1,\ldots,b_7:q\to r$, and
+$c_0,\ldots,c_5:p\to r$. Define $b_j a_i=c_{e_{j,i}}$, where the
+ordered triples $e_j$ are
+\[
+ 012,\quad013,\quad015,\quad025,\quad124,\quad135,\quad234.
+\]
+These are all nonidentity compositions; identities provide the rest,
+so associativity is immediate and is also checked exhaustively by the
+program. Every object maps to $r$.
+
+Over $\mathbb F_2$, take
+$t=b_1+b_3+b_5+b_6+b_7$, of augmentation one. Its three marginals
+coincide modulo two, as direct substitution shows.
+For a rational certificate in the other direction, assign values on
+$c_0,\ldots,c_5$ to two functionals:
+\[
+ \lambda_1=(-3/2,-1/2,-1/2,0,0,0),\qquad
+ \lambda_2=(0,-1/2,0,0,1/2,0).
+\]
+Every listed triple $e_j=(x,y,z)$ satisfies
+$\lambda_1(y)-\lambda_1(x)+\lambda_2(z)-\lambda_2(x)=1$.
+Thus for $D(t)=(ta_1-ta_0,ta_2-ta_0)$,
+$(\lambda_1,\lambda_2)D=\operatorname{aug}$ over $\mathbb Q$.
+A rational kernel element has augmentation zero, so there is no
+affine equalizer at $r$. At $q$ the only possible affine endomorphism
+is the identity, which does not equalize the arrows; there are no
+arrows $q\to p$. This proves the assertion at all targets.
+
+The code \texttt{C4\_exception\_certificate.py} verifies the modular
+vector, the rational functional, and every composable triple in this
+19-arrow category. It also records why this is not a counterexample
+to the central all-prime question: two distinct $b_j$ cannot be
+equalized over any ring, since $r$ has only its identity endomorphism.
+\end{proof}
+
+\subsection{Contractible Kan simplex categories are Ramsey}
+\begin{theorem}[Proved: the contractible Kan candidate is already exact]
+\label{C4:contractible-kan-ramsey}
+Let $K$ be a nonempty contractible Kan complex. Then the category
+$\Delta_{\mathrm{inj}}/K$ has the morphism Ramsey property. Consequently
+its colimit functor is exact over every unital ring. In particular,
+choosing a contractible Dold--Kan complex from an acyclic but nonsplit
+chain complex does not give a total nonexact example in this family.
+\end{theorem}
+\begin{proof}
+Fix objects $A,B$ and a finite number $c$ of colours. If there is no
+arrow $A\to B$, the conclusion is immediate with target $B$. Otherwise
+let $L$ be the finite relational language with one relation $R_\sigma$
+for each simplex label occurring on a nonempty face of $A$ or $B$;
+its arity is the number of vertices of that face. Equal labels give
+one symbol. This set of symbols is closed under all face maps.
+
+Consider finite $L$-structures with the following rules. Every vertex
+has exactly one vertex label. Every relation tuple has distinct
+entries; it has at most one label of its arity. If an ordered tuple
+has label $\sigma$, every ordered subtuple has the corresponding
+face label of $\sigma$. No global order on these tuples is required
+at this stage, and different orderings of the same vertex set may
+be labelled independently, subject only to their common ordered
+subtuples. This is a hereditary free amalgamation class: in an
+amalgam all relation tuples come from one factor, and their subtuples
+come from that factor as well; labels on a tuple in both factors
+already agree on the common induced substructure. There are no new
+cross-factor relation tuples.
+
+Add an arbitrary linear order. Theorem~1.3 of
+Evans--Hubi\v cka--Ne\v set\v ril \cite{D-EHN2021} gives a finite
+ordered member $C$ with $C\longrightarrow(B)^A_c$, where $A$ and $B$
+are encoded by labelling precisely their increasing tuples. Remove
+from $C$ every relation tuple that is not increasing in its added
+linear order. The remaining labels give a downward closed simplicial
+subcomplex $L_C$ of the full simplex on $V(C)$ and a coherent
+simplicial map
+\[
+ L_C\longrightarrow K.
+\]
+Deleting the nonincreasing tuples does not change any existing
+induced copy of $A$ or $B$, since these structures have no such
+tuples. In particular the specific copies used in the Ramsey
+conclusion remain available.
+
+The map $K\to *$ is a trivial Kan fibration: it is a Kan fibration
+and a weak equivalence. Thus it has the right lifting property for
+all simplicial monomorphisms, by
+\citet[Theorem I.7.10, pp.~32--35]{ABGoerssJardine} and the
+boundary-by-boundary extension described in its proof. Apply this to
+$L_C\hookrightarrow\Delta^{V(C)}$ to extend the displayed map to the
+full simplex. The extension defines an object $D$ of
+$\Delta_{\mathrm{inj}}/K$ on the same ordered vertex set. Every
+previous copy of $A$ or $B$ remains an induced copy, because all of
+its faces were already labelled and the extension preserves those
+labels.
+
+Now colour the arrows $A\to D$ with $c$ colours. Restrict the
+colouring to the old copies $A\to C$. The Ramsey property of $C$
+gives an old copy $B\to C$ whose $A$-subcopies are monochromatic.
+This is a copy $B\to D$ with the same property. Hence $D$ is the
+required Ramsey target. The category has finite hom-sets and joint
+embeddings: the same extension argument applies to a disjoint union
+of two labelled simplices. The integral affine-equalizer proof of
+Ramsey exactness applies, and then works over every unital ring.
+\end{proof}
+
+\subsection{A counterexample to the all-prime implication}
+
+\begin{lemma}[Proved: finite marginal lifting in a perfect group algebra]
+\label{C4:perfect-marginals}
+Let $p$ be a prime, let $V$ be an abelian group on which multiplication
+by $p$ is bijective, and put $k=\mathbb F_p$. Suppose
+$\rho_i:V\twoheadrightarrow V_i$ is a finite family of surjective
+homomorphisms, with each $V_i$ uniquely $p$-divisible. Let
+$J_i=\ker(k[V]\to k[V_i])$. Then the finite lattice of ideals generated
+from the $J_i$ by sums and intersections is distributive. Consequently,
+a family $z_i\in k[V_i]$ lifts to one $z\in k[V]$ if its images agree
+in $k[V]/(J_i+J_j)$ for every pair $i,j$. The lift is a finite linear
+combination of elements of $V$.
+
+The same statement holds for affine surjections of torsors under these
+groups: choose any origin in the source torsor, and the induced origins
+in its quotients.
+\end{lemma}
+\begin{proof}
+The Frobenius map on $k[V]$ sends $\sum a_v[v]$ to
+$\sum a_v[pv]$. It is bijective, with inverse obtained by replacing
+$v$ by its unique $p$th root. The same is true in every $k[V_i]$.
+Thus each kernel $J_i$ is stable under Frobenius and its inverse.
+Sums and intersections of ideals with this property retain it:
+for sums use $(x+y)^{1/p}=x^{1/p}+y^{1/p}$, and for intersections
+apply the inverse in each ideal. Every such ideal is radical. Indeed,
+if $x^n$ belongs to it, then so does $x^{p^m}$ for $p^m\geq n$;
+applying the inverse Frobenius $m$ times puts $x$ in the ideal.
+
+The radical ideals of a commutative ring form a distributive lattice
+with intersection as meet and radical of the sum as join. Here all
+sums under consideration are already radical, so the operations are
+ordinary sum and intersection. Equivalently, one can verify
+\[
+ (I+J)\cap(I+J')=I+(J\cap J')
+\]
+by taking radicals and using the corresponding identity of closed
+sets in the prime spectrum. This proves the claimed distributivity.
+
+For the lifting assertion induct on the number of ideals. Suppose
+$x$ lifts the first $m-1$ residues and $y$ lifts the last. Pairwise
+compatibility gives $x-y\in J_i+J_m$ for every $i<m$, whence
+\[
+ x-y\in\bigcap_{i<m}(J_i+J_m)
+      =\left(\bigcap_{i<m}J_i\right)+J_m.
+\]
+Subtracting the first summand from $x$ makes it agree with $y$ modulo
+$J_m$ without changing any earlier residue. All elements of a group
+algebra have finite support. Changing an affine origin only translates
+a basis, so the torsor formulation follows.
+\end{proof}
+
+\begin{lemma}[Proved: coherent modular weights on rational primitives]
+\label{C4:primitive-weights}
+Fix $r\geq2$ and a prime $p$. For every finite ordered rational
+$r$-cocycle object $S$ there is a finitely supported element
+\[
+ \mu_S\in\mathbb F_p[\operatorname{Prim}(S)],\qquad
+ \operatorname{Prim}(S)=
+ \{b\in C^{r-1}(\Delta^S;\mathbb Q):db=c_S\},
+\]
+of augmentation one. These elements may be chosen simultaneously
+so that every induced embedding $T\to S$ pushes $\mu_S$ to $\mu_T$
+by restriction of primitives.
+\end{lemma}
+\begin{proof}
+The primitive set is a nonempty affine torsor under the rational
+vector space $V_S=Z^{r-1}(\Delta^S;\mathbb Q)$. Include the empty
+structure for this construction only, with its unique primitive.
+Restriction to a subset is surjective: a difference of two primitives
+on that subset is a positive-degree cocycle, hence a coboundary;
+extend its primitive cochain to $S$ and correct a chosen primitive
+on $S$.
+
+We need a precise two-subset assertion. If $T,U\subseteq S$, any
+primitives on $T$ and $U$ agreeing on $T\cap U$ extend to a primitive
+on $S$. Subtract the restriction of a fixed primitive on $S$. The
+result is an $(r-1)$-cocycle on
+$\Delta^T\cup\Delta^U$. That complex is contractible when its
+intersection is nonempty and is a disjoint union of at most two
+simplices otherwise. Its cohomology in degree $r-1>0$ vanishes.
+Write the difference as a coboundary, extend the preceding cochain
+to the full simplex, and add its coboundary to the fixed primitive.
+This also proves, on the translation spaces,
+\[
+ \ker(V_S\to V_T)+\ker(V_S\to V_U)
+   =\ker(V_S\to V_{T\cap U}).                       \tag{C4.1}
+\]
+For example, to prove the nontrivial inclusion, take $v$ vanishing
+on the intersection and extend the compatible pair $(v|_T,0|_U)$
+to $w\in V_S$; then $v=(v-w)+w$ is the required decomposition.
+The kernels in the group algebra therefore satisfy
+$J_T+J_U=J_{T\cap U}$: the kernel of a group-algebra quotient is
+generated by $[h]-1$ for elements $h$ of its group kernel.
+
+Choose the weights by induction on the size of $S$, one choice for
+each ordered isomorphism type. At size zero choose the unique basis
+element. Suppose the choices have been made naturally on all smaller
+structures. For a structure $S$, prescribe the previously chosen
+weight on each proper subset. These marginals agree after restriction
+to every intersection, by the inductive hypothesis. Equation (C4.1)
+and Lemma~\ref{C4:perfect-marginals} give an element of
+$\mathbb F_p[\operatorname{Prim}(S)]$ with all the prescribed
+marginals. Include the empty marginal, so its augmentation is one.
+A finite linearly ordered structure has no nonidentity increasing
+self-isomorphism. Thus transporting this choice from the representative
+to every ordered copy is unambiguous, and supplies all embedding
+compatibilities. This completes the induction. The argument gives
+finite support at every individual object, although no uniform bound
+on support sizes is asserted.
+\end{proof}
+
+\begin{theorem}[Refuted: all-prime exactness forces rational exactness]
+\label{C4:counterexample}
+For each $r\geq2$, the category $A=\mathcal A_r(\mathbb Q)$ of finite
+nonempty ordered rational $r$-cocycles is exact over $\mathbb F_p$
+for every prime $p$, but is not exact over $\mathbb Q$ or $\mathbb Z$.
+It has finite hom-sets and common successors. It lies in setting (S)
+and satisfies (Rig), (SA), (FA), (St), (Op), (WEI), and (Fin).
+It is not total, since $BA\simeq K(\mathbb Q,r)$.
+
+Consequently the main all-prime implication in C.4 is false, both
+with and without the finite-hom hypothesis, and remains false in
+setting (S) with (Rig). Property (P) does not imply totality, even
+for these nonempty connected finite-hom rigid strong Fra\"iss\'e
+categories. The version whose index category is assumed total is
+not decided by this example.
+\end{theorem}
+\begin{proof}
+Fix $p$. The expansion category $B$ consists of finite ordered
+$(r-1)$-cochains with rational values. Its reduct sends $b$ to $db$.
+For each finite collection of objects and arrows, only finitely many
+cochain values occur. Encode these values by finitely many relation
+symbols, with value zero represented by absence of a relation.
+The corresponding class of coloured $r$-uniform hypergraphs has free
+amalgamation, so its arbitrary linear-order expansion is Ramsey by
+\cite[Theorem~1.3]{D-EHN2021}. Hence every finite family of parallel
+arrows in $B$ has an integral affine equalizer, by the rechecked
+Ramsey-to-affine argument. Enlarging the finite set of colours to
+include zero preserves all required objects and embeddings.
+
+We give the finite-family passage explicitly, so no inference from
+constant-coefficient or action-component homology is needed. Let
+$a_0,\ldots,a_m:P\to Q$ be any finite parallel family in $A$.
+Write the finite support of Lemma~\ref{C4:primitive-weights} as
+\[
+ \mu_Q=\sum_{b\in\mathcal S}w_b[b],\qquad
+ \sum_b w_b=1\quad\text{in }\mathbb F_p.
+\]
+Jointly embed the finitely many primitive expansions $Q_b=(Q,b)$
+into one cochain object $X^*$, by maps $j_b:Q_b\to X^*$.
+For every primitive expansion $P_d$ occurring as some
+$a_i^*b$, consider all the maps
+\[
+ j_b a_i:P_d\longrightarrow X^*
+       \quad\text{with }a_i^*b=d.
+\]
+There are finitely many such types $d$ and finitely many such maps.
+Use integral affine equalizers in $B$ successively for these families,
+postcomposing later families with the previously obtained affine
+arrows. Equivalently, at a later stage equalize the finitely many
+ordinary arrows in the supports of the corresponding affine arrows.
+This yields one affine arrow $s:X^*\to Y^*$ over $\mathbb F_p$
+for which all the displayed maps of each fixed type $d$ have the
+same image $v_d$. Postcomposition preserves every equality already
+achieved.
+
+Let $u:B\to A$ forget the primitive and set
+\[
+ t=\sum_{b\in\mathcal S}w_b\,u(s)u(j_b)
+      \in\mathbb F_p[A(Q,uY^*)].
+\]
+Its augmentation is one. For every $i$ its composite with $a_i$ is
+\[
+ ta_i=\sum_d\left(\sum_{b:a_i^*b=d}w_b\right)u(v_d)
+      =\sum_d\mu_P(d)\,u(v_d),
+\]
+independent of $i$, by coherence of the weights. Thus every finite
+parallel family has an affine equalizer. The affine criterion proves
+exactness over $\mathbb F_p$ for arbitrary module diagrams.
+
+For rational nonexactness one can use a finite named family, not just
+the nonzero homology of the base. On $Q=\{0,\ldots,2r+1\}$ choose an
+$(r-1)$-cochain taking value $1$ on $(1,\ldots,r)$ and zero on every
+other increasing $r$-tuple, and give $Q$ its coboundary cocycle.
+The first $(r+1)$-point block has cocycle value one; the disjoint
+second block has value zero. Let $P$ have $r$ points and zero
+$r$-cocycle, and take the $2(r+1)$ embeddings $P\to Q$ onto the
+codimension-one faces of these two blocks. At any target $D$, choose
+a rational primitive $b_D$. If an affine combination $t$ equalized
+all these face embeddings, evaluating $b_D$ and alternating over
+the faces of the two blocks would give equal answers. The coboundary
+identity instead gives $\operatorname{aug}(t)=1$ on the first block
+and zero on the second. This contradiction excludes a rational
+affine equalizer at every target. Clearing denominators also excludes
+integral exactness.
+
+The strong-class properties and the identification
+$BA\simeq K(\mathbb Q,r)$ are the audited constructions of R13:
+all subsets are induced strong substructures, cochains extend across
+two simplices, nonempty-base amalgamation is functorial, and the
+three-piece extension uses $H^r(S^1;\mathbb Q)=0$ for $r\geq2$.
+The minimal finite-support argument gives (Op), and rigidity comes
+from the order. For (Fin), if $G_C\leq G_B$ has finite index, every
+point of $C$ has finite $G_B$-orbit. Free duplication over $B$ forces
+$C\subseteq B$, hence $G_B\leq G_C$ and equality. (WEI) follows
+from (Op). Finite hom-sets are subsets of sets of increasing
+injections between finite ordered sets. Joint embeddings give
+common successors. Finally $H_r(BA;\mathbb Z)\cong\mathbb Q\ne0$,
+so $BA$ is not contractible and $A$ is not total. The established
+profinite/all-prime equivalence gives (P).
+\end{proof}
+
+\begin{corollary}[Proved: the complete field profile of cocycle classes]
+\label{C4:field-profile}
+Let $\Lambda$ be a countable abelian group and let $r\geq2$. Then
+\[
+ \mathcal A_r(\Lambda)\text{ is exact over }\mathbb F_p
+ \quad\Longleftrightarrow\quad
+ p:\Lambda\longrightarrow\Lambda\text{ is bijective},
+\]
+and
+\[
+ \mathcal A_r(\Lambda)\text{ is exact over }\mathbb Q
+ \quad\Longleftrightarrow\quad \Lambda\text{ is torsion}.
+\]
+Thus it is exact over every prime field $\mathbb F_p$ precisely when
+$\Lambda$ is a rational vector space, and it is integrally exact
+precisely when $\Lambda=0$. For a nonzero rational vector space these
+categories give the counterexamples in Theorem~\ref{C4:counterexample}.
+\end{corollary}
+\begin{proof}
+If multiplication by $p$ is bijective on $\Lambda$, the primitive
+translation group
+$Z^{r-1}(\Delta^S;\Lambda)$ is uniquely $p$-divisible. This follows
+either from the cone contraction, which identifies it with a finite
+power of $\Lambda$, or by applying the inverse of multiplication by
+$p$ to cochains coordinatewise. The two-subset extension and the
+perfect group-algebra argument of
+Lemmas~\ref{C4:perfect-marginals}--\ref{C4:primitive-weights} therefore
+apply verbatim. The finite-family proof then gives exactness over
+$\mathbb F_p$ for every module diagram.
+
+For necessity, exactness annihilates all positive derived colimits,
+in particular homology with the constant $\mathbb F_p$ diagram.
+The base has $H_r(BA;\mathbb Z)=\Lambda$, and no reduced integral
+homology below degree $r$. The universal coefficient theorem gives
+\[
+ H_r(BA;\mathbb F_p)=\Lambda/p\Lambda,
+ \qquad
+ H_{r+1}(BA;\mathbb F_p)\twoheadrightarrow\Lambda[p].
+\]
+Both groups on the right must vanish. Thus multiplication by $p$ is
+surjective and injective. This use of constant coefficients proves
+necessity only; sufficiency was established above for arbitrary
+modules.
+
+If $\Lambda$ is torsion, the finitely many values occurring in a
+fixed finite parallel family generate a finite subgroup
+$\Lambda_0$. The finite-group primitive-averaging proof in
+Theorem~\ref{A:finite-cocycles} supplies a rational affine equalizer
+inside $\mathcal A_r(\Lambda_0)$, hence in $\mathcal A_r(\Lambda)$.
+The affine criterion proves rational exactness. Conversely, if
+$\Lambda$ is not torsion, choose a nonzero linear functional on
+$\mathbb Q\otimes\Lambda$ and normalize it at a nonzero image of
+some $\lambda\in\Lambda$. It induces a homomorphism
+$\chi:\Lambda\to\mathbb Q$ with $\chi(\lambda)=1$.
+Apply $\chi$ to a target primitive in the finite two-block face
+obstruction of Theorem~\ref{C4:counterexample}. The same alternating
+sum yields $1=0$, so rational exactness fails.
+
+Multiplication by every prime is bijective exactly for rational
+vector spaces. Integral exactness would force the constant homology
+$H_r(BA;\mathbb Z)=\Lambda$ to vanish; for $\Lambda=0$ the category
+is $\Delta_{\mathrm{inj}}$, which is integrally exact. This proves
+the remaining assertions.
+\end{proof}
+
+\begin{example}[A finite modular primitive distribution]
+\label{C4:triangle-distribution}
+For a triangle of cocycle value one, write a primitive as
+$(x,y,z)=(b_{01},b_{12},b_{02})$, so $x+y-z=1$.
+For any prime $p$, put weight $+1$ on
+\[
+ (1/p,j/p,(j+1-p)/p),\qquad 0\leq j<p,
+\]
+and weight $-1$ on
+\[
+ (0,j/p,(j-p)/p),\qquad 1\leq j<p.
+\]
+This has $2p-1$ distinct atoms and integral augmentation one. Its
+three marginals are respectively
+$p[1/p]-(p-1)[0]$, $[0]$, and $[0]$.
+Modulo $p$ all are $[0]$. This exhibits explicitly how rational
+denominators create the modular marginal cancellation, while the
+rational cocycle still has value one. The exact-arithmetic program
+\texttt{C4\_perfect\_marginal\_certificate.py} checks the formulas
+for eight primes; the displayed calculation proves them uniformly.
+\end{example}
+
+\begin{proposition}[Proved: a bounded-denominator criterion]
+\label{C4:noetherian}
+Let $A$ be nonempty with common successors, and fix a finite parallel
+family $a_0,\ldots,a_k:p\to q$. Write
+\[
+ D:\mathbb Z[A(q,-)]\longrightarrow
+       \mathbb Z[A(p,-)]^k,
+ \qquad D(t)=(ta_i-ta_0)_{1\leq i\leq k},
+\]
+and let $S$ be the pointwise saturation of $\operatorname{im}D$ in
+the target. If $S/\operatorname{im}D$ is annihilated by a positive
+integer $N$, an affine equalizer over $\mathbb F_p$ for any prime
+$p\nmid N$ implies a rational affine equalizer for this family.
+Consequently all-prime exactness implies rational exactness whenever
+these torsion quotients have bounded exponent for every finite family.
+
+The bounded-exponent condition holds if each such saturation functor
+is generated by finitely many elements at finitely many objects;
+in particular it holds if finite sums of integral representable
+functors are Noetherian. In setting (S), an alternative sufficient
+condition is that every finite sum of the smooth permutation modules
+$\mathbb Z[G/G_P]$ is Noetherian as a $\mathbb Z[G]$-module.
+No Noetherian hypothesis is asserted for arbitrary oligomorphic
+groups or for the independently ordered vector-space example.
+\end{proposition}
+\begin{proof}
+Choose a modular affine equalizer at a target $r$ and lift it to
+$t\in\mathbb Z[A(q,r)]$ with $\operatorname{aug}(t)\equiv1\pmod p$.
+Then $D(t)=p y$ for some integral vector $y$. The class of $y$ in
+$S(r)/\operatorname{im}D(r)$ is killed by both $p$ and $N$, hence is
+zero. Write $y=D(z)$ with $z$ integral. Now
+$w=t-pz$ lies in $\ker D(r)$ and its augmentation is congruent to
+one modulo $p$, so is a nonzero integer. Dividing $w$ by that
+augmentation gives the required rational affine equalizer.
+
+Suppose $S$ is generated by $s_j\in S(r_j)$ for $1\leq j\leq m$.
+For each $j$ choose $n_j>0$ with $n_js_j\in\operatorname{im}D(r_j)$.
+The product $N=\prod_jn_j$ then annihilates the saturation quotient
+at every object, by naturality and generation. A subfunctor of a
+Noetherian finite sum of representables is finitely generated, which
+proves the categorical sufficient condition.
+
+For the group-theoretic sufficient condition, take the filtered union
+over finite strong subsets of $M$. The resulting map is
+\[
+ D_\infty:\mathbb Z[\operatorname{Emb}(q,M)]\longrightarrow
+             \mathbb Z[\operatorname{Emb}(p,M)]^k.
+\]
+Its saturated image is a submodule of the indicated Noetherian
+permutation module, hence has finitely many $\mathbb Z[G]$-generators.
+An integer multiple of each generator belongs to
+$\operatorname{im}D_\infty$, so a common positive integer annihilates
+the saturation quotient. The preceding modular lifting argument
+works for $D_\infty$. All finitely many embeddings and coefficients
+which occur in the resulting rational vector lie in one finite
+strong subset of $M$, so it is a rational affine equalizer in $A$.
+The all-family affine criterion finishes the proof.
+\end{proof}
+
+\paragraph{Remaining total-category gate in C.4.}
+The counterexamples above have noncontractible base and hence do not
+decide whether all-prime exactness implies rational exactness when
+$A$ is additionally assumed total. The arithmetic conclusions of
+Proposition~\ref{C:rational-gate} still apply to that restricted
+question. Theorem~\ref{C4:contractible-kan-ramsey} excludes a tempting
+candidate family: replacing $K(\mathbb Q,r)$ by a contractible Kan
+complex in $\Delta_{\mathrm{inj}}/K$ always gives an integrally exact
+Ramsey category. The stronger
+Theorem~\ref{C:kan-filtered-totalization} excludes every filtered
+diagram of connected Kan simplex categories with weakly contractible
+colimit base, allowing arbitrary transition functors and arbitrary
+coefficient groups. Such a colimit is always integrally exact.
+Theorem~\ref{C4:acyclic-cocycle-colimits} also rules out rationally
+acyclic filtered colimits of rational-vector coefficient cocycle
+categories, without requiring contractibility as a hypothesis.
+More generally, Theorem~\ref{C4:exact-base-kan-assembly} excludes
+every total Grothendieck assembly of connected Kan simplex
+categories over an integrally exact base, even when the base is
+not filtered and the transition functors are arbitrary.
+The coefficient-pushforward special case in
+Theorem~\ref{C4:grothendieck-exclusion} is total precisely when
+its coefficient diagram is locally zero.
+No total counterexample or proof of the restricted implication is
+asserted here.
+
+\begin{corollary}[Proved: a compact torsor witnessing the all-prime failure]
+\label{C4:compact-obstruction}
+For $A=\mathcal A_2(\mathbb Q)$ there is a diagram $C:A\to\Ab$
+that is finitely generated at each object and satisfies
+\[
+ T_1(C)\cong\mathbb Z,
+ \qquad
+ \lim_{A^{\mathrm{op}}}^{1} C^\vee\cong\mathbb R/\mathbb Z.
+\]
+Every profinite abelian diagram on $A^{\mathrm{op}}$ has vanishing
+first derived limit, while the displayed compact diagram does not.
+A nonzero element of $\mathbb R/\mathbb Z$ gives an objectwise
+nonempty compact torsor diagram with empty inverse limit.
+\end{corollary}
+\begin{proof}
+Use the six face embeddings $a_0,\ldots,a_5:P\to Q$ in
+Theorem~\ref{C4:counterexample}, and set
+\[
+ D:\mathbb Z[A(Q,-)]\longrightarrow\mathbb Z[A(P,-)]^5,
+ \qquad D(t)=(ta_i-ta_0)_{1\leq i\leq5},
+ \qquad C=\operatorname{coker}D.
+\]
+The rational primitive functional in that proof shows
+$\operatorname{aug}\ker D(X)=0$ at every object $X$.
+Writing $J=\operatorname{im}D$, right exactness gives
+$\operatorname{colim}J\cong\mathbb Z$. Its map to the colimit
+$\mathbb Z^5$ of the target representable sum is zero. That sum
+is projective, so the long exact sequence of
+$0\to J\to\mathbb Z[A(P,-)]^5\to C\to0$ gives
+$T_1(C)\cong\mathbb Z$. This argument does not require $D$ itself
+to be injective. Finite hom-sets make every $C(X)$ finitely generated.
+The duality theorem in Part C gives the asserted first derived limit.
+
+For a direct torsor description, fix $0\ne\theta\in\mathbb R/\mathbb Z$.
+Inside
+$((\mathbb R/\mathbb Z)^{A(P,X)})^5$ take the affine equations
+\[
+ \sum_{i=1}^5\bigl(z_i(ga_i)-z_i(ga_0)\bigr)=\theta
+       \qquad(g\in A(Q,X)).
+\]
+Their homogeneous solution group is exactly $C(X)^\vee$.
+They are solvable: the homomorphism
+$t\mapsto\theta\operatorname{aug}(t)$ on
+$\mathbb Z[A(Q,X)]$ vanishes on $\ker D(X)$, hence descends to
+$J(X)$ and extends to the ambient free abelian group because
+$\mathbb R/\mathbb Z$ is injective. Restrictions along embeddings
+preserve the equations. A compatible solution would make each
+coordinate function $z_i$ constant on embeddings of $P$, by
+restriction along those embeddings from its value at $\operatorname{id}_P$.
+The left side of every equation would then be zero, contradicting
+$\theta\ne0$. Thus the torsor limit is empty. Finally all-prime
+exactness and the profinite test theorem imply vanishing on every
+profinite abelian diagram, as claimed.
+\end{proof}
