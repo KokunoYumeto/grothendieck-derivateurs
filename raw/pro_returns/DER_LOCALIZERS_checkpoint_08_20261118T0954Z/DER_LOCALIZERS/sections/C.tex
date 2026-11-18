@@ -1,0 +1,1455 @@
+\section{The linear manuscript: what the counit criterion actually says}\label{sec:C}
+\providecommand{\Ch}{\operatorname{Ch}}
+\providecommand{\Mod}{\operatorname{Mod}}
+\providecommand{\coker}{\operatorname{coker}}
+\providecommand{\Tot}{\operatorname{Tot}}
+\providecommand{\id}{\operatorname{id}}
+
+Throughout this section $k$ is a commutative unital ring, possibly the zero ring. We use homological complexes $K=(K_n,d_n)_{n\geq0}$ with $d_n:K_n\to K_{n-1}$ and $d_{n-1}d_n=0$. We write $\Ch_{\geq0}(\mathcal A)$ for their abelian category and $D_{\geq0}(\mathcal A)$ for its localization at quasi-isomorphisms. The latter is a full connective subcategory of the unbounded derived category when that category exists; it is not itself a triangulated category. This convention is forced by cote 134-8/053, lines 34--42, and by \emph{Pursuing Stacks}, \S134, equations (2)--(8). Interpreting its $D_\bullet$ as the entire unbounded derived category would already make the proposed equivalence false: the left-derived functor of a right-exact functor on objects has no negative homology.
+
+\begin{claim}{C.1}{Proved}{Projective objects and the two tests in scan 053}\label{C1}
+Suppose the abelian category $\mathcal A$ has enough projectives. An object $P\in\Ch_{\geq0}(\mathcal A)$ is projective in this abelian category if and only if every $P_n$ is projective, $H_nP=0$ for $n>0$, and $H_0P$ is projective. Equivalently,
+\[
+ P\cong H_0P[0]\oplus\bigoplus_{n\geq1}D^n(B_{n-1}P),
+\]
+where $D^n(Q)$ has $Q$ in degrees $n,n-1$, differential $\id_Q$, and zero elsewhere; every $B_{n-1}P$ in this decomposition is projective. The displayed sum is degreewise finite.
+\end{claim}
+\begin{proof}
+Evaluation in degree $n$ is exact. Its left adjoint is $Q\mapsto D^n(Q)$ for $n>0$, and $Q\mapsto Q[0]$ for $n=0$, so these objects are projective when $Q$ is. The projective generators obtained by taking epimorphisms from projectives onto the components give enough projectives in $\Ch_{\geq0}(\mathcal A)$: inductively or directly, a sum of these disk objects maps degreewise epimorphically onto any complex. Every projective is a retract of such a sum, which gives the necessary componentwise and homological conditions. Conversely, split $P_0\twoheadrightarrow H_0P$. Then $B_0P$ is projective. Split $P_1\twoheadrightarrow B_0P$; its kernel is $B_1P$, because $H_1P=0$, and is projective. Continuing gives $P_n=B_nP\oplus B_{n-1}P$ for $n>0$ and $P_0=B_0P\oplus H_0P$, with the asserted differentials. The decomposition is projective because each term is and the indicated coproduct has only two contributions in any degree. Thus the margin at 134-8/051 calling a projective resolution of a projective module a projective \emph{nonnegative complex} is correct. It would be incorrect for unbounded complexes, in which a nonzero $Q[0]$ is not projective.
+\end{proof}
+
+\begin{claim}{C.2}{Proved}{Lemme 1, with its sufficient weaker hypothesis}\label{C2}
+Let $\mathcal M,\mathcal A$ be abelian categories, with $\mathcal M$ having enough projectives. Let $\Lambda:\mathcal M\to\Ch_{\geq0}(\mathcal A)$ be additive and exact, and assume only that $H_j\Lambda(P)=0$ for every projective $P\in\mathcal M$ and every $j>0$. Set $\varphi=H_0\Lambda$. Then $\varphi$ is right exact and there is a natural isomorphism
+\[
+ L\varphi(X)\ \cong\ \Lambda(X)
+ \quad\text{in }D_{\geq0}(\mathcal A),\qquad X\in\mathcal M.
+\]
+In particular, the stronger hypothesis of Lemme 1 at 134-8/054, that $\Lambda$ takes projectives to projectives in $\Ch_{\geq0}(\mathcal A)$, suffices.
+\end{claim}
+\begin{proof}
+Fix a projective resolution $P_\bullet\twoheadrightarrow X$ in $\mathcal M$. Form the first-quadrant bicomplex $B_{i,j}=\Lambda_j(P_i)$, using the usual sign $(-1)^i$ on its second differential. Both canonical augmentations
+\[
+ \varphi(P_\bullet)\ \longleftarrow\ \Tot^{\oplus}B\
+ \longrightarrow\ \Lambda(X)
+\]
+are quasi-isomorphisms. For the left arrow, the column augmentation $\Lambda(P_i)\to H_0\Lambda(P_i)[0]$ is a quasi-isomorphism by hypothesis. For the right arrow, the row augmentation $\Lambda_j(P_\bullet)\to\Lambda_j(X)$ is exact because $\Lambda_j$ is exact. Filter the total complex by either degree; in total degree $n$ the filtration has only $n+1$ pieces, so both spectral-sequence comparisons converge without an unbounded-totalization assumption. Projective comparison maps and homotopies make this zigzag independent of the chosen resolution and natural in $X$. This also proves the weaker statement written in the margin of scan 054.
+\end{proof}
+
+\begin{claim}{C.3}{Proved}{Lemme 2 and all four equivalent conditions}\label{C3}
+Let $\mathcal M,\mathcal A$ be abelian categories with enough projectives and suppose
+\[
+ F:\mathcal M\rightleftarrows\Ch_{\geq0}(\mathcal A):G,
+ \qquad F\dashv G,
+\]
+is an additive adjunction. Assume $F$ preserves monomorphisms and $G$ preserves epimorphisms. Let $\eta:\id\to GF$ and $\epsilon:FG\to\id$ be its unit and counit and put $W=F^{-1}(\mathrm{qis})$. Then both functors are exact, $F$ preserves projectives, and $F$ represents $L(H_0F)$ on objects. The following conditions are equivalent:
+\begin{enumerate}
+\item[(i)] $G^{-1}(W)=\mathrm{qis}$ and the induced functors $\overline F:\mathcal M[W^{-1}]\rightleftarrows D_{\geq0}(\mathcal A):\overline G$ are inverse equivalences with the descended unit and counit;
+\item[(ii)] $\epsilon_K:FGK\to K$ is a quasi-isomorphism for every actual complex $K\in\Ch_{\geq0}(\mathcal A)$;
+\item[(ii$'$)] the same holds for every projective object of $\Ch_{\geq0}(\mathcal A)$;
+\item[(ii$''$)] the same holds for every $P[0]$ with $P$ projective in $\mathcal A$, and for every acyclic complex with projective components.
+\end{enumerate}
+The occurrence of an object of $D_\bullet(\mathcal A)$ in (ii) of 134-8/053 is shorthand requiring a chosen complex: $G$ is initially defined on complexes, and its descent is a conclusion.
+\end{claim}
+\begin{proof}
+A left adjoint is right exact, a right adjoint is left exact, and the two stated assumptions therefore give exactness. For projective $P\in\mathcal M$, the functor $\operatorname{Hom}(FP,-)=\operatorname{Hom}(P,G-)$ preserves epimorphisms, so $FP$ is projective. Claim~\ref{C2} applies.
+
+The equivalence of (ii$'$) and (ii$''$) follows from Claim~\ref{C1}: an acyclic nonnegative complex of projectives splits as a sum of disks, and an arbitrary projective complex splits as $P[0]\oplus A$ with $A$ of that form. Only a binary direct sum is used here, and additive functors preserve it.
+
+Assume (ii$'$). Choose a projective resolution $Q_\bullet\twoheadrightarrow K$ in the abelian category $\Ch_{\geq0}(\mathcal A)$. The exactness of the endofunctor $FG$ shows that $FGQ_\bullet\twoheadrightarrow FGK$ is again a resolution. Apply $\epsilon$ to obtain a map of first-quadrant bicomplexes. Each vertical column is a quasi-isomorphism by (ii$'$), and the two horizontal augmented resolutions are exact. The two finite-in-each-total-degree spectral-sequence comparisons give that $\epsilon_K$ is a quasi-isomorphism. Thus (ii$'$) implies (ii); the converse is immediate.
+
+Assume (ii). Naturality of $\epsilon$ gives, for every chain map $u:K\to L$,
+\[
+ \epsilon_L\circ FGu=u\circ\epsilon_K.
+\]
+Two out of three gives $FGu\in\mathrm{qis}$ if and only if $u\in\mathrm{qis}$. This is $G^{-1}W=\mathrm{qis}$, so $G$ descends. The triangle identity $\epsilon_{FX}\circ F\eta_X=\id_{FX}$ and (ii) imply $\eta_X\in W$ for every $X\in\mathcal M$. Both descended transformations are isomorphisms and retain the triangle identities, proving (i). Conversely (i) makes the image of $\epsilon_K$ invertible in the derived category. A chain map is invertible there exactly when its homology maps are all isomorphisms, so (ii) follows. This proof does not replace the canonical counit by an unrelated abstract isomorphism.
+\end{proof}
+
+\begin{claim}{C.4}{Proved}{The marginal adjunction question}\label{C4}
+For any adjunction $F:\mathcal C\rightleftarrows\mathcal E:G$ and classes $W,V$ of arrows, suppose $F(W)\subseteq V$ and $G(V)\subseteq W$, and suppose the Gabriel--Zisman localizations exist in the chosen universe. Then the induced functors $\overline F:\mathcal C[W^{-1}]\rightleftarrows\mathcal E[V^{-1}]:\overline G$ are adjoint. No exactness, projectivity or counit-isomorphism hypothesis is needed.
+\end{claim}
+\begin{proof}
+The composite of the unit with the localization functor is a natural transformation on $\mathcal C$ between functors which invert $W$. It descends uniquely, as does the counit. Naturality for the formally inverted arrows follows by multiplying the original naturality identities by their inverses. The two triangle identities descend as equalities. The unit--counit criterion for an adjunction then proves the assertion. This answers ``est-il vrai que si $\overline{\lambda^*}$ existe'' at 134-8/053, lines 10--12, affirmatively when $\overline{\lambda_!}$ is the already defined descent. The second symbol in that margin must be the descended right adjoint $\overline{\lambda^*}$; a new $\overline\lambda_*$ has not been defined there.
+\end{proof}
+
+\begin{claim}{C.5}{Refuted}{Literal Lemme 3 omits the normalization}\label{C5}
+The two displayed hypotheses (i) and (ii) of Lemme 3 at 134-8/053 do not imply the equivalent counit conditions of Lemme 2. This remains false with all the smallness, projectivity and exactness hypotheses of the corollary at 134-8/049. The missing degree-zero normalization cannot be suppressed.
+\end{claim}
+\begin{proof}
+Set $k=\mathbb F_2\times\mathbb F_3$, write $e=(1,0)$ and $f=(0,1)$, and take
+\[
+ \mathcal M=\Ch_{\geq0}(\mathbb F_2),\qquad
+ \kappa(U)=(eU)[0],\qquad \varphi(X)=H_0(X),
+\]
+where $\varphi(X)$ is regarded as a $k$-module annihilated by $f$. The tensor product is the ordinary tensor product of complexes over $\mathbb F_2$, with its usual symmetry. Its unit is $\mathbb F_2[0]$. The category is abelian, complete and cocomplete, and products are exact. It has a small family of finitely presented projective generators $\mathbb F_2[0]$ and $D^n(\mathbb F_2)$, $n\geq1$. Their additive hull is a small $k$-additive category $M$ with $\mathcal M\simeq\Mod(M)$, and all its Hom modules are projective $k$-modules. Explicitly, Hom modules are finite-dimensional $\mathbb F_2$-spaces, hence finite sums of the projective summand $ek$.
+
+The natural equality
+\[
+ \operatorname{Hom}_{\mathcal M}(X,\kappa U)
+ =\operatorname{Hom}_k(\varphi X,U)
+\]
+proves $\varphi\dashv\kappa$, and $\kappa$ is exact and preserves all limits. We may take $\Lambda(X)$ to be the same complex regarded over $k$. This exact functor has exact right adjoint $G(K)=eK$, represents $L\varphi$, and is a projective resolution of $\varphi$ in the cocontinuous-functor category: its component functors are evaluations, and its values on the displayed projective generators have the properties in Claim~\ref{C1}.
+
+Take $J=D^1(\mathbb F_2)$ and let $\alpha:\mathbb F_2[0]\hookrightarrow J$ be the bottom-degree inclusion. For every $X\in\mathcal M$, $\alpha\otimes X$ is degreewise split injective and $J\otimes X$ is contractible. If $u_0,u_1$ are the two generators with $du_1=u_0$, a contraction is $h(u_0\otimes x)=u_1\otimes x$, $h(u_1\otimes x)=0$; the standard tensor signs give $dh+hd=\id$. Thus $L_i\varphi(J\otimes X)=0$ for every $i\geq0$ and every $X$. Also $L_i\varphi(1)=0$ for $i>0$.
+
+Nevertheless, at $K=fk[0]\ne0$ the canonical counit is
+\[
+ \epsilon_K:\Lambda(eK)=0\longrightarrow fk[0],
+\]
+which is not a quasi-isomorphism. The induced localization is $D_{\geq0}(\mathbb F_2)$, not $D_{\geq0}(k)$. The failure is exactly $L\varphi(1)=ek\ne k$. This example does not refute the theorem of scan 049: hypothesis (c) of scan 048 requires the stronger canonical isomorphism $L\varphi(1)\to k$. If Lemme 3 was intended to retain that earlier assumption implicitly, this counterexample identifies a required inherited hypothesis rather than a contradiction in that interpretation. The finite coefficient algebra and contraction identity are checked in \texttt{code/C\_linear\_certificate.py}.
+\end{proof}
+
+\begin{claim}{C.6}{Proved}{What the corollary's smallness assumptions provide}\label{C6}
+Let $M$ be a small $k$-additive category and $\mathcal M=\operatorname{Add}_k(M^{\mathrm{op}},\Mod k)$. Suppose every $M(a,b)$ is projective over $k$. Let $\varphi:\mathcal M\to\Mod k$ be a cocontinuous $k$-linear functor whose right adjoint $\kappa$ is exact. Then there is an exact functor $F:\mathcal M\to\Ch_{\geq0}(k)$, representing $L\varphi$ on objects, and an exact right adjoint $G$. One obtains $F$ by any projective resolution of $\varphi$ in the category of cocontinuous $k$-linear functors. These data alone do not assert that the counit is a quasi-isomorphism.
+\end{claim}
+\begin{proof}
+Cocontinuous additive functors from $\mathcal M$ to $\Mod k$ are tensor functors $T\otimes_M-$ for covariant $k$-linear modules $T:M\to\Mod k$. This identification follows by applying a functor to the canonical presentation of each presheaf by sums of representables. Let $T_\bullet\twoheadrightarrow T$ be a projective resolution in that functor category, and put
+\[
+ F(X)_n=T_n\otimes_M X.
+\]
+Each projective $T_n$ is a retract of a sum of covariant representables, so $F_n$ is a retract of a sum of evaluation functors and is exact. For a representable projective $h_a=M(-,a)$, $F(h_a)=T_\bullet(a)$ resolves $T(a)=\varphi(h_a)$. Evaluation of a projective covariant module at $a$ is projective over $k$ by the Hom-projectivity assumption. The module $\varphi(h_a)$ is projective since $\kappa$ is exact. Claim~\ref{C1} therefore shows that $F(h_a)$ is projective as a complex. Sums and retracts give the same conclusion for every projective $X\in\mathcal M$; Claim~\ref{C2} gives $F\simeq L\varphi$.
+
+The right adjoint is explicitly
+\[
+ G(K)(a)=\operatorname{Hom}_{\Ch_{\geq0}(k)}(F(h_a),K),
+\]
+with presheaf reindexing by precomposition. Its adjunction follows first on representables and then from the canonical presentations. Since every $F(h_a)$ is projective in the abelian category of complexes, $G$ preserves epimorphisms, hence is exact. This checks the hypotheses at scan 049 one at a time; no pointwise projectivity is silently substituted for projectivity as a complex.
+\end{proof}
+
+\begin{claim}{C.7}{Proved under stated hypotheses}{A sufficient repair of the linear theorem}\label{C7}
+In the situation of Claim~\ref{C6}, suppose $\mathcal M$ has a symmetric $k$-bilinear monoidal structure with unit $1$, that $\kappa(U)=U\otimes_k1$, and that the canonical derived counit $L\varphi(1)\to k$ is an isomorphism. Suppose there is $\alpha:1\hookrightarrow J$ such that $\alpha\otimes X:X\hookrightarrow J\otimes X$ is a monomorphism and $L\varphi(J\otimes X)=0$ for every $X\in\mathcal M$. Suppose there is an integer $d$ such that every projective $k$-module has injective dimension at most $d$. Then the functors $F,G$ of Claim~\ref{C6} induce the quasi-inverse equivalences claimed at 134-8/049. In particular this holds when $k$ has finite global injective dimension, or when $k$ is noetherian and has finite self-injective dimension. Thus every field in every characteristic, $k=\mathbb Z$, and noetherian self-injective coefficient rings are covered. The zero ring yields the trivial case.
+
+Alternatively, without that injective-dimension bound, the same conclusion holds if every degree of
+\[
+ F(\alpha\otimes X):F(X)\longrightarrow F(J\otimes X)
+\]
+is a split monomorphism of $k$-modules for every $X\in\mathcal M$.
+\end{claim}
+\begin{proof}
+We prove the two tests of Claim~\ref{C3}(ii$''$). For a projective $k$-module $P$, adjunction and $\varphi=H_0F$ identify $G(P[0])$ canonically with $\kappa P$. The counit $FG(P[0])\to P[0]$ is consequently the canonical derived counit $L\varphi\kappa P\to P$. The normalization supplies this for $P=k$. Both $\kappa$ and $L\varphi$ commute with sums here: $\kappa$ is a tensor functor, and $L\varphi$ is computed by the exact cocontinuous component functors $F_n$. Thus the assertion holds for free $P$, and then for their direct summands. This uses the canonical map, not merely equality of homology dimensions.
+
+For the acyclic-complex test first suppose the injective dimensions of projective $k$-modules are bounded by $d<\infty$. An acyclic nonnegative complex $A$ with projective components is split, by Claim~\ref{C1}, and is a degreewise finite product of disks $D^n(B_{n-1}A)$. Resolve all $B_{n-1}A$ by injective $k$-modules in length at most $d$ and take the product of their disk complexes. This gives an exact sequence
+\[
+ 0\longrightarrow A\longrightarrow I^0\longrightarrow\cdots
+ \longrightarrow I^d\longrightarrow0
+\]
+in $\Ch_{\geq0}(k)$, where every $I^j$ is injective as an object of that abelian category. Indeed $D^n(I)$ is right adjoint to exact evaluation in degree $n-1$ and is injective for injective $I$; products of injectives are injective. All products here are degreewise finite.
+
+The exact right adjoint $G$ preserves injectives because its left adjoint $F$ is exact. Every injective $Q\in\mathcal M$ is a direct summand of $J\otimes Q$: extend $\id_Q$ across the monomorphism $\alpha\otimes Q$. The interval hypothesis therefore gives $FQ\simeq0$. Applying $G$ to the finite resolution and then the exact functor $F$, the homology long exact sequences, starting at its final term, show $FGA\simeq0$. Thus $\epsilon_A$ is a quasi-isomorphism. A finite resolution is essential to this particular dimension-shifting argument; we have not used an unjustified convergence claim for an infinite injective resolution.
+
+The asserted noetherian case follows directly from Baer's criterion; compare \citet[Lemma 47.3.7]{StacksNoethInjectiveSums}. Every map from an ideal of a noetherian ring into a direct sum of injectives has image in a finite subsum, because the ideal is finitely generated; it therefore extends to the ring. Thus direct sums of injectives are injective. Taking sums of a finite injective resolution of $k$ gives the same bound for free modules, and direct summands give the bound for projective modules.
+
+For the alternative assumption let $A$ again be split acyclic with projective components, and put $Q=GA$. A split acyclic complex is injective relative to degreewise split monomorphisms: writing it as the degreewise finite product of disks shows that a map into it is specified by unconstrained maps into the relevant disk modules, each of which extends across a split inclusion. Hence $\epsilon_A:FQ\to A$ extends across the degreewise split monomorphism $F(\alpha\otimes Q)$ to a chain map $F(J\otimes Q)\to A$. Its adjunct $J\otimes Q\to GA=Q$ is a retraction of $\alpha\otimes Q$, by naturality and the adjunction bijection. Therefore $FQ$ is a retract of the acyclic complex $F(J\otimes Q)$ and is acyclic. Claim~\ref{C3} now gives all the stated conclusions in either case.
+\end{proof}
+
+\begin{claim}{C.8}{Refuted}{Two weakened interval assumptions and the phrase exact limits}\label{C8}
+For a nonzero field $k$, neither of the following replacements for hypothesis (d) suffices for the theorem, even with all other assumptions: requiring only $L_i\varphi(J\otimes X)=0$ for $i>0$; or allowing $\alpha\otimes X$ not to be monic. Moreover, the phrase ``exact limits'' in the question cannot mean that every small inverse-limit functor is exact in a nonzero abelian category.
+\end{claim}
+\begin{proof}
+Take $\mathcal M=\Mod k$, $\varphi=\kappa=\id$, and the usual tensor product. With $J=k$ and $\alpha=\id$ the positive derived functors vanish for all $X$, but $W$ consists of isomorphisms, so $\mathcal M[W^{-1}]=\Mod k$ maps to the degree-zero part of $D_{\geq0}(k)$ and misses $k[1]$. With $J=0$ and $\alpha:k\to0$ the total-acyclicity requirement holds, and the same failure occurs. Thus the explicit demand ``on le veut pour $i=0$ aussi'' at scan 053 is mathematically consequential, as is the universal monomorphism requirement.
+
+For the last assertion choose any nonzero object $X$ in an abelian category. There is a pointwise epimorphism of parallel-arrow diagrams from $(X\rightrightarrows X)$, with arrows $\id,0$, to $(X\rightrightarrows0)$, with arrows $0,0$; its components are $\id_X$ and $X\twoheadrightarrow0$. The induced map of their inverse limits, namely equalizers, is $0\to X$, not an epimorphism. The actual margin at 134-8/048 says only ``abélienne avec lims'', and condition (a) says that $\kappa$ preserves inverse limits. We have used those actual assertions. Exact products, often denoted AB4*, hold in our module-category examples; they are different from exactness of every inverse-limit functor. The finite-field instances are included in the certificate for Claim~\ref{C5}.
+\end{proof}
+
+\begin{claim}{C.9}{Known}{The precise published comparison with Pursuing Stacks 134}\label{C9}
+For a small test category $A$ satisfying the strong Whitehead condition
+\[
+ W_A^{\mathrm{ab}}=U^{-1}W_A,
+\]
+where $U:\operatorname{Fun}(A^{\mathrm{op}},\mathrm{Ab})\to\widehat A$ forgets the abelian-group structure, the functor
+\[
+ \operatorname{Fun}(A^{\mathrm{op}},\mathrm{Ab})
+ [(W_A^{\mathrm{ab}})^{-1}]
+ \longrightarrow D_{\geq0}(\mathrm{Ab}),\qquad
+ X\longmapsto L\operatorname{colim}_{A^{\mathrm{op}}}X,
+\]
+is an equivalence. This is Hubert's Theorem 5.14 \citep{Hubert2026}, equivalently Theorem 3.5.22 of his thesis \citep{Hubert2025}; the two classes in the hypothesis are defined using categories of elements and total homology, respectively. The assertion applies to Joyal's $\Theta$ by Theorem 6.15 of the article. It does not claim that every test category satisfies the strong Whitehead condition.
+\end{claim}
+\begin{proof}
+The homology functor in Hubert's theorem is the left-derived colimit, exactly the functor denoted $Lp_!^{\mathrm{ab}}$ in \emph{Pursuing Stacks}, \S134, equations (2)--(8). The stated equality of weak-equivalence classes identifies the localization in his theorem with the localization displayed here. His theorem consequently supplies the asserted canonical equivalence, not just an abstract equivalence of categories. The thesis's Proposition 4.2.5 and Corollary 4.2.6 also give the general unit--counit localization criterion used in Claim~\ref{C3}. We gave its proof to check the exact map. For $A=\Delta$, ordinary Dold--Kan already identifies normalized chains with $\Ch_{\geq0}(\mathrm{Ab})$; see The Stacks Project, Theorem 14.24.3 \citep{StacksDK}. The unnormalized integrator itself need not be an equivalence before localization, as Grothendieck warns at PS p.~559.
+\end{proof}
+
+\paragraph{Hypothesis audit.}
+Condition (a) at scan 048 supplies the actual adjunction $\varphi\dashv\kappa$. Since the copower functor $\kappa(U)=U\otimes_k1$ also has right adjoint $\operatorname{Hom}_{\mathcal M}(1,-)$, it is exact; this is why $L\kappa=R\kappa=\kappa$ is legitimate and why $\varphi$ preserves projectives. Mere preservation of limits without an applicable adjoint-functor theorem should not be substituted for existence of the left adjoint. Condition (b) gives the projective resolutions defining $L\varphi$. Condition (c) is the necessary canonical degree-zero counit test; Claim~\ref{C5} demonstrates the loss when it is omitted from Lemme 3. Condition (d) provides null monomorphisms for \emph{all} objects. It is stronger than nullity of $J$ alone, and neither its degree-zero vanishing nor its monicity may be deleted as in Claim~\ref{C8}. The corollary's small projective generating category and its projective Hom modules supply precisely the exact adjunction of Claim~\ref{C6}. They do not, by themselves, settle its counit.
+
+\begin{claim}{C.10}{Proved}{The exact remaining gate in the corollary}\label{C10}
+Under the corollary's module-category and Hom-projectivity assumptions, (a)--(c), and the interval assumptions (d), the assertion that $F,G$ induce the claimed inverse equivalences is equivalent to
+\[
+ L\varphi(GP)=0
+ \quad\text{for every acyclic }P\in\Ch_{\geq0}(k)
+ \text{ with projective components}.\tag{C-gate}\label{Cgate}
+\]
+Equivalently, for every sequence of projective $k$-modules $(Q_n)_{n\geq1}$, one must have
+\[
+ L\varphi\!\left(\prod_{n\geq1}G(D^n(Q_n))\right)=0.
+\]
+The product is formed in $\mathcal M$. No closure of the null class under arbitrary products is part of the stated manuscript hypotheses.
+\end{claim}
+\begin{proof}
+The degree-zero projective tests follow from normalization exactly as in Claim~\ref{C7}. Claim~\ref{C3} therefore reduces the theorem to its acyclic-projective tests, and Claim~\ref{C2} identifies $F$ with $L\varphi$. Claim~\ref{C1} splits $P$ into a degreewise finite product of disks, and the right adjoint $G$ preserves that product. This proves both equivalences, in both directions.
+\end{proof}
+
+
+\begin{claim}{C.11}{Proved under stated hypotheses}{The underlying localization over every commutative ring}\label{C11}
+Under all the hypotheses of Claim~\ref{C6}, together with (c) and (d) as stated in Claim~\ref{C7}, the canonical functor
+\[
+ \overline F:\mathcal M[W^{-1}]\longrightarrow D_{\geq0}(k)
+\]
+is an equivalence for every commutative ring $k$. Here $W=F^{-1}(\text{quasi-isomorphisms})$, and no bound on the global dimension of $k$ is assumed. This assertion concerns the underlying localization and does not assert that the particular underived right adjoint $G$ preserves quasi-isomorphisms. A quasi-inverse is provided by the right-derived functor of $G$ for the model structures constructed in the proof.
+\end{claim}
+\begin{proof}
+We give the model-existence and realization details, since they are the additional ingredients absent from the elementary argument of Claim~\ref{C7}.
+
+First put the class of all monomorphisms and the class $W$ on $\mathcal M$. These are the cofibrations and weak equivalences of a combinatorial model structure. We check the recognition theorem rather than presuppose this conclusion. A module category over a small additive category is locally presentable, has effective unions of subobjects, and has exact filtered colimits. Its monomorphisms form the weakly saturated class generated by a set; this is the applicable case of \citet[Proposition 1.12]{Beke2000}. The class $W$ is accessible: each $F_n$ is cocontinuous, homology commutes with filtered colimits, and quasi-isomorphisms form an accessible, accessibly embedded class of arrows. Equivalently we may apply the inverse-image and solution-set results in \citet[Propositions 1.15 and 1.18]{Beke2000}. Retracts and two-out-of-three follow from the same properties of quasi-isomorphisms.
+
+If $i$ is monic, exactness of $F$ shows that $i\in W$ precisely when $F(\operatorname{coker}i)$ is acyclic. Hence monomorphisms in $W$ are stable under pushouts. They are stable under transfinite composition because $F$ preserves colimits and filtered colimits of $k$-modules are exact. A map with the right lifting property against all monomorphisms is a split epimorphism with injective kernel. To see this, lift against $0\to Y$ to obtain a section of $p:X\to Y$, and lift maps into its kernel against arbitrary monomorphisms to obtain injectivity. Conversely such a split epimorphism has the lifting property. Every injective $Q\in\mathcal M$ is a retract of $J\otimes Q$, since $\alpha\otimes Q$ is monic. Thus $FQ$ is acyclic, and all these split epimorphisms lie in $W$. These verifications are exactly the hypotheses of Smith's recognition theorem in \citet[Theorem 1.7]{Beke2000}. They produce the claimed model structure, with every object cofibrant.
+
+The category $\Ch_{\geq0}(k)$ likewise has a combinatorial model structure with all monomorphisms as cofibrations and quasi-isomorphisms as weak equivalences. The same recognition argument applies: its abelian injective objects are products of disks on injective modules, and so are acyclic; the other checks are unchanged. In particular we do not assume that every $k$-module is injective, nor confuse this model structure with the usual projective one. Since $F$ preserves monomorphisms and takes $W$ to quasi-isomorphisms, the adjunction $F\dashv G$ is Quillen for these model structures. Its derived left adjoint is the functor $\overline F$ itself, because all objects of $\mathcal M$ are cofibrant.
+
+We next show how simplicial objects recover this homotopy category. Write $s\mathcal M=\operatorname{Fun}(\Delta^{\mathrm{op}},\mathcal M)$ and equip it with the projective diagram model structure, whose weak equivalences are objectwise $W$. It exists because the model structure just obtained is cofibrantly generated; see \citet[Theorem 19.4]{DuggerHocolim}. The derived adjunction
+\[
+ H=\operatorname{hocolim}_{\Delta^{\mathrm{op}}}:
+ \operatorname{Ho}(s\mathcal M)\rightleftarrows
+ \operatorname{Ho}(\mathcal M):c
+\]
+has invertible counit. Indeed $\Delta^{\mathrm{op}}$ has initial object $[0]$ and contractible nerve. A constant diagram on $X$ has homotopy colimit equivalent to $X$: the simplicial replacement is the frame on $X$ tensored with that nerve, and the natural transformation from the constant functor at $[0]$ to the identity gives the contraction. This proves the statement for any fibrant replacement of $X$ and hence gives exactly the derived counit. Consequently $H$ induces an equivalence after inverting all maps which it sends to isomorphisms. This last assertion is formal: the counit is invertible, the image under $H$ of every unit is invertible by a triangle identity, and the localized unit and counit exhibit inverse functors.
+
+Let $N:s\mathcal M\simeq\Ch_{\geq0}(\mathcal M)$ be Dold--Kan normalization. Since $F$ is exact and additive, it commutes with normalization. Moreover a left Quillen functor preserves derived colimits: applying $F$ objectwise to a projectively cofibrant replacement gives the same left-derived composite as first taking its colimit and then applying $F$. Thus, for $K\in\Ch_{\geq0}(\mathcal M)$ and its denormalization $\Gamma K$, we have the natural comparison
+\[
+ \overline F(H\Gamma K)\simeq
+ \operatorname{hocolim}_{\Delta^{\mathrm{op}}}F(\Gamma K)
+ \simeq \Tot\bigl(F_q(K_p)\bigr)_{p,q\geq0}. \tag{C-real}\label{Creal}
+\]
+For clarity, the last identification has no condition about infinite product totalizations. A simplicial nonnegative chain complex has homotopy colimit its direct-sum total alternating-face complex, as in \citet[Proposition 19.9]{DuggerHocolim}; the degenerate summand is naturally contractible and the normalized summand is the displayed double complex. Each total degree has finitely many pairs $(p,q)$. One can also check this comparison on the free simplicial diagrams $k[\Delta^n]\otimes A$: the augmented normalized chains of $\Delta^n$ contract to $k$, compatibly with the augmentation to the ordinary colimit. Both sides preserve cofibrant cell attachments and filtered colimits, which gives the same comparison on projective diagram replacements.
+
+The functor $\overline F$ reflects isomorphisms in $\operatorname{Ho}(\mathcal M)$. Indeed we may replace its source and target by fibrant objects, which are still cofibrant, and represent it by an actual map between those objects. If its image under $F$ is invertible, that actual map has quasi-isomorphic image and hence belongs to $W$ by definition. The replacement maps already belong to $W$. It follows from \eqref{Creal} that the class of maps inverted by $H$, transported by Dold--Kan, is exactly
+\[
+ V=\{u:\Tot F(u)\text{ is a quasi-isomorphism}\}.
+\]
+We have therefore proved an equivalence
+\[
+ \mathcal M[W^{-1}]\simeq\Ch_{\geq0}(\mathcal M)[V^{-1}], \tag{C-enlarge}\label{Cenlarge}
+\]
+whose comparison on objects of $\mathcal M$ is the degree-zero inclusion. Ordinary quasi-isomorphisms of complexes in $\mathcal M$ lie in $V$, by exactness of the $F_q$ and the first-quadrant spectral sequence. The total functor $\Tot F$ is the left-derived functor $L\varphi$ on $D_{\geq0}(\mathcal M)$: resolve a complex by a first-quadrant double complex of projectives and use Claim~\ref{C2} on its columns. All comparison spectral sequences again have finite diagonals. Thus the right side of \eqref{Cenlarge} is the localization of $D_{\geq0}(\mathcal M)$ at the maps inverted by $L\varphi$.
+
+Finally the derived adjunction
+\[
+ L\varphi:D_{\geq0}(\mathcal M)\rightleftarrows D_{\geq0}(k):\kappa
+\]
+has invertible counit. Claim~\ref{C7}'s degree-zero argument already proves the canonical map $L\varphi\kappa P\to P$ invertible for every projective $k$-module $P$, using normalization at $k$, sums, and retracts; that argument used no global-dimension assumption. For any $K\in\Ch_{\geq0}(k)$ choose a quasi-isomorphism $Q\to K$ with $Q$ nonnegative and termwise projective. Exactness of $\kappa$ preserves this quasi-isomorphism. Each $\kappa Q_n$ is $\varphi$-acyclic by the projective-module case, so the first-quadrant comparison for $L\varphi(\kappa Q)$ identifies its canonical counit with the termwise isomorphisms $\varphi\kappa Q_n\to Q_n$. Hence that counit is an isomorphism for $K$ as well. Localizing this adjunction at the maps inverted by $L\varphi$ now yields an equivalence with $D_{\geq0}(k)$, by the same unit--counit argument. Composing with \eqref{Cenlarge} proves the stated canonical equivalence $\overline F$.
+
+Since $\overline F$ is the derived left adjoint of the Quillen adjunction $F\dashv G$, its derived right adjoint is a quasi-inverse. This means that we first take an injective-model fibrant replacement of a complex before applying $G$. Removing that replacement is exactly the separate condition in Claim~\ref{C10}; a right Quillen functor alone need only preserve weak equivalences between fibrant objects.
+\end{proof}
+
+\begin{claim}{C.12}{Refuted}{Unlimited dimension shifting does not replace the remaining test}\label{C12}
+An exact additive functor $E:\Mod R\to\Ch_{\geq0}(R)$ can take every injective module to an acyclic complex and still take the projective module $R$ to a nonacyclic complex. This is an obstruction to one attempted proof of \eqref{Cgate}, not a counterexample satisfying all the manuscript's hypotheses.
+\end{claim}
+\begin{proof}
+Put $R=\mathbb F_2[x_1,x_2,\ldots]$, $S=R/(x_1,x_2,\ldots)$, and let $K_n$ be the Koszul complex on $x_1,\ldots,x_n$. Set $K=\varinjlim_nK_n$ and $E(X)=K\otimes_RX$. Every term of $K$ is free, so $E$ is exact. Regularity of each finite variable sequence and exact filtered colimits give $H_0K=S\ne0$, $H_jK=0$ for $j>0$.
+
+For injective $I$, finite-free Koszul self-duality identifies $K_n\otimes I$ with the shifted dual complex $\operatorname{Hom}_R(K_n,I)$. Exactness of this Hom functor shows its homology is concentrated in homological degree $n$. For every fixed $j$, it therefore vanishes for $n>j$. Taking the filtered colimit gives $H_j(E(I))=0$ for every $j$, whereas $H_0(E(R))=S$. This is the Koszul phenomenon in \citet[Theorem 3.5]{Rickard2019}.
+\end{proof}
+
+\begin{claim}{C.13}{Proved under stated hypotheses}{Removing the small generators when filtered colimits are exact}\label{C13}
+Let $\mathcal M$ satisfy the manuscript's (a)--(d), with the actual adjunction $\varphi\dashv\kappa$ assumed in (a). Suppose in addition that $\mathcal M$ has all small coproducts and exact filtered colimits (AB5). Then the canonical functor
+\[
+ \mathcal M[W^{-1}]\longrightarrow D_{\geq0}(k),\qquad X\longmapsto L\varphi(X),
+\]
+is an equivalence. We do not require a small projective generating category, projectivity of its $k$-Hom modules, local presentability, or an exact resolving functor on $\mathcal M$. This gives the underlying theorem in another precisely stated scope. It does not assert that AB5 follows from (a)--(d).
+\end{claim}
+\begin{proof}
+We replace the missing exact resolving functor by a category of resolutions. Let $\mathcal R$ consist of nonnegative complexes $P$ of projective objects of $\mathcal M$ such that $H_iP=0$ for $i>0$. Give it weak equivalences
+\[
+ u\in W_{\mathcal R}\quad\Longleftrightarrow\quad
+ \varphi(u)\text{ is a quasi-isomorphism},
+\]
+where $\varphi$ is applied termwise. A cofibration is a degreewise split monomorphism whose cokernel belongs to $\mathcal R$. We check the six axioms of an ABC cofibration category, in the convention of \citet[Definition 1.1.1]{RadulescuBanu2009}.
+
+The zero object and closure under composition are immediate. Two-out-of-three holds by the definition of $W_{\mathcal R}$. The pushout of a cofibration exists degreewise. Its terms are projective, since after a degreewise splitting it is the direct sum of the other source and the cokernel. Its positive homology vanishes by the homology exact sequence. The resulting map is again a cofibration with the same cokernel. Termwise application of $\varphi$ preserves this split exact sequence, so acyclic cofibrations remain acyclic after pushout.
+
+For factorization let $f:P\to Q$, $X=H_0P$, and $Y=H_0Q$. In $\mathcal M$ factor $H_0f$ as
+\[
+ X\xrightarrow{(H_0f,\,\alpha\otimes X)}
+ Z=Y\oplus(J\otimes X)\xrightarrow{\mathrm{pr}_Y}Y.
+\]
+The first map is monic, and the second belongs to $W$ by (d). If $C$ is its cokernel, choose a projective resolution $R$ of $C$. The horseshoe construction produces a projective resolution $S$ of $Z$ and a degreewise split exact sequence $0\to P\to S\to R\to0$. We may simultaneously construct a chain map $g:S\to Q$ extending the given $f$ and lifting $Z\to Y$. Here are the relative lifting details: in degree zero choose the map on the projective summand $R_0$ through $Q_0\twoheadrightarrow Y$; after the maps in lower degrees have been chosen, the required next differential lands in the cycles of $Q$, and the projectivity of $R_n$ lifts it through the surjection from $Q_n$ onto those cycles. The already fixed map on $P_n$ is $f_n$. This induction gives $g$ with $g|_P=f$. Since $g$ induces $Z\to Y$ on $H_0$, it is in $W_{\mathcal R}$. Thus $P\to S\to Q$ is the required factorization.
+
+Coproducts of resolutions are resolutions because AB5 implies AB4, and coproducts of projectives are projective. Coproducts of cofibrations remain degreewise split with resolution cokernel. Since $\varphi$ preserves coproducts and coproducts of $k$-modules are exact, coproducts of acyclic cofibrations are acyclic. Finally a countable sequence of cofibrations has a degreewise colimit whose terms are projective: after choosing successive splittings, each term is the direct sum of the initial projective and the successive projective cokernels. Exactness of filtered colimits shows that its positive homology and the positive homology of the relevant quotient vanish. Termwise $\varphi$ preserves this colimit, so a countable composite of acyclic cofibrations is acyclic. This verifies the remaining axioms. Every object of $\mathcal R$ is cofibrant.
+
+The projection $H_0:\mathcal R\to\mathcal M$ induces an equivalence after inverting the maps inducing isomorphisms on $H_0$. Indeed every object has a projective resolution, every map lifts to a chain map between resolutions, and two lifts are chain homotopic. Chain homotopies become equalities on localization: their usual chain-cylinder has projective terms, positive homology zero, and projection inducing an $H_0$-isomorphism. Conversely a quasi-isomorphism between these bounded below projective resolutions is a chain-homotopy equivalence, by splitting its acyclic projective cone. The usual comparison argument therefore proves full faithfulness as well as essential surjectivity. After further localization this gives
+\[
+ \mathcal R[W_{\mathcal R}^{-1}]\simeq\mathcal M[W^{-1}]. \tag{C-res}\label{Cres}
+\]
+The same assertion holds diagramwise for every small indexing category $I$. To justify coherence, we use projective resolutions in $\mathcal M^I$. This diagram category has enough projectives: the left adjoints to evaluation send a projective $P$ to the diagram with value $\bigoplus_{I(i,j)}P$ at $j$, and sums of these give projective epimorphisms onto arbitrary diagrams. Their values are projective in $\mathcal M$. A projective resolution of the whole $I$-diagram maps to any given objectwise projective resolution of that diagram, and the same comparison and cylinder argument applies. This proves the diagramwise version of \eqref{Cres}, rather than merely an equivalence of the categories at the terminal index.
+
+The functor
+\[
+ \Phi:\mathcal R\longrightarrow\Ch_{\geq0}(k),\qquad P\longmapsto\varphi(P),
+\]
+is now an exact functor of cofibration categories. It preserves the specified cofibrations, their pushouts, coproducts, and countable cofibration colimits, and takes weak equivalences to quasi-isomorphisms. Its terms are projective over $k$ because $\kappa$ is exact. ABC cofibration categories have homotopy colimits with their usual adjunction to restriction \citep[Theorem 9.6.3]{RadulescuBanu2009}. For an explicit preservation check, let $p_t:\Delta'I\to I$ be the direct replacement of a small indexing category used in \citet[Proposition 9.5.7 and the proof of Theorem 9.6.3]{RadulescuBanu2009}. Choose a restricted Reedy cofibrant resolution $Q\to p_t^*X$. Its colimit over $\Delta'I$ computes $\operatorname{hocolim}_I X$. The diagram $\Phi Q$ is again restricted, because $\Phi$ preserves weak equivalences, and Reedy cofibrant, because it preserves latching pushouts and cofibrations. The degree filtration of $\Delta'I$ builds its colimit from sums, pushouts, and a countable cofibration composite; all three are preserved by $\Phi$. Consequently $\Phi(\operatorname{colim}_{\Delta'I}Q)\cong\operatorname{colim}_{\Delta'I}\Phi Q$ supplies the required homotopy-colimit comparison. No right adjoint to $\Phi$, or unverified preservation of infinite constructions by a merely finite-exact functor, is used.
+
+For completeness, the same homotopy-colimit structure is represented in $\mathcal M$ by all monomorphisms and $W$. The finite axioms follow from derived exact sequences and the displayed interval factorization. Coproducts preserve $L\varphi$, by taking sums of projective resolutions and using AB4. Filtered colimits also preserve $L\varphi$: for a filtered diagram choose a projective resolution in $\mathcal M^I$ as above. Its colimit is a projective resolution, since the colimit functor is exact and preserves projectives (its right adjoint, the constant diagram functor, is exact). Applying $\varphi$ commutes with that colimit, and homology commutes with filtered colimits in $\Mod k$. This proves the necessary weak-equivalence closure for the last two cofibration axioms. Thus $H_0$ preserves the indicated colimits and cofibrations, and the diagramwise equivalence transfers the homotopy-colimit comparison to $L\varphi$ on $\mathcal M[W^{-1}]$.
+
+We can now repeat the realization argument with its comparison made explicit. If $K\in\Ch_{\geq0}(\mathcal M)$, resolve its Dold--Kan denormalization $\Gamma K$ projectively in the abelian category $s\mathcal M$. This gives a simplicial object of $\mathcal R$. Applying $\Phi$ and normalizing in the simplicial direction gives a first-quadrant double complex with terms $\varphi(Q_{p,q})$. Each $Q_{p,q}$ is projective in $\mathcal M$, and each vertical column resolves $K_p$: normalization is exact and takes projective objects of $s\mathcal M$ to projective objects of $\Ch_{\geq0}(\mathcal M)$. Additive functors commute with this normalization, because its normalized summand is the image of the standard split idempotent built from degeneracies. The total of $Q_{p,q}$ is consequently a projective resolution of $K$ in the derived sense. The finite-diagonal comparison gives
+\[
+ L\varphi\bigl(\operatorname{hocolim}\Gamma K\bigr)
+ \simeq\Tot\bigl(\varphi(Q_{p,q})\bigr)
+ \simeq L\varphi(K).
+\]
+As in Claim~\ref{C11}, the homotopy-colimit/constant-diagram counit for $\Delta^{\mathrm{op}}$ is invertible. The weak equivalences are saturated: they are closed under retracts by their definition, so the cofibration-category saturation criterion applies \citep[Theorem 7.2.7]{RadulescuBanu2009}. The induced functor $L\varphi$ on $\mathcal M[W^{-1}]$ is conservative: Brown's homotopy calculus of fractions represents every morphism by $X\to Z\leftarrow Y$ with the second map a weak equivalence; if its $L\varphi$-image is invertible, the first map also belongs to $W$ \citep[Theorem 6.4.4]{RadulescuBanu2009}. Consequently the simplicial enlargement localized at homotopy-colimit equivalences is precisely
+\[
+ D_{\geq0}(\mathcal M)[(L\varphi)^{-1}(\mathrm{Iso})^{-1}].
+\]
+Finally (c), coproduct preservation just proved, and retracts imply that $L\varphi\kappa P\to P$ is an isomorphism for every projective $k$-module $P$. Resolving a nonnegative complex by projective $k$-modules and using the first-quadrant comparison proves this counit invertible on all of $D_{\geq0}(k)$. The localized adjunction $L\varphi\dashv\kappa$ therefore gives the asserted canonical equivalence, by the unit--counit argument of Claim~\ref{C4}.
+\end{proof}
+
+\begin{claim}{C.14}{Proved under stated hypotheses}{Pure-injective resolutions close a further part of the raw-adjoint gap}\label{C14}
+Assume the normalized hypotheses of Claim~\ref{C6}, including the interval condition (d). Suppose that every map
+\[
+ F(\alpha\otimes X):F(X)\longrightarrow F(J\otimes X)
+\]
+is degreewise pure as a map of complexes of $k$-modules. Suppose also that some integer $d\geq0$ bounds the pure-injective dimension of every projective $k$-module. Then the underived adjoints $F,G$ induce quasi-inverse equivalences, as in Claim~\ref{C7}.
+
+The purity hypothesis holds if the tensor product on $\mathcal M$ is compatible with scalar copowers: the canonical comparisons
+\[
+ (U\otimes_k\mathbf1)\otimes X\ \cong\ U\otimes_kX
+ \qquad(U\in\Mod k,\ X\in\mathcal M)
+ \tag{C-copower}\label{Ccopower}
+\]
+are isomorphisms, compatibly with the unit, symmetry, and associativity. In particular this compatibility holds when the internal tensor product preserves colimits in each variable. It is an additional hypothesis here: mere $k$-bilinearity does not assert preservation of cokernels or infinite coproducts.
+
+With this compatibility, the conclusion applies to every ring of finite pure global dimension. It therefore applies to every commutative ring of cardinality at most $\aleph_t$ for a finite integer $t$, in particular every countable commutative ring, by the Gruson--Jensen cardinal bound stated in \citet[Theorem 2.6.3]{BensonGnacadja1999}. No cardinal restriction on the modules, the generator category, or the resolving functor is needed.
+\end{claim}
+\begin{proof}
+We recall the exact meaning of the extra module-theoretic assumption. A monomorphism $A\to B$ of $k$-modules is pure if $U\otimes_k A\to U\otimes_k B$ is monic for every $k$-module $U$. A module $I$ is pure-injective if every map $A\to I$ extends across every such monomorphism. Its pure-injective dimension is at most $d$ if it admits a pure-exact resolution
+\[
+ 0\longrightarrow P\longrightarrow I^0\longrightarrow\cdots
+ \longrightarrow I^d\longrightarrow0
+\]
+with all $I^j$ pure-injective. These resolutions exist without the length bound; for example the character double-dual map is a pure monomorphism into a pure-injective module, and we iterate on its cokernel. The extension property, double-dual construction, and equivalence of the global pure-projective and pure-injective bounds are recorded in \citet[Sections 2.3--2.5]{BensonGnacadja1999}.
+
+Let $A=\prod_{n\geq1}D^n(I_n)$, where every $I_n$ is pure-injective. A chain map from a complex $C$ to $D^n(I_n)$ is specified by a module map $C_{n-1}\to I_n$. Consequently a map $C\to A$ extends across every degreewise pure monomorphism $C\to C'$: extend these component maps and combine them by the universal property of the product. In particular the counit
+\[
+ \varepsilon_A:FGA\longrightarrow A
+\]
+extends across the degreewise pure map $F(\alpha\otimes GA)$ to a map $F(J\otimes GA)\to A$. Under $F\dashv G$, this extension corresponds to a map $r:J\otimes GA\to GA$ whose composite with $\alpha\otimes GA$ is $1_{GA}$. This assertion follows from naturality of the adjunction and the fact that the counit corresponds to $1_{GA}$. Thus $GA$ is a retract of $J\otimes GA$, so $FGA$ is acyclic by (d). This proves the required vanishing for products of disks on pure-injective coefficients; it does not call a pure monomorphism split.
+
+Now let $P$ be an acyclic nonnegative complex of projective $k$-modules. Claim~\ref{C1} gives $P\cong\prod_{n\geq1}D^n(Q_n)$, where $Q_n=B_{n-1}P$ is projective. These $Q_n$ are disk coefficients, not the components of $P$. Choose a pure-injective resolution of length at most $d$ of each $Q_n$, padding by zero if necessary. Applying $D^n$ and taking the product gives an exact sequence of complexes
+\[
+ 0\longrightarrow P\longrightarrow A^0\longrightarrow\cdots
+ \longrightarrow A^d\longrightarrow0,
+ \qquad A^j=\prod_{n\geq1}D^n(I_n^j).
+\]
+There are only two disk contributions in each degree, so exactness here does not require an infinite-product exactness argument. Both $F$ and $G$ are exact. Hence applying $FG$ gives a finite exact sequence, all of whose terms $FGA^j$ are acyclic by the preceding paragraph. The homology long exact sequences for its successive kernels give $FGP$ acyclic. This is precisely the remaining test of Claim~\ref{C10}; normalization already proves the counit test on projective modules in degree zero. Claim~\ref{C3} now proves the asserted equivalence by the raw adjoints.
+
+We check the sufficient tensor hypothesis rather than identify it with $k$-bilinearity. Every $F_n$ is cocontinuous and $k$-linear, so it commutes with scalar copowers. Under \eqref{Ccopower}, symmetry and associativity identify $U\otimes_k(\alpha\otimes X)$ with $\alpha\otimes((U\otimes_k\mathbf1)\otimes X)$. The latter is monic by (d). Applying the exact functor $F_n$ identifies its image with $U\otimes_kF_n(\alpha\otimes X)$, proving purity for every $U$. If the internal tensor is cocontinuous, \eqref{Ccopower} itself follows by writing $U$ as the cokernel of a map between free $k$-modules: both sides preserve the resulting coproducts and cokernel, and the comparison is the unit isomorphism on each free summand.
+
+Finally finite pure global dimension gives the required uniform pure-injective bound by its equivalent injective definition. The cited cardinal theorem supplies such a bound $d=t+1$ when $|k|\leq\aleph_t$; finite rings are included in the countable case. This is a direct application of that theorem to coefficient modules, not a bound on the cardinalities of our diagrams. The zero ring gives only zero modules and the conclusion is immediate there.
+\end{proof}
+
+\begin{claim}{C.15}{Proved under stated hypotheses}{An exact resolving functor removes the colimit-exactness requirement}\label{C15}
+Let $\mathcal M$ satisfy (a)--(d) and have all small coproducts. Suppose there is an exact cocontinuous $k$-linear functor
+\[
+ F:\mathcal M\longrightarrow\Ch_{\geq0}(k)
+\]
+with a specified identification $H_0F=\varphi$, and with $H_iF(P)=0$ for every projective $P\in\mathcal M$ and $i>0$. Then the canonical functor $\mathcal M[W^{-1}]\to D_{\geq0}(k)$ is an equivalence. We require neither AB4 nor AB5, a small projective generating category, nor a right adjoint to $F$. The existence of this exact cocontinuous resolving functor is the added hypothesis; it has been proved in the corollary setting by Claim~\ref{C6}, and is not inferred from (a)--(d) alone.
+\end{claim}
+\begin{proof}
+Claim~\ref{C2} identifies $F$ with $L\varphi$ on objects of $\mathcal M$. Define
+\[
+ \mathsf{Cof}=F^{-1}\{\text{degreewise monomorphisms}\},
+ \qquad W=F^{-1}\{\text{quasi-isomorphisms}\}.
+\]
+These cofibrations need not be monomorphisms in $\mathcal M$. That distinction allows us to verify the ABC axioms without assuming exactness of colimits in $\mathcal M$.
+
+All objects are cofibrant, identities and composites are cofibrations, and two-out-of-three holds for $W$. The category has all small colimits, since an abelian category with small coproducts has cokernels and hence all small colimits. Pushouts of cofibrations, and pushouts of acyclic cofibrations, have the required properties because $F$ preserves pushouts and the corresponding assertions hold for monomorphisms of complexes of $k$-modules. For a map $f:X\to Y$, the factorization
+\[
+ X\xrightarrow{(f,\alpha\otimes X)}Y\oplus(J\otimes X)
+ \xrightarrow{\mathrm{pr}_Y}Y
+\]
+has first map in $\mathsf{Cof}$: it is monic in $\mathcal M$ and $F$ is exact. The second map is in $W$ by (d). This proves the factorization axiom. Arbitrary coproducts of cofibrations and of acyclic cofibrations have the required properties after applying $F$, because $F$ preserves coproducts and sums of $k$-modules are exact. Finally, apply $F$ to a countable sequence of cofibrations. Its image is a sequence of degreewise monomorphisms in $\Ch_{\geq0}(k)$; its colimit is again monic from every stage. If the successive cofibrations are acyclic, those maps to the colimit are quasi-isomorphisms, since filtered colimits of $k$-modules are exact. Preservation of the colimit by $F$ proves both parts of the final axiom in $\mathcal M$. Thus $\mathcal M$ is an ABC cofibration category, and $F$ preserves all colimits and cofibrations used to construct its homotopy colimits.
+
+The direct-replacement/Reedy construction in Claim~\ref{C13} therefore proves that $F$ preserves homotopy colimits over every small indexing category. Explicitly, a restricted Reedy cofibrant replacement over $\Delta'I$ remains restricted Reedy cofibrant under $F$, and $F$ takes its colimit to the colimit of its image. Brown's calculus of fractions also shows that the induced $\overline F:\mathcal M[W^{-1}]\to D_{\geq0}(k)$ is conservative: representing a morphism by $X\to Z\leftarrow Y$, with second map in $W$, shows that invertibility of its image forces the first map into $W$ as well. These are the applications of \citet[Theorems 6.4.4 and 9.6.3]{RadulescuBanu2009}; no combinatorial-model recognition theorem is used.
+
+Let $H=\operatorname{hocolim}_{\Delta^{\mathrm{op}}}$ on the localization of simplicial objects at objectwise $W$. Its adjunction to the constant diagram functor has invertible counit, since the nerve of $\Delta^{\mathrm{op}}$ is contractible. It therefore identifies $\mathcal M[W^{-1}]$ with the further localization of simplicial objects at all maps inverted by $H$. For $K\in\Ch_{\geq0}(\mathcal M)$, exactness and additivity of $F$ give
+\[
+ \overline F(H\Gamma K)
+ \simeq\operatorname{hocolim}_{\Delta^{\mathrm{op}}}F(\Gamma K)
+ \simeq\Tot\bigl(F_q(K_p)\bigr).
+\]
+The second comparison is the normalized alternating-face computation of the homotopy colimit in nonnegative complexes; all total degrees have finite diagonals. Conservativity now identifies the maps inverted by $H$ with the maps inverted by $\Tot F$. Exactness of each $F_q$ ensures that ordinary quasi-isomorphisms in $\Ch_{\geq0}(\mathcal M)$ belong to this class. Resolving a complex by a first-quadrant double complex of projectives and using Claim~\ref{C2} identifies $\Tot F$ with $L\varphi$ on $D_{\geq0}(\mathcal M)$. Hence
+\[
+ \mathcal M[W^{-1}]
+ \simeq D_{\geq0}(\mathcal M)
+       [(L\varphi)^{-1}(\mathrm{Iso})^{-1}].
+\]
+
+It remains to check the canonical counit of $L\varphi\dashv\kappa$. Normalization (c) proves it on $k[0]$. Both $F$ and $\kappa$ preserve coproducts, so it holds on every free $k$-module in degree zero, and hence on every projective one by retracts. Notice that we use preservation by the exact functor $F$, rather than assuming that sums of projective resolutions are exact in $\mathcal M$. Resolve an arbitrary nonnegative $k$-complex by a complex of projective $k$-modules. Exactness of $\kappa$ and the same first-quadrant comparison show that its canonical derived counit is invertible. The localized adjunction therefore gives the equivalence with $D_{\geq0}(k)$, proving the claim.
+\end{proof}
+
+\begin{claim}{C.16}{Proved under stated hypotheses}{Finite projective resolving components give the raw adjoint over every ring}\label{C16}
+In the normalized corollary setting of Claim~\ref{C6}, assume that every $F(\alpha\otimes X)$ is degreewise pure. Assume in addition that each component functor $F_n:\mathcal M\to\Mod k$ is a retract of a finite direct sum of evaluation functors $X\mapsto X(a)$, $a\in M_0$. The finite sum may depend on $n$. Then the raw adjoints $F,G$ induce the claimed quasi-inverse equivalences over every commutative ring $k$, with no ordinary or pure-injective dimension bound. Scalar-copower compatibility as in Claim~\ref{C14} is sufficient for the purity assumption.
+\end{claim}
+\begin{proof}
+Write $\mathcal A=\prod_{m\geq1}\Mod k$ for the category of sequences of coefficient modules. For $Q=(Q_m)\in\mathcal A$ put
+\[
+ DQ=\prod_{m\geq1}D^m(Q_m),\qquad E(Q)=FG(DQ).
+\]
+We show that every $E(Q)$ is contractible. This will in particular prove the projective-coefficient test in Claim~\ref{C10}.
+
+For fixed $n$, choose a finite evaluation sum of which $F_n$ is a retract, say $\bigoplus_{r=1}^{s_n}\mathrm{ev}_{a_{n,r}}$. Before taking that retract, its composite with $G D$ is
+\[
+ \begin{aligned}
+ \bigoplus_{r=1}^{s_n}G(DQ)(a_{n,r})
+ &\cong\bigoplus_{r=1}^{s_n}
+   \prod_{m\geq1}\operatorname{Hom}_k
+        \bigl(F(h_{a_{n,r}})_{m-1},Q_m\bigr)\\
+ &\cong\operatorname{Hom}_{\mathcal A}(B'_n,Q),
+ \end{aligned}
+\]
+where $B'_{n,m}=\bigoplus_{r=1}^{s_n}F(h_{a_{n,r}})_{m-1}$. The first isomorphism is the adjunction formula for $G$, the right-adjoint disk formula, and preservation of products by Hom. The second uses finiteness of the evaluation sum. Every $B'_{n,m}$ is projective by Claim~\ref{C6}. The natural idempotent defining the retract corresponds, by Yoneda, to an idempotent of $B'_n$. It splits in $\mathcal A$, giving a projective object $B_n$ with
+\[
+ E_n(Q)\cong\operatorname{Hom}_{\mathcal A}(B_n,Q).
+\]
+The differential $E_n\to E_{n-1}$ now corresponds to a map $B_{n-1}\to B_n$. The differential identities give a nonnegative cochain complex $B^\bullet$ in $\mathcal A$, with $B^n=B_n$, and $E(Q)$ is the associated Hom chain complex. This checks the variance as well as representability.
+
+If each $I_m$ is pure-injective over $k$, the disk product $DI$ is injective relative to degreewise pure monomorphisms of complexes. The extension-of-counit argument in Claim~\ref{C14} therefore proves $E(I)=FG(DI)$ acyclic. We now extract the consequence for $B^\bullet$ one coordinate at a time. Fix $m$ and take $I$ supported in that coordinate. We obtain
+\[
+ \operatorname{Hom}_k(B^\bullet_m,I_m)
+ \text{ acyclic for every pure-injective }I_m.
+\]
+Testing an ordinary injective cogenerator first proves that $B^\bullet_m$ is exact. Exactness of the displayed Hom complex then says that every map from a cycle module $Z^j(B_m)$ to a pure-injective $I_m$ extends to $B_m^j$. In particular we may take the character dual $I_m=\operatorname{Hom}_{\mathbb Z}(U,\mathbb Q/\mathbb Z)$ of any right $k$-module $U$, which is pure-injective. Tensor--Hom adjunction and faithful exact character duality show that $U\otimes_kZ^j(B_m)\to U\otimes_kB_m^j$ is monic for every $U$. Thus every cycle inclusion is pure: $B_m^\bullet$ is a pure acyclic complex of projective $k$-modules.
+
+We now use the unbounded pure-acyclicity theorem, not an infinite dimension-shifting argument: a pure acyclic complex whose terms are pure-projective is contractible \citep[Theorem 5.4 and Corollary 5.5]{Stovicek2014C}. Our terms are projective, hence pure-projective, so it supplies a contracting homotopy for each $B_m^\bullet$. These coordinatewise homotopies give a contracting homotopy of $B^\bullet$ in $\mathcal A$. Applying $\operatorname{Hom}_{\mathcal A}(-,Q)$ contracts $E(Q)$ for every sequence $Q$, without a cardinal bound. Claim~\ref{C10} and the canonical degree-zero test now give the assertion.
+
+The finiteness hypothesis was used at a precise step: an arbitrary direct sum of the displayed representable Hom functors need not be representable, because an infinite sum cannot be moved through the product over disk degrees. We therefore do not extrapolate the argument to an arbitrary projective functor resolution.
+\end{proof}
+
+\begin{claim}{C.17}{Proved under stated hypotheses}{One finite resolution controls every chosen resolving adjunction}\label{C17}
+Keep the chosen adjunction $F\dashv G$ and all the normalized corollary hypotheses of Claim~\ref{C6}. Suppose that $F(\alpha\otimes X)$ is degreewise pure for every $X$. Suppose there exists an exact cocontinuous resolving functor
+\[
+ F^{(0)}:\mathcal M\longrightarrow\Ch_{\geq0}(k)
+\]
+computing $L\varphi$, for which every component $F^{(0)}_n$ is a retract of a finite sum of evaluation functors. Then the original raw adjoints $F,G$ induce quasi-inverse equivalences over every commutative coefficient ring. The chosen $F$ itself need not have finite evaluation components. Existence of $F^{(0)}$ is an additional finiteness hypothesis; we do not assert that every representing module of $\varphi$ has a resolution of this type.
+\end{claim}
+\begin{proof}
+We retain the sequence category $\mathcal A$ and disk-product functor $D$ of Claim~\ref{C16}, but put $E=F^{(0)}GD$. If $F^{(0)}_n$ is a retract of $\bigoplus_{r=1}^{s_n}\mathrm{ev}_{a_{n,r}}$, then $E_n$ is a retract of
+\[
+ Q\longmapsto\bigoplus_{r=1}^{s_n}\prod_{m\geq1}
+ \operatorname{Hom}_k\bigl(F(h_{a_{n,r}})_{m-1},Q_m\bigr).
+\]
+The finite sum identifies this functor with $\operatorname{Hom}_{\mathcal A}(B'_n,-)$, where
+\[
+ B'_{n,m}=\bigoplus_{r=1}^{s_n}F(h_{a_{n,r}})_{m-1}.
+\]
+Each coefficient is projective by Claim~\ref{C6}, which concerns the original chosen $F$. Splitting the representing idempotent and reversing the differential by Yoneda gives a cochain complex $B^\bullet$ of projective objects of $\mathcal A$ such that $E(Q)=\operatorname{Hom}_{\mathcal A}(B^\bullet,Q)$ as a chain complex.
+
+For a sequence $I$ of pure-injective modules, we extend the counit of $F\dashv G$ across $F(\alpha\otimes GDI)$. The disk-product extension property in Claim~\ref{C14} gives a retraction of $GDI\to J\otimes GDI$. Condition (d) therefore implies $L\varphi(GDI)=0$. Since $F^{(0)}$ computes $L\varphi$, this proves $E(I)=F^{(0)}GDI$ acyclic. We have used the adjunction belonging to $F$ for the retraction and the resolving property of $F^{(0)}$ for the vanishing; no adjunction for $F^{(0)}$ is required.
+
+Taking $I$ supported in one coordinate and repeating the injective-cogenerator and character-dual test proved in Claim~\ref{C16} shows that each coordinate of $B^\bullet$ is pure acyclic. Its projective terms are pure-projective, so \citet[Corollary 5.5]{Stovicek2014C} makes it contractible. Coordinatewise contracting homotopies contract $B^\bullet$, and hence every $E(Q)$. In particular, if $P$ is an acyclic nonnegative complex of projective modules, its disk decomposition gives $F^{(0)}GP$ acyclic. This is exactly $L\varphi(GP)=0$, the gate in Claim~\ref{C10}. That gate and the normalized degree-zero counit test prove the assertion for the original $F,G$.
+\end{proof}
+
+
+\begin{claim}{C.18}{Refuted}{The complete interval hypotheses do not imply exact coproducts}\label{C18}
+The manuscript's (a)--(d), existence of all small limits and colimits, and even cocontinuity of the tensor product in both variables do not imply AB4 or AB5. The counterexample below still satisfies the asserted underlying localization equivalence. Thus it refutes a proposed route to the general theorem, not that theorem.
+\end{claim}
+\begin{proof}
+We work over $k=\mathbb Z$. Let $\mathcal T$ be the category of torsion abelian groups and put $\mathcal N=\mathcal T^{\mathrm{op}}$. Write $tA$ for the torsion subgroup of an abelian group $A$. The category $\mathcal T$ is abelian, with ordinary kernels and cokernels, ordinary direct sums, and products $t(\prod_iA_i)$. This product formula is also recorded in \citet[Introduction]{Rickard2020C}. Consequently $\mathcal T$ and $\mathcal N$ have all small limits and colimits.
+
+The category $\mathcal T$ has enough injectives. For an explicit verification, characters into $\mathbb Q/\mathbb Z$ separate the points of a torsion group $A$: a nonzero character on its cyclic subgroup extends to $A$, since $\mathbb Q/\mathbb Z$ is divisible and hence injective. The resulting embedding of $A$ into a product of copies of $\mathbb Q/\mathbb Z$ lands in its torsion subgroup. That subgroup is divisible: if $nx=y$ is solved in the divisible product and $ry=0$, then $nrx=0$, so the solution $x$ is torsion. It is therefore injective even in all abelian groups, and hence in $\mathcal T$. We use here the divisible--injective characterization, with its proof opened in \citet[Lemma 15.55.1, tag 01D6]{StacksInjectiveAbC}. Thus $\mathcal N$ has enough projectives.
+
+The category $\mathcal N$ has its usual scalar copowers. Explicitly, for an abelian group $U$ and an object $A$ of $\mathcal N$, define
+\[
+ U\cdot A=t\operatorname{Hom}_{\mathbb Z}(U,A),
+\]
+regarded as an object of $\mathcal N$. The opposite variance turns this into a covariant functor in $U$ and $A$. Indeed
+\[
+ \operatorname{Hom}_{\mathcal N}(U\cdot A,B)
+ \cong\operatorname{Hom}_{\mathbb Z}
+       \bigl(U,\operatorname{Hom}_{\mathcal N}(A,B)\bigr).
+\]
+A map from the torsion group $B$ into $\operatorname{Hom}(U,A)$ lands in its torsion subgroup, which proves this formula directly. We have natural identifications
+\[
+ (U\otimes V)\cdot A\cong U\cdot(V\cdot A),
+ \qquad\mathbb Z\cdot A\cong A.
+\]
+For the first, both sides are the bilinear maps $U\times V\to A$ killed by one common positive integer. The identifications satisfy the associativity and unit coherence relations because they are the usual tensor--Hom adjunction identifications. The scalar action preserves colimits in $U$ by the copower formula. It preserves colimits in $A\in\mathcal N$ because $t\operatorname{Hom}(U,-)$ on $\mathcal T$ is right adjoint to $U\otimes -$ on $\mathcal T$.
+
+Now put
+\[
+ \mathcal M=\Ch_{\geq0}(\mathbb Z)\times\mathcal N,
+\]
+and define a symmetric monoidal product by
+\[
+ (X,A)\otimes(Y,B)
+ =\bigl(X\otimes_{\mathbb Z}Y,
+        (X_0\cdot B)\oplus(Y_0\cdot A)\bigr).
+ \tag{C-square-zero}\label{Csquarezero}
+\]
+Its unit is $\mathbf1=(\mathbb Z[0],0)$. To check associativity explicitly, the second coordinate of either parenthesized triple product is canonically the sum
+\[
+ (X_0\otimes Y_0)\cdot C\ \oplus\
+ (X_0\otimes Z_0)\cdot B\ \oplus\
+ (Y_0\otimes Z_0)\cdot A.
+\]
+The scalar-action coherence gives the pentagon; permutation of these summands and the usual signed symmetry of chain complexes give the hexagon and symmetry. The unit identities follow from $\mathbb Z\cdot A=A$ and $0\cdot A=0$. Thus \eqref{Csquarezero} is a $\mathbb Z$-bilinear symmetric monoidal tensor. It preserves colimits in both variables: tensor products of complexes, degree-zero evaluation, and the two scalar actions all do so. The category $\mathcal M$ is complete and cocomplete, abelian, and has enough projectives, since both factors do. Its products are exact, by exactness of products of abelian groups and exactness of direct sums in $\mathcal T$.
+
+The scalar-copower functor and its two adjoints are
+\[
+ \kappa(U)=(U[0],0),\qquad
+ \varphi(X,A)=H_0(X),\qquad
+ \operatorname{Hom}_{\mathcal M}(\mathbf1,(X,A))=X_0.
+\]
+The functor $\kappa$ preserves all small limits as well as colimits and is strong monoidal. Projection $F:\mathcal M\to\Ch_{\geq0}(\mathbb Z)$, $(X,A)\mapsto X$, is an exact cocontinuous resolving functor for $\varphi$: on projective objects its positive homology is zero by Claim~\ref{C1}. Hence $L\varphi(X,A)$ is canonically $X$, and the normalized counit $L\varphi(\mathbf1)\to\mathbb Z$ is the identity.
+
+Take $J=(D^1\mathbb Z,0)$ and let $\alpha:\mathbf1\to J$ be the standard degree-zero inclusion. Since $(D^1\mathbb Z)_0=\mathbb Z$, tensoring it with $(X,A)$ gives
+\[
+ (X,A)\longrightarrow\bigl(D^1\mathbb Z\otimes X,A\bigr),
+\]
+whose first coordinate is the degreewise split inclusion and whose second coordinate is $1_A$. It is monic. The first coordinate of its target is contractible, by tensoring the usual contraction of $D^1\mathbb Z$ with $X$. Thus $L_i\varphi(J\otimes(X,A))=0$ for every $i\geq0$, as required by (d).
+
+Nevertheless $\mathcal N$, and hence $\mathcal M$, fails AB4. Fix a prime $p$ and consider the epimorphisms $q_n:\mathbb Z/p^n\to\mathbb Z/p$, $n\geq1$, in $\mathcal T$. Their product is
+\[
+ t\!\left(\prod_{n\geq1}\mathbb Z/p^n\right)
+ \longrightarrow (\mathbb Z/p)^{\mathbb N}.
+\]
+The constant sequence $(1,1,\ldots)$ has no preimage. Any lift has $n$th coordinate prime to $p$ and therefore of order exactly $p^n$; such a sequence has infinite order and does not belong to the torsion subgroup. The product map is not epic. The attached program \texttt{code/C\_torsion\_products.py} enumerates every lift for $p=2$ and $1\leq n\leq8$ and confirms its order $2^n$. The infinite assertion follows from the unbounded-order proof just given, not from that finite computation. Opposite variance gives monomorphisms in $\mathcal N$ whose coproduct is not monic. In particular AB5 fails too.
+
+Finally $F$ and its section $S(X)=(X,0)$ induce inverse equivalences after localization: $FS=1$, and the natural map $(X,A)\to(X,0)$ lies in $W$ because its image under $F$ is $1_X$. We therefore obtain $\mathcal M[W^{-1}]\simeq D_{\geq0}(\mathbb Z)$ directly. This last verification separates the failure of AB4 from the truth of the desired equivalence in this example.
+\end{proof}
+
+
+\begin{claim}{C.19}{Proved under stated hypotheses}{Coproduct preservation on disk coefficients also closes the raw gate}\label{C19}
+Assume the normalized corollary hypotheses of Claim~\ref{C6} and degreewise purity of every $F(\alpha\otimes X)$. Let $F^{(0)}$ be any exact cocontinuous resolving functor computing $L\varphi$, for example $F$ itself. On the category $\mathcal A=\prod_{m\geq1}\Mod k$ define
+\[
+ DQ=\prod_{m\geq1}D^m(Q_m),\qquad E=F^{(0)}GD.
+\]
+If $E$ preserves small coproducts, then the raw adjoints $F,G$ induce quasi-inverse equivalences over every commutative ring $k$.
+
+A sufficient hypothesis is that $G$ preserves coproducts. This holds if each $F(h_a)$ is a finitely generated projective object of $\Ch_{\geq0}(k)$, equivalently a finite direct sum, up to retract, of degree-zero spheres and disks on finitely generated projective modules. We make no finiteness assumption on the number of generators $a$, and no inference that this compactness holds for an arbitrary projective resolution.
+\end{claim}
+\begin{proof}
+The functor $D$ is exact and preserves colimits: only two disk contributions occur in any chain degree. Since $F^{(0)}$ and $G$ are exact, so is $E$. Its assumed preservation of coproducts therefore implies preservation of all colimits. Let $e_m:\Mod k\to\mathcal A$ insert a module in coordinate $m$ and zero elsewhere, and put $K_m=E(e_m k)$. Writing a module as the cokernel of a map of free modules gives natural isomorphisms of chain complexes
+\[
+ E(e_mU)\cong K_m\otimes_kU,
+ \qquad E(Q)\cong\bigoplus_{m\geq1}K_m\otimes_kQ_m.
+ \tag{C-tensor-coefficients}\label{Ctensorcoefficients}
+\]
+We have used exactness and coproduct preservation to prove this tensor description, not to assume commutation of an arbitrary right adjoint with coproducts.
+
+For every pure-injective module $I$, the extension of the counit of $F\dashv G$ across the pure interval map, as in Claim~\ref{C14}, makes $GD(e_mI)$ a retract of its interval tensor. Condition (d) and the resolving property of $F^{(0)}$ give
+\[
+ K_m\otimes_k I\simeq E(e_mI)\simeq0.
+\]
+We claim this forces $K_m$ to be pure acyclic. Write $V^+=\operatorname{Hom}_{\mathbb Z}(V,\mathbb Q/\mathbb Z)$. For any pure-injective $k$-module $P$, the character dual $P^+$ is pure-injective, so the preceding vanishing and exact character duality imply
+\[
+ \operatorname{Hom}_k(K_m,P^{++})
+ \cong (K_m\otimes_kP^+)^+
+ \quad\text{is acyclic}.
+\]
+The canonical pure monomorphism $P\to P^{++}$ splits because $P$ is pure-injective. Thus $\operatorname{Hom}_k(K_m,P)$ is acyclic for every pure-injective $P$. As proved explicitly in Claim~\ref{C16}, testing an ordinary injective cogenerator first gives exactness of $K_m$, and testing character duals proves purity of all its cycle inclusions. Hence $K_m$ is pure acyclic. Its tensor product with every module is therefore acyclic. Formula~\eqref{Ctensorcoefficients}, together with exactness of direct sums of modules, proves $E(Q)$ acyclic for every sequence $Q$. For projective disk coefficients this is $L\varphi(GDQ)=0$, which is Claim~\ref{C10}'s remaining gate.
+
+Finally, if $G$ preserves coproducts, then so does $F^{(0)}GD$. In the stated compactness case the adjunction formula
+\[
+ G(K)(a)=\operatorname{Hom}_{\Ch_{\geq0}(k)}(F(h_a),K)
+\]
+shows that $G$ preserves coproducts pointwise. Claim~\ref{C1}'s projective disk decomposition proves the asserted characterization of a finitely generated projective complex. These implications establish the sufficient hypotheses without identifying them with the unrestricted corollary assumptions.
+\end{proof}
+
+
+\begin{claim}{C.20}{Refuted}{Pure-injective tests do not suffice for arbitrary sums of representable components}\label{C20}
+There exist a commutative ring $R$, a projective $R$-module $Q$, and an exact $R$-linear functor
+\[
+ E:\Mod R\longrightarrow\Ch_{\geq0}(R)
+\]
+such that every $E_j$ is a countable direct sum of functors $\operatorname{Hom}_R(P,-)$ with $P$ projective, every $E(I)$ is acyclic for pure-injective $I$, but $H_0E(Q)\ne0$. Consequently the finite representability proof of Claim~\ref{C16} cannot be extended to arbitrary sums using only exactness, projective representing modules, and pure-injective tests. This is a counterexample to that proposed proof principle; we do not identify $E$ with an adjunction satisfying all the manuscript's monoidal hypotheses.
+\end{claim}
+\begin{proof}
+We first specify the coefficient modules and the finite resolutions that will be reversed. For $n\geq1$, let
+\[
+ R_n=\mathbb F_2[x_\alpha\mid\alpha<\aleph_n]
+       /(x_\alpha^2-x_\alpha\mid\alpha<\aleph_n),
+ \qquad L_n=R_n/(x_\alpha\mid\alpha<\aleph_n).
+\]
+Thus $R_n$ is the unital free Boolean ring on $\aleph_n$ generators and $L_n\cong\mathbb F_2$ is its augmentation residue. We use two precise classical dimension statements. The free Boolean ring on $\aleph_n$ generators has global dimension $n+1$, as stated in \citet[p.~319, following Corollary 1.5]{Osofsky1968C}, with attribution there to Pierce. The ideal generated by an independent family of $\aleph_n$ idempotents has projective dimension at least $n$, as stated in \citet[Remark 5.1(e), p.~917]{FinnMartinezMcGovern1997C}, with attribution there to Osofsky. Here independence means that, for disjoint finite subsets $A,B$ of the family, the product $\prod_{a\in A}a\prod_{b\in B}(1-b)$ is nonzero; this is precisely Remark 5.1(c) of that opened source. The free generators form such an independent family, as one sees by evaluating the variables in $A$ at $1$ and those in $B$ at $0$. The short exact sequence
+\[
+ 0\longrightarrow(x_\alpha)\longrightarrow R_n\longrightarrow L_n\longrightarrow0
+\]
+therefore gives $\operatorname{pd}_{R_n}L_n=n+1$: the upper bound is the global-dimension statement; a smaller bound would give projective dimension at most $n-1$ for the ideal, contradicting the second statement. We use these opened formulations of the classical estimates; the original Pierce article and Osofsky monograph were not obtained and are not reported as opened proofs.
+
+Put $r_n=n+1$. Take the standard free resolution of $L_n$ obtained successively by taking the free module on the underlying set of each kernel. Since its projective dimension is $r_n$, the kernel in position $r_n$ is projective. Stopping with that kernel, rather than deleting the top of an infinite resolution, gives a finite exact sequence
+\[
+ 0\longrightarrow P^{(n)}_{r_n}\xrightarrow{d_{r_n}}
+ P^{(n)}_{r_n-1}\longrightarrow\cdots\longrightarrow
+ P^{(n)}_0\longrightarrow L_n\longrightarrow0,
+ \tag{C-finite-resolution}\label{Cfiniteresolution}
+\]
+with every term projective. The identity of $P^{(n)}_{r_n}$ determines a nonzero class
+\[
+ \eta_n\in\operatorname{Ext}^{r_n}_{R_n}
+             (L_n,P^{(n)}_{r_n}).
+\]
+Indeed a zero class would mean that the identity extends across $d_{r_n}$, splitting the top inclusion and shortening the resolution, contrary to $\operatorname{pd}L_n=r_n$.
+
+Set $R=\prod_{n\geq1}R_n$ and let $e_n\in R$ be the coordinate idempotents. We regard all modules in \eqref{Cfiniteresolution} as $R$-modules supported on $e_n$. They remain projective whenever they were projective over $R_n$, because $e_nR\cong R_n$ is a projective $R$-module. Define
+\[
+ Q=\bigoplus_{n\geq1}P^{(n)}_{r_n},
+\]
+a projective $R$-module. The displayed classes remain nonzero in $\operatorname{Ext}^{r_n}_R(L_n,Q)$, since applying Hom from the $e_n$-supported resolution sees precisely $e_nQ=P^{(n)}_{r_n}$.
+
+The ring $R$ is Boolean, so it is reduced and all its prime quotients are $\mathbb F_2$. It is absolutely flat by \citet[Lemma 15.106.5, tag 092F]{StacksAbsolutelyFlatC}. Thus every short exact sequence of $R$-modules is pure, and pure-injective modules are exactly injective modules.
+
+For $X\in\Mod R$ define a finite nonnegative chain complex by reversing the entire Hom complex of \eqref{Cfiniteresolution}:
+\[
+ C_n(X)_j=\operatorname{Hom}_R(P^{(n)}_{r_n-j},X)
+ \quad(0\leq j\leq r_n),
+\]
+and set the other terms to zero. Its differential is precomposition with the resolution differential. Then
+\[
+ H_jC_n(X)=\operatorname{Ext}^{r_n-j}_R(L_n,X)
+ \quad(0\leq j\leq r_n).
+\]
+In particular, for injective $I$ its homology is concentrated in degree $r_n$, where it is $\operatorname{Hom}_R(L_n,I)$. The finite top projective term in \eqref{Cfiniteresolution} is essential for this assertion: a brutal truncation of an infinite resolution would introduce a spurious degree-zero cokernel.
+
+Let $A(X)=\bigoplus_{n\geq1}C_n(X)$, $B(X)=\prod_{n\geq1}C_n(X)$, and let $\iota_X:A(X)\to B(X)$ be the natural inclusion. Define
+\[
+ E(X)=\operatorname{Cone}(\iota_X),\qquad
+ E(X)_j=B(X)_j\oplus A(X)_{j-1}.
+\]
+The differential is $(b,a)\mapsto(d_Bb+\iota_Xa,-d_Aa)$. Every component of $E$ is exact, because all the $P^{(n)}_i$ are projective and sums and products of module exact sequences are exact. More precisely,
+\[
+ E_j\cong
+ \operatorname{Hom}_R\!\left(\bigoplus_nP^{(n)}_{r_n-j},-\right)
+ \ \oplus\ \bigoplus_n
+ \operatorname{Hom}_R(P^{(n)}_{r_n-j+1},-),
+\]
+where an out-of-range resolution term is zero. This is a countable sum of representables with projective representing modules, as asserted.
+
+For injective $I$, homology commutes with both the indicated sum and product. For each fixed degree $j$, at most one $n$ has $r_n=j$. Hence $H_j(\iota_I)$ is an isomorphism: the sum and product of the homology groups both have at most one nonzero contribution. Its cone $E(I)$ is acyclic. This covers every pure-injective $I$ over $R$.
+
+For the projective module $Q$, connectivity and the cone homology sequence instead give
+\[
+ H_0E(Q)\cong
+ \frac{\displaystyle\prod_{n\geq1}
+          \operatorname{Ext}^{r_n}_R(L_n,Q)}
+      {\displaystyle\bigoplus_{n\geq1}
+          \operatorname{Ext}^{r_n}_R(L_n,Q)}\ne0.
+\]
+The sequence $(\eta_n)_n$ represents a nonzero class because every coordinate is nonzero, whereas the denominator consists of finite-support sequences. This proves the counterexample and the stated limitation of the pro-representability route. The coefficient ring and modules here are intrinsically infinite; no finite computation is being substituted for the cardinal dimension theorems or the product/sum argument.
+\end{proof}
+
+
+
+\begin{claim}{C.21}{Proved under stated hypotheses}{The raw adjoint works for ordinary presheaves over every ring}\label{C21}
+Let $A$ be a small ordinary category, let $k$ be any commutative ring, and equip
+\[
+ \mathcal M=\operatorname{Fun}(A^{\mathrm{op}},\Mod k)
+\]
+with its pointwise tensor product and constant unit. Assume the manuscript's canonical normalization (c) for $\varphi=\operatorname{colim}_{A^{\mathrm{op}}}$, and assume its full interval condition (d). Then every resolving adjunction $F\dashv G$ obtained from a projective resolution of $\varphi$ in the category of cocontinuous $k$-linear functors induces quasi-inverse equivalences
+\[
+ \mathcal M[W^{-1}]\simeq D_{\geq0}(k).
+\]
+In particular the right adjoint in this assertion is the raw $G$, over every coefficient ring, with no finite-component assumption on the chosen resolution. The tensor product and the ordinary-category presentation in this statement are additional restrictions; we do not infer them for an arbitrary small $k$-additive category in the manuscript's corollary.
+\end{claim}
+\begin{proof}
+The zero ring is immediate, so we assume $k\ne0$. We first construct a countable unital subring $s\subseteq k$ such that the inclusion is pure as a map of $s$-modules. Begin with the image $s_0$ of $\mathbb Z$. Given the countable subring $s_j$, consider all finite systems of linear equations with coefficients and constants in $s_j$ that have a solution in $k$. There are only countably many such systems. Choose one solution of each solvable system and let $s_{j+1}$ be the subring generated by $s_j$ and all the finitely many coordinates in these chosen solutions. It is still countable. Set $s=\bigcup_{j\geq0}s_j$.
+
+Every finite linear system with coefficients and constants in $s$ occurs at some stage. If it has a solution in $k$, it consequently has a solution in $s$. This is precisely the finite-equation criterion for the purity of $s\to k$. We recall directly why that criterion gives the required tensor monomorphisms. If an element of an $s$-module $V$ dies in $k\otimes_sV$, express the element using finitely many generators of a free presentation of $V$. The asserted vanishing involves only finitely many relations from that presentation, and is therefore a finite system, with coefficients and constant vector in $s$, expressing that vector as a linear combination of those relations. A solution in $k$ can be replaced by a solution in $s$. The original element was already zero in $V$. Thus
+\[
+ V\longrightarrow k\otimes_sV
+ \quad\text{is monic for every }V\in\Mod s.
+ \tag{C-pure-subring}\label{Cpuresubring}
+\]
+We do not claim that $k$ is flat over $s$; purity of this inclusion is what the proof uses.
+
+We fix explicit bar resolving functors $\mathsf B^r$ for presheaves over each ring $r$. The corresponding projective resolution of the constant covariant $r$-module on $A$ is the functor
+\[
+ L^r(a)=C_*(N(A/a);r).
+\]
+We may use unnormalized chains. The overcategory $A/a$ has terminal object $1_a$, so the augmented complex $L^r(a)\to r[0]$ has its usual contraction. In degree $n$ the functor $L^r_n$ is a direct sum of covariant representables, indexed by strings $a_0\to\cdots\to a_n$. Its associated resolving functor is
+\[
+ \mathsf B^r_n(X)=
+ \bigoplus_{a_0\to\cdots\to a_n}X(a_n),
+ \qquad
+ \mathsf B^r_0(X)=\bigoplus_{a\in A}X(a).
+ \tag{C-bar-formula}\label{Cbarformula}
+\]
+The face maps are those of the bar construction, using the presheaf structure on the last face. These are projective cocontinuous component functors, hence exact. Claim~\ref{C2} identifies $\mathsf B^r$ with $L\operatorname{colim}$.
+
+Let $U$ denote restriction of scalars from $k$ to $s$, on modules, presheaves, or complexes as appropriate. The displayed formula gives natural, differential-compatible identifications
+\[
+ \mathsf B^s(UY)=U\mathsf B^k(Y),\qquad
+ L^k(a)=k\otimes_sL^s(a).
+ \tag{C-bar-scalars}\label{Cbarscalars}
+\]
+The first identity concerns restriction of scalars and requires no flatness.
+
+We now descend the interval to $s$. Regard $J$ as an $s$-module presheaf, and put
+\[
+ \beta:s_A\longrightarrow k_A\xrightarrow{\alpha}UJ.
+\]
+For an arbitrary $s$-module presheaf $X$, the map $\beta\otimes_sX$ factors as
+\[
+ X\longrightarrow k\otimes_sX
+ \longrightarrow
+ J\otimes_k(k\otimes_sX)
+ \cong UJ\otimes_sX.
+\]
+The first arrow is pointwise monic by \eqref{Cpuresubring}; the second is monic by the original universal interval condition. Moreover, the original condition (d), applied to $k\otimes_sX$, and \eqref{Cbarscalars} give
+\[
+ \mathsf B^s(UJ\otimes_sX)
+ =U\mathsf B^k\bigl(J\otimes_k(k\otimes_sX)\bigr)
+ \simeq0.
+\]
+This proves the whole interval condition over $s$, including degree-zero nullity and all coefficient presheaves.
+
+Canonical normalization descends as well. For any complex $C$ of $s$-modules, purity gives an injection
+\[
+ H_n(C)\longrightarrow H_n(k\otimes_sC).
+ \tag{C-pure-homology}\label{Cpurehomology}
+\]
+Indeed, if a cycle becomes a boundary after base change, its class in the module $C_n/\operatorname{im}d_{n+1}$ maps to zero after tensoring with $k$. That module injects into its base change by \eqref{Cpuresubring}; the cycle was already a boundary. Apply \eqref{Cpurehomology} to the cone of the canonical augmentation
+\[
+ \mathsf B^s(s_A)\longrightarrow s[0].
+\]
+After tensoring with $k$ this is the cone of the normalized augmentation over $k$, hence acyclic by (c). Its homology therefore vanishes already over $s$. Thus (c) holds canonically over $s$.
+
+The other corollary hypotheses are automatic for presheaves on an ordinary small category: the additive envelope of its $s$-linearization has a small set of finitely presented projective generators and projective $s$-module Hom groups; the constant functor is exact and preserves all limits; and the pointwise tensor is cocontinuous. Since $s$ is countable, the pure-global-dimension bound in \citet[Theorem 2.6.3]{BensonGnacadja1999}, applied as in Claim~\ref{C14}, proves that the raw bar right adjoint $\mathsf G^s$ is homotopical and its counit is a quasi-isomorphism on every complex.
+
+The same bar adjunction works raw over $k$. Its right adjoint is explicitly
+\[
+ \mathsf G^r(K)(a)=
+ \operatorname{Hom}_{\Ch_{\geq0}(r)}(L^r(a),K).
+\]
+Extension--restriction adjunction and \eqref{Cbarscalars} give
+\[
+ U\mathsf G^k(K)\cong\mathsf G^s(UK),\qquad
+ U\mathsf B^k\mathsf G^k(K)
+ \cong\mathsf B^s\mathsf G^s(UK).
+\]
+Under these identifications the counit over $k$ becomes the counit over $s$: both are evaluation of a chain map. Restriction of scalars is exact and conservative. It follows that the raw bar counit over $k$ is a quasi-isomorphism for every $K$, and the bar adjunction gives the asserted equivalence by Claim~\ref{C3}. In particular
+\[
+ L\varphi\bigl(\mathsf G^k(D^1 V)\bigr)=0
+ \quad\text{for every }k\text{-module }V,
+ \tag{C-bar-disk-null}\label{Cbardisknull}
+\]
+without a projectivity requirement on $V$.
+
+It remains to pass from this particular resolution to an arbitrary chosen $F$. We give the retract argument explicitly, since homotopy equivalence of resolutions alone does not automatically settle their raw right adjoints. For $a\in A$, let $R_a$ be the right adjoint of evaluation at $a$. Thus
+\[
+ R_a(V)(b)=\operatorname{Hom}_k(k[\operatorname{Hom}_A(a,b)],V).
+\]
+The degree-zero bar formula and the disk adjunction give a natural isomorphism
+\[
+ \mathsf G^k(D^1V)=\prod_{a\in A}R_a(V).
+ \tag{C-bar-dominates}\label{Cbardominates}
+\]
+Each projective component $F_n$ is a retract of a direct sum of evaluation functors. Its right adjoint $F_n^R$ is consequently a retract of the corresponding product of the $R_a$. For any sequence $(Q_m)_{m\geq1}$ of modules we therefore have
+\[
+ G\!\left(\prod_{m\geq1}D^mQ_m\right)
+ \cong\prod_{m\geq1}F_{m-1}^R(Q_m),
+\]
+which is a retract of an object of the form $\prod_{t\in T}R_{a_t}(V_t)$ for a set $T$ and modules $V_t$.
+
+Put $V=\prod_{t\in T}V_t$. Since each $R_a$ preserves products, \eqref{Cbardominates} identifies
+\[
+ \mathsf G^k(D^1V)
+ \cong\prod_{(a,t)\in A\times T}R_a(V_t).
+\]
+The product $\prod_{t\in T}R_{a_t}(V_t)$ is a direct factor of this product: project onto the factors $(a_t,t)$ and use zero maps in every other factor for the section. The assertion also holds when $T$ is empty, since then the object is zero. Thus the chosen $G$ applied to every product of disks is a retract of an object in \eqref{Cbardisknull}, and is itself $L\varphi$-null.
+
+Applying this conclusion to projective disk coefficients proves exactly the necessary-and-sufficient gate of Claim~\ref{C10}. That claim completes the proof for every chosen projective resolving adjunction. The proof has used the ordinary bar resolution and pointwise tensor essentially; it does not identify a general $k$-additive presentation with an ordinary-category presheaf category.
+\end{proof}
+
+
+\begin{claim}{C.22}{Proved under stated hypotheses}{A countable scalar form suffices for the general raw adjoint}\label{C22}
+Let $s\subseteq k$ be a countable pure unital subring, let $\mathcal A_s$ be a small $s$-linear category with projective $s$-module Hom groups, and put $\mathcal A_k=k\otimes_s\mathcal A_s$. Write
+\[
+ \mathcal M_r=\operatorname{Fun}_{r}(\mathcal A_r^{\mathrm{op}},\Mod r)
+ \quad(r=s,k),
+ \qquad L=k\otimes_s-:\mathcal M_s\rightleftarrows\mathcal M_k:U.
+\]
+Assume these two module categories have cocontinuous symmetric monoidal tensor products that are $r$-bilinear over their respective scalar rings $r=s,k$, with the following compatible scalar-form data:
+\begin{enumerate}
+\item the unit $\mathbf1_s$ has finitely generated projective values $\mathbf1_s(a)$;
+\item there is a specified unit identification $L\mathbf1_s\cong\mathbf1_k$;
+\item there are natural isomorphisms
+\[
+ U(Y\otimes_k LX)\cong UY\otimes_sX
+ \quad(X\in\mathcal M_s,\ Y\in\mathcal M_k),
+\]
+compatible with units, associativity, and the scalar-adjunction unit $X\to ULX$.
+\end{enumerate}
+Here the subscripts on the internal tensor distinguish the two monoidal categories; they do not assert that their products are pointwise.
+
+If $\mathcal M_k$ satisfies the manuscript's canonical normalization and full interval condition, then every projective resolving adjunction for $\varphi_k$ has a raw right adjoint inducing the desired equivalence. In particular a counterexample within the manuscript's corollary cannot admit such a countable scalar form. We do not assert that every $k$-linear category and tensor in the corollary has one.
+\end{claim}
+\begin{proof}
+Let $T_s(a)=\operatorname{Hom}_s(\mathbf1_s(a),s)$. Objectwise finite projectivity gives
+\[
+ \mathbf1_s(a)\otimes_sV\cong\operatorname{Hom}_s(T_s(a),V).
+\]
+It follows by tensor--Hom adjunction for modules over a small linear category that the scalar-copower functor $\kappa_s(V)=V\otimes_s\mathbf1_s$ (the external, objectwise scalar copower) has left adjoint
+\[
+ \varphi_s(X)=T_s\otimes_{\mathcal A_s}X.
+\]
+The scalar-copower functor $\kappa_s$ is exact and preserves all limits, since its values are tensor products with finitely generated projective modules. Its usual right adjoint is $\operatorname{Hom}_{\mathcal M_s}(\mathbf1_s,-)$. The same statements hold over $k$, and finite-projective dual base change identifies $T_k=k\otimes_sT_s$. Thus (a), (b), and the additional module hypotheses needed in Claim~\ref{C6} hold over $s$; normalization and the interval will be checked below.
+
+We choose the relative bar resolution of $T_s$. In degree $n$, it is a direct sum of covariant representables with coefficient modules
+\[
+ T_s(a_0)\otimes_s\mathcal A_s(a_0,a_1)
+ \otimes_s\cdots\otimes_s\mathcal A_s(a_{n-1},a_n).
+\]
+All these coefficients are projective over $s$. The augmentation is split exact as a complex of $s$-modules at each object, using the insertion of its identity morphism in the usual bar contraction. Consequently this is a projective resolution in the covariant functor category. Its scalar extension is the corresponding bar resolution of $T_k$, even though $k$ is not assumed flat over $s$.
+
+Let $\mathsf B^s$ and $\mathsf B^k$ be the resulting exact cocontinuous resolving functors. Their coend formulas give
+\[
+ \mathsf B^s(UY)\cong U\mathsf B^k(Y),
+ \qquad
+ \mathsf B^k(LX)\cong k\otimes_s\mathsf B^s(X).
+ \tag{C-form-bar}\label{Cformbar}
+\]
+For the first identity, one moves the scalar-extension coefficient modules across the tensor products with the $k$-module values of $Y$; all remaining coend relations are exactly those for $\mathcal A_s$. The second is the corresponding base-change identity on both variables. These formulas do not use preservation of arbitrary kernels by scalar extension.
+
+Given the interval $\alpha:\mathbf1_k\to J$ over $k$, put
+\[
+ \beta:\mathbf1_s\longrightarrow UL\mathbf1_s
+ \cong U\mathbf1_k\longrightarrow UJ.
+\]
+For each $X\in\mathcal M_s$, the unit-compatible projection formula identifies $\beta\otimes_sX$ with
+\[
+ X\longrightarrow ULX
+ \xrightarrow{\ U(\alpha\otimes_k LX)\ }
+ U(J\otimes_k LX)\cong UJ\otimes_sX.
+\]
+The first map is pointwise monic because $s\to k$ is pure; the second is monic by (d). Its target is $L\varphi_s$-null: equation~\eqref{Cformbar} identifies its resolving complex with the restriction of the null complex $\mathsf B^k(J\otimes_kLX)$. This proves all of (d) over $s$.
+
+For (c), apply \eqref{Cformbar} and the unit identification to the canonical augmentation $\mathsf B^s(\mathbf1_s)\to s[0]$. Its scalar extension is the canonical normalized augmentation over $k$. The pure-base-change homology injection proved in \eqref{Cpurehomology}, applied to its cone, implies that the augmentation over $s$ is a quasi-isomorphism. We have checked the actual canonical map, not only its graded homology groups.
+
+We next arrange that the resolving functor sees every evaluation in degree zero. Let
+\[
+ E_s(X)=\bigoplus_{a\in\mathcal A_s}X(a),
+ \qquad
+ F^{(s)}=\mathsf B^s\oplus D^1E_s.
+\]
+The second summand is a contractible projective cocontinuous functor complex. Thus $F^{(s)}$ is still an exact projective resolution of $\varphi_s$, with an exact raw right adjoint $G^{(s)}$ by Claim~\ref{C6}. The full normalized hypotheses over $s$ now hold. The tensor is cocontinuous, hence the interval images are pure by Claim~\ref{C14}. Since $s$ is countable, that claim proves that this augmented raw adjunction is an equivalence after localization.
+
+Base change the entire augmented resolution to obtain $F^{(k)}=\mathsf B^k\oplus D^1E_k$. Both \eqref{Cformbar} and the adjunction identity
+\[
+ U\operatorname{Hom}_{\Ch(k)}
+      (k\otimes_s F^{(s)}h_a,K)
+ \cong
+ \operatorname{Hom}_{\Ch(s)}(F^{(s)}h_a,UK)
+\]
+show that the right adjoints and their counits agree after scalar restriction. Here $h_a$ denotes the appropriate representable over its indicated scalar ring. Therefore the raw adjunction $F^{(k)},G^{(k)}$ also has a quasi-isomorphism counit on every complex. As in Claim~\ref{C21}, this step requires no assumption that restriction of scalars preserves projective $k$-modules.
+
+Let $R_a$ denote the right adjoint of evaluation on $\mathcal M_k$. Since $E_k$ is a direct summand of $F^{(k)}_0$, the product $\prod_aR_a(V)$ is a retract of $G^{(k)}(D^1V)$ for every module $V$. The latter is $L\varphi_k$-null because this augmented adjunction is already known to be homotopical. Hence $\prod_aR_a(V)$ is null for every $V$.
+
+Finally take any originally chosen projective resolving adjunction $F\dashv G$. Each $F_n$ is a retract of a sum of evaluations, so $G$ on a product of disks is a retract of a product $\prod_tR_{a_t}(V_t)$. Exactly as in Claim~\ref{C21}, this is a retract of
+\[
+ \prod_a R_a\!\left(\prod_tV_t\right).
+\]
+The latter has just been proved null. The exact gate in Claim~\ref{C10} follows, and establishes the raw equivalence for the original $F,G$.
+
+The countable scalar form is a substantive hypothesis. In particular, restricting scalars on the original $k$-linear category without descending its morphisms is insufficient: the resulting scalar-unit functor is generally $\kappa_k(k\otimes_s-)$, which need not preserve products. Nor is a countable subring assumed to contain an arbitrarily large set of composition or tensor structure constants. These are precisely the scope restrictions in the statement.
+\end{proof}
+
+
+\begin{claim}{C.23}{Proved under stated hypotheses}{Enough injectives replace AB5 in the underlying theorem}\label{C23}
+Let $\mathcal M$ satisfy the manuscript's (a)--(d), with the actual adjunction $\varphi\dashv\kappa$ in (a). Suppose that $\mathcal M$ has all small coproducts and enough injectives, in addition to the enough-projectives hypothesis already present in (b). Then the canonical functor
+\[
+ \mathcal M[W^{-1}]\longrightarrow D_{\geq0}(k),
+ \qquad X\longmapsto L\varphi(X),
+\]
+is an equivalence. Neither exactness of arbitrary filtered colimits nor existence of an exact resolving functor on $\mathcal M$ is assumed. The enough-injectives hypothesis is additional; we do not infer it from completeness or from (a)--(d).
+\end{claim}
+\begin{proof}
+We first isolate exactly the colimit facts required in the resolution proof of Claim~\ref{C13}. A morphism $f:A\to B$ in an abelian category with enough injectives is monic if and only if $\operatorname{Hom}(B,I)\to\operatorname{Hom}(A,I)$ is onto for every injective $I$. The forward implication is injectivity. For the converse, if the kernel $K$ is nonzero, embed it into an injective $I$ and extend that embedding along $K\hookrightarrow A$. The resulting map $A\to I$ cannot factor through $f$. This proves the criterion.
+
+It follows that coproducts in $\mathcal M$ are exact. Indeed, for any family of monomorphisms $A_t\to B_t$ and any injective $I$, the induced map on Hom from their coproducts is the product of the surjections $\operatorname{Hom}(B_t,I)\to\operatorname{Hom}(A_t,I)$. It is onto, and the criterion proves that $\bigoplus_t A_t\to\bigoplus_t B_t$ is monic. Coproducts are already right exact because they are left adjoints. Thus $\mathcal M$ is AB4.
+
+Next let $X_0\xrightarrow{u_0}X_1\xrightarrow{u_1}\cdots$ be any sequence of monomorphisms, and form the telescope map
+\[
+ T=1-\mathrm{shift}:\bigoplus_{i\geq0}X_i
+       \longrightarrow\bigoplus_{i\geq0}X_i,
+ \qquad T\iota_i=\iota_i-\iota_{i+1}u_i.
+\]
+For an injective $I$, precomposition with $T$ sends $(f_i)$ to $(f_i-f_{i+1}u_i)$. Given $(g_i)$, choose $f_0=0$ and then extend $f_i-g_i$ across the monomorphism $u_i$ to obtain $f_{i+1}$. Thus $\operatorname{Hom}(T,I)$ is onto for every injective $I$, and $T$ is monic. Its cokernel is $\operatorname{colim}_iX_i$, by the universal description of a sequential colimit. Each map $X_j\to\operatorname{colim}_iX_i$ is also monic: every map $X_j\to I$ extends recursively to a compatible family on the later terms, and gives the earlier terms by restriction. The same Hom criterion applies. These statements concern sequences of monomorphisms only; they do not assert AB5.
+
+Let $\mathcal R$ be the category of projective resolutions used in Claim~\ref{C13}: its objects are nonnegative projective complexes with zero positive homology, its weak equivalences are the maps made quasi-isomorphisms by termwise $\varphi$, and its cofibrations are degreewise split monomorphisms with cokernel in $\mathcal R$. The finite cofibration axioms and the interval factorization are proved there by the relative horseshoe construction; none uses a colimit-exactness hypothesis. AB4 supplies arbitrary coproducts of resolutions and cofibrations. The exactness of sums of $k$-modules and preservation of sums by $\varphi$ give the same assertion for acyclic cofibrations.
+
+We verify the countable axiom without invoking arbitrary filtered colimits. Consider a sequence of cofibrations $P^0\to P^1\to\cdots$ in $\mathcal R$. Choosing their degreewise splittings identifies the degree-$n$ colimit with the direct sum of $P^0_n$ and the successive projective cokernels. It is therefore projective. The telescope sequence of complexes
+\[
+ 0\longrightarrow\bigoplus_iP^i
+ \xrightarrow{1-\mathrm{shift}}\bigoplus_iP^i
+ \longrightarrow P^{\infty}\longrightarrow0
+\]
+is degreewise split exact. To see the splitting explicitly, decompose the sequence in each degree into the direct sum of constant tails supplied by the successive cokernels. On a constant tail $B\xrightarrow{1}B\xrightarrow{1}\cdots$, the shift difference has a left inverse whose restriction to the $m$th summand is minus the sum of the first $m$ inclusions, with the empty sum at $m=0$. Each such restriction is a finite sum, so this defines a map out of the coproduct.
+
+AB4 makes both direct-sum complexes positively acyclic. Their homology long exact sequence consequently gives $H_nP^{\infty}=0$ for $n>1$ and
+\[
+ H_1P^{\infty}
+ =\ker\left(1-\mathrm{shift}:\bigoplus_iH_0P^i
+                              \longrightarrow\bigoplus_iH_0P^i\right).
+\]
+The transition maps on $H_0P^i$ are monic, since the cofibration cokernels have zero positive homology. The telescope criterion just proved makes this kernel zero. Hence $P^{\infty}$ belongs to $\mathcal R$. Applying the same argument to the sequence of resolution cokernels $P^i/P^j$ for $i\geq j$ proves that every map $P^j\to P^{\infty}$ is a cofibration. Since $\varphi$ preserves the colimit and filtered colimits of $k$-modules are exact, a sequence of acyclic cofibrations also has acyclic maps from every stage to its colimit. This establishes both parts of the final ABC axiom.
+
+The category $\mathcal M$, with all monomorphisms as cofibrations and $W$ as weak equivalences, also has the required countable axiom. To check the derived comparison, take a sequence of monomorphisms $X_i\to X_{i+1}$. Starting from a projective resolution of $X_0$, apply the horseshoe construction inductively to the short exact sequences with cokernels $X_{i+1}/X_i$. We obtain a sequence of $\mathcal R$-cofibrations $P^i\to P^{i+1}$ resolving that sequence. Its colimit is a projective resolution by the preceding paragraph, and its zeroth homology is $\operatorname{colim}X_i$, since $H_0$ preserves colimits. Applying $\varphi$ termwise and using its cocontinuity gives
+\[
+ L\varphi\left(\operatorname{colim}_iX_i\right)
+ \simeq \operatorname{colim}_i\varphi(P^i),
+ \qquad
+ H_nL\varphi\left(\operatorname{colim}_iX_i\right)
+ \cong\operatorname{colim}_iH_nL\varphi(X_i).
+\]
+We have used exact filtered colimits only in the coefficient category $\Mod k$. The maps from every $X_i$ into its colimit are monic by the Hom criterion above; if the successive monomorphisms belong to $W$, the displayed comparison proves that these maps also belong to $W$. Coproducts commute with $L\varphi$ by AB4 and sums of projective resolutions. The other cofibration axioms for $\mathcal M$ use only derived short exact sequences, finite pushouts, and the original interval factorization. Thus they hold as in Claim~\ref{C13}.
+
+We spell out why no further use of AB5 is hidden in the remaining passage to realization. For every small indexing category $I$, $\mathcal M^I$ has enough projectives: the left adjoint to evaluation at $i$ takes a projective $P$ to the diagram with value $\bigoplus_{I(i,j)}P$ at $j$, and coproducts of these give projective epimorphisms onto any diagram. Their values are projective. Resolving whole diagrams, and using the projective comparison maps and their chain homotopies, gives the diagramwise localization equivalence
+\[
+ \mathcal R^I[(W_{\mathcal R})^I{}^{-1}]
+ \simeq \mathcal M^I[W^I{}^{-1}]
+\]
+proved in Claim~\ref{C13}. This argument uses projective resolutions and finite homotopy cylinders, not filtered colimit exactness in $\mathcal M^I$.
+
+The functor $\Phi(P)=\varphi(P)$ preserves the cofibrations, their pushouts, coproducts, and countable cofibration colimits just checked. The direct-replacement/Reedy construction of homotopy colimits uses precisely these operations: its degree filtration is countable, although each degree can involve an arbitrary small coproduct. Therefore the same explicit comparison as in Claim~\ref{C13}, using \citet[Proposition 9.5.7 and Theorem 9.6.3]{RadulescuBanu2009}, proves preservation of all small homotopy colimits. The functor $H_0:\mathcal R\to\mathcal M$ preserves the indicated cofibrations and colimits and transfers this comparison through the diagramwise equivalence.
+
+For $K\in\Ch_{\geq0}(\mathcal M)$, take a projective resolution of its Dold--Kan denormalization in $s\mathcal M$. Normalization is exact, is given by split summands, and takes projective objects to projective complexes. Its columns therefore give the same first-quadrant projective double resolution as in Claim~\ref{C13}. The finite-diagonal comparison identifies
+\[
+ L\varphi(\operatorname{hocolim}\Gamma K)\simeq L\varphi(K).
+\]
+The homotopy-colimit adjunction for $\Delta^{\mathrm{op}}$ has invertible counit because its nerve is contractible. Brown's roof calculus gives conservativity of the functor induced by $L\varphi$, and weak equivalences are saturated by the cited cofibration-category criterion, exactly as in Claim~\ref{C13}. Hence realization identifies
+\[
+ \mathcal M[W^{-1}]
+ \simeq D_{\geq0}(\mathcal M)[(L\varphi)^{-1}(\mathrm{Iso})^{-1}].
+\]
+
+Finally we check the canonical derived counit rather than merely objectwise homology. Normalization gives $L\varphi\kappa k\to k$ invertible. Both $\kappa$ and $L\varphi$ preserve coproducts, the latter by AB4 and sums of resolutions, so the counit is invertible on every free $k$-module, and then on every projective one by retracts. Resolve an arbitrary nonnegative $k$-complex by projective modules. Exactness of $\kappa$ preserves that quasi-isomorphism; the first-quadrant acyclic-resolution comparison identifies its derived counit with those termwise isomorphisms. It is therefore invertible for every object of $D_{\geq0}(k)$. Localizing the actual derived adjunction $L\varphi\dashv\kappa$ proves the asserted equivalence. All uses of coproducts and countable colimits in this argument have now been checked under the stated hypotheses.
+\end{proof}
+
+
+\begin{claim}{C.24}{Refuted}{Normalization propagation from scalar adjoints alone}\label{C24}
+Completeness, cocompleteness, enough projectives, an exact scalar-copower embedding with both adjoints, and the canonical normalization $L\varphi(\mathbf1)\simeq k$ do not by themselves imply
+\[
+ L\varphi\kappa(V)\longrightarrow V
+ \quad\text{is invertible for every free scalar module }V.
+\]
+We give a counterexample over a field, with a specified object $\mathbf1$ and its actual scalar copower. No symmetric monoidal tensor with that object as unit has been constructed. Accordingly this refutes a proposed argument omitting the monoidal data, not the manuscript's theorem or its full hypotheses.
+\end{claim}
+\begin{proof}
+Fix a field $k$ and define the additive $k$-linear functor
+\[
+ E(V)=\operatorname{coker}(V\longrightarrow V^{**}),
+ \qquad V^*=\operatorname{Hom}_k(V,k),
+\]
+using the evaluation map. Vector-space duality is exact, and evaluation is injective. Applying the kernel--cokernel sequence to the natural map from a short exact sequence to its double dual proves that $E$ is exact. It vanishes on finite-dimensional vector spaces.
+
+It does not vanish on an infinite free vector space $V=k^{(I)}$. Indeed $V^*=k^I$. We choose a nonzero linear functional on the nonzero quotient $k^I/k^{(I)}$ and compose with the quotient map. This gives a nonzero element of $V^{**}$ vanishing on every finitely supported vector in $k^I$. An evaluation functional coming from $V$ is a finite linear combination of coordinate functionals; if it vanishes on all finitely supported vectors, every coefficient is zero. Thus our chosen functional has a nonzero class in $E(V)$. No cardinality bound or large-cardinal assumption enters this argument.
+
+On $\mathrm{Vect}_k\times\mathrm{Vect}_k$ put $H(U,V)=(E(V),U)$ and use the square-zero monad $T=\mathrm{Id}\oplus H$. Its unit includes the identity summand, and its multiplication, under
+\[
+ T^2=\mathrm{Id}\oplus H\oplus H\oplus H^2,
+\]
+sends $(x,h_1,h_2,h_{12})$ to $(x,h_1+h_2)$. Additivity verifies the monad identities. Its algebra category $\mathcal A$ has objects
+\[
+ (U,V,a:U\to V,b:E(V)\to U),
+ \qquad ab=0,\quad bE(a)=0.
+\]
+A morphism $(f,g)$ satisfies $ga=a'f$ and $fb=b'E(g)$.
+
+We verify the categorical hypotheses explicitly. Kernels and cokernels are computed on the two underlying vector spaces, since exactness of $E$ supplies the induced maps and relations. Finite sums are likewise componentwise. The coimage-to-image map is an isomorphism because it is so on the underlying vector spaces and the forgetful functor reflects isomorphisms. Hence $\mathcal A$ is abelian, with an exact faithful forgetful functor $U_{\mathcal A}$ to $\mathrm{Vect}_k^2$.
+
+All small limits exist and are created by $U_{\mathcal A}$. For example a product has underlying pair $(\prod_iU_i,\prod_iV_i)$; its $b$ is induced by
+\[
+ E(\prod_iV_i)\longrightarrow E(V_i)\xrightarrow{b_i}U_i
+\]
+for all $i$. This does not assume that $E$ preserves products. The free algebra functor $F$ is left adjoint to $U_{\mathcal A}$, with underlying functor $T$. Every free algebra is projective, because
+\[
+ \operatorname{Hom}_{\mathcal A}(F(W),-)
+ =\operatorname{Hom}_{\mathrm{Vect}_k^2}(W,U_{\mathcal A}(-))
+\]
+is exact. The action map $F(U_{\mathcal A}X)\to X$ is epic, since it has an underlying vector-space section given by the monad unit. Thus $\mathcal A$ has enough projectives.
+
+We also check all small coproducts, without assuming accessibility of $T$. Each algebra $X$ is the coequalizer of its standard free presentation
+\[
+ F(TU_{\mathcal A}X)\rightrightarrows F(U_{\mathcal A}X)\longrightarrow X.
+\]
+For a set of algebras $X_i$, take free algebras on the corresponding direct sums of underlying vector spaces and take the cokernel of the difference of the two induced maps. The free adjunction and the displayed coequalizer property identify maps from this cokernel with arbitrary families of maps from the $X_i$. It is therefore their coproduct. Abelian cokernels then give all small colimits. In particular we are not claiming that these coproducts are componentwise sums.
+
+Now define
+\[
+ \kappa(W)=(W,0,0,0),\qquad
+ \varphi(U,V,a,b)=\operatorname{coker}b,\qquad
+ \psi(U,V,a,b)=\ker a.
+\]
+The morphism equations give actual adjunctions
+\[
+ \varphi\dashv\kappa\dashv\psi.
+\]
+Indeed, a map from $(U,V,a,b)$ to $\kappa(W)$ is a map $U\to W$ annihilating $b$, whereas a map from $\kappa(W)$ to $(U,V,a,b)$ is a map $W\to U$ annihilated by $a$. The embedding $\kappa$ is fully faithful and exact. It preserves all limits, because those limits on its image are componentwise, and all colimits, because it is left adjoint to $\psi$. For the specified object $\mathbf1=\kappa(k)$, the latter adjunction is precisely the scalar-copower formula
+\[
+ \operatorname{Hom}_{\mathcal A}(\kappa(W),X)
+ \cong\operatorname{Hom}_k\bigl(W,\operatorname{Hom}_{\mathcal A}(\mathbf1,X)\bigr).
+\]
+Thus $\kappa$ is the actual copower of $\mathbf1$, not a replacement functor bearing the same name.
+
+The free algebras on the two sorts are
+\[
+ P_0(W)=(W,W,1,0),\qquad
+ P_1(W)=(E(W),W,0,1).
+\]
+Both are projective for every $W$. Writing $S_1(W)=(0,W,0,0)$, we have short exact sequences
+\[
+ \begin{aligned}
+ 0&\longrightarrow S_1(W)\longrightarrow P_0(W)
+      \longrightarrow\kappa(W)\longrightarrow0,\\
+ 0&\longrightarrow\kappa(E(W))\longrightarrow P_1(W)
+      \longrightarrow S_1(W)\longrightarrow0.
+ \end{aligned}
+\]
+The first epimorphism has component maps $(1,0)$ and the second $(0,1)$. Iterating gives a projective resolution of $\kappa(W)$ whose terms in homological degrees $2n$ and $2n+1$ are, respectively, $P_0(E^nW)$ and $P_1(E^nW)$. The odd differential has components $(0,1)$ and each positive even differential has components $(1,0)$. The two displayed short exact sequences verify exactness throughout.
+
+Applying $\varphi$ gives $E^nW$ in degree $2n$ and zero in every odd degree, with zero differentials. Therefore
+\[
+ L_{2n}\varphi(\kappa W)=E^nW,
+ \qquad L_{2n+1}\varphi(\kappa W)=0.
+\]
+The degree-zero counit is canonically $1_W$. For $W=k$, all positive groups vanish because $E(k)=0$; hence the canonical normalization $L\varphi(\mathbf1)\to k$ is a quasi-isomorphism. For an infinite free $W$, however, $L_2\varphi(\kappa W)=E(W)\ne0$, and its derived counit is not a quasi-isomorphism.
+
+Finally we can see the failure of AB4 directly. Since $E(k)=0$, $S_1(k)=P_1(k)$, so $P_1(k)\to P_0(k)$ is monic. For $W=k^{(I)}$, the coproduct of these maps is $P_1(W)\to P_0(W)$, because both families are free algebras. Its kernel is $\kappa(E(W))\ne0$. Thus even an infinite coproduct of copies of this one monomorphism need not be monic. The projective generator $P_0(k)\oplus P_1(k)$ is not small: its Hom functor fails to preserve these coproducts. This does not satisfy the corollary's finitely presented projective-generator hypothesis. Most importantly, we have supplied no tensor or interval satisfying the remaining original assumptions, so the example is not being used to refute those assumptions' full conclusion.
+\end{proof}
+
+
+\begin{claim}{C.25}{Proved under stated hypotheses}{A structural obstruction to a tensor on the square-zero example}\label{C25}
+Let $\mathcal A$ be an abelian category with an additive monoidal product and unit $1$. Suppose
+\[
+0\longrightarrow S\xrightarrow{i}D\xrightarrow{p}1\longrightarrow0
+\]
+is exact. For every $X\in\mathcal A$, the map
+\[
+\operatorname{Hom}_{\mathcal A}(1,S\otimes X)
+\longrightarrow\operatorname{Hom}_{\mathcal A}(1,D\otimes X)
+\]
+induced by $i\otimes X$ is injective. We require neither exactness of the tensor nor a symmetry.
+
+Consequently the category in Claim~\ref{C24} admits no $k$-bilinear monoidal product with unit $\kappa k$ for which the canonical scalar-copower comparisons
+\[
+W\otimes_k S\longrightarrow S\otimes\kappa W,
+\qquad
+W\otimes_k D\longrightarrow D\otimes\kappa W
+\]
+are isomorphisms for every vector space $W$, where $S=P_1(k)$ and $D=P_0(k)$. In particular it admits no $k$-bilinear monoidal product with that unit which preserves arbitrary coproducts in its second variable. This excludes every cocontinuous symmetric $k$-bilinear tensor on that example. It does not exclude a merely bilinear tensor without the indicated compatibility.
+\end{claim}
+\begin{proof}
+We suppress the associativity and unit isomorphisms; the following equations are invariant under their insertion by monoidal coherence. Define
+\[
+r_1=p\otimes\id_D:D\otimes D\longrightarrow D,
+\qquad
+r_2=\id_D\otimes p:D\otimes D\longrightarrow D.
+\]
+The interchange and unit laws give $pr_1=p\otimes p=pr_2$. Since $i$ is the kernel of $p$, there is a unique
+\[
+d:D\otimes D\longrightarrow S,
+\qquad i\,d=r_1-r_2.
+\]
+After precomposition with $\id_D\otimes i$, we obtain
+\[
+i\,d(\id_D\otimes i)
+=i(p\otimes\id_S)-(\id_D\otimes pi)
+=i(p\otimes\id_S).
+\]
+Cancellation of the monomorphism $i$ therefore gives
+\[
+d(\id_D\otimes i)=p\otimes\id_S.
+\]
+Let $\beta:1\to S\otimes X$ satisfy $(i\otimes\id_X)\beta=0$. Tensoring this equality on the left by $D$ and then composing with $d\otimes\id_X$, we find
+\[
+0=(d\otimes\id_X)(\id_D\otimes i\otimes\id_X)
+  (\id_D\otimes\beta)
+ =(p\otimes\id_{S\otimes X})(\id_D\otimes\beta)
+ =\beta p.
+\]
+Because $p$ is an epimorphism, $\beta=0$. This proves the general assertion without supposing that $i\otimes X$ itself is monic.
+
+Now use the category and notation of Claim~\ref{C24}. Since $E(k)=0$, its first short exact sequence at $k$ is
+\[
+0\longrightarrow P_1(k)\xrightarrow{i}P_0(k)
+\xrightarrow{p}\kappa k\longrightarrow0.
+\]
+The actual scalar copowers of $S=P_1(k)$ and $D=P_0(k)$ are $P_1(W)$ and $P_0(W)$: this follows either from the free adjunction or from their displayed Hom formulas. Under these identifications the copower of $i$ is
+\[
+i_W:P_1(W)\longrightarrow P_0(W),\qquad i_W=(0,\id_W),
+\]
+and its kernel is $\kappa E(W)$. Choose an infinite-dimensional $W$ and a nonzero $e\in E(W)$. The corresponding map
+\[
+\beta_e:\kappa k\longrightarrow\kappa E(W)
+\longrightarrow P_1(W)
+\]
+is nonzero and is killed by $i_W$. The canonical copower comparisons are natural in their object argument. If they are isomorphisms for both $S$ and $D$, they therefore identify $i_W$ with $i\otimes\kappa W$. The first part, applied with $X=\kappa W$, contradicts the existence of $\beta_e$.
+
+Finally, if the second-variable tensor functors preserve coproducts, write $W$ as a free vector space on a basis. Since $\kappa W$ is the corresponding actual coproduct of units, the two canonical comparisons are isomorphisms. The contradiction applies. No choice of basis enters the naturality of those canonical maps, and no preservation of cokernels is needed for this last implication over a field.
+\end{proof}
+
+
+\begin{claim}{C.26}{Refuted}{A three-sort counterexample to the unrestricted linear theorem}\label{C26}
+There is a complete and cocomplete $k$-linear abelian category $\mathcal M$, over any nonzero field $k$, with enough projectives and a cocontinuous symmetric $k$-bilinear tensor, satisfying all four hypotheses (a)--(d) at 134-8/048, for which the canonical functor
+\[
+\mathcal M[\mathcal W^{-1}]\longrightarrow D_{\geq0}(k),
+\qquad \mathcal W=(L\varphi)^{-1}(\mathrm{qis}),
+\]
+is not an equivalence. This concerns the unrestricted theorem, not its corollary with finitely presented projective generators.
+\end{claim}
+\begin{proof}
+\textbf{The abelian category and its scalar adjoints.}
+Put $E(V)=V^{**}/V$ as in Claim~\ref{C24}. We use its proved exactness, $E(k)=0$, and $E(W)\ne0$ for an infinite-dimensional vector space $W$. On $\operatorname{Vect}_k^3$ take
+\[
+H(U_0,U_1,U_2)=(E(U_2),U_0,U_1),\qquad T=\id\oplus H,
+\]
+with square-zero multiplication on the $H$-summand. Its algebra category $\mathcal B$ has objects
+\[
+(U_0,U_1,U_2,a:U_0\to U_1,c:U_1\to U_2,b:E(U_2)\to U_0),
+\quad ca=0,\ ab=0,\ bE(c)=0.
+\]
+Morphisms are triples commuting with these operations. Exactness of $E$ gives kernels and cokernels componentwise, so $\mathcal B$ is abelian and its forgetful functor to $\operatorname{Vect}_k^3$ is exact and faithful. All small limits are created by that functor. Products are exact, since the underlying products of vector-space triples are exact and the forgetful functor preserves and reflects exactness. The free functor has underlying functor $T$, is exact, and takes every vector-space triple to a projective object. Its counit is epimorphic, hence there are enough projectives. Arbitrary coproducts exist by the free coequalizer presentation: for each object use the two maps from the free algebra on $T$ of its underlying triple to the free algebra on its underlying triple, take free algebras on the direct sums for a family, and take the cokernel of their difference. This proves cocompleteness without asserting that underlying coproducts are componentwise. These are the same elementary arguments verified in Claim~\ref{C24}, with three sorts in place of two.
+
+Set
+\[
+\kappa V=(V,0,0),\qquad
+\phi(U_0,U_1,U_2,a,c,b)=\coker b,\qquad
+\psi(U_0,U_1,U_2,a,c,b)=\ker a.
+\]
+The morphism equations give $\phi\dashv\kappa\dashv\psi$. In particular $\kappa$ is the actual scalar-copower functor of $1=\kappa k$, is fully faithful and exact, and preserves all small limits and colimits.
+
+Write $S_i(V)$ for the triple with $V$ in sort $i$ only and zero operations. The free projectives on the three sorts are
+\[
+P_0(V)=(V,V,0;\ a=\id),\quad
+P_1(V)=(0,V,V;\ c=\id),\quad
+P_2(V)=(E(V),0,V;\ b=\id).
+\]
+Every projective is a retract of a direct sum of these. We abbreviate $S_1$ to $S$. There are exact sequences
+\begin{align*}
+0&\longrightarrow S(V)\xrightarrow{i_V}P_0(V)\longrightarrow\kappa V\longrightarrow0,\\
+0&\longrightarrow S_2(V)\longrightarrow P_1(V)\xrightarrow{q_V}S(V)\longrightarrow0,\\
+0&\longrightarrow\kappa E(V)\longrightarrow P_2(V)\longrightarrow S_2(V)\longrightarrow0.
+\end{align*}
+The functor $S$ preserves arbitrary coproducts: its presentation is the cokernel of the natural map $P_2(V)\to P_1(V)$, and both free functors preserve coproducts. This observation is needed in the tensor construction.
+
+\textbf{The canonical strength.}
+Every $k$-linear functor $E$ on vector spaces has a canonical natural map
+\[
+t_{V,W}:E(V)\otimes_k W\longrightarrow E(V\otimes_k W),
+\quad t_{V,W}(e\otimes w)=E(v\mapsto v\otimes w)(e).
+\]
+Its bilinearity follows from $k$-linearity of $E$. Naturality, its unit identity at $W=k$, and
+\[
+t_{V\otimes W,Z}(t_{V,W}\otimes Z)=t_{V,W\otimes Z}
+\]
+follow by evaluating on $e\otimes w\otimes z$. There is a left-hand version obtained by the ordinary vector-space symmetry. We use only this strength, never a costrength in the reverse direction.
+
+\textbf{A bifunctor on all free projectives.}
+For $L=U\otimes_k V$ prescribe
+\[
+\begin{array}{c|ccc}
+\boxtimes&P_0(V)&P_1(V)&P_2(V)\\ \hline
+P_0(U)&P_0(L)\oplus S(L)&P_1(L)&P_2(L)\\
+P_1(U)&P_1(L)&0&0\\
+P_2(U)&P_2(L)&0&0.
+\end{array}
+\]
+We specify the maps as well; the object table alone would not define a tensor. In addition to diagonal coefficient maps, every map between free projectives is a sum of maps of the following three types:
+\[
+A_f:P_1(U)\to P_0(V),\qquad
+C_f:P_2(U)\to P_1(V),\qquad
+B_h:P_0(U)\to P_2(V),
+\]
+where $f:U\to V$ is linear and $h:U\to E(V)$ is linear. The first two have respectively their sort-1 and sort-2 components equal to $f$. The last has sort-0 component $h$ and all others zero. Diagonal maps on $P_2$ have components $E(f)$ and $f$. There are no other nonzero off-diagonal Hom groups. Products of two successive off-diagonal types vanish:
+\[
+A_f C_g=0,\qquad B_h A_f=0,\qquad C_f B_h=0.
+\]
+
+Diagonal coefficient maps are tensored in the usual way on every displayed summand. Suppress the coefficient maps temporarily in order to give the off-diagonal formulas with second argument $P_0(W)$:
+\begin{align*}
+A\boxtimes P_0&=(0,q):P_1\longrightarrow P_0\oplus S,&
+P_0\boxtimes A&=(A,-q):P_1\longrightarrow P_0\oplus S,\\
+C\boxtimes P_0&=C:P_2\longrightarrow P_1,&
+P_0\boxtimes C&=C:P_2\longrightarrow P_1.
+\end{align*}
+In each formula the parameter is the tensor product of the original parameters, and an $f$ is inserted as $f\otimes\id$ or $\id\otimes f$ in its indicated coefficient. For the third type put
+\[
+B_h\boxtimes P_0(W)=
+\bigl(B_{\,t_{V,W}(h\otimes\id_W)},0\bigr):
+P_0(U\otimes W)\oplus S(U\otimes W)\longrightarrow P_2(V\otimes W),
+\]
+and use the left-hand strength for $P_0(W)\boxtimes B_h$. Tensoring an off-diagonal map with $P_1$ or $P_2$ gives zero in every case. Extend these prescriptions additively to direct sums and then to retracts of free projectives.
+
+Here is a full check that the prescriptions define a bifunctor. Naturality with diagonal coefficient maps is exactly naturality of $t$, or ordinary tensor naturality. For compositions of off-diagonal maps with the other argument $P_0$, the first variable gives respectively $qC=0$, $B(0,q)=0$, and $CB=0$; the second variable gives $(AC,-qC)=0$, $B(A,-q)=BA=0$, and $CB=0$. With a positive-index argument they vanish by the zero entries. For interchange of two off-diagonal maps, pairs $(A,A),(A,C),(C,A),(C,C),(B,B)$ have zero source, zero target, or a zero intermediate term in both orders. The pair $(B,A)$ and its reverse reduce to $BA=0$ after the formulas $(0,q)$ and $(A,-q)$; the pair $(B,C)$ and its reverse reduce to $CB=0$. These exhaust the nine ordered pairs. Thus interchange holds, including the pairs which failed in the two-sort attempted construction. All formulas preserve coproducts of the free projectives in each variable: this uses coproduct preservation by $P_i$ and $S$ and the canonical linear strength on coefficient maps.
+
+\textbf{Right-exact extension.}
+An additive functor on projectives extends to a right-exact functor on an abelian category with enough projectives by applying it to a projective presentation and taking the cokernel. Comparison maps and their homotopies give independence of the presentation and functoriality. The same construction in two variables extends the bifunctor just defined, using
+\[
+\coker\bigl((Q_1\boxtimes R_0)\oplus(Q_0\boxtimes R_1)
+\longrightarrow Q_0\boxtimes R_0\bigr)
+\]
+for presentations $Q_1\to Q_0\to X\to0$ and $R_1\to R_0\to Y\to0$. Finite horseshoe presentations prove right exactness separately in each variable. This extension preserves arbitrary coproducts: coproducts of projective presentations remain right-exact presentations, coproducts of projectives are projective, and the prescribed functor on projectives preserves those coproducts. Exactness of coproducts at a monomorphism is not used. Hence the extended $\boxtimes$ is cocontinuous and $k$-bilinear in both variables.
+
+Natural transformations between such right-exact functors are determined by their values on projectives and extend from compatible transformations there, again by presentations. We will use this fact in three or four variables to check all monoidal coherences.
+
+\textbf{Associativity, symmetry and unit.}
+The relevant finite-coordinate model is the category of cochain complexes in degrees $0,1,2$ over $k$, with the following tensor: retain the degree-zero tensor and terms having precisely one positive degree, and set every product of two positive-degree terms to zero. Thus degree $n>0$ is $(X_n\otimes Y_0)\oplus(X_0\otimes Y_n)$; the differential on degree zero is the pair of differentials, and the remaining differential acts on its sole positive factor. This is an associative symmetric tensor with unit $k$ in degree zero: a triple tensor retains exactly the terms with at most one positive factor. Its associativity and symmetry are the evident permutations of these terms. We use this coordinate model solely to specify and verify the finite matrices below; the new maps $B_h$ are checked separately.
+
+For $P_0\boxtimes P_0=P_0\oplus S$, choose degree-one coordinates
+\[
+(x,y)=(p+s,p),
+\]
+where $x$ belongs to the first positive factor and $y$ to the second. Under these coordinates the symmetry is
+\[
+\begin{pmatrix}\id&i\\0&-\id\end{pmatrix}:
+P_0(L)\oplus S(L)\longrightarrow P_0(L)\oplus S(L),
+\]
+followed by the coefficient swap $U\otimes V\to V\otimes U$. With one positive-index projective the symmetry is the coefficient swap on that projective; with two it is the unique map of zero objects.
+
+From the presentation $P_2\to P_1\to S\to0$, right exactness gives
+\[
+S(U)\boxtimes P_0(V)=S(U\otimes V),\qquad
+S(U)\boxtimes P_i(V)=0\quad(i>0),
+\]
+and the corresponding reversed formulas. Therefore a triple of $P_0$'s is $P_0(L)\oplus S(L)^{\oplus2}$ in either bracketing. Write the left coordinates as $(p,r,s)$, with $r$ the new $S$ from the outer tensor and $s$ the old $S$ from the first pair. Its three degree-one coordinates are
+\[
+(x,y,z)=(p+r+s,p+r,p).
+\]
+For the right bracketing they are $(p'+r',p'+s',p')$. Hence the associator is
+\[
+(p,r,s)\longmapsto(p,r+s,r).
+\]
+For a triple with exactly one positive index it is ordinary coefficient associativity on $P_i(L)$; with at least two positive indices both sides are zero.
+
+These matrices are natural for the $A$, $C$ and diagonal maps by the finite-coordinate model. They are also natural for every $B_h$: those maps kill every $S$ summand, and the remaining equality is exactly the associativity or the symmetry-adjusted naturality of the canonical strength $t$. In the symmetry matrix the possible off-diagonal contribution is $B_h i=0$, since $A=i q$, $B_h A=0$, and $q$ is epimorphic (or directly because $\operatorname{Hom}(S(U),P_2(V))=0$). Thus no extra $E$-term is being discarded without verification.
+
+The pentagon and hexagon can be checked on free projectives. With no positive index the displayed matrices arise from permutations and reassociations of the same finite-coordinate tensor, and therefore satisfy both diagrams. With exactly one positive index they are ordinary vector-space coefficient identities; with two or more positive indices every term is zero. Naturality for $B_h$ just checked permits extension from projectives, so these are coherences on all of $\mathcal B$.
+
+Finally $1=\kappa k$ has presentation $P_1(k)\xrightarrow{A}P_0(k)\to1\to0$. Its left tensor with $P_0(V)$ is the cokernel of $(0,q)$, hence $P_0(V)$ by projection. Its right tensor is the cokernel of $(A,-q)$, hence $P_0(V)$ by $(\id,i)$. Tensoring $1$ with $P_i(V)$ for $i>0$ gives $P_i(V)$ directly. These unit identifications are natural for $B_h$ because $B_h i=0$ and $t_{V,k}=\id$; they are natural for the other generators by the same coordinate formulas. The triangle identities hold in the finite-coordinate model and extend by projective presentations. This completes the construction of a cocontinuous symmetric $k$-bilinear tensor with unit $\kappa k$. The exact-integer certificate in \texttt{code/C\_three\_sort\_coherence.py} checks the finite matrices, both hexagons, the pentagon, unit triangles, and generator relations in the finite model $E=\id$. That model is used only to make the extra $B$-map visible in a finite calculation; it does not verify $E(k)=0$ or the infinite-dimensional homology of this counterexample.
+
+\textbf{The derived scalar calculation.}
+The three displayed exact sequences give a projective resolution of $\kappa W$ with successive terms
+\[
+P_0(W),P_1(W),P_2(W),P_0(EW),P_1(EW),P_2(EW),\ldots.
+\]
+Applying $\phi$ leaves $E^n(W)$ in homological degree $3n$ and zero in the other degrees, with zero differentials. Thus
+\[
+L_{3n}\phi(\kappa W)=E^n(W),\qquad
+L_{3n+1}\phi(\kappa W)=L_{3n+2}\phi(\kappa W)=0.
+\]
+The canonical degree-zero counit is $\id_W$. At $W=k$ this is the required normalization, while $L_3\phi(\kappa W)\ne0$ for infinite-dimensional $W$.
+
+This category fails AB4. At $k$, the map $P_2(k)=S_2(k)\to P_1(k)$ is monic. Its coproduct indexed by a basis of an infinite-dimensional $W$ is $P_2(W)\to P_1(W)$, with nonzero kernel $\kappa E(W)$. Moreover $P_0(k)$ is not finitely presented: $\operatorname{Hom}(P_0(k),P_2(W))=E(W)$ whereas each $\operatorname{Hom}(P_0(k),P_2(k))$ is zero. If a set of finitely presented projective generators existed, its exact faithful evaluations would detect and prevent this failure of AB4. Thus the small-projective-generator corollary is not contradicted.
+
+
+\textbf{The four manuscript hypotheses.}
+Take $\mathcal M=\Ch_{\geq0}(\mathcal B)$, with the ordinary homological tensor induced by $\boxtimes$ and the usual signed symmetry. Only finite sums occur in each tensor degree. It is a complete and cocomplete abelian category with exact products and enough projectives; disk projectives give explicit degreewise epimorphisms onto every complex. The tensor is symmetric, $k$-bilinear and cocontinuous. Its unit is $\kappa k[0]$, its actual scalar-copower functor is $\kappa_{\mathcal M}(W)=\kappa W[0]$, and
+\[
+\varphi=\phi H_0:\mathcal M\longrightarrow\operatorname{Vect}_k
+\]
+is left adjoint to $\kappa_{\mathcal M}$. This scalar functor is exact and preserves all small limits, proving (a), and the disk construction proves (b). Projective resolutions of $\kappa W$ in $\mathcal B$, placed in internal degree zero, are projective resolutions of $\kappa W[0]$ in $\mathcal M$. Consequently the preceding calculation proves (c), and also
+\[
+L_3\varphi(\kappa_{\mathcal M}W)=E(W)\ne0.
+\]
+
+For (d) use $J=D^1(1)$ and its bottom inclusion $\alpha:1[0]\hookrightarrow J$. For every $X$, $\alpha\otimes X$ is degreewise split monic and $J\otimes X$ has the standard contraction $h(u_0\otimes x)=u_1\otimes x$, $h(u_1\otimes x)=0$, with $dh+hd=\id$. We verify total derived nullity without presuming exact coproducts. Any contractible nonnegative complex is the degreewise finite direct sum of disks $D^n(Z_{n-1})$, $n\geq1$. Choose projective resolutions of all the $Z_{n-1}$ in $\mathcal B$ and apply their disks. Their sum is a projective resolution in $\mathcal M$: at every internal degree it is a binary direct sum of exact resolutions. Every term of this resolution is a sum of disks and has $H_0=0$, so applying $\varphi$ gives the zero complex. Thus $L\varphi(J\otimes X)=0$ in all degrees, including zero. This proves (d) in its full strength.
+
+\textbf{Failure of the asserted localization equivalence.}
+For each vector space $W$, $\kappa_{\mathcal M}W$ is a $\mathcal W$-local object of $\mathcal M$: if $f$ is inverted by $L\varphi$, then $H_0L\varphi(f)=\varphi(f)$ is an isomorphism and the scalar adjunction makes $\operatorname{Hom}(f,\kappa_{\mathcal M}W)$ bijective. Therefore localization does not change maps into that object. For every $X\in\mathcal M$ we have naturally
+\[
+\operatorname{Hom}_{\mathcal M[\mathcal W^{-1}]}(X,\kappa_{\mathcal M}W)
+=\operatorname{Hom}_k(\varphi X,W)
+=\operatorname{Hom}_{D_{\geq0}(k)}(L\varphi X,W[0]).
+\]
+The last equality is the standard degree-zero truncation property, or follows directly from a nonnegative projective complex representing $L\varphi X$. If the asserted canonical functor were an equivalence, Yoneda, applied through that equivalence, would force its canonical map
+\[
+L\varphi(\kappa_{\mathcal M}W)\longrightarrow W[0]
+\]
+to be an isomorphism. Its third homology is $E(W)\ne0$ for infinite-dimensional $W$, a contradiction. If necessary we form the Gabriel--Zisman localization in a larger universe; a size failure of a smaller localization cannot restore the asserted equivalence.
+\end{proof}
+
+
+\paragraph{The necessary repair exposed by the counterexample.}
+The last argument is general: if the canonical $L\varphi$-comparison is an equivalence and $\varphi\dashv\kappa$, then its canonical derived counit must satisfy
+\[
+L\varphi(\kappa V)\xrightarrow{\sim}V[0]
+\quad\text{for every scalar module }V.
+\]
+Normalization at the single unit does not imply this requirement in the full manuscript scope. Claim~\ref{C26} fails precisely at that passage to infinite free coefficients. We do not assert that this necessary condition alone suffices; Claims~\ref{C11}, \ref{C13}, \ref{C15}, and~\ref{C23} retain their separately proved sufficient hypotheses.
+
+
+\begin{claim}{C.27}{Proved under stated hypotheses}{A flat interval can be approximated by split inclusions}\label{C27}
+Assume the corollary setting of Claim~\ref{C6}, including the canonical normalization and full interval hypothesis. Choose a presentation $\mathcal M\simeq\operatorname{Fun}_k(\mathcal A^{\mathrm{op}},\Mod k)$ by a small $k$-linear category $\mathcal A$ with projective Hom modules. We do not require this indexing category to contain zero objects or finite direct sums; its additive envelope supplies the additive generator category of Claim~\ref{C6}. Suppose the monoidal structure is pointwise on this chosen presentation: for $a\in\mathcal A$ we have specified natural identifications
+\[
+ \mathbf1(a)=k,\qquad (X\otimes Y)(a)=X(a)\otimes_kY(a)
+\]
+compatible with the unit constraints. Suppose also that the interval object has a filtered presentation
+\[
+ J\cong\mathop{\mathrm{colim}}_{i\in I}P_i
+\]
+by finitely generated projective objects of $\mathcal M$, and that $\alpha:\mathbf1\to J$ is represented by a map $\alpha_{i_0}:\mathbf1\to P_{i_0}$ at one stage. Then every projective resolving adjunction $F\dashv G$ of Claim~\ref{C6} has a raw right adjoint inducing the equivalence of the manuscript's corollary.
+
+The factorization hypothesis holds, in particular, if $\mathbf1$ is finitely presented in $\mathcal M$ and $J$ is flat as a module over the small linear category, with flatness expressed by such a filtered presentation. Neither finite presentation of the unit nor flatness of the interval is asserted to follow from the manuscript.
+\end{claim}
+\begin{proof}
+We may replace $I$ by the filtered undercategory $i_0/I$. Its forgetful functor to $I$ is final, so the colimit remains $J$, and every stage carries a specified compatible map $\alpha_i:\mathbf1\to P_i$ whose composite to $J$ is $\alpha$. For every $X$, the map $\alpha_i\otimes X$ is monic: its composite with $P_i\otimes X\to J\otimes X$ is the monomorphism $\alpha\otimes X$.
+
+We first check that $\alpha_i(a):k\to P_i(a)$ splits as a $k$-module map. Apply the preceding monicity to the scalar copower $\kappa(V)=V\otimes_k\mathbf1$, for every $k$-module $V$. The pointwise tensor formula identifies the resulting map at $a$ with $\alpha_i(a)\otimes_kV$. Thus $\alpha_i(a)$ is pure. The module $P_i(a)$ is projective over $k$: a finitely generated projective in the functor category is a retract of a finite sum of representables, whose evaluations are projective by the corollary's Hom-projectivity assumption.
+
+For completeness, a pure map $u:k\to P$ into a projective $k$-module splits even when $P$ is not finitely generated. Embed $P$ as a direct summand of a free module $k^{(S)}$. The image of $u(1)$ has finite support, with coordinates $c_1,\ldots,c_m$. The composite $k\to k^{(S)}$ remains pure. If $L=(c_1,\ldots,c_m)$, tensoring with $k/L$ sends this composite to the zero map, so purity forces $k/L=0$. Choose $r_1,\ldots,r_m$ with $\sum_jr_jc_j=1$. The corresponding finite-coordinate functional $k^{(S)}\to k$, restricted to $P$, retracts $u$.
+
+Fix such retractions of $\alpha_i(a)$ for all $a$. They need not be natural in $a$. The pointwise tensor formula nevertheless shows that every evaluation of $\alpha_i\otimes X$ is a split monomorphism of $k$-modules. Since every component $F_n$ is a retract of a sum of evaluation functors, each degree of $F(\alpha_i\otimes X)$ is split monic as well.
+
+Let $K$ be an acyclic nonnegative complex of projective $k$-modules, and put $Q=GK$. By Claim~\ref{C1}, $K$ is a degreewise finite product of disks $D^m(Q_m)$ with projective coefficients $Q_m$. Such a complex is injective relative to degreewise split monomorphisms of complexes. Indeed a chain map into $D^m(Q_m)$ is specified by a module map in degree $m-1$; a splitting in that degree extends it, and the product of the extensions is a chain map into $K$.
+
+We can therefore extend the counit $\epsilon_K:FQ\to K$ across every $F(\alpha_i\otimes Q)$ to a chain map
+\[
+ e_i:F(P_i\otimes Q)\longrightarrow K.
+\]
+Its adjunct $r_i:P_i\otimes Q\to GK=Q$ satisfies $r_i(\alpha_i\otimes Q)=\id_Q$, because the adjunct of the counit is $\id_{GK}$. Thus $Q$ is a retract of $P_i\otimes Q$ for each stage. We do not require the retractions $r_i$ to be compatible, and we do not assert that the individual objects $P_i\otimes Q$ are null.
+
+The pointwise tensor and all components of $F$ preserve filtered colimits. Consequently
+\[
+ \mathop{\mathrm{colim}}_i F(P_i\otimes Q)
+ \cong F(J\otimes Q)\simeq0.
+\]
+Filtered colimits of modules are exact, so the same equality holds after taking homology in any fixed degree. Let $z\in H_n(FQ)$, and map it to a class $z_i\in H_nF(P_i\otimes Q)$ at one stage. Its image in the displayed colimit is zero. The elementary description of a filtered colimit of modules supplies a later stage $i\to j$ at which the image of $z_i$ is zero. Compatibility of the maps $\alpha_i$ says that this image is $H_nF(\alpha_j\otimes Q)(z)$. Apply $H_nF(r_j)$ to conclude $z=0$.
+
+We have proved $FGK\simeq0$ for every acyclic nonnegative projective complex $K$, exactly the remaining test of Claim~\ref{C10}. Canonical normalization proves the degree-zero projective-coefficient counit, as in Claim~\ref{C7}. Claims~\ref{C10} and~\ref{C3} now prove the asserted raw equivalence for the originally chosen resolving adjunction.
+\end{proof}
+
+
+\begin{claim}{C.28}{Proved}{Neither a flat interval nor countable scalar descent is automatic}\label{C28}
+There are normalized data satisfying all four manuscript hypotheses and all the corollary's small-projective-generator hypotheses, with a pointwise cocontinuous symmetric tensor, for which no flat object of $\mathcal M$ admits a monomorphism from the unit. Moreover, $\mathcal M$ admits no form over any countable subring of $k$, even up to $k$-linear equivalence of abelian module categories. Thus neither the flat-interval hypothesis of Claim~\ref{C27} nor the countable-form hypothesis of Claim~\ref{C22} follows from the manuscript, even after changing the small linear presentation. All raw resolving adjunctions in this example nevertheless satisfy the desired conclusion by Claims~\ref{C7} and~\ref{C17}; it is not a counterexample to the remaining raw-adjoint gate.
+\end{claim}
+\begin{proof}
+Choose an uncountable set $I$ and the free Boolean ring
+\[
+ k=\mathbb F_2[e_i\mid i\in I]/(e_i^2-e_i\mid i\in I).
+\]
+Every element involves only finitely many generators, and every assignment of zeroes and ones to the $e_i$ defines a character to $\mathbb F_2$. Put
+\[
+ H_i=k\oplus ke_i x_i,\qquad x_i^2=0.
+\]
+This is a cocommutative bialgebra, with augmentation $\varepsilon_i(x_i)=0$, $1$ grouplike, and $x_i$ primitive. The relation $(1-e_i)x_i=0$ is respected by the coproduct, and the square-zero relation is respected because the characteristic is two. Its underlying $k$-module is finitely generated projective.
+
+Let $\mathcal A$ have objects $u,b_0,b_1,a_i$ for $i\in I$. The endomorphism rings at $u,b_0,b_1$ are $k$, and that at $a_i$ is $H_i$. For each branch $v$ there is one copy $kg_v$ of morphisms $u\to v$; all other off-diagonal Hom modules vanish. Composition with a branch endomorphism is $h g_v=\varepsilon_v(h)g_v$, where $\varepsilon_{b_j}=\id_k$. These rules define a small $k$-linear category with projective Hom modules. Give $g_v$ its grouplike coalgebra structure. Composition preserves these structures, so the pointwise tensor on
+\[
+ \mathcal M_0=\operatorname{Fun}_k(\mathcal A^{\mathrm{op}},\Mod k)
+\]
+is well-defined. Explicitly, a presheaf consists of modules $X_u,X_{b_j},X_i$, with $H_i$ acting on $X_i$, and maps $f_v:X_v\to X_u$ satisfying $f_i x_i=0$. On a tensor, $x_i$ acts as $x_i\otimes1+1\otimes x_i$, and the branch map is the tensor of the two branch maps. The usual module symmetry, associativity, and unit maps respect these formulas. Thus the tensor is symmetric, $k$-bilinear, and cocontinuous.
+
+The unit $U$ has value $k$ at every vertex, identity branch maps, and zero $x_i$-actions. Its scalar copower $\kappa_0V$ is the constant presheaf with value $V$. A map into it is determined by its component at $u$, and all branch components are forced to be its composites with $f_v$. Consequently
+\[
+ \operatorname{Hom}_{\mathcal M_0}(X,\kappa_0V)
+ \cong\operatorname{Hom}_k(X_u,V).
+\]
+This fixes the variance: these are contravariant presheaves on the star. The corresponding constant covariant module is representable at $u$; we are not asserting that the unit presheaf is representable.
+
+Now set $\mathcal M=s\mathcal M_0$, equivalently the presheaf category on $\mathcal A\otimes_k k[\Delta]$, with tensor pointwise in both variables. We use these original indexing objects for the pointwise formula and pass to the additive envelope only for the corollary's additive-generator convention. The category has all small limits and colimits, exact products, and finitely presented projective representable generators. Their Hom modules are finite sums of projective $k$-modules, since the Hom sets of $\Delta$ are finite. Its scalar copower $\kappa(V)$ is constant in both variables, hence is exact and preserves all limits. Its left adjoint and a resolving functor are
+\[
+ \varphi(X)=H_0N(X_u),\qquad F(X)=N(X_u).
+\]
+Here $N$ denotes normalized chains. Each $F_n$ is a retract of the single evaluation at $(u,[n])$ by the normalized/degenerate decomposition. On the representable at $(a,[m])$, evaluation at $u$ is $k[\Delta^m]$, because $\mathcal A(u,a)=k$. Its normalized complex has finite free components, vanishes in positive homology, and has $H_0=k$. Claim~\ref{C1} shows that $F$ takes projectives to projective complexes, so it is a projective resolving functor as in Claim~\ref{C6}. Its augmentation on the unit is the identity of $k[0]$, giving the canonical normalization.
+
+Take the simplicial module $L=k[\Delta^1]/k[\{0\}]$, let $J=U\otimes_k L$, and let $\alpha:U\to J$ be induced by the vertex $1$. In every degree the constant-one simplex is a basis element of $L$, so $\alpha\otimes X$ is evaluationwise split monic for every $X$. The pointed simplicial contraction $\min:\Delta^1\times\Delta^1\to\Delta^1$ contracts $L$ to zero. Tensoring this homotopy with $X_u$ and applying the normalized prism homotopy gives
+\[
+ F(J\otimes X)=N(L\otimes X_u)\simeq0
+\]
+for all $X$, including degree-zero homology. This verifies (a)--(d). The evaluationwise splittings pass through every retract of a sum of evaluation functors, so the alternative hypothesis of Claim~\ref{C7} holds for every chosen resolving functor. The particular $F$ above also satisfies Claim~\ref{C17}.
+
+We next prove the flat-object obstruction. Let $\mathcal B$ be the full three-vertex subcategory on $u,b_0,b_1$, and let $U_{\mathcal B}$ be its constant presheaf. Write $h_v=\mathcal B(-,v)$ and $h^v=\mathcal B(v,-)$. The covariant module $T$ with $T(u)=k$ and $T(b_j)=0$ has the projective resolution
+\[
+ 0\longrightarrow h^{b_0}\oplus h^{b_1}\longrightarrow h^u
+ \longrightarrow T\longrightarrow0.
+\]
+Tensoring it with $U_{\mathcal B}$ gives the addition map $k^2\to k$, so
+\[
+ \operatorname{Tor}^{\mathcal B}_1(T,U_{\mathcal B})=k,
+ \qquad \operatorname{Tor}^{\mathcal B}_2(T,-)=0.
+\]
+There cannot be a monomorphism $U_{\mathcal B}\to Q$ with $Q$ flat: the Tor sequence of its cokernel would inject this nonzero $k$ into $\operatorname{Tor}^{\mathcal B}_1(T,Q)=0$.
+
+Restriction to $\mathcal B$ followed by simplicial evaluation in degree zero is exact and preserves filtered colimits. It takes every representable of $\mathcal M$ to a finite sum of representables of $\mathcal B$: the restriction of $h_{a_i}$ is $h_u$, and evaluation of $k[\Delta^m]$ in degree zero has $m+1$ generators. Hence it preserves projectives and flat objects, using the standard description of flat functors as filtered colimits of finitely generated projectives; see \citet[p.~5]{Krause2016C}. It sends the unit to $U_{\mathcal B}$. A monomorphism from the unit into any flat object of $\mathcal M$ would therefore contradict the preceding paragraph. In particular no possible interval is flat. The two finite star matrices are checked in \texttt{code/C\_star\_obstruction.py}; the Tor argument proves the assertion for arbitrary flat objects.
+
+Finally suppose, toward a contradiction, that a countable unital subring $s\subseteq k$ and a small $s$-linear category $\mathcal D_s$ give a $k$-linear abelian equivalence
+\[
+ \mathcal M\simeq
+ \operatorname{Fun}_k\bigl((k\otimes_s\mathcal D_s)^{\mathrm{op}},\Mod k\bigr).
+\]
+No preservation of the displayed generators or tensor is assumed. All elements of $s$ together involve a countable subset $I_s\subset I$. Let $\chi_0:k\to\mathbb F_2$ send every $e_i$ to zero, and let $\chi_1$ send $e_i$ to zero on $I_s$ and to one outside $I_s$. The characters agree on $s$.
+
+For a $k$-linear abelian category, the full subcategory of objects annihilated by $\ker\chi$ is intrinsic: each scalar in that ideal acts by zero on the identity of each object. A $k$-linear equivalence preserves it. In the proposed scalar form the two fiber subcategories are both module categories over $\mathbb F_2\otimes_s\mathcal D_s$, so they would be equivalent. In our construction they are $s\Mod(\mathcal A_{\chi_j}^{\mathrm{op}})$. At $\chi_0$ every branch algebra is $\mathbb F_2$; at $\chi_1$ every branch outside $I_s$ has algebra $H=\mathbb F_2[x]/(x^2)$.
+
+Every simple base presheaf is supported at one vertex. Indeed its $u$-component defines a subobject supported at $u$; if it is zero, each branch defines a subobject supported at that branch. Each branch algebra has its unique simple module $\mathbb F_2$. At $\chi_0$ the simple at $u$ is projective, and a branch simple has resolution
+\[
+ 0\longrightarrow h_u\longrightarrow h_v\longrightarrow S_v\longrightarrow0.
+\]
+Thus every simple has finite projective dimension. At an active branch of $\chi_1$, evaluation is exact and preserves projectives: the only nonzero representable evaluation there is $H$. Its simple evaluates to $\mathbb F_2$, which has infinite projective dimension over $H$. The periodic resolution has all terms $H$ and all differentials multiplication by $x$; its image and kernel are both $(x)$. Applying $\operatorname{Hom}_H(-,\mathbb F_2)$ gives zero differentials and a nonzero Ext group in every degree. Consequently the branch simple has infinite projective dimension in the base presheaf category.
+
+Dold--Kan identifies simplicial objects with nonnegative chain complexes. Their simple objects are exactly the spheres $S[n]$ on base simples. Degree evaluation is exact and takes projective complexes to projective objects, so infinite projective dimension of $S$ implies the same for $S[n]$. If $S$ has finite projective dimension $d$, its sphere $S[0]$ and every disk $D^n(S)$ have projective dimension at most $d$; the sequences
+\[
+ 0\longrightarrow S[n-1]\longrightarrow D^n(S)
+ \longrightarrow S[n]\longrightarrow0
+\]
+give finite projective dimension, at most $d+n$, for every sphere. Therefore the $\chi_0$ fiber has no simple object of infinite projective dimension, whereas the $\chi_1$ fiber does. An abelian equivalence preserves simplicity, projectivity, and projective dimension, a contradiction.
+
+This excludes a countable scalar form even up to $k$-linear abelian equivalence. Ordinary $k$-presheaf categories have such a form over $\mathbb F_2$ by linearizing their ordinary indexing category; hence the example also lies outside Claim~\ref{C21}. It remains inside Claims~\ref{C7} and~\ref{C17}, as verified above. The finite certificate checks the star resolution and the dual-number differential; the infinite periodic-resolution and Boolean-character arguments are the proofs of the two infinite assertions, not conclusions drawn from a finite truncation.
+\end{proof}
+
+
+\begin{claim}{C.29}{Proved under stated hypotheses}{Finite Hom modules suffice for pointwise tensors}\label{C29}
+Assume the normalized corollary hypotheses of Claim~\ref{C6}, including the full interval condition. Suppose there is a chosen presentation
+\[
+ \mathcal M\simeq\operatorname{Fun}_k(\mathcal A^{\mathrm{op}},\Mod k)
+\]
+by a small $k$-linear indexing category $\mathcal A$, not required to contain a zero object or finite sums, such that every $\mathcal A(a,b)$ is finitely generated projective over $k$. Suppose the given coherent internal tensor is pointwise over $k$, with unit value $\mathbf1(a)=k$ compatibly with the pointwise unit maps. This is a hypothesis on the tensor already supplied, not an assertion that tensoring two structure maps of arbitrary linear presheaves defines a $k$-linear presheaf. Then every chosen projective resolving adjunction $F\dashv G$ of Claim~\ref{C6} induces the desired equivalence. No finite-presentation assumption on $\mathbf1$ as an $\mathcal A$-module, no flatness assumption on $J$, and no countable scalar form is required.
+\end{claim}
+\begin{proof}
+We construct a filtered presentation of $J$ in the category of objects under $\mathbf1$; the stages need not be projective or flat in $\mathcal M$. Choose a representable-generator epimorphism
+\[
+ \pi:\bigoplus_{t\in T}h_{a_t}\longrightarrow J.
+\]
+The map $[\alpha,\pi]:\mathbf1\oplus\bigoplus_{t\in T}h_{a_t}\to J$ is an epimorphism. Choose another sum of representables $\bigoplus_{r\in R}h_{b_r}$ mapping epimorphically onto its kernel. Write $d_r:h_{b_r}\to\mathbf1\oplus\bigoplus_{t\in T}h_{a_t}$ for the resulting relation map. Since a representable is finitely presented, $d_r$ factors through $\mathbf1\oplus\bigoplus_{t\in T_r}h_{a_t}$ for a finite subset $T_r\subseteq T$. This also follows directly by evaluating $d_r$ on the identity element: its component in the coproduct has finite support.
+
+Let $I$ be the filtered poset of pairs $(T_0,R_0)$ of finite subsets of $T,R$ such that $T_r\subseteq T_0$ for every $r\in R_0$, ordered by inclusion. Set
+\[
+ P_{T_0,R_0}=\coker\left(
+ \bigoplus_{r\in R_0}h_{b_r}\longrightarrow
+ \mathbf1\oplus\bigoplus_{t\in T_0}h_{a_t}\right).
+\]
+Each stage carries a compatible map $\alpha_i:\mathbf1\to P_i$, and the presentation gives $\operatorname{colim}_I P_i=J$ under $\mathbf1$. Indeed the filtered colimits of the relation and generator diagrams are their indicated full coproducts, and colimits preserve the displayed cokernels. This argument does not require $\mathbf1$ itself to be finitely presented.
+
+For every $X$, the composite of $\alpha_i\otimes X$ with $P_i\otimes X\to J\otimes X$ is $\alpha\otimes X$, hence $\alpha_i\otimes X$ is monic. Evaluating at $a$ and taking $X=\kappa(V)$ for arbitrary $V\in\Mod k$ shows that
+\[
+ \alpha_i(a):k\longrightarrow P_i(a)
+\]
+is pure. Moreover $P_i(a)$ is finitely presented over $k$: the displayed finite presentation of the stage evaluates to a cokernel between finite sums of finitely generated projective modules, with one additional summand $k$ in the target. Its quotient $P_i(a)/k$ is finitely presented as well, since we obtain a finite presentation by adding the single relation given by $\alpha_i(a)(1)$.
+
+We recall explicitly why a pure inclusion with finitely presented quotient splits. In a pure exact sequence $0\to A\to B\to C\to0$ with $C$ finitely presented, choose finitely many generators of $C$, their lifts $y_j$ to $B$, and a finite matrix of relations. Applying a relation to the lifts gives constants in $A$. The resulting finite system of linear equations has the solution $y_j$ in $B$. Purity says that it has a solution in $A$. Subtract those elements of $A$ from the chosen lifts; the adjusted lifts satisfy the defining relations of $C$ and yield a section $C\to B$. Here the finite-equation characterization follows directly from tensor-purity: if a vector of constants in $A^m$ lies in the image of a finite matrix acting on $B^n$, its class in the tensor product with the finitely presented cokernel of that matrix is zero; injectivity of the tensor map says that it was already in the image of the matrix on $A^n$. This proves the assertion without a coherence hypothesis on $k$.
+
+Thus each $\alpha_i(a)$ splits. Pointwise tensoring gives an evaluationwise splitting of $\alpha_i\otimes X$, and every component $F_n$, being a retract of a sum of evaluations, takes this map to a split monomorphism. No splitting is required to be natural in $a$ or in $i$.
+
+Let $K$ be an acyclic nonnegative complex of projective $k$-modules and put $Q=GK$. Its disk decomposition makes it injective relative to degreewise split monomorphisms. Hence the counit $FQ\to K$ extends across $F(\alpha_i\otimes Q)$ for each $i$. Adjunction gives a retraction
+\[
+ r_i:P_i\otimes Q\longrightarrow Q,
+ \qquad r_i(\alpha_i\otimes Q)=\id_Q.
+\]
+Pointwise tensoring and $F$ preserve filtered colimits, so
+\[
+ \operatorname{colim}_i F(P_i\otimes Q)
+ \cong F(J\otimes Q)\simeq0.
+\]
+Homology commutes with filtered colimits of $k$-modules. A class $z\in H_n(FQ)$ maps to some stage and then vanishes at a later stage. Compatibility of the $\alpha_i$ identifies its later image with $H_nF(\alpha_j\otimes Q)(z)$. Applying $H_nF(r_j)$ gives $z=0$. As in Claim~\ref{C27}, compatibility of the retractions and nullity of individual stages are unnecessary.
+
+We have proved the acyclic-projective test of Claim~\ref{C10}. The canonical normalization, coproducts, and retracts prove the degree-zero projective-coefficient test exactly as in Claim~\ref{C7}. Claim~\ref{C3} now proves the raw conclusion for every chosen resolving adjunction.
+\end{proof}
+
+\paragraph{Resolved unrestricted theorem and remaining corollary gate.}
+Claim~\ref{C26} refutes the unrestricted theorem under (a)--(d), even with all small limits and colimits, exact products, and a cocontinuous symmetric tensor. Its three-sort category has no family of finitely presented projective generators, so it does not refute the corollary. Claim~\ref{C11} proves the underlying canonical equivalence over every commutative ring under that corollary's module-category hypotheses. Claim~\ref{C13} proves it for arbitrary AB5 categories with enough projectives, and Claim~\ref{C23} replaces AB5 by enough injectives and all small coproducts. Claim~\ref{C15} proves it whenever an exact cocontinuous resolving functor is available. Claim~\ref{C18} shows that the original hypotheses do not force AB4; Claim~\ref{C24} isolates the scalar-normalization failure before a tensor is supplied, and Claim~\ref{C25} excludes cocontinuous tensors on that two-sort example. The three-sort construction in Claim~\ref{C26} supplies the missing compatible tensor and settles the unrestricted question.
+
+The remaining open question in this section is whether the underived right adjoint in the corollary always satisfies \eqref{Cgate} over an arbitrary commutative ring. Claims~\ref{C7}, \ref{C14}, \ref{C16}, \ref{C17}, \ref{C19}, \ref{C27}, and~\ref{C29} prove the raw conclusion under their stated additional assumptions. Claim~\ref{C21} proves it for every ordinary presheaf category with pointwise tensor, over every commutative ring and for every chosen projective resolving adjunction. Claim~\ref{C22} proves it for every module and tensor datum admitting its specified countable pure scalar form. Claim~\ref{C10} gives the necessary and sufficient remaining raw-adjoint test beyond these cases. Restoring the canonical normalization remains a necessary repair of the literal Lemme 3; in the corollary setting that normalization together with the exact gate is necessary and sufficient.
+
+The attempted injective-resolution proof succeeds when projective coefficient modules have uniformly bounded injective dimension and stops at an infinite, oppositely directed totalization otherwise. The attempted interval-extension proof succeeds when $F(\alpha\otimes X)$ is degreewise split and stops at the extension of the counit into a merely projective, not injective, disk coefficient otherwise. Tensor-purity alone must not be called split injectivity. An attempted reduction to individual disks also stops at the displayed product, since $F$ is a left adjoint and need not preserve products. The next concrete step is to prove \eqref{Cgate} from tensor-purity using a convergent comparison, or to construct a raw-adjoint counterexample satisfying all four original assumptions and the corollary's small-projective-generator hypotheses. Fields, $\mathbb Z$, noetherian rings of finite self-injective dimension, and degreewise split interval realizations have already been removed from that search. With scalar-copower compatibility, Claim~\ref{C14} also removes all coefficient rings of cardinality at most $\aleph_t$ for finite $t$, and all rings of finite pure global dimension. Claim~\ref{C16} removes the ring restriction when the resolving component functors are finite projective evaluation sums up to retract. Claim~\ref{C17} shows that it is enough for one such finite resolution to exist: the chosen resolving adjunction can then have arbitrary projective components. Claim~\ref{C19} gives a different sufficient condition, preservation of coproducts by $F^{(0)}GD$ on coefficient sequences, in particular by the chosen raw $G$. Claim~\ref{C20} refutes a further proposed extension of the finite-representability argument: exact components that are arbitrary sums of projective representables, even together with vanishing on every pure-injective coefficient, do not force the needed projective-coefficient vanishing. That functor has not been realized as $F^{(0)}GD$ with the manuscript's monoidal data, so it does not settle the original raw gate. Claim~\ref{C21} now excludes every ordinary-presheaf category with pointwise tensor from the search, including over the large Boolean coefficient ring of Claim~\ref{C20}: a full counterexample must escape this ordinary-presheaf setting as well. More generally Claim~\ref{C22} excludes every category admitting its specified countable pure scalar form, using an augmented bar resolution that contains all evaluations. Claim~\ref{C27} gives a further interval-approximation proof for pointwise tensors when the interval is a filtered colimit of finitely generated projectives and its unit map factors through one stage; neither this presentation nor the factorization is asserted in general. Claim~\ref{C28} proves that neither a flat interval nor a countable scalar form is automatic: its example admits no flat object containing the unit and no countable form even up to $k$-linear abelian equivalence. Its raw adjunctions are nevertheless good by the split and finite-component criteria, so this is an obstruction to those two proof routes, not a decision of the remaining gate. Claim~\ref{C29} proves the raw conclusion for every coherent pointwise tensor whose chosen linear indexing category has finitely generated projective Hom modules, with no flatness or unit-finiteness hypothesis. A pointwise counterexample must therefore escape every such presentation. This gives a new necessary restriction; we have not exhibited an instance covered by this theorem and by none of the preceding sufficient criteria. In particular the countable Koszul ring of Claim~\ref{C12} cannot be a counterexample with this tensor compatibility, even though its exact functor refutes the attempted proof principle.
+
+Finally, GALOIS G.6 and RESIDUE I.7 concern an iteratable construction on bare derivators. Reading their precise statements shows that they provide no comparison functor for this linear adjunction. Conversely the result in Claim~\ref{C7}, which requires a specified $k$-linear module enhancement and interval, does not solve their bare-derivator question.

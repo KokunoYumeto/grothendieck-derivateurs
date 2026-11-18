@@ -1,0 +1,720 @@
+\section{Two-dimensional acyclic resolutions: independent audit}
+\label{sec:E-audit}
+
+In this section a bound-$\mu$ resolution of a simply connected space $W$
+means a group $G$, an actual two-dimensional CW model $X=K(G,1)$,
+and a map $t:X\to W$ inducing integral homology isomorphisms, with
+every homomorphism from $G$ to a group of cardinality at most $\mu$
+trivial. The trivial group is allowed. All groups and cell sets are small.
+We use $\mathfrak c=2^{\aleph_0}$.
+
+\paragraph{Statement E.1 (verified input for the cardinal argument).}
+Let $P$ be a group and $w_1,\ldots,w_m\in P*F(t_1,\ldots,t_n)$.
+If their exponent-sum rows have rank $m$ over $\mathbb Q$, then
+\[
+ P\longrightarrow (P*F(t_1,\ldots,t_n))/
+                   \langle\!\langle w_1,\ldots,w_m\rangle\!\rangle
+\]
+is injective. This is precisely Theorem~1 of the OpenAI preprint
+\emph{Nonsingular systems of equations over arbitrary groups}, dated
+5 October 2026 \cite[Theorem~1 and Remark~5.1]{EOpenAI2026}.
+The complete sixteen-page source was obtained from the
+official repository and read; it imposes no restriction on $P$.
+The source is a preprint, and no claim of formal verification is made here.
+
+Here are the proof checks relevant to using that theorem. For unitary
+variables of sizes $k_1\geq\cdots\geq k_r$, rational independence of
+the signed block multiplicity rows supplies nested nonzero minors.
+The incidence space parametrizing a unitary matrix and an $l$-plane
+fixed by it has codimension $l^2$. Its Poincar\'e dual has leading
+exterior term a nonzero multiple of the product of the first $l$
+primitive cohomology generators of the unitary group. Restriction to
+$X\mapsto X\oplus(-I)$ verifies this coefficient by a single transverse
+intersection; shorter exterior terms cannot contribute to the
+top-dimensional pairing. The pairing for the product of the unitary
+variable groups is the product of the indicated nested minors, hence
+nonzero. This establishes the required simultaneous fixed-space bound.
+
+For the operator step, work in the matrix algebra over the group von
+Neumann algebra, with its faithful, unnormalized trace $\tau$.
+Writing $h(e^{2\pi it})=t-\lfloor t\rfloor$ and
+$\ell(U)=\tau(h(U))$, differentiate
+$\tau(f(Ue^{2\pi is h(V)}))$ for smooth $f$ on the circle.
+Cyclicity of the trace gives the derivative
+$\tau(f'(Ue^{2\pi is h(V)})h(V))$; it is at most $\tau(h(V))$
+when $f'\leq1$. Smoothing the sawtooth from the right, including at
+the cut $1$, gives $\ell(UV)\leq\ell(U)+\ell(V)$ by bounded
+convergence. For a weighted cyclic shift of length $a$, the phases of
+the $a$ roots give $(a-1)/2$ plus the phase of the product of its weights.
+These facts remain valid for uncountable coefficient groups: every
+square-summable coefficient vector has countable support, and the trace
+is still faithful and normal.
+
+For a planar band diagram, independence of the exponent rows forces
+equal positive and negative disk counts for each relator type. If there
+are $2K$ disks, $b$ bands and $q$ boundary components, then
+$2-q=2K-b$. The fixed-space bound and subadditivity give the upper
+phase estimate $3b/2-K$. Assign a small negative phase to each
+nonexceptional boundary and the compensating positive phase to the
+exceptional boundary. The weighted-cycle formula tends to the same
+constant plus the nonnegative phase of its coefficient word. Faithfulness
+therefore makes that word the identity. Finally, a finite normal-closure
+expression for a coefficient kernel element gives a punctured disk;
+disjoint level arcs of the variable-circle maps supply planar bands
+on which the coefficient map is constant. Removing components from
+the inside out proves coefficient injectivity. This checks the source's
+comparison from a kernel relation to its planar obstruction, rather
+than assuming that an arbitrary pairing of letters is planar.
+
+\paragraph{Statement E.2 (confirmation of INDLOCAL A.19).}
+Let $X=K(G,1)$ be a connected CW complex of dimension at most two, and put
+\[
+ \nu=\max\{\aleph_0,d(H_1(G;\mathbb Z)),
+                          \operatorname{rank}H_2(G;\mathbb Z)\}.
+\]
+For each $g\ne1$ there is a homomorphism $G\to Q$ with
+$|Q|\leq\nu^{\aleph_0}$ that does not kill $g$.
+
+\emph{Proof.}
+Start with a connected subcomplex of at most $\nu$ cells containing
+a loop for $g$, cycles generating $H_1(X)$, and cycles giving a basis
+of $H_2(X)$. This last group is free because it is a subgroup of
+$C_2(X;\mathbb Z)$. At each of countably many stages, add finite
+supports of nullhomotopies for every element of the kernel of the
+current fundamental-group map to $G$, and finite bounding chains for
+every element of the kernel of its first-homology map to $H_1(X)$.
+There are at most $\nu$ choices at each stage. The union $Y$ has at
+most $\nu$ cells, and the actual inclusion $Y\subseteq X$ induces
+an injection on fundamental groups and an integral homology
+isomorphism. Injectivity on $H_2$ requires no choice: there are no
+three-boundaries in either complex.
+
+Put $H=\pi_1Y$. Its embedding in $G$ identifies the universal cover
+of $Y$ with a component of the inverse image of $Y$ in the
+contractible universal cover of $X$. This component has no second
+homology, since its cellular two-cycles inject into those of the
+contractible two-complex. It is simply connected and
+two-dimensional, hence contractible by Hurewicz and Whitehead.
+Thus $Y$ itself is a classifying model, and its displayed subgroup
+$H$ contains the specified nonidentity $g$.
+
+Collapse a maximal tree of $Y^{(1)}$ and an extension of it to a
+maximal tree of $X^{(1)}$. The resulting pair has one vertex and
+the relative cellular boundary is an actual isomorphism
+\[
+ \delta:\mathbb Z^{(R)}\xrightarrow{\cong}\mathbb Z^{(S)},
+\]
+where $R,S$ are the relative two- and one-cells. For each $r\in R$
+choose its finite attaching word over $H*F(S)$ and let $W(r)$ contain
+\emph{all} its occurring variables, including those of total exponent
+zero. For each $s\in S$, let $I(s)$ be the finite support of
+$\delta^{-1}(s)$. A pair of subsets is closed when it is closed under
+$r\mapsto W(r)$ and $s\mapsto I(s)$. Closing one additional cell
+takes at most countably many cells. By well-ordering the cells this
+gives a continuous filtration of actual subcomplexes from $Y$ to $X$
+in which each successor adds countably many relative cells. On each
+successor quotient $\delta$ remains an isomorphism. Van Kampen
+therefore gives presentations whose exponent rows in the newly
+added variables are independent, every finite subfamily included.
+
+There is a group $E$ of cardinality at most $\nu$ containing $H$
+and solving every finite nonsingular system over itself: perform
+countably many passes through all finite systems over the group
+present at the beginning of a pass, adjoining universal solutions.
+Statement E.1 keeps all coefficient maps injective. Only $\nu$
+many finite strings and generators occur in a pass.
+
+Use the single reduced power
+\[
+ U=E^{\mathbb N}/E^{(\mathbb N)},\qquad
+ E^{(\mathbb N)}=\{(e_i):e_i=1\text{ for all but finitely many }i\}.
+\]
+The denominator is normal; constant sequences embed $E$, and
+$|U|\leq\nu^{\aleph_0}$. Any countable nonsingular system over $U$
+is solvable in $U$: fix representatives of its coefficients, solve
+the first $k$ equations in $E$ at coordinate $k$, and assemble the
+solutions coordinatewise. Each equation holds at every sufficiently
+large coordinate. Only the finitely many variables occurring in the
+first $k$ equations have to be solved there, so E.1 applies exactly.
+
+Now extend the displayed embedding $H\hookrightarrow U$ through
+the filtration of the relative presentation. At each successor,
+apply the current homomorphism to the coefficients and solve the
+resulting countable system in $U$. Assigning the new variables to
+these solutions gives a homomorphism on the next presentation with
+\emph{exactly} the previous restriction. At a limit use the group
+colimit universal property. The resulting homomorphism $G\to U$
+is injective on $H$, so it detects $g$. Taking its image as $Q$
+proves the assertion. No unproved injection of an intermediate
+presentation group is used in this recursion.\hfill$\square$
+
+\paragraph{Statement E.3 (confirmation of INDLOCAL A.20).}
+Let $W$ be simply connected, two-dimensional, and
+$H_2(W;\mathbb Z)\cong\mathbb Z^{(\kappa)}$ with $\kappa>0$.
+There is no bound-$\mu$ two-dimensional resolution when
+\[
+ \mu\geq \max(\aleph_0,\kappa)^{\aleph_0}.
+\]
+Indeed any such group has $H_1=0$ and $H_2\cong\mathbb Z^{(\kappa)}$,
+so is nontrivial. Statement E.2 detects any nonidentity element in
+a quotient of the forbidden size. For $W=S^2$ the excluded range
+is exactly $\mu\geq\mathfrak c$ from this argument; the argument
+does not exclude $\aleph_0\leq\mu<\mathfrak c$.
+
+\paragraph{Statement E.4 (an explicit finite-bound resolution).}
+Every simply connected two-dimensional CW complex has a
+two-dimensional resolution satisfying every finite bound at once.
+For a target with finite rank $k>0$ in degree two, such a resolution
+has a finite classifying model. A target of infinite rank $\kappa$
+has one with at most $\kappa$ cells.
+
+\emph{Proof.}
+We give an explicit Higman-block proof of this case of the
+finite-bound construction in \cite[Sections~8--10]{EBaumslagDyerHeller1980}.
+Let
+\[
+ H=\langle a,b,c,d\mid a^{-1}ba=b^2,
+ b^{-1}cb=c^2,\ c^{-1}dc=d^2,\ d^{-1}ad=a^2\rangle.
+\]
+Its presentation complex is aspherical. To check this, first
+amalgamate the standard aspherical Baumslag--Solitar complexes on
+$(a,b)$ and $(b,c)$ along the circle for $b$. The subgroup
+$\langle a,c\rangle$ is free of rank two: nonzero powers of
+$a$ and $c$ lie outside the amalgamated cyclic subgroup, so their
+alternating words are reduced. Do the same on $(c,d,a)$, then
+amalgamate the two resulting spaces along that free rank-two
+subgroup. Injective amalgam normal forms identify the universal
+cover as a tree of contractible spaces. The displayed four-relator
+presentation is the associated two-dimensional model. Its ordinary
+boundary $C_2\to C_1$ is a signed permutation matrix, so it is
+acyclic, and each named generator has infinite order.
+
+Every homomorphism $H\to F$ to a finite group is trivial. If any
+generator image were nonidentity, choose the least prime $p$
+dividing one of their orders, say the order of $x$. The preceding
+image $y$ conjugates $x$ to $x^2$. Thus $x$ has odd order, and
+the multiplicative order of $2$ modulo $p$ divides the order of
+$y$. It is greater than one and divides $p-1$, contradicting
+minimality of $p$.
+
+For a cardinal $\kappa>0$, take one central copy of $H$ and
+$\kappa$ leaf copies of $H$, amalgamating the infinite cyclic
+subgroups generated by $a$ along the edges of a star. Denote
+the resulting group by $G_\kappa$. Its graph-of-spaces model
+uses only two-dimensional vertex spaces and cylinders on circles,
+and is aspherical by the same normal-form argument. The
+Mayer--Vietoris sequence for this tree gives
+\[
+ H_1(G_\kappa;\mathbb Z)=0,\qquad
+ H_2(G_\kappa;\mathbb Z)\cong\mathbb Z^{(\kappa)},\qquad
+ H_i(G_\kappa;\mathbb Z)=0\quad(i>2).
+\]
+Every finite image kills every vertex group, and hence all of
+$G_\kappa$. The finite boundary matrices for the first eight stars
+are independently checked in \texttt{code/E\_higman\_homology.py}.
+This calculation is a homology check; asphericity is established
+by the preceding geometric argument.
+
+There is an actual homology equivalence to
+$W_\kappa=\bigvee_\kappa S^2$. Collapse a maximal tree to make
+the source one-vertex. Since $H_1=0$, its boundary
+$C_2\to C_1$ is onto and splits over $\mathbb Z$. The splitting
+gives a projection $C_2\to H_2$. Collapse the one-skeleton and
+map each resulting two-sphere by the finite pinch-and-degree map
+specified by its projected basis vector. This defines a continuous
+cellular map to $W_\kappa$ and induces the chosen identity on
+$H_2$. It is a homology isomorphism in every degree.
+Finally every simply connected two-dimensional $W$ is homotopy
+equivalent to $W_\kappa$: choose spherical representatives of a
+basis of $H_2(W)$ using Hurewicz, form their wedge map, and apply
+the simply connected homology Whitehead theorem. If $\kappa=0$,
+$W$ is contractible and the trivial group suffices.\hfill$\square$
+
+\paragraph{Statement E.5 (confirmation of INDLOCAL A.13).}
+For every infinite cardinal $\lambda$ there is a simple group
+$S_\lambda$ of size $\lambda$ with an actual two-dimensional
+classifying space and a homology equivalence
+$BS_\lambda\to\bigvee_\lambda S^2$. Consequently it is a
+bound-$\mu$ resolution for every $\mu<\lambda$.
+
+\emph{Proof.}
+Start with $F_\lambda$. At each pass process every ordered pair
+$g\ne1,h$ in the group at the beginning of the pass by adjoining
+a free letter $t$ and an HNN letter $s$ satisfying
+\[
+ s^{-1}ws=wh,\qquad
+ w=gtg^{-1}t^{-1}gt^2g^{-1}t^{-2}.
+\]
+In the free product with $\langle t\rangle$, $w$ is cyclically
+reduced of syllable length eight. Cyclic reduction of $wh$
+has length eight if $hg\ne1$ and six otherwise. Hence both
+associated cyclic subgroups are infinite, and HNN normal form
+embeds the old group. The relation puts $h$ in the normal
+closure of $g$. Repeat the passes countably. Every pair of
+elements occurs at a common pass, so the union is simple.
+
+Perform the attachments on classifying spaces. A free letter adds
+a circle; each HNN extension adds a circle and a two-cell.
+These actual inclusions are aspherical graph-of-spaces extensions,
+and their union is aspherical because every sphere map has finite
+cell support. The group contains $F_\lambda$ and has at most
+$\lambda$ generators, giving cardinality $\lambda$.
+
+In the first pass there are $\lambda$ pairs $(g,1)$. Each of
+their distinct two-cells has zero ordinary boundary. They remain
+independent in $H_2$ because there are no three-cells. Simplicity
+gives $H_1=0$; $H_2$ is free of rank exactly $\lambda$, and all
+higher homology vanishes. The split-boundary construction in E.4
+now gives the claimed actual map to the wedge. A nontrivial map
+from a simple group is injective, which excludes targets of
+size less than $\lambda$.\hfill$\square$
+
+\paragraph{Audit E.6 (INDLOCAL A.10 and A.16).}
+The general A.10 assertion uses the basic groupoid realization
+of Baumslag--Dyer--Heller, Sections 8--10
+\cite{EBaumslagDyerHeller1980}. Their Lemma 10.1 is
+exactly the reduced-word injectivity needed for its boundary
+inclusions, Theorem 9.1 converts the groupoid pushout to the
+homotopy pushout, Lemma 10.2 gives the acyclic simplex pieces,
+and Theorem 10.4 preserves the dimension for finite simplices.
+After killing the inserted Higman factors, each pointed
+simplex groupoid is indiscrete. All pointed intersections
+contain the common base object; thus gluing those quotients
+creates precisely the fundamental groupoid of the original
+complex, with no extra loops. The kernel is consequently
+normally generated by the inserted Higman groups, and all
+finite-group maps kill it. Inductively attaching mapping
+cylinders from the already constructed boundary models to
+the finite simplex models preserves the required dimension
+and cell bound. The local-coefficient comparison is obtained
+simplex by simplex and then by cellular unions. These are
+the steps needed to supplement the cited dimension theorem;
+none is an assertion that arbitrary bar models preserve
+dimension. E.4 provides a separate direct verification of
+the simply connected two-dimensional cases needed here.
+
+For A.16, the geometric input in A.14 also checks
+\cite[Section~6]{EBartholdiMikhailov2026}. Let $L$
+be a finite flag triangulation of a positive-genus surface
+and form its real moment-angle cube complex $C(L)$. Remove
+one open corner to get $M$. Its cut link is that surface.
+The dual graph of the three-cells is connected; collapsing
+along a spanning tree rooted at a cut face removes every
+three-cell. The oriented cube sum maps to a generator in
+$H_3(C(L),M)$, so the cut surface maps to zero in $H_2(M)$.
+The radial retraction in the CAT(0) universal cover of
+$C(L)$ proves injectivity of the old group when $M$ is
+glued, through a surface cylinder, to an aspherical space.
+After collapsing the lifted old spaces, the universal cover
+has flag vertex links (covers of $L$ at the new vertices),
+so the quotient is CAT(0). The relative homology sequence
+and contractibility of the old lifted pieces make the
+uncollapsed universal cover contractible too. The argument
+does not require the old aspherical space to have dimension
+two, which verifies the extension of the source lemma used
+in A.16.
+
+The algebraic steps of A.16 are likewise valid. In the
+pullback cover over $\widetilde W$, let
+$R=\mathbb Z[\pi_1W]$ and keep the initial copy
+$B=H_2(\widetilde W)$. The simple-kernel extension adds
+only relative cells in degrees one and two. Its surjective
+relative boundary has projective kernel $Z_2$. If the old
+$H_1$ has projective dimension at most one, then
+$\ker(Z_2\to H_1)$ is projective, by the long exact
+$\operatorname{Ext}$ sequence. Hence the new kernel of
+$H_2\to B$ is projective. The deliberately included
+$\lambda$ commutator relators with $h=1$ split off an
+actual free $R^{(\lambda)}$ summand: their coordinates
+occur in neither $\partial_2$ nor the old
+$\operatorname{im}\partial_3$. The countable direct-sum
+swindle makes the whole projective kernel free.
+
+Attach a surface block for each of its basis vectors.
+The map of that surface into $\widetilde W$ is nullhomotopic,
+because it has zero $H_2$ class and the target is simply
+connected. Thus the map to $W$ extends literally. Equivariant
+Mayer--Vietoris kills precisely the chosen free kernel,
+keeps homology above degree two unchanged, and leaves
+$H_1$ of projective dimension at most one and the new
+kernel of $H_2\to B$ free. Countable alternation gives
+the desired simple kernel and homology equivalence on
+pullback covers. The mapping cone of the cellular chain
+comparison is an acyclic bounded-below complex of free
+$R$-modules, so is contractible; tensoring proves the
+comparison for every local system. The dimension bound
+is $\max(\dim W,3)$ because the surface cylinders are
+three-dimensional. All these steps confirm A.16 and
+also identify why it does not answer E2.
+
+\paragraph{Audit E.7 (INDLOCAL A.27--A.31).}
+Here $[a,b]=aba^{-1}b^{-1}$. The following records the
+individual checks, including the comparisons that preserve
+two-dimensional classifying spaces.
+
+For A.27's mixed-identity-free case, the commutator maps
+$t\mapsto[a,t]b$ carry a word outside the coefficient
+free factor to another word outside it, by malnormality
+of a free factor in a free product. Their finite
+composition minus the prescribed root value is therefore
+a nonidentity mixed word and has a nonidentity evaluation.
+This verifies the recursive coefficient choice in
+(A.27.4). At a solution whose root equals its $k$th
+enumerated value, the $k$th equation becomes constant
+and backward substitution contradicts exactly that choice.
+For a torsion-free two-conjugacy-class group,
+$t\mapsto[a,t]b$ has image $E-\{ab\}$ with infinite
+fibres; deleting finitely many inputs preserves its
+image. This independently justifies the same recursive
+choice in that case. For a uniformly simple group,
+the word $W_a=\prod_{i=1}^N v_i[a,u_i]v_i^{-1}$ is
+onto whenever $a\ne1$. Indeed a nontrivial commutator
+$c=[a,u]$ normally expresses every element in at most
+$N$ conjugates, and
+$c^{-1}=u[a,u^{-1}]u^{-1}$. The finite tree
+substitutions in A.27 are therefore onto, and the
+chosen coefficients exclude each candidate root value.
+
+Every displayed relator has exponent one in its own
+variable and zero in all others. After lifting its
+coefficients from the specified subgroup, finite-prefix
+elimination of nonroot variables leaves one unimodular
+root relator over the old torsion-free group free-product
+with the remaining free letters. Forester--Rourke's
+one-pair theorem \cite[Main Theorem]{EForesterRourkeDiagrams}
+applies with exactly those hypotheses (an exponent-$\pm1$
+shape is amenable):
+the coefficient group embeds, and the inclusion-induced
+extension-of-scalars map on $\pi_2$ is an isomorphism.
+The prefix is therefore aspherical. Compactness of sphere
+maps makes the full CW union aspherical; compactness
+of nullhomotopies verifies injection of the old group
+without needing injections between every two prefixes.
+The identity relative boundary gives the integral
+homology isomorphism. Killing the coefficient group
+first kills the root and then all variables, proving
+normal generation. A map extending the chosen subgroup
+epimorphism would solve the forbidden system. This
+checks the subgroup version required by A.28.
+
+For A.28, a group of size at most $\mathfrak c$ has at
+most $\mathfrak c^{\aleph_0}=\mathfrak c$ countable
+subgroups. There are at most $\mathfrak c$ countable
+group structures and maps, so a pass has at most
+$\mathfrak c$ blocks. The $\omega_1$ outer passes
+retain that bound. Every map onto a countable group
+is onto on a countable subgroup lying in one earlier
+pass, since $\operatorname{cf}(\omega_1)>\aleph_0$.
+Its listed block contradicts extension of the final
+map. This is the precise diagonalization; it never
+assumes that a subgroup map extends to the whole
+current group. The extra one-variable unimodular
+adjunctions preserve asphericity and homology by the
+same one-pair theorem, and every finite coefficient
+list is eventually processed. Their solvability
+passes to quotients simply by lifting coefficients.
+Normal generation is transitive through the
+attachments and unions.
+
+The Higman image exclusions used in A.28 are valid.
+The least-prime argument in E.4 works if the four
+generator images merely have finite order, so kills
+maps into any torsion group. In a linear image,
+each generator is conjugate to its square, forcing
+its eigenvalues to be roots of unity. In positive
+characteristic it then has finite order. In
+characteristic zero, after taking unipotent powers,
+the identity
+$\operatorname{Ad}(y^{-m})\log(x^L)=2^m\log(x^L)$
+forces the logarithm to vanish: conjugation by a
+unipotent matrix is unipotent. Thus every generator
+again has finite order. A locally linear target
+contains the finitely generated image in a linear
+subgroup, so it too is killed. Normal generation
+transfers these exclusions to the final group.
+Mapping each new loop constantly to $S^2$ and
+filling each attaching loop extends the original
+map literally; the homology isomorphism follows
+from the inclusion comparison.
+
+For A.29, nested commutators combine a finite
+equational cover of $E-\{1\}$ into a zero-exponent
+word $v$ nonidentity at $1$ and identity elsewhere.
+Then $v(x)x=1$ is an unsolvable unimodular equation.
+Its finite-avoidance consequence supplies the
+recursive weighted letters of the proposed metric.
+At each stage there are finitely many constraints,
+because their conjugators lie in finite balls of
+the auxiliary proper length and their word lengths
+are bounded. The stage invariant gives
+$L(f_j)\geq2^{-j}>0$, while the chosen nonidentity
+$a_i$ satisfy $L(a_i)\leq2^{-i}$. Conjugation
+changes costs by at most the displayed finite
+constant $D_g$, which proves continuity of the
+group operations. Thus the claimed nondiscrete
+Hausdorff metrizable topology follows. No
+completeness or conjugation invariance is obtained.
+
+For A.30, the conjugation-invariant metric does
+give the uniform estimate
+$\ell(v[b,u]v^{-1})\leq2\ell(b)$. A word with
+$L$ variable occurrences is $L$-Lipschitz in the
+maximum product metric. Since those conjugated
+commutators form a symmetric normal generating
+set, a finite path between two different word
+values has a first changing step. Choosing $b$
+small excludes the prescribed value throughout
+the one-step image while retaining two distinct
+values. Iteration on the binary tree gives nested
+nonempty images excluding every group element.
+For each finite prefix, eliminating parents
+before children gives an actual homotopy
+equivalence relative to the old space with its
+wedge of frontier circles. This verifies its
+asphericity and coefficient injection independently
+of any simultaneous-equation asphericity conjecture.
+
+A.31 replaces the metric estimate by the exact
+word-norm bound
+\[
+ \rho_b\bigl(R(\mathbf s\mathbf u)R(\mathbf u)^{-1}\bigr)
+ \leq2L,\qquad
+ s_i\in\{v[b,u]v^{-1}\}.
+\]
+Replacing occurrences one at a time and multiplying
+the consecutive differences proves the bound,
+including inverse occurrences. Its hypothesis
+allows $b$ for which the excluded difference
+has greater norm, so the same binary-tree
+construction works. If that hypothesis fails,
+some $d\ne1$ has $\sup_b\rho_b(d)=M<\infty$.
+Expressing any $g$ by $k$ conjugates of $d^{\pm1}$
+gives $N_E(g)=\sup_b\rho_b(g)\leq kM$.
+Moreover, for every fixed $d\ne1$,
+\[
+ \rho_d(g)\leq N_E(g)\leq N_E(d)\rho_d(g).
+\]
+Hence boundedness of any one $\rho_d$ would give
+uniform simplicity. For the surviving quotients
+all these norms are unbounded; pointwise finiteness
+of $N_E$ is nevertheless consistent with this
+calculation. A positive invariant length satisfies
+$\ell(d)\leq N_E(d)\ell(b)$ for every $b\ne1$,
+which proves the claimed discreteness. These
+checks confirm the scope of A.31; they do not
+eliminate its residual class.
+
+\paragraph{Statement E.8 (the ranges established for E2--E4).}
+For $\kappa=0$ every bound is possible. For finite
+$\kappa>0$, E.3 and E.4 establish existence for
+all finite bounds and nonexistence for
+$\mu\geq\mathfrak c$. For infinite $\kappa$,
+E.3 and E.5 establish existence for $\mu<\kappa$
+and nonexistence for $\mu\geq\kappa^{\aleph_0}$.
+In particular if $\kappa^{\aleph_0}=\kappa$,
+the exact answer is $\mu<\kappa$.
+The outstanding intervals in this work are
+\[
+ \aleph_0\leq\mu<\mathfrak c
+ \quad(0<\kappa<\aleph_0),\qquad
+ \kappa\leq\mu<\kappa^{\aleph_0}
+ \quad(\kappa\text{ infinite}).
+\]
+No claim that these intervals are independent of
+ZFC is made. Under CH the first interval contains
+only $\aleph_0$; this arithmetic observation does
+not decide its existence question. The smallest
+unresolved case remains $W=S^2$, $\mu=\aleph_0$.
+
+\paragraph{Statement E.9 (limitation of two-dimensional group tests).}
+For any cardinal bound, groups with two-dimensional
+classifying spaces cannot replace all the group
+tests of INDLOCAL B.7 for arbitrary homotopy types.
+Indeed, for every actual two-dimensional CW
+complex $X$ and every $2$-connected space $Y$,
+obstruction theory (or cellular approximation
+for $Y=S^3$) gives $[X,Y]=\{*\}$.
+In particular $[BG,S^3]$ is a singleton for every
+such group, although $S^3$ is not a $1$-type.
+Thus E2--E4 can address only the $S^2$ or
+$\pi_2$ portion of a bounded-test refinement.
+If the test category is the one-object group
+$G$, its number of arrows is $|G|$. A nontrivial
+bound-$\mu$ resolution usable among tests with
+fewer than $\kappa$ arrows must satisfy
+$\mu<|G|<\kappa$: the first inequality follows
+from the identity homomorphism of $G$. The
+missing existence assertion in E2 cannot be
+inferred from B.7 or from this necessary size
+condition.
+
+\paragraph{Statement E.10 (a discarded proposed construction is impossible).}
+There is no nontrivial simple locally free group.
+More generally, a nontrivial locally free group
+with a finite normal generating set cannot be
+perfect. To prove this, choose nonidentity normal
+generators $x_1,\ldots,x_r$. If the group were
+perfect, write them as finite products of
+commutators, then write the finitely many entries
+of those commutators as products of conjugates
+of the $x_i^{\pm1}$. All the finitely many
+elements and conjugators lie in one finitely
+generated free subgroup $F$. The Magnus
+embedding of $F$ into noncommutative integral
+power series assigns every nonidentity element
+a least positive degree. Let $d$ be the least
+such degree among the $x_i$. Conjugation and
+products preserve degree at least $d$, while
+the commutator of two such series has degree
+at least $2d$. The chosen commutator expressions
+therefore give degree at least $2d$ for every
+$x_i$, contradicting minimality of $d$.
+A nonabelian simple group is perfect and is
+normally generated by any nonidentity element,
+so the first assertion follows.
+
+\paragraph{Statement E.11 (a restriction on cyclic HNN compression).}
+Let $X$ be an actual two-dimensional $K(G,1)$ and
+let $G\twoheadrightarrow\mathbb Z$ have kernel $N$.
+Put $R=\mathbb Q[t,t^{-1}]$, with $t$ acting by a
+generator of the deck group of the cyclic cover
+$X_N\to X$. Then $H_2(N;\mathbb Q)$ is a free
+$R$-module. If its $R$-rank is $\beta$, there is an
+exact sequence
+\[
+ 0\longrightarrow\mathbb Q^{(\beta)}
+ \longrightarrow H_2(G;\mathbb Q)
+ \longrightarrow
+ \ker\bigl(t-1:H_1(N;\mathbb Q)\to H_1(N;\mathbb Q)\bigr)
+ \longrightarrow0.
+\]
+Consequently $\beta\leq\dim_{\mathbb Q}H_2(G;\mathbb Q)$;
+if $N$ is perfect, equality holds. Moreover,
+\[
+ \dim_{\mathbb Q}H_2(N;\mathbb Q)=
+ \begin{cases}
+ 0,&\beta=0,\\
+ \max(\aleph_0,\beta),&\beta>0.
+ \end{cases}
+\]
+In particular, a perfect group with uncountable
+second Betti number cannot be the cyclic normal
+kernel of a two-dimensional group with finite
+second Betti number.
+
+For the proof, cellular chains of $X_N$ are free
+$R$-modules, including when the sets of cells
+are infinite. Since $X_N$ is two-dimensional,
+$H_2(X_N;\mathbb Q)=\ker d_2$ is a submodule
+of the free module $C_2(X_N;\mathbb Q)$.
+The Laurent polynomial ring $R$ is a principal
+ideal domain, so this submodule is free, with
+some basis of cardinality $\beta$. The short
+exact sequence of cellular chain complexes
+\[
+ 0\longrightarrow C_*(X_N;\mathbb Q)
+ \xrightarrow{\ t-1\ }C_*(X_N;\mathbb Q)
+ \longrightarrow C_*(X;\mathbb Q)\longrightarrow0
+\]
+gives the displayed exact sequence in homology,
+because the coinvariants of a free $R$-module
+$R^{(\beta)}$ are $\mathbb Q^{(\beta)}$.
+The underlying rational vector space of $R$ has
+countably infinite dimension, proving the rank
+formula. Finally $X_N$ is a $K(N,1)$, so these
+are the group homology groups claimed.
+
+Applied to $G=S\rtimes_f\mathbb Z$, this rules
+out reducing an uncountable $H_2(S;\mathbb Q)$
+to finite rank merely by choosing an automorphism
+$f$ with small coinvariants while retaining an
+actual two-dimensional model. For a proper
+ascending HNN extension the cyclic kernel is
+instead $\operatorname*{colim}(S\xrightarrow fS
+\xrightarrow f\cdots)$; the same statement applies
+to that kernel. Killing its homology first does
+not produce a two-dimensional model for the
+extension. If $S$ was simple, that direct limit
+is simple, so an acyclic two-dimensional cyclic
+kernel would already supply the difficult
+uncountable acyclic simple group, rather than
+deducing one from a homology calculation.
+
+\paragraph{Statement E.12 (ordinary countable equation compactness fails).}
+Let $E$ be a countably infinite group such that, for every $d\in E$,
+there is a finite integer $n(d)$ for which $d$ is a product of at most
+$n(d)$ conjugates of $a^{\pm1}$ for every $a\ne1$ in $E$.
+Then there is a countable system of equations with coefficients in $E$
+whose every finite subsystem has a solution in $E$, but which has no
+simultaneous solution in $E$.
+In particular the pointwise finite alternative for $N_E$ in
+INDLOCAL A.31 cannot occur in a countably equation-compact group.
+
+\emph{Proof.}
+Fix a nonprincipal ultrafilter $\mathcal U$ on $\mathbb N$ and put
+$P=E^{\mathbb N}/\mathcal U$, identifying $E$ with its diagonal copy.
+For any $b\ne1$ in $P$ and any $d\in E$, the bound $n(d)$ implies
+$d\in\langle\!\langle b\rangle\!\rangle_P$.
+Indeed, choose representatives $b_i$. On a set in $\mathcal U$,
+$b_i\ne1$, and there are expressions for $d$ as products of at most
+$n(d)$ conjugates of $b_i^{\pm1}$.
+There are only finitely many possible lengths and sign patterns;
+one pattern occurs on a set in $\mathcal U$.
+The conjugating elements in that pattern, chosen coordinatewise and
+defined arbitrarily off this set, give the required expression in $P$.
+Thus every nontrivial normal subgroup of $P$ contains the diagonal $E$.
+
+Choose $x\in P\setminus E$, for instance the class of a sequence
+of distinct elements of $E$. Construct countable subgroups
+$P_0\le P_1\le\cdots$ of $P$, starting with $P_0=\langle E,x\rangle$.
+At step $j+1$, for each $b\in P_j\setminus\{1\}$ and $d\in E$,
+adjoin the finitely many conjugators in one expression witnessing
+$d\in\langle\!\langle b\rangle\!\rangle_P$.
+There are only countably many pairs, so
+$P'=\bigcup_jP_j$ is countable and contains $E$ properly.
+Every nontrivial normal subgroup of $P'$ contains $E$.
+
+Use one variable for each element of $P'\setminus E$; for an element
+of $E$ use that element itself as a coefficient.
+Impose all the multiplication equations of $P'$.
+This is a countable system. Every finite subsystem has a solution
+in $P$, namely the displayed elements of $P'$, and consequently in
+$E$: for the finitely many equations, take representatives of these
+elements and choose one coordinate in the intersection of the
+finitely many sets in $\mathcal U$ on which the equations hold.
+If the entire system had a solution in $E$, its values would define
+a homomorphism $r:P'\to E$ restricting to the identity on $E$.
+Its kernel is nontrivial since
+$x r(x)^{-1}\ne1$, whereas every nontrivial normal subgroup of $P'$
+contains $E$. This contradicts $r|_E=\mathrm{id}_E$.
+\hfill$\square$
+
+The exponent-sum rows of this multiplication-table system are not
+asserted independent. The argument supplies neither a nonsingular
+system nor an actual two-dimensional relative homology equivalence.
+Adding fresh variables $y_i=r_i$ to make arbitrary equations
+formally independent removes their restrictions; imposing $y_i=1$
+restores the dependency. Thus E.12 gives a precise compactness
+obstruction, but does not decide E2.
+
+\paragraph{Unresolved step and approaches that do not close it.}
+Replacing the reduced power in E.2 by a countable
+universal target requires solutions to countable
+systems, not merely finite ones; A.27 rules out
+the natural countable existentially closed
+targets. Repeating the metric argument of
+A.30 with the topology from A.29 loses the
+uniform conjugation bound. Pointwise finite
+$N_E$ in A.31 permits uniform bounds for
+reaching any specified finite set, but not
+surjectivity onto the whole target; nested
+tree preimages need not admit a common bound.
+Finally, replacing old two-cells by the
+Bartholdi--Mikhailov blocks can retain
+two-dimensional models at each finite step,
+but those structural maps are not subcomplex
+inclusions: the old cell is removed by a
+collapse with a three-cell. A mapping telescope
+then has dimension three. These are exact
+obstructions to the attempted arguments,
+not proofs of nonexistence in E2.

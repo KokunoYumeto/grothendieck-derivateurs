@@ -1,0 +1,370 @@
+# Part E independent audit and research record
+
+This is a working record, not a claim that E2--E4 have been decided.
+
+## Sources actually opened and read
+
+* OpenAI, *Nonsingular systems of equations over arbitrary groups*, 5 Oct 2026,
+  official PDF downloaded from the `openai/math` repository. All 16 pages read.
+  Web-accessible identical manuscript: https://mathcommunity.github.io/oai-math-revised/papers/Nonsingular-systems-of-equations-over-arbitrary-groups-October-5-2026/nonsingular-systems-over-arbitrary-groups.pdf
+  and https://kourovkanotebookorg.wordpress.com/wp-content/uploads/2026/10/18-87.pdf .
+  Theorem 1 says precisely: for any group P and finitely many words with
+  rationally independent exponent rows, the map from P to the relative
+  presentation group is injective. Remark 5.1 extends coefficient injectivity
+  to arbitrary systems with independent finitely supported rows. No torsion,
+  countability, linearity, or approximation hypothesis is present.
+  The simultaneous fixed-space theorem, incidence-class leading coefficient,
+  phase inequality with its right-sided smoothing, weighted-cycle formula,
+  planar band counts and extraction from a disk were checked separately.
+* Baumslag--Dyer--Heller, *The topology of discrete groups*, JPAA 16 (1980),
+  1--47. https://math.uchicago.edu/~shmuel/lg-readings/Baumslag-Dyer-Heller.pdf .
+  Sections 8--10 and especially Theorem 9.1, Lemmas 10.1--10.2, Theorem 10.4
+  read for the A.10 application.
+* Forester--Rourke, *The adjunction problem over torsion-free groups*,
+  PNAS 102 (2005), 12670--12671. https://pmc.ncbi.nlm.nih.gov/articles/PMC1200269/
+  and https://math.ou.edu/~forester/papers/multi.pdf . Complete short paper read.
+* Forester--Rourke, *Diagrams and the second homotopy group*,
+  arXiv:math/0306088v2, https://arxiv.org/pdf/math/0306088 . Exact theorem
+  and Sections 1--3 read to check the extension-of-scalars map used in A.18.
+* Bartholdi--Mikhailov, *Finite Chains of Two-Complexes and Acyclic Covers*,
+  arXiv:2610.10074v1, https://arxiv.org/pdf/2610.10074v1 . Section 6 read.
+  Lemma 6.2 is initially stated for a two-complex X; the proof extends to an
+  arbitrary aspherical X exactly as INDLOCAL A.14 claims.
+* Klyachko--Mikheenko--Olshanskii, *Solvability of unimodular equations in
+  groups and Lie algebras*, arXiv:2608.28045v2. Read group-theoretic portions.
+  This does not supply the missing countable-quotient theorem. In particular,
+  unimodular closedness by itself does not force nilpotency: its introduction
+  gives finitely generated non-nilpotent examples.
+
+Downloaded source PDFs and text extractions are research intermediates; the
+final package may omit them with a statement of their locations and reason.
+
+## Audit status
+
+| INDLOCAL statement | Independent result |
+|---|---|
+| A.19 | Confirmed, using the exact external theorem above. Small homology core, relative boundary isomorphism, countable closed blocks, finite-equation closure, reduced power and transfinite compatible maps all checked. |
+| A.20 | Confirmed as a consequence of A.19 and A.13. No improvement to the interval below the continuum has been obtained. |
+| A.10 | Confirmed for the general stated form using BDH Sections 8--10 and its Higman normal-generation calculation. An additional elementary construction is given below for every simply connected two-dimensional target. |
+| A.13 | Confirmed. Cyclic normal forms of w and wh give injective HNN attachments; the h=1 relators give the claimed independent integral H2 classes; the map to the wedge is an actual cellular map. |
+| A.16 | Confirmed. The surface-block proof works for arbitrary aspherical source; the module splitting and free stabilization are valid. Three-dimensional cylinders are retained, so this does not settle dimension two. |
+| A.27 | Confirmed. The three diagonal choices, the identity exponent matrices, finite-prefix eliminations, and the subgroup-lift variant are checked. |
+| A.28 | Confirmed. The number of subgroup-map triples is at most c, omega_1 passes detect each countable image, normal generation is preserved, and unimodular solvability passes to quotients. The torsion and locally linear exclusions follow from the explicit Higman calculation. |
+| A.29 | Confirmed. The finite-cover obstruction and the weighted-word metric construction are correct. The resulting topology is not asserted complete or invariant. |
+| A.30 | Confirmed. The binary-tree diagonal relies essentially on an invariant metric; the collapse of every finite prefix fixes the old classifying space. |
+| A.31 | Confirmed. Pointwise finite unbounded N_E is exactly the remaining alternative to its diagonal hypothesis, after the other exclusions. No contradiction to that alternative was established. |
+
+## Additional explicit finite-bound construction
+
+Let H be the Higman group with its finite acyclic aspherical two-complex.
+Take G=H *_<a> H using an infinite cyclic subgroup generated by a. Its
+graph-of-spaces model is aspherical of dimension two, by normal form and the
+tree of universal covers. Mayer--Vietoris gives H1(G)=0 and H2(G)=Z.
+There are no homomorphisms to a finite group except the trivial one, because
+both vertex groups have this property and generate G. A cellular map to S2
+inducing the H2 isomorphism is constructed by splitting the surjective
+boundary C2 -> C1 and collapsing the one-skeleton.
+
+A star of κ such cyclic amalgamations, with acyclic Higman vertex groups,
+has H1=0 and H2=Z^(κ), a two-dimensional classifying model, and no finite
+images. This proves all finite-bound assertions for arbitrary simply connected
+two-dimensional W without using the entire Kan--Thurston construction.
+`code/E_higman_homology.py` checks the displayed integral cellular matrices
+for the single Higman block and the first eight finite stars.
+
+## Exact surviving intervals (not asserted decided)
+
+Write κ=rank H2(W), ν=max(aleph0,κ).
+
+* κ=0: W is contractible, and the trivial group resolves it for every μ.
+* 0<κ<aleph0: existence for every finite μ; nonexistence for μ>=c.
+  The interval aleph0<=μ<c remains undecided here.
+* κ infinite: existence for μ<κ by A.13, nonexistence for μ>=κ^aleph0
+  by A.19. The interval κ<=μ<κ^aleph0 remains undecided here.
+* If κ infinite and κ^aleph0=κ, the answer is exactly μ<κ.
+
+Under CH, E3 has only μ=aleph0 in its stated interval; under not-CH
+there are additional cardinals. This is only arithmetic of the interval,
+not an independence theorem or a proof of either existence alternative.
+
+## E5 scope obstruction
+
+Two-dimensional group tests cannot replace the entire group-test argument
+of B.7 for arbitrary targets, at any cardinal bound: for every G with an
+actual two-dimensional BG, cellular approximation gives [BG,S3]={*}.
+Thus these tests fail to detect the nonzero π3 of S3. E2--E4 concern only
+the S2/π2 portion of a possible refinement. A resolution of S2 with
+nonzero H2 is itself a nontrivial group, so the identity map already forces
+|G|>μ; a test bound <κ additionally forces |G|<κ.
+
+## Approaches tried on E2--E4
+
+1. Replace the reduced power in A.19 by a countable universal target.
+   Finite nonsingular systems admit such a target, but countable systems
+   do not follow. A.27 explicitly rules out the natural existentially closed
+   countable targets. This is the exact missing step.
+2. Strengthen A.31 using pointwise finite N_E. A fixed finite word can reach
+   any specified finite set uniformly in a nontrivial coefficient, but this
+   does not give surjectivity onto E. In the iterated tree construction the
+   needed preimages depend on the candidate root value; their word lengths
+   need not be bounded. The uniformly simple proof therefore does not extend.
+3. Use A.29's topology to repeat A.30. Its metric has conjugation constants
+   D_g, not an invariant norm. The set of all conjugates of a small element
+   need not be small, so the crucial uniform bound fails. No completeness
+   of the topology has been proved.
+4. Embed into a simple locally free group and double along Z. Impossible:
+   A.22's independently checked Magnus argument says a nontrivial locally
+   free perfect group cannot be finitely normally generated; every nonabelian
+   simple group is normally generated by one nonidentity element.
+5. Seek a non-simple acyclic locally free group with no countable images.
+   No such example with a proved two-dimensional model was located. General
+   locally free groups do not have a supplied dimension-two model merely
+   from local freeness. Dicks--Kropholler--Leary--Thomas explicitly distinguish
+   this issue: https://mat.uab.cat/~dicks/DKLT.html .
+6. Replace two-cells using Bartholdi--Mikhailov surface blocks, then take a
+   limit. Finite replacements can have two-dimensional models, but their
+   structural maps are not subcomplex inclusions: the old two-cell is removed
+   in a collapse with a new three-cell. The mapping telescope therefore has
+   dimension three. Dropping old relators at an infinite limit is invalid
+   because relations have finite proofs. This route has not overcome E2.
+
+The smallest unresolved instance is exactly E2: a nontrivial perfect G with
+an actual two-dimensional K(G,1), H2(G;Z)=Z, and no nontrivial countable
+quotient. Neither direction has been proved in this working record.
+
+
+## Further cyclic-extension obstruction
+
+Statement E.11 gives a new restriction on the proposed ascending-HNN route.
+For any actual two-dimensional K(G,1) and surjection G -> Z with kernel N,
+H2(N;Q) is a free module over R=Q[t,t^-1], because the cellular chain
+complex of the cyclic cover has no C3 and H2 is a submodule of its free
+R-module C2; R is a PID. If beta is this R-rank, the cyclic-cover chain
+sequence gives
+
+    0 -> Q^(beta) -> H2(G;Q) -> ker(t-1 on H1(N;Q)) -> 0.
+
+Thus beta <= b2(G), with equality when N is perfect, and a nonzero H2(N;Q)
+has rational dimension max(aleph0,beta). An uncountable-rank perfect base
+therefore cannot be compressed to finite H2 by a semidirect product with Z
+that still has geometric dimension two. Proper ascending HNN extensions
+have a direct-limit kernel; this argument applies after taking that limit.
+A homology-killing direct limit with a proved two-dimensional model would
+already be the hard acyclic large group, so ordinary Wang-sequence
+calculations do not supply the missing geometric conclusion.
+
+The proof does not assume the kernel finitely generated or finitely
+presented. It uses only cellular chains of the actual cyclic cover.
+
+Additional primary literature currently inspected: Poór--Rinot,
+*A Shelah group in ZFC*, Forum Math. Pi 13 (2025), e13,
+https://doi.org/10.1017/fmp.2025.5. The torsion-free groups have no smaller
+nontrivial images, but the paper's two-dimensional recursion is an ordinal
+grid, not a stated two-dimensional CW model; no small-H2 conclusion has
+been justified. Source PDF/text saved as E_PoorRinot_source.* for audit.
+
+## Countable equational-compactness obstruction
+
+Statement E.12 proves the following additional result. If E is countably
+infinite and N_E(d) is finite for each fixed d, then E is not countably
+equationally compact. In a nonprincipal ultrapower P of E, every nonidentity
+element normally generates the diagonal copy of E: for each fixed d the
+length bound N_E(d), and a finite-choice argument for the sign pattern,
+give witnesses coordinatewise. Choose x outside diagonal E and close the
+countable subgroup generated by E and x under those normal-generation
+witnesses. This gives countable P' properly containing E, with every
+nontrivial normal subgroup of P' containing E. Every finite part of the
+relative multiplication-table equations of P' is solvable in E by taking
+one ultrapower coordinate. A simultaneous solution would be a retraction
+P' -> E; its nontrivial kernel contradicts the essential-normal-subgroup
+property. The proof is fully written in the TeX section and does not use
+a classification of equationally compact groups.
+
+The remaining bridge is essential: this multiplication-table system is
+not proved nonsingular. Replacing r_i=1 by y_i=r_i introduces independent
+rows but removes the restrictions; imposing y_i=1 restores dependencies.
+The compactness result therefore does not prove the needed two-dimensional
+acyclic relative presentation and does not settle E2.
+
+The literature search must distinguish ordinary equational compactness
+from Ershov's servant-subgroup/finite-quotient notion, and group equations
+from equations in G-sets. No compact-topological-group retract theorem is
+being used. A universal-algebra survey reports counterexamples to the
+general compact-retract claim, but its cited original was not located and
+is not an input to any proof here.
+
+## Checkpoint files
+
+`notes/E_references.bib` records exact primary sources and the limits of
+their use. `notes/E_results.csv` follows the root result-ledger schema.
+E1 is fully audited. E2--E4 retain the explicitly displayed unresolved
+intervals; the extra E.11 and E.12 results rule out specific proposed
+shortcuts rather than claiming those intervals solved.
+
+## A separate geometric obstruction to compactness conversion
+
+Statement E.13 records an explicit finite counterexample to the inference
+from an invertible exponent matrix to asphericity. The binary icosahedral
+presentation <a,b | a^5=b^3, b^3=(ba)^2> has matrix [[5,-3],[-2,1]],
+determinant -1, hence an acyclic presentation complex, but the group has
+order 120. It cannot have any finite-dimensional classifying space.
+The primary identification is Mikhailov--Orr, arXiv:1306.6065v1,
+Example 3.2. Agent targets_ind independently suggested the example.
+Thus compactness conversion needs both the integral boundary condition
+and an actual asphericity proof such as the free-frontier elimination
+used in A.27; a general finite system with identity exponent matrix
+is not enough.
+
+The same Mikhailov--Orr source, Definitions 2.2 and 2.4 and Theorem 2.6,
+clarifies the homology-local route. HZ-locality inverts all H1-isomorphism,
+H2-surjection maps and requires unique extensions. Since P -> 1 is such
+a map for every perfect P, HZ-local groups receive no nontrivial perfect
+images. Levine's unique-solution closure likewise excludes finitely
+normally generated relatively perfect subgroups. These are not the
+existence-only closures in A.19/A.28, which can embed arbitrary allowed
+coefficient groups. The missing uniqueness cannot be supplied by citing
+the localization theorem.
+
+Mikheenko, arXiv:2410.20729v3 (1 July 2025), proves solvability of all
+infinite nonsingular systems in divisible nilpotent groups and of all
+infinite unimodular systems in nilpotent groups of bounded period.
+Its Section 4 questions concern abelian and nilpotent groups and do not
+give a classification for our residual simple groups. Its infinite
+unimodularity means independence modulo every prime of every finite
+row family, which is weaker than the full free-boundary isomorphism
+required by a two-dimensional relative integral homology equivalence.
+
+## Sequential one-pair simple-envelope obstruction
+
+Klyachko, *The Kervaire--Laudenbach conjecture and presentations of simple
+groups*, Algebra and Logic 44(2005),219--242, arXiv:math/0409146v1,
+Main Theorem on p.1, proves that <H,t | w> with torsion-free H is simple
+if and only if H is simple and w is conjugate to t^(+/-1)h. In particular
+the inclusion H -> <H,t | w> is then an isomorphism.
+
+Combined with the independently checked A.23 normal-subgroup preservation,
+this proves Statement E.14: a continuous well-ordered sequence of actual
+two-dimensional one-pair unimodular extensions cannot produce a new simple
+group. If the final group is simple, every nontrivial intermediate homology
+core is simple, so Klyachko's theorem makes every successor trivial as a
+group extension; the trivial initial-group case also stays trivial.
+The argument does not treat simultaneous countable closed blocks. The
+free-frontier finite prefixes used to establish asphericity of those blocks
+are not themselves the relative homology-equivalence stages required by
+this argument. No contrary conclusion is drawn for A.27/A.28.
+
+## Small-retract theorem for sparse Higman constructions
+
+Statement E.15 is an additional elementary obstruction with a full proof.
+For a presentation with one distinguished relator r_s per generator x_s,
+suppose deleting x_s from r_s leaves the identity word on all remaining
+generators. If there are at most nu additional relators, every at-most-nu
+subset lies in an at-most-nu retract (nu infinite). Include all additional
+relator supports and the desired elements, close under the finite supports
+of r_s for retained s, and kill every other generator. The deletion
+property makes the latter assignment respect every omitted relator.
+The two explicit presentation homomorphisms compose to the identity.
+
+For an actual aspherical presentation made only of Higman-type relations
+x_u^(-1) x_v x_u = x_v^2, each two-cell boundary is -x_v. Choose one
+relator for each target v. The omitted relators correspond exactly to a
+basis of H2 (subtract the distinguished relator with the same target),
+while generators never appearing as targets form a basis of H1. Therefore
+the quotient bound in this subclass improves from nu^aleph0 to nu, where
+nu=max(aleph0,rank H1,rank H2). In particular every nontrivial such group
+with countably generated H1 and H2 has a nontrivial countable quotient,
+regardless of the cardinality of its presentation.
+
+This also pinpoints the failure of graph-coloring constructions based
+only on an uncountable collection of Higman conjugation edges: small H2
+allows only countably many relations beyond one per target, and the
+remaining dependency graph admits the explicit small retractions.
+General A.27/A.31 equations have coefficient shifts and do not satisfy
+the deletion hypothesis.
+
+## Finite homology rank in a perfect normal subgroup (E.16)
+
+The complete proof supplied by targets_ind in
+`sections/CD_E_normal_subgroup.tex` has been independently audited and
+incorporated in E_agent.tex. If G has an actual two-dimensional classifying
+space and N is perfect normal with H2(N;Z)=Z^r, 0<r<infinity, then Q=G/N
+acts faithfully on this homology, is finite, and |Q| divides r+1. Thus
+rank one forces index at most two; a perfect G forces N=G. The r=0
+boundary instead gives cd_Z Q<=2, with no geometric-dimension claim.
+
+The proof first restricts the cover chain complex to a hypothetical
+infinite cyclic subgroup of Q: a nonzero finite-dimensional rational
+second homology cannot be a free Q[t,t^-1]-submodule of C2. Thus Q is
+torsion. A prime-order element acting trivially on Z^r contradicts
+H^4(C_p,Z^r)=H^1(C_p,Z)=0 after three dimension shifts through free
+cover chains. Hence Q embeds in GL_r(Z), and the torsion-free congruence
+kernel modulo 3 makes Q finite. Over F_p[P] for a Sylow p-subgroup,
+Schanuel compares the finite H2 to the third syzygy of F_p. The supplied
+finite-stabilization argument handles arbitrary infinite ranks of the
+cover chains without subtracting infinite dimensions, giving
+r=-1 mod |P|. All steps and signs in the splitting argument were checked.
+
+Corollary E.16a records a separate, stronger geometric rank bound when
+Y is an actual aspherical subcomplex and H=pi1(Y) is perfect. Its normal
+closure N has a regular cover in which Y lifts to disjoint copies indexed
+by Q=G/N. With no three-cells the two-cycles of these copies inject, so
+H2(N) contains Z[Q]^(rank H2(Y)). This explicitly identifies the loss
+from adjoining unrestricted conjugators and then taking normal closure.
+
+These facts do not solve E2: a countable homology core in a simple group
+need not be normal, and its normal closure can have larger H2. A.23 makes
+such a homology core simple when the ambient group is simple, but does
+not make it normal. No quotient is assumed to inherit geometric dimension.
+
+## Fixed-ball diagonal from bounded conjugator transport (E.17)
+
+A new positive advance in the unresolved target analysis: the full A.27
+killing block extends from uniformly simple targets to any countable
+simple E with pointwise finite N that has a bounded conjugator property
+on one ball. Choose d!=1 and D=N(d). The sufficient hypothesis is a
+single L such that every conjugate of every c with 0<N(c)<=2D can be
+reached by a conjugator of N at most L. This is implied by GMZ's
+Assumption 4.1 for (E,N), but the proof does not use its ultraproduct
+theorems. Source saved as E_GismatullinMajcherZiegler2024_source.pdf/.txt.
+
+Put C=L+D and m=2C. For any a!=1, some conjugate u of d has
+c=[a,u]!=1; its N is at most 2D. Every g in B_(2C) is at most 2C
+conjugates of c or c^-1 by the definition of N(g). Compress these
+conjugators to norm L and absorb negative signs using
+c^-1=u[a,u^-1]u^-1. Therefore W_a with m factors maps variables
+from B_C onto a set containing B_(2C). In particular W_a(B_C) b
+contains B_C for every b in B_C, uniformly in all a!=1.
+
+The A.27 tree now works inside B_C. Pick all shift coefficients in
+B_C. At each finite stage and candidate root e_n, backward lifting
+through the earlier maps reaches either of two fixed distinct root
+values in B_C; choose one unequal to e_n. This is enough to select
+the next coefficients in B_C. The depth-n collapse when x_root=e_n
+then gives the contradiction. The relative boundary is exactly the
+identity; finite prefixes reduce to one unimodular adjunction over
+a free frontier, so Forester--Rourke gives actual asphericity. Killing
+the old coefficient group kills every new variable, retaining normal
+generation. Full proof is in E.17 and the reusable standalone
+sections/E_bounded_transport.tex.
+
+This is an additional excluded family, not a decision of E2. Every
+remaining target must fail bounded transport uniformly on each ball
+B_(2N(d)). The bad c can vary with the requested transport bound;
+it would be incorrect to infer one fixed class with unbounded cost.
+The failure branch is still being investigated.
+
+### Scope correction in the GMZ source
+
+The source is cited only for its explicit Assumption 4.1. Root's
+independent read found that the printed Theorem 4.3(2) quantifies all
+||g||>r, while its proof applies the bounded product ball to (x,g)
+and needs an upper bound on ||g||. The missing bound is substantive:
+take G_k=A5 x Z with ||(a,z)||=1_(a!=1)+k|z|. Conjugacy transport
+uses only A5, so Assumption 4.1 holds with the constant function 2.
+The finitary metric ultraproduct is A5 and is simple. Yet (1,1) is
+central with norm k; its conjugate powers, even multiplied by balls
+of radius less than 1, cannot cover any nonidentity (a,0) in a fixed
+ball of radius greater than 1. This contradicts the unbounded-g
+version of the printed condition. This source-scope correction is
+not a claim about a corrected theorem, and no use of that theorem
+appears in E.17.

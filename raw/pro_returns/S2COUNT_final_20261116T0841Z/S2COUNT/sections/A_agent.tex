@@ -1,0 +1,462 @@
+\section{The homotopy types of the two Sweeney examples}\label{sec:monoids}
+
+This section supplies maps realizing the homotopy equivalences.  In
+particular, the identification does not infer a homotopy type from its
+homology groups.  The argument treats Examples 5.2 and 5.3 of
+\cite{Sweeney2025} at once.
+
+\begin{definition}\label{def:Mr}
+For an integer $r\geq 0$, let
+\[
+ M_r=\{1,x_{00},x_{01},x_{10},x_{11},y_1,\ldots,y_r\}.
+\]
+The identity is $1$.  Give $x_{ij}$ row $i$ and column $j$, and give each
+$y_s$ row and column zero.  For two nonidentity elements $v,w$, set
+\[
+             vw=x_{\operatorname{row}(v),\operatorname{col}(w)}.
+\]
+Write $e=x_{00}$.  Thus the prompt's six-element monoid is $M_1$, with
+$y_1=y$, and the monoid obtained by adjoining an identity to Sweeney's
+Example 5.3 is $M_2$.
+\end{definition}
+
+\begin{theorem}[Explicit wedge decomposition]\label{thm:Mr-wedge}
+Let $\mathcal W_r$ be the set of finite words, including the empty word,
+on $\{1,\ldots,r\}$.  There are explicit based maps
+$s_w:S^{|w|+2}\longrightarrow BM_r$ whose wedge is a homotopy equivalence
+\[
+ \Phi_r:\bigvee_{w\in\mathcal W_r}S^{|w|+2}\ \xrightarrow{\simeq}\ BM_r.
+ \tag{A*}\label{eq:Mr-wedge}
+\]
+Consequently,
+\[
+ BM_1\simeq\bigvee_{n\geq2}S^n,
+ \qquad
+ BM_2\simeq\bigvee_{n\geq2}\bigvee_{1\leq j\leq2^{n-2}}S^n.
+\]
+The maps $s_w$ induce a primitive integral basis in every positive
+homology degree in which homology is nonzero.
+\end{theorem}
+
+Here and below, the empty alphabet has just its empty word.  The proof
+will use a short projective resolution to count the integral homology,
+explicit cocycles to certify a basis, and explicit spheres realizing
+that basis.
+
+\subsection{The multiplication and an integral projective resolution}
+
+The multiplication is associative: for three nonidentity elements both
+parenthesizations have the row of the first and the column of the last.
+Cases involving $1$ follow from its identity property.  Sending all
+$y_s$ to $e$ and fixing the other elements defines a monoid retraction
+$M_r\to M_0$.  The program
+\texttt{code/A\_monoid\_verify.py} checks all multiplication triples for
+$r=0,1,2$, as well as this retraction and all algebra identities used
+below.
+
+\begin{lemma}\label{lem:Mr-ring}
+Put $R=\Z[M_r]$.  The following is an integral basis of $R$:
+\[
+ \begin{aligned}
+ &e,\quad u=1-e,\quad a=x_{10}-e,\quad b=x_{01}-e,\\
+ &c=x_{11}-x_{10}-x_{01}+e,\quad t_s=y_s-e\quad(1\leq s\leq r).
+ \end{aligned}
+\]
+The elements $e,u$ are orthogonal idempotents with sum $1$.  The additive
+subgroup $J$ spanned by $a,b,c,t_1,\ldots,t_r$ is an ideal.  Its only
+nonzero product of basis elements is $ab=c$.  Its idempotent supports are
+\[
+ a=uae,\qquad b=ebu,\qquad c=ucu,\qquad t_s=ut_su.
+\]
+In particular $J^3=0$ and $R/J\cong\Z\times\Z$.
+\end{lemma}
+\begin{proof}
+The inverse change of basis is integral:
+$1=e+u$, $x_{10}=e+a$, $x_{01}=e+b$, $x_{11}=e+a+b+c$,
+and $y_s=e+t_s$.  Expanding the products with the multiplication law in
+Definition~\ref{def:Mr} gives the stated supports, $ab=c$, and zero for
+all other products in $J$.  For example,
+$(x_{01}-e)(x_{10}-e)=e-e-e+e=0$ and
+$(y_s-e)(y_t-e)=e-e-e+e=0$.  These calculations also prove that $J$ is an
+ideal and establish the quotient description.
+\end{proof}
+
+\begin{proposition}\label{prop:Mr-homology}
+The augmented left $R$-module $T=\Z$ admits a projective resolution with
+\[
+ P_0=Re,\qquad P_1=Ru,\qquad
+ P_n=(Re)^{r^{n-2}}\oplus(Ru)^{r^{n-1}}\quad(n\geq2).
+\]
+For $r=0$ this is interpreted as $P_2=Re$ and $P_n=0$ for $n>2$.
+It follows integrally, in all degrees, that
+\[
+ H_0(BM_r;\Z)=\Z,\qquad H_1(BM_r;\Z)=0,\qquad
+ H_n(BM_r;\Z)=\Z^{r^{n-2}}\quad(n\geq2).
+\]
+\end{proposition}
+\begin{proof}
+The augmentation sends $e$ to $1$ and $u,J$ to $0$.
+Let $U$ denote the rank-one left module on which $u$ acts as $1$ and
+$e,J$ act as zero.  Lemma~\ref{lem:Mr-ring} gives
+\[
+ Re=\Z e\oplus\Z a,\qquad
+ Ru=\Z u\oplus\Z b\oplus\Z c\oplus\bigoplus_s\Z t_s.
+\]
+There are exact sequences
+\[
+ 0\longrightarrow U\xrightarrow{\,1\mapsto a\,}Re
+      \xrightarrow{\epsilon}T\longrightarrow0,
+ \qquad
+ 0\longrightarrow Re\oplus U^{r}\longrightarrow Ru
+      \xrightarrow{\,u\mapsto a\,}\Z a\longrightarrow0.
+\]
+For the second sequence, its kernel is
+$\Z b\oplus\Z c\oplus\bigoplus_s\Z t_s$.
+The map $Re\to Rb$ sending $e$ to $b$ sends $a$ to $c$, hence is an
+isomorphism; each $\Z t_s$ is isomorphic to $U$.  This proves exactness
+over $\Z$, including the asserted direct-sum decompositions of kernels.
+Both $Re$ and $Ru$ are projective, being summands of $R$ defined by
+idempotents.  At each step resolve every remaining $U$ summand by the
+second exact sequence, and use the identity resolution on each $Re$
+summand.  This gives the displayed $P_n$ and an exact projective
+resolution in all degrees.  More concretely, from degree $2$ onward the
+new $Re$ and $Ru$ summands map only into the preceding $Ru$ summands,
+using $e\mapsto b$ and $u\mapsto t_s$.
+
+Tensor on the left with the trivial right module $T$.  Then
+$T\otimes_R Re=\Z$, while $T\otimes_R Ru=0$.  Every resulting
+differential is zero: $d_1$ has zero source after tensoring, $d_2$ has
+zero target, and all higher images lie in $Ru$ summands.  The claimed
+homology follows from
+$H_n(BM_r;\Z)=\operatorname{Tor}^{R}_n(T,T)$, equivalently the ordinary
+bar resolution of the monoid.
+\end{proof}
+
+\begin{proposition}[Audit of the supplied periodic resolution]
+\label{prop:Mr-Sweeney-resolution}
+For $r=1$, Sweeney's displayed repeating resolution in Example 5.2 is
+exact over $\Z$, including its periodic kernel identifications.
+\end{proposition}
+\begin{proof}
+Use $y=y_1$.  Both left ideals $Rx_{00}$ and $Rx_{10}$ have the same
+underlying submodule $Re$, with basis $e,x_{10}$.  The displayed maps,
+before inserting zero in a first summand, are
+\[
+ \begin{aligned}
+ D_1:R&\longrightarrow Re,& D_1(\rho)&=\rho(e-x_{10}),\\
+ D_2:Re\oplus R&\longrightarrow R,&
+ D_2(\xi,\rho)&=\xi x_{01}+\rho y,\\
+ D_3:Re\oplus R&\longrightarrow R,&
+ D_3(\xi,\rho)&=\xi(x_{10}-x_{11})+\rho(e-y).
+ \end{aligned}
+\]
+Let $S\subset R$ be the free additive subgroup spanned by the five
+nonidentity elements.  Direct multiplication gives
+\[
+ \ker D_1=S=\operatorname{im}D_2,
+ \qquad \operatorname{im}D_3=\Z b\oplus\Z c\oplus\Z t_1.
+\]
+Indeed $D_1(1)=e-x_{10}$ and $D_1$ vanishes on $S$;
+$\xi x_{01}$ spans $x_{01},x_{11}$ while $\rho y$ spans $y,e,x_{10}$.
+Those five elements are distinct basis elements.  In $D_3$, its first
+summand maps the basis $e,x_{10}$ to $-b,-b-c$, and its second summand
+maps $1$ to $-t_1$ and every element of $S$ to zero.
+The indicated independent integral bases show
+\[
+ \ker D_2=0\oplus\operatorname{im}D_3,
+ \qquad \ker D_3=0\oplus\operatorname{im}D_2.
+\]
+For the first equality, the first summand of $D_2$ is forced to be
+zero by its column-one coefficients; the kernel of right
+multiplication by $y$ is precisely the displayed basis $b,c,t_1$.
+For the second equality the independent $b,c,t_1$ coefficients force
+the first summand and the coefficient of $1$ in the second to vanish.
+Finally, the kernel of the augmentation $Re\to\Z$ is generated by
+$x_{10}-e$, the image of $D_1$ up to sign.  This checks every exactness
+assertion in the periodic resolution, with saturated integral images.
+\end{proof}
+
+\subsection{Explicit primitive cocycles and spherical cycles}
+
+Use the normalized bar chains of $M_r$ with trivial coefficients.
+Our bar convention multiplies consecutive entries in their written
+order.  If the nerve convention takes the composite of consecutive
+arrows $m,m'$ to be $m'm$, this bar simplicial set is $N(M_r^{\op})$.
+Reversing the vertex order and barycentric coordinates gives the
+canonical homeomorphism $B(M_r^{\op})\to BM_r$; every bar-space map
+below is composed with this homeomorphism.  Thus the convention does
+not change either the target homotopy type or the stated maps.
+An
+$n$-simplex is written $[m_1|\cdots|m_n]$, where all $m_i\ne1$, and
+\[
+ \begin{split}
+ \partial[m_1|\cdots|m_n]={}&[m_2|\cdots|m_n]\\
+ &+\sum_{i=1}^{n-1}(-1)^i
+ [m_1|\cdots|m_im_{i+1}|\cdots|m_n]\\
+ &+(-1)^n[m_1|\cdots|m_{n-1}].
+ \end{split}
+\]
+Multilinear expressions in brackets denote the corresponding integral
+linear combinations, not additional monoid elements.  Define functions
+on the nonidentity elements by
+\[
+ \alpha(m)=\operatorname{col}(m),\quad
+ \beta(m)=\operatorname{row}(m),\quad
+ Y_s(m)=\begin{cases}1&m=y_s,\\0&\text{otherwise}.
+ \end{cases}
+\]
+For a word $w=(s_1,\ldots,s_k)$ and $n=k+2$, put
+\[
+ \begin{split}
+ f_w([m_1|\cdots|m_n])
+   &=\alpha(m_1)\,Y_{s_1}(m_2)\cdots
+                 Y_{s_k}(m_{n-1})\,\beta(m_n),\\
+ z_w&=[(x_{01}-e)|(y_{s_1}-e)|\cdots|
+                (y_{s_k}-e)|(x_{10}-e)].
+ \end{split}
+\]
+
+\begin{lemma}\label{lem:Mr-duality}
+Every $f_w$ is an integral cocycle, every $z_w$ is an integral cycle,
+and, for words of the same length,
+$f_w(z_v)=\delta_{wv}$.  The classes of the $z_w$ form an integral
+homology basis; the classes of the $f_w$ form its dual cohomology basis.
+\end{lemma}
+\begin{proof}
+For nonidentity $m,m'$, the product is a band element, and
+\[
+ \alpha(mm')=\alpha(m'),\quad
+ \beta(mm')=\beta(m),\quad Y_s(mm')=0.
+\]
+In $\delta f_w$ the first two terms cancel by the first identity, and
+the last two cancel by the second identity.  All other terms vanish by
+the third identity.  This also covers the empty word, where there are
+no remaining terms.
+
+The two alternatives in each entry of $z_w$ have coefficient sum zero,
+so both endpoint terms in its boundary vanish.  Every product of two
+chosen adjacent actual elements is $e$, independently of both choices.
+Hence every interior term in its boundary also vanishes.  Evaluation of
+$f_w$ selects $x_{01}$ in the first entry, $x_{10}$ in the last, and the
+specified $y_s$ at each interior entry; it gives the asserted Kronecker
+pairing.
+
+There are $r^{n-2}$ such cycles in degree $n$.  The pairing gives a split
+injection from the free group on these cycles into $H_n$.  By
+Proposition~\ref{prop:Mr-homology}, $H_n$ is free of exactly that rank,
+so the split complement is zero.  The universal coefficient theorem,
+with the preceding homology group free, gives the cohomology assertion.
+\end{proof}
+
+\begin{lemma}[The sphere map]\label{lem:Mr-spheres}
+For each word $w$ there is a based map
+$s_w:S^{|w|+2}\to BM_r$ taking an oriented fundamental class to $[z_w]$.
+\end{lemma}
+\begin{proof}
+Put $n=|w|+2$.  Give $S^1$ a cell triangulation with two vertices, of
+colors $0,1$, and two edges, both ordered from color $0$ to color $1$.
+Form its join with $n-1$ copies of $S^0$, whose vertex colors are
+$2,\ldots,n$.  Its realization is
+$S^1*(S^0)^{*(n-1)}\cong S^n$.  There are $2^n$ top-dimensional
+simplices, indexed by a choice of edge and one vertex in every $S^0$.
+Index these choices by $\varepsilon=(\varepsilon_1,\ldots,
+\varepsilon_n)\in\{0,1\}^n$.
+
+Send the simplex indexed by $\varepsilon$ to the bar simplex whose
+successive entries are selected by these bits from
+\[
+ (x_{01},e),\ (y_{s_1},e),\ldots,
+                (y_{s_{n-2}},e),\ (x_{10},e).
+\]
+All vertices map to the unique vertex of the nerve.  The faces of
+colors $0$ and $1$ pair the simplices obtained by flipping the first
+bit.  Face $0$ deletes the first entry; face $1$ multiplies its first
+two entries, always giving $e$.  Thus their images agree under the
+pairing.  For $2\leq i<n$, the face of color $i$ pairs simplices by
+flipping bit $i$; its bar image multiplies entries $i,i+1$, again
+always giving $e$.  The last face deletes the last entry and respects
+the last-bit pairing.  These checks prove that the simplex maps glue
+to a continuous map on the whole sphere.  They also check all lower
+face identifications, since those are composites of these face maps.
+
+Orient the initial circle by the difference of its two edges and each
+$S^0$ by the difference of its two vertices.  The resulting join
+fundamental chain has coefficients $(-1)^{\sum_i\varepsilon_i}$.
+Its image is precisely $z_w$.  Choosing any vertex as the base point
+makes the map based.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Mr-wedge}]
+Wedge the maps of Lemma~\ref{lem:Mr-spheres}, using the CW weak topology.
+This gives the map $\Phi_r$ in \eqref{eq:Mr-wedge}.
+Lemma~\ref{lem:Mr-duality} says that it induces an integral homology
+isomorphism.
+
+The fundamental group of $BM_r$ has generators the nonidentity
+elements and relations given by their products, as seen directly from
+the $2$-skeleton of its nerve.  Every $x_{ij}$ is idempotent and hence
+maps to $1$ in that group.  The relation $y_se=e$ then sends every
+$y_s$ to $1$ as well.  Thus $BM_r$ is simply connected.  The source of
+$\Phi_r$ is a wedge of spheres of dimension at least two and is also
+simply connected.  The homological Whitehead theorem now proves that
+$\Phi_r$ is a homotopy equivalence.
+\end{proof}
+
+This explicitly settles the first possibly problematic case in A2:
+for $r\geq1$, choose any word of length one and a based homotopy inverse
+$\Psi_r$ of $\Phi_r$.  The composite
+\[
+ BM_r\xrightarrow{\Psi_r}\bigvee_{w}S^{|w|+2}
+         \xrightarrow{\text{projection}}S^3
+\]
+has degree $1$ on the corresponding $H_3$ generator.  The same
+construction gives a retraction onto every displayed sphere.
+
+\subsection{Products, operations, and the auxiliary assertions of R3}
+
+\begin{proposition}\label{prop:Mr-cohomology}
+For $A=\Z$ or $\F_p$, $H^0(BM_r;A)=A$ and the positive-degree
+cohomology has basis $f_w$ in degree $|w|+2$.  Every product of two
+positive-degree classes is zero.  Every Steenrod square of positive
+degree is zero; at odd primes every positive-degree reduced power and
+the Bockstein are zero.  Every ordinary triple Massey product of
+positive-degree classes is defined and is the singleton $\{0\}$.
+\end{proposition}
+\begin{proof}
+The additive assertion follows from Proposition~\ref{prop:Mr-homology}
+and the universal coefficient theorem.  The wedge decomposition
+already proves the product assertion by restricting to each sphere.
+Here is also a direct integral bar-cochain check, which in particular
+checks the products requested in R3 before reduction modulo a prime.
+For words $v,w$ of lengths $k,l$, put $p=k+2$, $q=l+2$, and let
+$\gamma$ be the indicator function of $x_{11}$.  Define a cochain of
+degree $p+q-1$ by
+\[
+ \begin{split}
+ h_{v,w}([m_1|\cdots|m_{p+q-1}])={}&
+ \alpha(m_1)\prod_{i=1}^{k}Y_{v_i}(m_{i+1})\,
+ \gamma(m_p)\\
+ &\hspace{-10mm}\cdot\prod_{j=1}^{l}Y_{w_j}(m_{p+j})\,
+ \beta(m_{p+q-1}).
+ \end{split}
+\]
+For nonidentity $a',b'$, one has
+$\gamma(a'b')=\beta(a')\alpha(b')$.
+All terms in the coboundary of $h_{v,w}$ cancel in endpoint pairs or
+vanish at a $Y$ slot, except the term merging the two central entries.
+Consequently
+\[
+       \delta h_{v,w}=(-1)^p f_v\smile f_w.
+\]
+This gives explicit null cochains for every positive product, integrally
+and after coefficient reduction.
+
+For a positive-degree Steenrod operation on a class of degree $d$, its
+output degree is larger than $d$.  On a sphere summand of that output
+dimension the input restricts to zero, so naturality makes the output
+zero.  Those restrictions jointly detect cohomology, and hence the
+operation is zero.  This proves all the stated squares and powers;
+the same argument proves the Bockstein assertion (which also follows
+from torsion-free integral homology).
+
+All triple Massey products of positive-degree classes are defined
+because the required products are zero.  Their indeterminacy is a sum
+of positive-degree products, hence zero.  If the input degrees are
+$d_1,d_2,d_3$, their output degree $D=d_1+d_2+d_3-1$ is larger than each
+input degree.  Restrict to any $S^D$ summand.  All three inputs restrict
+to zero and their Massey product there is $\{0\}$.  Naturality and the
+jointly injective restrictions in degree $D$ prove the result.  In
+particular the first possible product, the degree-five product
+$\langle f_{\varnothing},f_{\varnothing},f_{\varnothing}\rangle$, is
+exactly $\{0\}$.  Alternatively the displayed primitives give a
+defining system whose Massey cocycle evaluates to zero on every
+$z_w$: each summand contains a factor forcing an interior entry to be
+$x_{11}$, whereas those cycles have only $e,y_s$ at interior entries.
+\end{proof}
+
+\begin{proposition}\label{prop:Mr-auxiliary}
+The monoid $M_r$ has trivial universal group.  The inclusion
+$M_0\hookrightarrow M_r$ and the retraction $y_s\mapsto e$ exhibit
+$BM_0\simeq S^2$ as a homotopy retract.  For $r=1$, the rational algebra
+$\Q[M_1]$ has exactly two simple modules, its trivial simple has first
+syzygy the other simple in the projective cover $\Q[M_1]e$, and
+\[
+ \Q[M_1]/\Q\{x_{00},x_{01},x_{10},x_{11}\}
+       \cong\Q[t]/(t^2).
+\]
+Every phantom map from $BM_r$ to a CW target is null-homotopic.
+\end{proposition}
+\begin{proof}
+The universal-group and retraction assertions were proved above.
+Over $\Q$ the ideal $J$ of Lemma~\ref{lem:Mr-ring} is nilpotent and the
+quotient is the semisimple algebra $\Q\times\Q$.  Thus $J$ is the
+Jacobson radical and the two idempotent vertices give exactly the two
+simple modules.  The first exact sequence in
+Proposition~\ref{prop:Mr-homology} computes the stated syzygy.  The
+band ideal has basis $e,a,b,c$; its quotient has basis $u,t$ with $u$
+the identity and $t^2=0$.
+
+For the phantom assertion, compose a phantom map with $\Phi_r$.
+Every sphere restriction is null, since its map to $BM_r$ factors
+through a finite subcomplex: a map from a finite CW complex into a CW
+complex is homotopic to one whose image lies in a finite subcomplex.
+A based map out of a CW wedge is determined up to based homotopy by
+its restrictions to the summands.  Hence the composite is null and
+so is the original map.  For an unbased phantom map, choose its
+basepoint value and use that the source is simply connected; the
+usual $\pi_1$-action cannot turn a nonzero based class into the zero
+class.
+\end{proof}
+
+\subsection{A finite two-object structural model}
+
+\begin{proposition}\label{prop:Mr-Karoubi}
+Let $\mathcal K_r$ be the full subcategory of $\Kar(M_r)$ on $1,e$.
+Its morphism sets are
+\[
+ \begin{array}{c|cc}
+  \Hom(\text{row},\text{column})&1&e\\\hline
+  1&M_r&\{e,x_{01}\}\\
+  e&\{e,x_{10}\}&\{e\}.
+ \end{array}
+\]
+Composition is multiplication in $M_r$, with $e$ the identity of the
+second object.  The inclusion of the object $1$ induces a homotopy
+equivalence $BM_r\to B\mathcal K_r$.
+\end{proposition}
+\begin{proof}
+The formula $\Hom(d,d')=d'M_rd$ gives the table and all composition
+laws.  Apply Quillen's Theorem A, in its dual formulation
+\cite[p.~93]{Quillen1973}, to the inclusion $i:M_r\to\mathcal K_r$.
+The comma category $(i\downarrow1)$ has terminal object $\id_1$.
+An object of $(i\downarrow e)$ is an element $f\in eM_r$; a morphism
+$f\to g$ is an $m\in M_r$ with $gm=f$.  Let $F$ be the constant
+functor with value the object $e$ of this comma category.  For each
+$f$, the element $f\in M_r$ is a morphism $f\to e$, since $ef=f$.
+These components form a natural transformation from the identity to
+$F$: for $m:f\to g$, its naturality equation is exactly $gm=f$.
+Thus the comma category is contractible.  Both comma nerves are
+contractible, proving the assertion.
+\end{proof}
+
+This supplies the finite structural model requested in A3, together
+with its comparison map and proof.  No use of the recent
+$M(Y,f)$ construction is needed.  The same category and the same proof
+work for the second Sweeney example.  Its different homotopy type is
+accounted for by the second symbol in each word, not just by an
+observed finite list of Betti numbers.
+
+\subsection{Independent computational checks and scope}
+
+The attached verifier uses only Python's standard library.  For
+$r=0,1,2$ it checks the full multiplication table, the integral change
+of basis and every product in Lemma~\ref{lem:Mr-ring}, the module
+identities giving the projective-resolution kernels, and the monoid
+retraction.  Through degree eight it checks every simplex-face
+identification in every sphere map and every boundary $\partial z_w$;
+it checks the integral dual pairings and the cup-product pairings.
+It also exhaustively verifies the cocycle equation on all normalized
+simplices through cochain degree four and the explicit integral
+cup primitives for bidegrees $(2,2),(2,3),(3,2)$.
+The all-degree proofs above,
+not extrapolation from these checks, establish the homotopy types.

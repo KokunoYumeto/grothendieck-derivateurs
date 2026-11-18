@@ -1,0 +1,384 @@
+\section{Exact colimits and compact inverse diagrams}
+\label{sec:C}
+
+We use $\mathbb T=\R/\Z$ with its usual compact topology. If $M$ is a discrete abelian group, $M^\vee=\Hom_{\Z}(M,\mathbb T)$ has the topology of pointwise convergence. If $K$ is compact Hausdorff abelian, $K^\wedge=\Hom_{\mathrm{cts}}(K,\mathbb T)$ is discrete. In all occurrences of $\lim^i$ below, the derived functor is taken in the category of diagrams of \emph{abstract} abelian groups; continuity is a requirement on the original diagram, not an alternative definition of its derived limit.
+
+\subsection{Duality and torsors}
+
+\begin{theorem}[C.1; Proved: the bar--cobar duality]\label{C:duality}
+For every small category $A$, every $M:A\to\Ab$, and every integer $i\geq0$, there is a natural isomorphism of abstract abelian groups
+\[
+ \lim_{A^{\op}}^{i}M^\vee\ \cong\ \Hom_{\Z}(L_i\colim_A M,\mathbb T).
+\]
+For $M:A\to\F_p\text{-}\mathrm{Mod}$ the analogous duality is
+\[
+ \lim_{A^{\op}}^{i}\Hom_{\F_p}(M,\F_p)
+ \cong\Hom_{\F_p}(L_i\colim_A M,\F_p),
+\]
+where the dual groups carry their profinite vector-space topologies. For a $\Q$-module diagram, the first displayed formula holds with $L_i\colim_A$ computed in $\Q$-modules and with the Pontryagin dual of its underlying additive group. These statements include empty and disconnected $A$.
+\end{theorem}
+\begin{proof}
+Write the unnormalized simplicial replacement as
+\[
+ C_n(A;M)=\bigoplus_{a_0\xrightarrow{f_1}\cdots\xrightarrow{f_n}a_n}M(a_0).
+\]
+Its zeroth face applies $M(f_1)$, its intermediate faces compose adjacent arrows, and its last face deletes the last arrow. The alternating face map is the differential. This complex computes $L_*\colim_A M$. One justification that does not assume the groups $M(a)$ are projective is to use the simplicial resolution by the evaluation--induction adjunction: an induced diagram $\Z[A(a,-)]\otimes M(a)$ is colimit-acyclic, because its standard replacement is the chain complex of the contractible category $a/A$ with the specified constant coefficient group. The resulting acyclic resolution computes the derived functor. Equivalently, resolve every $M(a)$ by free groups and compare the two filtrations of the double complex.
+
+Applying $\Hom_{\Z}(-,\mathbb T)$ turns this direct-sum complex into
+\[
+ C^n(A^{\op};M^\vee)=\prod_{a_0\to\cdots\to a_n}M(a_0)^\vee.
+\]
+This is the Roos cobar complex, with precisely its usual transition maps. In degree zero its differential is
+\[
+ (\partial t)_f=M(f)^\vee(t_b)-t_a\qquad(f:a\to b).
+\]
+Since $\mathbb T$ is injective as an abelian group, dualization is exact and identifies cohomology with the dual of homology. This proves the first formula, including naturality. Over $\F_p$ the same argument uses the exact vector-space dual and the product topology. Every profinite $\F_p$-vector space is the continuous dual of a discrete vector space. For $\Q$, the integral and rational bar complexes of a rational diagram coincide after forgetting scalars. Its compact dual is generally a solenoidal compact group, not a vector-space dual with the discrete topology. No comparison with such a discrete dual is being asserted.
+\end{proof}
+
+\begin{theorem}[C.2; Proved: exactness is the compact torsor property]\label{C:torsors}
+For every small category $A$, the following conditions are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $\colim_A:\Ab^A\to\Ab$ is exact;
+\item $\lim_{A^{\op}}$ takes objectwise surjective morphisms of compact Hausdorff abelian diagrams to surjections;
+\item $\lim^1_{A^{\op}}K=0$ for every compact Hausdorff abelian diagram $K$;
+\item every compact torsor diagram on $A^{\op}$ has a point in its limit, namely (CT).
+\end{enumerate}
+Replacing compact abelian groups by profinite $\F_p$-vector spaces gives exactness over $\F_p$ and $(\mathrm{CT})_p$. Replacing them by Pontryagin duals of discrete $\Q$-vector spaces gives exactness over $\Q$ and $(\mathrm{CT})_{\Q}$.
+\end{theorem}
+\begin{proof}
+Pontryagin duality is an exact contravariant equivalence between discrete abelian groups and compact Hausdorff abelian groups; in particular, a monomorphism of discrete groups dualizes to a continuous surjection. The coend description, or degree zero in Theorem~\ref{C:duality}, identifies the dual of a colimit with the limit of the dual diagram. Thus (i) and (ii) are equivalent. Theorem~\ref{C:duality}, the fact that $\mathbb T$ is a cogenerator, and the criterion $L_1\colim=0$ for exactness give (i)$\Leftrightarrow$(iii).
+
+For the torsor assertion, choose a point $t_a\in T(a)$ for each object of a torsor diagram under $K$. The simply transitive compact action identifies $T(a)$ homeomorphically with $K(a)$ by $x\mapsto x+t_a$: the orbit map is a continuous bijection from a compact space to a Hausdorff space. For $f:a\to b$ there is a unique
+\[
+ c_f=T(f)t_b-t_a\in K(a).
+\]
+For $a\xrightarrow f b\xrightarrow g c$, equivariance gives
+\[
+ c_{gf}=c_f+K(f)c_g.
+\]
+Consequently $(c_f)$ is a degree-one cocycle in the above cobar complex. Replacing $t_a$ by $t_a+x_a$ changes $c$ to $c+\partial x$. A compatible family is exactly a choice for which this new cocycle is zero.
+
+Conversely, any degree-one cocycle $c_f\in K(a)$ defines a compact torsor diagram with $T(a)=K(a)$ as a space and
+\[
+ T(f)(x)=K(f)x+c_f\quad(x\in K(b)).
+\]
+The cocycle equation is precisely the functoriality equation, and each map is continuous. Thus every class in $\lim^1K$ occurs, and it is zero exactly when its torsor has a section. This proves (iii)$\Leftrightarrow$(iv). The same proof works in the two specified dual coefficient categories, which are closed under kernels. For example, a point in the limit of a quotient diagram has a torsor of lifts under its kernel, explaining (ii) directly in terms of (iv).
+\end{proof}
+
+\subsection{Finite coefficient tests and their limitations}
+
+\begin{proposition}[C.3; Proved and Refuted: finite vector torsors]\label{C:finite-tests}
+Fix a prime $p$. If $A$ has finite hom-sets, exactness of $\colim_A$ over $\F_p$ is equivalent to the assertion that every torsor diagram under \emph{finite} $\F_p$-vector spaces has nonempty limit. The forward implication holds for every small category. The converse is false without the hom-set hypothesis, even for a nonempty connected category satisfying condition I.
+\end{proposition}
+\begin{proof}
+The forward implication is Theorem~\ref{C:torsors}. Conversely, the finite-torsor assertion and its cocycle proof say that $T_1(M)=0$ for every $M:A\to\F_p\text{-}\mathrm{Mod}$ that is finite dimensional at each object. Every vector-space diagram is the filtered union of its subfunctors generated by finitely many elements at finitely many objects. A subfunctor generated by $m_j\in M(a_j)$, $1\leq j\leq s$, is at $b$ spanned by
+\[
+ \{M(f)m_j:1\leq j\leq s,\ f\in A(a_j,b)\}.
+\]
+This set is finite under the hom-set assumption. The bar complex and its homology commute with filtered colimits, so $T_1$ vanishes on every diagram. Notice that no \emph{uniform} bound on these dimensions has been used.
+
+For the counterexample take the one-object category $B\Q$ of the additive discrete group $\Q$. A homomorphism from $\Q$ to a finite group is trivial: its image is abelian and divisible, whereas a finite divisible abelian group is zero. Thus every action on a finite set is trivial. A finite torsor diagram on $(B\Q)^{\op}$ is an action of $\Q$ by permutations of a finite nonempty set, so every point is compatible.
+
+Let $k=\F_p$, let $P=k[\Q]$ be the left regular module, and define the natural left-module endomorphism
+\[
+ D:P\longrightarrow P,\qquad [q]\longmapsto[q+1]-[q].
+\]
+It is injective: on each coset of $\Z\subset\Q$, a finitely supported translation-invariant coefficient function is zero. Its map on coinvariants is zero, and $P$ is representable. Hence $T_1(\coker D)=k\ne0$. The same construction works over every nonzero unital coefficient ring. Condition I holds because the category is a group. This proves the failure of the proposed unrestricted converse.
+\end{proof}
+
+\begin{proposition}[C.4; Refuted: uniformly bounded finite sets characterize quasi-filteredness]\label{C:bounded-tests}
+For a nonempty connected category satisfying I, the condition that every contravariant diagram of nonempty finite sets of uniformly bounded cardinality has nonempty limit does not imply quasi-filteredness. It does not imply an integral affine equalizer even for a single pair.
+\end{proposition}
+\begin{proof}
+Again take $A=B\Q$. Every finite-set action is trivial, so its limit is the same nonempty finite set. For the parallel endomorphisms $0,1$ of its unique object, an affine equalizer would be a finitely supported $t\in\Z[\Q]$ with $t(1-0)=0$ and augmentation one. The translation argument in Proposition~\ref{C:finite-tests} forces $t=0$, a contradiction. The same proof shows that this pair has no affine equalizer over any nonzero ring. The category is small, nonempty, connected, and satisfies I, exactly as requested.
+\end{proof}
+
+\begin{theorem}[C.5; Proved: the profinite test]\label{C:profinite}
+For every small category $A$, the following are equivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $\lim^1_{A^{\op}}K=0$ for every profinite abelian diagram $K$;
+\item $\colim_A$ is exact over $\F_p$ for every prime $p$;
+\item every objectwise torsion diagram $M:A\to\Ab$ has $T_i(M)=0$ for every $i>0$;
+\item $\lim^i_{A^{\op}}K=0$ for every profinite abelian diagram and every $i>0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The Pontryagin duals of profinite abelian groups are exactly the discrete torsion groups. This follows directly in one direction because a continuous character on a profinite group has finite image, and in the other by writing a torsion group as the union of its finite subgroups. Theorem~\ref{C:duality} therefore proves (i)$\Rightarrow$(ii) and (iii)$\Rightarrow$(iv)$\Rightarrow$(i).
+
+Assume (ii). The integral bar complex of an $\F_p$-module diagram is its field bar complex, so all its positive homology groups vanish. For a $p$-primary torsion diagram, filter by the subfunctors $M[p^n]$. Their successive quotients are killed by $p$. Closure of acyclic diagrams under extensions, followed by filtered unions, proves acyclicity of the $p$-primary part. The full torsion diagram is the direct sum of these parts. Direct sums, filtered colimits, and the bar differential commute, and these colimits are exact in abelian groups. This proves (iii).
+\end{proof}
+
+\subsection{Arithmetic of affine equalizers}
+
+For a finite family $a_0,\ldots,a_k:p\to q$, set
+\[
+ P=\Z[A(q,-)],\qquad E=\Z[A(p,-)]^k,\qquad
+ D(t)=(ta_i-ta_0)_{1\leq i\leq k}.
+\]
+When $A$ has common successors, the union of augmentation images of $\ker D(r)$ is an ideal $I\subseteq\Z$: to add elements at different targets, move them to a common successor. We use $\ker D$ as a subfunctor of $P$, not merely as a collection of unrelated kernels.
+
+\begin{proposition}[C.6; Proved: pair equalizers and exceptional primes]\label{C:arithmetic-pairs}
+Suppose $A$ has common successors.
+\begin{enumerate}[label=(\alph*)]
+\item For a pair $a_0,a_1$, existence of an affine equalizer over one $\F_p$ at a target $r$ implies existence of a rational affine equalizer at that same target. If the pair has an affine equalizer over every $\F_p$, possibly at different targets, it has an integral affine equalizer.
+\item For any finite family and a target $r$ with $A(q,r)$ and $A(p,r)$ finite, if a prime-field affine equalizer exists at $r$ but no rational one does, the prime divides the torsion subgroup of $\coker D(r)$.
+\item If $A$ has a weakly terminal object and is exact over every $\F_p$, it is filtered and hence exact over $\Z$. The same conclusion holds if $A$ is total and has a weakly terminal object. These conclusions do not require finite hom-sets; in particular every total one-object category is filtered.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+For (a), $D(r)$ is the integral incidence map of the directed graph whose vertices are $A(p,r)$ and whose edges are $g\in A(q,r)$, directed from $ga_0$ to $ga_1$. Its cokernel is the free abelian group on the connected components. This remains true for an infinite graph: every relation has finite support and the quotient identifies precisely the vertices in the same finite zigzag component. Thus the cokernel is torsion-free, and reduction of the kernel modulo $p$ surjects onto the kernel of the reduced incidence map. A field equalizer lifts to an integral kernel element of augmentation congruent to one modulo $p$, which is nonzero as an integer. Dividing by its augmentation proves rational solvability at the same target. If this works for every prime, $I$ is divisible by no prime and is nonzero; hence $I=\Z$.
+
+For (b), at a prime not dividing the finite torsion subgroup of $\coker D(r)$ the same kernel-lifting argument applies. Its lift has nonzero augmentation and therefore gives a rational affine equalizer.
+
+For (c), exactness over any nonzero field implies condition I by the coefficient-extraction proof of \citet[Lemma 3.2 and the coefficient-ring remark after Proposition 3.3]{IsbellMitchell1976}. Explicitly, an affine commutative square has equal sums of ordinary composites with augmentation one on both sides, so a nonzero term on one side must also occur on the other, giving an ordinary square. Part (a) gives condition IV. Thus $A$ is quasi-filtered. \citet[Corollary 4.4]{IsbellMitchell1976} states and proves that a connected category with I, IV and a weak terminal object is filtered. We have opened and checked that proof: IV filters every finite family of endomorphisms (Corollary 4.3); moving a pair to the weak terminal object and applying I reduces its ordinary equalization to that endomorphism assertion. This also proves the stronger conclusion claimed here. A total category is quasi-filtered, so the same opened Corollary4.4 proves the assertion about total categories and, in particular, one-object categories.
+
+Here is an independent direct proof of (c). First let $M$ be a monoid
+exact over every $\F_p$. For $x,a\in M$, an affine equalizer gives
+$t\in\F_p[M]$ with augmentation one and $txa=tx$. Put $z=tx$.
+Every point of the finite support of $z$ has a predecessor in that
+support under right multiplication by $a$. Following predecessors
+shows that every support point lies on a finite cycle; its coefficient
+is constant around the cycle. Since the augmentation is one, at least
+one such cycle has length $r$ prime to $p$. Thus some left multiple
+$yx$ satisfies $yx a^r=yx$. Start with $p=2$. If the obtained period
+$r$ exceeds one, choose a prime $p\mid r$ and apply the same argument
+to the new $x'=yx$. The resulting left multiple retains period $r$
+and acquires a period $s$ prime to $p$, hence has period
+$\gcd(r,s)<r$. Repetition gives a left multiple with period one.
+We have proved that for every $x,a$ there is $y$ with $yxa=yx$.
+Applying this first to $x=1,a$ and then to the resulting $x=y,b$
+equalizes any two $a,b\in M$, so $M$ is filtered.
+
+Now let $c$ be weakly terminal in $A$. Postcomposing affine equalizers
+with arrows to $c$ shows that $\operatorname{End}_A(c)$ is exact over
+each $\F_p$, so it is filtered by the preceding argument. Given
+$f,g:p\to q$, choose $h:q\to c$. A prime-field affine equalizer,
+again followed by an arrow to $c$, is a finite affine combination
+$t$ of endomorphisms of $c$ with $thf=thg$. Filteredness of the
+endomorphism monoid supplies one endomorphism $k$ such that all
+elements in the support of $kt$ are the same arrow $u$.
+Its augmentation is one, so $kt=[u]$ and $uhf=uhg$ as ordinary
+arrows. This proves filteredness without an external reduction.
+\end{proof}
+
+\begin{proposition}[C.7; Proved: the rational-only obstruction]\label{C:rational-gate}
+Assume $A$ has common successors and is exact over $\F_p$ for every prime. Then it is quasi-filtered. For every objectwise torsion-free $M:A\to\Ab$, each $T_i(M)$, $i>0$, is uniquely divisible. For every finite parallel family its augmentation ideal satisfies $I=0$ or $I=\Z$. Consequently rational exactness and integral exactness are equivalent under the all-prime hypothesis.
+
+If a family has $I=0$, define the subfunctor
+\[
+ S(r)=\{s\in\Q\otimes P(r):D(r)s\in E(r)\}.
+\]
+Then augmentation gives isomorphisms
+\[
+ \colim_A S\cong\Q,\qquad
+ \colim_A (\coker D)_{\mathrm{tor}}\cong\Q/\Z.
+\]
+If hom-sets are finite, the torsion cokernel at each individual target has only finitely many prime divisors. Thus the possible failure is necessarily distributed among unboundedly many targets.
+\end{proposition}
+\begin{proof}
+Condition I and IV were proved above. For an objectwise torsion-free diagram the sequence
+\[
+ 0\longrightarrow M\xrightarrow{p}M\longrightarrow M/pM\longrightarrow0
+\]
+is exact. All positive derived colimits of its last term vanish by Theorem~\ref{C:profinite}. The long exact sequence says multiplication by $p$ is bijective on $T_i(M)$ for every $i>0$. This holds for every prime, proving unique divisibility.
+
+Put $J=\im D$ and $C=\coker D$. Right exactness applied to $\ker D\to P\to J$ gives $\colim J=\Z/I$, because the colimit of a representable is $\Z$. The induced map $\colim J\to\colim E=\Z^k$ is zero. As $E$ is projective, the long exact sequence gives
+\[
+ T_1(C)\cong\Z/I.
+\]
+The torsion subfunctor $C_{\mathrm{tor}}$ is acyclic. The sequence $0\to C_{\mathrm{tor}}\to C\to C/C_{\mathrm{tor}}\to0$ therefore injects $T_1(C)$ into the rational vector space $T_1(C/C_{\mathrm{tor}})$. A nonzero finite cyclic group cannot embed in a rational vector space. Thus $I=0$ or $\Z$. If rational exactness holds, each finite family has a rational kernel element of augmentation one, which after clearing denominators makes $I\ne0$; therefore $I=\Z$. The affine criterion proves integral exactness. Its converse is immediate by restriction of scalars.
+
+We prove the saturation assertions without presuming exactness on non-torsion diagrams. The quotient $S/P$ is torsion and is a subfunctor of $(\Q\otimes P)/P$. Exactness on torsion diagrams makes
+\[
+ \colim(S/P)\longrightarrow\colim((\Q\otimes P)/P)=\Q/\Z
+\]
+injective. Also $T_1(S/P)=0$, so $\Z=\colim P\to\colim S$ is injective. Comparing the two short exact sequences shows that augmentation identifies $\colim S$ with a subgroup of $\Q$ containing $\Z$.
+
+Exactness on torsion diagrams implies exactness over $\Z/p^m\Z$. Its affine criterion supplies $t\in P(r)$ with $D(t)\in p^mE(r)$ and $\aug t\equiv1\pmod {p^m}$. Then $t/p^m\in S(r)$. Its augmentation, together with the integers, generates $1/p^m$ in $\colim S\subset\Q$. Varying $p,m$ proves $\colim S=\Q$ and $\colim(S/P)=\Q/\Z$.
+
+Finally write $K_{\Q}=\ker(\Q\otimes D)$ and $K=\ker D$. There is an exact sequence of torsion diagrams
+\[
+ 0\longrightarrow K_{\Q}/K\longrightarrow S/P
+   \longrightarrow C_{\mathrm{tor}}\longrightarrow0.
+\]
+The last map sends the class of $s$ to the class of $Ds$; its kernel is exactly $(P+K_{\Q})/P=K_{\Q}/K$. Because $I=0$, every element of $K_{\Q}$ has augmentation zero. The induced map from $\colim(K_{\Q}/K)$ into $\colim(S/P)\subset\Q/\Z$ is both injective (torsion exactness) and zero. Thus the last colimit is $\Q/\Z$. The finite-target assertion is the elementary finite-matrix torsion bound.
+\end{proof}
+
+\input{sections/C4_addendum.tex}
+
+\subsection{Explicit compact obstructions over \texorpdfstring{$\mathcal C_\delta$}{C-delta}}
+
+\begin{proposition}[C.8; Proved: the torsor and its nonzero cocycle]\label{C:explicit-torsor}
+Let $A=\Cdelta$, $P_X=A(V,X)$, $E_X=A(W,X)$, and let $k=\F_p$. Define $D_X:k[E_X]\to k[P_X]^2$ by
+\[
+ D_X[g]=([gv_2]-[gv_1],\ [gv_3]-[gv_1]),\qquad Q=\coker D.
+\]
+The following contravariant diagram consists of finite-dimensional $k$-vector spaces:
+\[
+ K(X)=\left\{(s,t)\in k^{P_X}\times k^{P_X}:
+ s(gv_2)-s(gv_1)+t(gv_3)-t(gv_1)=0\ (g\in E_X)\right\}.
+\]
+Its transitions are restriction along postcomposition of embeddings. It is $\Hom_k(Q,k)$ and satisfies $\lim^1K\cong k$. Replacing the right-hand side zero in its defining equations by one gives a nonempty torsor $T(X)$ under $K(X)$ at each object, and $\lim T=\varnothing$.
+
+Over $\Z$, use the same $D$, $Q$ and equations with values in $\mathbb T$. Then $K=\Hom_{\Z}(Q,\mathbb T)$ and $\lim^1K\cong\mathbb T$. For each nonzero $\theta\in\mathbb T$, the equations with right-hand side $\theta$ give a torsor without a compatible point.
+\end{proposition}
+\begin{proof}
+We recheck the input from T~A.24 rather than assuming it. In the support of a nonzero element of $k[E_X]$, different increasing embeddings have different hyperedge images. If there are $r$ such images on $v$ vertices, positivity of $2v-3|E_X(U)|$ gives $2v>3r$. Therefore some vertex belongs to exactly one image. Its coefficient in at least one of the two displayed difference coordinates is the original nonzero coefficient, up to sign. Thus $D_X$ is injective, including in characteristic two. The same argument works over $\Z$. The two-term projective resolution
+\[
+ 0\longrightarrow P_W\xrightarrow D P_V^2\longrightarrow Q\longrightarrow0
+\]
+has colimit differential zero. Hence $T_1(Q)=k$ or $\Z$, respectively. Theorem~\ref{C:duality} gives the stated derived limits and also shows that the duals of $P_W$ and $P_V^2$ have no positive derived limits.
+
+Dualizing the injection $D_X$ gives a surjection onto $k^{E_X}$ or $\mathbb T^{E_X}$, so the indicated fibers are nonempty. Restriction carries fibers to fibers because it preserves the equations. If a compatible family existed, its two functions on $P_X$ would be constant: for each $v:V\to X$, compatibility identifies their value at $v$ with their value at $\id_V$. The equation for $\id_W$ would then give $0=1$ or $0=\theta$, a contradiction.
+
+For the actual cocycle, choose any lift $z_X=(s_X,t_X)$ of the constant function $1$ (or $\theta$). In the finite-field case a completely specified choice is the first solution in lexicographic order using the skeleton's ordered hom-sets. For $f:X\to Y$ put
+\[
+ c_f=z_Y|_f-z_X\in K(X).
+\]
+Then $c_{gf}=c_f+K(f)c_g$. The connecting map for
+$0\to K\to P_V^{\vee\,2}\to P_W^\vee\to0$
+identifies its class with $1\in k$ or $\theta\in\mathbb T$, since the map of ordinary limits $k^2\to k$ (respectively $\mathbb T^2\to\mathbb T$) is zero. This both computes the class and proves it is nonzero.
+\end{proof}
+
+\begin{theorem}[C.9; Refuted: objectwise dimensions determine the first derived limit]\label{C:dimensions}
+For every prime $p$ there are two diagrams $F,F':\Cdelta^{\op}\to\F_p\text{-}\mathrm{Mod}$, finite dimensional at every object, with
+\[
+ \dim F(X)=\dim F'(X)\quad\text{for all }X,
+ \qquad \dim\lim^1F=1,\quad \dim\lim^1F'=0.
+\]
+More generally, for any small category $A$, any unital ring $R$, and any objectwise injective map
+\[
+ D:\bigoplus_{j=1}^{m}R[A(p_j,-)]\longrightarrow
+       \bigoplus_{i=1}^{n}R[A(q_i,-)],
+\]
+let $B:R^m\to R^n$ be its induced augmentation map. Then
+\[
+ T_1(\coker D)=\ker B,\qquad
+ T_i(\coker D)=0\ (i\geq2),\qquad
+ \colim_A\coker D=\coker B.
+\]
+Here $B$ is a morphism of left $R$-modules; for a noncommutative $R$ its entries act on a coordinate on the right.
+\end{theorem}
+\begin{proof}
+Take $F=\Hom_k(Q,k)$ from Proposition~\ref{C:explicit-torsor}. Choose $(\alpha,\beta,\gamma)=(1,1,1)$ if $p\ne3$ and $(1,1,2)$ if $p=3$. All three entries and their sum are nonzero. Define
+\[
+ D'':k[A(W,-)]\to k[A(V,-)],\qquad
+ [g]\mapsto\alpha[gv_1]+\beta[gv_2]+\gamma[gv_3].
+\]
+The private-vertex proof makes it injective. Its augmentation is the nonzero scalar $\alpha+\beta+\gamma$, so its cokernel has zero first derived colimit. Put
+\[
+ Q'=k[A(V,-)]\oplus\coker D'',\qquad F'=\Hom_k(Q',k).
+\]
+Both $Q(X)$ and $Q'(X)$ have dimension $2|P_X|-|E_X|$. The above projective resolutions and duality give the claimed derived-limit dimensions. The cocycle of the nonzero class is exactly $c_f$ in Proposition~\ref{C:explicit-torsor}; it is attached to $F$, while no nonzero class exists for $F'$.
+
+For the general formula, the assumed injection followed by its cokernel is a projective resolution of length one. The colimit of each representable free module is $R$, with its basis embeddings all identified: the element category $p/A$ has initial object $\id_p$. If
+\[
+ D_{p_j}[\id_{p_j}]=\sum_{i,h:q_i\to p_j}b_{ijh}[h],
+\]
+then $B$ sends $(r_j)_j$ to $(\sum_{j,h}r_jb_{ijh})_i$. Applying colimit to the resolution proves every formula. In particular sizes of the objectwise matrices do not determine the kernel of their augmentation map.
+\end{proof}
+
+\subsection{The four-object exit category}
+
+\begin{theorem}[C.10; Proved: the exit index and its constant coefficients]\label{C:exit}
+Let $G=F(a,b)$, let $c=(ab)^{-1}$, and put $H_0=\langle a\rangle$, $H_1=\langle b\rangle$, $H_\infty=\langle c\rangle$. Define a category $X$ on the objects $0,1,\infty,U$ by
+\[
+ X(U,U)=G,\quad X(x,U)=G/H_x\ (x=0,1,\infty),\quad
+ X(x,x)=\{\id_x\},
+\]
+with all other hom-sets empty. Here $G/H_x$ means left cosets $gH_x$, and composition is $h\circ(gH_x)=hgH_x$ and $h\circ g=hg$. This is a skeleton of the homotopy exit-path category of $\mathbb P^1$ stratified by its three punctures and their complement. Its classifying space is homotopy equivalent to $S^2$. Consequently
+\[
+ T_1^X(\Delta\Z)=0,\quad T_2^X(\Delta\Z)=\Z,
+ \qquad \lim^1_{X^{\op}}\Delta\mathbb T=0,\quad
+ \lim^2_{X^{\op}}\Delta\mathbb T=\mathbb T.
+\]
+\end{theorem}
+\begin{proof}
+Choose a base point of the open stratum and disjoint access paths to small circles around the punctures. The open stratum is a punctured sphere with fundamental group $F(a,b)$ and peripheral elements $a,b,c$, with $abc=1$. An exit path from a puncture to the base point is determined by a path in the open stratum modulo the peripheral loop at its starting end. These are exactly the cosets displayed above; concatenation at the terminal base point is left multiplication. A different system of access paths conjugates the peripheral subgroups and gives an isomorphic category. The three point strata have trivial endomorphism groups and there are no exit paths to a lower stratum.
+
+This category also models the full exit-path homotopy type. The open stratum is aspherical, and each peripheral circle is aspherical and injects on fundamental groups. The homotopy fibers describing its exit mapping spaces therefore have contractible components. Thus replacing those mapping spaces by their sets of components loses no homotopy information.
+
+More concretely, adjoining a source object with arrow set $G/H$ to the one-object group category $G$ produces the homotopy cofiber of $BH\to BG$. Indeed the part of its nerve consisting of simplices that start at that source is the cone on the nerve of the action groupoid $G\ltimes(G/H)$; the latter is equivalent to $BH$. With three source objects the classifying space is the homotopy pushout attaching three such cones. Since $BG$ is a wedge of two circles and the three attaching loops are $a,b,(ab)^{-1}$, this is the presentation two-complex with those three relators. The first two two-cells collapse the two circles, and the remaining cell is attached by a nullhomotopic loop. The resulting space is $S^2$. The homology assertions follow, and Theorem~\ref{C:duality} gives the derived-limit assertions. We give the actual bar cycle and cobar cocycle next, rather than leaving this last computation solely to duality.
+\end{proof}
+
+\begin{proposition}[C.11; Proved: an explicit degree-two cobar class]\label{C:exit-cocycle}
+Use the category and composition convention of Theorem~\ref{C:exit}. For each $x$ choose a coset section $s_x:G/H_x\to G$ with $s_x(H_x)=1$. Define the integer $n_x(g,z)$ by
+\[
+ s_x(gz)^{-1}g s_x(z)=\gamma_x^{\,n_x(g,z)},
+ \qquad (\gamma_0,\gamma_1,\gamma_\infty)=(a,b,c).
+\]
+For each $\theta\in\mathbb T$ there is a normalized degree-two cocycle $\omega_\theta$ with value
+$\theta n_\infty(g,z)$ on $\infty\xrightarrow zU\xrightarrow gU$, and value zero on all other nondegenerate two-simplices. The map
+\[
+ \mathbb T\longrightarrow\lim^2_{X^{\op}}\Delta\mathbb T,
+ \qquad \theta\longmapsto[\omega_\theta]
+\]
+is an isomorphism. There is no single group-theoretic generator of $\mathbb T$; the requested ``generating cocycle'' is therefore properly a family indexed by $\theta$, or the integral generator whose scalar multiples are this family.
+\end{proposition}
+\begin{proof}
+The section identity gives
+\[
+ n_x(hg,z)=n_x(h,gz)+n_x(g,z).
+\]
+For a three-simplex starting at $x$, this is exactly the cobar cocycle equation; on three-simplices inside $G$ all values are zero. Thus $\omega_\theta$ is a cocycle.
+
+For an explicit integral cycle write $u_x=H_x:x\to U$ and use $[f,g]$ for the simplex with first arrow $f$, then arrow $g$. In the normalized bar complex put
+\[
+ z=\sum_{x=0,1,\infty}[u_x,\gamma_x]
+       -[b,a]-[c,ab].
+\]
+We have $\partial[u_x,\gamma_x]=[\gamma_x]$, because $\gamma_xu_x=u_x$. Also
+\[
+ \partial([b,a]+[c,ab])=[a]+[b]+[c],
+\]
+since $(ab)c=1$ and identity edges are degenerate. Hence $\partial z=0$. In the cone-attachment model, this is the fundamental cycle obtained from the three peripheral disks and the fundamental relation $abc=1$. It generates $H_2(X;\Z)=\Z$. Direct evaluation gives $\omega_\theta(z)=\theta$.
+
+For a direct cohomological description, the cone-attachment cobar complex has its degree-two quotient
+\[
+ \mathbb T^3/\{(r,s,-r-s):r,s\in\mathbb T\}\cong\mathbb T,
+\]
+with isomorphism the sum of coordinates. Its degree-one kernel is zero. The vector $(0,0,\theta)$ is represented in the full cobar complex by $\omega_\theta$, and it maps to $\theta$ under this quotient. This verifies both derived limits and their agreement with the bar duality. The code certificate checks the displayed boundary identity in freely reduced words and the integral cellular boundary matrix.
+\end{proof}
+
+\begin{proposition}[C.12; Proved: nonconstant coefficients detect degree one]\label{C:exit-nonconstant}
+The category $X$ is not quasi-filtered and is not exact over any nonzero ring. It satisfies none of (CH), (CC), (CT). For its constant compact coefficients the first nonzero positive derived limit occurs in degree two; for an explicit nonconstant compact abelian diagram it already occurs in degree one.
+\end{proposition}
+\begin{proof}
+Let $P=R[X(U,-)]$. It is zero at the three point objects and is the regular left $R[G]$-module at $U$. Define the natural map
+\[
+ D:P\to P,\qquad [g]\mapsto[ga]-[g].
+\]
+It is objectwise injective over every nonzero ring: the orbits of right multiplication by the infinite-order element $a$ are copies of $\Z$, on which a finitely supported invariant function is zero. This proof needs no domain hypothesis and no zero-divisor theorem for group rings. The induced map on colimits is zero, so for $M=\coker D$ the representable resolution gives $T_1(M)=R$. The identical finite-support argument rules out an affine equalizer of $\id_U,a$, proving failure of IV.
+
+For $R=\Z$, the compact dual $K=M^\vee$ is the one-point group at each puncture and $\mathbb T^{G/H_0}$ at $U$, with the induced permutation action. It has $\lim^1K=\mathbb T$. For $0\ne\theta\in\mathbb T$ its nontrivial torsor is a point at the punctures and
+\[
+ T(U)=\{f\in\mathbb T^G:f(ga)-f(g)=\theta\text{ for all }g\in G\}.
+\]
+This set is nonempty by choosing values on the right $\langle a\rangle$-cosets and extending along their integer coordinates. The action maps come from the contravariant dual of left translation, and the maps to the point objects are unique. A compatible point would be a translation-invariant $f$, which would contradict its defining equation. Thus (CT) and (CH) fail.
+
+For (CC), take at $U$ the compact convex space of probability measures on the boundary of the free group $F(a,b)$, and at each puncture a singleton. The boundary is the compact space of infinite reduced words in $a^{\pm1},b^{\pm1}$; use inverse pushforward for the contravariant group action. For each letter $s$ let $C_s$ be the clopen cylinder of words starting with $s$. Left multiplication by $a$ maps the complement of $C_{a^{-1}}$ homeomorphically onto $C_a$, and similarly for $b$. An invariant probability measure would satisfy
+\[
+ \mu(C_a)+\mu(C_{a^{-1}})=1,
+ \qquad \mu(C_b)+\mu(C_{b^{-1}})=1.
+\]
+The four disjoint cylinders partition the boundary, so their total mass would be both one and two. Hence the diagram has empty limit. Its spaces are compact convex subsets of the continuous dual of the real Banach space of continuous boundary functions, with the weak-star topology, and its transition maps are continuous affine maps. This establishes (CC)'s failure without merely quoting nonamenability.
+\end{proof}
+
+% Further coefficient reductions, appended without renumbering earlier statements.
+\input{notes/C4_degree_exclusion.tex}
+
+\input{notes/C4_acyclic_colimit_exclusion.tex}
+
+\input{notes/C_Kan_filtered_exclusion.tex}
+
+\input{notes/C4_Grothendieck_exclusion.tex}
+
+\input{notes/C4_exact_base_Kan_assembly.tex}
+
+\input{notes/C4_three_arrow_high_degree.tex}
+
+\input{notes/C4_ultraproduct_exclusion.tex}
+
+\input{notes/C4_sparse_local_global.tex}
+
+\input{notes/C4_voltage_cover_exclusion.tex}

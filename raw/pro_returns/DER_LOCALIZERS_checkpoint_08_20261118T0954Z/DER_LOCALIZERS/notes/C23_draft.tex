@@ -1,0 +1,71 @@
+% Integrated as C.23 in sections/C.tex after independent root audit.
+\begin{claim}{C.23}{Proved under stated hypotheses}{Enough injectives replace AB5 in the underlying theorem}\label{C23}
+Let $\mathcal M$ satisfy the manuscript's (a)--(d), with the actual adjunction $\varphi\dashv\kappa$ in (a). Suppose that $\mathcal M$ has all small coproducts and enough injectives, in addition to the enough-projectives hypothesis already present in (b). Then the canonical functor
+\[
+ \mathcal M[W^{-1}]\longrightarrow D_{\geq0}(k),
+ \qquad X\longmapsto L\varphi(X),
+\]
+is an equivalence. Neither exactness of arbitrary filtered colimits nor existence of an exact resolving functor on $\mathcal M$ is assumed. The enough-injectives hypothesis is additional; we do not infer it from completeness or from (a)--(d).
+\end{claim}
+\begin{proof}
+We first isolate exactly the colimit facts required in the resolution proof of Claim~\ref{C13}. A morphism $f:A\to B$ in an abelian category with enough injectives is monic if and only if $\operatorname{Hom}(B,I)\to\operatorname{Hom}(A,I)$ is onto for every injective $I$. The forward implication is injectivity. For the converse, if the kernel $K$ is nonzero, embed it into an injective $I$ and extend that embedding along $K\hookrightarrow A$. The resulting map $A\to I$ cannot factor through $f$. This proves the criterion.
+
+It follows that coproducts in $\mathcal M$ are exact. Indeed, for any family of monomorphisms $A_t\to B_t$ and any injective $I$, the induced map on Hom from their coproducts is the product of the surjections $\operatorname{Hom}(B_t,I)\to\operatorname{Hom}(A_t,I)$. It is onto, and the criterion proves that $\bigoplus_t A_t\to\bigoplus_t B_t$ is monic. Coproducts are already right exact because they are left adjoints. Thus $\mathcal M$ is AB4.
+
+Next let $X_0\xrightarrow{u_0}X_1\xrightarrow{u_1}\cdots$ be any sequence of monomorphisms, and form the telescope map
+\[
+ T=1-\mathrm{shift}:\bigoplus_{i\geq0}X_i
+       \longrightarrow\bigoplus_{i\geq0}X_i,
+ \qquad T\iota_i=\iota_i-\iota_{i+1}u_i.
+\]
+For an injective $I$, precomposition with $T$ sends $(f_i)$ to $(f_i-f_{i+1}u_i)$. Given $(g_i)$, choose $f_0=0$ and then extend $f_i-g_i$ across the monomorphism $u_i$ to obtain $f_{i+1}$. Thus $\operatorname{Hom}(T,I)$ is onto for every injective $I$, and $T$ is monic. Its cokernel is $\operatorname{colim}_iX_i$, by the universal description of a sequential colimit. Each map $X_j\to\operatorname{colim}_iX_i$ is also monic: every map $X_j\to I$ extends recursively to a compatible family on the later terms, and gives the earlier terms by restriction. The same Hom criterion applies. These statements concern sequences of monomorphisms only; they do not assert AB5.
+
+Let $\mathcal R$ be the category of projective resolutions used in Claim~\ref{C13}: its objects are nonnegative projective complexes with zero positive homology, its weak equivalences are the maps made quasi-isomorphisms by termwise $\varphi$, and its cofibrations are degreewise split monomorphisms with cokernel in $\mathcal R$. The finite cofibration axioms and the interval factorization are proved there by the relative horseshoe construction; none uses a colimit-exactness hypothesis. AB4 supplies arbitrary coproducts of resolutions and cofibrations. The exactness of sums of $k$-modules and preservation of sums by $\varphi$ give the same assertion for acyclic cofibrations.
+
+We verify the countable axiom without invoking arbitrary filtered colimits. Consider a sequence of cofibrations $P^0\to P^1\to\cdots$ in $\mathcal R$. Choosing their degreewise splittings identifies the degree-$n$ colimit with the direct sum of $P^0_n$ and the successive projective cokernels. It is therefore projective. The telescope sequence of complexes
+\[
+ 0\longrightarrow\bigoplus_iP^i
+ \xrightarrow{1-\mathrm{shift}}\bigoplus_iP^i
+ \longrightarrow P^{\infty}\longrightarrow0
+\]
+is degreewise split exact. To see the splitting explicitly, decompose the sequence in each degree into the direct sum of constant tails supplied by the successive cokernels. On a constant tail $B\xrightarrow{1}B\xrightarrow{1}\cdots$, the shift difference has a left inverse whose restriction to the $m$th summand is minus the sum of the first $m$ inclusions, with the empty sum at $m=0$. Each such restriction is a finite sum, so this defines a map out of the coproduct.
+
+AB4 makes both direct-sum complexes positively acyclic. Their homology long exact sequence consequently gives $H_nP^{\infty}=0$ for $n>1$ and
+\[
+ H_1P^{\infty}
+ =\ker\left(1-\mathrm{shift}:\bigoplus_iH_0P^i
+                              \longrightarrow\bigoplus_iH_0P^i\right).
+\]
+The transition maps on $H_0P^i$ are monic, since the cofibration cokernels have zero positive homology. The telescope criterion just proved makes this kernel zero. Hence $P^{\infty}$ belongs to $\mathcal R$. Applying the same argument to the sequence of resolution cokernels $P^i/P^j$ for $i\geq j$ proves that every map $P^j\to P^{\infty}$ is a cofibration. Since $\varphi$ preserves the colimit and filtered colimits of $k$-modules are exact, a sequence of acyclic cofibrations also has acyclic maps from every stage to its colimit. This establishes both parts of the final ABC axiom.
+
+The category $\mathcal M$, with all monomorphisms as cofibrations and $W$ as weak equivalences, also has the required countable axiom. To check the derived comparison, take a sequence of monomorphisms $X_i\to X_{i+1}$. Starting from a projective resolution of $X_0$, apply the horseshoe construction inductively to the short exact sequences with cokernels $X_{i+1}/X_i$. We obtain a sequence of $\mathcal R$-cofibrations $P^i\to P^{i+1}$ resolving that sequence. Its colimit is a projective resolution by the preceding paragraph, and its zeroth homology is $\operatorname{colim}X_i$, since $H_0$ preserves colimits. Applying $\varphi$ termwise and using its cocontinuity gives
+\[
+ L\varphi\left(\operatorname{colim}_iX_i\right)
+ \simeq \operatorname{colim}_i\varphi(P^i),
+ \qquad
+ H_nL\varphi\left(\operatorname{colim}_iX_i\right)
+ \cong\operatorname{colim}_iH_nL\varphi(X_i).
+\]
+We have used exact filtered colimits only in the coefficient category $\Mod k$. The maps from every $X_i$ into its colimit are monic by the Hom criterion above; if the successive monomorphisms belong to $W$, the displayed comparison proves that these maps also belong to $W$. Coproducts commute with $L\varphi$ by AB4 and sums of projective resolutions. The other cofibration axioms for $\mathcal M$ use only derived short exact sequences, finite pushouts, and the original interval factorization. Thus they hold as in Claim~\ref{C13}.
+
+We spell out why no further use of AB5 is hidden in the remaining passage to realization. For every small indexing category $I$, $\mathcal M^I$ has enough projectives: the left adjoint to evaluation at $i$ takes a projective $P$ to the diagram with value $\bigoplus_{I(i,j)}P$ at $j$, and coproducts of these give projective epimorphisms onto any diagram. Their values are projective. Resolving whole diagrams, and using the projective comparison maps and their chain homotopies, gives the diagramwise localization equivalence
+\[
+ \mathcal R^I[(W_{\mathcal R})^I{}^{-1}]
+ \simeq \mathcal M^I[W^I{}^{-1}]
+\]
+proved in Claim~\ref{C13}. This argument uses projective resolutions and finite homotopy cylinders, not filtered colimit exactness in $\mathcal M^I$.
+
+The functor $\Phi(P)=\varphi(P)$ preserves the cofibrations, their pushouts, coproducts, and countable cofibration colimits just checked. The direct-replacement/Reedy construction of homotopy colimits uses precisely these operations: its degree filtration is countable, although each degree can involve an arbitrary small coproduct. Therefore the same explicit comparison as in Claim~\ref{C13}, using \citet[Proposition 9.5.7 and Theorem 9.6.3]{RadulescuBanu2009}, proves preservation of all small homotopy colimits. The functor $H_0:\mathcal R\to\mathcal M$ preserves the indicated cofibrations and colimits and transfers this comparison through the diagramwise equivalence.
+
+For $K\in\Ch_{\geq0}(\mathcal M)$, take a projective resolution of its Dold--Kan denormalization in $s\mathcal M$. Normalization is exact, is given by split summands, and takes projective objects to projective complexes. Its columns therefore give the same first-quadrant projective double resolution as in Claim~\ref{C13}. The finite-diagonal comparison identifies
+\[
+ L\varphi(\operatorname{hocolim}\Gamma K)\simeq L\varphi(K).
+\]
+The homotopy-colimit adjunction for $\Delta^{\mathrm{op}}$ has invertible counit because its nerve is contractible. Brown's roof calculus gives conservativity of the functor induced by $L\varphi$, and weak equivalences are saturated by the cited cofibration-category criterion, exactly as in Claim~\ref{C13}. Hence realization identifies
+\[
+ \mathcal M[W^{-1}]
+ \simeq D_{\geq0}(\mathcal M)[(L\varphi)^{-1}(\mathrm{Iso})^{-1}].
+\]
+
+Finally we check the canonical derived counit rather than merely objectwise homology. Normalization gives $L\varphi\kappa k\to k$ invertible. Both $\kappa$ and $L\varphi$ preserve coproducts, the latter by AB4 and sums of resolutions, so the counit is invertible on every free $k$-module, and then on every projective one by retracts. Resolve an arbitrary nonnegative $k$-complex by projective modules. Exactness of $\kappa$ preserves that quasi-isomorphism; the first-quadrant acyclic-resolution comparison identifies its derived counit with those termwise isomorphisms. It is therefore invertible for every object of $D_{\geq0}(k)$. Localizing the actual derived adjunction $L\varphi\dashv\kappa$ proves the asserted equivalence. All uses of coproducts and countable colimits in this argument have now been checked under the stated hypotheses.
+\end{proof}

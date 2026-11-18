@@ -1,0 +1,151 @@
+\subsection{A finite sparse characteristic effect that disappears later}
+
+\begin{proposition}[Proved: targetwise separation need not persist]
+\label{C4:sparse-local-global}
+In $\Cdelta$, let $V$ be the singleton and let $Q$ have
+ordered vertices $a<b<c<x<y$ and edges $\{a,x,y\}$ and
+$\{b,c,y\}$. Consider the three strong arrows $V\to Q$
+selecting $a,b,c$. There is a strong target $R$ with
+$24$ vertices and $14$ edges such that this family has an
+affine equalizer over $\mathbb F_2$ in $R$, but none over
+$\Q$ in $R$. Nevertheless the same family has an integral
+affine equalizer at a larger target in $\Cdelta$.
+\end{proposition}
+\begin{proof}
+Use ten selected vertices in the order
+\[
+ B<A<C<E<z<D<F<J<H<I
+\]
+and the following seven increasing triples:
+\[
+ (z,D,H),\ (A,z,I),\ (B,E,z),\ (A,E,J),\
+ (C,D,J),\ (C,F,H),\ (B,F,I).
+ \tag{SL.1}
+\]
+For each triple $(a_i,b_i,c_i)$, add private vertices
+$x_i<y_i$, put all private vertices above the ten selected
+vertices, and add the edges $a_ix_iy_i,b_ic_iy_i$.
+Distinct triples meet in at most one vertex.
+
+Here is a complete finite predimension certificate. For a
+subset $S$ of the ten selected vertices, minimizing over
+the private vertices of one gadget gives contribution
+$-2$ if all three selected vertices of that gadget belong
+to $S$, contribution $-1$ if $b_i,c_i\in S$ but $a_i\notin S$,
+and contribution zero otherwise. Thus the minimum is
+\[
+ m(S)=2|S|-2\#\{i:\{a_i,b_i,c_i\}\subseteq S\}
+       -\#\{i:\{b_i,c_i\}\subseteq S,\ a_i\notin S\}.
+ \tag{SL.2}
+\]
+The minima of (SL.2) at successive cardinalities
+$|S|=0,1,\ldots,10$ are
+\[
+ 0,2,3,4,5,5,6,6,6,6,6.
+ \tag{SL.3}
+\]
+The exact certificate \texttt{code/C4\_sparse\_local\_exception.py}
+checks all $1024$ selected subsets and all four private
+choices in each gadget; therefore it covers all $2^{24}$
+actual subsets. A nonempty subset containing no selected
+vertex has no edge and positive predimension. Equations
+(SL.2)--(SL.3) prove positivity. Each proposed copy of $Q$
+has predimension four. Adding a selected vertex gives
+predimension at least five; with its selected triple fixed,
+adding other private vertices also strictly raises
+predimension, since every other gadget meets the triple
+in at most one point. Consequently all seven copies are
+strong, and $\delta(R)=6$.
+
+They are all the induced copies of this ordered $Q$ in $R$.
+Its two edges must meet in their greatest vertex. Two
+edges from different gadgets can meet only at a selected
+vertex, which is below their private vertices. They cannot
+form such a copy. Within a gadget the increasing order
+forces the displayed identification with $Q$.
+
+Let $D$ have one column per copy, recording
+$(b_i-a_i,c_i-a_i)$ in two copies of the free module on
+the selected vertices. Every vertex other than $z$ occurs
+twice in (SL.1), always in the same position; $z$ occurs
+once in each position. Hence the sum of the seven columns
+is zero modulo two, with augmentation $7=1$ modulo two.
+Over $\Q$, a vector $(t_i)_{i=0}^6$ in the kernel must
+satisfy $t_i+t_j=0$ whenever two triples share a vertex
+other than $z$. The resulting graph of the seven triples
+is connected and contains the triangle $0,4,5,0$.
+It follows that every $t_i=0$. The exact integer matrix
+has Smith factors $1,1,1,1,1,1,2$, as independently
+recorded by the certificate. There is therefore no
+rational affine equalizer at this target.
+
+We next prove that the targetwise obstruction disappears.
+Let $M$ be the strong Fraisse limit and let $\Omega$ be
+its strong-singleton orbit. Form the abelian group with
+generators $u_t,v_t$ for $t\in\Omega$ and one generator
+$h$, with the relations
+\[
+ u_b-u_a+v_c-v_a=h
+ \quad\text{for every strong ordered copy }(a,b,c,x,y)
+       \text{ of }Q\text{ in }M.
+ \tag{SL.4}
+\]
+Write $\psi_t=u_t+v_t$. A three-edge star with edges
+$axy,a'x'y,bcy$, ordered so that both $a,a'$ are below
+$b<c$ and both $x,x'$ lie between $c$ and $y$, has
+seven vertices and predimension five. Its two displayed
+copies of $Q$ are strong. Subtracting their relations
+gives $\psi_a=\psi_{a'}$.
+
+The pair $a,a'$ is not strong in this star; this is why
+one star does not suffice to compare an arbitrary strong
+pair. Glue two such stars along an outer minimum, obtaining
+outer minima $a_0,a_1,a_2$. All other vertices may be put
+above these three minima in an order satisfying both
+stars. Their free amalgam is positive, and its four
+specified copies of $Q$ are strong. Its endpoint pair
+$\{a_0,a_2\}$ is strong: if a subset containing this pair
+omits $a_1$, its intersections with the two stars each
+have predimension at least two, strictly larger when
+enlarged beyond the endpoint; if it contains $a_1$, each
+intersection contains the two outer minima and has
+predimension at least four, so their union has
+predimension at least $4+4-2=6>4$. This also has an
+independent exhaustive certificate on all $8191$ nonempty
+subsets of the thirteen-vertex bridge.
+
+The extension property now gives $\psi_s=\psi_t$ for any
+strong pair $s,t$ in $M$. For an arbitrary pair in
+$\Omega$, add one singleton freely over a finite strong
+set containing it. Each old point and the new point form
+a strong pair, so $\psi$ is constant on all of $\Omega$.
+Every strong edge $b<c<y$ extends to a strong copy of $Q$
+by adding $a<b$ and $c<x<y$. Substituting the constant
+$\psi$ into (SL.4) gives
+\[
+ u_b-u_c=h\qquad\text{for every strong ordered edge }b<c<y.
+ \tag{SL.5}
+\]
+The integral pair affine-equalizer property of the total
+category $\Cdelta$, applied to the first two singleton
+arrows into an edge, makes a finite integer combination
+of (SL.5) have left side zero and right side $h$.
+Therefore $h=0$ in the group presented by (SL.4).
+
+Membership in the subgroup generated by the relations
+uses only finitely many relations. Writing $h$ as their
+integer combination gives a finite integer combination
+of copies of $Q$ whose two marginal differences vanish
+and whose augmentation is $1$, after changing all signs
+if necessary. A finite strong set containing their images
+is a target for an integral affine equalizer. Taking a
+common successor with $R$ if desired makes it a target
+extending the original finite-stage certificate.
+\end{proof}
+
+\paragraph{Scope.}
+This example separates a matrix calculation at one target
+from the existence of an affine equalizer somewhere in the
+category. It neither gives a familywise modular-versus-rational
+separation in a total category nor changes the status of
+the total restriction of C.4.

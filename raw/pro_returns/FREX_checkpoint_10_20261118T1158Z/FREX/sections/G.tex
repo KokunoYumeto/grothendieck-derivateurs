@@ -1,0 +1,4267 @@
+\section{Free monoids and the interval diagram}
+\label{sec:G}
+\providecommand{\hocolim}{\operatorname{hocolim}}
+\providecommand{\gp}{\mathrm{gp}}
+\providecommand{\ab}{\mathrm{ab}}
+\providecommand{\Und}{\operatorname{Und}}
+
+We keep the distinction between the colimit over all embeddings and the
+filtered colimit over inclusions.  In this section $A=\Cdelta$, $M_0$ is
+its ordered strong Fra\"iss\'e limit, $G=\Aut(M_0)$, and $I$ is the
+directed poset of nonempty finite strong subsets of $M_0$.  The letter
+$M$ denotes a diagram of monoids, and we write
+\[
+ S=\colim_{B\in I}^{\Mon}M(B),\qquad
+ C=\colim_{B\in A}^{\Mon}M(B).
+\]
+The group acts smoothly on $S$ by monoid automorphisms.  Thus $C$ is
+the coequalizer of that action in monoids, denoted $S_G$, rather than
+the set of orbits unless the orbit relation happens to be a congruence.
+
+\subsection{Checks on the inherited reductions}
+
+\begin{proposition}[Known, rechecked: the exact-index comparison]
+\label{G:exact}
+Let $J$ be a nonempty connected small category with exact integral
+colimits.  For every $M:J\to\FreeMon$, the canonical functor
+\[
+ q_M:\int_J M\longrightarrow
+ \mathbf B\bigl(\colim_J^{\Mon}M\bigr)
+\]
+has a weakly contractible target-under-comma category, and is a weak
+equivalence.  This is DF D.6, with arbitrary ranks and arbitrary
+unit-preserving substitutions.
+\end{proposition}
+\begin{proof}
+Put $C=\colim_JM$.  The comma is the Grothendieck construction of
+the diagram $D(j)$ with object set $C$ and arrows
+\[
+ c\longrightarrow j_j(m)c\quad(m\in M(j)).
+\]
+For a basis $E_j$ of $M(j)$ this is the free category on the edges
+$c\to j_j(e)c$, $e\in E_j$.  Its integral homology vanishes above
+degree one.  This assertion follows directly by removing the first
+edge of each nonempty path in the representable resolution; it is
+valid for infinite graphs.
+
+The ordinary categorical colimit of the $D(j)$ is the regular
+translation category $C//C$.  To check this, present $C$ by all stage
+basis letters and all substitution relations.  At each initial
+vertex $c$, the same relations are precisely path relations; a word
+forces every intermediate vertex by multiplication.  Consequently
+there are exactly the arrows labelled $u$ with $uc=c'$.  This
+category has initial object $1$.
+
+Exactness implies totality, so $BJ$ is simply connected.  In the
+groupoid completion of $\int_JD$, the transport arrows at each
+$c\in C$ therefore form a connected thin groupoid.  Choosing their
+unique classes eliminates all transports.  The remaining generators
+and relations are the groupoid completion of $C//C$, which is
+terminal.  The comma is thus connected and simply connected.
+Finally,
+\[
+ E^2_{p,q}=L_p\colim_J H_q(BD(j);\Z)
+ \Longrightarrow H_{p+q}(B\!\int_JD;\Z)
+\]
+has no terms with $p>0$, by exactness, and no terms with $q>1$,
+by freeness.  All positive homology of the comma vanishes.  Hurewicz
+and Whitehead make it weakly contractible, and Theorem A applies.
+This checks the precise place where DF D.6 uses exactness: the
+positive-column terms for the cycle-module row.  We have not
+replaced that use by totality.
+\end{proof}
+
+\begin{proposition}[Known, rechecked: saturation and finite free charts]
+\label{G:saturation}
+For $M:A\to\Mon$, put $T_S(B)=S^{G_B}$.  The natural monoid map
+$M\to T_S$ induces a weak equivalence on the homotopy colimits of
+classifying spaces and an isomorphism on ordinary monoid colimits.
+For $M:A\to\FreeMon$, every finite subset of $S$ lies in a finite
+free submonoid.  It has a least such free hull.  The hull of a finite
+set fixed pointwise by a subgroup is itself fixed pointwise.
+Consequently the universal comparison question on $A$ reduces to
+finite-rank free monoids with injective transitions, as in DF D.8--D.9.
+\end{proposition}
+\begin{proof}
+We record the checks rather than infer these conclusions merely
+from a filtered colimit.  Eventual equality in a set diagram is an
+equivalence relation by amalgamation.  A finite collection of
+equality witnesses is synchronized by successive amalgamation, so
+injectivization commutes with finite products.  Every embedding
+extends to $G$; applying its inverse shows that eventual equality
+is exactly equality in the filtered colimit over inclusions.
+
+For a set action $H$, the comparison to its injectivization is
+homotopy final.  After choosing a representative, its comparison
+commas reduce, by Theorem A, to nonempty full cosieves in slices
+$B/A$.  For the comparison of an injective action with $T_S$, the
+comma itself is the cosieve of arrows on whose target the given
+element is represented.  It is nonempty because two finite strong
+supports lie in a common finite strong set.  Each such cosieve is
+contracted by the functorial free amalgam with one fixed object over
+$B$: in each order gap put the variable side first.  Strongness of
+the induced arrows follows by viewing the target as the free
+amalgam of the larger variable side and the source over the smaller
+side.  This verifies both Theorem A arguments of T A.33 for the
+present use, including their variance.
+
+Apply these comparisons to $H=\Und(M)^k$ for every finite $k$.
+Filtered colimits and fixed subsets commute with finite products.
+Rowwise weak equivalences in the bisimplicial bar construction give
+the homotopy-colimit assertion.  For ordinary colimits, the
+isomorphisms of colimits of underlying sets for $k=1,2$ identify
+the presentation whose generators are stage elements and whose
+relations are transition and multiplication relations.  Hence the
+monoid-colimit map is an isomorphism.  This argument does not claim
+that arbitrary set colimits commute with products.
+
+Here are the word-theoretic checks of DF D.9.  The filtered colimit
+$S$ is cancellative and conical, since any finite equality is
+witnessed in one free stage.  Given a finite set $X\subset S$, choose,
+over all later stages, a free submonoid containing its image of
+least possible rank.  A noninjective subsequent map on that chart
+would give a non-code among its basis images; the defect theorem
+\cite[Section 2, Theorems 1--2]{GCastiglione2019} puts those images
+in a free monoid of smaller rank, a contradiction.
+Thus this chart embeds in $S$.
+
+If $H,L$ are free submonoids of $S$, then $H\cap L$ is stable
+inside $H$.  Indeed if $p,up,q,qu\in H\cap L$, apply Levi's lemma
+in $L$ to $q(up)=(qu)p$.  One factorization gives an element
+$t\in L$ with $t=u$ by cancellation; the other gives $ut=1$,
+and conicality gives $u=1$.  Hence $u\in H\cap L$.  The stability
+criterion, in the opened source \cite[Theorem 1, p.~84]{GCarpi2014},
+makes this intersection free.  It follows that the ordinary free
+hull of $X$ in one chart lies in every free submonoid of $S$
+containing $X$.  It is therefore the intrinsic least free hull.
+Every atom of the hull occurs in a word of $X$; an automorphism
+fixing $X$ fixes those ordered letters, and hence the hull pointwise.
+
+Replace $M(B)$ by the free hull in $S$ of its finite basis image.
+The hulls are functorial under embeddings extended to $G$, all
+maps are injective, and their filtered union is $S$.  Saturation
+therefore identifies both comparisons.  Finally an arbitrary-rank
+diagram is the filtered union of subdiagrams generated by finitely
+many tagged letters and the basis supports of all their images.
+At any object these are finite because the hom-sets of $A$ are
+finite.  Positivity of word substitutions makes them subdiagrams.
+Nerves, monoid colimits, and weak equivalences of simplicial sets
+commute with these filtered unions.  This proves the reduction.
+\end{proof}
+
+\begin{proposition}[Proved: the orbit-divisibility obstruction]
+\label{G:divisibility}
+Let $M:A\to\FreeMon$.  Suppose that in its smooth filtered-limit
+monoid $S$ no element is a proper left multiple of another element
+in its $G$-orbit:
+\[
+ x=(g x)w\quad\Longrightarrow\quad w=1
+ \qquad(x,w\in S, g\in G).
+ \tag{G.1}
+\]
+Then $q_M$ is a weak equivalence and
+$L_i\colim_A(M_{\ab})=0$ for every $i>0$.
+In particular failure of either conclusion forces a relation
+$x=(g x)w$ with $w\ne1$.  A strictly positive invariant additive
+length implies (G.1), but is not needed in this proposition.
+\end{proposition}
+\begin{proof}
+Finite free charts make $S$ equidivisible.  If $g(ab)=ab$, Levi's
+lemma makes $ga$ and $a$ comparable by left divisibility.  Condition
+(G.1), also applied with $g^{-1}$, forces $ga=a$, and cancellation
+forces $gb=b$.  Therefore every fixed monoid $S^{G_B}$ is closed
+under taking factors in $S$.
+
+We check the rest of DF D.10 with exactly this hypothesis.  Let $J$
+be the directed poset of finite free submonoids $H\subset S$.
+Directedness follows from the finite-chart assertion above.
+Factor-closedness makes $H\cap S^{G_B}$ the free submonoid on
+the subset of atoms of $H$ fixed by $G_B$.
+Fix a monoid $C_0$ with trivial $G$-action and a $G$-invariant
+homomorphism $\rho:S\to C_0$.  The free translation category
+of $H\cap S^{G_B}$ on the set $C_0$ has graph-chain group
+\[
+ E_{H,B}=\Z[C_0\times(\operatorname{At}(H)\cap S^{G_B})]
+\]
+in degree one and $\Z[C_0]$ in degree zero.  An inclusion of charts
+sends each edge to the chain of its substituted path.  These maps
+compose strictly.  Their filtered colimit $E_B$ is a submodule of
+the corresponding full group $E$, since filtered colimits are exact.
+
+At each chart the subgroups in this construction are spanned by
+subsets of one basis.  The identity
+$\langle G_B,G_D\rangle=G_{B\cap D}$ therefore gives
+\[
+ E_B\cap\sum_jE_{D_j}=\sum_jE_{B\cap D_j}.
+ \tag{G.2}
+\]
+The passage to the filtered colimit preserves these finite
+intersections.  Filtering $E_B$ by the cardinality of a strong
+support gives successive quotients
+\[
+ \bigoplus_{[D],\ |D|=n}\Z[A(D,B)]\otimes V_D
+ \quad(n>0),
+ \qquad V_\varnothing\quad(n=0).
+\]
+Here $V_D=E_D/\sum_{E\subsetneq D,\ E\text{ strong}}E_E$;
+(G.2) proves both independence of equal-size supports and that
+these are all relations.  Rigidity removes a setwise-stabilizer
+quotient.  The representable summands are acyclic for higher
+colimits for arbitrary $V_D$, using the initial object of $D/A$;
+the constant summand is acyclic because $BA$ is contractible.
+The exhaustive filtration and exact filtered colimits give
+$L_i\colim_A E_-=0$ for $i>0$.
+
+The translation-category graph complexes now give an exact sequence
+\[
+ 0\longrightarrow H_1\longrightarrow E_-
+ \longrightarrow\Z[C_0]
+ \longrightarrow\Z[\pi_0]\longrightarrow0.
+\]
+The last term is the free module on an action of $A$, so it is
+acyclic by totality.  The constant term and $E_-$ are acyclic as
+well.  Splitting this sequence at its middle image gives
+$L_i\colim_A H_1=0$ for $i>0$.  Each translation category has no
+homology above one, being a filtered colimit of free categories.
+Thus its homotopy colimit has no homology above one.
+
+Take $C_0=S_G$.  The same presentation and transport argument as in
+Proposition~\ref{G:exact} makes the comparison comma connected and
+simply connected.  Its higher homology has just vanished, so it is
+weakly contractible.  Saturation transfers this to $q_M$.
+Taking instead $C_0=1$ identifies $E_B$ with the universal abelian
+group of $S^{G_B}$.  The identical calculation, followed by the
+two-row homology spectral sequence for free monoids, gives the
+asserted vanishing for $M_{\ab}$.
+This supplies the additional argument needed for the necessary
+relation stated in the prompt: it is a consequence of the
+factor-closedness proof, not of the length statement by itself.
+\end{proof}
+
+\begin{proposition}[Proved: rank at most one cannot fail]
+\label{G:rankone}
+If every $M(B)$ has free rank at most one, then $q_M$ is a weak
+equivalence and $L_i\colim_A M_{\ab}=0$ for $i>0$.  Erasing
+transitions and rank-zero values are allowed.
+\end{proposition}
+\begin{proof}
+After injectivization, a value is either trivial or the free monoid
+on one letter: if a positive power is eventually killed, the whole
+generator is eventually killed in a free target; otherwise every
+transition from that value is a positive power map.  The filtered
+limit is either trivial or is isomorphic to an additive submonoid
+of $\Q_{\ge0}$ whose group completion is a nonzero subgroup of
+$\Q$.  This follows by fixing one nontrivial stage and writing the
+positive power maps between its later stages as rational changes
+of scale.
+
+Every automorphism of that monoid acts on its group completion by
+one positive rational scale.  The action of $G$ has open kernel,
+because fixing any nonzero element forces that scale to be one.
+There is no proper open normal subgroup of $G$.  Indeed (Op)
+writes it as $G_F$; normality and $\Fix_{M_0}(G_F)=F$ make $F$
+a finite invariant set.  Free disjoint copies show that every
+point has infinite orbit, so $F=\varnothing$.  Hence $G$ acts
+trivially on $S$.
+
+Its fixed-point diagram is now constant with value $S$.  Its
+homotopy colimit is $BA\times BS$, and its monoid colimit is
+$S$.  The projection is a weak equivalence since $BA$ is
+contractible.  Saturation proves the claim about $q_M$.  Finally
+$BS$ is a filtered colimit of classifying spaces of monogenic
+free monoids, so it has zero homology above degree one; the
+free-monoid homology formula gives the derived-colimit assertion.
+\end{proof}
+
+\subsection{The gap diagram, including all raw-point types}
+
+\begin{theorem}[Proved: the specified gap comparison passes]
+\label{G:gap}
+For $B\in A$, let $M_{\rm gap}(B)$ be the free monoid on the gaps
+of $\{-\infty\}\cup B\cup\{+\infty\}$, and let an increasing
+strong embedding send a gap to the product of all intervening gaps.
+Then its specified comparison $q_{M_{\rm gap}}$ is a weak equivalence.
+Let $O=G\backslash M_0$ be the set of orbits of \emph{all raw points}.
+There are natural identifications
+\[
+ (M_{\rm gap})_{\ab}\cong\Z[\Und(B)]\oplus\underline\Z,
+ \qquad L_i\colim_A(M_{\rm gap})_{\ab}=0\quad(i>0),
+\]
+and both sides of its comparison have type
+$K(F(O\amalg\{*\}),1)$.
+In the full category $O$ need not be a singleton; replacing raw
+points by $A(V,-)$ would be incorrect.
+\end{theorem}
+\begin{proof}
+Write the gaps of $b_1<\cdots<b_n$ as $e_0,\ldots,e_n$.
+In the group completion put
+\[
+ p_{b_i}=e_0\cdots e_{i-1},\qquad t=e_0\cdots e_n.
+\]
+They are a free basis: the inverse expressions are
+$e_0=p_{b_1}$, $e_i=p_{b_i}^{-1}p_{b_{i+1}}$ for $0<i<n$,
+and $e_n=p_{b_n}^{-1}t$.  Subdivision sends $p_b$ to $p_{f(b)}$
+and $t$ to $t$.  Thus the group-completed diagram is naturally
+the free-group diagram on the raw-point action together with a
+constant singleton.  Abelianization gives the displayed natural
+direct sum, and totality makes all its positive derived colimits
+zero.  More strongly the homotopy colimit of a basis-map free-group
+diagram over a total category is the bouquet on the colimit of its
+bases.  To see this without a homology-only argument, use the
+natural graph model: it is the homotopy pushout obtained by attaching
+$B\El(L)\times[0,1]$ to $BA$ at both ends.  Contract each action
+component and $BA$.  The resulting bouquet is the specified map
+to the free group on $\colim L$.  Group completion of each free
+monoid is a weak equivalence, naturally.  Hence
+\[
+ B\!\int_A M_{\rm gap}\simeq K(F(O\amalg\{*\}),1).
+ \tag{G.3}
+\]
+
+We must still identify the ordinary \emph{monoid} colimit.
+The filtered monoid $S$ has generators $[x,y]$ for
+$x<y$ in $M_0\cup\{-\infty,+\infty\}$, with relations
+\[
+ [x,y][y,z]=[x,z]\quad(x<y<z).
+ \tag{G.4}
+\]
+Every finite set of endpoints lies in a finite strong set, and
+subdivision in that set proves both the presentation and its
+independence of the chosen strong set.  Every embedding extends
+to $G$, so the colimit over all embeddings is the action
+coequalizer $S_G$.
+
+Let $\kappa\in O$ be the orbit of a strong singleton.  Free
+amalgamation inserts any finite collection of new isolated
+$\kappa$-points, in any specified order gaps, over a given finite
+strong set.  These points and every subset of them are strong.
+For $a\in M_0$, its finite strong closure $\operatorname{cl}(a)$
+is the intersection of the strong subsets of one finite strong
+set containing it.  Its definition is independent of that set,
+by the intersection property.  An automorphism fixing $a$
+preserves this finite ordered closure and hence fixes it pointwise.
+Consequently the orbit $\alpha=[a]\in O$ determines the marked
+ordered closure $(\operatorname{cl}(a),a)$.
+
+Choose independent isolated points $z<w$.  In $S_G$ denote
+$[-\infty,z]$ by $l$, $[z,+\infty]$ by $r$, and $[z,w]$ by
+$e$.  Their values are independent of the chosen copies, by
+homogeneity.  For $\alpha=[a]$, choose new isolated points
+$z<a<w$, with $z$ and $w$ in the immediate gaps below and above
+$a$ in its closure, and put
+\[
+ L_\alpha=[z,a],\qquad R_\alpha=[a,w].
+\]
+These also depend only on $\alpha$.  Subdividing with one or two
+additional isolated points gives
+\[
+\begin{gathered}
+ e^2=e,\qquad le=l,\qquad er=r,\\
+ eL_\alpha=L_\alpha,\qquad R_\alpha e=R_\alpha,
+ \qquad L_\alpha R_\alpha=e,\\
+ L_\kappa=R_\kappa=e.
+\end{gathered}
+\tag{G.5}
+\]
+For the relation $L_\alpha R_\alpha=e$, the two isolated points
+form a strong edgeless pair even though $a$ lies between them.
+
+For arbitrary $x<y$, choose new isolated $c,d$ with
+$x<c<d<y$, so close to the two endpoints that $c$ is in the
+immediate right gap of $x$ in its closure, and $d$ in the
+immediate left gap of $y$ in its closure.  One first works over
+a finite strong set containing both closures and then freely
+adjoins $c,d$; this proves existence even when the closures
+overlap.  In $S_G$ we obtain
+\[
+ [x,y]=R_{[x]}eL_{[y]}=R_{[x]}L_{[y]}.
+\]
+The ray and total formulas are
+\[
+ [-\infty,x]=lL_{[x]},\quad
+ [x,+\infty]=R_{[x]}r,\quad
+ [-\infty,+\infty]=lr.
+ \tag{G.6}
+\]
+These prove that (G.5) is a presentation, not only a list of
+necessary relations.  Namely assign the formulas (G.6) and
+$R_{[x]}L_{[y]}$ to the interval generators in an abstract monoid
+presented by (G.5).  Each relation (G.4) holds because
+$L_\alpha R_\alpha=e$, $R_\alpha e=R_\alpha$, and
+$eL_\alpha=L_\alpha$.  This gives a $G$-invariant homomorphism
+$S$ to the presented monoid.  The reverse homomorphism sends the
+listed generators to their chosen intervals.  The preceding
+formulas make the composites identities on every generator.
+
+Let $W_O$ be the category of nonempty finite linearly ordered
+$O$-coloured sets and colour-preserving increasing injections.
+It is Ramsey, even when $O$ is infinite.  For fixed source and
+target only finitely many colours occur.  Number those colours
+$1,\ldots,m$ and use the target word $(1,\ldots,m)^N$.
+An increasing injection $f:[n]\to[N]$ lifts a word with letters
+$c_j$ to positions $m(f(j)-1)+c_j$.  Apply ordinary finite Ramsey
+to the colouring of lifted source injections.  The monochromatic
+copy of $[n]$ lifts to the required copy of the target word;
+every source embedding into that target is one of the lifted
+injections.  Thus the morphism Ramsey property holds.  The
+Ramsey-to-integral-affine-equalizer theorem R5 makes $W_O$ exact.
+Equivalently its explicit affine proof uses the same formula for
+lifting the integral cones of $\Delta_{\rm inj}$; each composite
+retains the source colour in the final summand, so all affine
+identities are preserved.
+
+Colour a raw point $a$ by $[a]\in O$.  This defines a functor
+$u:A\to W_O$; the gap diagram on $A$ is its pullback.  The
+ordinary colimit of the coloured gap diagram has exactly
+presentation (G.5), by the same insertion argument in the dense
+coloured order.  Consequently the map on monoid colimits induced
+by $u$ is an isomorphism.  The point-action colimit map is the
+identity on $O$.  The prefix bases therefore identify the induced
+map on the two homotopy colimits with the identity map on the
+bouquet of (G.3).  Finally the coloured comparison is a weak
+equivalence by Proposition~\ref{G:exact}.  The commutative square
+of specified comparisons and two-out-of-three prove the theorem.
+
+The finite certificate \texttt{code/G\_gap\_checks.py} checks
+all overlaps of the three-colour presentation, all endpoint-type
+subdivision identities, 54,894 colour-preserving injections
+through target size six, and 2,295 prefix-basis naturality
+equations through eight points.  The unbounded statements are
+proved above; the program is a check of the displayed finite
+presentation and formulas.
+\end{proof}
+
+\subsection{A further necessary obstruction in the target}
+
+\begin{proposition}[Proved: idempotent-free colimits pass]\label{G:idempotent}
+Let $M:A\to\FreeMon$, where $A=\Cdelta$, and put
+$C=\colim_A^{\Mon}M$.  If $C$ has no idempotent other than $1$,
+then its specified comparison $q_M$ is a weak equivalence and
+$T_i(M_{\ab})=0$ for every $i>0$.  In particular this holds if
+$C$ is left cancellative or right cancellative.
+
+More precisely, use the smooth locally free $G$-monoid $S$ of
+Proposition~\ref{G:saturation}, so that $C=S_G$.  If
+$x=(gx)w$ with $w\ne1$, then $C$ contains an idempotent $e\ne1$
+such that
+\[
+ [x]e=[x],\qquad e[w]=[w].
+ \tag{G.7}
+\]
+\end{proposition}
+\begin{proof}
+First, the monoid congruence defining $S_G$ never identifies a
+nonidentity element with $1$.  The monoid $S$ is conical: a
+product equals $1$ only when both factors are $1$, as is seen in
+any free chart containing them.  Each elementary congruence
+step has the form
+$u s v\leftrightarrow u h(s)v$, for $h\in G$.
+One side is $1$ if and only if $u=s=v=1$, and then the other
+side is also $1$.  A finite chain of these steps proves the
+assertion.
+
+Write $x_0=x$ and $x_1=gx$.  By (Op), write
+$\operatorname{Stab}_G(x_0)=G_B$ and
+$\operatorname{Stab}_G(x_1)=G_{B'}$, with finite strong supports
+$B$ and $B'=gB$.  These supports are unique, by
+$\operatorname{Fix}_{M_0}(G_B)=B$.  The support $B$ is nonempty,
+since otherwise $gx=x$ and cancellation would give $w=1$.
+Moreover $B'\not\subseteq B$.  Indeed they have equal finite
+cardinality; if they were equal, $g$ would preserve $B$ setwise,
+hence fix it pointwise by the linear order, and would fix $x$.
+
+Choose a finite strong $D$ containing $B$, $B'$ and a support
+of $w$.  Freely amalgamate three copies $D_1,D_2,D_3$ of $D$
+over $B$.  In each order gap of $B$, put the $D_i\setminus B$
+parts in the order $1<2<3$.  Realize this finite strong amalgam
+in the limit over $B$.  The copy maps extend to automorphisms
+$h_i\in G_B$.  Put
+\[
+ y_i=h_i x_1,\qquad z_i=h_i w;
+ \qquad x_0=y_i z_i\quad(1\le i\le3).
+\]
+The supports of the $y_i$ are the copies of $B'$.  They are
+distinct because $B'\not\subseteq B$ and different copies of
+$D$ meet exactly in $B$.  Thus the $y_i$ are distinct.  The
+free-chart property gives cancellation and equidivisibility in
+$S$, so distinct prefixes of $x_0$ are strictly comparable.
+
+For any $i<j$ and $k<l$, the isomorphism from
+$D_i\cup_B D_j$ to $D_k\cup_B D_l$ which matches the ordered
+copies and fixes $B$ is an isomorphism of finite strong ordered
+structures.  Homogeneity extends it to $G_B$.  Consequently
+all pairs $(y_i,y_j)$, $i<j$, are in the same $G_B$-orbit.
+Their prefix direction is therefore constant.  If
+$y_1<_{\mathrm{pref}}y_2<_{\mathrm{pref}}y_3$, define the
+nonidentity quotients by $y_j=y_i p_{ij}$.  Cancellation gives
+$p_{13}=p_{12}p_{23}$.  If the direction is reversed, define
+$y_i=y_j p_{ij}$ instead, and obtain
+$p_{13}=p_{23}p_{12}$.  In either case uniqueness of quotients
+and the pair-orbit assertion show that $p_{12},p_{23},p_{13}$
+are in a single $G$-orbit.  Their common image $e$ in $C$
+satisfies $e^2=e$ and is not $1$, by the first paragraph.
+
+Every $y_i$ is in the $G$-orbit of $x$.  The defining quotient
+equations give $[x]e=[x]$.  In the increasing case cancellation
+in $y_i z_i=y_j z_j$ gives $z_i=p_{ij}z_j$; the decreasing
+case gives $z_j=p_{ij}z_i$.  All $z_i$ are in the orbit of
+$w$, so $e[w]=[w]$ in both cases.  This proves (G.7).
+
+If $C$ has no nonidentity idempotent, no proper left factor
+can be in the same $G$-orbit.  Proposition~\ref{G:divisibility}
+now proves both conclusions.  A left or right cancellative
+monoid has no nonidentity idempotent, by cancellation in
+$e^2=e$.
+\end{proof}
+
+\begin{proposition}[Proved: bounded ranks pass]\label{G:boundedrank}
+Let $M:A\to\FreeMon$, where $A=\Cdelta$, and let $S$ be its
+smooth filtered-limit monoid.  If $G$ acts trivially on
+$S_{\ab}$, then $q_M$ is a weak equivalence and
+$T_i(M_{\ab})=0$ for every $i>0$.
+The same conclusions hold if the smooth rational representation
+$\Q\otimes S_{\ab}$ is locally finite dimensional, meaning that
+the linear span of each $G$-orbit is finite dimensional.
+In particular they hold if $S_{\ab}$ has finite rational rank,
+and for every diagram whose free ranks have one finite uniform
+bound.
+
+Conversely, any failure of either conclusion forces a proper
+same-orbit prefix and arbitrarily large linearly independent
+finite subsets of one $G$-orbit in $\Q\otimes S_{\ab}$.
+\end{proposition}
+\begin{proof}
+The free charts form a directed system under containment: put
+the finitely many basis elements of two charts into a third
+free chart.  Abelianization commutes with its filtered colimit.
+Thus $S_{\ab}$ is a filtered colimit of free abelian groups and
+is torsion-free.  Moreover
+\[
+ s\ne1\quad\Longrightarrow\quad [s]_{\ab}\ne0.
+ \tag{G.8}
+\]
+Indeed, in any free chart containing $s$ its word has a nonzero
+nonnegative exponent vector.  The same is true in every later
+free chart; hence its class cannot become zero in the filtered
+colimit.  This does not assert that the abelianization map is
+injective on all of $S$.
+
+If $x=(gx)w$ and the action on $S_{\ab}$ is trivial, then
+$[w]_{\ab}=0$.  By (G.8), $w=1$.  Proposition
+\ref{G:divisibility} gives the first assertion.
+
+As checked in the proof of Proposition~\ref{G:rankone}, $G$
+has no proper open normal subgroup.  For completeness, if an
+open normal subgroup is $G_F$ by (Op), normality makes $F$
+$G$-invariant, by $\operatorname{Fix}_{M_0}(G_F)=F$.  Every
+nonempty finite strong set has infinitely many disjoint copies
+by free amalgamation over the empty set, so $F$ must be empty.
+Any smooth finite-dimensional rational representation has an
+open kernel: intersect the stabilizers of a finite vector-space
+basis.  The kernel is normal, so that representation is trivial.
+Apply this to the span of each orbit in a locally finite
+dimensional representation.  Torsion-freeness then makes the
+action on $S_{\ab}$ trivial.  A uniform rank bound on the
+original $M(B)$ bounds the dimension of their filtered rational
+abelianization colimit, giving the stated special case.
+
+Here is also a direct geometric certificate for the last
+assertion.  If $x=(gx)w$ is proper, carry out the construction
+in Proposition~\ref{G:idempotent} with any number $n\ge2$ of
+free copies $D_i$ over $B=\operatorname{supp}(x)$.
+The resulting $y_i$ are distinct comparable prefixes of $x$.
+By (G.8), their abelianizations $v_i$ are pairwise distinct.
+Write $\operatorname{Stab}_G(v_1)=G_{F_1}$ using (Op).
+Then $F_1\subseteq\operatorname{supp}(y_1)\subseteq D_1$:
+the inclusion of stabilizers and the fixed-point formula give
+the inclusion of supports.  The support $F_1$ is not contained
+in $B$, since otherwise the maps between copies over $B$ would
+give equal $v_i$.  The supports $F_i$ of the other $v_i$ are
+the corresponding copies of $F_1$.
+
+Suppose $\sum_{i=1}^n c_i v_i=0$ with integers $c_i$, not all
+zero, and choose $i$ with $c_i\ne0$.  The union $E$ of the
+other copies $D_j$, $j\ne i$, is a finite strong free amalgam.
+Its pointwise stabilizer fixes every $v_j$ for $j\ne i$,
+hence fixes $c_i v_i$.  Torsion-freeness implies that it fixes
+$v_i$.  Thus $G_E\subseteq G_{F_i}$, so $F_i\subseteq E$.
+But $F_i\subseteq D_i$ and $D_i\cap E=B$, a contradiction.
+The $v_i$ are therefore rationally independent.  They belong
+to a single $G$-orbit.  If either conclusion fails, the
+contrapositive of Proposition~\ref{G:divisibility} supplies
+such a proper same-orbit prefix.
+\end{proof}
+
+\subsection{A finite obstruction to the direct positive incidence lift}
+
+\begin{proposition}[Proved: the direct positive incidence lift collapses]
+\label{G:positiveincidence}
+Suppose $M:A\to\FreeMon$ has injective transitions, and choose
+$u,v\in M(V)$.  Write $u_i=M(v_i)u$ and $v_i'=M(v_i)v$ in
+$M(W)$.  If
+\[
+ u_2v_3'=u_1v_1',
+ \tag{G.9}
+\]
+then $u_2=u_1$ and $v_3'=v_1'$.
+Thus the abelian incidence relator of R3 cannot be lifted by
+this direct positive two-word equation while retaining its
+nonzero difference classes.  Likewise the alternative proposed
+lift $u_2=t u_1$, $v_1'=t v_3'$ cannot extend injectively from
+$V,W$ to $A$ when $t\ne1$.
+
+More generally, if only the original group equation
+$u_2u_1^{-1}v_3'(v_1')^{-1}=1$ is assumed, then the vector
+$[u_2]-[u_1]$ in $M(W)_{\ab}$ is either zero or has both
+positive and negative coordinates in its free abelian basis.
+\end{proposition}
+\begin{proof}
+The obstruction is the ordered hypergraph on $1<\cdots<11$
+with six edges, indexed from zero:
+\[
+ \begin{aligned}
+ e_0&=\{1,2,9\},& e_1&=\{2,3,10\},& e_2&=\{3,4,11\},\\
+ e_3&=\{1,4,5\},& e_4&=\{5,6,7\},& e_5&=\{7,8,9\}.
+ \end{aligned}
+ \tag{G.10}
+\]
+It is an object of $A$, every vertex is strong, and every
+displayed edge is strong.  Here is an elementary check of all
+subsets, independently of the program.  A vertex of this
+hypergraph lies in at most two edges.  The edge-intersection
+graph is the theta graph with three paths of lengths $1,3,3$
+between $e_0$ and $e_3$.  For a set of $r$ edges, let $s$ be
+the number of edges induced on those $r$ vertices of the theta
+graph.  Their union has $3r-s$ vertices, hence predimension
+$3r-2s$.  For $r=1,2,3,4,5,6$, the maximum possible $s$ is
+respectively $0,1,2,4,5,7$.  Thus a single edge has
+predimension $3$ and every union of at least two edges has
+predimension at least $4$.  Adding vertices outside such a
+union increases the predimension by $2$ per vertex.  A subset
+without an edge has predimension twice its size.  Positivity,
+strongness of each singleton, and strongness of each edge
+follow.
+
+For each vertex $a$, let $U_a,V_a$ be the word lengths of the
+images of $u,v$ in the free monoid $M(X)$, where $X$ is
+(G.10).  Equation (G.9) implies, for each $e=(a,b,c)$,
+\[
+ \tau_e=U_b-U_a=V_a-V_c.
+\]
+The four $u$-differences on $e_0,e_1,e_2,e_3$ telescope, and
+the four $v$-differences on $e_0,e_3,e_4,e_5$ telescope, giving
+\[
+ \tau_3=\tau_0+\tau_1+\tau_2,\qquad
+ \tau_0=\tau_3+\tau_4+\tau_5.
+ \tag{G.11}
+\]
+Consequently $\tau_1+\tau_2+\tau_4+\tau_5=0$.
+
+In the free monoid $M(W)$, (G.9) makes $u_1,u_2$ comparable
+as prefixes.  If they differ, write either $u_2=u_1t$ or
+$u_1=u_2t$, with $t\ne1$.  Its image along every edge
+embedding $W\to X$ is nonempty, by injectivity.  Hence all six
+$\tau_e$ are strictly positive in the first case and strictly
+negative in the second.  Either conclusion contradicts
+(G.11).  Thus $u_1=u_2$, and cancellation gives
+$v_1'=v_3'$.  The alternative lift in the statement forces
+all six $\tau_e>0$ directly and is excluded by the same
+calculation.
+
+For the last assertion, a nonzero vector with nonnegative
+coordinates stays nonzero and nonnegative under every edge
+map: each basis generator has a nonempty image by injectivity.
+Its total coordinate sum in $M(X)_{\ab}$ is therefore strictly
+positive for every edge.  A nonpositive vector gives the
+opposite sign.  The group equation still gives (G.11), so
+either one-sided sign contradicts that identity.
+
+The exact certificate
+\texttt{code/G\_positive\_lift\_search.py --explicit} checks
+all 2,047 nonempty vertex subsets, all six strong-edge tests,
+and the two integral circulation vectors whose sum is
+$(0,1,1,0,1,1)$.  Its independent primal linear-program check
+also finds the strict length system infeasible.  The integer
+identity (G.11), rather than the numerical solver status, is
+the proof.  This excludes the specified positive lifts; it does
+not exclude every free-monoid realization of a nonexact module.
+\end{proof}
+
+\subsection{A tree-order obstruction to positive incidence realizations}
+
+\begin{lemma}[Proved: invariant tree orders on strong singletons]
+\label{G:treeorder}
+Let $\Omega$ be the $G$-orbit of the strong singleton points of
+$M_0$.  A $G$-invariant partial order on $\Omega$ whose principal
+downsets are linearly ordered is either equality, the given
+linear order, or its reverse.
+\end{lemma}
+\begin{proof}
+Write $\prec$ for its strict relation, and suppose $a\prec b$
+with $a\ne b$.  Choose a finite strong $D$ containing $a,b$.
+The singletons of both distinguished points are strong in $D$.
+Freely amalgamate two copies of $D$ over $b$, putting the first
+copy before the second in every gap of $b$.  Call their other
+distinguished points $a_1<a_2$.  Both precede $b$ under
+$\prec$, so they are comparable.  Denote this two-block
+amalgam by $P$.
+
+Now freely amalgamate two copies of $P$, identifying $a_2$ in
+the first with $a_1$ in the second.  This is legitimate over
+a strong singleton.  The three remaining named positions are
+$a_1<a_2<a_3$.  The pairs $(a_1,a_2)$ and $(a_2,a_3)$ are
+conjugate, so transitivity makes $a_1,a_3$ comparable in the
+same direction.  The resulting structure $Q$ is a path of
+four copies of $D$, with three successive singleton gluing
+vertices.  Its two endpoint vertices are $a_1,a_3$.
+
+We verify the essential extra assertion
+$\{a_1,a_3\}\le_d Q$.  Its predimension is $4$.
+For $U\supseteq\{a_1,a_3\}$ write $U_i=U\cap D_i$.
+Predimensions add over the four blocks, subtracting $2$ for
+each gluing vertex that is present.  If all three gluing
+vertices are present, every block contains its two distinguished
+strong singleton points.  Thus $\delta(U_i)\ge3$ and
+$\delta(U)\ge12-6=6$.
+
+If a gluing vertex is absent, split the path at all absent
+gluing vertices, and discard empty blocks.  The two endpoint
+components are distinct.  A component consisting of one block
+and containing an endpoint has predimension at least $2$,
+with equality only for that bare endpoint, by strongness of
+its singleton.  An endpoint component consisting of $r\ge2$
+blocks has lower bound
+\[
+ 3+2+3(r-2)-2(r-1)=r+1\ge3:
+\]
+its first block contains the endpoint and a gluing vertex,
+its last contains a gluing vertex, and all intervening blocks
+contain two.  A nonempty component containing neither endpoint
+has positive predimension.  For $r=1$ this is positivity in
+$D$; for $r\ge2$ the corresponding bound is
+$2+2+3(r-2)-2(r-1)=r>0$.
+Consequently $\delta(U)>4$ unless $U$ consists of the two
+bare endpoints.  This proves the asserted strongness.
+
+All ordered strong pairs are conjugate: they are the same
+two-point edgeless ordered structure.  Hence every ordered
+strong pair is comparable in the direction just found.
+For arbitrary $x<y$ in $\Omega$, take a finite strong hull
+of them and freely adjoin an isolated strong point $c$ in the
+order gap $(x,y)$.  Both $\{x,c\}$ and $\{c,y\}$ are strong:
+this follows by adding the isolated point to the strong
+singleton $x$, respectively $y$.  Homogeneity and transitivity
+give $x\prec c\prec y$, or the reverse throughout.
+Thus the entire relation is the given linear order or its
+reverse.  If there was no strict comparison, it is equality.
+\end{proof}
+
+\begin{proposition}[Proved: separated positive incidence families]
+\label{G:separation}
+Let $M:A\to\FreeMon$ have injective transitions and let
+$u,v\in M(V)$.  Suppose the original DF D.4 group relator
+holds in $M(W)^{\gp}$:
+\[
+ u_2u_1^{-1}v_3'\,(v_1')^{-1}=1.
+ \tag{G.12}
+\]
+In the smooth inclusion-colimit monoid $S$, let $u_x,v_x$
+be the corresponding elements at $x\in\Omega$.  Either both
+families are constant, or, for any two distinct points $x,y$,
+the elements $u_x,u_y$ are incomparable both as left and as
+right factors, as are $v_x,v_y$, and as are $u_x,v_y$.
+
+In particular, neither cross-family lift
+\[
+ v_3'=u_1t,\quad v_1'=u_2t,
+ \qquad\hbox{or}\qquad
+ u_1=v_3't,\quad u_2=v_1't
+ \tag{G.13}
+\]
+can extend injectively to $A$ while keeping the families
+nonconstant.  The same assertion holds with a common left
+factor instead of the displayed common right factor.
+\end{proposition}
+\begin{proof}
+An element $u_x$ is fixed by $G_x$.  By (Op) its stabilizer
+is $G_F$ for a finite strong $F\subseteq\{x\}$, using
+$\operatorname{Fix}(G_x)=\{x\}$.  Thus the family is either
+constant or injective with $\operatorname{supp}(u_x)=\{x\}$.
+The same holds for $v$.  If one family is constant, (G.12)
+makes two distinct-point values of the other equal.  The
+other is therefore constant as well.
+
+Assume both are nonconstant.  Prefix order on the $u$-family
+pulls back to a $G$-invariant partial order on $\Omega$ with
+linearly ordered principal downsets: two prefixes of one word
+are comparable in any free chart containing their factorizations.
+If any two distinct values are comparable, Lemma
+\ref{G:treeorder} makes this order the raw order or its reverse.
+Apply the eleven-vertex configuration (G.10).  Put its finitely
+many $u$-values, $v$-values and the required nonidentity prefix
+quotients in a later free chart of the original inclusion
+diagram.  Such a chart exists by filteredness.  Equation
+(G.12) holds in its free group, so word lengths give the same
+two identities (G.11).  But all six differences
+$U_b-U_a$ have the same strict sign, contradicting their
+positive sum $\tau_1+\tau_2+\tau_4+\tau_5=0$.
+Thus the $u$-family is a prefix antichain.  Suffix order has
+the same tree-order property, so exactly the same argument
+makes it a suffix antichain.  Applying the argument to $v$
+uses $V_a-V_c$ in (G.11) and gives both conclusions for $v$.
+
+Suppose next that $u_x$ is a prefix of $v_y$ with $x\ne y$.
+Choose a finite strong $D$ containing $x,y$ and the factor
+witness.  Two free copies of $D$ over $y$ give two distinct
+$u$-values which are prefixes of the same $v_y$.  They are
+comparable, contrary to what was just proved.  If $v_y$ is a
+prefix of $u_x$, amalgamate over $x$ and interchange the two
+families.  Reversing all words gives the identical argument
+for suffixes.  This proves the separation assertion and
+excludes (G.13), including $t=1$ in the nonconstant case.
+For common left factors, use the suffix conclusion.
+\end{proof}
+
+This separation argument alone does not exclude every finite
+positive realization of (G.12). Theorem~\ref{G:noincidencelift}
+below will exclude its nonconstant global extension.
+For example, in the free monoid on $a,b,c$ the four words
+\[
+ u_1=ac,\quad u_2=bc,\quad
+ v_3'=aacca,\quad v_1'=bacca
+ \tag{G.14}
+\]
+are pairwise incomparable both as prefixes and as suffixes,
+and satisfy (G.12).  They have the rectangle factorization
+$u_1=pq$, $u_2=rq$, $v_3'=ps$, $v_1'=rs$ with
+$p=a$, $r=b$, $q=c$, $s=acca$.
+Their exponent vectors span $\Z^3$: the determinant of the
+columns for $u_1,u_2,v_3'$ is $-1$.
+Adding independent letters for $u_3$ and $v_2'$ gives an
+injective free-monoid diagram on the full subcategory with
+objects $V,W$, whose abelianization is exactly the incidence
+cokernel there.  The exact script
+\texttt{code/G\_rectangle\_local.py} checks the free-group
+reduction, both code conditions, and the unimodular minor.
+These finite rectangle data remain valid. The stronger
+arbitrary-orbit tree-order theorem below proves that no
+nonconstant realization of the same group relator extends
+to all strong structures; see Theorem~\ref{G:noincidencelift}.
+
+\begin{proposition}[Proved: a local rectangle realizes the full free-group diagram]
+\label{G:localrectangle}
+On the full subcategory of $A$ with objects $V,W$ there is an
+injective free-monoid diagram whose group completion is the
+restriction of DF D.4 and whose abelianization is the incidence
+cokernel of R3.  All six point-generator images are a bifix
+code, and the incidence difference has both a positive and a
+negative coordinate in the free abelian basis.
+\end{proposition}
+\begin{proof}
+Take $M(V)=\FreeMon(u,v)$ and
+$M(W)=\FreeMon(a,b,c,d,e)$, with point maps
+\[
+\begin{array}{c|cc}
+ &u&v\\ \hline
+1&cbabbaab&cabbaab\\
+2&caabbaab&e\\
+3&d&cbbbaab
+\end{array}
+\tag{G.15}
+\]
+The six words are pairwise incomparable as prefixes and
+suffixes, directly from their first and last differing letters;
+in particular all three point maps are injective.
+Put $s=bbaab$, $p=cb$, $r=ca$, $q=as$.
+Then the four nontrivial words are the rectangle
+$pq,rq,ps,rs$, so (G.12) holds.
+The difference $[u_2]-[u_1]=[a]-[b]$ is mixed, and the
+determinant of the exponent columns for $u_1,u_2,v_3'$ on
+$a,b,c$ is $-1$.
+
+It remains to check the stronger group assertion, since a
+unimodular exponent matrix alone would not imply it.  Set
+$x=u_1$, $y=u_2$, $z=v_3'$ and $w=yx^{-1}z=v_1'$.
+Within the subgroup they generate,
+\[
+ A=yw^{-1}=cac^{-1},\qquad
+ t=wz^{-1}=cab^{-1}c^{-1},\qquad
+ B=t^{-1}A=cbc^{-1}.
+\]
+As $z=cb^3a^2b$, we recover
+\[
+ c=(B^3A^2B)^{-1}z,\qquad
+ a=c^{-1}Ac,\qquad b=c^{-1}Bc.
+\]
+Thus $x,y,z$ generate the free group on $a,b,c$; three
+generators of a rank-three free group form a basis.
+Together with $d,e$ they give precisely the five free
+generators of the single-edge DF presentation, with
+$v_1'=u_2u_1^{-1}v_3'$ as its only defining relation.
+Abelianization gives exactly the R3 cokernel.
+
+The script \texttt{code/G\_rectangle\_full\_group.py}
+also expands the displayed inverse words and checks all six
+compositions in both directions by free reduction.  It checks
+the code condition and integral determinant independently;
+Stallings folding is a secondary check, not the sole evidence
+for the group isomorphism.  This is a construction only on
+$V,W$.  No extension to all of $A$ is asserted.
+\end{proof}
+
+\subsection{A general bounded-dimension theorem for total indices}
+
+\begin{proposition}[Proved: module injectivization preserves derived colimits]
+\label{G:moduleinjectivization}
+Let $J$ be any total category and let $R$ be a ring.  For a
+diagram $N:J\to R\text{-}\mathrm{Mod}$ put
+\[
+ K(a)=\{x\in N(a):N(f)x=0\text{ for some }f:a\to b\},
+ \qquad N^{\mathrm{inj}}(a)=N(a)/K(a).
+\]
+Then $K$ is a subfunctor, all transition maps of
+$N^{\mathrm{inj}}$ are injective, and the quotient induces
+\[
+ L_i\colim_JN\ \cong\ L_i\colim_JN^{\mathrm{inj}}
+ \qquad(i\ge0).
+ \tag{G.16}
+\]
+No finite-hom-set or finite-generation assumption is needed.
+\end{proposition}
+\begin{proof}
+Totality implies Condition I.  Two arrows out of the same
+object have a common commutative extension.  Thus finitely
+many eventual-kernel witnesses can be synchronized by one
+arrow.  This proves closure of $K(a)$ under addition and
+scalar multiplication.  The same square construction proves
+functoriality.  If the image of $x$ is eventually killed after
+an arrow $a\to b$, then $x$ is killed by the composite; hence
+the quotient transitions are injective.
+
+Let $F$ be the free $R$-module functor on sets and $U$ the
+underlying-set functor.  Use the standard augmented simplicial
+free-module resolution of $N$, whose degree $n$ is
+$(FU)^{n+1}N$.  It is objectwise a resolution: the underlying
+augmented simplicial set has its usual extra degeneracy.
+Every term has the form $R[L]$ for a set action $L$ on $J$.
+Its colimit bar complex is the chain complex of
+$\El_J(L)$, with coefficients $R$.  By totality all its
+components are weakly contractible, so
+$L_i\colim_JR[L]=0$ for $i>0$.
+Consequently the homology of the simplicial colimit of this
+resolution computes all the derived colimits of $N$.
+
+The map to the analogous resolution of $N^{\mathrm{inj}}$
+induces an isomorphism after colimit in every degree.
+Surjectivity follows pointwise.  To prove injectivity, lift a
+finite formal expression and a proposed equality between its
+images.  Each iterated free-module term consists of finite
+formal expressions, nested a finite number of times.  At
+their leaves, equality after quotient says that finitely many
+differences of elements of $N(a)$ are eventually killed.
+Synchronize those finitely many witnesses.  At that common
+extension the leaf equalities already hold, hence so does
+the entire equality of formal expressions.  If a colimit
+equality uses a zigzag, lift its finitely many expressions
+and apply this argument at each step; the arrows of the
+zigzag themselves also lift by naturality.  Thus the map
+on colimits is injective.  The resulting simplicial colimit
+complexes are isomorphic, proving (G.16).
+\end{proof}
+
+\begin{proposition}[Proved: bounded dimensions are acyclic on every total index]
+\label{G:boundedcoefficients}
+Let $J$ be total, let $k$ be any field, and let
+$N:J\to k\text{-}\mathrm{Mod}$ satisfy
+$\dim_kN(a)\le d$ for one finite integer $d$ and every $a$.
+Then $L_i\colim_JN=0$ for all $i>0$.
+Moreover the kernel of $N(a)\to\colim_JN$ is exactly $K(a)$
+from Proposition~\ref{G:moduleinjectivization}.
+
+If instead every $N(a)$ is a finitely generated free abelian
+group and their ranks have one finite uniform bound, the same
+acyclicity conclusion holds, and $\colim_JN$ is torsion-free.
+In particular the abelianization of every uniformly bounded
+finite-rank free-monoid diagram is acyclic over every total
+index, even without the Fra\"iss\'e hypotheses of this part.
+\end{proposition}
+\begin{proof}
+Replace $N$ by its injectivization, using (G.16).  Its dimensions
+remain bounded.  Let $d_0$ be the largest attained dimension,
+and let $D\subseteq J$ be the full subcategory where it is
+attained.  Since all transitions are injective, $D$ is a
+cosieve and its transition maps are isomorphisms.
+
+A connected category satisfying I has common successors:
+successively complete the spans along a zigzag connecting
+two objects.  Thus every object of $J$ maps to an object of
+$D$.  For $a\in J$, the category $a/D$ is a nonempty full
+cosieve in $a/J$, and Condition I makes it connected.
+It is the category of elements of the subaction of
+$J(a,-)$ consisting of arrows whose targets lie in $D$.
+Totality therefore makes $a/D$ weakly contractible.
+So $D\hookrightarrow J$ is homotopy final.
+Likewise $D$ itself is the category of elements of a
+subterminal action, is connected by common successors, and
+has weakly contractible nerve.
+
+The restricted vector-space diagram has only isomorphisms,
+so it factors through the fundamental groupoid of $D$.
+That groupoid is equivalent to the terminal groupoid, because
+$BD$ is connected and simply connected.  The restriction is
+therefore isomorphic to a constant diagram.  Its positive
+derived colimits vanish.  Homotopy finality gives the same
+over $J$.  It also shows that every map from an injectivized
+value to its colimit is injective: map the object into $D$,
+where its transition is injective and the maps to the
+constant colimit are isomorphisms.  This proves the kernel
+assertion for the original $N$.
+
+For the integral assertion, use the colimit bar complex
+$C_\bullet$ of $N$.  Each term is free abelian.  The field
+case applies to $N\otimes\Q$ and to $N\otimes\F_p$ for
+every prime $p$.  Therefore $H_i(C_\bullet)\otimes\Q=0$
+for $i>0$.  The universal-coefficient sequence for
+$C_\bullet\otimes\F_p$, in degrees $i$ and $i+1$, shows
+both $H_i(C_\bullet)/pH_i(C_\bullet)=0$ and
+$H_i(C_\bullet)[p]=0$ for every $i>0$.
+The first rational conclusion says these groups are torsion;
+the absence of prime-order elements then makes them zero.
+The degree-one universal-coefficient sequence also gives
+$H_0(C_\bullet)[p]=0$ for every $p$, so the ordinary colimit
+is torsion-free.  This proves all assertions.
+\end{proof}
+
+\begin{proposition}[Proved: injective colimit cocones and all rank-one diagrams]
+\label{G:generalcomparison}
+Let $J$ be any total category and $M:J\to\Mon$.
+If every canonical map
+$M(a)\to C=\colim_J^{\Mon}M$ is injective, then the specified
+canonical comparison $q_M$ is a weak equivalence.
+Moreover every diagram whose values have free rank at most
+one passes over every total $J$, including diagrams with
+erasing transitions.
+\end{proposition}
+\begin{proof}
+Under the first hypothesis, identify $M(a)$ with its image
+submonoid in $C$, and let $P$ be the poset of these image
+submonoids, ordered by inclusion.  Common successors in $J$
+make $P$ filtered.  Its union is $C$: a finite product of
+elements from several values can be moved into one common
+successor.  The diagram factors through the inclusion diagram
+on $P$.  For $P_0\in P$, the comma category of the functor
+$J\to P$ under $P_0$ is the full cosieve of objects $a$ for
+which $P_0\subseteq M(a)$.  It is nonempty and connected,
+again by common successors.  As the category of elements of
+a subterminal action on $J$, it is weakly contractible by
+totality.  Hence $J\to P$ is homotopy final.  The comparison
+is the composite
+\[
+ \operatorname{hocolim}_{a\in J}BM(a)
+ \xrightarrow{\sim}
+ \operatorname{hocolim}_{P_0\in P}BP_0
+ \xrightarrow{\sim} BC.
+\]
+The second arrow is the filtered-colimit comparison; the
+nerve of a monoid commutes with filtered colimits, degree by
+degree, since finite products do.  This proves the first
+assertion for the specified canonical map.
+
+For the second assertion first quotient $M(a)$ by eventual
+equality: two elements are equivalent when one arrow out of
+$a$ makes them equal.  Condition I synchronizes witnesses,
+so this is a monoid congruence, gives a diagram $M^{\mathrm{inj}}$
+with injective transitions, and leaves the ordinary monoid
+colimit unchanged.  This quotient also leaves the homotopy
+colimit of classifying spaces unchanged.  Indeed for each
+$n\ge0$ the induced map of set actions
+$M^n\to(M^{\mathrm{inj}})^n$ gives a bijection of ordinary
+set colimits: it is pointwise surjective, and equality of
+finitely many coordinates can be witnessed simultaneously
+after one arrow.  Both homotopy colimits of these set actions
+have weakly contractible components by totality, so that map
+is a weak equivalence in each degree of the monoid nerve.
+Realizing the simplicial homotopy-colimit comparison proves
+the assertion.  The square of canonical comparisons commutes,
+so passage transfers back to $M$.
+
+A rank-one monoid is $(\N,+)$.  Its homomorphisms to another
+rank-one monoid are multiplication by nonnegative integers.
+Such a map is either injective or zero.  Thus after the
+quotient every value remains either $1$ or $\N$.
+If all are $1$, the result is $BJ\simeq *$.
+Otherwise the nontrivial values form a nonempty cosieve $D$.
+It is homotopy final: $a/D$ is a nonempty connected cosieve
+of $a/J$, and is an action component, exactly as in
+Proposition~\ref{G:boundedcoefficients}.
+The category $D$ is itself total, because an action on a
+cosieve extends by the empty set outside that cosieve; it is
+connected by common successors.
+
+On $D$, the transition multipliers lie in $\N_{>0}$.
+Viewed in the group $\Q_{>0}^{\times}$ they form a local
+system on the weakly contractible nerve $BD$.
+Choose positive rational numbers $\lambda_a$ satisfying
+$\lambda_b n_f=\lambda_a$ for every $f:a\to b$.
+Then $r\mapsto\lambda_a r$ identifies the diagram with
+inclusions of the submonoids $\lambda_a\N$ of $\Q_{\ge0}$.
+Their images are directed by common successors.  Their union
+is their monoid colimit: equal rational representatives
+become equal in a common successor, so no additional
+identifications occur.  The canonical maps are injective,
+and the first assertion applies.  Homotopy finality and the
+preceding quotient comparison finish the rank-one case.
+\end{proof}
+
+\subsection{Gap diagrams on all lexicographic embedding actions}
+
+\begin{theorem}[Proved: lexicographic embedding-gap diagrams pass]
+\label{G:embeddinggaps}
+Fix a nonempty $F_0\in\Cdelta$ and any fixed listing of its
+vertices.  Order $L(X)=\Cdelta(F_0,X)$ lexicographically by
+that listing; the increasing listing is a special case.
+Let $M_{F_0}(X)$ be the free
+monoid on the consecutive gaps of
+$\{-\infty\}\cup L(X)\cup\{+\infty\}$, with a strong
+embedding acting by subdivision of gaps.  The set $L(X)$
+may be empty.
+Then the specified comparison $q_{M_{F_0}}$ is a weak
+equivalence and $T_i((M_{F_0})_{\ab})=0$ for every $i>0$.
+Its target is a $K(F_2,1)$.
+
+More precisely, list the distinct strong closures in $F_0$
+of the initial segments of the chosen listing as
+\[
+ \varnothing=B_0\subsetneq B_1\subsetneq\cdots
+ \subsetneq B_d=F_0.
+\]
+The ordinary monoid colimit has presentation
+\[
+ P_d=\langle l,r,e_0,\ldots,e_{d-1}\mid
+ e_i e_j=e_{\min(i,j)},\quad le_i=l,\quad e_i r=r
+ \ (0\le i,j<d)\rangle.
+ \tag{G.17}
+\]
+In particular the strong-hyperedge gap diagram, $F_0=W$,
+has two distinct nonidentity idempotents $e_0,e_1$ in its
+ordinary colimit and still passes.
+\end{theorem}
+\begin{proof}
+Write $\Omega=\operatorname{Emb}_{\le}(F_0,M_0)$ with this
+lexicographic order.  The inclusion-colimit monoid is the
+interval monoid on $\Omega$ with its two formal endpoints:
+every finite collection of embeddings lies in some finite
+strong substructure.  Its orbit monoid is the ordinary
+colimit, as in Proposition~\ref{G:saturation}.
+There is one orbit of $\Omega$.
+
+Agreement on $B_k$ defines a convex equivalence relation on
+$\Omega$.  Indeed $B_k$ is the strong closure of an initial
+segment, and homogeneity and uniqueness of strong closure
+show that agreement on that segment is equivalent to agreement
+on its closure.  Explicitly, an automorphism fixing the segment
+preserves its finite strong closure setwise, hence pointwise
+because of the linear order.
+Equality of an initial segment is a convex
+condition in lexicographic order.  For distinct $x<y$ in
+$\Omega$, call the largest $k$ for which their embeddings
+agree on $B_k$ the depth of the pair.
+
+We show that the orbit class of an interval $[x,y]$ depends
+only on this depth.  Fix depth $k$ and identify the common
+copy of $B_k$.  The first vertex $j$ in the chosen listing
+outside $B_k$
+is exactly the first coordinate where $x,y$ differ: agreeing
+there would force agreement on $B_{k+1}$, its next closure.
+In particular $x_j<y_j$.  Choose a finite strong $D$ containing
+both copies of $F_0$, and freely amalgamate two new copies
+$z,t$ of $F_0$ with $D$ over their common $B_k$.
+
+Choose the raw order in each gap of $B_k$ as follows.
+In the gap containing the pivot coordinates $x_j,y_j$,
+put all new vertices of $z$ in a short interval just after
+$x_j$, before $y_j$ and before the next raw new vertex of
+$x$, if one exists.  Put all new vertices of $t$ just before
+$y_j$, after the preceding raw new vertex of $y$, if one
+exists, and after the entire $z$ cluster.  There is room for
+both choices because $x_j<y_j$; use the boundaries of the
+gap when a neighboring raw vertex is absent.
+In every other gap containing new vertices, put the $z$
+cluster, then the $t$ cluster, before the new vertices of
+both old copies.  Within each cluster keep the prescribed
+raw order of $F_0$.
+These choices are permitted ordered free amalgams and give
+$x<z<t<y$ in the chosen lexicographic order.
+
+All three relevant two-copy unions are strong free amalgams
+over $B_k$.  The ordered pairs $(x,z)$ and $(t,y)$ have
+fixed isomorphism types: in the pivot gap their types depend
+only on the raw rank of the pivot vertex, and in the other
+gaps the new copy precedes the old.  Denote their interval
+classes by $a_k,b_k$.  The pair $(z,t)$ has the fixed type
+in which the first copy's new vertices precede the second
+copy's in every raw gap of $B_k$; denote its class by $e_k$.
+Thus every interval of depth $k$ has the same class
+$a_ke_kb_k$.
+Apply the construction when the original pair already has
+that separated type.  It gives $e_k=a_ke_kb_k$.
+All intervals of depth $k$ therefore have class $e_k$.
+
+For $x<y<z$, convexity of the nested equivalences gives
+\[
+ \operatorname{depth}(x,z)=
+ \min\{\operatorname{depth}(x,y),
+          \operatorname{depth}(y,z)\}.
+\]
+Every pair of depths is realized by taking free copies over
+the corresponding nested strong bases.  Subdivision yields
+the multiplication relations in (G.17).  The two ray classes
+are $l,r$, and their subdivisions give $le_k=l$ and $e_kr=r$.
+Conversely assign to an interval its $e_k$, to each ray its
+specified $l$ or $r$, and to the whole interval $lr$.
+The displayed relations check every subdivision, including
+the empty finite set.  This assignment is invariant under
+$G$ and is inverse to the presentation map, proving the
+full monoid presentation.  Its idempotents $e_k$ are distinct
+and nonidentity: send $l,r$ to $e_0$ in the finite chain
+semilattice with these distinct elements and a separately
+adjoined identity.
+
+For the comparison, let $\mathcal E_d$ be the category of
+finite linearly ordered sets with $d-1$ nested convex
+equivalence relations, including the empty object, with
+increasing induced embeddings.  Its Fra\"iss\'e limit is
+$\Q^d$ in lexicographic order, with equivalences given by
+agreement of successive initial coordinate strings.
+Universality and homogeneity follow recursively by embedding
+the finitely many blocks in $\Q$ and extending finite order
+isomorphisms independently inside those blocks.
+Its automorphism group is an iterated semidirect product
+\[
+ H_1=\Aut(\Q,<),\qquad
+ H_d=\Aut(\Q,<)\ltimes H_{d-1}^{\Q}.
+\]
+Finite-order Ramsey gives extreme amenability of $H_1$;
+products and extensions preserve extreme amenability by the
+compact fixed-set argument of KPT Lemma~6.7.  Induction and
+KPT Theorem~4.8 give the Ramsey property of $\mathcal E_d$
+\cite{ABKPT2005}.  For $d=2$ this is their Corollary~6.8.
+The empty object adds no Ramsey constraint.  Hence
+$\mathcal E_d$ is exact by R5.
+
+The functor $X\mapsto L(X)$, with the agreement relations
+on the $B_k$, takes values in $\mathcal E_d$ and pulls its
+gap diagram back to $M_{F_0}$.  In the template, its two-point
+objects identify intervals by depth directly, and its
+three-point objects impose precisely the minimum-depth
+subdivision rule.  The resulting finite-interval presentation
+is (G.17) as well;
+the induced map of colimits is the identity on all displayed
+generators.  Natural prefix bases identify the group-completed
+diagram with the free-group diagram on $L(X)\sqcup\{*\}$.
+The graph argument of Theorem~\ref{G:gap} applies: totality
+contracts the element-category component of the transitive
+embedding action, and the constant generator supplies the
+second loop.  Both homotopy colimits are $K(F_2,1)$, and
+the template map identifies their two free generators.
+It is a weak equivalence.  The template's specified comparison
+passes by Proposition~\ref{G:exact}; the commuting comparison
+square now proves passage for $M_{F_0}$.
+Finally the same prefix calculation gives
+$(M_{F_0})_{\ab}\cong\Z[L]\oplus\Z$, whose positive
+derived colimits vanish by totality.
+\end{proof}
+
+\subsection{Intrinsic locally free tests}
+
+\begin{proposition}[Proved: bounded rank forbids absorption in the colimit]
+\label{G:boundedtarget}
+Let $J$ be any total category, and let $M:J\to\FreeMon$ have
+free ranks bounded by one finite integer $d$. Put $C=\colim_JM$
+in $\Mon$, and let $C_{\ab}$ denote its universal abelian group.
+Then $C_{\ab}$ is torsion-free of rank at most $d$, and the map
+$C\to C_{\ab}$ has inverse image of $0$ equal to $\{1\}$.
+Moreover, the image $P\subseteq C_{\ab}$ satisfies
+$P\cap(-P)=\{0\}$. In particular $C$ has no nonidentity
+idempotent or unit, and
+\[
+ cx=c\ \text{or}\ xc=c\quad\Longrightarrow\quad x=1.
+\]
+No Fra\"iss\'e hypothesis is needed.
+\end{proposition}
+\begin{proof}
+The universal abelian group functor preserves colimits, so
+$C_{\ab}=\colim_JM_{\ab}$. Proposition~\ref{G:boundedcoefficients}
+gives torsion-freeness. Any finitely many elements of this colimit
+can be represented at one object, since $J$ has common successors.
+Their rational span therefore has dimension at most $d$.
+
+Every $c\in C$ is also represented by one word $w\in M(a)$:
+a finite product of stage elements can be moved to a common
+successor. If $[c]=0$, the kernel assertion of
+Proposition~\ref{G:boundedcoefficients}, applied over $\Q$, gives
+an arrow $f:a\to b$ for which the exponent-count vector of
+$M(f)(w)$ is zero. All its coordinates are nonnegative integers,
+so $M(f)(w)=1$ and $c=1$. If $[c]+[x]=0$, choose simultaneous
+word representatives at one object and apply the same argument
+to their product. Its eventual image is empty, so each factor's
+image is empty. Thus $c=x=1$, which proves pointedness of $P$
+and the assertion about units. An idempotent or a one-sided
+stabilizer has $[x]=0$ in $C_{\ab}$, proving the remaining claims.
+This conclusion alone does not assert comparison passage in
+bounded rank over an arbitrary total category.
+\end{proof}
+
+\begin{lemma}[Proved: functorial free hulls and locally free tests]
+\label{G:hullfunctorial}
+Call a monoid locally free if every finite subset lies in a
+finite-rank free submonoid. If $S,T$ are locally free, $X\subset S$
+is finite, and $f:S\to T$ is any monoid homomorphism, then
+\[
+ f(H_S(X))\subseteq H_T(fX),
+\]
+where $H$ denotes the intrinsic least free hull. Erasing and
+noninjective homomorphisms are allowed.
+
+Let $J$ be a small category with finite hom-sets. Every diagram
+$N:J\to\Mon$ with locally free values is a filtered union of
+subdiagrams with finite-rank free values. Consequently every
+free-monoid comparison over $J$ is a weak equivalence if and
+only if the same holds for all locally free monoid diagrams.
+\end{lemma}
+\begin{proof}
+We give the closure argument, including its ambient-monoid issue.
+A submonoid $H\subseteq S$ is stable when
+\[
+ p,q,pw,wq\in H\quad\Longrightarrow\quad w\in H
+ \qquad(p,q,w\in S).
+ \tag{G.18}
+\]
+In a free ambient monoid, stability is equivalent to freeness
+\cite[Theorem~1, p.~84]{GCarpi2014}. The inductive free-hull
+description by the unit, generators, multiplication, and
+(G.18) is also given in the opened primary formalization
+\cite[\texttt{Submonoids}: \texttt{free\_hull.intros},
+\texttt{free\_basis\_code}, \texttt{free\_hull\_min}]{GHolubRaskaStarosta2021}.
+
+Every free submonoid $H$ of a locally free $S$ is stable in $S$.
+Indeed apply Levi's lemma inside $H$ to
+$(pw)q=p(wq)$. One comparison gives $pw=pt$ with $t\in H$,
+so cancellation in $S$ gives $w=t$; the reverse comparison
+gives $p=(pw)t$, hence $wt=1$, so conicality gives $w=1$.
+These cancellation and conicality properties hold in $S$ because
+each finite equality lies in a free chart.
+
+Let $K_S(X)$ be the least submonoid containing $X$ and closed
+under (G.18). It is the union of the successive finitary closure
+steps. Choose a finite free chart containing $X$. The intrinsic
+least free hull $H_S(X)$ exists by the intersection argument of
+Proposition~\ref{G:saturation}; that argument uses only locally
+free charts. Since this hull is stable in $S$,
+$K_S(X)\subseteq H_S(X)$. The submonoid $K_S(X)$ is stable
+inside the free monoid $H_S(X)$, hence is free itself. Minimality
+of the hull forces equality. A homomorphism carries every instance
+of the finitary inference (G.18) to an instance of the same
+inference. Induction on closure steps therefore proves the
+displayed functoriality. This argument requires no lifting of
+factorizations through $f$.
+
+Now choose a finite set $D$ of tagged elements $(a,x)$ with
+$x\in N(a)$. At $b\in J$, put
+\[
+ X_D(b)=\{N(u)x:(a,x)\in D,\ u\in J(a,b)\},
+ \qquad N_D(b)=H_{N(b)}(X_D(b)).
+\]
+The set $X_D(b)$ is finite. Functoriality of the hull makes $N_D$
+a subfunctor of $N$, with finite-rank free values. Increasing
+$D$ gives inclusions of subfunctors, and their filtered union
+is $N$. The construction includes $D=\varnothing$, whose hull
+is the trivial monoid.
+
+Filtered colimits commute with finite products of sets, hence
+with monoid nerves, and with the bar construction for a fixed
+small indexing category. They also preserve weak equivalences
+of simplicial sets. The comparison for $N$ is therefore the
+filtered colimit of the comparisons for $N_D$. This proves the
+claimed equivalence of tests; the converse is immediate because
+free monoids are locally free.
+\end{proof}
+
+\begin{theorem}[Proved: an intrinsic group criterion for the free-monoid test]
+\label{G:groupcriterion}
+Assume setting (S), and assume its strong embedding category $A$
+is total. For a smooth action of $G=\Aut(M_0)$ by automorphisms
+on a locally free monoid $S$, let $(NS)/G$ be the degreewise
+orbit simplicial set, with $n$-simplices $S^n/G$. Let $S_G$ be
+the monoid quotient by the congruence generated by $s=gs$.
+Then $A\in\mathcal F$ if and only if, for every such $S$, the
+canonical map
+\[
+ \theta_S: |(NS)/G|\longrightarrow B(S_G)
+ \tag{G.19}
+\]
+is a weak equivalence.
+
+For each $i>0$, the assertion that
+$L_i\colim_A M_{\ab}=0$ for every $M:A\to\FreeMon$ is
+equivalent to
+\[
+ H_{i+1}(|(NS)/G|;\Z)=0
+ \quad\text{for every smooth locally free }G\text{-monoid }S.
+ \tag{G.20}
+\]
+Consequently both the class-$\mathcal F$ property and these
+abelianization-acyclicity properties are invariant under changing
+the total Fra\"iss\'e presentation of the same topological group.
+Together with Corollary~\ref{A:totality-group-invariant}, membership
+in $\mathcal F$ depends only on the topological group throughout
+setting (S), without the extra hypotheses (Rig), (SA), (FA),
+(FA$\varnothing$), (St), (Op), or (WEI).
+\end{theorem}
+\begin{proof}
+We work with the equivalent category $A_{M_0}$ of finite nonempty
+strong subsets of the limit. Let $\mathcal I$ be its directed
+poset of inclusions. For any monoid diagram $M:A_{M_0}\to\Mon$,
+put $S=\colim_{\mathcal I}M$. An automorphism $g\in G$ sends
+the class represented by $m\in M(B)$ to the class represented
+by $M(g|_B)m\in M(gB)$. This is well defined and smooth.
+Every embedding between finite strong sets extends to such a $g$.
+It follows, by presenting a colimit as generators and transition
+relations, that
+\[
+ \colim_{A_{M_0}}\Und(M)^n=S^n/G\quad(n\ge0),
+ \qquad \colim_{A_{M_0}}^{\Mon}M=S_G.
+ \tag{G.21}
+\]
+For the first identity, filtered colimits over $\mathcal I$
+commute with the finite power; inclusion relations form the
+filtered colimit, and the remaining embedding relations are
+exactly the diagonal $G$-orbit relations. For the second,
+multiplication is already defined in the filtered colimit, and
+the remaining relations generate the stated monoid congruence.
+In particular the orbit set and monoid coinvariants are not
+being identified.
+
+Totality gives a canonical weak equivalence from the homotopy
+colimit of each discrete set diagram to its set colimit: its
+source is the nerve of the category of elements, and every
+component is weakly contractible. Apply this to $\Und(M)^n$
+for every $n$. Realizing the resulting degreewise weak
+equivalences in the bisimplicial bar construction gives a
+natural weak equivalence
+\[
+ \hocolim_{A_{M_0}}BM\simeq |(NS)/G|.
+ \tag{G.22}
+\]
+Under (G.21)--(G.22), the specified comparison is precisely
+$\theta_S$. This establishes the needed saturation comparison
+here directly from totality, with no functorial-amalgamation
+assumption.
+
+If $M$ has free values, $S$ is locally free. To check this for
+possibly noninjective transition maps, represent a finite set
+at one stage and minimize the rank of a finite free chart
+containing its images over all later stages. A later failure
+of injectivity on that chart would lower the rank by the
+defect theorem, contradicting minimality. Thus the chosen
+chart embeds in $S$, as in Proposition~\ref{G:saturation}.
+Consequently (G.19) for all $S$ implies the free-monoid test
+over $A$.
+
+Conversely, start with an arbitrary smooth locally free
+$G$-monoid $S$. Set $T_S(B)=S^{G_B}$. For a strong embedding
+$u:B\to C$, choose an extension $g\in G$ and send $s$ to $gs$.
+This is independent of the extension, and its image is fixed
+by $G_C$, so it defines a monoid diagram. A finite set fixed
+by $G_B$ has its intrinsic free hull fixed pointwise: the
+group preserves the hull and permutes its atoms, and every
+atom occurs in one of the fixed words. Hence each $T_S(B)$
+is locally free. Smoothness gives
+$\colim_{\mathcal I}T_S=S$: an open element stabilizer
+contains the pointwise stabilizer of a finite strong set.
+The hom-sets of $A$ are finite, since its structures are finite.
+If $A\in\mathcal F$, Lemma~\ref{G:hullfunctorial} therefore
+makes the comparison for $T_S$ a weak equivalence. Applying
+(G.21)--(G.22) to this diagram proves (G.19).
+
+For (G.20), a locally free monoid $L$ is a filtered union of
+finite free submonoids. Therefore $H_q(BL;\Z)=0$ for $q>1$,
+and $H_1(BL;\Z)=L_{\ab}$. Since $BA$ is contractible, the
+two-row homology spectral sequence gives natural isomorphisms
+\[
+ H_{i+1}(\hocolim_A BN;\Z)
+     \cong L_i\colim_A N_{\ab}\qquad(i>0)
+ \tag{G.23}
+\]
+for every locally free diagram $N$. If the asserted vanishing
+holds for all free diagrams, write $T_S$ as the filtered union
+in Lemma~\ref{G:hullfunctorial}. Abelianization and the bar
+complex commute with this filtered colimit, so the vanishing
+holds for $T_S$; (G.22)--(G.23) give (G.20). The reverse
+direction applies the same identities to an arbitrary free
+diagram and its locally free filtered limit $S$.
+
+The tests (G.19) and (G.20) use only the topological group:
+a topological group isomorphism transports smooth actions,
+orbit simplicial sets, and monoid coinvariants. This proves
+presentation independence among total presentations. Finally
+$\mathcal F\subseteq\mathrm{total}$, and totality itself is
+group invariant by Corollary~\ref{A:totality-group-invariant}.
+Thus if either presentation belongs to $\mathcal F$, both are
+total and the preceding criterion applies; if neither is
+total, neither belongs to $\mathcal F$.
+\end{proof}
+
+The intrinsic criterion narrows the remaining Part G questions;
+it does not decide whether (G.19) always holds or whether
+(G.20) can fail for the particular group of $\Cdelta$.
+
+\subsection{Orders on arbitrary support orbits and the incidence relator}
+
+\begin{theorem}[Proved: invariant tree orders are finite signed lexicographic orders]
+\label{G:alltreeorders}
+Let $F\in\Cdelta$ be finite and strong, and put
+$\Omega_F=\Cdelta(F,M_0)$. Let $\preceq$ be a $G$-invariant
+partial order on $\Omega_F$ whose principal downsets are chains.
+Then there are strong subsets and coordinates
+\[
+ E=B_0\subsetneq B_1\subsetneq\cdots\subsetneq B_d=F,
+ \qquad a_i\in F\setminus B_{i-1},\quad
+ B_i=\operatorname{cl}_F(B_{i-1}\cup\{a_i\}),
+\]
+and signs $\epsilon_i\in\{+1,-1\}$ with the following description.
+Two distinct embeddings are comparable exactly when they agree
+on $E$. Within each such fiber their order is lexicographic:
+at the first $i$ for which their restrictions to $B_i$ differ,
+compare their values at $a_i$, in the raw order if
+$\epsilon_i=+1$ and in its reverse if $\epsilon_i=-1$.
+The equality order corresponds to $E=F$ and $d=0$.
+
+The same assertion holds relative to a fixed embedding of any
+strong $B\subseteq F$, with $G_B$ in place of $G$, and then
+$B\subseteq E$. In particular every comparability component
+of such an order is a chain.
+\end{theorem}
+\begin{proof}
+We use strict comparison $x\prec y$ for $x\preceq y$, $x\ne y$.
+The proof below also works with fixed strong parameters $B$;
+all amalgams and automorphisms then fix those parameters.
+
+\emph{A comparison gives a strong free pair over its equalizer.}
+Suppose $x\prec y$, and choose a finite strong $D$ containing
+$xF\cup yF$. Let $E\subseteq F$ be the coordinate equalizer,
+the set of $a$ with $x(a)=y(a)$. The overlap induces an
+increasing partial isomorphism $\sigma$ of $F$, with strong
+domain and range. Its fixed points are $E$. Let
+$C=\operatorname{cl}_F(E)$. The strong domain and range both
+contain $C$, and $\sigma(C)$ is strong and contains $E$.
+Minimality gives $C\subseteq\sigma(C)$; equal finite cardinalities
+give equality. The order on $C$ makes $\sigma|_C$ the identity,
+so $C=E$. Thus $E$ is strong.
+
+Concatenate copies of $D$, freely amalgamating the second
+$F$-copy of each block with the first of the next by their
+coordinate identification. These are ordered strong amalgams,
+and consecutive endpoint embeddings remain strictly comparable.
+An endpoint coordinate can persist through $m$ blocks only if
+the corresponding $m$-fold partial iterate of $\sigma$ is defined.
+A nonfixed increasing partial-bijection orbit in a finite chain
+is strictly monotone, so it dies within $|F|$ steps. Take at
+least $|F|$ blocks. Their two endpoint $F$-copies therefore
+meet precisely in the common image of $E$. Call this longer
+block $D'$.
+
+Write $\delta_E(X)=\delta(X)-\delta(E)$ for $E\subseteq X$
+and put $d_0=\delta(F)-\delta(E)>0$. Concatenate $r>d_0$
+copies of $D'$ in the same fashion. Denote their successive
+endpoint copies by $F_0,\ldots,F_r$. Adjacent endpoint copies
+meet only in $E$; nonadjacent blocks also meet only in $E$.
+For any induced $X$ containing $F_0\cup F_r$, additivity over
+the free path gives
+\[
+ \delta_E(X)=\sum_{i=1}^{r}\delta_E(X\cap D'_i)
+       -\sum_{i=1}^{r-1}\delta_E(X\cap F_i).
+ \tag{G.24}
+\]
+If $X$ meets every internal $F_i$ outside $E$, the first block
+strictly enlarges its strong left endpoint, and each later
+block adds a point outside its incoming strong $F_{i-1}$.
+The latter statement uses $F_{i-1}\cap F_i=E$.
+Submodularity and strict strongness give an increment at
+least one even when $X$ contains only part of a glue:
+\[
+ \delta(X\cap D'_i)-\delta(X\cap F_{i-1})\ge1.
+\]
+Hence $\delta_E(X)\ge d_0+r>2d_0$.
+If an internal glue is empty outside $E$, cut the path at all
+such glues. Each endpoint component has relative predimension
+at least $d_0$, with equality only for its bare endpoint $F$,
+because that endpoint is strong in the whole path. Every
+other nonempty component has positive relative predimension,
+since $E$ is strong. Thus every strict enlargement of
+$F_0\cup F_r$ has relative predimension greater than $2d_0$.
+The endpoint union is therefore strong. Since $r\ge2$ it is
+the free amalgam of its two $F$-copies over $E$.
+Transitivity retains their comparison. We have proved the
+claimed free-pair reduction.
+
+\emph{An active base has a single first coordinate.}
+Call a strong $E\subsetneq F$ active if some strong free
+$F$-pair over $E$, agreeing there, is comparable. Fix an active
+$E$ and an oriented witness $x\prec y$. For each coordinate
+outside $E$, choose a small raw-order interval around its
+value in $x$, with these intervals mutually disjoint and
+avoiding all coordinates of $y$ outside $E$. Two new copies
+of $F$ in these boxes, freely amalgamated over $E$, each have
+the same pair type with $y$ as $x$ does. They both lie below
+$y$, so they are comparable. Their mutual pair type is
+coordinate-separated: every coordinate of one copy and the
+corresponding coordinate of the other lie in one of the
+chosen disjoint boxes.
+
+For coordinate-separated free pairs over $E$, the pair type
+depends only on which of the two values is smaller at each
+coordinate in $F\setminus E$. Thus comparison is a function
+of this finite sign pattern. From the local comparison just
+obtained, put two lower copies in the same prescribed
+coordinate half-boxes below one upper copy. Their mutual
+sign pattern can be arbitrary. The chain-downset property
+therefore forces comparability for every sign pattern.
+Asymmetry gives exactly one orientation for each pair of
+opposite patterns.
+
+Here is the elementary finite-coordinate order argument.
+Reverse the social comparison if necessary so that unanimous
+coordinate increase implies increase. For the finite coordinate
+set $I=F\setminus E$, let $\mathcal U\subseteq\mathcal P(I)$
+consist of the sets of coordinates at which the first tuple
+is smaller when that tuple precedes the second. Exactly one
+of $A,A^c$ belongs to $\mathcal U$, and $I\in\mathcal U$.
+If $A\subseteq C$ and $A\in\mathcal U$, realize three tuples
+whose comparison sign sets for $(x,y),(y,z),(x,z)$ are
+$A,I,C$: use the coordinate orders $x<y<z$ on $A$,
+$y<x<z$ on $C\setminus A$, and $y<z<x$ outside $C$.
+Transitivity gives $C\in\mathcal U$.
+If $A,C\in\mathcal U$, realize the corresponding sign sets
+$A,C,A\cap C$ using respectively
+\[
+ x<y<z,\quad z<x<y,\quad y<z<x,\quad z<y<x
+\]
+on $A\cap C,A\setminus C,C\setminus A,I\setminus(A\cup C)$.
+Transitivity gives $A\cap C\in\mathcal U$.
+All these profiles are realizable by strong free copies in
+the disjoint coordinate boxes. Thus $\mathcal U$ is a proper
+ultrafilter on a finite set, hence consists exactly of the
+subsets containing one coordinate $a$. Returning to the
+original comparison, there is a sign $\epsilon$ such that
+every coordinate-separated pair is ordered by its values
+at $a$, with that sign.
+
+The same rule holds for every strong free pair over $E$.
+Realize its combined raw order by real coordinates, keeping
+the coordinates of $E$ fixed. The two tuples lie in the same
+open cell of strictly increasing coordinates in the prescribed
+$E$-gaps. The straight segment between them stays in that cell.
+When their values at $a$ are in the chosen signed order,
+subdivide this segment finely enough that successive tuples
+are coordinate-separated. Choose the finitely many intermediate
+parameters generically to avoid all unintended coordinate
+coincidences; each coordinate varies strictly because the
+endpoints are disjoint outside $E$. Realize this finite raw
+order as a free amalgam of $F$-copies over $E$, over the given
+endpoint pair. Each consecutive comparison has the chosen
+orientation, so transitivity proves the rule for the endpoints.
+
+Finally let $x,y$ be arbitrary embeddings agreeing on $E$,
+with distinct values at the pivot $a$. Take a finite strong
+set containing both images, and freely adjoin one $F$-copy
+$z$ over $E$, with $z(a)$ strictly between $x(a)$ and $y(a)$.
+The pairs $(x,z)$ and $(z,y)$ are strong free pairs over $E$:
+free amalgamation preserves the strong subobjects $xF,yF$.
+The rule just proved therefore compares $x,z,y$ in order.
+Thus every active base gives the global signed pivot rule,
+even for pairs with additional overlaps or relations.
+
+\emph{The least active base and the successive pivots.}
+Active bases are closed under intersection. For active
+$D_1,D_2$, fix an upper $F$-copy $y$. Freely adjoin an
+$F$-copy $x_i$ over its restriction to $D_i$, choosing the
+signed pivot of $D_i$ below that of $y$. Then $x_i\prec y$.
+The two new copies have coordinate equalizer exactly
+$D_1\cap D_2$. They are comparable by the chain-downset
+property, and the free-pair reduction makes their equalizer
+active. There are only finitely many strong subsets of $F$,
+so, if any comparison exists, there is a least active base $E$.
+The equalizer of every comparable pair is active by the
+first step; hence comparable pairs agree on $E$.
+
+Within an $E$-fiber, distinct pivot values have already been
+compared. If two distinct embeddings have the same pivot
+value, freely adjoin over $E$ an upper copy with its signed
+pivot above that common value. Both original embeddings
+lie below it, so they too are comparable. Thus each
+$E$-fiber is a chain and is exactly a comparability component.
+
+Put $B_1=\operatorname{cl}_F(E\cup\{a\})$.
+Agreement on $E$ and $a$ is equivalent to agreement on $B_1$:
+the overlap partial isomorphism fixes the former set, and
+the finite ordered closure argument used above makes it
+fix the latter pointwise. If $B_1\ne F$, restrict to the
+embeddings extending one fixed $B_1$-embedding. Their order
+is total and $G_{B_1}$-invariant. The argument above, with
+$B_1$ as fixed base, supplies the next signed pivot outside
+$B_1$. Iterating strictly enlarges the finite strong base,
+and terminates at $F$. This gives exactly the asserted
+signed lexicographic rule. If there was no strict comparison,
+take $E=F$.
+\end{proof}
+
+\begin{theorem}[Proved: the full incidence group relator has no nonconstant positive realization]
+\label{G:noincidencelift}
+Let $S$ be any smooth locally free $G$-monoid for
+$G=\Aut(M_0)$ of $\Cdelta$. Let $x\mapsto u_x$ and
+$x\mapsto v_x$ be $G$-equivariant maps from the orbit
+$\Omega$ of strong singletons to $S$. Suppose that for
+every strong ordered hyperedge $a<b<c$,
+\[
+ u_bu_a^{-1}v_c v_a^{-1}=1\quad\text{in }S^{\gp}.
+ \tag{G.25}
+\]
+Then both families are constant. In particular the DF D.4
+free-group diagram has no free-monoid lift over all of
+$\Cdelta$ with these nonconstant point generators, even after
+allowing arbitrary extra free generators and arbitrary
+rectangle factorizations at the hyperedges.
+\end{theorem}
+\begin{proof}
+The separation argument of Proposition~\ref{G:separation}
+applies to these data as well. We explain the only extension
+of its hypotheses. A locally free $S$ is the filtered union
+of its finite free charts, and its group completion is their
+filtered group colimit. A finite collection of group
+equalities is therefore witnessed in a later finite free
+chart, by choosing charts containing all the required words
+and then the finitely many equality witnesses. Positive
+elements embed in $S^{\gp}$: an equality between positive
+words in a later free group is an equality in its free
+monoid. Thus the word-length and cancellation arguments
+there are valid here. Supports and the strong-singleton
+tree-order argument are unchanged. Consequently either
+both families are constant already, or all the same-family
+and cross-family distinct-point values are pairwise
+incomparable on both sides.
+
+Assume the latter case. At one strong edge $a<b<c$, choose
+a finite free chart witnessing (G.25). The words $u_a,v_c$
+are not prefix-comparable. Remove their longest common
+prefix $p$ in this chart, writing $u_a=pq$ and $v_c=ps$,
+where $q,s$ have distinct first letters. In the reduced word
+$u_bq^{-1}s v_a^{-1}$, all of $q^{-1}$ must cancel against
+the end of $u_b$. Hence for a positive word $r$,
+\[
+ u_a=pq,\qquad u_b=rq,\qquad
+ v_c=ps,\qquad v_a=rs.
+ \tag{G.26}
+\]
+The factors belong to $S$ and have finite strong supports;
+they need not be supported on the edge itself.
+
+Consider the orbit $P=G\cdot p$ with prefix order. If $p$ is
+$G$-fixed this is already a chain. Otherwise (Op) identifies
+its stabilizer with $G_F$ for a nonempty finite strong $F$,
+so its orbit is $\Omega_F$. Prefix order has chain principal
+downsets by Levi's lemma in finite free charts. By
+Theorem~\ref{G:alltreeorders}, its comparability components
+are chains. Since $p$ prefixes $u_a$, every element of
+$G_a\cdot p$ prefixes $u_a$; these elements are pairwise
+comparable. Thus $G_a$ stabilizes the component of $p$.
+Likewise $p$ prefixes $v_c$, so $G_c$ stabilizes that component.
+The stabilizer-generation identity gives
+$\langle G_a,G_c\rangle=G$, because $a\ne c$ are strong
+singletons. Therefore $P$ has only one component and is a
+global chain. Applying the same argument to $r$, using its
+upper words $u_b$ and $v_a$, proves that $R=G\cdot r$ is
+also a global chain.
+
+There is a comparison between these two chains: choose
+$h\in G$ with $h(b)=a$. Both $p$ and $hr$ prefix $u_a$.
+We use a general tree-order observation. If two invariant
+transitive orbits $P,R$ are chains and some $p\in P$ lies
+below some $r\in R$, the set of $P$-elements lying below
+some $R$-element is nonempty and invariant, hence equals $P$.
+For arbitrary $p'\in P,r'\in R$, choose $r''\in R$ above
+$p'$. Compare $r',r''$ in their chain. Either $p'\preceq r'$
+by transitivity, or $p',r'$ both lie below $r''$ and are
+comparable by the chain-downset property. Reversing the
+roles handles the other initial orientation. Hence every
+element of $P$ is comparable with every element of $R$.
+In particular $p$ and $r$ are prefix-comparable.
+
+If they are distinct, their prefix orientation is strict and
+is preserved by every $g\in G$. Transport (G.26) to the six
+strong edges of the eleven-vertex structure (G.10), choosing
+an automorphism for each edge. All transported point words
+are the prescribed $u_x,v_x$ by equivariance. Put these
+finitely many factors, and their strict prefix quotients,
+in one finite free chart. For $e=(a,b,c)$ its word lengths
+satisfy
+\[
+ \tau_e=|u_b|-|u_a|=|r_e|-|p_e|
+       =|v_a|-|v_c|.
+\]
+All six $\tau_e$ have one strict sign. The two exact cycle
+identities (G.11) give
+$\tau_1+\tau_2+\tau_4+\tau_5=0$, a contradiction.
+Thus $p=r$. Equation (G.26) gives $u_a=u_b$ and $v_a=v_c$.
+An equivariant strong-singleton family with equal values at
+two distinct points is constant, by
+$\langle G_a,G_b\rangle=G$ and the analogous identity for
+$a,c$. This contradicts the nonconstant case and proves
+the theorem.
+\end{proof}
+
+Theorem~\ref{G:noincidencelift} excludes the full DF incidence
+group-relator route, rather than only a chosen word pattern.
+It does not assert that every nonzero $T_1(M_{\ab})$ would
+produce that relator. The arbitrary abelianization and
+comparison questions remain separate gates.
+
+\subsection{A finite obstruction to the natural-order word lift}
+
+\begin{proposition}[Proved: the natural-order pullback bases do not lift to words]
+\label{G:natural-order-fiber-obstruction}
+For the independently ordered punctured $\mathbb F_2$-vector-space
+category, let
+\[
+ N(B)=\mathbb Z^{\mathcal T(B)}
+\]
+be the natural-order function diagram from
+Proposition~\ref{A:ordered-vector-integral-torsion}, with its
+point-indicator bases. There is no free-monoid diagram with these
+specified free bases whose abelianization maps are the pullback
+maps of $N$. The obstruction already occurs on one finite
+commuting diagram with objects of dimensions one, two, and three.
+This assertion does not exclude a different choice of bases or a
+stabilized positive realization of a different diagram.
+\end{proposition}
+\begin{proof}
+Let $V$ be the punctured one-dimensional space, let $P$ be the
+punctured two-dimensional space ordered $x_1<x_2<x_3$, and let
+$Q$ be the punctured three-dimensional space with its binary labels
+in the reference order $1<2<\cdots<7$. Define
+\[
+ a(P)=(1,2,3),\qquad b(P)=(1,4,5),
+ \qquad v:V\to P,\quad v(V)=x_1.
+\]
+These are increasing linear embeddings and $av=bv$. The sets
+of auxiliary natural orders have respective sizes $1,6,168$.
+In the point-indicator bases the pullback of one order of $P$ is
+the sum of all $28$ orders of $Q$ restricting to it.
+
+Any word with this abelianization must list exactly those $28$
+distinct generators, once each. Similarly the image of the sole
+generator at $V$ in the free monoid at $P$ must list all six
+generators once. Functoriality along $av=bv$ would therefore give
+one word listing the $168$ generators at $Q$, in which every fiber
+of either restriction $\mathcal T(Q)\to\mathcal T(P)$ is a
+contiguous block. Thus the two six-part restriction partitions
+would both be interval partitions of one linear order.
+
+Two interval partitions with six nonempty blocks each have at
+most $6+6-1=11$ nonempty pairwise intersections: their combined
+ten interior cuts divide the line into at most eleven intervals.
+Here all $36$ intersections are nonempty. In the six order types
+\[
+ 012,\ 021,\ 102,\ 120,\ 201,\ 210
+\]
+on the locally indexed points of each plane, exact enumeration of
+the $168$ ordered bases gives the joint fiber cardinalities
+\[
+ \begin{pmatrix}
+ 10&10&2&2&2&2\\
+ 10&10&2&2&2&2\\
+ 2&2&8&4&8&4\\
+ 2&2&4&8&4&8\\
+ 2&2&8&4&8&4\\
+ 2&2&4&8&4&8
+ \end{pmatrix}.
+\]
+Every entry is positive and every row and column sums to $28$.
+The attached exhaustive script constructs each natural order by
+an ordered basis and verifies this matrix with integer arithmetic.
+The interval-partition bound is contradicted, proving the claim.
+\end{proof}
+
+\subsection{A twisted lift beyond the excluded group relator}
+
+\begin{example}[Proved: a twisted finite lift with both global cut chains]
+\label{G:twisted-finite}
+The positive pattern
+\[
+ u_a=pq,\qquad u_b=rq,\qquad v_c=sp,\qquad v_a=sr
+ \tag{G.27}
+\]
+has the incidence relation
+$[u_b]-[u_a]+[v_c]-[v_a]=0$ after abelianization,
+but its four core words are freely independent in the free group
+on $p,q,r,s$. There is a free-monoid diagram on the full
+subcategory of $\Cdelta$ with objects $V,W,X_{11}$ from (G.10),
+with ranks $2,6,1213$, in which every edge has form (G.27), all
+transition homomorphisms are injective, the twenty-two point
+words are pairwise bifix, and their only integral linear
+relations are the six prescribed incidence relations.
+Moreover, the six $q$-values form one strict suffix chain and
+the six $s$-values one strict prefix chain, both ordered by the
+signed lexicographic flag $(-a,-b)$ on an edge $(a,b,c)$.
+The existence of an extension to all of $\Cdelta$ is not asserted.
+\end{example}
+\begin{proof}
+The count relation is immediate from (G.27). Folding the four
+positive loops $pq,rq,sp,sr$ yields three vertices and six
+unoriented edges, hence a subgroup of rank four. More explicitly,
+the vertices are $0,x,y$ and the positive edges are
+\[
+ 0\xrightarrow{p,r}x,\quad x\xrightarrow q0,
+ \quad0\xrightarrow s y,\quad y\xrightarrow{p,r}0.
+\]
+No further fold is possible. Choose the tree edges $0\xrightarrow p x$ and $0\xrightarrow s y$.
+The remaining edges give the basis
+$A=pq$, $B=rp^{-1}$, $C=sp$, $D=sr$; the four core words
+are $A,BA,C,D$, which are again a free basis since
+$B=(BA)A^{-1}$. The original DF
+relator reduces to
+$r p^{-1}s p r^{-1}s^{-1}$, which is nonempty.
+
+We specify the larger finite example completely by labelled
+word positions and identifications, without listing all 2898
+positions separately. Write $U_i,V_i$ for initial formal words
+with distinct position labels, of lengths
+\[
+\begin{split}
+ (|U_i|)_{i=1}^{11}&=(124,126,133,129,130,132,139,134,131,128,134),\\
+ (|V_i|)_{i=1}^{11}&=(134,140,131,133,129,135,127,129,132,133,135).
+\end{split}
+\]
+Number all their positions consecutively, starting at $1$, in
+the order $U_1,\ldots,U_{11},V_1,\ldots,V_{11}$. In the edge order
+\[
+ (1,2,9),\ (2,3,10),\ (3,4,11),\ (1,4,5),\ (5,6,7),\ (7,8,9),
+\]
+take the block lengths
+\[
+\begin{array}{c|rrrrrr}
+ &0&1&2&3&4&5\\\hline
+ |p|&18&58&84&37&100&128\\
+ |q|&106&68&49&87&30&11\\
+ |r|&20&65&80&42&102&123\\
+ |s|&114&75&51&92&27&4
+\end{array}
+\]
+For each edge, identify corresponding positions in the two
+occurrences of each of $p,q,r,s$ in (G.27). In addition,
+identify every $q$-block with the suffix of the $q$-block of
+edge $0$ having the same length, and identify every $s$-block
+with the prefix of the $s$-block of edge $0$ having the same
+length. Take the equivalence relation generated by exactly
+these identifications. Its $1213$ classes are the alphabet of
+$M(X_{11})$; each $U_i,V_i$ becomes the word of its successive
+classes. Put $M(V)=\langle u,v\rangle^*$ and
+$M(W)=\langle p,q,r,s,d,e\rangle^*$, with point maps
+\[
+ (u_1,v_1)=(pq,sr),\quad (u_2,v_2)=(rq,e),
+ \quad (u_3,v_3)=(d,sp).
+\]
+For an edge $(a,b,c)$, map $p,q,r,s$ to its indicated blocks,
+$d$ to $U_c$, and $e$ to $V_b$. Map the point $i$ to
+$(U_i,V_i)$. The defining identifications verify all composition
+identities. These are all arrows and compositions in the stated
+finite full subcategory.
+
+Here are compact exact rank certificates. Give an alphabet
+class its least position label. The point-count matrix has a
+$16\times16$ minor of determinant $1$, with rows
+\[
+ 1,2,3,4,5,6,7,9,10,11,12,13,14,15,17,19
+\]
+and columns
+\[
+ 1,19,38,57,76,95,114,125,251,513,1048,1179,1307,1846,2108,2370.
+\]
+The six edge matrices have nonzero unit minors with respective
+column sets
+\[
+\begin{array}{c|l|r}
+0&1,19,125,251,384,1048&1\\
+1&19,38,57,251,643,1179&1\\
+2&38,57,76,643,1307,1846&1\\
+3&1,38,95,125,643,1846&1\\
+4&1,19,95,513,775,2108&-1\\
+5&1,114,513,1048,1441,2370&-1
+\end{array}
+\]
+where the last column is the determinant. Thus each edge
+map has full abelian rank six; the defect theorem makes its
+six images a code, so the monoid map is injective. The point
+maps are injective as well. The relation matrix $D$, with
+rows $u_b-u_a+v_c-v_a$, has determinant $-1$ on columns
+$1,2,3,5,7,13$, so its image is primitive of rank six.
+It lies in the kernel of the point-count map, whose rank is
+sixteen. The primitive rank-six subgroup is therefore the
+whole integral kernel.
+
+The two exact verification scripts supplied with this example
+reconstruct and check every word composition, both global chains,
+pairwise bifixness, the class count, and all the displayed minors
+with integer arithmetic; their saved data include every full word.
+The chain order of the six edges is $5,4,2,1,3,0$, which is
+exactly increasing $(-a,-b)$. This proves all the finite claims.
+\end{proof}
+
+For any global realization of (G.27) in a smooth locally free
+$G$-monoid, Theorem~\ref{G:alltreeorders} and (St) force the
+$q$-orbit to be one suffix chain: its $G_a$ and $G_b$ orbits
+are suffixes of the fixed words $u_a,u_b$, so both stabilizers
+preserve its comparability component, and together generate
+$G$. The $s$-orbit is similarly one prefix chain, using
+$v_a,v_c$. Example~\ref{G:twisted-finite} shows that imposing
+these two necessary global-chain conditions does not by itself
+exclude even the full $X_{11}$ configuration. The mixed roles
+of $p,r$, prefix in a $u$-word and suffix in a $v$-word, prevent
+us from applying Theorem~\ref{G:noincidencelift}. Compatibility
+under all further strong embeddings remains the unproved step.
+
+\subsection{The remaining universal question}
+
+The gap theorem settles the first prescribed test, including the
+full category's non-strong raw points.  Propositions
+\ref{G:saturation} and \ref{G:divisibility} reduce a possible
+counterexample to a finite-rank injective diagram whose smooth
+locally free monoid admits a proper factor in the same $G$-orbit.
+Proposition~\ref{G:idempotent} further forces its ordinary
+monoid colimit to contain a nonidentity idempotent, with the
+two absorption relations (G.7).
+Proposition~\ref{G:boundedrank} excludes every uniform finite
+rank bound, and forces infinite rational rank even after the
+filtered colimit over inclusions.
+The gap example has precisely such proper-factor phenomena, yet
+passes; that necessary condition is not a sufficient obstruction.
+Its ordinary colimit is the monoid in presentation (G.5), with
+the nonidentity idempotent $e$.  It is its classifying space,
+not that monoid, which is equivalent to the classifying space
+of the free group in (G.3).
+Theorem~\ref{G:embeddinggaps} also excludes every gap diagram
+on a lexicographic embedding action of a fixed strong source,
+even though its ordinary colimit can have arbitrarily long
+finite chains of nonidentity idempotents.
+For the general class $\mathcal F$, Proposition
+\ref{G:generalcomparison} excludes rank-one separators over
+all total indices, while Proposition~\ref{G:boundedcoefficients}
+forces any abelianization obstruction on such an index to
+escape every global finite rank bound. Proposition~\ref{G:boundedtarget}
+also rules out absorption in the bounded-rank colimit.
+Theorem~\ref{G:groupcriterion} replaces the remaining comparison
+and homology questions by the intrinsic smooth locally free
+$G$-monoid tests (G.19)--(G.20), and proves their independence
+of the total Fra\"iss\'e presentation. It does not establish
+that all such tests pass. Theorem~\ref{G:alltreeorders}
+classifies every invariant tree order on a finite-support orbit.
+Its application in Theorem~\ref{G:noincidencelift} excludes the
+entire original DF incidence group-relator construction, including
+all rectangle factorizations and extra positive generators. It is
+not proved that an arbitrary nonzero derived abelianization class
+would yield that particular relator. Example~\ref{G:twisted-finite}
+keeps a different positive lift of the abelian incidence relation
+alive on the complete finite $V,W,X_{11}$ test, including the two
+necessary global cut chains. Its extension under all further strong
+embeddings remains unproved.
+
+At the present checkpoint we have not proved or refuted the
+existence of $M:A\to\FreeMon$ with
+$L_1\colim_A M_{\ab}\ne0$, nor the universal comparison assertion
+for $A$, nor strictness of either inclusion
+$\mathrm{exact}\subseteq\mathcal F\subseteq\mathrm{total}$.
+The exact outstanding assertions and attempted constructions are
+kept in \texttt{notes/G\_progress.md}; none of these three assertions
+is asserted as a theorem here.
+
+\paragraph{Literature checked.}
+Fiedorowicz's opened Proposition 4.4 identifies asphericity of a
+monoid classifying space with the vanishing of the positive Tor
+groups of its group-completion module \cite{GFiedorowicz1984}.
+This is a criterion for the target, not a proof of our comparison.
+Gray--Steinberg, Remark 4.11, gives the explicit counterexample to
+Fiedorowicz's flatness Lemma 5.2(a) \cite{GGraySteinberg2024}; we
+have not used that lemma or its dependent amalgamation argument.
+Holub's revised Lemma 3 proves freeness of the coincidence monoid
+of nonerasing word morphisms \cite{GHolub2003}.  Its common-boundary
+factorization checks a local overlap, but does not supply the
+higher coherences needed for the universal assertion.
+Searches for ``exact colimits free monoids'', ``totally aspherical
+free monoids'', ``free monoids homotopy colimit'', and ``locally
+free monoids homology'' did not locate the gap theorem or settle
+the remaining assertion.  This is a search report and carries
+no claim of priority.
+
+\subsection{Positive abelian antichains and synchronized twisted cuts}
+
+\begin{lemma}[Proved: all invariant orders on strong singletons]
+\label{G:singletonpartial}
+Every $G$-invariant partial order on the strong-singleton orbit
+$\Omega$ is equality, the raw linear order, or its reverse.
+No assumption on principal downsets is required.
+\end{lemma}
+\begin{proof}
+Suppose $x\prec y$ with $x\ne y$, and choose a finite strong
+$D$ containing them. First suppose $x<y$ in the raw order.
+Form a path of four free copies $D_1,\ldots,D_4$, identifying
+$y$ in $D_i$ with $x$ in $D_{i+1}$. Denote the five distinguished
+vertices by $x_0,\ldots,x_4$. Each gluing is over a strong
+singleton. The raw orders extend with
+$x_0<x_1<\cdots<x_4$, and invariance and transitivity give
+$x_0\prec x_4$.
+
+We verify that the endpoint pair is strong. For a subset $Y$
+containing both endpoints, if all three internal gluing vertices
+belong to $Y$, each $Y\cap D_i$ contains two distinct strong
+singletons, so $\delta(Y\cap D_i)\ge3$. Consequently
+$\delta(Y)\ge4\cdot3-3\cdot2=6>4$.
+If an internal gluing vertex is missing, cut the path at every
+such vertex. The two endpoint components each have predimension
+at least $2$, with equality only when that component is its bare
+endpoint: the first nontrivial extension of a strong singleton
+has strictly positive increment, and subsequent free pieces have
+nonnegative increment. Every nonempty middle component has
+positive predimension. Thus every strict enlargement of the
+endpoint pair has predimension greater than $4$.
+The pair is therefore a strong copy of the ordered two-point
+structure with no edge. Homogeneity now gives $a\prec b$ for
+every free strong pair $a<b$.
+
+For arbitrary strong singleton points $a<b$, choose a finite
+strong support containing them and freely adjoin an isolated
+point $z$ between them. Both $\{a,z\}$ and $\{z,b\}$ are strong
+free pairs, so $a\prec z\prec b$. This proves the raw linear
+order. The case $y<x$ gives its reverse by the same construction.
+If there was no distinct comparable pair, the order was equality.
+\end{proof}
+
+\begin{proposition}[Proved: abelian antichains synchronize the twisted cuts]
+\label{G:twisted-synchronization}
+Let $S$ be a smooth locally free $G$-monoid, and let
+$x\mapsto u_x$ and $x\mapsto v_x$ be equivariant maps from
+$\Omega$ to $S$. Suppose that in $S_{\ab}$
+\[
+ [u_b]-[u_a]+[v_c]-[v_a]=0
+\]
+for every strong ordered edge $(a,b,c)$.
+Then either both abelianized point families are constant, or
+both are injective and are antichains for the pointed cone
+$P=\operatorname{im}(S\to S_{\ab})$.
+
+Assume the nonconstant case. If equivariant edge factors
+$p_e,q_e,r_e,s_e\in S$, for $e=(a,b,c)$, satisfy
+\[
+ u_a=p_eq_e,\qquad u_b=r_eq_e,\qquad
+ v_c=s_ep_e,\qquad v_a=s_er_e,
+\]
+then each of $q_e,s_e$ has full strong support $e$.
+Their respective suffix and prefix orders are global linear
+orders on the edge orbit, and they have exactly the same
+signed two-coordinate lexicographic flag. Thus only the
+$24$ identical-flag regimes remain possible, among the $576$
+pairs of flags.
+\end{proposition}
+\begin{proof}
+The cone $P$ is closed under addition, is pointed, and the
+abelianization of a nonidentity element of $S$ is nonzero.
+Indeed, every finite assertion is witnessed in a finite free
+chart, and passage to a larger chart sends each nonempty word
+to a nonempty word. A nonzero vector with nonnegative coordinates
+cannot become zero, or become the negative of another such
+vector, at a later chart.
+
+For either point family, equality at two different points makes
+its common value fixed by both singleton stabilizers. By (St)
+these generate $G$, so the whole family is constant. If one
+abelianized family is constant, the edge identity gives equality
+of the other family at two distinct points, so both are constant.
+Otherwise both maps to $S_{\ab}$ are injective. Pulling back the
+order defined by $P$ gives invariant partial orders on $\Omega$.
+By Lemma~\ref{G:singletonpartial}, a single strict comparison
+would make the corresponding family strictly increasing or
+strictly decreasing in raw order. On the six-edge object
+(G.10), write $\tau_e=[u_b]-[u_a]=[v_a]-[v_c]$.
+The integral identity (G.11) says
+$\tau_1+\tau_2+\tau_4+\tau_5=0$.
+Strict monotonicity of either family puts all four nonzero
+summands in $P$, or all in $-P$, which contradicts pointedness.
+Both families are therefore antichains.
+
+The suffixes of any one word in $S$ are linearly ordered,
+as are its prefixes; this follows in a common free chart.
+The $G_a$ and $G_b$ orbits of $q_e$ lie among the suffixes
+of $u_a$ and $u_b$, respectively. Each stabilizer preserves
+the comparability component of $q_e$, and (St) makes that
+component the whole $G$-orbit. Theorem~\ref{G:alltreeorders}
+therefore makes this orbit one suffix chain. Likewise the
+$G_a$ and $G_c$ orbits of $s_e$ lie among prefixes of
+$v_a,v_c$, and its whole orbit is one prefix chain.
+Set $Q_e=[q_e]$, $S_e=[s_e]$ and
+\[
+ H_e=S_e-Q_e=[v_c]-[u_a]=[v_a]-[u_b].
+\]
+If $e,f$ share their $a$ coordinate and their two chain orders
+have opposite strict directions, or one is a tie and the other
+is strict, then $H_e-H_f$ or its negative is a nonzero element
+of $P$. It equals $[v_c]-[v_{c'}]$, contradicting the antichain
+property. The same argument for a shared $c$ uses
+$-[u_a]+[u_{a'}]$, and for a shared $b$ uses
+$[v_a]-[v_{a'}]$. Thus the two chain comparisons, including
+ties, agree on every fiber of each of the three coordinate maps.
+
+By (Op), a stabilizer of an edge factor is the pointwise
+stabilizer of a strong subset of its edge. The proper strong
+subsets of a three-point edge are the empty set and its three
+singletons. Suppose $q_e$ has such a proper support. Choose a
+singleton coordinate $x$ whose stabilizer fixes $q_e$.
+The fiber comparison just proved makes $s_e$ fixed by $G_x$
+as well. If $x=a$, cancellation in $v_a=s_er_e$ makes $r_e$
+fixed by $G_a$, and $u_b=r_eq_e$ is then fixed by both
+$G_a,G_b$. If $x=b$, cancellation in $u_b=r_eq_e$ makes
+$r_e$ fixed by $G_b$, and $v_a=s_er_e$ is fixed by both
+$G_a,G_b$. If $x=c$, cancellation in $v_c=s_ep_e$ makes
+$p_e$ fixed by $G_c$, and $u_a=p_eq_e$ is fixed by both
+$G_a,G_c$. In every case (St) makes a point word globally
+fixed, contradicting the nonconstant abelianized case.
+Thus $q_e$ has full edge support. The same argument begins
+with a proper support of $s_e$, since the fiber comparisons
+include ties, so $s_e$ has full edge support too.
+
+Theorem~\ref{G:alltreeorders} now identifies each chain with a
+signed lexicographic order on two distinct coordinates of the
+edge: the closure of one coordinate is its singleton and the
+closure of any two coordinates is the whole edge. These flags
+are determined by their restrictions to the three
+single-coordinate fibers. Indeed, if their first pivots differ,
+fix the third coordinate and place two free edge copies over
+that singleton so that the other two coordinate comparisons
+make the proposed first-pivot decisions disagree. If their
+first pivots agree but their signs differ, fix any other
+coordinate and vary the first. Finally, if the first pivot and
+sign agree, fix that coordinate; arbitrary sign patterns on
+the two remaining coordinates distinguish different second
+pivots or different second signs. Each such placement exists
+by ordered free amalgamation over the fixed singleton, with
+small independent coordinate intervals. The fiber agreements
+force equality of both flags, as claimed.
+\end{proof}
+
+This excludes different global cut flags for the twisted
+incidence construction, without excluding its remaining
+identical-flag regimes. Proposition~\ref{G:twisted-finite}
+provides an exact finite model in one such regime. No global
+extension, nonzero derived class, or unrestricted comparison
+conclusion is asserted here.
+
+\subsection{Canonical ordered cuts and their stabilizers}
+
+\begin{proposition}[Proved: bounded cut stabilizers are locally cyclic]
+\label{G:cutstabilizers}
+Let $S$ be any locally free monoid, of arbitrary cardinality, and
+put $K=S^{\gp}$. The map $S\to K$ is injective, $K$ is locally
+free as a group, and
+\[
+ x\le y\quad\Longleftrightarrow\quad x^{-1}y\in S
+ \qquad(x,y\in K)
+\]
+is a left-invariant partial order with linearly ordered intervals
+and the interpolation property
+\[
+ x_1,x_2\le y_1,y_2
+ \quad\Longrightarrow\quad
+ \exists k\in K\quad x_1,x_2\le k\le y_1,y_2.
+\]
+For $E\subseteq K$, write $E^u$ and $E^l$ for its common upper
+and lower bounds. A bounded Dedekind--MacNeille cut is a pair
+$c=(D,U)$ satisfying
+\[
+ D=U^l\ne\varnothing,\qquad U=D^u\ne\varnothing.
+\]
+Its stabilizer $K_c=\{g\in K:gD=D\}$ under left translation
+maps injectively to $K_{\ab}=S_{\ab}$ and is locally cyclic.
+
+If a topological group $G$ acts smoothly on $S$ by monoid
+automorphisms, its induced action on the cuts obtained from
+principal cuts by finitely many bounded meets and joins is
+smooth. For $G=\Aut(M_0)$ of $\Cdelta$, let $\mathscr D$ be
+any invariant smooth set of bounded cuts. Each cut stabilizer
+$G_c$ fixes $K_c$ pointwise. Consequently, for every unital ring
+$R$, including the zero ring, the coefficient diagram
+\[
+ N_R(B)=\bigoplus_{c\in\mathscr D^{G_B}}
+            R\otimes_{\Z}K_c
+\]
+has $L_i\colim_{\Cdelta}N_R=0$ for every $i>0$.
+The transition along an embedding extended by $g\in G$ sends
+the summand at $c$ to the summand at $gc$ by $1\otimes g$.
+These assertions do not assert that this cut completion is a
+tree or supplies an acyclic interval resolution.
+\end{proposition}
+\begin{proof}
+Finite free submonoids containing prescribed finite subsets
+form a directed system with union $S$. Group completion
+preserves its colimit. A finite positive equality in $K$ is
+therefore witnessed in the group completion of a later free
+chart, where positive words embed; hence $S\to K$ is injective.
+The same finite-chart argument proves cancellation and conicality
+in $S$, so the displayed relation is a partial order.
+After translating an interval $[a,b]$ by $a^{-1}$, its points
+are prefixes in $S$ of $a^{-1}b$. Levi's lemma in a common
+free chart makes these prefixes linearly ordered.
+
+We give the group-freeness check without assuming that chart
+inclusions induce injective homomorphisms of free groups.
+Fix finitely many positive elements of $S$. In each later free
+chart, the subgroup they generate is finitely generated free,
+by the covering-graph proof of the subgroup theorem. Its rank
+is bounded by the size of the tuple. Maps between these image
+subgroups are surjective, so after their rank attains its minimum
+they are surjections between free groups of equal finite rank.
+Such maps are isomorphisms. For completeness, a finitely
+generated residually finite group is Hopfian: if a surjection
+$\phi$ killed $g\ne1$, choose a finite-index normal subgroup
+$N$ avoiding $g$. There are finitely many subgroups of that
+index, so two subgroups $\phi^{-i}N$ coincide; surjectivity then
+gives $N=\phi^{-d}N$ for some $d>0$, contrary to
+$g\in\ker\phi\subseteq\phi^{-d}N$. A free group is residually
+finite directly: realize a nontrivial reduced word as a path
+on finitely many distinct vertices, extend the partial bijections
+specified by each generator along that path to permutations,
+and the resulting finite permutation image does not kill the
+word. Thus the image subgroup of our tuple in $K$ is free.
+Every finite tuple of elements of $K$ lies in a subgroup generated
+by finitely many positive elements, proving local freeness.
+
+For interpolation, represent the four vertices and all four
+positive increments $x_i^{-1}y_j$ in a free chart and enlarge
+it until their finitely many group equalities hold. In the
+oriented Cayley tree of that free group, the four directed paths
+from the two lower vertices to the two upper vertices have a
+common intermediate vertex: their incoming portions merge
+before their outgoing portions split. Its image in $K$ is the
+required $k$.
+
+We will also use positive nonvanishing:
+\[
+ s\in S,\quad [s]=0\text{ in }S_{\ab}
+ \quad\Longrightarrow\quad s=1.
+\]
+Indeed $S_{\ab}$ is the filtered colimit of the free abelian
+chart groups. A nonempty positive word has a nonzero vector
+with nonnegative coordinates, and every subsequent chart
+inclusion sends it to a nonempty word. Its class cannot vanish.
+
+Fix a bounded cut $(D,U)$. We first prove a cut dichotomy.
+If $a\in D$, $b\in U$ and $a\le k\le b$, then
+$k\in D\cup U$. If $k\notin D$, choose $u'\in U$ such that
+$k\not\le u'$. For any $z\in D$, interpolation supplies
+$h$ with $a,z\le h\le b,u'$. The elements $h,k$ lie in the
+linearly ordered interval $[a,b]$. The inequality $k\le h$
+would imply $k\le u'$, so $h<k$ and hence $z\le k$.
+Thus $k$ is above all of $D$, which means $k\in U$.
+
+It follows that either $D$ is upward directed or $U$ is
+downward directed. If $D$ is not directed, choose $x,y\in D$
+with no common upper bound in $D$. For any $u,v\in U$,
+interpolation gives $x,y\le k\le u,v$. The cut dichotomy
+places $k$ in $D\cup U$, and the choice of $x,y$ excludes
+$D$. Thus $k\in U$ is a lower bound of $u,v$ within $U$.
+
+Let $g\in K_c$, which also preserves $U$. If $D$ is directed,
+fix $a\in D,b\in U$ and choose $x\in D$ with
+$x\ge a,g^{-1}a$. Then $x,gx\in[a,b]$, so they are comparable.
+If instead $U$ is downward directed, choose $x\in U$ with
+$x\le b,g^{-1}b$, and the same conclusion holds.
+Consequently either $x^{-1}gx\in S$ or its inverse belongs
+to $S$. If $g$ maps to zero in $K_{\ab}=S_{\ab}$, positive
+nonvanishing forces $g=1$. This proves the asserted injection.
+It makes $K_c$ abelian; every finitely generated subgroup is
+also free, by local freeness of $K$, and therefore cyclic.
+
+Finally, every group element of $K$ is represented by finitely
+many positive elements, so the given action of $G$ on $K$ is
+smooth. A principal cut is determined by one such element.
+Meets of closed lower sets are intersections, and joins are
+the common-lower-bound sets of their common upper bounds;
+these operations commute with order automorphisms. A finite
+term in bounded meets and joins is therefore fixed by the
+intersection of the open stabilizers of its finitely many
+parameters. This proves smoothness.
+
+For the coefficient assertion, (Op) gives $G_c=G_F$ for a
+finite strong $F$, possibly empty. If $K_c\ne1$, choose
+$h\in K_c\setminus\{1\}$. An automorphism of the torsion-free
+rank-one group $K_c$ that fixes $h$ fixes every element:
+for each element some nonzero integral multiple is an integral
+multiple of $h$. Hence the kernel of the $G_F$-action on $K_c$
+is the open stabilizer of $h$, and it is normal in $G_F$.
+There is no proper open normal subgroup of $G_F$. Indeed,
+(Op) writes one as $G_D\subseteq G_F$, so (Fix) gives
+$F\subseteq D$. Normality makes the finite set $D$ invariant
+under $G_F$; the raw linear order makes this action pointwise
+trivial, and (Fix) then gives $D\subseteq F$.
+Thus $G_F$ fixes $K_c$ pointwise. The case $K_c=1$ is immediate.
+
+It follows that the bundle of groups $K_c$ over each orbit of
+cuts is the constant group $K_c$ transported over $G/G_F$.
+The fixed-cut coefficient diagram for this orbit is
+$(R\otimes_{\Z}K_c)\otimes_{\Z}\Z[\operatorname{Emb}(F,-)]$.
+For $F\ne\varnothing$ its bar complex is the chain complex
+of $F/\Cdelta$, with constant coefficient $R\otimes K_c$;
+that category has an initial object. For $F=\varnothing$ it
+is the constant-coefficient complex of $B\Cdelta$, which is
+contractible by totality. Both have zero positive homology,
+without any flatness assumption on $R$. Direct sums over cut
+orbits prove the assertion. The pointwise stabilizer statement
+also makes the displayed transition maps independent of the
+chosen extension of the embedding.
+\end{proof}
+
+The locally cyclic conclusion cannot in general be strengthened
+to trivial stabilizers, even for a cut defined by two elements.
+Let $S$ be the sequential union of the free monoids
+$\operatorname{Free}(a,b_n,c_n)$ under
+\[
+ a\longmapsto a,\qquad
+ b_n\longmapsto a b_{n+1},\qquad
+ c_n\longmapsto a c_{n+1}.
+\]
+The three images form a code, and the induced group maps
+are isomorphisms; hence $K$ is the free group on $a,b_0,c_0$.
+In the $n$th chart, $b_0=a^n b_n$ and $c_0=a^n c_n$.
+Their common lower set in $K$ is
+$D=\bigcup_{n\ge0}\mathord\downarrow a^n$: any proposed common
+lower vertex and its two positive increments can be put in a
+later free chart, whose greatest common lower vertex for
+$b_0,c_0$ is $a^n$.
+This lower set is the nonprincipal meet cut of $b_0,c_0$,
+and $aD=D$. Its stabilizer is abelian by the proposition,
+so it centralizes $a$. Reduced words in the free group show
+that the centralizer of a basis letter is its cyclic subgroup:
+a word containing a different letter cannot commute with $a$
+after removing its initial and terminal powers of $a$.
+The cut stabilizer is therefore exactly $\langle a\rangle\cong\Z$.
+
+\subsection{A canonical tree completion of the prefix order}
+
+\begin{proposition}[Proved: finite-parameter median tree completion]
+\label{G:prefixtree}
+Let $S$ be a locally free monoid, $K=S^{\gp}$, and $P=(K,\le)$
+the prefix order of Proposition~\ref{G:cutstabilizers}. Inside its
+bounded Dedekind--MacNeille completion, let $T$ be the closure of
+the principal cuts under finitely many bounded binary meets and
+joins. There is a canonical median pretree structure on $T$ whose
+segment between comparable points is their full order interval.
+Every segment is a finite concatenation of order intervals, and
+its turns are obtained by bounded binary meets and joins.
+The order-preserving actions of $K$ and of every group of monoid
+automorphisms of $S$ preserve this pretree structure. If the latter
+action is smooth, its action on $T$ is smooth. Every $K$-point
+stabilizer in $T$ is locally cyclic. For every subgroup $U$ of the
+automorphism group, the fixed-point poset $T^U$ has weakly
+contractible nerve; no openness assumption on $U$ is needed.
+
+This supplies a tree of ordered intervals, not a simplicial tree
+with a permutation module of edges. No equivariant homology
+resolution or free-monoid comparison follows here by assertion.
+\end{proposition}
+\begin{proof}
+We give the completion and path arguments explicitly. The general
+connection between ramification-complete diamond-free orders and
+simply connected nerves is also recorded in
+\cite[Theorem~3.3.7]{GChen2014}; the finite path argument below
+establishes what is needed without a countability restriction.
+
+\emph{Intervals in the completion are chains.}
+Suppose two incomparable bounded cuts $B,C$ lay between bounded
+cuts $A,D$. Choose original vertices $a\in\operatorname{lower}(A)$
+and $d\in\operatorname{upper}(D)$. Since the cuts $B,C$ are
+incomparable, choose
+\[
+ b\in\operatorname{lower}(B),\quad
+ u_C\in\operatorname{upper}(C),\quad b\not\le u_C,
+ \qquad
+ c\in\operatorname{lower}(C),\quad
+ u_B\in\operatorname{upper}(B),\quad c\not\le u_B.
+\]
+Interpolation in $P$ gives
+\[
+ a,b\le h_b\le d,u_B,\qquad
+ a,c\le h_c\le d,u_C.
+\]
+Both $h_b,h_c$ lie in the original chain $[a,d]$.
+The relation $h_b\le h_c$ would give $b\le u_C$, and the reverse
+relation would give $c\le u_B$. This contradiction proves the
+claim, in particular for $T$. Any two points of $T$ with a common
+upper bound in $T$ have their join in $T$, and the dual statement
+holds for meets, by its defining closure.
+
+\emph{The nerve of $T$ is simply connected.}
+For a finite free chart $S_0\subseteq S$, its free group has the
+oriented Cayley tree and the corresponding prefix poset $P_0$.
+The nerve of $P_0$ is weakly contractible. Indeed, the finite
+Cayley-tree hull of any finite collection of its vertices is a
+finite oriented tree. Its order complex contracts by successively
+removing a leaf: every vertex comparable with that leaf is
+comparable with its unique neighbouring vertex, which cones its
+link. Every finite simplicial sphere therefore contracts after
+passing to such a hull.
+
+The posets $P_0$ need not embed in one another. Nevertheless their
+nerves have filtered colimit $NP$: every finite chain in $P$, its
+positive increments, and every equality between two such finite
+records are witnessed in a later free chart. Consequently $NP$
+is weakly contractible, by the finite simplicial description of
+homotopy groups. In particular it is connected and simply
+connected.
+
+Adjoin the nonprincipal vertices of $T$ to $P$ in any well-order,
+with the induced partial order at every stage. Each new cut has
+an original lower and an original upper vertex. Its link in the
+preceding order complex is
+\[
+ N(\{x:x<c\})*N(\{x:c<x\}),
+\]
+whose two factors are nonempty, so the link is connected.
+Adjoining its cone cannot create a fundamental-group generator:
+van Kampen makes the map on fundamental groups surjective.
+The same remains true at limit stages, since an edge loop and
+an edge-path homotopy use finitely many vertices. Thus $NT$ is
+connected and simply connected.
+
+\emph{Reduction of interval paths.}
+An interval path is a finite list of nondegenerate order
+intervals, successively traversed in either direction, with
+matching endpoints. Consecutive traversals in the same direction
+merge. At a peak $a\le b\ge c$, the two intervals overlap in
+$[a\vee c,b]$; cancel that retraced portion and replace the turn
+by $a\vee c$. At a trough use $b$'s replacement $a\wedge c$.
+These are actual points of $T$, and the overlap is closed.
+
+Define reduction by a stack. Append the next interval to an
+already reduced stack and compare it with the terminal interval.
+If the common retraced part consumes the old interval, pop it
+and continue. If it consumes the new interval, trim and stop.
+If it consumes neither, trim both at the overlap endpoint and
+stop. Delete zero-length pieces and merge equal-direction runs.
+There are only finitely many pops. Shortening a terminal interval
+cannot spoil the preceding reduced turn: for example, if its
+old lower endpoint is $a=u\wedge b$ and $a\le e\le b$, then
+$u\wedge e=a$; the dual identity handles a peak. Thus the output
+has consecutive intervals intersecting only in their common
+endpoint. Merging equal-direction pieces preserves the preceding
+reduced turn as well: if $u\wedge b=a<b\le d$, then
+$u\wedge d=a$. Indeed $u\wedge d$ and $b$ lie in the chain
+$[a,d]$; the possibility $b\le u\wedge d$ would imply
+$b\le u$, and otherwise $u\wedge d\le b$ forces
+$u\wedge d\le u\wedge b=a$. The dual argument applies
+at a peak.
+
+Here is the local calculation ensuring that this operation is
+independent of grouping. For three alternating intervals
+$a\le b\ge c\le d$, set
+\[
+ e=a\vee c,\qquad f=b\wedge d.
+\]
+Both lie in the chain $[c,b]$. If $e\le f$, then
+$e\wedge d=e$ and $a\vee f=f$, and either order of cancellation
+gives the single interval from $a$ to $d$. If $f\le e$, then
+$e\wedge d=f$ and $a\vee f=e$, and both orders give
+$a\to e\to f\to d$, after deleting degenerate pieces.
+The dual calculation covers the opposite orientation; a repeated
+orientation is just interval concatenation.
+
+For clarity, this calculation applies in a longer context as
+follows. Compare the two groupings at the terminal pair of the
+current stack. A partial cancellation leaves the preceding stack
+unchanged, and the calculation gives the same new terminal
+pieces. A whole-interval cancellation removes at least one stack
+entry; apply the induction hypothesis to the shorter stack and
+the remaining interval. Induction on the number of entries
+removed, followed by induction on the number of appended
+intervals, proves associativity of reduced concatenation.
+It also proves that inserting a subdivision of an interval, or
+inserting an interval followed by its reverse, leaves reduction
+unchanged. These are exactly the triangle and backtrack moves
+for edge paths in the order complex. Reduction is therefore
+invariant under every finite edge-path homotopy in $NT$.
+
+\emph{Unique segments and medians.}
+Since $NT$ is simply connected, a closed interval path reduces
+to the empty path. Two reduced paths with the same endpoints
+must therefore agree, after monotone subdivisions: concatenate
+one with the reverse of the other and cancel their common
+terminal portions. Any remaining portion would be a nonempty
+reduced closed path. A reduced path has no nonadjacent
+self-intersection, for such an intersection would similarly
+produce a nonempty reduced closed subpath. Its image, ordered
+along the traversal, is the canonical segment between its
+endpoints.
+
+The intersection of two order intervals, when nonempty, is the
+closed interval between the join of their lower endpoints and
+the meet of their upper endpoints. Hence the intersection of
+two finite interval paths is a finite union of closed intervals.
+Unique paths imply that two segments from the same initial point
+share an initial segment with a last point. For three points
+$x,y,z$, this last point of $[x,y]\cap[x,z]$ lies on $[y,z]$;
+otherwise their paths would contain a reduced cycle. It is the
+unique median. These unique segments and their tripod
+intersections give the pretree betweenness axioms directly.
+
+Everything was defined by the partial order and bounded meets
+and joins. The indicated actions therefore preserve it.
+Smoothness and local cyclicity are exactly the final assertions
+of Proposition~\ref{G:cutstabilizers}.
+
+Finally, let $U$ be any subgroup of the given automorphism group.
+It fixes the original vertex $1$. The unique path between two
+$U$-fixed vertices is preserved in its traversal order. Its
+finitely many order turns are therefore individually fixed.
+For finitely many fixed vertices, take the union of their paths
+from $1$, and retain the endpoints, all turns, and all branch
+points. This gives finitely many vertices: adjoining one root
+path meets the preceding union in an initial segment with a last
+point, and adds only its finitely many turns and that possible
+branch point. Every retained vertex is fixed, since branch points
+are medians of fixed vertices. The induced finite poset is the
+order of an oriented finite tree: its edges are the successive
+retained vertices along these paths, and comparability is exactly
+the existence of a directed path. Its nerve contracts by the leaf
+removal argument above. Any finite simplicial sphere in $NT^U$
+is contained in such a contractible finite subposet. Hence
+$NT^U$ is weakly contractible.
+\end{proof}
+
+
+\subsection{Fixed monoids and fixed group completions differ}
+
+\begin{example}[Proved: neither direction of the fixed-group identification]
+\label{G:fixedgroupfailures}
+For smooth locally free monoids $S$ of the group $G$ of $\Cdelta$,
+the canonical homomorphism
+\[
+ (S^G)^{\gp}\longrightarrow (S^{\gp})^G
+\]
+need be neither injective nor surjective. The two explicit
+examples below come from finite-rank free-monoid diagrams over
+$\Cdelta$. Both diagrams satisfy $T_i(M_{\ab})=0$ for every
+$i>0$, so these examples do not settle the remaining general
+$T_1$ or comparison question.
+\end{example}
+\begin{proof}
+Let $\Omega=\operatorname{Emb}(V,M)$, identified with the
+strong-singleton vertices of the limit and ordered by the raw
+linear order. This is an infinite transitive smooth $G$-set.
+First form the poset $D$ with moving points $\Omega$, two fixed
+incomparable left points $L_0,L_1$, and two fixed incomparable
+right points $R_0,R_1$, with
+$L_i<x<R_j$ for every $x\in\Omega$ and every $i,j$.
+Let $S$ be the monoid generated by the nonidentity arrows of
+this poset, with the relation that a pair of composable arrows
+is their composite. We write products in path order.
+
+Every element has a unique normal form consisting of a sequence
+of nonidentity arrows in which adjacent arrows are not composable.
+Indeed, composition strictly reduces the number of arrows;
+disjoint reductions commute, and the sole overlapping ambiguity
+is three composable arrows, resolved by associativity. Thus the
+reduction is terminating and confluent; see also
+\cite[Lemmas~3.3--3.4]{GWehrung2018} for the general category
+normal form. A finite nonempty set
+$I\subset\Omega$ of size $n$ gives the free submonoid on the
+$n+3$ edges of the oriented tree with two incoming leaves,
+the chain $I$, and two outgoing leaves. Every arrow involving
+only the four fixed endpoints can be expressed using any point
+of $I$. These free submonoids are directed and exhaust $S$;
+inclusions subdivide edges and are injective by the normal form.
+The action is smooth since each normal form uses finitely many
+moving endpoints.
+
+An element fixed by $G$ has every arrow in its normal form fixed.
+The only fixed nonidentity arrows are
+$w_{ij}=(L_i\to R_j)$. They cannot be composed with one another,
+so $S^G$ is the free monoid on these four letters. At any
+$x\in\Omega$, put $a_i=(L_i\to x)$ and $b_j=(x\to R_j)$.
+Then $w_{ij}=a_i b_j$, whence in $S^{\gp}$
+\[
+ w_{00}w_{10}^{-1}w_{11}w_{01}^{-1}=1.
+\]
+The displayed word is reduced and nontrivial in the free group
+$(S^G)^{\gp}$. This proves failure of injectivity.
+
+For failure of surjectivity, omit the right endpoints and use
+the analogous monoid $S'$ on $L_0,L_1$ and $\Omega$.
+Its nonempty finite charts are free of rank $n+1$.
+Every nonidentity arrow has a moving endpoint, so the same
+normal-form argument gives $(S')^G=\{1\}$. Nevertheless
+\[
+ k=(L_0\to x)(L_1\to x)^{-1}
+\]
+is independent of $x$: if $x<y$, both arrows append the same
+arrow $x\to y$, which cancels in the group. Hence $k$ is fixed
+by $G$. It is nontrivial: the homomorphism $S'\to\Z$
+sending an arrow starting at $L_0$ to $1$ and every other
+nonidentity arrow to $0$ respects composition and sends $k$
+to $1$ after group completion. Thus the fixed-group map is not
+surjective.
+
+We also check the asserted scope at the diagram level. For a
+finite strong $B$, put $E(B)=\operatorname{Emb}(V,B)$, with its
+induced order, and apply the two constructions with $E(B)$ in
+place of $\Omega$. If $E(B)$ is empty, the two-sided monoid is
+free on the four $w_{ij}$ and the one-sided monoid is trivial;
+otherwise their ranks are $|E(B)|+3$ and $|E(B)|+1$.
+A strong embedding acts on the moving endpoints and fixes the
+boundary endpoints, so these are functors to free monoids.
+Their inclusion colimits are $S$ and $S'$ respectively.
+
+For the two-sided construction there is a natural surjection
+\[
+ M_{\ab}\longrightarrow\Z[E]\oplus\Z^3.
+\]
+When $E(B)\ne\varnothing$, its inverse sends the point basis
+$x$ to $[L_0\to x]$, and the three constant basis vectors to
+$[w_{00}],[w_{01}],[w_{10}]$. To verify these form a basis,
+the internal edge $x\to y$ equals the difference of the two
+point vectors; the terminal right edges are $[w_{0j}]$ minus
+the last point vector; and the other initial left edge is
+$[w_{10}]-[w_{00}]$ plus the first point vector.
+At an empty stage the map sends
+$[w_{11}]$ to $[w_{01}]+[w_{10}]-[w_{00}]$.
+Its kernel is supported only on stages with $E(B)=\varnothing$.
+In the one-sided construction there is instead a natural
+injection
+\[
+ M'_{\ab}\longrightarrow\Z[E]\oplus\Z,
+\]
+which is an isomorphism at nonempty stages: the point vector
+$x$ maps back to $[L_0\to x]$, and the constant vector to
+$[L_1\to x]-[L_0\to x]$, independent of $x$.
+Its cokernel is supported only on the empty stages.
+
+Both exceptional diagrams are locally zero, since every stage
+has a common successor with $V$. Proposition~\ref{G:moduleinjectivization}
+kills all their derived colimits. The representable diagram
+$\Z[E]$ and the constant diagrams have zero positive derived
+colimits, the latter because $B\Cdelta$ is contractible.
+The two exact sequences therefore give the claimed vanishing.
+The same fixed-group phenomena already occur for
+$\operatorname{Aut}(\Q,<)$ with the elementary ordered-set
+charts; we have not used a claim that pullback from an exact
+index preserves the comparison.
+\end{proof}
+
+
+\subsection{Splitting of discrete central stabilizer extensions}
+
+\begin{proposition}[Proved: uniqueness and existence of a global central splitting]
+\label{G:centralextensions}
+In setting \textup{(S)}, suppose the strong-embedding category is
+total. Let $G=\Aut(M)$, let $U\leq G$ be open, and let
+\[
+ 1\longrightarrow L\longrightarrow E\stackrel{p}{\longrightarrow}U
+ \longrightarrow1
+\]
+be an extension of topological groups with discrete abelian kernel,
+where $p$ is a quotient map. Suppose the extension is central. Then it has a unique continuous
+homomorphic section over $U$.
+
+For the group of $\Cdelta$, in particular, a point $c$ of the
+tree $T$ in Proposition~\ref{G:prefixtree} has a stabilizer in
+$K\rtimes G$ fitting into
+\[
+ 1\longrightarrow K_c\longrightarrow (K\rtimes G)_c
+ \longrightarrow G_{Kc}\longrightarrow1,
+\]
+and this is canonically a direct product of $K_c$ and a uniquely
+specified lift of $G_{Kc}$. Here $G_{Kc}$ denotes the setwise
+stabilizer of the $K$-orbit of $c$, not the point stabilizer $G_c$.
+Let $\Gamma=K_G$ be the group of coinvariants and let
+$\rho:K\rtimes G\to\Gamma$ send $(k,g)$ to the class of $k$.
+The uniquely lifted copy $\widehat{G_{Kc}}$ is killed by $\rho$.
+Consequently
+\[
+ \rho((K\rtimes G)_c)=\rho(K_c),\qquad
+ \ker(\rho)\cap(K\rtimes G)_c
+ =\ker(\rho|K_c)\times\widehat{G_{Kc}}.
+\]
+In particular the image stabilizer in $\Gamma$ is locally cyclic.
+This splitting does not assert that its lifted subgroup is
+$K$-conjugate to the standard copy of $G_{Kc}$.
+\end{proposition}
+\begin{proof}
+The existence of a continuous homomorphic local section is
+automatic here. The quotient homomorphism $p$ is open. Since
+its kernel is discrete, choose an open identity neighborhood
+$O\subset E$ with $O^{-1}O\cap L=\{1\}$; then $p|O$ is a
+homeomorphism onto the open set $pO$. Choose an open identity
+neighborhood $W\subset O$ with $WW\subset O$. Since $U$ has
+an open-subgroup basis, choose an open subgroup $V\subset pW$.
+The inverse local section $s:V\to W$ is a homomorphism:
+$s(x)s(y)$ and $s(xy)$ both lie in $O$ and have the same image
+under $p$, which is injective there.
+
+By Proposition~\ref{A:open-subgroups}, the open group $U$
+has a total presentation in \textup{(S)}. Fix such a
+presentation, and write $U_B$ for the pointwise stabilizer
+of a finite strong set $B$ in its limit. By
+Proposition~\ref{B:no-open-quotients}, no open subgroup of $U$
+has a proper open normal subgroup. Thus every continuous
+homomorphism from an open subgroup of $U$ to a discrete group
+is trivial. Neither (Op) nor a free-amalgamation hypothesis
+is being added to this assertion.
+
+Let $V\leq U$ be an open subgroup on which a local section
+has been obtained. Retain those finite strong sets $B$ for
+which $U_B$ is contained in a $U$-conjugate of $V$.
+These form a nonempty $U$-invariant upward-closed cofinal
+collection. Its full embedding category $\mathcal A$ is a
+cosieve of the total presentation, and is total: a set action
+on this cosieve extends by the empty set outside it, while
+common successors give connectedness. Its inclusion poset
+$I$ is directed.
+
+For each retained $B$ the extension splits continuously over
+$U_B$. Such a section $s_B$ is unique. Indeed, the ratio of two
+sections of a central extension is a continuous homomorphism
+$U_B\to L$, whose open normal kernel must be all of $U_B$.
+Consequently restrictions of these sections agree, and conjugation
+by any element $e\in E$ carries $s_B$ to $s_{p(e)B}$.
+
+Define a category $\widetilde{\mathcal A}$ with the same objects
+as $\mathcal A$. A lifted arrow from $B$ to $C$ is a right coset
+$e\,s_B(U_B)$ with $p(e)B\subseteq C$; its underlying arrow is
+$p(e)|B$. Composition is multiplication of representatives.
+It is well defined: if $p(e)B\subseteq C$, conjugation takes the
+restriction of $s_C$ on $U_C\subseteq p(e)U_Bp(e)^{-1}$ into the
+corresponding restriction of $s_B$, by uniqueness. Every arrow
+of $\mathcal A$ therefore has an $L$-torsor of lifts, and the
+central $L$-actions commute with composition.
+
+Choose one lift of each arrow, choosing the identity lift for
+identities. The defect of multiplicativity is a normalized
+$L$-valued $2$-cocycle on the nerve of $\mathcal A$.
+Since $B\mathcal A$ is weakly contractible, its cohomology in
+degree two with these constant coefficients is zero. Subtract
+a $1$-cochain whose coboundary is this defect. The corrected
+lifts compose exactly. Hence
+\[
+ \widetilde{\mathcal A}\cong\mathcal A\times\mathbf B L,
+ \qquad
+ \pi_1(B\widetilde{\mathcal A})\cong L,
+\]
+and the latter isomorphism restricts to the identity on the
+loops supplied by the kernel $L$.
+
+We spell out how this categorical splitting gives a group
+splitting. The transport category $I\rtimes E$ has the same
+objects and has one arrow labelled $e$ from $B$ to $C$ whenever
+$p(e)B\subseteq C$. Its nerve has fundamental group $E$:
+localizing the inclusion arrows identifies all objects, because
+$I$ is directed, and leaves precisely multiplication of the
+labels in $E$. Equivalently its nerve is the homotopy quotient
+of the contractible nerve $NI$ by the discrete group $E$.
+The functor to $\widetilde{\mathcal A}$ is surjective on every
+arrow set and imposes exactly the relations making each loop
+in $s_B(U_B)$ an identity. Thus, if $N$ is the normal subgroup
+of $E$ generated by all $s_B(U_B)$, localization gives
+\[
+ E/N\cong\pi_1(B\widetilde{\mathcal A})\cong L,
+\]
+with the original $L\subseteq E$ mapping identically onto this
+quotient. In particular $N\cap L=1$ and $E=LN$, so
+$p|N:N\to U$ is a group isomorphism.
+
+It is a topological isomorphism. The image of a continuous local
+section over a sufficiently small open subgroup is open in $E$:
+discreteness of the kernel gives an identity neighborhood on
+which $p$ is injective, and continuity of the section identifies
+its restriction there with the inverse of this local quotient
+homeomorphism. Therefore $N$ contains an open subgroup of $E$,
+and is itself open. The quotient map $p$ is open, so its
+restriction to $N$ is open as well. Its inverse is the required
+continuous section. Uniqueness follows once more from the
+absence of a nontrivial continuous homomorphism $U\to L$.
+
+For the application, $G_{Kc}$ contains the open group $G_c$, hence
+is open. Its full inverse image in $K\rtimes G$ preserving $c$
+projects onto it, with kernel $K_c$. The subgroup
+$\{1\}\times G_c$ gives a continuous local section.
+By Proposition~\ref{G:cutstabilizers}, $K_c$ is locally cyclic
+and $G_c$ fixes it pointwise. Conjugation on this abelian kernel
+therefore descends to $G_{Kc}$, and its kernel contains $G_c$.
+It is an open normal subgroup, so is all of $G_{Kc}$. The
+extension is central, and the result just proved applies.
+The projection is a quotient map because the displayed local
+section has open image and its translates cover the stabilizer.
+Finally, $\rho$ is a continuous homomorphism when $\Gamma$ is
+discrete: its kernel contains the open subgroup $\{1\}\times G$.
+Its composite with the unique lifted section over $G_{Kc}$ is
+therefore a continuous homomorphism to a discrete group. Its
+kernel is open and normal, so the composite is trivial. The two
+displayed identities follow from the direct-product splitting.
+An image of a locally cyclic group is locally cyclic; no
+assertion of torsion-freeness of that image is made.
+\end{proof}
+
+
+\subsection{Affine fixed cuts do not imply conjugacy}
+
+\begin{example}[Proved: a bounded affine fixed cut without a fixed group vertex]
+\label{G:affinecutcounterexample}
+There is a smooth locally free $G$-monoid $S$, for the group of
+$\Cdelta$, and a continuous $1$-cocycle $\kappa:G\to S^{\gp}$
+whose affine action on the tree of Proposition~\ref{G:prefixtree}
+fixes a cut obtained by one bounded binary join, but fixes no
+original group vertex. Thus the lifted subgroup in
+Proposition~\ref{G:centralextensions} need not be conjugate by
+$S^{\gp}$ to a subgroup of the standard copy of $G$.
+\end{example}
+\begin{proof}
+Let $L$ and $\Omega$ be two tagged copies of the strong-singleton
+$G$-orbit. Make $L$ an antichain, order $\Omega$ by the raw
+linear order, and put every point of $L$ below every point of
+$\Omega$. Denote this poset by $D$. Let $S$ be its interval
+monoid, with the reduced-arrow normal forms used in
+Example~\ref{G:fixedgroupfailures}. A chart on finite subsets
+$L_0\subset L$ and $I\subset\Omega$, with $I$ nonempty, is the
+free monoid on the oriented tree with one edge from each point
+of $L_0$ to $\min I$ and the successive edges of $I$.
+These charts inject and exhaust $S$, so it is locally free;
+finite endpoints give smoothness.
+
+Fix $o\in\Omega$. For $d\in D$, let $j(d)\in K=S^{\gp}$ be
+the signed interval path from $o$ to $d$. Such a path is unique
+in every finite chart containing $o,d$, and the definitions
+agree under enlargement. In particular $j(o)=1$ and
+$j(d)^{-1}j(e)=[d,e]$ whenever $d<e$ in $D$.
+The group maps between charts containing $o$ are injective:
+in vertex coordinates they are the inclusions of free groups
+on the letters $j(d)$ for $d\ne o$. Thus $j$ embeds $D$ into
+the prefix poset of $K$. This is an order embedding: in a
+common oriented star-and-chain chart, the path between two
+vertices is positive exactly for a comparable pair in $D$;
+enlarging the chart does not change that criterion.
+
+The continuous cocycle
+\[
+ \kappa(g)=j(go),\qquad
+ \kappa(gh)=\kappa(g)\,g\kappa(h)
+\]
+gives the affine action $g*x=\kappa(g)g(x)$. It sends
+$j(d)$ to $j(gd)$ and preserves the prefix order. Its
+continuity follows from the open stabilizer of $o$.
+The boundary homomorphism identifies, equivariantly,
+\[
+ K_{\ab}\cong\ker\bigl(\Z[D]\stackrel{\aug}{\longrightarrow}\Z\bigr),
+ \qquad [d,e]\longmapsto e-d.
+\]
+Indeed this is the vertex basis calculation in the finite tree
+charts, or follows from connectedness and vanishing first
+homology of the directed poset $D$.
+If $x\in K$ were fixed by the affine action, its abelian vector
+$v$ would satisfy $v=go-o+gv$. Thus $v+o$ would be a
+$G$-invariant finitely supported vector in $\Z[D]$ of augmentation
+one. Both $G$-orbits in $D$ are infinite, so every finitely
+supported invariant vector is zero. This is impossible.
+
+It remains to verify the bounded cut in the full prefix order,
+not merely in $D$. Choose distinct $l_1,l_2\in L$. Their
+common-upper-bound set in $K$ is exactly
+\[
+ U=\bigcup_{y\in\Omega}\mathord\uparrow j(y).
+\]
+One inclusion follows from $j(l_i)\le j(y)$. For the other,
+put any proposed common upper bound, its two positive increments,
+and $o,l_1,l_2$ in one finite free chart, enlarging until the
+finite equalities hold. In its oriented Cayley tree the join
+of $j(l_1),j(l_2)$ is $j(\min I)$, where $I$ is that chart's
+finite nonempty set of $\Omega$-vertices. Hence the proposed
+upper bound lies above some $j(y)$, as required.
+Consequently their bounded join cut $c$ has upper set $U$.
+It is independent of the chosen distinct pair in $L$, is
+bounded below by $j(l_1)$ and above by every $j(y)$, and is
+fixed by the affine $G$-action. It belongs to the finite-parameter
+tree because it is a single bounded binary join of original
+vertices. It is nonprincipal, since a principal fixed cut would
+be a fixed original vertex, already excluded.
+
+The subgroup $\{(\kappa(g),g):g\in G\}$ of $K\rtimes G$
+therefore stabilizes $c$. If it were conjugate into the
+standard copy of $G$, its action on the $K$-torsor would fix
+a vertex. It does not. The uniqueness assertion of
+Proposition~\ref{G:centralextensions} identifies this subgroup
+with the splitting over $G_{Kc}=G$.
+\end{proof}
+
+
+\subsection{Smooth quotients and the tree double complex}
+
+\begin{lemma}[Proved: acyclic smooth spaces over a total group]
+\label{G:smoothquotient}
+Suppose a topological group $U$ has a total presentation in setting
+\textup{(S)}. Let $X$ be a nonempty simplicial $U$-set whose action
+in every degree is smooth. If $X$ is connected and integrally
+acyclic, then $X/U$ is connected and integrally acyclic. If $X$ is
+weakly contractible, then $X/U$ is weakly contractible.
+Here the quotient is the degreewise simplicial quotient followed
+by realization; no separation assumption on a topological orbit
+space is being substituted for this construction.
+\end{lemma}
+\begin{proof}
+Use the total strong presentation $\mathcal A$ and write $U_B$ for
+its finite strong pointwise stabilizers. The simplicial sets
+$X^{U_B}$ form a covariant diagram on $\mathcal A$: an embedding
+acts by any automorphism extending it. Its action on a fixed
+simplex is independent of that extension. The filtered colimit
+over inclusions is $X$, since every finite collection of simplices
+has a finite strong support.
+
+Take the first-quadrant double complex given by the category bar
+resolution of the unnormalized chain diagrams $C_q(X^{U_B};\Z)$.
+Each chain diagram is the free abelian group on a set action.
+Totality therefore makes its positive derived colimits zero:
+they are the positive homology groups of the corresponding
+categories of elements, whose components are contractible.
+Its ordinary colimit is $\Z[X_q/U]$. One spectral sequence thus
+identifies the homology of the double complex with $H_*(X/U;\Z)$.
+
+For the other spectral sequence, every positive homology diagram
+$B\mapsto H_q(X^{U_B};\Z)$ is locally zero. Indeed, a finite cycle
+becomes a boundary in $X$, and a finite filling has a finite strong
+support containing its original support. In degree zero, the
+kernel and cokernel of the augmentation to the constant diagram
+$\Z$ are locally zero, by the same finite-path argument and
+nonemptiness. Proposition~\ref{G:moduleinjectivization} kills all
+derived colimits of these locally zero diagrams. The other
+spectral sequence consequently has just $\Z$ in total degree
+zero, since the nerve of the total category is contractible.
+This proves the homology assertion.
+
+For completeness, if $X$ is simply connected, an elementary
+edge-path argument gives a surjection
+\[
+ U\longrightarrow\pi_1(|X/U|).
+\]
+Choose a vertex $x$ and, for $u\in U$, an edge path from $x$ to
+$ux$. Its projection is a loop. Simple connectivity makes its
+class independent of the chosen path and makes this assignment
+a homomorphism (up to the harmless opposite convention).
+Every quotient edge loop can be lifted edge by edge, translating
+successive lifts to match their endpoints; its final endpoint is
+$ux$, proving surjectivity. An element fixing a vertex $y$ lies
+in the kernel: use a path from $x$ to $y$ followed by the reverse
+of its translate. The kernel therefore contains an open vertex
+stabilizer. It is an open normal subgroup of $U$, and must be
+all of $U$ by Proposition~\ref{B:no-open-quotients}. Thus the
+quotient is simply connected. The homology assertion and the
+Hurewicz theorem now make it weakly contractible.
+\end{proof}
+
+\begin{proposition}[Proved: a coherent tree model with locally cyclic fibres]
+\label{G:treedoublemodel}
+Let $G$ be the group of $\Cdelta$, let $S$ be a smooth locally
+free $G$-monoid, and put $K=S^{\gp}$ and $H=K\rtimes G$.
+Let $P$ be the prefix poset of $K$ and $T$ its tree completion.
+There is a natural weak equivalence
+\[
+ \bigl|(NP\times NT)/H\bigr|\ \longrightarrow\ |(NS)/G|.
+ \tag{TD.1}
+\]
+For a simplex $\sigma$ of $NT$, write $H_\sigma$ for its
+pointwise stabilizer and $A_\sigma=K\cap H_\sigma$. Then
+$A_\sigma$ is torsion-free locally cyclic and
+\[
+ |NP/H_\sigma|\simeq K(A_\sigma,1).
+ \tag{TD.2}
+\]
+These fibres are the rows of one explicit bisimplicial set,
+so all their incidence maps are retained. In particular there
+is a homology spectral sequence converging to
+$H_*((NS)/G;\Z)$, with
+\[
+ E^1_{n,q}=\bigoplus_{[\sigma]\in (NT_n)/H}
+                H_q(A_\sigma;\Z),\qquad
+ E^1_{n,q}=0\quad(q\geq2).
+ \tag{TD.3}
+\]
+The $q=0$ row is the simplicial chain complex of $NT/H$; the
+$q=1$ row has the indicated stabilizer groups and the face maps
+induced by inclusions and conjugation. Formula (TD.3) alone does
+not assert that either horizontal row is acyclic, or that the
+remaining differential between them vanishes.
+\end{proposition}
+\begin{proof}
+Use the bisimplicial set
+\[
+ Z_{m,n}=(NP_m\times NT_n)/H.
+\]
+Its diagonal is the quotient in (TD.1), and diagonal and iterated
+realization have the same weak homotopy type.
+For a fixed $P$-simplex $\tau$, its stabilizer in $H$ is conjugate
+to an open subgroup of the standard $G$. Indeed, translate its
+first vertex to $1$; fixing the remaining finitely many group
+vertices is precisely fixing finitely many smooth group elements.
+The stabilizer is open in $G$ and has a total presentation by
+Proposition~\ref{A:open-subgroups}. Its action on $NT$ is smooth,
+and $NT$ is weakly contractible by
+Proposition~\ref{G:prefixtree}. Lemma~\ref{G:smoothquotient}
+therefore makes $NT/H_\tau$ weakly contractible.
+For every fixed $m$ the projection of the vertical realization
+of $Z_{m,*}$ to $NP_m/H$ is consequently a weak equivalence.
+Realizing in $m$ proves (TD.1), because
+\[
+ NP/H=(NP/K)/G=(NS)/G:
+\]
+a prefix chain modulo left translation records exactly its
+successive positive increments in $S$.
+
+Now fix a $T$-simplex $\sigma$. Its stabilizer projects onto
+an open subgroup $U_\sigma\leq G$, since it contains the
+standard open pointwise stabilizer of its finitely many smooth
+vertices. Its kernel $A_\sigma$ is a subgroup of any one of
+their locally cyclic $K$-stabilizers. The standard subgroup
+fixing all vertices of $\sigma$ acts trivially on this kernel,
+by Proposition~\ref{G:cutstabilizers}. Thus the conjugation
+action of $U_\sigma$ on $A_\sigma$ has an open normal kernel
+and is trivial. Proposition~\ref{G:centralextensions} gives
+the unique continuous splitting
+\[
+ H_\sigma=A_\sigma\times\widehat U_\sigma.
+ \tag{TD.4}
+\]
+The action of $\widehat U_\sigma$ on $NP$ is smooth. Since
+$NP$ is weakly contractible, Lemma~\ref{G:smoothquotient}
+makes $NP/\widehat U_\sigma$ weakly contractible.
+
+The remaining $A_\sigma$-action on this quotient is free.
+To see this, a stabilizer in $H_\sigma$ of an original vertex
+$k\in K$ has trivial intersection with $A_\sigma$, because
+$K$ acts freely on its original vertices. Its projection to
+$U_\sigma$ is an open subgroup $V$, and it gives a continuous
+section over $V$ of the central extension (TD.4). Uniqueness
+in Proposition~\ref{G:centralextensions}, applied to this open
+total group $V$, makes that section precisely
+$\widehat U_\sigma|V$. Thus no nonidentity $A_\sigma$-element
+can carry an original vertex into its $\widehat U_\sigma$-orbit.
+The same follows for every simplex by considering a vertex.
+The quotient of the weakly contractible simplicial set
+$NP/\widehat U_\sigma$ by this free simplicial action is a
+classifying space for $A_\sigma$, proving (TD.2).
+
+Realize $Z_{*,n}$ first and take its homology. It is the disjoint
+union of the spaces (TD.2), one for each orbit of $T$-simplices.
+The standard first-quadrant spectral sequence of this bisimplicial
+chain complex gives (TD.3). A torsion-free locally cyclic group
+is the filtered union of its infinite cyclic subgroups, so its
+integral homology is zero in degrees at least two.
+Faces are induced by the actual stabilizer inclusions (after
+transporting an orbit representative). The splittings (TD.4)
+are compatible with such inclusions and transports by uniqueness:
+two resulting sections over the same open subgroup of the same
+central extension must agree. Thus no coherence is discarded
+in the displayed two-row model.
+\end{proof}
+
+
+\subsection{Root-closed stabilizers and the remaining transgression}
+
+\begin{proposition}[Proved: root closure and maximal cut stabilizers]
+\label{G:cutroots}
+Let $S$ be a locally free monoid and $K=S^{\gp}$.
+The submonoid $S\subseteq K$ is root-closed: if $z^m\in S$
+for $z\in K$ and an integer $m\ge1$, then $z\in S$.
+Every bounded Dedekind--MacNeille cut stabilizer $K_c$ in
+Proposition~\ref{G:cutstabilizers} is likewise root-closed in $K$.
+If $K_c\ne1$, then, for every $1\ne h\in K_c$,
+\[
+ K_c=C_K(h)=N_K(K_c).
+\]
+Thus two nontrivial cut stabilizers either are equal or have
+trivial intersection. For the finite-parameter tree $T$ of
+Proposition~\ref{G:prefixtree}, if $C$ is such a nontrivial
+stabilizer, the fixed-point poset $T^C$ is nonempty and has
+weakly contractible nerve. Every point fixed by one nonidentity
+element of $C$ has stabilizer exactly $C$.
+\end{proposition}
+\begin{proof}
+Represent $z$ by a word in a finite free chart, and enlarge the
+chart until its $m$th power equals the given positive element.
+In a free group, if a positive power of a reduced word is a
+positive word, then the word itself is positive. To see this,
+write its cyclic reduction as $vuv^{-1}$. The reduced power is
+$vu^mv^{-1}$; positivity forces $v$ to be empty, and then all
+letters of $u$ are positive. The identity case is immediate.
+The resulting positive representative maps to $z$ in $K$,
+proving root closure of $S$.
+
+Write a bounded cut as $(D,U)$, and suppose $g^m$ fixes it.
+Choose $a\in D,b\in U$. By the cut dichotomy in
+Proposition~\ref{G:cutstabilizers}, either $D$ is upward
+directed or $U$ is downward directed. In the first case,
+for any $d\in D$ choose $x\in D$ above $a,g^{-m}a,d$.
+Then $x,g^m x$ lie in the chain $[a,b]$, so
+$(x^{-1}gx)^m$ or its inverse is positive. Root closure
+makes $x,gx$ comparable. Applying the order-preserving
+translation by $g$ repeatedly shows that $gx$ lies between
+$x$ and $g^m x$, so $gx\in D$ and $gd\le gx$ lies in $D$.
+Thus $gD\subseteq D$; repeating with $g^{-1}$ gives equality.
+If $U$ is downward directed, for $u\in U$ choose $x\in U$
+below $b,g^{-m}b,u$. The same argument puts $gx$ between
+$x,g^m x$ in $U$, and then $gu\ge gx$ lies in $U$.
+Again applying the inverse gives $gU=U$. In either case
+$g$ fixes the cut.
+
+Let $1\ne h\in K_c$. This stabilizer is abelian by
+Proposition~\ref{G:cutstabilizers}. If $z$ centralizes $h$,
+the finitely generated subgroup $\langle z,h\rangle$ of the
+locally free group $K$ is free and abelian, hence cyclic.
+For $z\ne1$ some positive power of $z$ is a nonzero integral
+power of $h$. Root closure of $K_c$ puts $z$ in $K_c$.
+Thus $K_c=C_K(h)$.
+
+If $z$ normalizes $K_c$, then $zhz^{-1}$ commutes with $h$.
+Inside the finitely generated free subgroup $\langle z,h\rangle$,
+these two nontrivial elements have the same Cayley-tree axis.
+The element $z$ preserves that axis. It cannot reverse the axis:
+a reversal fixes a vertex or inverts an edge, neither of which
+occurs for the left action of a free group on its Cayley tree.
+It therefore translates the axis and commutes with $h$.
+This proves $N_K(K_c)=K_c$. The intersection assertion follows
+by centralizing any nontrivial element of the intersection.
+
+For the last assertion, any point $t$ fixed by $h\ne1$ has
+$K_t=C_K(h)=C$. The nerve of $T^C$ is weakly contractible by
+the fixed-path proof of Proposition~\ref{G:prefixtree}, with
+any point of $T^C$ as the fixed root. Explicitly, the finitely
+many turns on paths between fixed vertices are fixed, as are
+their medians. Every finite set of fixed vertices therefore
+lies in a finite fixed-vertex tree order whose nerve contracts
+by removing leaves. Convexity of the fixed set in the ambient
+pretree is not asserted or needed.
+\end{proof}
+
+\begin{corollary}[Proved: collapse of the stabilizer row]
+\label{G:stabilizerrow}
+In the notation of Proposition~\ref{G:treedoublemodel}, let
+$\mathscr C$ be the set of distinct nontrivial groups $K_c$
+for $c\in T$. It is an $H=K\rtimes G$-set under conjugation.
+Choose one $C$ from every $H$-orbit, and put
+\[
+ A_{\mathrm{cut}}=\bigoplus_{[C]\in\mathscr C/H}C,
+ \qquad X=|(NS)/G|,\qquad Y=|NT/H|,\qquad\Gamma=K_G.
+\]
+The degree-one stabilizer row in (TD.3) has zero homology in
+positive horizontal degrees, and has $H_0=A_{\mathrm{cut}}$.
+Via the two projections of the double model, there are natural isomorphisms
+\[
+ H_i(X;\Z)\cong H_i(Y;\Z)\quad(i\ge3)
+\]
+and a natural exact sequence
+\[
+ 0\longrightarrow H_2(X;\Z)\longrightarrow H_2(Y;\Z)
+ \stackrel{d_2}{\longrightarrow} A_{\mathrm{cut}}
+ \longrightarrow\Gamma_{\ab}
+ \longrightarrow H_1(Y;\Z)\longrightarrow0.
+ \tag{TR.1}
+\]
+The map from each summand $C$ to $\Gamma_{\ab}$ is the
+inclusion into $K$, followed by the group-coinvariant map and
+abelianization. Neither $H_i(Y)$ nor the transgression $d_2$
+is declared zero. In particular the remaining general
+$H_2(X)$ question is exactly the kernel of the displayed
+transgression.
+\end{corollary}
+\begin{proof}
+A simplex $\sigma$ of $NT$ has nontrivial $K$-stabilizer exactly
+when all its vertices belong to $T^C$ for one $C\in\mathscr C$.
+In that case $K_\sigma=C$, by Proposition~\ref{G:cutroots}.
+Every face of such a simplex has the same nontrivial stabilizer.
+Thus the nonzero stabilizer chain groups split into the
+subcomplexes associated to these distinct fixed-point posets.
+
+For a chosen $C$, its normalizer $N_H(C)$ has kernel
+$N_K(C)=C$ under projection to $G$. Its image $U$ is open:
+if $1\ne h\in C$, the open group $G_h$ fixes $C=C_K(h)$
+and gives a standard local section. Conjugation on $C$
+descends to $U$, since $C$ is abelian. Its kernel contains
+the open subgroup $G_h$, which fixes the entire rank-one
+group $C$ once it fixes $h$. This open normal kernel is all
+of $U$, so the extension is central. Its projection is a
+quotient map, as the standard local section has open image.
+Proposition~\ref{G:centralextensions} therefore gives
+\[
+ N_H(C)=C\times\widehat U.
+\]
+The subgroup $C$ acts trivially on $T^C$ by definition.
+The action of $\widehat U$ on that fixed-point poset is smooth,
+and $\widehat U$ has a total presentation, being isomorphic to
+an open subgroup of $G$. Proposition~\ref{G:cutroots} and
+Lemma~\ref{G:smoothquotient} give
+\[
+ |NT^C/N_H(C)|=|NT^C/\widehat U|\simeq *.
+\]
+The stabilizer subcomplex for this orbit is precisely
+\[
+ C\otimes_{\Z} C_*(NT^C/\widehat U;\Z).
+\]
+Indeed a simplex with stabilizer $C$ can be transported to
+another such simplex only by its normalizer; the normalizer
+acts trivially on the coefficient $C$, and every face map
+inside this subcomplex is the identity on $C$.
+This is a constant-coefficient chain complex of a weakly
+contractible simplicial set. Its homology is $C$ in degree
+zero and vanishes in positive degrees. Direct sums over the
+$H$-orbits prove the stabilizer-row assertion.
+
+The second page of the spectral sequence now has only the
+row $E^2_{p,0}=H_p(Y;\Z)$ and the single extra group
+$E^2_{0,1}=A_{\mathrm{cut}}$. The only possible nonzero
+remaining differential is
+$d_2:E^2_{2,0}\to E^2_{0,1}$. Reading the filtration in total
+degrees one and two gives (TR.1), and all higher degrees give
+the stated isomorphisms. The usual nerve presentation of
+$NS/G$ identifies its fundamental group with $K_G$: its
+oriented generators are $G$-orbits of elements of $S$, and
+its triangular relations are their products. Thus
+$H_1(X;\Z)=\Gamma_{\ab}$. The indicated edge map on each
+$C$ follows from its actual inclusion into the fibre model,
+so this is the specified map, not merely an abstract exact
+sequence with unnamed terms.
+\end{proof}
+
+
+\subsection{Periodic anchors force a nonzero transgression}
+
+\begin{example}[Proved: cut groups can die in coinvariants]
+\label{G:periodicanchors}
+There is an explicit diagram $M:\Cdelta\to\FreeMon$ of
+finite-rank free monoids with injective transition maps for which
+$T_i(M_{\ab})=0$ for every $i>0$, but a nontrivial cut stabilizer
+$K_c$ of its smooth limit monoid maps noninjectively to $K_G$.
+For this example, in Corollary~\ref{G:stabilizerrow},
+\[
+ H_2(X;\Z)=0,\qquad H_2(Y;\Z)\ne0,\qquad d_2\ne0.
+\]
+Thus neither cut-group injectivity nor vanishing of the quotient
+$Y$'s second homology is a valid general shortcut. The example
+does not refute injectivity of $d_2$; here that differential is
+injective.
+\end{example}
+\begin{proof}
+Put $E(B)=\operatorname{Emb}(V,B)$ and let $S_0(B)$ be the
+interval monoid on the ordered set $E(B)$. This is free on its
+successive gaps; it is trivial if $|E(B)|\le1$.
+Use the reduced-arrow normal form of
+Example~\ref{G:fixedgroupfailures}. Let $J(B)$ be the finite
+set of nonidentity elements of $S_0(B)$ whose number of arrows
+in this normal form is at most $|B|$. An increasing injection
+of endpoint sets preserves both reducedness and this length.
+Since a strong embedding $B\to C$ has $|B|\le|C|$, these
+sets form a covariant set action $J$.
+
+Define
+\[
+ M(B)=S_0(B)*\FreeMon(p_s,q_s\mid s\in J(B)).
+\]
+It is a finite-rank free monoid. For a strong embedding
+$f:B\to C$, act on the interval monoid by its endpoint map and
+put, with $d=|C|-|B|$,
+\[
+ M(f)(p_s)=f(s)^d p_{f(s)},\qquad
+ M(f)(q_s)=f(s)^d q_{f(s)}.
+ \tag{PA.1}
+\]
+Exponents add under composition, so this defines a functor.
+The maps are injective. The interval-group inclusion is a
+free-factor inclusion, using vertex bases based at any common
+endpoint (and is trivial if there are fewer than two source
+endpoints). The anchor labels have distinct images. After this
+inclusion, (PA.1) is a positive Nielsen substitution: fix the
+base group and replace each indicated anchor letter by a base
+word times that letter. Its inverse in the free group removes
+that base word. Thus the resulting group map, and hence its
+restriction to the monoid, is injective.
+
+There is a natural integral basis change giving
+\[
+ M_{\ab}\cong (S_0)_{\ab}\oplus\Z[J\times\{p,q\}].
+ \tag{PA.2}
+\]
+It sends the anchor basis vector at $s\in J(B)$ to
+$[p_s]+|B|[s]$, or $[q_s]+|B|[s]$. Under (PA.1) this is
+sent to the same expression at $f(s)$ and $C$.
+The basis change is invertible because it only adds base
+vectors to distinct anchor vectors.
+
+The interval summand is
+\[
+ (S_0(B))_{\ab}
+ =\ker\bigl(\Z[E(B)]\stackrel{\aug}{\longrightarrow}\Z\bigr).
+\]
+The augmentation cokernel is supported on stages with $E(B)$
+empty and is locally zero, because every object has a common
+successor with $V$. Proposition~\ref{G:moduleinjectivization}
+kills all its derived colimits. The representable
+$\Z[E]$ and the constant diagram have no positive derived
+colimits, and their degree-zero augmentation is an isomorphism.
+The two short exact sequences through the augmentation image
+therefore show that $(S_0)_{\ab}$ has zero derived colimits
+in every degree. The other summand of (PA.2) is free on a
+set action and is acyclic in positive degrees by totality.
+This proves the asserted vanishing of $T_i(M_{\ab})$.
+
+Let $S$ be the inclusion colimit of $M$ in the limit structure,
+and $S_0$ the interval monoid on its strong-singleton orbit
+$\Omega$. For every $1\ne s\in S_0$, arbitrary enlargement
+of its finite strong support eventually puts $s$ in $J(B)$.
+The elements
+\[
+ P_s=s^{|B|}p_s,\qquad Q_s=s^{|B|}q_s
+\]
+tagged at such a support are independent of the support, by
+(PA.1). They are permuted by $G$ with the label $s$.
+For every $n\ge0$ there are elements $p_{s,n},q_{s,n}\in S$
+with
+\[
+ P_s=s^n p_{s,n},\qquad Q_s=s^n q_{s,n}:
+\]
+choose a support of size $N\ge n$ and use
+$p_{s,n}=s^{N-n}p_s$, and likewise for $q$.
+This description also shows that $S$ is the directed union of
+free interval charts with finitely many independent anchor
+letters and the substitutions $p_{s,n}=s p_{s,n+1}$.
+In particular its action is smooth and it is locally free.
+
+Fix a nonidentity interval $s=[x,y]$ with $x<y$ in $\Omega$.
+The common lower set of $P_s,Q_s$ in the full prefix poset of
+$K=S^{\gp}$ is exactly
+\[
+ D=\bigcup_{n\ge0}\mathord\downarrow s^n.
+ \tag{PA.3}
+\]
+The inclusion from right to left follows from the displayed
+factorizations. For the converse, a common lower vertex and
+its two positive increments can be represented in a single
+later free chart $M(B)$. There the two words are
+$s^{|B|}p_s$ and $s^{|B|}q_s$, whose greatest common lower
+vertex in the oriented Cayley tree is $s^{|B|}$, because the
+terminal anchor letters are distinct. This proves (PA.3).
+The associated meet cut $c$ is bounded by $1$ and $P_s$,
+is defined by the two original vertices $P_s,Q_s$, and is
+nonprincipal. Its lower set is preserved by $s$, since
+$\bigcup_{n\ge0}\downarrow s^{n+1}=D$. Thus $1\ne s\in K_c$.
+Nontriviality follows from the embedding $S\subseteq K$ and
+the nonempty interval word. The absence of a largest point
+in (PA.3) proves nonprincipality.
+
+Finally, every nonidentity interval has the same image $e$
+in the ordinary monoid coinvariants of $S_0$, and $e^2=e$.
+Indeed, given endpoints $x<y$, freely adjoin an isolated strong
+singleton $z$ between them. Both pairs $(x,z)$ and $(z,y)$
+are strong free pairs and have one fixed orbit type. Writing
+$e$ for the image of that type, the interval relation gives
+$[x,y]=e^2$. Applying this to a strong free pair gives
+$e=e^2$. Hence every such interval dies in the group
+coinvariants $K_G$. In particular $s$ gives a nonzero element
+of the summand $K_c$ of $A_{\mathrm{cut}}$ that maps to zero
+in $\Gamma_{\ab}$.
+
+The degreewise comparison of Proposition~\ref{G:groupcriterion}
+identifies the diagram's homotopy colimit with $X=|(NS)/G|$.
+The free-monoid homology formula then gives $H_2(X)=T_1(M_{\ab})=0$.
+Exactness of (TR.1) makes $d_2$ injective and puts the preceding
+nonzero element of $A_{\mathrm{cut}}$ in its image. Therefore
+$H_2(Y)\ne0$ and $d_2\ne0$, as claimed. The exact finite
+subdivision, Nielsen and basis identities are checked in
+\texttt{code/G34\_periodic\_anchors.py}.
+\end{proof}
+
+
+\subsection{Finite-support cuts and cross-orbit comparisons}
+
+\begin{lemma}[Proved: smooth cuts in a support lexicographic order]
+\label{G:smooth-lex-cuts}
+Let $G=\Aut(M_0)$ for $\Cdelta$. Fix a strong $E\subseteq F$,
+an embedding $\eta:E\to M_0$, a strong flag
+\[
+ E=B_0\subsetneq B_1\subsetneq\cdots\subsetneq B_d=F,
+ \qquad B_j=\operatorname{cl}_F(B_{j-1}\cup\{a_j\}),
+\]
+and signs $\epsilon_j\in\{+1,-1\}$. Give the set $\Omega$ of
+strong embeddings $f:F\to M_0$ extending $\eta$ its signed
+lexicographic order from this flag. If $D\subset M_0$ is finite
+strong and contains $\eta E$, every $G_D$-invariant initial
+segment of $\Omega$ is a union of cells in the following finite
+convex partition:
+\begin{enumerate}
+\item for $0\le j<d$, each strong $h:B_j\to D$ extending
+$\eta$, and each raw-order gap $I$ of $D$, the nonempty set
+\[
+ \{f\in\Omega:f|_{B_j}=h,\ f(a_{j+1})\in I\};
+ \tag{OC.1}
+\]
+\item the singleton sets consisting of strong embeddings
+$F\to D$ extending $\eta$.
+\end{enumerate}
+In particular membership is expressible using only equalities
+between the displayed support coordinates and strict raw-order
+comparisons with the finitely many points of $D$.
+\end{lemma}
+\begin{proof}
+For any $f\in\Omega$ whose image is not contained in $D$, take
+the first $j+1$ for which $fB_{j+1}\not\subseteq D$.
+Then $f(a_{j+1})\notin D$. Indeed, otherwise the strong set $D$
+would contain the strong closure of $fB_j\cup\{f(a_{j+1})\}$,
+which is $fB_{j+1}$. Thus $f$ belongs to precisely one cell
+(OC.1). Embeddings with full image in $D$ give the other cells.
+These form a finite partition. Each cell is convex: fixing the
+prefix $B_j$ fixes the first $j$ lexicographic coordinates,
+and a raw gap, also in its reversed order, is a convex interval
+for the next coordinate.
+
+We show that a $G_D$-orbit through any point $f$ of a cell is
+both cofinal and coinitial in that entire cell. Let $f'$ be
+another point of the cell. Choose finite strong sets $T,Z$
+containing respectively $D\cup fF$ and $D\cup f'F$. Freely
+amalgamate a copy of $T$ with $Z$ over $D$. In the raw gap
+containing the distinguished pivot, place the copied pivot
+strictly below $f'(a_{j+1})$, or strictly above it, at will.
+All remaining copied points can be placed in their prescribed
+order in the gaps of $D$; this imposes no restriction on either
+choice of the pivot. The resulting ordered free amalgam is in
+$\Cdelta$ and embeds in $M_0$ over $Z$. Strong homogeneity
+extends the copy of $T$ to an automorphism fixing $D$. We have
+therefore found orbit points on both sides of $f'$ in the
+signed lexicographic order. If an invariant initial segment
+contains $f$, an orbit point above $f'$ shows that it contains
+$f'$. If it omits $f$, an orbit point below $f'$ shows that it
+omits $f'$. Membership is constant on the cell, as required.
+\end{proof}
+
+\begin{proposition}[Proved: comparisons between finitely many smooth orbits use only order]
+\label{G:order-only-tree-comparisons}
+Let $L$ be a smooth $G$-set with a $G$-invariant partial order
+whose principal downsets are chains. Identify each of finitely
+many chosen orbits with $\operatorname{Emb}(F_i,M_0)$ using its
+unique finite strong support. On this finite union of orbits,
+every comparison $x\preceq y$ is given by a finite Boolean
+combination of equalities and raw-order comparisons between
+the coordinates of the two support embeddings. No relation on
+the union of the supports other than raw order and coordinate
+equality is needed in these formulas.
+
+More precisely, let $E_i\subseteq F_i$ be the component base
+of the $i$th orbit from Theorem~\ref{G:alltreeorders}. If a
+point of orbit $i$ lies below a point of orbit $j$, its component
+label is obtained from the latter's component label by a fixed
+strong embedding $E_i\to E_j$. If this embedding is an
+isomorphism, each matched pair of orbit components has a
+linearly ordered union. Consequently a matched pair of
+components linked by a comparison has a chain union unless
+the indicated inclusion of component bases is strict. No
+assertion is made about incomparable components of the same
+base type.
+
+This applies, in particular, to the rooted tree order on the
+completion $T$ of Proposition~\ref{G:prefixtree}, rooted at
+the $G$-fixed original vertex $1$.
+\end{proposition}
+\begin{proof}
+Fix a source orbit $\Omega_F$. Theorem~\ref{G:alltreeorders}
+gives a strong $E\subseteq F$ such that its comparability
+components are precisely the fibers of restriction to $E$,
+and gives a signed lexicographic order in each fiber.
+Fix a point $y$ of a target orbit and write its stabilizer as
+$G_D$ with $D$ finite strong; the empty support is allowed.
+
+If no point of $\Omega_F$ is below $y$, the comparison relation
+on this pair of orbits is empty by transitivity on the target
+orbit. Otherwise all points of $\Omega_F$ below $y$ belong to
+one comparability component: any two have upper bound $y$ and
+hence are comparable. Its component label $\eta:E\to M_0$
+is fixed by $G_D$. Since $\operatorname{Fix}(G_D)=D$, its image
+is contained in $D$. Within that fiber, the points below $y$
+form a $G_D$-invariant initial segment. The preceding lemma
+expresses it as a finite union of cells using only coordinate
+equalities and comparisons with $D$.
+
+For completeness, if the target orbit is identified with
+$\operatorname{Emb}(D,M_0)$, the cell attached to
+$h:B_j\to D$ and the gap between consecutive $d_r,d_{r+1}\in D$
+transports to the formula
+\[
+ f|_{B_j}=g h,\qquad
+ g(d_r)<f(a_{j+1})<g(d_{r+1}),
+\]
+where $g:D\to M_0$ represents the target point; at either end
+omit the corresponding inequality. A singleton cell transports
+to $f=gh$. Homogeneity and invariance make these the same
+formulas for every target point, independently of the chosen
+extending automorphism. A source orbit with empty support is
+a singleton, and its comparison with any target orbit is
+constant, which is again expressible by such a formula.
+
+We prove the component-base assertion. If orbit $i$ has a
+predecessor of one point of orbit $j$, transitivity gives a
+nonempty predecessor set at every point of orbit $j$. For
+comparable $y,z$ in one $j$-component, these predecessor sets
+are nested, and their unique $i$-component labels are therefore
+equal. Thus the label is constant on each $j$-component.
+The stabilizer of that component is the pointwise stabilizer
+of its $E_j$-label, so it fixes the selected $E_i$-label.
+The fixed-point property puts its image inside that $E_j$;
+the resulting map $E_i\to E_j$ is strong because both images
+are strong in $M_0$. Equivariance makes this one fixed
+embedding between the representative supports.
+
+When this embedding is an isomorphism, the two matched
+components are transitive chains under the same base
+stabilizer. Every point $x$ of the $i$-component lies below
+some point $z$ of the $j$-component, by transitivity applied
+to a known comparison. For an arbitrary $y$ in that
+$j$-component, either $z\preceq y$ and hence $x\preceq y$,
+or both $x,y$ lie below $z$ and are comparable. This proves
+that the union is a chain. A comparison with equal finite
+base size has an isomorphism as its base embedding, proving
+the stated pairwise formulation. Incomparable components can
+branch even when both bases are empty: two disjoint invariant
+chains above a fixed root already show this. We do not merge
+components merely because a chain of other orbit types links
+them.
+
+In the final assertion, the rooted order is $x\preceq_1 y$
+when $x$ belongs to the canonical tree segment from $1$ to $y$.
+Its principal downsets are chains, it is $G$-invariant, and the
+completion action is smooth. The proposition therefore applies.
+\end{proof}
+
+\paragraph{Scope.}
+The formulas are asserted on the actual strong-embedding
+orbits. Arbitrary tuples of points may have overlap patterns
+which cannot occur as finite strong supports. Extending these
+formulas to an unrestricted tuple template, proving that such
+an extension remains a tree order, and constructing a
+product-compatible exact cover are not consequences of the
+proposition. The general kernel and comparison questions in
+Part G remain undecided.
+
+
+\subsection{Inheritance by action components}
+
+\begin{proposition}[Proved: free-monoid tests pass to action components]
+\label{G:actioninheritance}
+Let $A$ be a nonempty connected small category in $\mathcal F$,
+let $L:A\to\Set$ be any covariant set action, and let $B$ be
+a nonempty connected component of $\operatorname{El}_A(L)$.
+Then $B\in\mathcal F$. No finiteness of hom-sets or of the
+sets $L(a)$ is required. More generally, if $u:A\to D$ is
+an ordinary final functor, then $D\in\mathcal F$.
+
+There is a separate degreewise assertion, not requiring
+$A\in\mathcal F$: fix $i>0$ and a commutative ring $R$.
+If
+\[
+ L_i\colim_A\bigl(R\otimes_{\Z}M_{\ab}\bigr)=0
+ \quad\text{for every }M:A\to\FreeMon,
+\]
+then the same assertion holds with $B$ in place of $A$.
+The zero ring is allowed.
+\end{proposition}
+\begin{proof}
+The elements of $L$ belonging to $B$ form a subfunctor:
+a morphism in its category of elements cannot leave its
+connected component. We replace $L$ by this subfunctor,
+so that $\operatorname{El}_A(L)=B$; some fibers may be empty.
+Write $p:B\to A$ for the projection. Given
+$N:B\to\FreeMon$, define the induced free-monoid diagram
+\[
+ M(a)=\mathop{*}_{l\in L(a)}N(a,l).
+ \tag{AI.1}
+\]
+For $f:a\to a'$, its restriction to the $l$th factor is the
+map $N(f):N(a,l)\to N(a',L(f)l)$ followed by the inclusion
+of that target factor. This gives a functor even when
+$L(f)$ identifies several indices. An empty free product is
+the trivial monoid.
+
+The universal property of free products identifies cocones
+from $M$ to a fixed monoid with cocones from $N$ to that
+monoid. Consequently there is a specified natural isomorphism
+\[
+ \colim_A^{\Mon}M\cong\colim_B^{\Mon}N.
+ \tag{AI.2}
+\]
+At each $a$ the natural map of pointed simplicial sets
+\[
+ W(a):=\bigvee_{l\in L(a)}\mathrm B N(a,l)
+       \longrightarrow \mathrm B M(a)
+ \tag{AI.3}
+\]
+is a weak equivalence. Indeed each factor is the
+classifying space of a free monoid, hence has the homotopy
+type of the graph of its basis circles. The wedge of those
+graphs is the graph of the union basis for the free product.
+The indicated map induces that basis identification on
+fundamental groups, and both sides are aspherical.
+For arbitrary ranks and index sets this follows by the
+filtered union of finite collections of basis circles.
+The map (AI.3) itself is natural under all the substitutions
+in (AI.1); no natural choice of the graph retractions is
+needed.
+
+The pointed bar construction gives a natural homotopy
+pushout square
+\[
+\begin{tikzcd}
+ \mathrm B B \arrow[r] \arrow[d,"\mathrm Bp"'] &
+ \hocolim_{B}\mathrm B N \arrow[d] \\
+ \mathrm B A \arrow[r] & \hocolim_A W.
+\end{tikzcd}
+ \tag{AI.4}
+\]
+To verify it, before identifying basepoints use the
+unpointed coproduct
+$\coprod_{l\in L(a)}\mathrm B N(a,l)$.
+Its simplicial replacement is the simplicial replacement
+over $B$: a chain in $B$ is precisely a chain in $A$ with
+its starting element of $L$ specified. The coproduct of
+basepoints has homotopy colimit $\mathrm B B$, and the
+single common basepoint diagram has homotopy colimit
+$\mathrm B A$. The inclusions of these basepoints are
+simplicial cofibrations. Their objectwise pushout is $W$,
+so taking the simplicial replacement and realization gives
+(AI.4) as a homotopy pushout.
+
+The inherited inclusion $\mathcal F\subseteq\{\text{total}\}$
+makes $A$ total. Thus both $\mathrm B A$ and $\mathrm B B$
+are weakly contractible. The right vertical map of (AI.4)
+is therefore a weak equivalence. Composing it with the
+homotopy colimit of (AI.3) gives a specified weak equivalence
+\[
+ \hocolim_B\mathrm B N\longrightarrow
+ \hocolim_A\mathrm B M.
+\]
+Under (AI.2), the two canonical comparison maps commute
+with this map. The comparison for $M$ is a weak equivalence
+by $A\in\mathcal F$, so the comparison for $N$ is one by
+two-out-of-three. This proves $B\in\mathcal F$.
+
+For the final-functor assertion, each comma $d/u$ is the
+category of elements of the action $a\mapsto D(d,u(a))$.
+Ordinary finality makes this comma nonempty and connected;
+totality of $A$ therefore makes it weakly contractible.
+Thus $u$ is homotopy final as well as ordinary final. For
+any free-monoid diagram on $D$, restriction along $u$
+preserves both its ordinary monoid colimit and its homotopy
+colimit of classifying spaces, by their specified comparison
+maps. Its comparison is consequently a weak equivalence by
+the comparison property on $A$.
+
+For the degreewise assertion, (AI.1) gives the natural
+isomorphism
+\[
+ R\otimes M_{\ab}(a)
+ \cong\bigoplus_{l\in L(a)} R\otimes N_{\ab}(a,l).
+\]
+The ordinary bar chain complexes computing the two derived
+colimits are isomorphic: in each degree the summands are
+indexed by a chain in $A$ and its starting element of $L$,
+equivalently by a chain in $B$, with the same coefficient
+and the same faces. Thus, in every degree $i\ge0$,
+\[
+ L_i\colim_A(R\otimes M_{\ab})
+ \cong L_i\colim_B(R\otimes N_{\ab}).
+\]
+This proof of the degreewise implication does not use
+contractibility or totality, and also covers $R=0$.
+\end{proof}
+
+\paragraph{Group interpretation.}
+In setting (S), together with the presentation invariance of
+Proposition~\ref{G:groupcriterion} and the open-subgroup
+presentation of Proposition~\ref{A:open-subgroups}, this
+shows that the free-monoid comparison property passes to
+open subgroups. It also passes along continuous dense-image
+homomorphisms between groups with presentations in (S).
+For the latter assertion, restrict a smooth locally free
+monoid along the homomorphism. Its finite-tuple orbits are
+unchanged by density, as are its monoid coinvariants. Thus
+the simplicial quotient and the target in
+Proposition~\ref{G:groupcriterion} are literally the same.
+These are inheritance properties of $\mathcal F$, not a
+determination of either inclusion in
+$\{\text{exact}\}\subseteq\mathcal F\subseteq\{\text{total}\}$.
+
+
+\subsection{Positive matrices do not remove the obstruction}
+
+\begin{proposition}[Proved: positive integral stabilization]
+\label{G:positive-matrix-stabilization}
+Let $J$ be a small category with finite hom-sets and a degree
+function $d:\operatorname{Ob}J\to\N$ such that every
+nonidentity arrow strictly increases degree and there are
+only finitely many objects of each bounded degree. Let
+$N:J\to\Q\text{-}\mathrm{Mod}$ have finite-dimensional values.
+There is a diagram $L:J\to\Ab$ of finite-rank free abelian
+groups, with a specified basis at every object, such that
+\[
+ L\otimes_{\Z}\Q\cong\underline\Q\oplus N
+ \tag{PM.1}
+\]
+naturally, and every nonidentity transition matrix of $L$ has
+strictly positive integer entries. If all transitions of $N$
+are injective, those of $L$ can also be chosen injective.
+
+In particular there is such an injective strictly-positive-matrix
+diagram on $\Cdelta$ for which
+\[
+ T_1(L)\otimes\Q\cong\Q.
+\]
+This is a statement about positive integer matrices. It does
+not assert that they can be realized by a functor to free
+monoids.
+\end{proposition}
+\begin{proof}
+Put $V_a=\Q e_a\oplus N(a)$. We will choose positive rational
+numbers $\lambda_a$ and lattices $L(a)\subset V_a$ so that
+\[
+ V(f)(t e_a+v)=
+       (\lambda_b/\lambda_a)t e_b+N(f)v
+       \quad(f:a\to b)
+ \tag{PM.2}
+\]
+sends each lattice basis to a strictly positive integer
+combination of the target lattice basis. Formula (PM.2) is
+functorial for every choice of the $\lambda_a$, and its first
+summand is naturally isomorphic to the constant rational
+diagram by $t e_a\mapsto t/\lambda_a$.
+
+Proceed by degree. At $b$, choose a rational basis
+$x_1,\ldots,x_n$ of $N(b)$, and use the rational basis of $V_b$
+\[
+ b_0=e_b-\sum_{i=1}^n x_i,\qquad b_i=e_b+x_i
+       \quad(1\le i\le n).
+\]
+The positive cone generated by these $n+1$ vectors has $e_b$
+in its interior. More explicitly, the coefficients of
+$t e_b+\sum_i v_i x_i$ in this basis are
+\[
+ z_0=\frac{t-\sum_i v_i}{n+1},\qquad z_i=v_i+z_0.
+ \tag{PM.3}
+\]
+For fixed $v_i$ they are all strictly positive when $t$ is
+sufficiently large.
+
+Every already chosen source lattice basis vector has a
+strictly positive $e_a$-coordinate. There are only finitely
+many nonidentity arrows $a\to b$ and finitely many source
+basis vectors to consider. Choose $\lambda_b>0$ sufficiently
+large that (PM.3) is strictly positive for the image under
+(PM.2) of every one of these vectors. All coordinates are
+rational. Choose a positive integer $D_b$ clearing their
+finitely many denominators, and let the lattice basis at $b$
+be $b_0/D_b,\ldots,b_n/D_b$. Its image coordinates are now
+strictly positive integers. Its own $e_b$-coordinates remain
+positive, so the induction continues. If $n=0$, the same
+argument uses the one-element basis $e_b$.
+
+These choices yield an integral subdiagram of the rational
+functor (PM.2). Compositions hold because they already hold
+in $V$; the choices of positive bases impose no additional
+relations. Rationalizing gives (PM.1). If $N(f)$ is injective,
+(PM.2) is injective, hence so is its lattice restriction.
+
+For the final assertion, take the rational cokernel diagram
+$Q=\operatorname{coker}(P_W^{\Q}\to(P_V^{\Q})^2)$ of
+Theorem~\ref{D:nonexact} for $\Cdelta$. Its values are finite
+dimensional and $T_1(Q)=\Q$. Replace it by its injectivization
+$Q^{\mathrm{inj}}$. Proposition~\ref{G:moduleinjectivization}
+applies because $\Cdelta$ is total and preserves every derived
+colimit. The quotient values remain finite dimensional, and
+all transition maps are injective. A skeleton of $\Cdelta$
+meets the degree hypotheses with $d(B)=|B|$: it has finitely
+many isomorphism types of each bounded size, finite hom-sets,
+and rigidity makes every equal-size endomorphism the identity.
+Apply the construction to $N=Q^{\mathrm{inj}}$.
+
+Rational tensor product commutes with the bar complex and
+its homology. The constant rational diagram has zero positive
+derived colimits because $\Cdelta$ is total. Thus (PM.1)
+gives $T_1(L)\otimes\Q=T_1(Q^{\mathrm{inj}})=\Q$.
+\end{proof}
+
+\paragraph{Scope.}
+Choosing the sorted word with a prescribed nonnegative
+incidence column does not in general preserve composition:
+substituted column blocks can interleave in the target order.
+The proposition therefore isolates the missing word-level
+coherence condition. It does not construct a free-monoid
+counterexample, and it does not change the status of either
+universal question in Part G.
+
+
+\subsection{Compatible positive cones do not ensure word amalgamation}
+
+\begin{example}[Refuted: cone-compatible bifix free-factor amalgamation]
+\label{G:bifix-freefactor-AP}
+The amalgamation property fails for finite-rank free monoids
+with injective substitutions whose basis images are bifix
+codes, even when both induced group maps are isomorphisms
+and their positive abelianized matrices are identical.
+Put
+\[
+ H=\FreeMon(x,y,z),\quad P=\FreeMon(a,b,c),\quad
+ Q=\FreeMon(A,B,C),
+\]
+and define $i:H\to P$, $j:H\to Q$ by
+\[
+\begin{array}{c|ccc}
+ &x&y&z\\\hline
+ i&bacb&bcacb&ccacb\\
+ j&BABC&BCABC&CCABC.
+\end{array}
+ \tag{BF.1}
+\]
+Both maps are injective with bifix basis images, both group
+maps are isomorphisms, and their abelianized matrices are
+\[
+ \begin{pmatrix}1&1&1\\2&2&1\\1&2&3\end{pmatrix},
+ \qquad \det=1.
+ \tag{BF.2}
+\]
+Nevertheless there are no injective monoid maps $u:P\to S$,
+$v:Q\to S$ into any locally free monoid $S$ with $ui=vj$.
+\end{example}
+\begin{proof}
+No word in either image triple is a proper prefix or suffix
+of another, so the substitutions are injective. Factor both
+maps through the intermediate free monoid on $t,b,c$ by
+\[
+ \sigma(x)=bt,\qquad\sigma(y)=bct,\qquad\sigma(z)=cct.
+\]
+For $i$ send $t$ to $acb$ and leave $b,c$ unchanged; for
+$j$ send $t$ to $ABC$, $b$ to $B$, and $c$ to $C$.
+The bifix group basis underlying $\sigma$ is the reversal of
+$\{ab,acb,acc\}$ from
+\citet[Example~5.18]{GBerthe2015Bifix}. We check its inverse
+explicitly. In the free group on $x,y,z$, put
+\[
+ c_*=zx^{-1}yz^{-1},\qquad
+ t_*=c_*^{-2}z,\qquad b_*=xt_*^{-1}.
+ \tag{BF.3}
+\]
+Their images under $\sigma^{\gp}$ are $c,t,b$, respectively.
+Conversely $b_*t_*=x$, $b_*c_*t_*=y$, and
+$c_*^2t_*=z$. For the middle identity, the formula for $c_*$
+gives $x t_*^{-1}c_*t_*=y$ after using $z=c_*^2t_*$.
+Thus $\sigma^{\gp}$ is an isomorphism. The subsequent
+substitutions are Nielsen isomorphisms: their inverses send
+$a$ to $t b^{-1}c^{-1}$, or $A$ to $t c^{-1}b^{-1}$.
+This proves the two group-map claims; the matrix calculation
+in (BF.2) is independent and immediate.
+
+Suppose an injective amalgam existed. Passing to the group
+completion of $S$ and applying the common source words
+$b_*,c_*,t_*$ gives
+\[
+ u(b)=v(B),\qquad u(c)=v(C),\qquad
+ u(a)u(c)u(b)=v(A)v(B)v(C).
+ \tag{BF.4}
+\]
+A locally free monoid embeds in its group completion, as
+proved in Proposition~\ref{G:cutstabilizers}, so these are
+also equalities in $S$. Choose one finite free submonoid
+containing the six target letter images. Abbreviate the
+common images of $b,B$ and $c,C$ by $\beta,\gamma$ and
+write $\alpha=u(a)$, $\alpha'=v(A)$. Then (BF.4) says
+\[
+ \alpha\gamma\beta=\alpha'\beta\gamma.
+\]
+Taking word lengths in this free chart gives
+$|\alpha|=|\alpha'|$. Equal-length prefixes of the same
+word are equal, so $\alpha=\alpha'$. Cancelling this prefix
+gives $\gamma\beta=\beta\gamma$, contradicting injectivity
+of $u$ because $cb\ne bc$ in $P$.
+
+The exact script \texttt{code/G39\_bifix\_freefactor\_AP.py}
+checks both bifix conditions, all eighteen inverse identities
+for the intermediate and two final group maps, the identical
+matrices and determinant, and the recovered words in (BF.4).
+Unlike an obstruction from incompatible cones, the two
+abelian group identifications here identify the entire
+standard positive cones of the targets. The contradiction
+uses the order of letters in the words.
+\end{proof}
+
+\paragraph{Scope.}
+The example excludes the proposed blanket amalgamation
+route even after imposing free-factor group maps and
+compatibility of the abelian positive cones. It does not
+exclude every more restrictive amalgamation class, and does
+not itself give a free-monoid diagram with nonzero derived
+colimit. The universal questions of Part G remain open.
+
+
+
+\subsection{Bounded powers and the full smooth cut completion}
+
+\begin{lemma}[Proved: bounded powers have a finite cut witness]
+\label{G:bounded-power-cut}
+Let $S$ be a locally free monoid, $K=S^{\gp}$, and give $K$
+the prefix order. Suppose $1\ne g\in S$ and $y\in K$ satisfy
+$g^n\le y$ for every integer $n\ge0$. In the bounded
+Dedekind--MacNeille completion,
+\[
+ \sup_{n\ge0} g^n=y\wedge gy.
+\]
+The vertices $y$ and $gy$ are incomparable, and their displayed
+meet is nonprincipal and is fixed by $g$.
+
+Consequently every nontrivial stabilizer of an arbitrary bounded
+Dedekind--MacNeille cut occurs as the stabilizer of a cut obtained
+by one bounded meet or one bounded join of two original vertices,
+up to left translation. The original cut need not itself have
+finite parameters. If $S$ carries a smooth group action, each of
+these finite witnesses is smooth.
+\end{lemma}
+\begin{proof}
+We first exclude a positive conjugacy with bounded powers.
+If $y\le gy$, write $gy=yw$ with $w\in S$. Since $1\le y$,
+the elements $g,y,w$ belong to $S$. For every $n\ge0$, put
+$x_n=g^{-n}y\in S$. The conjugacy equation gives
+\[
+ g^n x_n=y=x_n w^n.
+\]
+Let $F$ be the intrinsic finite-rank free hull of $g,y,w$ in
+$S$. The stability rule in Lemma~\ref{G:hullfunctorial}, applied
+with $p=g^n$, $q=w^n$, and the middle factor $x_n$, puts $x_n$
+in $F$. Word length in this one free monoid now gives
+$|y|_F\ge n|g|_F$ for all $n$, which is impossible because
+$g\ne1$. The opposite comparison $gy\le y$ would give
+$y=gyt$ for $t\in S$, which already contradicts length in a
+single free chart containing $g,y,t$. Thus $y,gy$ are
+incomparable.
+
+The powers of $g$ have a supremum cut $c_0$, since they have
+the lower bound $1$ and upper bound $y$. Their shift by $g$
+is cofinal in the same set, so $gc_0=c_0$. In particular
+$c_0$ is not principal, because left translation by $g\ne1$
+fixes no original group vertex. Every power lies below both
+$y$ and $gy$, so $c_0\le m:=y\wedge gy$.
+
+Suppose that this inequality were strict. In terms of closed
+lower sets choose $d\in D_m\setminus D_{c_0}$. The
+interpolation property of Proposition~\ref{G:cutstabilizers}
+gives an original vertex $k$ with
+\[
+ 1,d\le k\le y,gy.
+\]
+Then $k\notin D_{c_0}$, since otherwise its lower vertex $d$
+would lie there. Both $k$ and every $g^n$ belong to the chain
+$[1,y]$. The possibility $k\le g^n$ would again put $k$ in
+$D_{c_0}$, so $g^n\le k$ for every $n$. Also
+$1\le g^{-1}k\le y$, using respectively $g\le k$ and
+$k\le gy$. Thus $k,g^{-1}k$ are comparable in $[1,y]$.
+After multiplying by $g$, one possibility is $gk\le k$,
+excluded by positive free-chart length. The other is
+$k\le gk$. Apply the preceding positive-conjugacy argument
+with $k$ in place of $y$, since all powers of $g$ lie below
+$k$. This is a contradiction. Hence $m=c_0$.
+
+Now let $c=(D,U)$ be any bounded cut with nontrivial stabilizer
+$C=K_c$, and choose $1\ne h\in C$. If $D$ is upward directed,
+the proof of Proposition~\ref{G:cutstabilizers} supplies an
+$x\in D$ for which $x,hx$ are comparable. Replace $h$ by its
+inverse if necessary so that $x<hx$. Then
+$g=x^{-1}hx\in S\setminus\{1\}$, and the cut $x^{-1}c$
+is fixed by $g$ and has $1$ in its lower set. All powers
+$g^n$ belong to that lower set and are bounded above by any
+of its original upper vertices $y$. The finite meet $y\wedge
+gy$ is fixed by $g$. Its stabilizer is $C_K(g)$ by
+Proposition~\ref{G:cutroots}. Translating this meet by $x$
+therefore gives a finite cut with stabilizer
+$C_K(h)=C$.
+
+If $D$ is not directed, then $U$ is downward directed by
+Proposition~\ref{G:cutstabilizers}. Apply the order-dual
+argument. Formally, inversion identifies the opposite of the
+prefix order of $S$ with the prefix order of the opposite
+monoid $S^{\mathrm{op}}$, which is also locally free. It
+produces a bounded binary join with the required stabilizer.
+Finally a cut given by two original vertices is smooth under
+any smooth automorphism action, as established in
+Proposition~\ref{G:cutstabilizers}.
+\end{proof}
+
+\begin{proposition}[Proved: all smooth bounded cuts give the same quotient model]
+\label{G:smooth-cut-completion}
+Let $G$ be the group of $\Cdelta$, let $S$ be a smooth locally
+free $G$-monoid, and put $K=S^{\gp}$ and $H=K\rtimes G$.
+Let $T$ be the finite-parameter tree of
+Proposition~\ref{G:prefixtree}, and let $\widehat T$ be the set
+of all bounded Dedekind--MacNeille cuts whose $G$-stabilizer
+is open. Then $\widehat T$ is an $H$-invariant smooth median
+pretree, with the same ordered-interval path construction as
+$T$. Every fixed-point nerve $(N\widehat T)^U$ is weakly
+contractible when $U\le G$; the analogous assertion holds for
+any subgroup of $H$ having a fixed vertex. The sets of
+nontrivial $K$-stabilizers occurring on $T$ and $\widehat T$
+are equal.
+
+The natural inclusion induces a weak equivalence
+\[
+ |NT/H|\ \longrightarrow\ |N\widehat T/H|.
+\]
+Consequently the double model and the transgression exact
+sequence of Proposition~\ref{G:treedoublemodel} and
+Corollary~\ref{G:stabilizerrow} may use all smooth bounded
+cuts, with the same stabilizer summands. This does not assert
+that the transgression is injective or that its source vanishes.
+\end{proposition}
+\begin{proof}
+Every original vertex is smooth. A finite bounded meet or join
+of smooth cuts is fixed by the intersection of their open
+stabilizers, so $\widehat T$ is closed under these operations
+and contains $T$. If $c$ is smooth and $k\in K$, then $kc$
+is fixed by the intersection of $G_c$ and $G_k$, which is
+open. Thus $\widehat T$ is invariant under $H$ and its
+$G$-action is smooth.
+
+The proof of Proposition~\ref{G:prefixtree} applies to this
+larger set of cuts. For precision, intervals are chains by
+the same interpolation argument in the original prefix poset.
+Every new nonprincipal cut has an original lower and upper
+vertex. Adjoining the cuts in any well-order therefore cones
+off connected links and leaves the nerve connected and simply
+connected. Closure under bounded binary meets and joins gives
+the same associative stack reduction of finite interval paths.
+It produces unique reduced paths and their medians. A finite
+set of vertices together with its path turns and medians has
+a finite tree hull; its nerve contracts by removing leaves.
+Hence $N\widehat T$ is weakly contractible. If a group fixes
+the endpoints of a path, it fixes its finitely many ordered
+turns. With any fixed root, the same finite-hull contraction
+proves the stated fixed-point assertion. For $U\le G$, the
+original vertex $1$ supplies that root.
+
+Lemma~\ref{G:bounded-power-cut} shows that every nontrivial
+$K$-stabilizer on $\widehat T$ already occurs on $T$.
+Conversely $T\subseteq\widehat T$. Denote this common set of
+maximal locally cyclic subgroups by $\mathscr C$.
+All the proofs of Proposition~\ref{G:treedoublemodel} and
+Corollary~\ref{G:stabilizerrow} consequently apply to
+$\widehat T$: stabilizers are smooth, their central extensions
+split uniquely, and the fixed-point nerves needed there are
+contractible. We will compare these constructions on universal
+covers to obtain a weak equivalence, not only an integral
+homology equivalence.
+
+We recall the elementary quotient fundamental-group calculation.
+If a group $L$ acts on a connected simply connected poset nerve
+$NV$, then
+\[
+ \pi_1(|NV/L|)=L/\langle\!\langle L_v:v\in V\rangle\!\rangle.
+\]
+Here the quotient is degreewise simplicial. To verify the
+formula, lift a finite quotient edge path successively, starting
+at a chosen original vertex. Changes of lift are exactly
+insertions of conjugates of vertex stabilizers. A path from
+$v_0$ to $\ell v_0$ gives the class of $\ell$; every quotient
+loop arises this way. Triangle and backtrack moves lift, after
+such stabilizer changes, and simple connectedness of $NV$
+kills all remaining closed lifts. This proves both surjectivity
+and the displayed kernel. Poset automorphisms have no inversion
+of a chain, so no further simplex-stabilizer relation is needed.
+
+Let $J_T$ be the normal subgroup of $H$ generated by the
+vertex stabilizers on $T$. It contains the standard $G$, the
+stabilizer of the original vertex $1$. Modulo the normal
+closure of $G$, the group $H$ is $\Gamma=K_G$.
+Proposition~\ref{G:centralextensions} identifies the image
+in $\Gamma$ of every affine cut stabilizer with the image of
+its $K$-stabilizer. The same proof applies to smooth cuts:
+the stabilizer projects onto an open subgroup, its rank-one
+kernel has trivial conjugation action, and its uniquely lifted
+open subgroup has trivial continuous image in the discrete
+group $\Gamma$. Since the set $\mathscr C$ is unchanged, the
+normal subgroup generated by all vertex stabilizers of
+$\widehat T$ is exactly $J_T$. Write it as $J$, and put
+$\Lambda=H/J$.
+
+It follows that both quotient nerves have fundamental group
+$\Lambda$. Moreover $\Lambda$ acts freely on the vertices
+of $NT/J$ and $N\widehat T/J$: an element carrying a vertex
+to its $J$-orbit differs from a $J$-element by a vertex
+stabilizer, which already lies in $J$. The resulting maps to
+the respective $H$-quotients are simplicial covering maps.
+Indeed, choosing a lift of one specified simplex vertex fixes
+a unique $\Lambda$-translate of any simplex lift; uniqueness
+is compatible with all face maps. They are their universal
+covers. The set of all vertex
+stabilizers is invariant under $H$-conjugation, so it generates
+$J$ already as a subgroup; the displayed fundamental-group
+calculation applied to the $J$-action makes each covering
+space simply connected.
+
+For $V=T$ or $\widehat T$, consider the bisimplicial set
+\[
+ Z^V_{m,n}=(NP_m\times NV_n)/J,
+\]
+where $P$ is the original prefix poset. Every stabilizer of
+an original $P$-simplex is conjugate to an open subgroup of
+$G$ and lies in $J$. Its quotient of $NV$ is weakly
+contractible by Lemma~\ref{G:smoothquotient}. Therefore the
+first projection gives a natural weak equivalence
+\[
+ |Z^V|\ \longrightarrow\ |NP/J|
+\]
+for both $V$, just as in Proposition~\ref{G:treedoublemodel}.
+In the other realization direction, a $V$-simplex stabilizer
+in $J$ is its full stabilizer in $H$, because all vertex
+stabilizers lie in $J$. Hence its fibre has the same
+classifying space of its locally cyclic $K$-stabilizer as in
+that proposition.
+
+For each $C\in\mathscr C$, the normalizer splitting in
+Corollary~\ref{G:stabilizerrow} is
+$N_H(C)=C\times\widehat U$, with $\widehat U$ an open total
+group lifted continuously. Both factors lie in $J$: the
+first is a vertex stabilizer, and the second has trivial
+image already in $\Gamma$. Thus $N_J(C)=N_H(C)$. The
+degree-one row for $Z^V$ decomposes, now over
+$J$-conjugacy classes of $C$, into
+\[
+ C\otimes_{\Z} C_*(NV^C/\widehat U;\Z).
+\]
+Each quotient nerve is weakly contractible by
+Lemma~\ref{G:smoothquotient}, and inclusion from $T$ to
+$\widehat T$ induces the identity on the resulting
+degree-zero coefficient $C$. The degree-one row maps are
+therefore homology isomorphisms in every degree.
+
+The degree-zero rows are the chain complexes of $NT/J$ and
+$N\widehat T/J$. The two total complexes have the same
+homology through their natural projections to $NP/J$.
+Comparing the two-row exact sequences, as in (TR.1), proves
+that
+\[
+ |NT/J|\longrightarrow |N\widehat T/J|
+\]
+is an integral homology equivalence in every degree. These
+spaces are simply connected CW spaces, so the relative
+Hurewicz theorem makes it a weak equivalence. Together with
+the common fundamental group $\Lambda$, this proves the
+asserted weak equivalence of the original $H$-quotients.
+\end{proof}
