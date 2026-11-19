@@ -1,0 +1,77 @@
+\begin{proposition}[Refuted: the diameter condition cannot be dropped for generic connected graphs]
+\label{C:connected-convex-warning}
+For a generic pair of induced graph embeddings with connected source
+and target, strong convexity of both source images, injectivity on
+components, and bounded nontrivial point paths do not guarantee
+convexity of the old copies in the repaired beta target. This failure
+can occur at $n=3$, $s=45$, $k=11$, even though these numbers satisfy
+the numerical C.1 condition for $a_0=2$, $a_1=8/5$.
+The graph configuration below is not asserted to arise among the
+arrows of the prescribed C.1 construction.
+\end{proposition}
+
+\begin{proof}
+More generally fix an odd $s=4k+1$ with $k\geq2$, and an integer
+$L\geq s$. Let $S$ be the path with vertices $0,\ldots,L$, let
+$T$ be the cycle with vertices $0,\ldots,2L+1$ in cyclic order, and
+define
+\[
+ f(r)=r,\qquad g(r)=L+1+r\qquad(0\leq r\leq L).
+\]
+Both image paths have length $L$, strictly less than half the cycle
+length $L+1$. Every shortest path in $T$ between two vertices of
+either image is therefore the unique path in that image. Thus both
+embeddings are strongly convex. Source and target are connected, so
+their component maps are injective. The point-transition relation is
+the disjoint union of the two-vertex paths
+$r\mapsto L+1+r$. In particular any common bound $n\geq2$ is valid.
+The two actual point maps are also increasing for the natural orders
+on the displayed vertex sets.
+
+Use the actual-path-size beta construction. Its vertex set is
+$\{0,\ldots,L\}\times\mathbb Z/s$, with copy $i$ given by
+\[
+ \alpha_i f(r)=(r,u_i),\qquad
+ \alpha_i g(r)=(r,v_i),\qquad
+ (u_i,v_i)=(\beta_i^2(0),\beta_i^2(1)).
+\]
+The graph has a vertical path of length $L$ in every column, and for
+every index pair $\{u_i,v_i\}$ it has the two end bridges
+\[
+ (L,u_i)(0,v_i),\qquad (0,u_i)(L,v_i).
+\]
+The unordered index pairs are the edges of the cycle
+\[
+ 0,1,\ldots,2k,4k,4k-1,\ldots,2k+1,0.
+\]
+Because $s$ is odd, starting at $(0,0)$ and following only the end
+bridges along this whole index cycle ends at $(L,0)$ after $s$
+edges. The two vertices belong to copy zero, where their intrinsic
+distance is $L$. This bridge path leaves copy zero. If $L>s$, it
+is shorter than the old distance; if $L=s$, it has the old distance
+and is an outside shortest path. To verify the latter assertion,
+any path that uses an interior vertex of a vertical column and
+connects distinct column ends must traverse a full column and has
+length at least $L$. The bridge subgraph on the two ends of each
+column is the connected double cover of an odd $s$-cycle, hence a
+$2s$-cycle; the two ends of column zero are opposite and have bridge
+distance $s$. Thus the new distance is exactly $\min\{L,s\}$.
+
+For a strict shortening at numerically admissible parameters, take
+$L=46$, $n=3$, $k=11$, and $s=45$. The source is a $46$-edge path,
+the old target a $94$-cycle, and the repaired target has $2115$
+vertices and $2160$ edges. The indicated old distance $46$ becomes
+$45$. The standalone program
+\texttt{akr\_connected\_convex\_counterexample.py} verifies both
+old convex embeddings, the point-path bound, all neighboring copy
+identities, the explicit $45$-edge bridge path, and its exact new
+distance. Its JSON certificate specifies every map and every vertex
+of the shorter path.
+
+The numerical compatibility is not a counterexample to universal
+C.1. In particular, if the displayed old cycle were one of the
+protected first-stage circles, either proper half-cycle arrow image
+would contradict Proposition~\ref{C:protected-nonadjacent}. The
+specific realization of such a configuration among later generated
+objects remains an additional requirement.
+\end{proof}
