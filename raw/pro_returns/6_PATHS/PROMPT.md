@@ -133,3 +133,13 @@ One ZIP containing:
 The work is AI-produced by GPT-6 Astra (OpenAI, ChatGPT Pro mode); credit it so, attribute nothing to any person, and claim no priority: where a result is known, cite it; where you did not find it, say what you searched.
 
 This task is long by design. Work through all parts completely; do not stop at an outline, a sample or a plan, and do not ask whether to continue. Ignore any clock. Write the files from the start and extend them as you go, so that an interruption loses little.
+
+**Checkpoints.** Save a checkpoint ZIP to the user's Library, or wherever files survive the loss of the execution
+environment, once every hour of work, each under a new name, `6_PATHS_checkpoint_<NN>.zip` with `NN` counting up; never overwrite, rename or
+delete an earlier checkpoint, and put no earlier checkpoint ZIP inside a checkpoint. If the workspace comes back
+empty, restore it from the newest checkpoint and from this conversation before you continue. The final ZIP holds
+everything the checkpoints held. Save checkpoints once an hour and at no other time: none after a page, part, section, cote, folder, chapter or reader. A checkpoint is one ZIP holding every deliverable written so far and everything that
+documents the work (records, notes, logs, scripts, the report so far), so that a new session can continue from it and
+the files attached to this prompt. Leave the attached files themselves out of it, the scans and sources you were
+given: we have them. It is never a JSON file, a recovery file, a summary, or an export of the newest pages only. The
+checkpoints are what keeps the work if this session dies: work that is in no checkpoint is lost.
